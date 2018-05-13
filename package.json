@@ -1,0 +1,22 @@
+{
+  "name": "switchblade",
+  "version": "1.0.0",
+  "description": "The multi-purpose Discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SwitchbladeBot/switchblade.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "Switchblade Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SwitchbladeBot/switchblade/issues"
+  },
+  "homepage": "https://github.com/SwitchbladeBot/switchblade#readme"
+}
