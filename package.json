@@ -18,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/SwitchbladeBot/switchblade/issues"
   },
-  "homepage": "https://github.com/SwitchbladeBot/switchblade#readme"
+  "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
+  "dependencies": {
+    "bufferutil": "^3.0.5",
+    "discord.js": "^11.3.2",
+    "erlpack": "github:discordapp/erlpack",
+    "libsodium-wrappers": "^0.7.3",
+    "uws": "^10.148.0"
+  }
 }
