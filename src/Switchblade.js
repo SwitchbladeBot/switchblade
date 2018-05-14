@@ -14,6 +14,7 @@ module.exports = class Switchblade extends Client {
     super(options)
     this.commands = []
     this.listeners = []
+    this.colors = require('./assets/colors.json')
 
     this.initializeCommands('./src/commands') // Custom commands directory?
     this.initializeListeners('./src/listeners') // Custom listeners directory?
