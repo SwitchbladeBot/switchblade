@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-dev": "nodemon index.js",
+    "start-dev": "nodemon --exec node -r dotenv/config index.js",
     "test": "standard",
     "fix": "standard --fix"
   },
