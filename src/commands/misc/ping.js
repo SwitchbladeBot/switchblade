@@ -7,7 +7,7 @@ module.exports = class Ping extends Command {
     this.aliases = ['pang', 'peng', 'pong', 'pung']
   }
 
-  run (message, args) {
+  run (message) {
     message.channel.send(':ping_pong: ...').then((newMessage) => {
       newMessage.edit(`:ping_pong: \`${(newMessage.createdAt - message.createdAt)}ms\``)
     })
