@@ -8,12 +8,11 @@ module.exports = class Adorable extends Command {
     this.aliases = ['adrlb']
   }
 
-  run (message, args) {
+  run (message) {
     const template = 'https://api.adorable.io/avatars/256'
-    const name = args.join(' ')
   
     let embed = this.client.getDefaultEmbed(message.author)
-    embed.setImage(`${template}/${name}.png`)
+    embed.setImage(`${template}/${message.author.avatar}.png`)
     message.channel.send({embed})
   }
 }
