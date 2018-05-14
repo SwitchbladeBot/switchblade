@@ -27,6 +27,7 @@
     "discord.js": "^11.3.2",
     "erlpack": "github:discordapp/erlpack",
     "libsodium-wrappers": "^0.7.3",
+    "request": "^2.85.0",
     "uws": "^10.148.0"
   },
   "devDependencies": {
