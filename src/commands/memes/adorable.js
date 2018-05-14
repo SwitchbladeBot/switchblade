@@ -5,7 +5,6 @@ module.exports = class Adorable extends Command {
     super(client)
 
     this.name = 'adorable'
-    this.aliases = ['adrlb']
   }
 
   run (message) {
