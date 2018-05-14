@@ -10,6 +10,7 @@ module.exports = class Command {
     this.aliases = []
     this.permissions = []
     this.userIDs = []
+    this.hideHelp = false
   }
 
   /**
