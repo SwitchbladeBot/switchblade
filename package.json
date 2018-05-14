@@ -4,7 +4,8 @@
   "description": "The multi-purpose Discord bot",
   "main": "index.js",
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "fix": "standard --fix"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,9 @@
     "erlpack": "github:discordapp/erlpack",
     "libsodium-wrappers": "^0.7.3",
     "uws": "^10.148.0"
+  },
+  "devDependencies": {
+    "dotenv": "^5.0.1",
+    "standard": "^11.0.1"
   }
 }
