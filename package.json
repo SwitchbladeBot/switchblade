@@ -28,7 +28,8 @@
     "erlpack": "github:discordapp/erlpack",
     "libsodium-wrappers": "^0.7.3",
     "request": "^2.85.0",
-    "uws": "^10.148.0"
+    "uws": "^10.148.0",
+    "snekfetch": "^4.0.0"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
