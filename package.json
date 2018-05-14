@@ -4,6 +4,8 @@
   "description": "The multi-purpose Discord bot",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon index.js",
     "test": "standard",
     "fix": "standard --fix"
   },
