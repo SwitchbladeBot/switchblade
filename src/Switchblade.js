@@ -15,7 +15,7 @@ module.exports = class Switchblade extends Client {
     this.commands = []
     this.listeners = []
 
-    this.initializeCommands('./commands') // Custom commands directory?
+    this.initializeCommands('./src/commands') // Custom commands directory?
   }
 
   /**
@@ -88,9 +88,7 @@ module.exports = class Switchblade extends Client {
    */
   initializeCommands (dirPath) {
     try {
-      const files = fs.readdirSync(dirPath)
-      this.log(`Loading ${files.length} commands.`, 'Commands')
-      files.forEach(file => {
+      fs.readdirSync(dirPath).forEach(file => {
         if (file.endsWith('.js')) {
           const RequiredCommand = require(path.resolve(dirPath, file))
           this.addCommand(new RequiredCommand(this))
