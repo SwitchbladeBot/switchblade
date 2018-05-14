@@ -23,8 +23,10 @@ module.exports = class Switchblade extends Client {
    * @param {string} [token] - Token of the account to log in with
    */
   login (token) {
-    token = token || process.env.DISCORD_TOKEN
-    super.login(token)
+    return new Promise((resolve, reject) => {
+      token = token || process.env.DISCORD_TOKEN
+      super.login(token).then(resolve).catch(reject)
+    })
   }
 
   // Helpers
