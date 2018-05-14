@@ -26,6 +26,9 @@ module.exports = class Eval extends Command {
   }
 
   canRun (message) {
-    return this.client.guilds.get(process.env.BOT_GUILD).roles.get(process.env.DEVELOPER_ROLE).members.get(message.author.id)
+    const botGuild = this.client.guilds.get(process.env.BOT_GUILD)
+    const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)
+    const hasRole = developerRole && developerRole.members.has(message.author.id)
+    return super.canRun(message) && hasRole
   }
 }
