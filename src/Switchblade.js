@@ -37,8 +37,6 @@ module.exports = class Switchblade extends Client {
    * @param {...string} [tags] - Tags to identify the log entry
    */
   log (...args) {
-    if (args.length < 1) return
-
     let message = args[0]
     const tags = args.slice(1)
     if (tags.length > 0) {
@@ -53,10 +51,8 @@ module.exports = class Switchblade extends Client {
   /**
    * Adds a new error log entry to the console.
    * @param {string} message - Error message
-   * @param {boolean} [fullStack] - Whether to log the error stacktrace
    */
-  logError (message, fullStack = false) {
-    if (fullStack) console.error(message)
+  logError (message) {
     this.log(message, 'ErrorLog')
   }
 
@@ -100,7 +96,7 @@ module.exports = class Switchblade extends Client {
         }
       })
     } catch (e) {
-      this.logError(e, true)
+      this.logError(e)
     }
   }
 
@@ -138,7 +134,7 @@ module.exports = class Switchblade extends Client {
         }
       })
     } catch (e) {
-      this.logError(e, true)
+      this.logError(e)
     }
   }
 
