@@ -28,7 +28,10 @@
     "uws": "^10.148.0"
   },
   "devDependencies": {
+    "auto-install": "^1.7.4",
     "dotenv": "^5.0.1",
+    "eslint-config-standard": "^11.0.0",
+    "nodemon": "^1.17.4",
     "standard": "^11.0.1"
   }
 }

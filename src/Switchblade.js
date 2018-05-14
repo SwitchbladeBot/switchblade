@@ -20,7 +20,7 @@ module.exports = class Switchblade extends Client {
 
   /**
    * Logs the client in, establishing a websocket connection to Discord.
-   * @param {string} token - Token of the account to log in with
+   * @param {string} [token] - Token of the account to log in with
    */
   login (token) {
     token = token || process.env.DISCORD_TOKEN
