@@ -10,7 +10,7 @@ module.exports = class Smart extends Command {
 
   run (message) {
     let embed = this.client.getDefaultEmbed(message.author)
-    embed.setImage('https://i.imgur.com/MzwiZg8.png')
+    embed.setImage('https://media0.giphy.com/media/d3mlE7uhX8KFgEmY/source.gif')
     message.channel.send({embed})
   }
 }
