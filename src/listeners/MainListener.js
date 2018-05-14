@@ -1,9 +1,13 @@
 const { EventListener } = require('../')
 
-module.exports = class CommandListener extends EventListener {
+module.exports = class MainListener extends EventListener {
   constructor (client) {
     super(client)
-    this.events = ['message']
+    this.events = ['ready', 'message']
+  }
+
+  onReady () {
+    this.user.setPresence({game: {name: process.env.PREFIX + 'help'}})
   }
 
   onMessage (message) {
