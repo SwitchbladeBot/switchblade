@@ -1,5 +1,5 @@
 const { Command } = require('../../')
-const request = require('snekfetch')
+const snekfetch = require('snekfetch')
 
 module.exports = class Thinking extends Command {
   constructor (client) {
@@ -11,7 +11,7 @@ module.exports = class Thinking extends Command {
   run (message) {
     message.channel.startTyping()
     let embed = this.client.getDefaultEmbed(message.author)
-    request.get('https://reddit.com/r/thinking/random/.json').then(data => {
+    snekfetch.get('https://reddit.com/r/thinking/random/.json').then(data => {
       let req = data.body[0].data.children[0].data
       embed.setImage(req.url)
       embed.setTitle(':thinking:')
