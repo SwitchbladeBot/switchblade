@@ -42,23 +42,14 @@ module.exports = class Command {
    * @returns {boolean} Whether this command can run
    */
   canRun (message, args) {
-    let can = true
     if (this.permissions.length > 0) {
-      if (!message.guild) {
-        return false
-      }
-
-      if (message.channel.permissionsFor(message.member).has(this.permissions)) {
-        can = true
-      } else {
+      if (!message.guild || !message.channel.permissionsFor(message.member).has(this.permissions)) {
         return false
       }
     }
 
     if (this.userIDs.length > 0) {
-      if (this.userIDs.includes(message.author.id)) {
-        can = true
-      } else {
+      if (!this.userIDs.includes(message.author.id)) {
         return false
       }
     }
@@ -70,7 +61,7 @@ module.exports = class Command {
       return false
     }
 
-    return can
+    return true
   }
 
   // Cooldown
