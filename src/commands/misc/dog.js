@@ -10,7 +10,7 @@ module.exports = class Dog extends Command {
 
   async run (message) {
     message.channel.startTyping()
-    await this.requestNewDoggo(message)
+    await this.requestDoggo(message)
   }
 
   sendDoggo (message, r) {
