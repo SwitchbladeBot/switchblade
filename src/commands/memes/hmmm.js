@@ -1,4 +1,5 @@
-const { Command, reddit } = require('../../')
+const { Command } = require('../../')
+const Reddit = require('../../utils/reddit.js')
 
 module.exports = class Hmmm extends Command {
   constructor (client) {
@@ -9,7 +10,8 @@ module.exports = class Hmmm extends Command {
 
   async run (message) {
     let embed = this.client.getDefaultEmbed(message.author)
-    let post = await reddit.getRandomPostFromSubreddit('/r/hmmm')
+    let reddit = new Reddit('/r/hmmm')
+    let post = await reddit.getRandomPostFromSubreddit()
     message.channel.startTyping()
     embed.setImage(post.url)
     embed.setTitle('hmmm')
