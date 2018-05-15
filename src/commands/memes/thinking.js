@@ -5,7 +5,7 @@ module.exports = class Thinking extends Command {
   constructor (client) {
     super(client)
     this.name = 'thinking'
-    this.aliases = ['thonk', 'thonking']
+    this.aliases = ['thonk', 'thonking', 'thonkang']
   }
 
   async run (message) {
