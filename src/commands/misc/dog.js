@@ -20,8 +20,8 @@ module.exports = class Dog extends Command {
     message.channel.stopTyping()
   }
 
-  requestNewDoggo (message) {
-    request.get('https://random.dog/woof.json').then(r => {
+  async requestNewDoggo (message) {
+    await request.get('https://random.dog/woof.json').then(r => {
       const notSupported = ['.mp4']
       if (!r.body.url.endsWith(notSupported)) this.sendDoggo(message, r)
       else this.requestNewDoggo(message)
