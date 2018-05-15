@@ -10,20 +10,17 @@ module.exports = class Dog extends Command {
 
   async run (message) {
     message.channel.startTyping()
-    await this.requestDoggo(message)
-  }
-
-  sendDoggo (message, r) {
+    const doggo = await this.requestDoggo(message)
     const embed = this.client.getDefaultEmbed(message.author)
-    embed.setImage(r.body.url).setDescription('Here is your dog <:DoggoF:445701839564963840>')
-    message.channel.send({embed})
+    embed.setImage(doggo).setDescription('Here is your dog <:DoggoF:445701839564963840>')
+    message.channel.send(embed)
     message.channel.stopTyping()
   }
 
   async requestDoggo (message) {
-    const { req } = await snekfetch.get('https://random.dog/woof.json')
+    const { body } = await snekfetch.get('https://random.dog/woof.json')
     const notSupported = ['.mp4']
-    if (!req.body.url.endsWith(notSupported)) this.sendDoggo(message, req)
-    else this.requestDoggo(message)
+    if (!body.url.endsWith(notSupported)) return body.url
+    else return this.requestDoggo(message)
   }
 }
