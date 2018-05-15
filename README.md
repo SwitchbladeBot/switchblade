@@ -25,7 +25,7 @@ git clone https://github.com/SwitchbladeBot/switchblade && cd switchblade
 ```
 *(Ensure that you have [Git](http://git-scm.com/downloads), [Node.js with npm](https://nodejs.org/en/download/) and [Windows Build Tools](https://www.npmjs.com/package/windows-build-tools) installed before doing anything)*
 
-After that, execute ```npm install --production``` if you're running a local instance for production or ```npm install``` if you're running a non production instance.
+After that, execute ```npm install```.
 
 If you're running a production instance or a normal instance, make sure to read [this](https://github.com/SwitchbladeBot/switchblade/wiki/Environment-Variables) so that you can get to know what you will need to run a Switchblade local instance.
 After you've checked them, if you're running a local instance, add those environment variables within a .env file. Example:
