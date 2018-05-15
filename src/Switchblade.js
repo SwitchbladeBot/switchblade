@@ -38,7 +38,7 @@ module.exports = class Switchblade extends Client {
    * @param {...string} [tags] - Tags to identify the log entry
    */
   log (...args) {
-    let message = args[0]
+    const message = args[0]
     const tags = args.slice(1).map(t => `[${t}]`)
     console.log(...tags, message)
   }
