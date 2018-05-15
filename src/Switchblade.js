@@ -39,14 +39,8 @@ module.exports = class Switchblade extends Client {
    */
   log (...args) {
     let message = args[0]
-    const tags = args.slice(1)
-    if (tags.length > 0) {
-      const text = tags.map(t => `[${t}]`)
-      text.push(message)
-      message = text.join(' ')
-    }
-
-    console.log(message)
+    const tags = args.slice(1).map(t => `[${t}]`)
+    console.log(...tags, message)
   }
 
   /**
