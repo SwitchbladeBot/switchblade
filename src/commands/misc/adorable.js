@@ -1,4 +1,4 @@
-const { Command } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Adorable extends Command {
   constructor (client) {
@@ -9,8 +9,9 @@ module.exports = class Adorable extends Command {
 
   run (message) {
     const template = 'https://api.adorable.io/avatars/256'
-    let embed = this.client.getDefaultEmbed(message.author)
-    embed.setImage(`${template}/${message.author.avatar}.png`)
-    message.channel.send({embed})
+    message.channel.send(
+      new SwitchbladeEmbed(message.author)
+        .setImage(`${template}/${message.author.avatar}.png`)
+    )
   }
 }

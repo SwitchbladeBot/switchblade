@@ -1,4 +1,4 @@
-const { Client, RichEmbed } = require('discord.js')
+const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
 
@@ -137,17 +137,5 @@ module.exports = class Switchblade extends Client {
     } catch (e) {
       this.logError(e)
     }
-  }
-
-  /**
-   * Returns a RichEmbed with the default fields already filled
-   * @param {User} [user] - The user that executed the command that resulted in this embed
-   * @returns {RichEmbed} - RichEmbed with
-   */
-  getDefaultEmbed (user) {
-    const embed = new RichEmbed()
-    if (process.env.EMBED_COLOR) embed.setColor(process.env.EMBED_COLOR)
-    if (user) embed.setFooter(user.tag, user.displayAvatarURL)
-    return embed
   }
 }
