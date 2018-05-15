@@ -20,11 +20,10 @@ module.exports = class Dog extends Command {
     message.channel.stopTyping()
   }
 
-  async requestNewDoggo (message) {
-    await request.get('https://random.dog/woof.json').then(r => {
-      const notSupported = ['.mp4']
-      if (!r.body.url.endsWith(notSupported)) this.sendDoggo(message, r)
-      else this.requestNewDoggo(message)
-    })
+  async requestDoggo (message) {
+    const { req } = await request.get('https://random.dog/woof.json')
+    const notSupported = ['.mp4']
+    if (!req.body.url.endsWith(notSupported)) this.sendDoggo(message, req)
+    else this.requestDoggo(message)
   }
 }
