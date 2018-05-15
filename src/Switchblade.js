@@ -54,7 +54,7 @@ module.exports = class Switchblade extends Client {
    * @param {string} message - Error message
    */
   logError (message) {
-    this.log(message, 'ErrorLog')
+    console.error('[ErrorLog]', message)
   }
 
   // Commands
@@ -77,7 +77,7 @@ module.exports = class Switchblade extends Client {
    */
   runCommand (command, message, args) {
     if (command.canRun(message, args)) {
-      command._run(message, args)
+      command._run(message, args).catch(this.logError)
     }
   }
 

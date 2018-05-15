@@ -1,5 +1,4 @@
-const { Command } = require('../../')
-const Reddit = require('../../utils/Reddit.js')
+const { Command, Reddit, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Thinking extends Command {
   constructor (client) {
@@ -9,14 +8,13 @@ module.exports = class Thinking extends Command {
   }
 
   async run (message) {
-    let embed = this.client.getDefaultEmbed(message.author)
-    let reddit = new Reddit('/r/thinking')
-    let random = await reddit.getRandomPostFromSubreddit()
     message.channel.startTyping()
-    embed.setImage(random.url)
-    embed.setTitle(':thinking:')
-    embed.setURL(`https://reddit.com${random.permalink}`)
-    message.channel.send({embed})
-    message.channel.stopTyping()
+    const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/thinking')
+    message.channel.send(
+      new SwitchbladeEmbed(message.author)
+        .setTitle(':thinking:')
+        .setImage(url)
+        .setURL(`https://reddit.com${permalink}`)
+    ).then(() => message.channel.stopTyping())
   }
 }
