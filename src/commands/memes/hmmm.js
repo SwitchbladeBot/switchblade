@@ -1,11 +1,11 @@
 const { Command } = require('../../')
-const Reddit = require('../../utils/reddit.js')
+const Reddit = require('../../utils/Reddit.js')
 
 module.exports = class Hmmm extends Command {
   constructor (client) {
     super(client)
     this.name = 'hmmm'
-    this.aliases = ['hm', 'hmm']
+    this.aliases = ['hm', 'hmm', 'hmmmm']
   }
 
   async run (message) {

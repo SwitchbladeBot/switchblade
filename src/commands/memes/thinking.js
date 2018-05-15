@@ -1,5 +1,5 @@
 const { Command } = require('../../')
-const Reddit = require('../../utils/reddit.js')
+const Reddit = require('../../utils/Reddit.js')
 
 module.exports = class Thinking extends Command {
   constructor (client) {
