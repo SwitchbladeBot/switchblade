@@ -1,5 +1,5 @@
 const { Command } = require('../../')
-const request = require('snekfetch')
+const snekfetch = require('snekfetch')
 
 module.exports = class Dog extends Command {
   constructor (client) {
@@ -21,7 +21,7 @@ module.exports = class Dog extends Command {
   }
 
   async requestDoggo (message) {
-    const { req } = await request.get('https://random.dog/woof.json')
+    const { req } = await snekfetch.get('https://random.dog/woof.json')
     const notSupported = ['.mp4']
     if (!req.body.url.endsWith(notSupported)) this.sendDoggo(message, req)
     else this.requestDoggo(message)
