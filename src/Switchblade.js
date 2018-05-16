@@ -1,4 +1,4 @@
-const { Client, RichEmbed } = require('discord.js')
+const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
 
@@ -38,15 +38,9 @@ module.exports = class Switchblade extends Client {
    * @param {...string} [tags] - Tags to identify the log entry
    */
   log (...args) {
-    let message = args[0]
-    const tags = args.slice(1)
-    if (tags.length > 0) {
-      const text = tags.map(t => `[${t}]`)
-      text.push(message)
-      message = text.join(' ')
-    }
-
-    console.log(message)
+    const message = args[0]
+    const tags = args.slice(1).map(t => `[${t}]`)
+    console.log(...tags, message)
   }
 
   /**
@@ -54,7 +48,7 @@ module.exports = class Switchblade extends Client {
    * @param {string} message - Error message
    */
   logError (message) {
-    this.log(message, 'ErrorLog')
+    console.error('[ErrorLog]', message)
   }
 
   // Commands
@@ -77,7 +71,7 @@ module.exports = class Switchblade extends Client {
    */
   runCommand (command, message, args) {
     if (command.canRun(message, args)) {
-      command._run(message, args)
+      command._run(message, args).catch(this.logError)
     }
   }
 
@@ -137,17 +131,5 @@ module.exports = class Switchblade extends Client {
     } catch (e) {
       this.logError(e)
     }
-  }
-
-  /**
-   * Returns a RichEmbed with the default fields already filled
-   * @param {User} [user] - The user that executed the command that resulted in this embed
-   * @returns {RichEmbed} - RichEmbed with
-   */
-  getDefaultEmbed (user) {
-    const embed = new RichEmbed()
-    if (process.env.EMBED_COLOR) embed.setColor(process.env.EMBED_COLOR)
-    if (user) embed.setFooter(user.tag, user.displayAvatarURL)
-    return embed
   }
 }

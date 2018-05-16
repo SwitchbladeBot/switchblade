@@ -24,7 +24,7 @@ module.exports = class Command {
    * @param {Message} message Message that triggered it
    * @param {Array<string>} args Command arguments
    */
-  _run (message, args) {
+  async _run (message, args) {
     return this.run(message, args)
   }
 
@@ -33,7 +33,7 @@ module.exports = class Command {
    * @param {Message} message Message that triggered it
    * @param {Array<string>} args Command arguments
    */
-  run () {}
+  async run () {}
 
   /**
    * Returns true if it can run
