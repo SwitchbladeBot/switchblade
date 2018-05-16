@@ -13,7 +13,7 @@ module.exports = class Neko extends Command {
     message.channel.startTyping()
 
     // Send a lewd neko if the channel is NSFW
-    let endpoint = message.channel.nsfw ? 'lewd' : 'neko'
+    const endpoint = message.channel.nsfw ? 'lewd' : 'neko'
 
     const { body } = await snekfetch.get(nekoAPI + endpoint)
     message.channel.send(
