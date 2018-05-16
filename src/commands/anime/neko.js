@@ -19,7 +19,7 @@ module.exports = class Neko extends Command {
     message.channel.send(
       new SwitchbladeEmbed(message.author)
         .setImage(body.url)
-        .setDescription(`Here's your neko!`)
+        .setDescription('Here\'s your neko!')
     ).then(() => message.channel.stopTyping())
   }
 }
