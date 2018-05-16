@@ -5,7 +5,7 @@ module.exports = {
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),
 
   // Utils
-  Reddit: require('./utils/Reddit.js'),
+  Reddit: require('./utils/reddit.js'),
 
   // Etc
   Switchblade: require('./Switchblade.js')
