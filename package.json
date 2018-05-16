@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon --exec node -r dotenv/config index.js",
-    "test": "standard",
+    "test": "mocha",
     "fix": "standard --fix"
   },
   "repository": {
@@ -26,6 +26,8 @@
     "bufferutil": "^3.0.5",
     "discord.js": "^11.3.2",
     "erlpack": "github:discordapp/erlpack",
+    "mocha": "^5.1.1",
+    "mocha-standard": "^1.0.0",
     "node-opus": "^0.3.0",
     "snekfetch": "^4.0.0",
     "uws": "^10.148.0"
