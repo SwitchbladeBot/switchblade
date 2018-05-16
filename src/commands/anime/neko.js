@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed } = require('../../index')
 const snekfetch = require('snekfetch')
 const nekoAPI = 'https://nekos.life/api/v2/img/'
 
-module.exports = class Dog extends Command {
+module.exports = class Neko extends Command {
   constructor (client) {
     super(client)
     this.name = 'neko'
