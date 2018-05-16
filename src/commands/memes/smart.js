@@ -1,4 +1,4 @@
-const { Command } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Smart extends Command {
   constructor (client) {
@@ -9,8 +9,9 @@ module.exports = class Smart extends Command {
   }
 
   run (message) {
-    let embed = this.client.getDefaultEmbed(message.author)
-    embed.setImage('https://media0.giphy.com/media/d3mlE7uhX8KFgEmY/source.gif')
-    message.channel.send({embed})
+    message.channel.send(
+      new SwitchbladeEmbed(message.author)
+        .setImage('https://media0.giphy.com/media/d3mlE7uhX8KFgEmY/source.gif')
+    )
   }
 }

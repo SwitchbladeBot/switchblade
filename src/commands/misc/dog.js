@@ -1,4 +1,4 @@
-const { Command } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 const snekfetch = require('snekfetch')
 
 module.exports = class Dog extends Command {
@@ -11,10 +11,11 @@ module.exports = class Dog extends Command {
   async run (message) {
     message.channel.startTyping()
     const doggo = await this.requestDoggo(message)
-    const embed = this.client.getDefaultEmbed(message.author)
-    embed.setImage(doggo).setDescription('Here is your dog <:DoggoF:445701839564963840>')
-    message.channel.send(embed)
-    message.channel.stopTyping()
+    message.channel.send(
+      new SwitchbladeEmbed(message.author)
+        .setImage(doggo)
+        .setDescription('Here is your dog <:DoggoF:445701839564963840>')
+    ).then(() => message.channel.stopTyping())
   }
 
   async requestDoggo (message) {

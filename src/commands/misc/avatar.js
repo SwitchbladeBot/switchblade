@@ -1,4 +1,4 @@
-const { Command } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Avatar extends Command {
   constructor (client) {
@@ -8,11 +8,11 @@ module.exports = class Avatar extends Command {
   }
 
   run (message) {
-    message.channel.startTyping()
-    const embed = this.client.getDefaultEmbed(message.author)
     const user = message.mentions.users.first() || message.author
-    embed.setImage(user.displayAvatarURL).setDescription(user + "'s avatar")
-    message.channel.send({embed})
-    message.channel.stopTyping()
+    message.channel.send(
+      new SwitchbladeEmbed(message.author)
+        .setImage(user.displayAvatarURL)
+        .setDescription(user + '\'s avatar')
+    )
   }
 }

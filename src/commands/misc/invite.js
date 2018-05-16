@@ -1,4 +1,4 @@
-const { Command } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Invite extends Command {
   constructor (client) {
@@ -9,10 +9,11 @@ module.exports = class Invite extends Command {
 
   async run (message) {
     message.channel.startTyping()
-    let embed = this.client.getDefaultEmbed()
-    embed.setThumbnail(this.client.user.displayAvatarURL)
-    embed.setDescription(`[Click here to invite me to your server](${await this.client.generateInvite()})\nNote that you need the \`MANAGE_SERVER\` permission to add bots to servers.`)
-    message.channel.send({embed})
-    message.channel.stopTyping()
+    const invite = await this.client.generateInvite()
+    message.channel.send(
+      new SwitchbladeEmbed()
+        .setThumbnail(this.client.user.displayAvatarURL)
+        .setDescription(`[Click here to invite me to your server](${invite})\nNote that you need the \`MANAGE_SERVER\` permission to add bots to servers.`)
+    ).then(() => message.channel.stopTyping())
   }
 }

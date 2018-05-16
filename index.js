@@ -1,6 +1,4 @@
-const CLIENT_OPTIONS = {
-  autoReconnect: true
-}
+const CLIENT_OPTIONS = {}
 
 const Switchblade = require('./src/Switchblade.js')
 const client = new Switchblade(CLIENT_OPTIONS)
