@@ -7,9 +7,9 @@ module.exports = class Triggered extends Command {
     this.aliases = ['trigger', 'puto']
   }
 
-  run (message, args) {
-    let picture = message.mentions.users.first() ? message.mentions.users.first().displayAvatarURL : message.author.displayAvatarURL
+  run (message) {
+    const user = message.mentions.users.first() || message.author
     message.channel.startTyping()
-    message.channel.send({ file: { attachment: `http://www.triggered-api.tk/api/v2/triggered?url=${picture}`, name: 'triggered.gif' } }).then(() => message.channel.stopTyping())
+    message.channel.send({ file: { attachment: `http://www.triggered-api.tk/api/v2/triggered?url=${user.displayAvatarURL}`, name: 'triggered.gif' } }).then(() => message.channel.stopTyping())
   }
 }
