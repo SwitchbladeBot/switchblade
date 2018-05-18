@@ -1,7 +1,7 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": ""
+      "here_is_your_neko": "ここはあなたの猫！"
     },
     "coin": {
       "flipped_a_coin": "",
@@ -12,13 +12,13 @@
       "someones_avatar": ""
     },
     "dog": {
-      "here_is_your_dog": ""
+      "here_is_your_dog": "ここはあなたの犬！"
     },
     "invite": {
-      "click_here": "",
+      "click_here": "ここをクリックしてサーバーに私を招待には",
       "note_that": ""
     }
   },
-  "usage": "",
-  "example": ""
+  "usage": "使い方",
+  "example": "例"
 }
