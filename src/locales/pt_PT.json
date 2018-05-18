@@ -1,7 +1,7 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": "Aqui está o teu neko!"
+      "here_is_your_neko": "Aqui está a tua neko!"
     },
     "coin": {
       "flipped_a_coin": "{0}* * atirou uma moeda ao ar e teve * *{1} * *!",
