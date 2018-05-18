@@ -1,50 +1,50 @@
 {
   "commands": {
     "neko": {
-      "_description": "Fetches a random neko girl (lewd if the channel is NSFW) and displays it.",
+      "_description": "Busca uma neko aleatória (lewd se o canal for NSFW) e exibe.",
       "here_is_your_neko": "Aqui está sua neko!"
     },
     "coin": {
-      "_description": "Flips a coin",
+      "_description": "Joga uma moeda",
       "flipped_a_coin": "**{0}** jogou uma moeda e tirou **{1}**!",
       "heads": "CARA",
       "tails": "COROA"
     },
     "reverse": {
-      "_description": "Reverses a sentence.",
-      "_usage": "<sentence>",
-      "no_sentence": "You have to give me something to reverse!"
+      "_description": "Inverte uma frase.",
+      "_usage": "<frase>",
+      "no_sentence": "Você tem que me dar algo pra inverter!"
     },
     "hmmm": {
-      "_description": "Random image from /r/hmmm"
+      "_description": "Imagem aleatória do subreddit /r/hmmm"
     },
     "smart": {
-      "_description": "Shows the Roll Safe meme"
+      "_description": "Mostra o meme Roll Safe"
     },
     "softwaregore": {
-      "_description": "Random image from /r/softwaregore"
+      "_description": "Imagem aleatória de /r/softwaregore"
     },
     "thinking": {
-      "_description": "Random :thinking: image from /r/thinking"
+      "_description": "Imagem :thinking: aleatória do subreddit /r/thinking"
     },
     "adorable": {
-      "_description": "Generates an adorable avatar"
+      "_description": "Gera um avatar adorable"
     },
     "avatar": {
-      "_description": "Shows your or someone else's",
-      "_usage": "[user]",
+      "_description": "",
+      "_usage": "",
       "someones_avatar": "Avatar de {0}"
     },
     "dog": {
       "here_is_your_dog": "Aqui está seu cachorro!"
     },
     "invite": {
-      "_description": "Shows the link to invite Switchblade to your server",
+      "_description": "",
       "click_here": "Clique aqui para me convidar para o seu servidor",
       "note_that": "Note que você precisa da permissão \"Gerenciar servidor\" para convidar bots."
     },
     "ping": {
-      "_description": "Checks to see if the bot is online"
+      "_description": ""
     }
   },
   "usage": "Uso",
