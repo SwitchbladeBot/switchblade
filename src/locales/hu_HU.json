@@ -1,22 +1,50 @@
 {
   "commands": {
     "neko": {
+      "_description": "Fetches a random neko girl (lewd if the channel is NSFW) and displays it.",
       "here_is_your_neko": "Itt a nekod!"
     },
     "coin": {
+      "_description": "Flips a coin",
       "flipped_a_coin": "**{0}** feldobott egy érmét és ezt kapta: **{1}**!",
       "heads": "FEJ",
       "tails": "ÍRÁS"
     },
+    "reverse": {
+      "_description": "Reverses a sentence.",
+      "_usage": "<sentence>",
+      "no_sentence": "You have to give me something to reverse!"
+    },
+    "hmmm": {
+      "_description": "Random image from /r/hmmm"
+    },
+    "smart": {
+      "_description": "Shows the Roll Safe meme"
+    },
+    "softwaregore": {
+      "_description": "Random image from /r/softwaregore"
+    },
+    "thinking": {
+      "_description": "Random :thinking: image from /r/thinking"
+    },
+    "adorable": {
+      "_description": "Generates an adorable avatar"
+    },
     "avatar": {
+      "_description": "Shows your or someone else's",
+      "_usage": "[user]",
       "someones_avatar": "{0} avatárja"
     },
     "dog": {
       "here_is_your_dog": "Itt a kutyád!"
     },
     "invite": {
+      "_description": "Shows the link to invite Switchblade to your server",
       "click_here": "Kattints ide, hogy meghívj a szerveredre",
       "note_that": "Ne feledd, hogy „Szerver kezelése” jog szükséges a botok meghívásához."
+    },
+    "ping": {
+      "_description": "Checks to see if the bot is online"
     }
   },
   "usage": "Használat",
