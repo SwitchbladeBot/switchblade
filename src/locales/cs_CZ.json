@@ -1,52 +1,52 @@
 {
   "commands": {
     "neko": {
-      "_description": "Fetches a random neko girl (lewd if the channel is NSFW) and displays it.",
-      "here_is_your_neko": "Here's your neko!"
+      "_description": "",
+      "here_is_your_neko": ""
     },
     "coin": {
-      "_description": "Flips a coin",
-      "flipped_a_coin": "**{0}** flipped a coin and got **{1}**!",
-      "heads": "HEADS",
-      "tails": "TAILS"
+      "_description": "",
+      "flipped_a_coin": "",
+      "heads": "",
+      "tails": ""
     },
     "reverse": {
-      "_description": "Reverses a sentence.",
-      "_usage": "<sentence>",
-      "no_sentence": "You have to give me something to reverse!"
+      "_description": "",
+      "_usage": "",
+      "no_sentence": ""
     },
     "hmmm": {
-      "_description": "Random image from /r/hmmm"
+      "_description": ""
     },
     "smart": {
-      "_description": "Shows the Roll Safe meme"
+      "_description": ""
     },
     "softwaregore": {
-      "_description": "Random image from /r/softwaregore"
+      "_description": ""
     },
     "thinking": {
-      "_description": "Random :thinking: image from /r/thinking"
+      "_description": ""
     },
     "adorable": {
-      "_description": "Generates an adorable avatar"
+      "_description": ""
     },
     "avatar": {
-      "_description": "Shows your or someone else's",
-      "_usage": "[user]",
-      "someones_avatar": "{0}'s avatar"
+      "_description": "",
+      "_usage": "",
+      "someones_avatar": ""
     },
     "dog": {
-      "here_is_your_dog": "Here's your dog!"
+      "here_is_your_dog": ""
     },
     "invite": {
-      "_description": "Shows the link to invite Switchblade to your server",
-      "click_here": "Click here to invite me to your server",
-      "note_that": "Note that you need the \"Manage server\" permission in order to invite bots."
+      "_description": "",
+      "click_here": "",
+      "note_that": ""
     },
     "ping": {
-      "_description": "Checks to see if the bot is online"
+      "_description": ""
     }
   },
-  "usage": "Usage",
-  "example": "Example"
+  "usage": "",
+  "example": ""
 }
