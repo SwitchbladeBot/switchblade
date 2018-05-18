@@ -5,30 +5,30 @@
       "here_is_your_neko": "Aqui está a tua neko!"
     },
     "coin": {
-      "_description": "Flips a coin",
+      "_description": "Vira uma moeda",
       "flipped_a_coin": "{0}* * atirou uma moeda ao ar e teve * *{1} * *!",
       "heads": "CARA",
       "tails": "COROA"
     },
     "reverse": {
-      "_description": "Reverses a sentence.",
+      "_description": "Inverte uma frase.",
       "_usage": "<sentence>",
-      "no_sentence": "You have to give me something to reverse!"
+      "no_sentence": "Tu tens que dar-me algo para reverter!"
     },
     "hmmm": {
-      "_description": "Random image from /r/hmmm"
+      "_description": "Imagem aleatória de /r/hmmm"
     },
     "smart": {
       "_description": "Shows the Roll Safe meme"
     },
     "softwaregore": {
-      "_description": "Random image from /r/softwaregore"
+      "_description": "Imagem aleatória de /r/softwaregore"
     },
     "thinking": {
-      "_description": "Random :thinking: image from /r/thinking"
+      "_description": "Imagem aleatória pensativa :thinking: de /r/thinking"
     },
     "adorable": {
-      "_description": "Generates an adorable avatar"
+      "_description": "Gera um avatar adorável"
     },
     "avatar": {
       "_description": "Shows your or someone else's",
@@ -39,12 +39,12 @@
       "here_is_your_dog": "Aqui está o teu cão!"
     },
     "invite": {
-      "_description": "Shows the link to invite Switchblade to your server",
+      "_description": "Mostra o link para convidar o Switchblad para o teu servidor",
       "click_here": "Clica aqui para convidares-me para o teu servidor",
       "note_that": "Vê que precisas de ter a permissão \"Manager server\" para convidares bots."
     },
     "ping": {
-      "_description": "Checks to see if the bot is online"
+      "_description": "Verifica se o bot está online"
     }
   },
   "usage": "Uso",
