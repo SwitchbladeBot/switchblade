@@ -1,12 +1,12 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": "Here's your neko!"
+      "here_is_your_neko": "Her er din neko!"
     },
     "coin": {
       "flipped_a_coin": "**{0}** flipped a coin and got **{1}**!",
-      "heads": "HEADS",
-      "tails": "TAILS"
+      "heads": "KRON",
+      "tails": "MYNT"
     },
     "avatar": {
       "someones_avatar": "{0}'s avatar"
