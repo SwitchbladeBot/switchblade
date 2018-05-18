@@ -1,7 +1,7 @@
 {
   "commands": {
     "neko": {
-      "_description": "",
+      "_description": "Finner en tilfeldig neko jente (lewd om kanalen er NSFW) og sender et bilde av hun.",
       "here_is_your_neko": "Her er din neko!"
     },
     "coin": {
@@ -12,7 +12,7 @@
     },
     "reverse": {
       "_description": "Reverserer en setning.",
-      "_usage": "",
+      "_usage": "<setning>",
       "no_sentence": "Du må gi meg noe å reversere!"
     },
     "hmmm": {
@@ -31,7 +31,7 @@
       "_description": ""
     },
     "avatar": {
-      "_description": "",
+      "_description": "Viser din eller noen andre sin avatar",
       "_usage": "[bruker]",
       "someones_avatar": "{0} sin avatar"
     },
