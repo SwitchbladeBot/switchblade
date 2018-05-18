@@ -1,0 +1,24 @@
+{
+  "commands": {
+    "neko": {
+      "here_is_your_neko": "Ecco il tuo neko!"
+    },
+    "coin": {
+      "flipped_a_coin": "",
+      "heads": "",
+      "tails": ""
+    },
+    "avatar": {
+      "someones_avatar": ""
+    },
+    "dog": {
+      "here_is_your_dog": ""
+    },
+    "invite": {
+      "click_here": "",
+      "note_that": ""
+    }
+  },
+  "usage": "",
+  "example": ""
+}
