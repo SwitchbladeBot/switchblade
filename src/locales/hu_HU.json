@@ -31,7 +31,7 @@
       "_description": "Létrehoz egy aranyos avatárt"
     },
     "avatar": {
-      "_description": "Megmutatja a tiéd vagy valaki másét",
+      "_description": "Megmutatja a saját vagy más avatárját",
       "_usage": "[felhasználó]",
       "someones_avatar": "{0} avatárja"
     },
