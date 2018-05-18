@@ -1,7 +1,7 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": "Itt a nekód!"
+      "here_is_your_neko": "Itt a nekod!"
     },
     "coin": {
       "flipped_a_coin": "**{0}** feldobott egy érmét és ezt kapta: **{1}**!",
