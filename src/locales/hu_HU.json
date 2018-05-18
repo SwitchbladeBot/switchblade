@@ -1,7 +1,7 @@
 {
   "commands": {
     "neko": {
-      "_description": "Fetches a random neko girl (lewd if the channel is NSFW) and displays it.",
+      "_description": "Lekér egy véletlenszerű neko lányt (18+, ha a csatorna NSFW) és megjeleníti.",
       "here_is_your_neko": "Itt a nekod!"
     },
     "coin": {
@@ -19,32 +19,32 @@
       "_description": "Véletlenszerű kép a /r/hmmm subredditről"
     },
     "smart": {
-      "_description": "Shows the Roll Safe meme"
+      "_description": "Megjelenít egy „Roll Safe” mémet"
     },
     "softwaregore": {
-      "_description": "Random image from /r/softwaregore"
+      "_description": "Véletlenszerű kép a /r/softwaregore subredditről"
     },
     "thinking": {
-      "_description": "Random :thinking: image from /r/thinking"
+      "_description": "Random :thinking: kép a /r/thinking subredditről"
     },
     "adorable": {
-      "_description": "Generates an adorable avatar"
+      "_description": "Létrehoz egy aranyos avatárt"
     },
     "avatar": {
-      "_description": "Shows your or someone else's",
-      "_usage": "[user]",
+      "_description": "Megmutatja a tiéd vagy valaki másét",
+      "_usage": "[felhasználó]",
       "someones_avatar": "{0} avatárja"
     },
     "dog": {
       "here_is_your_dog": "Itt a kutyád!"
     },
     "invite": {
-      "_description": "Shows the link to invite Switchblade to your server",
+      "_description": "Megjeleníti a linket amivel meghívhatod Switchbladet a szerveredre",
       "click_here": "Kattints ide, hogy meghívj a szerveredre",
       "note_that": "Ne feledd, hogy „Szerver kezelése” jog szükséges a botok meghívásához."
     },
     "ping": {
-      "_description": "Checks to see if the bot is online"
+      "_description": "Megnézi, hogy elérhető-e a bot"
     }
   },
   "usage": "Használat",
