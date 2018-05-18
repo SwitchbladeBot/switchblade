@@ -1,22 +1,50 @@
 {
   "commands": {
     "neko": {
+      "_description": "Busca uma neko aleatória (lewd se o canal for NSFW) e exibe.",
       "here_is_your_neko": "Aqui está sua neko!"
     },
     "coin": {
+      "_description": "Joga uma moeda",
       "flipped_a_coin": "**{0}** jogou uma moeda e tirou **{1}**!",
       "heads": "CARA",
       "tails": "COROA"
     },
+    "reverse": {
+      "_description": "Inverte uma frase.",
+      "_usage": "<frase>",
+      "no_sentence": "Você tem que me dar algo pra inverter!"
+    },
+    "hmmm": {
+      "_description": "Imagem aleatória do subreddit /r/hmmm"
+    },
+    "smart": {
+      "_description": "Mostra o meme Roll Safe"
+    },
+    "softwaregore": {
+      "_description": "Imagem aleatória de /r/softwaregore"
+    },
+    "thinking": {
+      "_description": "Imagem :thinking: aleatória do subreddit /r/thinking"
+    },
+    "adorable": {
+      "_description": "Gera um avatar adorable"
+    },
     "avatar": {
+      "_description": "Mostra o seu avatar ou o de alguém",
+      "_usage": "[usuário]",
       "someones_avatar": "Avatar de {0}"
     },
     "dog": {
       "here_is_your_dog": "Aqui está seu cachorro!"
     },
     "invite": {
+      "_description": "Mostra o link para convidar o Switchblade para o seu servidor",
       "click_here": "Clique aqui para me convidar para o seu servidor",
       "note_that": "Note que você precisa da permissão \"Gerenciar servidor\" para convidar bots."
+    },
+    "ping": {
+      "_description": "Checa se o bot está online"
     }
   },
   "usage": "Uso",

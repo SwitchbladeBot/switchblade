@@ -1,22 +1,50 @@
 {
   "commands": {
     "neko": {
+      "_description": "",
       "here_is_your_neko": ""
     },
     "coin": {
+      "_description": "",
       "flipped_a_coin": "",
       "heads": "",
       "tails": ""
     },
+    "reverse": {
+      "_description": "",
+      "_usage": "",
+      "no_sentence": ""
+    },
+    "hmmm": {
+      "_description": ""
+    },
+    "smart": {
+      "_description": ""
+    },
+    "softwaregore": {
+      "_description": ""
+    },
+    "thinking": {
+      "_description": ""
+    },
+    "adorable": {
+      "_description": ""
+    },
     "avatar": {
+      "_description": "",
+      "_usage": "",
       "someones_avatar": ""
     },
     "dog": {
       "here_is_your_dog": ""
     },
     "invite": {
+      "_description": "",
       "click_here": "",
       "note_that": ""
+    },
+    "ping": {
+      "_description": ""
     }
   },
   "usage": "",

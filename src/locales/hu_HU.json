@@ -1,24 +1,52 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": ""
+      "_description": "Lekér egy véletlenszerű neko lányt (18+, ha a csatorna NSFW) és megjeleníti.",
+      "here_is_your_neko": "Itt a nekod!"
     },
     "coin": {
-      "flipped_a_coin": "",
-      "heads": "",
-      "tails": ""
+      "_description": "Feldob egy érmét",
+      "flipped_a_coin": "**{0}** feldobott egy érmét és ezt kapta: **{1}**!",
+      "heads": "FEJ",
+      "tails": "ÍRÁS"
+    },
+    "reverse": {
+      "_description": "Megfordít egy mondatot.",
+      "_usage": "<mondat>",
+      "no_sentence": "Meg kell adnod valamit, amit megfordíthatok!"
+    },
+    "hmmm": {
+      "_description": "Véletlenszerű kép a /r/hmmm subredditről"
+    },
+    "smart": {
+      "_description": "Megjelenít egy „Roll Safe” mémet"
+    },
+    "softwaregore": {
+      "_description": "Véletlenszerű kép a /r/softwaregore subredditről"
+    },
+    "thinking": {
+      "_description": "Random :thinking: kép a /r/thinking subredditről"
+    },
+    "adorable": {
+      "_description": "Létrehoz egy aranyos avatárt"
     },
     "avatar": {
-      "someones_avatar": ""
+      "_description": "Megmutatja a saját vagy más avatárját",
+      "_usage": "[felhasználó]",
+      "someones_avatar": "{0} avatárja"
     },
     "dog": {
-      "here_is_your_dog": ""
+      "here_is_your_dog": "Itt a kutyád!"
     },
     "invite": {
-      "click_here": "",
-      "note_that": ""
+      "_description": "Megjeleníti a linket amivel meghívhatod Switchbladet a szerveredre",
+      "click_here": "Kattints ide, hogy meghívj a szerveredre",
+      "note_that": "Ne feledd, hogy „Szerver kezelése” jog szükséges a botok meghívásához."
+    },
+    "ping": {
+      "_description": "Megnézi, hogy elérhető-e a bot"
     }
   },
-  "usage": "",
-  "example": ""
+  "usage": "Használat",
+  "example": "Példa"
 }

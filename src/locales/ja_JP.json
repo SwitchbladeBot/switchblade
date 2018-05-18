@@ -1,24 +1,52 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": ""
+      "_description": "",
+      "here_is_your_neko": "ここはあなたの猫！"
     },
     "coin": {
+      "_description": "",
       "flipped_a_coin": "",
       "heads": "",
       "tails": ""
     },
+    "reverse": {
+      "_description": "",
+      "_usage": "",
+      "no_sentence": ""
+    },
+    "hmmm": {
+      "_description": ""
+    },
+    "smart": {
+      "_description": ""
+    },
+    "softwaregore": {
+      "_description": ""
+    },
+    "thinking": {
+      "_description": ""
+    },
+    "adorable": {
+      "_description": ""
+    },
     "avatar": {
-      "someones_avatar": ""
+      "_description": "",
+      "_usage": "",
+      "someones_avatar": "{0]のアバター"
     },
     "dog": {
-      "here_is_your_dog": ""
+      "here_is_your_dog": "ここはあなたの犬！"
     },
     "invite": {
-      "click_here": "",
+      "_description": "",
+      "click_here": "ここをクリックしてサーバーに私を招待には",
       "note_that": ""
+    },
+    "ping": {
+      "_description": ""
     }
   },
-  "usage": "",
-  "example": ""
+  "usage": "使い方",
+  "example": "例"
 }

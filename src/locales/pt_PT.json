@@ -1,24 +1,52 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": ""
+      "_description": "",
+      "here_is_your_neko": "Aqui está a tua neko!"
     },
     "coin": {
-      "flipped_a_coin": "",
-      "heads": "",
-      "tails": ""
+      "_description": "Vira uma moeda",
+      "flipped_a_coin": "{0}* * atirou uma moeda ao ar e teve * *{1} * *!",
+      "heads": "CARA",
+      "tails": "COROA"
+    },
+    "reverse": {
+      "_description": "Inverte uma frase.",
+      "_usage": "<sentence>",
+      "no_sentence": "Tu tens que dar-me algo para reverter!"
+    },
+    "hmmm": {
+      "_description": "Imagem aleatória de /r/hmmm"
+    },
+    "smart": {
+      "_description": ""
+    },
+    "softwaregore": {
+      "_description": "Imagem aleatória de /r/softwaregore"
+    },
+    "thinking": {
+      "_description": "Imagem aleatória pensativa :thinking: de /r/thinking"
+    },
+    "adorable": {
+      "_description": "Gera um avatar adorável"
     },
     "avatar": {
-      "someones_avatar": ""
+      "_description": "",
+      "_usage": "",
+      "someones_avatar": "Avatar de {0}"
     },
     "dog": {
-      "here_is_your_dog": ""
+      "here_is_your_dog": "Aqui está o teu cão!"
     },
     "invite": {
-      "click_here": "",
-      "note_that": ""
+      "_description": "Mostra o link para convidar o Switchblade para o teu servidor",
+      "click_here": "Clica aqui para convidares-me para o teu servidor",
+      "note_that": "Vê que precisas de ter a permissão \"Manager server\" para convidares bots."
+    },
+    "ping": {
+      "_description": "Verifica se o bot está online"
     }
   },
-  "usage": "",
-  "example": ""
+  "usage": "Uso",
+  "example": "Exemplo"
 }
