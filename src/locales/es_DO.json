@@ -1,24 +1,24 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": ""
+      "here_is_your_neko": "Here's your neko!"
     },
     "coin": {
-      "flipped_a_coin": "",
-      "heads": "",
-      "tails": ""
+      "flipped_a_coin": "**{0}** flipped a coin and got **{1}**!",
+      "heads": "HEADS",
+      "tails": "TAILS"
     },
     "avatar": {
-      "someones_avatar": ""
+      "someones_avatar": "{0}'s avatar"
     },
     "dog": {
-      "here_is_your_dog": ""
+      "here_is_your_dog": "Here's your dog!"
     },
     "invite": {
-      "click_here": "",
-      "note_that": ""
+      "click_here": "Click here to invite me to your server",
+      "note_that": "Note that you need the \"Manage server\" permission in order to invite bots."
     }
   },
-  "usage": "",
-  "example": ""
+  "usage": "Usage",
+  "example": "Example"
 }
