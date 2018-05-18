@@ -1,0 +1,24 @@
+{
+  "commands": {
+    "neko": {
+      "here_is_your_neko": "Aqui está sua neko!"
+    },
+    "coin": {
+      "flipped_a_coin": "**{0}** jogou uma moeda e tirou **{1}**!",
+      "heads": "CARA",
+      "tails": "COROA"
+    },
+    "avatar": {
+      "someones_avatar": "Avatar de {0}"
+    },
+    "dog": {
+      "here_is_your_dog": "Aqui está seu cachorro!"
+    },
+    "invite": {
+      "click_here": "Clique aqui para me convidar para o seu servidor",
+      "note_that": "Note que você precisa da permissão \"Gerenciar servidor\" para convidar bots."
+    }
+  },
+  "usage": "Uso",
+  "example": "Exemplo"
+}
