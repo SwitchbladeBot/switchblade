@@ -5,18 +5,18 @@
       "here_is_your_neko": "Itt a nekod!"
     },
     "coin": {
-      "_description": "Flips a coin",
+      "_description": "Feldob egy érmét",
       "flipped_a_coin": "**{0}** feldobott egy érmét és ezt kapta: **{1}**!",
       "heads": "FEJ",
       "tails": "ÍRÁS"
     },
     "reverse": {
-      "_description": "Reverses a sentence.",
-      "_usage": "<sentence>",
-      "no_sentence": "You have to give me something to reverse!"
+      "_description": "Megfordít egy mondatot.",
+      "_usage": "<mondat>",
+      "no_sentence": "Meg kell adnod valamit, amit megfordíthatok!"
     },
     "hmmm": {
-      "_description": "Random image from /r/hmmm"
+      "_description": "Véletlenszerű kép a /r/hmmm subredditről"
     },
     "smart": {
       "_description": "Shows the Roll Safe meme"
