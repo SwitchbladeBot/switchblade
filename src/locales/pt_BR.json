@@ -31,20 +31,20 @@
       "_description": "Gera um avatar adorable"
     },
     "avatar": {
-      "_description": "",
-      "_usage": "",
+      "_description": "Mostra o seu avatar ou o de alguém",
+      "_usage": "[usuário]",
       "someones_avatar": "Avatar de {0}"
     },
     "dog": {
       "here_is_your_dog": "Aqui está seu cachorro!"
     },
     "invite": {
-      "_description": "",
+      "_description": "Mostra o link para convidar o Switchblade para o seu servidor",
       "click_here": "Clique aqui para me convidar para o seu servidor",
       "note_that": "Note que você precisa da permissão \"Gerenciar servidor\" para convidar bots."
     },
     "ping": {
-      "_description": ""
+      "_description": "Checa se o bot está online"
     }
   },
   "usage": "Uso",
