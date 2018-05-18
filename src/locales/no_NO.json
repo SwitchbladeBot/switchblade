@@ -12,13 +12,13 @@
       "someones_avatar": "{0}'s avatar"
     },
     "dog": {
-      "here_is_your_dog": "Here's your dog!"
+      "here_is_your_dog": "Her er din hund!"
     },
     "invite": {
-      "click_here": "Click here to invite me to your server",
-      "note_that": "Note that you need the \"Manage server\" permission in order to invite bots."
+      "click_here": "Klikk her for å invitere meg til serveren din",
+      "note_that": "Husk at du må ha \"Administrer server\", tillatelsen for å invitere bots."
     }
   },
   "usage": "Usage",
-  "example": "Example"
+  "example": "Eksempel"
 }
