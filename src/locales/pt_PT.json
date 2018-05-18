@@ -1,7 +1,7 @@
 {
   "commands": {
     "neko": {
-      "_description": "Fetches a random neko girl (lewd if the channel is NSFW) and displays it.",
+      "_description": "",
       "here_is_your_neko": "Aqui está a tua neko!"
     },
     "coin": {
@@ -19,7 +19,7 @@
       "_description": "Imagem aleatória de /r/hmmm"
     },
     "smart": {
-      "_description": "Shows the Roll Safe meme"
+      "_description": ""
     },
     "softwaregore": {
       "_description": "Imagem aleatória de /r/softwaregore"
@@ -31,15 +31,15 @@
       "_description": "Gera um avatar adorável"
     },
     "avatar": {
-      "_description": "Shows your or someone else's",
-      "_usage": "[user]",
+      "_description": "",
+      "_usage": "",
       "someones_avatar": "Avatar de {0}"
     },
     "dog": {
       "here_is_your_dog": "Aqui está o teu cão!"
     },
     "invite": {
-      "_description": "Mostra o link para convidar o Switchblad para o teu servidor",
+      "_description": "Mostra o link para convidar o Switchblade para o teu servidor",
       "click_here": "Clica aqui para convidares-me para o teu servidor",
       "note_that": "Vê que precisas de ter a permissão \"Manager server\" para convidares bots."
     },
