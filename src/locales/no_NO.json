@@ -4,12 +4,12 @@
       "here_is_your_neko": "Her er din neko!"
     },
     "coin": {
-      "flipped_a_coin": "**{0}** flipped a coin and got **{1}**!",
+      "flipped_a_coin": "**{0}** slo kron eller mynt og fikk **{1}**!",
       "heads": "KRON",
       "tails": "MYNT"
     },
     "avatar": {
-      "someones_avatar": "{0}'s avatar"
+      "someones_avatar": "{0} sin avatar"
     },
     "dog": {
       "here_is_your_dog": "Her er din hund!"
@@ -19,6 +19,6 @@
       "note_that": "Husk at du må ha \"Administrer server\", tillatelsen for å invitere bots."
     }
   },
-  "usage": "Usage",
+  "usage": "Bruk",
   "example": "Eksempel"
 }
