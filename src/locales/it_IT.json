@@ -1,50 +1,50 @@
 {
   "commands": {
     "neko": {
-      "_description": "Fetches a random neko girl (lewd if the channel is NSFW) and displays it.",
+      "_description": "",
       "here_is_your_neko": "Ecco la tua neko!"
     },
     "coin": {
-      "_description": "Flips a coin",
+      "_description": "",
       "flipped_a_coin": "**{0}** lancia la moneta ed esce **{1}**!",
       "heads": "TESTA",
       "tails": "CROCE"
     },
     "reverse": {
-      "_description": "Reverses a sentence.",
-      "_usage": "<sentence>",
-      "no_sentence": "You have to give me something to reverse!"
+      "_description": "",
+      "_usage": "",
+      "no_sentence": ""
     },
     "hmmm": {
-      "_description": "Random image from /r/hmmm"
+      "_description": ""
     },
     "smart": {
-      "_description": "Shows the Roll Safe meme"
+      "_description": ""
     },
     "softwaregore": {
-      "_description": "Random image from /r/softwaregore"
+      "_description": ""
     },
     "thinking": {
-      "_description": "Random :thinking: image from /r/thinking"
+      "_description": ""
     },
     "adorable": {
-      "_description": "Generates an adorable avatar"
+      "_description": ""
     },
     "avatar": {
-      "_description": "Shows your or someone else's",
-      "_usage": "[user]",
+      "_description": "",
+      "_usage": "",
       "someones_avatar": "L'avatar di {0}"
     },
     "dog": {
       "here_is_your_dog": "Ecco il tuo cane!"
     },
     "invite": {
-      "_description": "Shows the link to invite Switchblade to your server",
+      "_description": "",
       "click_here": "Clicca qui per invitarmi nel tuo server",
       "note_that": "Nota che serve il permesso \"Gestire il server\" per invitare i bot."
     },
     "ping": {
-      "_description": "Checks to see if the bot is online"
+      "_description": ""
     }
   },
   "usage": "Utilizzo",
