@@ -4,9 +4,9 @@
       "here_is_your_neko": "ここはあなたの猫！"
     },
     "coin": {
-      "flipped_a_coin": "",
-      "heads": "",
-      "tails": ""
+      "flipped_a_coin": "**{0}** flipped a coin and got **{1}**!",
+      "heads": "HEADS",
+      "tails": "TAILS"
     },
     "avatar": {
       "someones_avatar": "{0]のアバター"
@@ -16,7 +16,7 @@
     },
     "invite": {
       "click_here": "ここをクリックしてサーバーに私を招待には",
-      "note_that": ""
+      "note_that": "Note that you need the \"Manage server\" permission in order to invite bots."
     }
   },
   "usage": "使い方",
