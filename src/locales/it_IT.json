@@ -1,24 +1,24 @@
 {
   "commands": {
     "neko": {
-      "here_is_your_neko": "Ecco il tuo neko!"
+      "here_is_your_neko": "Ecco la tua neko!"
     },
     "coin": {
-      "flipped_a_coin": "",
-      "heads": "",
-      "tails": ""
+      "flipped_a_coin": "**{0}** lancia la moneta ed esce **{1}**!",
+      "heads": "TESTA",
+      "tails": "CROCE"
     },
     "avatar": {
-      "someones_avatar": ""
+      "someones_avatar": "L'avatar di {0}"
     },
     "dog": {
-      "here_is_your_dog": ""
+      "here_is_your_dog": "Ecco il tuo cane!"
     },
     "invite": {
-      "click_here": "",
-      "note_that": ""
+      "click_here": "Clicca qui per invitarmi nel tuo server",
+      "note_that": "Nota che serve il permesso \"Gestire il server\" per invitare i bot."
     }
   },
-  "usage": "",
-  "example": ""
+  "usage": "Utilizzo",
+  "example": "Esempio"
 }
