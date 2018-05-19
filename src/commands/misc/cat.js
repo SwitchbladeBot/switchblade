@@ -20,8 +20,5 @@ module.exports = class Cat extends Command {
 
   async requestKitty (message) {
     const { body } = await snekfetch.get('http://aws.random.cat/meow')
-    const notSupported = ['.mp4']
-    if (!body.file.endsWith(notSupported)) return body.file
-    else return this.requestKitty(message)
   }
 }
