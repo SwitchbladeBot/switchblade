@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 
 const { Command, EventListener } = require('./structures')
+const { MongoDB } = require('./database')
 
 /**
  * Custom Discord.js Client.
@@ -20,6 +21,7 @@ module.exports = class Switchblade extends Client {
     this.initializeApis('./src/apis')
     this.initializeCommands('./src/commands')
     this.initializeListeners('./src/listeners')
+    this.initializeDatabase(MongoDB)
   }
 
   /**
@@ -163,5 +165,11 @@ module.exports = class Switchblade extends Client {
     } catch (e) {
       this.logError(e)
     }
+  }
+  
+  // Database
+  initializeDatabase (DBWrapper, options = {}) {
+    this.database = new DBWrapper(options)
+    this.database.connect().then(() => this.log('Database connection established!', 'DB')).catch(this.logError)
   }
 }
