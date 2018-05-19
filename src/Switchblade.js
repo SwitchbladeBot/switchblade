@@ -2,7 +2,7 @@ const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
 
-const { Command, EventListener, APIWrapper } = require('./structures')
+const { Command, EventListener } = require('./structures')
 
 /**
  * Custom Discord.js Client.
