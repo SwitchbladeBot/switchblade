@@ -21,7 +21,7 @@ module.exports = class MongoDB extends DBWrapper {
   }
 
   async getUser (_id) {
-    if (_id instanceof Discord.User) _id = _id.id
+    if (_id instanceof Discord.User || _id instanceof Discord.GuildMember) _id = _id.id
     if (!_id || typeof _id !== 'string') return
 
     const User = this.Models.User
