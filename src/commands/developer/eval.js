@@ -1,6 +1,7 @@
 /* eslint-disable no-eval */
 
 const { Command } = require('../../')
+const util = require('util')
 
 module.exports = class Eval extends Command {
   constructor (client) {
@@ -10,20 +11,19 @@ module.exports = class Eval extends Command {
     this.hidden = true
   }
 
-  run (message, args) {
+  async run (message, args) {
     try {
-      const code = args.join(' ')
-      let evaled = this.clean(require('util').inspect(eval(code)))
-      message.channel.send(evaled, { code: 'xl' }).catch(err => {
-        message.channel.send(`\`ERROR\` \`\`\`xl\n${this.clean(err)}\n\`\`\``)
-      })
+      const evaled = eval(args.join(' '))
+      const cleanEvaled = this.clean(util.inspect(evaled), {depth: 0})
+      await message.channel.send(cleanEvaled, { code: 'xl' })
     } catch (err) {
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${this.clean(err)}\n\`\`\``)
+      message.channel.send('`ERROR` ```xl\n' + this.clean(err) + '\n```')
     }
   }
 
   clean (text) {
-    return typeof text === 'string' ? text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203)) : text
+    const blankSpace = String.fromCharCode(8203)
+    return typeof text === 'string' ? text.replace(/`/g, '`' + blankSpace).replace(/@/g, '@' + blankSpace) : text
   }
 
   canRun (message) {
