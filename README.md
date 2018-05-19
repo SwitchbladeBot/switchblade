@@ -46,11 +46,11 @@ Then, disable the *web* dyno within *Resources*, enable the *worker* dyno, and y
 * [Issues](https://github.com/SwitchbladeBot/switchblade/issues)
 
 ## Contributing
-If you'd like to contribute, fork this repository, edit / add something in it, and make a Pull Request, or you can give ideias in [its Discord Server](https://discord.gg/PwWJRsc). It can't be any type of hardcoded bullsh*ttery, try to avoid it as much as possible.
+If you'd like to contribute, fork this repository, edit / add something in it, and make a Pull Request, or you can give ideas in [its Discord Server](https://discord.gg/PwWJRsc). It can't be any type of hardcoded bullsh*ttery, try to avoid it as much as possible.
 
 ## License and Copyright
 ```
-Copyright (c) 2018 SwiftBlade
+Copyright (c) 2018 SwitchBlade
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
