@@ -15,7 +15,6 @@ module.exports = class Switchblade extends Client {
     this.commands = []
     this.listeners = []
     this.apis = {}
-    this.colors = require('./assets/colors.json')
 
     this.initializeApis('./src/apis')
     this.initializeCommands('./src/commands')

@@ -7,6 +7,7 @@ module.exports = {
 
   // Utils
   Reddit: require('./utils/reddit.js'),
+  Constants: require('./utils/Constants.js'),
 
   // Etc
   Switchblade: require('./Switchblade.js')
