@@ -2,7 +2,7 @@ const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
 
-const { Command, EventListener } = require('./structures')
+const { Command, EventListener, APIWrapper } = require('./structures')
 
 /**
  * Custom Discord.js Client.
@@ -14,10 +14,12 @@ module.exports = class Switchblade extends Client {
     super(options)
     this.commands = []
     this.listeners = []
+    this.apis = {}
     this.colors = require('./assets/colors.json')
 
-    this.initializeCommands('./src/commands') // Custom commands directory?
-    this.initializeListeners('./src/listeners') // Custom listeners directory?
+    this.initializeApis('./src/apis')
+    this.initializeCommands('./src/commands')
+    this.initializeListeners('./src/listeners')
   }
 
   /**
@@ -126,6 +128,36 @@ module.exports = class Switchblade extends Client {
           this.log(`${file} loaded.`, 'Listeners')
         } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
           this.initializeListeners(path.resolve(dirPath, file))
+        }
+      })
+    } catch (e) {
+      this.logError(e)
+    }
+  }
+
+  // APIs
+
+  /**
+   * Adds a new listener to the Client.
+   * @param {Object} api - API to be added
+   */
+  addApi (api) {
+    this.apis[api.name] = api.initialize()
+  }
+
+  /**
+   * Initializes all API Wrappers.
+   * @param {string} dirPath - Path to the listeners directory
+   */
+  initializeApis (dirPath) {
+    try {
+      fs.readdirSync(dirPath).forEach(file => {
+        if (file.endsWith('.js')) {
+          const RequiredAPI = require(path.resolve(dirPath, file))
+          this.addApi(new RequiredAPI())
+          this.log(`${file} loaded.`, 'APIs')
+        } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
+          this.initializeApis(path.resolve(dirPath, file))
         }
       })
     } catch (e) {
