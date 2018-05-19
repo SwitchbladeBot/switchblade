@@ -166,8 +166,9 @@ module.exports = class Switchblade extends Client {
       this.logError(e)
     }
   }
-  
+
   // Database
+
   initializeDatabase (DBWrapper, options = {}) {
     this.database = new DBWrapper(options)
     this.database.connect().then(() => this.log('Database connection established!', 'DB')).catch(this.logError)

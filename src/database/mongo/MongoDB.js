@@ -10,7 +10,7 @@ module.exports = class MongoDB extends DBWrapper {
     this.URI = process.env.MONGODB_URI
     this.Models = {}
   }
-  
+
   connect () {
     return mongoose.connect(this.URI, this.options).then(() => {
       Object.keys(Schemas).forEach(k => {
@@ -18,20 +18,20 @@ module.exports = class MongoDB extends DBWrapper {
       })
     })
   }
-  
+
+  async getModelByIndex (modelName, indexName, indexValue, createFallback = true) {
+    const Model = this.Models['modelName']
+    const model = await Model.findOne({index: indexValue}).then() || createFallback ? await new Model({index: indexValue}).save() : null
+    return model
+  }
+
   async getUser (id) {
     if (!id || typeof id !== 'string') return
-    
-    const User = this.Models['User']
-    const user = await User.findOne({user_id: id}).then() || await new User({user_id: id}).save()
-    return user
+    return this.getModelByIndex('User', 'user_id', id)
   }
-  
+
   async getGuild (id) {
     if (!id || typeof id !== 'string') return
-    
-    const Guild = this.Models['Guild']
-    const guild = await Guild.findOne({user_id: id}).then() || await new Guild({user_id: id}).save()
-    return guild
+    return this.getModelByIndex('Guild', 'guild_id', id)
   }
 }
