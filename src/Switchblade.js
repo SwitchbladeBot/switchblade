@@ -2,7 +2,7 @@ const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
 
-const { Command, EventListener } = require('./structures')
+const { Command, EventListener, APIWrapper } = require('./structures')
 
 /**
  * Custom Discord.js Client.
@@ -142,7 +142,9 @@ module.exports = class Switchblade extends Client {
    * @param {Object} api - API to be added
    */
   addApi (api) {
-    if (api.canLoad()) this.apis[api.name] = api.load()
+    if (api instanceof APIWrapper && api.canLoad()) {
+      this.apis[api.name] = api.load()
+    }
   }
 
   /**
