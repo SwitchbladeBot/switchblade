@@ -23,7 +23,6 @@ module.exports = class Spotify extends Command {
         let track = tracksResponse.tracks.items[0]
         let artists = track.artists.map(a => { return a.name }).join(', ')
         const album = await spotify.request(spotifyBaseUrl + 'albums/' + track.album.id)
-        console.log(album)
         let coverUrl = album.images[2].url
         message.channel.send(
           new SwitchbladeEmbed()
