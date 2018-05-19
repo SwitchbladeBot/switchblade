@@ -19,17 +19,17 @@ module.exports = class MongoDB extends DBWrapper {
     })
   }
 
-  async getUser (id) {
-    if (!id || typeof id !== 'string') return
+  async getUser (_id) {
+    if (!_id || typeof _id !== 'string') return
     const User = this.Models.User
-    const user = await User.findOne({'_id': id}).then() || await new User({'_id': id}).save()
+    const user = await User.findById(_id).then() || await new User({_id}).save()
     return user
   }
 
-  async getGuild (id) {
-    if (!id || typeof id !== 'string') return
+  async getGuild (_id) {
+    if (!_id || typeof _id !== 'string') return
     const Guild = this.Models.Guild
-    const guild = await Guild.findOne({'_id': id}).then() || await new Guild({'_id': id}).save()
+    const guild = await Guild.findById(_id).then() || await new Guild({_id}).save()
     return guild
   }
 }
