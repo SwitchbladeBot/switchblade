@@ -1,10 +1,10 @@
 const { APIWrapper } = require('../')
-const Spotify = require('node-spotify-api');
+const Spotify = require('node-spotify-api')
 
 module.exports = class SpotifyAPI extends APIWrapper {
   constructor () {
     super()
-    this.name = "spotify"
+    this.name = 'spotify'
   }
 
   initialize () {
@@ -14,5 +14,3 @@ module.exports = class SpotifyAPI extends APIWrapper {
     })
   }
 }
-
-

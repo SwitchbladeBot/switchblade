@@ -1,6 +1,5 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const snekfetch = require('snekfetch')
 const spotifyBaseUrl = 'https://api.spotify.com/v1/'
 
 module.exports = class Spotify extends Command {
@@ -16,13 +15,13 @@ module.exports = class Spotify extends Command {
 
       const spotify = this.client.apis.spotify
 
-      let query = encodeURI(args.join(" "))
+      let query = encodeURI(args.join(' '))
 
       // Request the track information
       const tracksResponse = await spotify.search({type: 'track', query: query})
       if (tracksResponse.tracks.total > 0) {
         let track = tracksResponse.tracks.items[0]
-        let artists = track.artists.map(a => {return a.name}).join(', ')
+        let artists = track.artists.map(a => { return a.name }).join(', ')
         const album = await spotify.request(spotifyBaseUrl + 'albums/' + track.album.id)
         console.log(album)
         let coverUrl = album.images[2].url
@@ -40,7 +39,6 @@ module.exports = class Spotify extends Command {
             .setTitle('I couldn\'t find any tracks with that name.')
         ).then(() => message.channel.stopTyping())
       }
-
     } else {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
@@ -52,8 +50,8 @@ module.exports = class Spotify extends Command {
   }
 }
 
-function msToMMSS(millis) {
-  let minutes = Math.floor(millis / 60000);
-  let seconds = ((millis % 60000) / 1000).toFixed(0);
-  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+function msToMMSS (millis) {
+  let minutes = Math.floor(millis / 60000)
+  let seconds = ((millis % 60000) / 1000).toFixed(0)
+  return minutes + ':' + (seconds < 10 ? '0' : '') + seconds
 }

@@ -3,13 +3,12 @@
  */
 module.exports = class APIWrapper {
   constructor () {
-    this.name = ""
+    this.name = ''
   }
 
   /**
    * Initializes the wrapper
    * @returns {Object} - The initialized API Wrapper
    */
-  initialize() {}
+  initialize () {}
 }
-
