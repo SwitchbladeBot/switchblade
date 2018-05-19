@@ -18,21 +18,12 @@ module.exports = class Spotify extends Command {
 
     const embed = new SwitchbladeEmbed(message.author)
     if (args.length > 0) {
-      const spotify = this.client.apis.spotify
-
-      const query = encodeURIComponent(args.join(' '))
-
-      // Request the track information
-      const tracksResponse = await spotify.search({type: 'track', query})
-      if (tracksResponse && tracksResponse.tracks.total > 0) {
-        const track = tracksResponse.tracks.items[0]
-        const artists = track.artists.map(a => a.name).join(', ')
-        const album = await spotify.request(spotifyBaseUrl + 'albums/' + track.album.id)
-        const coverUrl = album.images[2].url
+      const track = await this.getTrack(encodeURIComponent(args.join(' ')))
+      if (track) {
         embed
           .setAuthor('Spotify', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2000px-Spotify_logo_without_text.svg.png')
-          .setThumbnail(coverUrl)
-          .setDescription(`[**${track.name}**](${track.external_urls.spotify}) (${msToMMSS(track.duration_ms)})\n${artists}`)
+          .setThumbnail(track.coverURL)
+          .setDescription(`[**${track.name}**](${track.url}) (${msToMMSS(track.duration)})\n${track.artists}`)
           .setColor(this.client.colors.spotify)
           .footer = {}
       } else {
@@ -48,6 +39,18 @@ module.exports = class Spotify extends Command {
     }
 
     message.channel.send(embed).then(() => message.channel.stopTyping())
+  }
+
+  async getTrack (query) {
+    const spotify = this.client.apis.spotify
+    const tracksResponse = await spotify.search({type: 'track', query})
+    if (tracksResponse && tracksResponse.tracks.total > 0) {
+      const track = tracksResponse.tracks.items[0]
+      const artists = track.artists.map(a => a.name).join(', ')
+      const album = await spotify.request(spotifyBaseUrl + 'albums/' + track.album.id)
+      const coverURL = album.images[2].url
+      return { name: track.name, url: track.external_urls.spotify, duration: track.duration_ms, artists, coverURL }
+    } else { return null }
   }
 }
 
