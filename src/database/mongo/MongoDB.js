@@ -19,19 +19,17 @@ module.exports = class MongoDB extends DBWrapper {
     })
   }
 
-  async getModelByIndex (modelName, indexName, indexValue, createFallback = true) {
-    const Model = this.Models['modelName']
-    const model = await Model.findOne({index: indexValue}).then() || createFallback ? await new Model({index: indexValue}).save() : null
-    return model
-  }
-
   async getUser (id) {
     if (!id || typeof id !== 'string') return
-    return this.getModelByIndex('User', 'user_id', id)
+    const User = this.Models.User
+    const user = await User.findOne({'_id': id}).then() || await new User({'_id': id}).save()
+    return user
   }
 
   async getGuild (id) {
     if (!id || typeof id !== 'string') return
-    return this.getModelByIndex('Guild', 'guild_id', id)
+    const Guild = this.Models.Guild
+    const guild = await Guild.findOne({'_id': id}).then() || await new Guild({'_id': id}).save()
+    return guild
   }
 }
