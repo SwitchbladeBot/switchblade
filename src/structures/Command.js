@@ -20,6 +20,14 @@ module.exports = class Command {
   }
 
   /**
+   * Returns true if it can load
+   * @returns {boolean} Whether this command can load
+   */
+  canLoad () {
+    return true
+  }
+
+  /**
    * Pre-executes itself
    * @param {Message} message Message that triggered it
    * @param {Array<string>} args Command arguments
