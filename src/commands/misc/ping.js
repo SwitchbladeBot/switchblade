@@ -10,7 +10,13 @@ module.exports = class Ping extends Command {
   run (message) {
     let x = new Date()
     message.channel.send(':ping_pong: ...').then((newMessage) => {
-      newMessage.edit(`:ping_pong: \`${(new Date() - x)}ms\``)
+      let y = new Date()
+      console.log(x)
+      console.log(y)
+      if (x > y) {
+        newMessage.edit(`:ping_pong: \`${(x - y)}ms\``)
+      }
+      newMessage.edit(`:ping_pong: \`${(y - x)}ms\``)
     })
   }
 }
