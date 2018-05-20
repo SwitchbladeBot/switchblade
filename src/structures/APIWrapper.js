@@ -4,11 +4,23 @@
 module.exports = class APIWrapper {
   constructor () {
     this.name = ''
+    this.envVars = []
   }
 
   /**
-   * Initializes the wrapper
-   * @returns {Object} - The initialized API Wrapper
+   * Check if the API can load
+   * @returns {boolean} - Whether the API can load
    */
-  initialize () {}
+  canLoad () {
+    if (this.envVars.length) {
+      return this.envVars.every(v => process.env[v])
+    }
+    return true
+  }
+
+  /**
+   * Loads the API
+   * @returns {Object} - The loaded API
+   */
+  load () {}
 }
