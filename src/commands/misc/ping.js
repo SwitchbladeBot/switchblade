@@ -8,8 +8,9 @@ module.exports = class Ping extends Command {
   }
 
   run (message) {
+    let x = new Date()
     message.channel.send(':ping_pong: ...').then((newMessage) => {
-      newMessage.edit(`:ping_pong: \`${(newMessage.createdAt - message.createdAt)}ms\``)
+      newMessage.edit(`:ping_pong: \`${(new Date() - x)}ms\``)
     })
   }
 }
