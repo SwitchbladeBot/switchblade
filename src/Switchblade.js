@@ -2,7 +2,7 @@ const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
 
-const { Command, EventListener } = require('./structures')
+const { Command, EventListener, APIWrapper } = require('./structures')
 
 /**
  * Custom Discord.js Client.
@@ -12,9 +12,9 @@ const { Command, EventListener } = require('./structures')
 module.exports = class Switchblade extends Client {
   constructor (options = {}) {
     super(options)
+    this.apis = {}
     this.commands = []
     this.listeners = []
-    this.apis = {}
 
     this.initializeApis('./src/apis')
     this.initializeCommands('./src/commands')
@@ -59,7 +59,7 @@ module.exports = class Switchblade extends Client {
    * @param {Command} command - Command to be added
    */
   addCommand (command) {
-    if (command instanceof Command) {
+    if (command instanceof Command && command.canLoad()) {
       this.commands.push(command)
     }
   }
@@ -141,7 +141,9 @@ module.exports = class Switchblade extends Client {
    * @param {Object} api - API to be added
    */
   addApi (api) {
-    this.apis[api.name] = api.initialize()
+    if (api instanceof APIWrapper && api.canLoad()) {
+      this.apis[api.name] = api.load()
+    }
   }
 
   /**
