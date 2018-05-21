@@ -8,6 +8,6 @@ module.exports = class Ping extends Command {
   }
 
   run (message) {
-    message.channel.send(':ping_pong: `' + this.client.ping + '`ms')
+    message.channel.send(':ping_pong: `' + (Math.ceil(this.client.ping)) + '`ms')
   }
 }
