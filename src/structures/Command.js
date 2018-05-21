@@ -24,8 +24,8 @@ module.exports = class Command {
    * @param {Message} message Message that triggered it
    * @param {Array<string>} args Command arguments
    */
-  async _run (message, args) {
-    return this.run(message, args)
+  async _run (message, args, translation) {
+    return this.run(message, args, translation)
   }
 
   /**

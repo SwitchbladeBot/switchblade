@@ -7,12 +7,12 @@ module.exports = class Avatar extends Command {
     this.aliases = ['profilepicture', 'pfp']
   }
 
-  run (message) {
+  run (message, args, translation) {
     const user = message.mentions.users.first() || message.author
     message.channel.send(
       new SwitchbladeEmbed(message.author)
         .setImage(user.displayAvatarURL)
-        .setDescription(user + '\'s avatar')
+        .setDescription(translation('commands:avatar.someonesAvatar', {user: user}))
     )
   }
 }

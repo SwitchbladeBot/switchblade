@@ -1,6 +1,8 @@
 const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
+const i18next = require('i18next')
+const translationBackend = require('i18next-node-fs-backend')
 
 const { Command, EventListener } = require('./structures')
 
@@ -18,6 +20,7 @@ module.exports = class Switchblade extends Client {
 
     this.initializeCommands('./src/commands') // Custom commands directory?
     this.initializeListeners('./src/listeners') // Custom listeners directory?
+    this.initializei18next('./src/locales')
   }
 
   /**
@@ -71,7 +74,7 @@ module.exports = class Switchblade extends Client {
    */
   runCommand (command, message, args) {
     if (command.canRun(message, args)) {
-      command._run(message, args).catch(this.logError)
+      command._run(message, args, i18next.getFixedT('pt_BR')).catch(this.logError)
     }
   }
 
@@ -126,6 +129,26 @@ module.exports = class Switchblade extends Client {
           this.log(`${file} loaded.`, 'Listeners')
         } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
           this.initializeListeners(path.resolve(dirPath, file))
+        }
+      })
+    } catch (e) {
+      this.logError(e)
+    }
+  }
+
+  /**
+   * Initializes i18next.
+   */
+  initializei18next (dirPath) {
+    const locales = fs.readdirSync(dirPath)
+    try {
+      i18next.use(translationBackend).init({
+        debug: true,
+        ns: ['commands', 'commons', 'permissions'],
+        preload: locales,
+        fallbackLng: 'en_US',
+        backend: {
+          loadPath: 'src/locales/{{lng}}/{{ns}}.json'
         }
       })
     } catch (e) {
