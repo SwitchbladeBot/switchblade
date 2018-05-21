@@ -1,0 +1,55 @@
+{
+  "neko": {
+    "commandDescription": "Fetches a random neko girl (lewd if the channel is NSFW) and displays it.",
+    "hereIsYour_neko": "Here's your neko!",
+    "hereIsYour_lewd": "Here's your lewd neko!"
+  },
+  "coin": {
+    "commandDescription": "Flips a coin",
+    "flippedACoin_heads": "**{{username}}** flipped a coin and got **HEADS**!",
+    "flippedACoin_tails": "**{{username}}** flipped a coin and got **TAILS**!"
+  },
+  "reverse": {
+    "commandDescription": "Reverses a sentence.",
+    "commandUsage": "<sentence>",
+    "no_sentence": "You have to give me something to reverse!"
+  },
+  "hmmm": {
+    "commandDescription": "Random image from /r/hmmm"
+  },
+  "smart": {
+    "commandDescription": "Shows the Roll Safe meme"
+  },
+  "softwaregore": {
+    "commandDescription": "Random image from /r/softwaregore"
+  },
+  "thinking": {
+    "commandDescription": "Random :thinking: image from /r/thinking"
+  },
+  "adorable": {
+    "commandDescription": "Generates an adorable avatar"
+  },
+  "avatar": {
+    "commandDescription": "Shows your or someone else's",
+    "commandUsage": "[user]",
+    "someonesAvatar": "{{- user}}'s avatar"
+  },
+  "dog": {
+    "commandDescription": "Fetches a random dog and displays it. Woof!",
+    "hereIsYourDog": "Here's your dog!"
+  },
+  "invite": {
+    "commandDescription": "Shows the link to invite Switchblade to your server",
+    "clickHere": "Click here to invite me to your server",
+    "noteThat": "Note that you need the **$t(permissions:MANAGE_GUILD)** permission in order to invite bots."
+  },
+  "ping": {
+    "commandDescription": "Checks if the bot is online"
+  },
+  "spotify": {
+    "commandDescription": "Searches for a song on Spotify",
+    "usage": "<track name>",
+    "noTracksFound": "I couldn't find any tracks with that name.",
+    "noTrackName": "You need to give me a track name."
+  }
+}
