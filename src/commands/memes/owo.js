@@ -6,7 +6,7 @@ module.exports = class OwO extends Command {
   constructor (client) {
     super(client)
     this.name = 'owo'
-    this.aliases = ['uwu', 'whatsthis', 'owoify']
+    this.aliases = ['uwu', 'whatsthis', 'owoify', 'fursuit']
   }
 
   async run (message, args) {
