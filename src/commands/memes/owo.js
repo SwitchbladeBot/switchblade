@@ -10,7 +10,6 @@ module.exports = class OwO extends Command {
   }
 
   async run (message, args) {
-    const embed = new SwitchbladeEmbed(message.author)
     // If theres something to owoify, it gonna return, else, not.
     if (args.join(' ') > 0) {
       message.channel.startTyping()
@@ -21,7 +20,7 @@ module.exports = class OwO extends Command {
       ).then(() => message.channel.stopTyping())
     } else {
 message.channel.send(
-        new SwitchbladeEmbed(message.author)
+      new SwitchbladeEmbed(message.author)
           .setColor(this.client.colors.error)
           .setTitle('You need to give me something to owoify')
           .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
