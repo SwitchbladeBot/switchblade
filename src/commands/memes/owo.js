@@ -19,8 +19,8 @@ module.exports = class OwO extends Command {
           .setTitle(body.owo)
       ).then(() => message.channel.stopTyping())
     } else {
-message.channel.send(
-      new SwitchbladeEmbed(message.author)
+      message.channel.send(
+        new SwitchbladeEmbed(message.author)
           .setColor(this.client.colors.error)
           .setTitle('You need to give me something to owoify')
           .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
