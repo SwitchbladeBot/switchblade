@@ -1,14 +1,15 @@
-const { Command, Math } = require('../../')
+const { Command } = require('../../')
 
 module.exports = class Triggered extends Command {
-  constructor (client) {
+
+  run (message) {
+    constructor (client) {
     super(client)
-    this.name = 'dicksize'
+    this.name = 'DickSize'
   }
   
   var randnumb = Math.floor((Math.random() * 20) + 1);
-
-  async run (message) {
+    
     message.channel.send(rannumb + ' cm')
   }
 }
