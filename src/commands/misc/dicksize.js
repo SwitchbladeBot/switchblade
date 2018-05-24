@@ -1,19 +1,18 @@
 const { Command } = require('../../')
 
 module.exports = class DickSize extends Command {
-
-  run (message) {
-    constructor (client) {
+  constructor (client) {
     super(client)
     this.name = 'dicksize'
+    this.aliases = ['peepeesize', 'weinersize']
   }
-    
-  if const endpoint = message.channel.nsfw = True {
-  var randnumb = Math.floor((Math.random() * 20) + 1);
-    
-    message.channel.send(rannumb + ' cm') 
-  } else {
-    message.channel.send('This is a NSFW-only command. It only works in NSFW channels.') 
-  }
+
+  run (message) {
+    if message.channel.nsfw {
+      var randnumb = Math.floor((Math.random() * 20) + 1);
+      message.channel.send(rannumb + ' cm') 
+    } else {
+      message.channel.send('This is a NSFW-only command. It only works in NSFW channels.') 
+    }
   }
 }
