@@ -28,6 +28,7 @@
     "erlpack": "github:discordapp/erlpack",
     "node-opus": "^0.3.0",
     "node-spotify-api": "^1.0.7",
+    "nodesu": "^0.6.4",
     "snekfetch": "^4.0.0",
     "uws": "^10.148.0"
   },
