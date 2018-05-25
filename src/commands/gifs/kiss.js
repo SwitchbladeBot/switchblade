@@ -8,7 +8,7 @@ module.exports = class Neko extends Command {
   }
 
   run (message) {
-            if (msg.mentions.users.first().id == this.user.id) return msg.channel.send('It\'s so sad looking at you alone')
+            if (message.mentions.users.first().id == this.user.id) return message.channel.send('It\'s so sad looking at you alone')
     
 
     KissArray = new Array()
