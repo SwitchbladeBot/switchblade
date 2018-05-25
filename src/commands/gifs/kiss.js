@@ -15,7 +15,7 @@ module.exports = class Kiss extends Command {
     if (message.mentions.users.first().id === this.client.user.id) return message.channel.send('It\'s so sad looking at you alone')
     if (message.mentions.users.first().id !== this.client.user.id) {
       message.channel.startTyping()
-      const embed = new SwitchbladeEmbed(message.author).setColor('0x0000FF').setImage(kissImg).setDescription(`${message.author.username} deu um beijo em ${message.mentions.users.first().username}`)
+      const embed = new SwitchbladeEmbed(message.author).setColor('0x0000FF').setImage(kissImg).setDescription(`${message.author} deu um beijo em ${message.mentions.users.first()}`)
       message.channel.send(
         embed
       ).then(() => message.channel.stopTyping())
