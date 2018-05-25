@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const Nodesu = require('nodesu');
+const Nodesu = require('nodesu')
 
 module.exports = class OsuAPI extends APIWrapper {
   constructor () {
@@ -9,6 +9,6 @@ module.exports = class OsuAPI extends APIWrapper {
   }
 
   load () {
-    return new Nodesu.Client(process.env.OSU_API_KEY);
+    return new Nodesu.Client(process.env.OSU_API_KEY)
   }
 }
