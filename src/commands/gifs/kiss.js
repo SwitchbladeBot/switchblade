@@ -4,10 +4,10 @@ module.exports = class Neko extends Command {
   constructor (client) {
     super(client)
     this.name = 'kiss'
-    this.aliases = ['beijo']
+    this.aliases = ['beijo', "beijar"]
   }
 
-  async run (message) {
+  run (message) {
             if (msg.mentions.users.first().id == this.user.id) return msg.channel.send('It\'s so sad looking at you alone')
     
 
