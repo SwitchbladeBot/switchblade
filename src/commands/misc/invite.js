@@ -7,13 +7,13 @@ module.exports = class Invite extends Command {
     this.aliases = []
   }
 
-  async run (message, args, translation) {
+  async run (message, args, t) {
     message.channel.startTyping()
     const invite = await this.client.generateInvite()
     message.channel.send(
       new SwitchbladeEmbed()
         .setThumbnail(this.client.user.displayAvatarURL)
-        .setDescription(`[${translation('commands:invite.clickHere')}](${invite})\n${translation('commands:invite.noteThat')}`)
+        .setDescription(`[${t('commands:invite.clickHere')}](${invite})\n${t('commands:invite.noteThat')}`)
     ).then(() => message.channel.stopTyping())
   }
 }
