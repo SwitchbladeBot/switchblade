@@ -1,4 +1,4 @@
-const { Command, Reddit, SwitchbladeEmbed } = require('../../')
+const { Command, Reddit, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Copypasta extends Command {
   constructor (client) {
