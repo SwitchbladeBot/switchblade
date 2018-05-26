@@ -29,6 +29,7 @@
     "i18next": "^11.3.2",
     "i18next-node-fs-backend": "^1.0.0",
     "node-opus": "^0.3.0",
+    "node-spotify-api": "^1.0.7",
     "snekfetch": "^4.0.0",
     "uws": "^10.148.0"
   },

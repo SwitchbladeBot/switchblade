@@ -4,7 +4,7 @@ const path = require('path')
 const i18next = require('i18next')
 const translationBackend = require('i18next-node-fs-backend')
 
-const { Command, EventListener } = require('./structures')
+const { Command, EventListener, APIWrapper } = require('./structures')
 
 /**
  * Custom Discord.js Client.
@@ -14,12 +14,14 @@ const { Command, EventListener } = require('./structures')
 module.exports = class Switchblade extends Client {
   constructor (options = {}) {
     super(options)
+    this.apis = {}
     this.commands = []
     this.listeners = []
     this.colors = require('./assets/colors.json')
 
-    this.initializeCommands('./src/commands') // Custom commands directory?
-    this.initializeListeners('./src/listeners') // Custom listeners directory?
+    this.initializeApis('./src/apis')
+    this.initializeCommands('./src/commands')
+    this.initializeListeners('./src/listeners')
     this.initializei18next('./src/locales')
   }
 
@@ -61,7 +63,7 @@ module.exports = class Switchblade extends Client {
    * @param {Command} command - Command to be added
    */
   addCommand (command) {
-    if (command instanceof Command) {
+    if (command instanceof Command && command.canLoad()) {
       this.commands.push(command)
     }
   }
@@ -129,6 +131,38 @@ module.exports = class Switchblade extends Client {
           this.log(`${file} loaded.`, 'Listeners')
         } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
           this.initializeListeners(path.resolve(dirPath, file))
+        }
+      })
+    } catch (e) {
+      this.logError(e)
+    }
+  }
+
+  // APIs
+
+  /**
+   * Adds a new listener to the Client.
+   * @param {Object} api - API to be added
+   */
+  addApi (api) {
+    if (api instanceof APIWrapper && api.canLoad()) {
+      this.apis[api.name] = api.load()
+    }
+  }
+
+  /**
+   * Initializes all API Wrappers.
+   * @param {string} dirPath - Path to the listeners directory
+   */
+  initializeApis (dirPath) {
+    try {
+      fs.readdirSync(dirPath).forEach(file => {
+        if (file.endsWith('.js')) {
+          const RequiredAPI = require(path.resolve(dirPath, file))
+          this.addApi(new RequiredAPI())
+          this.log(`${file} loaded.`, 'APIs')
+        } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
+          this.initializeApis(path.resolve(dirPath, file))
         }
       })
     } catch (e) {
