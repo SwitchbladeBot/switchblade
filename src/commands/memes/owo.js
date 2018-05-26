@@ -9,7 +9,7 @@ module.exports = class OwO extends Command {
     this.aliases = ['uwu', 'whatsthis', 'owoify']
   }
 
-  async run (message, args) {
+  async run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
     message.channel.startTyping()
     if (args.length > 0) {
@@ -17,8 +17,8 @@ module.exports = class OwO extends Command {
       embed.setTitle(body.owo)
     } else {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me a sentence to owoify')
-        .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
+        .setTitle(translation('commands:owo.missingSentence'))
+        .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:owo.commandUsage')}\``)
     }
     message.channel.send(embed).then(() => message.channel.stopTyping())
   }

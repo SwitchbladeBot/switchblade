@@ -9,7 +9,7 @@ module.exports = class Neko extends Command {
     this.aliases = ['nekogirl']
   }
 
-  async run (message, args, translation) {
+  async run (message, args, t) {
     message.channel.startTyping()
 
     // Send a lewd neko if the channel is NSFW
@@ -19,7 +19,7 @@ module.exports = class Neko extends Command {
     message.channel.send(
       new SwitchbladeEmbed(message.author)
         .setImage(body.url)
-        .setDescription(translation('commands:neko.hereIsYour', {context: endpoint}))
+        .setDescription(t('commands:neko.hereIsYour', {context: endpoint}))
     ).then(() => message.channel.stopTyping())
   }
 }
