@@ -8,16 +8,15 @@ module.exports = class Hmmm extends Command {
   }
 
   async run (message) {
-    message.channel.startTyping()
+    const embed = new SwitchbladeEmbed(message.author)
     const { title, selftext, permalink } = await Reddit.getRandomPostFromSubreddit('/r/copypasta')
     let pasta
     if (selftext.length > 2048) pasta = selftext.substr(0, 2045) + '...'
     else pasta = selftext
-    message.channel.send(
-      new SwitchbladeEmbed(message.author)
-        .setTitle(title)
-        .setDescription(pasta)
-        .setURL(`https://reddit.com${permalink}`)
-    ).then(() => message.channel.stopTyping())
+    message.channel.startTyping()
+    embed.setTitle(title)
+      .setDescription(pasta)
+      .setURL(`https://reddit.com${permalink}`)
+    message.channel.send(embed).then(() => message.channel.stopTyping())
   }
 }
