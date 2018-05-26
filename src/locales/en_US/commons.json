@@ -1,4 +1,7 @@
 {
   "example": "Example",
-  "usage": "Usage"
+  "usage": "Usage",
+  "and": "and",
+  "anErrorOcurred": "An error ocurred.",
+  "reportThis": "You might want to report this."
 }
