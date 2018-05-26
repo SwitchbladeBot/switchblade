@@ -12,12 +12,12 @@ module.exports = class Kiss extends Command {
   run (message) {
     const kissImg = kissarray[Math.floor(Math.random() * kissarray.length)]
     const user = message.mentions.users.first()
-    if(!user) return message.channel.send('`s!kiss <@user>`')
+    if (!user) return message.channel.send('`s!kiss <user>`')
     if (user.id === this.client.user.id) return message.channel.send('It\'s so sad looking at you alone')
-    if(user.id === message.author.id) return message.channel.send('You can\'t kiss yourself')
+    if (user.id === message.author.id) return message.channel.send('You can\'t kiss yourself')
 
     message.channel.send(
-        new SwitchbladeEmbed(message.author)
+      new SwitchbladeEmbed(message.author)
         .setColor('#0000FF')
         .setImage(kissImg)
         .setDescription(`${message.author} kissed ${user}`)
