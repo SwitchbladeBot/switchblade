@@ -17,7 +17,7 @@ module.exports = class OwO extends Command {
       embed.setTitle(body.owo)
     } else {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(translation('commands:owo.missingSentence'))
+        .setTitle(t('commands:owo.missingSentence'))
         .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:owo.commandUsage')}\``)
     }
     message.channel.send(embed).then(() => message.channel.stopTyping())
