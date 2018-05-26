@@ -16,7 +16,7 @@ module.exports = class OwO extends Command {
       const { body } = await snekfetch.get(OWOapi + args.join(' '))
       embed.setTitle(body.owo)
     } else {
-      embed.setColor(this.client.colors.error)
+      embed.setColor(Constants.ERROR_COLOR)
         .setTitle('You need to give me a sentence to owoify')
         .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
     }
