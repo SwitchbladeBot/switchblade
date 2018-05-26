@@ -10,15 +10,16 @@ module.exports = class Kiss extends Command {
   }
 
   run (message) {
-    var kissnum = Math.floor(Math.random() * KissArray.length)
-    var kissImg = kissarray[kissnum]
-    if (message.mentions.users.first().id === this.client.user.id) return message.channel.send('It\'s so sad looking at you alone')
-    if (message.mentions.users.first().id !== this.client.user.id) {
-      message.channel.startTyping()
-      const embed = new SwitchbladeEmbed(message.author).setColor('0x0000FF').setImage(kissImg).setDescription(`${message.author} deu um beijo em ${message.mentions.users.first()}`)
-      message.channel.send(
-        embed
-      ).then(() => message.channel.stopTyping())
-    }
-  }
+    const kissImg = kissarray[Math.floor(Math.random() * kissarray.length)]
+    const user = message.mentions.users.first()
+    if(!user) return message.channel.send('`s!kiss <@user>`')
+    if (user.id === this.client.user.id) return message.channel.send('It\'s so sad looking at you alone')
+    if(user.id === message.author.id) return message.channel.send('You can\'t kiss yourself')
+
+    message.channel.send(
+        new SwitchbladeEmbed(message.author)
+        .setColor('#0000FF')
+        .setImage(kissImg)
+        .setDescription(`${message.author} kissed ${user}`)
+    )
 }
