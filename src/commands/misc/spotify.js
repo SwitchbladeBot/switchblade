@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const spotifyBaseUrl = 'https://api.spotify.com/v1/'
 
@@ -24,16 +24,16 @@ module.exports = class Spotify extends Command {
           .setAuthor('Spotify', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2000px-Spotify_logo_without_text.svg.png')
           .setThumbnail(track.coverURL)
           .setDescription(`[**${track.name}**](${track.url}) (${msToMMSS(track.duration)})\n${track.artists}`)
-          .setColor(this.client.colors.spotify)
+          .setColor(Constants.SPOTIFY_COLOR)
           .footer = {}
       } else {
         embed
-          .setColor(this.client.colors.error)
+          .setColor(Constants.ERROR_COLOR)
           .setTitle('I couldn\'t find any tracks with that name.')
       }
     } else {
       embed
-        .setColor(this.client.colors.error)
+        .setColor(Constants.ERROR_COLOR)
         .setTitle('You need to give me a track name.')
         .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <track name>\``)
     }
