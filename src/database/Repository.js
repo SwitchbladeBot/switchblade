@@ -30,7 +30,7 @@ module.exports = class Repository {
 
   /**
    * Retrieves all entities from the repository
-   * @returns {Array<Object>} - Parsed entity
+   * @returns {Array<Object>} - Retrieved entities
    */
   findAll () {}
 
