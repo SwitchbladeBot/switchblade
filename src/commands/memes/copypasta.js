@@ -1,6 +1,6 @@
 const { Command, Reddit, SwitchbladeEmbed } = require('../../')
 
-module.exports = class Hmmm extends Command {
+module.exports = class Copypasta extends Command {
   constructor (client) {
     super(client)
     this.name = 'copypasta'
