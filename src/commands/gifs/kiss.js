@@ -11,7 +11,7 @@ module.exports = class Kiss extends Command {
 
   run (message) {
     var kissnum = Math.floor(Math.random() * KissArray.length)
-    var kissImg = KissArray[kissnum]
+    var kissImg = kissarray[kissnum]
     if (message.mentions.users.first().id === this.client.user.id) return message.channel.send('It\'s so sad looking at you alone')
     if (message.mentions.users.first().id !== this.client.user.id) {
       message.channel.startTyping()
