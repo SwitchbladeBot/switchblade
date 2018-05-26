@@ -12,7 +12,7 @@
   "reverse": {
     "commandDescription": "Reverses a sentence.",
     "commandUsage": "<sentence>",
-    "no_sentence": "You have to give me something to reverse!"
+    "noSentence": "You have to give me something to reverse!"
   },
   "hmmm": {
     "commandDescription": "Random image from /r/hmmm"
@@ -48,8 +48,16 @@
   },
   "spotify": {
     "commandDescription": "Searches for a song on Spotify",
-    "usage": "<track name>",
+    "commandUsage": "<track name>",
     "noTracksFound": "I couldn't find any tracks with that name.",
     "noTrackName": "You need to give me a track name."
+  },
+  "copypasta": {
+    "commandDescription": "Random text from /r/copypasta"
+  },
+  "owo": {
+    "commandDescription": "Owoifies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to owoify"
   }
 }
