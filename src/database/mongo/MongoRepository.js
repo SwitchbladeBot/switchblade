@@ -33,8 +33,8 @@ module.exports = class MongoRepository extends Repository {
     return this.model.find({}).then(e => e.forEach(this.parse))
   }
 
-  async get (id) {
-    return await this.findOne(id) || await this.add({_id: id})
+  get (id) {
+    return this.findOne(id).then(e => e || this.add({_id: id}))
   }
 
   remove (id) {

@@ -14,7 +14,7 @@ module.exports = class MainListener extends EventListener {
     if (message.author.bot) return
 
     const guildDB = message.guild && this.database && await this.database.guilds.get(message.guild.id)
-    const prefix = guildDB && guildDB.prefix || process.env.PREFIX
+    const prefix = (guildDB && guildDB.prefix) || process.env.PREFIX
     if (message.content.startsWith(prefix)) {
       let fullCmd = message.content.split(/\s+/g).filter(a => a).map(s => s.trim())
       let args = fullCmd.slice(1)
