@@ -22,4 +22,5 @@ module.exports = class Kiss extends Command {
         .setImage(kissImg)
         .setDescription(`${message.author} kissed ${user}`)
     )
+  }
 }
