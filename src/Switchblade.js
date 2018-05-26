@@ -17,10 +17,10 @@ module.exports = class Switchblade extends Client {
     this.commands = []
     this.listeners = []
 
+    this.initializeDatabase(MongoDB)
     this.initializeApis('./src/apis')
     this.initializeCommands('./src/commands')
     this.initializeListeners('./src/listeners')
-    this.initializeDatabase(MongoDB)
   }
 
   /**
