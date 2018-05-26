@@ -5,6 +5,7 @@
  */
 module.exports = class DBWrapper {
   constructor (options = {}) {
+    if (this.constructor === DBWrapper) throw new Error('Cannot instantiate abstract class')
     this.options = options
   }
 
@@ -12,16 +13,4 @@ module.exports = class DBWrapper {
    * Creates the DB client connection
    */
   connect () {}
-
-  /**
-   * Retrieves an user structure from the DB
-   * @param {string|User|GuildMember} _id - User id
-   */
-  getUser (_id) {}
-
-  /**
-   * Retrieves a guild structure from the DB
-   * @param {string|Guild} _id - Guild id
-   */
-  getGuild (_id) {}
 }
