@@ -1,0 +1,5 @@
+module.exports = {
+  REDDIT_COLOR: '#FF4500',
+  SPOTIFY_COLOR: '#1DB954',
+  ERROR_COLOR: '#FF3333'
+}
