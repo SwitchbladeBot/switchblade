@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 const snekfetch = require('snekfetch')
 const OWOapi = 'https://nekos.life/api/v2/owoify?text='
 
