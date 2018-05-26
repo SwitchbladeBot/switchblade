@@ -17,7 +17,7 @@ module.exports = class OwO extends Command {
         .setTitle('You need to give me a sentence to owoify')
         .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
     } else {
-      const { body } = await snekfetch.get(OWOapi + args.join(' '))
+      const { body } = await snekfetch.get(OWOapi + encodeURIComponent(args.join(' ')))
       if (body.msg) {
         embed.setColor(Constants.ERROR_COLOR)
           .setTitle('Sentence longer than 200 characters')
