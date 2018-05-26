@@ -10,12 +10,11 @@ module.exports = class MainListener extends EventListener {
     this.user.setPresence({game: {name: process.env.PREFIX + 'help'}})
   }
 
-  onMessage (message) {
-    if (message.author.bot) {
-      return
-    }
+  async onMessage (message) {
+    if (message.author.bot) return
 
-    const prefix = process.env.PREFIX
+    const guildDB = message.guild && this.database && await this.database.guilds.get(message.guild.id)
+    const prefix = (guildDB && guildDB.prefix) || process.env.PREFIX
     if (message.content.startsWith(prefix)) {
       let fullCmd = message.content.split(/\s+/g).filter(a => a).map(s => s.trim())
       let args = fullCmd.slice(1)
