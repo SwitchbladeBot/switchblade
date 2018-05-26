@@ -11,15 +11,14 @@ module.exports = class OwO extends Command {
 
   async run (message, args) {
     const embed = new SwitchbladeEmbed(message.author)
+    message.channel.startTyping()
     if (args.length > 0) {
-      message.channel.startTyping()
       const { body } = await snekfetch.get(OWOapi + args.join(' '))
       embed.setTitle(body.owo)
     } else {
-      message.channel.startTyping()
       embed.setColor(this.client.colors.error)
-      embed.setTitle('You need to give me a sentence to owoify')
-      embed.setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
+        .setTitle('You need to give me a sentence to owoify')
+        .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
     }
     message.channel.send(embed).then(() => message.channel.stopTyping())
   }
