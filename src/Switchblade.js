@@ -78,7 +78,7 @@ module.exports = class Switchblade extends Client {
    */
   runCommand (command, message, args, language) {
     if (command.canRun(message, args)) {
-      command._run(message, args, i18next.getFixedT(lang)).catch(this.logError)
+      command._run(message, args, i18next.getFixedT(language)).catch(this.logError)
     }
   }
 
