@@ -13,6 +13,6 @@ module.exports = {
   Guild: new Schema({
     _id: String,
     prefix: { type: String, default: process.env.PREFIX },
-    language: { type: String, default: 'en_EN' }
+    language: { type: String, default: 'en_US' }
   })
 }
