@@ -74,10 +74,11 @@ module.exports = class Switchblade extends Client {
    * @param {Command} command - Command to be runned
    * @param {Message} message - Message that triggered the command
    * @param {Array<string>} args - Array of command arguments
+   * @param {String} language - Code for the language that the command will be executed in
    */
-  runCommand (command, message, args) {
+  runCommand (command, message, args, language) {
     if (command.canRun(message, args)) {
-      command._run(message, args, i18next.getFixedT('en_US')).catch(this.logError)
+      command._run(message, args, i18next.getFixedT(lang)).catch(this.logError)
     }
   }
 
@@ -178,7 +179,6 @@ module.exports = class Switchblade extends Client {
     const locales = fs.readdirSync(dirPath)
     try {
       i18next.use(translationBackend).init({
-        debug: true,
         ns: ['commands', 'commons', 'permissions'],
         preload: locales,
         fallbackLng: 'en_US',
