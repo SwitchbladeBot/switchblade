@@ -12,7 +12,7 @@ module.exports = class MainListener extends EventListener {
 
   async onMessage (message) {
     if (message.author.bot) return
-    
+
     const guildDB = message.guild && this.database && await this.database.guilds.get(message.guild.id)
     const prefix = (guildDB && guildDB.prefix) || process.env.PREFIX
     const prefixRegex = new RegExp(`^(${this.user}[ ]?|${prefix}).+`)
