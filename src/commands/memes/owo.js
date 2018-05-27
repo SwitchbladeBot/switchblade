@@ -12,13 +12,17 @@ module.exports = class OwO extends Command {
   async run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
     message.channel.startTyping()
-    if (args.length > 0) {
-      const { body } = await snekfetch.get(OWOapi + args.join(' '))
-      embed.setTitle(body.owo)
-    } else {
+    if (args.length <= 0) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:owo.missingSentence'))
-        .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:owo.commandUsage')}\``)
+        .setTitle('You need to give me a sentence to owoify')
+        .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
+    } else {
+      const { body } = await snekfetch.get(OWOapi + encodeURIComponent(args.join(' ')))
+      if (body.msg) {
+        embed.setColor(Constants.ERROR_COLOR)
+          .setTitle('Sentence longer than 200 characters')
+          .setDescription('Try shortening your sentence down or separate it into multiple commands')
+      } else embed.setTitle(body.owo)
     }
     message.channel.send(embed).then(() => message.channel.stopTyping())
   }
