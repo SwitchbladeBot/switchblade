@@ -16,9 +16,9 @@ module.exports = class MainListener extends EventListener {
     const guildDB = message.guild && this.database && await this.database.guilds.get(message.guild.id)
     const prefix = (guildDB && guildDB.prefix) || process.env.PREFIX
     const prefixRegex = new RegExp(`^(${this.user}[ ]?|${prefix}).+`)
-    const prefixUsed = prefixRegex.exec(message.content)[1]
-    if (prefixUsed) {
-      const fullCmd = message.content.substring(prefixUsed.length).split(/\s+/g).filter(a => a).map(s => s.trim())
+    const regexResult = prefixRegex.exec(message.content)
+    if (regexResult) {
+      const fullCmd = message.content.substring(regexResult[1].length).split(/\s+/g).filter(a => a).map(s => s.trim())
       const args = fullCmd.slice(1)
       const cmd = fullCmd[0].toLowerCase().trim()
       const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
