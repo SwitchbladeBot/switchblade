@@ -7,7 +7,7 @@ module.exports = class MainListener extends EventListener {
   }
 
   onReady () {
-    this.user.setPresence({game: {name: '@' + this.user.username + ' help'}})
+    this.user.setPresence({game: {name: `@${this.user.username} help`}})
   }
 
   async onMessage (message) {
