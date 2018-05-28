@@ -14,14 +14,14 @@ module.exports = class OwO extends Command {
     message.channel.startTyping()
     if (args.length <= 0) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me a sentence to owoify')
-        .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
+        .setTitle(t('commands:owo.missingSentence'))
+        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:owo.commandUsage')}`)
     } else {
       const { body } = await snekfetch.get(OWOapi + encodeURIComponent(args.join(' ')))
       if (body.msg) {
         embed.setColor(Constants.ERROR_COLOR)
-          .setTitle('Sentence longer than 200 characters')
-          .setDescription('Try shortening your sentence down or separate it into multiple commands')
+          .setTitle(t('commands:owo.tooLongTitle'))
+          .setDescription(t('commands:owo.tooLongDescription'))
       } else embed.setTitle(body.owo)
     }
     message.channel.send(embed).then(() => message.channel.stopTyping())
