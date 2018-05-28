@@ -18,7 +18,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
   }
 
   async fetchSongs (identifier, ytSearch = false) {
-    if (ytSearch) identifier = 'ytsearch:' + identifier
+    if (ytSearch) identifier = `ytsearch:${identifier}`
 
     const res = await snekfetch.get(`http://${this.REST_ADDRESS}/loadtracks`)
       .query({ identifier })

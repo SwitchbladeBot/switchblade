@@ -19,7 +19,7 @@ module.exports = class Play extends Command {
           embed
             .setTitle(`${Constants.PLAY_BUTTON} ${song.info.title}`)
             .setURL(song.info.uri)
-        } catch(e) {
+        } catch (e) {
           embed
             .setColor(Constants.ERROR_COLOR)
             .setTitle('An error occured!')
