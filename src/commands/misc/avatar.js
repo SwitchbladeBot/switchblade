@@ -12,7 +12,7 @@ module.exports = class Avatar extends Command {
     message.channel.send(
       new SwitchbladeEmbed(message.author)
         .setImage(user.displayAvatarURL)
-        .setDescription(t('commands:avatar.someonesAvatar', {user: user}))
+        .setDescription(t('commands:avatar.someonesAvatar', {user}))
     )
   }
 }
