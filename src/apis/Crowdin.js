@@ -4,7 +4,7 @@ const Crowdin = require('crowdin')
 module.exports = class CrowdinAPI extends APIWrapper {
   constructor () {
     super()
-    this.name = 'spotify'
+    this.name = 'crowdin'
     this.envVars = ['CROWDIN_API_KEY', 'CROWDIN_PROJECT_ID']
   }
 
