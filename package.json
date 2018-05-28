@@ -25,6 +25,7 @@
   "dependencies": {
     "bufferutil": "^3.0.5",
     "discord.js": "^11.3.2",
+    "discord.js-lavalink": "^2.0.2",
     "erlpack": "github:discordapp/erlpack",
     "mongoose": "^5.1.1",
     "node-opus": "^0.3.0",
@@ -41,6 +42,7 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "ffmpeg-binaries": "^3.2.2-3",
     "nodemon": "^1.17.5",
     "standard": "^11.0.1"
   }

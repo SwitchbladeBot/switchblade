@@ -1,4 +1,5 @@
 const { EventListener } = require('../')
+const { SwitchbladePlayerManager } = require('../music')
 
 module.exports = class MainListener extends EventListener {
   constructor (client) {
@@ -8,6 +9,17 @@ module.exports = class MainListener extends EventListener {
 
   onReady () {
     this.user.setPresence({game: {name: process.env.PREFIX + 'help'}})
+
+    // Lavalink connection
+    const nodes = [{
+      'host': process.env.LAVALINK_WSS_HOST,
+      'port': process.env.LAVALINK_WSS_PORT,
+      'password': process.env.LAVALINK_PASSWORD
+    }]
+    this.playerManager = new SwitchbladePlayerManager(this, nodes, {
+      user: this.user.id,
+      shards: 1
+    })
   }
 
   async onMessage (message) {
