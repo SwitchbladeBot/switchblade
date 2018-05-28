@@ -1,4 +1,4 @@
-const { Command } = require('../../')
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 const math = require('mathjs')
 
 module.exports = class Math extends Command {
@@ -9,19 +9,30 @@ module.exports = class Math extends Command {
 
   run (message, args) {
     let result
+    const embed = new SwitchbladeEmbed(message.author)
     message.channel.startTyping()
-    try {
-      result = math.eval(args.join(' '))
-    } catch (error) {
-      this.client.log(`Failed math calculation ${args.join(' ')}\nError: ${error.stack}`, this.name)
-      message.channel.send(`Error while evaluating the math expression: ${error.stack}`)
-    } finally {
-      if (isNaN(parseFloat(result))) {
-        message.channel.send('Invalid calculation expression')
-      } else {
-        message.channel.send(`Result: \`${result}\``)
+    if (!args[0]) {
+      embed.setColor(Constants.ERROR_COLOR)
+        .setTitle('You need to give me a math expression to evaluate')
+        .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <math expression>`)
+    } else {
+      try {
+        result = math.eval(args.join(' '))
+      } catch (error) {
+        this.client.log(`Failed math calculation ${args.join(' ')}\nError: ${error.stack}`, this.name)
+        embed.setColor(Constants.ERROR_COLOR)
+          .setTitle('An error occurred while evaluating the math expression')
+          .setDescription(error.stack)
+      } finally {
+        if (isNaN(parseFloat(result))) {
+          embed.setColor(Constants.ERROR_COLOR)
+            .setTitle('Invalid math expression')
+            .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <math expression>`)
+        } else {
+          embed.setTitle(`Result: \`${result}\``)
+        }
       }
     }
-    message.channel.stopTyping()
+    message.channel.send(embed).then(() => message.channel.stopTyping())
   }
 }
