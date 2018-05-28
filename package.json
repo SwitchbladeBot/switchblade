@@ -26,6 +26,7 @@
     "bufferutil": "^3.0.5",
     "discord.js": "^11.3.2",
     "erlpack": "github:discordapp/erlpack",
+    "mathjs": "^4.4.0",
     "mongoose": "^5.1.1",
     "node-opus": "^0.3.0",
     "node-spotify-api": "^1.0.7",
