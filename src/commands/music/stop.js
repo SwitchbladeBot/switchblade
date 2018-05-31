@@ -24,7 +24,7 @@ module.exports = class Stop extends Command {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to be in a voice channel to use this command.')
+          .setTitle('You need to be in a voice channel to use this command!')
       )
     }
   }

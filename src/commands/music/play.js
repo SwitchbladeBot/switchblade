@@ -8,26 +8,28 @@ module.exports = class Play extends Command {
   }
 
   async run (message, args) {
+    const user = message.author
     message.channel.startTyping()
     if (args.length > 0) {
       if (message.member.voiceChannel) {
         const playerManager = this.client.playerManager
         try {
-          const song = await playerManager.fetchSong(args.join(' '), message.author)
+          const identifier = args.join(' ')
+          const song = await playerManager.fetchSong(identifier, user) || await playerManager.fetchSong(`ytsearch:${identifier}`, user)
           if (song) {
             this.songFeedback(message, song)
             await playerManager.play(song, message.member.voiceChannel)
             message.channel.stopTyping()
           } else {
             message.channel.send(
-              new SwitchbladeEmbed(message.author)
+              new SwitchbladeEmbed(user)
                 .setColor(Constants.ERROR_COLOR)
                 .setTitle('Sorry, I couldn\'t find this song!')
             ).then(() => message.channel.stopTyping())
           }
         } catch (e) {
           message.channel.send(
-            new SwitchbladeEmbed(message.author)
+            new SwitchbladeEmbed(user)
               .setColor(Constants.ERROR_COLOR)
               .setTitle('An error occured!')
               .setDescription(e)
@@ -36,16 +38,16 @@ module.exports = class Play extends Command {
         }
       } else {
         message.channel.send(
-          new SwitchbladeEmbed(message.author)
+          new SwitchbladeEmbed(user)
             .setColor(Constants.ERROR_COLOR)
-            .setTitle('You need to be in a voice channel to use this command.')
+            .setTitle('You need to be in a voice channel to use this command!')
         ).then(() => message.channel.stopTyping())
       }
     } else {
       message.channel.send(
-        new SwitchbladeEmbed(message.author)
+        new SwitchbladeEmbed(user)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to give me a track identifier.')
+          .setTitle('You need to give me a track identifier!')
           .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <track name|track url>\``)
       ).then(() => message.channel.stopTyping())
     }
@@ -55,21 +57,21 @@ module.exports = class Play extends Command {
     song.once('start', () => {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
-          .setDescription(`${Constants.PLAY_BUTTON} **Started playing** [${song.info.title}](${song.info.uri})`)
+          .setDescription(`${Constants.PLAY_BUTTON} **Started playing** [${song.title}](${song.uri})`)
       )
     })
 
     song.once('queue', () => {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
-          .setDescription(`${Constants.PLAY_BUTTON} [${song.info.title}](${song.info.uri}) **was added to queue!**`)
+          .setDescription(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri}) **was added to queue!**`)
       )
     })
 
     song.once('end', () => {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
-          .setDescription(`${Constants.STOP_BUTTON} [${song.info.title}](${song.info.uri}) **has ended!**`)
+          .setDescription(`${Constants.STOP_BUTTON} [${song.title}](${song.uri}) **has ended!**`)
       )
     })
 

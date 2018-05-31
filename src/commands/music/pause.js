@@ -1,10 +1,10 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
-module.exports = class Skip extends Command {
+module.exports = class Pause extends Command {
   constructor (client) {
     super(client)
-    this.name = 'next'
-    this.aliases = ['skip']
+    this.name = 'pause'
+    this.aliases = ['resume']
   }
 
   async run (message, args) {
@@ -14,10 +14,10 @@ module.exports = class Skip extends Command {
       const playerManager = this.client.playerManager
       const guildPlayer = playerManager.get(message.guild.id)
       if (guildPlayer && guildPlayer.playing) {
-        const song = guildPlayer.playingSong
+        const pause = !guildPlayer.paused
         message.channel.send(embed
-          .setDescription(`${Constants.STOP_BUTTON} [${song.title}](${song.uri}) **was skipped!**`))
-        guildPlayer.next()
+          .setTitle(`${pause ? Constants.PAUSE_BUTTON : Constants.PLAY_BUTTON} Music player has been ${pause ? 'paused' : 'resumed'}!`))
+        guildPlayer.pause(pause)
       } else {
         message.channel.send(embed
           .setColor(Constants.ERROR_COLOR)

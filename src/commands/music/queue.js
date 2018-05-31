@@ -15,11 +15,11 @@ module.exports = class Queue extends Command {
       const guildPlayer = playerManager.get(message.guild.id)
       if (guildPlayer && guildPlayer.playing) {
         const npSong = guildPlayer.playingSong
-        const description = [`**Now playing:** [${npSong.info.title}](${npSong.info.uri})`]
+        const description = [`**Now playing:** [${npSong.title}](${npSong.uri})`]
 
         if (guildPlayer.queue.length > 0) {
           description.push('', '**Songs queued:**')
-          description.push(...guildPlayer.queue.map((song, i) => `${i + 1}. [${song.info.title}](${song.info.uri}) (added by ${song.author})`))
+          description.push(...guildPlayer.queue.map((song, i) => `${i + 1}. [${song.title}](${song.uri}) (added by ${song.requestedBy})`))
         } else {
           description.push('There are no songs after the current one.')
         }
@@ -33,7 +33,7 @@ module.exports = class Queue extends Command {
     } else {
       embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to be in a voice channel to use this command.')
+        .setTitle('You need to be in a voice channel to use this command!')
     }
 
     message.channel.send(embed)

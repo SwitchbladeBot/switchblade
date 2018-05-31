@@ -19,7 +19,7 @@ module.exports = class Volume extends Command {
           if (!isNaN(volume)) {
             guildPlayer.volume(volume)
             embed
-              .setTitle(`\uD83D\uDD0A Volume set to ${volume}!`)
+              .setTitle(`\uD83D\uDD0A Volume set to ${volume}.`)
           } else {
             embed
               .setColor(Constants.ERROR_COLOR)
@@ -33,12 +33,12 @@ module.exports = class Volume extends Command {
       } else {
         embed
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to be in a voice channel to use this command.')
+          .setTitle('You need to be in a voice channel to use this command!')
       }
     } else {
       embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me the volume level.')
+        .setTitle('You need to give me the volume level!')
         .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <0-100>\``)
     }
 
