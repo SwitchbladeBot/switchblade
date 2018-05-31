@@ -1,20 +1,24 @@
-const { PlayerManager } = require('discord.js-lavalink')
 const GuildPlayer = require('./GuildPlayer.js')
+const Song = require('./Song.js')
+
+const { PlayerManager } = require('discord.js-lavalink')
 const snekfetch = require('snekfetch')
 
 const DEFAULT_JOIN_OPTIONS = {selfdeaf: true}
 
 module.exports = class SwitchbladePlayerManager extends PlayerManager {
   constructor (client, nodes = [], options = {}) {
+    options.player = GuildPlayer
     super(client, nodes, options)
+
     this.REST_ADDRESS = `${process.env.LAVALINK_REST_HOST}:${process.env.LAVALINK_REST_PORT}`
   }
 
-  add (data) {
-    if (!data.id) throw new Error('INVALID_DATA: Object or Class doesn\'t have id property')
-    const player = new GuildPlayer(data)
-    this.set(player.id, player)
-    return player
+  onMessage (message) {
+    if (!message || !message.op) return
+    const player = this.get(message.guildId)
+    if (!player) return
+    return player.event(message)
   }
 
   async fetchSongs (identifier, ytSearch = false) {
@@ -35,10 +39,16 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     return res.body
   }
 
-  async play (channel, author, identifier) {
-    const [ song ] = await this.fetchSongs(identifier)
-    if (song) {
-      song.author = author
+  async fetchSong (identifier, author) {
+    const [ songData ] = await this.fetchSongs(identifier)
+    if (songData) {
+      return new Song(songData, author)
+    }
+    return null
+  }
+
+  async play (channel, song) {
+    if (song && song instanceof Song) {
       const host = this.nodes.first().host
       const player = await this.join({
         guild: channel.guild.id,

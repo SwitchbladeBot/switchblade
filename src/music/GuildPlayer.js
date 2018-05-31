@@ -6,16 +6,62 @@ module.exports = class GuildPlayer extends Player {
 
     this.on('end', (data) => {
       if (data.reason === 'REPLACED') return
+      this.playingSong.emit('end')
+      if (data.reason !== 'STOPPED') this.next()
+    })
+
+    this.on('stop', user => {
+      this.playingSong.emit('stop', user)
       this.playingSong = null
-      console.log(data)
+      this.manager.leave(this.id)
     })
 
     this.on('error', console.error)
+
+    this.queue = []
+    this._volume = 25
   }
 
-  play (song, options = {}) {
+  event (message) {
+    if (message.op === 'playerUpdate') {
+      this.state = Object.assign(this.state, { volume: this._volume }, message.state)
+    } else {
+      super.event(message)
+    }
+  }
+
+  play (song, forcePlay = false, options = {}) {
+    if (this.playing && !forcePlay) {
+      this.queue.push(song)
+      song.emit('queue')
+      return false
+    }
+
     super.play(song.track, options)
     this.playingSong = song
-    this.volume(5)
+    this.volume(this._volume)
+    song.emit('start')
+    return true
+  }
+
+  stop (user) {
+    this.queue = []
+    this.emit('stop', user)
+    super.stop()
+  }
+
+  next () {
+    const nextSong = this.queue.shift()
+    if (nextSong) {
+      this.play(nextSong, true)
+      return nextSong
+    } else {
+      this.stop()
+    }
+  }
+
+  volume (volume) {
+    this._volume = volume
+    super.volume(volume)
   }
 }
