@@ -15,7 +15,7 @@ module.exports = class Volume extends Command {
         const playerManager = this.client.playerManager
         const guildPlayer = playerManager.get(message.guild.id)
         if (guildPlayer && guildPlayer.playing) {
-          const volume = Math.max(Math.min(parseInt(args[0]), 100), 0)
+          const volume = Math.max(Math.min(parseInt(args[0]), 150), 0)
           if (!isNaN(volume)) {
             guildPlayer.volume(volume)
             embed
@@ -39,7 +39,7 @@ module.exports = class Volume extends Command {
       embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle('You need to give me the volume level!')
-        .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <0-100>\``)
+        .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <0-150>\``)
     }
 
     message.channel.send(embed)

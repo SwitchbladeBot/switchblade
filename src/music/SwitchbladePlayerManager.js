@@ -1,10 +1,10 @@
-const GuildPlayer = require('./GuildPlayer.js')
-const Song = require('./structures/Song.js')
+const { GuildPlayer, Song, Playlist } = require('./structures')
 
 const { PlayerManager } = require('discord.js-lavalink')
 const snekfetch = require('snekfetch')
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
+const SEARCH_PREFIXES = ['scsearch:', 'ytsearch:']
 
 module.exports = class SwitchbladePlayerManager extends PlayerManager {
   constructor (client, nodes = [], options = {}) {
@@ -21,25 +21,29 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     return player.event(message)
   }
 
-  async fetchSongs (identifier) {
+  async fetchTracks (identifier) {
     const res = await snekfetch.get(`http://${this.REST_ADDRESS}/loadtracks`)
       .query({ identifier })
       .set('Authorization', process.env.LAVALINK_PASSWORD)
       .catch(err => {
-        console.error('fetchSongs error')
+        console.error('fetchTracks error')
         console.error(err)
         return null
       })
-    if (!res || !res.body.length) {
-      return []
-    }
-    return res.body
+    if (!res || !res.body || !res.body.length) return []
+    const songs = res.body
+    songs.searchResult = !!SEARCH_PREFIXES.find(p => identifier.startsWith(p))
+    return songs
   }
 
-  async fetchSong (identifier, requestedBy) {
-    const [ songData ] = await this.fetchSongs(identifier)
-    if (songData) {
-      return new Song(songData, requestedBy)
+  async loadTracks (identifier, requestedBy) {
+    const songs = await this.fetchTracks(identifier)
+    if (songs.length > 0) {
+      if (songs.searchResult || songs.length === 1) {
+        return new Song(songs[0], requestedBy)
+      } else {
+        return new Playlist(songs, requestedBy)
+      }
     }
     return null
   }
