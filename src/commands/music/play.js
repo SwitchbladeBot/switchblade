@@ -78,7 +78,7 @@ module.exports = class Play extends Command {
     song.once('stop', u => send(`${Constants.STOP_BUTTON} **The queue is now empty, leaving the voice channel!**`, u))
 
     if (queueFeedback) {
-      song.once('queue', () => send`${Constants.PLAY_BUTTON} [${song.title}](${song.uri}) **was added to queue!**`)
+      song.once('queue', () => send(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri}) **was added to queue!**`))
     }
   }
 
