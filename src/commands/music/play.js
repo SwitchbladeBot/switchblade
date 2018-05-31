@@ -69,14 +69,14 @@ module.exports = class Play extends Command {
     song.once('end', () => {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
-          .setDescription(`${Constants.PLAY_BUTTON} [${song.info.title}](${song.info.uri}) **has ended!**`)
+          .setDescription(`${Constants.STOP_BUTTON} [${song.info.title}](${song.info.uri}) **has ended!**`)
       )
     })
 
     song.once('stop', user => {
       message.channel.send(
         new SwitchbladeEmbed(user)
-          .setDescription(`${Constants.STOP_BUTTON} **All tracks have been stopped, leaving voice channel now!**`)
+          .setDescription(`${Constants.STOP_BUTTON} **The queue is now empty, leaving the voice channel!**`)
       )
     })
   }

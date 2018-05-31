@@ -15,7 +15,7 @@ module.exports = class Skip extends Command {
       const guildPlayer = playerManager.get(message.guild.id)
       if (guildPlayer && guildPlayer.playing) {
         const song = guildPlayer.playingSong
-        embed.setDescription(`${Constants.PLAY_BUTTON} [${song.info.title}](${song.info.uri}) **was skipped!**`)
+        embed.setDescription(`${Constants.STOP_BUTTON} [${song.info.title}](${song.info.uri}) **was skipped!**`)
         guildPlayer.next()
       } else {
         embed

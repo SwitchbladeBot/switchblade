@@ -19,10 +19,11 @@ module.exports = class Queue extends Command {
 
         if (guildPlayer.queue.length > 0) {
           description.push('', '**Songs queued:**')
-          guildPlayer.queue.forEach((song, i) => {
-            description.push(`${i + 1}. [${song.info.title}](${song.info.uri}) (added by ${song.author})`)
-          })
+          description.push(...guildPlayer.queue.map((song, i) => `${i + 1}. [${song.info.title}](${song.info.uri}) (added by ${song.author})`))
+        } else {
+          description.push('There are no songs after the current one.')
         }
+
         embed.setDescription(description.join('\n'))
       } else {
         embed
