@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
-module.exports = class Stop extends Command {
+module.exports = class Skip extends Command {
   constructor (client) {
     super(client)
     this.name = 'next'
