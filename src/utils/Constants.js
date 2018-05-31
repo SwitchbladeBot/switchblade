@@ -3,6 +3,7 @@ module.exports = {
   REDDIT_COLOR: '#FF4500',
   SPOTIFY_COLOR: '#1DB954',
   ERROR_COLOR: '#FF3333',
+  EIGHTBALL_COLOR: '#000000',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:450443946041016320>',

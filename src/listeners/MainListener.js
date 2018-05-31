@@ -8,7 +8,7 @@ module.exports = class MainListener extends EventListener {
   }
 
   onReady () {
-    this.user.setPresence({game: {name: process.env.PREFIX + 'help'}})
+    this.user.setPresence({game: {name: `@${this.user.username} help`}})
 
     // Lavalink connection
     const nodes = [{
@@ -27,7 +27,7 @@ module.exports = class MainListener extends EventListener {
 
     const guildDB = message.guild && this.database && await this.database.guilds.get(message.guild.id)
     const prefix = (guildDB && guildDB.prefix) || process.env.PREFIX
-    const prefixRegex = new RegExp(`^(${this.user}[ ]?|${prefix}).+`)
+    const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)
     const regexResult = prefixRegex.exec(message.content)
     if (regexResult) {
       const fullCmd = message.content.substring(regexResult[1].length).split(/\s+/g).filter(a => a).map(s => s.trim())
