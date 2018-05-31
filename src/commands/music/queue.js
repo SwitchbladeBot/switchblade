@@ -1,10 +1,10 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
-module.exports = class Skip extends Command {
+module.exports = class Queue extends Command {
   constructor (client) {
     super(client)
-    this.name = 'next'
-    this.aliases = ['skip']
+    this.name = 'queue'
+    this.aliases = ['playlist']
   }
 
   async run (message, args) {
@@ -14,9 +14,16 @@ module.exports = class Skip extends Command {
       const playerManager = this.client.playerManager
       const guildPlayer = playerManager.get(message.guild.id)
       if (guildPlayer && guildPlayer.playing) {
-        const song = guildPlayer.playingSong
-        embed.setDescription(`${Constants.PLAY_BUTTON} [${song.info.title}](${song.info.uri}) **was skipped!**`)
-        guildPlayer.next()
+        const npSong = guildPlayer.playingSong
+        const description = [`**Now playing:** [${npSong.info.title}](${npSong.info.uri})`]
+
+        if (guildPlayer.queue.length > 0) {
+          description.push('', '**Songs queued:**')
+          guildPlayer.queue.forEach((song, i) => {
+            description.push(`${i + 1}. [${song.info.title}](${song.info.uri}) (added by ${song.author})`)
+          })
+        }
+        embed.setDescription(description.join('\n'))
       } else {
         embed
           .setColor(Constants.ERROR_COLOR)

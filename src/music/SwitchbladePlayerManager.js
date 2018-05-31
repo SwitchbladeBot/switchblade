@@ -47,7 +47,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     return null
   }
 
-  async play (channel, song) {
+  async play (song, channel) {
     if (song && song instanceof Song) {
       const host = this.nodes.first().host
       const player = await this.join({
