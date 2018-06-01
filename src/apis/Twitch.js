@@ -14,18 +14,16 @@ module.exports = class TwitchAPI extends APIWrapper {
     return this
   }
 
-  async getUser (id) {
-    const [ user ] = (await this.request('/users', { id })).data
-    return user
+  getUser (id) {
+    return this.request('/users', { id }).then(u => u && u.data[0])
   }
 
-  async getStreamByUsername (username) {
-    const [ stream ] = (await this.request('/streams', { user_login: username })).data
-    return stream
+  getStreamByUsername (username) {
+    return this.request('/streams', { user_login: username }).then(s => s && s.data[0])
   }
 
-  async request (endpoint, queryParams) {
+  request (endpoint, queryParams) {
     const query = Object.keys(queryParams).map(k => `${k}=${queryParams[k]}`).join('&')
-    return (await snekfetch.get(`${API_URL}${endpoint}?${query}`).set({'Client-ID': process.env.TWITCH_CLIENT_ID})).body
+    return snekfetch.get(`${API_URL}${endpoint}?${query}`).set({'Client-ID': process.env.TWITCH_CLIENT_ID}).then(r => r.body)
   }
 }

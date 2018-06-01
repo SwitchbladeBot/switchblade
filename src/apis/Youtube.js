@@ -16,9 +16,8 @@ module.exports = class YoutubeAPI extends APIWrapper {
     return this
   }
 
-  async getVideo (id, part = 'snippet, statistics') {
-    const [ video ] = (await this.Youtube.videos.list({ id, part })).data.items
-    return video
+  getVideo (id, part = 'snippet, statistics') {
+    return this.Youtube.videos.list({ id, part }).then(r => r && r.data.items[0])
   }
 
   getBestThumbnail (video) {

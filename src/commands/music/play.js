@@ -72,7 +72,7 @@ module.exports = class Play extends Command {
   }
 
   songFeedback (message, song, queueFeedback = true) {
-    const bEmbed = (t, u) => new SwitchbladeEmbed(u || message.author).setDescription(t)
+    const bEmbed = (t, u) => new SwitchbladeEmbed(u).setDescription(t)
     const send = (t, u) => message.channel.send(bEmbed(t, u))
     const sendWI = (t, i, u) => message.channel.send(bEmbed(t, u).setThumbnail(i || song.artwork))
 
