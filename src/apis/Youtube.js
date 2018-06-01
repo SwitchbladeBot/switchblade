@@ -1,6 +1,5 @@
 const { APIWrapper } = require('../')
-const Youtube = require('youtube-api')
-const { promisify } = require('util')
+const { google } = require('googleapis')
 
 module.exports = class YoutubeAPI extends APIWrapper {
   constructor () {
@@ -10,16 +9,15 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   load () {
-    Youtube.authenticate({
-      type: 'key',
-      key: process.env.YOUTUBE_API_KEY
+    this.Youtube = google.youtube({
+      version: 'v3',
+      auth: process.env.YOUTUBE_API_KEY
     })
     return this
   }
 
   async getVideoById (id, part = 'snippet, statistics') {
-    const videoList = promisify(Youtube.videos.list)
-    const [ video ] = (await videoList({ id, part })).items
+    const [ video ] = (await this.Youtube.videos.list({ id, part })).data.items
     return video
   }
 

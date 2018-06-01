@@ -30,6 +30,7 @@
     "discord.js": "^11.3.2",
     "discord.js-lavalink": "^2.0.2",
     "erlpack": "github:discordapp/erlpack",
+    "googleapis": "^31.0.2",
     "mathjs": "^4.4.0",
     "moment": "^2.22.1",
     "moment-duration-format": "^2.2.2",
@@ -38,8 +39,7 @@
     "node-spotify-api": "^1.0.7",
     "snekfetch": "^4.0.0",
     "transform-props": "^1.0.1",
-    "uws": "^10.148.0",
-    "youtube-api": "^2.0.9"
+    "uws": "^10.148.0"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
