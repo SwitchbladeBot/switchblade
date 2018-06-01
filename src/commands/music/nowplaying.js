@@ -1,5 +1,4 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
-const MusicUtils = require('../../music/MusicUtils.js')
 const moment = require('moment')
 
 module.exports = class NowPlaying extends Command {
