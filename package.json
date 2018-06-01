@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
+    "api-npm": "^1.0.0",
     "bufferutil": "^3.0.5",
     "discord.js": "^11.3.2",
     "erlpack": "github:discordapp/erlpack",
