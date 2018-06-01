@@ -9,27 +9,43 @@ module.exports = class NowPlaying extends Command {
   }
 
   async run (message, args) {
-    let embed = new SwitchbladeEmbed(message.author)
     const playerManager = this.client.playerManager
     const guildPlayer = playerManager.get(message.guild.id)
     if (guildPlayer && guildPlayer.playing) {
       const song = guildPlayer.playingSong
-      embed = new SwitchbladeEmbed(song.requestedBy)
+      const embed = new SwitchbladeEmbed(song.requestedBy)
 
-      const format = song.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss'
-      const elapsed = this.formatDuration(guildPlayer.state.position, format)
-      const duration = this.formatDuration(song.length, format)
+      let durationText = '`(LIVE)`'
+      if (!song.isStream) {
+        const format = song.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss'
+        const elapsed = this.formatDuration(guildPlayer.state.position, format)
+        const duration = this.formatDuration(song.length, format)
+        durationText = `\`(${elapsed}/${duration})\``
+      }
 
-      embed.setDescription([
-        `**Now playing:** [${song.title}](${song.uri}) \`(${elapsed}/${duration})\``
-      ].join('\n'))
+      const description = [`**Now playing:** [${song.title}](${song.uri}) ${durationText}`]
+
+      switch (song.source) {
+        case 'youtube':
+          embed.setImage(song.artwork)
+          break
+        case 'twitch':
+          embed.setImage(song.richInfo.thumbnailUrl || song.artwork)
+          break
+        case 'soundcloud':
+          break
+        default:
+          embed.setImage(song.artwork)
+      }
+
+      message.channel.send(embed.setDescription(description.join('\n')))
     } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle('I ain\'t playing anything!')
+      message.channel.send(
+        new SwitchbladeEmbed(message.author)
+          .setColor(Constants.ERROR_COLOR)
+          .setTitle('I ain\'t playing anything!')
+      )
     }
-
-    message.channel.send(embed)
   }
 
   formatDuration (duration, format) {

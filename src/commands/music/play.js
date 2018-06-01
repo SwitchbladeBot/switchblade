@@ -64,6 +64,7 @@ module.exports = class Play extends Command {
         return playerManager.play(song, message.member.voiceChannel)
       }))
     }
+    return Promise.reject(new Error('Invalid song instance.'))
   }
 
   playlistFeedback (message, playlist) {
@@ -71,14 +72,16 @@ module.exports = class Play extends Command {
   }
 
   songFeedback (message, song, queueFeedback = true) {
-    const send = (t, u) => message.channel.send(new SwitchbladeEmbed(u || message.author).setDescription(t))
+    const bEmbed = (t, u) => new SwitchbladeEmbed(u || message.author).setDescription(t)
+    const send = (t, u) => message.channel.send(bEmbed(t, u))
+    const sendWI = (t, i, u) => message.channel.send(bEmbed(t, u).setThumbnail(i || song.artwork))
 
-    song.once('start', () => send(`${Constants.PLAY_BUTTON} **Started playing** [${song.title}](${song.uri})`))
+    song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} **Started playing** [${song.title}](${song.uri})`))
     song.once('end', () => send(`${Constants.STOP_BUTTON} [${song.title}](${song.uri}) **has ended!**`))
     song.once('stop', u => send(`${Constants.STOP_BUTTON} **The queue is now empty, leaving the voice channel!**`, u))
 
     if (queueFeedback) {
-      song.once('queue', () => send(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri}) **was added to queue!**`))
+      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri}) **was added to queue!**`))
     }
   }
 

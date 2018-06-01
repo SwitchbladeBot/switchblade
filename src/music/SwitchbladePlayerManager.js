@@ -1,4 +1,6 @@
 const { GuildPlayer, Song, Playlist } = require('./structures')
+const { YoutubeSong, TwitchSong } = require('./sources')
+const MusicUtils = require('./MusicUtils.js')
 
 const { PlayerManager } = require('discord.js-lavalink')
 const snekfetch = require('snekfetch')
@@ -21,6 +23,10 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     return player.event(message)
   }
 
+  test () {
+    return new YoutubeSong({info: {identifier: 'B8pywyGywWg'}}, {}, this.client.apis.youtube).loadInfo()
+  }
+
   async fetchTracks (identifier) {
     const res = await snekfetch.get(`http://${this.REST_ADDRESS}/loadtracks`)
       .query({ identifier })
@@ -38,7 +44,17 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     const songs = await this.fetchTracks(identifier)
     if (songs && songs.length > 0) {
       if (songs.searchResult || songs.length === 1) {
-        return new Song(songs[0], requestedBy)
+        const [ song ] = songs
+        const source = song.info.source = MusicUtils.getSongSource(song)
+
+        switch (source) {
+          case 'youtube':
+            return new YoutubeSong(song, requestedBy, this.client.apis.youtube).loadInfo()
+          case 'twitch':
+            return new TwitchSong(song, requestedBy, this.client.apis.twitch).loadInfo()
+          default:
+            return new Song(songs[0], requestedBy)
+        }
       } else {
         return new Playlist(songs, requestedBy)
       }

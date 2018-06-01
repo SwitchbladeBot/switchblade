@@ -1,0 +1,19 @@
+const { Song } = require('../structures')
+
+module.exports = class YoutubeSong extends Song {
+  constructor (data = {}, requestedBy, Youtube) {
+    super(data, requestedBy)
+    this._Youtube = Youtube
+  }
+
+  async loadInfo () {
+    const yt = this._Youtube
+    const video = await yt.getVideoById(this.identifier)
+    const { viewCount, likeCount, dislikeCount, favoriteCount, commentCount } = video.statistics
+
+    this.artwork = yt.getBestThumbnail(video).url
+    this.richInfo = { viewCount, likeCount, dislikeCount, favoriteCount, commentCount }
+
+    return this
+  }
+}

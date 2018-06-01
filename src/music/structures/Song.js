@@ -8,6 +8,7 @@ module.exports = class Song extends EventEmitter {
     this.requestedBy = requestedBy || data.requestedBy
 
     this.identifier = data.info.identifier
+    this.source = data.info.source
     this.isSeekable = data.info.isSeekable
     this.author = data.info.author
     this.length = data.info.length
