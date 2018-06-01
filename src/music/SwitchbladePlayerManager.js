@@ -23,10 +23,6 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     return player.event(message)
   }
 
-  test () {
-    return new YoutubeSong({info: {identifier: 'B8pywyGywWg'}}, {}, this.client.apis.youtube).loadInfo()
-  }
-
   async fetchTracks (identifier) {
     const res = await snekfetch.get(`http://${this.REST_ADDRESS}/loadtracks`)
       .query({ identifier })
