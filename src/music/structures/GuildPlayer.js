@@ -1,4 +1,5 @@
 const { Player } = require('discord.js-lavalink')
+const moment = require('moment')
 
 module.exports = class GuildPlayer extends Player {
   constructor (options = {}) {
@@ -63,5 +64,12 @@ module.exports = class GuildPlayer extends Player {
   volume (volume) {
     this._volume = volume
     super.volume(volume)
+  }
+
+  // Helpers
+
+  get formattedElapsed () {
+    if (!this.playingSong || this.playingSong.isStream) return ''
+    return moment.duration(this.state.position).format(this.playingSong.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss', { trim: false })
   }
 }

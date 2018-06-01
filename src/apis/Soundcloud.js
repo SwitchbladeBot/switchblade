@@ -17,6 +17,7 @@ module.exports = class SoundcloudAPI extends APIWrapper {
   }
 
   load () {
+    this.updateClientId()
     return this
   }
 

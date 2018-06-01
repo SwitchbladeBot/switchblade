@@ -76,12 +76,14 @@ module.exports = class Play extends Command {
     const send = (t, u) => message.channel.send(bEmbed(t, u))
     const sendWI = (t, i, u) => message.channel.send(bEmbed(t, u).setThumbnail(i || song.artwork))
 
-    song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} **Started playing** [${song.title}](${song.uri})`))
+    const duration = song.isStream ? '' : ` \`(${song.formattedDuration})\``
+
+    song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} **Started playing** [${song.title}](${song.uri})${duration}`))
     song.once('end', () => send(`${Constants.STOP_BUTTON} [${song.title}](${song.uri}) **has ended!**`))
     song.once('stop', u => send(`${Constants.STOP_BUTTON} **The queue is now empty, leaving the voice channel!**`, u))
 
     if (queueFeedback) {
-      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri}) **was added to queue!**`))
+      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri})${duration} **was added to queue!**`))
     }
   }
 

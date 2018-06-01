@@ -1,4 +1,5 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const MusicUtils = require('../../music/MusicUtils.js')
 const moment = require('moment')
 
 module.exports = class NowPlaying extends Command {
@@ -14,26 +15,39 @@ module.exports = class NowPlaying extends Command {
     if (guildPlayer && guildPlayer.playing) {
       const song = guildPlayer.playingSong
       const embed = new SwitchbladeEmbed(song.requestedBy)
+      const nf = new Intl.NumberFormat('en-US').format
 
       let durationText = '`(LIVE)`'
       if (!song.isStream) {
-        const format = song.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss'
-        const elapsed = this.formatDuration(guildPlayer.state.position, format)
-        const duration = this.formatDuration(song.length, format)
-        durationText = `\`(${elapsed}/${duration})\``
+        durationText = `\`(${guildPlayer.formattedElapsed}/${song.formattedDuration})\``
       }
 
       const description = [`**Now playing:** [${song.title}](${song.uri}) ${durationText}`]
+      if (song.source) {
+        description.push(`**Source:** ${MusicUtils.SOURCE_NAMES[song.source]}`)
+      }
 
       switch (song.source) {
         case 'youtube':
           embed.setImage(song.artwork)
+          description.push('',
+            `**Views:** ${nf(song.richInfo.viewCount)}`,
+            `**Likes:** ${nf(song.richInfo.likeCount)}`,
+            `**Dislikes:** ${nf(song.richInfo.dislikeCount)}`
+          )
           break
         case 'twitch':
           embed.setImage(song.richInfo.thumbnailUrl || song.artwork)
+          description.push('',
+            `**Viewers:** ${nf(song.richInfo.viewerCount)}`,
+            `**Views:** ${nf(song.richInfo.viewCount)}`
+          )
           break
         case 'soundcloud':
           embed.setImage(song.artwork)
+          description.push('',
+            `**Played:** ${nf(song.richInfo.playbackCount)}x`
+          )
           break
         default:
           embed.setImage(song.artwork)

@@ -1,4 +1,5 @@
 const { EventEmitter } = require('events')
+const moment = require('moment')
 
 module.exports = class Song extends EventEmitter {
   constructor (data = {}, requestedBy) {
@@ -21,5 +22,10 @@ module.exports = class Song extends EventEmitter {
 
     this.on('start', () => this.removeAllListeners('queue'))
     this.on('stop', () => this.removeAllListeners())
+  }
+
+  get formattedDuration () {
+    if (this.isStream) return ''
+    return moment.duration(this.length).format(this.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss', { trim: false })
   }
 }
