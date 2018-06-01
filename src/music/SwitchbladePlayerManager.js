@@ -25,10 +25,8 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     const res = await snekfetch.get(`http://${this.REST_ADDRESS}/loadtracks`)
       .query({ identifier })
       .set('Authorization', process.env.LAVALINK_PASSWORD)
-      .catch(err => {
-        console.error('fetchTracks error')
-        console.error(err)
-        return null
+      .catch(e => {
+        this.client.logError(new Error(`Lavalink fetchTracks ${e}`))
       })
     if (!res || !res.body || !res.body.length) return []
     const songs = res.body
@@ -38,7 +36,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
 
   async loadTracks (identifier, requestedBy) {
     const songs = await this.fetchTracks(identifier)
-    if (songs.length > 0) {
+    if (songs && songs.length > 0) {
       if (songs.searchResult || songs.length === 1) {
         return new Song(songs[0], requestedBy)
       } else {

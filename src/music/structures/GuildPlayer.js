@@ -16,7 +16,7 @@ module.exports = class GuildPlayer extends Player {
       this.manager.leave(this.id)
     })
 
-    this.on('error', console.error)
+    this.on('error', this.manager.client.logError)
 
     this.queue = []
     this._volume = 25
