@@ -44,7 +44,7 @@ module.exports = class OsuProfile extends Command {
         } else { // Osu API returned undefined
           embed
             .setColor(this.client.colors.error)
-            .setTitle('I couldn\'t find an user with that name')
+            .setTitle('I couldn\'t find a user with that name')
         }
       } else { // First argument isn't a valid gamemode
         embed
