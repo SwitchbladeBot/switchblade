@@ -33,6 +33,7 @@ module.exports = class NowPlaying extends Command {
           embed.setImage(song.richInfo.thumbnailUrl || song.artwork)
           break
         case 'soundcloud':
+          embed.setImage(song.artwork)
           break
         default:
           embed.setImage(song.artwork)

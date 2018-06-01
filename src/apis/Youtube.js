@@ -16,7 +16,7 @@ module.exports = class YoutubeAPI extends APIWrapper {
     return this
   }
 
-  async getVideoById (id, part = 'snippet, statistics') {
+  async getVideo (id, part = 'snippet, statistics') {
     const [ video ] = (await this.Youtube.videos.list({ id, part })).data.items
     return video
   }

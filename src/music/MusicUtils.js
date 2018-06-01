@@ -18,3 +18,9 @@ module.exports = class MusicUtils {
     if (regex) return regex[1]
   }
 }
+
+module.exports.SOURCE_NAMES = {
+  youtube: 'YouTube',
+  twitch: 'Twitch',
+  soundcloud: 'SoundCloud'
+}

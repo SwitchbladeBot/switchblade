@@ -1,5 +1,5 @@
 const { GuildPlayer, Song, Playlist } = require('./structures')
-const { YoutubeSong, TwitchSong } = require('./sources')
+const { SoundcloudSong, TwitchSong, YoutubeSong } = require('./sources')
 const MusicUtils = require('./MusicUtils.js')
 
 const { PlayerManager } = require('discord.js-lavalink')
@@ -48,6 +48,8 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
             return new YoutubeSong(song, requestedBy, this.client.apis.youtube).loadInfo()
           case 'twitch':
             return new TwitchSong(song, requestedBy, this.client.apis.twitch).loadInfo()
+          case 'soundcloud':
+            return new SoundcloudSong(song, requestedBy, this.client.apis.soundcloud).loadInfo()
           default:
             return new Song(songs[0], requestedBy)
         }
