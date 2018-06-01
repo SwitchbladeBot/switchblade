@@ -16,6 +16,7 @@ module.exports = class Switchblade extends Client {
     this.apis = {}
     this.commands = []
     this.listeners = []
+    this.playerManager = null
 
     this.initializeDatabase(MongoDB)
     this.initializeApis('./src/apis')
