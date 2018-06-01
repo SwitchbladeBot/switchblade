@@ -34,7 +34,7 @@ module.exports = class Play extends Command {
               .setTitle('An error occured!')
               .setDescription(e)
           ).then(() => message.channel.stopTyping())
-          console.error(e)
+          message.client.logError(e)
         }
       } else {
         message.channel.send(
@@ -67,7 +67,7 @@ module.exports = class Play extends Command {
   }
 
   playlistFeedback (message, playlist) {
-    // TO-DO, need APIs
+    // TODO, need APIs
   }
 
   songFeedback (message, song, queueFeedback = true) {

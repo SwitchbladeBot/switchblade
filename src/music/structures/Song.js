@@ -16,17 +16,9 @@ module.exports = class Song extends EventEmitter {
     this.title = data.info.title
     this.uri = data.info.uri
 
-    this.richInfo = null
+    this.richInfo = null // TODO, need APIs
 
-    this.on('start', () => {
-      console.log('TRACK_STARTED:', this.title)
-      this.removeAllListeners('queue')
-    })
-    this.on('queue', () => {
-      console.log('TRACK_QUEUED.:', this.title)
-    })
-    this.on('end', () => {
-      console.log('TRACK_ENDED..:', this.title)
-    })
+    this.on('start', () => this.removeAllListeners('queue'))
+    this.on('stop', () => this.removeAllListeners())
   }
 }

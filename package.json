@@ -31,6 +31,8 @@
     "discord.js-lavalink": "^2.0.2",
     "erlpack": "github:discordapp/erlpack",
     "mathjs": "^4.4.0",
+    "moment": "^2.22.1",
+    "moment-duration-format": "^2.2.2",
     "mongoose": "^5.1.1",
     "node-opus": "^0.3.0",
     "node-spotify-api": "^1.0.7",
