@@ -28,7 +28,6 @@ module.exports = class Queue extends Command {
         description.push('There are no songs after the current one.')
       }
 
-      console.log(description.join('\n').length)
       embed.setDescription(description.join('\n'))
     } else {
       embed

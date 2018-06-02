@@ -1,4 +1,4 @@
-const { Song } = require('../structures')
+const { Song } = require('../../structures')
 
 module.exports = class YoutubeSong extends Song {
   constructor (data = {}, requestedBy, Youtube) {
@@ -12,7 +12,7 @@ module.exports = class YoutubeSong extends Song {
     if (video) {
       const { viewCount, likeCount, dislikeCount, favoriteCount, commentCount } = video.statistics
 
-      this.artwork = yt.getBestThumbnail(video).url
+      this.artwork = yt.getBestThumbnail(video.snippet.thumbnails).url
       this.richInfo = { viewCount, likeCount, dislikeCount, favoriteCount, commentCount }
     }
 

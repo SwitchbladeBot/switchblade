@@ -16,13 +16,17 @@ module.exports = class YoutubeAPI extends APIWrapper {
     return this
   }
 
-  getVideo (id, part = 'snippet, statistics') {
+  getVideo (id, part = 'snippet,statistics') {
     return this.Youtube.videos.list({ id, part }).then(r => r && r.data.items[0])
   }
 
-  getBestThumbnail (video) {
-    if (!video || !video.snippet) return null
-    const { medium, high, standard, maxres } = video.snippet.thumbnails
-    return maxres || standard || high || medium || video.snippet.thumbnails['default']
+  getPlaylist (id, part = 'snippet') {
+    return this.Youtube.playlists.list({ id, part }).then(r => r && r.data.items[0])
+  }
+
+  getBestThumbnail (thumbnails) {
+    if (!thumbnails) return null
+    const { medium, high, standard, maxres } = thumbnails
+    return maxres || standard || high || medium || thumbnails['default']
   }
 }

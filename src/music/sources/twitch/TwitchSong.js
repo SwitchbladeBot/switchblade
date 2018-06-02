@@ -1,5 +1,5 @@
-const { Song } = require('../structures')
-const MusicUtils = require('../MusicUtils.js')
+const { Song } = require('../../structures')
+const MusicUtils = require('../../MusicUtils.js')
 
 module.exports = class TwitchSong extends Song {
   constructor (data = {}, requestedBy, Twitch) {
