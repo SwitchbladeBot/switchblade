@@ -23,7 +23,7 @@ module.exports = class NowPlaying extends Command {
 
       const description = [
         `**Now playing:** [${song.title}](${song.uri}) ${durationText}`,
-        `**Requested by:** ${song.requestedBy}`
+        `**Added by:** ${song.requestedBy}`
       ]
 
       switch (song.source) {

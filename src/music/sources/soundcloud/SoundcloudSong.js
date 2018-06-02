@@ -1,4 +1,4 @@
-const { Song } = require('../structures')
+const { Song } = require('../../structures')
 
 module.exports = class SoundcloudSong extends Song {
   constructor (data = {}, requestedBy, Soundcloud) {

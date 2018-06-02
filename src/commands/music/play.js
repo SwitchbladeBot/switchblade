@@ -67,20 +67,29 @@ module.exports = class Play extends Command {
     return Promise.reject(new Error('Invalid song instance.'))
   }
 
-  playlistFeedback (message, playlist) {
-    // TODO, need APIs
+  playlistFeedback (message, playlist, playingNow) {
+    const duration = ` \`(${playlist.formattedDuration})\``
+    const amount = playlist.songs.length
+    message.channel.send(
+      new SwitchbladeEmbed()
+        .setThumbnail(playlist.artwork)
+        .setDescription(`${Constants.PLAY_BUTTON} **${amount} songs from playlist** [${playlist.title}](${playlist.uri})${duration} **was added to queue!**`)
+    )
   }
 
-  songFeedback (message, song, queueFeedback = true) {
+  songFeedback (message, song, queueFeedback = true, startFeedback = true) {
     const bEmbed = (t, u) => new SwitchbladeEmbed(u).setDescription(t)
     const send = (t, u) => message.channel.send(bEmbed(t, u))
     const sendWI = (t, i, u) => message.channel.send(bEmbed(t, u).setThumbnail(i || song.artwork))
 
     const duration = song.isStream ? '' : ` \`(${song.formattedDuration})\``
 
-    song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} **Started playing** [${song.title}](${song.uri})${duration}`))
     song.once('end', () => send(`${Constants.STOP_BUTTON} [${song.title}](${song.uri}) **has ended!**`))
     song.once('stop', u => send(`${Constants.STOP_BUTTON} **The queue is now empty, leaving the voice channel!**`, u))
+
+    if (startFeedback) {
+      song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} **Started playing** [${song.title}](${song.uri})${duration}`))
+    }
 
     if (queueFeedback) {
       song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri})${duration} **was added to queue!**`))

@@ -1,5 +1,11 @@
 module.exports = {
-  SoundcloudSong: require('./SoundcloudSong.js'),
-  TwitchSong: require('./TwitchSong.js'),
-  YoutubeSong: require('./YoutubeSong.js')
+  // SoundCloud
+  SoundcloudSong: require('./soundcloud/SoundcloudSong.js'),
+
+  // Twitch
+  TwitchSong: require('./twitch/TwitchSong.js'),
+
+  // YouTube
+  YoutubePlaylist: require('./youtube/YoutubePlaylist.js'),
+  YoutubeSong: require('./youtube/YoutubeSong.js')
 }
