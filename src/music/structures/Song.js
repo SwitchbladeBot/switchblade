@@ -24,6 +24,10 @@ module.exports = class Song extends EventEmitter {
     this.on('stop', () => this.removeAllListeners())
   }
 
+  loadInfo () {
+    return this
+  }
+
   get formattedDuration () {
     if (this.isStream) return ''
     return moment.duration(this.length).format(this.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss', { trim: false })

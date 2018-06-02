@@ -48,40 +48,42 @@ module.exports = class SoundcloudAPI extends APIWrapper {
 
     this.lastClientIdUpdate = now
     return this.findClientIdFromSite().then(id => {
-      this.clientId = id
-      return id
+      if (id) {
+        this.clientId = id
+        return id
+      }
     }, e => {
-      console.error('SoundCloud client ID update failed.', e)
+      console.error('SoundCloud client ID update failed.', e.statusCode || e)
     })
   }
 
   findClientIdFromSite () {
     return this.findApplicationScriptUrl().then(this.findClientIdFromApplicationScript, e => {
-      console.error('Could not find application script from main page.', e)
+      console.error('Could not find application script from main page.', e.statusCode || e)
     })
   }
 
   async findApplicationScriptUrl () {
-    const res = await snekfetch.get('https://soundcloud.com')
-    if (res && res.statusCode === 200) {
-      const body = res.body.toString()
-      const regex = PAGE_APP_SCRIPT_REGEX.exec(body)
-      if (regex) {
-        return regex[0]
+    return snekfetch.get('https://soundcloud.com').then(res => {
+      if (res && res.statusCode === 200) {
+        const body = res.body.toString()
+        const regex = PAGE_APP_SCRIPT_REGEX.exec(body)
+        if (regex) {
+          return regex[0]
+        }
       }
-    }
-    throw new Error(res.statusCode)
+    })
   }
 
   async findClientIdFromApplicationScript (url) {
-    const res = await snekfetch.get(url)
-    if (res && res.statusCode === 200) {
-      const body = res.body.toString()
-      const regex = APP_SCRIPT_CLIENT_ID_REGEX.exec(body)
-      if (regex) {
-        return regex[1]
+    return snekfetch.get(url).then(res => {
+      if (res && res.statusCode === 200) {
+        const body = res.body.toString()
+        const regex = APP_SCRIPT_CLIENT_ID_REGEX.exec(body)
+        if (regex) {
+          return regex[1]
+        }
       }
-    }
-    throw new Error(res.statusCode)
+    })
   }
 }

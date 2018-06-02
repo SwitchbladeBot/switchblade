@@ -28,7 +28,6 @@ module.exports = class TwitchSong extends Song {
         this.richInfo = { viewerCount: stream.viewer_count, thumbnailUrl }
       }
     }
-
     return this
   }
 }
