@@ -18,7 +18,6 @@ module.exports = class MusicUtils {
     if (YOUTUBE_PLAYLIST_REGEX.test(query)) {
       return { identifier: YOUTUBE_PLAYLIST_REGEX.exec(query)[1], source: 'youtube' }
     }
-
     return {}
   }
 

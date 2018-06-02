@@ -59,7 +59,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
           case 'youtube':
             return new YoutubePlaylist(pInfo, songs, requestedBy, this.client.apis.youtube).loadInfo()
           default:
-            return new Playlist(pInfo, songs, requestedBy)
+            return new Playlist(pInfo, songs, requestedBy).loadInfo()
         }
       }
     }
