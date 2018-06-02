@@ -18,8 +18,6 @@ module.exports = class YoutubePlaylist extends Playlist {
 
     // Load playlist
     const playlist = await yt.getPlaylist(this.identifier)
-    console.log(this.identifier)
-    console.log(playlist)
     if (playlist) {
       this.title = playlist.snippet.title
       this.description = playlist.snippet.description
