@@ -73,7 +73,7 @@ module.exports = class Play extends Command {
     message.channel.send(
       new SwitchbladeEmbed()
         .setThumbnail(playlist.artwork)
-        .setDescription(`${Constants.PLAY_BUTTON} **${amount} songs from playlist** [${playlist.title}](${playlist.uri})${duration} **was added to queue!**`)
+        .setDescription(`${Constants.PLAY_BUTTON} **${amount} songs from playlist** [${playlist.title}](${playlist.uri})${duration} **has been added to queue!**`)
     )
   }
 
@@ -92,7 +92,7 @@ module.exports = class Play extends Command {
     }
 
     if (queueFeedback) {
-      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri})${duration} **was added to queue!**`))
+      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri})${duration} **has been added to queue!**`))
     }
   }
 
