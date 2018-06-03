@@ -7,6 +7,7 @@ module.exports = {
 
   // Utils
   RedditUtils: require('./utils/RedditUtils.js'),
+  OsuUtils: require('./utils/OsuUtils.js'),
 
   // Etc
   Switchblade: require('./Switchblade.js')

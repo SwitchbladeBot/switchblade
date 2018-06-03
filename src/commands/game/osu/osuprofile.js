@@ -1,6 +1,5 @@
-const { Command, SwitchbladeEmbed } = require('../../../index')
+const { Command, SwitchbladeEmbed, OsuUtils } = require('../../../index')
 const logo = 'https://vignette2.wikia.nocookie.net/fantendo/images/1/12/Osu%21_logo.png'
-const modes = ['osu', 'taiko', 'catch', 'mania']
 
 module.exports = class OsuProfile extends Command {
   constructor (client) {
@@ -16,9 +15,9 @@ module.exports = class OsuProfile extends Command {
   async run (message, args) {
     const embed = new SwitchbladeEmbed(message.author)
     if (args.length >= 2) { // Check if enough args were passed
-      if (modes.indexOf(args[0]) > -1) { // Check if the first argument is a valid gamemode
+      if (OsuUtils.modes.indexOf(args[0]) > -1) { // Check if the first argument is a valid gamemode
         message.channel.startTyping()
-        const user = await this.client.apis.osu.user.get(args.slice(0, args.length), modes.indexOf(args[0]))
+        const user = await this.client.apis.osu.user.get(args.slice(0, args.length), OsuUtils.modes.indexOf(args[0]))
         if (user) {
           embed.setAuthor('osu!' + (args[0] !== 'osu' ? args[0] : ''), logo)
           if (user.playcount !== null) { // Check if the API returned null values
@@ -49,8 +48,8 @@ module.exports = class OsuProfile extends Command {
       } else { // First argument isn't a valid gamemode
         embed
           .setColor(this.client.colors.error)
-          .setTitle(`${args[0]} isn't a valid gamemode.`)
-          .setDescription(`**Valid gamemodes:** ${modes.join(', ')}\n**Usage:** \`${process.env.PREFIX}${this.name} <gamemode> <username>\``)
+          .setTitle(`"${args[0]}" isn't a valid gamemode.`)
+          .setDescription(`**Valid gamemodes:** ${OsuUtils.modes.map(g => `\`${g}\``).join(', ')}\n**Usage:** \`${process.env.PREFIX}${this.name} <gamemode> <username>\``)
       }
     } else { // No args were passed
       embed
