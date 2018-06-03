@@ -15,22 +15,22 @@ module.exports = class Kiss extends Command {
     if (!user) {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to mention someone.')
-        .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <user>\``)
+          .setColor(Constants.ERROR_COLOR)
+          .setTitle('You need to mention someone.')
+          .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <user>\``)
       )
     } else if (user.id === message.author.id) {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle('You can\' kiss yourself.')
-        .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <user>\``)
+          .setColor(Constants.ERROR_COLOR)
+          .setTitle('You can\' kiss yourself.')
+          .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <user>\``)
       )
-    } else { 
-     message.channel.send(
-      new SwitchbladeEmbed(message.author)
-        .setImage(kissImg)
-        .setDescription(`${message.author} kissed ${user}`)
+    } else {
+      message.channel.send(
+        new SwitchbladeEmbed(message.author)
+          .setImage(kissImg)
+          .setDescription(`${message.author} kissed ${user}`)
     )
     }
   }
