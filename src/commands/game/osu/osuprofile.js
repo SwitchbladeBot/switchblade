@@ -15,7 +15,7 @@ module.exports = class OsuProfile extends Command {
   async run (message, args) {
     const embed = new SwitchbladeEmbed(message.author)
     if (args.length >= 2) { // Check if enough args were passed
-      if (OsuUtils.modes.indexOf(args[0]) > -1) { // Check if the first argument is a valid gamemode
+      if (OsuUtils.modes.includes(args[0])) { // Check if the first argument is a valid gamemode
         message.channel.startTyping()
         const user = await this.client.apis.osu.user.get(args.slice(0, args.length), OsuUtils.modes.indexOf(args[0]))
         if (user) {
