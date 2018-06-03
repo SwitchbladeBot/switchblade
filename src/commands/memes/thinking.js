@@ -1,4 +1,4 @@
-const { Command, Reddit, SwitchbladeEmbed } = require('../../')
+const { Command, RedditUtils, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Thinking extends Command {
   constructor (client) {
@@ -9,7 +9,7 @@ module.exports = class Thinking extends Command {
 
   async run (message) {
     message.channel.startTyping()
-    const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/thinking')
+    const { url, permalink } = await RedditUtils.getRandomPostFromSubreddit('/r/thinking')
     message.channel.send(
       new SwitchbladeEmbed(message.author)
         .setTitle(':thinking:')

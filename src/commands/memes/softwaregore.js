@@ -1,4 +1,4 @@
-const { Command, Reddit, SwitchbladeEmbed } = require('../../')
+const { Command, RedditUtils, SwitchbladeEmbed } = require('../../')
 
 module.exports = class SoftwareGore extends Command {
   constructor (client) {
@@ -9,7 +9,7 @@ module.exports = class SoftwareGore extends Command {
 
   async run (message) {
     message.channel.startTyping()
-    const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/softwaregore')
+    const { url, permalink } = await RedditUtils.getRandomPostFromSubreddit('/r/softwaregore')
     message.channel.send(
       new SwitchbladeEmbed(message.author)
         .setTitle('<:meowthonkang:446407184373383169>')

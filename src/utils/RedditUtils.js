@@ -1,6 +1,6 @@
 const snekfetch = require('snekfetch')
 
-module.exports = class Reddit {
+module.exports = class RedditUtils {
   static async getRandomPostFromSubreddit (subReddit) {
     subReddit = subReddit.replace('/r/', '')
     let { body } = await snekfetch.get(`https://reddit.com/r/${subReddit}/random/.json`)
