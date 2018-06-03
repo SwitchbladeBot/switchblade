@@ -31,7 +31,7 @@ module.exports = class Kiss extends Command {
         new SwitchbladeEmbed(message.author)
           .setImage(kissImg)
           .setDescription(`${message.author} kissed ${user}`)
-    )
+      )
     }
   }
 }
