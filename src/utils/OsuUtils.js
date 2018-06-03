@@ -1,3 +1,5 @@
 module.exports = class OsuUtils {
-  modes = ['osu', 'taiko', 'catch', 'mania']
+  static get modes() {
+    return ['osu', 'taiko', 'catch', 'mania']
+  }
 }
