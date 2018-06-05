@@ -23,7 +23,7 @@ module.exports = class E621 extends Command {
         })
     } else {
       embed.setColor(Constants.ERROR_COLOR)
-      embed.setTitle('You need to use this command in a nsfw channel')
+      embed.setTitle('You need to use this command in a NSFW channel')
       embed.setDescription(`**Usage:** ${process.env.PREFIX}${this.name}`)
       message.channel.send(embed)
     }
