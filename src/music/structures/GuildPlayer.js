@@ -19,6 +19,7 @@ module.exports = class GuildPlayer extends Player {
 
     this.on('error', this.manager.client.logError)
 
+    this.skipVotes = []
     this.queue = []
     this._volume = 25
   }
@@ -39,6 +40,7 @@ module.exports = class GuildPlayer extends Player {
     }
 
     super.play(song.track, options)
+    this.skipVotes = []
     this.playingSong = song
     this.volume(this._volume)
     song.emit('start')
@@ -71,5 +73,9 @@ module.exports = class GuildPlayer extends Player {
   get formattedElapsed () {
     if (!this.playingSong || this.playingSong.isStream) return ''
     return moment.duration(this.state.position).format(this.playingSong.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss', { trim: false })
+  }
+
+  get voiceChannel () {
+    return this.client.channels.get(this.channel)
   }
 }
