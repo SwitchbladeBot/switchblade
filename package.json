@@ -34,6 +34,7 @@
     "erlpack": "github:discordapp/erlpack",
     "googleapis": "^31.0.2",
     "mathjs": "^4.4.0",
+    "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
     "mongoose": "^5.1.1",
     "node-opus": "^0.3.0",
