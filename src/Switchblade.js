@@ -23,7 +23,7 @@ module.exports = class Switchblade extends Client {
     this.initializeApis('./src/apis')
     this.initializeCommands('./src/commands')
     this.initializeListeners('./src/listeners')
-    this.initializei18next('./src/locales')
+    this.downloadAndInitializeLocales('./src/locales')
   }
 
   /**
@@ -175,24 +175,29 @@ module.exports = class Switchblade extends Client {
   /**
    * Initializes i18next.
    */
-  initializei18next (dirPath) {
-    const locales = fs.readdirSync(dirPath)
-    try {
-      i18next.use(translationBackend).init({
-        ns: ['commands', 'commons', 'permissions'],
-        preload: locales,
-        fallbackLng: 'en_US',
-        backend: {
-          loadPath: 'src/locales/{{lng}}/{{ns}}.json'
-        }
-      })
-    } catch (e) {
-      this.logError(e)
-    }
+  downloadAndInitializeLocales (dirPath) {
+    return new Promise(async (resolve, reject) => {
+      this.log('Downloading locales from Crowdin', 'Localization')
+      await this.apis.crowdin.downloadToPath(dirPath)
+      try {
+        i18next.use(translationBackend).init({
+          ns: ['commands', 'commons', 'permissions'],
+          preload: fs.readdirSync(dirPath),
+          fallbackLng: 'en_US',
+          backend: {
+            loadPath: 'src/locales/{{lng}}/{{ns}}.json'
+          }
+        })
+        this.log('Locales loaded', 'Localization')
+        resolve()
+      } catch (e) {
+        reject(e)
+        this.logError(e)
+      }
+    })
   }
 
   // Database
-
   initializeDatabase (DBWrapper, options = {}) {
     this.database = new DBWrapper(options)
     this.database.connect().then(() => this.log('Database connection established!', 'DB')).catch(this.logError)
