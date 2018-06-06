@@ -5,6 +5,7 @@ module.exports = {
   User: new Schema({
     _id: String,
     money: { type: Number, default: 0 },
+    lastDaily: { type: Number, default: 0 },
     globalXp: { type: Number, default: 0 },
     personalText: { type: String, default: 'Do you know that you can edit this in the future dashboard? :o' }
   }),

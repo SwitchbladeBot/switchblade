@@ -7,7 +7,18 @@ module.exports = class MainListener extends EventListener {
   }
 
   onReady () {
-    this.user.setPresence({game: {name: process.env.PREFIX + 'help'}})
+    this.user.setPresence({game: {name: `@${this.user.username} help`}})
+
+    // Lavalink connection
+    const nodes = [{
+      'host': process.env.LAVALINK_WSS_HOST,
+      'port': process.env.LAVALINK_WSS_PORT,
+      'password': process.env.LAVALINK_PASSWORD
+    }]
+    this.playerManager = new SwitchbladePlayerManager(this, nodes, {
+      user: this.user.id,
+      shards: 1
+    })
   }
 
   async onMessage (message) {
@@ -15,7 +26,7 @@ module.exports = class MainListener extends EventListener {
 
     const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
-    const prefixRegex = new RegExp(`^(${this.user}[ ]?|${prefix}).+`)
+    const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)
     const regexResult = prefixRegex.exec(message.content)
     if (regexResult) {
       const fullCmd = message.content.substring(regexResult[1].length).split(/\s+/g).filter(a => a).map(s => s.trim())
