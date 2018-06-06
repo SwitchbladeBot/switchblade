@@ -1,4 +1,4 @@
-const { Command, CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
+const { Command, CommandStructures, SwitchbladeEmbed } = require('../../')
 const { CommandRequirements, CommandParameters, NumberParameter } = CommandStructures
 
 module.exports = class Volume extends Command {

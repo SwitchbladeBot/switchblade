@@ -43,7 +43,7 @@ module.exports = class CommandParameters {
         embed.setDescription(`**Usage:** \`${process.env.PREFIX}${this.command.name} ${params}\``)
       }
       return message.channel.send(customize(embed))
-      .then(() => message.channel.stopTyping())
+        .then(() => message.channel.stopTyping())
     }
   }
 }
