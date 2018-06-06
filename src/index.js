@@ -1,6 +1,13 @@
+const CommandStructures = require('./structures/command')
+
 module.exports = {
+  // Command Structures
+  CommandStructures,
+  Command: CommandStructures.Command,
+  CommandParameters: CommandStructures.CommandParameters,
+  CommandRequirements: CommandStructures.CommandRequirements,
+
   // Structures
-  Command: require('./structures/Command.js'),
   APIWrapper: require('./structures/APIWrapper.js'),
   EventListener: require('./structures/EventListener.js'),
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),

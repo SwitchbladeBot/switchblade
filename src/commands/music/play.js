@@ -1,55 +1,40 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
 const { Song, Playlist } = require('../../music/structures')
+const { CommandRequirements, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class Play extends Command {
   constructor (client) {
     super(client)
     this.name = 'play'
     this.aliases = []
+
+    this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true})
+    this.parameters = new CommandParameters(this, new StringParameter({full: true}))
   }
 
-  async run (message, args) {
+  async run (message, identifier) {
     const user = message.author
     message.channel.startTyping()
-    if (args.length > 0) {
-      if (message.member.voiceChannel) {
-        const playerManager = this.client.playerManager
-        try {
-          const identifier = args.join(' ')
-          const res = await playerManager.loadTracks(identifier, user) || await playerManager.loadTracks(`ytsearch:${identifier}`, user)
-          if (res) {
-            await this.loadSongs(message, res, playerManager)
-            message.channel.stopTyping()
-          } else {
-            message.channel.send(
-              new SwitchbladeEmbed(user)
-                .setColor(Constants.ERROR_COLOR)
-                .setTitle('Sorry, I couldn\'t find this song!')
-            ).then(() => message.channel.stopTyping())
-          }
-        } catch (e) {
-          message.channel.send(
-            new SwitchbladeEmbed(user)
-              .setColor(Constants.ERROR_COLOR)
-              .setTitle('An error occured!')
-              .setDescription(e)
-          ).then(() => message.channel.stopTyping())
-          message.client.logError(e)
-        }
+    const playerManager = this.client.playerManager
+    try {
+      const res = await playerManager.loadTracks(identifier, user) || await playerManager.loadTracks(`ytsearch:${identifier}`, user)
+      if (res) {
+        this.loadSongs(message, res, playerManager).then(() => message.channel.stopTyping())
       } else {
         message.channel.send(
           new SwitchbladeEmbed(user)
             .setColor(Constants.ERROR_COLOR)
-            .setTitle('You need to be in a voice channel to use this command!')
+            .setTitle('Sorry, I couldn\'t find this song!')
         ).then(() => message.channel.stopTyping())
       }
-    } else {
+    } catch (e) {
       message.channel.send(
         new SwitchbladeEmbed(user)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to give me a track identifier!')
-          .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <track name|track url>\``)
+          .setTitle('An error occured!')
+          .setDescription(e)
       ).then(() => message.channel.stopTyping())
+      message.client.logError(e)
     }
   }
 
@@ -94,9 +79,5 @@ module.exports = class Play extends Command {
     if (queueFeedback) {
       song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri})${duration} **has been added to queue!**`))
     }
-  }
-
-  canRun (message, args) {
-    return !!message.guild && super.canRun(message, args)
   }
 }

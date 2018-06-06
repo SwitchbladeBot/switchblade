@@ -74,9 +74,7 @@ module.exports = class Switchblade extends Client {
    * @param {Array<string>} args - Array of command arguments
    */
   runCommand (command, message, args) {
-    if (command.canRun(message, args)) {
-      command._run(message, args).catch(this.logError)
-    }
+    command._run(message, args).catch(this.logError)
   }
 
   /**
