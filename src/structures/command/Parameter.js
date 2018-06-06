@@ -4,6 +4,8 @@ module.exports = class Parameter {
 
     this.required = !!options.required
     this.full = !!options.full
+    this.missingError = options.missingError || 'An error occured!'
+    this.id = options.id || 'parameter'
   }
 
   parse (arg, error) {

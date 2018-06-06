@@ -9,7 +9,9 @@ module.exports = class Play extends Command {
     this.aliases = []
 
     this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true})
-    this.parameters = new CommandParameters(this, new StringParameter({full: true}))
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, missingError: 'You need to give me a track name or URL!', id: 'track name|url'})
+    )
   }
 
   async run (message, identifier) {

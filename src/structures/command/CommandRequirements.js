@@ -62,13 +62,17 @@ module.exports = class CommandRequirements {
   }
 
   errorMessageFactory (message) {
-    return (description, customize) => {
+    return (title, showUsage, customize) => {
       customize = customize || ((e) => e)
-      return message.channel.send(
-        customize(new SwitchbladeEmbed(message.author)
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(description))
-      ).then(() => message.channel.stopTyping())
+      const embed = new SwitchbladeEmbed(message.author)
+        .setColor(Constants.ERROR_COLOR)
+        .setTitle(title)
+      if (showUsage) {
+        const params = this.parameters.map(p => '<' + p.id + '>').join(' ')
+        embed.setDescription(`**Usage:** \`${process.env.PREFIX}${this.command.name} ${params}\``)
+      }
+      return message.channel.send(customize(embed))
+      .then(() => message.channel.stopTyping())
     }
   }
 }

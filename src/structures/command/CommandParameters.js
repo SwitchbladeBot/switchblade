@@ -1,3 +1,4 @@
+const ParameterError = require('./ParameterError.js')
 const Constants = require('../../utils/Constants.js')
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 
@@ -13,33 +14,36 @@ module.exports = class CommandParameters {
     const parsedArgs = []
     for (let i = 0; i < this.parameters.length; i++) {
       const param = this.parameters[i]
-      const arg = args[i]
 
-      if (!arg && param.required) {
-        error('missing ' + i)
+      let arg = args[i]
+      if (param.full) arg = args.join(' ')
+
+      const parsedArg = param.parse(arg, error)
+      if (parsedArg instanceof ParameterError) {
+        error(parsedArg.message, parsedArg.showUsage)
+        return null
+      } else if (!parsedArg && param.required) {
+        error(param.missingError, true)
         return null
       }
-
-      if (param.full) {
-        return param.parse(args.join(' '), error)
-      } else {
-        const parsedArg = param.parse(arg, error)
-        if (parsedArg) parsedArgs.push(parsedArg)
-        else return null
-      }
+      parsedArgs.push(parsedArg)
     }
 
     return parsedArgs
   }
 
   errorMessageFactory (message) {
-    return (description, customize) => {
+    return (title, showUsage, customize) => {
       customize = customize || ((e) => e)
-      return message.channel.send(
-        customize(new SwitchbladeEmbed(message.author)
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(description))
-      ).then(() => message.channel.stopTyping())
+      const embed = new SwitchbladeEmbed(message.author)
+        .setColor(Constants.ERROR_COLOR)
+        .setTitle(title)
+      if (showUsage) {
+        const params = this.parameters.map(p => '<' + p.id + '>').join(' ')
+        embed.setDescription(`**Usage:** \`${process.env.PREFIX}${this.command.name} ${params}\``)
+      }
+      return message.channel.send(customize(embed))
+      .then(() => message.channel.stopTyping())
     }
   }
 }

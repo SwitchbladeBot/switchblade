@@ -1,4 +1,5 @@
 const Parameter = require('./Parameter.js')
+const ParameterError = require('./ParameterError.js')
 
 module.exports = class NumberParameter extends Parameter {
   constructor (options = {}) {
@@ -11,7 +12,7 @@ module.exports = class NumberParameter extends Parameter {
   parse (arg, error) {
     let nmb = Number(arg)
     if (isNaN(nmb)) {
-      error('You need to give me a valid number!')
+      return new ParameterError('You need to give me a valid number!')
       return null
     }
 

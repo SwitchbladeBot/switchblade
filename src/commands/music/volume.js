@@ -1,4 +1,5 @@
-const { Command, CommandRequirements, Constants, SwitchbladeEmbed } = require('../../')
+const { Command, CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
+const { CommandRequirements, CommandParameters, NumberParameter } = CommandStructures
 
 module.exports = class Volume extends Command {
   constructor (client) {
@@ -7,30 +8,14 @@ module.exports = class Volume extends Command {
     this.aliases = ['vol']
 
     this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true})
+    this.parameters = new CommandParameters(this,
+      new NumberParameter({full: true, missingError: 'You need to give me the volume level!', id: '0-150', min: 0, max: 150})
+    )
   }
 
-  async run (message, args) {
-    const embed = new SwitchbladeEmbed(message.author)
+  async run (message, volume) {
     const guildPlayer = this.client.playerManager.get(message.guild.id)
-
-    if (args.length > 0) {
-      const volume = Math.max(Math.min(parseInt(args[0]), 150), 0)
-      if (!isNaN(volume)) {
-        guildPlayer.volume(volume)
-        embed
-          .setTitle(`\uD83D\uDD0A Volume set to ${volume}.`)
-      } else {
-        embed
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to give me a valid number!')
-      }
-    } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me the volume level!')
-        .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <0-150>\``)
-    }
-
-    message.channel.send(embed)
+    guildPlayer.volume(volume)
+    message.channel.send(new SwitchbladeEmbed(message.author).setTitle(`\uD83D\uDD0A Volume set to ${volume}.`))
   }
 }
