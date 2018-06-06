@@ -5,7 +5,7 @@ module.exports = class StringParameter extends Parameter {
     super(options)
   }
 
-  parse (arg, error) {
+  parse (arg) {
     return arg && (typeof arg === 'string' ? arg : String(arg))
   }
 }

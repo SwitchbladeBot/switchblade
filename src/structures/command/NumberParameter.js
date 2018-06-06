@@ -9,7 +9,7 @@ module.exports = class NumberParameter extends Parameter {
     this.max = Number(options.max)
   }
 
-  parse (arg, error) {
+  parse (arg) {
     let nmb = Number(arg)
     if (isNaN(nmb)) {
       return new ParameterError('You need to give me a valid number!')

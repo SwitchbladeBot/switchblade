@@ -18,7 +18,7 @@ module.exports = class CommandParameters {
       let arg = args[i]
       if (param.full) arg = args.join(' ')
 
-      const parsedArg = param.parse(arg, error)
+      const parsedArg = param.parse(arg)
       if (parsedArg instanceof ParameterError) {
         error(parsedArg.message, parsedArg.showUsage)
         return null

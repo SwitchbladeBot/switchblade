@@ -8,7 +8,7 @@ module.exports = class Parameter {
     this.id = options.id || 'parameter'
   }
 
-  parse (arg, error) {
+  parse (arg) {
     return arg
   }
 }
