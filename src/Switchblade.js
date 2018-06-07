@@ -177,26 +177,26 @@ module.exports = class Switchblade extends Client {
    * Initializes i18next.
    */
   async downloadAndInitializeLocales (dirPath) {
-      if (process.env.CROWDIN_API_KEY && process.env.CROWDIN_PROJECT_ID) {
-        this.log('Downloading locales from Crowdin', 'Localization')
-        await this.apis.crowdin.downloadToPath(dirPath)
-      } else {
-        this.log('Couldn\'t download locales: Crowdin environment variables not found')
-      }
-      try {
-        i18next.use(translationBackend).init({
-          ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
-          preload: fs.readdirSync(dirPath),
-          fallbackLng: 'en_US',
-          backend: {
-            loadPath: 'src/locales/{{lng}}/{{ns}}.json'
-          },
-          simplifyPluralSuffix: true
-        })
-        this.log('Locales loaded', 'Localization')
-      } catch (e) {
-        this.logError(e)
-      }
+    if (process.env.CROWDIN_API_KEY && process.env.CROWDIN_PROJECT_ID) {
+      this.log('Downloading locales from Crowdin', 'Localization')
+      await this.apis.crowdin.downloadToPath(dirPath)
+    } else {
+      this.log('Couldn\'t download locales: Crowdin environment variables not found')
+    }
+    try {
+      i18next.use(translationBackend).init({
+        ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
+        preload: fs.readdirSync(dirPath),
+        fallbackLng: 'en_US',
+        backend: {
+          loadPath: 'src/locales/{{lng}}/{{ns}}.json'
+        },
+        simplifyPluralSuffix: true
+      })
+      this.log('Locales loaded', 'Localization')
+    } catch (e) {
+      this.logError(e)
+    }
   }
 
   // Database

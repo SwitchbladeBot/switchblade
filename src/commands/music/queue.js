@@ -32,7 +32,7 @@ module.exports = class Queue extends Command {
     } else {
       embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle(rt('errors:notPlaying'))
+        .setTitle(t('errors:notPlaying'))
     }
 
     message.channel.send(embed)
