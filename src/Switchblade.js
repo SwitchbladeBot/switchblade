@@ -181,7 +181,7 @@ module.exports = class Switchblade extends Client {
       this.log('Downloading locales from Crowdin', 'Localization')
       await this.apis.crowdin.downloadToPath(dirPath)
     } else {
-      this.log('Couldn\'t download locales: Crowdin environment variables not found')
+      this.log('Couldn\'t download locales from Crowdin', 'Localization')
     }
     try {
       i18next.use(translationBackend).init({
@@ -193,7 +193,7 @@ module.exports = class Switchblade extends Client {
         },
         simplifyPluralSuffix: true
       })
-      this.log('Locales loaded', 'Localization')
+      this.log('i18next initialized', 'Localization')
     } catch (e) {
       this.logError(e)
     }
