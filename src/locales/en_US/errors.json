@@ -9,5 +9,6 @@
   "missingMultiplePermissions": "You need the {{permission}} permissions in order to do that.",
   "cooldown": "Woah! Slow down buddy! You're going too fast, you need to wait!",
   "notPlaying": "I ain't playing anything!",
-  "missingParameters": "You need to give me parameters!"
+  "missingParameters": "You need to give me parameters!",
+  "nsfwOnly": "This can only be done in channels marked as NSFW."
 }
