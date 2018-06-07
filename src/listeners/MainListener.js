@@ -36,7 +36,7 @@ module.exports = class MainListener extends EventListener {
       const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
 
       if (command) {
-        this.runCommand(command, message, args, (guildDocument && guildDocument.language) || 'en_US')
+        this.runCommand(command, message, args, (guildDocument && guildDocument.language) || 'en-US')
       }
     }
   }

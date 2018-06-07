@@ -187,11 +187,11 @@ module.exports = class Switchblade extends Client {
       i18next.use(translationBackend).init({
         ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
         preload: fs.readdirSync(dirPath),
-        fallbackLng: 'en_US',
+        fallbackLng: 'en-US',
         backend: {
           loadPath: 'src/locales/{{lng}}/{{ns}}.json'
         },
-        simplifyPluralSuffix: true
+        debug: true
       })
       this.log('i18next initialized', 'Localization')
     } catch (e) {
