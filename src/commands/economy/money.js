@@ -7,17 +7,16 @@ module.exports = class Money extends Command {
     this.aliases = ['balance', 'bal']
   }
 
-  run (message, args) {
-    let user
+  run (message, args, t) {
+    const user = message.mentions.users.first() || message.author
     const embed = new SwitchbladeEmbed(message.author)
     message.channel.startTyping()
-    if (!args[0]) user = message.author
-    else if (args[0]) {
-      if (!this.client.users.get(args[0])) user = message.author
-      else user = this.client.users.get(args[0])
-    }
     this.client.database.users.get(user.id).then(data => {
-      embed.setDescription(`**${user.tag}** has **${data.money}** SwitchCoins`)
+      if (user.id === message.author.id) {
+        embed.setDescription(t('commands:money.youHave', {count: data.money}))
+      } else {
+        embed.setDescription(t('commands:money.someoneHas', {count: data.money, user: user}))
+      }
       message.channel.send(embed).then(() => message.channel.stopTyping())
     })
   }

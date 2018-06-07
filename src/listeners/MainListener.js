@@ -1,4 +1,5 @@
 const { EventListener } = require('../')
+const { SwitchbladePlayerManager } = require('../music')
 
 module.exports = class MainListener extends EventListener {
   constructor (client) {

@@ -7,7 +7,7 @@ module.exports = class Volume extends Command {
     this.aliases = ['vol']
   }
 
-  async run (message, args) {
+  async run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
 
     if (args.length > 0) {
@@ -19,27 +19,27 @@ module.exports = class Volume extends Command {
           if (!isNaN(volume)) {
             guildPlayer.volume(volume)
             embed
-              .setTitle(`\uD83D\uDD0A Volume set to ${volume}.`)
+              .setTitle(`\uD83D\uDD0A ${t('commands:volumeSet', {volume})}`)
           } else {
             embed
               .setColor(Constants.ERROR_COLOR)
-              .setTitle('You need to give me a valid number!')
+              .setTitle(t('commands:volume.invalidVolumeParameter'))
           }
         } else {
           embed
             .setColor(Constants.ERROR_COLOR)
-            .setTitle('I ain\'t playing anything!')
+            .setTitle(t('errors:notPlaying'))
         }
       } else {
         embed
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to be in a voice channel to use this command!')
+          .setTitle(t('errors:voiceChannelOnly'))
       }
     } else {
       embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me the volume level!')
-        .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <0-150>\``)
+        .setTitle(t('commands:volume.missingVolumeParameter'))
+        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:volume.commandUsage')}`)
     }
 
     message.channel.send(embed)

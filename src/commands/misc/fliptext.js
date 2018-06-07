@@ -6,13 +6,13 @@ module.exports = class FlipText extends Command {
     this.name = 'fliptext'
   }
 
-  run (message, args) {
+  run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
     message.channel.startTyping()
     if (!args[0]) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me a sentence to flip')
-        .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <sentence>`)
+        .setTitle(t('commands:fliptext.noSentence'))
+        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:8ball.commandUsage')}`)
     } else {
       const mapping = '¡"#$%⅋,)(*+\'-˙/0ƖᄅƐㄣϛ9ㄥ86:;<=>¿@∀qƆpƎℲפHIſʞ˥WNOԀQɹS┴∩ΛMX⅄Z[/]^_`ɐqɔpǝɟƃɥᴉɾʞlɯuodbɹsʇnʌʍxʎz{|}~'
       const offset = '!'.charCodeAt(0)

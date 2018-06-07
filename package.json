@@ -59,6 +59,8 @@
     "standard": "^11.0.1"
   },
   "nodemonConfig": {
-    "ignore": ["locales/*"]
+    "ignore": [
+      "locales/*"
+    ]
   }
 }

@@ -7,7 +7,7 @@ module.exports = class Pause extends Command {
     this.aliases = ['resume']
   }
 
-  async run (message, args) {
+  async run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
 
     if (message.member.voiceChannel) {
@@ -16,17 +16,20 @@ module.exports = class Pause extends Command {
       if (guildPlayer && guildPlayer.playing) {
         const pause = !guildPlayer.paused
         message.channel.send(embed
-          .setTitle(`${pause ? Constants.PAUSE_BUTTON : Constants.PLAY_BUTTON} Music player has been ${pause ? 'paused' : 'resumed'}!`))
+          .setTitle(`${pause ? Constants.PAUSE_BUTTON : Constants.PLAY_BUTTON} ${t('music:stateChanged', {context: pause ? 'pause' : 'resume'})}`)
+        )
         guildPlayer.pause(pause)
       } else {
         message.channel.send(embed
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('I ain\'t playing anything!'))
+          .setTitle(t('errors:notPlaying'))
+        )
       }
     } else {
       message.channel.send(embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to be in a voice channel to use this command!'))
+        .setTitle(t('errors:voiceChannelOnly'))
+      )
     }
   }
 

@@ -7,7 +7,7 @@ module.exports = class Skip extends Command {
     this.aliases = ['skip']
   }
 
-  async run (message, args) {
+  async run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
 
     if (message.member.voiceChannel) {
@@ -15,18 +15,20 @@ module.exports = class Skip extends Command {
       const guildPlayer = playerManager.get(message.guild.id)
       if (guildPlayer && guildPlayer.playing) {
         const song = guildPlayer.playingSong
+        const songName = `[${song.title}](${song.uri})`
         message.channel.send(embed
-          .setDescription(`${Constants.STOP_BUTTON} [${song.title}](${song.uri}) **was skipped!**`))
+          .setDescription(`${Constants.STOP_BUTTON} ${t('music:wasSkipped', {songName})}`))
         guildPlayer.next()
       } else {
         message.channel.send(embed
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('I ain\'t playing anything!'))
+          .setTitle(t('music:errors.notPlaying'))
+        )
       }
     } else {
       message.channel.send(embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to be in a voice channel to use this command!'))
+        .setTitle(t('errors:voiceChannelOnly')))
     }
   }
 

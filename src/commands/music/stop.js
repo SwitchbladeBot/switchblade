@@ -7,7 +7,7 @@ module.exports = class Stop extends Command {
     this.aliases = []
   }
 
-  async run (message, args) {
+  async run (message, args, t) {
     if (message.member.voiceChannel) {
       const playerManager = this.client.playerManager
       const guildPlayer = playerManager.get(message.guild.id)
@@ -17,14 +17,14 @@ module.exports = class Stop extends Command {
         message.channel.send(
           new SwitchbladeEmbed(message.author)
             .setColor(Constants.ERROR_COLOR)
-            .setTitle('I ain\'t playing anything!')
+            .setTitle(t('errors:notPlaying'))
         )
       }
     } else {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to be in a voice channel to use this command!')
+          .setTitle(t('errors:voiceChannelOnly'))
       )
     }
   }

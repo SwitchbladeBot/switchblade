@@ -9,30 +9,30 @@ module.exports = class Queue extends Command {
     this.aliases = ['playlist']
   }
 
-  async run (message, args) {
+  async run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
 
     const playerManager = this.client.playerManager
     const guildPlayer = playerManager.get(message.guild.id)
     if (guildPlayer && guildPlayer.playing) {
       const npSong = guildPlayer.playingSong
-      const description = [`**Now playing:** [${npSong.title}](${npSong.uri})`]
+      const description = [`**${t('music:nowPlaying')}:** [${npSong.title}](${npSong.uri})`]
 
       if (guildPlayer.queue.length > 0) {
-        const queue = guildPlayer.queue.map((song, i) => `${i + 1}. [${song.title}](${song.uri}) (added by ${song.requestedBy})`).slice(0, MAX_PLAYLIST_LENGTH)
-        description.push('', '**Songs queued:**', ...queue)
+        const queue = guildPlayer.queue.map((song, i) => `${i + 1}. [${song.title}](${song.uri}) *(${t('music:addedBy', {user: song.requestedBy})})*`).slice(0, MAX_PLAYLIST_LENGTH)
+        description.push('', `**${t('music:queue')}:**`, ...queue)
 
         const missing = guildPlayer.queue.length - MAX_PLAYLIST_LENGTH
-        if (missing > 0) description.push(`\`and ${missing} more...\``)
+        if (missing > 0) description.push(`\`${t('music:andMore', {missing})}\``)
       } else {
-        description.push('There are no songs after the current one.')
+        description.push(t('music:noneAfterCurrent'))
       }
 
       embed.setDescription(description.join('\n'))
     } else {
       embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle('I ain\'t playing anything!')
+        .setTitle(rt('errors:notPlaying'))
     }
 
     message.channel.send(embed)

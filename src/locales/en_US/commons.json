@@ -2,6 +2,9 @@
   "example": "Example",
   "usage": "Usage",
   "and": "and",
-  "anErrorOcurred": "An error ocurred.",
-  "reportThis": "You might want to report this."
+  "reportThis": "You might want to report this.",
+  "currencyWithCount": "{{count}} Switchcoin",
+  "currencyWithCount_plural": "{{count}} Switchcoins",
+  "currency": "Switchcoin",
+  "currency_plural": "Switchcoins"
 }
