@@ -1,6 +1,6 @@
-const { Command, CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
+const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
 const { Song, Playlist } = require('../../music/structures')
-const { CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class Play extends Command {
   constructor (client) {

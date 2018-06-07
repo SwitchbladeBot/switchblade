@@ -1,5 +1,5 @@
-const { Command, CommandStructures, SwitchbladeEmbed } = require('../../')
-const { CommandRequirements, CommandParameters, NumberParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandRequirements, CommandParameters, NumberParameter } = CommandStructures
 
 module.exports = class Volume extends Command {
   constructor (client) {

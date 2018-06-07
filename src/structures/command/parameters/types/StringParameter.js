@@ -6,6 +6,6 @@ module.exports = class StringParameter extends Parameter {
   }
 
   parse (arg) {
-    return arg && (typeof arg === 'string' ? arg : String(arg))
+    return arg ? (typeof arg === 'string' ? arg : String(arg)) : undefined
   }
 }

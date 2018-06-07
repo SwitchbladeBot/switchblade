@@ -1,24 +1,25 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
 
 module.exports = class Money extends Command {
   constructor (client) {
     super(client)
     this.name = 'money'
     this.aliases = ['balance', 'bal']
+
+    this.parameters = new CommandParameters(this,
+      new UserParameter({full: true, required: false, id: 'user'})
+    )
   }
 
-  run (message, args) {
-    let user
-    const embed = new SwitchbladeEmbed(message.author)
+  run (message, user) {
+    user = user || message.author
     message.channel.startTyping()
-    if (!args[0]) user = message.author
-    else if (args[0]) {
-      if (!this.client.users.get(args[0])) user = message.author
-      else user = this.client.users.get(args[0])
-    }
     this.client.database.users.get(user.id).then(data => {
-      embed.setDescription(`**${user.tag}** has **${data.money}** SwitchCoins`)
-      message.channel.send(embed).then(() => message.channel.stopTyping())
+      message.channel.send(
+        new SwitchbladeEmbed(message.author)
+          .setDescription(`**${user.tag}** has **${data.money}** SwitchCoins`)
+      ).then(() => message.channel.stopTyping())
     })
   }
 }

@@ -1,3 +1,4 @@
+const CommandError = require('./CommandError.js')
 const Constants = require('../../utils/Constants.js')
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 
@@ -7,46 +8,49 @@ module.exports = class CommandRequirements {
     this.cooldownMap = new Map()
 
     this.permissions = options.permissions || []
+
     this.cooldown = Object.assign({enabled: false, feedback: true, time: 1}, options.cooldown)
+
+    this.devOnly = !!options.devOnly
     this.guildOnly = !!options.guildOnly
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
   }
 
   handle (message, args) {
-    const error = this.errorMessageFactory(message)
+    if (this.devOnly) {
+      const botGuild = message.client.guilds.get(process.env.BOT_GUILD)
+      const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)
+      const hasRole = developerRole && developerRole.members.has(message.author.id)
+      if (!hasRole) {
+        return new CommandError('This command is devOnly!')
+      }
+    }
 
     if (this.guildOnly && !message.guild) {
-      message.channel.send('guildOnly')
-      return false
+      return new CommandError('This command is guildOnly!')
     }
 
     if (this.voiceChannelOnly && !message.member.voiceChannel) {
-      error('You need to be in a voice channel to use this command!')
-      return false
+      return new CommandError('You need to be in a voice channel to use this command!')
     }
 
     const guildPlayer = this.command.client.playerManager.get(message.guild.id)
     if (this.guildPlaying && (!guildPlayer || !guildPlayer.playing)) {
-      error('I ain\'t playing anything!')
-      return false
+      return new CommandError('I ain\'t playing anything!')
     }
 
     if (this.permissions.length > 0) {
       if (!message.channel.permissionsFor(message.member).has(this.permissions)) {
-        error(this.permissions.join(', '))
-        return false
+        return new CommandError(this.permissions.join(', '))
       }
     }
 
     if (this.cooldown.enabled && this.cooldownMap.has(message.author.id)) {
       if (this.cooldown.feedback) {
-        error('Woah! Slow down buddy! You\'re going too fast, you need to wait!')
+        return new CommandError('Woah! Slow down buddy! You\'re going too fast, you need to wait!')
       }
-      return false
     }
-
-    return true
   }
 
   applyCooldown (user, time) {
@@ -58,21 +62,6 @@ module.exports = class CommandRequirements {
       user.client.setTimeout(() => {
         this.cooldownMap.delete(user.id)
       }, time * 1000)
-    }
-  }
-
-  errorMessageFactory (message) {
-    return (title, showUsage, customize) => {
-      customize = customize || ((e) => e)
-      const embed = new SwitchbladeEmbed(message.author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(title)
-      if (showUsage) {
-        const params = this.parameters.map(p => '<' + p.id + '>').join(' ')
-        embed.setDescription(`**Usage:** \`${process.env.PREFIX}${this.command.name} ${params}\``)
-      }
-      return message.channel.send(customize(embed))
-        .then(() => message.channel.stopTyping())
     }
   }
 }

@@ -1,10 +1,11 @@
 module.exports = {
   Command: require('./Command.js'),
-  CommandParameters: require('./CommandParameters.js'),
+  CommandParameters: require('./parameters/CommandParameters.js'),
   CommandRequirements: require('./CommandRequirements.js'),
 
   // Parameters
-  Parameter: require('./Parameter.js'),
-  NumberParameter: require('./NumberParameter.js'),
-  StringParameter: require('./StringParameter.js')
+  Parameter: require('./parameters/types/Parameter.js'),
+  NumberParameter: require('./parameters/types/NumberParameter.js'),
+  StringParameter: require('./parameters/types/StringParameter.js'),
+  UserParameter: require('./parameters/types/UserParameter.js')
 }

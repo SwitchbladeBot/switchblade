@@ -1,6 +1,7 @@
 /* eslint-disable no-eval */
 
-const { Command } = require('../../')
+const { CommandStructures } = require('../../')
+const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
 const util = require('util')
 
 module.exports = class Eval extends Command {
@@ -9,11 +10,16 @@ module.exports = class Eval extends Command {
     this.name = 'eval'
     this.aliases = ['execute']
     this.hidden = true
+
+    this.requirements = new CommandRequirements(this, {devOnly: true})
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, missingError: 'You need to give me something to evaluate!', id: 'expression'})
+    )
   }
 
-  async run (message, args) {
+  async run (message, expr) {
     try {
-      const evaled = eval(args.join(' '))
+      const evaled = eval(expr)
       const cleanEvaled = this.clean(util.inspect(evaled, {depth: 0}))
       await message.channel.send(cleanEvaled, { code: 'xl' })
     } catch (err) {
@@ -24,12 +30,5 @@ module.exports = class Eval extends Command {
   clean (text) {
     const blankSpace = String.fromCharCode(8203)
     return typeof text === 'string' ? text.replace(/`/g, '`' + blankSpace).replace(/@/g, '@' + blankSpace) : text
-  }
-
-  canRun (message) {
-    const botGuild = this.client.guilds.get(process.env.BOT_GUILD)
-    const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)
-    const hasRole = developerRole && developerRole.members.has(message.author.id)
-    return super.canRun(message) && hasRole
   }
 }
