@@ -1,7 +1,6 @@
 const Parameter = require('./Parameter.js')
 const CommandError = require('../../CommandError.js')
 
-const isNull = (n) => n === null || n === undefined || n === NaN
 const MENTION_REGEX = /^(?:<@!?)?([0-9]{16,18})(?:>)?$/
 
 module.exports = class UserParameter extends Parameter {

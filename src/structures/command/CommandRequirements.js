@@ -1,6 +1,4 @@
 const CommandError = require('./CommandError.js')
-const Constants = require('../../utils/Constants.js')
-const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 
 module.exports = class CommandRequirements {
   constructor (command, options = {}) {

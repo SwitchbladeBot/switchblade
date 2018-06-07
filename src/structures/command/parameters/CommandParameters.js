@@ -1,8 +1,6 @@
 const CommandError = require('../CommandError.js')
-const Constants = require('../../../utils/Constants.js')
-const SwitchbladeEmbed = require('../../SwitchbladeEmbed.js')
 
-const isNull = (n) => n === null || n === undefined || n === NaN
+const isNull = (n) => n === null || n === undefined || isNaN(n)
 
 module.exports = class CommandParameters {
   constructor (command, ...params) {
