@@ -18,15 +18,14 @@ module.exports = class E621 extends Command {
           for (let image of images) {
             embed.setImage(image.common.file_url)
             embed.setDescription('Here\'s your yiff!')
-            message.channel.send(embed)
+            message.channel.send(embed).then(message => message.channel.stopTyping())
           }
         })
     } else {
       embed.setColor(Constants.ERROR_COLOR)
       embed.setTitle('You need to use this command in a NSFW channel')
       embed.setDescription(`**Usage:** ${process.env.PREFIX}${this.name}`)
-      message.channel.send(embed)
+      message.channel.send(embed).then(message => message.channel.stopTyping())
     }
-    message.channel.stopTyping()
   }
 }
