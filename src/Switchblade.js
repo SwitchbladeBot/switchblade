@@ -191,7 +191,9 @@ module.exports = class Switchblade extends Client {
         backend: {
           loadPath: 'src/locales/{{lng}}/{{ns}}.json'
         },
-        debug: true
+        interpolation: {
+          escapeValue: false
+        }
       })
       this.log('i18next initialized', 'Localization')
     } catch (e) {
