@@ -160,7 +160,7 @@
   "help": {
     "commandDescription": "Shows information about commands or lists them",
     "commandUsage": "[command name]",
-    "listTitle": "Avaliable commands",
+    "listTitle": "Available commands",
     "prefix": "Prefix",
     "youCanUse": "You can also use {{- botMention}} as a prefix",
     "specificInformation": "Type {{helpString}} for command specific information",
@@ -168,5 +168,12 @@
     "noDescriptionProvided": "No description provided",
     "noUsageProvided": "No usage provided",
     "commandNotFound": "I couldn't find a command with that name"
+  },
+  "setlanguage": {
+    "commandDescription": "Changes the bot's language",
+    "commandUsage": "<language code>",
+    "noCode": "You need to give me a language code.",
+    "availableLanguages": "Available languages",
+    "changedSuccessfully": "Language changed successfully to {{lang}}!"
   }
 }
