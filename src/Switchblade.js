@@ -193,7 +193,8 @@ module.exports = class Switchblade extends Client {
         },
         interpolation: {
           escapeValue: false
-        }
+        },
+        returnEmptyString: false
       })
       this.log('i18next initialized', 'Localization')
     } catch (e) {
