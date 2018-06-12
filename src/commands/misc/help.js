@@ -14,14 +14,15 @@ module.exports = class Pause extends Command {
     if (args.length > 0) {
       const command = this.client.commands.find(c => c.name === args[0])
       if (command) {
+        let description = [
+          t([`commands:${command.name}.commandDescription`, 'commands:help.noDescriptionProvided']),
+          '',
+          `**${t('commons:usage')}:** \`${prefix}${command.name} ${t([`commands:${command.name}.commandUsage`, ''])}\``
+        ].join('\n')
+        if (command.aliases.length > 0) description += `\n**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`
         embed
           .setTitle(command.name)
-          .setDescription([
-            t([`commands:${command.name}.commandDescription`, 'commands:help.noDescriptionProvided']),
-            '',
-            `**${t('commons:usage')}:** \`${prefix}${command.name} ${t([`commands:${command.name}.commandUsage`, ''])}\``,
-            `**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`
-          ].join('\n'))
+          .setDescription(description)
       } else {
         embed
           .setColor(Constants.ERROR_COLOR)
