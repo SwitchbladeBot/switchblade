@@ -12,12 +12,10 @@ module.exports = class E621 extends Command {
     message.channel.startTyping()
     const embed = new SwitchbladeEmbed(message.author)
     if (message.channel.nsfw) {
-      const images = await booru.search('e621.net', ['rating:e'], {limit: 1, random: true})
-        .then(booru.commonfy)
-      for (let image of images) {
-        embed.setImage(image.common.file_url)
-        embed.setDescription('Here\'s your yiff!')
-      }
+      const [ image ] = await booru.search('e621.net', ['rating:e'], {limit: 1, random: true}).then(booru.commonfy)
+      embed.setImage(image.common.file_url)
+      embed.setDescription('Here\'s your yiff!')
+      embed.setColor(Constants.E621_COLOR)
     } else {
       embed.setColor(Constants.ERROR_COLOR)
       embed.setTitle('You need to use this command in a NSFW channel')
