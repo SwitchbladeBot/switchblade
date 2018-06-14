@@ -11,7 +11,7 @@ module.exports = class CrowdinAPI extends APIWrapper {
   load () {
     return new Crowdin({
       apiKey: process.env.CROWDIN_API_KEY,
-      endpointUrl: `https://api.crowdin.net/api/project/${process.env.CROWDIN_PROJECT_ID}` + process.env.CROWDIN_PROJECT_ID
+      endpointUrl: `https://api.crowdin.net/api/project/${process.env.CROWDIN_PROJECT_ID}`
     })
   }
 }
