@@ -23,7 +23,7 @@ module.exports = class Kiss extends Command {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You can\' kiss yourself.')
+          .setTitle('You can\'t kiss yourself.')
           .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <user>\``)
       )
     } else {
