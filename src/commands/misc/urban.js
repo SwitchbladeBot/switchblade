@@ -17,7 +17,6 @@ module.exports = class Urban extends Command {
           if (!query.definition || !query.example) return
           if (query.definition.length > 1000) query.definition = query.definition.substr(0, 1000)
           if (query.example.length > 1000) query.example = query.example.substr(0, 1000)
-          console.log('a')
           embed.setAuthor(`Urban Dictionary: "${query.word}"`, 'https://i.imgur.com/4Wh085V.jpg', query.permalink)
           embed.setColor(Constants.URBAN_COLOR)
           embed.addField('Definition:', query.definition)
