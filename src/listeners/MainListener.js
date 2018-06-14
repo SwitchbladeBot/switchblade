@@ -25,8 +25,8 @@ module.exports = class MainListener extends EventListener {
   async onMessage (message) {
     if (message.author.bot) return
 
-    const guildDB = message.guild && this.database && await this.database.guilds.get(message.guild.id)
-    const prefix = (guildDB && guildDB.prefix) || process.env.PREFIX
+    const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
+    const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
     const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)
     const regexResult = prefixRegex.exec(message.content)
     if (regexResult) {
@@ -36,7 +36,7 @@ module.exports = class MainListener extends EventListener {
       const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
 
       if (command) {
-        this.runCommand(command, message, args)
+        this.runCommand(command, message, args, (guildDocument && guildDocument.language) || 'en-US')
       }
     }
   }

@@ -1,0 +1,179 @@
+{
+  "neko": {
+    "commandDescription": "Fetches a random neko girl (lewd if the channel is NSFW) and displays it.",
+    "hereIsYour_neko": "Here's your neko!",
+    "hereIsYour_lewd": "Here's your lewd neko!"
+  },
+  "coin": {
+    "commandDescription": "Flips a coin",
+    "flippedACoin_heads": "**{{username}}** flipped a coin and got **HEADS**!",
+    "flippedACoin_tails": "**{{username}}** flipped a coin and got **TAILS**!"
+  },
+  "reverse": {
+    "commandDescription": "Reverses a sentence.",
+    "commandUsage": "<sentence>",
+    "noSentence": "You have to give me something to reverse!"
+  },
+  "hmmm": {
+    "commandDescription": "Random image from /r/hmmm"
+  },
+  "smart": {
+    "commandDescription": "Shows the Roll Safe meme"
+  },
+  "softwaregore": {
+    "commandDescription": "Random image from /r/softwaregore"
+  },
+  "thinking": {
+    "commandDescription": "Random :thinking: image from /r/thinking"
+  },
+  "adorable": {
+    "commandDescription": "Generates an adorable avatar"
+  },
+  "avatar": {
+    "commandDescription": "Shows your or someone else's",
+    "commandUsage": "[user]",
+    "someonesAvatar": "{{- user}}'s avatar"
+  },
+  "dog": {
+    "commandDescription": "Fetches a random dog and displays it. Woof!",
+    "hereIsYourDog": "Here's your dog!"
+  },
+  "invite": {
+    "commandDescription": "Shows the link to invite Switchblade to your server",
+    "clickHere": "Click here to invite me to your server",
+    "noteThat": "Note that you need the **$t(permissions:MANAGE_GUILD)** permission in order to invite bots."
+  },
+  "ping": {
+    "commandDescription": "Checks if the bot is online"
+  },
+  "spotify": {
+    "commandDescription": "Searches for a song on Spotify",
+    "commandUsage": "<track name>",
+    "noTracksFound": "I couldn't find any tracks with that name.",
+    "noTrackName": "You need to give me a track name."
+  },
+  "copypasta": {
+    "commandDescription": "Random text from /r/copypasta"
+  },
+  "owo": {
+    "commandDescription": "Owoifies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to owoify",
+    "tooLongTitle": "Your sentence is longer than 200 characters",
+    "tooLongDescription": "Try shortening your sentence down or separate it into multiple commands"
+  },
+  "daily": {
+    "commandDescription": "Claims your daily reward",
+    "alreadyClaimedTitle": "You've already claimed your daily reward.",
+    "alreadyClaimedDescription": "You can do it again in **{{time}}**",
+    "claimedSuccessfully": "You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as your daily reward"
+  },
+  "money": {
+    "commandDescription": "Shows how many $t(commons:currency_plural) someone has",
+    "commandUsage": "[user to lookup]",
+    "youHave": "You have **$t(commons:currencyWithCount, { 'count': {{count}} }) in your account**",
+    "someoneHas": "{{- user}} has **$t(commons:currencyWithCount, { 'count': {{count}} }) in their account**"
+  },
+  "kiss": {
+    "commandDescription": "Kisses someone",
+    "commandUsage": "<user to kiss>",
+    "noMention": "You need to mention someone",
+    "notYourself": "You can't kiss yourself!",
+    "success": "{{- kisser}} kissed {{- kissed}}"
+  },
+  "triggered": {
+    "commandDescription": "Triggers someone",
+    "commandUsage": "[user to trigger]"
+  },
+  "8ball": {
+    "commandDescription": "Asks the magic 8ball about something",
+    "commandUsage": "<question>",
+    "noQuestion": "You need to ask me something",
+    "answers": {
+      "0": "It is certain",
+      "1": "It is decidedly so",
+      "2": "Without a doubt",
+      "3": "Yes definitely",
+      "4": "You may rely on it",
+      "5": "As I see it, yes",
+      "6": "Most likely",
+      "7": "Outlook good",
+      "8": "Yes",
+      "9": "Signs point to yes",
+      "10": "Reply hazy try again",
+      "11": "Ask again later",
+      "12": "Better not tell you now",
+      "13": "Cannot predict now",
+      "14": "Concentrate and ask again",
+      "15": "Don't count on it",
+      "16": "My reply is no",
+      "17": "My sources say no",
+      "18": "Outlook not so good",
+      "19": "Very doubtful"
+    }
+  },
+  "fliptext": {
+    "commandDescription": "Flips text upside down",
+    "commandUsage": "<text to be flipped>",
+    "noSentence": "You need to give me a sentence to flip"
+  },
+  "npm": {
+    "commandDescription": "Shows information about a NPM package",
+    "commandUsage": "<package name>",
+    "noDescription": "No description provided",
+    "notFound": "Package not found.",
+    "noNameProvided": "You need to give me a package name."
+  },
+  "poll": {
+    "commandDescription": "Creates a poll",
+    "commandUsage": "<poll title> [|option 1|option 2|option 3|...]",
+    "noQuestion": "You need to give me something to be voted",
+    "tooManyOptions": "You can't exceed {{maxOptions}} options"
+  },
+  "nowPlaying": {
+    "commandDescription": "Shows the name of the song being played"
+  },
+  "pause": {
+    "commandDescription": "Pauses or resumes the music playback"
+  },
+  "play": {
+    "commandDescription": "Plays a certain song or adds it to the queue",
+    "commandUsage": "<track name or URL>",
+    "noTrackIdentifier": "You need to give me a track name or URL!"
+  },
+  "queue": {
+    "commandDescription": "Shows the current queue"
+  },
+  "skip": {
+    "commandDescription": "Skips the current song"
+  },
+  "stop": {
+    "commandDescription": "Stops the music playback"
+  },
+  "volume": {
+    "commandDescription": "Adjusts the volume of the music playback",
+    "commandUsage": "<0-150>",
+    "missingVolumeParameter": "You need to give me the volume level!",
+    "invalidVolumeParameter": "You need to give me a valid number!",
+    "volumeSet": "Volume set to {{volume}}%"
+  },
+  "help": {
+    "commandDescription": "Shows information about commands or lists them",
+    "commandUsage": "[command name]",
+    "listTitle": "Available commands",
+    "prefix": "Prefix",
+    "youCanUse": "You can also use {{- botMention}} as a prefix",
+    "specificInformation": "Type {{helpString}} for command specific information",
+    "aliases": "Aliases",
+    "noDescriptionProvided": "No description provided",
+    "noUsageProvided": "No usage provided",
+    "commandNotFound": "I couldn't find a command with that name"
+  },
+  "setlanguage": {
+    "commandDescription": "Changes the bot's language",
+    "commandUsage": "<language code>",
+    "noCode": "You need to give me a language code.",
+    "availableLanguages": "Available languages",
+    "changedSuccessfully": "Language changed successfully to {{lang}}!"
+  }
+}

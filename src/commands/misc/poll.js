@@ -6,13 +6,13 @@ module.exports = class Poll extends Command {
     this.name = 'poll'
   }
 
-  run (message, args) {
+  run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
     message.channel.startTyping()
     if (!args[0]) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me a question to make a poll')
-        .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <question> [| answer 1 | answer 2 | answer 3 | ...]`)
+        .setTitle(t('commands:poll.noQuestion'))
+        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:npm.commandUsage')}`)
       message.channel.send(embed)
     } else {
       const pollPcs = args.join(' ').split('|')
@@ -23,9 +23,10 @@ module.exports = class Poll extends Command {
           await m.react('👎')
         })
       } else {
-        if (pollPcs.slice(1).length > 26) {
+        const maxOptions = 26
+        if (pollPcs.slice(1).length > maxOptions) {
           embed.setColor(Constants.ERROR_COLOR)
-            .setTitle('Can\'t exceed more than 26 options')
+            .setTitle(t('commands:poll.tooManyOptions', {maxOptions}))
           message.channel.send(embed)
         } else {
           let description = ''

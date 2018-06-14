@@ -9,28 +9,28 @@ module.exports = class Kiss extends Command {
     this.aliases = ['beijo', 'beijar']
   }
 
-  run (message) {
+  run (message, args, t) {
     const kissImg = kissarray[Math.floor(Math.random() * kissarray.length)]
     const user = message.mentions.users.first()
     if (!user) {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to mention someone.')
-          .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <user>\``)
+          .setTitle(t('commands:kiss.noMention'))
+          .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:kiss.commandUsage')}`)
       )
     } else if (user.id === message.author.id) {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You can\' kiss yourself.')
-          .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <user>\``)
+          .setTitle(t('commands:kiss.notYourself'))
+          .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:kiss.commandUsage')}`)
       )
     } else {
       message.channel.send(
         new SwitchbladeEmbed(message.author)
           .setImage(kissImg)
-          .setDescription(`${message.author} kissed ${user}`)
+          .setDescription(t('commands:kiss.success', {kisser: message.author, kissed: user}))
       )
     }
   }

@@ -8,7 +8,7 @@ module.exports = class Play extends Command {
     this.aliases = []
   }
 
-  async run (message, args) {
+  async run (message, args, t) {
     const user = message.author
     message.channel.startTyping()
     if (args.length > 0) {
@@ -18,20 +18,20 @@ module.exports = class Play extends Command {
           const identifier = args.join(' ')
           const res = await playerManager.loadTracks(identifier, user) || await playerManager.loadTracks(`ytsearch:${identifier}`, user)
           if (res) {
-            await this.loadSongs(message, res, playerManager)
+            await this.loadSongs(message, res, playerManager, t)
             message.channel.stopTyping()
           } else {
             message.channel.send(
               new SwitchbladeEmbed(user)
                 .setColor(Constants.ERROR_COLOR)
-                .setTitle('Sorry, I couldn\'t find this song!')
+                .setTitle(t('music:songNotfound'))
             ).then(() => message.channel.stopTyping())
           }
         } catch (e) {
           message.channel.send(
             new SwitchbladeEmbed(user)
               .setColor(Constants.ERROR_COLOR)
-              .setTitle('An error occured!')
+              .setTitle(t('errors:generic'))
               .setDescription(e)
           ).then(() => message.channel.stopTyping())
           message.client.logError(e)
@@ -40,59 +40,61 @@ module.exports = class Play extends Command {
         message.channel.send(
           new SwitchbladeEmbed(user)
             .setColor(Constants.ERROR_COLOR)
-            .setTitle('You need to be in a voice channel to use this command!')
+            .setTitle(t('errors:voiceChannelOnly'))
         ).then(() => message.channel.stopTyping())
       }
     } else {
       message.channel.send(
         new SwitchbladeEmbed(user)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('You need to give me a track identifier!')
-          .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <track name|track url>\``)
+          .setTitle(t('commands:play.noTrackIdentifier'))
+          .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:play.commandUsage')}`)
       ).then(() => message.channel.stopTyping())
     }
   }
 
-  loadSongs (message, res, playerManager) {
+  loadSongs (message, res, playerManager, t) {
     if (res instanceof Song) {
-      this.songFeedback(message, res)
+      this.songFeedback(message, res, true, true, t)
       return playerManager.play(res, message.member.voiceChannel)
     } else if (res instanceof Playlist) {
-      this.playlistFeedback(message, res)
+      this.playlistFeedback(message, res, t)
       return Promise.all(res.songs.map(song => {
-        this.songFeedback(message, song, false)
+        this.songFeedback(message, song, false, false, t)
         return playerManager.play(song, message.member.voiceChannel)
       }))
     }
     return Promise.reject(new Error('Invalid song instance.'))
   }
 
-  playlistFeedback (message, playlist, playingNow) {
-    const duration = ` \`(${playlist.formattedDuration})\``
-    const amount = playlist.songs.length
+  playlistFeedback (message, playlist, t) {
+    const duration = `\`(${playlist.formattedDuration})\``
+    const count = playlist.songs.length
+    const playlistName = `[${playlist.title}](${playlist.uri})`
     message.channel.send(
       new SwitchbladeEmbed()
         .setThumbnail(playlist.artwork)
-        .setDescription(`${Constants.PLAY_BUTTON} **${amount} songs from playlist** [${playlist.title}](${playlist.uri})${duration} **has been added to queue!**`)
+        .setDescription(`${Constants.PLAY_BUTTON} ${t('music:addedFromPlaylist', {count, playlistName, duration})}`)
     )
   }
 
-  songFeedback (message, song, queueFeedback = true, startFeedback = true) {
-    const bEmbed = (t, u) => new SwitchbladeEmbed(u).setDescription(t)
-    const send = (t, u) => message.channel.send(bEmbed(t, u))
-    const sendWI = (t, i, u) => message.channel.send(bEmbed(t, u).setThumbnail(i || song.artwork))
+  songFeedback (message, song, queueFeedback = true, startFeedback = true, t) {
+    const bEmbed = (d, u) => new SwitchbladeEmbed(u).setDescription(d)
+    const send = (d, u) => message.channel.send(bEmbed(d, u))
+    const sendWI = (d, i, u) => message.channel.send(bEmbed(d, u).setThumbnail(i || song.artwork))
 
-    const duration = song.isStream ? '' : ` \`(${song.formattedDuration})\``
+    const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
+    const songName = `[${song.title}](${song.uri}) ${duration}`
 
-    song.once('end', () => send(`${Constants.STOP_BUTTON} [${song.title}](${song.uri}) **has ended!**`))
-    song.once('stop', u => send(`${Constants.STOP_BUTTON} **The queue is now empty, leaving the voice channel!**`, u))
+    song.once('end', () => send(`${Constants.STOP_BUTTON} ${t('music:hasEnded', {songName})}`))
+    song.once('stop', u => send(`${Constants.STOP_BUTTON} ${t('music:queueIsEmpty')}`, u))
 
     if (startFeedback) {
-      song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} **Started playing** [${song.title}](${song.uri})${duration}`))
+      song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:startedPlaying', {songName})}`))
     }
 
     if (queueFeedback) {
-      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} [${song.title}](${song.uri})${duration} **has been added to queue!**`))
+      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:addedToTheQueue', {songName})}`))
     }
   }
 

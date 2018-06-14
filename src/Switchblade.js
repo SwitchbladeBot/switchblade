@@ -1,6 +1,8 @@
 const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
+const i18next = require('i18next')
+const translationBackend = require('i18next-node-fs-backend')
 
 const { Command, EventListener, APIWrapper } = require('./structures')
 const { MongoDB } = require('./database')
@@ -22,6 +24,7 @@ module.exports = class Switchblade extends Client {
     this.initializeApis('./src/apis')
     this.initializeCommands('./src/commands')
     this.initializeListeners('./src/listeners')
+    this.downloadAndInitializeLocales('./src/locales')
   }
 
   /**
@@ -72,10 +75,11 @@ module.exports = class Switchblade extends Client {
    * @param {Command} command - Command to be runned
    * @param {Message} message - Message that triggered the command
    * @param {Array<string>} args - Array of command arguments
+   * @param {String} language - Code for the language that the command will be executed in
    */
-  runCommand (command, message, args) {
+  runCommand (command, message, args, language) {
     if (command.canRun(message, args)) {
-      command._run(message, args).catch(this.logError)
+      command._run(message, args, i18next.getFixedT(language)).catch(this.logError)
     }
   }
 
@@ -169,8 +173,36 @@ module.exports = class Switchblade extends Client {
     }
   }
 
-  // Database
+  /**
+   * Initializes i18next.
+   */
+  async downloadAndInitializeLocales (dirPath) {
+    if (process.env.CROWDIN_API_KEY && process.env.CROWDIN_PROJECT_ID) {
+      this.log('Downloading locales from Crowdin', 'Localization')
+      await this.apis.crowdin.downloadToPath(dirPath)
+    } else {
+      this.log('Couldn\'t download locales from Crowdin', 'Localization')
+    }
+    try {
+      i18next.use(translationBackend).init({
+        ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
+        preload: fs.readdirSync(dirPath),
+        fallbackLng: 'en-US',
+        backend: {
+          loadPath: 'src/locales/{{lng}}/{{ns}}.json'
+        },
+        interpolation: {
+          escapeValue: false
+        },
+        returnEmptyString: false
+      })
+      this.log('i18next initialized', 'Localization')
+    } catch (e) {
+      this.logError(e)
+    }
+  }
 
+  // Database
   initializeDatabase (DBWrapper, options = {}) {
     this.database = new DBWrapper(options)
     this.database.connect().then(() => this.log('Database connection established!', 'DB')).catch(this.logError)
