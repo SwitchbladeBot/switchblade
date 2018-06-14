@@ -62,4 +62,4 @@ typings/
 
 .idea/
 
-src/locales/
+src/locales/en_US/*
