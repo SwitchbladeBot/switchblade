@@ -29,9 +29,12 @@
     "api-npm": "^1.0.0",
     "booru": "^0.4.0",
     "bufferutil": "^3.0.5",
+    "crowdin": "^1.0.0",
     "discord.js": "^11.3.2",
     "discord.js-lavalink": "^2.0.2",
     "erlpack": "github:discordapp/erlpack",
+    "i18next": "^11.3.2",
+    "i18next-node-fs-backend": "^1.0.0",
     "googleapis": "^31.0.2",
     "mathjs": "^4.4.0",
     "moment": "^2.22.2",
@@ -55,5 +58,10 @@
     "ffmpeg-binaries": "^3.2.2-3",
     "nodemon": "^1.17.5",
     "standard": "^11.0.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "locales/*"
+    ]
   }
 }
