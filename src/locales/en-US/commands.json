@@ -175,5 +175,8 @@
     "noCode": "You need to give me a language code.",
     "availableLanguages": "Available languages",
     "changedSuccessfully": "Language changed successfully to {{lang}}!"
+  },
+  "e621": {
+    "hereIsYour_yiff": "Here's your yiff!"
   }
 }
