@@ -19,7 +19,7 @@ module.exports = class Volume extends Command {
           if (!isNaN(volume)) {
             guildPlayer.volume(volume)
             embed
-              .setTitle(`\uD83D\uDD0A ${t('commands:volumeSet', {volume})}`)
+              .setTitle(`\uD83D\uDD0A ${t('music:volumeSet', {volume})}`)
           } else {
             embed
               .setColor(Constants.ERROR_COLOR)
