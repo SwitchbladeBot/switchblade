@@ -71,8 +71,8 @@
   "money": {
     "commandDescription": "Shows how many $t(commons:currency_plural) someone has",
     "commandUsage": "[user to lookup]",
-    "youHave": "You have **$t(commons:currencyWithCount, { 'count': {{count}} }) in your account**",
-    "someoneHas": "{{- user}} has **$t(commons:currencyWithCount, { 'count': {{count}} }) in their account**"
+    "youHave": "You have **$t(commons:currencyWithCount, { 'count': {{count}} })** in your account",
+    "someoneHas": "{{- user}} has **$t(commons:currencyWithCount, { 'count': {{count}} })** in their account"
   },
   "kiss": {
     "commandDescription": "Kisses someone",
