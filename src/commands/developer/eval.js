@@ -13,7 +13,7 @@ module.exports = class Eval extends Command {
 
     this.requirements = new CommandRequirements(this, {devOnly: true})
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'You need to give me something to evaluate!', id: 'expression'})
+      new StringParameter({full: true, missingError: 'errors:missingParameters', showUsage: false})
     )
   }
 

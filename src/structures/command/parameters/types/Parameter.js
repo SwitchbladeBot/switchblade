@@ -1,6 +1,8 @@
 module.exports = class Parameter {
   constructor (options = {}) {
-    options = Object.assign({required: true, full: false}, options)
+    options = Object.assign({required: true, full: false, showUsage: true}, options)
+
+    this.showUsage = options.showUsage
 
     this.whitelist = options.whitelist
     this.required = !!options.required

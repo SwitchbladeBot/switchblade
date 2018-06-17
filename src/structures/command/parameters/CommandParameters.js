@@ -23,12 +23,12 @@ module.exports = class CommandParameters {
       if (parsedArg instanceof CommandError) {
         return parsedArg
       } else if (isNull(parsedArg) && param.required) {
-        return new CommandError(missingErr, true)
+        return new CommandError(missingErr, param.showUsage)
       }
 
       const whitelist = funcOrString(param.whitelist, null, context)
       if (whitelist && !whitelist.includes(parsedArg)) {
-        return new CommandError(missingErr, true)
+        return new CommandError(missingErr, param.showUsage)
       }
 
       if (param.full) return parsedArg
