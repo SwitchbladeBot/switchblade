@@ -186,5 +186,10 @@
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
+  },
+  "math": {
+    "commandUsage": "<expression>",
+    "noExpression": "You need to give me a math expression to evaluate",
+    "result": "Result"
   }
 }
