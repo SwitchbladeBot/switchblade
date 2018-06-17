@@ -23,7 +23,6 @@ module.exports = class Eval extends Command {
       const cleanEvaled = this.clean(util.inspect(evaled, {depth: 0}))
       await channel.send(cleanEvaled, { code: 'xl' })
     } catch (err) {
-      console.log(err)
       channel.send('`ERROR` ```xl\n' + this.clean(err) + '\n```')
     }
   }
