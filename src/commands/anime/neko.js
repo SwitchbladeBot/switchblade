@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command } = CommandStructures
 const snekfetch = require('snekfetch')
 const nekoAPI = 'https://nekos.life/api/v2/img/'
 

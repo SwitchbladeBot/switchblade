@@ -42,7 +42,10 @@ module.exports = class MainListener extends EventListener {
           prefix: usedPrefix,
           aliase: cmd,
           client: this,
-          message, command, guildDocument, language
+          message,
+          command,
+          guildDocument,
+          language
         })
         this.runCommand(command, context, args, language)
       }
