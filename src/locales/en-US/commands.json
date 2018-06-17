@@ -184,7 +184,7 @@
     "commandUsage": "<@member> <value>",
     "noMember": "You need to mention someone",
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
-    "notEnoughMoney": "You don't have enough $t(commons:currency_plural) to perform this transaction!",
-    "transactionSuccessful": "You sent Donated **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
+    "notEnoughMoney": "You don't have enough $t(commons:currency_plural) to send to {{receiver}}\n$t(commons:currency_plural) needed: **{{valueNeeded}}**",
+    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   }
 }
