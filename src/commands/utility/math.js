@@ -19,14 +19,14 @@ module.exports = class Math extends Command {
       try {
         result = math.eval(args.join(' '))
       } catch (error) {
-        this.client.log(`${t('errors:mathFailedCalculation')} ${args.join(' ')}\n${t('commons:error')}: ${error.stack}`, this.name)
+        this.client.log(`${t('commands:math.failedCalculation')} ${args.join(' ')}\n${t('commons:error')}: ${error.stack}`, this.name)
         embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('errors:mathEvaluation'))
+          .setTitle(t('commands:math.invalidExpression'))
           .setDescription(error.stack)
       } finally {
         if (isNaN(parseFloat(result))) {
           embed.setColor(Constants.ERROR_COLOR)
-            .setTitle(t('errors:mathExpression'))
+            .setTitle(t('commands:math.invalidExpression'))
             .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:math.commandUsage')}`)
         } else {
           embed.setTitle(`${t('commands:math.result')}: \`${result}\``)
