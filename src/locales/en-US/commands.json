@@ -197,5 +197,13 @@
   "xkcd37": {
     "commandDescription": "Whenever anyone calls something an [adjective]-ass [noun], move the hyphen one word to the right.",
     "commandUsage": "<sentence>"
+  },
+  "math": {
+    "commandUsage": "<expression>",
+    "noExpression": "You need to give me a math expression to evaluate",
+    "result": "Result",
+    "invalidExpression": "Invalid math expression",
+    "evaluationError": "An error occurred while evaluating the math expression",
+    "failedCalculation": "Failed math calculation"
   }
 }
