@@ -1,37 +1,39 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class Pause extends Command {
   constructor (client) {
     super(client)
     this.name = 'help'
     this.aliases = ['commands']
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, required: false})
+    )
   }
 
-  async run (message, args, t) {
-    const embed = new SwitchbladeEmbed(message.author)
-    const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
+  async run ({ t, author, channel, guild, guildDocument }, cmd) {
+    const embed = new SwitchbladeEmbed(author)
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
-    if (args.length > 0) {
-      const command = this.client.commands.find(c => c.name === args[0])
+    if (cmd) {
+      const command = this.client.commands.find(c => c.name === cmd)
       if (command) {
-        let description = [
+        const description = [
           t([`commands:${command.name}.commandDescription`, 'commands:help.noDescriptionProvided']),
           '',
           `**${t('commons:usage')}:** \`${prefix}${command.name} ${t([`commands:${command.name}.commandUsage`, ''])}\``
-        ].join('\n')
-        if (command.aliases.length > 0) description += `\n**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`
-        embed
-          .setTitle(command.name)
-          .setDescription(description)
+        ]
+        if (command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
+
+        embed.setTitle(command.name)
+          .setDescription(description.join('\n'))
       } else {
-        embed
-          .setColor(Constants.ERROR_COLOR)
+        embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:help.commandNotFound'))
       }
     } else {
       const commands = this.client.commands.map(c => `\`${c.name}\``).sort((a, b) => a.localeCompare(b)).join('**, **')
-      embed
-        .setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL)
+      embed.setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL)
         .setDescription([
           commands,
           '',
@@ -40,6 +42,6 @@ module.exports = class Pause extends Command {
           `**${t('commands:help.specificInformation', {helpString: `\`${prefix}${this.name} ${t('commands:help.commandUsage')}\``})}**`
         ].join('\n'))
     }
-    message.channel.send(embed)
+    channel.send(embed)
   }
 }

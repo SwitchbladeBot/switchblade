@@ -73,14 +73,13 @@ module.exports = class Switchblade extends Client {
   /**
    * Runs a command.
    * @param {Command} command - Command to be runned
-   * @param {Message} message - Message that triggered the command
+   * @param {CommandContext} context - CommandContext containing run information
    * @param {Array<string>} args - Array of command arguments
    * @param {String} language - Code for the language that the command will be executed in
    */
-  runCommand (command, message, args, language) {
-    if (command.canRun(message, args)) {
-      command._run(message, args, i18next.getFixedT(language)).catch(this.logError)
-    }
+  runCommand (command, context, args, language) {
+    context.setFixedT(i18next.getFixedT(language))
+    command._run(context, args).catch(this.logError)
   }
 
   /**
@@ -196,7 +195,7 @@ module.exports = class Switchblade extends Client {
         },
         returnEmptyString: false
       })
-      this.log('i18next initialized', 'Localization')
+      this.log('Locales downloaded successfully and i18next initialized', 'Localization')
     } catch (e) {
       this.logError(e)
     }

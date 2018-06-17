@@ -7,7 +7,7 @@ module.exports = class Ping extends Command {
     this.aliases = ['pang', 'peng', 'pong', 'pung']
   }
 
-  run (message) {
-    message.channel.send(':ping_pong: `' + (Math.ceil(this.client.ping)) + '`ms')
+  run ({ channel }) {
+    channel.send(`:ping_pong \`${Math.ceil(this.client.ping)}ms\``)
   }
 }

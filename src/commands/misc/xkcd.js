@@ -1,4 +1,6 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../index')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
+const { Command, CommandParameters, StringParameter } = CommandStructures
+
 const snekfetch = require('snekfetch')
 
 const baseUrl = 'https://xkcd.com'
@@ -7,54 +9,54 @@ module.exports = class XKCD extends Command {
   constructor (client) {
     super(client)
     this.name = 'xkcd'
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, required: false})
+    )
   }
 
-  async run (message, args, t) {
-    message.channel.startTyping()
+  async run ({ t, channel }, arg) {
+    channel.startTyping()
+    const embed = new SwitchbladeEmbed()
     let response
     try {
-      if (args.length > 0) {
-        if (args[0] === 'latest') {
+      if (arg) {
+        if (arg === 'latest') {
           response = await snekfetch.get(baseUrl + '/info.0.json')
-        } else if (args[0].match(/^\d+$/)) {
-          response = await snekfetch.get(baseUrl + `/${args[0]}/info.0.json`)
+        } else if (arg.match(/^\d+$/)) {
+          response = await snekfetch.get(baseUrl + `/${arg}/info.0.json`)
         } else {
-          message.channel.send(new SwitchbladeEmbed()
-            .setColor(Constants.ERROR_COLOR)
+          embed.setColor(Constants.ERROR_COLOR)
             .setTitle(t('commands:xkcd.invalidArgument'))
             .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:xkcd.commandUsage')}\``)
-          ).then(() => { message.channel.stopTyping() })
+          channel.send(embed).then(() => channel.stopTyping())
         }
       } else {
-        const latestResp = await snekfetch.get(baseUrl + `/info.0.json`)
+        const latestResp = await snekfetch.get(`${baseUrl}/info.0.json`)
         const latestNumber = latestResp.body.num
         const randomNumber = Math.floor(Math.random() * latestNumber + 1)
-        response = await snekfetch.get(baseUrl + `/${randomNumber}/info.0.json`)
+        response = await snekfetch.get(`${baseUrl}/${randomNumber}/info.0.json`)
       }
     } catch (e) {
       if (e.statusCode === 404) {
-        message.channel.send(new SwitchbladeEmbed()
-          .setColor(Constants.ERROR_COLOR)
+        embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:xkcd.notFound'))
-        ).then(() => { message.channel.stopTyping() })
       } else {
-        message.channel.send(new SwitchbladeEmbed()
-          .setColor(Constants.ERROR_COLOR)
+        embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('errors:generic'))
           .setDescription(`\`${e.message}\`\n\n[${t('commons:reportThis')}](https://github.com/SwitchbladeBot/switchblade/issues)`)
-        ).then(() => { message.channel.stopTyping() })
       }
+      channel.send(embed).then(() => channel.stopTyping())
     }
 
     if (response && response.ok) {
       const xkcd = response.body
-      message.channel.send(new SwitchbladeEmbed()
-        .setColor(0x96A8C8)
+      embed.setColor(Constants.XKCD_COLOR)
         .setTitle(`#${xkcd.num} - "${xkcd.title}"`)
-        .setURL('http://xkcd.com/' + xkcd.num)
+        .setURL(`http://xkcd.com/${xkcd.num}`)
         .setDescription(xkcd.alt)
         .setImage(xkcd.img)
-      ).then(() => { message.channel.stopTyping() })
+      channel.send(embed).then(() => { channel.stopTyping() })
     }
   }
 }
