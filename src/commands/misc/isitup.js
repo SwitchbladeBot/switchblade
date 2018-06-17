@@ -28,6 +28,6 @@ module.exports = class IsItUp extends Command {
         .setTitle(t('commands:isitup.noWebsite'))
         .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:npm.commandUsage')}\``)
     }
-    message.channel.send(embed).then(() => {message.channel.stopTyping()})
+    message.channel.send(embed).then(() => { message.channel.stopTyping() })
   }
 }
