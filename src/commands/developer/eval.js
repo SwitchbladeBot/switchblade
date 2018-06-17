@@ -17,12 +17,13 @@ module.exports = class Eval extends Command {
     )
   }
 
-  async run ({ channel }, expr) {
+  async run ({ channel, message }, expr) {
     try {
       const evaled = await eval(expr)
       const cleanEvaled = this.clean(util.inspect(evaled, {depth: 0}))
       await channel.send(cleanEvaled, { code: 'xl' })
     } catch (err) {
+      console.log(err)
       channel.send('`ERROR` ```xl\n' + this.clean(err) + '\n```')
     }
   }

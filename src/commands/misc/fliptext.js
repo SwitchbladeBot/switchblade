@@ -11,12 +11,12 @@ module.exports = class FlipText extends Command {
     )
   }
 
-  run (message, args, t) {
+  run ({ author, channel }, text) {
     const mapping = '¡"#$%⅋,)(*+\'-˙/0ƖᄅƐㄣϛ9ㄥ86:;<=>¿@∀qƆpƎℲפHIſʞ˥WNOԀQɹS┴∩ΛMX⅄Z[/]^_`ɐqɔpǝɟƃɥᴉɾʞlɯuodbɹsʇnʌʍxʎz{|}~'
     const offset = '!'.charCodeAt(0)
-    message.channel.send(new SwitchbladeEmbed(message.author)
+    channel.send(new SwitchbladeEmbed(author)
       .setTitle(
-        args.join(' ').split('')
+        text.split('')
           .map(c => c.charCodeAt(0) - offset)
           .map(c => mapping[c] || ' ')
           .reverse().join('')

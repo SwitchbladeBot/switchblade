@@ -30,7 +30,7 @@ module.exports = class CommandRequirements {
       return new CommandError(t('errors:guildOnly'))
     }
 
-    if (this.nsfwOnly && guild) {
+    if (this.nsfwOnly && guild && !channel.nsfw) {
       return new CommandError(t('errors:nsfwOnly'))
     }
 
