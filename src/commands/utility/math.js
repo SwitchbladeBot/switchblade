@@ -19,7 +19,7 @@ module.exports = class Math extends Command {
       try {
         result = math.eval(args.join(' '))
       } catch (error) {
-        this.client.log(`${t('errors:mathFailedCalculation')} ${args.join(' ')}\n${t('errors:error')}: ${error.stack}`, this.name)
+        this.client.log(`${t('errors:mathFailedCalculation')} ${args.join(' ')}\n${t('commons:error')}: ${error.stack}`, this.name)
         embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('errors:mathEvaluation'))
           .setDescription(error.stack)
