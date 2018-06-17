@@ -12,7 +12,7 @@ module.exports = class FlipText extends Command {
     if (!args[0]) {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:fliptext.noSentence'))
-        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:8ball.commandUsage')}`)
+        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:fliptext.commandUsage')}`)
     } else {
       const mapping = '¡"#$%⅋,)(*+\'-˙/0ƖᄅƐㄣϛ9ㄥ86:;<=>¿@∀qƆpƎℲפHIſʞ˥WNOԀQɹS┴∩ΛMX⅄Z[/]^_`ɐqɔpǝɟƃɥᴉɾʞlɯuodbɹsʇnʌʍxʎz{|}~'
       const offset = '!'.charCodeAt(0)
