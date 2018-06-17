@@ -16,7 +16,7 @@ module.exports = class XKCD extends Command {
   }
 
   async run ({ t, author, channel }, arg) {
-    message.channel.startTyping()
+    channel.startTyping()
     let response
     try {
       if (arg) {
@@ -25,11 +25,11 @@ module.exports = class XKCD extends Command {
         } else if (arg.match(/^\d+$/)) {
           response = await snekfetch.get(baseUrl + `/${arg}/info.0.json`)
         } else {
-          message.channel.send(new SwitchbladeEmbed()
+          channel.send(new SwitchbladeEmbed()
             .setColor(Constants.ERROR_COLOR)
             .setTitle(t('commands:xkcd.invalidArgument'))
             .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:xkcd.commandUsage')}\``)
-          ).then(() => { message.channel.stopTyping() })
+          ).then(() => { channel.stopTyping() })
         }
       } else {
         const latestResp = await snekfetch.get(baseUrl + `/info.0.json`)
@@ -39,28 +39,28 @@ module.exports = class XKCD extends Command {
       }
     } catch (e) {
       if (e.statusCode === 404) {
-        message.channel.send(new SwitchbladeEmbed()
+        channel.send(new SwitchbladeEmbed()
           .setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:xkcd.notFound'))
-        ).then(() => { message.channel.stopTyping() })
+        ).then(() => { channel.stopTyping() })
       } else {
-        message.channel.send(new SwitchbladeEmbed()
+        channel.send(new SwitchbladeEmbed()
           .setColor(Constants.ERROR_COLOR)
           .setTitle(t('errors:generic'))
           .setDescription(`\`${e.message}\`\n\n[${t('commons:reportThis')}](https://github.com/SwitchbladeBot/switchblade/issues)`)
-        ).then(() => { message.channel.stopTyping() })
+        ).then(() => { channel.stopTyping() })
       }
     }
 
     if (response && response.ok) {
       const xkcd = response.body
-      message.channel.send(new SwitchbladeEmbed()
+      channel.send(new SwitchbladeEmbed()
         .setColor(0x96A8C8)
         .setTitle(`#${xkcd.num} - "${xkcd.title}"`)
         .setURL('http://xkcd.com/' + xkcd.num)
         .setDescription(xkcd.alt)
         .setImage(xkcd.img)
-      ).then(() => { message.channel.stopTyping() })
+      ).then(() => { channel.stopTyping() })
     }
   }
 }

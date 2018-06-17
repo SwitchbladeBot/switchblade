@@ -16,7 +16,7 @@ module.exports = class CommandParameters {
 
       let arg = args[i]
       if (param.full) arg = args.join(param.fullJoin || ' ')
-      
+
       const missingErr = funcOrString(param.missingError, context.t, context)
 
       const parsedArg = param.parse(arg, context)

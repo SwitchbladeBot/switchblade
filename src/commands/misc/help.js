@@ -24,7 +24,7 @@ module.exports = class Pause extends Command {
           `**${t('commons:usage')}:** \`${prefix}${command.name} ${t([`commands:${command.name}.commandUsage`, ''])}\``
         ]
         if (command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
-        
+
         embed
           .setTitle(command.name)
           .setDescription(description.join('\n'))

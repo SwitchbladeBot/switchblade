@@ -19,13 +19,13 @@ module.exports = class Kiss extends Command {
     const embed = new SwitchbladeEmbed(author)
     if (user.id === author.id) {
       embed
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:kiss.notYourself'))
-          .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:kiss.commandUsage')}`)
+        .setColor(Constants.ERROR_COLOR)
+        .setTitle(t('commands:kiss.notYourself'))
+        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:kiss.commandUsage')}`)
     } else {
       embed
-          .setImage(kissImg)
-          .setDescription(t('commands:kiss.success', {kisser: author, kissed: user}))
+        .setImage(kissImg)
+        .setDescription(t('commands:kiss.success', {kisser: author, kissed: user}))
     }
     channel.send(embed).then(() => channel.stopTyping())
   }
