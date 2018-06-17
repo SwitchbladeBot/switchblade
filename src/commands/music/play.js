@@ -1,6 +1,6 @@
 const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Song, Playlist } = require('../../music/structures')
 const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { Song, Playlist } = require('../../music/structures')
 
 module.exports = class Play extends Command {
   constructor (client) {
@@ -10,7 +10,7 @@ module.exports = class Play extends Command {
 
     this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true})
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'You need to give me a track name or URL!', id: 'track name|url'})
+      new StringParameter({full: true, missingError: 'commands:play.noTrackIdentifier'})
     )
   }
 

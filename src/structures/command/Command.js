@@ -35,12 +35,13 @@ module.exports = class Command {
    */
   async _run (context, args) {
     args = this.handleParameters(context, args)
-    if (args instanceof CommandError) return this.error(context, args.message, args.showUsage)
+    if (args instanceof CommandError) return this.error(context, args.content, args.showUsage)
 
     const requirements = this.handleRequirements(context, args)
-    if (requirements instanceof CommandError) return this.error(context, requirements.message, requirements.showUsage)
+    if (requirements instanceof CommandError) return this.error(context, requirements.content, requirements.showUsage)
 
-    return this.run(context, args)
+    args = Array.isArray(args) ? args : [args]
+    return this.run(context, ...args)
   }
 
   /**
@@ -73,14 +74,16 @@ module.exports = class Command {
     return this.requirements && this.requirements.applyCooldown(user, time)
   }
 
-  error ({ author, channel }, title, showUsage = false, customize) {
+  error ({ t, author, channel }, content, showUsage = false, customize) {
+    const embedContent = typeof content === 'object'
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.ERROR_COLOR)
-      .setTitle(title)
+      .setTitle(embedContent ? content.title : content)
 
-    if (showUsage) {
-      const params = this.parameters ? this.parameters.parameters.map(p => p.required ? `<${p.id}>` : `[<${p.id}>]`).join(' ') : ''
-      embed.setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} ${params}\``)
+    if (showUsage && !embedContent) {
+      embed.setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t(`commands:${this.name}.commandUsage`)}\``,)
+    } else if(embedContent) {
+      embed.setDescription(content.description)
     }
 
     return channel.send(embed).then(() => channel.stopTyping())

@@ -8,9 +8,9 @@ module.exports = class Smart extends Command {
     this.aliases = ['wesmart']
   }
 
-  run (message) {
-    message.channel.send(
-      new SwitchbladeEmbed(message.author)
+  run ({ author, channel }) {
+    channel.send(
+      new SwitchbladeEmbed(author)
         .setImage('https://media0.giphy.com/media/d3mlE7uhX8KFgEmY/source.gif')
     )
   }

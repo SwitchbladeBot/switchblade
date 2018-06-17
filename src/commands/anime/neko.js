@@ -10,17 +10,17 @@ module.exports = class Neko extends Command {
     this.aliases = ['nekogirl']
   }
 
-  async run (message, args, t) {
-    message.channel.startTyping()
+  async run ({ t, author, channel }) {
+    channel.startTyping()
 
     // Send a lewd neko if the channel is NSFW
-    const endpoint = message.channel.nsfw ? 'lewd' : 'neko'
+    const endpoint = channel.nsfw ? 'lewd' : 'neko'
 
-    const { body } = await snekfetch.get(nekoAPI + endpoint)
-    message.channel.send(
-      new SwitchbladeEmbed(message.author)
-        .setImage(body.url)
+    const { body: { url } } = await snekfetch.get(nekoAPI + endpoint)
+    channel.send(
+      new SwitchbladeEmbed(author)
+        .setImage(url)
         .setDescription(t('commands:neko.hereIsYour', {context: endpoint}))
-    ).then(() => message.channel.stopTyping())
+    ).then(() => channel.stopTyping())
   }
 }

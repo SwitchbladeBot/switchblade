@@ -12,8 +12,10 @@ module.exports = class NumberParameter extends Parameter {
   }
 
   parse (arg) {
+    if (!arg) return
+
     let nmb = Number(arg)
-    if (isNaN(nmb)) {
+    if (isNull(nmb)) {
       return new CommandError('You need to give me a valid number!')
     }
 

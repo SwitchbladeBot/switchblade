@@ -11,6 +11,7 @@ module.exports = class CommandRequirements {
 
     this.devOnly = !!options.devOnly
     this.guildOnly = !!options.guildOnly
+    this.nsfwOnly = !!options.nsfwOnly
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
   }
@@ -21,32 +22,38 @@ module.exports = class CommandRequirements {
       const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)
       const hasRole = developerRole && developerRole.members.has(author.id)
       if (!hasRole) {
-        return new CommandError('This command is devOnly!')
+        return new CommandError(t('errors:developerOnly'))
       }
     }
 
     if (this.guildOnly && !guild) {
-      return new CommandError('This command is guildOnly!')
+      return new CommandError(t('errors:guildOnly'))
+    }
+
+    if (this.nsfwOnly && guild) {
+      return new CommandError(t('errors:nsfwOnly'))
     }
 
     if (this.voiceChannelOnly && !voiceChannel) {
-      return new CommandError('You need to be in a voice channel to use this command!')
+      return new CommandError(t('errors:voiceChannelOnly'))
     }
 
-    const guildPlayer = this.command.client.playerManager.get(guild.id)
+    const guildPlayer = client.playerManager.get(guild.id)
     if (this.guildPlaying && (!guildPlayer || !guildPlayer.playing)) {
-      return new CommandError('I ain\'t playing anything!')
+      return new CommandError(t('errors:notPlaying'))
     }
 
     if (this.permissions.length > 0) {
       if (!channel.permissionsFor(member).has(this.permissions)) {
-        return new CommandError(this.permissions.join(', '))
+        const permission = this.permissions.map(p => `\`${p}\``).join(', ')
+        const sentence = this.permissions.length > 1 ? 'errors:missingOnePermission' : 'errors:missingMultiplePermissions'
+        return new CommandError(t(sentence, { permission }))
       }
     }
 
     if (this.cooldown.enabled && this.cooldownMap.has(author.id)) {
       if (this.cooldown.feedback) {
-        return new CommandError('Woah! Slow down buddy! You\'re going too fast, you need to wait!')
+        return new CommandError(t('errors:cooldown'))
       }
     }
   }

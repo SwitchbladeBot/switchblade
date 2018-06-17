@@ -8,7 +8,7 @@ module.exports = class Money extends Command {
     this.aliases = ['balance', 'bal']
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({full: true, required: false, id: 'user'})
+      new UserParameter({full: true, required: false})
     )
   }
 

@@ -7,11 +7,11 @@ module.exports = class Adorable extends Command {
     this.name = 'adorable'
   }
 
-  run (message) {
+  run ({ author, channel }) {
     const template = 'https://api.adorable.io/avatars/256'
-    message.channel.send(
-      new SwitchbladeEmbed(message.author)
-        .setImage(`${template}/${message.author.avatar}.png`)
+    channel.send(
+      new SwitchbladeEmbed(author)
+        .setImage(`${template}/${author.avatar}.png`)
     )
   }
 }

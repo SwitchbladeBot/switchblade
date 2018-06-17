@@ -1,4 +1,6 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../index')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
+const { Command, CommandParameters, StringParameter } = CommandStructures
+
 const snekfetch = require('snekfetch')
 
 const baseUrl = 'https://xkcd.com'
@@ -7,17 +9,21 @@ module.exports = class XKCD extends Command {
   constructor (client) {
     super(client)
     this.name = 'xkcd'
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, required: false})
+    )
   }
 
-  async run (message, args, t) {
+  async run ({ t, author, channel }, arg) {
     message.channel.startTyping()
     let response
     try {
-      if (args.length > 0) {
-        if (args[0] === 'latest') {
+      if (arg) {
+        if (arg === 'latest') {
           response = await snekfetch.get(baseUrl + '/info.0.json')
-        } else if (args[0].match(/^\d+$/)) {
-          response = await snekfetch.get(baseUrl + `/${args[0]}/info.0.json`)
+        } else if (arg.match(/^\d+$/)) {
+          response = await snekfetch.get(baseUrl + `/${arg}/info.0.json`)
         } else {
           message.channel.send(new SwitchbladeEmbed()
             .setColor(Constants.ERROR_COLOR)

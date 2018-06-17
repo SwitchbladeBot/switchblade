@@ -1,28 +1,33 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class Pause extends Command {
   constructor (client) {
     super(client)
     this.name = 'help'
     this.aliases = ['commands']
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, required: false})
+    )
   }
 
-  async run ({ t, author, channel, guild }, args) {
+  async run ({ t, author, channel, guild, guildDocument }, cmd) {
     const embed = new SwitchbladeEmbed(author)
-    const guildDocument = guild && this.database && await this.database.guilds.get(guild.id)
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
-    if (args.length > 0) {
-      const command = this.client.commands.find(c => c.name === args[0])
+    if (cmd) {
+      const command = this.client.commands.find(c => c.name === cmd)
       if (command) {
-        let description = [
+        const description = [
           t([`commands:${command.name}.commandDescription`, 'commands:help.noDescriptionProvided']),
           '',
           `**${t('commons:usage')}:** \`${prefix}${command.name} ${t([`commands:${command.name}.commandUsage`, ''])}\``
-        ].join('\n')
-        if (command.aliases.length > 0) description += `\n**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`
+        ]
+        if (command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
+        
         embed
           .setTitle(command.name)
-          .setDescription(description)
+          .setDescription(description.join('\n'))
       } else {
         embed
           .setColor(Constants.ERROR_COLOR)

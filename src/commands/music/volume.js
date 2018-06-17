@@ -9,7 +9,7 @@ module.exports = class Volume extends Command {
 
     this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true})
     this.parameters = new CommandParameters(this,
-      new NumberParameter({full: true, missingError: 'You need to give me the volume level!', id: '0-150', min: 0, max: 150})
+      new NumberParameter({full: true, missingError: 'commands:volume.missingVolumeParameter', min: 0, max: 150})
     )
   }
 

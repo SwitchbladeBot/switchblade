@@ -1,4 +1,5 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../index')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
+const { Command, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
 const i18next = require('i18next')
 
 module.exports = class SetLanguage extends Command {
@@ -6,53 +7,30 @@ module.exports = class SetLanguage extends Command {
     super(client)
     this.name = 'setlanguage'
     this.aliases = ['setlang']
+
+    this.requirements = new CommandRequirements(this, {guildOnly: true, permissions: ['MANAGE_GUILD']})
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, fullJoin: '-', whitelist: () => Object.keys(i18next.store.data), missingError: ({t}) => {
+        return {
+          title: t('commands:setlanguage.noCode'),
+          description: [
+            `**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:setlanguage.commandUsage')}\``,
+            '',
+            `__**${t('commands:setlanguage.availableLanguages')}:**__`,
+            `**${Object.keys(i18next.store.data).map(l => `\`${l}\``).join(', ')}**`
+          ].join('\n')
+        }
+      }})
+    )
   }
 
-  async run (message, args, t) {
-    const embed = new SwitchbladeEmbed(message.author)
-    if (message.guild) {
-      if (message.member.hasPermission('MANAGE_GUILD')) {
-        const availableLangs = Object.keys(i18next.store.data)
-        if (args.length > 0) {
-          const lang = args.join('-').replace('_')
-          if (availableLangs.includes(lang)) {
-            const guildDocument = await this.client.database.guilds.get(message.guild.id)
-            guildDocument.language = lang
-            await guildDocument.save()
-            const updatedT = i18next.getFixedT(lang)
-            embed.setTitle(updatedT('commands:setlanguage.changedSuccessfully', {lang}))
-          } else {
-            embed
-              .setColor(Constants.ERROR_COLOR)
-              .setTitle(t('commands:setlanguage.noCode'))
-              .setDescription([
-                `**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:setlanguage.commandUsage')}\``,
-                '',
-                `__**${t('commands:setlanguage.availableLanguages')}:**__`,
-                `**${availableLangs.map(l => `\`${l}\``).join(', ')}**`
-              ].join('\n'))
-          }
-        } else {
-          embed
-            .setColor(Constants.ERROR_COLOR)
-            .setTitle(t('commands:setlanguage.noCode'))
-            .setDescription([
-              `**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:setlanguage.commandUsage')}\``,
-              '',
-              `__**${t('commands:setlanguage.availableLanguages')}:**__`,
-              `**${availableLangs.map(l => `\`${l}\``).join(', ')}**`
-            ].join('\n'))
-        }
-      } else {
-        embed
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(t('errors:missingOnePermission', {permission: `**"${t('permissions:MANAGE_GUILD')}"**`}))
-      }
-    } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('errors:guildOnly'))
-    }
-    message.channel.send(embed)
+  async run ({ t, author, channel, guild, guildDocument }, lang) {
+    const embed = new SwitchbladeEmbed(author)
+    lang = lang.replace('_')
+    guildDocument.language = lang
+    await guildDocument.save()
+    embed.setTitle(i18next.getFixedT(lang)('commands:setlanguage.changedSuccessfully', {lang}))
+    channel.send(embed)
   }
 }

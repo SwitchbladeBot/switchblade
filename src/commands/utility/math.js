@@ -12,9 +12,9 @@ module.exports = class Math extends Command {
     )
   }
 
-  run (message, expression) {
-    const embed = new SwitchbladeEmbed(message.author)
-    message.channel.startTyping()
+  run ({ author, channel }, expression) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
 
     let result
     try {
@@ -36,6 +36,6 @@ module.exports = class Math extends Command {
       }
     }
 
-    message.channel.send(embed).then(() => message.channel.stopTyping())
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }
