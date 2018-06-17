@@ -186,5 +186,13 @@
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
+  },
+  "isitup": {
+    "commandDescription": "Check whether a website is up or down",
+    "commandUsage": "<address>",
+    "isUp": "{{body.domain}} is up!",
+    "isDown": "{{body.domain}} is down.",
+    "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with **{{body.response_code}}**.",
+    "noWebsite": "You need to give me a website to check"
   }
 }
