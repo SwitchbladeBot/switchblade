@@ -6,7 +6,7 @@ module.exports = class XKCD37 extends Command {
     this.name = 'xkcd37'
   }
 
-  // Context: https://xkcd.com/37/
+  // Context: https://xkcd.com/37/.
 
   async run (message, args, t) {
     let embed = new SwitchbladeEmbed(message.author)
