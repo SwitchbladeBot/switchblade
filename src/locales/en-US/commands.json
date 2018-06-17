@@ -180,11 +180,11 @@
     "hereIsYour_yiff": "Here's your yiff!"
   },
   "pay": {
-    "commandDescription": "Donates $t(commons:currency_plural) to a user",
+    "commandDescription": "Pays $t(commons:currency_plural) to a user",
     "commandUsage": "<@member> <value>",
-    "noMember": "You need to give me a valid member mention",
+    "noMember": "You need to mention someone",
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) to perform this transaction!",
-    "transactionSuccessful": "Transaction completed with success! {{- receiver}} has received **{{- value}} $t(commons:currency_plural)**!"
+    "transactionSuccessful": "You sent Donated **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   }
 }
