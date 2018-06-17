@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class Poll extends Command {
@@ -28,7 +28,7 @@ module.exports = class Poll extends Command {
         for (let i = 0; i < pollPcs.slice(1).length; i++) {
           description += `:regional_indicator_${alphabet[i]}: ${pollPcs.slice(1)[i]}\n`
         }
-        
+
         channel.send(embed
           .setTitle(`:ballot_box: ${pollPcs[0]}`)
           .setDescription(description)
