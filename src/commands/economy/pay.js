@@ -14,7 +14,7 @@ module.exports = class Pay extends Command {
         .setTitle(t('commands:pay.noMember'))
         .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:pay.commandUsage')}\``)
       message.channel.send(embed).then(() => message.channel.stopTyping())
-    } else if (!args[1] || isNaN(parseInt(args[1]))) {
+    } else if (!args[1] || isNaN(parseInt(args[1])) || parseInt(args[1]) < 1) {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:pay.noValue'))
         .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:pay.commandUsage')}\``)
