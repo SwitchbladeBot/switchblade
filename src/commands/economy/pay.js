@@ -24,7 +24,7 @@ module.exports = class Pay extends Command {
         const valueToTransfer = parseInt(args[1])
         if (valueToTransfer > sender.money) {
           embed.setColor(Constants.ERROR_COLOR)
-            .setDescription(t('commands:pay.notEnoughMoney', { receiver: message.mentions.users.first(), valueNeeded: valueToTransfer - sender.money }))
+            .setDescription(t('commands:pay.notEnoughMoney'))
         } else {
           this.client.database.users.get(message.mentions.members.first().id).then(receiver => {
             sender.money -= valueToTransfer
