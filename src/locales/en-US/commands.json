@@ -187,15 +187,6 @@
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   },
-  "worldcup": {
-    "commandDescription": "Shows information about today's World Cup matches",
-    "todaysMatches": "Today's Matches",
-    "status": {
-      "future": "Future",
-      "in_progress": "In progress",
-      "completed": "Finished"
-    }
-  },
   "xkcd": {
     "commandDescription": "Shows an XKCD",
     "commandUsage": "[#|\"latest\"]",
