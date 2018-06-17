@@ -195,7 +195,7 @@ module.exports = class Switchblade extends Client {
         },
         returnEmptyString: false
       })
-      this.log('i18next initialized', 'Localization')
+      this.log('Locales downloaded successfully and i18next initialized', 'Localization')
     } catch (e) {
       this.logError(e)
     }

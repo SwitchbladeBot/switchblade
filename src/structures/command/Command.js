@@ -74,7 +74,7 @@ module.exports = class Command {
     return this.requirements && this.requirements.applyCooldown(user, time)
   }
 
-  error ({ t, author, channel }, content, showUsage = false, customize) {
+  error ({ t, author, channel }, content, showUsage = false) {
     const embedContent = typeof content === 'object'
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.ERROR_COLOR)
