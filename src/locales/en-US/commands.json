@@ -177,7 +177,7 @@
     "changedSuccessfully": "Language changed successfully to {{lang}}!"
   },
   "e621": {
-    "commandDescriptions": "Sends random yiff from e621",
+    "commandDescription": "Sends random yiff from e621",
     "hereIsYour_yiff": "Here's your yiff!"
   },
   "pay": {
