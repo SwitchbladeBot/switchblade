@@ -23,12 +23,12 @@ module.exports = class XKCD extends Command {
             .setColor(Constants.ERROR_COLOR)
             .setTitle(t('commands:xkcd.invalidArgument'))
             .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:xkcd.commandUsage')}\``)
-          ).then(() => {message.channel.stopTyping()})
+          ).then(() => { message.channel.stopTyping() })
         }
       } else {
         const latestResp = await snekfetch.get(baseUrl + `/info.0.json`)
         const latestNumber = latestResp.body.num
-        const randomNumber = Math.floor(Math.random()*latestNumber+1)
+        const randomNumber = Math.floor(Math.random() * latestNumber + 1)
         response = await snekfetch.get(baseUrl + `/${randomNumber}/info.0.json`)
       }
     } catch (e) {
@@ -36,13 +36,13 @@ module.exports = class XKCD extends Command {
         message.channel.send(new SwitchbladeEmbed()
           .setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:xkcd.notFound'))
-        ).then(() => {message.channel.stopTyping()})
+        ).then(() => { message.channel.stopTyping() })
       } else {
         message.channel.send(new SwitchbladeEmbed()
           .setColor(Constants.ERROR_COLOR)
           .setTitle(t('errors:generic'))
           .setDescription(`\`${e.message}\`\n\n[${t('commons:reportThis')}](https://github.com/SwitchbladeBot/switchblade/issues)`)
-        ).then(() => {message.channel.stopTyping()})
+        ).then(() => { message.channel.stopTyping() })
       }
     }
 
@@ -54,7 +54,7 @@ module.exports = class XKCD extends Command {
         .setURL('http://xkcd.com/' + xkcd.num)
         .setDescription(xkcd.alt)
         .setImage(xkcd.img)
-      ).then(() => {message.channel.stopTyping()})
+      ).then(() => { message.channel.stopTyping() })
     }
   }
 }

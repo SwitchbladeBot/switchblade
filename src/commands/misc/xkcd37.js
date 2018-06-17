@@ -1,5 +1,4 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../index')
-const xkcd = require('xkcd-api')
 
 module.exports = class XKCD37 extends Command {
   constructor (client) {
