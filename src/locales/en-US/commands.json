@@ -190,6 +190,9 @@
   "math": {
     "commandUsage": "<expression>",
     "noExpression": "You need to give me a math expression to evaluate",
-    "result": "Result"
+    "result": "Result",
+    "invalidExpression": "Invalid math expression",
+    "evaluationError": "An error occurred while evaluating the math expression",
+    "failedCalculation": "Failed math calculation"
   }
 }
