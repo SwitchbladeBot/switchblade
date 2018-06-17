@@ -12,7 +12,7 @@ module.exports = class Poll extends Command {
     if (!args[0]) {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:poll.noQuestion'))
-        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:npm.commandUsage')}`)
+        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:poll.commandUsage')}`)
       message.channel.send(embed)
     } else {
       const pollPcs = args.join(' ').split('|')
