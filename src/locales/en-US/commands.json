@@ -71,8 +71,8 @@
   "money": {
     "commandDescription": "Shows how many $t(commons:currency_plural) someone has",
     "commandUsage": "[user to lookup]",
-    "youHave": "You have **$t(commons:currencyWithCount, { 'count': {{count}} }) in your account**",
-    "someoneHas": "{{- user}} has **$t(commons:currencyWithCount, { 'count': {{count}} }) in their account**"
+    "youHave": "You have **$t(commons:currencyWithCount, { 'count': {{count}} })** in your account",
+    "someoneHas": "{{- user}} has **$t(commons:currencyWithCount, { 'count': {{count}} })** in their account"
   },
   "kiss": {
     "commandDescription": "Kisses someone",
@@ -175,6 +175,17 @@
     "noCode": "You need to give me a language code.",
     "availableLanguages": "Available languages",
     "changedSuccessfully": "Language changed successfully to {{lang}}!"
+  },
+  "e621": {
+    "hereIsYour_yiff": "Here's your yiff!"
+  },
+  "pay": {
+    "commandDescription": "Pays $t(commons:currency_plural) to a user",
+    "commandUsage": "<@member> <value>",
+    "noMember": "You need to mention someone",
+    "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
+    "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
+    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   },
   "worldcup": {
     "commandDescription": "Shows information about today's World Cup matches",

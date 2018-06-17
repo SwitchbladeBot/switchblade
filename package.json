@@ -27,6 +27,7 @@
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
     "api-npm": "^1.0.0",
+    "booru": "^0.4.0",
     "bufferutil": "^3.0.5",
     "crowdin": "^1.0.0",
     "discord.js": "^11.3.2",
@@ -38,11 +39,11 @@
     "mathjs": "^4.4.0",
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
-    "mongoose": "^5.1.1",
+    "mongoose": "^5.1.5",
     "node-opus": "^0.3.0",
     "node-spotify-api": "^1.0.7",
     "pretty-ms": "^3.2.0",
-    "snekfetch": "^4.0.0",
+    "snekfetch": "^4.0.2",
     "transform-props": "^1.0.1",
     "uws": "^10.148.0"
   },
