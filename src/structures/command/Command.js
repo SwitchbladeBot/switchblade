@@ -33,14 +33,14 @@ module.exports = class Command {
    * @param {Message} message Message that triggered it
    * @param {Array<string>} args Command arguments
    */
-  async _run (message, args) {
-    args = this.handleParameters(message, args)
-    if (args instanceof CommandError) return this.error(message, args.message, args.showUsage)
+  async _run (context, args) {
+    args = this.handleParameters(context, args)
+    if (args instanceof CommandError) return this.error(context, args.message, args.showUsage)
 
-    const requirements = this.handleRequirements(message, args)
-    if (requirements instanceof CommandError) return this.error(message, requirements.message, requirements.showUsage)
+    const requirements = this.handleRequirements(context, args)
+    if (requirements instanceof CommandError) return this.error(context, requirements.message, requirements.showUsage)
 
-    return this.run(message, args)
+    return this.run(context, args)
   }
 
   /**
@@ -56,12 +56,12 @@ module.exports = class Command {
    * @param {Array<string>} args Command arguments
    * @returns {boolean} Whether this command can run
    */
-  handleRequirements (message, args) {
-    return this.requirements ? this.requirements.handle(message, args) : true
+  handleRequirements (context, args) {
+    return this.requirements ? this.requirements.handle(context, args) : true
   }
 
-  handleParameters (message, args) {
-    return this.parameters ? this.parameters.handle(message, args) : args
+  handleParameters (context, args) {
+    return this.parameters ? this.parameters.handle(context, args) : args
   }
 
   /**
@@ -73,8 +73,8 @@ module.exports = class Command {
     return this.requirements && this.requirements.applyCooldown(user, time)
   }
 
-  error (message, title, showUsage = false, customize) {
-    const embed = new SwitchbladeEmbed(message.author)
+  error ({ author, channel }, title, showUsage = false, customize) {
+    const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.ERROR_COLOR)
       .setTitle(title)
 
@@ -83,6 +83,6 @@ module.exports = class Command {
       embed.setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} ${params}\``)
     }
 
-    return message.channel.send(embed).then(() => message.channel.stopTyping())
+    return channel.send(embed).then(() => channel.stopTyping())
   }
 }

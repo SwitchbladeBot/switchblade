@@ -9,11 +9,12 @@ module.exports = class Skip extends Command {
     this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true})
   }
 
-  async run (message, args) {
-    const guildPlayer = this.client.playerManager.get(message.guild.id)
+  async run ({ t, author, channel, guild }, args) {
+    const guildPlayer = this.client.playerManager.get(guild.id)
     const song = guildPlayer.playingSong
-    message.channel.send(new SwitchbladeEmbed(message.author)
-      .setDescription(`${Constants.STOP_BUTTON} [${song.title}](${song.uri}) **was skipped!**`))
+    const songName = `[${song.title}](${song.uri})`
+    channel.send(new SwitchbladeEmbed(author)
+      .setDescription(`${Constants.STOP_BUTTON} ${t('music:wasSkipped', {songName})}`))
     guildPlayer.next()
   }
 }

@@ -7,7 +7,7 @@ module.exports = class Daily extends Command {
     this.name = 'daily'
   }
 
-  run (message, args) {
+  run (message, args, t) {
     const embed = new SwitchbladeEmbed(message.author)
     message.channel.startTyping()
     this.client.database.users.get(message.author.id).then(data => {
@@ -15,14 +15,16 @@ module.exports = class Daily extends Command {
       if (data.lastDaily === 0) date = Date.now() - 86400000
       else date = data.lastDaily
       if (Date.now() - date < 86400000) {
+        const time = prettyMs(parseInt((Date.now() - (date + 86400000)) * -1), { secDecimalDigits: 0 })
         embed.setColor(Constants.ERROR_COLOR)
-          .setDescription(`You've already claimed your daily reward, you can get it again in **${prettyMs(parseInt((Date.now() - (date + 86400000)) * -1))}**`)
+          .setTitle(t('commands:daily.alreadyClaimedTitle'))
+          .setDescription(t('commands:daily.alreadyClaimedDescription', {time}))
       } else {
         const collectedMoney = Math.floor(Math.random() * (2750 - 750 + 1)) + 750
         data.money += collectedMoney
         data.lastDaily = Date.now()
         data.save()
-        embed.setDescription(`You've received **${collectedMoney}** SwitchCoins as your daily reward!`)
+        embed.setDescription(t('commands:daily.claimedSuccessfully', {count: collectedMoney}))
       }
       message.channel.send(embed).then(() => message.channel.stopTyping())
     })

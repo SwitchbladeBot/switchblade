@@ -13,9 +13,9 @@ module.exports = class Volume extends Command {
     )
   }
 
-  async run (message, volume) {
-    const guildPlayer = this.client.playerManager.get(message.guild.id)
+  async run ({ t, author, channel, guild }, volume) {
+    const guildPlayer = this.client.playerManager.get(guild.id)
     guildPlayer.volume(volume)
-    message.channel.send(new SwitchbladeEmbed(message.author).setTitle(`\uD83D\uDD0A Volume set to ${volume}.`))
+    channel.send(new SwitchbladeEmbed(author).setTitle(`\uD83D\uDD0A ${t('commands:volume.volumeSet', {volume})}`))
   }
 }

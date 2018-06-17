@@ -9,8 +9,8 @@ module.exports = class Stop extends Command {
     this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true})
   }
 
-  async run (message, args) {
-    const guildPlayer = this.client.playerManager.get(message.guild.id)
-    guildPlayer.stop(message.author)
+  async run ({ author, guild }, args) {
+    const guildPlayer = this.client.playerManager.get(guild.id)
+    guildPlayer.stop(author)
   }
 }

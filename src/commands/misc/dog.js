@@ -8,13 +8,13 @@ module.exports = class Dog extends Command {
     this.aliases = ['doggo', 'dogpics', 'randomdog']
   }
 
-  async run (message) {
+  async run (message, args, t) {
     message.channel.startTyping()
     const doggo = await this.requestDoggo(message)
     message.channel.send(
       new SwitchbladeEmbed(message.author)
         .setImage(doggo)
-        .setDescription('Here is your dog <:DoggoF:445701839564963840>')
+        .setDescription(t('commands:dog.hereIsYourDog') + ' <:DoggoF:445701839564963840>')
     ).then(() => message.channel.stopTyping())
   }
 

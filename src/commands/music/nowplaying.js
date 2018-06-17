@@ -10,46 +10,46 @@ module.exports = class NowPlaying extends Command {
     this.requirements = new CommandRequirements(this, {guildOnly: true, guildPlaying: true})
   }
 
-  async run (message, args) {
-    const guildPlayer = this.client.playerManager.get(message.guild.id)
+  async run ({ t, author, channel, guild }, args) {
+    const guildPlayer = this.client.playerManager.get(guild.id)
     const song = guildPlayer.playingSong
-    const embed = new SwitchbladeEmbed(message.author)
+    const embed = new SwitchbladeEmbed(author)
     const nf = new Intl.NumberFormat('en-US').format
 
-    let durationText = '`(LIVE)`'
+    let durationText = `\`(${t('music:live')})\``
     if (!song.isStream) {
       durationText = `\`(${guildPlayer.formattedElapsed}/${song.formattedDuration})\``
     }
 
     const description = [
-      `**Now playing:** [${song.title}](${song.uri}) ${durationText}`,
-      `**Added by:** ${song.requestedBy}`
+      `**${t('music:nowPlaying')}:** [${song.title}](${song.uri}) ${durationText}`,
+      `*[${t('music:addedBy', {user: song.requestedBy})}]*`
     ]
 
     switch (song.source) {
       case 'youtube':
         embed
           .setImage(song.artwork)
-          .addField('Views', nf(song.richInfo.viewCount), true)
-          .addField('Likes', nf(song.richInfo.likeCount), true)
-          .addField('Dislikes', nf(song.richInfo.dislikeCount), true)
+          .addField(t('music:views'), nf(song.richInfo.viewCount), true)
+          .addField(t('music:likes'), nf(song.richInfo.likeCount), true)
+          .addField(t('music:dislikes'), nf(song.richInfo.dislikeCount), true)
         break
       case 'twitch':
         embed
           .setImage(song.richInfo.thumbnailUrl || song.artwork)
-          .addField('Viewers', nf(song.richInfo.viewerCount), true)
-          .addField('Views', nf(song.richInfo.viewCount), true)
+          .addField(t('music:viewers'), nf(song.richInfo.viewerCount), true)
+          .addField(t('music:views'), nf(song.richInfo.viewCount), true)
         break
       case 'soundcloud':
         embed
           .setImage(song.artwork)
-          .addField('Played', nf(song.richInfo.playbackCount) + 'x', true)
+          .addField(t('music:played'), nf(song.richInfo.playbackCount) + 'x', true)
         break
       default:
         embed.setImage(song.artwork)
     }
 
-    message.channel.send(embed.setDescription(description.join('\n')))
+    channel.send(embed.setDescription(description.join('\n')))
   }
 
   formatDuration (duration, format) {

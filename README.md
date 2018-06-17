@@ -12,6 +12,7 @@
     <a href="https://travis-ci.org/SwitchbladeBot/switchblade" target="_blank"><img src="https://api.travis-ci.org/SwitchbladeBot/switchblade.svg" alt="Travis CI Build Status"/></a>
     <a href="https://snyk.io/test/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://snyk.io/test/github/SwitchbladeBot/switchblade/badge.svg" alt="Known Vulnerabilities"/></a>
     <a href="https://codeclimate.com/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg" alt="Code Climate"/></a>
+    <a title="Crowdin" target="_blank" href="https://crowdin.com/project/switchblade"><img src="https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg"></a>
   </p>
 </div>
 

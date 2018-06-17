@@ -9,11 +9,11 @@ module.exports = class Pause extends Command {
     this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true})
   }
 
-  async run (message, args) {
-    const guildPlayer = this.client.playerManager.get(message.guild.id)
+  async run ({ t, author, channel, guild }) {
+    const guildPlayer = this.client.playerManager.get(guild.id)
     const pause = !guildPlayer.paused
-    message.channel.send(new SwitchbladeEmbed(message.author)
-      .setTitle(`${pause ? Constants.PAUSE_BUTTON : Constants.PLAY_BUTTON} Music player has been ${pause ? 'paused' : 'resumed'}!`))
+    channel.send(new SwitchbladeEmbed(author)
+      .setTitle(`${pause ? Constants.PAUSE_BUTTON : Constants.PLAY_BUTTON} ${t('music:stateChanged', {context: pause ? 'pause' : 'resume'})}`))
     guildPlayer.pause(pause)
   }
 }

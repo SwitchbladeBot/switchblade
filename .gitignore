@@ -61,3 +61,6 @@ typings/
 .next
 
 .idea/
+
+src/locales/*
+!src/locales/en-US/

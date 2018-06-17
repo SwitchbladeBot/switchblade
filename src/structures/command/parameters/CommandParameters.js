@@ -8,7 +8,7 @@ module.exports = class CommandParameters {
     this.parameters = params || []
   }
 
-  handle (message, args) {
+  handle (context, args) {
     const parsedArgs = []
     for (let i = 0; i < this.parameters.length; i++) {
       const param = this.parameters[i]
@@ -16,7 +16,7 @@ module.exports = class CommandParameters {
       let arg = args[i]
       if (param.full) arg = args.join(' ')
 
-      const parsedArg = param.parse(arg, message)
+      const parsedArg = param.parse(arg, context)
       if (parsedArg instanceof CommandError) {
         return parsedArg
       } else if (isNull(parsedArg) && param.required) {

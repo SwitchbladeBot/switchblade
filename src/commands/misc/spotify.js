@@ -13,7 +13,7 @@ module.exports = class Spotify extends Command {
     return !!this.client.apis.spotify
   }
 
-  async run (message, args) {
+  async run (message, args, t) {
     message.channel.startTyping()
 
     const embed = new SwitchbladeEmbed(message.author)
@@ -29,13 +29,13 @@ module.exports = class Spotify extends Command {
       } else {
         embed
           .setColor(Constants.ERROR_COLOR)
-          .setTitle('I couldn\'t find any tracks with that name.')
+          .setTitle(t('commands:spotify.noTracksFound'))
       }
     } else {
       embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me a track name.')
-        .setDescription(`**Usage:** \`${process.env.PREFIX}${this.name} <track name>\``)
+        .setTitle(t('commands:spotify.noTrackName'))
+        .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:spotify.commandUsage')}\``)
     }
 
     message.channel.send(embed).then(() => message.channel.stopTyping())

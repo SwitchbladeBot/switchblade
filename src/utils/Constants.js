@@ -4,6 +4,7 @@ module.exports = {
   SPOTIFY_COLOR: '#1DB954',
   ERROR_COLOR: '#FF3333',
   EIGHTBALL_COLOR: '#000000',
+  E621_COLOR: '258CF5',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:450443946041016320>',

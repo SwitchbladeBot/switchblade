@@ -12,14 +12,18 @@ module.exports = class Money extends Command {
     )
   }
 
-  run (message, user) {
-    user = user || message.author
-    message.channel.startTyping()
-    this.client.database.users.get(user.id).then(data => {
-      message.channel.send(
-        new SwitchbladeEmbed(message.author)
-          .setDescription(`**${user.tag}** has **${data.money}** SwitchCoins`)
-      ).then(() => message.channel.stopTyping())
-    })
+  async run ({ t, author, channel }, user) {
+    user = user || author
+    channel.startTyping()
+
+    const embed = new SwitchbladeEmbed(author)
+    const { money } = await this.client.database.users.get(user.id)
+    if (author.id === user.id) {
+      embed.setDescription(t('commands:money.youHave', {count: money}))
+    } else {
+      embed.setDescription(t('commands:money.someoneHas', {count: money, user}))
+    }
+
+    message.channel.send(embed).then(() => message.channel.stopTyping())
   }
 }

@@ -8,15 +8,15 @@ module.exports = class UserParameter extends Parameter {
     super(options)
   }
 
-  parse (arg, message) {
+  parse (arg, { client }) {
     if (!arg) return
 
     const regexResult = MENTION_REGEX.exec(arg)
     let userId = regexResult && regexResult[1]
-    return this.user(message, userId)
+    return this.user(client, userId)
   }
 
-  user (message, id) {
-    return message.client.users.get(id) || new CommandError('You need to give me a valid user!')
+  user (client, id) {
+    return client.users.get(id) || new CommandError('You need to give me a valid user!')
   }
 }
