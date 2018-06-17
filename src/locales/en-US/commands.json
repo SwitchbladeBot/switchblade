@@ -175,5 +175,24 @@
     "noCode": "You need to give me a language code.",
     "availableLanguages": "Available languages",
     "changedSuccessfully": "Language changed successfully to {{lang}}!"
+  },
+  "worldcup": {
+    "commandDescription": "Shows information about today's World Cup matches",
+    "todaysMatches": "Today's Matches",
+    "status": {
+      "future": "Future",
+      "in_progress": "In progress",
+      "completed": "Finished"
+    }
+  },
+  "xkcd": {
+    "commandDescription": "Shows an XKCD",
+    "commandUsage": "[#|\"latest\"]",
+    "invalidArgument": "You need to give me a valid XKCD number",
+    "notFound": "XKCD not found"
+  },
+  "xkcd37": {
+    "commandDescription": "Whenever anyone calls something an [adjective]-ass [noun], move the hyphen one word to the right.",
+    "commandUsage": "<sentence>"
   }
 }
