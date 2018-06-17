@@ -7,29 +7,29 @@ module.exports = class Math extends Command {
     this.name = 'math'
   }
 
-  run (message, args) {
+  run (message, args, t) {
     let result
     const embed = new SwitchbladeEmbed(message.author)
     message.channel.startTyping()
     if (!args[0]) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle('You need to give me a math expression to evaluate')
-        .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <expression>`)
+        .setTitle(t('commands:math.noExpression'))
+        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:math.commandUsage')}`)
     } else {
       try {
         result = math.eval(args.join(' '))
       } catch (error) {
-        this.client.log(`Failed math calculation ${args.join(' ')}\nError: ${error.stack}`, this.name)
+        this.client.log(`${t('errors:mathFailedCalculation')} ${args.join(' ')}\n${t('errors:error')}: ${error.stack}`, this.name)
         embed.setColor(Constants.ERROR_COLOR)
-          .setTitle('An error occurred while evaluating the math expression')
+          .setTitle(t('errors:mathEvaluation'))
           .setDescription(error.stack)
       } finally {
         if (isNaN(parseFloat(result))) {
           embed.setColor(Constants.ERROR_COLOR)
-            .setTitle('Invalid math expression')
-            .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <expression>`)
+            .setTitle(t('errors:mathExpression'))
+            .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:math.commandUsage')}`)
         } else {
-          embed.setTitle(`Result: \`${result}\``)
+          embed.setTitle(`${t('commands:math.result')}: \`${result}\``)
         }
       }
     }
