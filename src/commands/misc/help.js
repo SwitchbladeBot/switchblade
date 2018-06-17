@@ -25,18 +25,15 @@ module.exports = class Pause extends Command {
         ]
         if (command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
 
-        embed
-          .setTitle(command.name)
+        embed.setTitle(command.name)
           .setDescription(description.join('\n'))
       } else {
-        embed
-          .setColor(Constants.ERROR_COLOR)
+        embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:help.commandNotFound'))
       }
     } else {
       const commands = this.client.commands.map(c => `\`${c.name}\``).sort((a, b) => a.localeCompare(b)).join('**, **')
-      embed
-        .setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL)
+      embed.setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL)
         .setDescription([
           commands,
           '',

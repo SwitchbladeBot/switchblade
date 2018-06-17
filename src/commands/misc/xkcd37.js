@@ -13,9 +13,9 @@ module.exports = class XKCD37 extends Command {
 
   // Context: https://xkcd.com/37/
 
-  async run ({ t, author, channel }, text) {
-    channel.send(new SwitchbladeEmbed(author)
-      .setTitle(text.replace(/(\w+?)(?!\\)+(-ass)(\s+)(\S+?)/g, '$1$3ass-$4').replace(/\\-/g, '-'))
-    )
+  async run ({ author, channel }, text) {
+    const embed = new SwitchbladeEmbed(author)
+    embed.setTitle(text.replace(/(\w+?)(?!\\)+(-ass)(\s+)(\S+?)/g, '$1$3ass-$4').replace(/\\-/g, '-'))
+    channel.send(embed)
   }
 }

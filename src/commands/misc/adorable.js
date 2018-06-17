@@ -8,10 +8,9 @@ module.exports = class Adorable extends Command {
   }
 
   run ({ author, channel }) {
+    const embed = new SwitchbladeEmbed(author)
     const template = 'https://api.adorable.io/avatars/256'
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setImage(`${template}/${author.avatar}.png`)
-    )
+    embed.setImage(`${template}/${author.avatar}.png`)
+    channel.send(embed)
   }
 }

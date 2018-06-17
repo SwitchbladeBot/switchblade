@@ -23,14 +23,12 @@ module.exports = class Spotify extends Command {
     const embed = new SwitchbladeEmbed(author)
     const track = await this.getTrack(encodeURIComponent(trackName))
     if (track) {
-      embed
-        .setColor(Constants.SPOTIFY_COLOR)
+      embed.setColor(Constants.SPOTIFY_COLOR)
         .setAuthor('Spotify', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2000px-Spotify_logo_without_text.svg.png')
         .setThumbnail(track.coverURL)
         .setDescription(`[**${track.name}**](${track.url}) (${msToMMSS(track.duration)})\n${track.artists}`)
     } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
+      embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:spotify.noTracksFound'))
     }
 
@@ -43,7 +41,7 @@ module.exports = class Spotify extends Command {
     if (tracksResponse && tracksResponse.tracks.total > 0) {
       const track = tracksResponse.tracks.items[0]
       const artists = track.artists.map(a => a.name).join(', ')
-      const album = await spotify.request(spotifyBaseUrl + 'albums/' + track.album.id)
+      const album = await spotify.request(`${spotifyBaseUrl}albums/${track.album.id}`)
       const coverURL = album.images[2].url
       return { name: track.name, url: track.external_urls.spotify, duration: track.duration_ms, artists, coverURL }
     } else { return null }

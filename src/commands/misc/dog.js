@@ -9,13 +9,12 @@ module.exports = class Dog extends Command {
   }
 
   async run ({ t, author, channel }) {
+    const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const doggo = await this.requestDoggo()
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setImage(doggo)
-        .setDescription(t('commands:dog.hereIsYourDog') + ' <:DoggoF:445701839564963840>')
-    ).then(() => channel.stopTyping())
+    embed.setImage(doggo)
+      .setDescription(`${t('commands:dog.hereIsYourDog')} <:DoggoF:445701839564963840>`)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 
   async requestDoggo () {

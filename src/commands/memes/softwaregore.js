@@ -8,13 +8,12 @@ module.exports = class SoftwareGore extends Command {
   }
 
   async run ({ author, channel }) {
+    const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/softwaregore')
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setTitle('<:meowthonkang:446407184373383169>')
-        .setImage(url)
-        .setURL(`https://reddit.com${permalink}`)
-    ).then(() => channel.stopTyping())
+    embed.setTitle('<:meowthonkang:446407184373383169>')
+      .setImage(url)
+      .setURL(`https://reddit.com${permalink}`)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

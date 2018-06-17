@@ -8,13 +8,12 @@ module.exports = class Hmmm extends Command {
   }
 
   async run ({ author, channel }) {
+    const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/hmmm')
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setTitle('hmmm')
-        .setImage(url)
-        .setURL(`https://reddit.com${permalink}`)
-    ).then(() => channel.stopTyping())
+    embed.setTitle('hmmm')
+      .setImage(url)
+      .setURL(`https://reddit.com${permalink}`)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

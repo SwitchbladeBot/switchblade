@@ -13,11 +13,12 @@ module.exports = class EightBall extends Command {
   }
 
   run ({ t, author, channel }, question) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     const answerCount = 19
     const result = Math.floor((Math.random() * answerCount))
-    channel.send(new SwitchbladeEmbed(author)
-      .setColor(Constants.EIGHTBALL_COLOR)
+    embed.setColor(Constants.EIGHTBALL_COLOR)
       .setDescription(`:grey_question: ${question}\n:8ball: ${t(`commands:8ball.answers.${result}`)}`)
-    ).then(() => channel.stopTyping())
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

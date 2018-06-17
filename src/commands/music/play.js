@@ -15,6 +15,7 @@ module.exports = class Play extends Command {
   }
 
   async run ({ t, author, channel, guild, voiceChannel }, identifier) {
+    const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const playerManager = this.client.playerManager
     try {
@@ -22,20 +23,18 @@ module.exports = class Play extends Command {
       if (res) {
         this.loadSongs({ t, channel, voiceChannel }, res, playerManager).then(() => channel.stopTyping())
       } else {
-        channel.send(
-          new SwitchbladeEmbed(author)
-            .setColor(Constants.ERROR_COLOR)
-            .setTitle(t('errors:voiceChannelOnly'))
-        ).then(() => channel.stopTyping())
+        embed.setColor(Constants.ERROR_COLOR)
+          .setTitle(t('errors:voiceChannelOnly'))
+        channel.send(embed).then(() => channel.stopTyping())
       }
     } catch (e) {
-      channel.send(
-        new SwitchbladeEmbed(author)
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(t('errors:generic'))
-          .setDescription(e)
-      ).then(() => channel.stopTyping())
-      this.client.logError(e)
+      embed.setColor(Constants.ERROR_COLOR)
+        .setTitle(t('errors:generic'))
+        .setDescription(e)
+      channel.send(embed).then(() => {
+        channel.stopTyping()
+        this.client.logError(e)
+      })
     }
   }
 

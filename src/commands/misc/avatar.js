@@ -13,11 +13,11 @@ module.exports = class Avatar extends Command {
   }
 
   run ({ t, author, channel }, user) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     user = user || author
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setImage(user.displayAvatarURL)
-        .setDescription(t('commands:avatar.someonesAvatar', {user}))
-    )
+    embed.setImage(user.displayAvatarURL)
+      .setDescription(t('commands:avatar.someonesAvatar', {user}))
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

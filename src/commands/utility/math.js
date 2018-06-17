@@ -8,11 +8,11 @@ module.exports = class Math extends Command {
     this.name = 'math'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'You need to give me a math expression to evaluate', id: 'expression'})
+      new StringParameter({full: true, missingError: 'commands:math.needMathExpression', id: 'expression'})
     )
   }
 
-  run ({ author, channel }, expression) {
+  run ({ t, author, channel }, expression) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
@@ -21,18 +21,16 @@ module.exports = class Math extends Command {
       result = math.eval(expression)
     } catch (error) {
       this.client.log(`Failed math calculation ${expression}\nError: ${error.stack}`, this.name)
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle('An error occurred while evaluating the math expression')
+      embed.setColor(Constants.ERROR_COLOR)
+        .setTitle(t('errors:mathEvaluationError'))
         .setDescription(error.stack)
     } finally {
       if (isNaN(parseFloat(result))) {
-        embed
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle('Invalid math expression')
-          .setDescription(`**Usage:** ${process.env.PREFIX}${this.name} <expression>`)
+        embed.setColor(Constants.ERROR_COLOR)
+          .setTitle(t('commands:math.invalidMathExpression'))
+          .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:math.commandUsage')}`)
       } else {
-        embed.setTitle(`Result: \`${result}\``)
+        embed.setTitle(t('commands:math.result', { result }))
       }
     }
 

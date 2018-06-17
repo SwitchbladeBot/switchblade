@@ -11,8 +11,9 @@ module.exports = class Queue extends Command {
     this.requirements = new CommandRequirements(this, {guildOnly: true, guildPlaying: true})
   }
 
-  async run ({ t, author, channel, guild }, args) {
+  async run ({ t, author, channel, guild }) {
     const guildPlayer = this.client.playerManager.get(guild.id)
+    const embed = new SwitchbladeEmbed(author)
 
     const npSong = guildPlayer.playingSong
     const description = [`**Now playing:** [${npSong.title}](${npSong.uri})`]
@@ -27,6 +28,6 @@ module.exports = class Queue extends Command {
       description.push(t('music:noneAfterCurrent'))
     }
 
-    channel.send(new SwitchbladeEmbed(author).setDescription(description.join('\n')))
+    channel.send(embed.setDescription(description.join('\n')))
   }
 }

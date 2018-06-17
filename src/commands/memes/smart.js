@@ -9,9 +9,8 @@ module.exports = class Smart extends Command {
   }
 
   run ({ author, channel }) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setImage('https://media0.giphy.com/media/d3mlE7uhX8KFgEmY/source.gif')
-    )
+    const embed = new SwitchbladeEmbed(author)
+    embed.setImage('https://media0.giphy.com/media/d3mlE7uhX8KFgEmY/source.gif')
+    channel.send(embed)
   }
 }

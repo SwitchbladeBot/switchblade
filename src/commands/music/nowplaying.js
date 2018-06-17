@@ -28,21 +28,18 @@ module.exports = class NowPlaying extends Command {
 
     switch (song.source) {
       case 'youtube':
-        embed
-          .setImage(song.artwork)
+        embed.setImage(song.artwork)
           .addField(t('music:views'), nf(song.richInfo.viewCount), true)
           .addField(t('music:likes'), nf(song.richInfo.likeCount), true)
           .addField(t('music:dislikes'), nf(song.richInfo.dislikeCount), true)
         break
       case 'twitch':
-        embed
-          .setImage(song.richInfo.thumbnailUrl || song.artwork)
+        embed.setImage(song.richInfo.thumbnailUrl || song.artwork)
           .addField(t('music:viewers'), nf(song.richInfo.viewerCount), true)
           .addField(t('music:views'), nf(song.richInfo.viewCount), true)
         break
       case 'soundcloud':
-        embed
-          .setImage(song.artwork)
+        embed.setImage(song.artwork)
           .addField(t('music:played'), nf(song.richInfo.playbackCount) + 'x', true)
         break
       default:
