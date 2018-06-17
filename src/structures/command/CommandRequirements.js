@@ -45,7 +45,7 @@ module.exports = class CommandRequirements {
 
     if (this.permissions.length > 0) {
       if (!channel.permissionsFor(member).has(this.permissions)) {
-        const permission = this.permissions.map(p => `**"${t('permissions:${p}')}"**`).join(', ')
+        const permission = this.permissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
         const sentence = this.permissions.length > 1 ? 'errors:missingOnePermission' : 'errors:missingMultiplePermissions'
         return new CommandError(t(sentence, { permission }))
       }
