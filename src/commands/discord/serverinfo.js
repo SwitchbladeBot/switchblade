@@ -8,14 +8,15 @@ module.exports = class ServerInfo extends Command {
     this.aliases = ['server', 'guildinfo', 'guild']
   }
 
-  run ({ t, author, channel, guild }, expression) {
+  run ({ t, author, channel, guild }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    embed.setAuthor(guild.name, guild.iconURL ? guild.iconURL : 'https://i.imgur.com/o0P9VYp.jpg')
+    embed.setTitle(guild.name)
+      .setThumbnail(guild.iconURL ? guild.iconURL : 'https://i.imgur.com/o0P9VYp.jpg')
       .addField(t('commands:serverInfo.id'), guild.id, true)
       .addField(t('commands:serverInfo.owner'), guild.owner, true)
-      .addField(t('commands:serverInfo.region'), guild.region, true)
+      .addField(t('commands:serverInfo.region'), t(`regions:${guild.region}`), true)
       .addField(t('commands:serverInfo.channels', { count: guild.channels.size }), [
         t('commands:serverInfo.textChannels', { count: guild.channels.filter(g => g.type === 'text' || g.type === 'category').size }),
         t('commands:serverInfo.voiceChannels', { count: guild.channels.filter(g => g.type === 'voice').size })
