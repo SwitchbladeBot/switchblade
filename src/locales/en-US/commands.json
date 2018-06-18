@@ -204,5 +204,22 @@
     "needMathExpression": "You need to give me a math expression to evaluate",
     "invalidMathExpression": "Invalid math expression",
     "result": "Result: `{{result}}`"
+  },
+  "serverInfo": {
+    "id": "ID",
+    "owner": "Owner",
+    "region": "Region",
+    "channels": "Channels **({{count}})**",
+    "textChannels": "Text: **{{count}}**",
+    "voiceChannels": "Voice: **{{count}}**",
+    "createdAt": "Created At",
+    "joinedAt": "Joined At",
+    "members": "Members **({{count}})**",
+    "online": "Online: **{{count}}**",
+    "away": "Idle: **{{count}}**",
+    "dnd": "Do Not Disturb: **{{count}}**",
+    "offline": "Offline: **{{count}}**",
+    "users": "Users: **{{count}}**",
+    "bots": "Bots: **{{count}}**"
   }
 }
