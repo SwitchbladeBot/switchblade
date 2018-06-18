@@ -4,7 +4,7 @@ const { SwitchbladePlayerManager } = require('../music')
 module.exports = class MainListener extends EventListener {
   constructor (client) {
     super(client)
-    this.events = ['ready', 'message']
+    this.events = ['ready', 'message', 'guildCreate', 'guildDelete']
   }
 
   onReady () {
@@ -20,6 +20,14 @@ module.exports = class MainListener extends EventListener {
       user: this.user.id,
       shards: 1
     })
+  }
+
+  onGuildCreate (guild) {
+    this.log(`Joined guild ${guild.name} (${guild.id}) with ${guild.members.size} members`, 'Guilds')
+  }
+
+  onGuildDelete (guild) {
+    this.log(`Left guild ${guild.name} (${guild.id}) with ${guild.members.size} members`, 'Guilds')
   }
 
   async onMessage (message) {
