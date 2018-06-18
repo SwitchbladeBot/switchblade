@@ -43,6 +43,7 @@
     "node-opus": "^0.3.0",
     "node-spotify-api": "^1.0.7",
     "pretty-ms": "^3.2.0",
+    "searchitunes": "^2.4.0",
     "snekfetch": "^4.0.2",
     "transform-props": "^1.0.1",
     "uws": "^10.148.0"
