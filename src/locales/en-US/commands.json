@@ -204,5 +204,13 @@
     "needMathExpression": "You need to give me a math expression to evaluate",
     "invalidMathExpression": "Invalid math expression",
     "result": "Result: `{{result}}`"
+  },
+  "appstore": {
+    "commandDescription": "Searches for apps on the Apple App Store",
+    "commandUsage": "<country code> <app name>",
+    "noAppName": "You need to give me an app name",
+    "noCountryCode": "You need to give me a country code",
+    "free": "Free",
+    "appNotFound": "I couldn't find an app with that name"
   }
 }
