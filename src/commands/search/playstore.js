@@ -1,6 +1,6 @@
 const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../index')
 const { Command, CommandParameters, StringParameter } = CommandStructures
-const gplay = require('google-play-scraper');
+const gplay = require('google-play-scraper')
 
 module.exports = class PlayStore extends Command {
   constructor (client) {

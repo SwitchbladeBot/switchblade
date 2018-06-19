@@ -2,7 +2,7 @@ module.exports = {
   ratingToStarEmoji: function (rating) {
     return '<:ratingstar:458381544357101580>'.repeat(Math.floor(rating)) + ((rating % 1).toFixed(1) !== 0 ? '<:ratinghalfstar:458381544571273224>' : '')
   },
-  
+
   formatBytes: function (a, b) {
     if (a === 0) return '0 Bytes'
     const c = 1024
