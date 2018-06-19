@@ -112,6 +112,11 @@
       "19": "Very doubtful"
     }
   },
+  "lmgtfy": {
+    "commandDescription": "www.lmgtfy.com lets you google for someone else. So for example, instead of answering a question, you get to be a smartass and answer it through Google!",
+    "commandUsage": "<query>",
+    "noQuestion": "You need to give me something to google for"
+  },
   "fliptext": {
     "commandDescription": "Flips text upside down",
     "commandUsage": "<text to be flipped>",
