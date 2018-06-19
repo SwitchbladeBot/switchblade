@@ -10,12 +10,13 @@ module.exports = class PlayStore extends Command {
     this.aliases = ['googleplay', 'gplay']
     this.parameters = new CommandParameters(this,
       new StringParameter({full: false, missingError: 'errors:noCountryCode'}),
-      new StringParameter({full: false, missingError: 'errors:noAppName'})
+      new StringParameter({full: true, missingError: 'errors:noAppName'})
     )
   }
 
   async run ({t, author, channel, language}, country, term) {
     channel.startTyping()
+    console.log(term)
     const embed = new SwitchbladeEmbed(author)
     const response = await gplay.search({term, country, num: 1, lang: language.substring(0, 1)})
     if (response.length > 0) {

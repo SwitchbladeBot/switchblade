@@ -9,7 +9,7 @@ module.exports = class AppStore extends Command {
     this.name = 'appstore'
     this.parameters = new CommandParameters(this,
       new StringParameter({full: false, missingError: 'errors:noCountryCode'}),
-      new StringParameter({full: false, missingError: 'errors:noAppName'})
+      new StringParameter({full: true, missingError: 'errors:noAppName'})
     )
   }
 
