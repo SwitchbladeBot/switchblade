@@ -113,9 +113,10 @@
     }
   },
   "lmgtfy": {
-    "commandDescription": "www.lmgtfy.com lets you google for someone else. So for example, instead of answering a question, you get to be a smartass and answer it through Google!",
+    "commandDescription": "Google something for someone else",
     "commandUsage": "<query>",
-    "noQuestion": "You need to give me something to google for"
+    "noQuery": "You need to give me something to search for",
+    "search": "Click [here]({{link}}) to search for **{{query}}**"
   },
   "fliptext": {
     "commandDescription": "Flips text upside down",
