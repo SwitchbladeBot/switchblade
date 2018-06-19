@@ -33,6 +33,7 @@
     "discord.js": "^11.3.2",
     "discord.js-lavalink": "^2.0.2",
     "erlpack": "github:discordapp/erlpack",
+    "google-play-scraper": "^6.1.0",
     "googleapis": "^31.0.2",
     "i18next": "^11.3.2",
     "i18next-node-fs-backend": "^1.0.0",
