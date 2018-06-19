@@ -9,7 +9,7 @@ module.exports = class PlayStore extends Command {
     this.name = 'playstore'
     this.aliases = ['googleplay', 'gplay']
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: false, missingError: 'errors:noCountryCode'}),
+      new StringParameter({missingError: 'errors:noCountryCode'}),
       new StringParameter({full: true, missingError: 'errors:noAppName'})
     )
   }
