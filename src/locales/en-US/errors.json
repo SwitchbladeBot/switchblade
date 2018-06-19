@@ -12,5 +12,8 @@
   "missingParameters": "You need to give me parameters!",
   "nsfwOnly": "This can only be done in channels marked as NSFW.",
   "noSentence": "You need to give me a sentence.",
-  "mathEvaluationError": "An error occurred while evaluating the math expression"
+  "mathEvaluationError": "An error occurred while evaluating the math expression",
+  "noCountryCode": "You need to give me a country code",
+  "noAppName": "You need to give me an app name",
+  "appNotFound": "I couldn't find an app with that name"
 }

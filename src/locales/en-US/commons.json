@@ -6,5 +6,6 @@
   "currencyWithCount": "{{count}} Switchcoin",
   "currencyWithCount_plural": "{{count}} Switchcoins",
   "currency": "Switchcoin",
-  "currency_plural": "Switchcoins"
+  "currency_plural": "Switchcoins",
+  "free": "Free"
 }

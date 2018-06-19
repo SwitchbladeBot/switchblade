@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
+const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../index')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const itunesSearchApi = require('itunes-search-api')
 
@@ -8,8 +8,8 @@ module.exports = class AppStore extends Command {
 
     this.name = 'appstore'
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: false, missingError: 'commands:appstore.noCountryCode'}),
-      new StringParameter({full: false, missingError: 'commands:appstore.noAppName'})
+      new StringParameter({full: false, missingError: 'errors:noCountryCode'}),
+      new StringParameter({full: false, missingError: 'errors:noAppName'})
     )
   }
 
@@ -23,19 +23,18 @@ module.exports = class AppStore extends Command {
       embed
         .setURL(app.trackViewUrl)
         .setThumbnail(app.artworkUrl60)
-        .setColor(0x5690F2)
         .setAuthor('App Store', 'https://i.imgur.com/yki1FZs.jpg')
         .setDescription([
           `**[${app.trackName}](${app.trackViewUrl})**`,
           app.genres.join(', '),
           '',
-          ratingToStarEmoji(app.averageUserRating),
-          `**${formatBytes(app.fileSizeBytes)}** - ${getPriceString(app, t)}`
+          MiscUtils.ratingToStarEmoji(app.averageUserRating),
+          `**${MiscUtils.formatBytes(app.fileSizeBytes)}** - ${getPriceString(app, t)}`
         ].join('\n'))
     } else {
       embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:appstore.appNotFound'))
+        .setTitle(t('errors:appNotFound'))
     }
     channel.send(embed).then(() => channel.stopTyping())
   }
@@ -43,7 +42,7 @@ module.exports = class AppStore extends Command {
 
 function getPriceString (app, t) {
   if (app.price === 0) {
-    return t('commands:appstore.free')
+    return t('commons:free')
   } else {
     return app.formattedPrice
   }
