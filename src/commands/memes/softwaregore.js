@@ -7,14 +7,13 @@ module.exports = class SoftwareGore extends Command {
     this.aliases = ['sg']
   }
 
-  async run (message) {
-    message.channel.startTyping()
+  async run ({ author, channel }) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/softwaregore')
-    message.channel.send(
-      new SwitchbladeEmbed(message.author)
-        .setTitle('<:meowthonkang:446407184373383169>')
-        .setImage(url)
-        .setURL(`https://reddit.com${permalink}`)
-    ).then(() => message.channel.stopTyping())
+    embed.setTitle('<:meowthonkang:446407184373383169>')
+      .setImage(url)
+      .setURL(`https://reddit.com${permalink}`)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

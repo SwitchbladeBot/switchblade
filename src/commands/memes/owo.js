@@ -1,4 +1,6 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandParameters, StringParameter } = CommandStructures
+
 const snekfetch = require('snekfetch')
 const OWOapi = 'https://nekos.life/api/v2/owoify?text='
 
@@ -7,23 +9,21 @@ module.exports = class OwO extends Command {
     super(client)
     this.name = 'owo'
     this.aliases = ['uwu', 'whatsthis', 'owoify']
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, missingError: 'commands:owo.missingSentence'})
+    )
   }
 
-  async run (message, args, t) {
-    const embed = new SwitchbladeEmbed(message.author)
-    message.channel.startTyping()
-    if (args.length <= 0) {
+  async run ({ t, author, channel }, text) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
+    const { body } = await snekfetch.get(OWOapi + encodeURIComponent(text))
+    if (body.msg) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:owo.missingSentence'))
-        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:owo.commandUsage')}`)
-    } else {
-      const { body } = await snekfetch.get(OWOapi + encodeURIComponent(args.join(' ')))
-      if (body.msg) {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:owo.tooLongTitle'))
-          .setDescription(t('commands:owo.tooLongDescription'))
-      } else embed.setTitle(body.owo)
-    }
-    message.channel.send(embed).then(() => message.channel.stopTyping())
+        .setTitle(t('commands:owo.tooLongTitle'))
+        .setDescription(t('commands:owo.tooLongDescription'))
+    } else embed.setTitle(body.owo)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

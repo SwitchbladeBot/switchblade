@@ -10,5 +10,7 @@
   "cooldown": "Woah! Slow down buddy! You're going too fast, you need to wait!",
   "notPlaying": "I ain't playing anything!",
   "missingParameters": "You need to give me parameters!",
-  "nsfwOnly": "This can only be done in channels marked as NSFW."
+  "nsfwOnly": "This can only be done in channels marked as NSFW.",
+  "noSentence": "You need to give me a sentence.",
+  "mathEvaluationError": "An error occurred while evaluating the math expression"
 }

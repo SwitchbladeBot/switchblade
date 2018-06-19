@@ -1,41 +1,33 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandParameters, CommandRequirements, NumberParameter, UserParameter } = CommandStructures
 
 module.exports = class Pay extends Command {
   constructor (client) {
     super(client)
     this.name = 'pay'
+
+    this.requirements = new CommandRequirements(this, {guildOnly: true})
+    this.parameters = new CommandParameters(this,
+      new UserParameter({missingError: 'commands:pay.noMember'}),
+      new NumberParameter({min: 1, missingError: 'commands:pay.noValue'})
+    )
   }
 
-  run (message, args, t) {
-    const embed = new SwitchbladeEmbed(message.author)
-    message.channel.startTyping()
-    if (!args[0] || !message.mentions.members.first()) {
+  async run ({ t, author, channel }, user, value) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
+    const senderDoc = await this.client.database.users.get(author.id)
+    if (value > senderDoc.money) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:pay.noMember'))
-        .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:pay.commandUsage')}\``)
-      message.channel.send(embed).then(() => message.channel.stopTyping())
-    } else if (!args[1] || isNaN(parseInt(args[1]))) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:pay.noValue'))
-        .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:pay.commandUsage')}\``)
-      message.channel.send(embed).then(() => message.channel.stopTyping())
+        .setDescription(t('commands:pay.notEnoughMoney'))
     } else {
-      this.client.database.users.get(message.author.id).then(sender => {
-        const valueToTransfer = parseInt(args[1])
-        if (valueToTransfer > sender.money) {
-          embed.setColor(Constants.ERROR_COLOR)
-            .setDescription(t('commands:pay.notEnoughMoney'))
-        } else {
-          this.client.database.users.get(message.mentions.members.first().id).then(receiver => {
-            sender.money -= valueToTransfer
-            receiver.money += valueToTransfer
-            sender.save()
-            receiver.save()
-          })
-          embed.setDescription(t('commands:pay.transactionSuccessful', { receiver: message.mentions.users.first(), value: valueToTransfer }))
-        }
-        message.channel.send(embed).then(() => message.channel.stopTyping())
-      })
+      const receiverDoc = await this.client.database.users.get(user.id)
+      senderDoc.money -= value
+      receiverDoc.money += value
+      senderDoc.save()
+      receiverDoc.save()
     }
+    embed.setDescription(t('commands:pay.transactionSuccessful', { receiver: user, value }))
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

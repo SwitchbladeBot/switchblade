@@ -1,25 +1,24 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class EightBall extends Command {
   constructor (client) {
     super(client)
     this.name = '8ball'
     this.aliases = ['eightball', '8b', 'magicball']
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, missingError: 'commands:8ball.noQuestion'})
+    )
   }
 
-  run (message, args, t) {
+  run ({ t, author, channel }, question) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     const answerCount = 19
-    const embed = new SwitchbladeEmbed(message.author)
-    message.channel.startTyping()
-    if (!args[0]) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:8ball.noQuestion'))
-        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:8ball.commandUsage')}`)
-    } else {
-      const result = Math.floor((Math.random() * answerCount))
-      embed.setColor(Constants.EIGHTBALL_COLOR)
-        .setDescription(`:grey_question: ${args.join(' ')}\n:8ball: ${t(`commands:8ball.answers.${result}`)}`)
-    }
-    message.channel.send(embed).then(() => message.channel.stopTyping())
+    const result = Math.floor((Math.random() * answerCount))
+    embed.setColor(Constants.EIGHTBALL_COLOR)
+      .setDescription(`:grey_question: ${question}\n:8ball: ${t(`commands:8ball.answers.${result}`)}`)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

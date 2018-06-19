@@ -1,50 +1,49 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
+const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class Poll extends Command {
   constructor (client) {
     super(client)
     this.name = 'poll'
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, missingError: 'commands:poll.noQuestion'})
+    )
   }
 
-  run (message, args, t) {
-    const embed = new SwitchbladeEmbed(message.author)
-    message.channel.startTyping()
-    if (!args[0]) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:poll.noQuestion'))
-        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:npm.commandUsage')}`)
-      message.channel.send(embed)
-    } else {
-      const pollPcs = args.join(' ').split('|')
-      if (pollPcs.length === 1) {
-        embed.setTitle(`:ballot_box: ${args.join(' ')}`)
-        message.channel.send(embed).then(async m => {
-          await m.react('👍')
-          await m.react('👎')
-        })
+  run ({ t, author, channel }, question) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
+    const pollPcs = question.split('|')
+    if (pollPcs.length > 1) {
+      const maxOptions = 26
+      if (pollPcs.slice(1).length > maxOptions) {
+        embed.setColor(Constants.ERROR_COLOR)
+          .setTitle(t('commands:poll.tooManyOptions', {maxOptions}))
+        channel.send(embed)
       } else {
-        const maxOptions = 26
-        if (pollPcs.slice(1).length > maxOptions) {
-          embed.setColor(Constants.ERROR_COLOR)
-            .setTitle(t('commands:poll.tooManyOptions', {maxOptions}))
-          message.channel.send(embed)
-        } else {
-          let description = ''
-          const alphabet = ('abcdefghijklmnopqrstuvwxyz').split('')
-          const unicodeAlphabet = ('🇦 🇧 🇨 🇩 🇪 🇫 🇬 🇭 🇮 🇯 🇰 🇱 🇲 🇳 🇴 🇵 🇶 🇷 🇸 🇹 🇺 🇻 🇼 🇽 🇾 🇿').split(' ')
-          for (let i = 0; i < pollPcs.slice(1).length; i++) {
-            description += `:regional_indicator_${alphabet[i]}: ${pollPcs.slice(1)[i]}\n`
-          }
-          embed.setTitle(`:ballot_box: ${pollPcs[0]}`)
-            .setDescription(description)
-          message.channel.send(embed).then(async m => {
-            for (let i = 0; i < pollPcs.slice(1).length; i++) {
-              await m.react(unicodeAlphabet[i])
-            }
-          })
+        let description = ''
+        const alphabet = ('abcdefghijklmnopqrstuvwxyz').split('')
+        const unicodeAlphabet = ('🇦 🇧 🇨 🇩 🇪 🇫 🇬 🇭 🇮 🇯 🇰 🇱 🇲 🇳 🇴 🇵 🇶 🇷 🇸 🇹 🇺 🇻 🇼 🇽 🇾 🇿').split(' ')
+        for (let i = 0; i < pollPcs.slice(1).length; i++) {
+          description += `:regional_indicator_${alphabet[i]}: ${pollPcs.slice(1)[i]}\n`
         }
+
+        channel.send(embed
+          .setTitle(`:ballot_box: ${pollPcs[0]}`)
+          .setDescription(description)
+        ).then(async m => {
+          for (let i = 0; i < pollPcs.slice(1).length; i++) {
+            await m.react(unicodeAlphabet[i])
+          }
+        })
       }
+    } else {
+      embed.setTitle(`:ballot_box: ${question}`)
+      channel.send(embed).then(m => {
+        m.react('👍').then(() => m.react('👎'))
+      })
     }
-    message.channel.stopTyping()
+    channel.stopTyping()
   }
 }

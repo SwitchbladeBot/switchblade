@@ -1,51 +1,22 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandRequirements, CommandParameters, NumberParameter } = CommandStructures
 
 module.exports = class Volume extends Command {
   constructor (client) {
     super(client)
     this.name = 'volume'
     this.aliases = ['vol']
+
+    this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true})
+    this.parameters = new CommandParameters(this,
+      new NumberParameter({full: true, missingError: 'commands:volume.missingVolumeParameter', min: 0, max: 150})
+    )
   }
 
-  async run (message, args, t) {
-    const embed = new SwitchbladeEmbed(message.author)
-
-    if (args.length > 0) {
-      if (message.member.voiceChannel) {
-        const playerManager = this.client.playerManager
-        const guildPlayer = playerManager.get(message.guild.id)
-        if (guildPlayer && guildPlayer.playing) {
-          const volume = Math.max(Math.min(parseInt(args[0]), 150), 0)
-          if (!isNaN(volume)) {
-            guildPlayer.volume(volume)
-            embed
-              .setTitle(`\uD83D\uDD0A ${t('commands:volume.volumeSet', {volume})}`)
-          } else {
-            embed
-              .setColor(Constants.ERROR_COLOR)
-              .setTitle(t('commands:volume.invalidVolumeParameter'))
-          }
-        } else {
-          embed
-            .setColor(Constants.ERROR_COLOR)
-            .setTitle(t('errors:notPlaying'))
-        }
-      } else {
-        embed
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(t('errors:voiceChannelOnly'))
-      }
-    } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:volume.missingVolumeParameter'))
-        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:volume.commandUsage')}`)
-    }
-
-    message.channel.send(embed)
-  }
-
-  canRun (message, args) {
-    return !!message.guild && super.canRun(message, args)
+  async run ({ t, author, channel, guild }, volume) {
+    const embed = new SwitchbladeEmbed(author)
+    const guildPlayer = this.client.playerManager.get(guild.id)
+    guildPlayer.volume(volume)
+    channel.send(embed.setTitle(`\uD83D\uDD0A ${t('commands:volume.volumeSet', {volume})}`))
   }
 }
