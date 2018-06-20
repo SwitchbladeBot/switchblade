@@ -188,6 +188,18 @@
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   },
+  "kick": {
+    "commandDescription": "Kicks a member from your guild",
+    "commandUsage": "<@member> <reason>",
+    "noMember": "You need to mention someone",
+    "noReason": "You need to give me a reason",
+    "noPermissions": "I need the **$t(permissions:KICK_MEMBERS)** permission for this command to work",
+    "cantKick": "Can't kick {{member}} because my role is lower than his role",
+    "lowerPosition": "You can't kick {{member}} because your role is lower than his role",
+    "cantKickYourself": "You can't kick yourself",
+    "youHaveBeenKicked": "You have been kicked from **{{guild}}** by {{author}}.\nReason: {{reason}}",
+    "kicked": "**{{member}}** has been kicked successfully"
+  },
   "xkcd": {
     "commandDescription": "Shows an XKCD",
     "commandUsage": "[#|\"latest\"]",
