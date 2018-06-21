@@ -204,5 +204,8 @@
     "needMathExpression": "You need to give me a math expression to evaluate",
     "invalidMathExpression": "Invalid math expression",
     "result": "Result: `{{result}}`"
+  },
+  "stoptyping": {
+    "tryingToStop": "Trying to stop writing..."
   }
 }
