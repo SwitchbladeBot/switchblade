@@ -11,6 +11,6 @@ module.exports = class StopTyping extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     embed.setDescription(t('commands:stoptyping.tryingToStop'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send(embed).then(() => channel.stopTyping(true))
   }
 }
