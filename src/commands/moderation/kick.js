@@ -29,9 +29,8 @@ module.exports = class Kick extends Command {
       embed.setTitle(t('commands:kick.lowerPosition'))
         .setColor(Constants.ERROR_COLOR)
     } else {
-      member.kick(reason).then(() => {
-        member.send(t('commands:kick.youHaveBeenKicked', { guild, author, reason }))
-      })
+      member.send(t('commands:kick.youHaveBeenKicked', { guild, author, reason }))
+      member.kick(reason)
       embed.setDescription(t('commands:kick.kicked', { member }))
     }
     channel.send(embed).then(() => channel.stopTyping())
