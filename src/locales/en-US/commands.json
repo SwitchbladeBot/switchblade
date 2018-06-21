@@ -194,8 +194,8 @@
     "noMember": "You need to mention someone",
     "noReason": "You need to give me a reason",
     "noPermissions": "I need the **$t(permissions:KICK_MEMBERS)** permission for this command to work",
-    "cantKick": "Can't kick {{member}} because my role is lower than his role",
-    "lowerPosition": "You can't kick {{member}} because your role is lower than his role",
+    "cantKick": "Can't kick {{member}} because my role is lower than their role",
+    "lowerPosition": "You can't kick {{member}} because your role is lower than their role",
     "cantKickYourself": "You can't kick yourself",
     "youHaveBeenKicked": "You have been kicked from **{{guild}}** by {{author}}.\nReason: {{reason}}",
     "kicked": "**{{member}}** has been kicked successfully"
