@@ -206,6 +206,7 @@
     "result": "Result: `{{result}}`"
   },
   "stoptyping": {
-    "tryingToStop": "Trying to stop writing..."
+    "commandDescription": "Forces the bot to stop typing",
+    "tryingToStop": "Trying to stop typing..."
   }
 }
