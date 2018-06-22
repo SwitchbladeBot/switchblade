@@ -210,7 +210,7 @@
     "commandUsage": "<address>",
     "isUp": "{{body.domain}} is up!",
     "isDown": "{{body.domain}} is down.",
-    "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with **{{body.response_code}}**.",
+    "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
     "noWebsite": "You need to give me a website to check"
   }
 }
