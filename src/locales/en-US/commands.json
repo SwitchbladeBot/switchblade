@@ -188,6 +188,30 @@
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   },
+  "kick": {
+    "commandDescription": "Kicks a member from your guild",
+    "commandUsage": "<@member> <reason>",
+    "noMember": "You need to mention someone",
+    "noReason": "You need to give me a reason",
+    "noPermissions": "I need the **$t(permissions:KICK_MEMBERS)** permission for this command to work",
+    "cantKick": "Can't kick {{member}} because my role is lower than their role",
+    "lowerPosition": "You can't kick {{member}} because your role is lower than their role",
+    "cantKickYourself": "You can't kick yourself",
+    "youHaveBeenKicked": "You have been kicked from **{{guild}}** by {{author}}.\nReason: {{reason}}",
+    "kicked": "**{{member}}** has been kicked successfully"
+  },
+  "ban": {
+    "commandDescription": "Bans a member from your guild",
+    "commandUsage": "<@member> <reason>",
+    "noMember": "You need to mention someone",
+    "noReason": "You need to give me a reason",
+    "noPermissions": "I need the **$t(permissions:BAN_MEMBERS)** permission for this command to work",
+    "cantBan": "Can't ban {{member}} because my role is lower than their role",
+    "lowerPosition": "You can't ban {{member}} because your role is lower than their role",
+    "cantBanYourself": "You can't ban yourself",
+    "youHaveBeenBanned": "You have been banned from **{{guild}}** by {{author}}.\nReason: {{reason}}",
+    "banned": "**{{member}}** has been banned successfully"
+  },
   "xkcd": {
     "commandDescription": "Shows an XKCD",
     "commandUsage": "[#|\"latest\"]",
@@ -208,9 +232,8 @@
   "isitup": {
     "commandDescription": "Check whether a website is up or down",
     "commandUsage": "<address>",
-    "isUp": "{{body.domain}} is up!",
-    "isDown": "{{body.domain}} is down.",
-    "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
+    "isUp": "{{url}} is up! Status code: {{statusCode}}",
+    "isDown": "{{url}} is down. Status code: {{statusCode}}",
     "noWebsite": "You need to give me a website to check"
   }
 }
