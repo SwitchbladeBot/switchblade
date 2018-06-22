@@ -6,7 +6,7 @@ module.exports = class IsItUp extends Command {
   constructor (client) {
     super(client)
     this.name = 'isitup'
-    this.parameters = new CommandParameters(this, new StringParameter({ missingError: 'commands:isitup.noWebsite'}))
+    this.parameters = new CommandParameters(this, new StringParameter({ missingError: 'commands:isitup.noWebsite' }))
   }
 
   async run ({t, author, channel}, link) {
