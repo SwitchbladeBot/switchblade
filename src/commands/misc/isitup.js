@@ -17,7 +17,7 @@ module.exports = class IsItUp extends Command {
     const { body } = await snekfetch.get(`https://isitup.org/${site[0]}.json`)
     if (body.response_code) {
       embed.setTitle(t('commands:isitup.isUp', {body}))
-        .setDescription(t('commands:isitup.details', {body}))
+        .setDescription(t('commands:isitup.details', {body.response_time * 1000, body}))
     } else {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:isitup.isDown', {body}))
