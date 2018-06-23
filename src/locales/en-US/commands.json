@@ -112,6 +112,12 @@
       "19": "Very doubtful"
     }
   },
+  "lmgtfy": {
+    "commandDescription": "Google something for someone else",
+    "commandUsage": "<query>",
+    "noQuery": "You need to give me something to search for",
+    "search": "Click [here]({{link}}) to search for **{{query}}**"
+  },
   "fliptext": {
     "commandDescription": "Flips text upside down",
     "commandUsage": "<text to be flipped>",
