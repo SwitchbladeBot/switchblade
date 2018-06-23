@@ -17,7 +17,7 @@ module.exports = class E621 extends Command {
     const [ image ] = await booru.search('e621.net', ['rating:e'], {limit: 1, random: true}).then(booru.commonfy)
     embed.setImage(image.common.file_url)
       .setDescription(t('commands:e621'))
-      .setCoolor(Constants.E621_COLOR)
+      .setColor(Constants.E621_COLOR)
     channel.send(embed).then(() => channel.stopTyping())
   }
 }
