@@ -21,6 +21,7 @@ module.exports = class CommandParameters {
 
       const parsedArg = param.parse(arg, context)
       if (parsedArg instanceof CommandError) {
+        parsedArg.showUsage = param.showUsage
         return parsedArg
       } else if (isNull(parsedArg) && param.required) {
         return new CommandError(missingErr, param.showUsage)
