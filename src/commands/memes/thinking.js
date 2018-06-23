@@ -7,14 +7,13 @@ module.exports = class Thinking extends Command {
     this.aliases = ['thonk', 'thonking', 'thonkang']
   }
 
-  async run (message) {
-    message.channel.startTyping()
+  async run ({ author, channel }) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/thinking')
-    message.channel.send(
-      new SwitchbladeEmbed(message.author)
-        .setTitle(':thinking:')
-        .setImage(url)
-        .setURL(`https://reddit.com${permalink}`)
-    ).then(() => message.channel.stopTyping())
+    embed.setTitle(':thinking:')
+      .setImage(url)
+      .setURL(`https://reddit.com${permalink}`)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

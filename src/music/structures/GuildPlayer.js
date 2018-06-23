@@ -19,7 +19,6 @@ module.exports = class GuildPlayer extends Player {
 
     this.on('error', this.manager.client.logError)
 
-    this.skipVotes = []
     this.queue = []
     this._volume = 25
   }
@@ -40,7 +39,6 @@ module.exports = class GuildPlayer extends Player {
     }
 
     super.play(song.track, options)
-    this.skipVotes = []
     this.playingSong = song
     this.volume(this._volume)
     song.emit('start')

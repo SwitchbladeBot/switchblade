@@ -7,14 +7,13 @@ module.exports = class Hmmm extends Command {
     this.aliases = ['hm', 'hmm', 'hmmmm']
   }
 
-  async run (message) {
-    message.channel.startTyping()
+  async run ({ author, channel }) {
+    const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/hmmm')
-    message.channel.send(
-      new SwitchbladeEmbed(message.author)
-        .setTitle('hmmm')
-        .setImage(url)
-        .setURL(`https://reddit.com${permalink}`)
-    ).then(() => message.channel.stopTyping())
+    embed.setTitle('hmmm')
+      .setImage(url)
+      .setURL(`https://reddit.com${permalink}`)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

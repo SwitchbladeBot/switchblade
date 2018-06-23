@@ -4,16 +4,14 @@ module.exports = class Invite extends Command {
   constructor (client) {
     super(client)
     this.name = 'invite'
-    this.aliases = []
   }
 
-  async run (message) {
-    message.channel.startTyping()
+  async run ({ t, channel }) {
+    const embed = new SwitchbladeEmbed()
+    channel.startTyping()
     const invite = await this.client.generateInvite()
-    message.channel.send(
-      new SwitchbladeEmbed()
-        .setThumbnail(this.client.user.displayAvatarURL)
-        .setDescription(`[Click here to invite me to your server](${invite})\nNote that you need the \`MANAGE_SERVER\` permission to add bots to servers.`)
-    ).then(() => message.channel.stopTyping())
+    embed.setThumbnail(this.client.user.displayAvatarURL)
+      .setDescription(`[${t('commands:invite.clickHere')}](${invite})\n${t('commands:invite.noteThat')}`)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

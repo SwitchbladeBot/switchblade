@@ -1,0 +1,17 @@
+const { APIWrapper } = require('../')
+const Crowdin = require('crowdin')
+
+module.exports = class CrowdinAPI extends APIWrapper {
+  constructor () {
+    super()
+    this.name = 'crowdin'
+    this.envVars = ['CROWDIN_API_KEY', 'CROWDIN_PROJECT_ID']
+  }
+
+  load () {
+    return new Crowdin({
+      apiKey: process.env.CROWDIN_API_KEY,
+      endpointUrl: `https://api.crowdin.net/api/project/${process.env.CROWDIN_PROJECT_ID}`
+    })
+  }
+}
