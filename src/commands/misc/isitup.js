@@ -16,11 +16,11 @@ module.exports = class IsItUp extends Command {
     const site = regex.exec(url)
     const { body } = await snekfetch.get(`https://isitup.org/${site[0]}.json`)
     if (body.response_code) {
-      embed.setTitle(t('commands:isitup.isUp', {body}))
-        .setDescription(t('commands:isitup.details', {body.response_time * 1000, body}))
+      embed.setTitle(t('commands:isitup.isUp'))
+        .setDescription(t('commands:isitup.details', {body}))
     } else {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:isitup.isDown', {body}))
+        .setTitle(t('commands:isitup.isDown'))
     }
     channel.send(embed).then(() => channel.stopTyping())
   }
