@@ -80,7 +80,7 @@ module.exports = class Command {
       .setColor(Constants.ERROR_COLOR)
       .setTitle(embedContent ? content.title : content)
 
-    if (showUsage && !embedContent) {
+    if ((content.showUsage || showUsage) && !embedContent) {
       embed.setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t(`commands:${this.name}.commandUsage`)}\``)
     } else if (embedContent) {
       embed.setDescription(content.description)
