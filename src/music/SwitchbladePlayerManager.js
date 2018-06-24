@@ -51,7 +51,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
           case 'soundcloud':
             return new SoundcloudSong(song, requestedBy, this.client.apis.soundcloud).loadInfo()
           default:
-            return new Song(songs[0], requestedBy)
+            return new Song(songs[0], requestedBy).loadInfo()
         }
       } else {
         const pInfo = MusicUtils.getPlaylistInfo(identifier)
@@ -59,7 +59,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
           case 'youtube':
             return new YoutubePlaylist(pInfo, songs, requestedBy, this.client.apis.youtube).loadInfo()
           default:
-            return new Playlist(pInfo, songs, requestedBy)
+            return new Playlist(pInfo, songs, requestedBy).loadInfo()
         }
       }
     }
