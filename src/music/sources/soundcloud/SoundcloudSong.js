@@ -27,7 +27,6 @@ module.exports = class SoundcloudSong extends Song {
         }
       }
     }
-
     return this
   }
 }
