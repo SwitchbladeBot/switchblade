@@ -11,5 +11,9 @@ module.exports = {
   // Emojis
   PLAY_BUTTON: '<:playbutton:450443946041016320>',
   PAUSE_BUTTON: '<:pausebutton:450443973752782889>',
-  STOP_BUTTON: '<:stopbutton:450444121924960256>'
+  STOP_BUTTON: '<:stopbutton:450444121924960256>',
+
+  // Assets
+  COINS_PNG: 'src/assets/png/coins.png',
+  DAILY_CLOCK_PNG: 'src/assets/png/daily_clock.png'
 }
