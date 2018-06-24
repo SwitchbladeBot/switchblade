@@ -39,7 +39,13 @@ module.exports = class SoundcloudAPI extends APIWrapper {
 
     queryParams['client_id'] = this.clientId
     const query = Object.keys(queryParams).map(k => `${k}=${queryParams[k]}`).join('&')
-    return snekfetch.get(`${API_URL}${endpoint}?${query}`).then(r => r.body)
+    return snekfetch.get(`${API_URL}${endpoint}?${query}`).then(r => r.body).catch(e => {
+      if (e.statusCode === 401) {
+        this.lastClientIdUpdate = 0
+        return this.request(endpoint, queryParams)
+      }
+      return e
+    })
   }
 
   updateClientId () {
