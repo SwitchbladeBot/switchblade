@@ -72,4 +72,8 @@ module.exports = class GuildPlayer extends Player {
     if (!this.playingSong || this.playingSong.isStream) return ''
     return moment.duration(this.state.position).format(this.playingSong.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss', { trim: false })
   }
+
+  get voiceChannel () {
+    return this.client.channels.get(this.channel)
+  }
 }
