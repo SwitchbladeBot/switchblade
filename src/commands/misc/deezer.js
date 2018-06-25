@@ -1,7 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
-const Deezer = require('deezer-node-api')
-const dz = new Deezer()
 
 module.exports = class Deezer extends Command {
   constructor (client) {
@@ -17,12 +15,13 @@ module.exports = class Deezer extends Command {
     channel.startTyping()
 
     const embed = new SwitchbladeEmbed(author)
-    const track = await dz.findTracks(trackName)
-    if (track.total !== 0) {
+    const track = await this.client.apis.deezer.findTracks(trackName)
+    if (track.total > 0) {
+      const [ info ] = track.data
       embed.setColor(Constants.DEEZER_COLOR)
         .setAuthor('Deezer', 'https://i.imgur.com/lKlFtbs.png')
-        .setThumbnail(track.data[0].album.cover_big)
-        .setDescription(`[**${track.data[0].title}**](${track.data[0].link})\n${track.data[0].artist.name}`)
+        .setThumbnail(info.album.cover_big)
+        .setDescription(`[**${info.title}**](${info.link})\n${info.artist.name}`)
     } else {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:spotify.noTracksFound'))
