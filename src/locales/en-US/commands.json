@@ -218,7 +218,6 @@
     "victory": "Yay, it landed **$t(commons:{{chosenSide}})**, so you won **$t(commons:currencyWithCount, { 'count': {{count}} })**!",
     "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**",
     "noBetValue": "You need to give me a value to bet on",
-    "noCoin": "You need to give me a coin side to bet on",
-    "invalidCoinSide": "Invalid coin side\nValid coin sides: `$t(commons:tails), $t(commons:heads)`"
+    "noCoin": "You need to give me a coin side to bet on"
   }
 }
