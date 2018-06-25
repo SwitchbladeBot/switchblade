@@ -205,6 +205,10 @@
     "invalidMathExpression": "Invalid math expression",
     "result": "Result: `{{result}}`"
   },
+  "stoptyping": {
+    "commandDescription": "Forces the bot to stop typing",
+    "tryingToStop": "Trying to stop typing..."
+  },
   "isitup": {
     "commandDescription": "Check whether a website is up or down",
     "commandUsage": "<address>",
