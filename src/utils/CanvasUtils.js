@@ -15,10 +15,11 @@ module.exports = class CanvasUtils {
   static initializeHelpers () {
     // Initiliaze fonts
     registerFont('src/assets/fonts/Montserrat-Regular.ttf', {family: 'Montserrat'})
+    registerFont('src/assets/fonts/Montserrat-SemiBold.ttf', {family: 'Montserrat SemiBold'})
     registerFont('src/assets/fonts/Montserrat-Bold.ttf', {family: 'Montserrat', weight: 'bold'})
     registerFont('src/assets/fonts/Montserrat-BoldItalic.ttf', {family: 'Montserrat', style: 'italic', weight: 'bold'})
-    registerFont('src/assets/fonts/Montserrat-SemiBold.ttf', {family: 'Montserrat SemiBold'})
     registerFont('src/assets/fonts/Montserrat-Black.ttf', {family: 'Montserrat Black'})
+    registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', {family: 'Montserrat Black', style: 'italic'})
 
     // Image loading
     Image.from = function (url, localFile = false) {
