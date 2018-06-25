@@ -5,7 +5,7 @@ const moment = require('moment')
 
 const DAILY_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 
-const measureText = function(ctx, font, text) {
+const measureText = function (ctx, font, text) {
   ctx.font = font
   const measure = ctx.measureText(text)
   return {
@@ -16,16 +16,14 @@ const measureText = function(ctx, font, text) {
 
 module.exports = class CanvasTemplates {
   static async profile ({ t, client }, user) {
-    //const WIDTH = 1000
     const WIDTH = 800
     const HEIGHT = 600
     const BORDER = 25
 
     const { lastDaily, money } = await client.database.users.get(user.id)
-    
+
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
-
 
     // Background
     const profBg = await Image.from('https://i.imgur.com/mM3puy3.jpg')
@@ -37,10 +35,8 @@ module.exports = class CanvasTemplates {
     grd.addColorStop(0.35, 'rgba(114, 137, 218, 0)')
     grd.addColorStop(0.6, 'rgba(114, 137, 218, 0.8)')
     grd.addColorStop(1, 'rgba(114, 137, 218, 0.9)')
-
     ctx.fillStyle = grd
     ctx.fillRect(0, 0, WIDTH, HEIGHT)
-
 
     // Profile picture
     const PROFPIC_SIZE = 275
@@ -55,7 +51,6 @@ module.exports = class CanvasTemplates {
     const profPic = await Image.from(avatarURL)
     ctx.roundImage(profPic, BORDER, 105, PROFPIC_SIZE, PROFPIC_SIZE)
 
-
     // Text
     ctx.fillStyle = 'white'
 
@@ -63,7 +58,6 @@ module.exports = class CanvasTemplates {
     const switchbladeText = measureText(ctx, 'italic 29px "Montserrat Black"', 'SWITCHBLADE')
     ctx.font = 'italic 29px "Montserrat Black"'
     ctx.fillText('SWITCHBLADE', WIDTH - BORDER - switchbladeText.width, BORDER + switchbladeText.height)
-
 
     // Left text
 
@@ -117,7 +111,6 @@ module.exports = class CanvasTemplates {
       if (BORDER + lineText.width <= maxX) {
         ctx.fillText(l, BORDER, descriptionY)
       } else {
-        let x = 0
         ctx.fillText(l.split(' ').reduce((lw, w, i, a) => {
           const word = lw ? `${lw} ${w}` : w
           const wordText = measureText(ctx, '18px "Montserrat"', word)

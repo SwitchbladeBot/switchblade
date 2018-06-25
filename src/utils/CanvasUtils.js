@@ -24,7 +24,7 @@ module.exports = class CanvasUtils {
     // Image loading
     Image.from = function (url, localFile = false) {
       return new Promise(async (resolve, reject) => {
-        const b = await (localFile ? fs.readFile(url) : URLtoBuffer(url)) 
+        const b = await (localFile ? fs.readFile(url) : URLtoBuffer(url))
         const img = new Image()
         img.onerror = (e) => reject(e)
         img.onload = () => resolve(img)
@@ -57,7 +57,7 @@ module.exports = class CanvasUtils {
       return SCanvas
     }
 
-    Context2d.prototype.circle = function(x, y, r, a1, a2) {
+    Context2d.prototype.circle = function (x, y, r, a1, a2) {
       this.beginPath()
       this.arc(x, y, r, a1, a2, true)
       this.closePath()
