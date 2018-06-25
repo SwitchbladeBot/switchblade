@@ -4,11 +4,6 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
-  "coin": {
-    "commandDescription": "Flips a coin",
-    "flippedACoin_heads": "**{{username}}** flipped a coin and got **HEADS**!",
-    "flippedACoin_tails": "**{{username}}** flipped a coin and got **TAILS**!"
-  },
   "reverse": {
     "commandDescription": "Reverses a sentence.",
     "commandUsage": "<sentence>",
@@ -212,5 +207,18 @@
     "isDown": "{{body.domain}} is down.",
     "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
     "noWebsite": "You need to give me a website to check"
+  },
+  "coinflip": {
+    "commandDescription": "Flips a coin",
+    "landed": "I've flipped a coin and it landed **$t(commons:{{chosenSide}})**"
+  },
+  "betflip": {
+    "commandDescription": "Bets $t(commons:currency_plural) on a coin flip",
+    "commandUsage": "<value to bet> <heads | tails>",
+    "victory": "Yay, it landed **$t(commons:{{chosenSide}})**, so you won **$t(commons:currencyWithCount, { 'count': {{count}} })**!",
+    "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**",
+    "noBetValue": "You need to give me a value to bet on",
+    "noCoin": "You need to give me a coin side to bet on",
+    "invalidCoinSide": "Invalid coin side\nValid coin sides: `$t(commons:tails), $t(commons:heads)`"
   }
 }
