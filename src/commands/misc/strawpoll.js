@@ -16,8 +16,7 @@ module.exports = class Strawpoll extends Command {
   async run ({ t, author, channel }, text) {
     const embed = new SwitchbladeEmbed(author)
     const options = text.split('|')
-    const title = options[0]
-    options.shift()
+    const title = options.shift()
 
     if (options.length >= 2 && options.length <= 30) {
       channel.startTyping()
