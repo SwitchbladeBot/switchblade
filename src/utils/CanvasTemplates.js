@@ -88,29 +88,45 @@ module.exports = class CanvasTemplates {
     const coinsY = TLY - TLText.height - dailyText.height - 50
 
     const iconSize = dailyText.height + TLText.height + 10
+    const iconX = TLX - 70
 
-    ctx.drawImage(await Image.from(Constants.COINS_PNG, true), TLX - 70, coinsY - iconSize, iconSize, iconSize)
+    ctx.drawImage(await Image.from(Constants.COINS_PNG, true), iconX, coinsY - iconSize, iconSize, iconSize)
     ctx.font = '29px "Montserrat"'
     ctx.fillText('Switchcoins', TLX, coinsY - coinsText.height - 10)
     ctx.font = '39px "Montserrat Black"'
     ctx.fillText(money, TLX, coinsY)
 
-    ctx.drawImage(await Image.from(Constants.DAILY_CLOCK_PNG, true), TLX - 70, TLY - iconSize, iconSize, iconSize)
+    ctx.drawImage(await Image.from(Constants.DAILY_CLOCK_PNG, true), iconX, TLY - iconSize, iconSize, iconSize)
     ctx.font = '29px "Montserrat"'
     ctx.fillText('Next reward in', TLX, TLY - TLText.height - 10)
     ctx.font = '39px "Montserrat Black"'
     ctx.fillText(TL, TLX, TLY)
 
     // Description
-    // Maximo = 20
-    // Media = 13
     const description = [
       'Suspendisse ut enim vitae felis maximus pulvinar vitae vitae augue.', 'Integer posuere volutpat leo vitae aliquam.',
       'Donec vitae feugiat leo, at vehicula tellus. Maecenas eget rutrum risus, ut mollis massa.', 'Mauris ut sagittis elit.'
     ].join('\n')
-    console.log(description.length)
-    ctx.font = '18px "Montserrat"'
-    ctx.fillText(description, BORDER, usernameX + 62)
+
+    const maxX = iconX - 20
+    let descriptionY = usernameX + 62
+    description.split('\n').forEach(l => {
+      const lineText = measureText(ctx, '18px "Montserrat"', l)
+      const height = lineText.height
+      ctx.font = '18px "Montserrat"'
+      if (BORDER + lineText.width <= maxX) {
+        ctx.fillText(l, BORDER, descriptionY)
+      } else {
+        let x = 0
+        ctx.fillText(l.split(' ').reduce((lw, w, i, a) => {
+          const word = lw ? `${lw} ${w}` : w
+          const wordText = measureText(ctx, '18px "Montserrat"', word)
+          if (BORDER + wordText.width <= maxX && !a.done) return word
+          else a.done = true; return lw
+        }, ''), BORDER, descriptionY)
+      }
+      descriptionY += height + 5
+    })
 
     return canvas.toBuffer()
   }
