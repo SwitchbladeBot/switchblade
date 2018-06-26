@@ -186,6 +186,7 @@
     "noMember": "You need to mention someone",
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
+    "cantPayYourself": "You can't pay yourself",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   },
   "xkcd": {
