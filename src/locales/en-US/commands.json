@@ -216,5 +216,12 @@
     "isDown": "That website is down.",
     "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
     "noWebsite": "You need to give me a website to check"
+  },
+  "strawpoll": {
+    "commandDescription": "Creates a Straw Poll",
+    "commandUsage": "<poll title|<option 1|option 2|option 3...>",
+    "noParameters": "You need to give me a title and some options",
+    "optionsNumberError": "You need to give me between 2 and 30 options",
+    "clickHere": "Click here to vote"
   }
 }
