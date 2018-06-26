@@ -15,7 +15,7 @@ module.exports = class QRCode extends Command {
   async run ({ t, author, channel }, text) {
     channel.send(
       new SwitchbladeEmbed(author)
-        .setImage('https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(text))
+        .setImage(`https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(text)}`)
     )
   }
 }
