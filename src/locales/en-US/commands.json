@@ -216,5 +216,18 @@
     "isDown": "That website is down.",
     "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
     "noWebsite": "You need to give me a website to check"
+  },
+  "samp": {
+    "commandDescription": "Shows information about a San Andreas: Multiplayer server",
+    "commandUsage": "<ip>[:port]",
+    "noIP": "You need to give me an IP!",
+    "serverUnreachableTitle": "I couldn't reach this server",
+    "serverUnreachableDescription": "Check the IP and port, or try again later.",
+    "address": "Address",
+    "version": "Version",
+    "players": "Players",
+    "map": "Map",
+    "gameMode": "Game Mode",
+    "time": "Time"
   }
 }
