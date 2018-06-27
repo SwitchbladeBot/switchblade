@@ -181,6 +181,7 @@
     "noMember": "You need to mention someone",
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
+    "cantPayYourself": "You can't pay yourself",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   },
   "xkcd": {
@@ -199,6 +200,10 @@
     "needMathExpression": "You need to give me a math expression to evaluate",
     "invalidMathExpression": "Invalid math expression",
     "result": "Result: `{{result}}`"
+  },
+  "stoptyping": {
+    "commandDescription": "Forces the bot to stop typing",
+    "tryingToStop": "Trying to stop typing..."
   },
   "isitup": {
     "commandDescription": "Check whether a website is up or down",
@@ -219,5 +224,17 @@
     "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**",
     "noBetValue": "You need to give me a value to bet on",
     "noCoin": "You need to give me a coin side to bet on"
+  },
+  "qrcode": {
+    "commandDescription": "Generates a QR Code",
+    "commandUsage": "<text>",
+    "noText": " You need to give me some text!"
+  },
+  "strawpoll": {
+    "commandDescription": "Creates a Straw Poll",
+    "commandUsage": "<poll title|<option 1|option 2|option 3...>",
+    "noParameters": "You need to give me a title and some options",
+    "optionsNumberError": "You need to give me between 2 and 30 options",
+    "clickHere": "Click here to vote"
   }
 }

@@ -17,7 +17,10 @@ module.exports = class Pay extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const senderDoc = await this.client.database.users.get(author.id)
-    if (value > senderDoc.money) {
+    if (author === user) {
+      embed.setColor(Constants.ERROR_COLOR)
+        .setDescription(t('commands:pay.cantPayYourself'))
+    } else if (value > senderDoc.money) {
       embed.setColor(Constants.ERROR_COLOR)
         .setDescription(t('commands:pay.notEnoughMoney'))
     } else {
