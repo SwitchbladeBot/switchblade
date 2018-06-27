@@ -186,6 +186,7 @@
     "noMember": "You need to mention someone",
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
+    "cantPayYourself": "You can't pay yourself",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   },
   "xkcd": {
@@ -229,5 +230,17 @@
     "map": "Map",
     "gameMode": "Game Mode",
     "time": "Time"
+  },
+  "qrcode": {
+    "commandDescription": "Generates a QR Code",
+    "commandUsage": "<text>",
+    "noText": " You need to give me some text!"
+  },
+  "strawpoll": {
+    "commandDescription": "Creates a Straw Poll",
+    "commandUsage": "<poll title|<option 1|option 2|option 3...>",
+    "noParameters": "You need to give me a title and some options",
+    "optionsNumberError": "You need to give me between 2 and 30 options",
+    "clickHere": "Click here to vote"
   }
 }

@@ -22,5 +22,7 @@ module.exports = class APIWrapper {
    * Loads the API
    * @returns {Object} - The loaded API
    */
-  load () {}
+  load () {
+    return this
+  }
 }
