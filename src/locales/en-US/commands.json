@@ -218,6 +218,11 @@
     "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
     "noWebsite": "You need to give me a website to check"
   },
+  "qrcode": {
+    "commandDescription": "Generates a QR Code",
+    "commandUsage": "<text>",
+    "noText": " You need to give me some text!"
+  },
   "strawpoll": {
     "commandDescription": "Creates a Straw Poll",
     "commandUsage": "<poll title|<option 1|option 2|option 3...>",
