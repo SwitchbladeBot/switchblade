@@ -19,8 +19,7 @@ module.exports = class SAMP extends Command {
     const port = address.split(':')[1] || 7777
     try {
       const response = await this.queryPromise({host, port})
-      embed
-        .setAuthor('San Andreas: Multiplayer', 'http://1.bp.blogspot.com/-AY3d9tMV8nM/Ton8LlgoJgI/AAAAAAAAAMg/VFID_9mI-Co/s1600/SAMP.png')
+      embed.setAuthor('San Andreas: Multiplayer', 'http://1.bp.blogspot.com/-AY3d9tMV8nM/Ton8LlgoJgI/AAAAAAAAAMg/VFID_9mI-Co/s1600/SAMP.png')
         .setColor(0xF07B0F)
         .setTitle(response.hostname)
         .setURL(this.cleanURL(response.rules.weburl))
@@ -33,12 +32,10 @@ module.exports = class SAMP extends Command {
     } catch (err) {
       embed.setColor(Constants.ERROR_COLOR)
       if (err === 'Host unavailable') {
-        embed
-          .setTitle(t('commands:samp.serverUnreachableTitle'))
+        embed.setTitle(t('commands:samp.serverUnreachableTitle'))
           .setDescription(t('commands:samp.serverUnreachableDescription'))
       } else {
-        embed
-          .setTitle(t('errors:generic'))
+        embed.setTitle(t('errors:generic'))
           .setDescription(`\`${err}\``)
       }
     }
