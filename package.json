@@ -46,6 +46,7 @@
     "snekfetch": "^4.0.2",
     "transform-props": "^1.0.1",
     "uws": "^10.148.0",
+    "samp-query": "latest",
     "rss-parser": "latest"
   },
   "devDependencies": {
