@@ -242,5 +242,9 @@
     "noParameters": "You need to give me a title and some options",
     "optionsNumberError": "You need to give me between 2 and 30 options",
     "clickHere": "Click here to vote"
+  },
+  "imageoftheday": {
+    "commandDescription": "Shows the NASA Image of the Day",
+    "embedAuthor": "NASA Image of the Day"
   }
 }
