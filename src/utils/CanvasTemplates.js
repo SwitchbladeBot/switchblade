@@ -55,7 +55,7 @@ module.exports = class CanvasTemplates {
     const { lastDaily, money, personalText } = await DATABASE_QUERY
 
     const LABEL_FONT = '29px "Montserrat"'
-    const VALUE_FONT = '39px "Montserrat Black"'
+    const VALUE_FONT = 'bold 39px "Montserrat"'
 
     const TL = moment.duration(Math.max(DAILY_INTERVAL - (Date.now() - lastDaily), 0)).format('h[h] m[m] s[s]')
     const balanceX = WIDTH - Math.max(
@@ -74,8 +74,8 @@ module.exports = class CanvasTemplates {
 
     // User info
     const userInfoY = 105 + PROFPIC_SIZE + 25
-    const usernameY = ctx.writeParagraph(user.username, '44px "Montserrat Black"', BORDER, userInfoY, iconX - BORDER, userInfoY + 30).bottomY
-    const discriminatorY = ctx.write(`#${user.discriminator}`, BORDER, usernameY + 15, '20px "Montserrat SemiBold"', ALIGN.TOP_LEFT).bottomY
+    const usernameY = ctx.writeParagraph(user.username, 'bold 44px "Montserrat"', BORDER, userInfoY, iconX - BORDER, userInfoY + 30).bottomY
+    const discriminatorY = ctx.write(`#${user.discriminator}`, BORDER, usernameY + 15, 'bold 20px "Montserrat"', ALIGN.TOP_LEFT).bottomY
 
     // Description
     ctx.writeParagraph(personalText, '18px "Montserrat"', BORDER, discriminatorY + 10, iconX - BORDER, HEIGHT - BORDER)
