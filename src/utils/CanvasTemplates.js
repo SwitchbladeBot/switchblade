@@ -23,9 +23,6 @@ module.exports = class CanvasTemplates {
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
-    // Background
-    //ctx.drawImage(await BACKGROUND_ASSET, 0, 0, WIDTH, HEIGHT)
-
     // Background gradient
     const backgroundColor = '#7289DA'
     const alphaToHex = (a) => Math.floor(a * 255).toString(16).padStart(2, '0')
