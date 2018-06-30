@@ -7,7 +7,7 @@ module.exports = class Deezer extends Command {
 
     this.name = 'deezer'
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:spotify.noTrackName'})
+      new StringParameter({full: true, missingError: 'commands:deezer.noTrackName'})
     )
   }
 
@@ -24,7 +24,7 @@ module.exports = class Deezer extends Command {
         .setDescription(`[**${info.title}**](${info.link})\n${info.artist.name}`)
     } else {
       embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:spotify.noTracksFound'))
+        .setTitle(t('commands:deezer.noTracksFound'))
     }
 
     channel.send(embed).then(() => channel.stopTyping())
