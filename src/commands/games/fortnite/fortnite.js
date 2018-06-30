@@ -1,6 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
-const Fortnite = require('fortnite-api')
 
 module.exports = class Deezer extends Command {
   constructor (client) {
