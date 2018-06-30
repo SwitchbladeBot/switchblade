@@ -1,5 +1,5 @@
 const Constants = require('./Constants')
-const { ALIGN, measureText, hexToRGB } = require('./CanvasUtils.js')
+const { ALIGN, measureText } = require('./CanvasUtils.js')
 
 const { createCanvas, Image } = require('canvas')
 const moment = require('moment')
@@ -29,7 +29,7 @@ module.exports = class CanvasTemplates {
     // Background gradient
     const backgroundColor = '#7289DA'
     const alphaToHex = (a) => Math.floor(a * 255).toString(16).padStart(2, '0')
-    const gradientColor = (a) => `${backgroundColor}${alphaToHex(a)}`
+    const gradientColor = (a) => backgroundColor + alphaToHex(a)
 
     const grd = ctx.createLinearGradient(0, 0, 0, HEIGHT)
     grd.addColorStop(0, gradientColor(0))
