@@ -27,8 +27,9 @@ module.exports = class CanvasTemplates {
     ctx.drawImage(await BACKGROUND_ASSET, 0, 0, WIDTH, HEIGHT)
 
     // Background gradient
-    const gradientRGB = hexToRGB('#7289da')
-    const gradientColor = (a) => `rgba(${gradientRGB.r}, ${gradientRGB.g}, ${gradientRGB.b}, ${a})`
+    const backgroundColor = '#7289DA'
+    const alphaToHex = (a) => Math.floor(a * 255).toString(16).padStart(2, '0')
+    const gradientColor = (a) => `${backgroundColor}${alphaToHex(a)}`
 
     const grd = ctx.createLinearGradient(0, 0, 0, HEIGHT)
     grd.addColorStop(0, gradientColor(0))
