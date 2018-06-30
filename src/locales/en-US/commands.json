@@ -225,6 +225,19 @@
     "noBetValue": "You need to give me a value to bet on",
     "noCoin": "You need to give me a coin side to bet on"
   },
+  "samp": {
+    "commandDescription": "Shows information about a San Andreas: Multiplayer server",
+    "commandUsage": "<ip>[:port]",
+    "noIP": "You need to give me an IP!",
+    "serverUnreachableTitle": "I couldn't reach this server",
+    "serverUnreachableDescription": "Check the IP and port, or try again later.",
+    "address": "Address",
+    "version": "Version",
+    "players": "Players",
+    "map": "Map",
+    "gameMode": "Game Mode",
+    "time": "Time"
+  },
   "qrcode": {
     "commandDescription": "Generates a QR Code",
     "commandUsage": "<text>",
@@ -236,5 +249,9 @@
     "noParameters": "You need to give me a title and some options",
     "optionsNumberError": "You need to give me between 2 and 30 options",
     "clickHere": "Click here to vote"
+  },
+  "imageoftheday": {
+    "commandDescription": "Shows the NASA Image of the Day",
+    "embedAuthor": "NASA Image of the Day"
   }
 }
