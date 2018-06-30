@@ -12,6 +12,20 @@ module.exports = class CanvasTemplates {
     const HEIGHT = 600
     const BORDER = 25
 
+    const FONTS = (() => {
+      const MEME = Math.random() > 0.99 ? '"Comic Sans MS"' : null
+      const STRONG = MEME || '"Montserrat Black"'
+      const REGULAR = MEME || '"Montserrat"'
+      return {
+        BRAND: `italic 29px ${STRONG}`,
+        BALANCE_LABEL: `29px ${REGULAR}`,
+        BALANCE_VALUE: `bold 39px ${REGULAR}`,
+        USERNAME: `bold 44px ${REGULAR}`,
+        DISCRIMINATOR: `bold 20px ${REGULAR}`,
+        DESCRIPTION: `18px ${REGULAR}`
+      }
+    })()
+
     const IMAGE_ASSETS = Promise.all([
       Image.from(user.displayAvatarURL.replace('.gif', '.png')),
       Image.from(Constants.COINS_PNG, true),
@@ -49,36 +63,33 @@ module.exports = class CanvasTemplates {
     ctx.fillStyle = 'white'
 
     // SWITCHBLADE text
-    ctx.write('SWITCHBLADE', WIDTH - BORDER, BORDER, 'italic 29px "Montserrat Black"', ALIGN.TOP_RIGHT)
+    ctx.write('SWITCHBLADE', WIDTH - BORDER, BORDER, FONTS.BRAND, ALIGN.TOP_RIGHT)
 
     // Balance info
     const { lastDaily, money, personalText } = await DATABASE_QUERY
 
-    const LABEL_FONT = '29px "Montserrat"'
-    const VALUE_FONT = 'bold 39px "Montserrat"'
-
     const TL = moment.duration(Math.max(DAILY_INTERVAL - (Date.now() - lastDaily), 0)).format('h[h] m[m] s[s]')
     const balanceX = WIDTH - Math.max(
-      measureText(ctx, VALUE_FONT, TL).width,
-      measureText(ctx, LABEL_FONT, 'Next reward in').width
+      measureText(ctx, FONTS.BALANCE_VALUE, TL).width,
+      measureText(ctx, FONTS.BALANCE_LABEL, 'Next reward in').width
     ) - BORDER
 
-    const timeLeft = ctx.write(TL, balanceX, HEIGHT - BORDER, VALUE_FONT)
-    const timeLeftLabel = ctx.write('Next reward in', balanceX, timeLeft.topY - 10, LABEL_FONT)
+    const timeLeft = ctx.write(TL, balanceX, HEIGHT - BORDER, FONTS.BALANCE_VALUE)
+    const timeLeftLabel = ctx.write('Next reward in', balanceX, timeLeft.topY - 10, FONTS.BALANCE_LABEL)
 
-    const coins = ctx.write(money, balanceX, timeLeftLabel.topY - 40, VALUE_FONT)
-    ctx.write('Switchcoins', balanceX, coins.topY - 10, LABEL_FONT)
+    const coins = ctx.write(money, balanceX, timeLeftLabel.topY - 40, FONTS.BALANCE_VALUE)
+    ctx.write('Switchcoins', balanceX, coins.topY - 10, FONTS.BALANCE_LABEL)
 
     const iconSize = timeLeft.height + timeLeftLabel.height + 10
     const iconX = balanceX - 70
 
     // User info
     const userInfoY = 105 + PROFPIC_SIZE + 25
-    const usernameY = ctx.writeParagraph(user.username, 'bold 44px "Montserrat"', BORDER, userInfoY, iconX - BORDER, userInfoY + 30).bottomY
-    const discriminatorY = ctx.write(`#${user.discriminator}`, BORDER, usernameY + 15, 'bold 20px "Montserrat"', ALIGN.TOP_LEFT).bottomY
+    const usernameY = ctx.writeParagraph(user.username, FONTS.USERNAME, BORDER, userInfoY, iconX - BORDER, userInfoY + 30).bottomY
+    const discriminatorY = ctx.write(`#${user.discriminator}`, BORDER, usernameY + 15, FONTS.DISCRIMINATOR, ALIGN.TOP_LEFT).bottomY
 
     // Description
-    ctx.writeParagraph(personalText, '18px "Montserrat"', BORDER, discriminatorY + 10, iconX - BORDER, HEIGHT - BORDER)
+    ctx.writeParagraph(personalText, FONTS.DESCRIPTION, BORDER, discriminatorY + 10, iconX - BORDER, HEIGHT - BORDER)
 
     // Image handling
     const [ avatarImage, coinsImage, clockImage, backgroundImage ] = await IMAGE_ASSETS

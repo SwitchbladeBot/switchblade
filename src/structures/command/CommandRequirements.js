@@ -34,6 +34,8 @@ module.exports = class CommandRequirements {
       return new CommandError(t('errors:nsfwOnly'))
     }
 
+    console.log(this.voiceChannelOnly)
+    console.log(voiceChannel)
     if (this.voiceChannelOnly && !voiceChannel) {
       return new CommandError(t('errors:voiceChannelOnly'))
     }
