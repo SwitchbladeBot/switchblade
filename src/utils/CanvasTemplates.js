@@ -75,7 +75,6 @@ module.exports = class CanvasTemplates {
     const iconX = balanceX - 70
 
     // User info
-    const maxX = iconX - 15
     const userInfoY = 105 + PROFPIC_SIZE + 25
     const usernameY = ctx.writeParagraph(user.username, '44px "Montserrat Black"', BORDER, userInfoY, iconX - BORDER, userInfoY + 30).bottomY
     const discriminatorY = ctx.write(`#${user.discriminator}`, BORDER, usernameY + 15, '20px "Montserrat SemiBold"', ALIGN.TOP_LEFT).bottomY
