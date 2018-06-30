@@ -18,6 +18,6 @@ module.exports = class Profile extends Command {
     channel.startTyping()
     const before = Date.now()
     const profile = await CanvasTemplates.profile({ t, client }, user)
-    channel.send(Date.now() - before, new Attachment(profile, 'profile.jpg')).then(() => channel.stopTyping())
+    channel.send(`Took **${Date.now() - before}**ms`, new Attachment(profile, 'profile.jpg')).then(() => channel.stopTyping())
   }
 }

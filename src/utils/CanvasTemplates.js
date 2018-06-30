@@ -24,7 +24,7 @@ module.exports = class CanvasTemplates {
     const ctx = canvas.getContext('2d')
 
     // Background gradient
-    const backgroundColor = '#7289DA'
+    const backgroundColor = process.env.EMBED_COLOR || '#7289DA'
     const alphaToHex = (a) => Math.floor(a * 255).toString(16).padStart(2, '0')
     const gradientColor = (a) => backgroundColor + alphaToHex(a)
 
