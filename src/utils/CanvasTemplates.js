@@ -17,15 +17,14 @@ module.exports = class CanvasTemplates {
       Image.from(Constants.COINS_PNG, true),
       Image.from(Constants.DAILY_CLOCK_PNG, true)
     ])
-    const BACKGROUND_ASSET = await Image.from('https://i.imgur.com/mM3puy3.jpg')
-
-    const { lastDaily, personalText, money } = await client.database.users.get(user.id)
+    const DATABASE_QUERY = client.database.users.get(user.id)
+    const BACKGROUND_ASSET = Image.from('https://i.imgur.com/mM3puy3.jpg')
 
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
     // Background
-    ctx.drawImage(BACKGROUND_ASSET, 0, 0, WIDTH, HEIGHT)
+    ctx.drawImage(await BACKGROUND_ASSET, 0, 0, WIDTH, HEIGHT)
 
     // Background gradient
     const gradientRGB = hexToRGB('#7289da')
@@ -55,6 +54,8 @@ module.exports = class CanvasTemplates {
     ctx.write('SWITCHBLADE', WIDTH - BORDER, BORDER, 'italic 29px "Montserrat Black"', ALIGN.TOP_RIGHT)
 
     // Balance info
+    const { lastDaily, money, personalText } = await DATABASE_QUERY
+
     const LABEL_FONT = '29px "Montserrat"'
     const VALUE_FONT = '39px "Montserrat Black"'
 
