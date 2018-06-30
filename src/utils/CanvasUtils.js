@@ -94,6 +94,48 @@ module.exports = class CanvasUtils {
         height
       }
     }
+
+    Context2d.prototype.writeParagraph = function (text, font, startX, startY, maxX, maxY, lineDistance = 5) {
+      const lines = text.split('\n')
+      let currentY = startY
+      let lastWrite = null
+      for (let i = 0; i < lines.length; i++) {
+        const l = lines[i]
+        if (!l) continue
+
+        const lineText = self.measureText(this, font, l)
+        const height = lineText.height
+        if (currentY > maxY) break
+
+        if (lineText.width <= maxX) {
+          lastWrite = this.write(l, startX, currentY, font, ALIGN.TOP_LEFT)
+        } else {
+          if (l.includes(' ')) {
+            const words = l.split(' ')
+            const maxIndex = words.findIndex((w, j) => {
+              const word = words.slice(0, j + 1).join(' ')
+              const wordText = self.measureText(this, font, word)
+              if (startX + wordText.width <= maxX) return false
+              else return true
+            })
+            const missingWords = words.slice(maxIndex, words.length)
+            if (missingWords.length > 0) lines.splice(i + 1, 0, missingWords.join(' '))
+            lastWrite = this.write(words.slice(0, maxIndex).join(' '), startX, currentY, font, ALIGN.TOP_LEFT)
+          } else {
+            const letters = l.split('')
+            const maxIndex = letters.findIndex((w, j) => {
+              const word = letters.slice(0, j + 1).join('')
+              const wordText = self.measureText(this, font, word)
+              if (startX + wordText.width <= maxX) return false
+              else return true
+            })
+            lastWrite = this.write(letters.slice(0, maxIndex).join(''), startX, currentY, font, ALIGN.TOP_LEFT)
+          }
+        }
+        currentY += height + lineDistance
+      }
+      return lastWrite
+    }
   }
 
   static measureText (ctx, font, text) {

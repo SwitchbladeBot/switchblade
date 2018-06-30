@@ -75,61 +75,13 @@ module.exports = class CanvasTemplates {
     const iconX = balanceX - 70
 
     // User info
-    const usernameY = ctx.write(user.username, BORDER, 105 + PROFPIC_SIZE + 25, '44px "Montserrat Black"', ALIGN.TOP_LEFT).bottomY
-    const discriminatorY = ctx.write(`#${user.discriminator}`, BORDER, usernameY + 10, '20px "Montserrat SemiBold"', ALIGN.TOP_LEFT).bottomY
+    const maxX = iconX - 15
+    const userInfoY = 105 + PROFPIC_SIZE + 25
+    const usernameY = ctx.writeParagraph(user.username, '44px "Montserrat Black"', BORDER, userInfoY, iconX - BORDER, userInfoY + 30).bottomY
+    const discriminatorY = ctx.write(`#${user.discriminator}`, BORDER, usernameY + 15, '20px "Montserrat SemiBold"', ALIGN.TOP_LEFT).bottomY
 
     // Description
-    let descriptionY = discriminatorY + 10
-    const maxX = iconX - 15
-
-    /* DEBUG
-    ctx.strokeStyle = '#42f4f1'
-    ctx.beginPath()
-    ctx.moveTo(BORDER, descriptionY)
-    ctx.lineTo(maxX, descriptionY)
-    ctx.lineTo(maxX, HEIGHT - BORDER)
-    ctx.lineTo(BORDER, HEIGHT - BORDER)
-    ctx.lineTo(BORDER, descriptionY)
-    ctx.stroke()
-    */
-
-    const lines = personalText.split('\n')
-    for (let i = 0; i < lines.length; i++) {
-      const l = lines[i]
-      if (!l) continue
-
-      const font = '18px "Montserrat"'
-      const lineText = measureText(ctx, font, l)
-      const height = lineText.height
-      if (descriptionY > HEIGHT - BORDER) break
-
-      if (BORDER + lineText.width <= maxX) {
-        ctx.write(l, BORDER, descriptionY, font, ALIGN.TOP_LEFT)
-      } else {
-        if (l.includes(' ')) {
-          const words = l.split(' ')
-          const maxIndex = words.findIndex((w, j) => {
-            const word = words.slice(0, j + 1).join(' ')
-            const wordText = measureText(ctx, font, word)
-            if (BORDER + wordText.width <= maxX) return false
-            else return true
-          })
-          const missingWords = words.slice(maxIndex, words.length)
-          if (missingWords.length > 0) lines.splice(i + 1, 0, missingWords.join(' '))
-          ctx.write(words.slice(0, maxIndex).join(' '), BORDER, descriptionY, font, ALIGN.TOP_LEFT)
-        } else {
-          const letters = l.split('')
-          const maxIndex = letters.findIndex((w, j) => {
-            const word = letters.slice(0, j + 1).join('')
-            const wordText = measureText(ctx, font, word)
-            if (BORDER + wordText.width <= maxX) return false
-            else return true
-          })
-          ctx.write(letters.slice(0, maxIndex).join(''), BORDER, descriptionY, font, ALIGN.TOP_LEFT)
-        }
-      }
-      descriptionY += height + 5
-    }
+    ctx.writeParagraph(personalText, '18px "Montserrat"', BORDER, discriminatorY + 10, iconX - BORDER, HEIGHT - BORDER)
 
     // Image handling
     const [ avatarImage, coinsImage, clockImage ] = await USED_ASSETS
