@@ -21,8 +21,9 @@ module.exports = class MainListener extends EventListener {
         user: this.user.id,
         shards: 1
       })
+      this.log('Player manager connection established!', 'Music')
     } else {
-      this.log('Player manager didn\'t load correctly!', 'Music')
+      this.log('Player manager connection didn\'t establish!', 'Music')
     }
   }
 
