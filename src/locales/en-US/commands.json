@@ -246,7 +246,7 @@
   "imageoftheday": {
     "commandDescription": "Shows the NASA Image of the Day",
     "embedAuthor": "NASA Image of the Day"
-  }
+  },
   "deezer": {
     "commandDescription": "Searches for a song on Deezer",
     "commandUsage": "<track name>",
