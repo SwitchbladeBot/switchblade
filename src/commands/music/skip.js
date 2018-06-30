@@ -6,7 +6,7 @@ module.exports = class Skip extends Command {
     this.name = 'next'
     this.aliases = ['skip']
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true})
+    this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true})
   }
 
   async run ({ t, author, channel, guild }) {

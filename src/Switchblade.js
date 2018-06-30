@@ -54,8 +54,10 @@ module.exports = class Switchblade extends Client {
    * Adds a new error log entry to the console.
    * @param {string} message - Error message
    */
-  logError (message) {
-    console.error('[ErrorLog]', message)
+  logError (...args) {
+    const message = args[0]
+    const tags = args.slice(1).map(t => `[${t}]`)
+    console.error('[ErrorLog]', ...tags, message)
   }
 
   // Commands
@@ -204,6 +206,11 @@ module.exports = class Switchblade extends Client {
   // Database
   initializeDatabase (DBWrapper, options = {}) {
     this.database = new DBWrapper(options)
-    this.database.connect().then(() => this.log('Database connection established!', 'DB')).catch(this.logError)
+    this.database.connect()
+      .then(() => this.log('Database connection established!', 'DB'))
+      .catch((e) => {
+        this.logError(e.message, 'Database')
+        this.database = null
+      })
   }
 }
