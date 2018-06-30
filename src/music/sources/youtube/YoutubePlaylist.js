@@ -12,18 +12,19 @@ module.exports = class YoutubePlaylist extends Playlist {
   }
 
   async loadInfo () {
-    // Load playlist
     const yt = this._Youtube
+    // Load songs
+    this.songs = await Promise.all(this.songs.map(s => new YoutubeSong(s, this.requestedBy, yt).loadInfo()))
+
+    // Load playlist
     const playlist = await yt.getPlaylist(this.identifier)
     if (playlist) {
       this.title = playlist.snippet.title
       this.description = playlist.snippet.description
       this.artwork = yt.getBestThumbnail(playlist.snippet.thumbnails).url
+    } else {
+      return null
     }
-
-    // Load songs
-    this.songs = await Promise.all(this.songs.map(s => new YoutubeSong(s, this.requestedBy, yt).loadInfo()))
-
     return this
   }
 }

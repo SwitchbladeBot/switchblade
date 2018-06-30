@@ -186,6 +186,7 @@
     "noMember": "You need to mention someone",
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
+    "cantPayYourself": "You can't pay yourself",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
   },
   "xkcd": {
@@ -205,6 +206,10 @@
     "invalidMathExpression": "Invalid math expression",
     "result": "Result: `{{result}}`"
   },
+  "stoptyping": {
+    "commandDescription": "Forces the bot to stop typing",
+    "tryingToStop": "Trying to stop typing..."
+  },
   "isitup": {
     "commandDescription": "Check whether a website is up or down",
     "commandUsage": "<address>",
@@ -212,5 +217,34 @@
     "isDown": "That website is down.",
     "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
     "noWebsite": "You need to give me a website to check"
+  },
+  "samp": {
+    "commandDescription": "Shows information about a San Andreas: Multiplayer server",
+    "commandUsage": "<ip>[:port]",
+    "noIP": "You need to give me an IP!",
+    "serverUnreachableTitle": "I couldn't reach this server",
+    "serverUnreachableDescription": "Check the IP and port, or try again later.",
+    "address": "Address",
+    "version": "Version",
+    "players": "Players",
+    "map": "Map",
+    "gameMode": "Game Mode",
+    "time": "Time"
+  },
+  "qrcode": {
+    "commandDescription": "Generates a QR Code",
+    "commandUsage": "<text>",
+    "noText": " You need to give me some text!"
+  },
+  "strawpoll": {
+    "commandDescription": "Creates a Straw Poll",
+    "commandUsage": "<poll title|<option 1|option 2|option 3...>",
+    "noParameters": "You need to give me a title and some options",
+    "optionsNumberError": "You need to give me between 2 and 30 options",
+    "clickHere": "Click here to vote"
+  },
+  "imageoftheday": {
+    "commandDescription": "Shows the NASA Image of the Day",
+    "embedAuthor": "NASA Image of the Day"
   }
 }

@@ -15,7 +15,6 @@ module.exports = class YoutubeSong extends Song {
       this.artwork = yt.getBestThumbnail(video.snippet.thumbnails).url
       this.richInfo = { viewCount, likeCount, dislikeCount, favoriteCount, commentCount }
     }
-
     return this
   }
 }

@@ -7,6 +7,7 @@ module.exports = {
   NPM_COLOR: '#CB3837',
   E621_COLOR: '258CF5',
   XKCD_COLOR: '96A8C8',
+  DEEZER_COLOR: 'E3231D',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:450443946041016320>',

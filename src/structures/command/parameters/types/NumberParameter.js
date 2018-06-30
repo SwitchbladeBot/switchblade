@@ -11,12 +11,12 @@ module.exports = class NumberParameter extends Parameter {
     this.max = Number(options.max)
   }
 
-  parse (arg) {
+  parse (arg, { t }) {
     if (!arg) return
 
     let nmb = Number(arg)
     if (isNull(nmb)) {
-      return new CommandError('You need to give me a valid number!')
+      return new CommandError(t('errors:invalidNumber'))
     }
 
     if (!isNull(this.min)) nmb = Math.max(nmb, this.min)
