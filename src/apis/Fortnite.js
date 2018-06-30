@@ -1,14 +1,14 @@
 const { APIWrapper } = require('../')
 const Fortnite = require('fortnite-api')
 
-module.exports = class SpotifyAPI extends APIWrapper {
+module.exports = class FortniteAPI extends APIWrapper {
   constructor () {
     super()
     this.name = 'fortnite'
     this.envVars = ['FORTNITE_EMAIL', 'FORTNITE_PASSWORD', 'FORTNITE_LAUNCHER_TOKEN', 'FORTNITE_CLIENT_TOKEN']
   }
 
-  async load () {
+  load () {
     const api = new Fortnite(
       [
         process.env.FORTNITE_EMAIL,
@@ -17,7 +17,7 @@ module.exports = class SpotifyAPI extends APIWrapper {
         process.env.FORTNITE_CLIENT_TOKEN
       ]
     )
-    await api.login()
+    api.login()
     return api
   }
 }
