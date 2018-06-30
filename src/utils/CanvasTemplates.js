@@ -49,7 +49,7 @@ module.exports = class CanvasTemplates {
     ctx.fillStyle = 'white'
 
     // SWITCHBLADE text
-    ctx.write('SWITCHBLADE', WIDTH - BORDER, BORDER, 'italic 29px "Montserrat Black"', ALIGN.TOP_RIGHT)
+    ctx.write('SWITCHBLADE', WIDTH - BORDER, BORDER, 'bold italic 29px "Montserrat"', ALIGN.TOP_RIGHT)
 
     // Balance info
     const { lastDaily, money, personalText } = await DATABASE_QUERY
