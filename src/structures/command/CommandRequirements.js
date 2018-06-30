@@ -14,9 +14,20 @@ module.exports = class CommandRequirements {
     this.nsfwOnly = !!options.nsfwOnly
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
+
+    this.databaseOnly = !!options.databaseOnly
+    this.playerManagerOnly = !!options.playerManagerOnly
   }
 
   handle ({ t, author, channel, client, guild, member, voiceChannel }, args) {
+    if (this.databaseOnly && !client.database) {
+      return new CommandError(t('errors:databaseOnly'))
+    }
+
+    if (this.playerManagerOnly && !client.playerManager) {
+      return new CommandError(t('errors:playerManagerOnly'))
+    }
+
     if (this.devOnly) {
       const botGuild = client.guilds.get(process.env.BOT_GUILD)
       const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)

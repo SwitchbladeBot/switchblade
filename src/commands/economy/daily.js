@@ -1,10 +1,13 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandRequirements } = CommandStructures
 const prettyMs = require('pretty-ms')
 
 module.exports = class Daily extends Command {
   constructor (client) {
     super(client)
     this.name = 'daily'
+
+    this.requirements = new CommandRequirements(this, {guildOnly: true, databaseOnly: true})
   }
 
   async run ({ t, author, channel }) {
