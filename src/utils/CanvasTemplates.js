@@ -12,19 +12,19 @@ module.exports = class CanvasTemplates {
     const HEIGHT = 600
     const BORDER = 25
 
-    const USED_ASSETS = Promise.all([
+    const IMAGE_ASSETS = Promise.all([
       Image.from(user.displayAvatarURL.replace('.gif', '.png')),
       Image.from(Constants.COINS_PNG, true),
-      Image.from(Constants.DAILY_CLOCK_PNG, true)
+      Image.from(Constants.DAILY_CLOCK_PNG, true),
+      Image.from('https://i.imgur.com/mM3puy3.jpg')
     ])
     const DATABASE_QUERY = client.database.users.get(user.id)
-    const BACKGROUND_ASSET = Image.from('https://i.imgur.com/mM3puy3.jpg')
 
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
     // Background
-    ctx.drawImage(await BACKGROUND_ASSET, 0, 0, WIDTH, HEIGHT)
+    //ctx.drawImage(await BACKGROUND_ASSET, 0, 0, WIDTH, HEIGHT)
 
     // Background gradient
     const backgroundColor = '#7289DA'
@@ -84,11 +84,14 @@ module.exports = class CanvasTemplates {
     ctx.writeParagraph(personalText, '18px "Montserrat"', BORDER, discriminatorY + 10, iconX - BORDER, HEIGHT - BORDER)
 
     // Image handling
-    const [ avatarImage, coinsImage, clockImage ] = await USED_ASSETS
+    const [ avatarImage, coinsImage, clockImage, backgroundImage ] = await IMAGE_ASSETS
     ctx.roundImage(avatarImage, BORDER, 105, PROFPIC_SIZE, PROFPIC_SIZE)
 
     ctx.drawImage(coinsImage, iconX, coins.bottomY - iconSize, iconSize, iconSize)
     ctx.drawImage(clockImage, iconX, timeLeft.bottomY - iconSize, iconSize, iconSize)
+
+    ctx.globalCompositeOperation = 'destination-over'
+    ctx.drawImage(backgroundImage, 0, 0, WIDTH, HEIGHT)
 
     return canvas.toBuffer()
   }
