@@ -81,7 +81,9 @@ module.exports = class Command {
       .setTitle(embedContent ? content.title : content)
 
     if ((content.showUsage || showUsage) && !embedContent) {
-      embed.setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t(`commands:${this.name}.commandUsage`)}\``)
+      const usage = t(`commands:${this.name}.commandUsage`)
+      const hasUsage = usage !== `${this.name}.commandUsage`
+      if (hasUsage) embed.setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${usage}\``)
     } else if (embedContent) {
       embed.setDescription(content.description)
     }

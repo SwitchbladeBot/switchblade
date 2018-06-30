@@ -10,7 +10,7 @@ module.exports = class Kiss extends Command {
     this.aliases = ['beijo', 'beijar']
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({missingError: 'commands:kiss.noMention'})
+      new UserParameter({missingError: 'commands:kiss.noMention', acceptBot: true})
     )
   }
 

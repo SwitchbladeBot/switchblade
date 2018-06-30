@@ -8,7 +8,7 @@ module.exports = class Avatar extends Command {
     this.aliases = ['profilepicture', 'pfp']
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({full: true, required: false})
+      new UserParameter({full: true, required: false, acceptBot: true})
     )
   }
 

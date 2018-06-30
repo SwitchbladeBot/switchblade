@@ -246,5 +246,9 @@
   "imageoftheday": {
     "commandDescription": "Shows the NASA Image of the Day",
     "embedAuthor": "NASA Image of the Day"
+  },
+  "profile": {
+    "commandDescription": "Shows your or someone else's profile",
+    "commandUsage": "<user>"
   }
 }

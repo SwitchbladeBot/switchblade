@@ -14,5 +14,7 @@
   "noSentence": "You need to give me a sentence.",
   "mathEvaluationError": "An error occurred while evaluating the math expression",
   "invalidNumber": "You need to give me a valid number.",
-  "invalidUser": "You need to give me a valid user."
+  "invalidUser": "You need to give me a valid user.",
+  "invalidUserBot": "You need to give me a user that isn't a bot.",
+  "invalidUserNotBot": "You need to give me a user that is a bot."
 }
