@@ -213,25 +213,25 @@ module.exports = class Switchblade extends Client {
     })
   }
 
-  async loadLanguagesDisplayNames (languageCodes) {
-    const validLanguages = languageCodes.reduce((o, l) => { o[l] = {}; return o }, {})
-    languageCodes.forEach(lc => {
+  async loadLanguagesDisplayNames (codes) {
+    const lw = (s) => s.toLowerCase()
+    const langs = codes.reduce((o, l) => { o[l] = {}; return o }, {})
+    codes.forEach(lc => {
       let [ language ] = lc.split('-')
       try {
         const { main } = require(`cldr-localenames-modern/main/${language}/languages`)
-        const displayNames = main[language].localeDisplayNames.languages
-        languageCodes.forEach(l => {
-          const langObj = validLanguages[l][lc] = []
+        const display = main[language].localeDisplayNames.languages
+        codes.forEach(l => {
+          const langObj = langs[l][lc] = []
           let [ lcode ] = l.split('-')
-          if (languageCodes.filter(c => c.startsWith(lcode)).length === 1 && displayNames[lcode]) {
-            langObj.push(displayNames[lcode].toLowerCase())
+          if (codes.filter(c => c.startsWith(lcode)).length === 1 && display[lcode]) {
+            langObj.push(lw(display[lcode]))
           }
-          if (displayNames[l]) langObj.push(displayNames[l].toLowerCase())
+          if (display[l]) langObj.push(lw(display[l]))
         })
       } catch (e) {}
     })
-    this.cldr.languages = validLanguages
-    return validLanguages
+    return this.cldr.languages = langs
   }
 
   // Database
