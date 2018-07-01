@@ -6,7 +6,7 @@ module.exports = class Pay extends Command {
     super(client)
     this.name = 'pay'
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true})
+    this.requirements = new CommandRequirements(this, {guildOnly: true, databaseOnly: true})
     this.parameters = new CommandParameters(this,
       new UserParameter({missingError: 'commands:pay.noMember'}),
       new NumberParameter({min: 1, missingError: 'commands:pay.noValue'})

@@ -8,7 +8,7 @@ module.exports = class SetLanguage extends Command {
     this.name = 'setlanguage'
     this.aliases = ['setlang']
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, permissions: ['MANAGE_GUILD']})
+    this.requirements = new CommandRequirements(this, {guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD']})
 
     this.parameters = new CommandParameters(this,
       new StringParameter({full: true,

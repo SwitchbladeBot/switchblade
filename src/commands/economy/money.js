@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
 
 module.exports = class Money extends Command {
   constructor (client) {
@@ -7,6 +7,7 @@ module.exports = class Money extends Command {
     this.name = 'money'
     this.aliases = ['balance', 'bal']
 
+    this.requirements = new CommandRequirements(this, {guildOnly: true, databaseOnly: true})
     this.parameters = new CommandParameters(this,
       new UserParameter({full: true, required: false})
     )
