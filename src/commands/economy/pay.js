@@ -19,10 +19,10 @@ module.exports = class Pay extends Command {
     const senderDoc = await this.client.database.users.get(author.id)
     if (author === receiver) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setDescription(t('commands:pay.cantPayYourself'))
+        .setTitle(t('commands:pay.cantPayYourself'))
     } else if (value > senderDoc.money) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setDescription(t('commands:pay.notEnoughMoney'))
+        .setTitle(t('commands:pay.notEnoughMoney'))
     } else {
       const receiverDoc = await this.client.database.users.get(receiver.id)
       senderDoc.money -= value
