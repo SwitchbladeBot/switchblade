@@ -228,9 +228,7 @@ module.exports = class Switchblade extends Client {
           }
           if (displayNames[l]) langObj.push(displayNames[l].toLowerCase())
         })
-      } catch(e) {
-        return
-      }
+      } catch (e) {}
     })
     this.cldr.languages = validLanguages
     return validLanguages
