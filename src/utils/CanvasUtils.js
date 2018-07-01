@@ -28,6 +28,7 @@ module.exports = class CanvasUtils {
 
     // Initiliaze fonts
     registerFont('src/assets/fonts/Montserrat-Regular.ttf', {family: 'Montserrat'})
+    registerFont('src/assets/fonts/Montserrat-Italic.ttf', {family: 'Montserrat', style: 'italic'})
     registerFont('src/assets/fonts/Montserrat-Medium.ttf', {family: 'Montserrat Medium'})
     registerFont('src/assets/fonts/Montserrat-MediumItalic.ttf', {family: 'Montserrat Medium', style: 'italic'})
     registerFont('src/assets/fonts/Montserrat-SemiBold.ttf', {family: 'Montserrat SemiBold'})
