@@ -249,6 +249,6 @@
   },
   "profile": {
     "commandDescription": "Shows your or someone else's profile",
-    "commandUsage": "<user>"
+    "commandUsage": "[user]"
   }
 }

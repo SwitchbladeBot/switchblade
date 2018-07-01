@@ -16,8 +16,7 @@ module.exports = class Profile extends Command {
   async run ({ t, author, channel, client }, user) {
     user = user || author
     channel.startTyping()
-    const before = Date.now()
     const profile = await CanvasTemplates.profile({ t, client }, user)
-    channel.send(`Took **${Date.now() - before}**ms`, new Attachment(profile, 'profile.jpg')).then(() => channel.stopTyping())
+    channel.send(new Attachment(profile, 'profile.jpg')).then(() => channel.stopTyping())
   }
 }
