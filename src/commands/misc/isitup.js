@@ -2,7 +2,8 @@ const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const snekfetch = require('snekfetch')
 
-const PROTOCOL_REGEX = /^[a-z]+:\/\//
+const PROTOCOL_REGEX = /^[a-zA-Z]+:\/\//
+const PATH_REGEX = /(\/(.+)?)/g
 
 module.exports = class IsItUp extends Command {
   constructor (client) {
@@ -12,7 +13,7 @@ module.exports = class IsItUp extends Command {
   }
 
   async run ({t, author, channel}, url) {
-    url = url.replace(PROTOCOL_REGEX, '').replace(/\/$/, '')
+    url = url.replace(PROTOCOL_REGEX, '').replace(PATH_REGEX, '')
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const { body } = await snekfetch.get(`https://isitup.org/${url}.json`)
