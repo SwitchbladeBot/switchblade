@@ -15,7 +15,12 @@ module.exports = class CommandRequirements {
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
 
+    this.databaseOnly = !!options.databaseOnly
+    this.playerManagerOnly = !!options.playerManagerOnly
+
     this.errors = Object.assign({
+      databaseOnly: 'errors:databaseOnly',
+      playerManagerOnly: 'errors:playerManagerOnly',
       devOnly: 'errors:developerOnly',
       guildOnly: 'errors:guildOnly',
       nsfwOnly: 'errors:nsfwOnly',
@@ -26,6 +31,14 @@ module.exports = class CommandRequirements {
   }
 
   handle ({ t, author, channel, client, guild, member, voiceChannel }, args) {
+    if (this.databaseOnly && !client.database) {
+      return new CommandError(t(this.errors.databaseOnly))
+    }
+
+    if (this.playerManagerOnly && !client.playerManager) {
+      return new CommandError(t(this.errors.playerManagerOnly))
+    }
+
     if (this.devOnly) {
       const botGuild = client.guilds.get(process.env.BOT_GUILD)
       const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)

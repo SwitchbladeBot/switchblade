@@ -7,7 +7,7 @@ module.exports = class NowPlaying extends Command {
     this.name = 'nowplaying'
     this.aliases = ['np', 'currentplaying']
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, guildPlaying: true})
+    this.requirements = new CommandRequirements(this, {guildOnly: true, guildPlaying: true, playerManagerOnly: true})
   }
 
   async run ({ t, author, channel, guild }, args) {

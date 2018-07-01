@@ -3,6 +3,7 @@
   "voiceChannelOnly": "You need to be in a voice channel in order to do that.",
   "sameVoiceChannelOnly": "You need to be in the same voice channel as me in order to do that",
   "guildOnly": "This can only be done in servers.",
+  "notEnoughMoney": "You don't have enough money for that",
   "serverOwnerOnly": "You need to be the server owner in order to do that",
   "developerOnly": "Only the bot developers can do that",
   "missingOnePermission": "You need the {{permission}} permission in order to do that.",
@@ -14,5 +15,7 @@
   "noSentence": "You need to give me a sentence.",
   "mathEvaluationError": "An error occurred while evaluating the math expression",
   "invalidNumber": "You need to give me a valid number.",
-  "invalidUser": "You need to give me a valid user."
+  "invalidUser": "You need to give me a valid user.",
+  "databaseOnly": "Sorry, I don't have a database connection right now!",
+  "playerManagerOnly": "Sorry, I don't have a player connection right now!"
 }
