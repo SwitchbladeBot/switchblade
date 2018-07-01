@@ -50,7 +50,7 @@ module.exports = class CanvasTemplates {
     ctx.fillStyle = grd
     ctx.fillRect(0, 0, WIDTH, HEIGHT)
 
-    // Profile picture
+    // Profile picture shadow
     const PROFPIC_SIZE = 275
     const PROFPIC_HALF = PROFPIC_SIZE * 0.5
 
