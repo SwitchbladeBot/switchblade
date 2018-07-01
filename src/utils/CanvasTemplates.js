@@ -30,7 +30,7 @@ module.exports = class CanvasTemplates {
       Image.from(user.displayAvatarURL.replace('.gif', '.png')),
       Image.from(Constants.COINS_PNG, true),
       Image.from(Constants.DAILY_CLOCK_PNG, true),
-      Image.from('https://i.imgur.com/mM3puy3.jpg')
+      Image.from(Constants.DEFAULT_BACKGROUND_PNG, true)
     ])
     const DATABASE_QUERY = client.database.users.get(user.id)
 

@@ -15,6 +15,11 @@ module.exports = {
   STOP_BUTTON: '<:stopbutton:450444121924960256>',
 
   // Assets
+
+  // Icons
   COINS_PNG: 'src/assets/png/coins.png',
-  DAILY_CLOCK_PNG: 'src/assets/png/daily_clock.png'
+  DAILY_CLOCK_PNG: 'src/assets/png/daily_clock.png',
+
+  // Backgrounds
+  DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png'
 }
