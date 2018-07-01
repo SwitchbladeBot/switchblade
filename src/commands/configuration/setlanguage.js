@@ -25,7 +25,7 @@ module.exports = class SetLanguage extends Command {
               `**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:setlanguage.commandUsage')}\``,
               '',
               `__**${t('commands:setlanguage.availableLanguages')}:**__`,
-              `**${Object.keys(i18next.store.data).map(l => `\`${l}\``).join(', ')}**`
+              `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`
             ].join('\n')
           }
         }

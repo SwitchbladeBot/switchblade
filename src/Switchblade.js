@@ -231,7 +231,8 @@ module.exports = class Switchblade extends Client {
         })
       } catch (e) {}
     })
-    return this.cldr.languages = langs
+    this.cldr.languages = langs
+    return langs
   }
 
   // Database
