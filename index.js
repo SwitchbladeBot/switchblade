@@ -4,7 +4,10 @@ require('moment-duration-format')
 require('./src/utils/CanvasUtils.js').initializeHelpers()
 
 // Initialize client
-const CLIENT_OPTIONS = {}
+const CLIENT_OPTIONS = {
+  'fetchAllMembers': true,
+  'enableEveryone': false
+}
 
 const Switchblade = require('./src/Switchblade.js')
 const client = new Switchblade(CLIENT_OPTIONS)

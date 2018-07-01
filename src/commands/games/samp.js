@@ -42,7 +42,7 @@ module.exports = class SAMP extends Command {
     channel.send(embed).then(channel.stopTyping())
   }
 
-  static queryPromise (options) {
+  queryPromise (options) {
     return new Promise((resolve, reject) => {
       query(options, function (error, response) {
         if (error) reject(error)
@@ -51,7 +51,7 @@ module.exports = class SAMP extends Command {
     })
   }
 
-  static cleanURL (url) {
+  cleanURL (url) {
     if (!/^https?:\/\//i.test(url)) return 'http://' + url
     return url
   }
