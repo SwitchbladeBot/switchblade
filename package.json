@@ -29,6 +29,8 @@
     "api-npm": "^1.0.0",
     "booru": "^0.4.0",
     "bufferutil": "^3.0.5",
+    "cldr-core": "^33.0.0",
+    "cldr-localenames-modern": "^33.0.0",
     "crowdin": "^1.0.0",
     "discord.js": "^11.3.2",
     "discord.js-lavalink": "^2.0.2",
@@ -43,11 +45,11 @@
     "node-opus": "^0.3.0",
     "node-spotify-api": "^1.0.7",
     "pretty-ms": "^3.2.0",
+    "rss-parser": "latest",
+    "samp-query": "latest",
     "snekfetch": "^4.0.2",
     "transform-props": "^1.0.1",
-    "uws": "^10.148.0",
-    "samp-query": "latest",
-    "rss-parser": "latest"
+    "uws": "^10.148.0"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",

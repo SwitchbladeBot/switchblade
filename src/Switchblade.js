@@ -19,12 +19,14 @@ module.exports = class Switchblade extends Client {
     this.commands = []
     this.listeners = []
     this.playerManager = null
+    this.cldr = { languages: {} }
 
     this.initializeDatabase(MongoDB)
     this.initializeApis('./src/apis')
-    this.initializeCommands('./src/commands')
     this.initializeListeners('./src/listeners')
-    this.downloadAndInitializeLocales('./src/locales')
+    this.downloadAndInitializeLocales('./src/locales').then(() => {
+      this.initializeCommands('./src/commands')
+    })
   }
 
   /**
@@ -93,6 +95,7 @@ module.exports = class Switchblade extends Client {
       fs.readdirSync(dirPath).forEach(file => {
         if (file.endsWith('.js')) {
           const RequiredCommand = require(path.resolve(dirPath, file))
+          if (Object.getPrototypeOf(RequiredCommand) !== Command) return
           this.addCommand(new RequiredCommand(this))
           this.log(`${file} loaded.`, 'Commands')
         } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
@@ -131,6 +134,7 @@ module.exports = class Switchblade extends Client {
       fs.readdirSync(dirPath).forEach(file => {
         if (file.endsWith('.js')) {
           const RequiredListener = require(path.resolve(dirPath, file))
+          if (Object.getPrototypeOf(RequiredListener) !== EventListener) return
           this.addListener(new RequiredListener(this))
           this.log(`${file} loaded.`, 'Listeners')
         } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
@@ -163,6 +167,7 @@ module.exports = class Switchblade extends Client {
       fs.readdirSync(dirPath).forEach(file => {
         if (file.endsWith('.js')) {
           const RequiredAPI = require(path.resolve(dirPath, file))
+          if (Object.getPrototypeOf(RequiredAPI) !== APIWrapper) return
           this.addApi(new RequiredAPI())
           this.log(`${file} loaded.`, 'APIs')
         } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
@@ -178,29 +183,56 @@ module.exports = class Switchblade extends Client {
    * Initializes i18next.
    */
   async downloadAndInitializeLocales (dirPath) {
-    if (process.env.CROWDIN_API_KEY && process.env.CROWDIN_PROJECT_ID) {
-      this.log('Downloading locales from Crowdin', 'Localization')
-      await this.apis.crowdin.downloadToPath(dirPath)
-    } else {
-      this.log('Couldn\'t download locales from Crowdin', 'Localization')
-    }
-    try {
-      i18next.use(translationBackend).init({
-        ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
-        preload: fs.readdirSync(dirPath),
-        fallbackLng: 'en-US',
-        backend: {
-          loadPath: 'src/locales/{{lng}}/{{ns}}.json'
-        },
-        interpolation: {
-          escapeValue: false
-        },
-        returnEmptyString: false
-      })
-      this.log('Locales downloaded successfully and i18next initialized', 'Localization')
-    } catch (e) {
-      this.logError(e)
-    }
+    return new Promise(async (resolve, reject) => {
+      if (process.env.CROWDIN_API_KEY && process.env.CROWDIN_PROJECT_ID) {
+        this.log('Downloading locales from Crowdin', 'Localization')
+        await this.apis.crowdin.downloadToPath(dirPath)
+      } else {
+        this.log('Couldn\'t download locales from Crowdin', 'Localization')
+      }
+
+      try {
+        i18next.use(translationBackend).init({
+          ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
+          preload: fs.readdirSync(dirPath),
+          fallbackLng: 'en-US',
+          backend: {
+            loadPath: 'src/locales/{{lng}}/{{ns}}.json'
+          },
+          interpolation: {
+            escapeValue: false
+          },
+          returnEmptyString: false
+        }, () => {
+          resolve(this.loadLanguagesDisplayNames(Object.keys(i18next.store.data)))
+          this.log('Locales downloaded successfully and i18next initialized', 'Localization')
+        })
+      } catch (e) {
+        this.logError(e)
+      }
+    })
+  }
+
+  async loadLanguagesDisplayNames (codes) {
+    const lw = (s) => s.toLowerCase()
+    const langs = codes.reduce((o, l) => { o[l] = {}; return o }, {})
+    codes.forEach(lc => {
+      let [ language ] = lc.split('-')
+      try {
+        const { main } = require(`cldr-localenames-modern/main/${language}/languages`)
+        const display = main[language].localeDisplayNames.languages
+        codes.forEach(l => {
+          const langObj = langs[l][lc] = []
+          let [ lcode ] = l.split('-')
+          if (codes.filter(c => c.startsWith(lcode)).length === 1 && display[lcode]) {
+            langObj.push(lw(display[lcode]))
+          }
+          if (display[l]) langObj.push(lw(display[l]))
+        })
+      } catch (e) {}
+    })
+    this.cldr.languages = langs
+    return langs
   }
 
   // Database
