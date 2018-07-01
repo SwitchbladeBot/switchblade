@@ -15,7 +15,7 @@ module.exports = class CommandParameters {
       const param = this.parameters[i]
 
       let arg = args[i]
-      if (param.full) arg = args.join(param.fullJoin || ' ')
+      if (param.full) arg = args.slice(i).join(param.fullJoin || ' ')
 
       const missingErr = funcOrString(param.missingError, context.t, context)
 
@@ -32,10 +32,9 @@ module.exports = class CommandParameters {
         return new CommandError(missingErr, param.showUsage)
       }
 
-      if (param.full) return parsedArg
       parsedArgs.push(parsedArg)
     }
 
-    return parsedArgs
+    return parsedArgs.length > 1 ? parsedArgs : parsedArgs[0]
   }
 }
