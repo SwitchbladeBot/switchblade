@@ -11,7 +11,7 @@ module.exports = class Triggered extends Command {
     this.aliases = ['trigger', 'puto']
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({full: true, required: false})
+      new UserParameter({full: true, required: false, acceptBot: true})
     )
   }
 
