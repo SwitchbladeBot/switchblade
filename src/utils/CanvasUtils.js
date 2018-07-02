@@ -1,6 +1,7 @@
 const request = require('request')
-const { promises: fs } = require('fs')
 const { createCanvas, registerFont, Context2d, Image } = require('canvas')
+
+const FileUtils = require('./FileUtils.js')
 
 const URLtoBuffer = function (url) {
   return new Promise((resolve, reject) => {
@@ -43,7 +44,7 @@ module.exports = class CanvasUtils {
     // Image loading
     Image.from = function (url, localFile = false) {
       return new Promise(async (resolve, reject) => {
-        const b = await (localFile ? fs.readFile(url) : URLtoBuffer(url))
+        const b = await (localFile ? FileUtils.readFile(url) : URLtoBuffer(url))
         const img = new Image()
         img.onerror = (e) => reject(e)
         img.onload = () => resolve(img)
