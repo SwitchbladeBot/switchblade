@@ -226,7 +226,7 @@
     "noCoin": "You need to give me a coin side to bet on"
   },
   "samp": {
-    "commandDescription": "Shows information about a San Andreas: Multiplayer server",
+    "commandDescription": "Shows information about a GTA San Andreas: Multiplayer server",
     "commandUsage": "<ip>[:port]",
     "noIP": "You need to give me an IP!",
     "serverUnreachableTitle": "I couldn't reach this server",
