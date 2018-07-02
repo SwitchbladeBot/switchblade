@@ -35,6 +35,6 @@ module.exports = class CommandParameters {
       parsedArgs.push(parsedArg)
     }
 
-    return parsedArgs.length > 1 ? parsedArgs : parsedArgs[0]
+    return parsedArgs
   }
 }

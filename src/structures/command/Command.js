@@ -48,7 +48,6 @@ module.exports = class Command {
     const requirements = this.handleRequirements(context, args)
     if (requirements instanceof CommandError) return this.error(context, requirements.content, requirements.showUsage)
 
-    args = Array.isArray(args) ? args : [args]
     return this.run(context, ...args)
   }
 
