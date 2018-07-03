@@ -29,7 +29,7 @@ Setup a development environment, make some changes, and [open a pull request](ht
 Have a great idea, but don't know how to code (or maybe you're just too lazy to do it)? No problem! [Open an issue](https://github.com/SwitchbladeBot/switchblade/issues/new) so we can talk about your awesome idea.
 
 **Contribute by hunting bugs:**
-Just like discord, we have an awesome team of bug hunters. You can [join our server](https://discord.gg/2FB8wDG) and ask for the **Bug Hunter™** role. After that, you can start hunting bugs and [reporting them](https://github.com/SwitchbladeBot/switchblade/issues/new?template=Bug_report.md).
+Just like Discord, we have an awesome team of bug hunters. You can [join our server](https://discord.gg/2FB8wDG) and ask for the **Bug Hunter™** role. After that, you can start hunting bugs and [reporting them](https://github.com/SwitchbladeBot/switchblade/issues/new?template=Bug_report.md).
 
 **Contribute with translations:**
 Switchblade's translation is Crowdsourced too! [Click here to learn more](https://crowdin.com/project/switchblade)
