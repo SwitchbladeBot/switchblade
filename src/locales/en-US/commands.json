@@ -259,5 +259,9 @@
     "commandUsage": "<track name>",
     "noTrackName": "You need to give me a track name.",
     "noTracksFound": "I couldn't find any tracks with that name."
+  },
+  "profile": {
+    "commandDescription": "Shows your or someone else's profile",
+    "commandUsage": "[user]"
   }
 }

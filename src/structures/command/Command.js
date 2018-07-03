@@ -16,6 +16,8 @@ module.exports = class Command {
 
     this.hidden = false
 
+    this.subcommands = []
+
     this.requirements = null // Run requirements
     this.parameters = null // Run parameters
   }
@@ -34,13 +36,18 @@ module.exports = class Command {
    * @param {Array<string>} args Command arguments
    */
   async _run (context, args) {
+    const [ subcmd ] = args
+    const subcommand = this.subcommands.find(c => c.name.toLowerCase() === subcmd || c.aliases.includes(subcmd))
+    if (subcommand) {
+      return subcommand._run(context, args.splice(1))
+    }
+
     args = this.handleParameters(context, args)
     if (args instanceof CommandError) return this.error(context, args.content, args.showUsage)
 
     const requirements = this.handleRequirements(context, args)
     if (requirements instanceof CommandError) return this.error(context, requirements.content, requirements.showUsage)
 
-    args = Array.isArray(args) ? args : [args]
     return this.run(context, ...args)
   }
 
@@ -81,7 +88,9 @@ module.exports = class Command {
       .setTitle(embedContent ? content.title : content)
 
     if ((content.showUsage || showUsage) && !embedContent) {
-      embed.setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t(`commands:${this.name}.commandUsage`)}\``)
+      const usage = t(`commands:${this.name}.commandUsage`)
+      const hasUsage = usage !== `${this.name}.commandUsage`
+      if (hasUsage) embed.setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${usage}\``)
     } else if (embedContent) {
       embed.setDescription(content.description)
     }
