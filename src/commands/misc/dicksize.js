@@ -7,11 +7,11 @@ module.exports = class Dicksize extends Command {
     this.aliases = ['peepeesize']
   }
 
-  async run ({ author, channel }) {
+  run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const size = await Math.floor((Math.random() * 20) + 1) + ' cm';
-    embed.setTitle('Your Dicksize')
+    const size = Math.floor((Math.random() * 20) + 1) + ' cm';
+    embed.setTitle(t('commands:dicksize.yourDickSize'))
     .setDescription(String(size))
       channel.send(embed).then(() => channel.stopTyping())
   }
