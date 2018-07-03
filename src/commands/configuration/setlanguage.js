@@ -14,7 +14,7 @@ module.exports = class SetLanguage extends Command {
       new StringParameter({full: true,
         fullJoin: '-',
         whitelist: () => Object.keys(i18next.store.data),
-        missingError: ({t}) => {
+        missingError: ({ t }) => {
           return {
             title: t('commands:setlanguage.noCode'),
             description: [

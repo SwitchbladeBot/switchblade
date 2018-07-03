@@ -1,9 +1,8 @@
 const { Client } = require('discord.js')
-const fs = require('fs')
-const path = require('path')
 const i18next = require('i18next')
 const translationBackend = require('i18next-node-fs-backend')
 
+const FileUtils = require('./utils/FileUtils.js')
 const { Command, EventListener, APIWrapper } = require('./structures')
 const { MongoDB } = require('./database')
 
@@ -21,10 +20,12 @@ module.exports = class Switchblade extends Client {
     this.playerManager = null
 
     this.initializeDatabase(MongoDB)
-    this.initializeApis('./src/apis')
-    this.initializeCommands('./src/commands')
-    this.initializeListeners('./src/listeners')
-    this.downloadAndInitializeLocales('./src/locales')
+    this.initializeApis('src/apis').then(() => {
+      this.initializeListeners('src/listeners')
+      this.downloadAndInitializeLocales('src/locales').then(() => {
+        this.initializeCommands('src/commands')
+      })
+    })
   }
 
   /**
@@ -55,9 +56,8 @@ module.exports = class Switchblade extends Client {
    * @param {string} message - Error message
    */
   logError (...args) {
-    const message = args[0]
-    const tags = args.slice(1).map(t => `[${t}]`)
-    console.error('[ErrorLog]', ...tags, message)
+    const tags = args.length > 1 ? args.slice(0, -1).map(t => `[${t}]`) : []
+    console.error('[ErrorLog]', ...tags, args[args.length - 1])
   }
 
   // Commands
@@ -89,19 +89,11 @@ module.exports = class Switchblade extends Client {
    * @param {string} dirPath - Path to the commands directory
    */
   initializeCommands (dirPath) {
-    try {
-      fs.readdirSync(dirPath).forEach(file => {
-        if (file.endsWith('.js')) {
-          const RequiredCommand = require(path.resolve(dirPath, file))
-          this.addCommand(new RequiredCommand(this))
-          this.log(`${file} loaded.`, 'Commands')
-        } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
-          this.initializeCommands(path.resolve(dirPath, file))
-        }
-      })
-    } catch (e) {
-      this.logError(e)
-    }
+    return FileUtils.requireDirectory(dirPath, (NewCommand) => {
+      if (Object.getPrototypeOf(NewCommand) !== Command || NewCommand.ignore) return
+      this.addCommand(new NewCommand(this))
+      this.log(`${NewCommand.name} loaded.`, 'Commands')
+    }, this.logError)
   }
 
   // Listeners
@@ -127,26 +119,18 @@ module.exports = class Switchblade extends Client {
    * @param {string} dirPath - Path to the listeners directory
    */
   initializeListeners (dirPath) {
-    try {
-      fs.readdirSync(dirPath).forEach(file => {
-        if (file.endsWith('.js')) {
-          const RequiredListener = require(path.resolve(dirPath, file))
-          this.addListener(new RequiredListener(this))
-          this.log(`${file} loaded.`, 'Listeners')
-        } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
-          this.initializeListeners(path.resolve(dirPath, file))
-        }
-      })
-    } catch (e) {
-      this.logError(e)
-    }
+    return FileUtils.requireDirectory(dirPath, (NewListener) => {
+      if (Object.getPrototypeOf(NewListener) !== EventListener) return
+      this.addListener(new NewListener(this))
+      this.log(`${NewListener.name} loaded.`, 'Listeners')
+    }, this.logError)
   }
 
   // APIs
 
   /**
-   * Adds a new listener to the Client.
-   * @param {Object} api - API to be added
+   * Adds a new API Wrapper to the Client.
+   * @param {Object} api - API Wrapper to be added
    */
   addApi (api) {
     if (api instanceof APIWrapper && api.canLoad()) {
@@ -159,48 +143,45 @@ module.exports = class Switchblade extends Client {
    * @param {string} dirPath - Path to the listeners directory
    */
   initializeApis (dirPath) {
-    try {
-      fs.readdirSync(dirPath).forEach(file => {
-        if (file.endsWith('.js')) {
-          const RequiredAPI = require(path.resolve(dirPath, file))
-          this.addApi(new RequiredAPI())
-          this.log(`${file} loaded.`, 'APIs')
-        } else if (fs.statSync(path.resolve(dirPath, file)).isDirectory()) {
-          this.initializeApis(path.resolve(dirPath, file))
-        }
-      })
-    } catch (e) {
-      this.logError(e)
-    }
+    return FileUtils.requireDirectory(dirPath, (NewAPI) => {
+      if (Object.getPrototypeOf(NewAPI) !== APIWrapper) return
+      this.addApi(new NewAPI())
+      this.log(`${NewAPI.name} loaded.`, 'APIs')
+    }, this.logError)
   }
 
   /**
    * Initializes i18next.
    */
-  async downloadAndInitializeLocales (dirPath) {
-    if (process.env.CROWDIN_API_KEY && process.env.CROWDIN_PROJECT_ID) {
-      this.log('Downloading locales from Crowdin', 'Localization')
-      await this.apis.crowdin.downloadToPath(dirPath)
-    } else {
-      this.log('Couldn\'t download locales from Crowdin', 'Localization')
-    }
-    try {
-      i18next.use(translationBackend).init({
-        ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
-        preload: fs.readdirSync(dirPath),
-        fallbackLng: 'en-US',
-        backend: {
-          loadPath: 'src/locales/{{lng}}/{{ns}}.json'
-        },
-        interpolation: {
-          escapeValue: false
-        },
-        returnEmptyString: false
-      })
-      this.log('Locales downloaded successfully and i18next initialized', 'Localization')
-    } catch (e) {
-      this.logError(e)
-    }
+  downloadAndInitializeLocales (dirPath) {
+    return new Promise(async (resolve, reject) => {
+      if (this.apis.crowdin) {
+        this.log('Downloading locales from Crowdin', 'Localization')
+        await this.apis.crowdin.downloadToPath(dirPath)
+      } else {
+        this.log('Couldn\'t download locales from Crowdin', 'Localization')
+      }
+
+      try {
+        i18next.use(translationBackend).init({
+          ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
+          preload: await FileUtils.readdir(dirPath),
+          fallbackLng: 'en-US',
+          backend: {
+            loadPath: `${dirPath}/{{lng}}/{{ns}}.json`
+          },
+          interpolation: {
+            escapeValue: false
+          },
+          returnEmptyString: false
+        }, () => {
+          resolve()
+          this.log('Locales downloaded successfully and i18next initialized', 'Localization')
+        })
+      } catch (e) {
+        this.logError(e)
+      }
+    })
   }
 
   // Database
@@ -208,7 +189,7 @@ module.exports = class Switchblade extends Client {
     this.database = new DBWrapper(options)
     this.database.connect()
       .then(() => this.log('Database connection established!', 'DB'))
-      .catch((e) => {
+      .catch(e => {
         this.logError(e.message, 'DB')
         this.database = null
       })
