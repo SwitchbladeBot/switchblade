@@ -19,55 +19,51 @@
 ## A completely open-source Discord bot project
 **Switchblade** is an open-source multi purpose Discord bot, built for those who want structure quality, fine command organization, user enjoyability and ease of access when it comes to host it by yourself. Switchblade isn't supposed to be your average Discord bot. The objective of the project is to create a bot that does as many things as possible (just like an actual switchblade), and it also brings a new whole world of modularity and personal configuration, so that you can equip it with your favorite tools.
 
-## How to install
-First of all, clone the GitHub repository to your local drive and navigate to its folder with
-```shell
-git clone https://github.com/SwitchbladeBot/switchblade && cd switchblade
-```
-*(Ensure that you have [Git](http://git-scm.com/downloads), [Node.js with npm](https://nodejs.org/en/download/) and [Windows Build Tools](https://www.npmjs.com/package/windows-build-tools) installed before doing anything)*
+## Contributing
+You want to help? Great! There are many ways to do it:
 
-After that, execute ```npm install```.
+**Contribute with code:**
+Setup a development environment, make some changes, and [open a pull request](https://github.com/SwitchbladeBot/switchblade/compare)
 
-If you're running a production instance or a normal instance, make sure to read [this](https://github.com/SwitchbladeBot/switchblade/wiki/Environment-Variables) so that you can get to know what you will need to run a Switchblade local instance.
-After you've checked them, if you're running a local instance, add those environment variables within a .env file. Example:
+**Contribute with ideas:**
+Have a great idea, but don't know how to code (or maybe you're just too lazy to do it)? No problem! [Open an issue](https://github.com/SwitchbladeBot/switchblade/issues/new) so we can talk about your awesome idea.
+
+**Contribute by hunting bugs:**
+Just like discord, we have an awesome team of bug hunters. You can [join our server](https://discord.gg/2FB8wDG) and ask for the **Bug Hunter™** role. After that, you can start hunting bugs and [reporting them](https://github.com/SwitchbladeBot/switchblade/issues/new?template=Bug_report.md).
+
+**Contribute with translations:**
+Switchblade's translation is Crowdsourced too! [Click here to learn more](https://crowdin.com/project/switchblade)
+
+## Branching
+New Pull Requests should be made upon the `dev` branch, where **Switchblade Canary**, our private testing instance, runs. Every two weeks, we push code from `dev` to `master`, where the production instance runs.
+
+## Setting up a development environment
+> For this guide, we're assuming that you already have NPM, Node and Windows Build Tools installed.
+
+**1. Clone the repository and checkout the `dev` branch**
+```bash
+git clone https://github.com/SwitchbladeBot/switchblade
+cd switchblade
+git checkout dev
 ```
-DISCORD_TOKEN=MjEwOTE2ODc1OTg3MTQ0NjA5.lFE3aA.CQiNp7rRa9VaXZEcpTRYReDo8UP
+
+**2. Install all the dependencies with NPM**
+```bash
+npm install
+```
+
+**3. Create a file named `.env` inside of the bot's folder and add all of the [required environment variables](https://github.com/SwitchbladeBot/switchblade/wiki/Environment-Variables) to it.**
+
+In the end, your file should look like this:
+```
+DISCORD_TOKEN=NDQ0OTU4ODkyMzgwNzgyNTky.Dhxlog.2VyI9uaXRO0t36vMsH5wVDjqpfk
 PREFIX=s!
 ```
-Then, run ```npm run start-dev```
 
-If you're running it on Heroku, just add [those same environment variables](https://github.com/SwitchbladeBot/switchblade/wiki/Environment-Variables) within the *Config Vars* section on the settings of your Heroku project ![Heroku Config Vars](http://i.join-my.stream/anBu07W.png)
-
-Then, disable the *web* dyno within *Resources*, enable the *worker* dyno, and you're pretty much done! ![Heroku Resources](http://i.join-my.stream/ld8SQbi.png)
-
-## Quick Links
-* [Discord Server](https://discord.gg/PwWJRsc)
-* [Trello Board](https://trello.com/b/cGBRYZhu/switchblade)
-* [Wiki](https://github.com/SwitchbladeBot/switchblade/wiki)
-* [Issues](https://github.com/SwitchbladeBot/switchblade/issues)
-
-## Contributing
-If you'd like to contribute, fork this repository, edit / add something in it, and make a Pull Request, or you can give ideas in [its Discord Server](https://discord.gg/PwWJRsc). It can't be any type of hardcoded bullsh*ttery, try to avoid it as much as possible.
-
-## License and Copyright
+**4. Run the bot!**
 ```
-Copyright (c) 2018 SwitchBlade
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+npm run start-dev
 ```
+The `start-dev` script loads the variables from `.env` into the process, and automatically restart the bot when you make changes to the code.
+
+Happy hacking!
