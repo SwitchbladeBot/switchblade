@@ -13,24 +13,24 @@ module.exports = class Pay extends Command {
     )
   }
 
-  async run ({ t, author, channel }, user, value) {
+  async run ({ t, author, channel }, receiver, value) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const senderDoc = await this.client.database.users.get(author.id)
-    if (author === user) {
+    if (author === receiver) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setDescription(t('commands:pay.cantPayYourself'))
+        .setTitle(t('commands:pay.cantPayYourself'))
     } else if (value > senderDoc.money) {
       embed.setColor(Constants.ERROR_COLOR)
-        .setDescription(t('commands:pay.notEnoughMoney'))
+        .setTitle(t('commands:pay.notEnoughMoney'))
     } else {
-      const receiverDoc = await this.client.database.users.get(user.id)
+      const receiverDoc = await this.client.database.users.get(receiver.id)
       senderDoc.money -= value
       receiverDoc.money += value
       senderDoc.save()
       receiverDoc.save()
+      embed.setDescription(t('commands:pay.transactionSuccessful', { receiver, value }))
     }
-    embed.setDescription(t('commands:pay.transactionSuccessful', { receiver: user, value }))
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

@@ -17,15 +17,26 @@ module.exports = class CommandRequirements {
 
     this.databaseOnly = !!options.databaseOnly
     this.playerManagerOnly = !!options.playerManagerOnly
+
+    this.errors = Object.assign({
+      databaseOnly: 'errors:databaseOnly',
+      playerManagerOnly: 'errors:playerManagerOnly',
+      devOnly: 'errors:developerOnly',
+      guildOnly: 'errors:guildOnly',
+      nsfwOnly: 'errors:nsfwOnly',
+      voiceChannelOnly: 'errors:voiceChannelOnly',
+      guildPlaying: 'errors:notPlaying',
+      cooldown: 'errors:cooldown'
+    }, options.errors)
   }
 
   handle ({ t, author, channel, client, guild, member, voiceChannel }, args) {
     if (this.databaseOnly && !client.database) {
-      return new CommandError(t('errors:databaseOnly'))
+      return new CommandError(t(this.errors.databaseOnly))
     }
 
     if (this.playerManagerOnly && !client.playerManager) {
-      return new CommandError(t('errors:playerManagerOnly'))
+      return new CommandError(t(this.errors.playerManagerOnly))
     }
 
     if (this.devOnly) {
@@ -33,25 +44,25 @@ module.exports = class CommandRequirements {
       const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)
       const hasRole = developerRole && developerRole.members.has(author.id)
       if (!hasRole) {
-        return new CommandError(t('errors:developerOnly'))
+        return new CommandError(t(this.errors.devOnly))
       }
     }
 
     if (this.guildOnly && !guild) {
-      return new CommandError(t('errors:guildOnly'))
+      return new CommandError(t(this.errors.guildOnly))
     }
 
     if (this.nsfwOnly && guild && !channel.nsfw) {
-      return new CommandError(t('errors:nsfwOnly'))
+      return new CommandError(t(this.errors.nsfwOnly))
     }
 
     if (this.voiceChannelOnly && !voiceChannel) {
-      return new CommandError(t('errors:voiceChannelOnly'))
+      return new CommandError(t(this.errors.voiceChannelOnly))
     }
 
     const guildPlayer = client.playerManager.get(guild.id)
     if (this.guildPlaying && (!guildPlayer || !guildPlayer.playing)) {
-      return new CommandError(t('errors:notPlaying'))
+      return new CommandError(t(this.errors.guildPlaying))
     }
 
     if (this.permissions.length > 0) {
@@ -64,7 +75,7 @@ module.exports = class CommandRequirements {
 
     if (this.cooldown.enabled && this.cooldownMap.has(author.id)) {
       if (this.cooldown.feedback) {
-        return new CommandError(t('errors:cooldown'))
+        return new CommandError(t(this.errors.cooldown))
       }
     }
   }
