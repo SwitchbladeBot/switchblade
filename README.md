@@ -16,8 +16,8 @@
   </p>
 </div>
 
-## A completely open-source Discord bot project
-**Switchblade** is an open-source multi purpose Discord bot, built for those who want structure quality, fine command organization, user enjoyability and ease of access when it comes to host it by yourself. Switchblade isn't supposed to be your average Discord bot. The objective of the project is to create a bot that does as many things as possible (just like an actual switchblade), and it also brings a new whole world of modularity and personal configuration, so that you can equip it with your favorite tools.
+## The open source Discord bot
+**Switchblade** is a free and open source solution to all of your server managing problems, built from scratch with code organization and quality in mind. Want some music for your server? We've got you covered. Maybe you want a good anti-spam solution? We've got you covered. How about economy? Well, you probably got it by now. [Like the idea? Click here to invite Switchblade to your server](http://invite.switchblade.xyz/)
 
 ## Contributing
 You want to help? Great! There are many ways to do it:
