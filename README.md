@@ -40,9 +40,12 @@ New Pull Requests should be made upon the `dev` branch, where **Switchblade Cana
 ## Setting up a development environment
 > For this guide, we're assuming that you already have NPM, Node and Windows Build Tools installed.
 
-**1. Clone the repository and checkout the `dev` branch**
+**0. Fork the repository** (You don't have to do this if you're part of our organization)
+
+
+**1. Clone your fork and checkout the `dev` branch**
 ```bash
-git clone https://github.com/SwitchbladeBot/switchblade
+git clone https://github.com/<your username>/switchblade
 cd switchblade
 git checkout dev
 ```
