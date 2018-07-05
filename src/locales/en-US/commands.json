@@ -263,5 +263,12 @@
   "profile": {
     "commandDescription": "Shows your or someone else's profile",
     "commandUsage": "[user]"
+  },
+  "mal": {
+	"commandDescription": "Searches for an anime on MyAnimeList",
+	"commandUsage": "<anime name>",
+	"noAnime": "You have to give me an anime to search for",
+	"score": "Score",
+	"episodes": "Episodes"
   }
 }
