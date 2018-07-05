@@ -66,6 +66,10 @@ PREFIX=s!
 ```
 npm run start-dev
 ```
-The `start-dev` script loads the variables from `.env` into the process, and automatically restart the bot when you make changes to the code.
+The `start-dev` script loads the variables from `.env` into the process, and automatically restarts the bot when you make changes to the code.
 
 Happy hacking!
+
+<div align="center">
+  <img src="https://botsfordiscord.com/api/v1/bots/445277324175474689/embed"> <img src="https://discordbots.org/api/widget/445277324175474689.svg">
+</div>
