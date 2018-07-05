@@ -7,7 +7,8 @@ module.exports = {
     money: { type: Number, default: 0 },
     lastDaily: { type: Number, default: 0 },
     globalXp: { type: Number, default: 0 },
-    personalText: { type: String, default: 'Do you know that you can edit this in the future dashboard? :o' }
+    personalText: { type: String, default: 'Do you know that you can edit this in the future dashboard? :o' },
+    lastListcordVote: { type: Number, default: 0 }
   }),
 
   // Guild Schema
