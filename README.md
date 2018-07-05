@@ -13,6 +13,8 @@
     <a href="https://snyk.io/test/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://snyk.io/test/github/SwitchbladeBot/switchblade/badge.svg" alt="Known Vulnerabilities"/></a>
     <a href="https://codeclimate.com/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg" alt="Code Climate"/></a>
     <a title="Crowdin" target="_blank" href="https://crowdin.com/project/switchblade"><img src="https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg"></a>
+    <br>
+    Vote on <a href="https://listcord.com/bot/445277324175474689/" target="_blank">Listcord</a> and  <a href="https://discordbots.org/bot/445277324175474689/vote" target="_blank">DBL</a>
   </p>
 </div>
 
