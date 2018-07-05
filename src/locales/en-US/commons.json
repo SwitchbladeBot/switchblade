@@ -8,5 +8,6 @@
   "currency": "Switchcoin",
   "currency_plural": "Switchcoins",
   "heads": "Heads",
-  "tails": "Tails"
+  "tails": "Tails",
+  "youCanDoItAgainIn": "You can do that again in **{{time}}**"
 }
