@@ -13,11 +13,10 @@ module.exports = class Daily extends Command {
     this.requirements = new CommandRequirements(this, {databaseOnly: true})
   }
 
-  async run ({ t, author, channel, prefix, alias }) {
+  async run ({ t, author, channel, prefix, alias, userDocument }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const now = Date.now()
-    const userDocument = await this.client.database.users.get(author.id)
     if (now - userDocument.lastListcordBonusClaim < INTERVAL) {
       const time = moment.duration(INTERVAL - (now - userDocument.lastListcordBonusClaim)).format('h[h] m[m] s[s]')
       embed
