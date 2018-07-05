@@ -37,6 +37,7 @@
     "googleapis": "^31.0.2",
     "i18next": "^11.3.2",
     "i18next-node-fs-backend": "^1.0.0",
+    "mal-scraper": "^2.4.2",
     "mathjs": "^4.4.0",
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
@@ -44,11 +45,11 @@
     "node-opus": "^0.3.0",
     "node-spotify-api": "^1.0.7",
     "request": "^2.87.0",
+    "rss-parser": "latest",
+    "samp-query": "latest",
     "snekfetch": "^4.0.2",
     "transform-props": "^1.0.1",
-    "uws": "^10.148.0",
-    "samp-query": "latest",
-    "rss-parser": "latest"
+    "uws": "^10.148.0"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
