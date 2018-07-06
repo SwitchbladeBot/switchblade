@@ -269,7 +269,10 @@
 	"commandUsage": "<anime name>",
 	"noAnime": "You need to give me an anime to search for",
 	"score": "Score",
-	"episodes": "Episodes"
+	"episodes": "Episodes",
+    "studio": "Studio",
+    "studios": "Studios",
+    "aired": "Aired"
   },
   "listcord": {
     "commandDescription": "Gives you a bonus for voting on Listcord",
