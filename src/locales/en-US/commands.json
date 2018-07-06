@@ -264,6 +264,10 @@
     "commandDescription": "Shows your or someone else's profile",
     "commandUsage": "[user]"
   },
+  "dicksize": {
+    "commandDescription": "Shows how small you dick is",
+    "yourDickSize": "Your Dick Size"
+  },
   "listcord": {
     "commandDescription": "Gives you a bonus for voting on Listcord",
     "alreadyClaimed": "You've already claimed your Listcord bonus today",
