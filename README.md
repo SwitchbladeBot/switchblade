@@ -13,6 +13,8 @@
     <a href="https://snyk.io/test/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://snyk.io/test/github/SwitchbladeBot/switchblade/badge.svg" alt="Known Vulnerabilities"/></a>
     <a href="https://codeclimate.com/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg" alt="Code Climate"/></a>
     <a title="Crowdin" target="_blank" href="https://crowdin.com/project/switchblade"><img src="https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg"></a>
+    <br>
+    Vote on <a href="https://listcord.com/bot/445277324175474689/" target="_blank">Listcord</a> and  <a href="https://discordbots.org/bot/445277324175474689/vote" target="_blank">DBL</a>
   </p>
 </div>
 
@@ -40,9 +42,12 @@ New Pull Requests should be made upon the `dev` branch, where **Switchblade Cana
 ## Setting up a development environment
 > For this guide, we're assuming that you already have NPM, Node and Windows Build Tools installed.
 
-**1. Clone the repository and checkout the `dev` branch**
+**0. Fork the repository** (You don't have to do this if you're part of our organization)
+
+
+**1. Clone your fork and checkout the `dev` branch**
 ```bash
-git clone https://github.com/SwitchbladeBot/switchblade
+git clone https://github.com/<your username>/switchblade
 cd switchblade
 git checkout dev
 ```
@@ -64,6 +69,10 @@ PREFIX=s!
 ```
 npm run start-dev
 ```
-The `start-dev` script loads the variables from `.env` into the process, and automatically restart the bot when you make changes to the code.
+The `start-dev` script loads the variables from `.env` into the process, and automatically restarts the bot when you make changes to the code.
 
 Happy hacking!
+
+<div align="center">
+  <img src="https://botsfordiscord.com/api/v1/bots/445277324175474689/embed"> <img src="https://discordbots.org/api/widget/445277324175474689.svg">
+</div>

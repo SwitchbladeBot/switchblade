@@ -12,6 +12,8 @@ module.exports = class CommandContext {
     this.guildDocument = options.guildDocument
     this.language = options.language
 
+    this.userDocument = options.userDocument
+
     this.command = options.command
     this.aliase = options.aliase
     this.prefix = options.prefix
