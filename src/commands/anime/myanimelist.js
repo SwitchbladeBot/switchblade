@@ -17,9 +17,9 @@ module.exports = class MyAnimeList extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
+    try {
     const data = await malScraper.getInfoFromName(anime)
     if (data) {
-      console.log(data)
       embed
         .setThumbnail(data.picture)
         .setDescription(data.synopsis.split('\n\n')[0])
@@ -31,10 +31,11 @@ module.exports = class MyAnimeList extends Command {
         .addField(t('commands:myanimelist.studio', {count: data.studios.length}), data.studios.join(', '), true)
         .addField(t('commands:myanimelist.episodes'), data.episodes, true)
         .addField(t('commands:myanimelist.aired'), data.aired, true)
-    } else {
+    }
+    } catch (e) {
       embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:myanimelist.animeNotFound'))
+    .setColor(Constants.ERROR_COLOR)
+    .setTitle(t('commands:myanimelist.animeNotFound'))
     }
 
     channel.send(embed).then(() => channel.stopTyping())
