@@ -265,11 +265,11 @@
     "commandUsage": "[user]"
   },
   "myanimelist": {
-	"commandDescription": "Searches for an anime on MyAnimeList",
-	"commandUsage": "<anime name>",
-	"noAnime": "You need to give me an anime to search for",
-	"score": "Score",
-	"episodes": "Episodes",
+    "commandDescription": "Searches for an anime on MyAnimeList",
+    "commandUsage": "<anime name>",
+    "noAnime": "You need to give me an anime to search for",
+    "score": "Score",
+    "episodes": "Episodes",
     "studio": "Studio",
     "studios": "Studios",
     "aired": "Aired",
