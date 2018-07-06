@@ -272,7 +272,8 @@
 	"episodes": "Episodes",
     "studio": "Studio",
     "studios": "Studios",
-    "aired": "Aired"
+    "aired": "Aired",
+    "animeNotFound": "I couldn't find an anime by that name"
   },
   "listcord": {
     "commandDescription": "Gives you a bonus for voting on Listcord",
