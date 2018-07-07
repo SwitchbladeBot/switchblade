@@ -6,6 +6,7 @@ module.exports = class BotInfo extends Command {
   constructor (client) {
     super(client)
     this.name = 'botinfo'
+    this.aliases = ['bi', 'binfo']
   }
 
   run ({ channel, author, t }) {
