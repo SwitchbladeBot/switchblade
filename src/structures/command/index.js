@@ -8,5 +8,6 @@ module.exports = {
   Parameter: require('./parameters/types/Parameter.js'),
   NumberParameter: require('./parameters/types/NumberParameter.js'),
   StringParameter: require('./parameters/types/StringParameter.js'),
-  UserParameter: require('./parameters/types/UserParameter.js')
+  UserParameter: require('./parameters/types/UserParameter.js'),
+  MemberParameter: require('./parameters/types/MemberParameter.js')
 }
