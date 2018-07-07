@@ -17,7 +17,7 @@ module.exports = class UserInfo extends Command {
     const embed = new SwitchbladeEmbed(author)
     member = member || author
     moment.locale(guildDocument.language)
-    const filter = this.client.guilds.filter(g => g.members.get(member.id)).map(g => g.name)
+    const filter = this.client.guilds.filter(g => g.members.has(member.id)).map(g => g.name)
     channel.startTyping()
 
     embed.setTitle(member.displayName)
