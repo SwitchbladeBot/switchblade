@@ -20,8 +20,7 @@ module.exports = class Triggered extends Command {
 
   async run ({ t, author, channel }, user) {
     user = user || author
-    const before = Date.now()
     const triggered = await CanvasTemplates.triggered(user)
-    channel.send(Date.now() - before, new Attachment(triggered, 'triggered.gif')).then(() => channel.stopTyping())
+    channel.send(new Attachment(triggered, 'triggered.gif')).then(() => channel.stopTyping())
   }
 }
