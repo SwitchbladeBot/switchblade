@@ -102,7 +102,7 @@ module.exports = class MainListener extends EventListener {
           userDocument
         })
         this.log(`Command ${command.name} with ${args.length ? `args ${args.join(' ')}` : 'no args'} was executed on ${message.guild.name} by ${message.author.tag} `, 'Commands')
-        this.runCommand(command, content, args, language)
+        this.runCommand(command, context, args, language)
       }
     }
   }
