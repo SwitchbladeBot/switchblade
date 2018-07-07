@@ -14,7 +14,7 @@ module.exports = class UserInfo extends Command {
   }
 
   run ({ t, member: author, channel, guildDocument }, member) {
-    const embed = new SwitchbladeEmbed(author)
+    const embed = new SwitchbladeEmbed(author.user)
     member = member || author
     moment.locale(guildDocument.language)
     const filter = this.client.guilds.filter(g => g.members.has(member.id)).map(g => g.name)
