@@ -14,10 +14,6 @@ module.exports = class Triggered extends Command {
     )
   }
 
-  canLoad () {
-    return !!process.env.TRIGGERED_TOKEN
-  }
-
   async run ({ t, author, channel }, user) {
     user = user || author
     const triggered = await CanvasTemplates.triggered(user)
