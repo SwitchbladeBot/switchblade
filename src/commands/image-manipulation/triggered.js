@@ -2,7 +2,6 @@ const { CanvasTemplates, CommandStructures } = require('../../')
 const { Command, CommandParameters, UserParameter } = CommandStructures
 
 const { Attachment } = require('discord.js')
-const snekfetch = require('snekfetch')
 
 module.exports = class Triggered extends Command {
   constructor (client) {
@@ -21,7 +20,8 @@ module.exports = class Triggered extends Command {
 
   async run ({ t, author, channel }, user) {
     user = user || author
+    const before = Date.now()
     const triggered = await CanvasTemplates.triggered(user)
-    channel.send(new Attachment(triggered, 'triggered.gif')).then(() => channel.stopTyping())
+    channel.send(Date.now() - before, new Attachment(triggered, 'triggered.gif')).then(() => channel.stopTyping())
   }
 }
