@@ -112,5 +112,5 @@ module.exports = class Command {
     if (usage !== usagePath) {
       return `**${t('commons:usage')}:** \`${prefix}${this.fullName} ${usage}\``
     }
-  } 
+  }
 }
