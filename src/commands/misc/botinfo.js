@@ -17,8 +17,8 @@ module.exports = class BotInfo extends Command {
     embed.setAuthor(this.client.user.username, this.client.user.displayAvatarURL)
       .setThumbnail(this.client.user.displayAvatarURL)
       .setDescription([
-        t('commands:botinfo.hello', { this: this }),
-        t('commands:botinfo.statistics', { this: this, uptime, Discord, process })
+        t('commands:botinfo.hello', { user: this.client.user }),
+        t('commands:botinfo.statistics', { guilds: this.client.guilds, commands: this.client.commands, uptime, Discord, nodeVersion: process.version })
       ].join('\n\n'))
       .addField(t('commands:botinfo.links'), [
         t('commands:botinfo.inviteLink', { Constants }),

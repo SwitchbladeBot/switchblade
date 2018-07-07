@@ -227,8 +227,8 @@
   },
   "botinfo": {
     "commandDescriptions": "Sends information about myself",
-    "hello": "Hello, my name is **{{this.client.user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
-    "statistics": "I've been up for **{{uptime}}**, helping **{{this.client.guilds.size}} servers** with **{{this.client.commands.length}} commands**. Currently running **[Node.js {{process.version}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
+    "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
+    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds.size}} servers** with **{{commands.length}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
     "links": "Useful links",
     "inviteLink": "{{Constants.BOT_BADGE}} **[Invite me to your server](https://invite.switchblade.xyz)**",
     "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
