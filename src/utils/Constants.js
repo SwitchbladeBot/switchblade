@@ -29,6 +29,9 @@ module.exports = {
   COINS_PNG: 'src/assets/png/coins.png',
   DAILY_CLOCK_PNG: 'src/assets/png/daily_clock.png',
 
+  // Misc
+  TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
+
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png'
 }
