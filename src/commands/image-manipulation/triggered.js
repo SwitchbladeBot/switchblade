@@ -1,4 +1,4 @@
-const { CommandStructures } = require('../../')
+const { CanvasTemplates, CommandStructures } = require('../../')
 const { Command, CommandParameters, UserParameter } = CommandStructures
 
 const { Attachment } = require('discord.js')
@@ -21,7 +21,7 @@ module.exports = class Triggered extends Command {
 
   async run ({ t, author, channel }, user) {
     user = user || author
-    const { body } = await snekfetch.get(`http://www.triggered-api.tk/api/v2/triggered?url=${user.displayAvatarURL}`).set({Authorization: process.env.TRIGGERED_TOKEN})
-    channel.send(new Attachment(body, 'triggered.gif')).then(() => channel.stopTyping())
+    const triggered = await CanvasTemplates.triggered(user)
+    channel.send(new Attachment(triggered, 'triggered.gif')).then(() => channel.stopTyping())
   }
 }
