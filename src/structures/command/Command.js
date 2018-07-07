@@ -89,9 +89,8 @@ module.exports = class Command {
       .setTitle(embedContent ? content.title : content)
 
     if ((content.showUsage || showUsage) && !embedContent) {
-      const usage = t(`commands:${this.tPath}.commandUsage`)
-      const hasUsage = usage !== `${this.tPath}.commandUsage`
-      if (hasUsage) embed.setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.fullName} ${usage}\``)
+      const usage = this.usage(t)
+      if (usage) embed.setDescription(usage)
     } else if (embedContent) {
       embed.setDescription(content.description)
     }
@@ -106,4 +105,12 @@ module.exports = class Command {
   get fullName () {
     return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
   }
+
+  usage (t, prefix = process.env.PREFIX, noUsage = true) {
+    const usagePath = `${this.tPath}.commandUsage`
+    const usage = noUsage ? t(`commands:${usagePath}`) : t([`commands:${usagePath}`, ''])
+    if (usage !== usagePath) {
+      return `**${t('commons:usage')}:** \`${prefix}${this.fullName} ${usage}\``
+    }
+  } 
 }
