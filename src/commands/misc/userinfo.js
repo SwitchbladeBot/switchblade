@@ -18,6 +18,7 @@ module.exports = class UserInfo extends Command {
     member = member || author
     moment.locale(guildDocument.language)
     const filter = this.client.guilds.filter(g => g.members.has(member.id)).map(g => g.name)
+    const charLimit = (s) => s.length > 1024 ? `${s.substr(0, 1020)}...` : s
     channel.startTyping()
 
     embed.setTitle(member.displayName)
@@ -27,7 +28,7 @@ module.exports = class UserInfo extends Command {
       .addField(t('commands:userinfo.status'), t(`commands:userinfo.${member.presence.status}`, { Constants }), true)
       .addField(t('commands:userinfo.createdAt'), moment(member.user.createdTimestamp).format('LLL'), true)
       .addField(t('commands:userinfo.joinedAt'), moment(member.joinedTimestamp).format('LLL'), true)
-      .addField(t('commands:userinfo.serversInCommon', { count: filter.length }), filter.join(', '))
+      .addField(t('commands:userinfo.serversInCommon', { count: filter.length }), charLimit(filter.join(', ')))
 
     channel.send(embed).then(() => channel.stopTyping())
   }
