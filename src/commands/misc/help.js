@@ -36,7 +36,7 @@ module.exports = class Pause extends Command {
         ]
 
         if (command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
-        if (command.subcommands.length > 0)description.push(`**${t('commands:help.subcommands')}:** ${command.subcommands.map(a => `\`${a.name}\``).join(', ')}`)
+        if (command.subcommands.length > 0) description.push(`**${t('commands:help.subcommands')}:** ${command.subcommands.map(a => `\`${a.name}\``).join(', ')}`)
 
         embed.setTitle(command.fullName)
           .setDescription(description.join('\n'))
