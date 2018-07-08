@@ -160,6 +160,7 @@
     "youCanUse": "You can also use {{- botMention}} as a prefix",
     "specificInformation": "Type {{helpString}} for command specific information",
     "aliases": "Aliases",
+    "subcommands": "Subcommands",
     "noDescriptionProvided": "No description provided",
     "noUsageProvided": "No usage provided",
     "commandNotFound": "I couldn't find a command with that name"

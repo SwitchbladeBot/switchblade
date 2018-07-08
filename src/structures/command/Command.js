@@ -8,7 +8,7 @@ const CommandError = require('./CommandError.js')
  * @param {Switchblade} client - Switchblade client
  */
 module.exports = class Command {
-  constructor (client) {
+  constructor (client, parentCommand) {
     this.client = client
 
     this.name = 'CommandName'
@@ -20,6 +20,7 @@ module.exports = class Command {
 
     this.requirements = null // Run requirements
     this.parameters = null // Run parameters
+    this.parentCommand = parentCommand
   }
 
   /**
@@ -88,13 +89,28 @@ module.exports = class Command {
       .setTitle(embedContent ? content.title : content)
 
     if ((content.showUsage || showUsage) && !embedContent) {
-      const usage = t(`commands:${this.name}.commandUsage`)
-      const hasUsage = usage !== `${this.name}.commandUsage`
-      if (hasUsage) embed.setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${usage}\``)
+      const usage = this.usage(t)
+      if (usage) embed.setDescription(usage)
     } else if (embedContent) {
       embed.setDescription(content.description)
     }
 
     return channel.send(embed).then(() => channel.stopTyping())
+  }
+
+  get tPath () {
+    return this.parentCommand ? `${this.parentCommand.tPath}.subcommands.${this.name}` : `${this.name}`
+  }
+
+  get fullName () {
+    return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
+  }
+
+  usage (t, prefix = process.env.PREFIX, noUsage = true) {
+    const usagePath = `${this.tPath}.commandUsage`
+    const usage = noUsage ? t(`commands:${usagePath}`) : t([`commands:${usagePath}`, ''])
+    if (usage !== usagePath) {
+      return `**${t('commons:usage')}:** \`${prefix}${this.fullName} ${usage}\``
+    }
   }
 }
