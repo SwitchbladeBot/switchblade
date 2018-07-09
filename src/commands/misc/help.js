@@ -7,7 +7,7 @@ module.exports = class Pause extends Command {
   constructor (client) {
     super(client)
     this.name = 'help'
-    this.aliases = ['commands']
+    this.aliases = ['commands', 'ajuda']
 
     this.parameters = new CommandParameters(this,
       new StringParameter({full: true, required: false})
@@ -19,9 +19,9 @@ module.exports = class Pause extends Command {
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
     const validCommands = this.client.commands.filter(c => !c.hidden)
 
-    const regexMatch = cmd.match(prefixRegex(prefix))
-    cmd = regexMatch && regexMatch[1]
     if (cmd) {
+      const regexMatch = cmd.match(prefixRegex(prefix))
+      cmd = regexMatch && regexMatch[1]
       const command = cmd.split(' ').reduce((o, ca) => {
         const arr = (Array.isArray(o) && o) || (o && o.subcommands)
         if (!arr) return o
