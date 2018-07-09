@@ -326,5 +326,8 @@
     "alreadyClaimed": "You've already claimed your Listcord bonus today",
     "howToVote": "**[Vote on Listcord]({{link}})** and then run `{{command}}` again to claim your bonus",
     "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+  },
+  "cow": {
+    "commandDescription": "Shows a random ASCII cow"
   }
 }
