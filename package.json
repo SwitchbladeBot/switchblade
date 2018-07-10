@@ -34,6 +34,7 @@
     "discord.js": "^11.3.2",
     "discord.js-lavalink": "^2.0.2",
     "erlpack": "github:discordapp/erlpack",
+    "figlet": "^1.2.0",
     "gifencoder": "^1.1.0",
     "googleapis": "^31.0.2",
     "i18next": "^11.3.2",

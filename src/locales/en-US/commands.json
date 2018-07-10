@@ -326,5 +326,10 @@
     "alreadyClaimed": "You've already claimed your Listcord bonus today",
     "howToVote": "**[Vote on Listcord]({{link}})** and then run `{{command}}` again to claim your bonus",
     "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+  },
+  "asciify": {
+    "commandDescription": "Turns your text into ASCII art",
+    "commandUsage": "<text>",
+    "noText": "You need to give me some text to asciify"
   }
 }
