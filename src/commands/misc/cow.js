@@ -1,5 +1,5 @@
 const { Command } = require('../../')
-const cows = require('cows');
+const cows = require('cows')
 
 module.exports = class Cow extends Command {
   constructor (client) {
