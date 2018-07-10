@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { CommandStructures } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const figlet = require('figlet')
 
