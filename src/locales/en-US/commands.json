@@ -220,7 +220,7 @@
     "noCoin": "You need to give me a coin side to bet on"
   },
   "botinfo": {
-    "commandDescriptions": "Sends information about myself",
+    "commandDescription": "Sends information about myself",
     "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
     "statistics": "I've been up for **{{uptime}}**, helping **{{guilds.size}} servers** with **{{commands.length}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
     "links": "Useful links",
@@ -339,5 +339,10 @@
         "changedSuccessfully": "Prefix changed successfully to `{{prefix}}`!"
       }
     }
+  },
+  "asciify": {
+    "commandDescription": "Turns your text into ASCII art",
+    "commandUsage": "<text>",
+    "noText": "You need to give me some text to asciify"
   }
 }

@@ -13,6 +13,14 @@ const { MongoDB } = require('./database')
  */
 module.exports = class Switchblade extends Client {
   constructor (options = {}) {
+    console.log(
+      '   _____         _ _       _     _     _           _      \n' +
+      '  / ____|       (_| |     | |   | |   | |         | |     \n' +
+      ' | (_____      ___| |_ ___| |__ | |__ | | __ _  __| | ___ \n' +
+      '  \\___ \\ \\ /\\ / | | __/ __| \'_ \\| \'_ \\| |/ _` |/ _` |/ _ \\\n' +
+      '  ____) \\ V  V /| | || (__| | | | |_) | | (_| | (_| |  __/\n' +
+      ' |_____/ \\_/\\_/ |_|\\__\\___|_| |_|_.__/|_|\\__,_|\\__,_|\\___|\n')
+
     super(options)
     this.apis = {}
     this.commands = []
