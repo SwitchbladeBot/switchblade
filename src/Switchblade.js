@@ -16,6 +16,7 @@ module.exports = class Switchblade extends Client {
     super(options)
     this.apis = {}
     this.commands = []
+    this.cldr = { languages: {} }
     this.listeners = []
     this.playerManager = null
 
@@ -175,13 +176,38 @@ module.exports = class Switchblade extends Client {
           },
           returnEmptyString: false
         }, () => {
-          resolve()
+          resolve(this.loadLanguagesDisplayNames(Object.keys(i18next.store.data)))
           this.log('Locales downloaded successfully and i18next initialized', 'Localization')
         })
       } catch (e) {
         this.logError(e)
       }
     })
+  }
+
+  /**
+   * Loads language display names
+   */
+  async loadLanguagesDisplayNames (codes) {
+    const lw = (s) => s.toLowerCase()
+    const langs = codes.reduce((o, l) => { o[l] = {}; return o }, {})
+    codes.forEach(lc => {
+      let [ language ] = lc.split('-')
+      try {
+        const { main } = require(`cldr-localenames-modern/main/${language}/languages`)
+        const display = main[language].localeDisplayNames.languages
+        codes.forEach(l => {
+          const langObj = langs[l][lc] = []
+          let [ lcode ] = l.split('-')
+          if (codes.filter(c => c.startsWith(lcode)).length === 1 && display[lcode]) {
+            langObj.push(lw(display[lcode]))
+          }
+          if (display[l]) langObj.push(lw(display[l]))
+        })
+      } catch (e) {}
+    })
+    this.cldr.languages = langs
+    return langs
   }
 
   // Database
