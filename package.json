@@ -30,7 +30,7 @@
     "booru": "^0.4.0",
     "bufferutil": "^3.0.5",
     "canvas": "^2.0.0-alpha.12",
-    "crowdin": "^1.0.0",
+    "crowdin-without-vulnerability": "^1.0.0",
     "discord.js": "^11.3.2",
     "discord.js-lavalink": "^2.0.2",
     "erlpack": "github:discordapp/erlpack",
