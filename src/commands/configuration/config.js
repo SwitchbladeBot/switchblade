@@ -40,7 +40,7 @@ class ConfigLanguage extends Command {
           return {
             title: t('commands:config.subcommands.language.noCode'),
             description: [
-              `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:config.subcommands.language.commandUsage')}\``,
+              `**${t('commons:usage')}:** \`${prefix}${parentCommand.name} ${this.name} ${t('commands:config.subcommands.language.commandUsage')}\``,
               '',
               `__**${t('commands:config.subcommands.language.availableLanguages')}:**__`,
               `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`
