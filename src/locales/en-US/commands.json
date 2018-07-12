@@ -329,5 +329,10 @@
   },
   "cow": {
     "commandDescription": "Shows a random ASCII cow"
+  }, 
+  "asciify": {
+    "commandDescription": "Turns your text into ASCII art",
+    "commandUsage": "<text>",
+    "noText": "You need to give me some text to asciify"
   }
 }
