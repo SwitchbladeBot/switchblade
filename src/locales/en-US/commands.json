@@ -331,5 +331,14 @@
     "commandDescription": "Turns your text into ASCII art",
     "commandUsage": "<text>",
     "noText": "You need to give me some text to asciify"
+  },
+  "urban": {
+    "commandDescription": "Searches your word on Urban Dictionary",
+    "commandUsage": "<word>",
+    "noWordProvided": "You need to give me a word to search its definition",
+    "definition": "Definition:",
+    "example": "Example:",
+    "noDefinitionFound": "No definition found to {{- text}}"
   }
+}
 }
