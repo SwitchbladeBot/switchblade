@@ -52,7 +52,7 @@
     "snekfetch": "^4.0.2",
     "transform-props": "^1.0.1",
     "uws": "^10.148.0",
-    "urban-dictionary": "^1.0.7"
+    "urban-dictionary": "1.0.7"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
