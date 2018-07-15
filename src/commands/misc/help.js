@@ -1,8 +1,6 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
-const prefixRegex = (prefix) => new RegExp(`^(?:${prefix})?(.+)`)
-
 module.exports = class Pause extends Command {
   constructor (client) {
     super(client)
@@ -17,35 +15,24 @@ module.exports = class Pause extends Command {
   async run ({ t, author, channel, guild, guildDocument }, cmd) {
     const embed = new SwitchbladeEmbed(author)
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
-    const validCommands = this.client.commands.filter(c => !c.hidden)
-
-    const regexMatch = cmd.match(prefixRegex(prefix))
-    cmd = regexMatch && regexMatch[1]
     if (cmd) {
-      const command = cmd.split(' ').reduce((o, ca) => {
-        const arr = (Array.isArray(o) && o) || (o && o.subcommands)
-        if (!arr) return o
-        return arr.find(c => c.name === ca || c.aliases.includes(ca))
-      }, validCommands)
-
+      const command = this.client.commands.find(c => c.name === cmd)
       if (command) {
         const description = [
-          t([`commands:${command.tPath}.commandDescription`, 'commands:help.noDescriptionProvided']),
+          t([`commands:${command.name}.commandDescription`, 'commands:help.noDescriptionProvided']),
           '',
-          command.usage(t, prefix, false)
+          `**${t('commons:usage')}:** \`${prefix}${command.name} ${t([`commands:${command.name}.commandUsage`, ''])}\``
         ]
-
         if (command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
-        if (command.subcommands.length > 0) description.push(`**${t('commands:help.subcommands')}:** ${command.subcommands.map(a => `\`${a.name}\``).join(', ')}`)
 
-        embed.setTitle(command.fullName)
+        embed.setTitle(command.name)
           .setDescription(description.join('\n'))
       } else {
         embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:help.commandNotFound'))
       }
     } else {
-      const commands = validCommands.map(c => `\`${c.name}\``).sort((a, b) => a.localeCompare(b)).join('**, **')
+      const commands = this.client.commands.map(c => `\`${c.name}\``).sort((a, b) => a.localeCompare(b)).join('**, **')
       embed.setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL)
         .setDescription([
           commands,
