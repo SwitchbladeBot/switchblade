@@ -223,7 +223,7 @@
     "commandUsage": "<value to bet> <heads | tails>",
     "victory": "Yay, it landed **$t(commons:{{chosenSide}})**, so you won **$t(commons:currencyWithCount, { 'count': {{count}} })**!",
     "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**",
-    "noBetValue": "You need to give me a value to bet on",
+    "noBetValue": "You need to give me a value to bet",
     "noCoin": "You need to give me a coin side to bet on"
   },
   "botinfo": {
