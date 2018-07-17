@@ -1,6 +1,8 @@
 const { Client } = require('discord.js')
 const fs = require('fs')
 const path = require('path')
+const i18next = require('i18next')
+const translationBackend = require('i18next-node-fs-backend')
 
 const { Command, EventListener, APIWrapper } = require('./structures')
 const { MongoDB } = require('./database')
@@ -16,11 +18,13 @@ module.exports = class Switchblade extends Client {
     this.apis = {}
     this.commands = []
     this.listeners = []
+    this.playerManager = null
 
     this.initializeDatabase(MongoDB)
     this.initializeApis('./src/apis')
     this.initializeCommands('./src/commands')
     this.initializeListeners('./src/listeners')
+    this.downloadAndInitializeLocales('./src/locales')
   }
 
   /**
@@ -50,8 +54,10 @@ module.exports = class Switchblade extends Client {
    * Adds a new error log entry to the console.
    * @param {string} message - Error message
    */
-  logError (message) {
-    console.error('[ErrorLog]', message)
+  logError (...args) {
+    const message = args[0]
+    const tags = args.slice(1).map(t => `[${t}]`)
+    console.error('[ErrorLog]', ...tags, message)
   }
 
   // Commands
@@ -69,13 +75,13 @@ module.exports = class Switchblade extends Client {
   /**
    * Runs a command.
    * @param {Command} command - Command to be runned
-   * @param {Message} message - Message that triggered the command
+   * @param {CommandContext} context - CommandContext containing run information
    * @param {Array<string>} args - Array of command arguments
+   * @param {String} language - Code for the language that the command will be executed in
    */
-  runCommand (command, message, args) {
-    if (command.canRun(message, args)) {
-      command._run(message, args).catch(this.logError)
-    }
+  runCommand (command, context, args, language) {
+    context.setFixedT(i18next.getFixedT(language))
+    command._run(context, args).catch(this.logError)
   }
 
   /**
@@ -168,10 +174,43 @@ module.exports = class Switchblade extends Client {
     }
   }
 
-  // Database
+  /**
+   * Initializes i18next.
+   */
+  async downloadAndInitializeLocales (dirPath) {
+    if (process.env.CROWDIN_API_KEY && process.env.CROWDIN_PROJECT_ID) {
+      this.log('Downloading locales from Crowdin', 'Localization')
+      await this.apis.crowdin.downloadToPath(dirPath)
+    } else {
+      this.log('Couldn\'t download locales from Crowdin', 'Localization')
+    }
+    try {
+      i18next.use(translationBackend).init({
+        ns: ['commands', 'commons', 'permissions', 'errors', 'music'],
+        preload: fs.readdirSync(dirPath),
+        fallbackLng: 'en-US',
+        backend: {
+          loadPath: 'src/locales/{{lng}}/{{ns}}.json'
+        },
+        interpolation: {
+          escapeValue: false
+        },
+        returnEmptyString: false
+      })
+      this.log('Locales downloaded successfully and i18next initialized', 'Localization')
+    } catch (e) {
+      this.logError(e)
+    }
+  }
 
+  // Database
   initializeDatabase (DBWrapper, options = {}) {
     this.database = new DBWrapper(options)
-    this.database.connect().then(() => this.log('Database connection established!', 'DB')).catch(this.logError)
+    this.database.connect()
+      .then(() => this.log('Database connection established!', 'DB'))
+      .catch((e) => {
+        this.logError(e.message, 'DB')
+        this.database = null
+      })
   }
 }

@@ -1,4 +1,10 @@
-const CLIENT_OPTIONS = {}
+require('moment')
+require('moment-duration-format')
+
+const CLIENT_OPTIONS = {
+  'fetchAllMembers': true,
+  'enableEveryone': false
+}
 
 const Switchblade = require('./src/Switchblade.js')
 const client = new Switchblade(CLIENT_OPTIONS)

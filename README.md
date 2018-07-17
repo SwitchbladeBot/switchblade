@@ -1,17 +1,18 @@
 
 <div align="center">
-  <img src="http://i.join-my.stream/Untitled-1.png"><br>
-  <img src="http://i.join-my.stream/Untitled-2.png"><br>
+  <img src="https://i.imgur.com/LID4HYe.png"><br>
+  <img src="https://i.imgur.com/SVyi88i.png"><br>
   <b>Multi purpose Discord Bot made using discord.js, focused on quality, organization and enjoyability.</b><br><br>
 
   <p>
-    <a href="https://discord.gg/PwWJRsc" target="_blank"><img src="https://img.shields.io/badge/dynamic/json.svg?label=chat%20on%20discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online" alt="Discord Server"/></a>
-    <a href="https://discordapp.com/api/oauth2/authorize?client_id=445277324175474689&permissions=0&scope=bot" target="_blank"><img
+    <a href="https://discord.gg/PwWJRsc" target="_blank"><img src="https://img.shields.io/badge/dynamic/json.svg?label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online" alt="Discord Server"/></a>
+    <a href="https://invite.switchblade.xyz/" target="_blank"><img
     src="https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg" alt "Invite Switchblade"></a>
     <a href="https://github.com/SwitchbladeBot/switchblade/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/SwitchbladeBot/switchblade.svg" alt="License"/></a>
     <a href="https://travis-ci.org/SwitchbladeBot/switchblade" target="_blank"><img src="https://api.travis-ci.org/SwitchbladeBot/switchblade.svg" alt="Travis CI Build Status"/></a>
     <a href="https://snyk.io/test/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://snyk.io/test/github/SwitchbladeBot/switchblade/badge.svg" alt="Known Vulnerabilities"/></a>
     <a href="https://codeclimate.com/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg" alt="Code Climate"/></a>
+    <a title="Crowdin" target="_blank" href="https://crowdin.com/project/switchblade"><img src="https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg"></a>
   </p>
 </div>
 
