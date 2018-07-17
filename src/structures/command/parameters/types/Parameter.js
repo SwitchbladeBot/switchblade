@@ -9,7 +9,10 @@ module.exports = class Parameter {
     this.full = !!options.full
     this.fullJoin = options.fullJoin
     this.missingError = options.missingError || 'An error occured!'
-    this.id = options.id || 'parameter'
+
+    // Flags
+    this.name = options.name || 'parameter'
+    this.aliases = options.aliases || []
   }
 
   parse (arg) {

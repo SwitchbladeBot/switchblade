@@ -160,6 +160,7 @@
     "youCanUse": "You can also use {{- botMention}} as a prefix",
     "specificInformation": "Type {{helpString}} for command specific information",
     "aliases": "Aliases",
+    "subcommands": "Subcommands",
     "noDescriptionProvided": "No description provided",
     "noUsageProvided": "No usage provided",
     "commandNotFound": "I couldn't find a command with that name"
@@ -222,8 +223,49 @@
     "commandUsage": "<value to bet> <heads | tails>",
     "victory": "Yay, it landed **$t(commons:{{chosenSide}})**, so you won **$t(commons:currencyWithCount, { 'count': {{count}} })**!",
     "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**",
-    "noBetValue": "You need to give me a value to bet on",
+    "noBetValue": "You need to give me a value to bet",
     "noCoin": "You need to give me a coin side to bet on"
+  },
+  "botinfo": {
+    "commandDescription": "Sends information about myself",
+    "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
+    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds.size}} servers** with **{{commands.length}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
+    "links": "Useful links",
+    "inviteLink": "{{Constants.BOT_BADGE}} **[Invite me to your server](https://invite.switchblade.xyz)**",
+    "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
+    "translate": "{{Constants.CROWDIN_LOGO}} **[Translate me to your language](https://translate.switchblade.xyz)**",
+    "github": "{{Constants.GITHUB_LOGO}} **[GitHub repository](https://github.com/SwitchbladeBot/switchblade)**"
+  },
+  "guildinfo": {
+    "commandDescription": "Sends information about the current server",
+    "id": "ID",
+    "owner": "Owner",
+    "region": "Region",
+    "channels": "Channels **({{count}})**",
+    "textChannels": "Text: **{{count}}**",
+    "voiceChannels": "Voice: **{{count}}**",
+    "createdAt": "Created At",
+    "joinedAt": "Joined At",
+    "members": "Members **({{count}})**",
+    "online": "Online: **{{count}}**",
+    "idle": "Idle: **{{count}}**",
+    "dnd": "Do Not Disturb: **{{count}}**",
+    "offline": "Offline: **{{count}}**",
+    "users": "Users: **{{count}}**",
+    "bots": "Bots: **{{count}}**"
+  },
+  "userinfo": {
+    "commandDescription": "Sends your or someone else's user information",
+    "online": "{{Constants.ONLINE_STATUS}} Online",
+    "idle": "{{Constants.IDLE_STATUS}} Idle",
+    "dnd": "{{Constants.DND_STATUS}} Do Not Disturb",
+    "offline": "{{Constants.OFFLINE_STATUS}} Offline",
+    "tag": "Tag",
+    "id": "ID",
+    "status": "Status",
+    "createdAt": "Created at",
+    "joinedAt": "Joined at",
+    "serversInCommon": "Servers in common ({{count}})"
   },
   "samp": {
     "commandDescription": "Shows information about a GTA San Andreas: Multiplayer server",
@@ -259,5 +301,38 @@
     "commandUsage": "<track name>",
     "noTrackName": "You need to give me a track name.",
     "noTracksFound": "I couldn't find any tracks with that name."
+  },
+  "profile": {
+    "commandDescription": "Shows your or someone else's profile",
+    "commandUsage": "[user]"
+  },
+  "myanimelist": {
+    "commandDescription": "Searches for an anime on MyAnimeList",
+    "commandUsage": "<anime name>",
+    "noAnime": "You need to give me an anime to search for",
+    "score": "Score",
+    "episodes": "Episodes",
+    "studio": "Studio",
+    "studios": "Studios",
+    "aired": "Aired",
+    "animeNotFound": "I couldn't find an anime by that name"
+  },
+  "dicksize": {
+    "commandDescription": "Shows how small your dick is",
+    "yourDickSize": "Your Dick Size"
+  },
+  "listcord": {
+    "commandDescription": "Gives you a bonus for voting on Listcord",
+    "alreadyClaimed": "You've already claimed your Listcord bonus today",
+    "howToVote": "**[Vote on Listcord]({{link}})** and then run `{{command}}` again to claim your bonus",
+    "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+  },
+  "cow": {
+    "commandDescription": "Shows a random ASCII cow"
+  }, 
+  "asciify": {
+    "commandDescription": "Turns your text into ASCII art",
+    "commandUsage": "<text>",
+    "noText": "You need to give me some text to asciify"
   }
 }
