@@ -47,6 +47,12 @@
     "noTracksFound": "I couldn't find any tracks with that name.",
     "noTrackName": "You need to give me a track name."
   },
+  "lyrics": {
+    "commandDescription": "Find the lyrics of a song",
+    "commandUsage": "<track name>",
+    "noLyricsFound": "The provided song's lyrics could not be found.",
+    "noTrackName": "You need to give me a track name."
+  },
   "copypasta": {
     "commandDescription": "Random text from /r/copypasta"
   },
@@ -329,7 +335,7 @@
   },
   "cow": {
     "commandDescription": "Shows a random ASCII cow"
-  }, 
+  },
   "asciify": {
     "commandDescription": "Turns your text into ASCII art",
     "commandUsage": "<text>",
