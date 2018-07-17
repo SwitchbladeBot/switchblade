@@ -36,7 +36,7 @@ module.exports = class Lyrics extends Command {
     embed.setAuthor(`Genius`, 'https://cdn.discordapp.com/attachments/445647209892020234/467733917798236202/b7b6ada09725d7a97a01bbef815b74d2.png')
       .setDescription(body.length >= 1900 ? `${body.substr(0, 1900)}\n\n[Click here to see the full lyrics](http://genius.com${data.result.path})` : body)
       .setThumbnail(img)
-      .setColor("#FFFB66")
+      .setColor('#FFFB66')
       .setTitle(`${extendedsong} - ${artist}`)
       .setURL(`http://genius.com${data.result.path}`)
     return channel.send(embed).then(() => channel.stopTyping())
