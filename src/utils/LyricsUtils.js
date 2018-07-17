@@ -7,7 +7,7 @@ module.exports = class Lyrics {
     return snekfetch.get(`https://api.genius.com/${path}`)
       .set('Authorization', `Bearer ${key}`)
       .then(res => res.body)
-      .catch(err => throw new Error(err))
+      .catch(err => console.log(err))
   }
   static loadLyrics (url) {
     return snekfetch.get(url).then(res => {
