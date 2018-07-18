@@ -31,6 +31,7 @@
     "bufferutil": "^3.0.5",
     "canvas": "^2.0.0-alpha.12",
     "cows": "^2.0.0",
+    "cheerio": "^1.0.0-rc.2",
     "crowdin-without-vulnerability": "^1.0.0",
     "discord.js": "^11.3.2",
     "discord.js-lavalink": "^2.0.2",
