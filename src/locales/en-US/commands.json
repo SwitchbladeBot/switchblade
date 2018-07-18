@@ -165,13 +165,6 @@
     "noUsageProvided": "No usage provided",
     "commandNotFound": "I couldn't find a command with that name"
   },
-  "setlanguage": {
-    "commandDescription": "Changes the bot's language",
-    "commandUsage": "<language code>",
-    "noCode": "You need to give me a language code.",
-    "availableLanguages": "Available languages",
-    "changedSuccessfully": "Language changed successfully to {{lang}}!"
-  },
   "e621": {
     "commandDescription": "Sends random yiff from e621",
     "hereIsYour_yiff": "Here's your yiff!"
@@ -223,7 +216,7 @@
     "commandUsage": "<value to bet> <heads | tails>",
     "victory": "Yay, it landed **$t(commons:{{chosenSide}})**, so you won **$t(commons:currencyWithCount, { 'count': {{count}} })**!",
     "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**",
-    "noBetValue": "You need to give me a value to bet on",
+    "noBetValue": "You need to give me a value to bet",
     "noCoin": "You need to give me a coin side to bet on"
   },
   "botinfo": {
@@ -327,9 +320,29 @@
     "howToVote": "**[Vote on Listcord]({{link}})** and then run `{{command}}` again to claim your bonus",
     "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
   },
+  "config": {
+    "commandDescription": "Change the current guild configuration",
+    "guildLang": "To change the guild language, `{{command}} language <language code>`",
+    "guildPrefix": "To change the guild prefix, `{{command}} prefix <new prefix>`",
+    "subcommands": {
+      "language": {
+        "commandDescription": "Change the current guild language",
+        "commandUsage": "<language code>",
+        "noCode": "You need to give me a language code.",
+        "availableLanguages": "Available languages",
+        "changedSuccessfully": "Language changed successfully to `{{lang}}`!"
+      },
+      "prefix": {
+        "commandDescription": "Change the current guild prefix",
+        "commandUsage": "<new prefix>",
+        "noPrefix": "You need to give me a prefix.",
+        "changedSuccessfully": "Prefix changed successfully to `{{prefix}}`!"
+      }
+    }
+  },
   "cow": {
     "commandDescription": "Shows a random ASCII cow"
-  }, 
+  },
   "asciify": {
     "commandDescription": "Turns your text into ASCII art",
     "commandUsage": "<text>",

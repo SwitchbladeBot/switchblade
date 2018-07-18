@@ -60,7 +60,7 @@ module.exports = class CommandRequirements {
       return new CommandError(t(this.errors.voiceChannelOnly))
     }
 
-    const guildPlayer = client.playerManager.get(guild.id)
+    const guildPlayer = client.playerManager && client.playerManager.get(guild.id)
     if (this.guildPlaying && (!guildPlayer || !guildPlayer.playing)) {
       return new CommandError(t(this.errors.guildPlaying))
     }
