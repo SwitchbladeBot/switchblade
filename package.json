@@ -30,6 +30,8 @@
     "booru": "^0.4.0",
     "bufferutil": "^3.0.5",
     "canvas": "^2.0.0-alpha.12",
+    "cldr-core": "^33.0.0",
+    "cldr-localenames-modern": "^33.0.0",
     "cows": "^2.0.0",
     "crowdin-without-vulnerability": "^1.0.0",
     "discord.js": "^11.3.2",
@@ -50,20 +52,20 @@
     "request": "^2.87.0",
     "rss-parser": "latest",
     "samp-query": "latest",
-    "snekfetch": "^4.0.2",
+    "snekfetch": "^4.0.4",
     "transform-props": "^1.0.1",
-    "uws": "^10.148.0"
+    "uws": "^10.148.1"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
     "dotenv": "^5.0.1",
     "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "ffmpeg-binaries": "^3.2.2-3",
-    "nodemon": "^1.17.5",
+    "ffmpeg-binaries": "^3.2.2",
+    "nodemon": "^1.18.1",
     "standard": "^11.0.1"
   },
   "nodemonConfig": {

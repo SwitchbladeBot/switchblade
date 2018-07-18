@@ -106,7 +106,7 @@ module.exports = class Command {
     return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
   }
 
-  usage (t, prefix = process.env.PREFIX, noUsage = true) {
+  usage (t, prefix, noUsage = true) {
     const usagePath = `${this.tPath}.commandUsage`
     const usage = noUsage ? t(`commands:${usagePath}`) : t([`commands:${usagePath}`, ''])
     if (usage !== usagePath) {
