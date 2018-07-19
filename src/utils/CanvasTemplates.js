@@ -38,10 +38,10 @@ module.exports = class CanvasTemplates {
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
+    const { lastDaily, money, personalText, favColor } = await DATABASE_QUERY
     // Background gradient
-    const backgroundColor = process.env.EMBED_COLOR || '#7289DA'
     const alphaToHex = (a) => Math.floor(a * 255).toString(16).padStart(2, '0')
-    const gradientColor = (a) => backgroundColor + alphaToHex(a)
+    const gradientColor = (a) => favColor + alphaToHex(a)
 
     const grd = ctx.createLinearGradient(0, 0, 0, HEIGHT)
     grd.addColorStop(0, gradientColor(0))
@@ -67,7 +67,6 @@ module.exports = class CanvasTemplates {
     ctx.write('SWITCHBLADE', WIDTH - BORDER, BORDER, FONTS.BRAND, ALIGN.TOP_RIGHT)
 
     // Balance info
-    const { lastDaily, money, personalText } = await DATABASE_QUERY
 
     const TL = moment.duration(Math.max(DAILY_INTERVAL - (Date.now() - lastDaily), 0)).format('h[h] m[m] s[s]')
     const balanceX = WIDTH - Math.max(
