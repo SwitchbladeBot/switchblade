@@ -25,8 +25,9 @@ module.exports = class Favcolor extends Command {
         // Database
         const userData = await this.client.database.users.get(author.id)
         const favColor = userData.favColor
-        userDoc.lastDaily = hexcode.input
-        userDoc.save()
+        userData.favColor = hexcode.input
+        userData.save()
+        embed
         .setTitle(t('commands:favcolor.changedSuccessfully'))
     }
     channel.send(embed).then(() => channel.stopTyping())
