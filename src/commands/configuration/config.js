@@ -50,7 +50,7 @@ class ConfigLanguage extends Command {
     )
   }
 
-  async run ({ t, author, channel, guildDocument }, lang) {
+  async run ({ t, author, channel, guild }, lang) {
     const langCodes = languageCodes()
     const langDisplayNames = this.client.cldr.languages
     if (!langCodes.includes(lang)) {
@@ -61,8 +61,7 @@ class ConfigLanguage extends Command {
     const langDisplayName = language && language[0]
 
     const embed = new SwitchbladeEmbed(author)
-    guildDocument.language = lang
-    guildDocument.save()
+    await this.client.modules.guildConfig.setLanguage(guild, lang)
     embed.setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
     channel.send(embed)
   }
@@ -78,11 +77,10 @@ class ConfigPrefix extends Command {
     )
   }
 
-  async run ({ t, author, channel, guildDocument }, prefix) {
+  async run ({ t, author, channel, guild }, prefix) {
     const embed = new SwitchbladeEmbed(author)
     prefix = prefix || process.env.PREFIX
-    guildDocument.prefix = prefix
-    await guildDocument.save()
+    await this.client.modules.guildConfig.setPrefix(guild, prefix)
     embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', {prefix}))
     channel.send(embed)
   }
