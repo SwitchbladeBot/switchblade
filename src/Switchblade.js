@@ -168,7 +168,8 @@ module.exports = class Switchblade extends Client {
    */
   addModule (module) {
     if (module instanceof Module && module.canLoad()) {
-      this.modules[module.name] = module.load()
+      this.modules[module.name] = module
+      this.log(`${module.name} loaded.`, 'Modules')
     }
   }
 
@@ -179,8 +180,7 @@ module.exports = class Switchblade extends Client {
   initializeModules (dirPath) {
     return FileUtils.requireDirectory(dirPath, (NewModule) => {
       if (Object.getPrototypeOf(NewModule) !== Module) return
-      this.addModule(new NewModule())
-      this.log(`${NewModule.name} loaded.`, 'Modules')
+      this.addModule(new NewModule(this))
     }, this.logError)
   }
 

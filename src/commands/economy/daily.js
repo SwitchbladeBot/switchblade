@@ -16,9 +16,8 @@ module.exports = class Daily extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    const userDoc = await this.client.database.users.get(author.id)
+    const date = await this.client.modules.economy.checkDaily(author)
     const now = Date.now()
-    const date = userDoc.lastDaily
     if (now - date < DAILY_INTERVAL) {
       const time = moment.duration(DAILY_INTERVAL - (now - date)).format('h[h] m[m] s[s]')
       embed.setColor(Constants.ERROR_COLOR)
@@ -26,9 +25,7 @@ module.exports = class Daily extends Command {
         .setDescription(t('commands:daily.alreadyClaimedDescription', {time}))
     } else {
       const collectedMoney = Math.ceil(Math.random() * 2000) + 750
-      userDoc.money += collectedMoney
-      userDoc.lastDaily = now
-      userDoc.save()
+      await this.client.modules.economy.collectDaily(author, now, collectedMoney)
       embed.setDescription(t('commands:daily.claimedSuccessfully', {count: collectedMoney}))
     }
     channel.send(embed).then(() => channel.stopTyping())

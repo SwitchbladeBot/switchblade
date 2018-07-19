@@ -18,11 +18,11 @@ module.exports = class Money extends Command {
     channel.startTyping()
 
     const embed = new SwitchbladeEmbed(author)
-    const { money } = await this.client.database.users.get(user.id)
+    const count = await this.client.modules.economy.checkBalance(author)
     if (author.id === user.id) {
-      embed.setDescription(t('commands:money.youHave', {count: money}))
+      embed.setDescription(t('commands:money.youHave', {count}))
     } else {
-      embed.setDescription(t('commands:money.someoneHas', {count: money, user}))
+      embed.setDescription(t('commands:money.someoneHas', {count, user}))
     }
 
     channel.send(embed).then(() => channel.stopTyping())

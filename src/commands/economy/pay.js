@@ -16,7 +16,7 @@ module.exports = class Pay extends Command {
   async run ({ t, author, channel }, receiver, value) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const senderBalance = await this.client.modules.economy.checkBalance(author.id)
+    const senderBalance = await this.client.modules.economy.checkBalance(author)
     if (author === receiver) {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:pay.cantPayYourself'))

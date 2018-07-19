@@ -13,9 +13,9 @@ module.exports = class Betflip extends Command {
 
   async run ({channel, author, t}, bet, side) {
     const embed = new SwitchbladeEmbed(author)
-    const userDoc = await this.client.database.users.get(author.id)
+    const balance = await this.client.modules.economy.checkBalance(author)
     channel.startTyping()
-    if (userDoc.money < bet) {
+    if (balance < bet) {
       embed.setColor(Constants.ERROR_COLOR)
         .setDescription(t('errors:notEnoughMoney'))
     } else {
@@ -23,13 +23,11 @@ module.exports = class Betflip extends Command {
       const chosenSide = sides[Math.floor(Math.random() * sides.length)]
       embed.setImage(`https://raw.githubusercontent.com/bolsomito/koi/master/bin/assets/${chosenSide}.png`)
       if (chosenSide === side.toLowerCase()) {
+        await this.client.modules.economy.addMoney(author, bet)
         embed.setDescription(t('commands:betflip.victory', { chosenSide, count: bet }))
-        userDoc.money += bet
-        userDoc.save()
       } else {
+        await this.client.modules.economy.removeMoney(author, bet)
         embed.setDescription(t('commands:betflip.loss', { chosenSide, count: bet }))
-        userDoc.money -= bet
-        userDoc.save()
       }
     }
     channel.send(embed).then(() => channel.stopTyping())

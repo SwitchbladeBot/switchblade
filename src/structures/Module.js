@@ -16,17 +16,8 @@ module.exports = class Module {
    */
   canLoad () {
     let value = true
-    console.log(this)
-    if (this.requiresDatabase && !this.database) return false
+    if (this.requiresDatabase && !this.client.database) return false
     if (this.envVars && !this.envVars.every(v => process.env[v])) return false
     return value
-  }
-
-  /**
-   * Loads the module
-   * @returns {Object} - The loaded module
-   */
-  load () {
-    return this
   }
 }
