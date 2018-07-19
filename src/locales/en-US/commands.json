@@ -347,5 +347,11 @@
     "commandDescription": "Turns your text into ASCII art",
     "commandUsage": "<text>",
     "noText": "You need to give me some text to asciify"
-  }
+  },
+"favcolor": {
+  "commandDescription": "Set a background color to your profile",
+  "commandUsage": "<#hexcode>",
+  "invalidHex": "You need to give me a valid hex code",
+  "changedSuccessfully": "Profile color changed successfully to `{{hexcode}}`!"
+}
 }
