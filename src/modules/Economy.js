@@ -4,7 +4,7 @@ module.exports = class Economy extends Module {
   constructor (client) {
     super(client)
     this.name = 'economy'
-    this.requireDatabase = true
+    this.requiresDatabase = true
   }
 
   load () {
