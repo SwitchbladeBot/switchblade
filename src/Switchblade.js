@@ -3,7 +3,7 @@ const i18next = require('i18next')
 const translationBackend = require('i18next-node-fs-backend')
 
 const FileUtils = require('./utils/FileUtils.js')
-const { Command, EventListener, APIWrapper } = require('./structures')
+const { Command, EventListener, APIWrapper, Module } = require('./structures')
 const { MongoDB } = require('./database')
 
 /**
@@ -23,6 +23,7 @@ module.exports = class Switchblade extends Client {
 
     super(options)
     this.apis = {}
+    this.modules = {}
     this.commands = []
     this.cldr = { languages: {} }
     this.listeners = []
@@ -149,13 +150,37 @@ module.exports = class Switchblade extends Client {
 
   /**
    * Initializes all API Wrappers.
-   * @param {string} dirPath - Path to the listeners directory
+   * @param {string} dirPath - Path to the API Wrappers directory
    */
   initializeApis (dirPath) {
     return FileUtils.requireDirectory(dirPath, (NewAPI) => {
       if (Object.getPrototypeOf(NewAPI) !== APIWrapper) return
       this.addApi(new NewAPI())
       this.log(`${NewAPI.name} loaded.`, 'APIs')
+    }, this.logError)
+  }
+
+  // Modules
+
+  /**
+   * Adds a new module to the Client
+   * @param {Object} module - Module to be added
+   */
+  addModule (module) {
+    if (module instanceof Module && module.canLoad()) {
+      this.modules[module.name] = module.load()
+    }
+  }
+
+  /**
+   * Initializes all modules
+   * @param {string} dirPath - Path to the modules directory
+   */
+  initializeModules (dirPath) {
+    return FileUtils.requireDirectory(dirPath, (NewModule) => {
+      if (Object.getPrototypeOf(NewModule) !== Module) return
+      this.addModule(new NewModule())
+      this.log(`${NewModule.name} loaded.`, 'Modules')
     }, this.logError)
   }
 
@@ -222,8 +247,10 @@ module.exports = class Switchblade extends Client {
   initializeDatabase (DBWrapper, options = {}) {
     this.database = new DBWrapper(options)
     this.database.connect()
-      .then(() => this.log('Database connection established!', 'DB'))
-      .catch(e => {
+      .then(() => {
+        this.log('Database connection established!', 'DB')
+        this.initializeModules('src/modules')
+      }).catch(e => {
         this.logError(e.message, 'DB')
         this.database = null
       })
