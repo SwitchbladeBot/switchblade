@@ -349,12 +349,12 @@
     "noText": "You need to give me some text to asciify"
   },
   "urban": {
-    "commandDescription": "Searches your word on Urban Dictionary",
-    "commandUsage": "<word>",
-    "noWordProvided": "You need to give me a word to search its definition",
+    "commandDescription": "Searches for an expression on Urban Dictionary",
+    "commandUsage": "<expression>",
+    "noWordProvided": "You need to give me a word",
     "definition": "Definition:",
     "example": "Example:",
-    "noDefinitionFound": "No definition found to {{- text}}"
+    "noDefinitionFound": "No definition found for {{- text}}"
   }
 }
 }
