@@ -10,10 +10,6 @@ module.exports = class TwitchAPI extends APIWrapper {
     this.envVars = ['TWITCH_CLIENT_ID']
   }
 
-  load () {
-    return this
-  }
-
   getUser (id) {
     return this.request('/users', { id }).then(u => u && u.data[0])
   }
