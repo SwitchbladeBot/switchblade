@@ -351,7 +351,7 @@
   "urban": {
     "commandDescription": "Searches for an expression on Urban Dictionary",
     "commandUsage": "<expression>",
-    "noWordProvided": "You need to give me a word",
+    "noExpressionProvided": "You need to give me an expression",
     "definition": "Definition:",
     "example": "Example:",
     "noDefinitionFound": "No definition found for {{- text}}"
