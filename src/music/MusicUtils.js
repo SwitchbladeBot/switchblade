@@ -1,3 +1,4 @@
+const HTTP_STREAM_REGEX = /^(icy|https?):\/\/(.*)\.(mp3|)$/
 const YOUTUBE_VIDEO_ID_REGEX = /([a-zA-Z0-9_-]{11})/
 const TWITCH_STREAM_NAME_REGEX = /^https?:\/\/(?:www\.|go\.)?twitch.tv\/([^/]+)$/
 const SOUNDCLOUD_TRACK_URL_REGEX = /^(?:https?:\/\/|)(?:www\.|)(?:m\.|)soundcloud\.com\/([a-zA-Z0-9-_]+)\/([a-zA-Z0-9-_]+)(?:\\?.*|)$/
@@ -9,6 +10,7 @@ module.exports = class MusicUtils {
     const id = song.info.identifier
     const uri = song.info.uri
 
+    if (HTTP_STREAM_REGEX.test(id)) return 'stream'
     if (YOUTUBE_VIDEO_ID_REGEX.test(id)) return 'youtube'
     if (TWITCH_STREAM_NAME_REGEX.test(id)) return 'twitch'
     if (SOUNDCLOUD_TRACK_URL_REGEX.test(uri)) return 'soundcloud'
