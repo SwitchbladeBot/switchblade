@@ -10,7 +10,7 @@ module.exports = class UrbanDictionary extends Command {
     this.name = 'urban'
     this.aliases = ['urban', 'urbandictionary']
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:urban.noWordProvided'})
+      new StringParameter({full: true, missingError: 'commands:urban.noExpressionProvided'})
     )
   }
 
