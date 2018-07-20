@@ -1,4 +1,7 @@
 module.exports = {
+  // HTTP
+  HTTPSong: require('./http/HTTPSong.js'),
+
   // SoundCloud
   SoundcloudSong: require('./soundcloud/SoundcloudSong.js'),
 

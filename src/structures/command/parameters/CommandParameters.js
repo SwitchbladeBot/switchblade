@@ -74,9 +74,12 @@ module.exports = class CommandParameters {
     }
 
     if (!isNull(parsedArg)) {
-      const whitelist = funcOrString(param.whitelist, null, context)
-      if (whitelist && !whitelist.includes(parsedArg)) {
-        return new CommandError(missingErr, param.showUsage)
+      if (param.whitelist) {
+        const whitelist = funcOrString(param.whitelist, null, parsedArg, context)
+        const whitelisted = Array.isArray(whitelist) ? whitelist.includes(parsedArg) : !!whitelist
+        if (!whitelisted) {
+          return new CommandError(missingErr, param.showUsage)
+        }
       }
     }
 

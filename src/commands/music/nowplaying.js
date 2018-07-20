@@ -16,17 +16,10 @@ module.exports = class NowPlaying extends Command {
     const embed = new SwitchbladeEmbed(author)
     const nf = new Intl.NumberFormat('en-US').format
 
-    let durationText = `\`(${t('music:live')})\``
-    if (!song.isStream) {
-      durationText = `\`(${guildPlayer.formattedElapsed}/${song.formattedDuration})\``
-    }
-
-    const description = [
-      `**${t('music:nowPlaying')}:** [${song.title}](${song.uri}) ${durationText}`,
-      `*[${t('music:addedBy', {user: song.requestedBy})}]*`
-    ]
-
     switch (song.source) {
+      case 'http':
+        await song.loadInfo()
+        break
       case 'youtube':
         embed.setImage(song.artwork)
           .addField(t('music:views'), nf(song.richInfo.viewCount), true)
@@ -45,6 +38,16 @@ module.exports = class NowPlaying extends Command {
       default:
         embed.setImage(song.artwork)
     }
+
+    let durationText = `\`(${t('music:live')})\``
+    if (!song.isStream) {
+      durationText = `\`(${guildPlayer.formattedElapsed}/${song.formattedDuration})\``
+    }
+
+    const description = [
+      `**${t('music:nowPlaying')}:** [${song.title}](${song.uri}) ${durationText}`,
+      `*[${t('music:addedBy', {user: song.requestedBy})}]*`
+    ]
 
     channel.send(embed.setDescription(description.join('\n')))
   }

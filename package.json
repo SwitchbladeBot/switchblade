@@ -42,6 +42,7 @@
     "googleapis": "^31.0.2",
     "i18next": "^11.3.2",
     "i18next-node-fs-backend": "^1.0.0",
+    "icecast-parser": "^3.0.0",
     "mal-scraper": "^2.4.2",
     "mathjs": "^4.4.0",
     "moment": "^2.22.2",

@@ -29,7 +29,7 @@ module.exports = class Switchblade extends Client {
     this.listeners = []
     this.playerManager = null
 
-    this.initializeDatabase(MongoDB)
+    this.initializeDatabase(MongoDB, { useNewUrlParser: true })
     this.initializeApis('src/apis').then(() => {
       this.initializeListeners('src/listeners')
       this.downloadAndInitializeLocales('src/locales').then(() => {

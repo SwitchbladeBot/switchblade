@@ -35,7 +35,7 @@ class ConfigLanguage extends Command {
     this.parameters = new CommandParameters(this,
       new StringParameter({
         full: true,
-        whitelist: () => languageCodes().concat(languageAliases(this.client)),
+        whitelist: (arg) => languageCodes().concat(languageAliases(this.client)).some(l => l.toLowerCase() === arg.toLowerCase()),
         missingError: ({ t, prefix }) => {
           return {
             title: t('commands:config.subcommands.language.noCode'),
@@ -50,13 +50,15 @@ class ConfigLanguage extends Command {
     )
   }
 
-  async run ({ t, author, channel, guild }, lang) {
+  async run ({ t, author, channel, guildDocument }, lang) {
+    lang = lang.toLowerCase()
     const langCodes = languageCodes()
     const langDisplayNames = this.client.cldr.languages
-    if (!langCodes.includes(lang)) {
-      lang = langCodes.find(lc => langDisplayNames[lc] && Object.values(langDisplayNames[lc]).reduce((a, v) => a.concat(v), []).includes(lang.toLowerCase()))
+    if (!langCodes.some(l => l.toLowerCase() === lang)) {
+      lang = langCodes.find(lc => langDisplayNames[lc] && Object.values(langDisplayNames[lc]).reduce((a, v) => a.concat(v), []).includes(lang))
     }
 
+    lang = langCodes.find(l => l.toLowerCase() === lang.toLowerCase())
     const language = langDisplayNames[lang] && langDisplayNames[lang][lang]
     const langDisplayName = language && language[0]
 
