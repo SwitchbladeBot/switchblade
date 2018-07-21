@@ -57,7 +57,7 @@ class Color {
   }
 
   get colorInvert () {
-    return this.colorLuminance > 0.55 ? new Color('#000000') : new Color('#FFFFFFFF')
+    return this.colorLuminance > 0.55 ? new Color('#000000') : new Color('#FFFFFF')
   }
 
   // Static methods
