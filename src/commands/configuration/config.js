@@ -50,7 +50,7 @@ class ConfigLanguage extends Command {
     )
   }
 
-  async run ({ t, author, channel, guildDocument }, lang) {
+  async run ({ t, author, channel, guild }, lang) {
     lang = lang.toLowerCase()
     const langCodes = languageCodes()
     const langDisplayNames = this.client.cldr.languages

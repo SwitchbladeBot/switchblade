@@ -1,5 +1,6 @@
 const request = require('request')
-const { createCanvas, registerFont, Context2d, Image } = require('canvas')
+const canvg = require('canvg')
+const { createCanvas, registerFont, Canvas, Context2d, Image } = require('canvas')
 
 const FileUtils = require('./FileUtils.js')
 
@@ -23,6 +24,11 @@ const ALIGN = {
   CENTER_LEFT: 8
 }
 
+// Color regex
+const RGB_REGEX = /^rgb\(([0-2][0-5]?[0-5]?),\s*([0-2][0-5]?[0-5]?),\s*([0-2][0-5]?[0-5]?)\)$/
+const RGBA_REGEX = /^rgba\(([0-2][0-5]?[0-5]?),\s*([0-2][0-5]?[0-5]?),\s*([0-2][0-5]?[0-5]?),\s*([0-1](\.[0-9])?)\)$/
+const HEX_REGEX = /^#?((([a-f\d]){3}){1,2})$/
+
 module.exports = class CanvasUtils {
   static initializeHelpers () {
     const self = this
@@ -42,23 +48,25 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', {family: 'Montserrat Black', style: 'italic'})
 
     // Image loading
-    Image.from = function (url, localFile = false) {
+    Image.from = function (url, localFile) {
       return new Promise(async (resolve, reject) => {
-        const b = await (localFile ? FileUtils.readFile(url) : URLtoBuffer(url))
+        const b = await Image.buffer(url, localFile)
         const img = new Image()
-        img.onerror = (e) => reject(e)
+        img.onerror = e => reject(e)
         img.onload = () => resolve(img)
         img.src = b
       })
     }
 
+    Image.buffer = (url, localFile = false) => localFile ? FileUtils.readFile(url) : URLtoBuffer(url)
+
     // Context functions
     Context2d.prototype.roundImage = function (img, x, y, w, h, r) {
-      this.drawImage(this.roundImageCanvas(img, w, h, r), x, y, w, h)
+      this.drawImage(Canvas.roundImageCanvas(img, w, h, r), x, y, w, h)
       return this
     }
 
-    Context2d.prototype.roundImageCanvas = function (img, w = img.width, h = img.height, r = w * 0.5) {
+    Canvas.roundImageCanvas = function (img, w = img.width, h = img.height, r = w * 0.5) {
       const canvas = createCanvas(w, h)
       const ctx = canvas.getContext('2d')
 
@@ -143,6 +151,16 @@ module.exports = class CanvasUtils {
       }
       return lastWrite
     }
+
+    Canvas.createSVGCanvas = function (svg, w, h) {
+      return new Promise((resolve, reject) => {
+        const canvas = createCanvas(w, h)
+        canvg(canvas, svg, {
+          renderCallback: () => resolve(canvas),
+        })
+      })
+      
+    }
   }
 
   static measureText (ctx, font, text) {
@@ -186,14 +204,6 @@ module.exports = class CanvasUtils {
     return realCoords
   }
 
-  static hexToRGB (hex) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null
-  }
 }
 
 module.exports.ALIGN = ALIGN

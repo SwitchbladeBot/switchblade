@@ -26,8 +26,8 @@ module.exports = {
   // Assets
 
   // Icons
-  COINS_PNG: 'src/assets/png/coins.png',
-  DAILY_CLOCK_PNG: 'src/assets/png/daily_clock.png',
+  COINS_SVG: 'src/assets/svg/coins.svg',
+  DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
