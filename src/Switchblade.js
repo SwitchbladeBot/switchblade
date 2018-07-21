@@ -79,6 +79,7 @@ module.exports = class Switchblade extends Client {
   addCommand (command) {
     if (command instanceof Command && command.canLoad()) {
       this.commands.push(command)
+      this.log(`${command.constructor.name} loaded.`, 'Commands')
     }
   }
 
@@ -102,7 +103,6 @@ module.exports = class Switchblade extends Client {
     return FileUtils.requireDirectory(dirPath, (NewCommand) => {
       if (Object.getPrototypeOf(NewCommand) !== Command || NewCommand.ignore) return
       this.addCommand(new NewCommand(this))
-      this.log(`${NewCommand.name} loaded.`, 'Commands')
     }, this.logError)
   }
 
@@ -121,6 +121,7 @@ module.exports = class Switchblade extends Client {
       })
 
       this.listeners.push(listener)
+      this.log(`${listener.constructor.name} loaded.`, 'Listeners')
     }
   }
 
@@ -132,7 +133,6 @@ module.exports = class Switchblade extends Client {
     return FileUtils.requireDirectory(dirPath, (NewListener) => {
       if (Object.getPrototypeOf(NewListener) !== EventListener) return
       this.addListener(new NewListener(this))
-      this.log(`${NewListener.name} loaded.`, 'Listeners')
     }, this.logError)
   }
 
@@ -145,6 +145,7 @@ module.exports = class Switchblade extends Client {
   addApi (api) {
     if (api instanceof APIWrapper && api.canLoad()) {
       this.apis[api.name] = api.load()
+      this.log(`${api.constructor.name} loaded.`, 'APIs')
     }
   }
 
@@ -156,7 +157,6 @@ module.exports = class Switchblade extends Client {
     return FileUtils.requireDirectory(dirPath, (NewAPI) => {
       if (Object.getPrototypeOf(NewAPI) !== APIWrapper) return
       this.addApi(new NewAPI())
-      this.log(`${NewAPI.name} loaded.`, 'APIs')
     }, this.logError)
   }
 
@@ -169,7 +169,7 @@ module.exports = class Switchblade extends Client {
   addModule (module) {
     if (module instanceof Module && module.canLoad()) {
       this.modules[module.name] = module
-      this.log(`${module.name} loaded.`, 'Modules')
+      this.log(`${module.constructor.name} loaded.`, 'Modules')
     }
   }
 

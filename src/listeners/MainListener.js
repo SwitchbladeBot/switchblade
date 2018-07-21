@@ -76,8 +76,10 @@ module.exports = class MainListener extends EventListener {
 
   async onMessage (message) {
     if (message.author.bot) return
+
     const userDocument = this.database && await this.database.users.get(message.author.id)
     if (userDocument.blacklisted) return
+
     const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
     const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)

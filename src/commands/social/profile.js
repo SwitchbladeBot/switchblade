@@ -13,10 +13,12 @@ module.exports = class Profile extends Command {
     )
   }
 
-  async run ({ t, author, channel, client }, user) {
-    user = user || author
+  async run ({ t, author, channel, userDocument }, user) {
     channel.startTyping()
-    const profile = await CanvasTemplates.profile({ t, client }, user)
+
+    user = user || author
+    if (user !== author) userDocument = await this.client.database.users.get(user.id)    
+    const profile = await CanvasTemplates.profile({ t }, user, userDocument)
     channel.send(new Attachment(profile, 'profile.jpg')).then(() => channel.stopTyping())
   }
 }
