@@ -86,7 +86,6 @@ class Color {
       const [ , r, g, b ] = this.RGB_REGEX.exec(text)
       return [ parseRGBValue(r), parseRGBValue(g), parseRGBValue(b), 1 ]
     }
-    return null
   }
 
   static parseRGBA (text) {
@@ -94,7 +93,6 @@ class Color {
       const [ , r, g, b, a ] = this.RGBA_REGEX.exec(text)
       return [ parseRGBValue(r), parseRGBValue(g), parseRGBValue(b), parseRGBAlpha(a) ]
     }
-    return null
   }
 
   static parseHex (text) {
@@ -104,7 +102,6 @@ class Color {
       rgba.push(parseHexAlpha(alpha || 'ff')) // Alpha
       return rgba
     }
-    return null
   }
 
   static parseSimpleHex (text) {
@@ -114,7 +111,6 @@ class Color {
       rgba.push(parseHexAlpha(alpha ? alpha + alpha : 'ff')) // Alpha
       return rgba
     }
-    return null
   }
 }
 
