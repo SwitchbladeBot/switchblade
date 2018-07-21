@@ -58,8 +58,8 @@ class Color {
 
   get colorLuminance () {
     if (!this.valid) return 0
-    const [ r, g, b ] = this.rgbArray.map(v => v / 255).map(v => v < 0.03928 ? v / 12.92 : Math.pow(((v + .055) / 1.055), 2))
-    return (r * .2126) + (g * .7152) + (b * .0722)
+    const [ r, g, b ] = this.rgbArray.map(v => v / 255).map(v => v < 0.03928 ? v / 12.92 : Math.pow(((v + 0.055) / 1.055), 2))
+    return (r * 0.2126) + (g * 0.7152) + (b * 0.0722)
   }
 
   get colorInvert () {

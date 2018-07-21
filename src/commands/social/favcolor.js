@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, ColorParameter } = CommandStructures
 
 module.exports = class Favcolor extends Command {

@@ -24,11 +24,6 @@ const ALIGN = {
   CENTER_LEFT: 8
 }
 
-// Color regex
-const RGB_REGEX = /^rgb\(([0-2][0-5]?[0-5]?),\s*([0-2][0-5]?[0-5]?),\s*([0-2][0-5]?[0-5]?)\)$/
-const RGBA_REGEX = /^rgba\(([0-2][0-5]?[0-5]?),\s*([0-2][0-5]?[0-5]?),\s*([0-2][0-5]?[0-5]?),\s*([0-1](\.[0-9])?)\)$/
-const HEX_REGEX = /^#?((([a-f\d]){3}){1,2})$/
-
 module.exports = class CanvasUtils {
   static initializeHelpers () {
     const self = this
@@ -156,10 +151,9 @@ module.exports = class CanvasUtils {
       return new Promise((resolve, reject) => {
         const canvas = createCanvas(w, h)
         canvg(canvas, svg, {
-          renderCallback: () => resolve(canvas),
+          renderCallback: () => resolve(canvas)
         })
       })
-      
     }
   }
 
@@ -203,7 +197,6 @@ module.exports = class CanvasUtils {
     }
     return realCoords
   }
-
 }
 
 module.exports.ALIGN = ALIGN
