@@ -203,7 +203,7 @@ const parseHue = (H, C) => {
   if (h >= 3 && h <= 4) return [ 0, X, C ]
   if (h >= 4 && h <= 5) return [ X, 0, C ]
   if (h >= 5 && h <= 6) return [ C, 0, C ]
-  return [0, 0, 0]
+  return [ 0, 0, 0 ]
 }
 
 module.exports = Color
