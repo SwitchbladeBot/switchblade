@@ -1,67 +1,94 @@
 const { Module } = require('../structures')
 
-module.exports = class Economy extends Module {
+class Economy extends Module {
   constructor (client) {
     super(client)
     this.name = 'economy'
     this.requiresDatabase = true
   }
 
-  async checkBalance (user) {
-    const { money } = await this.client.database.users.get(user.id)
-    return money
+  async checkBalance ({ user, doc }) {
+    const { money } = doc || await this.client.database.users.get(user.id)
+    return { ok: true, balance: money }
   }
 
-  async addMoney (user, value) {
-    const userDoc = await this.client.database.users.get(user.id)
-    userDoc.money += value
-    userDoc.save()
-    this.logAdded(value, user)
+  async addMoney ({ user, doc, value }) {
+    doc = doc || await this.client.database.users.get(user.id)
+
+    doc.money += Math.abs(Math.round(value))
+    doc.save()
+    this.logAdded(user, value)
+    return { ok: true, balance: doc.money }
   }
 
-  async removeMoney (user, value) {
-    const userDoc = await this.client.database.users.get(user.id)
-    userDoc.money -= value
-    userDoc.save()
-    this.logRemoved(value, user)
+  async removeMoney ({ user, doc, value }) {
+    doc = doc || await this.client.database.users.get(user.id)
+
+    value = Math.abs(Math.round(value))
+    if (doc.money < value) {
+      return { ok: false, error: 'INSUFFICIENT_FUNDS', senderBalance: doc.money }
+    }
+
+    doc.money -= value
+    doc.save()
+    this.logRemoved(user, value)
+    return { ok: true, balance: doc.money }
   }
 
-  async sendTo (sender, receiver, value) {
-    const senderDoc = await this.client.database.users.get(sender.id)
-    const receiverDoc = await this.client.database.users.get(receiver.id)
-    senderDoc.money -= value
-    receiverDoc.money += value
-    senderDoc.save()
-    receiverDoc.save()
-    this.logTransaction(value, sender, receiver)
+  async transfer ({ sender, senderDoc, receiver, receiverDoc, value }) {
+    senderDoc = senderDoc || await this.client.database.users.get(sender.id)
+    receiverDoc = receiverDoc || await this.client.database.users.get(receiver.id)
+
+    value = Math.abs(Math.round(value))
+    if (sender === receiver) {
+      return { ok: false, error: 'SAME_ACCOUNT' }
+    }
+
+    if (senderDoc.money < value) {
+      return { ok: false, error: 'INSUFFICIENT_FUNDS', senderBalance: senderDoc.money }
+    }
+
+    this.removeMoney({ user: sender, doc: senderDoc, value })
+    this.addMoney({ user: receiver, doc: receiverDoc, value })
+    this.logTransaction(sender, receiver, value)
+    return { ok: true, value, senderBalance: senderDoc.money, receiverBalance: receiverDoc.money }
   }
 
-  async checkDaily (user) {
-    const { lastDaily } = await this.client.database.users.get(user.id)
-    return lastDaily
+  async collectDaily ({ user, doc }) {
+    doc = doc || await this.client.database.users.get(user.id)
+
+    const { lastDaily } = doc
+    const now = Date.now()
+    const DAILY_INTERVAL = this.constructor.DAILY_INTERVAL
+    if (now - lastDaily < DAILY_INTERVAL) {
+      return { ok: false, error: 'IN_INTERVAL', lastDaily, interval: DAILY_INTERVAL - (now - lastDaily) }
+    }
+
+    doc.lastDaily = now
+    const value = this.constructor.DAILY_BONUS()
+    this.logDaily(user, value)
+    this.addMoney({ user, doc, value })
+    return { ok: true, value }
   }
 
-  async collectDaily (user, date, collectedMoney) {
-    const userDoc = await this.client.database.users.get(user.id)
-    userDoc.money += collectedMoney
-    userDoc.lastDaily = date
-    userDoc.save()
-    this.logDaily(collectedMoney, user)
+  logTransaction (sender, receiver, value) {
+    this.log(`${value} Switchcoins were sent from ${sender.id} to ${receiver.id}`)
   }
 
-  logTransaction (value, sender, receiver) {
-    this.client.log(`${value} Switchcoins were sent from ${sender.id} to ${receiver.id}`, 'Modules', 'Economy')
+  logDaily (user, value) {
+    this.log(`${value} Switchcoins were collected by ${user.id} from daily`)
   }
 
-  logDaily (value, user) {
-    this.client.log(`${value} Switchcoins were collected by ${user.id} from daily`, 'Modules', 'Economy')
+  logAdded (user, value) {
+    this.log(`${value} Switchcoins were added to ${user.id}'s account`)
   }
 
-  logAdded (value, user) {
-    this.client.log(`${value} Switchcoins were added to ${user.id}'s account`, 'Modules', 'Economy')
-  }
-
-  logRemoved (value, user) {
-    this.client.log(`${value} Switchcoins were added to ${user.id}'s account`, 'Modules', 'Economy')
+  logRemoved (user, value) {
+    this.log(`${value} Switchcoins were removed from ${user.id}'s account`)
   }
 }
+
+Economy.DAILY_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
+Economy.DAILY_BONUS = () => Math.ceil(Math.random() * 2000) + 750
+
+module.exports = Economy

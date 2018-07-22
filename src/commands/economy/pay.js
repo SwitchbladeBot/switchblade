@@ -13,20 +13,31 @@ module.exports = class Pay extends Command {
     )
   }
 
-  async run ({ t, author, channel }, receiver, value) {
+  async run ({ t, author, channel, userDocument }, receiver, count) {
     const embed = new SwitchbladeEmbed(author)
+
     channel.startTyping()
-    const senderBalance = await this.client.modules.economy.checkBalance(author)
-    if (author === receiver) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:pay.cantPayYourself'))
-    } else if (value > senderBalance) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:pay.notEnoughMoney'))
-    } else {
-      await this.client.modules.economy.sendTo(author, receiver, value)
+    const { ok, error, value } = await this.client.modules.economy.transfer({
+      sender: author,
+      senderDoc: userDocument,
+      receiver,
+      value: count
+    })
+
+    if (ok) {
       embed.setDescription(t('commands:pay.transactionSuccessful', { receiver, value }))
+    } else {
+      embed.setColor(Constants.ERROR_COLOR)
+      switch (error) {
+        case 'SAME_ACCOUNT':
+          embed.setTitle(t('commands:pay.cantPayYourself'))
+          break
+        case 'INSUFFICIENT_FUNDS':
+          embed.setTitle(t('commands:pay.notEnoughMoney'))
+          break
+      }
     }
+
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

@@ -2,8 +2,6 @@ const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandRequirements } = CommandStructures
 const moment = require('moment')
 
-const INTERVAL = 24 * 60 * 60 * 1000
-
 module.exports = class Daily extends Command {
   constructor (client) {
     super(client)
@@ -12,28 +10,32 @@ module.exports = class Daily extends Command {
     this.requirements = new CommandRequirements(this, {databaseOnly: true})
   }
 
-  async run ({ t, author, channel, prefix, alias }) {
+  async run ({ t, alias, author, channel, prefix, userDocument }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const now = Date.now()
-    const lastBonus = await this.client.modules.rewards.checkListcordVote(author)
-    if (now - lastBonus < INTERVAL) {
-      const time = moment.duration(INTERVAL - (now - lastBonus)).format('h[h] m[m] s[s]')
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:listcord.alreadyClaimed'))
-        .setDescription(t('commons:youCanDoItAgainIn', {time}))
+
+    const { ok, error, interval, value: count } = await this.client.modules.rewards.collectListcord({ user: author, doc: userDocument })
+    if (ok) {
+      embed.setDescription(t('commands:listcord.thanksForVoting', { count }))
     } else {
-      const vote = await this.client.modules.rewards.validateListcordVote(author)
-      if (vote && now - vote.lastVote < INTERVAL) {
-        const count = 500
-        await this.client.modules.rewards.collectListcordReward(author, count, now)
-        embed.setDescription(t('commands:listcord.thanksForVoting', {count: count}))
-      } else {
-        embed
-          .setDescription(t('commands:listcord.howToVote', {link: `https://listcord.com/bot/${this.client.user.id}`, command: `${prefix}${alias || this.name}`}))
+      embed.setColor(Constants.ERROR_COLOR)
+      switch (error) {
+        case 'IN_INTERVAL':
+          const time = moment.duration(interval).format('h[h] m[m] s[s]')
+          embed
+            .setTitle(t('commands:listcord.alreadyClaimed'))
+            .setDescription(t('commons:youCanDoItAgainIn', { time }))
+          break
+        case 'INVALID_VOTE':
+          embed
+            .setDescription(t('commands:listcord.howToVote', {
+              link: `https://listcord.com/bot/${this.client.user.id}`,
+              command: `${prefix}${alias || this.name}`
+            }))
+          break
       }
     }
+
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

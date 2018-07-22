@@ -7,21 +7,23 @@ module.exports = class GuildConfiguration extends Module {
     this.requiresDatabase = true
   }
 
-  async setLanguage (guild, language) {
-    const guildDoc = await this.client.database.guilds.get(guild.id)
-    guildDoc.language = language
-    guildDoc.save()
+  async setLanguage ({ guild, doc, language }) {
+    doc = doc || await this.client.database.guilds.get(guild.id)
+    doc.language = language
+    doc.save()
     this.logGuildChange(guild, 'language', language)
+    return { ok: true, language }
   }
 
-  async setPrefix (guild, prefix) {
-    const guildDoc = await this.client.database.guilds.get(guild.id)
-    guildDoc.prefix = prefix
-    guildDoc.save()
+  async setPrefix ({ guild, doc, prefix }) {
+    doc = doc || await this.client.database.guilds.get(guild.id)
+    doc.prefix = prefix
+    doc.save()
     this.logGuildChange(guild, 'prefix', prefix)
+    return { ok: true, prefix }
   }
 
   logGuildChange (guild, variable, value) {
-    this.client.log(`Guild ${guild.id} has changed their ${variable} variable to ${value}`, 'Modules', 'GuildConfiguration')
+    this.log(`Guild ${guild.id} has changed their ${variable} variable to ${value}`)
   }
 }
