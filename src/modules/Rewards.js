@@ -16,7 +16,7 @@ class Rewards extends Module {
   async collectListcord ({ user, doc }) {
     doc = doc || await this.client.database.users.get(user.id)
 
-    const { lastBonus } = doc
+    const { lastBonus: lastListcordBonusClaim } = doc
     const now = Date.now()
     const LISTCORD_INTERVAL = this.constructor.LISTCORD_INTERVAL
     if (now - lastBonus < LISTCORD_INTERVAL) {
