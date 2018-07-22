@@ -12,7 +12,7 @@ module.exports = class GeniusAPI extends APIWrapper {
   }
 
   // Find a track
- findTrack (q) {
+  findTrack (q) {
     return this.request('/search', { q })
   }
 
