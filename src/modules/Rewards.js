@@ -37,7 +37,7 @@ class Rewards extends Module {
   }
 
   logListcord (user, value) {
-    this.client.log(`${value} Switchcoins were collected by ${user.id} from Listcord bonus`, 'Modules', 'Rewards')
+    this.log(`${value} Switchcoins were collected by ${user.id} from Listcord bonus`)
   }
 }
 
