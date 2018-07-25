@@ -348,10 +348,17 @@
     "commandUsage": "<text>",
     "noText": "You need to give me some text to asciify"
   },
-  "favcolor": {
-    "commandDescription": "Set a background color to your profile",
-    "commandUsage": "<#hexcode>",
-    "invalidHex": "You need to give me a valid hex code",
-    "changedSuccessfully": "Profile color changed successfully to `{{hexcode}}`!"
-  }
+"favcolor": {
+  "commandDescription": "Set a background color to your profile",
+  "commandUsage": "<#hexcode>",
+  "invalidHex": "You need to give me a valid hex code",
+  "changedSuccessfully": "Profile color changed successfully to "
+},
+"personaltext": {
+  "commandDescription": "Set a personal text to your profile",
+  "commandUsage": "<personal text>",
+  "noText": "You need to give me some text",
+  "tooLongText": "Your text is longer than 150 characters",
+  "changedSuccessfully": "Personal text changed successfully to "
+}
 }
