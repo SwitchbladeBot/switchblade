@@ -5,7 +5,7 @@ const snekfetch = require('snekfetch')
 
 const INTERVAL = 24 * 60 * 60 * 1000
 
-module.exports = class Daily extends Command {
+module.exports = class Listcord extends Command {
   constructor (client) {
     super(client)
     this.name = 'listcord'
