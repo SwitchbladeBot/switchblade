@@ -101,7 +101,7 @@ module.exports = class MainListener extends EventListener {
           language,
           userDocument
         })
-        this.log(`Command ${command.name} with ${args.length ? `args ${args.join(' ')}` : 'no args'} was executed on ${message.guild.name} by ${message.author.tag} `, 'Commands')
+        this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (<@${message.author.id}>) on guild "${message.guild.name}" (<$${message.guild.id}>) channel "#${message.channel.name}" (<#${message.channel.id}>)`, 'Commands')
         this.runCommand(command, context, args, language)
       }
     }
