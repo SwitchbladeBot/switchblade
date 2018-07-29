@@ -348,8 +348,8 @@
     "commandUsage": "<text>",
     "noText": "You need to give me some text to asciify"
   },
-"hentai": {
-"commandDescription": "Sends a hentai in a NSFW channel",
-"hereIsYourHentai": "Here's your hentai!"
-}
+  "hentai": {
+    "commandDescription": "Sends a hentai in a NSFW channel",
+    "hereIsYourHentai": "Here's your hentai!"
+  }
 }
