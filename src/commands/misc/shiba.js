@@ -6,7 +6,7 @@ module.exports = class Shiba extends Command {
   constructor (client) {
     super(client)
     this.name = 'shiba'
-    this.aliases = ['shibainu, doge']
+    this.aliases = ['shibainu', 'doge']
   }
 
   async run ({ t, author, channel }) {
