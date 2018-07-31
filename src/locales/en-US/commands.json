@@ -353,9 +353,10 @@
     "hereIsYourHentai": "Here's your hentai!"
   },
   "whatanime": {
-    "commandDescription": "Tells you what anime an image came from. Gets the channel's last image if you don't give it any."
+    "commandDescription": "Tells you what anime an image came from. Gets the channel's last image if you don't give it any.",
     "commandUsage": "[image url]",
-    "invalidUrl": "You need to give me an valid image URL",
+    "invalidUrl": "You need to give me an valid image URL.",
+    "noImage": "You need to give me an image to search for.",
     "matchFound": "Match found!",
     "matchName": "**{{animeName}}**, episode **{{episodeNumber}}**",
     "matchDuration": "(From **{{matchStart}}** to **{{matchEnd}}**)",
@@ -363,7 +364,8 @@
     "channelIsNotNSFWDescription": "Please run the command again in a channel marked as NSFW.",
     "imageTooBigTitle": "The image you gave me is too big.",
     "imageTooBigDescription": "I can only use images smaller than **{{sizeLimit}}**.`",
-    "rateLimitExceededTitle": "We have exceeded our ratelimit",
-    "rateLimitExceededDescription": "Please try again later"
+    "rateLimitExceededTitle": "We have exceeded our ratelimit.",
+    "rateLimitExceededDescription": "Please try again later.",
+    "noMatchFound": "No match found."
   }
 }
