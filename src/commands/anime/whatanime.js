@@ -27,10 +27,10 @@ module.exports = class WhatAnime extends Command {
 
     if (imageUrl) {
       if (new RegExp(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/).exec(imageUrl)) {
-        const image = await snekfetch.get(imageUrl)
+        const {image} = await snekfetch.get(imageUrl)
         try {
-          if (image.body.length < sizeLimit) {
-            const response = await snekfetch.post(`https://whatanime.ga/api/search?token=${process.env.WHATANIME_API_KEY}`).attach('image', image.body.toString('base64'))
+          if (image.length < sizeLimit) {
+            const response = await snekfetch.post(`https://whatanime.ga/api/search?token=${process.env.WHATANIME_API_KEY}`).attach('image', body.toString('base64'))
             if (response.body.docs && response.body.docs[0].similarity > 0.80) {
               const bestMatch = response.body.docs[0]
 
