@@ -349,8 +349,24 @@
     "noText": "You need to give me some text to asciify"
   },
   "hentai": {
-    "commandDescription": "Sends a hentai in a NSFW channel",
+    "commandDescription": "Sends hentai in a NSFW channel",
     "hereIsYourHentai": "Here's your hentai!"
+  },
+  "whatanime": {
+    "commandDescription": "Tells you which anime an image is from. Gets the channel's last image if you don't give it any.",
+    "commandUsage": "[image url]",
+    "invalidUrl": "You need to give me a valid image URL.",
+    "noImage": "You need to give me an image to search for.",
+    "matchFound": "Match found!",
+    "matchName": "**{{animeName}}**, episode **{{episodeNumber}}**",
+    "matchDuration": "(From **{{matchStart}}** to **{{matchEnd}}**)",
+    "channelIsNotNSFWTitle": "A match was found, but it's NSFW and I can't show it here.",
+    "channelIsNotNSFWDescription": "Please run the command again in a channel marked as NSFW.",
+    "imageTooBigTitle": "The image you gave me is too big.",
+    "imageTooBigDescription": "I can only use images smaller than **{{sizeLimit}}**.",
+    "rateLimitExceededTitle": "We have exceeded our ratelimit.",
+    "rateLimitExceededDescription": "Please try again later.",
+    "noMatchFound": "No match found."
   },
   "lyrics": {
     "commandDescription": "Find the lyrics of a song",
