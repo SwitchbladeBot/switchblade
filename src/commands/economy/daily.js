@@ -1,6 +1,8 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandRequirements } = CommandStructures
-const prettyMs = require('pretty-ms')
+const moment = require('moment')
+
+const DAILY_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 
 module.exports = class Daily extends Command {
   constructor (client) {
@@ -17,8 +19,8 @@ module.exports = class Daily extends Command {
     const userDoc = await this.client.database.users.get(author.id)
     const now = Date.now()
     const date = userDoc.lastDaily
-    if (date + 86400000 >= now) {
-      const time = prettyMs(parseInt((now - (date + 86400000)) * -1), { secDecimalDigits: 0 })
+    if (now - date < DAILY_INTERVAL) {
+      const time = moment.duration(DAILY_INTERVAL - (now - date)).format('h[h] m[m] s[s]')
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:daily.alreadyClaimedTitle'))
         .setDescription(t('commands:daily.alreadyClaimedDescription', {time}))

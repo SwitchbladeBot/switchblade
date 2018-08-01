@@ -12,10 +12,7 @@ module.exports = class APIWrapper {
    * @returns {boolean} - Whether the API can load
    */
   canLoad () {
-    if (this.envVars.length) {
-      return this.envVars.every(v => process.env[v])
-    }
-    return true
+    return this.envVars.length ? this.envVars.every(v => process.env[v]) : true
   }
 
   /**

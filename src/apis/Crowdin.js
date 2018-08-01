@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const Crowdin = require('crowdin')
+const Crowdin = require('crowdin-without-vulnerability')
 
 module.exports = class CrowdinAPI extends APIWrapper {
   constructor () {
