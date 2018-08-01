@@ -303,7 +303,7 @@
     "commandDescription": "Searches for an anime on MyAnimeList",
     "commandUsage": "<anime name>",
     "noAnime": "You need to give me an anime to search for",
-    "score": "Score",
+    "score": "Score rating",
     "episodes": "Episodes",
     "studio": "Studio",
     "studios": "Studios",
@@ -349,7 +349,7 @@
     "noText": "You need to give me some text to asciify"
   },
   "hentai": {
-    "commandDescription": "Sends a hentai in a NSFW channel",
+    "commandDescription": "Sends hentai in a NSFW channel",
     "hereIsYourHentai": "Here's your hentai!"
   }
 }
