@@ -354,7 +354,7 @@
   },
   "whatanime": {
     "commandDescription": "Tells you which anime an image is from. Gets the channel's last image if you don't give it any.",
-    "commandUsage": "[image url]",
+    "commandUsage": "<image url>",
     "invalidUrl": "You need to give me a valid image URL.",
     "noImage": "You need to give me an image to search for.",
     "matchFound": "Match found!",
