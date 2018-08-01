@@ -357,6 +357,6 @@
     "commandUsage": "<track name>",
     "noLyricsFound": "The provided song's lyrics could not be found.",
     "noTrackName": "You need to give me a track name.",
-	  "fullLyrics": "Click here to see the full lyrics"
+    "fullLyrics": "Click here to see the full lyrics"
   }
 }
