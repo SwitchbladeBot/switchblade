@@ -351,5 +351,9 @@
   "hentai": {
     "commandDescription": "Sends hentai in a NSFW channel",
     "hereIsYourHentai": "Here's your hentai!"
-  }
+  },
+  "shiba": {
+    "commandDescription": "Fetches a random Shiba Inu and displays it. Woof!",
+    "hereIsYourShiba": "Here's your Shiba!"
+  } 
 }
