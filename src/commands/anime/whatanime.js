@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed, Constants, DiscordUtils } = require('../../')
+const { Command, CommandParameters, StringParameter } = CommandStructures
 const snekfetch = require('snekfetch')
 const moment = require('moment')
 
@@ -23,13 +23,13 @@ module.exports = class WhatAnime extends Command {
   async run ({ t, author, channel, message }, urlFromParams) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
-    const imageUrl = urlFromParams || await lastImageFromChannel(channel)
+    const imageUrl = urlFromParams || await DiscordUtils.lastImageFromChannel(channel)
 
     if (imageUrl) {
       if (new RegExp(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/).exec(imageUrl)) {
-        const {image} = await snekfetch.get(imageUrl)
+        const {body} = await snekfetch.get(imageUrl)
         try {
-          if (image.length < sizeLimit) {
+          if (body.length < sizeLimit) {
             const response = await snekfetch.post(`https://whatanime.ga/api/search?token=${process.env.WHATANIME_API_KEY}`).attach('image', body.toString('base64'))
             if (response.body.docs && response.body.docs[0].similarity > 0.80) {
               const bestMatch = response.body.docs[0]
@@ -70,6 +70,10 @@ module.exports = class WhatAnime extends Command {
                 .setTitle(t('commands:whatanime.imageTooBigTitle'))
                 .setDescription(t('commands:whatanime.imageTooBigDescription', {sizeLimit: sizeLimitHumanReadable}))
               break
+            default:
+              embed
+                .setTitle(t('errors:generic'))
+                .setDescription(`\`${e.message}\``)
           }
         }
       } else {
@@ -80,15 +84,5 @@ module.exports = class WhatAnime extends Command {
     }
 
     channel.send(embed).then(() => channel.stopTyping())
-  }
-}
-
-async function lastImageFromChannel (channel) {
-  const channelMessages = await channel.fetchMessages()
-  const message = channelMessages.find(m => m.attachments.filter(a => a.height).first())
-  if (message) {
-    return message.attachments
-  } else {
-    return null
   }
 }
