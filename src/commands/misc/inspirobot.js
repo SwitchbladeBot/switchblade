@@ -13,7 +13,8 @@ module.exports = class InspiroBot extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const { body } = await snekfetch.get('http://inspirobot.me/api?generate=true')
-    embed.setImage(body.toString('utf8'))
+    embed
+      .setImage(body.toString('utf8'))
       .setDescription(t('commands:inspirobot.quote'))
     channel.send(embed).then(() => channel.stopTyping())
   }
