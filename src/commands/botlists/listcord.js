@@ -28,7 +28,7 @@ module.exports = class Listcord extends Command {
         .setTitle(t('commands:listcord.alreadyClaimed'))
         .setDescription(t('commons:youCanDoItAgainIn', {time}))
     } else {
-      const {body} = await snekfetch.get(`https://listcord.com/api/bot/${this.client.user.id}/votes`)
+      const {body} = await snekfetch.get(`https://listcord.com/api/bot/${this.client.user.id}/votes`).set('Authorization', process.env.LISTCORD_TOKEN)
       const userVote = body.find(u => u.id === author.id)
       if (userVote && now - userVote.lastVote < INTERVAL) {
         const count = 500
