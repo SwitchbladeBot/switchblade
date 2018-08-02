@@ -2,7 +2,7 @@ const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command } = CommandStructures
 const snekfetch = require('snekfetch')
 
-module.exports = class Inspirobot extends Command {
+module.exports = class InspiroBot extends Command {
   constructor (client) {
     super(client)
     this.name = 'inspirobot'
