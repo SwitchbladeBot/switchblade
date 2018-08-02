@@ -13,6 +13,10 @@ module.exports = class Listcord extends Command {
     this.requirements = new CommandRequirements(this, {databaseOnly: true})
   }
 
+  canLoad () {
+    return !!process.env.LISTCORD_TOKEN
+  }
+
   async run ({ t, author, channel, prefix, alias, userDocument }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
