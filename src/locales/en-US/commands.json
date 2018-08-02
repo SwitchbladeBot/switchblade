@@ -279,4 +279,5 @@
     "commandUsage": "<text>",
     "missingText": "You need to give me some text",
     "textToBinary": "In binary:"
+  }
 }
