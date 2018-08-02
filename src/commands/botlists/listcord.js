@@ -12,7 +12,7 @@ module.exports = class Listcord extends Command {
 
     this.requirements = new CommandRequirements(this, {databaseOnly: true})
   }
-  
+
   canLoad () {
     return !!process.env.LISTCORD_TOKEN
   }
