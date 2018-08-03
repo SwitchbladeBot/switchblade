@@ -1,5 +1,6 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
+const BinaryRegex = '(?=^1*(01*0)*1*$)^.(..)*$'
 
 module.exports = class Binary extends Command {
   constructor (client) {
@@ -12,24 +13,34 @@ module.exports = class Binary extends Command {
     )
   }
 
-  async run ({ t, author, channel }, text) {
+  async run ({ t, author, channel }, input) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    if (text.length <= 200) {
-      function text2Binary (text) {
-        return text.split('').map(function (char) {
-          return char.charCodeAt(0).toString(2)
-        }).join(' ')
+    if (input.length <= 200) {
+      if (input.match(BinaryRegex)) {
+        embed
+          .setTitle(t('commands:binary.binaryToText'))
+          .setDescription(this.binaryToText(input))
+      } else {
+        embed
+          .setTitle(t('commands:binary.textToBinary'))
+          .setDescription(this.textToBinary(input))
       }
-      const binaryText = text2Binary(text)
-      embed
-        .setTitle(t('commands:binary.textToBinary'))
-        .setDescription(binaryText)
     } else {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:binary.tooLongTitle'))
         .setDescription(t('commands:binary.tooLongDescription'))
     }
     channel.send(embed).then(() => channel.stopTyping())
+  }
+  
+  textToBinary (text) {
+    return text.split('').map(function (char) {
+      return char.charCodeAt(0).toString(2)
+    }).join(' ')
+  }
+  
+  binaryToText (binary) {
+    return parseInt(binary, 2).toString(10)
   }
 }
