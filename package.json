@@ -56,7 +56,8 @@
     "samp-query": "latest",
     "snekfetch": "^4.0.4",
     "transform-props": "^1.0.1",
-    "uws": "^10.148.1"
+    "uws": "^10.148.1",
+    "urban-dictionary": "^2.1.2"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",

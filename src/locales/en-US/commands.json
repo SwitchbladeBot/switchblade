@@ -362,5 +362,13 @@
     "noLyricsFound": "The provided song's lyrics could not be found.",
     "noTrackName": "You need to give me a track name.",
     "fullLyrics": "Click here to see the full lyrics"
+  },
+  "urban": {
+    "commandDescription": "Searches for an expression on Urban Dictionary",
+    "commandUsage": "<expression>",
+    "noExpressionProvided": "You need to give me an expression",
+    "definition": "Definition:",
+    "example": "Example:",
+    "noDefinitionFound": "No definition found for {{- text}}"
   }
 }
