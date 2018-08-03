@@ -362,5 +362,13 @@
     "noLyricsFound": "The provided song's lyrics could not be found.",
     "noTrackName": "You need to give me a track name.",
     "fullLyrics": "Click here to see the full lyrics"
+  },
+  "binary": {
+    "commandDescription": "Converts your text into binary",
+    "commandUsage": "<text>",
+    "missingText": "You need to give me some text",
+    "textToBinary": "In Binary",
+    "tooLongTitle": "Your text is longer than 200 characters",
+    "tooLongDescription": "Try shortening your text down or separate it into multiple commands"
   }
 }
