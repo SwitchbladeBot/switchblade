@@ -33,13 +33,13 @@ module.exports = class Binary extends Command {
     }
     channel.send(embed).then(() => channel.stopTyping())
   }
-  
+
   textToBinary (text) {
     return text.split('').map(function (char) {
       return char.charCodeAt(0).toString(2)
     }).join(' ')
   }
-  
+
   binaryToText (binary) {
     return parseInt(binary, 2).toString(10)
   }
