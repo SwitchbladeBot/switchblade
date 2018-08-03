@@ -362,5 +362,9 @@
     "noLyricsFound": "The provided song's lyrics could not be found.",
     "noTrackName": "You need to give me a track name.",
     "fullLyrics": "Click here to see the full lyrics"
+  },
+  "cowsay": {
+    "commandDescription": "Turns your text into cowsay",
+    "noText": "You have to give me a sentence!"
   }
 }
