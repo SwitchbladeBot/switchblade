@@ -348,6 +348,21 @@
     "commandUsage": "<text>",
     "noText": "You need to give me some text to asciify"
   },
+  "hentai": {
+    "commandDescription": "Sends hentai in a NSFW channel",
+    "hereIsYourHentai": "Here's your hentai!"
+  },
+  "shiba": {
+    "commandDescription": "Fetches a random Shiba Inu and displays it. Woof!",
+    "hereIsYourShiba": "Here's your Shiba!"
+  },
+  "lyrics": {
+    "commandDescription": "Find the lyrics of a song",
+    "commandUsage": "<track name>",
+    "noLyricsFound": "The provided song's lyrics could not be found.",
+    "noTrackName": "You need to give me a track name.",
+    "fullLyrics": "Click here to see the full lyrics"
+  },
   "urban": {
     "commandDescription": "Searches for an expression on Urban Dictionary",
     "commandUsage": "<expression>",

@@ -5,12 +5,16 @@ const snekfetch = require('snekfetch')
 
 const INTERVAL = 24 * 60 * 60 * 1000
 
-module.exports = class Daily extends Command {
+module.exports = class Listcord extends Command {
   constructor (client) {
     super(client)
     this.name = 'listcord'
 
     this.requirements = new CommandRequirements(this, {databaseOnly: true})
+  }
+
+  canLoad () {
+    return !!process.env.LISTCORD_TOKEN
   }
 
   async run ({ t, author, channel, prefix, alias, userDocument }) {
@@ -24,7 +28,7 @@ module.exports = class Daily extends Command {
         .setTitle(t('commands:listcord.alreadyClaimed'))
         .setDescription(t('commons:youCanDoItAgainIn', {time}))
     } else {
-      const {body} = await snekfetch.get(`https://listcord.com/api/bot/${this.client.user.id}/votes`)
+      const {body} = await snekfetch.get(`https://listcord.com/api/bot/${this.client.user.id}/votes`).set('Authorization', process.env.LISTCORD_TOKEN)
       const userVote = body.find(u => u.id === author.id)
       if (userVote && now - userVote.lastVote < INTERVAL) {
         const count = 500

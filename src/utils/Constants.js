@@ -9,6 +9,8 @@ module.exports = {
   XKCD_COLOR: '96A8C8',
   DEEZER_COLOR: 'E3231D',
   MAL_COLOR: '2E51A2',
+  GELBOORU_COLOR: '2887FD',
+  GENIUS_COLOR: '#FFFB66',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',

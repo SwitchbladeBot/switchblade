@@ -3,7 +3,7 @@ const { Command, CommandParameters, StringParameter } = CommandStructures
 
 const prefixRegex = (prefix) => new RegExp(`^(?:${prefix})?(.+)`)
 
-module.exports = class Pause extends Command {
+module.exports = class Help extends Command {
   constructor (client) {
     super(client)
     this.name = 'help'
