@@ -13,7 +13,7 @@ module.exports = class Cowsay extends Command {
     )
   }
 
-  async run ({ channel }, text) {
+  run ({ channel }, text) {
     channel.send(`\`\`\`${cowsay.say({text})}\`\`\``)
   }
 }
