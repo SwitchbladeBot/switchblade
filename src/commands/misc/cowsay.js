@@ -1,6 +1,6 @@
 const { CommandStructures } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
-const snekfetch = require('snekfetch')
+const cowsay = require('cowsay')
 
 module.exports = class Cowsay extends Command {
   constructor (client) {
@@ -14,7 +14,6 @@ module.exports = class Cowsay extends Command {
   }
 
   async run ({ channel }, text) {
-    const { body } = await snekfetch.get(`http://cowsay.morecode.org/say?message=${text}&format=json`)
-    channel.send(`\`\`\`${body.cow}\`\`\``)
+    channel.send(`\`\`\`${cowsay.say({text})}\`\`\``)
   }
 }
