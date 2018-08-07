@@ -373,7 +373,7 @@
     "tooLongDescription": "Try shortening your text down or separate it into multiple commands"
   },
   "inspirobot": {
-	"commandDescription": "Shows a random InspiroBot quote",
-	"quote": "Here's your InspiroBot quote!"
+    "commandDescription": "Shows a random InspiroBot quote",
+    "quote": "Here's your InspiroBot quote!"
   }
 }
