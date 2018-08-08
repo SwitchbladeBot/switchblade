@@ -5,7 +5,7 @@ module.exports = class EightBall extends Command {
   constructor (client) {
     super(client)
     this.name = '8ball'
-    this.aliases = ['eightball', '8b', 'magicball']
+    this.aliases = ['eightball', '8b', 'magicball', '8-ball']
 
     this.parameters = new CommandParameters(this,
       new StringParameter({full: true, missingError: 'commands:8ball.noQuestion'})
