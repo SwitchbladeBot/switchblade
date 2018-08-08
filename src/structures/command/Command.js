@@ -82,14 +82,14 @@ module.exports = class Command {
     return this.requirements && this.requirements.applyCooldown(user, time)
   }
 
-  error ({ t, author, channel }, content, showUsage = false) {
+  error ({ t, author, channel, prefix }, content, showUsage = false) {
     const embedContent = typeof content === 'object'
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.ERROR_COLOR)
       .setTitle(embedContent ? content.title : content)
 
     if ((content.showUsage || showUsage) && !embedContent) {
-      const usage = this.usage(t)
+      const usage = this.usage(t, prefix)
       if (usage) embed.setDescription(usage)
     } else if (embedContent) {
       embed.setDescription(content.description)
