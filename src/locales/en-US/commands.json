@@ -81,7 +81,7 @@
     "commandUsage": "[user to trigger]"
   },
   "8ball": {
-    "commandDescription": "Asks the magic 8ball about something",
+    "commandDescription": "Asks the magic 8-Ball about something",
     "commandUsage": "<question>",
     "noQuestion": "You need to ask me something",
     "answers": {
