@@ -253,7 +253,7 @@
     "idle": "{{Constants.IDLE_STATUS}} Idle",
     "dnd": "{{Constants.DND_STATUS}} Do Not Disturb",
     "offline": "{{Constants.OFFLINE_STATUS}} Offline",
-    "tag": "Tag",
+    "tag": "DiscordTag",
     "id": "ID",
     "status": "Status",
     "createdAt": "Created at",
