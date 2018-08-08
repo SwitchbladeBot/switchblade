@@ -253,7 +253,7 @@
     "idle": "{{Constants.IDLE_STATUS}} Idle",
     "dnd": "{{Constants.DND_STATUS}} Do Not Disturb",
     "offline": "{{Constants.OFFLINE_STATUS}} Offline",
-    "tag": "DiscordTag",
+    "tag": "Tag",
     "id": "ID",
     "status": "Status",
     "createdAt": "Created at",
@@ -368,7 +368,11 @@
     "noText": "You have to give me a sentence!"
   },
   "inspirobot": {
-	"commandDescription": "Shows a random InspiroBot quote",
-	"quote": "Here's your InspiroBot quote!"
+    "commandDescription": "Shows a random InspiroBot quote",
+    "quote": "Here's your InspiroBot quote!"
+  },
+  "support": {
+    "commandDescription": "Shows the link to our support server",
+    "clickHere": "Click here to join in our support server"
   }
 }
