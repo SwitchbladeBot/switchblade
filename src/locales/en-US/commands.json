@@ -372,6 +372,10 @@
     "tooLongTitle": "Your text is longer than 200 characters",
     "tooLongDescription": "Try shortening your text down or separate it into multiple commands"
   },
+  "cowsay": {
+    "commandDescription": "Turns your text into cowsay",
+    "noText": "You have to give me a sentence!"
+  },
   "inspirobot": {
     "commandDescription": "Shows a random InspiroBot quote",
     "quote": "Here's your InspiroBot quote!"
