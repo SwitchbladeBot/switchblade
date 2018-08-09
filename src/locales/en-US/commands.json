@@ -239,7 +239,7 @@
     "voiceChannels": "Voice: **{{count}}**",
     "createdAt": "Created At",
     "joinedAt": "Joined At",
-    "members": "Members **({{count}})**",
+    "members": "Members: **({{count}})**",
     "online": "Online: **{{count}}**",
     "idle": "Idle: **{{count}}**",
     "dnd": "Do Not Disturb: **{{count}}**",
