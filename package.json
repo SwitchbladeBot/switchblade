@@ -10,7 +10,7 @@
     "fix": "standard --fix"
   },
   "engines": {
-    "node": "^10.3.0"
+    "node": "^10.8.0"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "cldr-core": "^33.0.0",
     "cldr-localenames-modern": "^33.0.0",
     "cows": "^2.0.0",
+    "cowsay": "^1.3.1",
     "crowdin-without-vulnerability": "^1.0.0",
     "discord.js": "^11.4.0",
     "discord.js-lavalink": "^2.1.1",
