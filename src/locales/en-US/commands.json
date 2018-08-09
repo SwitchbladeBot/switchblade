@@ -368,11 +368,19 @@
     "noText": "You have to give me a sentence!"
   },
   "inspirobot": {
-	"commandDescription": "Shows a random InspiroBot quote",
-	"quote": "Here's your InspiroBot quote!"
+    "commandDescription": "Shows a random InspiroBot quote",
+    "quote": "Here's your InspiroBot quote!"
   },
   "cat": {
     "commandDescription": "Fetches a random cat and displays it. Nya~",
     "hereIsYourCat": "Here's your cat!"
+  },
+  "support": {
+    "commandDescription": "Shows the link to our support server",
+    "clickHere": "Click here to join in our support server"
+  },
+  "i18n": {
+    "commandDescription": "Fetches a random cat and displays it. Nya~",
+    "TranslateMe": "**[Translate me to your language](https://translate.switchblade.xyz)**"
   }
 }
