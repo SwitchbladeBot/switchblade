@@ -19,6 +19,15 @@ module.exports = class BeatSaver extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     let url = await parseQuery(query)
+
+    if (!url) {
+      embed
+        .setTitle(t('commands:beatsaver.notFound'))
+        .setColor(Constants.ERROR_COLOR)
+      channel.send(embed).then(channel.stopTyping())
+      return
+    }
+
     const {body} = await snekfetch.get(url)
     const $ = cheerio.load(body)
     if (body) {
@@ -28,7 +37,7 @@ module.exports = class BeatSaver extends Command {
         .setAuthor('Beat Saver', 'https://i.imgur.com/yK8SmyX.png')
         .setTitle($('body > div > div > h2').text())
         .setThumbnail(($('body > div > div > table > tbody > tr:nth-child(1) > th.text-center > div:nth-child(1) > img')[0].attribs.src))
-        .setDescription(`**[${'Download'}](${downloadUrl})** - [${'Details'}](${url})`)
+        .setDescription(`**[${t('commands:beatsaver.download')}](${downloadUrl})** - [${t('commands:beatsaver.details')}](${url})`)
     } else {
       embed
         .setTitle(t('commands:beatsaver.notFound'))
@@ -46,6 +55,7 @@ async function parseQuery (query) {
   } else {
     const {body} = await snekfetch.get(`https://beatsaver.com/search/all/${encodeURIComponent(query)}`)
     const $ = cheerio.load(body)
-    return $('body > div > div > table:nth-child(3) > tbody > tr:nth-child(1) > th.text-center > div:nth-child(3) > a')[0].attribs.href
+    const map = $('body > div > div > table:nth-child(3) > tbody > tr:nth-child(1) > th.text-center > div:nth-child(3) > a')[0]
+    if (map) return map.attribs.href
   }
 }
