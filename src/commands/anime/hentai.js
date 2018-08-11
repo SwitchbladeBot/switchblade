@@ -17,7 +17,6 @@ module.exports = class Hentai extends Command {
     const [ image ] = await booru.search('gelbooru.com', ['rating:explicit'], {limit: 1, random: true}).then(booru.commonfy)
     embed.setImage(image.common.file_url)
       .setTitle(t('commands:hentai.hereIsYourHentai'))
-      .setURL(image.common.source)
       .setColor(Constants.GELBOORU_COLOR)
     channel.send(embed).then(() => channel.stopTyping())
   }
