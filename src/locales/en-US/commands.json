@@ -81,7 +81,7 @@
     "commandUsage": "[user to trigger]"
   },
   "8ball": {
-    "commandDescription": "Asks the magic 8ball about something",
+    "commandDescription": "Asks the magic 8-Ball about something",
     "commandUsage": "<question>",
     "noQuestion": "You need to ask me something",
     "answers": {
@@ -253,7 +253,7 @@
     "idle": "{{Constants.IDLE_STATUS}} Idle",
     "dnd": "{{Constants.DND_STATUS}} Do Not Disturb",
     "offline": "{{Constants.OFFLINE_STATUS}} Offline",
-    "tag": "Tag",
+    "tag": "DiscordTag",
     "id": "ID",
     "status": "Status",
     "createdAt": "Created at",
@@ -374,10 +374,26 @@
   },
   "cowsay": {
     "commandDescription": "Turns your text into cowsay",
-    "noText": "You have to give me a sentence!"
+    "noText": "You need to give me a sentence!"
   },
   "inspirobot": {
     "commandDescription": "Shows a random InspiroBot quote",
     "quote": "Here's your InspiroBot quote!"
+  },
+  "cat": {
+    "commandDescription": "Fetches a random cat and displays it. Nya~",
+    "hereIsYourCat": "Here's your cat!"
+  },
+  "i18n": {
+    "commandDescription": "Fetches a random cat and displays it. Nya~",
+    "TranslateMe": "**[Translate me to your language](https://translate.switchblade.xyz)**"
+  },
+  "beatsaver": {
+    "commandDescription": "Searches for a Beatmap on Beat Saver",
+    "commandUsage": "<beatmap name, song, id, author or uploader>",
+    "download": "Download",
+    "details": "Details",
+    "noQuery": "You need to give me a map name, song, id, author or uploader.",
+    "notFound": "No beatmaps were found."
   }
 }
