@@ -363,6 +363,15 @@
     "noTrackName": "You need to give me a track name.",
     "fullLyrics": "Click here to see the full lyrics"
   },
+  "binary": {
+    "commandDescription": "Converts your text into binary",
+    "commandUsage": "<text>",
+    "missingText": "You need to give me some text or binary",
+    "textToBinary": "In Binary",
+    "binaryToText": "In Text",
+    "tooLongTitle": "Your text is longer than 200 characters",
+    "tooLongDescription": "Try shortening your text down or separate it into multiple commands"
+  },
   "cowsay": {
     "commandDescription": "Turns your text into cowsay",
     "noText": "You need to give me a sentence!"
