@@ -9,7 +9,8 @@ module.exports = {
     globalXp: { type: Number, default: 0 },
     personalText: { type: String, default: 'Do you know that you can edit this in the future dashboard? :o' },
     lastListcordBonusClaim: { type: Number, default: 0 },
-    blacklisted: {type: Boolean, default: false}
+    blacklisted: { type: Boolean, default: false },
+    favColor: { type: String, default: process.env.EMBED_COLOR }
   }),
 
   // Guild Schema
