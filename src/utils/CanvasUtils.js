@@ -42,6 +42,16 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-Black.ttf', {family: 'Montserrat Black'})
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', {family: 'Montserrat Black', style: 'italic'})
 
+    // Canvas
+    Canvas.createSVGCanvas = function (svg, w, h) {
+      return new Promise((resolve, reject) => {
+        const canvas = createCanvas(w, h)
+        canvg(canvas, svg, {
+          renderCallback: () => resolve(canvas)
+        })
+      })
+    }
+
     // Image loading
     Image.from = function (url, localFile = false) {
       return new Promise(async (resolve, reject) => {
@@ -145,15 +155,6 @@ module.exports = class CanvasUtils {
         currentY += height + lineDistance
       }
       return lastWrite
-    }
-
-    Canvas.createSVGCanvas = function (svg, w, h) {
-      return new Promise((resolve, reject) => {
-        const canvas = createCanvas(w, h)
-        canvg(canvas, svg, {
-          renderCallback: () => resolve(canvas)
-        })
-      })
     }
   }
 
