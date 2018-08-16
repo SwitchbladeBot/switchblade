@@ -1,6 +1,6 @@
 const request = require('request')
 const canvg = require('canvg')
-const { createCanvas, registerFont, Context2d, Image } = require('canvas')
+const { createCanvas, registerFont, Canvas, Context2d, Image } = require('canvas')
 
 const FileUtils = require('./FileUtils.js')
 

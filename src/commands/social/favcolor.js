@@ -18,7 +18,9 @@ module.exports = class FavColor extends Command {
     channel.startTyping()
     userDocument.favColor = hexcode
     userDocument.save()
-    embed.setTitle(t('commands:favcolor.changedSuccessfully', { hexcode }))
+    embed
+      .setTitle(t('commands:favcolor.changedSuccessfully') + hexcode)
+      .setColor(hexcode)
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

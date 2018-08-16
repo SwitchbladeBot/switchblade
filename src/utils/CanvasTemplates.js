@@ -9,7 +9,7 @@ const moment = require('moment')
 const DAILY_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 
 module.exports = class CanvasTemplates {
-  static async profile ({ t, client }, user) {
+  static async profile ({ t, client }, user, userDocument) {
     const WIDTH = 800
     const HEIGHT = 600
     const BORDER = 25
