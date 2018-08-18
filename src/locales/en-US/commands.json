@@ -395,5 +395,10 @@
     "details": "Details",
     "noQuery": "You need to give me a map name, song, id, author or uploader.",
     "notFound": "No beatmaps were found."
+  },
+  "favcolor": {
+    "commandDescription": "Set a background color to your profile",
+    "commandUsage": "<#hexcode>",
+    "changedSuccessfully": "Profile color changed successfully to {{hexcode}}."
   }
 }

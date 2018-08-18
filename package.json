@@ -30,6 +30,7 @@
     "booru": "^0.4.0",
     "bufferutil": "^3.0.5",
     "canvas": "^2.0.0-alpha.13",
+    "canvg": "^1.5.2",
     "cheerio": "^1.0.0-rc.2",
     "cldr-core": "^33.0.0",
     "cldr-localenames-modern": "^33.0.0",
