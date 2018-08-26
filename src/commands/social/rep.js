@@ -38,7 +38,6 @@ module.exports = class Rep extends Command {
         userData.save() && authorData.save()
         embed.setDescription(t('commands:rep.reputationPoint', {user}))
       }
-      // }
     }
     channel.send(embed).then(() => channel.stopTyping())
   }
