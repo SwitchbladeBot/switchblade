@@ -8,9 +8,9 @@ module.exports = {
     lastDaily: { type: Number, default: 0 },
     globalXp: { type: Number, default: 0 },
     personalText: { type: String, default: 'Do you know that you can edit this in the future dashboard? :o' },
-    lastListcordBonusClaim: { type: Number, default: 0 },
-    blacklisted: { type: Boolean, default: false },
-    favColor: { type: String, default: process.env.EMBED_COLOR }
+    blacklisted: {type: Boolean, default: false},
+    rep: { type: Number, default: 0 },
+    lastRep: { type: Number, default: 0 }
   }),
 
   // Guild Schema
@@ -18,5 +18,10 @@ module.exports = {
     _id: String,
     prefix: { type: String, default: process.env.PREFIX },
     language: { type: String, default: 'en-US' }
+  }),
+  // Moderation Schema
+  Moderation: new Schema({
+    _id: String
+
   })
 }
