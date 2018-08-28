@@ -20,3 +20,4 @@ module.exports = {
     prefix: { type: String, default: process.env.PREFIX },
     language: { type: String, default: 'en-US' }
   })
+}
