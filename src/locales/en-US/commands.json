@@ -314,12 +314,6 @@
     "commandDescription": "Shows how small your dick is",
     "yourDickSize": "Your Dick Size"
   },
-  "listcord": {
-    "commandDescription": "Gives you a bonus for voting on Listcord",
-    "alreadyClaimed": "You've already claimed your Listcord bonus today",
-    "howToVote": "**[Vote on Listcord]({{link}})** and then run `{{command}}` again to claim your bonus",
-    "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
-  },
   "config": {
     "commandDescription": "Change the current guild configuration",
     "guildLang": "To change the guild language, `{{command}} language <language code>`",
