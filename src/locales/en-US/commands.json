@@ -402,6 +402,6 @@
     "reputationPoint": "You gave a reputation point to {{user}}",
     "againIn": "You can do it again in **{{time}}**",
     "alreadyGave": "You already gave a reputation point to someone today",
-    "repYourself": "You can't give a reputation point to yourself."
+    "repYourself": "You can't give a reputation point to yourself"
   }
 }
