@@ -19,10 +19,4 @@ module.exports = {
     _id: String,
     prefix: { type: String, default: process.env.PREFIX },
     language: { type: String, default: 'en-US' }
-  }),
-  // Moderation Schema
-  Moderation: new Schema({
-    _id: String
-
   })
-}
