@@ -49,16 +49,6 @@ module.exports = class MainListener extends EventListener {
           .catch(() => client.log('Failed to post statistics', 'discordbots.org'))
       }
 
-      // listcord.com
-      if (process.env.LISTCORD_TOKEN) {
-        snekfetch
-          .post(`https://listcord.com/api/bot/${client.user.id}/guilds`)
-          .set('Authorization', process.env.LISTCORD_TOKEN)
-          .send({guilds: client.guilds.size})
-          .then(() => client.log('Posted statistics successfully', 'listcord.com'))
-          .catch(() => client.log('Failed to post statistics', 'listcord.com'))
-      }
-
       // botsfordiscord.com
       if (process.env.BOTSFORDISCORD_TOKEN) {
         snekfetch
