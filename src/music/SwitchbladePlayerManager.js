@@ -30,8 +30,9 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
       .catch(e => {
         this.client.logError(new Error(`Lavalink fetchTracks ${e}`))
       })
-    if (!res || !res.body || !res.body.length) return []
-    const songs = res.body
+    const { body } = res
+    if (!body || body.loadType === 'LOAD_FAILED' || body.loadType === 'NO_MATCHES' || !body.tracks.length) return
+    const songs = body.tracks
     songs.searchResult = !!SEARCH_PREFIXES.find(p => identifier.startsWith(p))
     return songs
   }
@@ -71,12 +72,11 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
   async play (song, channel) {
     if (song && song instanceof Song) {
       const host = this.nodes.first().host
-      const player = await this.join({
+      const player = this.join({
         guild: channel.guild.id,
         channel: channel.id,
         host
       }, DEFAULT_JOIN_OPTIONS)
-
       player.play(song)
       return song
     }
