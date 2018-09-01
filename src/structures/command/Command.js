@@ -37,6 +37,9 @@ module.exports = class Command {
    * @param {Array<string>} args Command arguments
    */
   async _run (context, args) {
+    const requirements = this.handleRequirements(context, args)
+    if (requirements instanceof CommandError) return this.error(context, requirements.content, requirements.showUsage)
+
     const [ subcmd ] = args
     const subcommand = this.subcommands.find(c => c.name.toLowerCase() === subcmd || c.aliases.includes(subcmd))
     if (subcommand) {
@@ -45,9 +48,6 @@ module.exports = class Command {
 
     args = this.handleParameters(context, args)
     if (args instanceof CommandError) return this.error(context, args.content, args.showUsage)
-
-    const requirements = this.handleRequirements(context, args)
-    if (requirements instanceof CommandError) return this.error(context, requirements.content, requirements.showUsage)
 
     return this.run(context, ...args)
   }

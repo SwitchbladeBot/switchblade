@@ -12,6 +12,10 @@ module.exports = class Lyrics extends Command {
     )
   }
 
+  canLoad () {
+    return !!this.client.apis.genius
+  }
+
   async run ({ t, author, channel }, song) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)

@@ -54,7 +54,7 @@ module.exports = class MainListener extends EventListener {
         snekfetch
           .post(`https://botsfordiscord.com/api/v1/bots/${client.user.id}`)
           .set('Authorization', process.env.BOTSFORDISCORD_TOKEN)
-          .send({guilds: client.guilds.size})
+          .send({count: client.guilds.size})
           .then(() => client.log('Posted statistics successfully', 'botsfordiscord.com'))
           .catch(() => client.log('Failed to post statistics', 'botsfordiscord.com'))
       }

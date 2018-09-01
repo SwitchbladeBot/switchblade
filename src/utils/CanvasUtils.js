@@ -1,5 +1,6 @@
 const request = require('request')
-const { createCanvas, registerFont, Context2d, Image } = require('canvas')
+const canvg = require('canvg')
+const { createCanvas, registerFont, Canvas, Context2d, Image } = require('canvas')
 
 const FileUtils = require('./FileUtils.js')
 
@@ -41,16 +42,28 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-Black.ttf', {family: 'Montserrat Black'})
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', {family: 'Montserrat Black', style: 'italic'})
 
+    // Canvas
+    Canvas.createSVGCanvas = function (svg, w, h) {
+      return new Promise((resolve, reject) => {
+        const canvas = createCanvas(w, h)
+        canvg(canvas, svg, {
+          renderCallback: () => resolve(canvas)
+        })
+      })
+    }
+
     // Image loading
     Image.from = function (url, localFile = false) {
       return new Promise(async (resolve, reject) => {
-        const b = await (localFile ? FileUtils.readFile(url) : URLtoBuffer(url))
+        const b = await Image.buffer(url, localFile)
         const img = new Image()
         img.onerror = (e) => reject(e)
         img.onload = () => resolve(img)
         img.src = b
       })
     }
+
+    Image.buffer = (url, localFile = false) => localFile ? FileUtils.readFile(url) : URLtoBuffer(url)
 
     // Context functions
     Context2d.prototype.roundImage = function (img, x, y, w, h, r) {
@@ -184,15 +197,6 @@ module.exports = class CanvasUtils {
         break
     }
     return realCoords
-  }
-
-  static hexToRGB (hex) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null
   }
 }
 

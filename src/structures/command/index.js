@@ -6,8 +6,9 @@ module.exports = {
 
   // Parameters
   Parameter: require('./parameters/types/Parameter.js'),
+  ColorParameter: require('./parameters/types/ColorParameter.js'),
+  MemberParameter: require('./parameters/types/MemberParameter.js'),
   NumberParameter: require('./parameters/types/NumberParameter.js'),
   StringParameter: require('./parameters/types/StringParameter.js'),
-  UserParameter: require('./parameters/types/UserParameter.js'),
-  MemberParameter: require('./parameters/types/MemberParameter.js')
+  UserParameter: require('./parameters/types/UserParameter.js')
 }
