@@ -19,6 +19,9 @@
 </div>
 
 ## The open source Discord bot
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d88f88bbc38f4db48ffab013d46a234a)](https://app.codacy.com/app/Doges/switchblade?utm_source=github.com&utm_medium=referral&utm_content=SwitchbladeBot/switchblade&utm_campaign=Badge_Grade_Dashboard)
+
 **Switchblade** is a free and open source solution to all of your server managing problems, built from scratch with code organization and quality in mind. Want some music for your server? We've got you covered. Maybe you want a good anti-spam solution? We've got you covered. How about economy? Well, you probably got it by now. [Like the idea? Click here to invite Switchblade to your server](http://invite.switchblade.xyz/).
 
 ## Contributing
