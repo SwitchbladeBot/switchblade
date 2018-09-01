@@ -11,7 +11,7 @@ module.exports = class SoftwareGore extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/softwaregore')
-    embed.setTitle('<:meowthonkang:446407184373383169>')
+    embed.setTitle('🤔')
       .setImage(url)
       .setURL(`https://reddit.com${permalink}`)
     channel.send(embed).then(() => channel.stopTyping())
