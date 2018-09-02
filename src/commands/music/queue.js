@@ -16,7 +16,7 @@ module.exports = class Queue extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     const npSong = guildPlayer.playingSong
-    const description = [`**${t('music:nowplaying')}** [${npSong.title}](${npSong.uri})`]
+    const description = [`**${t('music:nowPlaying')}** [${npSong.title}](${npSong.uri})`]
 
     if (guildPlayer.queue.length > 0) {
       const queue = guildPlayer.queue.map((song, i) => `${i + 1}. [${song.title}](${song.uri}) *(${t('music:addedBy', {user: song.requestedBy})})*`).slice(0, MAX_PLAYLIST_LENGTH)
