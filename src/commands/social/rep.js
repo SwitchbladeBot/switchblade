@@ -10,7 +10,7 @@ module.exports = class Rep extends Command {
     this.name = 'rep'
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({missingError: 'commands:rep.noMention', acceptBot: true})
+      new UserParameter({missingError: 'commands:rep.noMention', acceptBot: false})
     )
   }
 
