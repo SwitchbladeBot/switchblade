@@ -20,6 +20,7 @@ module.exports = class Volume extends Command {
     if (volume === maxVolume) embed.setImage('https://i.imgur.com/A6HWTqq.png')
     const guildPlayer = this.client.playerManager.get(guild.id)
     guildPlayer.volume(volume)
-    channel.send(embed.setTitle(`\uD83D\uDD0A ${t('commands:volume.volumeSet', {volume})}`))
+    embed.setTitle(`\uD83D\uDD0A ${t('commands:volume.volumeSet', {volume})}`)
+    channel.send(embed)
   }
 }
