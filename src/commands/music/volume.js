@@ -17,7 +17,7 @@ module.exports = class Volume extends Command {
 
   async run ({ t, author, channel, guild }, volume) {
     const embed = new SwitchbladeEmbed(author)
-    if (volume === maxVolume) embed.setImage("https://i.imgur.com/A6HWTqq.png")
+    if (volume === maxVolume) embed.setImage('https://i.imgur.com/A6HWTqq.png')
     const guildPlayer = this.client.playerManager.get(guild.id)
     guildPlayer.volume(volume)
     channel.send(embed.setTitle(`\uD83D\uDD0A ${t('commands:volume.volumeSet', {volume})}`))
