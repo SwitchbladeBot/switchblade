@@ -412,5 +412,21 @@
     "noText": "You need to give me some text",
     "tooLongText": "Your text is longer than 150 characters",
     "changedSuccessfully": "Personal text changed to {{profileText}}!"
+  },
+  "fivem": {
+    "commandDescription": "Shows information about a FiveM server",
+    "commandUsage": "<ip>[:port]",
+    "noIP": "You need to give me an IP!",
+    "serverUnreachableTitle": "I couldn't reach this server",
+    "serverUnreachableDescription": "Check the IP and port, or try again later.",
+    "address": "Address",
+    "version": "Version",
+    "players": "Players",
+    "map": "Map",
+    "gameMode": "Game Mode",
+    "gameName": "Game Name",
+    "noMap": "Default map",
+    "noGameMode": "None",
+    "noGameName": "Not found"
   }
 }
