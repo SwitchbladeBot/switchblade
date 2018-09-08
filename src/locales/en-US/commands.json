@@ -410,5 +410,9 @@
     "noText": "You need to give me some text",
     "tooLongText": "Your text is longer than 150 characters",
     "changedSuccessfully": "Personal text changed to {{profileText}}!"
+  },
+  "guildicon": {
+    "iconDescription": "{{- guild}}'s icon:",
+    "noIcon": "This guild doesn't have an icon!"
   }
 }
