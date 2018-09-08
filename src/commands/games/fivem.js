@@ -29,10 +29,10 @@ module.exports = class FiveM extends Command {
 
     if (server) {
       const serverData = JSON.parse(server.body)
-      const imageData = new Buffer.from(serverData.icon.replace(/^data:image\/([\w+]+);base64,([\s\S]+)/, ''), 'base64');
+      const imageData = new Buffer.from(serverData.icon.replace(/^data:image\/([\w+]+);base64,([\s\S]+)/, ''), 'base64')
       await this.getAllServers().then(function (servers) {
         for (let serv of servers) {
-          if (serv.EndPoint == `${host}:${port}`) serverData.data = serv.Data
+          if (serv.EndPoint === `${host}:${port}`) serverData.data = serv.Data
         }
       })
       embed.setAuthor('FiveM', 'https://i.imgur.com/u5wzB9A.png')
@@ -51,10 +51,10 @@ module.exports = class FiveM extends Command {
   }
 
   getAllServers () {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       request('http://servers-live.fivem.net/api/servers/', function (error, response, body) {
-        if (error) return reject(error);
-        resolve(JSON.parse(body));
+        if (error) return reject(error)
+        resolve(JSON.parse(body))
       })
     })
   }
