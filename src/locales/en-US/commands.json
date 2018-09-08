@@ -412,7 +412,7 @@
     "changedSuccessfully": "Personal text changed to {{profileText}}!"
   },
   "guildicon": {
-    "iconDescription": "{{- guild}}'s icon:",
-    "noIcon": "This guild doesn't have an icon!"
+    "iconDescription": "{{guild}}'s icon:",
+    "noIcon": "This server doesn't have an icon!"
   }
 }
