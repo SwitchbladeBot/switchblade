@@ -53,8 +53,8 @@ module.exports = class FiveM extends Command {
   getAllServers () {
     return new Promise(function (resolve, reject) {
       request('http://servers-live.fivem.net/api/servers/', function (error, response, body) {
-        if (error) return reject(error)
-        resolve(JSON.parse(body))
+        if (error) reject(error)
+        else resolve(JSON.parse(body))
       })
     })
   }
