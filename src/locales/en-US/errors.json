@@ -20,5 +20,6 @@
   "invalidUserNotBot": "You need to give me a user that is a bot.",
   "databaseOnly": "Sorry, I don't have a database connection right now!",
   "playerManagerOnly": "Sorry, I don't have a player connection right now!",
-  "invalidColor": "You need to give me a valid color."
+  "invalidColor": "You need to give me a valid color.",
+  "invalidGuild": "You need to give me a valid guild."
 }
