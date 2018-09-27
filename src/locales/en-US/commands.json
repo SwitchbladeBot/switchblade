@@ -413,6 +413,11 @@
     "tooLongText": "Your text is longer than 150 characters",
     "changedSuccessfully": "Personal text changed to {{profileText}}!"
   },
+  "guildicon": {
+    "commandDescription": "Shows the current server's icon",
+    "iconDescription": "{{guild}}'s icon:",
+    "noIcon": "This server doesn't have an icon!"
+  },
   "fivem": {
     "commandDescription": "Shows information about a FiveM server",
     "commandUsage": "<ip>[:port]",
