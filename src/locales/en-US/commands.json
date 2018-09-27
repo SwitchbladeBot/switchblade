@@ -417,7 +417,7 @@
     "commandDescription": "Shows current server icon",
     "iconDescription": "{{guild}}'s icon:",
     "noIcon": "This server doesn't have an icon!"
-  }
+  },
   "fivem": {
     "commandDescription": "Shows information about a FiveM server",
     "commandUsage": "<ip>[:port]",
