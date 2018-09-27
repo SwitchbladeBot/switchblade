@@ -414,7 +414,7 @@
     "changedSuccessfully": "Personal text changed to {{profileText}}!"
   },
   "guildicon": {
-    "commandDescription": "Shows the current server's icon",
+    "commandDescription": "Shows the current or another server's icon",
     "iconDescription": "{{guild}}'s icon:",
     "noIcon": "This server doesn't have an icon!"
   },
