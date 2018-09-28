@@ -11,7 +11,7 @@
     <a href="https://github.com/SwitchbladeBot/switchblade/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/SwitchbladeBot/switchblade.svg" alt="License"/></a>
     <a href="https://travis-ci.org/SwitchbladeBot/switchblade" target="_blank"><img src="https://api.travis-ci.org/SwitchbladeBot/switchblade.svg" alt="Travis CI Build Status"/></a>
     <a href="https://snyk.io/test/github/SwitchbladeBot/switchblade" target="_blank"><img src="https://snyk.io/test/github/SwitchbladeBot/switchblade/badge.svg" alt="Known Vulnerabilities"/></a>
-    <a title="Crowdin" target="_blank" href="https://crowdin.com/project/switchblade"><img src="https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg"></a>
+    <a title="Crowdin" target="_blank" href="https://translate.switchblade.xyz/project/switchblade"><img src="https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg"></a>
   <a class="badge-align" href="https://www.codacy.com/app/Doges/switchblade?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SwitchbladeBot/switchblade&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4f29cb30be614ad3a5af1fa381efa9f7"/></a>
     <br>
     Vote on <a href="https://discordbots.org/bot/445277324175474689/vote" target="_blank">DBL</a>
