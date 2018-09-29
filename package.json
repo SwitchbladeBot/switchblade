@@ -21,7 +21,9 @@
   "bugs": {
     "url": "https://github.com/SwitchbladeBot/switchblade/issues",
   },
-   {"engines" : { "node" : "^10.10.0" } },
+  "engines": {
+    "node": "^10.10.0"
+  },
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
     "api-npm": "^1.0.0",
