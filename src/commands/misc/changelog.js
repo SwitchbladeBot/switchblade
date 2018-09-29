@@ -13,7 +13,7 @@ module.exports = class Changelog extends Command {
     channel.startTyping()
     const { body } = await snekfetch.get('https://api.github.com/repos/switchbladebot/switchblade/commits')
     const commits = body.slice(0, 10)
-    embed.setTitle(`[switchblade:dev] Latest 10 commits`)
+    embed.setTitle(`[switchblade:dev] ${t('commands:changelog.latest')}`)
   		.setURL(`https://github.com/switchbladebot/switchblade/commits/dev`)
   		.setDescription(commits.map(c => {
   			let h = `[\`${c.sha.slice(0, 7)}\`](${c.html_url})`
