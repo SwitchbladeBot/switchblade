@@ -5,6 +5,4 @@ ignore:
   'npm:chownr:20180731':
     - canvas@2.0.0-alpha.17 > node-pre-gyp@0.11.0 > tar@4.4.6 > chownr@1.1.1:
         reason: Not valid for us
-    - bufferutil@3.0.5 › prebuild-install@4.0.0 › tar-fs@1.16.3 › chownr@1.1.1:
-        reason: Not valid for us
 patch: {}
