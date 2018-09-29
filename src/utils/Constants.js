@@ -25,6 +25,7 @@ module.exports = {
   DISCORD_LOGO: '<:DiscordLogo:465159291440201765>',
   CROWDIN_LOGO: '<:CrowdinLogo:465159290995474434>',
   GITHUB_LOGO: '<:GithubLogo:465159291545059328>',
+  SWITCHBLADE_LOGO: '<:switchblade:494575477659271168>',
 
   // Assets
 
