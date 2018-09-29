@@ -9,9 +9,6 @@
     "test": "snyk test && standard",
     "fix": "standard --fix"
   },
-  "engines": {
-    "node": "^10.8.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/SwitchbladeBot/switchblade.git"
@@ -22,7 +19,10 @@
   "author": "Switchblade Team",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SwitchbladeBot/switchblade/issues"
+    "url": "https://github.com/SwitchbladeBot/switchblade/issues",
+  },
+   "engines": {
+    "node": "^10.8.0"
   },
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
