@@ -434,5 +434,8 @@
     "noMap": "Default map",
     "noGameMode": "None",
     "noGameName": "Not found"
+  },
+  "changelog": {
+    "latest" "Latest 10 commits"  
   }
 }
