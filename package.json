@@ -9,9 +9,6 @@
     "test": "snyk test && standard",
     "fix": "standard --fix"
   },
-  "engines": {
-    "node": "^10.8.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/SwitchbladeBot/switchblade.git"
@@ -71,6 +68,9 @@
     "ffmpeg-binaries": "^3.2.2",
     "nodemon": "^1.18.4",
     "standard": "^11.0.1",
+  },
+  "engines": {
+    "node": "^10.10.0"
   },
   "nodemonConfig": {
     "ignore": [
