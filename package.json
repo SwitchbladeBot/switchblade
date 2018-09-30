@@ -9,6 +9,9 @@
     "test": "snyk test && standard",
     "fix": "standard --fix"
   },
+  "engines": {
+    "node": "^10.8.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/SwitchbladeBot/switchblade.git"
