@@ -69,13 +69,9 @@
     "nodemon": "^1.18.4",
     "standard": "^11.0.1",
   },
-  "engines": {
-    "node": "^10.10.0"
-  },
   "nodemonConfig": {
     "ignore": [
       "locales/*"
     ]
   }
-}
 }
