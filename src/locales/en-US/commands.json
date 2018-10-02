@@ -434,5 +434,11 @@
     "noMap": "Default map",
     "noGameMode": "None",
     "noGameName": "Not found"
+  },
+  "lmgtfy": {
+    "commandDescription": "Google something for someone that they should have googled",
+    "commandUsage": "<query>",
+    "noQuery": "I can't google something for you without something to google",
+    "search": "This might [help]({{link}}) ¯\\_(ツ)_/¯"
   }
 }
