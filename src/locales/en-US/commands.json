@@ -438,5 +438,10 @@
   "emoji": {
     "commandDescription": "Enlarges emojis",
     "hereIsYourEmoji": "Here's your emoji!"
+  },
+  "clapify": {
+    "commandDescription": "Clapifies text",
+    "commandUsage": "<text to clapify>",
+    "missingSentence": "You need to give me a sentence to clapify"
   }
 }

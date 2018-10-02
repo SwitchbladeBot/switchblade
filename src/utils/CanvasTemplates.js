@@ -111,7 +111,7 @@ module.exports = class CanvasTemplates {
 
   static async triggered (user) {
     const WIDTH = 256
-    const HEIGHT = 256
+    const HEIGHT = 310
 
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.TRIGGERED_LABEL_PNG, true),
@@ -133,7 +133,7 @@ module.exports = class CanvasTemplates {
     const random = (max) => Math.floor(Math.random() * max) - max
     for (let i = 0; i < 8; i++) {
       ctx.clearRect(0, 0, WIDTH, HEIGHT)
-      ctx.drawImage(avatarImage, random(AVATAR_RANDOM_MAX), random(AVATAR_RANDOM_MAX), WIDTH + AVATAR_RANDOM_MAX, HEIGHT + AVATAR_RANDOM_MAX)
+      ctx.drawImage(avatarImage, random(AVATAR_RANDOM_MAX), random(AVATAR_RANDOM_MAX), WIDTH + AVATAR_RANDOM_MAX, HEIGHT - 54 + AVATAR_RANDOM_MAX)
       ctx.fillStyle = '#FF000033'
       ctx.fillRect(0, 0, WIDTH, HEIGHT)
       ctx.drawImage(triggeredLabel, random(LABEL_RANDOM_MAX), HEIGHT - 54 + random(LABEL_RANDOM_MAX), 256 + LABEL_RANDOM_MAX, 54 + LABEL_RANDOM_MAX)
