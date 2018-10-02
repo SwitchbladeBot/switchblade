@@ -428,5 +428,10 @@
     "noMap": "Default map",
     "noGameMode": "None",
     "noGameName": "Not found"
+  },
+  "clapify": {
+    "commandDescription": "Clapifies text",
+    "commandUsage": "<text to clapify>",
+    "missingSentence": "You need to give me a sentence to clapify"
   }
 }
