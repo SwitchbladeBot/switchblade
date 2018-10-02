@@ -1,7 +1,7 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
-const Owoify = require('../../utils/Owoify');
+const Owoify = require('../../utils/Owoify')
 
 module.exports = class OwO extends Command {
   constructor (client) {
