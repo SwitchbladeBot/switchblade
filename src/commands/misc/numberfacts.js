@@ -11,7 +11,7 @@ module.exports = class NumberFacts extends Command {
   async run ({ author, channel }, number) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const { body } = await snekfetch.get('http://numbersapi.com/${number}/trivia')
+    const { body } = await snekfetch.get(`http://numbersapi.com/${number}/trivia`)
     embed.setTitle(body)
     channel.send(embed).then(() => channel.stopTyping())
   }
