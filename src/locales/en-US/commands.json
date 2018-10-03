@@ -435,6 +435,10 @@
     "noGameMode": "None",
     "noGameName": "Not found"
   },
+  "emoji": {
+    "commandDescription": "Enlarges emojis",
+    "hereIsYourEmoji": "Here's your emoji!"
+  },
   "clapify": {
     "commandDescription": "Clapifies text",
     "commandUsage": "<text to clapify>",
