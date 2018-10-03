@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class LMGTFY extends Command {
