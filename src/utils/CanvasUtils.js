@@ -26,7 +26,23 @@ const ALIGN = {
 
 module.exports = class CanvasUtils {
   static initializeHelpers () {
-    const self = this
+        const self = this
+    exports.Canvas = null;
+    ['canvas', 'canvas-prebuild'].some(moduleName => {
+      try {
+        require.resolve(moduleName)
+      } catch (e) {
+        // ${moduleName} is not installed
+        exports.Canvas = null
+        return false
+      }
+      exports.Canvas = require(moduleName)
+      if (typeof exports.Canvas !== 'function') {
+        // In browserify, the require will succeed but return an empty object
+        exports.Canvas = null
+      }
+      return exports.Canvas !== null
+    })
 
     // Initiliaze fonts
     registerFont('src/assets/fonts/Montserrat-Regular.ttf', {family: 'Montserrat'})
