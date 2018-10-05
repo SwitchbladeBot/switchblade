@@ -28,7 +28,7 @@ module.exports = class MyAnimeList extends Command {
           .setURL(data.url)
           .setAuthor('MyAnimeList', 'https://myanimelist.cdn-dena.com/img/sp/icon/apple-touch-icon-256.png')
           .addField(t('commands:myanimelist.score'), `${data.score} (${data.ranked})`, true)
-          .addField(t('commands:myanimelist.studio', {count: data.studios.length}), data.studios.join(', '), true)
+          .addField(t(data.studios.length > 1 ? 'commands:myanimelist.studios' : 'commands:myanimelist.studio', {count: data.studios.length}), data.studios.join(', '), true)
           .addField(t('commands:myanimelist.episodes'), data.episodes, true)
           .addField(t('commands:myanimelist.aired'), data.aired, true)
       }
