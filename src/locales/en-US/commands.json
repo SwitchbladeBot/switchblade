@@ -309,7 +309,7 @@
     "score": "Score",
     "episodes": "Episodes",
     "studio": "Studio",
-    "studios": "Studios",
+    "studio_plural": "Studios",
     "aired": "Aired",
     "animeNotFound": "I couldn't find an anime by that name"
   },
