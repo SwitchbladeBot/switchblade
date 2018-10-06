@@ -448,8 +448,7 @@
     "validNumber": "You need to give me a number!",
     "commandUsage": "<number>",
     "commandDescription": "Shows a fact about a number"
-
-=======
+  },
   "blacklist": {
     "commandDescription": "Adds a user to the blacklist",
     "commandUsage": "<user> <reason>",
