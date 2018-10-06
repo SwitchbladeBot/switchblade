@@ -448,5 +448,8 @@
     "validNumber": "You need to give me a number!",
     "commandUsage": "<number>",
     "commandDescription": "Shows a fact about a number"
+  },
+  "tipsfedora": {
+    "commandDescription": "Shows the Tips Fedora meme"
   }
 }
