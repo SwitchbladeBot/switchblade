@@ -12,11 +12,11 @@ module.exports = class Blacklist {
     userDocument.blacklistReason = ''
     userDocument.blacklisterId = ''
     userDocument.save()
-    return true;
+    return true
   }
 
   static async getInfo (userDocument) {
     if (!userDocument.blacklisted) return false
-    return {reason: userDocument.blacklistReason, blacklisterId: userDocument.blacklisterId};
+    return {reason: userDocument.blacklistReason, blacklisterId: userDocument.blacklisterId}
   }
 }
