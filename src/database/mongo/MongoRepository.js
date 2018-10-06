@@ -30,7 +30,7 @@ module.exports = class MongoRepository extends Repository {
   }
 
   findAll () {
-    return this.model.find({}).then(e => e.forEach(this.parse))
+    return this.model.find({}).then(e => e.map(this.parse))
   }
 
   get (id) {
