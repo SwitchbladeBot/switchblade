@@ -8,7 +8,7 @@ module.exports = class Parameter {
     this.required = !!options.required
     this.full = !!options.full
     this.fullJoin = options.fullJoin
-    this.missingError = options.missingError || 'An error occured!'
+    this.missingError = options.missingError || 'errors:generic'
 
     // Flags
     this.name = options.name || 'parameter'

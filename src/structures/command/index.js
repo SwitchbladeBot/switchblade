@@ -11,5 +11,6 @@ module.exports = {
   NumberParameter: require('./parameters/types/NumberParameter.js'),
   StringParameter: require('./parameters/types/StringParameter.js'),
   UserParameter: require('./parameters/types/UserParameter.js'),
-  GuildParameter: require('./parameters/types/GuildParameter.js')
+  GuildParameter: require('./parameters/types/GuildParameter.js'),
+  EmojiParameter: require('./parameters/types/EmojiParameter.js')
 }

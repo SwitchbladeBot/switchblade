@@ -22,5 +22,6 @@
   "playerManagerOnly": "Sorry, I don't have a player connection right now!",
   "invalidColor": "You need to give me a valid color.",
   "invalidGuild": "You need to give me a valid guild.",
+  "invalidEmoji": "You need to give me a valid emoji.",
   "userCantBeDeveloper": "User can't be a developer"
 }
