@@ -1,4 +1,4 @@
-const { CommandStructures, Blacklist, SwitchbladeEmbed } = require('../../index')
+const { CommandStructures, Blacklist, SwitchbladeEmbed, Constants } = require('../../index')
 const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
 
 module.exports = class Eval extends Command {
