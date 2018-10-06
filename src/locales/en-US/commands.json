@@ -469,8 +469,17 @@
     "missingUser": "You need to give me an user to check the reason",
     "notBlacklisted": "That user isn't blacklisted",
     "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
-      },
+  },
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme"
-  }
+  },
+  "leaderboard": {
+    "commandDescription": "Shows a leaderboard",
+    "subcommands": {
+      "money": {
+        "commandDescription": "Shows a list of the richest users",
+        "changedSuccessfully": "Language changed successfully to `{{lang}}`!"
+      }
+    }
+  },
 }
