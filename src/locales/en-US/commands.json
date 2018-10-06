@@ -435,18 +435,25 @@
     "noGameMode": "None",
     "noGameName": "Not found"
   },
-  "emoji": {
-    "commandDescription": "Enlarges emojis",
-    "hereIsYourEmoji": "Here's your emoji!"
+  "blacklist": {
+    "commandDescription": "Adds a user to the blacklist",
+    "commandUsage": "<user> <reason>",
+    "missingUser": "You need to give me an user to blacklist",
+    "missingReason": "You need to give me a reason for blacklisting",
+    "successTitle": "User added to the blacklist successfully"
   },
-  "clapify": {
-    "commandDescription": "Clapifies text",
-    "commandUsage": "<text to clapify>",
-    "missingSentence": "You need to give me a sentence to clapify"
+  "unblacklist": {
+    "commandDescription": "Removes a user from the blacklist",
+    "commandUsage": "<user>",
+    "success": "{{user}} has been removed from the blacklist successfully",
+    "missingUser": "You need to give me an user to remove from the blacklist",
+    "notBlacklisted": "That user isn't blacklisted"
   },
-  "numberfacts": {
-    "validNumber": "You need to give me a number!",
-    "commandUsage": "<number>",
-    "commandDescription": "Shows a fact about a number"
+  "whyblacklisted": {
+    "commandDescription": "Shows why someone is blacklisted",
+    "commandUsage": "<user>",
+    "missingUser": "You need to give me an user to check the reason",
+    "notBlacklisted": "That user isn't blacklisted",
+    "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
   }
 }
