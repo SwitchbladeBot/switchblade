@@ -447,6 +447,6 @@
   "numberfacts": {
     "validNumber": "You need to give me a number!",
     "commandUsage": "<number>",
-    "commandDescription": "Shows a fact from a number"
+    "commandDescription": "Shows a fact about a number"
   }
 }
