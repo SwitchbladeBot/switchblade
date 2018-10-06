@@ -29,7 +29,7 @@
     "api-npm": "^1.0.0",
     "booru": "^0.4.0",
     "bufferutil": "^3.0.5",
-    "canvas": "^2.0.0-alpha.17",
+    "canvas": "^2.0.0-alpha.14",
     "canvas-prebuilt": "^2.0.0-alpha.14",
     "canvg": "^1.5.2",
     "cheerio": "^1.0.0-rc.2",
