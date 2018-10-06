@@ -227,10 +227,12 @@
     "inviteLink": "{{Constants.BOT_BADGE}} **[Invite me to your server](https://invite.switchblade.xyz)**",
     "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
     "translate": "{{Constants.CROWDIN_LOGO}} **[Translate me to your language](https://translate.switchblade.xyz)**",
-    "github": "{{Constants.GITHUB_LOGO}} **[GitHub repository](https://github.com/SwitchbladeBot/switchblade)**"
+    "github": "{{Constants.GITHUB_LOGO}} **[GitHub repository](https://github.com/SwitchbladeBot/switchblade)**",
+    "website": "{{Constants.SWITCHBLADE_LOGO}} **[My Website](https://switchblade.xyz)**"
   },
   "guildinfo": {
-    "commandDescription": "Sends information about the current server",
+    "commandDescription": "Sends information about the current server or from another guild",
+    "commandUsage": "[guild id]",
     "id": "ID",
     "owner": "Owner",
     "region": "Region",
@@ -240,6 +242,7 @@
     "createdAt": "Created At",
     "joinedAt": "Joined At",
     "members": "Members **({{count}})**",
+    "streaming": "Streaming: **{{count}}**",
     "online": "Online: **{{count}}**",
     "idle": "Idle: **{{count}}**",
     "dnd": "Do Not Disturb: **{{count}}**",
@@ -306,7 +309,7 @@
     "score": "Score",
     "episodes": "Episodes",
     "studio": "Studio",
-    "studios": "Studios",
+    "studio_plural": "Studios",
     "aired": "Aired",
     "animeNotFound": "I couldn't find an anime by that name"
   },
@@ -410,5 +413,64 @@
     "noText": "You need to give me some text",
     "tooLongText": "Your text is longer than 150 characters",
     "changedSuccessfully": "Personal text changed to {{profileText}}!"
+  },
+  "guildicon": {
+    "commandDescription": "Shows the current or another server's icon",
+    "iconDescription": "{{guild}}'s icon:",
+    "noIcon": "This server doesn't have an icon!"
+  },
+  "fivem": {
+    "commandDescription": "Shows information about a FiveM server",
+    "commandUsage": "<ip>[:port]",
+    "noIP": "You need to give me an IP!",
+    "serverUnreachableTitle": "I couldn't reach this server",
+    "serverUnreachableDescription": "Check the IP and port, or try again later.",
+    "address": "Address",
+    "version": "Version",
+    "players": "Players",
+    "map": "Map",
+    "gameMode": "Game Mode",
+    "gameName": "Game Name",
+    "noMap": "Default map",
+    "noGameMode": "None",
+    "noGameName": "Not found"
+  },
+  "emoji": {
+    "commandDescription": "Enlarges emojis",
+    "hereIsYourEmoji": "Here's your emoji!"
+  },
+  "clapify": {
+    "commandDescription": "Clapifies text",
+    "commandUsage": "<text to clapify>",
+    "missingSentence": "You need to give me a sentence to clapify"
+  },
+  "numberfacts": {
+    "validNumber": "You need to give me a number!",
+    "commandUsage": "<number>",
+    "commandDescription": "Shows a fact about a number"
+  },
+  "blacklist": {
+    "commandDescription": "Adds a user to the blacklist",
+    "commandUsage": "<user> <reason>",
+    "missingUser": "You need to give me an user to blacklist",
+    "missingReason": "You need to give me a reason for blacklisting",
+    "successTitle": "User added to the blacklist successfully"
+  },
+  "unblacklist": {
+    "commandDescription": "Removes a user from the blacklist",
+    "commandUsage": "<user>",
+    "success": "{{user}} has been removed from the blacklist successfully",
+    "missingUser": "You need to give me an user to remove from the blacklist",
+    "notBlacklisted": "That user isn't blacklisted"
+  },
+  "whyblacklisted": {
+    "commandDescription": "Shows why someone is blacklisted",
+    "commandUsage": "<user>",
+    "missingUser": "You need to give me an user to check the reason",
+    "notBlacklisted": "That user isn't blacklisted",
+    "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
+      },
+  "tipsfedora": {
+    "commandDescription": "Shows the Tips Fedora meme"
   }
 }

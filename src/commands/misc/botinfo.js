@@ -23,6 +23,7 @@ module.exports = class BotInfo extends Command {
       .addField(t('commands:botinfo.links'), [
         t('commands:botinfo.inviteLink', { Constants }),
         t('commands:botinfo.supportServer', { Constants }),
+        t('commands:botinfo.website', { Constants }),
         t('commands:botinfo.translate', { Constants }),
         t('commands:botinfo.github', { Constants })
       ].join('\n'))
