@@ -439,8 +439,15 @@
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
     "commandUsage": "<user>",
-    "success": "{{user}} has been from the blacklist successfully",
+    "success": "{{user}} has been removed from the blacklist successfully",
     "missingUser": "You need to give me an user to remove from the blacklist",
     "notBlacklisted": "That user isn't blacklisted"
+  },
+  "whyblacklisted": {
+    "commandDescription": "Shows why someone is blacklisted",
+    "commandUsage": "<user>",
+    "missingUser": "You need to give me an user to check the reason",
+    "notBlacklisted": "That user isn't blacklisted",
+    "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
   }
 }

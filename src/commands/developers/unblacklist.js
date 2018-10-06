@@ -9,7 +9,7 @@ module.exports = class Eval extends Command {
 
     this.requirements = new CommandRequirements(this, {devOnly: true})
     this.parameters = new CommandParameters(this,
-      new UserParameter({showUsage: false})
+      new UserParameter({showUsage: false, missingError: 'commands:unblacklist.missingUser'})
     )
   }
 

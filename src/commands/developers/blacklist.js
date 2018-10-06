@@ -17,7 +17,7 @@ module.exports = class Eval extends Command {
   async run ({ channel, author, t }, user, reason) {
     const embed = new SwitchbladeEmbed(author)
     const doc = await this.client.database.users.get(user.id)
-    await Blacklist.addUser(doc, reason)
+    await Blacklist.addUser(doc, reason, author)
     embed
       .setTitle(t('commands:blacklist.successTitle'))
       .setDescription(`${user} - \`${reason}\``)
