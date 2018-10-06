@@ -76,6 +76,13 @@
     "notYourself": "You can't kiss yourself!",
     "success": "{{- kisser}} kissed {{- kissed}}"
   },
+  "handshake": {
+    "commandDescription": "Handshake someone",
+    "commandUsage": "<user to handshake>",
+    "noMention": "You need to mention someone",
+    "notYourself": "You can't handshake yourself!",
+    "success": "{{- handshaker}} handshaked {{- handshaked}}"
+  },
   "triggered": {
     "commandDescription": "Triggers someone",
     "commandUsage": "[user to trigger]"
