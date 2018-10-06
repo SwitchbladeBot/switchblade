@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { Command, CommandRequirements } = CommandStructures
 
 module.exports = class Leaderboard extends Command {
   constructor (client) {
@@ -13,10 +13,6 @@ module.exports = class Leaderboard extends Command {
 
   async run ({ t, author, prefix, alias, channel, guildDocument }) {
     const embed = new SwitchbladeEmbed(author)
-    /*embed.setDescription([
-      t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` }),
-      t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` })
-    ].join('\n'))*/
     channel.send(embed)
   }
 }
@@ -29,7 +25,6 @@ class MoneyLeaderboard extends Command {
   }
 
   async run ({ t, author, channel }) {
-
     channel.startTyping()
 
     const embed = new SwitchbladeEmbed(author)
