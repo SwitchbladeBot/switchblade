@@ -21,5 +21,6 @@
   "databaseOnly": "Sorry, I don't have a database connection right now!",
   "playerManagerOnly": "Sorry, I don't have a player connection right now!",
   "invalidColor": "You need to give me a valid color.",
-  "invalidGuild": "You need to give me a valid guild."
+  "invalidGuild": "You need to give me a valid guild.",
+  "userCantBeDeveloper": "User can't be a developer"
 }

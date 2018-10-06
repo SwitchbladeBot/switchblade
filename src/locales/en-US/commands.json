@@ -428,5 +428,19 @@
     "noMap": "Default map",
     "noGameMode": "None",
     "noGameName": "Not found"
+  },
+  "blacklist": {
+    "commandDescription": "Adds a user to the blacklist",
+    "commandUsage": "<user> <reason>",
+    "missingUser": "You need to give me an user to blacklist",
+    "missingReason": "You need to give me a reason for blacklisting",
+    "successTitle": "User added to the blacklist successfully"
+  },
+  "unblacklist": {
+    "commandDescription": "Removes a user from the blacklist",
+    "commandUsage": "<user>",
+    "success": "{{user}} has been from the blacklist successfully",
+    "missingUser": "You need to give me an user to remove from the blacklist",
+    "notBlacklisted": "That user isn't blacklisted"
   }
 }
