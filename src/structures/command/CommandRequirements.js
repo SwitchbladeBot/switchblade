@@ -40,7 +40,7 @@ module.exports = class CommandRequirements {
       return new CommandError(t(this.errors.playerManagerOnly))
     }
 
-    if (this.devOnly && !!!PermissionUtils.isDeveloper(client, author)) {
+    if (this.devOnly && !PermissionUtils.isDeveloper(client, author)) {
       return new CommandError(t(this.errors.devOnly))
     }
 
