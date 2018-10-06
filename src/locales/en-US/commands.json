@@ -445,6 +445,8 @@
     "missingSentence": "You need to give me a sentence to clapify"
   },
   "numberfacts": {
-    "validNumber": "You need to give me a number!"
+    "validNumber": "You need to give me a number!",
+    "commandUsage": "<number>",
+    "commandDescription": "Shows a fact from a number"
   }
 }
