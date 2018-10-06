@@ -9,7 +9,7 @@ module.exports = class Smart extends Command {
 
   run ({ author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    embed.setImage('https://i.kym-cdn.com/entries/icons/original/000/014/711/neckbeard.jpg')
+    embed.setImage('https://i.kym-cdn.com/photos/images/masonry/000/747/485/3a1.gif')
     channel.send(embed)
   }
 }
