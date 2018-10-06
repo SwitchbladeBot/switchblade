@@ -443,5 +443,10 @@
     "commandDescription": "Clapifies text",
     "commandUsage": "<text to clapify>",
     "missingSentence": "You need to give me a sentence to clapify"
+  },
+  "numberfacts": {
+    "validNumber": "You need to give me a number!",
+    "commandUsage": "<number>",
+    "commandDescription": "Shows a fact about a number"
   }
 }
