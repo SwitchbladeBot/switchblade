@@ -27,7 +27,7 @@ module.exports = class CommandParameters {
         const flagsObject = {}
         const error = this.flags.map(flag => {
           const flagIndex = args.findIndex(a => flagCheck(a, flag))
-          if (flagIndex) {
+          if (flagIndex > -1) {
             const missingErr = funcOrString(flag.missingError, context.t, context)
 
             let flagValue = args[flagIndex + 1]

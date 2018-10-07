@@ -98,6 +98,30 @@ module.exports = class CanvasUtils {
       return this
     }
 
+    Context2d.prototype.roundRect = function (x, y, width, height, radius, fill, stroke) {
+      let cornerRadius = { upperLeft: 0, upperRight: 0, lowerLeft: 0, lowerRight: 0 }
+      if (typeof radius === 'object') {
+        cornerRadius = Object.assign(cornerRadius, radius)
+      } else if (typeof radius === 'number') {
+        cornerRadius = { upperLeft: radius, upperRight: radius, lowerLeft: radius, lowerRight: radius }
+      }
+
+      this.beginPath()
+      this.moveTo(x + cornerRadius.upperLeft, y)
+      this.lineTo(x + width - cornerRadius.upperRight, y)
+      this.quadraticCurveTo(x + width, y, x + width, y + cornerRadius.upperRight)
+      this.lineTo(x + width, y + height - cornerRadius.lowerRight)
+      this.quadraticCurveTo(x + width, y + height, x + width - cornerRadius.lowerRight, y + height)
+      this.lineTo(x + cornerRadius.lowerLeft, y + height)
+      this.quadraticCurveTo(x, y + height, x, y + height - cornerRadius.lowerLeft)
+      this.lineTo(x, y + cornerRadius.upperLeft)
+      this.quadraticCurveTo(x, y, x + cornerRadius.upperLeft, y)
+      this.closePath()
+      if (stroke) this.stroke()
+      if (fill) this.fill()
+      return this
+    } 
+
     Context2d.prototype.write = function (text, x, y, font = '12px "Montserrat"', align = ALIGN.BOTTOM_LEFT) {
       this.font = font
       const { width, height } = self.measureText(this, font, text)

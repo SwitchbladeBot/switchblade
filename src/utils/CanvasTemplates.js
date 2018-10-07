@@ -9,7 +9,7 @@ const moment = require('moment')
 const DAILY_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 
 module.exports = class CanvasTemplates {
-  static async profile ({ t, client }, user, userDocument) {
+  static async profile ({ t }, user, userDocument) {
     const WIDTH = 800
     const HEIGHT = 600
     const BORDER = 25
@@ -105,6 +105,74 @@ module.exports = class CanvasTemplates {
 
     ctx.globalCompositeOperation = 'destination-over'
     ctx.drawImage(backgroundImage, 0, 0, WIDTH, HEIGHT)
+
+    return canvas.toBuffer()
+  }
+
+  static async nowPlaying ({ t }, guildPlayer, song) {
+    const WIDTH = 800
+    const HEIGHT = 600
+    const MARGIN = 100
+    const INNER_MARGIN = 30
+
+    const THUMBNAIL_HEIGHT = 200
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(song.artwork)
+    ])
+
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    // Modal
+    ctx.save()
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
+    ctx.shadowBlur = 28
+    ctx.shadowOffsetY = 14
+    ctx.fillStyle = '#FFFFFF'
+    ctx.roundRect(MARGIN, MARGIN, WIDTH - MARGIN * 2, HEIGHT - MARGIN * 2, 10, true)
+    ctx.restore()
+
+    // Song info
+    ctx.fillStyle = '#000000'
+    // Title
+    const TITLE = song.title.length > 25 ? song.title.substring(0, 22) + '...' : song.title
+    const TITLE_Y = MARGIN + INNER_MARGIN + THUMBNAIL_HEIGHT + INNER_MARGIN
+    const title = ctx.write(TITLE, WIDTH * 0.5, TITLE_Y, 'bold 20px Montserrat', ALIGN.TOP_CENTER)
+    // Author
+    const AUTHOR = song.author.length > 25 ? song.author.substring(0, 22) + '...' : song.author
+    const author = ctx.write(AUTHOR, WIDTH * 0.5, title.bottomY + 10, '16px Montserrat', ALIGN.TOP_CENTER)
+
+    // Timebar
+    const TIMEBAR_WIDTH = WIDTH - MARGIN * 2
+    const TIMEBAR_HEIGHT = 10
+    // Timebar full
+    const TIMEBAR_FULL_BORDERS = { upperLeft: 0, upperRight: 0, lowerLeft: 10, lowerRight: 10 }
+    ctx.fillStyle = '#99AAB5'
+    ctx.roundRect(MARGIN, HEIGHT - MARGIN - TIMEBAR_HEIGHT, TIMEBAR_WIDTH, TIMEBAR_HEIGHT, TIMEBAR_FULL_BORDERS, true)
+    // Timebar now
+    ctx.fillStyle = song.color
+    const NOW_WIDTH = guildPlayer.state.position / song.length * TIMEBAR_WIDTH
+    if (NOW_WIDTH >= 10) {
+      const TIMEBAR_NOW_BORDERS = { upperLeft: 0, upperRight: 0, lowerLeft: 10, lowerRight: TIMEBAR_WIDTH - NOW_WIDTH >= 10 ? 0 : 10 }
+      ctx.roundRect(MARGIN, HEIGHT - MARGIN - TIMEBAR_HEIGHT, NOW_WIDTH, TIMEBAR_HEIGHT, TIMEBAR_NOW_BORDERS, true)
+    }
+
+    // Time info
+    const TIME_Y = HEIGHT - MARGIN - INNER_MARGIN
+    const TIME_FONT = '16px Montserrat'
+    // Time elapsed
+    const TIME_ELAPSED = moment.duration(guildPlayer.state.position).format('hh:mm:ss', { stopTrim: 'm' })
+    ctx.write(TIME_ELAPSED, MARGIN + INNER_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_LEFT)
+    // Time left
+    if (!song.isStream) {
+      const TIME_LEFT = moment.duration(guildPlayer.state.position - song.length).format('hh:mm:ss', { stopTrim: 'm' })
+      ctx.write(TIME_LEFT, WIDTH - MARGIN - INNER_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_RIGHT)
+    }
+
+    // Thumbnail
+    const [ artworkImage ] = await IMAGE_ASSETS
+    const THUMBNAIL_WIDTH = artworkImage.width * (THUMBNAIL_HEIGHT / artworkImage.height)
+    ctx.drawImage(artworkImage, WIDTH * 0.5 - THUMBNAIL_WIDTH * 0.5, MARGIN + INNER_MARGIN, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
 
     return canvas.toBuffer()
   }
