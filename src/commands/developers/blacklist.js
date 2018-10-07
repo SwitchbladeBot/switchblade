@@ -1,4 +1,4 @@
-const { CommandStructures, Blacklist, SwitchbladeEmbed } = require('../../')
+const { CommandStructures, BlacklistUtils, SwitchbladeEmbed } = require('../../')
 const { Command, CommandRequirements, CommandParameters, StringParameter, UserParameter } = CommandStructures
 
 module.exports = class Blacklist extends Command {
@@ -17,7 +17,7 @@ module.exports = class Blacklist extends Command {
   async run ({ channel, author, t }, user, reason) {
     const embed = new SwitchbladeEmbed(author)
     const doc = await this.client.database.users.get(user.id)
-    await Blacklist.addUser(doc, reason, author)
+    await BlacklistUtils.addUser(doc, reason, author)
     embed
       .setTitle(t('commands:blacklist.successTitle'))
       .setDescription(`${user} - \`${reason}\``)

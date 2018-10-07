@@ -140,7 +140,7 @@ module.exports = class CanvasTemplates {
     const title = ctx.write(TITLE, WIDTH * 0.5, TITLE_Y, 'bold 20px Montserrat', ALIGN.TOP_CENTER)
     // Author
     const AUTHOR = song.author.length > 25 ? song.author.substring(0, 22) + '...' : song.author
-    const author = ctx.write(AUTHOR, WIDTH * 0.5, title.bottomY + 10, '16px Montserrat', ALIGN.TOP_CENTER)
+    ctx.write(AUTHOR, WIDTH * 0.5, title.bottomY + 10, '16px Montserrat', ALIGN.TOP_CENTER)
 
     // Timebar
     const TIMEBAR_WIDTH = WIDTH - MARGIN * 2

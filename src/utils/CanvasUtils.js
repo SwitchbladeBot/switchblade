@@ -120,7 +120,7 @@ module.exports = class CanvasUtils {
       if (stroke) this.stroke()
       if (fill) this.fill()
       return this
-    } 
+    }
 
     Context2d.prototype.write = function (text, x, y, font = '12px "Montserrat"', align = ALIGN.BOTTOM_LEFT) {
       this.font = font
