@@ -29,11 +29,12 @@ class MoneyLeaderboard extends Command {
 
     const embed = new SwitchbladeEmbed(author)
     const top = await this.client.database.users.findAll().then(users => users.sort((a, b) => b.money - a.money).splice(0, 10))
+    const ranking = await top.map(u => u.id)
     embed
-      .setTitle('Money Leaderboard')
+      .setTitle(t('commands:leaderboard.subcommands.money.successTitle'))
       .setDescription(top.map(u => {
         const user = this.client.users.get(u.id)
-        return `**${user ? user.tag : u.id}** - ${t('commons:currencyWithCount_plural', { count: u.money })}`
+        return `#${ranking.indexOf(u.id) + 1} **${user ? user.tag : u.id}** - ${t('commons:currencyWithCount_plural', { count: u.money })}`
       }).join('\n'))
     channel.send(embed).then(() => channel.stopTyping())
   }
