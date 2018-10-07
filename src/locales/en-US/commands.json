@@ -478,7 +478,7 @@
     "subcommands": {
       "money": {
         "commandDescription": "Shows a list of the richest users",
-        "changedSuccessfully": "Language changed successfully to `{{lang}}`!"
+        "successTitle": "Money Leaderboard"
       }
     }
   },
