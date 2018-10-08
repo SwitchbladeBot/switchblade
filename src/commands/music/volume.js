@@ -9,9 +9,9 @@ module.exports = class Volume extends Command {
     this.name = 'volume'
     this.aliases = ['vol']
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true})
+    this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true })
     this.parameters = new CommandParameters(this,
-      new NumberParameter({full: true, missingError: 'commands:volume.missingVolumeParameter', min: 0, max: maxVolume})
+      new NumberParameter({ full: true, missingError: 'commands:volume.missingVolumeParameter', min: 0, max: maxVolume })
     )
   }
 
@@ -20,7 +20,7 @@ module.exports = class Volume extends Command {
     if (volume === maxVolume) embed.setImage('https://i.imgur.com/A6HWTqq.png')
     const guildPlayer = this.client.playerManager.get(guild.id)
     guildPlayer.volume(volume)
-    embed.setTitle(`\uD83D\uDD0A ${t('commands:volume.volumeSet', {volume})}`)
+    embed.setTitle(`\uD83D\uDD0A ${t('commands:volume.volumeSet', { volume })}`)
     channel.send(embed)
   }
 }
