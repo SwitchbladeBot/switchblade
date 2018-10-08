@@ -9,7 +9,7 @@ module.exports = class Profile extends Command {
     this.aliases = []
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({full: true, required: false})
+      new UserParameter({ full: true, required: false })
     )
   }
 
