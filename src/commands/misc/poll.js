@@ -7,7 +7,7 @@ module.exports = class Poll extends Command {
     this.name = 'poll'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:poll.noQuestion'})
+      new StringParameter({ full: true, missingError: 'commands:poll.noQuestion' })
     )
   }
 
@@ -19,7 +19,7 @@ module.exports = class Poll extends Command {
       const maxOptions = 26
       if (pollPcs.slice(1).length > maxOptions) {
         embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:poll.tooManyOptions', {maxOptions}))
+          .setTitle(t('commands:poll.tooManyOptions', { maxOptions }))
         channel.send(embed)
       } else {
         let description = ''

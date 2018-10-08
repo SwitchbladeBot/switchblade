@@ -8,7 +8,7 @@ module.exports = class FavColor extends Command {
     this.aliases = ['favoritecolor', 'sethex', 'setcolor']
 
     this.parameters = new CommandParameters(this,
-      new ColorParameter({full: true, missingError: 'errors:invalidColor'})
+      new ColorParameter({ full: true, missingError: 'errors:invalidColor' })
     )
   }
 

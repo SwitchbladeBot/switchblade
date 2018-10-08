@@ -1,4 +1,4 @@
-module.exports = class Blacklist {
+module.exports = class BlacklistUtils {
   static async addUser (userDocument, reason, blacklister) {
     userDocument.blacklisted = true
     userDocument.blacklistReason = reason
@@ -17,6 +17,6 @@ module.exports = class Blacklist {
 
   static async getInfo (userDocument) {
     if (!userDocument.blacklisted) return false
-    return {reason: userDocument.blacklistReason, blacklisterId: userDocument.blacklisterId}
+    return { reason: userDocument.blacklistReason, blacklisterId: userDocument.blacklisterId }
   }
 }

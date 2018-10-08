@@ -8,7 +8,7 @@ module.exports = class CommandRequirements {
 
     this.permissions = options.permissions || []
 
-    this.cooldown = Object.assign({enabled: false, feedback: true, time: 1}, options.cooldown)
+    this.cooldown = Object.assign({ enabled: false, feedback: true, time: 1 }, options.cooldown)
 
     this.devOnly = !!options.devOnly
     this.guildOnly = !!options.guildOnly

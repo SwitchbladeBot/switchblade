@@ -10,7 +10,7 @@ module.exports = class GuildInfo extends Command {
     this.requirements = new CommandRequirements(this, { guildOnly: true })
 
     this.parameters = new CommandParameters(this,
-      new GuildParameter({full: true, required: false})
+      new GuildParameter({ full: true, required: false })
     )
   }
 

@@ -8,9 +8,9 @@ module.exports = class Play extends Command {
     this.name = 'play'
     this.aliases = []
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, playerManagerOnly: true})
+    this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, playerManagerOnly: true })
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:play.noTrackIdentifier'})
+      new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' })
     )
   }
 
@@ -59,7 +59,7 @@ module.exports = class Play extends Command {
     channel.send(
       new SwitchbladeEmbed()
         .setThumbnail(playlist.artwork)
-        .setDescription(`${Constants.PLAY_BUTTON} ${t('music:addedFromPlaylist', {count, playlistName, duration})}`)
+        .setDescription(`${Constants.PLAY_BUTTON} ${t('music:addedFromPlaylist', { count, playlistName, duration })}`)
     )
   }
 
@@ -71,15 +71,15 @@ module.exports = class Play extends Command {
     const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
     const songName = `[${song.title}](${song.uri}) ${duration}`
 
-    song.once('end', () => send(`${Constants.STOP_BUTTON} ${t('music:hasEnded', {songName})}`))
+    song.once('end', () => send(`${Constants.STOP_BUTTON} ${t('music:hasEnded', { songName })}`))
     song.once('stop', u => send(`${Constants.STOP_BUTTON} ${t('music:queueIsEmpty')}`, u))
 
     if (startFeedback) {
-      song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:startedPlaying', {songName})}`))
+      song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:startedPlaying', { songName })}`))
     }
 
     if (queueFeedback) {
-      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:addedToTheQueue', {songName})}`))
+      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:addedToTheQueue', { songName })}`))
     }
   }
 }

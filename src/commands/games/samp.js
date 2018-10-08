@@ -8,7 +8,7 @@ module.exports = class SAMP extends Command {
     this.name = 'samp'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({missingError: 'commands:samp.noIP'})
+      new StringParameter({ missingError: 'commands:samp.noIP' })
     )
   }
 
@@ -18,7 +18,7 @@ module.exports = class SAMP extends Command {
     const host = address.split(':')[0]
     const port = address.split(':')[1] || 7777
     try {
-      const response = await this.queryPromise({host, port})
+      const response = await this.queryPromise({ host, port })
       embed.setAuthor('San Andreas: Multiplayer', 'http://1.bp.blogspot.com/-AY3d9tMV8nM/Ton8LlgoJgI/AAAAAAAAAMg/VFID_9mI-Co/s1600/SAMP.png')
         .setColor(0xF07B0F)
         .setTitle(response.hostname)

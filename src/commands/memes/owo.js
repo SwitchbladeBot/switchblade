@@ -10,7 +10,7 @@ module.exports = class OwO extends Command {
     this.aliases = ['uwu', 'whatsthis', 'owoify']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:owo.missingSentence'})
+      new StringParameter({ full: true, missingError: 'commands:owo.missingSentence' })
     )
   }
 

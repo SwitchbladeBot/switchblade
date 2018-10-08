@@ -10,7 +10,7 @@ module.exports = class Help extends Command {
     this.aliases = ['commands', 'ajuda']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, required: false})
+      new StringParameter({ full: true, required: false })
     )
   }
 
@@ -50,9 +50,9 @@ module.exports = class Help extends Command {
         .setDescription([
           commands,
           '',
-          `**${t('commands:help.prefix')}:** \`${prefix}\` (${t('commands:help.youCanUse', {botMention: this.client.user})})`,
+          `**${t('commands:help.prefix')}:** \`${prefix}\` (${t('commands:help.youCanUse', { botMention: this.client.user })})`,
           '',
-          `**${t('commands:help.specificInformation', {helpString: `\`${prefix}${this.name} ${t('commands:help.commandUsage')}\``})}**`
+          `**${t('commands:help.specificInformation', { helpString: `\`${prefix}${this.name} ${t('commands:help.commandUsage')}\`` })}**`
         ].join('\n'))
     }
     channel.send(embed)
