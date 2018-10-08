@@ -8,7 +8,7 @@ module.exports = class Math extends Command {
     this.name = 'math'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:math.needMathExpression', id: 'expression'})
+      new StringParameter({ full: true, missingError: 'commands:math.needMathExpression', id: 'expression' })
     )
   }
 
