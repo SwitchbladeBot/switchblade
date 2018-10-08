@@ -9,7 +9,7 @@ module.exports = class WhyBlacklisted extends Command {
 
     this.requirements = new CommandRequirements(this)
     this.parameters = new CommandParameters(this,
-      new UserParameter({showUsage: false, missingError: 'commands:whyblacklisted.missingUser'})
+      new UserParameter({ showUsage: false, missingError: 'commands:whyblacklisted.missingUser' })
     )
   }
 
@@ -18,7 +18,7 @@ module.exports = class WhyBlacklisted extends Command {
     const doc = await this.client.database.users.get(user.id)
     const info = await Blacklist.getInfo(doc)
     if (info) {
-      const text = {user: user, blacklister: `<@${info.blacklisterId}>`}
+      const text = { user: user, blacklister: `<@${info.blacklisterId}>` }
       embed.setDescription(
         [
           `**${t('commands:whyblacklisted.reasonTitle', text)}**`,

@@ -9,7 +9,7 @@ module.exports = class Npm extends Command {
     this.name = 'npm'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, fullJoin: '-', missingError: 'commands:npm.noNameProvided'})
+      new StringParameter({ full: true, fullJoin: '-', missingError: 'commands:npm.noNameProvided' })
     )
   }
 
