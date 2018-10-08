@@ -11,7 +11,7 @@ module.exports = class FiveM extends Command {
     this.name = 'fivem'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({missingError: 'commands:fivem.noIP'})
+      new StringParameter({ missingError: 'commands:fivem.noIP' })
     )
   }
 
