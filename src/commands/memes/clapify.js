@@ -1,7 +1,7 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../index')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
-const emoji = ':clap:'
+const emoji = '\uD83D\uDC4F'
 
 module.exports = class Clapify extends Command {
   constructor (client) {
