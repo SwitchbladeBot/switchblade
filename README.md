@@ -38,7 +38,7 @@ Just like Discord, we have an awesome team of bug hunters. You can [join our ser
 Switchblade's translation is Crowdsourced too! [Click here to learn more](https://crowdin.com/project/switchblade).
 
 ## Branching
-New Pull Requests should be made upon the `dev` branch, where **Switchblade Canary**, our private testing instance, runs. Every two weeks, we push code from `dev` to `master`, where the production instance runs.
+New Pull Requests should be made upon the `dev` branch, where **Switchblade Canary**, our private testing instance, runs. Every 1 month, we push code from `dev` to `master`, where the production instance runs.
 
 ## Setting up a development environment
 > For this guide, we're assuming that you already have NPM, Node and Windows Build Tools installed.
