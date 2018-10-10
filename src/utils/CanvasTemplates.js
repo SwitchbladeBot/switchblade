@@ -110,14 +110,18 @@ module.exports = class CanvasTemplates {
   }
 
   static async nowPlaying ({ t }, guildPlayer, song) {
-    const WIDTH = 670
-    const HEIGHT = 215
+    // const WIDTH = 670
+    // const HEIGHT = 215
+    const WIDTH = 800
+    const HEIGHT = 257
 
-    const THUMBNAIL_WIDTH = 220
-    let THUMBNAIL_HEIGHT = 215
+    // const THUMBNAIL_WIDTH = 220
+    // let THUMBNAIL_HEIGHT = 215
+    const THUMBNAIL_WIDTH = 263
+    let THUMBNAIL_HEIGHT = HEIGHT
 
     const IMAGE_ASSETS = Promise.all([
-      Image.from(song.artwork)
+      Image.from(song.artwork || Constants.DEFAULT_SONG_PNG, !song.artwork)
     ])
 
     const canvas = createCanvas(WIDTH, HEIGHT)
@@ -141,8 +145,8 @@ module.exports = class CanvasTemplates {
     const RIGHT_TEXT_MARGIN = WIDTH - 8
 
     // Time info
-    const TIME_Y = HEIGHT - TIMEBAR_HEIGHT - 4
-    const TIME_FONT = '14px "Montserrat Medium"'
+    const TIME_Y = HEIGHT - TIMEBAR_HEIGHT - 8
+    const TIME_FONT = '16px "Montserrat Medium"'
     const formatTime = (t) => moment.duration(t).format('hh:mm:ss', { stopTrim: 'm' })
     // Elapsed time
     const TIME_ELAPSED = formatTime(guildPlayer.state.position)
@@ -152,7 +156,7 @@ module.exports = class CanvasTemplates {
     ctx.write(TIME_TOTAL, RIGHT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_RIGHT)
 
     // Author
-    const AUTHOR_FONT = 'italic 20px Montserrat'
+    const AUTHOR_FONT = 'italic 22px Montserrat'
     const AUTHOR_Y = elapsed.topY - 30
     const author = ctx.writeParagraph(song.author, AUTHOR_FONT, LEFT_TEXT_MARGIN, AUTHOR_Y, RIGHT_TEXT_MARGIN, AUTHOR_Y + 1)
     // Title
@@ -171,7 +175,17 @@ module.exports = class CanvasTemplates {
 
     // Background
     ctx.globalCompositeOperation = 'destination-over'
-    ctx.drawBlurredImage(artworkImage, 20, THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
+
+    const realColor = new Color('#000')
+    const gradientColor = (a) => realColor.setAlpha(a).rgba(true)
+
+    const grd = ctx.createLinearGradient(0, 0, 0, HEIGHT)
+    grd.addColorStop(0, gradientColor(0))
+    grd.addColorStop(1, gradientColor(0.9))
+    ctx.fillStyle = grd
+    ctx.fillRect(THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
+
+    ctx.drawBlurredImage(artworkImage, 10, THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
 
     // Modal style
     ctx.fillStyle = '#FFFFFF'

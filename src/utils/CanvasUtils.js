@@ -151,7 +151,7 @@ module.exports = class CanvasUtils {
         const height = lineText.height
         if (currentY > maxY) break
 
-        if (lineText.width <= maxX) {
+        if (startX + lineText.width <= maxX) {
           lastWrite = this.write(l, startX, currentY, font, ALIGN.TOP_LEFT)
         } else {
           if (l.includes(' ')) {
