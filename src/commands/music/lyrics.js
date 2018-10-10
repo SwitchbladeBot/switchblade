@@ -8,7 +8,7 @@ module.exports = class Lyrics extends Command {
     this.aliases = ['lyric', 'genius']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:lyrics.noTrackName'})
+      new StringParameter({ full: true, missingError: 'commands:lyrics.noTrackName' })
     )
   }
 

@@ -8,11 +8,11 @@ module.exports = class Personaltext extends Command {
     this.aliases = ['profiletext']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:personaltext.noText'})
+      new StringParameter({ full: true, missingError: 'commands:personaltext.noText' })
     )
   }
 
-  async run ({t, author, channel}, profileText) {
+  async run ({ t, author, channel }, profileText) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     if (profileText.length > 150) {
@@ -25,7 +25,7 @@ module.exports = class Personaltext extends Command {
       userData.personalText = profileText
       userData.save()
       embed
-        .setTitle(t('commands:personaltext.changedSuccessfully', {profileText}))
+        .setTitle(t('commands:personaltext.changedSuccessfully', { profileText }))
     }
     channel.send(embed).then(() => channel.stopTyping())
   }

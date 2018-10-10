@@ -13,7 +13,7 @@ module.exports = class Config extends Command {
     this.aliases = ['cfg']
     this.subcommands = [new ConfigLanguage(client, this), new ConfigPrefix(client, this)]
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD']})
+    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD'] })
   }
 
   run ({ t, author, prefix, alias, channel, guildDocument }) {
@@ -46,7 +46,7 @@ class ConfigLanguage extends Command {
               `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`
             ].join('\n')
           }
-        }})
+        } })
     )
   }
 
@@ -85,7 +85,7 @@ class ConfigPrefix extends Command {
     prefix = prefix || process.env.PREFIX
     guildDocument.prefix = prefix
     await guildDocument.save()
-    embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', {prefix}))
+    embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', { prefix }))
     channel.send(embed)
   }
 }

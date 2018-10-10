@@ -11,16 +11,16 @@ module.exports = class Eval extends Command {
     this.aliases = ['execute']
     this.hidden = true
 
-    this.requirements = new CommandRequirements(this, {devOnly: true})
+    this.requirements = new CommandRequirements(this, { devOnly: true })
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'errors:missingParameters', showUsage: false})
+      new StringParameter({ full: true, missingError: 'errors:missingParameters', showUsage: false })
     )
   }
 
   async run ({ channel, message }, expr) {
     try {
       const evaled = await eval(expr)
-      const cleanEvaled = this.clean(util.inspect(evaled, {depth: 0}))
+      const cleanEvaled = this.clean(util.inspect(evaled, { depth: 0 }))
       await channel.send(cleanEvaled, { code: 'xl' })
     } catch (err) {
       channel.send('`ERROR` ```xl\n' + this.clean(err) + '\n```')

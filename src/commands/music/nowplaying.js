@@ -10,8 +10,8 @@ module.exports = class NowPlaying extends Command {
     this.name = 'nowplaying'
     this.aliases = ['np', 'currentplaying']
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, guildPlaying: true, playerManagerOnly: true})
-    this.parameters = new CommandParameters(this, [new BooleanFlagParameter({ name: 'text' })])
+    this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true, playerManagerOnly: true })
+    this.parameters = new CommandParameters(this, [ new BooleanFlagParameter({ name: 'text' }) ])
   }
 
   async run ({ t, author, channel, flags, guild }) {
@@ -54,7 +54,7 @@ module.exports = class NowPlaying extends Command {
 
       const description = [
         `**${t('music:nowPlaying')}:** [${song.title}](${song.uri}) ${durationText}`,
-        `*[${t('music:addedBy', {user: song.requestedBy})}]*`
+        `*[${t('music:addedBy', { user: song.requestedBy })}]*`
       ]
 
       channel.send(embed.setDescription(description.join('\n')))

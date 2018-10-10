@@ -9,7 +9,7 @@ module.exports = class GuildIcon extends Command {
     this.requirements = new CommandRequirements(this, { guildOnly: true })
 
     this.parameters = new CommandParameters(this,
-      new GuildParameter({full: true, required: false})
+      new GuildParameter({ full: true, required: false })
     )
   }
 
@@ -19,7 +19,7 @@ module.exports = class GuildIcon extends Command {
     guild = guild || channel.guild
     if (guild.iconURL) {
       embed.setImage(guild.iconURL)
-        .setDescription(t('commands:guildicon.iconDescription', {guild: guild.name}))
+        .setDescription(t('commands:guildicon.iconDescription', { guild: guild.name }))
     } else {
       embed.setDescription(t('commands:guildicon.noIcon'))
         .setColor(Constants.ERROR_COLOR)

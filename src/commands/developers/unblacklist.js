@@ -7,9 +7,9 @@ module.exports = class Unblacklist extends Command {
     this.name = 'unblacklist'
     this.hidden = true
 
-    this.requirements = new CommandRequirements(this, {devOnly: true})
+    this.requirements = new CommandRequirements(this, { devOnly: true })
     this.parameters = new CommandParameters(this,
-      new UserParameter({showUsage: false, missingError: 'commands:unblacklist.missingUser'})
+      new UserParameter({ showUsage: false, missingError: 'commands:unblacklist.missingUser' })
     )
   }
 
@@ -18,7 +18,7 @@ module.exports = class Unblacklist extends Command {
     const doc = await this.client.database.users.get(user.id)
     const ok = await BlacklistUtils.removeUser(doc)
     if (ok) {
-      embed.setDescription(`**${t('commands:unblacklist.success', {user: user})}**`)
+      embed.setDescription(`**${t('commands:unblacklist.success', { user: user })}**`)
     } else {
       embed
         .setColor(Constants.ERROR_COLOR)

@@ -12,7 +12,7 @@ module.exports = class handshake extends Command {
     this.aliases = ['hs', 'hands']
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({missingError: 'commands:handshake.noMention', acceptBot: true})
+      new UserParameter({ missingError: 'commands:handshake.noMention', acceptBot: true })
     )
   }
 

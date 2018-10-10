@@ -8,7 +8,7 @@ module.exports = class Avatar extends Command {
     this.aliases = ['profilepicture', 'pfp']
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({full: true, required: false, acceptBot: true})
+      new UserParameter({ full: true, required: false, acceptBot: true })
     )
   }
 
@@ -17,7 +17,7 @@ module.exports = class Avatar extends Command {
     channel.startTyping()
     user = user || author
     embed.setImage(user.displayAvatarURL)
-      .setDescription(t('commands:avatar.someonesAvatar', {user}))
+      .setDescription(t('commands:avatar.someonesAvatar', { user }))
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

@@ -11,7 +11,7 @@ module.exports = class BeatSaver extends Command {
     this.aliases = ['beatsaber', 'bsaver']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({missingError: 'commands:beatsaver.noQuery'})
+      new StringParameter({ missingError: 'commands:beatsaver.noQuery' })
     )
   }
 
@@ -28,7 +28,7 @@ module.exports = class BeatSaver extends Command {
       return
     }
 
-    const {body} = await snekfetch.get(url)
+    const { body } = await snekfetch.get(url)
     const $ = cheerio.load(body)
     if (body) {
       const downloadUrl = $('body > div > div > table > tbody > tr:nth-child(1) > th.text-center > div:nth-child(3) > a')[0].attribs.href
@@ -53,7 +53,7 @@ async function parseQuery (query) {
   if (match) {
     return `https://beatsaver.com/browse/detail/${match}`
   } else {
-    const {body} = await snekfetch.get(`https://beatsaver.com/search/all/${encodeURIComponent(query)}`)
+    const { body } = await snekfetch.get(`https://beatsaver.com/search/all/${encodeURIComponent(query)}`)
     const $ = cheerio.load(body)
     const map = $('body > div > div > table:nth-child(3) > tbody > tr:nth-child(1) > th.text-center > div:nth-child(3) > a')[0]
     if (map) return map.attribs.href

@@ -10,11 +10,11 @@ module.exports = class Rep extends Command {
     this.name = 'rep'
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({missingError: 'commands:rep.noMention', acceptBot: false})
+      new UserParameter({ missingError: 'commands:rep.noMention', acceptBot: false })
     )
   }
 
-  async run ({t, author, channel}, user) {
+  async run ({ t, author, channel }, user) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     if (user.id === author.id) {
@@ -31,12 +31,12 @@ module.exports = class Rep extends Command {
         const time = moment.duration(DAILY_INTERVAL - (now - date)).format('h[h] m[m] s[s]')
         embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:rep.alreadyGave'))
-          .setDescription(t('commands:rep.againIn', {time}))
+          .setDescription(t('commands:rep.againIn', { time }))
       } else {
         authorData.lastRep = now
         userData.rep++
         userData.save() && authorData.save()
-        embed.setDescription(t('commands:rep.reputationPoint', {user}))
+        embed.setDescription(t('commands:rep.reputationPoint', { user }))
       }
     }
     channel.send(embed).then(() => channel.stopTyping())

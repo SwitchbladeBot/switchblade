@@ -6,7 +6,7 @@ const FileUtils = require('./FileUtils.js')
 
 const URLtoBuffer = function (url) {
   return new Promise((resolve, reject) => {
-    request.get({url, encoding: null, isBuffer: true}, (err, res, body) => {
+    request.get({ url, encoding: null, isBuffer: true }, (err, res, body) => {
       if (!err && res && res.statusCode === 200 && body) resolve(body)
       else reject(err || res)
     })
@@ -29,18 +29,18 @@ module.exports = class CanvasUtils {
     const self = this
 
     // Initiliaze fonts
-    registerFont('src/assets/fonts/Montserrat-Regular.ttf', {family: 'Montserrat'})
-    registerFont('src/assets/fonts/Montserrat-Italic.ttf', {family: 'Montserrat', style: 'italic'})
-    registerFont('src/assets/fonts/Montserrat-Medium.ttf', {family: 'Montserrat Medium'})
-    registerFont('src/assets/fonts/Montserrat-MediumItalic.ttf', {family: 'Montserrat Medium', style: 'italic'})
-    registerFont('src/assets/fonts/Montserrat-SemiBold.ttf', {family: 'Montserrat SemiBold'})
-    registerFont('src/assets/fonts/Montserrat-SemiBoldItalic.ttf', {family: 'Montserrat SemiBold', style: 'italic'})
-    registerFont('src/assets/fonts/Montserrat-Bold.ttf', {family: 'Montserrat', weight: 'bold'})
-    registerFont('src/assets/fonts/Montserrat-BoldItalic.ttf', {family: 'Montserrat', style: 'italic', weight: 'bold'})
-    registerFont('src/assets/fonts/Montserrat-ExtraBold.ttf', {family: 'Montserrat ExtraBold'})
-    registerFont('src/assets/fonts/Montserrat-ExtraBoldItalic.ttf', {family: 'Montserrat ExtraBold', style: 'italic'})
-    registerFont('src/assets/fonts/Montserrat-Black.ttf', {family: 'Montserrat Black'})
-    registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', {family: 'Montserrat Black', style: 'italic'})
+    registerFont('src/assets/fonts/Montserrat-Regular.ttf', { family: 'Montserrat' })
+    registerFont('src/assets/fonts/Montserrat-Italic.ttf', { family: 'Montserrat', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-Medium.ttf', { family: 'Montserrat Medium' })
+    registerFont('src/assets/fonts/Montserrat-MediumItalic.ttf', { family: 'Montserrat Medium', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-SemiBold.ttf', { family: 'Montserrat SemiBold' })
+    registerFont('src/assets/fonts/Montserrat-SemiBoldItalic.ttf', { family: 'Montserrat SemiBold', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-Bold.ttf', { family: 'Montserrat', weight: 'bold' })
+    registerFont('src/assets/fonts/Montserrat-BoldItalic.ttf', { family: 'Montserrat', style: 'italic', weight: 'bold' })
+    registerFont('src/assets/fonts/Montserrat-ExtraBold.ttf', { family: 'Montserrat ExtraBold' })
+    registerFont('src/assets/fonts/Montserrat-ExtraBoldItalic.ttf', { family: 'Montserrat ExtraBold', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-Black.ttf', { family: 'Montserrat Black' })
+    registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', { family: 'Montserrat Black', style: 'italic' })
 
     // Canvas
     Canvas.createSVGCanvas = function (svg, w, h) {

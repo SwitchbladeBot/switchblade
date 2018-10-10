@@ -7,10 +7,10 @@ module.exports = class Blacklist extends Command {
     this.name = 'blacklist'
     this.hidden = true
 
-    this.requirements = new CommandRequirements(this, {devOnly: true})
+    this.requirements = new CommandRequirements(this, { devOnly: true })
     this.parameters = new CommandParameters(this,
-      new UserParameter({acceptDeveloper: false, missingError: 'commands:blacklist.missingUser'}),
-      new StringParameter({full: true, missingError: 'commands:blacklist.missingReason'})
+      new UserParameter({ acceptDeveloper: false, missingError: 'commands:blacklist.missingUser' }),
+      new StringParameter({ full: true, missingError: 'commands:blacklist.missingReason' })
     )
   }
 
