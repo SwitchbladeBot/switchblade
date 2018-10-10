@@ -110,12 +110,12 @@ module.exports = class CanvasTemplates {
   }
 
   static async nowPlaying ({ t }, guildPlayer, song) {
-    const WIDTH = 800
-    const HEIGHT = 600
-    const MARGIN = 100
-    const INNER_MARGIN = 30
+    const WIDTH = 670
+    const HEIGHT = 215
 
-    const THUMBNAIL_HEIGHT = 200
+    const THUMBNAIL_WIDTH = 220
+    let THUMBNAIL_HEIGHT = 215
+
     const IMAGE_ASSETS = Promise.all([
       Image.from(song.artwork)
     ])
@@ -123,56 +123,60 @@ module.exports = class CanvasTemplates {
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
-    // Modal
-    ctx.save()
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
-    ctx.shadowBlur = 28
-    ctx.shadowOffsetY = 14
-    ctx.fillStyle = '#FFFFFF'
-    ctx.roundRect(MARGIN, MARGIN, WIDTH - MARGIN * 2, HEIGHT - MARGIN * 2, 10, true)
-    ctx.restore()
-
-    // Song info
-    ctx.fillStyle = '#000000'
-    // Title
-    const TITLE = song.title.length > 25 ? song.title.substring(0, 22) + '...' : song.title
-    const TITLE_Y = MARGIN + INNER_MARGIN + THUMBNAIL_HEIGHT + INNER_MARGIN
-    const title = ctx.write(TITLE, WIDTH * 0.5, TITLE_Y, 'bold 20px Montserrat', ALIGN.TOP_CENTER)
-    // Author
-    const AUTHOR = song.author.length > 25 ? song.author.substring(0, 22) + '...' : song.author
-    ctx.write(AUTHOR, WIDTH * 0.5, title.bottomY + 10, '16px Montserrat', ALIGN.TOP_CENTER)
-
     // Timebar
-    const TIMEBAR_WIDTH = WIDTH - MARGIN * 2
-    const TIMEBAR_HEIGHT = 10
-    // Timebar full
-    const TIMEBAR_FULL_BORDERS = { upperLeft: 0, upperRight: 0, lowerLeft: 10, lowerRight: 10 }
-    ctx.fillStyle = '#99AAB5'
-    ctx.roundRect(MARGIN, HEIGHT - MARGIN - TIMEBAR_HEIGHT, TIMEBAR_WIDTH, TIMEBAR_HEIGHT, TIMEBAR_FULL_BORDERS, true)
-    // Timebar now
+    const TIMEBAR_HEIGHT = 6
+    // Full timebar
+    const FULL_COLOR = '#504F4F'
+    const FULL_WIDTH = WIDTH - THUMBNAIL_WIDTH
+    ctx.fillStyle = FULL_COLOR
+    ctx.fillRect(THUMBNAIL_WIDTH, HEIGHT - TIMEBAR_HEIGHT, FULL_WIDTH, TIMEBAR_HEIGHT)
+    // Elapsed timebar
+    const ELAPSED_WIDTH = guildPlayer.state.position / song.length * FULL_WIDTH
     ctx.fillStyle = song.color
-    const NOW_WIDTH = guildPlayer.state.position / song.length * TIMEBAR_WIDTH
-    if (NOW_WIDTH >= 10) {
-      const TIMEBAR_NOW_BORDERS = { upperLeft: 0, upperRight: 0, lowerLeft: 10, lowerRight: TIMEBAR_WIDTH - NOW_WIDTH >= 10 ? 0 : 10 }
-      ctx.roundRect(MARGIN, HEIGHT - MARGIN - TIMEBAR_HEIGHT, NOW_WIDTH, TIMEBAR_HEIGHT, TIMEBAR_NOW_BORDERS, true)
-    }
+    ctx.fillRect(THUMBNAIL_WIDTH, HEIGHT - TIMEBAR_HEIGHT, ELAPSED_WIDTH, TIMEBAR_HEIGHT)
+
+    // Text
+    ctx.fillStyle = '#FFFFFF'
+    const LEFT_TEXT_MARGIN = THUMBNAIL_WIDTH + 8
+    const RIGHT_TEXT_MARGIN = WIDTH - 8
 
     // Time info
-    const TIME_Y = HEIGHT - MARGIN - INNER_MARGIN
-    const TIME_FONT = '16px Montserrat'
-    // Time elapsed
-    const TIME_ELAPSED = moment.duration(guildPlayer.state.position).format('hh:mm:ss', { stopTrim: 'm' })
-    ctx.write(TIME_ELAPSED, MARGIN + INNER_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_LEFT)
-    // Time left
-    if (!song.isStream) {
-      const TIME_LEFT = moment.duration(guildPlayer.state.position - song.length).format('hh:mm:ss', { stopTrim: 'm' })
-      ctx.write(TIME_LEFT, WIDTH - MARGIN - INNER_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_RIGHT)
-    }
+    const TIME_Y = HEIGHT - TIMEBAR_HEIGHT - 4
+    const TIME_FONT = '14px "Montserrat Medium"'
+    const formatTime = (t) => moment.duration(t).format('hh:mm:ss', { stopTrim: 'm' })
+    // Elapsed time
+    const TIME_ELAPSED = formatTime(guildPlayer.state.position)
+    const elapsed = ctx.write(TIME_ELAPSED, LEFT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_LEFT)
+    // Total time
+    const TIME_TOTAL = formatTime(song.length)
+    ctx.write(TIME_TOTAL, RIGHT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_RIGHT)
+
+    // Author
+    const AUTHOR_FONT = 'italic 20px Montserrat'
+    const AUTHOR_Y = elapsed.topY - 30
+    const author = ctx.writeParagraph(song.author, AUTHOR_FONT, LEFT_TEXT_MARGIN, AUTHOR_Y, RIGHT_TEXT_MARGIN, AUTHOR_Y + 1)
+    // Title
+    const TITLE_FONT = 'italic 34px "Montserrat Black"'
+    const TITLE_Y = author.topY - 34
+    ctx.writeParagraph(song.title, TITLE_FONT, LEFT_TEXT_MARGIN, TITLE_Y, RIGHT_TEXT_MARGIN, TITLE_Y + 1)
+
+    // Image handling
+    const [ artworkImage ] = await IMAGE_ASSETS
 
     // Thumbnail
-    const [ artworkImage ] = await IMAGE_ASSETS
-    const THUMBNAIL_WIDTH = artworkImage.width * (THUMBNAIL_HEIGHT / artworkImage.height)
-    ctx.drawImage(artworkImage, WIDTH * 0.5 - THUMBNAIL_WIDTH * 0.5, MARGIN + INNER_MARGIN, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+    ctx.fillStyle = '#000000'
+    ctx.fillRect(0, 0, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+    THUMBNAIL_HEIGHT = artworkImage.height * (THUMBNAIL_WIDTH / artworkImage.width)
+    ctx.drawImage(artworkImage, 0, HEIGHT * 0.5 - THUMBNAIL_HEIGHT * 0.5, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+
+    // Background
+    ctx.globalCompositeOperation = 'destination-over'
+    ctx.drawBlurredImage(artworkImage, 20, THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
+
+    // Modal style
+    ctx.fillStyle = '#FFFFFF'
+    ctx.globalCompositeOperation = 'destination-in'
+    ctx.roundRect(0, 0, WIDTH, HEIGHT, 10, true)
 
     return canvas.toBuffer()
   }
