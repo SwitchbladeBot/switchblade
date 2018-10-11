@@ -5,8 +5,8 @@ module.exports = class Unblacklist extends Command {
   constructor (client) {
     super(client)
     this.name = 'unblacklist'
-    this.hidden = true
     this.category = 'developers'
+    this.hidden = true
 
     this.requirements = new CommandRequirements(this, { devOnly: true })
     this.parameters = new CommandParameters(this,

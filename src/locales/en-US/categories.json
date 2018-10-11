@@ -1,15 +1,16 @@
 {
-  "bot": "Bot",
   "anime": "Anime",
-  "nsfw": "NSFW",
-  "games": "Games",
-  "images": "Images",
-  "economy": "Economy",
+  "bot": "Bot",
   "configuration": "Bot",
+  "developers": "Developers",
+  "economy": "Economy",
+  "games": "Games",
   "general": "General",
+  "images": "Images",
   "memes": "Memes",
+  "moderation": "Moderation",
   "music": "Music",
+  "nsfw": "NSFW",
   "social": "Social",
-  "utility": "Utility",
-  "moderation": "Moderation"
+  "utility": "Utility"
 }

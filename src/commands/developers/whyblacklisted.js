@@ -5,6 +5,7 @@ module.exports = class WhyBlacklisted extends Command {
   constructor (client) {
     super(client)
     this.name = 'whyblacklisted'
+    this.category = 'developers'
     this.hidden = true
 
     this.requirements = new CommandRequirements(this, { devOnly: true })
