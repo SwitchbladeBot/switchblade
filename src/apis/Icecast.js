@@ -9,10 +9,15 @@ module.exports = class Icecast extends APIWrapper {
 
   fetchMetadata (url) {
     return new Promise((resolve, reject) => {
-      const station = new IcecastParser(url)
-      station.on('metadata', resolve)
-      station.on('error', reject)
-      station.on('empty', reject)
+      if (url.startsWith('https://')) return reject()
+      try {
+        const station = new IcecastParser(url)
+        station.on('metadata', resolve)
+        station.on('error', reject)
+        station.on('empty', reject)
+      } catch(e) {
+        reject(e)
+      }
     })
   }
 }
