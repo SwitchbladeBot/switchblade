@@ -53,7 +53,7 @@ module.exports = class Help extends Command {
           `**${t('commands:help.specificInformation', { helpString: `\`${prefix}${this.name} ${t('commands:help.commandUsage')}\`` })}**`
         ].join('\n'))
 
-      const categories = validCommands.map(c => c.category).filter((v, i, a) => a.indexOf(v) == i)
+      const categories = validCommands.map(c => c.category).filter((v, i, a) => a.indexOf(v) === i)
       categories
         .sort((a, b) => t(`categories:${a}`).localeCompare(t(`categories:${b}`)))
         .forEach(category => {
