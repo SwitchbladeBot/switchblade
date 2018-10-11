@@ -38,5 +38,5 @@ module.exports = {
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
 
   // Backgrounds
-  DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/test.png'
+  DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png'
 }
