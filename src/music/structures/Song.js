@@ -18,6 +18,7 @@ module.exports = class Song extends EventEmitter {
     this.title = data.info.title
     this.uri = data.info.uri
 
+    this.color = '#7289DA'
     this.richInfo = null
 
     this.on('start', () => this.removeAllListeners('queue'))

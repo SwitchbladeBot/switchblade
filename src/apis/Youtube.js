@@ -25,8 +25,8 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   getBestThumbnail (thumbnails) {
-    if (!thumbnails) return null
-    const { medium, high, standard, maxres } = thumbnails
-    return maxres || standard || high || medium || thumbnails['default']
+    if (!thumbnails) return {}
+    const { high, maxres, medium, standard } = thumbnails
+    return maxres || high || medium || standard || thumbnails['default']
   }
 }

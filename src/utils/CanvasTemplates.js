@@ -4,9 +4,10 @@ const Color = require('./Color.js')
 
 const { createCanvas, Image, Canvas: { createSVGCanvas } } = require('canvas')
 const GIFEncoder = require('gifencoder')
+const moment = require('moment')
 
 module.exports = class CanvasTemplates {
-  static async profile ({ t, client }, user, userDocument, role) {
+static async profile ({ t }, user, userDocument, role) {
     const WIDTH = 800
     const HEIGHT = 600
 
@@ -174,6 +175,92 @@ module.exports = class CanvasTemplates {
     ctx.fillStyle = '#FFFFFF'
     ctx.globalCompositeOperation = 'destination-in'
     ctx.roundRect(CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT, 10, true)
+
+    return canvas.toBuffer()
+  }
+
+  static async nowPlaying ({ t }, guildPlayer, song) {
+    // const WIDTH = 670
+    // const HEIGHT = 215
+    const WIDTH = 800
+    const HEIGHT = 257
+
+    // const THUMBNAIL_WIDTH = 220
+    // let THUMBNAIL_HEIGHT = 215
+    const THUMBNAIL_WIDTH = 263
+    let THUMBNAIL_HEIGHT = HEIGHT
+
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(song.artwork || Constants.DEFAULT_SONG_PNG, !song.artwork)
+    ])
+
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    // Timebar
+    const TIMEBAR_HEIGHT = 6
+    // Full timebar
+    const FULL_COLOR = '#504F4F'
+    const FULL_WIDTH = WIDTH - THUMBNAIL_WIDTH
+    ctx.fillStyle = FULL_COLOR
+    ctx.fillRect(THUMBNAIL_WIDTH, HEIGHT - TIMEBAR_HEIGHT, FULL_WIDTH, TIMEBAR_HEIGHT)
+    // Elapsed timebar
+    const ELAPSED_WIDTH = guildPlayer.state.position / song.length * FULL_WIDTH
+    ctx.fillStyle = song.color
+    ctx.fillRect(THUMBNAIL_WIDTH, HEIGHT - TIMEBAR_HEIGHT, ELAPSED_WIDTH, TIMEBAR_HEIGHT)
+
+    // Text
+    ctx.fillStyle = '#FFFFFF'
+    const LEFT_TEXT_MARGIN = THUMBNAIL_WIDTH + 8
+    const RIGHT_TEXT_MARGIN = WIDTH - 8
+
+    // Time info
+    const TIME_Y = HEIGHT - TIMEBAR_HEIGHT - 8
+    const TIME_FONT = '16px "Montserrat Medium"'
+    const formatTime = (t) => moment.duration(t).format('hh:mm:ss', { stopTrim: 'm' })
+    // Elapsed time
+    const TIME_ELAPSED = formatTime(guildPlayer.state.position)
+    const elapsed = ctx.write(TIME_ELAPSED, LEFT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_LEFT)
+    // Total time
+    const TIME_TOTAL = formatTime(song.length)
+    ctx.write(TIME_TOTAL, RIGHT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_RIGHT)
+
+    // Author
+    const AUTHOR_FONT = 'italic 22px Montserrat'
+    const AUTHOR_Y = elapsed.topY - 30
+    const author = ctx.writeParagraph(song.author, AUTHOR_FONT, LEFT_TEXT_MARGIN, AUTHOR_Y, RIGHT_TEXT_MARGIN, AUTHOR_Y + 1)
+    // Title
+    const TITLE_FONT = 'italic 34px "Montserrat Black"'
+    const TITLE_Y = author.topY - 34
+    ctx.writeParagraph(song.title, TITLE_FONT, LEFT_TEXT_MARGIN, TITLE_Y, RIGHT_TEXT_MARGIN, TITLE_Y + 1)
+
+    // Image handling
+    const [ artworkImage ] = await IMAGE_ASSETS
+
+    // Thumbnail
+    ctx.fillStyle = '#000000'
+    ctx.fillRect(0, 0, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+    THUMBNAIL_HEIGHT = artworkImage.height * (THUMBNAIL_WIDTH / artworkImage.width)
+    ctx.drawImage(artworkImage, 0, HEIGHT * 0.5 - THUMBNAIL_HEIGHT * 0.5, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+
+    // Background
+    ctx.globalCompositeOperation = 'destination-over'
+
+    const realColor = new Color('#000')
+    const gradientColor = (a) => realColor.setAlpha(a).rgba(true)
+
+    const grd = ctx.createLinearGradient(0, 0, 0, HEIGHT)
+    grd.addColorStop(0, gradientColor(0))
+    grd.addColorStop(1, gradientColor(0.9))
+    ctx.fillStyle = grd
+    ctx.fillRect(THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
+
+    ctx.drawBlurredImage(artworkImage, 10, THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
+
+    // Modal style
+    ctx.fillStyle = '#FFFFFF'
+    ctx.globalCompositeOperation = 'destination-in'
+    ctx.roundRect(0, 0, WIDTH, HEIGHT, 10, true)
 
     return canvas.toBuffer()
   }
