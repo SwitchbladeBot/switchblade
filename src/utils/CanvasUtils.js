@@ -133,7 +133,7 @@ module.exports = class CanvasUtils {
         bottomY: realY,
         topY: realY - height,
         centerX: realX + width * 0.5,
-        centerY: realY + height * 0.5,
+        centerY: realY - height * 0.5,
         width,
         height
       }

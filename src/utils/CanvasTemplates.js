@@ -132,10 +132,12 @@ module.exports = class CanvasTemplates {
     // Full timebar
     const FULL_COLOR = '#504F4F'
     const FULL_WIDTH = WIDTH - THUMBNAIL_WIDTH
-    ctx.fillStyle = FULL_COLOR
-    ctx.fillRect(THUMBNAIL_WIDTH, HEIGHT - TIMEBAR_HEIGHT, FULL_WIDTH, TIMEBAR_HEIGHT)
+    if (!song.isStream) {
+      ctx.fillStyle = FULL_COLOR
+      ctx.fillRect(THUMBNAIL_WIDTH, HEIGHT - TIMEBAR_HEIGHT, FULL_WIDTH, TIMEBAR_HEIGHT)
+    }
     // Elapsed timebar
-    const ELAPSED_WIDTH = guildPlayer.state.position / song.length * FULL_WIDTH
+    const ELAPSED_WIDTH = song.isStream ? FULL_WIDTH : guildPlayer.state.position / song.length * FULL_WIDTH
     ctx.fillStyle = song.color
     ctx.fillRect(THUMBNAIL_WIDTH, HEIGHT - TIMEBAR_HEIGHT, ELAPSED_WIDTH, TIMEBAR_HEIGHT)
 
@@ -152,8 +154,17 @@ module.exports = class CanvasTemplates {
     const TIME_ELAPSED = formatTime(guildPlayer.state.position)
     const elapsed = ctx.write(TIME_ELAPSED, LEFT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_LEFT)
     // Total time
-    const TIME_TOTAL = formatTime(song.length)
-    ctx.write(TIME_TOTAL, RIGHT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_RIGHT)
+    if (!song.isStream) {
+      const TIME_TOTAL = formatTime(song.length)
+      ctx.write(TIME_TOTAL, RIGHT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_RIGHT)
+    } else {
+      const LIVE_CIRCLE_RADIUS = 5
+      const LIVE_TEXT = t('music:live').toUpperCase()
+      const live = ctx.write(LIVE_TEXT, RIGHT_TEXT_MARGIN, TIME_Y, TIME_FONT, ALIGN.BOTTOM_RIGHT)
+      ctx.fillStyle = '#FF0000'
+      ctx.circle(live.leftX - LIVE_CIRCLE_RADIUS * 2, live.centerY, LIVE_CIRCLE_RADIUS, 0, Math.PI * 2, true)
+      ctx.fillStyle = '#FFFFFF'
+    }
 
     // Author
     const AUTHOR_FONT = 'italic 22px Montserrat'
