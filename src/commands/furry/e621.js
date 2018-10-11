@@ -7,6 +7,7 @@ module.exports = class E621 extends Command {
     super(client)
     this.name = 'e621'
     this.aliases = ['yiff']
+    this.category = 'nsfw'
 
     this.requirements = new CommandRequirements(this, { nsfwOnly: true })
   }

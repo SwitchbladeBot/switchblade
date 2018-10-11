@@ -5,6 +5,7 @@ module.exports = class Betflip extends Command {
   constructor (client) {
     super(client)
     this.name = 'betflip'
+    this.category = 'games'
     this.parameters = new CommandParameters(this,
       new NumberParameter({ min: 1, missingError: 'commands:betflip.noBetValue' }),
       new StringParameter({ full: true, whitelist: ['heads', 'tails'], missingError: 'commands:betflip.noCoin' })

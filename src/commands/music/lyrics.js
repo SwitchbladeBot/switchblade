@@ -6,6 +6,7 @@ module.exports = class Lyrics extends Command {
     super(client)
     this.name = 'lyrics'
     this.aliases = ['lyric', 'genius']
+    this.category = 'music'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:lyrics.noTrackName' })

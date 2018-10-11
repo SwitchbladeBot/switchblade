@@ -6,6 +6,7 @@ module.exports = class FavColor extends Command {
     super(client)
     this.name = 'favcolor'
     this.aliases = ['favoritecolor', 'sethex', 'setcolor']
+    this.category = 'social'
 
     this.parameters = new CommandParameters(this,
       new ColorParameter({ full: true, missingError: 'errors:invalidColor' })

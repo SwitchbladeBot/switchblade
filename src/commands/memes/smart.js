@@ -6,6 +6,7 @@ module.exports = class Smart extends Command {
 
     this.name = 'smart'
     this.aliases = ['wesmart']
+    this.category = 'memes'
   }
 
   run ({ author, channel }) {

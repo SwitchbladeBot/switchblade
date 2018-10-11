@@ -6,6 +6,7 @@ module.exports = class Blacklist extends Command {
     super(client)
     this.name = 'blacklist'
     this.hidden = true
+    this.category = 'developers'
 
     this.requirements = new CommandRequirements(this, { devOnly: true })
     this.parameters = new CommandParameters(this,

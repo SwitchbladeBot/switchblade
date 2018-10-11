@@ -10,6 +10,7 @@ module.exports = class Eval extends Command {
     this.name = 'eval'
     this.aliases = ['execute']
     this.hidden = true
+    this.category = 'developers'
 
     this.requirements = new CommandRequirements(this, { devOnly: true })
     this.parameters = new CommandParameters(this,

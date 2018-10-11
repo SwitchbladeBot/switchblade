@@ -5,6 +5,7 @@ module.exports = class Skip extends Command {
     super(client)
     this.name = 'next'
     this.aliases = ['skip']
+    this.category = 'music'
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true })
   }

@@ -6,6 +6,7 @@ module.exports = class SAMP extends Command {
   constructor (client) {
     super(client)
     this.name = 'samp'
+    this.category = 'games'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ missingError: 'commands:samp.noIP' })

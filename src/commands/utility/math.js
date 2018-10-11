@@ -6,6 +6,7 @@ module.exports = class Math extends Command {
   constructor (client) {
     super(client)
     this.name = 'math'
+    this.category = 'utility'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:math.needMathExpression', id: 'expression' })

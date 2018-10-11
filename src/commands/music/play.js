@@ -7,6 +7,7 @@ module.exports = class Play extends Command {
     super(client)
     this.name = 'play'
     this.aliases = []
+    this.category = 'music'
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, playerManagerOnly: true })
     this.parameters = new CommandParameters(this,

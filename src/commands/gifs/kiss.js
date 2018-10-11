@@ -8,6 +8,7 @@ module.exports = class Kiss extends Command {
     super(client)
     this.name = 'kiss'
     this.aliases = ['beijo', 'beijar']
+    this.category = 'images'
 
     this.parameters = new CommandParameters(this,
       new UserParameter({ missingError: 'commands:kiss.noMention', acceptBot: true })

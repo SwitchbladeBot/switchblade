@@ -9,6 +9,7 @@ module.exports = class BeatSaver extends Command {
     super(client)
     this.name = 'beatsaver'
     this.aliases = ['beatsaber', 'bsaver']
+    this.category = 'games'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ missingError: 'commands:beatsaver.noQuery' })

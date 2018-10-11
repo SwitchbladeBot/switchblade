@@ -11,6 +11,7 @@ module.exports = class Config extends Command {
     super(client)
     this.name = 'config'
     this.aliases = ['cfg']
+    this.category = 'configuration'
     this.subcommands = [new ConfigLanguage(client, this), new ConfigPrefix(client, this)]
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD'] })

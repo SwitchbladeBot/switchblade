@@ -6,6 +6,7 @@ module.exports = class BolinaDeGorfe extends Command {
 
     this.name = 'bolinadegorfe'
     this.aliases = ['bolinhadegolfe', 'bolinhadegorfe', 'bolinadegolfe']
+    this.category = 'memes'
   }
 
   run ({ author, channel }) {
