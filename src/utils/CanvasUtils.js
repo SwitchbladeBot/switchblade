@@ -21,7 +21,8 @@ const ALIGN = {
   BOTTOM_RIGHT: 5,
   BOTTOM_CENTER: 6,
   BOTTOM_LEFT: 7,
-  CENTER_LEFT: 8
+  CENTER_LEFT: 8,
+  CENTER: 9
 }
 
 module.exports = class CanvasUtils {
@@ -29,6 +30,8 @@ module.exports = class CanvasUtils {
     const self = this
 
     // Initiliaze fonts
+    registerFont('src/assets/fonts/Montserrat-Light.ttf', { family: 'Montserrat Light' })
+    registerFont('src/assets/fonts/Montserrat-LightItalic.ttf', { family: 'Montserrat Light', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Regular.ttf', { family: 'Montserrat' })
     registerFont('src/assets/fonts/Montserrat-Italic.ttf', { family: 'Montserrat', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Medium.ttf', { family: 'Montserrat Medium' })
@@ -90,11 +93,12 @@ module.exports = class CanvasUtils {
       return canvas
     }
 
-    Context2d.prototype.circle = function (x, y, r, a1, a2) {
+    Context2d.prototype.circle = function (x, y, r, a1, a2, fill = true, stroke = false) {
       this.beginPath()
       this.arc(x, y, r, a1, a2, true)
       this.closePath()
-      this.fill()
+      if (fill) this.fill()
+      if (stroke) this.stroke()
       return this
     }
 
@@ -238,7 +242,7 @@ module.exports = class CanvasUtils {
         break
       case ALIGN.CENTER_RIGHT:
         realCoords.x = x - width
-        realCoords.y = y - height * 0.5
+        realCoords.y = y + height * 0.5
         break
       case ALIGN.BOTTOM_RIGHT:
         realCoords.x = x - width
@@ -247,7 +251,11 @@ module.exports = class CanvasUtils {
         realCoords.x = x - width * 0.5
         break
       case ALIGN.CENTER_LEFT:
-        realCoords.y = y - height * 0.5
+        realCoords.y = y + height * 0.5
+        break
+      case ALIGN.CENTER:
+        realCoords.x = x - width * 0.5
+        realCoords.y = y + height * 0.5
         break
     }
     return realCoords

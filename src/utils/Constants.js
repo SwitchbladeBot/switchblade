@@ -35,6 +35,7 @@ module.exports = {
   // Icons SVG
   COINS_SVG: 'src/assets/svg/coins.svg',
   DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
+  REPUTATION_SVG: 'src/assets/svg/reputation.svg',
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
