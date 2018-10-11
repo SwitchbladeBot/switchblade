@@ -7,7 +7,7 @@ const GIFEncoder = require('gifencoder')
 const moment = require('moment')
 
 module.exports = class CanvasTemplates {
-static async profile ({ t }, user, userDocument, role) {
+  static async profile ({ t }, user, userDocument, role) {
     const WIDTH = 800
     const HEIGHT = 600
 
