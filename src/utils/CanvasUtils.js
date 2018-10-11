@@ -30,7 +30,6 @@ module.exports = class CanvasUtils {
     const self = this
 
     // Initiliaze fonts
-    /*
     registerFont('src/assets/fonts/Montserrat-Light.ttf', { family: 'Montserrat Light' })
     registerFont('src/assets/fonts/Montserrat-LightItalic.ttf', { family: 'Montserrat Light', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Regular.ttf', { family: 'Montserrat' })
@@ -45,7 +44,6 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-ExtraBoldItalic.ttf', { family: 'Montserrat ExtraBold', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Black.ttf', { family: 'Montserrat Black' })
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', { family: 'Montserrat Black', style: 'italic' })
-    */
 
     // Canvas
     Canvas.createSVGCanvas = function (svg, w, h) {
@@ -157,7 +155,7 @@ module.exports = class CanvasUtils {
         const height = lineText.height
         if (currentY > maxY) break
 
-        if (lineText.width <= maxX) {
+        if (startX + lineText.width <= maxX) {
           lastWrite = this.write(l, startX, currentY, font, ALIGN.TOP_LEFT)
         } else {
           if (l.includes(' ')) {

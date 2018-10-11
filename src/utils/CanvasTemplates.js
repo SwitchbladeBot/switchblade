@@ -4,18 +4,13 @@ const Color = require('./Color.js')
 
 const { createCanvas, Image, Canvas: { createSVGCanvas } } = require('canvas')
 const GIFEncoder = require('gifencoder')
-const moment = require('moment')
-
-const DAILY_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 
 module.exports = class CanvasTemplates {
-  static async profile ({ t, client }, user, userDocument) {
+  static async profile ({ t, client }, user, userDocument, role) {
     const WIDTH = 800
     const HEIGHT = 600
 
-    // const CARD_WIDTH = 644
     const CARD_WIDTH = 644
-    // const CARD_HEIGHT = 586
     const CARD_HEIGHT = 600
     const CARD_X_MARGIN = (WIDTH - CARD_WIDTH) * 0.5
     const CARD_Y_MARGIN = (HEIGHT - CARD_HEIGHT) * 0.5
@@ -49,6 +44,9 @@ module.exports = class CanvasTemplates {
       Image.from(Constants.DEFAULT_BACKGROUND_PNG, true)
     ])
 
+    const FAVCOLOR = new Color(favColor)
+    const TEXTCOLOR = '#FFF'
+
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
@@ -63,22 +61,36 @@ module.exports = class CanvasTemplates {
     ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN + CARD_MARGIN, CARD_WIDTH, BRIGHTER_HEIGHT)
 
     // Profile
-    ctx.fillStyle = '#FFF'
+    ctx.fillStyle = TEXTCOLOR
     const PROFILE_X = CARD_X_MARGIN + INNER_MARGIN * 2 + AVATAR_SIZE
+    const PROFILE_Y = CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT * 0.5
     //   Username
-    ctx.write(user.username, PROFILE_X, CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT * 0.5, FONTS.USERNAME, ALIGN.BOTTOM_LEFT)
+    ctx.write(user.username, PROFILE_X, PROFILE_Y, FONTS.USERNAME, ALIGN.BOTTOM_LEFT)
     //   Discriminator
-    ctx.write(`#${user.discriminator}`, PROFILE_X, CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT * 0.5 + 10, FONTS.DISCRIMINATOR, ALIGN.TOP_LEFT)
+    ctx.write(`#${user.discriminator}`, PROFILE_X, PROFILE_Y + 10, FONTS.DISCRIMINATOR, ALIGN.TOP_LEFT)
+    //   Tags
+    if (role) {
+      const TAG_NAME = role.name.toUpperCase()
+      const TAG_MARGIN = 20
+      const TAG_NAME_WIDTH = measureText(ctx, FONTS.TAG_LABEL, TAG_NAME).width
+      const TAG_HEIGHT = 34
+      const TAG_Y = CARD_Y_MARGIN + CARD_MARGIN
+
+      const TAG_COLOR = new Color(role.hexColor)
+      ctx.fillStyle = TAG_COLOR.rgba(true)
+      ctx.roundRect(PROFILE_X, TAG_Y - (TAG_HEIGHT * 0.5), TAG_NAME_WIDTH + TAG_MARGIN * 2, TAG_HEIGHT, TAG_HEIGHT * 0.5, true)
+      ctx.fillStyle = TAG_COLOR.colorInvert.rgba(true)
+      ctx.write(TAG_NAME, PROFILE_X + TAG_MARGIN, TAG_Y, FONTS.TAG_LABEL, ALIGN.CENTER_LEFT)
+    }
 
     // XP
-    
     //   XP Label
     const XP_LABEL_RADIUS = 18
     const XP_X = WIDTH - CARD_X_MARGIN - INNER_MARGIN - XP_LABEL_RADIUS
     const XP_Y = CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT
     ctx.fillStyle = '#151515'
     ctx.circle(XP_X, XP_Y, XP_LABEL_RADIUS, 0, Math.PI * 2)
-    ctx.fillStyle = '#FFF'
+    ctx.fillStyle = TEXTCOLOR
     ctx.write('XP', XP_X, XP_Y, FONTS.XP_LABEL, ALIGN.CENTER)
     //   XP Bar
     ctx.fillStyle = '#151515'
@@ -86,14 +98,14 @@ module.exports = class CanvasTemplates {
     const XP_BAR_WIDTH = CARD_WIDTH - INNER_MARGIN * 2 - INNER_MARGIN * 0.5 - XP_LABEL_RADIUS * 2
     ctx.roundRect(CARD_X_MARGIN + INNER_MARGIN, XP_Y - XP_BAR_HEIGHT * 0.5, XP_BAR_WIDTH, XP_BAR_HEIGHT, XP_BAR_HEIGHT * 0.5, true)
     //   XP Bar current
-    ctx.fillStyle = '#757575'
+    ctx.fillStyle = FAVCOLOR.rgba(true)
     ctx.roundRect(CARD_X_MARGIN + INNER_MARGIN, XP_Y - XP_BAR_HEIGHT * 0.5, XP_BAR_WIDTH * 0.5, XP_BAR_HEIGHT, XP_BAR_HEIGHT * 0.5, true)
 
     // Sections
     const SECTION_INNER_MARGIN = 16
     ctx.lineWidth = 1
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
-    ctx.fillStyle = '#FFF'
+    ctx.fillStyle = TEXTCOLOR
     //   Info sections
     const INFO_WIDTH = (CARD_WIDTH - INNER_MARGIN * 3) * 0.5
     const INFO_HEIGHT = 82
@@ -139,18 +151,19 @@ module.exports = class CanvasTemplates {
     const AVATAR_HALF = AVATAR_SIZE * 0.5
     const AVATAR_Y = CARD_Y_MARGIN + CARD_MARGIN - (AVATAR_SIZE * 0.5)
     //   Avatar shadow
-    ctx.fillStyle = '#000'
-    ctx.shadowColor = '#000'
+    ctx.save()
+    ctx.fillStyle = '#000000'
+    ctx.shadowColor = '#000000'
     ctx.shadowBlur = 10
     ctx.circle(CARD_X_MARGIN + INNER_MARGIN + AVATAR_HALF, AVATAR_Y + AVATAR_HALF, AVATAR_HALF, 0, Math.PI * 2)
-    ctx.shadowBlur = 0
+    ctx.restore()
     //   Avatar
     ctx.roundImage(avatarImage, CARD_X_MARGIN + INNER_MARGIN, AVATAR_Y, AVATAR_SIZE, AVATAR_SIZE)
 
     //   Info section
-    const coinsSVG = await createSVGCanvas(coinsImage.toString().replace(/\$COLOR/g, '#FFFFFF'), COINS_WIDTH, COINS_HEIGHT)
+    const coinsSVG = await createSVGCanvas(coinsImage.toString().replace(/\$COLOR/g, TEXTCOLOR), COINS_WIDTH, COINS_HEIGHT)
     ctx.drawImage(coinsSVG, COINS_X, COINS_Y, COINS_WIDTH, COINS_HEIGHT)
-    const repSVG = await createSVGCanvas(repImage.toString().replace(/\$COLOR/g, '#FFFFFF'), REP_WIDTH, REP_HEIGHT)
+    const repSVG = await createSVGCanvas(repImage.toString().replace(/\$COLOR/g, TEXTCOLOR), REP_WIDTH, REP_HEIGHT)
     ctx.drawImage(repSVG, REP_X + SECTION_INNER_MARGIN, REP_Y, REP_WIDTH, REP_HEIGHT)
 
     //   Background image
