@@ -6,6 +6,7 @@ module.exports = class Money extends Command {
     super(client)
     this.name = 'money'
     this.aliases = ['balance', 'bal']
+    this.category = 'economy'
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true })
     this.parameters = new CommandParameters(this,

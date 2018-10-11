@@ -8,6 +8,7 @@ module.exports = class Volume extends Command {
     super(client)
     this.name = 'volume'
     this.aliases = ['vol']
+    this.category = 'music'
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true })
     this.parameters = new CommandParameters(this,

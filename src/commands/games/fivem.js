@@ -9,6 +9,7 @@ module.exports = class FiveM extends Command {
   constructor (client) {
     super(client)
     this.name = 'fivem'
+    this.category = 'games'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ missingError: 'commands:fivem.noIP' })

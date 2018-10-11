@@ -5,6 +5,7 @@ module.exports = class Pause extends Command {
     super(client)
     this.name = 'pause'
     this.aliases = ['resume']
+    this.category = 'music'
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true })
   }

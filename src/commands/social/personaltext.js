@@ -6,6 +6,7 @@ module.exports = class Personaltext extends Command {
     super(client)
     this.name = 'personaltext'
     this.aliases = ['profiletext']
+    this.category = 'social'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:personaltext.noText' })

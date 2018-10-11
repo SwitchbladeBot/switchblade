@@ -7,6 +7,7 @@ module.exports = class Hentai extends Command {
     super(client)
     this.name = 'hentai'
     this.aliases = ['animeporn']
+    this.category = 'nsfw'
 
     this.requirements = new CommandRequirements(this, { nsfwOnly: true })
   }

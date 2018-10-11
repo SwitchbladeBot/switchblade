@@ -7,6 +7,7 @@ module.exports = class Clapify extends Command {
   constructor (client) {
     super(client)
     this.name = 'clapify'
+    this.category = 'memes'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:clapify.missingSentence' })

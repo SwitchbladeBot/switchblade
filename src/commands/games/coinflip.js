@@ -5,6 +5,7 @@ module.exports = class Coinflip extends Command {
   constructor (client) {
     super(client)
     this.name = 'coinflip'
+    this.category = 'games'
   }
 
   run ({ channel, author, t }) {

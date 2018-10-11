@@ -9,6 +9,7 @@ module.exports = class Eval extends Command {
     super(client)
     this.name = 'eval'
     this.aliases = ['execute']
+    this.category = 'developers'
     this.hidden = true
 
     this.requirements = new CommandRequirements(this, { devOnly: true })

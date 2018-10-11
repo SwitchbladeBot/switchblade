@@ -8,6 +8,7 @@ module.exports = class Neko extends Command {
     super(client)
     this.name = 'neko'
     this.aliases = ['nekogirl']
+    this.category = 'anime'
   }
 
   async run ({ t, author, channel }) {

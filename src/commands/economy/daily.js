@@ -8,6 +8,7 @@ module.exports = class Daily extends Command {
   constructor (client) {
     super(client)
     this.name = 'daily'
+    this.category = 'economy'
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true })
   }

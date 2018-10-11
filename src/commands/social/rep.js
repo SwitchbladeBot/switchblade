@@ -8,6 +8,7 @@ module.exports = class Rep extends Command {
   constructor (client) {
     super(client)
     this.name = 'rep'
+    this.category = 'social'
 
     this.parameters = new CommandParameters(this,
       new UserParameter({ missingError: 'commands:rep.noMention', acceptBot: false })

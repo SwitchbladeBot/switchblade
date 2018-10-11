@@ -7,6 +7,7 @@ module.exports = class MyAnimeList extends Command {
     super(client)
     this.name = 'myanimelist'
     this.aliases = ['mal']
+    this.category = 'anime'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:myanimelist.noAnime' })
