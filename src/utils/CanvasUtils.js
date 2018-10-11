@@ -98,6 +98,30 @@ module.exports = class CanvasUtils {
       return this
     }
 
+    Context2d.prototype.roundRect = function (x, y, width, height, radius, fill, stroke) {
+      let cornerRadius = { upperLeft: 0, upperRight: 0, lowerLeft: 0, lowerRight: 0 }
+      if (typeof radius === 'object') {
+        cornerRadius = Object.assign(cornerRadius, radius)
+      } else if (typeof radius === 'number') {
+        cornerRadius = { upperLeft: radius, upperRight: radius, lowerLeft: radius, lowerRight: radius }
+      }
+
+      this.beginPath()
+      this.moveTo(x + cornerRadius.upperLeft, y)
+      this.lineTo(x + width - cornerRadius.upperRight, y)
+      this.quadraticCurveTo(x + width, y, x + width, y + cornerRadius.upperRight)
+      this.lineTo(x + width, y + height - cornerRadius.lowerRight)
+      this.quadraticCurveTo(x + width, y + height, x + width - cornerRadius.lowerRight, y + height)
+      this.lineTo(x + cornerRadius.lowerLeft, y + height)
+      this.quadraticCurveTo(x, y + height, x, y + height - cornerRadius.lowerLeft)
+      this.lineTo(x, y + cornerRadius.upperLeft)
+      this.quadraticCurveTo(x, y, x + cornerRadius.upperLeft, y)
+      this.closePath()
+      if (stroke) this.stroke()
+      if (fill) this.fill()
+      return this
+    }
+
     Context2d.prototype.write = function (text, x, y, font = '12px "Montserrat"', align = ALIGN.BOTTOM_LEFT) {
       this.font = font
       const { width, height } = self.measureText(this, font, text)
@@ -127,7 +151,7 @@ module.exports = class CanvasUtils {
         const height = lineText.height
         if (currentY > maxY) break
 
-        if (lineText.width <= maxX) {
+        if (startX + lineText.width <= maxX) {
           lastWrite = this.write(l, startX, currentY, font, ALIGN.TOP_LEFT)
         } else {
           if (l.includes(' ')) {
@@ -155,6 +179,36 @@ module.exports = class CanvasUtils {
         currentY += height + lineDistance
       }
       return lastWrite
+    }
+
+    Canvas.prototype.blur = function (blur) {
+      const ctx = this.getContext('2d')
+
+      const delta = 5
+      const alphaLeft = 1 / (2 * Math.PI * delta * delta)
+      const step = blur < 3 ? 1 : 2
+      let sum = 0
+      for (let y = -blur; y <= blur; y += step) {
+        for (let x = -blur; x <= blur; x += step) {
+          let weight = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta))
+          sum += weight
+        }
+      }
+      for (let y = -blur; y <= blur; y += step) {
+        for (let x = -blur; x <= blur; x += step) {
+          ctx.globalAlpha = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta)) / sum * blur
+          ctx.drawImage(this, x, y)
+        }
+      }
+      ctx.globalAlpha = 1
+    }
+
+    Context2d.prototype.drawBlurredImage = function (image, blur, imageX, imageY, w = image.width, h = image.height) {
+      const canvas = createCanvas(w, h)
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(image, 0, 0, w, h)
+      canvas.blur(blur)
+      this.drawImage(canvas, imageX, imageY, w, h)
     }
   }
 

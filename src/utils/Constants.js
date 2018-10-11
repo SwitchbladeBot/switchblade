@@ -29,7 +29,10 @@ module.exports = {
 
   // Assets
 
-  // Icons
+  // Icons PNG
+  DEFAULT_SONG_PNG: 'src/assets/png/default_song.png',
+
+  // Icons SVG
   COINS_SVG: 'src/assets/svg/coins.svg',
   DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
 
