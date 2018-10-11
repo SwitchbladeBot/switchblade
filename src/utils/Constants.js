@@ -32,10 +32,11 @@ module.exports = {
   // Icons
   COINS_SVG: 'src/assets/svg/coins.svg',
   DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
+  REPUTATION_SVG: 'src/assets/svg/reputation.svg',
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
 
   // Backgrounds
-  DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png'
+  DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/test.png'
 }

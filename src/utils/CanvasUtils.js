@@ -21,7 +21,8 @@ const ALIGN = {
   BOTTOM_RIGHT: 5,
   BOTTOM_CENTER: 6,
   BOTTOM_LEFT: 7,
-  CENTER_LEFT: 8
+  CENTER_LEFT: 8,
+  CENTER: 9
 }
 
 module.exports = class CanvasUtils {
@@ -29,6 +30,9 @@ module.exports = class CanvasUtils {
     const self = this
 
     // Initiliaze fonts
+    /*
+    registerFont('src/assets/fonts/Montserrat-Light.ttf', { family: 'Montserrat Light' })
+    registerFont('src/assets/fonts/Montserrat-LightItalic.ttf', { family: 'Montserrat Light', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Regular.ttf', { family: 'Montserrat' })
     registerFont('src/assets/fonts/Montserrat-Italic.ttf', { family: 'Montserrat', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Medium.ttf', { family: 'Montserrat Medium' })
@@ -41,6 +45,7 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-ExtraBoldItalic.ttf', { family: 'Montserrat ExtraBold', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Black.ttf', { family: 'Montserrat Black' })
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', { family: 'Montserrat Black', style: 'italic' })
+    */
 
     // Canvas
     Canvas.createSVGCanvas = function (svg, w, h) {
@@ -90,11 +95,36 @@ module.exports = class CanvasUtils {
       return canvas
     }
 
-    Context2d.prototype.circle = function (x, y, r, a1, a2) {
+    Context2d.prototype.circle = function (x, y, r, a1, a2, fill = true, stroke = false) {
       this.beginPath()
       this.arc(x, y, r, a1, a2, true)
       this.closePath()
-      this.fill()
+      if (fill) this.fill()
+      if (stroke) this.stroke()
+      return this
+    }
+
+    Context2d.prototype.roundRect = function (x, y, width, height, radius, fill, stroke) {
+      let cornerRadius = { upperLeft: 0, upperRight: 0, lowerLeft: 0, lowerRight: 0 }
+      if (typeof radius === 'object') {
+        cornerRadius = Object.assign(cornerRadius, radius)
+      } else if (typeof radius === 'number') {
+        cornerRadius = { upperLeft: radius, upperRight: radius, lowerLeft: radius, lowerRight: radius }
+      }
+
+      this.beginPath()
+      this.moveTo(x + cornerRadius.upperLeft, y)
+      this.lineTo(x + width - cornerRadius.upperRight, y)
+      this.quadraticCurveTo(x + width, y, x + width, y + cornerRadius.upperRight)
+      this.lineTo(x + width, y + height - cornerRadius.lowerRight)
+      this.quadraticCurveTo(x + width, y + height, x + width - cornerRadius.lowerRight, y + height)
+      this.lineTo(x + cornerRadius.lowerLeft, y + height)
+      this.quadraticCurveTo(x, y + height, x, y + height - cornerRadius.lowerLeft)
+      this.lineTo(x, y + cornerRadius.upperLeft)
+      this.quadraticCurveTo(x, y, x + cornerRadius.upperLeft, y)
+      this.closePath()
+      if (stroke) this.stroke()
+      if (fill) this.fill()
       return this
     }
 
@@ -184,7 +214,7 @@ module.exports = class CanvasUtils {
         break
       case ALIGN.CENTER_RIGHT:
         realCoords.x = x - width
-        realCoords.y = y - height * 0.5
+        realCoords.y = y + height * 0.5
         break
       case ALIGN.BOTTOM_RIGHT:
         realCoords.x = x - width
@@ -193,7 +223,11 @@ module.exports = class CanvasUtils {
         realCoords.x = x - width * 0.5
         break
       case ALIGN.CENTER_LEFT:
-        realCoords.y = y - height * 0.5
+        realCoords.y = y + height * 0.5
+        break
+      case ALIGN.CENTER:
+        realCoords.x = x - width * 0.5
+        realCoords.y = y + height * 0.5
         break
     }
     return realCoords
