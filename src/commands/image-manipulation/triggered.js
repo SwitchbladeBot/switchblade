@@ -8,9 +8,10 @@ module.exports = class Triggered extends Command {
     super(client)
     this.name = 'triggered'
     this.aliases = ['trigger', 'puto']
+    this.category = 'images'
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({full: true, required: false, acceptBot: true})
+      new UserParameter({ full: true, required: false, acceptBot: true })
     )
   }
 

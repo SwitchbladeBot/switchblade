@@ -8,7 +8,7 @@ module.exports = class EightBall extends Command {
     this.aliases = ['eightball', '8b', 'magicball', '8-ball']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:8ball.noQuestion'})
+      new StringParameter({ full: true, missingError: 'commands:8ball.noQuestion' })
     )
   }
 

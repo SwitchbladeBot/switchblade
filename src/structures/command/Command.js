@@ -13,6 +13,7 @@ module.exports = class Command {
 
     this.name = 'CommandName'
     this.aliases = []
+    this.category = 'general'
 
     this.hidden = false
 

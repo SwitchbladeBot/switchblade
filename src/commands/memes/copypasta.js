@@ -4,6 +4,7 @@ module.exports = class Copypasta extends Command {
   constructor (client) {
     super(client)
     this.name = 'copypasta'
+    this.category = 'memes'
   }
 
   async run ({ author, channel }) {

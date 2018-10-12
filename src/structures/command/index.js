@@ -6,6 +6,7 @@ module.exports = {
 
   // Parameters
   Parameter: require('./parameters/types/Parameter.js'),
+  BooleanFlagParameter: require('./parameters/types/BooleanFlagParameter.js'),
   ColorParameter: require('./parameters/types/ColorParameter.js'),
   MemberParameter: require('./parameters/types/MemberParameter.js'),
   NumberParameter: require('./parameters/types/NumberParameter.js'),

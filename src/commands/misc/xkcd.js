@@ -11,7 +11,7 @@ module.exports = class XKCD extends Command {
     this.name = 'xkcd'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, required: false})
+      new StringParameter({ full: true, required: false })
     )
   }
 

@@ -5,7 +5,7 @@ const MENTION_REGEX = /^(?:<@!?)?([0-9]{16,18})(?:>)?$/
 
 module.exports = class MemberParameter extends Parameter {
   constructor (options = {}) {
-    options = Object.assign({acceptBot: false, acceptUser: true}, options)
+    options = Object.assign({ acceptBot: false, acceptUser: true }, options)
     super(options)
     this.acceptBot = !!options.acceptBot
     this.acceptUser = !!options.acceptUser

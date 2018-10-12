@@ -8,6 +8,7 @@ module.exports = class Neko extends Command {
     super(client)
     this.name = 'neko'
     this.aliases = ['nekogirl']
+    this.category = 'anime'
   }
 
   async run ({ t, author, channel }) {
@@ -20,7 +21,7 @@ module.exports = class Neko extends Command {
     const { body: { url } } = await snekfetch.get(nekoAPI + endpoint)
 
     embed.setImage(url)
-      .setDescription(t('commands:neko.hereIsYour', {context: endpoint}))
+      .setDescription(t('commands:neko.hereIsYour', { context: endpoint }))
 
     channel.send(embed).then(() => channel.stopTyping())
   }
