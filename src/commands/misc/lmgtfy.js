@@ -8,7 +8,7 @@ module.exports = class LMGTFY extends Command {
     this.aliases = ['letmegooglethatforyou']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:lmgtfy.noQuery'})
+      new StringParameter({ full: true, missingError: 'commands:lmgtfy.noQuery' })
     )
   }
 
