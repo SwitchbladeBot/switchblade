@@ -1,14 +1,15 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { CanvasTemplates, CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
 const { Command, CommandRequirements } = CommandStructures
+const { Attachment } = require('discord.js')
 
 module.exports = class Leaderboard extends Command {
   constructor (client) {
     super(client)
     this.name = 'leaderboard'
-    this.aliases = ['top', 'ranking']
-    this.subcommands = [new MoneyLeaderboard(client, this)]
+    this.aliases = [ 'top', 'ranking' ]
+    this.subcommands = [ new MoneyLeaderboard(client, this) ]
 
-    this.requirements = new CommandRequirements(this, {databaseOnly: true})
+    this.requirements = new CommandRequirements(this, { databaseOnly: true })
   }
 
   async run ({ t, author, prefix, alias, channel, guildDocument }) {
@@ -27,15 +28,21 @@ class MoneyLeaderboard extends Command {
   async run ({ t, author, channel }) {
     channel.startTyping()
 
-    const embed = new SwitchbladeEmbed(author)
-    const top = await this.client.database.users.findAll().then(users => users.sort((a, b) => b.money - a.money).splice(0, 10))
-    const ranking = await top.map(u => u.id)
-    embed
-      .setTitle(t('commands:leaderboard.subcommands.money.successTitle'))
-      .setDescription(top.map(u => {
-        const user = this.client.users.get(u.id)
-        return `#${ranking.indexOf(u.id) + 1} **${user ? user.tag : u.id}** - ${t('commons:currencyWithCount_plural', { count: u.money })}`
-      }).join('\n'))
-    channel.send(embed).then(() => channel.stopTyping())
+    const db = this.client.database.users
+    let top = await db.model.find().sort({ money: -1 }).limit(16).then(res => res.map(db.parse))
+    top = top.filter(u => {
+      u.user = this.client.users.get(u.id)
+      return !!u.user
+    })
+
+    const leaderboard = await CanvasTemplates.leaderboard({ t }, top, {
+      icon: Constants.COINS_SVG,
+      iconWidth: 48,
+      iconHeight: 48,
+      title: 'MONEY LEADERBOARD',
+      valueFunction: (u) => t('commons:currencyWithCount_plural', { count: u.money })
+    })
+
+    channel.send(new Attachment(leaderboard, 'leaderboard.jpg')).then(() => channel.stopTyping())
   }
 }
