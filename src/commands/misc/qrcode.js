@@ -8,7 +8,7 @@ module.exports = class QRCode extends Command {
     this.name = 'qrcode'
     this.aliases = ['qr']
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:qrcode.noText'})
+      new StringParameter({ full: true, missingError: 'commands:qrcode.noText' })
     )
   }
 

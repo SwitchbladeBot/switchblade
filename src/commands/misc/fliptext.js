@@ -7,7 +7,7 @@ module.exports = class FlipText extends Command {
     this.name = 'fliptext'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:fliptext.noSentence'})
+      new StringParameter({ full: true, missingError: 'commands:fliptext.noSentence' })
     )
   }
 

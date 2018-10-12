@@ -7,8 +7,9 @@ module.exports = class Queue extends Command {
     super(client)
     this.name = 'queue'
     this.aliases = ['playlist']
+    this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, guildPlaying: true, playerManagerOnly: true})
+    this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true, playerManagerOnly: true })
   }
 
   async run ({ t, author, channel, guild }) {
@@ -19,11 +20,11 @@ module.exports = class Queue extends Command {
     const description = [`**${t('music:nowPlaying')}** [${npSong.title}](${npSong.uri})`]
 
     if (guildPlayer.queue.length > 0) {
-      const queue = guildPlayer.queue.map((song, i) => `${i + 1}. [${song.title}](${song.uri}) *(${t('music:addedBy', {user: song.requestedBy})})*`).slice(0, MAX_PLAYLIST_LENGTH)
+      const queue = guildPlayer.queue.map((song, i) => `${i + 1}. [${song.title}](${song.uri}) *(${t('music:addedBy', { user: song.requestedBy })})*`).slice(0, MAX_PLAYLIST_LENGTH)
       description.push('', `**${t('music:queue')}:**`, ...queue)
 
       const missing = guildPlayer.queue.length - MAX_PLAYLIST_LENGTH
-      if (missing > 0) description.push(`\`${t('music:andMore', {missing})}\``)
+      if (missing > 0) description.push(`\`${t('music:andMore', { missing })}\``)
     } else {
       description.push(t('music:noneAfterCurrent'))
     }

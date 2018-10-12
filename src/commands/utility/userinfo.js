@@ -7,9 +7,10 @@ module.exports = class UserInfo extends Command {
     super(client)
     this.name = 'userinfo'
     this.aliases = ['user', 'ui', 'uinfo']
+    this.category = 'utility'
     this.requirements = new CommandRequirements(this, { guildOnly: true })
     this.parameters = new CommandParameters(this,
-      new MemberParameter({full: true, required: false, acceptBot: true})
+      new MemberParameter({ full: true, required: false, acceptBot: true })
     )
   }
 

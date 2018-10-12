@@ -7,7 +7,7 @@ module.exports = class Deezer extends Command {
 
     this.name = 'deezer'
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:deezer.noTrackName'})
+      new StringParameter({ full: true, missingError: 'commands:deezer.noTrackName' })
     )
   }
 
