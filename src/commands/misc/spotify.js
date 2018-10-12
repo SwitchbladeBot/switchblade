@@ -9,7 +9,7 @@ module.exports = class Spotify extends Command {
 
     this.name = 'spotify'
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:spotify.noTrackName'})
+      new StringParameter({ full: true, missingError: 'commands:spotify.noTrackName' })
     )
   }
 
@@ -37,7 +37,7 @@ module.exports = class Spotify extends Command {
 
   async getTrack (query) {
     const spotify = this.client.apis.spotify
-    const tracksResponse = await spotify.search({type: 'track', query})
+    const tracksResponse = await spotify.search({ type: 'track', query })
     if (tracksResponse && tracksResponse.tracks.total > 0) {
       const track = tracksResponse.tracks.items[0]
       const artists = track.artists.map(a => a.name).join(', ')

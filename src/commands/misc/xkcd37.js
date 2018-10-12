@@ -7,7 +7,7 @@ module.exports = class XKCD37 extends Command {
     this.name = 'xkcd37'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'errors:noSentence'})
+      new StringParameter({ full: true, missingError: 'errors:noSentence' })
     )
   }
 

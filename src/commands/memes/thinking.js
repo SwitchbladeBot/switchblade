@@ -5,6 +5,7 @@ module.exports = class Thinking extends Command {
     super(client)
     this.name = 'thinking'
     this.aliases = ['thonk', 'thonking', 'thonkang']
+    this.category = 'memes'
   }
 
   async run ({ author, channel }) {

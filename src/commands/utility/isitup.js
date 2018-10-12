@@ -9,10 +9,11 @@ module.exports = class IsItUp extends Command {
   constructor (client) {
     super(client)
     this.name = 'isitup'
+    this.category = 'utility'
     this.parameters = new CommandParameters(this, new StringParameter({ full: true, missingError: 'commands:isitup.noWebsite' }))
   }
 
-  async run ({t, author, channel}, url) {
+  async run ({ t, author, channel }, url) {
     url = url.replace(PROTOCOL_REGEX, '').replace(PATH_REGEX, '')
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()

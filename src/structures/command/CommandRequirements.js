@@ -1,4 +1,5 @@
 const CommandError = require('./CommandError.js')
+const PermissionUtils = require('../../utils/PermissionUtils.js')
 
 module.exports = class CommandRequirements {
   constructor (command, options = {}) {
@@ -7,7 +8,7 @@ module.exports = class CommandRequirements {
 
     this.permissions = options.permissions || []
 
-    this.cooldown = Object.assign({enabled: false, feedback: true, time: 1}, options.cooldown)
+    this.cooldown = Object.assign({ enabled: false, feedback: true, time: 1 }, options.cooldown)
 
     this.devOnly = !!options.devOnly
     this.guildOnly = !!options.guildOnly
@@ -39,13 +40,8 @@ module.exports = class CommandRequirements {
       return new CommandError(t(this.errors.playerManagerOnly))
     }
 
-    if (this.devOnly) {
-      const botGuild = client.guilds.get(process.env.BOT_GUILD)
-      const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)
-      const hasRole = developerRole && developerRole.members.has(author.id)
-      if (!hasRole) {
-        return new CommandError(t(this.errors.devOnly))
-      }
+    if (this.devOnly && !PermissionUtils.isDeveloper(client, author)) {
+      return new CommandError(t(this.errors.devOnly))
     }
 
     if (this.guildOnly && !guild) {

@@ -8,9 +8,10 @@ module.exports = class Kiss extends Command {
     super(client)
     this.name = 'kiss'
     this.aliases = ['beijo', 'beijar']
+    this.category = 'images'
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({missingError: 'commands:kiss.noMention', acceptBot: true})
+      new UserParameter({ missingError: 'commands:kiss.noMention', acceptBot: true })
     )
   }
 
@@ -23,7 +24,7 @@ module.exports = class Kiss extends Command {
         .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:kiss.commandUsage')}`)
     } else {
       embed.setImage(kissImg)
-        .setDescription(t('commands:kiss.success', {kisser: author, kissed: user}))
+        .setDescription(t('commands:kiss.success', { kisser: author, kissed: user }))
     }
     channel.send(embed).then(() => channel.stopTyping())
   }

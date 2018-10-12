@@ -76,6 +76,13 @@
     "notYourself": "You can't kiss yourself!",
     "success": "{{- kisser}} kissed {{- kissed}}"
   },
+  "handshake": {
+    "commandDescription": "Handshake someone",
+    "commandUsage": "<user to handshake>",
+    "noMention": "You need to mention someone",
+    "notYourself": "You can't handshake yourself!",
+    "success": "{{- handshaker}} handshaked {{- handshaked}}"
+  },
   "triggered": {
     "commandDescription": "Triggers someone",
     "commandUsage": "[user to trigger]"
@@ -309,7 +316,7 @@
     "score": "Score",
     "episodes": "Episodes",
     "studio": "Studio",
-    "studios": "Studios",
+    "studio_plural": "Studios",
     "aired": "Aired",
     "animeNotFound": "I couldn't find an anime by that name"
   },
@@ -411,8 +418,8 @@
     "commandDescription": "Sets a personal text to your profile",
     "commandUsage": "<personal text>",
     "noText": "You need to give me some text",
-    "tooLongText": "Your text is longer than 150 characters",
-    "changedSuccessfully": "Personal text changed to {{profileText}}!"
+    "tooLongText": "Your text is longer than {{limit}} characters",
+    "changedSuccessfully": "Personal text changed!"
   },
   "guildicon": {
     "commandDescription": "Shows the current or another server's icon",
@@ -435,6 +442,10 @@
     "noGameMode": "None",
     "noGameName": "Not found"
   },
+  "emoji": {
+    "commandDescription": "Enlarges emojis",
+    "hereIsYourEmoji": "Here's your emoji!"
+  },
   "clapify": {
     "commandDescription": "Clapifies text",
     "commandUsage": "<text to clapify>",
@@ -445,5 +456,34 @@
     "commandUsage": "<query>",
     "noQuery": "I can't google something for you without something to google",
     "search": "This might [help]({{link}}) ¯\\_(ツ)_/¯"
+  }
+  "numberfacts": {
+    "validNumber": "You need to give me a number!",
+    "commandUsage": "<number>",
+    "commandDescription": "Shows a fact about a number"
+  },
+  "blacklist": {
+    "commandDescription": "Adds a user to the blacklist",
+    "commandUsage": "<user> <reason>",
+    "missingUser": "You need to give me an user to blacklist",
+    "missingReason": "You need to give me a reason for blacklisting",
+    "successTitle": "User added to the blacklist successfully"
+  },
+  "unblacklist": {
+    "commandDescription": "Removes a user from the blacklist",
+    "commandUsage": "<user>",
+    "success": "{{user}} has been removed from the blacklist successfully",
+    "missingUser": "You need to give me an user to remove from the blacklist",
+    "notBlacklisted": "That user isn't blacklisted"
+  },
+  "whyblacklisted": {
+    "commandDescription": "Shows why someone is blacklisted",
+    "commandUsage": "<user>",
+    "missingUser": "You need to give me an user to check the reason",
+    "notBlacklisted": "That user isn't blacklisted",
+    "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
+  },
+  "tipsfedora": {
+    "commandDescription": "Shows the Tips Fedora meme"
   }
 }

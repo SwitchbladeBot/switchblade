@@ -5,13 +5,14 @@ module.exports = class Betflip extends Command {
   constructor (client) {
     super(client)
     this.name = 'betflip'
+    this.category = 'games'
     this.parameters = new CommandParameters(this,
-      new NumberParameter({min: 1, missingError: 'commands:betflip.noBetValue'}),
-      new StringParameter({full: true, whitelist: ['heads', 'tails'], missingError: 'commands:betflip.noCoin'})
+      new NumberParameter({ min: 1, missingError: 'commands:betflip.noBetValue' }),
+      new StringParameter({ full: true, whitelist: ['heads', 'tails'], missingError: 'commands:betflip.noCoin' })
     )
   }
 
-  async run ({channel, author, t}, bet, side) {
+  async run ({ channel, author, t }, bet, side) {
     const embed = new SwitchbladeEmbed(author)
     const userDoc = await this.client.database.users.get(author.id)
     channel.startTyping()
