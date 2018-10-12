@@ -5,7 +5,7 @@ module.exports = class Changelog extends Command {
   constructor (client) {
     super(client)
     this.name = 'changelog'
-    this.aliases = ['commits']
+    this.aliases = ['recentcommits']
   }
 
   async run ({ t, author, channel }) {
