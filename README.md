@@ -75,5 +75,5 @@ The `start-dev` script loads the variables from `.env` into the process, and aut
 Happy hacking!
 
 <div align="center">
-  <img src="https://botsfordiscord.com/api/v1/bots/445277324175474689/embed"> <img src="https://discordbots.org/api/widget/445277324175474689.svg">
+  <img src="https://discordbots.org/api/widget/445277324175474689.svg">
 </div>
