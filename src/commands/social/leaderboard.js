@@ -22,7 +22,7 @@ class MoneyLeaderboard extends Command {
   constructor (client, parentCommand) {
     super(client, parentCommand)
     this.name = 'money'
-    this.aliases = ['balance']
+    this.aliases = [ 'balance', 'switchcoins' ]
   }
 
   async run ({ t, author, channel }) {

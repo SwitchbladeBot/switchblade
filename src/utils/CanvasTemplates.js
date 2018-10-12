@@ -313,7 +313,7 @@ module.exports = class CanvasTemplates {
     const IMAGE_ASSETS = Promise.all([
       Image.buffer(icon, true),
       Image.buffer(Constants.MEDAL_SVG, true),
-      Image.from(Constants.TESTING_BACKGROUND_PNG, true),
+      Image.from(Constants.DEFAULT_BACKGROUND_PNG, true),
       ...avatarPictures
     ])
 
