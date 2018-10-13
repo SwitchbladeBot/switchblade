@@ -20,8 +20,8 @@ module.exports = class Config extends Command {
   run ({ t, author, prefix, alias, channel, guildDocument }) {
     const embed = new SwitchbladeEmbed(author)
     embed.setDescription([
-      t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` }),
-      t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` })
+      t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` }),
+      t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` })
     ].join('\n'))
     channel.send(embed)
   }
@@ -44,7 +44,9 @@ class ConfigLanguage extends Command {
               `**${t('commons:usage')}:** \`${prefix}${parentCommand.name} ${this.name} ${t('commands:config.subcommands.language.commandUsage')}\``,
               '',
               `__**${t('commands:config.subcommands.language.availableLanguages')}:**__`,
-              `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`
+              `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`,
+              '',
+              `**${t('commands:config.missingTranslation')}**`
             ].join('\n')
           }
         } })
