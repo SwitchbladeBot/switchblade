@@ -46,7 +46,7 @@ class ConfigLanguage extends Command {
               `__**${t('commands:config.subcommands.language.availableLanguages')}:**__`,
               `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`,
               '',
-              `**${t('commands:config.missingTranslation')}**`
+              `${t('commands:config.missingTranslation')}`
             ].join('\n')
           }
         } })
