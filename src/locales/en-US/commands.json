@@ -328,6 +328,7 @@
     "commandDescription": "Change the current guild configuration",
     "guildLang": "To change the guild language, `{{command}} language <language code>`",
     "guildPrefix": "To change the guild prefix, `{{command}} prefix <new prefix>`",
+    "missingTranslation": "Some strings may be missing",
     "subcommands": {
       "language": {
         "commandDescription": "Change the current guild language",
@@ -476,7 +477,7 @@
     "missingUser": "You need to give me an user to check the reason",
     "notBlacklisted": "That user isn't blacklisted",
     "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
-      },
+  },
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme"
   }
