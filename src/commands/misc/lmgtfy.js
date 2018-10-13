@@ -6,6 +6,7 @@ module.exports = class LMGTFY extends Command {
     super(client)
     this.name = 'lmgtfy'
     this.aliases = ['letmegooglethatforyou']
+    this.category = 'memes'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:lmgtfy.noQuery' })
