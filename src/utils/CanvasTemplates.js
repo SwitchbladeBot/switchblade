@@ -153,8 +153,8 @@ module.exports = class CanvasTemplates {
     const AVATAR_Y = CARD_Y_MARGIN + CARD_MARGIN - (AVATAR_SIZE * 0.5)
     //   Avatar shadow
     ctx.save()
-    ctx.fillStyle = '#000000'
-    ctx.shadowColor = '#000000'
+    ctx.fillStyle = '#00000099'
+    ctx.shadowColor = '#00000099'
     ctx.shadowBlur = 10
     ctx.circle(CARD_X_MARGIN + INNER_MARGIN + AVATAR_HALF, AVATAR_Y + AVATAR_HALF, AVATAR_HALF, 0, Math.PI * 2)
     ctx.restore()
