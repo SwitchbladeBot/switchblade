@@ -301,6 +301,7 @@ module.exports = class CanvasTemplates {
         TOP_USERNAME: `bold 29px ${REGULAR}`,
         TOP_DISCRIMINATOR: `20px ${LIGHT}`,
         TOP_VALUE: `20px ${LIGHT}`,
+        TOP_POSITION: `bold 29px ${REGULAR}`,
         OTHERS_USERNAME: `bold 19px ${REGULAR}`,
         OTHERS_DISCRIMINATOR: `14px ${LIGHT}`,
         OTHERS_VALUE: `14px ${LIGHT}`,
@@ -312,7 +313,6 @@ module.exports = class CanvasTemplates {
     const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png')))
     const IMAGE_ASSETS = Promise.all([
       Image.buffer(icon, true),
-      Image.buffer(Constants.MEDAL_SVG, true),
       Image.from(Constants.DEFAULT_BACKGROUND_PNG, true),
       ...avatarPictures
     ])
@@ -385,7 +385,7 @@ module.exports = class CanvasTemplates {
     })
 
     // Image handling
-    const [ valueImage, medalImage, backgroundImage, ...avatarImages ] = await IMAGE_ASSETS
+    const [ valueImage, backgroundImage, ...avatarImages ] = await IMAGE_ASSETS
 
     const avatarImage = avatarImages.shift()
     //   Top avatar shadow
@@ -404,8 +404,8 @@ module.exports = class CanvasTemplates {
     const MEDAL_X = TOP_USER_AVATAR_X + TOP_AVATAR_RADIUS - MEDAL_RADIUS
     const MEDAL_Y = TOP_USER_AVATAR_Y + TOP_AVATAR_RADIUS - MEDAL_RADIUS
     ctx.circle(MEDAL_X, MEDAL_Y, MEDAL_RADIUS, 0, Math.PI * 2)
-    const medalSVG = await createSVGCanvas(medalImage.toString().replace(/\$COLOR/g, '#0000008f'), 512, 512)
-    ctx.drawImage(medalSVG, MEDAL_X - 15, MEDAL_Y - 15, 31, 31)
+    ctx.fillStyle = '#0000008f'
+    ctx.write('1', MEDAL_X, MEDAL_Y, FONTS.TOP_POSITION, ALIGN.CENTER)
 
     // Others avatars
     avatarImages.forEach((avatar, i) => {
