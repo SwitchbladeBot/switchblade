@@ -1,3 +1,3 @@
 describe('Code style', () => {
-  it('conforms to standard', require('mocha-standard')).timeout(0)
+  it('should conform to standard', require('mocha-standard')).timeout(0)
 })

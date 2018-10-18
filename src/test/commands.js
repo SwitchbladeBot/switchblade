@@ -9,7 +9,7 @@ FileUtils.requireDirectory('src/commands', (NewCommand) => {
 }, console.error).catch(console.error)
 
 describe('Commands', () => {
-  it('have no duplicate names or aliases', (done) => {
+  it('should have no duplicate names or aliases', (done) => {
     let aliases = []
     commands.forEach(NewCommand => {
       aliases = aliases.concat(new NewCommand().aliases)
@@ -22,7 +22,7 @@ describe('Commands', () => {
     }
   })
 
-  it('have no duplicate class names', (done) => {
+  it('should have no duplicate class names', (done) => {
     const classNames = commands.map(c => c.name)
     const dupes = MiscUtils.findArrayDuplicates(classNames)
     if (dupes.length) {
@@ -32,7 +32,7 @@ describe('Commands', () => {
     }
   })
 
-  it('are in commands.json', (done) => {
+  it('should be in commands.json', (done) => {
     let notInCommandsFile = []
     const commandsFile = require('../../src/locales/en-US/commands.json')
     commands.forEach(CurrentCommand => {
@@ -46,7 +46,7 @@ describe('Commands', () => {
     }
   })
 
-  it('have descriptions', (done) => {
+  it('should have descriptions', (done) => {
     let noDescription = []
     const commandsFile = require('../../src/locales/en-US/commands.json')
     commands.forEach(CurrentCommand => {
