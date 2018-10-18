@@ -479,5 +479,8 @@
       },
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme"
+  },
+  "bolinadegorfe": {
+    "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker"
   }
 }

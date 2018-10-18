@@ -13,7 +13,9 @@
     "node": "^10.8.0"
   },
   "standard": {
-    "env": [ "mocha" ]
+    "env": [
+      "mocha"
+    ]
   },
   "repository": {
     "type": "git",
@@ -32,8 +34,7 @@
     "api-npm": "^1.0.0",
     "booru": "^0.4.0",
     "bufferutil": "^3.0.5",
-    "canvas": "^2.0.0-alpha.14",
-    "canvas-prebuilt": "^2.0.0-alpha.14",
+    "canvas": "^2.0.0-alpha.13",
     "canvg": "^1.5.2",
     "cheerio": "^1.0.0-rc.2",
     "cldr-core": "^33.0.0",
@@ -62,7 +63,8 @@
     "samp-query": "latest",
     "snekfetch": "^4.0.4",
     "transform-props": "^1.0.1",
-    "uws": "^10.148.2"
+    "uws": "^10.148.2",
+    "windows-build-tools": "^5.0.0"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
