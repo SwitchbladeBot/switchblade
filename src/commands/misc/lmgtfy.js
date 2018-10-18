@@ -15,8 +15,7 @@ module.exports = class LMGTFY extends Command {
 
   run ({ t, channel, author }, query) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
     embed.setDescription(t('commands:lmgtfy.search', { link: `https://lmgtfy.com/?q=${encodeURIComponent(query)}` }))
-    channel.send(embed.setColor('#4285F4')).then(() => channel.stopTyping())
+    channel.send(embed.setColor('#4285F4'))
   }
 }
