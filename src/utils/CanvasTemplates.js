@@ -180,18 +180,15 @@ module.exports = class CanvasTemplates {
   }
 
   static async nowPlaying ({ t }, guildPlayer, song) {
-    // const WIDTH = 670
-    // const HEIGHT = 215
     const WIDTH = 800
     const HEIGHT = 257
 
-    // const THUMBNAIL_WIDTH = 220
-    // let THUMBNAIL_HEIGHT = 215
     const THUMBNAIL_WIDTH = 263
     let THUMBNAIL_HEIGHT = HEIGHT
 
     const IMAGE_ASSETS = Promise.all([
-      Image.from(song.artwork || Constants.DEFAULT_SONG_PNG, !song.artwork)
+      Image.from(song.mainImage || Constants.DEFAULT_SONG_PNG, !song.mainImage),
+      Image.from(song.backgroundImage || Constants.DEFAULT_SONG_PNG, !song.backgroundImage)
     ])
 
     const canvas = createCanvas(WIDTH, HEIGHT)
@@ -246,13 +243,13 @@ module.exports = class CanvasTemplates {
     ctx.writeParagraph(song.title, TITLE_FONT, LEFT_TEXT_MARGIN, TITLE_Y, RIGHT_TEXT_MARGIN, TITLE_Y + 1)
 
     // Image handling
-    const [ artworkImage ] = await IMAGE_ASSETS
+    const [ mainImage, backgroundImage ] = await IMAGE_ASSETS
 
     // Thumbnail
     ctx.fillStyle = '#000000'
     ctx.fillRect(0, 0, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
-    THUMBNAIL_HEIGHT = artworkImage.height * (THUMBNAIL_WIDTH / artworkImage.width)
-    ctx.drawImage(artworkImage, 0, HEIGHT * 0.5 - THUMBNAIL_HEIGHT * 0.5, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+    THUMBNAIL_HEIGHT = mainImage.height * (THUMBNAIL_WIDTH / mainImage.width)
+    ctx.drawImage(mainImage, 0, HEIGHT * 0.5 - THUMBNAIL_HEIGHT * 0.5, THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
 
     // Background
     ctx.globalCompositeOperation = 'destination-over'
@@ -266,7 +263,7 @@ module.exports = class CanvasTemplates {
     ctx.fillStyle = grd
     ctx.fillRect(THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
 
-    ctx.drawBlurredImage(artworkImage, 10, THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
+    ctx.drawBlurredImage(backgroundImage, 10, THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
 
     // Modal style
     ctx.fillStyle = '#FFFFFF'
