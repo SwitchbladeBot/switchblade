@@ -5,6 +5,7 @@ module.exports = class Ping extends Command {
     super(client)
     this.name = 'ping'
     this.aliases = ['pang', 'peng', 'pong', 'pung']
+    this.category = 'bot'
   }
 
   run ({ channel }) {

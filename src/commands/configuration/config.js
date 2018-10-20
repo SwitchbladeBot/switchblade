@@ -11,16 +11,17 @@ module.exports = class Config extends Command {
     super(client)
     this.name = 'config'
     this.aliases = ['cfg']
+    this.category = 'configuration'
     this.subcommands = [new ConfigLanguage(client, this), new ConfigPrefix(client, this)]
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD']})
+    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD'] })
   }
 
   run ({ t, author, prefix, alias, channel, guildDocument }) {
     const embed = new SwitchbladeEmbed(author)
     embed.setDescription([
-      t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` }),
-      t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` })
+      t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` }),
+      t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` })
     ].join('\n'))
     channel.send(embed)
   }
@@ -43,10 +44,12 @@ class ConfigLanguage extends Command {
               `**${t('commons:usage')}:** \`${prefix}${parentCommand.name} ${this.name} ${t('commands:config.subcommands.language.commandUsage')}\``,
               '',
               `__**${t('commands:config.subcommands.language.availableLanguages')}:**__`,
-              `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`
+              `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`,
+              '',
+              `${t('commands:config.missingTranslation')}`
             ].join('\n')
           }
-        }})
+        } })
     )
   }
 
@@ -85,7 +88,7 @@ class ConfigPrefix extends Command {
     prefix = prefix || process.env.PREFIX
     guildDocument.prefix = prefix
     await guildDocument.save()
-    embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', {prefix}))
+    embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', { prefix }))
     channel.send(embed)
   }
 }

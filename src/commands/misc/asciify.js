@@ -9,7 +9,7 @@ module.exports = class Asciify extends Command {
     this.aliases = ['bigtext']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, required: true, missingError: 'commands:asciify.noText'})
+      new StringParameter({ full: true, required: true, missingError: 'commands:asciify.noText' })
     )
   }
 

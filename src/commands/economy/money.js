@@ -6,10 +6,11 @@ module.exports = class Money extends Command {
     super(client)
     this.name = 'money'
     this.aliases = ['balance', 'bal']
+    this.category = 'economy'
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, databaseOnly: true})
+    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true })
     this.parameters = new CommandParameters(this,
-      new UserParameter({full: true, required: false})
+      new UserParameter({ full: true, required: false })
     )
   }
 
@@ -20,9 +21,9 @@ module.exports = class Money extends Command {
     const embed = new SwitchbladeEmbed(author)
     const { money } = await this.client.database.users.get(user.id)
     if (author.id === user.id) {
-      embed.setDescription(t('commands:money.youHave', {count: money}))
+      embed.setDescription(t('commands:money.youHave', { count: money }))
     } else {
-      embed.setDescription(t('commands:money.someoneHas', {count: money, user}))
+      embed.setDescription(t('commands:money.someoneHas', { count: money, user }))
     }
 
     channel.send(embed).then(() => channel.stopTyping())

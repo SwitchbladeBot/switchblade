@@ -8,8 +8,9 @@ module.exports = class Daily extends Command {
   constructor (client) {
     super(client)
     this.name = 'daily'
+    this.category = 'economy'
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, databaseOnly: true})
+    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true })
   }
 
   async run ({ t, author, channel }) {
@@ -23,13 +24,13 @@ module.exports = class Daily extends Command {
       const time = moment.duration(DAILY_INTERVAL - (now - date)).format('h[h] m[m] s[s]')
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:daily.alreadyClaimedTitle'))
-        .setDescription(t('commands:daily.alreadyClaimedDescription', {time}))
+        .setDescription(t('commands:daily.alreadyClaimedDescription', { time }))
     } else {
       const collectedMoney = Math.ceil(Math.random() * 2000) + 750
       userDoc.money += collectedMoney
       userDoc.lastDaily = now
       userDoc.save()
-      embed.setDescription(t('commands:daily.claimedSuccessfully', {count: collectedMoney}))
+      embed.setDescription(t('commands:daily.claimedSuccessfully', { count: collectedMoney }))
     }
     channel.send(embed).then(() => channel.stopTyping())
   }

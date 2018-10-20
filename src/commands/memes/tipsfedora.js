@@ -5,6 +5,7 @@ module.exports = class TipsFedora extends Command {
     super(client)
 
     this.name = 'tipsfedora'
+    this.category = 'memes'
   }
 
   run ({ author, channel }) {

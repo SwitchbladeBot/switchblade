@@ -4,6 +4,7 @@ module.exports = class YoutubeSong extends Song {
   constructor (data = {}, requestedBy, Youtube) {
     super(data, requestedBy)
     this._Youtube = Youtube
+    this.color = '#FF0000'
   }
 
   async loadInfo () {

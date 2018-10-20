@@ -18,6 +18,7 @@ module.exports = class Song extends EventEmitter {
     this.title = data.info.title
     this.uri = data.info.uri
 
+    this.color = '#7289DA'
     this.richInfo = null
 
     this.on('start', () => this.removeAllListeners('queue'))
@@ -31,5 +32,14 @@ module.exports = class Song extends EventEmitter {
   get formattedDuration () {
     if (this.isStream) return ''
     return moment.duration(this.length).format(this.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss', { trim: false })
+  }
+
+  // Images
+  get backgroundImage () {
+    return this.artwork
+  }
+
+  get mainImage () {
+    return this.artwork
   }
 }

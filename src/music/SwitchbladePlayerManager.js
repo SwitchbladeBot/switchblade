@@ -13,7 +13,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     options.player = GuildPlayer
     super(client, nodes, options)
 
-    this.REST_ADDRESS = `${process.env.LAVALINK_REST_HOST}:${process.env.LAVALINK_REST_PORT}`
+    this.REST_ADDRESS = `${process.env.LAVALINK_HOST}:${process.env.LAVALINK_PORT}`
   }
 
   onMessage (message) {
@@ -33,7 +33,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     const { body } = res
     if (!body || body.loadType === 'LOAD_FAILED' || body.loadType === 'NO_MATCHES' || !body.tracks.length) return
     const songs = body.tracks
-    songs.searchResult = !!SEARCH_PREFIXES.find(p => identifier.startsWith(p))
+    songs.searchResult = body.loadType === 'SEARCH_RESULT' || !!SEARCH_PREFIXES.find(p => identifier.startsWith(p))
     return songs
   }
 

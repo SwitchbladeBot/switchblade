@@ -18,7 +18,8 @@ module.exports = {
   Constants: require('./utils/Constants.js'),
   MiscUtils: require('./utils/MiscUtils.js'),
   CanvasTemplates: require('./utils/CanvasTemplates.js'),
-  Blacklist: require('./utils/Blacklist.js'),
+  PermissionUtils: require('./utils/PermissionUtils.js'),
+  BlacklistUtils: require('./utils/BlacklistUtils.js'),
 
   // Etc
   Switchblade: require('./Switchblade.js')

@@ -5,9 +5,10 @@ module.exports = class Coinflip extends Command {
   constructor (client) {
     super(client)
     this.name = 'coinflip'
+    this.category = 'games'
   }
 
-  run ({channel, author, t}) {
+  run ({ channel, author, t }) {
     const sides = ['heads', 'tails']
     const chosenSide = sides[Math.floor(Math.random() * sides.length)]
     const embed = new SwitchbladeEmbed(author)

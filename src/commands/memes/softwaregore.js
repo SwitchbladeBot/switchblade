@@ -5,6 +5,7 @@ module.exports = class SoftwareGore extends Command {
     super(client)
     this.name = 'softwaregore'
     this.aliases = ['sg']
+    this.category = 'memes'
   }
 
   async run ({ author, channel }) {

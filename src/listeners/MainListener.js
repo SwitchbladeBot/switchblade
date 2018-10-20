@@ -9,13 +9,13 @@ module.exports = class MainListener extends EventListener {
   }
 
   onReady () {
-    this.user.setPresence({game: {name: `@${this.user.username} help`}})
+    this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     // Lavalink connection
-    if (process.env.LAVALINK_WSS_HOST) {
+    if (process.env.LAVALINK_HOST) {
       const nodes = [{
-        'host': process.env.LAVALINK_WSS_HOST,
-        'port': process.env.LAVALINK_WSS_PORT || '1337',
+        'host': process.env.LAVALINK_HOST,
+        'port': process.env.LAVALINK_PORT || '1337',
         'password': process.env.LAVALINK_PASSWORD || 'password'
       }]
       this.playerManager = new SwitchbladePlayerManager(this, nodes, {
@@ -34,7 +34,7 @@ module.exports = class MainListener extends EventListener {
         snekfetch
           .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
           .set('Authorization', process.env.DISCORDBOTSPW_TOKEN)
-          .send({server_count: client.guilds.size})
+          .send({ server_count: client.guilds.size })
           .then(() => client.log('Posted statistics successfully', 'bots.discord.pw'))
           .catch(() => client.log('Failed to post statistics', 'bots.discord.pw'))
       }
@@ -44,7 +44,7 @@ module.exports = class MainListener extends EventListener {
         snekfetch
           .post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
           .set('Authorization', process.env.DBL_TOKEN)
-          .send({server_count: client.guilds.size})
+          .send({ server_count: client.guilds.size })
           .then(() => client.log('Posted statistics successfully', 'discordbots.org'))
           .catch(() => client.log('Failed to post statistics', 'discordbots.org'))
       }
@@ -54,7 +54,7 @@ module.exports = class MainListener extends EventListener {
         snekfetch
           .post(`https://botsfordiscord.com/api/v1/bots/${client.user.id}`)
           .set('Authorization', process.env.BOTSFORDISCORD_TOKEN)
-          .send({count: client.guilds.size})
+          .send({ count: client.guilds.size })
           .then(() => client.log('Posted statistics successfully', 'botsfordiscord.com'))
           .catch(() => client.log('Failed to post statistics', 'botsfordiscord.com'))
       }
