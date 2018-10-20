@@ -132,7 +132,7 @@
     "noQuestion": "You need to give me something to be voted",
     "tooManyOptions": "You can't exceed {{maxOptions}} options"
   },
-  "nowPlaying": {
+  "nowplaying": {
     "commandDescription": "Shows the name of the song being played"
   },
   "pause": {
@@ -483,5 +483,14 @@
   },
   "bolinadegorfe": {
     "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker"
+  },
+  "eval": {
+    "commandDescription": "Evals a JS string"
+  },
+  "oddlysatisfying": {
+    "commandDescription": "Random image from /r/oddlysatisfying"
+  },
+  "geekjokes": {
+    "commandDescription": "Random geekjoke"
   }
 }
