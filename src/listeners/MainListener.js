@@ -12,10 +12,10 @@ module.exports = class MainListener extends EventListener {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     // Lavalink connection
-    if (process.env.LAVALINK_WSS_HOST) {
+    if (process.env.LAVALINK_HOST) {
       const nodes = [{
-        'host': process.env.LAVALINK_WSS_HOST,
-        'port': process.env.LAVALINK_WSS_PORT || '1337',
+        'host': process.env.LAVALINK_HOST,
+        'port': process.env.LAVALINK_PORT || '1337',
         'password': process.env.LAVALINK_PASSWORD || 'password'
       }]
       this.playerManager = new SwitchbladePlayerManager(this, nodes, {

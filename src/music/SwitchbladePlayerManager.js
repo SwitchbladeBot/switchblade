@@ -13,7 +13,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     options.player = GuildPlayer
     super(client, nodes, options)
 
-    this.REST_ADDRESS = `${process.env.LAVALINK_REST_HOST}:${process.env.LAVALINK_REST_PORT}`
+    this.REST_ADDRESS = `${process.env.LAVALINK_HOST}:${process.env.LAVALINK_PORT}`
   }
 
   onMessage (message) {
