@@ -66,7 +66,6 @@ module.exports = class Switchblade extends Client {
    */
   logError (...args) {
     const tags = args.length > 1 ? args.slice(0, -1).map(t => `[${t}]`) : []
-    console.log(args)
     console.error('[ErrorLog]', ...tags, args[args.length - 1])
   }
 
