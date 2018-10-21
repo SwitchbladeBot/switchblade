@@ -150,7 +150,8 @@
     "commandDescription": "Skips the current song"
   },
   "stop": {
-    "commandDescription": "Stops the music playback"
+    "commandDescription": "Stops the music playback",
+    "stopped": "Playback has been stopped, leaving the voice channel."
   },
   "volume": {
     "commandDescription": "Adjusts the volume of the music playback",
