@@ -11,8 +11,7 @@ module.exports = class GuildPlayer extends Player {
       if (data.reason !== 'STOPPED') this.next()
     })
 
-    this.on('stop', user => {
-      this.playingSong.emit('stop', user)
+    this.on('stop', () => {
       this.playingSong = null
       this.manager.leave(this.id)
     })
@@ -45,19 +44,21 @@ module.exports = class GuildPlayer extends Player {
     return true
   }
 
-  stop (user) {
+  stop () {
     this.queue = []
-    this.emit('stop', user)
+    this.emit('stop')
     super.stop()
   }
 
-  next () {
+  next (user) {
     const nextSong = this.queue.shift()
     if (nextSong) {
       this.play(nextSong, true)
       return nextSong
     } else {
-      this.stop()
+      super.stop()
+      this.playingSong.emit('stop', user)
+      this.emit('stop', user)
     }
   }
 
