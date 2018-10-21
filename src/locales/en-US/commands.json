@@ -492,5 +492,8 @@
   },
   "geekjokes": {
     "commandDescription": "Random geekjoke"
+  },
+  "aww": {
+    "commandDescription": "Random image from /r/aww"
   }
 }
