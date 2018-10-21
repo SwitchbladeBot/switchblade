@@ -57,7 +57,6 @@
     "moment-duration-format": "^2.2.2",
     "mongoose": "^5.3.0",
     "node-opus": "^0.3.0",
-    "node-spotify-api": "^1.0.7",
     "request": "^2.88.0",
     "rss-parser": "latest",
     "samp-query": "latest",

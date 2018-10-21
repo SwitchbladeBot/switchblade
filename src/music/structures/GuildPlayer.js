@@ -71,7 +71,7 @@ module.exports = class GuildPlayer extends Player {
 
   get formattedElapsed () {
     if (!this.playingSong || this.playingSong.isStream) return ''
-    return moment.duration(this.state.position).format(this.playingSong.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss', { trim: false })
+    return moment.duration(this.state.position).format('hh:mm:ss', { stopTrim: 'm' })
   }
 
   get voiceChannel () {

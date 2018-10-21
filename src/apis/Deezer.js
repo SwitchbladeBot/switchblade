@@ -37,7 +37,6 @@ module.exports = class DeezerAPI extends APIWrapper {
 
   // Default
   request (endpoint, queryParams = {}) {
-    const query = Object.keys(queryParams).map(k => `${k}=${queryParams[k]}`).join('&')
-    return snekfetch.get(`${API_URL}${endpoint}?${query}`).then(r => r.body)
+    return snekfetch.get(`${API_URL}${endpoint}`).query(queryParams).then(r => r.body)
   }
 }
