@@ -13,7 +13,7 @@ module.exports = class Aww extends Command {
     channel.startTyping()
     const { url, permalink } = await Reddit.getRandomPostFromSubreddit('/r/aww')
     embed
-      .setTitle(t('Here is some eyebleach for ya!'))
+      .setTitle(t('commands:aww.title'))
       .setImage(url)
       .setURL(`https://reddit.com${permalink}`)
     channel.send(embed).then(() => channel.stopTyping())
