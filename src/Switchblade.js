@@ -66,6 +66,7 @@ module.exports = class Switchblade extends Client {
    */
   logError (...args) {
     const tags = args.length > 1 ? args.slice(0, -1).map(t => `[${t}]`) : []
+    console.log(args)
     console.error('[ErrorLog]', ...tags, args[args.length - 1])
   }
 
@@ -224,7 +225,7 @@ module.exports = class Switchblade extends Client {
     this.database.connect()
       .then(() => this.log('Database connection established!', 'DB'))
       .catch(e => {
-        this.logError(e.message, 'DB')
+        this.logError('DB', e.message)
         this.database = null
       })
   }
