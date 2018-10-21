@@ -494,6 +494,7 @@
     "commandDescription": "Random geekjoke"
   },
   "aww": {
+    "title": "Here is some eyebleach for ya!",
     "commandDescription": "Random image from /r/aww"
   }
 }
