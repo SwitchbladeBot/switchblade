@@ -32,27 +32,27 @@ module.exports = class SpotifyAPI extends APIWrapper {
 
   async getToken () {
     const {
-      access_token,
-      token_type,
-      expires_in
+      access_token: accessToken,
+      token_type: tokenType,
+      expires_in: expiresIn
     } = await snekfetch.post(TOKEN_URL).set(this.credentialHeaders).query({ 'grant_type': 'client_credentials' }).then(r => r.body)
 
     const now = new Date()
     this.token = {
-      access_token,
-      token_type,
-      expires_in,
-      expires_at: new Date(now.getTime() + (expires_in * 1000))
+      accessToken,
+      tokenType,
+      expiresIn,
+      expiresAt: new Date(now.getTime() + (expiresIn * 1000))
     }
   }
 
   get isTokenExpired () {
-    return this.token ? this.token.expires_at - new Date() <= 0 : true
+    return this.token ? this.token.expiresAt - new Date() <= 0 : true
   }
 
   // Authorization Headers
   get tokenHeaders () {
-    return this.token ? { 'Authorization': `${this.token.token_type} ${this.token.access_token}` } : {}
+    return this.token ? { 'Authorization': `${this.token.tokenType} ${this.token.accessToken}` } : {}
   }
 
   get credentialHeaders () {
