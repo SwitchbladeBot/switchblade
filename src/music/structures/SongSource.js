@@ -4,6 +4,6 @@ module.exports = class SongSource {
   }
 
   static provide (identifier, client, requestedBy) {
-    return
+    return null
   }
 }

@@ -1,4 +1,4 @@
-const { SongSearchResult, SongSource } = require('../../structures')
+const { SongSource } = require('../../structures')
 
 const SpotifyPlaylist = require('./SpotifyPlaylist.js')
 const SpotifySong = require('./SpotifySong.js')
