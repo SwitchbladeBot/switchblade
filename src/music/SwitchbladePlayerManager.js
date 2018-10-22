@@ -1,12 +1,17 @@
-const { GuildPlayer, Song, Playlist } = require('./structures')
-const { HTTPSong, SoundcloudSong, TwitchSong, YoutubeSong, YoutubePlaylist } = require('./sources')
+const { GuildPlayer, Song, SongSearchResult, SongSource, Playlist } = require('./structures')
+const {
+  Songs: {
+    HTTPSong, SoundcloudSong, TwitchSong, YoutubeSong, YoutubePlaylist
+  },
+  Sources
+} = require('./sources')
+
 const MusicUtils = require('./MusicUtils.js')
 
 const { PlayerManager } = require('discord.js-lavalink')
 const snekfetch = require('snekfetch')
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
-const SEARCH_PREFIXES = ['scsearch:', 'ytsearch:']
 
 module.exports = class SwitchbladePlayerManager extends PlayerManager {
   constructor (client, nodes = [], options = {}) {
@@ -24,49 +29,59 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
   }
 
   async fetchTracks (identifier) {
+    const specialSource = Object.values(Sources).find(source => source.test(identifier))
+    if (specialSource) return specialSource
+
     const res = await snekfetch.get(`http://${this.REST_ADDRESS}/loadtracks`)
       .query({ identifier })
       .set('Authorization', process.env.LAVALINK_PASSWORD)
       .catch(e => {
         this.client.logError(new Error(`Lavalink fetchTracks ${e}`))
       })
+
     const { body } = res
-    if (!body || body.loadType === 'LOAD_FAILED' || body.loadType === 'NO_MATCHES' || !body.tracks.length) return
+    if (!body || ['LOAD_FAILED', 'NO_MATCHES'].includes(body.loadType) || !body.tracks.length) return
+
     const songs = body.tracks
-    songs.searchResult = body.loadType === 'SEARCH_RESULT' || !!SEARCH_PREFIXES.find(p => identifier.startsWith(p))
+    songs.searchResult = body.loadType === 'SEARCH_RESULT'
     return songs
   }
 
   async loadTracks (identifier, requestedBy) {
     const songs = await this.fetchTracks(identifier)
+    if (songs && Object.getPrototypeOf(songs) === SongSource) {
+      return SongSearchResult.from(songs.provide(this, identifier, requestedBy), false)
+    }
+
     if (songs && songs.length > 0) {
+      const searchResult = new SongSearchResult(songs.searchResult)
       if (songs.searchResult || songs.length === 1) {
         const [ song ] = songs
         const source = song.info.source = MusicUtils.getSongSource(song)
 
         switch (source) {
           case 'http':
-            return new HTTPSong(song, requestedBy, this.client.apis.icecast).loadInfo()
+            return searchResult.setResult(new HTTPSong(song, requestedBy, this.client.apis.icecast).loadInfo())
           case 'youtube':
-            return new YoutubeSong(song, requestedBy, this.client.apis.youtube).loadInfo()
+            return searchResult.setResult(new YoutubeSong(song, requestedBy, this.client.apis.youtube).loadInfo())
           case 'twitch':
-            return new TwitchSong(song, requestedBy, this.client.apis.twitch).loadInfo()
+            return searchResult.setResult(new TwitchSong(song, requestedBy, this.client.apis.twitch).loadInfo())
           case 'soundcloud':
-            return new SoundcloudSong(song, requestedBy, this.client.apis.soundcloud).loadInfo()
+            return searchResult.setResult(new SoundcloudSong(song, requestedBy, this.client.apis.soundcloud).loadInfo())
           default:
-            return new Song(songs[0], requestedBy).loadInfo()
+            return searchResult.setResult(new Song(songs[0], requestedBy).loadInfo())
         }
       } else {
         const pInfo = MusicUtils.getPlaylistInfo(identifier)
         switch (pInfo.source) {
           case 'youtube':
-            return new YoutubePlaylist(pInfo, songs, requestedBy, this.client.apis.youtube).loadInfo()
+            return searchResult.setResult(new YoutubePlaylist(pInfo, songs, requestedBy, this.client.apis.youtube).loadInfo())
           default:
-            return new Playlist(pInfo, songs, requestedBy).loadInfo()
+            return searchResult.setResult(new Playlist(pInfo, songs, requestedBy).loadInfo())
         }
       }
     }
-    return null
+    return new SongSearchResult(true)
   }
 
   async play (song, channel) {

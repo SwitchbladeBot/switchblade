@@ -20,9 +20,13 @@ module.exports = class Play extends Command {
     channel.startTyping()
     const playerManager = this.client.playerManager
     try {
-      const res = await playerManager.loadTracks(identifier, author) || await playerManager.loadTracks(`ytsearch:${identifier}`, author)
-      if (res) {
-        this.loadSongs({ t, channel, voiceChannel }, res, playerManager).then(() => channel.stopTyping())
+      let { result, tryAgain } = await playerManager.loadTracks(identifier, author)
+      if (tryAgain && !result) {
+        result = (await playerManager.loadTracks(`ytsearch:${identifier}`, author)).result
+      }
+
+      if (result) {
+        this.loadSongs({ t, channel, voiceChannel }, result, playerManager).then(() => channel.stopTyping())
       } else {
         embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('music:songNotFound'))

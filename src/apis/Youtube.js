@@ -29,4 +29,8 @@ module.exports = class YoutubeAPI extends APIWrapper {
     const { high, maxres, medium, standard } = thumbnails
     return maxres || high || medium || standard || thumbnails['default']
   }
+
+  searchVideos (query, part = 'snippet', maxResults = 5) {
+    return this.Youtube.search.list({ q: query, type: 'video', part, maxResults }).then(r => r.data)
+  }
 }
