@@ -497,5 +497,17 @@
   "aww": {
     "title": "Here is some eyebleach for ya!",
     "commandDescription": "Random image from /r/aww"
+  },
+  "mcquery": {
+    "commandDescription": "Fetch info from a MC:PC server.",
+    "commandUsage": "<address:port>",
+    "unknownServer": "Server is offline or doesn't exists.",
+    "noIP": "You need to give me a IP.",
+    "players": "Players",
+    "version": "Version",
+    "online": "Online",
+    "messageOfTheDay": "Message of the day (MOTD)",
+    "stats": "Stats"
   }
+    
 }
