@@ -76,5 +76,5 @@ Happy hacking!
 
 <div align="center">
   <img src="https://discordbots.org/api/widget/445277324175474689.svg">
-  <img src="https://botsfordiscord.com/api/bot/445277324175474689/widget">
+  <img src="https://botsfordiscord.com/api/bot/445277324175474689/widget" height="150">
 </div>
