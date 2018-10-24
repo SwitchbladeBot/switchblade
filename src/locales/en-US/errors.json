@@ -23,5 +23,6 @@
   "invalidColor": "You need to give me a valid color.",
   "invalidGuild": "You need to give me a valid guild.",
   "invalidEmoji": "You need to give me a valid emoji.",
-  "userCantBeDeveloper": "User can't be a developer"
+  "userCantBeDeveloper": "User can't be a developer",
+  "onlyOldAccounts": "Sorry, you need to have at least 1 month of account to do that."
 }
