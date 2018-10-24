@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, CommandParameters, UserParameter, CommandRequirements } = CommandStructures
 const moment = require('moment')
 
 const DAILY_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
@@ -9,6 +9,8 @@ module.exports = class Rep extends Command {
     super(client)
     this.name = 'rep'
     this.category = 'social'
+
+    this.requirements = new CommandRequirements(this, { onlyOldAccounts: true, databaseOnly: true })
 
     this.parameters = new CommandParameters(this,
       new UserParameter({ missingError: 'commands:rep.noMention', acceptBot: false })
