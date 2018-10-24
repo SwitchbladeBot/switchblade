@@ -497,5 +497,9 @@
   "aww": {
     "title": "Here is some eyebleach for ya!",
     "commandDescription": "Random image from /r/aww"
+  },
+  "videochat": {
+    "commandDescription": "Gives you the link to join the voice chat on the voice channel you're in (Beta feature!)",
+    "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}})`"
   }
 }
