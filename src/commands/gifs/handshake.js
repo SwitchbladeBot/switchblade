@@ -1,18 +1,21 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, UserParameter } = CommandStructures
 
-const handshakeArray = ['https://i.gifer.com/C9M7.gif',
+const handshakeArray = [
+  'https://i.gifer.com/C9M7.gif',
   'https://media1.tenor.com/images/314a2f7c3647ec0b9ba4100f8e35dc2e/tenor.gif?itemid=12270042',
-  'https://i.giphy.com/media/lNjOEfoKIplcc/200_d.gif']
+  'https://i.giphy.com/media/lNjOEfoKIplcc/200_d.gif'
+]
 
-module.exports = class handshake extends Command {
+module.exports = class Handshake extends Command {
   constructor (client) {
     super(client)
     this.name = 'handshake'
     this.aliases = ['hs', 'hands']
+    this.category = 'images'
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({missingError: 'commands:handshake.noMention', acceptBot: true})
+      new UserParameter({ missingError: 'commands:handshake.noMention', acceptBot: true })
     )
   }
 

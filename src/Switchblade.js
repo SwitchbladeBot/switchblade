@@ -173,7 +173,7 @@ module.exports = class Switchblade extends Client {
 
       try {
         i18next.use(translationBackend).init({
-          ns: ['commands', 'commons', 'permissions', 'errors', 'music', 'regions'],
+          ns: [ 'categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions' ],
           preload: await FileUtils.readdir(dirPath),
           fallbackLng: 'en-US',
           backend: {
@@ -224,7 +224,7 @@ module.exports = class Switchblade extends Client {
     this.database.connect()
       .then(() => this.log('Database connection established!', 'DB'))
       .catch(e => {
-        this.logError(e.message, 'DB')
+        this.logError('DB', e.message)
         this.database = null
       })
   }

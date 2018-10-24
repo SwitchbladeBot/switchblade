@@ -132,7 +132,7 @@
     "noQuestion": "You need to give me something to be voted",
     "tooManyOptions": "You can't exceed {{maxOptions}} options"
   },
-  "nowPlaying": {
+  "nowplaying": {
     "commandDescription": "Shows the name of the song being played"
   },
   "pause": {
@@ -150,7 +150,8 @@
     "commandDescription": "Skips the current song"
   },
   "stop": {
-    "commandDescription": "Stops the music playback"
+    "commandDescription": "Stops the music playback",
+    "stopped": "Playback has been stopped, leaving the voice channel."
   },
   "volume": {
     "commandDescription": "Adjusts the volume of the music playback",
@@ -328,6 +329,7 @@
     "commandDescription": "Change the current guild configuration",
     "guildLang": "To change the guild language, `{{command}} language <language code>`",
     "guildPrefix": "To change the guild prefix, `{{command}} prefix <new prefix>`",
+    "missingTranslation": "**(A few translations might be missing)**",
     "subcommands": {
       "language": {
         "commandDescription": "Change the current guild language",
@@ -418,8 +420,8 @@
     "commandDescription": "Sets a personal text to your profile",
     "commandUsage": "<personal text>",
     "noText": "You need to give me some text",
-    "tooLongText": "Your text is longer than 150 characters",
-    "changedSuccessfully": "Personal text changed to {{profileText}}!"
+    "tooLongText": "Your text is longer than {{limit}} characters",
+    "changedSuccessfully": "Personal text changed!"
   },
   "guildicon": {
     "commandDescription": "Shows the current or another server's icon",
@@ -476,12 +478,25 @@
     "missingUser": "You need to give me an user to check the reason",
     "notBlacklisted": "That user isn't blacklisted",
     "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
-      },
+  },
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme"
   },
   "bolinadegorfe": {
     "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker"
+  },
+  "eval": {
+    "commandDescription": "Evals a JS string"
+  },
+  "oddlysatisfying": {
+    "commandDescription": "Random image from /r/oddlysatisfying"
+  },
+  "geekjokes": {
+    "commandDescription": "Random geekjoke"
+  },
+  "aww": {
+    "title": "Here is some eyebleach for ya!",
+    "commandDescription": "Random image from /r/aww"
   },
   "videochat": {
     "commandDescription": "Gives you the link to join the voice chat on the voice channel you're in (Beta feature!)",

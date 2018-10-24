@@ -8,7 +8,7 @@ module.exports = class Emoji extends Command {
     this.aliases = ['enlarge', 'bigemoji']
 
     this.parameters = new CommandParameters(this,
-      new EmojiParameter({full: true})
+      new EmojiParameter({ full: true })
     )
   }
 

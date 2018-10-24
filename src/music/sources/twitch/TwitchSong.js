@@ -5,6 +5,7 @@ module.exports = class TwitchSong extends Song {
   constructor (data = {}, requestedBy, Twitch) {
     super(data, requestedBy)
     this._Twitch = Twitch
+    this.color = '#4B367C'
   }
 
   async loadInfo () {
@@ -29,5 +30,9 @@ module.exports = class TwitchSong extends Song {
       }
     }
     return this
+  }
+
+  get backgroundImage () {
+    return this.richInfo.thumbnailUrl || this.artwork
   }
 }

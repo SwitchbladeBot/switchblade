@@ -6,7 +6,7 @@ const FileUtils = require('./FileUtils.js')
 
 const URLtoBuffer = function (url) {
   return new Promise((resolve, reject) => {
-    request.get({url, encoding: null, isBuffer: true}, (err, res, body) => {
+    request.get({ url, encoding: null, isBuffer: true }, (err, res, body) => {
       if (!err && res && res.statusCode === 200 && body) resolve(body)
       else reject(err || res)
     })
@@ -21,7 +21,8 @@ const ALIGN = {
   BOTTOM_RIGHT: 5,
   BOTTOM_CENTER: 6,
   BOTTOM_LEFT: 7,
-  CENTER_LEFT: 8
+  CENTER_LEFT: 8,
+  CENTER: 9
 }
 
 module.exports = class CanvasUtils {
@@ -29,18 +30,20 @@ module.exports = class CanvasUtils {
     const self = this
 
     // Initiliaze fonts
-    registerFont('src/assets/fonts/Montserrat-Regular.ttf', {family: 'Montserrat'})
-    registerFont('src/assets/fonts/Montserrat-Italic.ttf', {family: 'Montserrat', style: 'italic'})
-    registerFont('src/assets/fonts/Montserrat-Medium.ttf', {family: 'Montserrat Medium'})
-    registerFont('src/assets/fonts/Montserrat-MediumItalic.ttf', {family: 'Montserrat Medium', style: 'italic'})
-    registerFont('src/assets/fonts/Montserrat-SemiBold.ttf', {family: 'Montserrat SemiBold'})
-    registerFont('src/assets/fonts/Montserrat-SemiBoldItalic.ttf', {family: 'Montserrat SemiBold', style: 'italic'})
-    registerFont('src/assets/fonts/Montserrat-Bold.ttf', {family: 'Montserrat', weight: 'bold'})
-    registerFont('src/assets/fonts/Montserrat-BoldItalic.ttf', {family: 'Montserrat', style: 'italic', weight: 'bold'})
-    registerFont('src/assets/fonts/Montserrat-ExtraBold.ttf', {family: 'Montserrat ExtraBold'})
-    registerFont('src/assets/fonts/Montserrat-ExtraBoldItalic.ttf', {family: 'Montserrat ExtraBold', style: 'italic'})
-    registerFont('src/assets/fonts/Montserrat-Black.ttf', {family: 'Montserrat Black'})
-    registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', {family: 'Montserrat Black', style: 'italic'})
+    registerFont('src/assets/fonts/Montserrat-Light.ttf', { family: 'Montserrat Light' })
+    registerFont('src/assets/fonts/Montserrat-LightItalic.ttf', { family: 'Montserrat Light', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-Regular.ttf', { family: 'Montserrat' })
+    registerFont('src/assets/fonts/Montserrat-Italic.ttf', { family: 'Montserrat', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-Medium.ttf', { family: 'Montserrat Medium' })
+    registerFont('src/assets/fonts/Montserrat-MediumItalic.ttf', { family: 'Montserrat Medium', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-SemiBold.ttf', { family: 'Montserrat SemiBold' })
+    registerFont('src/assets/fonts/Montserrat-SemiBoldItalic.ttf', { family: 'Montserrat SemiBold', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-Bold.ttf', { family: 'Montserrat', weight: 'bold' })
+    registerFont('src/assets/fonts/Montserrat-BoldItalic.ttf', { family: 'Montserrat', style: 'italic', weight: 'bold' })
+    registerFont('src/assets/fonts/Montserrat-ExtraBold.ttf', { family: 'Montserrat ExtraBold' })
+    registerFont('src/assets/fonts/Montserrat-ExtraBoldItalic.ttf', { family: 'Montserrat ExtraBold', style: 'italic' })
+    registerFont('src/assets/fonts/Montserrat-Black.ttf', { family: 'Montserrat Black' })
+    registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', { family: 'Montserrat Black', style: 'italic' })
 
     // Canvas
     Canvas.createSVGCanvas = function (svg, w, h) {
@@ -90,11 +93,36 @@ module.exports = class CanvasUtils {
       return canvas
     }
 
-    Context2d.prototype.circle = function (x, y, r, a1, a2) {
+    Context2d.prototype.circle = function (x, y, r, a1, a2, fill = true, stroke = false) {
       this.beginPath()
       this.arc(x, y, r, a1, a2, true)
       this.closePath()
-      this.fill()
+      if (fill) this.fill()
+      if (stroke) this.stroke()
+      return this
+    }
+
+    Context2d.prototype.roundRect = function (x, y, width, height, radius, fill, stroke) {
+      let cornerRadius = { upperLeft: 0, upperRight: 0, lowerLeft: 0, lowerRight: 0 }
+      if (typeof radius === 'object') {
+        cornerRadius = Object.assign(cornerRadius, radius)
+      } else if (typeof radius === 'number') {
+        cornerRadius = { upperLeft: radius, upperRight: radius, lowerLeft: radius, lowerRight: radius }
+      }
+
+      this.beginPath()
+      this.moveTo(x + cornerRadius.upperLeft, y)
+      this.lineTo(x + width - cornerRadius.upperRight, y)
+      this.quadraticCurveTo(x + width, y, x + width, y + cornerRadius.upperRight)
+      this.lineTo(x + width, y + height - cornerRadius.lowerRight)
+      this.quadraticCurveTo(x + width, y + height, x + width - cornerRadius.lowerRight, y + height)
+      this.lineTo(x + cornerRadius.lowerLeft, y + height)
+      this.quadraticCurveTo(x, y + height, x, y + height - cornerRadius.lowerLeft)
+      this.lineTo(x, y + cornerRadius.upperLeft)
+      this.quadraticCurveTo(x, y, x + cornerRadius.upperLeft, y)
+      this.closePath()
+      if (stroke) this.stroke()
+      if (fill) this.fill()
       return this
     }
 
@@ -109,7 +137,7 @@ module.exports = class CanvasUtils {
         bottomY: realY,
         topY: realY - height,
         centerX: realX + width * 0.5,
-        centerY: realY + height * 0.5,
+        centerY: realY - height * 0.5,
         width,
         height
       }
@@ -127,7 +155,7 @@ module.exports = class CanvasUtils {
         const height = lineText.height
         if (currentY > maxY) break
 
-        if (lineText.width <= maxX) {
+        if (startX + lineText.width <= maxX) {
           lastWrite = this.write(l, startX, currentY, font, ALIGN.TOP_LEFT)
         } else {
           if (l.includes(' ')) {
@@ -155,6 +183,36 @@ module.exports = class CanvasUtils {
         currentY += height + lineDistance
       }
       return lastWrite
+    }
+
+    Canvas.prototype.blur = function (blur) {
+      const ctx = this.getContext('2d')
+
+      const delta = 5
+      const alphaLeft = 1 / (2 * Math.PI * delta * delta)
+      const step = blur < 3 ? 1 : 2
+      let sum = 0
+      for (let y = -blur; y <= blur; y += step) {
+        for (let x = -blur; x <= blur; x += step) {
+          let weight = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta))
+          sum += weight
+        }
+      }
+      for (let y = -blur; y <= blur; y += step) {
+        for (let x = -blur; x <= blur; x += step) {
+          ctx.globalAlpha = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta)) / sum * blur
+          ctx.drawImage(this, x, y)
+        }
+      }
+      ctx.globalAlpha = 1
+    }
+
+    Context2d.prototype.drawBlurredImage = function (image, blur, imageX, imageY, w = image.width, h = image.height) {
+      const canvas = createCanvas(w, h)
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(image, 0, 0, w, h)
+      canvas.blur(blur)
+      this.drawImage(canvas, imageX, imageY, w, h)
     }
   }
 
@@ -184,7 +242,7 @@ module.exports = class CanvasUtils {
         break
       case ALIGN.CENTER_RIGHT:
         realCoords.x = x - width
-        realCoords.y = y - height * 0.5
+        realCoords.y = y + height * 0.5
         break
       case ALIGN.BOTTOM_RIGHT:
         realCoords.x = x - width
@@ -193,7 +251,11 @@ module.exports = class CanvasUtils {
         realCoords.x = x - width * 0.5
         break
       case ALIGN.CENTER_LEFT:
-        realCoords.y = y - height * 0.5
+        realCoords.y = y + height * 0.5
+        break
+      case ALIGN.CENTER:
+        realCoords.x = x - width * 0.5
+        realCoords.y = y + height * 0.5
         break
     }
     return realCoords

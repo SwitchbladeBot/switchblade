@@ -1,5 +1,6 @@
 const CommandError = require('./CommandError.js')
 const PermissionUtils = require('../../utils/PermissionUtils.js')
+const moment = require('moment')
 
 module.exports = class CommandRequirements {
   constructor (command, options = {}) {
@@ -8,10 +9,11 @@ module.exports = class CommandRequirements {
 
     this.permissions = options.permissions || []
 
-    this.cooldown = Object.assign({enabled: false, feedback: true, time: 1}, options.cooldown)
+    this.cooldown = Object.assign({ enabled: false, feedback: true, time: 1 }, options.cooldown)
 
     this.devOnly = !!options.devOnly
     this.guildOnly = !!options.guildOnly
+    this.onlyOldAccounts = !!options.onlyOldAccounts
     this.nsfwOnly = !!options.nsfwOnly
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
@@ -27,7 +29,8 @@ module.exports = class CommandRequirements {
       nsfwOnly: 'errors:nsfwOnly',
       voiceChannelOnly: 'errors:voiceChannelOnly',
       guildPlaying: 'errors:notPlaying',
-      cooldown: 'errors:cooldown'
+      cooldown: 'errors:cooldown',
+      onlyOldAccounts: 'errors:onlyOldAccounts'
     }, options.errors)
   }
 
@@ -54,6 +57,10 @@ module.exports = class CommandRequirements {
 
     if (this.voiceChannelOnly && !voiceChannel) {
       return new CommandError(t(this.errors.voiceChannelOnly))
+    }
+
+    if (this.onlyOldAccounts && moment(author.createdTimestamp).format('MM, YYYY') === moment().format('MM, YYYY')) {
+      return new CommandError(t(this.errors.onlyOldAccounts))
     }
 
     const guildPlayer = client.playerManager && client.playerManager.get(guild.id)

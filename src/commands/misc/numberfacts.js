@@ -9,7 +9,7 @@ module.exports = class NumberFacts extends Command {
     this.aliases = ['number', 'numfacts', 'numf']
 
     this.parameters = new CommandParameters(this,
-      new NumberParameter({min: 0, missingError: 'commands:numberfacts.validNumber'})
+      new NumberParameter({ min: 0, missingError: 'commands:numberfacts.validNumber' })
     )
   }
 
@@ -17,7 +17,7 @@ module.exports = class NumberFacts extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     try {
-      const {body} = await snekfetch.get(`http://numbersapi.com/${number}/trivia`)
+      const { body } = await snekfetch.get(`http://numbersapi.com/${number}/trivia`)
       embed.setTitle(body)
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
