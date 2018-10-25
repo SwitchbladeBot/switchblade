@@ -6,6 +6,7 @@ module.exports = class Dog extends Command {
     super(client)
     this.name = 'dog'
     this.aliases = ['doggo', 'dogpics', 'randomdog']
+    this.category = 'misc'
   }
 
   async run ({ t, author, channel }) {
