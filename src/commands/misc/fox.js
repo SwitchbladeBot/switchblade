@@ -5,6 +5,7 @@ module.exports = class Fox extends Command {
   constructor (client) {
     super(client)
     this.name = 'fox'
+    this.category = 'misc'
   }
 
   async run ({ t, author, channel }) {
