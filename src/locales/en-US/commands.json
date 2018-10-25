@@ -511,5 +511,9 @@
     "commandDescription": "Emojifies a sentence",
     "commandUsage": "<sentence>",
     "missingSentence": "You need to give me a sentence to emojify"
+  },
+  "fox": {
+    "commandDescription": "Fetches a random image of a fox",
+    "hereIsYourFox": "Here's your fox!"
   }
 }
