@@ -21,3 +21,6 @@ addons:
       - librsvg2-dev
       - g++-4.9
 cache: npm
+  bundler: true
+  directories:
+  - node_modules
