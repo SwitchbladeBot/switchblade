@@ -20,7 +20,7 @@ addons:
       - libgif-dev
       - librsvg2-dev
       - g++-4.9
-cache: npm
+cache:
   bundler: true
   directories:
   - node_modules
