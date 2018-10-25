@@ -1,4 +1,5 @@
 const { Command, SwitchbladeEmbed } = require('../../')
+const { Attachment } = require('discord.js')
 const snekfetch = require('snekfetch')
 
 module.exports = class Birb extends Command {
@@ -10,11 +11,8 @@ module.exports = class Birb extends Command {
   }
 
   async run ({ t, author, channel }) {
-    const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const { body } = await snekfetch.get('https://random.birb.pw/tweet/random')
-    embed.setImage(body)
-      .setDescription(t('commands:birb.hereIsYourBirb'))
-    channel.send(embed).then(() => channel.stopTyping())
+    const { body } = await snekfetch.get('http://random.birb.pw/tweet/random')
+    channel.send(new SwitchbladeEmbed().setDescription(t('commands:birb.hereIsYourBirb')).setImage('attachment://birb.png').attachFile(new Attachment(body, 'birb.png'))).then(() => channel.stopTyping())
   }
 }
