@@ -6,7 +6,7 @@ module.exports = class Birb extends Command {
   constructor (client) {
     super(client)
     this.name = 'birb'
-    this.category = 'misc'
+    this.category = 'general'
     this.aliases = ['bird', 'borb']
   }
 
