@@ -12,8 +12,8 @@ module.exports = class Birb extends Command {
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const { body } = await snekfetch.get('http://random.birb.pw/tweet.json/')
-    embed.setImage('http://random.birb.pw/img/' + body.file)
+    const { body } = await snekfetch.get('https://random.birb.pw/tweet/random')
+    embed.setImage(body)
       .setDescription(t('commands:birb.hereIsYourBirb'))
     channel.send(embed).then(() => channel.stopTyping())
   }
