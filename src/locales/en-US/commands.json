@@ -515,5 +515,9 @@
   "fox": {
     "commandDescription": "Fetches a random image of a fox",
     "hereIsYourFox": "Here's your fox!"
+  },
+  "birb": {
+    "commandDescription": "Fetches a random image of a birb",
+    "hereIsYourBirb": "Here's your birb!"
   }
 }
