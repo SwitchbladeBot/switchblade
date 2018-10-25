@@ -32,13 +32,13 @@ module.exports = class Emojify extends Command {
 
   async run ({ t, author, channel }, text) {
     const emojified = text.toLowerCase().split('').map(letter => {
-        if (/[a-z]/g.test(letter)) {
-          return `:regional_indicator_${letter}: `
-        } else if (specialCodes[letter]) {
-          return `${specialCodes[letter]} `
-        }
-        return letter
-      }).join('')
+      if (/[a-z]/g.test(letter)) {
+        return `:regional_indicator_${letter}: `
+      } else if (specialCodes[letter]) {
+        return `${specialCodes[letter]} `
+      }
+      return letter
+    }).join('')
     channel.send(emojified)
   }
 }
