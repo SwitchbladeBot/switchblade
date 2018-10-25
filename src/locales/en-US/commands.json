@@ -497,5 +497,15 @@
   "aww": {
     "title": "Here is some eyebleach for ya!",
     "commandDescription": "Random image from /r/aww"
+  },
+  "vaporwave": {
+    "commandDescription": "Vaporwavefies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to vaporwavefy"
+  },
+  "emojify": {
+    "commandDescription": "Emojifies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to emojify"
   }
 }
