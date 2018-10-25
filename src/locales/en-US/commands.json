@@ -501,5 +501,15 @@
   "videochat": {
     "commandDescription": "Gives you the link to join the voice chat on the voice channel you're in (Beta feature!)",
     "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}})`"
+  },
+  "vaporwave": {
+    "commandDescription": "Vaporwavefies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to vaporwavefy"
+  },
+  "emojify": {
+    "commandDescription": "Emojifies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to emojify"
   }
 }
