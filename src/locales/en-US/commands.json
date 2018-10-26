@@ -507,5 +507,10 @@
     "commandDescription": "Emojifies a sentence",
     "commandUsage": "<sentence>",
     "missingSentence": "You need to give me a sentence to emojify"
+  },
+  "zap": {
+    "commandDescription": "Adds emoji to a sentence based on context",
+    "commandUsage": "<sentence>",
+    "missingZap": "You need to give me a sentence to add emoji to"
   }
 }
