@@ -499,7 +499,7 @@
     "commandDescription": "Random image from /r/aww"
   },
   "videochat": {
-    "commandDescription": "Gives you the link to join the voice chat on the voice channel you're in (Beta feature!)",
+    "commandDescription": "Gives you the link for a voice channel with screensharing and videochat capabilites (Beta feature!)",
     "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}})`"
   },
   "vaporwave": {
