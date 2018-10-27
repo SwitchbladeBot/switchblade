@@ -6,7 +6,7 @@ module.exports = class Stop extends Command {
     this.name = 'stop'
     this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true, permissions: ['MANAGE_GUILD'] })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true, permissions: ['MANAGE_GUILD'] })
   }
 
   async run ({ author, channel, guild, t }) {

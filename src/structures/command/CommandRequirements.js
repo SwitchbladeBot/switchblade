@@ -15,6 +15,8 @@ module.exports = class CommandRequirements {
     this.guildOnly = !!options.guildOnly
     this.onlyOldAccounts = !!options.onlyOldAccounts
     this.nsfwOnly = !!options.nsfwOnly
+
+    this.sameVoiceChannelOnly = !!options.sameVoiceChannelOnly
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
 
@@ -27,6 +29,7 @@ module.exports = class CommandRequirements {
       devOnly: 'errors:developerOnly',
       guildOnly: 'errors:guildOnly',
       nsfwOnly: 'errors:nsfwOnly',
+      sameVoiceChannelOnly: 'errors:sameVoiceChannelOnly',
       voiceChannelOnly: 'errors:voiceChannelOnly',
       guildPlaying: 'errors:notPlaying',
       cooldown: 'errors:cooldown',
@@ -53,6 +56,10 @@ module.exports = class CommandRequirements {
 
     if (this.nsfwOnly && guild && !channel.nsfw) {
       return new CommandError(t(this.errors.nsfwOnly))
+    }
+
+    if (this.sameVoiceChannelOnly && guild.me.voiceChannelID && (!voiceChannel || guild.me.voiceChannelID !== voiceChannel.id)) {
+      return new CommandError(t(this.errors.sameVoiceChannelOnly))
     }
 
     if (this.voiceChannelOnly && !voiceChannel) {

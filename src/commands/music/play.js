@@ -9,7 +9,7 @@ module.exports = class Play extends Command {
     this.aliases = []
     this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, playerManagerOnly: true })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, playerManagerOnly: true })
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' })
     )
