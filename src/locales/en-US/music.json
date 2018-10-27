@@ -2,6 +2,8 @@
   "stateChanged_pause": "The music playback has been paused",
   "stateChanged_resume": "The music playback has been resumed",
   "stateChanged_stop": "The music playback has been stopped",
+  "stateChanged_loop_on": "The music playback's loop mode has been activated",
+  "stateChanged_loop_off": "The music playback's loop mode has been deactivated",
   "nowPlaying": "Now playing",
   "queue": "Queue",
   "addedBy": "added by {{- user}}",

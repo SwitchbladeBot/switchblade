@@ -7,7 +7,7 @@ module.exports = class Pause extends Command {
     this.aliases = ['resume']
     this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true })
   }
 
   async run ({ t, author, channel, guild }) {

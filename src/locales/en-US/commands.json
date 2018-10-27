@@ -519,5 +519,8 @@
   "birb": {
     "commandDescription": "Fetches a random image of a birb",
     "hereIsYourBirb": "Here's your birb!"
+  },
+  "loop": {
+    "commandDescription": "Activates or deactivates the music playback's loop mode"
   }
 }
