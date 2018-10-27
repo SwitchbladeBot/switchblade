@@ -498,6 +498,29 @@
     "title": "Here is some eyebleach for ya!",
     "commandDescription": "Random image from /r/aww"
   },
+  "videochat": {
+    "commandDescription": "Enables videochat for the voice channel that you're currently connected to and shares a link to it (Beta feature!)",
+    "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}})`"
+  },
+  "vaporwave": {
+    "commandDescription": "Vaporwavefies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to vaporwavefy"
+  },
+  "emojify": {
+    "commandDescription": "Emojifies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to emojify"
+  },
+  "fox": {
+    "commandDescription": "Fetches a random image of a fox",
+    "hereIsYourFox": "Here's your fox!"
+  },
+  "birb": {
+    "commandDescription": "Fetches a random image of a birb",
+    "hereIsYourBirb": "Here's your birb!"
+  }
+},
   "mcquery": {
     "commandDescription": "Fetch info from a MC:PC server.",
     "commandUsage": "<address:port>",
@@ -509,5 +532,3 @@
     "messageOfTheDay": "Message of the day (MOTD)",
     "stats": "Stats"
   }
-    
-}
