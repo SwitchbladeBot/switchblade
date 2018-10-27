@@ -487,7 +487,11 @@
     "subcommands": {
       "money": {
         "commandDescription": "Shows a list of the richest users",
-        "successTitle": "Money Leaderboard"
+        "title": "Money Leaderboard"
+      },
+      "reputation": {
+        "commandDescription": "Shows a list of the users with the most reputation points",
+        "title": "Reputation Leaderboard"
       }
     }
   },

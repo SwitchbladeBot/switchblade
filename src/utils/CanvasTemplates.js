@@ -438,7 +438,7 @@ module.exports = class CanvasTemplates {
 
     const TITLE_NAME_WIDTH = measureText(ctx, FONTS.TITLE, title).width
     const TITLE_RECT_INNER_MARGIN = 30
-    const TITLE_RECT_WIDTH = TITLE_NAME_WIDTH + TITLE_RECT_INNER_MARGIN * 2
+    const TITLE_RECT_WIDTH = TITLE_NAME_WIDTH + TITLE_RECT_INNER_MARGIN * 2 + TITLE_RECT_INNER_MARGIN * 0.5
     const TITLE_RECT_HEIGHT = 42
 
     ctx.roundRect(TITLE_X, TITLE_Y - TITLE_RECT_HEIGHT * 0.5, TITLE_RECT_WIDTH, TITLE_RECT_HEIGHT, TITLE_RECT_HEIGHT * 0.5, true)
@@ -447,7 +447,7 @@ module.exports = class CanvasTemplates {
     ctx.drawImage(valueSVG, TITLE_X - iconWidth * 0.5, TITLE_Y - iconHeight * 0.5, iconWidth, iconHeight)
 
     ctx.fillStyle = '#000000'
-    ctx.write(title, TITLE_X + TITLE_RECT_INNER_MARGIN, TITLE_Y, FONTS.TITLE, ALIGN.CENTER_LEFT)
+    ctx.write(title, TITLE_X + TITLE_RECT_INNER_MARGIN * 1.5, TITLE_Y, FONTS.TITLE, ALIGN.CENTER_LEFT)
 
     return canvas.toBuffer()
   }
