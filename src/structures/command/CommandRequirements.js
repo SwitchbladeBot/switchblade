@@ -90,15 +90,11 @@ module.exports = class CommandRequirements {
     }
   }
 
-  applyCooldown (user, time) {
+  applyCooldown (user, time = this.cooldown.time) {
     if (!user || !this.cooldown.enabled) return false
-    time = time || this.cooldown.time
-
     if (!this.cooldownMap.has(user.id)) {
       this.cooldownMap.set(user.id, Date.now())
-      user.client.setTimeout(() => {
-        this.cooldownMap.delete(user.id)
-      }, time * 1000)
+      user.client.setTimeout(() => this.cooldownMap.delete(user.id), time * 1000)
     }
   }
 }

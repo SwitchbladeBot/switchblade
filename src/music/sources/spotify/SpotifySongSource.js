@@ -37,8 +37,12 @@ module.exports = class SpotifySongSource extends SongSource {
   static async provideTrack (manager, track, requestedBy) {
     const video = await this.getClosestVideo(manager, track)
     if (video) {
-      const [ song ] = await manager.fetchTracks(video.id.videoId)
-      return new SpotifySong(song, requestedBy, track).loadInfo()
+      try {
+        const [ song ] = await manager.fetchTracks(video.id.videoId)
+        return new SpotifySong(song, requestedBy, track).loadInfo()
+      } catch(e) {
+        return null
+      }
     }
   }
 

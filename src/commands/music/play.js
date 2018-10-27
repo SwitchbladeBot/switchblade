@@ -9,7 +9,13 @@ module.exports = class Play extends Command {
     this.aliases = []
     this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, playerManagerOnly: true })
+    this.requirements = new CommandRequirements(this, {
+      guildOnly: true,
+      sameVoiceChannelOnly: true,
+      voiceChannelOnly: true,
+      playerManagerOnly: true
+    })
+
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' })
     )
@@ -50,7 +56,7 @@ module.exports = class Play extends Command {
     } else if (res instanceof Playlist) {
       this.playlistFeedback({ t, channel }, res, t)
       return Promise.all(res.songs.map(song => {
-        this.songFeedback({ t, channel }, song, false, false)
+        this.songFeedback({ t, channel }, song, false, true)
         return playerManager.play(song, voiceChannel)
       }))
     }

@@ -50,6 +50,7 @@ module.exports = class Command {
     args = this.handleParameters(context, args)
     if (args instanceof CommandError) return this.error(context, args.content, args.showUsage)
 
+    this.applyCooldown(context.author)
     return this.run(context, ...args)
   }
 
