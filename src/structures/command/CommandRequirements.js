@@ -21,7 +21,7 @@ module.exports = class CommandRequirements {
     this.guildPlaying = !!options.guildPlaying
 
     this.databaseOnly = !!options.databaseOnly
-    this.playerManagerOnly = !!options.playerManagerOnly
+    this.playerManagerOnly = this.guildPlaying || !!options.playerManagerOnly
 
     this.errors = Object.assign({
       databaseOnly: 'errors:databaseOnly',

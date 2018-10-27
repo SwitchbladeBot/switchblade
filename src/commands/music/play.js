@@ -72,11 +72,11 @@ module.exports = class Play extends Command {
     const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
     const songName = `[${song.title}](${song.uri}) ${duration}`
 
-    song.once('end', () => send(`${Constants.STOP_BUTTON} ${t('music:hasEnded', { songName })}`))
+    song.on('end', () => send(`${Constants.STOP_BUTTON} ${t('music:hasEnded', { songName })}`))
     song.once('stop', u => send(`${Constants.STOP_BUTTON} ${t('music:queueIsEmpty')}`, u))
 
     if (startFeedback) {
-      song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:startedPlaying', { songName })}`))
+      song.on('start', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:startedPlaying', { songName })}`))
     }
 
     if (queueFeedback) {
