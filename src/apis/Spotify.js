@@ -24,6 +24,18 @@ module.exports = class SpotifyAPI extends APIWrapper {
     return this.request(`/albums/${id}`)
   }
 
+  getPlaylist (id) {
+    return this.request(`/playlists/${id}`)
+  }
+
+  getPlaylistTracks (id, fields = 'fields=items(track(name,artists(name)))') {
+    return this.request(`/playlists/${id}/tracks`, { fields })
+  }
+
+  getTrack (id) {
+    return this.request(`/tracks/${id}`)
+  }
+
   // Request
   async request (endpoint, queryParams = {}) {
     if (this.isTokenExpired) await this.getToken()
