@@ -40,7 +40,7 @@ module.exports = class SpotifySongSource extends SongSource {
       try {
         const [ song ] = await manager.fetchTracks(video.id.videoId)
         return new SpotifySong(song, requestedBy, track).loadInfo()
-      } catch(e) {
+      } catch (e) {
         return null
       }
     }
