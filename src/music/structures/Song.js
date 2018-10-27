@@ -31,6 +31,15 @@ module.exports = class Song extends EventEmitter {
 
   get formattedDuration () {
     if (this.isStream) return ''
-    return moment.duration(this.length).format(this.length >= 3600000 ? 'hh:mm:ss' : 'mm:ss', { trim: false })
+    return moment.duration(this.length).format('hh:mm:ss', { stopTrim: 'm' })
+  }
+
+  // Images
+  get backgroundImage () {
+    return this.artwork
+  }
+
+  get mainImage () {
+    return this.artwork
   }
 }

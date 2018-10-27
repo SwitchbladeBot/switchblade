@@ -26,7 +26,9 @@ module.exports = class GeniusAPI extends APIWrapper {
 
   // Default
   request (endpoint, queryParams = {}) {
-    const query = Object.keys(queryParams).map(k => `${k}=${queryParams[k]}`).join('&')
-    return snekfetch.get(`${API_URL}${endpoint}?${query}`).set('Authorization', `Bearer ${process.env.GENIUS_API}`).then(r => r.body)
+    return snekfetch.get(`${API_URL}${endpoint}`)
+      .query(queryParams)
+      .set('Authorization', `Bearer ${process.env.GENIUS_API}`)
+      .then(r => r.body)
   }
 }

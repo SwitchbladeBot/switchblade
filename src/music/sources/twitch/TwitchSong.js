@@ -31,4 +31,8 @@ module.exports = class TwitchSong extends Song {
     }
     return this
   }
+
+  get backgroundImage () {
+    return this.richInfo.thumbnailUrl || this.artwork
+  }
 }

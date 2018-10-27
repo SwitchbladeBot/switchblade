@@ -224,7 +224,7 @@ module.exports = class Switchblade extends Client {
     this.database.connect()
       .then(() => this.log('Database connection established!', 'DB'))
       .catch(e => {
-        this.logError(e.message, 'DB')
+        this.logError('DB', e.message)
         this.database = null
       })
   }

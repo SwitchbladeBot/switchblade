@@ -3,8 +3,8 @@ const { Command, CommandRequirements, Constants, SwitchbladeEmbed } = require('.
 module.exports = class Skip extends Command {
   constructor (client) {
     super(client)
-    this.name = 'next'
-    this.aliases = ['skip']
+    this.name = 'skip'
+    this.aliases = ['next']
     this.category = 'music'
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true })

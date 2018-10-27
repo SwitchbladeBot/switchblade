@@ -132,7 +132,7 @@
     "noQuestion": "You need to give me something to be voted",
     "tooManyOptions": "You can't exceed {{maxOptions}} options"
   },
-  "nowPlaying": {
+  "nowplaying": {
     "commandDescription": "Shows the name of the song being played"
   },
   "pause": {
@@ -150,7 +150,8 @@
     "commandDescription": "Skips the current song"
   },
   "stop": {
-    "commandDescription": "Stops the music playback"
+    "commandDescription": "Stops the music playback",
+    "stopped": "Playback has been stopped, leaving the voice channel."
   },
   "volume": {
     "commandDescription": "Adjusts the volume of the music playback",
@@ -328,6 +329,7 @@
     "commandDescription": "Change the current guild configuration",
     "guildLang": "To change the guild language, `{{command}} language <language code>`",
     "guildPrefix": "To change the guild prefix, `{{command}} prefix <new prefix>`",
+    "missingTranslation": "**(A few translations might be missing)**",
     "subcommands": {
       "language": {
         "commandDescription": "Change the current guild language",
@@ -489,4 +491,42 @@
       }
     }
   },
+  "bolinadegorfe": {
+    "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker"
+  },
+  "eval": {
+    "commandDescription": "Evals a JS string"
+  },
+  "oddlysatisfying": {
+    "commandDescription": "Random image from /r/oddlysatisfying"
+  },
+  "geekjokes": {
+    "commandDescription": "Random geekjoke"
+  },
+  "aww": {
+    "title": "Here is some eyebleach for ya!",
+    "commandDescription": "Random image from /r/aww"
+  },
+  "videochat": {
+    "commandDescription": "Enables videochat for the voice channel that you're currently connected to and shares a link to it (Beta feature!)",
+    "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}})`"
+  },
+  "vaporwave": {
+    "commandDescription": "Vaporwavefies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to vaporwavefy"
+  },
+  "emojify": {
+    "commandDescription": "Emojifies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to emojify"
+  },
+  "fox": {
+    "commandDescription": "Fetches a random image of a fox",
+    "hereIsYourFox": "Here's your fox!"
+  },
+  "birb": {
+    "commandDescription": "Fetches a random image of a birb",
+    "hereIsYourBirb": "Here's your birb!"
+  }
 }
