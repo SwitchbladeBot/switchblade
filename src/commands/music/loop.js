@@ -1,6 +1,6 @@
-const { Command, CommandRequirements, Constants, SwitchbladeEmbed } = require('../../')
+const { Command, CommandRequirements, SwitchbladeEmbed } = require('../../')
 
-module.exports = class Pause extends Command {
+module.exports = class Loop extends Command {
   constructor (client) {
     super(client)
     this.name = 'loop'
