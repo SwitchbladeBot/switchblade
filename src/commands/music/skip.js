@@ -7,7 +7,7 @@ module.exports = class Skip extends Command {
     this.aliases = ['next']
     this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, playerManagerOnly: true })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true })
   }
 
   async run ({ t, author, channel, guild }) {
