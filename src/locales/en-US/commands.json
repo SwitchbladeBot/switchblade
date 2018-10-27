@@ -519,8 +519,7 @@
   "birb": {
     "commandDescription": "Fetches a random image of a birb",
     "hereIsYourBirb": "Here's your birb!"
-  }
-},
+  },
   "zap": {
     "commandDescription": "Adds emoji to a sentence based on context",
     "commandUsage": "<sentence>",
