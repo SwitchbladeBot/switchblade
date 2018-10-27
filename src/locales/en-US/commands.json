@@ -522,5 +522,5 @@
   },
   "loop": {
     "commandDescription": "Activates or deactivates the music playback's loop mode"
-  },
+  }
 }
