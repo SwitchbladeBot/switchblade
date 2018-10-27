@@ -519,8 +519,7 @@
   "birb": {
     "commandDescription": "Fetches a random image of a birb",
     "hereIsYourBirb": "Here's your birb!"
-  }
-},
+  },
   "mcquery": {
     "commandDescription": "Fetch info from a MC:PC server.",
     "commandUsage": "<address:port>",
