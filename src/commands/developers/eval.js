@@ -20,7 +20,7 @@ module.exports = class Eval extends Command {
 
   async run ({ channel, message }, expr) {
     try {
-      const evaled = await eval(expr)
+      const evaled = await eval(expr.replace(/(^`{3}(\w+)?|`{3}$)/g, ''))
       const cleanEvaled = this.clean(util.inspect(evaled, { depth: 0 }))
       await channel.send(cleanEvaled, { code: 'xl' })
     } catch (err) {
