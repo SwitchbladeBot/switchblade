@@ -522,5 +522,11 @@
   },
   "loop": {
     "commandDescription": "Activates or deactivates the music playback's loop mode"
+  },
+  "time": {
+    "commandDescription": "Get the current time in a specified place",
+    "commandUsage": "<timezone>",
+    "invalidTimezone": "You need to give me an `iana tz database` timezone or timezone abbreviation",
+    "currentTime": "The current time in {{timezone}} is"
   }
 }
