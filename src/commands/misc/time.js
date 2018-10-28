@@ -23,15 +23,17 @@ module.exports = class Time extends Command {
     super(client)
     this.name = 'time'
     this.aliases = ['currenttime']
+    this.category = 'general'
 
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:time.invalidTimezone' })
     )
   }
 
-  run ({ t, author, channel }, requestedTz) {
+  run ({ t, author, channel, guildDocument }, requestedTz) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
+    moment.locale(guildDocument.language)
 
     let reqTz = requestedTz
 
@@ -43,7 +45,7 @@ module.exports = class Time extends Command {
     if (!moment.tz.zone(reqTz)) {
       time = t('commands:time.invalidTimezone')
     } else {
-      time = moment.tz(reqTz).format('D MMM hh:mma z')
+      time = moment.tz(reqTz).format('LLLL [(]z[)]')
     }
 
     embed
