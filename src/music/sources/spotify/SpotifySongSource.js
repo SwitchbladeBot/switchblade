@@ -19,7 +19,7 @@ module.exports = class SpotifySongSource extends SongSource {
         const track = await manager.client.apis.spotify.getTrack(trackID)
         return this.provideTrack(manager, track, requestedBy)
       } else if (SPOTIFY_ALBUM_URL_REGEX.test(identifier)) {
-        const [ , albumID ] = SPOTIFY_ALBUM_URL_REGEX.exec(identifer)
+        const [ , albumID ] = SPOTIFY_ALBUM_URL_REGEX.exec(identifier)
         const album = await manager.client.apis.spotify.getAlbum(albumID)
         return this.provideAlbum(manager, album, requestedBy)
       } else if (SPOTIFY_PLAYLIST_URL_REGEX.test(identifier)) {
