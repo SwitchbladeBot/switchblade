@@ -41,17 +41,18 @@ module.exports = class SpotifySongSource extends SongSource {
 
   static async provideAlbum (manager, album, requestedBy) {
     const { items } = await manager.client.apis.spotify.getAlbumTracks(album.id)
-    const videos = (await Promise.all(items.map((track) => this.provideTrack(manager, track, requestedBy)))).filter(i => !!i)
+    const videos = (await Promise.all(items.map((track) => this.provideTrack(manager, track, requestedBy, album)))).filter(i => !!i)
     return new SpotifyPlaylist(album, videos, requestedBy).loadInfo()
   }
 
-  static async provideTrack (manager, track, requestedBy) {
+  static async provideTrack (manager, track, requestedBy, album = track.album) {
     const video = await this.getClosestVideo(manager, track)
     if (video) {
       try {
         const [ song ] = await manager.fetchTracks(video.id.videoId)
-        return new SpotifySong(song, requestedBy, track).loadInfo()
+        return new SpotifySong(song, requestedBy, track, album).loadInfo()
       } catch (e) {
+        console.error(e)
         return null
       }
     }
