@@ -41,7 +41,7 @@ module.exports = class SpotifySongSource extends SongSource {
 
   static async provideAlbum (manager, album, requestedBy) {
     const { items } = await manager.client.apis.spotify.getAlbumTracks(album.id)
-    const videos = (await Promise.all(items.map(({ track }) => this.provideTrack(manager, track, requestedBy)))).filter(i => !!i)
+    const videos = (await Promise.all(items.map((track) => this.provideTrack(manager, track, requestedBy)))).filter(i => !!i)
     return new SpotifyPlaylist(album, videos, requestedBy).loadInfo()
   }
 
