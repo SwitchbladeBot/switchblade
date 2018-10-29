@@ -24,6 +24,10 @@ module.exports = class SpotifyAPI extends APIWrapper {
     return this.request(`/albums/${id}`)
   }
 
+  getAlbumTracks (id, limit = 50) {
+    return this.request(`/albums/${id}/tracks`)
+  }
+
   getPlaylist (id) {
     return this.request(`/playlists/${id}`)
   }

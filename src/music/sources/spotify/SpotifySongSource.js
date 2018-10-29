@@ -4,11 +4,12 @@ const SpotifyPlaylist = require('./SpotifyPlaylist.js')
 const SpotifySong = require('./SpotifySong.js')
 
 const SPOTIFY_TRACK_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/track\/([a-zA-Z\d-_]+)+$/
-const SPOTIFY_PLAYLIST_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/playlist\/([a-zA-Z\d-_]+)+$/
+const SPOTIFY_ALBUM_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/album\/([a-zA-Z\d-_]+)+$/
+const SPOTIFY_PLAYLIST_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com(?:\/user\/[a-zA-Z\d-_]+)?\/playlist\/([a-zA-Z\d-_]+)+$/
 
 module.exports = class SpotifySongSource extends SongSource {
   static test (identifier) {
-    return SPOTIFY_TRACK_URL_REGEX.test(identifier) || SPOTIFY_PLAYLIST_URL_REGEX.test(identifier)
+    return SPOTIFY_TRACK_URL_REGEX.test(identifier) || SPOTIFY_ALBUM_URL_REGEX.test(identifier) || SPOTIFY_PLAYLIST_URL_REGEX.test(identifier)
   }
 
   static async provide (manager, identifier, requestedBy) {
@@ -17,6 +18,10 @@ module.exports = class SpotifySongSource extends SongSource {
         const [ , trackID ] = SPOTIFY_TRACK_URL_REGEX.exec(identifier)
         const track = await manager.client.apis.spotify.getTrack(trackID)
         return this.provideTrack(manager, track, requestedBy)
+      } else if (SPOTIFY_ALBUM_URL_REGEX.test(identifier)) {
+        const [ , albumID ] = SPOTIFY_ALBUM_URL_REGEX.exec(identifer)
+        const album = await manager.client.apis.spotify.getAlbum(albumID)
+        return this.provideAlbum(manager, album, requestedBy)
       } else if (SPOTIFY_PLAYLIST_URL_REGEX.test(identifier)) {
         const [ , playlistID ] = SPOTIFY_PLAYLIST_URL_REGEX.exec(identifier)
         const playlist = await manager.client.apis.spotify.getPlaylist(playlistID)
@@ -32,6 +37,12 @@ module.exports = class SpotifySongSource extends SongSource {
     const { items } = await manager.client.apis.spotify.getPlaylistTracks(playlist.id)
     const videos = (await Promise.all(items.map(({ track }) => this.provideTrack(manager, track, requestedBy)))).filter(i => !!i)
     return new SpotifyPlaylist(playlist, videos, requestedBy).loadInfo()
+  }
+
+  static async provideAlbum (manager, album, requestedBy) {
+    const { items } = await manager.client.apis.spotify.getAlbumTracks(album.id)
+    const videos = (await Promise.all(items.map(({ track }) => this.provideTrack(manager, track, requestedBy)))).filter(i => !!i)
+    return new SpotifyPlaylist(album, videos, requestedBy).loadInfo()
   }
 
   static async provideTrack (manager, track, requestedBy) {
