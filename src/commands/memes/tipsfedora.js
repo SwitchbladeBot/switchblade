@@ -1,10 +1,11 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-module.exports = class Smart extends Command {
+module.exports = class TipsFedora extends Command {
   constructor (client) {
     super(client)
 
     this.name = 'tipsfedora'
+    this.category = 'memes'
   }
 
   run ({ author, channel }) {

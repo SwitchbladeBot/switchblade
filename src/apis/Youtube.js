@@ -25,8 +25,12 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   getBestThumbnail (thumbnails) {
-    if (!thumbnails) return null
-    const { medium, high, standard, maxres } = thumbnails
-    return maxres || standard || high || medium || thumbnails['default']
+    if (!thumbnails) return {}
+    const { high, maxres, medium, standard } = thumbnails
+    return maxres || high || medium || standard || thumbnails['default']
+  }
+
+  searchVideos (query, part = 'snippet', maxResults = 5) {
+    return this.Youtube.search.list({ q: query, type: 'video', part, maxResults }).then(r => r.data)
   }
 }

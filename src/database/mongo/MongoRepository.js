@@ -34,7 +34,7 @@ module.exports = class MongoRepository extends Repository {
   }
 
   get (id) {
-    return this.findOne(id).then(e => this.parse(e) || this.add({_id: id}))
+    return this.findOne(id).then(e => this.parse(e) || this.add({ _id: id }))
   }
 
   remove (id) {

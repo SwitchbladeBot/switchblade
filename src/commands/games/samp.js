@@ -6,20 +6,20 @@ module.exports = class SAMP extends Command {
   constructor (client) {
     super(client)
     this.name = 'samp'
+    this.category = 'games'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({missingError: 'commands:samp.noIP'})
+      new StringParameter({ missingError: 'commands:samp.noIP' })
     )
   }
 
   async run ({ t, author, channel }, address) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const host = address.split(':')[0]
-    const port = address.split(':')[1] || 7777
+    const [ host, port = 7777 ] = address.split(':')
     try {
-      const response = await this.queryPromise({host, port})
-      embed.setAuthor('San Andreas: Multiplayer', 'http://1.bp.blogspot.com/-AY3d9tMV8nM/Ton8LlgoJgI/AAAAAAAAAMg/VFID_9mI-Co/s1600/SAMP.png')
+      const response = await this.queryPromise({ host, port })
+      embed.setAuthor('San Andreas: Multiplayer', 'https://i.imgur.com/QYeGxrV.png')
         .setColor(0xF07B0F)
         .setTitle(response.hostname)
         .setURL(this.cleanURL(response.rules.weburl))
@@ -42,17 +42,16 @@ module.exports = class SAMP extends Command {
     channel.send(embed).then(channel.stopTyping())
   }
 
-  queryPromise (options) {
+  async queryPromise (options) {
     return new Promise((resolve, reject) => {
       query(options, function (error, response) {
-        if (error) reject(error)
-        else resolve(response)
+        if (error) return reject(error)
+        resolve(response)
       })
     })
   }
 
   cleanURL (url) {
-    if (!/^https?:\/\//i.test(url)) return 'http://' + url
-    return url
+    return /^https?:\/\//i.test(url) ? url : `http://${url}`
   }
 }

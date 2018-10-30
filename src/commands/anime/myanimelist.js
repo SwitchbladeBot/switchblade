@@ -7,9 +7,10 @@ module.exports = class MyAnimeList extends Command {
     super(client)
     this.name = 'myanimelist'
     this.aliases = ['mal']
+    this.category = 'anime'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:myanimelist.noAnime'})
+      new StringParameter({ full: true, missingError: 'commands:myanimelist.noAnime' })
     )
   }
 
@@ -28,7 +29,7 @@ module.exports = class MyAnimeList extends Command {
           .setURL(data.url)
           .setAuthor('MyAnimeList', 'https://myanimelist.cdn-dena.com/img/sp/icon/apple-touch-icon-256.png')
           .addField(t('commands:myanimelist.score'), `${data.score} (${data.ranked})`, true)
-          .addField(t('commands:myanimelist.studio', {count: data.studios.length}), data.studios.join(', '), true)
+          .addField(t('commands:myanimelist.studio', { count: data.studios.length }), data.studios.join(', '), true)
           .addField(t('commands:myanimelist.episodes'), data.episodes, true)
           .addField(t('commands:myanimelist.aired'), data.aired, true)
       }

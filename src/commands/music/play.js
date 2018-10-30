@@ -7,10 +7,17 @@ module.exports = class Play extends Command {
     super(client)
     this.name = 'play'
     this.aliases = []
+    this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, {guildOnly: true, voiceChannelOnly: true, playerManagerOnly: true})
+    this.requirements = new CommandRequirements(this, {
+      guildOnly: true,
+      sameVoiceChannelOnly: true,
+      voiceChannelOnly: true,
+      playerManagerOnly: true
+    })
+
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:play.noTrackIdentifier'})
+      new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' })
     )
   }
 
@@ -19,9 +26,13 @@ module.exports = class Play extends Command {
     channel.startTyping()
     const playerManager = this.client.playerManager
     try {
-      const res = await playerManager.loadTracks(identifier, author) || await playerManager.loadTracks(`ytsearch:${identifier}`, author)
-      if (res) {
-        this.loadSongs({ t, channel, voiceChannel }, res, playerManager).then(() => channel.stopTyping())
+      let { result, tryAgain } = await playerManager.loadTracks(identifier, author)
+      if (tryAgain && !result) {
+        result = (await playerManager.loadTracks(`ytsearch:${identifier}`, author)).result
+      }
+
+      if (result) {
+        this.loadSongs({ t, channel, voiceChannel }, result, playerManager).then(() => channel.stopTyping())
       } else {
         embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('music:songNotFound'))
@@ -45,7 +56,7 @@ module.exports = class Play extends Command {
     } else if (res instanceof Playlist) {
       this.playlistFeedback({ t, channel }, res, t)
       return Promise.all(res.songs.map(song => {
-        this.songFeedback({ t, channel }, song, false, false)
+        this.songFeedback({ t, channel }, song, false, true)
         return playerManager.play(song, voiceChannel)
       }))
     }
@@ -59,7 +70,7 @@ module.exports = class Play extends Command {
     channel.send(
       new SwitchbladeEmbed()
         .setThumbnail(playlist.artwork)
-        .setDescription(`${Constants.PLAY_BUTTON} ${t('music:addedFromPlaylist', {count, playlistName, duration})}`)
+        .setDescription(`${Constants.PLAY_BUTTON} ${t('music:addedFromPlaylist', { count, playlistName, duration })}`)
     )
   }
 
@@ -71,15 +82,15 @@ module.exports = class Play extends Command {
     const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
     const songName = `[${song.title}](${song.uri}) ${duration}`
 
-    song.once('end', () => send(`${Constants.STOP_BUTTON} ${t('music:hasEnded', {songName})}`))
+    song.on('end', () => send(`${Constants.STOP_BUTTON} ${t('music:hasEnded', { songName })}`))
     song.once('stop', u => send(`${Constants.STOP_BUTTON} ${t('music:queueIsEmpty')}`, u))
 
     if (startFeedback) {
-      song.once('start', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:startedPlaying', {songName})}`))
+      song.on('start', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:startedPlaying', { songName })}`))
     }
 
     if (queueFeedback) {
-      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:addedToTheQueue', {songName})}`))
+      song.once('queue', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:addedToTheQueue', { songName })}`))
     }
   }
 }

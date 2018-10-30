@@ -7,9 +7,10 @@ module.exports = class Binary extends Command {
     super(client)
     this.name = 'binary'
     this.aliases = ['t2b', 'texttobinary', 'ttb']
+    this.category = 'utility'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:binary.missingText'})
+      new StringParameter({ full: true, missingError: 'commands:binary.missingText' })
     )
   }
 

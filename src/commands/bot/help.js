@@ -8,9 +8,10 @@ module.exports = class Help extends Command {
     super(client)
     this.name = 'help'
     this.aliases = ['commands', 'ajuda']
+    this.category = 'bot'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, required: false})
+      new StringParameter({ full: true, required: false })
     )
   }
 
@@ -45,15 +46,23 @@ module.exports = class Help extends Command {
           .setTitle(t('commands:help.commandNotFound'))
       }
     } else {
-      const commands = validCommands.map(c => `\`${c.name}\``).sort((a, b) => a.localeCompare(b)).join('**, **')
-      embed.setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL)
+      embed
+        .setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL)
         .setDescription([
-          commands,
-          '',
-          `**${t('commands:help.prefix')}:** \`${prefix}\` (${t('commands:help.youCanUse', {botMention: this.client.user})})`,
-          '',
-          `**${t('commands:help.specificInformation', {helpString: `\`${prefix}${this.name} ${t('commands:help.commandUsage')}\``})}**`
+          `**${t('commands:help.prefix')}:** \`${prefix}\` (${t('commands:help.youCanUse', { botMention: this.client.user })})`,
+          `**${t('commands:help.specificInformation', { helpString: `\`${prefix}${this.name} ${t('commands:help.commandUsage')}\`` })}**`
         ].join('\n'))
+
+      const categories = validCommands.map(c => c.category).filter((v, i, a) => a.indexOf(v) === i)
+      categories
+        .sort((a, b) => t(`categories:${a}`).localeCompare(t(`categories:${b}`)))
+        .forEach(category => {
+          const commands = validCommands
+            .filter(c => c.category === category)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(c => `\`${c.name}\``).join('**, **')
+          embed.addField(t(`categories:${category}`), commands, false)
+        })
     }
     channel.send(embed)
   }

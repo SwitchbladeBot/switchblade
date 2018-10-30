@@ -9,7 +9,7 @@ module.exports = class Strawpoll extends Command {
     this.name = 'strawpoll'
     this.aliases = ['spoll', 'strawp']
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, missingError: 'commands:strawpoll.noParameters'})
+      new StringParameter({ full: true, missingError: 'commands:strawpoll.noParameters' })
     )
   }
 
@@ -24,9 +24,9 @@ module.exports = class Strawpoll extends Command {
         headers: {
           'Content-Type': 'application/json'
         },
-        data: {title, options}
+        data: { title, options }
       }
-      const {body} = await snekfetch.post('https://strawpoll.me/api/v2/polls', strawOptions)
+      const { body } = await snekfetch.post('https://strawpoll.me/api/v2/polls', strawOptions)
 
       embed
         .setColor(0xffd756)
