@@ -9,7 +9,7 @@ module.exports = class Queue extends Command {
     this.aliases = ['playlist']
     this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true, playerManagerOnly: true })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true })
   }
 
   async run ({ t, author, channel, guild }) {

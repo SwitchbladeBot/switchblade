@@ -15,11 +15,13 @@ module.exports = class CommandRequirements {
     this.guildOnly = !!options.guildOnly
     this.onlyOldAccounts = !!options.onlyOldAccounts
     this.nsfwOnly = !!options.nsfwOnly
+
+    this.sameVoiceChannelOnly = !!options.sameVoiceChannelOnly
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
 
     this.databaseOnly = !!options.databaseOnly
-    this.playerManagerOnly = !!options.playerManagerOnly
+    this.playerManagerOnly = this.guildPlaying || !!options.playerManagerOnly
 
     this.errors = Object.assign({
       databaseOnly: 'errors:databaseOnly',
@@ -27,6 +29,7 @@ module.exports = class CommandRequirements {
       devOnly: 'errors:developerOnly',
       guildOnly: 'errors:guildOnly',
       nsfwOnly: 'errors:nsfwOnly',
+      sameVoiceChannelOnly: 'errors:sameVoiceChannelOnly',
       voiceChannelOnly: 'errors:voiceChannelOnly',
       guildPlaying: 'errors:notPlaying',
       cooldown: 'errors:cooldown',
@@ -53,6 +56,10 @@ module.exports = class CommandRequirements {
 
     if (this.nsfwOnly && guild && !channel.nsfw) {
       return new CommandError(t(this.errors.nsfwOnly))
+    }
+
+    if (this.sameVoiceChannelOnly && guild.me.voiceChannelID && (!voiceChannel || guild.me.voiceChannelID !== voiceChannel.id)) {
+      return new CommandError(t(this.errors.sameVoiceChannelOnly))
     }
 
     if (this.voiceChannelOnly && !voiceChannel) {
@@ -83,15 +90,11 @@ module.exports = class CommandRequirements {
     }
   }
 
-  applyCooldown (user, time) {
+  applyCooldown (user, time = this.cooldown.time) {
     if (!user || !this.cooldown.enabled) return false
-    time = time || this.cooldown.time
-
     if (!this.cooldownMap.has(user.id)) {
       this.cooldownMap.set(user.id, Date.now())
-      user.client.setTimeout(() => {
-        this.cooldownMap.delete(user.id)
-      }, time * 1000)
+      user.client.setTimeout(() => this.cooldownMap.delete(user.id), time * 1000)
     }
   }
 }

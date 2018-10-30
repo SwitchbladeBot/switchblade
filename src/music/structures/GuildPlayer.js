@@ -5,10 +5,10 @@ module.exports = class GuildPlayer extends Player {
   constructor (options = {}) {
     super(options)
 
-    this.on('end', (data) => {
-      if (data.reason === 'REPLACED') return
+    this.on('end', ({ reason }) => {
+      if (reason === 'REPLACED') return
       this.playingSong.emit('end')
-      if (data.reason !== 'STOPPED') this.next()
+      if (reason !== 'STOPPED') this.next()
     })
 
     this.on('stop', () => {
@@ -20,6 +20,7 @@ module.exports = class GuildPlayer extends Player {
 
     this.queue = []
     this._volume = 25
+    this._loop = false
   }
 
   event (message) {
@@ -51,6 +52,7 @@ module.exports = class GuildPlayer extends Player {
   }
 
   next (user) {
+    if (this._loop) this.play(this.playingSong)
     const nextSong = this.queue.shift()
     if (nextSong) {
       this.play(nextSong, true)
@@ -62,9 +64,17 @@ module.exports = class GuildPlayer extends Player {
     }
   }
 
-  volume (volume) {
+  volume (volume = 50) {
     this._volume = volume
     super.volume(volume)
+  }
+
+  get looping () {
+    return this._loop
+  }
+
+  loop (loop = true) {
+    this._loop = !!loop
   }
 
   // Helpers

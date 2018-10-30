@@ -11,7 +11,7 @@ module.exports = class NowPlaying extends Command {
     this.aliases = ['np', 'currentplaying']
     this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true, playerManagerOnly: true })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true })
     this.parameters = new CommandParameters(this, [ new BooleanFlagParameter({ name: 'text' }) ])
   }
 

@@ -520,6 +520,15 @@
     "commandDescription": "Fetches a random image of a birb",
     "hereIsYourBirb": "Here's your birb!"
   },
+  "loop": {
+    "commandDescription": "Activates or deactivates the music playback's loop mode"
+  },
+  "time": {
+    "commandDescription": "Get the current time in a specified place",
+    "commandUsage": "<timezone>",
+    "invalidTimezone": "You need to give me an `iana tz database` timezone or timezone abbreviation",
+    "currentTime": "The current time in {{timezone}} is"
+  },
   "mcquery": {
     "commandDescription": "Fetch info from a MC:PC server.",
     "commandUsage": "<address:port>",
