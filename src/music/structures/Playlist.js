@@ -15,6 +15,7 @@ module.exports = class Playlist extends EventEmitter {
 
   loadInfo () {
     this.songs = this.songs.map(s => new Song(s, this.requestedBy))
+    return this
   }
 
   get length () {
