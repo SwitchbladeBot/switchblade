@@ -482,6 +482,19 @@
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme"
   },
+  "leaderboard": {
+    "commandDescription": "Shows a leaderboard",
+    "subcommands": {
+      "money": {
+        "commandDescription": "Shows a list of the richest users",
+        "title": "Money Leaderboard"
+      },
+      "reputation": {
+        "commandDescription": "Shows a list of the users with the most reputation points",
+        "title": "Reputation Leaderboard"
+      }
+    }
+  },
   "bolinadegorfe": {
     "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker"
   },
