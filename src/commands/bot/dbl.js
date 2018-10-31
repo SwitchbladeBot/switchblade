@@ -26,7 +26,7 @@ module.exports = class DBL extends Command {
         .setTitle(t('commands:dbl.alreadyClaimed'))
         .setDescription(t('commons:youCanDoItAgainIn', { time }))
     } else {
-      const { body } = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.id}/check?userId=${author.id}`, {
+      const { body } = await snekfetch.get(`https://discordbots.org/api/bots/445277324175474689/check?userId=${author.id}`, {
         headers: {
           'Authorization': process.env.DBL_TOKEN
         }
@@ -40,7 +40,7 @@ module.exports = class DBL extends Command {
         embed.setDescription(t('commands:dbl.thanksForVoting', { count: count }))
       } else {
         embed
-          .setDescription(t('commands:dbl.howToVote', { link: `https://discordbots.org/bots/${this.client.user.id}`, command: `${prefix}${alias || this.name}` }))
+          .setDescription(t('commands:dbl.howToVote', { link: `https://discordbots.org/bot/${this.client.user.id}`, command: `${prefix}${alias || this.name}` }))
       }
     }
     channel.send(embed).then(() => channel.stopTyping())
