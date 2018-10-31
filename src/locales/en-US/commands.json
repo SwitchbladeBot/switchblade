@@ -482,6 +482,19 @@
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme"
   },
+  "leaderboard": {
+    "commandDescription": "Shows a leaderboard",
+    "subcommands": {
+      "money": {
+        "commandDescription": "Shows a list of the richest users",
+        "title": "Money Leaderboard"
+      },
+      "reputation": {
+        "commandDescription": "Shows a list of the users with the most reputation points",
+        "title": "Reputation Leaderboard"
+      }
+    }
+  },
   "bolinadegorfe": {
     "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker"
   },
@@ -528,6 +541,12 @@
     "commandUsage": "<timezone>",
     "invalidTimezone": "You need to give me an `iana tz database` timezone or timezone abbreviation",
     "currentTime": "The current time in {{timezone}} is"
+  },
+  "dbl": {
+    "commandDescription": "Gives you a bonus for voting on Discord Bot List",
+    "alreadyClaimed": "You've already claimed your DBL bonus today",
+    "howToVote": "**[Vote on DBL]({{link}})** and then run `{{command}}` again to claim your bonus",
+    "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
   },
   "zap": {
     "commandDescription": "Adds emoji to a sentence based on context",

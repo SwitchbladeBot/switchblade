@@ -31,15 +31,18 @@ module.exports = {
 
   // Icons PNG
   DEFAULT_SONG_PNG: 'src/assets/png/default_song.png',
+  DEFAULT_AVATAR_PNG: 'src/assets/png/default_avatar.png',
 
   // Icons SVG
   COINS_SVG: 'src/assets/svg/coins.svg',
   DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
   REPUTATION_SVG: 'src/assets/svg/reputation.svg',
+  MEDAL_SVG: 'src/assets/svg/medal.svg',
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
 
   // Backgrounds
-  DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png'
+  DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
+  TESTING_BACKGROUND_PNG: 'src/assets/png/backgrounds/testing.png'
 }

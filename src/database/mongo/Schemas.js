@@ -13,7 +13,8 @@ module.exports = {
     blacklisterId: String,
     favColor: { type: String, default: process.env.EMBED_COLOR },
     rep: { type: Number, default: 0 },
-    lastRep: { type: Number, default: 0 }
+    lastRep: { type: Number, default: 0 },
+    lastDBLBonusClaim: { type: Number, default: 0 }
   }),
 
   // Guild Schema

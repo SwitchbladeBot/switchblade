@@ -3,9 +3,9 @@ const { SongSource } = require('../../structures')
 const SpotifyPlaylist = require('./SpotifyPlaylist.js')
 const SpotifySong = require('./SpotifySong.js')
 
-const SPOTIFY_TRACK_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/track\/([a-zA-Z\d-_]+)+$/
-const SPOTIFY_ALBUM_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/album\/([a-zA-Z\d-_]+)+$/
-const SPOTIFY_PLAYLIST_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com(?:\/user\/[a-zA-Z\d-_]+)?\/playlist\/([a-zA-Z\d-_]+)+$/
+const SPOTIFY_TRACK_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/track\/([a-zA-Z\d-_]+)/
+const SPOTIFY_ALBUM_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/album\/([a-zA-Z\d-_]+)/
+const SPOTIFY_PLAYLIST_URL_REGEX = /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com(?:\/user\/[a-zA-Z\d-_]+)?\/playlist\/([a-zA-Z\d-_]+)/
 
 module.exports = class SpotifySongSource extends SongSource {
   static test (identifier) {
