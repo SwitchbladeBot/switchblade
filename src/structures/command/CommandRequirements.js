@@ -80,7 +80,7 @@ module.exports = class CommandRequirements {
     if (this.permissions.length > 0) {
       if (!channel.permissionsFor(member).has(this.permissions)) {
         const permission = this.permissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
-        const sentence = this.permissions.length > 1 ? 'errors:missingOnePermission' : 'errors:missingMultiplePermissions'
+        const sentence = this.permissions.length >= 1 ? 'errors:missingOnePermission' : 'errors:missingMultiplePermissions'
         return new CommandError(t(sentence, { permission }))
       }
     }
@@ -88,7 +88,7 @@ module.exports = class CommandRequirements {
     if (this.botPermissions.length > 0) {
       if (!channel.permissionsFor(guild.me).has(this.permissions)) {
         const permission = this.botPermissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
-        const sentence = this.botPermissions.length > 1 ? 'errors:botMissingOnePermission' : 'errors:botMissingMultiplePermissions'
+        const sentence = this.botPermissions.length >= 1 ? 'errors:botMissingOnePermission' : 'errors:botMissingMultiplePermissions'
         return new CommandError(t(sentence, { permission }))
       }
     }
