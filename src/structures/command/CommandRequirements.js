@@ -9,6 +9,8 @@ module.exports = class CommandRequirements {
 
     this.permissions = options.permissions || []
 
+    this.botPermissions = options.botPermissions || []
+
     this.cooldown = Object.assign({ enabled: false, feedback: true, time: 1 }, options.cooldown)
 
     this.devOnly = !!options.devOnly
@@ -79,6 +81,14 @@ module.exports = class CommandRequirements {
       if (!channel.permissionsFor(member).has(this.permissions)) {
         const permission = this.permissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
         const sentence = this.permissions.length > 1 ? 'errors:missingOnePermission' : 'errors:missingMultiplePermissions'
+        return new CommandError(t(sentence, { permission }))
+      }
+    }
+
+    if (this.botPermissions.length > 0) {
+      if (!channel.permissionsFor(guild.me).has(this.permissions)) {
+        const permission = this.botPermissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
+        const sentence = this.botPermissions.length > 1 ? 'errors:botMissingOnePermission' : 'errors:botMissingMultiplePermissions'
         return new CommandError(t(sentence, { permission }))
       }
     }

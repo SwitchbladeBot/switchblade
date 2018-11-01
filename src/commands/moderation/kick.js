@@ -8,7 +8,7 @@ module.exports = class Kick extends Command {
     this.aliases = ['expulsar']
     this.category = 'moderation'
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, permissions: ['KICK_MEMBERS'] })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, botPermissions: ['KICK_MEMBERS'], permissions: ['KICK_MEMBERS'] })
     this.parameters = new CommandParameters(this,
       new MemberParameter({ acceptBot: true, missingError: 'commands:kick.missingUser' }),
       new StringParameter({ full: true, missingError: 'commands:kick.missingReason' })
@@ -17,22 +17,16 @@ module.exports = class Kick extends Command {
 
   async run ({ channel, guild, author, t }, member, reason) {
     const embed = new SwitchbladeEmbed(author)
-    if (!guild.me.hasPermission('KICK_MEMBERS')) {
+    await member.kick(reason).then(kickedMember => {
+      embed
+        .setTitle(t('commands:kick.successTitle'))
+        .setDescription(`${kickedMember} - \`${reason}\``)
+    }).catch(err => {
       embed
         .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:kick.noPermission'))
-    } else {
-      await member.kick(reason).then(kickedMember => {
-        embed
-          .setTitle(t('commands:kick.successTitle'))
-          .setDescription(`${kickedMember} - \`${reason}\``)
-      }).catch(err => {
-        embed
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:kick.cantKick'))
-          .setDescription(`\`${err}\``)
-      })
-    }
+        .setTitle(t('commands:kick.cantKick'))
+        .setDescription(`\`${err}\``)
+    })
     channel.send(embed)
   }
 }
