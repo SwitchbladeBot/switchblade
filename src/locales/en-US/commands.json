@@ -465,6 +465,24 @@
     "missingReason": "You need to give me a reason for blacklisting",
     "successTitle": "User added to the blacklist successfully"
   },
+  "kick": {
+    "commandDescription": "Kicks a member from this server",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me an member to kick",
+    "missingReason": "You need to give me a reason for kicking",
+    "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
+    "successTitle": "Member was kicked succesfully",
+    "cantKick": "I can't kick this member"
+  },
+  "ban": {
+    "commandDescription": "Bans a member from this server",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me an member to ban",
+    "missingReason": "You need to give me a reason for banning",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
+    "successTitle": "Member was banned succesfully",
+    "cantKick": "I can't ban this member"
+  },
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
     "commandUsage": "<user>",
