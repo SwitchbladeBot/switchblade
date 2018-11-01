@@ -40,7 +40,7 @@ module.exports = class DBL extends Command {
         embed.setDescription(t('commands:dbl.thanksForVoting', { count: count }))
       } else {
         embed
-          .setDescription(t('commands:dbl.howToVote', { link: `https://discordbots.org/bot/${this.client.user.id}`, command: `${prefix}${alias || this.name}` }))
+          .setDescription(t('commands:dbl.howToVote', { link: `https://discordbots.org/bot/${this.client.user.id}/vote`, command: `${prefix}${alias || this.name}` }))
       }
     }
     channel.send(embed).then(() => channel.stopTyping())
