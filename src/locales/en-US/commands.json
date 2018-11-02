@@ -465,6 +465,33 @@
     "missingReason": "You need to give me a reason for blacklisting",
     "successTitle": "User added to the blacklist successfully"
   },
+  "kick": {
+    "commandDescription": "Kicks a member from this server",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me an member to kick",
+    "missingReason": "You need to give me a reason for kicking",
+    "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
+    "successTitle": "Member was kicked succesfully",
+    "cantKick": "I can't kick this member"
+  },
+  "ban": {
+    "commandDescription": "Bans a member from this server",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me an member to ban",
+    "missingReason": "You need to give me a reason for banning",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
+    "successTitle": "Member was banned succesfully",
+    "cantBan": "I can't ban this member"
+  },
+  "softban": {
+    "commandDescription": "Bans a member, removes all of their messages and unbans",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me an member to softban",
+    "missingReason": "You need to give me a reason for softbanning",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
+    "successTitle": "Member was softbanned succesfully",
+    "cantSoftban": "I can't softban this member"
+  },
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
     "commandUsage": "<user>",
