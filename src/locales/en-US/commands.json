@@ -574,5 +574,9 @@
     "alreadyClaimed": "You've already claimed your DBL bonus today",
     "howToVote": "**[Vote on DBL]({{link}})** and then run `{{command}}` again to claim your bonus",
     "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+  },
+  "reloadlocales": {
+    "commandDescription": "Reloads the locales folder",
+    "reloaded": "The locales has been reloaded successfully!"
   }
 }
