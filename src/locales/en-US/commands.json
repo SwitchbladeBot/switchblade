@@ -468,7 +468,7 @@
   "kick": {
     "commandDescription": "Kicks a member from this server",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me an member to kick",
+    "missingUser": "You need to give me a member to kick",
     "missingReason": "You need to give me a reason for kicking",
     "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
     "successTitle": "Member was kicked succesfully",
@@ -477,7 +477,7 @@
   "ban": {
     "commandDescription": "Bans a member from this server",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me an member to ban",
+    "missingUser": "You need to give me a member to ban",
     "missingReason": "You need to give me a reason for banning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
     "successTitle": "Member was banned succesfully",
@@ -486,7 +486,7 @@
   "softban": {
     "commandDescription": "Bans a member, removes all of their messages and unbans",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me an member to softban",
+    "missingUser": "You need to give me a member to softban",
     "missingReason": "You need to give me a reason for softbanning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
     "successTitle": "Member was softbanned succesfully",
