@@ -31,10 +31,14 @@ module.exports = class GuildPlayer extends Player {
     }
   }
 
+  queueTrack (song) {
+    this.queue.push(song)
+    song.emit('queue')
+  }
+
   play (song, forcePlay = false, options = {}) {
     if (this.playing && !forcePlay) {
-      this.queue.push(song)
-      song.emit('queue')
+      this.queueTrack(song)
       return false
     }
 
@@ -52,7 +56,7 @@ module.exports = class GuildPlayer extends Player {
   }
 
   next (user) {
-    if (this._loop) this.play(this.playingSong)
+    if (this._loop) this.queueTrack(this.playingSong)
     const nextSong = this.queue.shift()
     if (nextSong) {
       this.play(nextSong, true)
