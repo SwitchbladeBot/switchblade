@@ -66,9 +66,7 @@ module.exports = class MainListener extends EventListener {
 
   async onMessage (message) {
     if (message.author.bot) return
-    const userDocument = this.database && await this.database.users.get(message.author.id)
-    if (userDocument.blacklisted) return
-    const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
+    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id)
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
     const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)
     const regexResult = prefixRegex.exec(message.content)
@@ -80,6 +78,9 @@ module.exports = class MainListener extends EventListener {
       const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
 
       if (command) {
+        const userDocument = this.database && await this.database.users.get(message.author.id)
+        if (userDocument && userDocument.blacklisted) return
+
         const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
           prefix: usedPrefix,
