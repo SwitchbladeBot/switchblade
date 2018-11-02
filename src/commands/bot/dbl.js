@@ -26,7 +26,7 @@ module.exports = class DBL extends Command {
         .setTitle(t('commands:dbl.alreadyClaimed'))
         .setDescription(t('commons:youCanDoItAgainIn', { time }))
     } else {
-      const { body } = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.id}/check?userId=${author.id}`, {
+      const { body } = await snekfetch.get(`https://discordbots.org/api/bots/445277324175474689/check?userId=${author.id}`, {
         headers: {
           'Authorization': process.env.DBL_TOKEN
         }
