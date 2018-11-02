@@ -481,7 +481,16 @@
     "missingReason": "You need to give me a reason for banning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
     "successTitle": "Member was banned succesfully",
-    "cantKick": "I can't ban this member"
+    "cantBan": "I can't ban this member"
+  },
+  "softban": {
+    "commandDescription": "Bans a member, removes all of their messages and unbans",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me an member to softban",
+    "missingReason": "You need to give me a reason for softbanning",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
+    "successTitle": "Member was softbanned succesfully",
+    "cantSoftban": "I can't softban this member"
   },
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
