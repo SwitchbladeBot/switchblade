@@ -577,6 +577,6 @@
   },
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder",
-    "reloaded": "The locales has been reloaded successfully!"
+    "reloaded": "The locales had been reloaded successfully!"
   }
 }
