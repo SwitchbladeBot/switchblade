@@ -578,5 +578,8 @@
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder",
     "reloaded": "The locales had been reloaded successfully!"
+  },
+  "tesla": {
+    "commandDescription": "Random image from /r/TeslaPorn"
   }
 }
