@@ -577,7 +577,7 @@
   },
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder",
-    "reloaded": "The locales had been reloaded successfully!"
+    "reloaded": "Locales reloaded!"
   },
   "tesla": {
     "commandDescription": "Random image from /r/TeslaPorn"
@@ -616,7 +616,7 @@
     "success": "{{- _author}} pats {{- pat}}"
   },
   "hug": {
-    "commandDescription": "Hugges someone",
+    "commandDescription": "Hugs someone",
     "commandUsage": "<user to hug>",
     "noMention": "You need to mention someone",
     "success": "{{- hugger}} hugged {{- hugged}}"
