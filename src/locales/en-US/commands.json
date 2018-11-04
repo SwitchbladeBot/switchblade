@@ -577,7 +577,7 @@
   },
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder",
-    "reloaded": "The locales were reloaded successfully!"
+    "reloaded": "The locales had been reloaded successfully!"
   },
   "tesla": {
     "commandDescription": "Random image from /r/TeslaPorn"
@@ -598,5 +598,38 @@
     "online": "Online",
     "messageOfTheDay": "Message of the day (MOTD)",
     "stats": "Stats"
+  },
+  "kemonomimi": {
+    "commandDescription": "Fetches a random kemonomimi (lewd if the channel is NSFW) and displays it. (Girls with animal ears)",
+    "hereIsYour_kemonomimi": "Here's your kemonomimi!",
+    "hereIsYour_lewdkemo": "Here's your lewd kemonomimi!"
+  },
+  "kitsune": {
+    "commandDescription": "Fetches a random kitsune girl (lewd if the channel is NSFW) and displays it.",
+    "hereIsYour_fox_girl": "Here's your kitsune!",
+    "hereIsYour_lewdk": "Here's your lewd kitsune!"
+  },
+  "pat": {
+    "commandDescription": "Pats someone",
+    "commandUsage": "<user to pat>",
+    "noMention": "You need to mention someone",
+    "success": "{{- _author}} pats {{- pat}}"
+  },
+  "hug": {
+    "commandDescription": "Hugges someone",
+    "commandUsage": "<user to hug>",
+    "noMention": "You need to mention someone",
+    "success": "{{- hugger}} hugged {{- hugged}}"
+  },
+  "nekogif": {
+    "commandDescription": "Fetches a random neko girl gif (lewd if the channel is NSFW) and displays it.",
+    "hereIsYour_ngif": "Here's your neko!",
+    "hereIsYour_nsfw_neko_gif": "Here's your lewd neko!"
+  },
+  "slap": {
+    "commandDescription": "Slap someone",
+    "commandUsage": "<user to slap>",
+    "noMention": "You need to mention someone",
+    "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   }
 }
