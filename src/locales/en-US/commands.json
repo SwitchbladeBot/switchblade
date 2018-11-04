@@ -465,6 +465,33 @@
     "missingReason": "You need to give me a reason for blacklisting",
     "successTitle": "User added to the blacklist successfully"
   },
+  "kick": {
+    "commandDescription": "Kicks a member from this server",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me a member to kick",
+    "missingReason": "You need to give me a reason for kicking",
+    "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
+    "successTitle": "Member was kicked succesfully",
+    "cantKick": "I can't kick this member"
+  },
+  "ban": {
+    "commandDescription": "Bans a member from this server",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me a member to ban",
+    "missingReason": "You need to give me a reason for banning",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
+    "successTitle": "Member was banned succesfully",
+    "cantBan": "I can't ban this member"
+  },
+  "softban": {
+    "commandDescription": "Bans a member, removes all of their messages and unbans",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me a member to softban",
+    "missingReason": "You need to give me a reason for softbanning",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
+    "successTitle": "Member was softbanned succesfully",
+    "cantSoftban": "I can't softban this member"
+  },
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
     "commandUsage": "<user>",
@@ -548,11 +575,24 @@
     "howToVote": "**[Vote on DBL]({{link}})** and then run `{{command}}` again to claim your bonus",
     "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
   },
+  "reloadlocales": {
+    "commandDescription": "Reloads the locales folder",
+    "reloaded": "The locales had been reloaded successfully!"
+  },
+  "tesla": {
+    "commandDescription": "Random image from /r/TeslaPorn"
+  },
+  "lmgtfy": {
+    "commandDescription": "Google something for someone that they should have googled",
+    "commandUsage": "<query>",
+    "noQuery": "I can't google something for you without something to google",
+    "search": "This might [help]({{link}}) ¯\\_(ツ)_/¯"
+  },
   "mcquery": {
-    "commandDescription": "Fetch info from a MC:PC server.",
-    "commandUsage": "<address:port>",
-    "unknownServer": "Server is offline or doesn't exists.",
-    "noIP": "You need to give me a IP.",
+    "commandDescription": "Shows information about a Minecraft: Java Edition server",
+    "commandUsage": "<address>[:port]",
+    "unknownServer": "Server is offline or doesn't exist",
+    "noIP": "You need to give me an address.",
     "players": "Players",
     "version": "Version",
     "online": "Online",
