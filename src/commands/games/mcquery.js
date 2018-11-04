@@ -1,6 +1,7 @@
 /* eslint-disable no-control-regex */
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
+const net = require('net')
 
 module.exports = class MCQuery extends Command {
   constructor (client) {
@@ -13,47 +14,44 @@ module.exports = class MCQuery extends Command {
     )
   }
   async run ({ t, author, channel }, server) {
-    let address = server.split(':')
-    let port = 25565
-    if (address.length === 2) port = address[1]
+    let [ address, port = 25565 ] = server.split(':')
 
-    let info = await this.getInfo(address[0], port)
+    let info = await this.getInfo(address, port)
     let embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     if (info.online) {
-      embed.setTitle(`${address[0]}:${port}`)
-      embed.setDescription(`**${t('commands:mcquery.stats')}:** \`${t('commands:mcquery.online')}\`\n**${t('commands:mcquery.messageOfTheDay')}:** \`${info.motd}\`\n**${t('commands:mcquery.players')}**: \`${info.currentPlayers}/${info.maxPlayers}\`\n**${t('commands:mcquery.version')}**: \`${info.version}\``)
+      if (port === '25565') {
+        embed
+          .setTitle(`${address}`)
+          .setDescription(`**${t('commands:mcquery.stats')}:** \`${t('commands:mcquery.online')}\`\n**${t('commands:mcquery.messageOfTheDay')}:** \`${info.motd}\`\n**${t('commands:mcquery.players')}**: \`${info.currentPlayers}/${info.maxPlayers}\`\n**${t('commands:mcquery.version')}**: \`${info.version}\``)
+      } else {
+        embed
+          .setTitle(`${address}:${port}`)
+          .setDescription(`**${t('commands:mcquery.stats')}:** \`${t('commands:mcquery.online')}\`\n**${t('commands:mcquery.messageOfTheDay')}:** \`${info.motd}\`\n**${t('commands:mcquery.players')}**: \`${info.currentPlayers}/${info.maxPlayers}\`\n**${t('commands:mcquery.version')}**: \`${info.version}\``)
+      }
     } else if (info.timeout) {
-      embed.setTitle(t('commands:mcquery.unknownServer'))
-      embed.setColor(Constants.ERROR_COLOR)
+      embed
+        .setTitle(t('commands:mcquery.unknownServer'))
+        .setColor(Constants.ERROR_COLOR)
     }
     channel.send(embed).then(() => channel.stopTyping())
   }
   cleanMOTD (motd) {
-    let cleanMotd = motd.split('')
-    motd.split('').forEach((char, i) => {
-      if (char === '�') {
-        cleanMotd[i] = ''
-        cleanMotd[parseInt(i) + 1] = ''
-      }
-    })
-    return cleanMotd.join('')
+    let cleanMotd = motd.replace(/�./g, '')
+    return cleanMotd
   }
   getInfo (address, port) {
     return new Promise((resolve) => {
       // Minestat code.
-      let info = {}
-      info.address = address
-      info.port = port
-      const net = require('net')
-      const client = net.connect(port, address, () => {
+      let info = { address, port }
+      const netClient = net.connect(port, address, () => {
         let buff = Buffer.from([0xFE, 0x01])
-        client.write(buff)
+        netClient.write(buff)
       })
 
-      client.setTimeout(6000)
+      netClient.setTimeout(6000)
 
-      client.on('data', (data) => {
+      netClient.on('data', (data) => {
         if (data !== null && data !== '') {
           let serverInfo = data.toString().split(`\x00\x00\x00`)
           if (serverInfo !== null && serverInfo.length >= 6) {
@@ -67,13 +65,13 @@ module.exports = class MCQuery extends Command {
           }
         }
         resolve(info)
-        client.end()
+        netClient.end()
       })
-      client.on('timeout', () => {
+      netClient.on('timeout', () => {
         resolve({ timeout: true })
-        client.end()
+        netClient.end()
       })
-      client.on('error', (err) => {
+      netClient.on('error', (err) => {
         resolve({ timeout: true, err: err })
       })
     })
