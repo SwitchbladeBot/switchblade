@@ -17,7 +17,7 @@ module.exports = class MCQuery extends Command {
     let [ address, port = 25565 ] = server.split(':')
 
     let info = await this.getInfo(address, port)
-    let embed = new SwitchbladeEmbed(author)
+    const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     if (info.online) {
       if (port === '25565') {
