@@ -587,5 +587,16 @@
     "commandUsage": "<query>",
     "noQuery": "I can't google something for you without something to google",
     "search": "This might [help]({{link}}) ¯\\_(ツ)_/¯"
+  },
+  "mcquery": {
+    "commandDescription": "Shows information about a Minecraft: Java Edition server",
+    "commandUsage": "<address>[:port]",
+    "unknownServer": "Server is offline or doesn't exist",
+    "noIP": "You need to give me an address.",
+    "players": "Players",
+    "version": "Version",
+    "online": "Online",
+    "messageOfTheDay": "Message of the day (MOTD)",
+    "stats": "Stats"
   }
 }
