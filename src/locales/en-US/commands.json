@@ -585,7 +585,7 @@
   "lmgtfy": {
     "commandDescription": "Google something for someone that they should have googled",
     "commandUsage": "<query>",
-    "noQuery": "I can't google something for you without something to google",
+    "noQuery": "I can't google something for you without keywords",
     "search": "This might [help]({{link}}) ¯\\_(ツ)_/¯"
   },
   "mcquery": {
