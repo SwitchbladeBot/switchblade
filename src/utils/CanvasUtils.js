@@ -143,7 +143,7 @@ module.exports = class CanvasUtils {
       }
     }
 
-    Context2d.prototype.writeParagraph = function (text, font, startX, startY, maxX, maxY, lineDistance = 5) {
+    Context2d.prototype.writeParagraph = function (text, font, startX, startY, maxX, maxY, lineDistance = 5, alignment = ALIGN.TOP_LEFT) {
       const lines = text.split('\n')
       let currentY = startY
       let lastWrite = null
@@ -156,7 +156,8 @@ module.exports = class CanvasUtils {
         if (currentY > maxY) break
 
         if (startX + lineText.width <= maxX) {
-          lastWrite = this.write(l, startX, currentY, font, ALIGN.TOP_LEFT)
+          lastWrite = this.write(l, startX, currentY, font, alignment)
+          alignment = ALIGN.TOP_LEFT
         } else {
           if (l.includes(' ')) {
             const words = l.split(' ')
@@ -168,7 +169,8 @@ module.exports = class CanvasUtils {
             })
             const missingWords = words.slice(maxIndex, words.length)
             if (missingWords.length > 0) lines.splice(i + 1, 0, missingWords.join(' '))
-            lastWrite = this.write(words.slice(0, maxIndex).join(' '), startX, currentY, font, ALIGN.TOP_LEFT)
+            lastWrite = this.write(words.slice(0, maxIndex).join(' '), startX, currentY, font, alignment)
+            alignment = ALIGN.TOP_LEFT
           } else {
             const letters = l.split('')
             const maxIndex = letters.findIndex((w, j) => {
@@ -177,7 +179,8 @@ module.exports = class CanvasUtils {
               if (startX + wordText.width <= maxX) return false
               else return true
             })
-            lastWrite = this.write(letters.slice(0, maxIndex).join(''), startX, currentY, font, ALIGN.TOP_LEFT)
+            lastWrite = this.write(letters.slice(0, maxIndex).join(''), startX, currentY, font, alignment)
+            alignment = ALIGN.TOP_LEFT
           }
         }
         currentY += height + lineDistance

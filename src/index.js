@@ -16,6 +16,7 @@ module.exports = {
   // Utils
   Reddit: require('./utils/Reddit.js'),
   Constants: require('./utils/Constants.js'),
+  MiscUtils: require('./utils/MiscUtils.js'),
   CanvasTemplates: require('./utils/CanvasTemplates.js'),
   PermissionUtils: require('./utils/PermissionUtils.js'),
   BlacklistUtils: require('./utils/BlacklistUtils.js'),

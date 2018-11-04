@@ -132,7 +132,7 @@
     "noQuestion": "You need to give me something to be voted",
     "tooManyOptions": "You can't exceed {{maxOptions}} options"
   },
-  "nowPlaying": {
+  "nowplaying": {
     "commandDescription": "Shows the name of the song being played"
   },
   "pause": {
@@ -150,7 +150,8 @@
     "commandDescription": "Skips the current song"
   },
   "stop": {
-    "commandDescription": "Stops the music playback"
+    "commandDescription": "Stops the music playback",
+    "stopped": "Playback has been stopped, leaving the voice channel."
   },
   "volume": {
     "commandDescription": "Adjusts the volume of the music playback",
@@ -328,6 +329,7 @@
     "commandDescription": "Change the current guild configuration",
     "guildLang": "To change the guild language, `{{command}} language <language code>`",
     "guildPrefix": "To change the guild prefix, `{{command}} prefix <new prefix>`",
+    "missingTranslation": "**(A few translations might be missing)**",
     "subcommands": {
       "language": {
         "commandDescription": "Change the current guild language",
@@ -451,12 +453,6 @@
     "commandUsage": "<text to clapify>",
     "missingSentence": "You need to give me a sentence to clapify"
   },
-  "lmgtfy": {
-    "commandDescription": "Google something for someone that they should have googled",
-    "commandUsage": "<query>",
-    "noQuery": "I can't google something for you without something to google",
-    "search": "This might [help]({{link}}) ¯\\_(ツ)_/¯"
-  },
   "numberfacts": {
     "validNumber": "You need to give me a number!",
     "commandUsage": "<number>",
@@ -468,6 +464,33 @@
     "missingUser": "You need to give me an user to blacklist",
     "missingReason": "You need to give me a reason for blacklisting",
     "successTitle": "User added to the blacklist successfully"
+  },
+  "kick": {
+    "commandDescription": "Kicks a member from this server",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me a member to kick",
+    "missingReason": "You need to give me a reason for kicking",
+    "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
+    "successTitle": "Member was kicked succesfully",
+    "cantKick": "I can't kick this member"
+  },
+  "ban": {
+    "commandDescription": "Bans a member from this server",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me a member to ban",
+    "missingReason": "You need to give me a reason for banning",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
+    "successTitle": "Member was banned succesfully",
+    "cantBan": "I can't ban this member"
+  },
+  "softban": {
+    "commandDescription": "Bans a member, removes all of their messages and unbans",
+    "commandUsage": "<member> <reason>",
+    "missingUser": "You need to give me a member to softban",
+    "missingReason": "You need to give me a reason for softbanning",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
+    "successTitle": "Member was softbanned succesfully",
+    "cantSoftban": "I can't softban this member"
   },
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
@@ -485,5 +508,84 @@
   },
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme"
+  },
+  "leaderboard": {
+    "commandDescription": "Shows a leaderboard",
+    "subcommands": {
+      "money": {
+        "commandDescription": "Shows a list of the richest users",
+        "title": "Money Leaderboard"
+      },
+      "reputation": {
+        "commandDescription": "Shows a list of the users with the most reputation points",
+        "title": "Reputation Leaderboard"
+      }
+    }
+  },
+  "bolinadegorfe": {
+    "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker"
+  },
+  "eval": {
+    "commandDescription": "Evals a JS string"
+  },
+  "oddlysatisfying": {
+    "commandDescription": "Random image from /r/oddlysatisfying"
+  },
+  "geekjokes": {
+    "commandDescription": "Random geekjoke"
+  },
+  "aww": {
+    "title": "Here is some eyebleach for ya!",
+    "commandDescription": "Random image from /r/aww"
+  },
+  "videochat": {
+    "commandDescription": "Enables videochat for the voice channel that you're currently connected to and shares a link to it (Beta feature!)",
+    "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}})`"
+  },
+  "vaporwave": {
+    "commandDescription": "Vaporwavefies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to vaporwavefy"
+  },
+  "emojify": {
+    "commandDescription": "Emojifies a sentence",
+    "commandUsage": "<sentence>",
+    "missingSentence": "You need to give me a sentence to emojify"
+  },
+  "fox": {
+    "commandDescription": "Fetches a random image of a fox",
+    "hereIsYourFox": "Here's your fox!"
+  },
+  "birb": {
+    "commandDescription": "Fetches a random image of a birb",
+    "hereIsYourBirb": "Here's your birb!"
+  },
+  "loop": {
+    "commandDescription": "Activates or deactivates the music playback's loop mode"
+  },
+  "time": {
+    "commandDescription": "Get the current time in a specified place",
+    "commandUsage": "<timezone>",
+    "invalidTimezone": "You need to give me an `iana tz database` timezone or timezone abbreviation",
+    "currentTime": "The current time in {{timezone}} is"
+  },
+  "dbl": {
+    "commandDescription": "Gives you a bonus for voting on Discord Bot List",
+    "alreadyClaimed": "You've already claimed your DBL bonus today",
+    "howToVote": "**[Vote on DBL]({{link}})** and then run `{{command}}` again to claim your bonus",
+    "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+  },
+  "reloadlocales": {
+    "commandDescription": "Reloads the locales folder",
+    "reloaded": "The locales had been reloaded successfully!"
+  },
+  "tesla": {
+    "commandDescription": "Random image from /r/TeslaPorn"
+  },
+  "lmgtfy": {
+    "commandDescription": "Google something for someone that they should have googled",
+    "commandUsage": "<query>",
+    "noQuery": "I can't google something for you without something to google",
+    "search": "This might [help]({{link}}) ¯\\_(ツ)_/¯"
   }
 }

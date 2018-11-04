@@ -12,10 +12,10 @@ module.exports = class MainListener extends EventListener {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     // Lavalink connection
-    if (process.env.LAVALINK_WSS_HOST) {
+    if (process.env.LAVALINK_HOST) {
       const nodes = [{
-        'host': process.env.LAVALINK_WSS_HOST,
-        'port': process.env.LAVALINK_WSS_PORT || '1337',
+        'host': process.env.LAVALINK_HOST,
+        'port': process.env.LAVALINK_PORT || '1337',
         'password': process.env.LAVALINK_PASSWORD || 'password'
       }]
       this.playerManager = new SwitchbladePlayerManager(this, nodes, {
@@ -52,9 +52,9 @@ module.exports = class MainListener extends EventListener {
       // botsfordiscord.com
       if (process.env.BOTSFORDISCORD_TOKEN) {
         snekfetch
-          .post(`https://botsfordiscord.com/api/v1/bots/${client.user.id}`)
+          .post(`https://botsfordiscord.com/api/bots/${client.user.id}`)
           .set('Authorization', process.env.BOTSFORDISCORD_TOKEN)
-          .send({ count: client.guilds.size })
+          .send({ server_count: client.guilds.size })
           .then(() => client.log('Posted statistics successfully', 'botsfordiscord.com'))
           .catch(() => client.log('Failed to post statistics', 'botsfordiscord.com'))
       }
@@ -66,9 +66,7 @@ module.exports = class MainListener extends EventListener {
 
   async onMessage (message) {
     if (message.author.bot) return
-    const userDocument = this.database && await this.database.users.get(message.author.id)
-    if (userDocument.blacklisted) return
-    const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
+    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id)
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
     const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)
     const regexResult = prefixRegex.exec(message.content)
@@ -80,6 +78,9 @@ module.exports = class MainListener extends EventListener {
       const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
 
       if (command) {
+        const userDocument = this.database && await this.database.users.get(message.author.id)
+        if (userDocument && userDocument.blacklisted) return
+
         const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
           prefix: usedPrefix,

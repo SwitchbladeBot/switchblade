@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "stable"
+  - "10.12.0"
 after_success:
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
@@ -20,3 +20,7 @@ addons:
       - libgif-dev
       - librsvg2-dev
       - g++-4.9
+cache:
+  bundler: true
+  directories:
+  - node_modules

@@ -1,7 +1,7 @@
 const { CommandStructures, BlacklistUtils, SwitchbladeEmbed } = require('../../')
 const { Command, CommandRequirements, CommandParameters, StringParameter, UserParameter } = CommandStructures
 
-module.exports = class Blacklist extends Command {
+module.exports = class BlacklistCommand extends Command {
   constructor (client) {
     super(client)
     this.name = 'blacklist'
