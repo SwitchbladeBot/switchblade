@@ -586,7 +586,7 @@
     "commandDescription": "Google something for someone that they should have googled",
     "commandUsage": "<query>",
     "noQuery": "I can't google something for you without keywords",
-    "search": "This might [help]({{link}}) ¯\\_(ツ)_/¯"
+    "search": "[This]({{link}}) might help ¯\\_(ツ)_/¯"
   },
   "mcquery": {
     "commandDescription": "Shows information about a Minecraft: Java Edition server",
