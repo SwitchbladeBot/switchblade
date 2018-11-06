@@ -23,11 +23,11 @@ module.exports = class MCQuery extends Command {
       if (port === '25565') {
         embed
           .setTitle(`${address}`)
-          .setDescription(`**${t('commands:mcquery.stats')}:** \`${t('commands:mcquery.online')}\`\n**${t('commands:mcquery.messageOfTheDay')}:** \`${info.motd}\`\n**${t('commands:mcquery.players')}**: \`${info.currentPlayers}/${info.maxPlayers}\`\n**${t('commands:mcquery.version')}**: \`${info.version}\``)
+          .setDescription(`**${t('commands:mcquery.status')}:** \`${t('commands:mcquery.online')}\`\n**${t('commands:mcquery.messageOfTheDay')}:** \`${info.motd}\`\n**${t('commands:mcquery.players')}**: \`${info.currentPlayers}/${info.maxPlayers}\`\n**${t('commands:mcquery.version')}**: \`${info.version}\``)
       } else {
         embed
           .setTitle(`${address}:${port}`)
-          .setDescription(`**${t('commands:mcquery.stats')}:** \`${t('commands:mcquery.online')}\`\n**${t('commands:mcquery.messageOfTheDay')}:** \`${info.motd}\`\n**${t('commands:mcquery.players')}**: \`${info.currentPlayers}/${info.maxPlayers}\`\n**${t('commands:mcquery.version')}**: \`${info.version}\``)
+          .setDescription(`**${t('commands:mcquery.status')}:** \`${t('commands:mcquery.online')}\`\n**${t('commands:mcquery.messageOfTheDay')}:** \`${info.motd}\`\n**${t('commands:mcquery.players')}**: \`${info.currentPlayers}/${info.maxPlayers}\`\n**${t('commands:mcquery.version')}**: \`${info.version}\``)
       }
     } else if (info.timeout) {
       embed

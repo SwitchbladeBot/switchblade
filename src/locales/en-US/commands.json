@@ -597,7 +597,7 @@
     "version": "Version",
     "online": "Online",
     "messageOfTheDay": "Message of the day (MOTD)",
-    "stats": "Stats"
+    "status": "Status"
   },
   "kemonomimi": {
     "commandDescription": "Fetches a random kemonomimi (lewd if the channel is NSFW) and displays it. (Girls with animal ears)",
