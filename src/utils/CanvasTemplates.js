@@ -264,7 +264,7 @@ module.exports = class CanvasTemplates {
     ctx.fillRect(THUMBNAIL_WIDTH, 0, WIDTH - THUMBNAIL_WIDTH, HEIGHT)
 
     const bgWidth = WIDTH - THUMBNAIL_WIDTH
-    const bgHeight = (backgroundImage.width / bgWidth) * backgroundImage.height
+    const bgHeight = (bgWidth / backgroundImage.width) * backgroundImage.height
     const bgY = -((bgHeight - HEIGHT) / 2)
     ctx.drawBlurredImage(backgroundImage, 10, THUMBNAIL_WIDTH, bgY, bgWidth, bgHeight)
 
