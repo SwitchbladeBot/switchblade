@@ -1,6 +1,6 @@
 const request = require('request')
 const canvg = require('canvg')
-const { createCanvas, registerFont, Canvas, Context2d, Image } = require('canvas')
+const { createCanvas, registerFont, loadImage, Canvas, Context2d, Image } = require('canvas')
 
 const FileUtils = require('./FileUtils.js')
 
@@ -57,13 +57,7 @@ module.exports = class CanvasUtils {
 
     // Image loading
     Image.from = function (url, localFile = false) {
-      return new Promise(async (resolve, reject) => {
-        const b = await Image.buffer(url, localFile)
-        const img = new Image()
-        img.onerror = (e) => reject(e)
-        img.onload = () => resolve(img)
-        img.src = b
-      })
+      return loadImage(url)
     }
 
     Image.buffer = (url, localFile = false) => localFile ? FileUtils.readFile(url) : URLtoBuffer(url)
