@@ -1,6 +1,7 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandRequirements } = CommandStructures
-module.exports = class reloadlocales extends Command {
+
+module.exports = class ReloadLocales extends Command {
   constructor (client) {
     super(client)
     this.name = 'reloadlocales'
@@ -14,15 +15,15 @@ module.exports = class reloadlocales extends Command {
     const embed = new SwitchbladeEmbed(author)
     try {
       this.client.downloadAndInitializeLocales('src/locales').then(() => {
-        embed
-          .setTitle(t('commands:reloadlocales:reloaded'))
-        channel.send(embed)
+        channel.send(embed.setTitle(t('commands:reloadlocales.reloaded')))
       })
     } catch (e) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('errors:generic'))
-      channel.send(embed)
+      channel.send(
+        embed
+          .setColor(Constants.ERROR_COLOR)
+          .setTitle(t('errors:generic'))
+          .setDescription(`\`${e.message}\``)
+      )
     }
   }
 }
