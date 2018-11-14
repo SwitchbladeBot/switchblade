@@ -1,5 +1,7 @@
 const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
+// eslint-disable-next-line no-useless-escape
+const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 
 module.exports = class Poll extends Command {
   constructor (client) {
@@ -14,7 +16,7 @@ module.exports = class Poll extends Command {
   run ({ t, author, channel }, question) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const pollPcs = question.split('|')
+    const pollPcs = EscapeMarkdown(question).split('|')
     if (pollPcs.length > 1) {
       const maxOptions = 26
       if (pollPcs.slice(1).length > maxOptions) {
@@ -39,7 +41,7 @@ module.exports = class Poll extends Command {
         })
       }
     } else {
-      embed.setTitle(`:ballot_box: ${question}`)
+      embed.setTitle(`:ballot_box: ${EscapeMarkdown(question)}`)
       channel.send(embed).then(m => {
         m.react('👍').then(() => m.react('👎'))
       })
