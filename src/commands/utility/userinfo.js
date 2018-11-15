@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { Command, CommandRequirements, CommandParameters, MemberParameter } = CommandStructures
 const moment = require('moment')
 
 module.exports = class UserInfo extends Command {
@@ -10,7 +10,7 @@ module.exports = class UserInfo extends Command {
     this.category = 'utility'
     this.requirements = new CommandRequirements(this, { guildOnly: true })
     this.parameters = new CommandParameters(this,
-      new UserParameter({ full: true, required: false, acceptBot: true })
+      new MemberParameter({ full: true, required: false, acceptBot: true })
     )
   }
 
