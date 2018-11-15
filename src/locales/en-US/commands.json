@@ -336,13 +336,13 @@
         "commandUsage": "<language code>",
         "noCode": "You need to give me a language code.",
         "availableLanguages": "Available languages",
-        "changedSuccessfully": "Language changed successfully to `{{lang}}`!"
+        "changedSuccessfully": "Language changed to `{{lang}}`."
       },
       "prefix": {
         "commandDescription": "Change the current guild prefix",
         "commandUsage": "<new prefix>",
         "noPrefix": "You need to give me a prefix.",
-        "changedSuccessfully": "Prefix changed successfully to `{{prefix}}`!"
+        "changedSuccessfully": "Prefix changed to `{{prefix}}`."
       }
     }
   },
