@@ -471,7 +471,7 @@
     "missingUser": "You need to give me a member to kick",
     "missingReason": "You need to give me a reason for kicking",
     "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
-    "successTitle": "Member was kicked succesfully",
+    "successTitle": "Member was kicked",
     "cantKick": "I can't kick this member"
   },
   "ban": {
@@ -480,7 +480,7 @@
     "missingUser": "You need to give me a member to ban",
     "missingReason": "You need to give me a reason for banning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
-    "successTitle": "Member was banned succesfully",
+    "successTitle": "Member was banned",
     "cantBan": "I can't ban this member"
   },
   "softban": {
@@ -489,7 +489,7 @@
     "missingUser": "You need to give me a member to softban",
     "missingReason": "You need to give me a reason for softbanning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
-    "successTitle": "Member was softbanned succesfully",
+    "successTitle": "Member was softbanned",
     "cantSoftban": "I can't softban this member"
   },
   "unblacklist": {
