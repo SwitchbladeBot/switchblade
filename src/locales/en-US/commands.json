@@ -634,7 +634,7 @@
   },
   "steamladder": {
     "commandDescription": "Displays a ladder from Steam Ladder",
-    "commandUsage": "<ladder> [country or region]",
+    "commandUsage": "[ladder] [country or region]",
     "noLadder": "You need to give me a valid ladder",
     "availableLadders": "Available ladders"
   }
