@@ -631,5 +631,11 @@
     "commandUsage": "<user to slap>",
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
+  },
+  "steamladder": {
+    "commandDescription": "Displays a ladder from Steam Ladder",
+    "commandUsage": "<ladder> [country or region]",
+    "noLadder": "You need to choose a ladder to display.",
+    "availableLadders": "Available ladders"
   }
 }
