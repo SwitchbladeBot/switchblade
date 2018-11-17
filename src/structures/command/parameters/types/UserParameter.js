@@ -22,8 +22,8 @@ module.exports = class UserParameter extends Parameter {
     return this.user(context, userId)
   }
 
-  user ({ t, client, author }, id) {
-    const user = client.users.get(id)
+  async user ({ t, client, author }, id) {
+    const user = await client.users.get(id)
     if (!user) return new CommandError(t('errors:invalidUser'))
     if (!this.self && id === author.id) return new CommandError(t('errors:sameUser'))
     if (!this.acceptBot && user.bot) return new CommandError(t('errors:invalidUserBot'))

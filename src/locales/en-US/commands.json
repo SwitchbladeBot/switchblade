@@ -343,6 +343,11 @@
         "commandUsage": "<new prefix>",
         "noPrefix": "You need to give me a prefix.",
         "changedSuccessfully": "Prefix changed successfully to `{{prefix}}`!"
+      },
+      "djrole": {
+        "commandDescription": "Sets a DJ Role",
+        "commandUsage": "<role>",
+        "changedSuccessfully": "<@&{{roleId}}> was set as the DJ role."
       }
     }
   },

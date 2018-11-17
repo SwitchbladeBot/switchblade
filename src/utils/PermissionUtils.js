@@ -13,4 +13,12 @@ module.exports = class PermissionUtils {
       return member.roles.filter(r => r.hoist).sort((a, b) => b.position - a.position).first()
     }
   }
+
+  static async isDj (client, user, channel) {
+    const guild = channel.guild
+    const role = await client.database.guilds.get(guild)
+    if (!role) return
+    const hasRole = role && role.members.has(user.id)
+    return hasRole
+  }
 }
