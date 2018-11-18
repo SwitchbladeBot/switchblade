@@ -1,6 +1,6 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
-const countries = require("i18n-iso-countries");
+const countries = require('i18n-iso-countries')
 
 const embedColor = 0x292B2D
 
@@ -40,8 +40,8 @@ module.exports = class SteamLadder extends Command {
               `**${ladders.map(l => `\`${l}\``).join(', ')}**`
             ].join('\n')
           }
-        }}),
-      new StringParameter({required: false})
+        } }),
+      new StringParameter({ required: false })
     )
   }
 
@@ -103,23 +103,23 @@ module.exports = class SteamLadder extends Command {
 
     switch (ladderType) {
       case 'XP':
-        line += ` - ${t('commands:steamladder.levelWithNumber', {level: Intl.NumberFormat.call(language).format(entry.steam_stats.level)})}`
+        line += ` - ${t('commands:steamladder.levelWithNumber', { level: Intl.NumberFormat.call(language).format(entry.steam_stats.level) })}`
         break
 
       case 'G':
-        line += ` - ${t('commands:steamladder.gamesWithCount', {count: Intl.NumberFormat.call(language).format(entry.steam_stats.games.total_games)})}`
+        line += ` - ${t('commands:steamladder.gamesWithCount', { count: Intl.NumberFormat.call(language).format(entry.steam_stats.games.total_games) })}`
         break
 
       case 'PT':
-        line += ` - ${t('commands:steamladder.hoursInGame', {count: Intl.NumberFormat.call(language).format(Math.round(entry.steam_stats.games.total_playtime_min / 60))})}`
+        line += ` - ${t('commands:steamladder.hoursInGame', { count: Intl.NumberFormat.call(language).format(Math.round(entry.steam_stats.games.total_playtime_min / 60)) })}`
         break
 
       case 'B':
-        line += ` - ${t('commands:steamladder.badgesWithCount', {count: Intl.NumberFormat.call(language).format(entry.steam_stats.badges.total)})}`
+        line += ` - ${t('commands:steamladder.badgesWithCount', { count: Intl.NumberFormat.call(language).format(entry.steam_stats.badges.total) })}`
         break
 
       case 'A':
-        line += ` - ${t('commands:steamladder.joinedOn', {date: Intl.DateTimeFormat.call(language).format(new Date(entry.steam_user.steam_join_date))})}`
+        line += ` - ${t('commands:steamladder.joinedOn', { date: Intl.DateTimeFormat.call(language).format(new Date(entry.steam_user.steam_join_date)) })}`
         break
     }
 
