@@ -636,6 +636,32 @@
     "commandDescription": "Displays a ladder from Steam Ladder",
     "commandUsage": "[ladder] [country or region]",
     "noLadder": "You need to give me a valid ladder",
-    "availableLadders": "Available ladders"
+    "availableLadders": "Available ladders",
+    "gamesWithCount": "{{count}} games",
+    "games": "Games",
+    "levelWithNumber": "Level {{level}}",
+    "level": "Level",
+    "playtime": "Playtime",
+    "hours": "{{count}} hours",
+    "hoursInGame": "{{count}} hours in game",
+    "badgesWithCount": "{{count}} badges",
+    "badges": "Badges",
+    "joinedOn": "Joined on {{date}}",
+    "ladders": {
+      "XP": "Highest Level",
+      "G": "Most Games",
+      "PT": "Most Playtime",
+      "B": "Most Badges",
+      "A": "Longest on Steam"
+    },
+    "regions": {
+      "EUROPE": "Europe",
+      "NORTH_AMERICA": "North America",
+      "SOUTH_AMERICA": "South America",
+      "ASIA": "Asia",
+      "AFRICA": "Africa",
+      "OCEANIA": "Oceania",
+      "ANTARCTICA": "Antarctica"
+    }
   }
 }
