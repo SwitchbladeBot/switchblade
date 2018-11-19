@@ -71,7 +71,6 @@ module.exports = class Switchblade extends Client {
 
   // Commands
 
-
   /**
    * Adds a new command to the Client.
    * @param {Command} command - Command to be added
@@ -176,7 +175,7 @@ module.exports = class Switchblade extends Client {
         this.log(`[91m${api.name} failed to load - canLoad function returned false`, 'Listeners')
       }
     } else {
-      this.log(`[91m${listener.name} failed to load - Not an APIWrapper`, 'Listeners')
+      this.log(`[91m${api.name} failed to load - Not an APIWrapper`, 'Listeners')
     }
   }
 
