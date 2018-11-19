@@ -22,9 +22,9 @@ module.exports = class MainListener extends EventListener {
         user: this.user.id,
         shards: 1
       })
-      this.log('Player manager connection established!', 'Music')
+      this.log('[92mLavalink connection established!', 'Music')
     } else {
-      this.log('Player manager connection didn\'t establish!', 'Music')
+      this.log('[91mLavalink connection didn\'t establish - LAVALINK_HOST not set.', 'Music')
     }
 
     // TODO: Make stat posters modular
