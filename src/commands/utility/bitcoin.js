@@ -14,6 +14,6 @@ module.exports = class Bitcoin extends Command {
     channel.startTyping()
     const { body } = await snekfetch.get('https://api.coinbase.com/v2/prices/spot?currency=USD')
     embed.setTitle(t('commands:bitcoin.commandTitle'))
-    embed.setDescription('1 BTC = ' + body.data.amount + 'USD')
+    embed.setDescription('1 BTC = ' + body.data.amount + ' USD')
     channel.send(embed).then(() => channel.stopTyping())
   }
