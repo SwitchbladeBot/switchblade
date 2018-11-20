@@ -57,7 +57,7 @@ module.exports = class Switchblade extends Client {
   log (...args) {
     const message = args[0]
     const tags = args.slice(1).map(t => `[34m[${t}][0m`)
-    console.log(...tags, message)
+    console.log(...tags, message + '[0m')
   }
 
   /**
@@ -126,9 +126,9 @@ module.exports = class Switchblade extends Client {
       this.addCommand(new NewCommand(this)) ? success++ : failed++
     }, this.logError).then(() => {
       if (failed === 0) {
-        this.log(`[92mAll ${success} commands loaded without errors.[0m`, 'Commands')
+        this.log(`[92mAll ${success} commands loaded without errors.`, 'Commands')
       } else {
-        this.log(`[33m${success} commands loaded, ${failed} failed.[0m`, 'Commands')
+        this.log(`[33m${success} commands loaded, ${failed} failed.`, 'Commands')
       }
     }).catch(this.logError)
   }
@@ -166,9 +166,9 @@ module.exports = class Switchblade extends Client {
       this.addListener(new NewListener(this)) ? success++ : failed++
     }, this.logError).then(() => {
       if (failed === 0) {
-        this.log(`[92mAll ${success} listeners loaded without errors.[0m`, 'Listeners')
+        this.log(`[92mAll ${success} listeners loaded without errors.`, 'Listeners')
       } else {
-        this.log(`[33m${success} listeners loaded, ${failed} failed.[0m`, 'Listeners')
+        this.log(`[33m${success} listeners loaded, ${failed} failed.`, 'Listeners')
       }
     })
   }
@@ -211,9 +211,9 @@ module.exports = class Switchblade extends Client {
       this.addApi(new NewAPI()) ? success++ : failed++
     }, this.logError).then(() => {
       if (failed === 0) {
-        this.log(`[92mAll ${success} API wrappers loaded without errors.[0m`, 'APIs')
+        this.log(`[92mAll ${success} API wrappers loaded without errors.`, 'APIs')
       } else {
-        this.log(`[33m${success} API wrappers loaded, ${failed} failed.[0m`, 'APIs')
+        this.log(`[33m${success} API wrappers loaded, ${failed} failed.`, 'APIs')
       }
     })
   }
