@@ -184,7 +184,7 @@
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
     "cantPayYourself": "You can't pay yourself",
-    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
+    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}}!"
   },
   "xkcd": {
     "commandDescription": "Shows an XKCD",
@@ -405,7 +405,7 @@
   "favcolor": {
     "commandDescription": "Set a background color to your profile",
     "commandUsage": "<#hexcode>",
-    "changedSuccessfully": "Profile color changed successfully to {{hexcode}}."
+    "changedSuccessfully": "Profile color changed to {{hexcode}}."
   },
   "rep": {
     "commandDescription": "Gives a reputation point to someone",
@@ -463,7 +463,7 @@
     "commandUsage": "<user> <reason>",
     "missingUser": "You need to give me an user to blacklist",
     "missingReason": "You need to give me a reason for blacklisting",
-    "successTitle": "User added to the blacklist successfully"
+    "successTitle": "User added to the blacklist"
   },
   "kick": {
     "commandDescription": "Kicks a member from this server",
@@ -495,7 +495,7 @@
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
     "commandUsage": "<user>",
-    "success": "{{user}} has been removed from the blacklist successfully",
+    "success": "{{user}} has been removed from the blacklist",
     "missingUser": "You need to give me an user to remove from the blacklist",
     "notBlacklisted": "That user isn't blacklisted"
   },
