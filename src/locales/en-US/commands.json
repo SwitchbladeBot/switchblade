@@ -633,7 +633,7 @@
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
   "bitcoin": {
-    "commandDescription": "Gives you the current value of Bitcoin is USD",
+    "commandDescription": "Gives you the current value of Bitcoin in USD",
     "commandTitle": "Current Bitcoin Value"
   }
 }
