@@ -180,16 +180,23 @@ module.exports = class Switchblade extends Client {
    * @param {Object} api - API Wrapper to be added
    */
   addApi (api) {
-    if (api instanceof APIWrapper) {
-      if (api.canLoad()) {
-        this.apis[api.name] = api.load()
-        return true
-      } else {
-        this.log(`[91m${api.name} failed to load - canLoad function returned false`, 'APIs')
-      }
-    } else {
+    if (!api instanceof APIWrapper) {
       this.log(`[91m${api.name} failed to load - Not an APIWrapper`, 'APIs')
+      return false
     }
+
+    if (api.canLoad() !== true) {
+      this.log(`[91m${api.name} failed to load - ${api.canLoad() || 'canLoad function did not return true.'}`, 'APIs')
+      return false
+    }
+
+    if (!api.envVars.every(variable => {
+      if (!process.env[variable]) this.log(`[91m${api.name} failed to load - Required environment variable "${variable}" not set.`, 'APIs')
+      return !!process.env[variable]
+    })) return false
+
+    this.apis[api.name] = api.load()
+    return true
   }
 
   /**
