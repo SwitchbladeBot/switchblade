@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandParameters, StringParameter, CommandRequirements } = CommandStructures
 
 const moment = require('moment')
 
@@ -8,13 +8,10 @@ module.exports = class Spotify extends Command {
     super(client)
 
     this.name = 'spotify'
+    this.requirements = new CommandRequirements(this, {apis: ['spotify']})
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:spotify.noTrackName' })
     )
-  }
-
-  canLoad () {
-    return !!this.client.apis.spotify
   }
 
   async run ({ t, author, channel }, trackName) {
