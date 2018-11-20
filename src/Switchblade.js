@@ -76,18 +76,25 @@ module.exports = class Switchblade extends Client {
    * @param {Command} command - Command to be added
    */
   addCommand (command) {
-    if (command instanceof Command) {
-      if (command.canLoad()) {
-        this.commands.push(command)
-        return true
-      } else {
-        this.log(`[91m${command.name} failed to load - canLoad funcion returned false`, 'Commands')
-        return false
-      }
-    } else {
-      this.log(`[91m${command.name} failed to load - Not a command`, 'Commands')
+    if (!(command instanceof Command)) {
+      this.log(`[91m${command} failed to load - Not a command`, 'Commands')
       return false
     }
+
+    if (!command.canLoad()) {
+      this.log(`[91m${command.name} failed to load - canLoad function returned false`, 'Commands')
+      return false
+    }
+
+    if (command.requirements) {
+      if (!command.requirements.apis.every(api => {
+        if (!this.apis[api]) this.log(`[91m${command.name} failed to load - Required API wrapper "${api}" not found.`, 'Commands')
+        return !!this.apis[api]
+      })) return false
+    }
+
+    this.commands.push(command)
+    return true
   }
 
   /**
@@ -172,10 +179,10 @@ module.exports = class Switchblade extends Client {
         this.apis[api.name] = api.load()
         return true
       } else {
-        this.log(`[91m${api.name} failed to load - canLoad function returned false`, 'Listeners')
+        this.log(`[91m${api.name} failed to load - canLoad function returned false`, 'APIs')
       }
     } else {
-      this.log(`[91m${api.name} failed to load - Not an APIWrapper`, 'Listeners')
+      this.log(`[91m${api.name} failed to load - Not an APIWrapper`, 'APIs')
     }
   }
 

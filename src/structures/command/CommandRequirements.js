@@ -18,8 +18,8 @@ module.exports = class CommandRequirements {
     this.guildPlaying = !!options.guildPlaying
     this.databaseOnly = !!options.databaseOnly
     this.playerManagerOnly = this.guildPlaying || !!options.playerManagerOnly
-    this.apis = []
-    this.environmentVariables = []
+    this.apis = options.apis || []
+    this.envVars = options.envVars || []
 
     this.errors = Object.assign({
       databaseOnly: 'errors:databaseOnly',

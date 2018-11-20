@@ -8,7 +8,7 @@ module.exports = class Spotify extends Command {
     super(client)
 
     this.name = 'spotify'
-    this.requirements = new CommandRequirements(this, {apis: ['spotify']})
+    this.requirements = new CommandRequirements(this, { apis: ['spotify'] })
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:spotify.noTrackName' })
     )
