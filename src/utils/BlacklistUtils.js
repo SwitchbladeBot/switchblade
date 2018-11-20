@@ -8,7 +8,7 @@ module.exports = class BlacklistUtils {
 
   static async removeUser (userDocument) {
     if (!userDocument.blacklisted) return false
-    userDocument.blacklisted = true
+    userDocument.blacklisted = false
     userDocument.blacklistReason = ''
     userDocument.blacklisterId = ''
     userDocument.save()
