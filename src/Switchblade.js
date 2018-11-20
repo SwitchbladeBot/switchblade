@@ -81,8 +81,8 @@ module.exports = class Switchblade extends Client {
       return false
     }
 
-    if (!command.canLoad()) {
-      this.log(`[91m${command.name} failed to load - canLoad function returned false`, 'Commands')
+    if (command.canLoad() !== true) {
+      this.log(`[91m${command.name} failed to load - ${command.canLoad() || 'canLoad function did not return true.'}`, 'Commands')
       return false
     }
 
@@ -140,17 +140,18 @@ module.exports = class Switchblade extends Client {
    * @param {EventListener} listener - Listener to be added
    */
   addListener (listener) {
-    if (listener instanceof EventListener) {
-      const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
-      listener.events.forEach(event => {
-        this.on(event, listener['on' + capitalize(event)])
-      })
-      this.listeners.push(listener)
-      return true
-    } else {
+    if (!listener instanceof EventListener) {
       this.log(`[91m${listener.name} failed to load - Not an EventListener`, 'Listeners')
       return false
     }
+
+    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+    listener.events.forEach(event => {
+      this.on(event, listener['on' + capitalize(event)])
+    })
+
+    this.listeners.push(listener)
+    return true
   }
 
   /**
