@@ -17,4 +17,4 @@ module.exports = class Bitcoin extends Command {
     embed.setDescription('1 BTC = ' + body.data.amount + ' USD')
     channel.send(embed).then(() => channel.stopTyping())
   }
-} 
+}
