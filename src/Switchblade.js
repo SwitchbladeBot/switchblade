@@ -91,6 +91,11 @@ module.exports = class Switchblade extends Client {
         if (!this.apis[api]) this.log(`[91m${command.name} failed to load - Required API wrapper "${api}" not found.`, 'Commands')
         return !!this.apis[api]
       })) return false
+
+      if (!command.requirements.envVars.every(variable => {
+        if (!process.env[variable]) this.log(`[91m${command.name} failed to load - Required environment variable "${variable}" not set.`, 'Commands')
+        return !!process.env[variable]
+      })) return false
     }
 
     this.commands.push(command)
