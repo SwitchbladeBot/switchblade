@@ -631,5 +631,9 @@
     "commandUsage": "<user to slap>",
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
+  },
+  "bitcoin": {
+    "commandDescription": "Gives you the current value of Bitcoin is USD",
+    "commandTitle": "1 Bitcoin BTC in USD"
   }
 }
