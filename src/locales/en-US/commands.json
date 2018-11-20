@@ -634,6 +634,6 @@
   },
   "bitcoin": {
     "commandDescription": "Gives you the current value of Bitcoin is USD",
-    "commandTitle": "1 Bitcoin BTC in USD"
+    "commandTitle": "Current Bitcoin Value"
   }
 }
