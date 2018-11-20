@@ -140,7 +140,7 @@ module.exports = class Switchblade extends Client {
    * @param {EventListener} listener - Listener to be added
    */
   addListener (listener) {
-    if (!listener instanceof EventListener) {
+    if (!(listener instanceof EventListener)) {
       this.log(`[91m${listener.name} failed to load - Not an EventListener`, 'Listeners')
       return false
     }
@@ -180,7 +180,7 @@ module.exports = class Switchblade extends Client {
    * @param {Object} api - API Wrapper to be added
    */
   addApi (api) {
-    if (!api instanceof APIWrapper) {
+    if (!(api instanceof APIWrapper)) {
       this.log(`[91m${api.name} failed to load - Not an APIWrapper`, 'APIs')
       return false
     }
