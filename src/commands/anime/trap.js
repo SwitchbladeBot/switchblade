@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
+const { Command, CommandRequirements } = CommandStructures
 const snekfetch = require('snekfetch')
 
 module.exports = class Trap extends Command {
@@ -8,6 +8,8 @@ module.exports = class Trap extends Command {
     this.name = 'trap'
     this.aliases = ['nohomo']
     this.category = 'anime'
+
+    this.requirements = new CommandRequirements(this, { nsfwOnly: true })
   }
 
   async run ({ t, author, channel }) {
