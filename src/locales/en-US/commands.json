@@ -631,5 +631,9 @@
     "commandUsage": "<user to slap>",
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
+  },
+  "trap": {
+    "commandDescription": "Fetches a random trap and displays it.",
+    "hereIsYour_ngif": "Here's your trap!"
   }
 }
