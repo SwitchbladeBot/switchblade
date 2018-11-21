@@ -16,7 +16,7 @@ module.exports = class PermissionUtils {
 
   static async isDj (client, user, channel) {
     const guild = channel.guild
-    const role = await client.database.guilds.get(guild.id)
+    const { role } = await client.database.guilds.get(guild.id)
     if (!role) return
     const hasRole = role && role.members.has(user.id)
     return hasRole
