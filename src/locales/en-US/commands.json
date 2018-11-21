@@ -634,6 +634,6 @@
   },
   "trap": {
     "commandDescription": "Fetches a random trap and displays it.",
-    "hereIsYour_ngif": "Here's your trap!"
+    "hereIsYourTrap": "Here's your trap!"
   }
 }
