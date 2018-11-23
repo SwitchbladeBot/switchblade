@@ -16,7 +16,6 @@ module.exports = class Switchblade extends Client {
   constructor (options = {}) {
     console.log(fs.readFileSync('bigtitle.txt', 'utf8').toString())
 
-
     super(options)
     this.apis = {}
     this.commands = []
