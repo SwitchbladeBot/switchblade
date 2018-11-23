@@ -184,7 +184,7 @@
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
     "cantPayYourself": "You can't pay yourself",
-    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
+    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}}!"
   },
   "xkcd": {
     "commandDescription": "Shows an XKCD",
@@ -336,13 +336,13 @@
         "commandUsage": "<language code>",
         "noCode": "You need to give me a language code.",
         "availableLanguages": "Available languages",
-        "changedSuccessfully": "Language changed successfully to `{{lang}}`!"
+        "changedSuccessfully": "Language changed to `{{lang}}`."
       },
       "prefix": {
         "commandDescription": "Change the current guild prefix",
         "commandUsage": "<new prefix>",
         "noPrefix": "You need to give me a prefix.",
-        "changedSuccessfully": "Prefix changed successfully to `{{prefix}}`!"
+        "changedSuccessfully": "Prefix changed to `{{prefix}}`."
       }
     }
   },
@@ -405,7 +405,7 @@
   "favcolor": {
     "commandDescription": "Set a background color to your profile",
     "commandUsage": "<#hexcode>",
-    "changedSuccessfully": "Profile color changed successfully to {{hexcode}}."
+    "changedSuccessfully": "Profile color changed to {{hexcode}}."
   },
   "rep": {
     "commandDescription": "Gives a reputation point to someone",
@@ -463,7 +463,7 @@
     "commandUsage": "<user> <reason>",
     "missingUser": "You need to give me an user to blacklist",
     "missingReason": "You need to give me a reason for blacklisting",
-    "successTitle": "User added to the blacklist successfully"
+    "successTitle": "User added to the blacklist"
   },
   "kick": {
     "commandDescription": "Kicks a member from this server",
@@ -471,7 +471,7 @@
     "missingUser": "You need to give me a member to kick",
     "missingReason": "You need to give me a reason for kicking",
     "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
-    "successTitle": "Member was kicked succesfully",
+    "successTitle": "Member was kicked",
     "cantKick": "I can't kick this member"
   },
   "ban": {
@@ -480,7 +480,7 @@
     "missingUser": "You need to give me a member to ban",
     "missingReason": "You need to give me a reason for banning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
-    "successTitle": "Member was banned succesfully",
+    "successTitle": "Member was banned",
     "cantBan": "I can't ban this member"
   },
   "softban": {
@@ -489,13 +489,13 @@
     "missingUser": "You need to give me a member to softban",
     "missingReason": "You need to give me a reason for softbanning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
-    "successTitle": "Member was softbanned succesfully",
+    "successTitle": "Member was softbanned",
     "cantSoftban": "I can't softban this member"
   },
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
     "commandUsage": "<user>",
-    "success": "{{user}} has been removed from the blacklist successfully",
+    "success": "{{user}} has been removed from the blacklist",
     "missingUser": "You need to give me an user to remove from the blacklist",
     "notBlacklisted": "That user isn't blacklisted"
   },
