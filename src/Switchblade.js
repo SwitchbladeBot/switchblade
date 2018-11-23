@@ -93,7 +93,7 @@ module.exports = class Switchblade extends Client {
       })) return false
 
       if (!command.requirements.envVars.every(variable => {
-        if (!process.env[variable]) this.log(`[91m${command.name} failed to load - Required environment variable "${variable}" not set.`, 'Commands')
+        if (!process.env[variable]) this.log(`�[91m${command.name} failed to load - Required environment variable "${variable}" is not set.`, 'Commands')
         return !!process.env[variable]
       })) return false
     }
