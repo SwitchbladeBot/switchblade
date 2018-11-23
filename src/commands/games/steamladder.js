@@ -13,7 +13,6 @@ module.exports = class SteamLadder extends Command {
   constructor (client) {
     super(client)
     this.name = 'steamladder'
-    this.subcommands = [new SteamLadderProfle(client, this)]
     this.aliases = ['sl']
     this.category = 'games'
     this.parameters = new CommandParameters(this,
