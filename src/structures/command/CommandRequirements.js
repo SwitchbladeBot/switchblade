@@ -6,20 +6,24 @@ module.exports = class CommandRequirements {
   constructor (command, options = {}) {
     this.command = command
     this.cooldownMap = new Map()
+
     this.permissions = options.permissions || []
+
     this.botPermissions = options.botPermissions || []
+
     this.cooldown = Object.assign({ enabled: false, feedback: true, time: 1 }, options.cooldown)
+
     this.devOnly = !!options.devOnly
     this.guildOnly = !!options.guildOnly
     this.onlyOldAccounts = !!options.onlyOldAccounts
     this.nsfwOnly = !!options.nsfwOnly
+
     this.sameVoiceChannelOnly = !!options.sameVoiceChannelOnly
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
+
     this.databaseOnly = !!options.databaseOnly
     this.playerManagerOnly = this.guildPlaying || !!options.playerManagerOnly
-    this.apis = options.apis || []
-    this.envVars = options.envVars || []
 
     this.errors = Object.assign({
       databaseOnly: 'errors:databaseOnly',

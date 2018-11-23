@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
+const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class Lyrics extends Command {
   constructor (client) {
@@ -8,10 +8,13 @@ module.exports = class Lyrics extends Command {
     this.aliases = ['lyric', 'genius']
     this.category = 'music'
 
-    this.requirements = new CommandRequirements(this, { apis: ['genius'] })
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, missingError: 'commands:lyrics.noTrackName' })
     )
+  }
+
+  canLoad () {
+    return !!this.client.apis.genius
   }
 
   async run ({ t, author, channel }, song) {

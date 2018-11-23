@@ -11,4 +11,4 @@ const CLIENT_OPTIONS = {
 
 const Switchblade = require('./src/Switchblade.js')
 const client = new Switchblade(CLIENT_OPTIONS)
-client.login().then(() => client.log('[92mLogged in successfully!', 'Discord')).catch(e => client.logError(e))
+client.login().then(() => client.log('Logged in successfully!', 'Discord')).catch(e => client.logError(e))
