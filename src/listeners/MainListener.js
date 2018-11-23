@@ -12,7 +12,8 @@ module.exports = class MainListener extends EventListener {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     // Lavalink connection
-    if (process.env.LAVALINK_HOST) {
+    const lavalinkRequiredVariables = ['LAVALINK_HOST', 'LAVALINK_PORT', 'LAVALINK_PASSWORD']
+    if (lavalinkRequiredVariables.every(variable => !!process.env[variable])) {
       const nodes = [{
         'host': process.env.LAVALINK_HOST,
         'port': process.env.LAVALINK_PORT || '1337',
@@ -22,9 +23,9 @@ module.exports = class MainListener extends EventListener {
         user: this.user.id,
         shards: 1
       })
-      this.log('Player manager connection established!', 'Music')
+      this.log('[92mLavalink connection established!', 'Music')
     } else {
-      this.log('Player manager connection didn\'t establish!', 'Music')
+      this.log(`[91mLavalink connection didn't establish - Rrequired environment variable(s) (${lavalinkRequiredVariables.filter(variable => !process.env[variable]).join(', ')}) not set.`, 'Music')
     }
 
     // TODO: Make stat posters modular
@@ -66,7 +67,7 @@ module.exports = class MainListener extends EventListener {
 
   async onMessage (message) {
     if (message.author.bot) return
-    const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
+    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id)
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
     const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)
     const regexResult = prefixRegex.exec(message.content)
