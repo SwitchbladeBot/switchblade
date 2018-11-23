@@ -23,6 +23,7 @@ module.exports = class SteamLadder extends Command {
   constructor (client) {
     super(client)
     this.name = 'steamladder'
+    this.subcommands = [new SteamLadderProfle(client, this)]
     this.aliases = ['sl']
     this.category = 'games'
     this.parameters = new CommandParameters(this,
@@ -46,7 +47,7 @@ module.exports = class SteamLadder extends Command {
   }
 
   canLoad () {
-    return !!this.client.apis.steamladder
+    return !!this.client.apis.steamladder && !!this.client.apis.steam
   }
 
   async run ({ t, author, channel, language }, ladderType = 'xp', regionOrCountry) {
@@ -124,5 +125,39 @@ module.exports = class SteamLadder extends Command {
     }
 
     return line
+  }
+}
+
+class SteamLadderProfle extends Command {
+  constructor (client) {
+    super(client)
+    this.name = 'profile'
+    this.aliases = ['p']
+    this.parameters = new CommandParameters(this,
+      new StringParameter({full: true, required: false})
+    )
+  }
+
+  async run ({ t, author, channel, language }, query) {
+    channel.startTyping()
+    const steamid = await this.client.apis.steam.resolve(query)
+    const steamLadderResponse = await this.client.apis.steamladder.getProfile(steamid)
+    console.log(steamLadderResponse)
+    const embed = new SwitchbladeEmbed(author)
+      .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
+      .setColor(embedColor)
+      .setThumbnail(steamLadderResponse.steam_user.steam_avatar_src)
+      .setTitle(steamLadderResponse.steam_user.steam_name)
+      .setURL(steamLadderResponse.steam_user.steamladder_url)
+      .setDescription(
+        [
+          t('commands:steamladder.levelWithNumber', {level: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.level)}),
+          t('commands:steamladder.gamesWithCount', {count: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.games.total_games)}),
+          t('commands:steamladder.hoursInGame', {count: Intl.NumberFormat.call(language).format(Math.round(steamLadderResponse.steam_stats.games.total_playtime_min / 60))}),
+          t('commands:steamladder.badgesWithCount', {count: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.badges.total)}),
+          t('commands:steamladder.joinedOn', {date: Intl.DateTimeFormat.call(language).format(new Date(steamLadderResponse.steam_user.steam_join_date))})
+        ].map(l => `**${l}**`).join('\n')
+      )
+    channel.send(embed).then(channel.stopTyping())
   }
 }
