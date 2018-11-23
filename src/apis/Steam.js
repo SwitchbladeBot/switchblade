@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const Steam = require('steamapi');
+const Steam = require('steamapi')
 
 module.exports = class SteamAPI extends APIWrapper {
   constructor () {

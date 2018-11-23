@@ -1,20 +1,10 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
-const countries = require("i18n-iso-countries");
+const { Command, CommandParameters, StringParameter } = CommandStructures
+const countries = require('i18n-iso-countries')
 
 const embedColor = 0x292B2D
 
 const ladders = ['xp', 'games', 'badges', 'playtime', 'age']
-
-const regions = {
-  eu: 'europe',
-  na: 'north_america',
-  sa: 'south_america',
-  asia: 'asia',
-  africa: 'africa',
-  oc: 'oceania',
-  an: 'antartica'
-}
 
 // TODO: Finish the ladder command
 // TODO: Add profile subcommand
@@ -41,8 +31,8 @@ module.exports = class SteamLadder extends Command {
               `**${ladders.map(l => `\`${l}\``).join(', ')}**`
             ].join('\n')
           }
-        }}),
-      new StringParameter({required: false})
+        } }),
+      new StringParameter({ required: false })
     )
   }
 
@@ -104,23 +94,23 @@ module.exports = class SteamLadder extends Command {
 
     switch (ladderType) {
       case 'XP':
-        line += ` - ${t('commands:steamladder.levelWithNumber', {level: Intl.NumberFormat.call(language).format(entry.steam_stats.level)})}`
+        line += ` - ${t('commands:steamladder.levelWithNumber', { level: Intl.NumberFormat.call(language).format(entry.steam_stats.level) })}`
         break
 
       case 'G':
-        line += ` - ${t('commands:steamladder.gamesWithCount', {count: Intl.NumberFormat.call(language).format(entry.steam_stats.games.total_games)})}`
+        line += ` - ${t('commands:steamladder.gamesWithCount', { count: Intl.NumberFormat.call(language).format(entry.steam_stats.games.total_games) })}`
         break
 
       case 'PT':
-        line += ` - ${t('commands:steamladder.hoursInGame', {count: Intl.NumberFormat.call(language).format(Math.round(entry.steam_stats.games.total_playtime_min / 60))})}`
+        line += ` - ${t('commands:steamladder.hoursInGame', { count: Intl.NumberFormat.call(language).format(Math.round(entry.steam_stats.games.total_playtime_min / 60)) })}`
         break
 
       case 'B':
-        line += ` - ${t('commands:steamladder.badgesWithCount', {count: Intl.NumberFormat.call(language).format(entry.steam_stats.badges.total)})}`
+        line += ` - ${t('commands:steamladder.badgesWithCount', { count: Intl.NumberFormat.call(language).format(entry.steam_stats.badges.total) })}`
         break
 
       case 'A':
-        line += ` - ${t('commands:steamladder.joinedOn', {date: Intl.DateTimeFormat.call(language).format(new Date(entry.steam_user.steam_join_date))})}`
+        line += ` - ${t('commands:steamladder.joinedOn', { date: Intl.DateTimeFormat.call(language).format(new Date(entry.steam_user.steam_join_date)) })}`
         break
     }
 
@@ -134,7 +124,7 @@ class SteamLadderProfle extends Command {
     this.name = 'profile'
     this.aliases = ['p']
     this.parameters = new CommandParameters(this,
-      new StringParameter({full: true, required: false})
+      new StringParameter({ full: true, required: false })
     )
   }
 
@@ -151,11 +141,11 @@ class SteamLadderProfle extends Command {
       .setURL(steamLadderResponse.steam_user.steamladder_url)
       .setDescription(
         [
-          t('commands:steamladder.levelWithNumber', {level: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.level)}),
-          t('commands:steamladder.gamesWithCount', {count: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.games.total_games)}),
-          t('commands:steamladder.hoursInGame', {count: Intl.NumberFormat.call(language).format(Math.round(steamLadderResponse.steam_stats.games.total_playtime_min / 60))}),
-          t('commands:steamladder.badgesWithCount', {count: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.badges.total)}),
-          t('commands:steamladder.joinedOn', {date: Intl.DateTimeFormat.call(language).format(new Date(steamLadderResponse.steam_user.steam_join_date))})
+          t('commands:steamladder.levelWithNumber', { level: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.level) }),
+          t('commands:steamladder.gamesWithCount', { count: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.games.total_games) }),
+          t('commands:steamladder.hoursInGame', { count: Intl.NumberFormat.call(language).format(Math.round(steamLadderResponse.steam_stats.games.total_playtime_min / 60)) }),
+          t('commands:steamladder.badgesWithCount', { count: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.badges.total) }),
+          t('commands:steamladder.joinedOn', { date: Intl.DateTimeFormat.call(language).format(new Date(steamLadderResponse.steam_user.steam_join_date)) })
         ].map(l => `**${l}**`).join('\n')
       )
     channel.send(embed).then(channel.stopTyping())
