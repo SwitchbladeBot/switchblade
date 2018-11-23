@@ -64,6 +64,7 @@
     "rss-parser": "latest",
     "samp-query": "latest",
     "snekfetch": "^4.0.4",
+    "steamapi": "^2.0.3",
     "steamladder": "^1.0.4",
     "transform-props": "^1.0.1",
     "uws": "^10.148.2"
