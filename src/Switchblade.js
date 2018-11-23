@@ -1,6 +1,7 @@
 const { Client } = require('discord.js')
 const translationBackend = require('i18next-node-fs-backend')
 const i18next = require('i18next')
+const fs = require('fs')
 
 const FileUtils = require('./utils/FileUtils.js')
 const { Command, EventListener, APIWrapper } = require('./structures')
@@ -13,13 +14,8 @@ const { MongoDB } = require('./database')
  */
 module.exports = class Switchblade extends Client {
   constructor (options = {}) {
-    console.log(
-      '[36m   _____         _ _       _     _     _           _      \n' +
-      '  / ____|       (_| |     | |   | |   | |         | |     \n' +
-      ' | (_____      ___| |_ ___| |__ | |__ | | __ _  __| | ___ \n' +
-      '  \\___ \\ \\ /\\ / | | __/ __| \'_ \\| \'_ \\| |/ _` |/ _` |/ _ \\\n' +
-      '  ____) \\ V  V /| | || (__| | | | |_) | | (_| | (_| |  __/\n' +
-      ' |_____/ \\_/\\_/ |_|\\__\\___|_| |_|_.__/|_|\\__,_|\\__,_|\\___|[0m\n')
+    console.log(fs.readFileSync('bigtitle.txt', 'utf8').toString())
+
 
     super(options)
     this.apis = {}
@@ -56,7 +52,7 @@ module.exports = class Switchblade extends Client {
    */
   log (...args) {
     const message = args[0]
-    const tags = args.slice(1).map(t => `[34m[${t}][0m`)
+    const tags = args.slice(1).map(t => `[36m[${t}][0m`)
     console.log(...tags, message + '[0m')
   }
 
@@ -77,23 +73,23 @@ module.exports = class Switchblade extends Client {
    */
   addCommand (command) {
     if (!(command instanceof Command)) {
-      this.log(`[91m${command} failed to load - Not a command`, 'Commands')
+      this.log(`[31m${command} failed to load - Not a command`, 'Commands')
       return false
     }
 
     if (command.canLoad() !== true) {
-      this.log(`[91m${command.name} failed to load - ${command.canLoad() || 'canLoad function did not return true.'}`, 'Commands')
+      this.log(`[31m${command.name} failed to load - ${command.canLoad() || 'canLoad function did not return true.'}`, 'Commands')
       return false
     }
 
     if (command.requirements) {
       if (!command.requirements.apis.every(api => {
-        if (!this.apis[api]) this.log(`[91m${command.name} failed to load - Required API wrapper "${api}" not found.`, 'Commands')
+        if (!this.apis[api]) this.log(`[31m${command.name} failed to load - Required API wrapper "${api}" not found.`, 'Commands')
         return !!this.apis[api]
       })) return false
 
       if (!command.requirements.envVars.every(variable => {
-        if (!process.env[variable]) this.log(`�[91m${command.name} failed to load - Required environment variable "${variable}" is not set.`, 'Commands')
+        if (!process.env[variable]) this.log(`[31m${command.name} failed to load - Required environment variable "${variable}" is not set.`, 'Commands')
         return !!process.env[variable]
       })) return false
     }
@@ -126,7 +122,7 @@ module.exports = class Switchblade extends Client {
       this.addCommand(new NewCommand(this)) ? success++ : failed++
     }, this.logError).then(() => {
       if (failed === 0) {
-        this.log(`[92mAll ${success} commands loaded without errors.`, 'Commands')
+        this.log(`[32mAll ${success} commands loaded without errors.`, 'Commands')
       } else {
         this.log(`[33m${success} commands loaded, ${failed} failed.`, 'Commands')
       }
@@ -141,7 +137,7 @@ module.exports = class Switchblade extends Client {
    */
   addListener (listener) {
     if (!(listener instanceof EventListener)) {
-      this.log(`[91m${listener.name} failed to load - Not an EventListener`, 'Listeners')
+      this.log(`[31m${listener.name} failed to load - Not an EventListener`, 'Listeners')
       return false
     }
 
@@ -166,7 +162,7 @@ module.exports = class Switchblade extends Client {
       this.addListener(new NewListener(this)) ? success++ : failed++
     }, this.logError).then(() => {
       if (failed === 0) {
-        this.log(`[92mAll ${success} listeners loaded without errors.`, 'Listeners')
+        this.log(`[32mAll ${success} listeners loaded without errors.`, 'Listeners')
       } else {
         this.log(`[33m${success} listeners loaded, ${failed} failed.`, 'Listeners')
       }
@@ -181,17 +177,17 @@ module.exports = class Switchblade extends Client {
    */
   addApi (api) {
     if (!(api instanceof APIWrapper)) {
-      this.log(`[91m${api.name} failed to load - Not an APIWrapper`, 'APIs')
+      this.log(`[31m${api.name} failed to load - Not an APIWrapper`, 'APIs')
       return false
     }
 
     if (api.canLoad() !== true) {
-      this.log(`[91m${api.name} failed to load - ${api.canLoad() || 'canLoad function did not return true.'}`, 'APIs')
+      this.log(`[31m${api.name} failed to load - ${api.canLoad() || 'canLoad function did not return true.'}`, 'APIs')
       return false
     }
 
     if (!api.envVars.every(variable => {
-      if (!process.env[variable]) this.log(`�[91m${api.name} failed to load - Required environment variable "${variable}" is not set.`, 'APIs')
+      if (!process.env[variable]) this.log(`[31m${api.name} failed to load - Required environment variable "${variable}" is not set.`, 'APIs')
       return !!process.env[variable]
     })) return false
 
@@ -211,7 +207,7 @@ module.exports = class Switchblade extends Client {
       this.addApi(new NewAPI()) ? success++ : failed++
     }, this.logError).then(() => {
       if (failed === 0) {
-        this.log(`[92mAll ${success} API wrappers loaded without errors.`, 'APIs')
+        this.log(`[32mAll ${success} API wrappers loaded without errors.`, 'APIs')
       } else {
         this.log(`[33m${success} API wrappers loaded, ${failed} failed.`, 'APIs')
       }
@@ -227,13 +223,13 @@ module.exports = class Switchblade extends Client {
         this.log('Downloading locales from Crowdin', 'Localization')
         try {
           await this.apis.crowdin.downloadToPath(dirPath)
-          this.log('[92mLocales downloaded', 'Localization')
+          this.log('[32mLocales downloaded', 'Localization')
         } catch (e) {
-          this.log('[91mCouldn\'t download locales - An error ocurred.', 'Localization')
+          this.log('[31mCouldn\'t download locales - An error ocurred.', 'Localization')
           this.logError(e)
         }
       } else {
-        this.log('[91mCouldn\'t download locales - API wrapper didn\'t load.', 'Localization')
+        this.log('[31mCouldn\'t download locales - API wrapper didn\'t load.', 'Localization')
       }
 
       try {
@@ -250,7 +246,7 @@ module.exports = class Switchblade extends Client {
           returnEmptyString: false
         }, () => {
           resolve(this.loadLanguagesDisplayNames(Object.keys(i18next.store.data)))
-          this.log('[92mi18next initialized', 'Localization')
+          this.log('[32mi18next initialized', 'Localization')
         })
       } catch (e) {
         this.logError(e)
@@ -287,7 +283,7 @@ module.exports = class Switchblade extends Client {
   initializeDatabase (DBWrapper, options = {}) {
     this.database = new DBWrapper(options)
     this.database.connect()
-      .then(() => this.log('[92mDatabase connection established!', 'DB'))
+      .then(() => this.log('[32mDatabase connection established!', 'DB'))
       .catch(e => {
         this.logError('DB', e.message)
         this.database = null

@@ -23,9 +23,9 @@ module.exports = class MainListener extends EventListener {
         user: this.user.id,
         shards: 1
       })
-      this.log('[92mLavalink connection established!', 'Music')
+      this.log('[32mLavalink connection established!', 'Music')
     } else {
-      this.log(`[91mLavalink connection didn't establish - Required environment variable(s) (${lavalinkRequiredVariables.filter(variable => !process.env[variable]).join(', ')}) not set.`, 'Music')
+      this.log(`[31mLavalink connection didn't establish - Required environment variable(s) (${lavalinkRequiredVariables.filter(variable => !process.env[variable]).join(', ')}) not set.`, 'Music')
     }
 
     // TODO: Make stat posters modular
@@ -36,8 +36,8 @@ module.exports = class MainListener extends EventListener {
           .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
           .set('Authorization', process.env.DISCORDBOTSPW_TOKEN)
           .send({ server_count: client.guilds.size })
-          .then(() => client.log('Posted statistics successfully', 'bots.discord.pw'))
-          .catch(() => client.log('Failed to post statistics', 'bots.discord.pw'))
+          .then(() => client.log('[32mPosted statistics successfully', 'bots.discord.pw'))
+          .catch(() => client.log('[31mFailed to post statistics', 'bots.discord.pw'))
       }
 
       // discordbots.org
@@ -46,8 +46,8 @@ module.exports = class MainListener extends EventListener {
           .post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
           .set('Authorization', process.env.DBL_TOKEN)
           .send({ server_count: client.guilds.size })
-          .then(() => client.log('Posted statistics successfully', 'discordbots.org'))
-          .catch(() => client.log('Failed to post statistics', 'discordbots.org'))
+          .then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
+          .catch(() => client.log('[31mFailed to post statistics', 'discordbots.org'))
       }
 
       // botsfordiscord.com
@@ -56,8 +56,8 @@ module.exports = class MainListener extends EventListener {
           .post(`https://botsfordiscord.com/api/bots/${client.user.id}`)
           .set('Authorization', process.env.BOTSFORDISCORD_TOKEN)
           .send({ server_count: client.guilds.size })
-          .then(() => client.log('Posted statistics successfully', 'botsfordiscord.com'))
-          .catch(() => client.log('Failed to post statistics', 'botsfordiscord.com'))
+          .then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
+          .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
       }
     }
 
