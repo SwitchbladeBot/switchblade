@@ -191,7 +191,7 @@ module.exports = class Switchblade extends Client {
     }
 
     if (!api.envVars.every(variable => {
-      if (!process.env[variable]) this.log(`[91m${api.name} failed to load - Required environment variable "${variable}" not set.`, 'APIs')
+      if (!process.env[variable]) this.log(`�[91m${api.name} failed to load - Required environment variable "${variable}" is not set.`, 'APIs')
       return !!process.env[variable]
     })) return false
 
