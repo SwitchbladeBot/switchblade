@@ -26,6 +26,7 @@ module.exports = {
   CROWDIN_LOGO: '<:CrowdinLogo:465159290995474434>',
   GITHUB_LOGO: '<:GithubLogo:465159291545059328>',
   SWITCHBLADE_LOGO: '<:switchblade:494575477659271168>',
+  PATREON_LOGO: '<:patreon:516365722314866719>'
 
   // Assets
 
