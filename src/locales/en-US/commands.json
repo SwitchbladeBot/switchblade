@@ -237,6 +237,7 @@
     "translate": "{{Constants.CROWDIN_LOGO}} **[Translate me to your language](https://translate.switchblade.xyz)**",
     "github": "{{Constants.GITHUB_LOGO}} **[GitHub repository](https://github.com/SwitchbladeBot/switchblade)**",
     "website": "{{Constants.SWITCHBLADE_LOGO}} **[My Website](https://switchblade.xyz)**"
+    "patreon": "{{Constants.PATREON_LOGO}} **[Support me](https://www.patreon.com/switchblade)**"
   },
   "guildinfo": {
     "commandDescription": "Sends information about the current server or from another guild",
