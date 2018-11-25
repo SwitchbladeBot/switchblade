@@ -1,7 +1,7 @@
 const { CanvasTemplates, CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const { Attachment } = require('discord.js')
-const moment = require('moment-timezone');
+const moment = require('moment-timezone')
 
 const icons = [ 'clear-day',
   'clear-night',
@@ -26,7 +26,7 @@ module.exports = class Weather extends Command {
   }
 
   async run ({ t, author, channel, language }, address) {
-    moment.locale(language);
+    moment.locale(language)
     channel.startTyping()
     const city = await this.client.apis.gmaps.searchCity(address)
     if (city) {
@@ -46,7 +46,7 @@ module.exports = class Weather extends Command {
       }
 
       daily.map(d => {
-        d.temperature = this.tempHumanize((d.temperatureHigh + d.temperatureLow) / 2),
+        d.temperature = this.tempHumanize((d.temperatureHigh + d.temperatureLow) / 2)
         d.icon = icons.indexOf(d.icon)
         d.weekday = this.getTimeData(d.time, weatherData.timezone).format('ddd')
       })
@@ -62,7 +62,6 @@ module.exports = class Weather extends Command {
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:weather.notFound')))
     }
-
   }
 
   getTimeData (time, tz) {
@@ -71,7 +70,7 @@ module.exports = class Weather extends Command {
     return moment(time)
   }
 
-  tempHumanize(temp) {
+  tempHumanize (temp) {
     return parseFloat(temp.toFixed(1))
   }
 }

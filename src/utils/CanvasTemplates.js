@@ -491,7 +491,7 @@ module.exports = class CanvasTemplates {
     return encoder.out.getData()
   }
 
-  static async weather ({ t }, title, weather ) {
+  static async weather ({ t }, title, weather) {
     const WIDTH = 430
     const HEIGHT = 350
 
@@ -507,10 +507,10 @@ module.exports = class CanvasTemplates {
       const LIGHT = MEME || '"Montserrat Light"'
       return {
         TITLE: `17px ${EXTRABOLD}`,
-        TEMPERATURE: `bold 90px ${EXTRABOLD}`, 
+        TEMPERATURE: `bold 90px ${EXTRABOLD}`,
         INFORMATIONS: `17px ${LIGHT}`,
         WEEK_DAYS: `17px ${REGULAR}`,
-        WEEK_TEMPERATURES: `bold 29px ${LIGHT}`,
+        WEEK_TEMPERATURES: `bold 29px ${LIGHT}`
       }
     })()
 
@@ -535,7 +535,6 @@ module.exports = class CanvasTemplates {
 
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
-
 
     // CARD DRAWING
     ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
@@ -566,12 +565,12 @@ module.exports = class CanvasTemplates {
     ctx.write(weather.now.min, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN + MAIN_INFORMATIONS_MAX_W + MAIN_INFORMATIONS_X_MARGIN_BETWEEN, MAIN_INFORMATIONS_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
     const MAIN_INFORMATIONS_MIN_W = measureText(ctx, FONTS.INFORMATIONS, weather.now.min).width
     ctx.write(weather.now.wind, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN + MAIN_INFORMATIONS_MAX_W + MAIN_INFORMATIONS_MIN_W + MAIN_INFORMATIONS_X_MARGIN_BETWEEN * 2, MAIN_INFORMATIONS_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
-    
 
-    const [ ...WEATHER_SVG_ICONS ] = await WEATHER_ICONS 
+    const [ ...WEATHER_SVG_ICONS ] = await WEATHER_ICONS
 
     const AWAIT_ICONS = Promise.all(WEATHER_SVG_ICONS.map(async icon => {
-      return await createSVGCanvas(icon.toString().replace(/\$COLOR/g, '#FFFFFF'), WEATHER_ICONS_SIZE, WEATHER_ICONS_SIZE)
+      const canvas = await createSVGCanvas(icon.toString().replace(/\$COLOR/g, '#FFFFFF'), WEATHER_ICONS_SIZE, WEATHER_ICONS_SIZE)
+      return canvas
     }))
 
     // MAIN TEMPERATURE ICON
@@ -583,7 +582,6 @@ module.exports = class CanvasTemplates {
     const mainTemperatureIcon = await createSVGCanvas(WEATHER_SVG_ICONS[weather.now.icon].toString().replace(/\$COLOR/g, '#FFFFFF'), MAIN_ICON_SIZE, MAIN_ICON_SIZE)
 
     ctx.drawImage(mainTemperatureIcon, CARD_X_MARGIN + CARD_WIDTH - MAIN_ICON_RIGHT_MARGIN - MAIN_ICON_SIZE, MAIN_ICON_Y, MAIN_ICON_SIZE, MAIN_ICON_SIZE)
-
 
     // WEATHER DAILY ICONS
 
@@ -604,8 +602,7 @@ module.exports = class CanvasTemplates {
 
     ctx.drawImage(arrow, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN - MAIN_INFORMATIONS_ICON_SIZE * 1.2, MAIN_INFORMATIONS_Y - MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
     ctx.drawImage(arrow, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN - MAIN_INFORMATIONS_ICON_SIZE * 1.2 + MAIN_INFORMATIONS_X_MARGIN_BETWEEN * 0.9 + MAIN_INFORMATIONS_MAX_W, MAIN_INFORMATIONS_Y - MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
-    ctx.drawImage(wind,  CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN - MAIN_INFORMATIONS_ICON_SIZE * 1.2 + MAIN_INFORMATIONS_X_MARGIN_BETWEEN * 1.9 + MAIN_INFORMATIONS_MAX_W + MAIN_INFORMATIONS_MIN_W, MAIN_INFORMATIONS_Y - MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
-
+    ctx.drawImage(wind, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN - MAIN_INFORMATIONS_ICON_SIZE * 1.2 + MAIN_INFORMATIONS_X_MARGIN_BETWEEN * 1.9 + MAIN_INFORMATIONS_MAX_W + MAIN_INFORMATIONS_MIN_W, MAIN_INFORMATIONS_Y - MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
 
     // BACKGROUND
     ctx.save()

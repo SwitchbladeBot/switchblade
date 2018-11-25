@@ -6,7 +6,7 @@ const API_URL = 'https://api.darksky.net'
 module.exports = class DarkSkyAPI extends APIWrapper {
   constructor () {
     super()
-    this.name = 'darksky',
+    this.name = 'darksky'
     this.envVars = ['DARKSKY_KEY']
   }
 
@@ -20,7 +20,7 @@ module.exports = class DarkSkyAPI extends APIWrapper {
    * @param {string} [options.units=auto] The units to the weather conditions, see more in https://darksky.net/dev/docs#forecast-request
    * @returns {Promise<Object>} Promise with object with weather forecast info, see more in https://darksky.net/dev/docs#response-format
    */
-  getForecast(lat, lng, options){
+  getForecast (lat, lng, options) {
     if (!options.units) options.units = 'auto'
     return this.request('/forecast', lat, lng, options)
   }
