@@ -25,7 +25,7 @@ module.exports = class MainListener extends EventListener {
       })
       this.log('[32mLavalink connection established!', 'Music')
     } else {
-      this.log(`[31mLavalink connection didn't establish - Required environment variable(s) (${lavalinkRequiredVariables.filter(variable => !process.env[variable]).join(', ')}) not set.`, 'Music')
+      this.log(`[31mFailed to establish Lavalink connection - Required environment variable(s) (${lavalinkRequiredVariables.filter(variable => !process.env[variable]).join(', ')}) not set.`, 'Music')
     }
 
     // TODO: Make stat posters modular
