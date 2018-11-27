@@ -101,25 +101,27 @@ module.exports = class SteamLadder extends Command {
   }
 
   generateLadderEmbedLine (ladderType, entry, t, language) {
+    const formatter = new Intl.NumberFormat(language)
+
     let line = `\`${('0' + (entry.pos + 1)).slice(-2)}.\` `
     line += EmojiUtils.getFlag(entry.steam_user.steam_country_code)
     line += ` **[${entry.steam_user.steam_name}](${entry.steam_user.steamladder_url})**`
 
     switch (ladderType) {
       case 'XP':
-        line += ` - ${t('commands:steamladder.levelWithNumber', { level: Intl.NumberFormat.call(language).format(entry.steam_stats.level) })}`
+        line += ` - ${t('commands:steamladder.levelWithNumber', { level: formatter.format(entry.steam_stats.level) })}`
         break
 
       case 'G':
-        line += ` - ${t('commands:steamladder.gamesWithCount', { count: Intl.NumberFormat.call(language).format(entry.steam_stats.games.total_games) })}`
+        line += ` - ${t('commands:steamladder.gamesWithCount', { count: formatter.format(entry.steam_stats.games.total_games) })}`
         break
 
       case 'PT':
-        line += ` - ${t('commands:steamladder.hoursInGame', { count: Intl.NumberFormat.call(language).format(Math.round(entry.steam_stats.games.total_playtime_min / 60)) })}`
+        line += ` - ${t('commands:steamladder.hoursInGame', { count: formatter.format(Math.round(entry.steam_stats.games.total_playtime_min / 60)) })}`
         break
 
       case 'B':
-        line += ` - ${t('commands:steamladder.badgesWithCount', { count: Intl.NumberFormat.call(language).format(entry.steam_stats.badges.total) })}`
+        line += ` - ${t('commands:steamladder.badgesWithCount', { count: formatter.format(entry.steam_stats.badges.total) })}`
         break
 
       case 'A':
