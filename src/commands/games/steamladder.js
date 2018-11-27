@@ -74,7 +74,6 @@ module.exports = class SteamLadder extends Command {
         .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
         .setColor(embedColor)
     } catch (e) {
-      console.log(e)
       embed = new SwitchbladeEmbed(author)
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:steamladder.ladderNotFound'))
@@ -140,8 +139,8 @@ module.exports = class SteamLadder extends Command {
 }
 
 class SteamLadderProfile extends Command {
-  constructor (client) {
-    super(client)
+  constructor (client, parentCommand) {
+    super(client, parentCommand)
     this.name = 'profile'
     this.aliases = ['p']
     this.parameters = new CommandParameters(this,
