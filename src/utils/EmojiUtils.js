@@ -1,8 +1,8 @@
-const { Constants } = require('../')
+const Constants = require('./Constants.js')
 
 module.exports = class EmojiUtils {
   static getFlag (countryCode) {
-    if (countryCode) `:flag_${countryCode.toLowerCase()}:`
+    if (countryCode) return `:flag_${countryCode.toLowerCase()}:`
     return Constants.UNKNOWN_COUNTRY_FLAG
   }
 }
