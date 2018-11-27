@@ -26,6 +26,7 @@ module.exports = {
   CROWDIN_LOGO: '<:CrowdinLogo:465159290995474434>',
   GITHUB_LOGO: '<:GithubLogo:465159291545059328>',
   SWITCHBLADE_LOGO: '<:switchblade:494575477659271168>',
+  PATREON_LOGO: '<:patreon:516783030543712273>',
   UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
 
   // SteamLadder Emoji
