@@ -1,10 +1,11 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, EmojiUtils, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const countries = require('i18n-iso-countries')
 
 const embedColor = 0x292B2D
 
 const ladders = ['xp', 'games', 'badges', 'playtime', 'age']
+const regions = ['europe', 'north_america', 'south_america', 'asia', 'africa', 'oceania', 'antarctica']
 
 // TODO: Finish the ladder command
 // TODO: Add profile subcommand
@@ -15,6 +16,7 @@ module.exports = class SteamLadder extends Command {
     this.name = 'steamladder'
     this.aliases = ['sl']
     this.category = 'games'
+    this.subcommands = [new SteamLadderProfile(client, this)]
     this.parameters = new CommandParameters(this,
       new StringParameter({
         full: false,
@@ -30,8 +32,24 @@ module.exports = class SteamLadder extends Command {
               `**${ladders.map(l => `\`${l}\``).join(', ')}**`
             ].join('\n')
           }
-        } }),
-      new StringParameter({ required: false })
+        }}),
+      new StringParameter({
+        required: false,
+        whitelist: Object.keys(countries.getNames('en')).concat(regions),
+        missingError: ({ t, prefix }) => {
+          return {
+            title: t('commands:steamladder.noRegion'),
+            description: [
+              `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:steamladder.commandUsage')}\``,
+              '',
+              `__**${t('commands:steamladder.availableRegions')}:**__`,
+              `**${regions.map(l => `\`${l}\``).join(', ')}**`,
+              '',
+              `[${t('commands:steamladder.youCanAlsoUse')}](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)`
+            ].join('\n')
+          }
+        }
+      })
     )
   }
 
@@ -40,19 +58,21 @@ module.exports = class SteamLadder extends Command {
   }
 
   async run ({ t, author, channel, language }, ladderType = 'xp', regionOrCountry) {
-    if (ladderType === 'age') ladderType = 'steam_age'
     channel.startTyping()
-    const steamLadderResponse = await this.client.apis.steamladder.getLadder(ladderType, regionOrCountry)
-    console.log(steamLadderResponse)
-    console.log(steamLadderResponse.ladder[0].steam_user)
-    console.log(steamLadderResponse.ladder[0].steam_stats)
-
+    if (ladderType === 'age') ladderType = 'steam_age'
     const embed = new SwitchbladeEmbed(author)
-    embed
-      .setTitle(this.generateLadderEmbedTitle(steamLadderResponse, t, language))
-      .setDescription(this.generateLadderEmbedDescription(steamLadderResponse, t, language))
-      .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
-      .setColor(embedColor)
+    try {
+      const steamLadderResponse = await this.client.apis.steamladder.getLadder(ladderType, regionOrCountry)
+      embed
+        .setTitle(this.generateLadderEmbedTitle(steamLadderResponse, t, language))
+        .setDescription(this.generateLadderEmbedDescription(steamLadderResponse, t, language))
+        .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
+        .setColor(embedColor)
+    } catch (e) {
+      embed
+        .setColor(Constants.ERROR_COLOR)
+        .setTitle(t('commands:steamladder.ladderNotFound'))
+    }
     channel.send(embed).then(channel.stopTyping())
   }
 
@@ -82,13 +102,7 @@ module.exports = class SteamLadder extends Command {
 
   generateLadderEmbedLine (ladderType, entry, t, language) {
     let line = `\`${('0' + (entry.pos + 1)).slice(-2)}.\` `
-
-    if (entry.steam_user.steam_country_code) {
-      line += `:flag_${entry.steam_user.steam_country_code.toLowerCase()}:`
-    } else {
-      line += '<:missingflag:513764139412357130>'
-    }
-
+    line += EmojiUtils.getFlag(entry.steam_user.steam_country_code)
     line += ` **[${entry.steam_user.steam_name}](${entry.steam_user.steamladder_url})**`
 
     switch (ladderType) {
@@ -117,7 +131,7 @@ module.exports = class SteamLadder extends Command {
   }
 }
 
-class SteamLadderProfle extends Command {
+class SteamLadderProfile extends Command {
   constructor (client) {
     super(client)
     this.name = 'profile'
@@ -130,23 +144,43 @@ class SteamLadderProfle extends Command {
   async run ({ t, author, channel, language }, query) {
     channel.startTyping()
     const steamid = await this.client.apis.steam.resolve(query)
-    const steamLadderResponse = await this.client.apis.steamladder.getProfile(steamid)
-    console.log(steamLadderResponse)
+    const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
-      .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
-      .setColor(embedColor)
-      .setThumbnail(steamLadderResponse.steam_user.steam_avatar_src)
-      .setTitle(steamLadderResponse.steam_user.steam_name)
-      .setURL(steamLadderResponse.steam_user.steamladder_url)
-      .setDescription(
-        [
-          t('commands:steamladder.levelWithNumber', { level: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.level) }),
-          t('commands:steamladder.gamesWithCount', { count: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.games.total_games) }),
-          t('commands:steamladder.hoursInGame', { count: Intl.NumberFormat.call(language).format(Math.round(steamLadderResponse.steam_stats.games.total_playtime_min / 60)) }),
-          t('commands:steamladder.badgesWithCount', { count: Intl.NumberFormat.call(language).format(steamLadderResponse.steam_stats.badges.total) }),
-          t('commands:steamladder.joinedOn', { date: Intl.DateTimeFormat.call(language).format(new Date(steamLadderResponse.steam_user.steam_join_date)) })
-        ].map(l => `**${l}**`).join('\n')
-      )
+    try {
+      const steamLadderResponse = await this.client.apis.steamladder.getProfile(steamid)
+      let description = EmojiUtils.getFlag(steamLadderResponse.steam_user.steam_country_code)
+      if (steamLadderResponse.steam_ladder_info.is_staff) description += ' ' + Constants.STEAMLADDER_STAFF
+      if (steamLadderResponse.steam_ladder_info.is_winter_18) description += ' ' + Constants.STEAMLADDER_WINTER
+      if (steamLadderResponse.steam_ladder_info.is_donator) description += ' ' + Constants.STEAMLADDER_DONATOR
+      if (steamLadderResponse.steam_ladder_info.is_top_donator) description += ' ' + Constants.STEAMLADDER_TOP_DONATOR
+      embed
+        .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
+        .setColor(embedColor)
+        .setThumbnail(steamLadderResponse.steam_user.steam_avatar_src)
+        .setTitle(`${steamLadderResponse.steam_user.steam_name} \`${steamLadderResponse.steam_user.steam_id}\``)
+        .setURL(steamLadderResponse.steam_user.steamladder_url)
+        .setDescription(description)
+        .addField(t('commands:steamladder.level'), [
+          `**${formatter.format(steamLadderResponse.steam_stats.level)}** (${formatter.format(steamLadderResponse.steam_stats.xp)} XP)`,
+          `\`${t('commands:steamladder.inTheWorld', {position: formatter.format(steamLadderResponse.ladder_rank.worldwide_xp)})}\``
+        ].join('\n'), true)
+        .addField(t('commands:steamladder.playtime'), [
+          t('commands:steamladder.hours', {count: `**${formatter.format(Math.round(steamLadderResponse.steam_stats.games.total_playtime_min / 60))}**`}),
+          `\`${t('commands:steamladder.inTheWorld', {position: formatter.format(steamLadderResponse.ladder_rank.worldwide_playtime)})}\``
+        ].join('\n'), true)
+        .addField(t('commands:steamladder.games'), [
+          `**${formatter.format(Math.round(steamLadderResponse.steam_stats.games.total_games))}**`,
+          `\`${t('commands:steamladder.inTheWorld', {position: formatter.format(steamLadderResponse.ladder_rank.worldwide_games)})}\``
+        ].join('\n'), true)
+        .addField(t('commands:steamladder.others'), [
+          t('commands:steamladder.badgesWithCount', {count: `**${formatter.format(Math.round(steamLadderResponse.steam_stats.badges.total))}**`}),
+          t('commands:steamladder.friendsWithCount', {count: `**${formatter.format(Math.round(steamLadderResponse.steam_stats.friends))}**`})
+        ].join('\n'), true)
+    } catch (e) {
+      embed
+        .setColor(Constants.ERROR_COLOR)
+        .setTitle(t('commands:steamladder.userNotFound'))
+    }
     channel.send(embed).then(channel.stopTyping())
   }
 }
