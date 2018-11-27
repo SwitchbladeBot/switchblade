@@ -64,9 +64,10 @@ module.exports = class SteamLadder extends Command {
   async run ({ t, author, channel, language }, ladderType = 'xp', regionOrCountry) {
     channel.startTyping()
     if (ladderType === 'age') ladderType = 'steam_age'
-    const embed = new SwitchbladeEmbed(author)
+    let embed = new SwitchbladeEmbed(author)
+    if (regionOrCountry) regionOrCountry = regionOrCountry.toLowerCase()
     try {
-      const steamLadderResponse = await this.client.apis.steamladder.getLadder(ladderType, regionOrCountry.toLowerCase())
+      const steamLadderResponse = await this.client.apis.steamladder.getLadder(ladderType, regionOrCountry)
       embed
         .setTitle(this.generateLadderEmbedTitle(steamLadderResponse, t, language))
         .setDescription(this.generateLadderEmbedDescription(steamLadderResponse, t, language))
@@ -74,7 +75,7 @@ module.exports = class SteamLadder extends Command {
         .setColor(embedColor)
     } catch (e) {
       console.log(e)
-      embed
+      embed = new SwitchbladeEmbed(author)
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:steamladder.ladderNotFound'))
     }
@@ -155,7 +156,7 @@ class SteamLadderProfile extends Command {
   async run ({ t, author, channel, language }, query) {
     channel.startTyping()
     const formatter = new Intl.NumberFormat(language)
-    const embed = new SwitchbladeEmbed(author)
+    let embed = new SwitchbladeEmbed(author)
     try {
       const steamid = await this.client.apis.steam.resolve(query)
       const steamLadderResponse = await this.client.apis.steamladder.getProfile(steamid)
@@ -185,10 +186,10 @@ class SteamLadderProfile extends Command {
         ].join('\n'), true)
         .addField(t('commands:steamladder.others'), [
           t('commands:steamladder.badgesWithCount', {count: `**${formatter.format(Math.round(steamLadderResponse.steam_stats.badges.total))}**`}),
-          t('commands:steamladder.friendsWithCount', {count: `**${formatter.format(Math.round(steamLadderResponse.steam_stats.friends))}**`})
+          t('commands:steamladder.joinedOn', {date: `**${new Intl.DateTimeFormat(language).format(new Date(steamLadderResponse.steam_user.steam_join_date))}**`})
         ].join('\n'), true)
     } catch (e) {
-      embed
+      embed = new SwitchbladeEmbed(author)
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:steamladder.userNotFound'))
     }
