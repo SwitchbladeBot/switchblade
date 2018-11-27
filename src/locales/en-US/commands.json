@@ -639,6 +639,7 @@
     "ladderNotFound": "I couldn't find that ladder.",
     "noRegion": "You need to give me a valid region name or country code",
     "noLadder": "You need to give me a valid ladder.",
+    "noUser": "You need to give me an user",
     "youCanAlsoUse": "You can also use alpha-2 country codes.",
     "availableRegions": "Available regions",
     "availableLadders": "Available ladders",

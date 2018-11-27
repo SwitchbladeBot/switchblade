@@ -39,7 +39,7 @@ module.exports = class SteamLadder extends Command {
         }}),
       new StringParameter({
         required: false,
-        whitelist: Object.keys(countries.getNames('en')).concat(regions),
+        whitelist: Object.keys(countries.getNames('en')).map(c => c.toLowerCase()).concat(Object.keys(countries.getNames('en'))).concat(regions),
         missingError: ({ t, prefix }) => {
           return {
             title: t('commands:steamladder.noRegion'),
@@ -66,7 +66,7 @@ module.exports = class SteamLadder extends Command {
     if (ladderType === 'age') ladderType = 'steam_age'
     const embed = new SwitchbladeEmbed(author)
     try {
-      const steamLadderResponse = await this.client.apis.steamladder.getLadder(ladderType, regionOrCountry)
+      const steamLadderResponse = await this.client.apis.steamladder.getLadder(ladderType, regionOrCountry.toLowerCase())
       embed
         .setTitle(this.generateLadderEmbedTitle(steamLadderResponse, t, language))
         .setDescription(this.generateLadderEmbedDescription(steamLadderResponse, t, language))
@@ -144,16 +144,20 @@ class SteamLadderProfile extends Command {
     this.name = 'profile'
     this.aliases = ['p']
     this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: false })
+      new StringParameter({
+        full: true,
+        required: true,
+        missingError: 'commands:steamladder.noUser'
+      })
     )
   }
 
   async run ({ t, author, channel, language }, query) {
     channel.startTyping()
-    const steamid = await this.client.apis.steam.resolve(query)
     const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
     try {
+      const steamid = await this.client.apis.steam.resolve(query)
       const steamLadderResponse = await this.client.apis.steamladder.getProfile(steamid)
       let description = EmojiUtils.getFlag(steamLadderResponse.steam_user.steam_country_code)
       if (steamLadderResponse.steam_ladder_info.is_staff) description += ' ' + Constants.STEAMLADDER_STAFF
