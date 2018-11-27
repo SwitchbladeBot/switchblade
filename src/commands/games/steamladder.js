@@ -2,6 +2,10 @@ const { CommandStructures, SwitchbladeEmbed, EmojiUtils, Constants } = require('
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const countries = require('i18n-iso-countries')
 
+// We're using a Polyfill for Intl, as node doesn't come with all locales for formatting.
+const Intl = require("intl")
+Intl.__disableRegExpRestore()
+
 const embedColor = 0x292B2D
 
 const ladders = ['xp', 'games', 'badges', 'playtime', 'age']
@@ -69,6 +73,7 @@ module.exports = class SteamLadder extends Command {
         .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
         .setColor(embedColor)
     } catch (e) {
+      console.log(e)
       embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:steamladder.ladderNotFound'))
@@ -125,7 +130,7 @@ module.exports = class SteamLadder extends Command {
         break
 
       case 'A':
-        line += ` - ${t('commands:steamladder.joinedOn', { date: Intl.DateTimeFormat.call(language).format(new Date(entry.steam_user.steam_join_date)) })}`
+        line += ` - ${t('commands:steamladder.joinedOn', { date: new Intl.DateTimeFormat(language).format(new Date(entry.steam_user.steam_join_date)) })}`
         break
     }
 
