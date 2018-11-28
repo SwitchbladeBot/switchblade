@@ -18,7 +18,7 @@ module.exports = class PlayStore extends Command {
     gplay.search({ term: appName, country: country, num: 8 }).then((apps) => {
       const listEmbed = new SwitchbladeEmbed(author)
         .setTitle(t('commands:playstore.results', { appName }))
-        .setDescription(`**${t('commands:playstore.sendYourNumber')}**\n\n\`[1]\` ${apps[0].title}\n\`[2]\` ${apps[1].title}\n\`[3]\` ${apps[2].title}\n\`[4]\` ${apps[3].title}\n\`[5]\` ${apps[4].title}\n\`[6]\` ${apps[5].title}\n\`[7]\` ${apps[6].title}\n\`[8]\` ${apps[7].title}`)
+        .setDescription(`**${t('commands:playstore.sendNumber')}**\n\n\`[1]\` ${apps[0].title}\n\`[2]\` ${apps[1].title}\n\`[3]\` ${apps[2].title}\n\`[4]\` ${apps[3].title}\n\`[5]\` ${apps[4].title}\n\`[6]\` ${apps[5].title}\n\`[7]\` ${apps[6].title}\n\`[8]\` ${apps[7].title}`)
       channel.send(listEmbed).then(async (msg) => {
         channel.stopTyping()
         let col = await channel.awaitMessages(m => m.author.id === author.id, { max: 1, time: 120000 })
