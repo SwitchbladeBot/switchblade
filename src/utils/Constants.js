@@ -41,6 +41,7 @@ module.exports = {
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
+  BUTTSLAP_GIF = 'src/assets/gif/buffslap.gif',
 
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
