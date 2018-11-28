@@ -636,7 +636,7 @@
   "playstore": {
     "commandDescription": "Search for a app on Play Store.",
     "results": "Results for '{{- appName}}' on Play Store",
-    "sendYourNumber": "Send a number between 1 and 8 to select your app. You have 2 minutes to send it.",
+    "sendNumber": "Send a number between 1 and 8 to select your app. You have 2 minutes to choose it.",
     "invalidNumber": "You should enter a number between 1 and 8. Try again.",
     "noAppProvided": "You have to give me something for search.",
     "noCountryProvided": "You have to give me a country code.",
