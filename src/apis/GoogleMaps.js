@@ -28,16 +28,6 @@ module.exports = class GoogleMapsAPI extends APIWrapper {
     })
   }
 
-  getTimezone (location, language = 'en-us') {
-    return new Promise(async resolve => {
-      let search = await this.request('/timezone', { location, language })
-      if (search.status === 'OK') {
-        let result = search.results[0]
-        resolve(result)
-      } else resolve(null)
-    })
-  }
-
   // Default
   request (endpoint, queryParams = {}) {
     queryParams.key = process.env.GMAPS_KEY
