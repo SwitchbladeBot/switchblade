@@ -12,7 +12,7 @@ module.exports = class RandomRedditPostCommand extends Command {
 
   // TODO: Check if the URL is an image type supported by reddit
 
-  async run ({channel, author, t}) {
+  async run ({ channel, author, t }) {
     channel.startTyping()
     const { url, title, selftext, permalink } = await Reddit.getRandomPostFromSubreddit(`/r/${this.subreddit}`)
     channel.send(
@@ -26,6 +26,6 @@ module.exports = class RandomRedditPostCommand extends Command {
   }
 
   shortenTextIfTooBig (text) {
-    return text.length > 2048 ? selftext.substr(0, 2045) + '...' : text
+    return text.length > 2048 ? text.substr(0, 2045) + '...' : text
   }
 }
