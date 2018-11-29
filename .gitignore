@@ -64,5 +64,3 @@ typings/
 
 src/locales/*
 !src/locales/en-US/
-
-package-lock.json
