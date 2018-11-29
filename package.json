@@ -65,7 +65,8 @@
     "snekfetch": "^4.0.4",
     "transform-props": "^1.0.1",
     "uws": "^10.148.2",
-    "gif-frames": "^1.0.0"
+    "gif-frames": "^1.0.0",
+    "stream-to-buffer": "^0.1.0"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
