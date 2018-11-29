@@ -634,11 +634,11 @@
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
   "playstore": {
-    "commandDescription": "Search for a app on Play Store.",
-    "results": "Results for '{{- appName}}' on Play Store",
+    "commandDescription": "Search for an app on the Play Store.",
+    "results": "Results for '{{- appName}}' on the Play Store",
     "sendNumber": "Send a number between 1 and 8 to select your app. You have 2 minutes to choose it.",
-    "invalidNumber": "You should enter a number between 1 and 8. Try again.",
-    "noAppProvided": "You have to give me something for search.",
+    "invalidNumber": "You have to enter a number between 1 and 8. Try again.",
+    "noAppProvided": "You have to give me something to for search.",
     "noCountryProvided": "You have to give me a country code.",
     "commandUsage": "<country code> <app>",
     "developer": "Developer",
