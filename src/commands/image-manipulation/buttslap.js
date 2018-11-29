@@ -38,3 +38,5 @@ class ButtSlap extends Command {
         }
     }
 }
+
+module.exports = ButtSlap;
