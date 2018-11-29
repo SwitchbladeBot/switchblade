@@ -14,6 +14,7 @@
   <a class="badge-align" href="https://www.codacy.com/app/Doges/switchblade?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SwitchbladeBot/switchblade&amp;utm_campaign=Badge_Grade"><img src="https://img.shields.io/codacy/grade/4f29cb30be614ad3a5af1fa381efa9f7.svg?style=flat-square"/></a>
     <a title="Dependencies" target="_blank" href="https://david-dm.org/SwitchbladeBot/switchblade/"><img src="https://david-dm.org/SwitchbladeBot/switchblade/status.svg?style=flat-square"></a>
 <img src="https://img.shields.io/badge/library-discord.js-blue.svg?style=flat-square" alt="Library">
+  <a title="JetBrains" target="_blank" href="https://www.jetbrains.com/?from=switchblade/"><img src="https://img.shields.io/badge/Powered%20by%20JetBrains-gray.svg?logo=webstorm&style=flat-square"></a>
     <br>
     Vote on <a href="https://discordbots.org/bot/445277324175474689/vote" target="_blank">DBL</a>
   </p>
