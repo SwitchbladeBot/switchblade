@@ -272,7 +272,7 @@ module.exports = class CanvasTemplates {
 
   static async leaderboard ({ t }, top, { icon, iconWidth, iconHeight, title, valueFunction }) {
     const WIDTH = 680
-    const HEIGHT = 654 //654
+    const HEIGHT = 654
 
     const CARD_HEIGHT = 590
     const CARD_Y_MARGIN = (HEIGHT - CARD_HEIGHT) * 0.5
