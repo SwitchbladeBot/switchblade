@@ -10,6 +10,4 @@ module.exports = class EmojiUtils {
     return Constants.UNKNOWN_COUNTRY_FLAG
   }
 }
-/**
-* So here should be a newline
-*/
+
