@@ -384,8 +384,8 @@ module.exports = class CanvasTemplates {
     //   Top avatar shadow
     const [ TOP_USER_AVATAR_X, TOP_USER_AVATAR_Y ] = TOP_USER_AVATAR_COORDS
     ctx.save()
-    ctx.fillStyle = '#000000'
-    ctx.shadowColor = '#000000'
+    ctx.fillStyle = '#00000099'
+    ctx.shadowColor = '#00000099'
     ctx.shadowBlur = 10
     ctx.circle(TOP_USER_AVATAR_X, TOP_USER_AVATAR_Y, TOP_AVATAR_RADIUS, 0, Math.PI * 2)
     ctx.restore()
