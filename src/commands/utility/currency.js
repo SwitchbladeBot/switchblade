@@ -8,6 +8,7 @@ module.exports = class Currency extends Command {
     this.name = 'currency'
     this.aliases = ['currencyconverter', 'converter']
     this.category = 'utility'
+    this.envVars = 'KSOFT_KEY'
   }
 
   async run ({ t, author, channel, guildDocument }, tocoin, fromcoin, value) {
