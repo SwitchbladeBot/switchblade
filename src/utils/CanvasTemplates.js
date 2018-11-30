@@ -271,12 +271,10 @@ module.exports = class CanvasTemplates {
   }
 
   static async leaderboard ({ t }, top, { icon, iconWidth, iconHeight, title, valueFunction }) {
-    const WIDTH = 800
-    const HEIGHT = 654
+    const WIDTH = 680
+    const HEIGHT = 654 //654
 
-    const CARD_WIDTH = 680
     const CARD_HEIGHT = 590
-    const CARD_X_MARGIN = (WIDTH - CARD_WIDTH) * 0.5
     const CARD_Y_MARGIN = (HEIGHT - CARD_HEIGHT) * 0.5
 
     const TOP_AVATAR_SIZE = 134
@@ -322,16 +320,16 @@ module.exports = class CanvasTemplates {
     //   Darker rectangle
     const CARD_MARGIN = 102
     ctx.fillStyle = 'rgba(29, 29, 29, 0.94)'
-    ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN + CARD_MARGIN, CARD_WIDTH, CARD_HEIGHT - CARD_MARGIN)
+    ctx.fillRect(0, CARD_Y_MARGIN + CARD_MARGIN, WIDTH, CARD_HEIGHT - CARD_MARGIN)
     //   Brighter rectangle
     const BRIGHTER_HEIGHT = 110
     ctx.fillStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
-    ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN + CARD_MARGIN, CARD_WIDTH, BRIGHTER_HEIGHT)
+    ctx.fillRect(0, CARD_Y_MARGIN + CARD_MARGIN, WIDTH, BRIGHTER_HEIGHT)
 
     // Top user
     ctx.fillStyle = TEXTCOLOR
-    const TOP_USER_AVATAR_COORDS = [CARD_X_MARGIN + INNER_MARGIN + TOP_AVATAR_RADIUS, CARD_Y_MARGIN + CARD_MARGIN + INNER_MARGIN]
-    const PROFILE_X = CARD_X_MARGIN + INNER_MARGIN * 2 + TOP_AVATAR_SIZE
+    const TOP_USER_AVATAR_COORDS = [INNER_MARGIN + TOP_AVATAR_RADIUS, CARD_Y_MARGIN + CARD_MARGIN + INNER_MARGIN]
+    const PROFILE_X = INNER_MARGIN * 2 + TOP_AVATAR_SIZE
     const PROFILE_Y = CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT * 0.5
     //   Username
     const topUsername = ctx.write(TOP_USER.user.username, PROFILE_X, PROFILE_Y, FONTS.TOP_USERNAME, ALIGN.BOTTOM_LEFT)
@@ -345,11 +343,11 @@ module.exports = class CanvasTemplates {
     ctx.lineWidth = 1
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
     //   Info sections
-    const SECTION_WIDTH = (CARD_WIDTH - INNER_MARGIN * 3) / 2
+    const SECTION_WIDTH = (WIDTH - INNER_MARGIN * 3) / 2
     const SECTION_HEIGHT = ((CARD_HEIGHT - CARD_MARGIN - BRIGHTER_HEIGHT) - INNER_MARGIN * 4) / 3
     top.forEach((u, i) => {
       i++
-      const SECTION_X = CARD_X_MARGIN + INNER_MARGIN + (i % 2 ? 0 : SECTION_WIDTH + INNER_MARGIN)
+      const SECTION_X = INNER_MARGIN + (i % 2 ? 0 : SECTION_WIDTH + INNER_MARGIN)
       const SECTION_Y = CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT + INNER_MARGIN + (Math.ceil(i / 2) - 1) * (SECTION_HEIGHT + INNER_MARGIN)
       ctx.roundRect(SECTION_X, SECTION_Y, SECTION_WIDTH, SECTION_HEIGHT, 10, false, true)
 
@@ -418,18 +416,18 @@ module.exports = class CanvasTemplates {
     //   Background image
     ctx.save()
     ctx.globalCompositeOperation = 'destination-over'
-    ctx.drawImage(backgroundImage, CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT)
+    ctx.drawImage(backgroundImage, 0, CARD_Y_MARGIN, WIDTH, CARD_HEIGHT)
 
     //   Modal
     ctx.fillStyle = '#FFFFFF'
     ctx.globalCompositeOperation = 'destination-in'
-    ctx.roundRect(CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT, 10, true)
+    ctx.roundRect(0, CARD_Y_MARGIN, WIDTH, CARD_HEIGHT, 10, true)
     ctx.restore()
 
     //   Title
     ctx.fillStyle = '#FFFFFF'
     const TITLE_CIRCLE_RADIUS = 32
-    const TITLE_X = CARD_X_MARGIN + TITLE_CIRCLE_RADIUS
+    const TITLE_X = TITLE_CIRCLE_RADIUS
     const TITLE_Y = CARD_Y_MARGIN
     ctx.circle(TITLE_X, TITLE_Y, TITLE_CIRCLE_RADIUS, 0, Math.PI * 2)
 
