@@ -634,6 +634,53 @@
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
+  "steamladder": {
+    "commandDescription": "Displays a ladder from Steam Ladder",
+    "commandUsage": "[ladder] [country or region]",
+    "userNotFound": "I couldn't find that user.",
+    "ladderNotFound": "I couldn't find that ladder.",
+    "noRegion": "You need to give me a valid region name or country code",
+    "noLadder": "You need to give me a valid ladder.",
+    "noUser": "You need to give me a user",
+    "youCanAlsoUse": "You can also use alpha-2 country codes.",
+    "availableRegions": "Available regions",
+    "availableLadders": "Available ladders",
+    "gamesWithCount": "{{count}} games",
+    "games": "Games",
+    "levelWithNumber": "Level {{level}}",
+    "level": "Level",
+    "playtime": "Playtime",
+    "hours": "{{count}} hours",
+    "hoursInGame": "{{count}} hours in game",
+    "inTheWorld": "#{{position}} in the world",
+    "badgesWithCount": "{{count}} badges",
+    "badges": "Badges",
+    "joinedOn": "Joined on {{date}}",
+    "friendsWithCount": "{{count}} friends",
+    "others": "Others",
+    "ladders": {
+      "XP": "Highest Level",
+      "G": "Most Games",
+      "PT": "Most Playtime",
+      "B": "Most Badges",
+      "A": "Longest on Steam"
+    },
+    "regions": {
+      "EUROPE": "Europe",
+      "NORTH_AMERICA": "North America",
+      "SOUTH_AMERICA": "South America",
+      "ASIA": "Asia",
+      "AFRICA": "Africa",
+      "OCEANIA": "Oceania",
+      "ANTARCTICA": "Antarctica"
+    },
+    "subcommands": {
+      "profile": {
+        "commandUsage": "<username>",
+        "commandDescription": "Shows someone's Steam Ladder profile"
+      }
+    }
+  },
   "weather": {
     "commandDescription": "Shows the weather forecast for a city",
     "commandUsage": "<city name>",

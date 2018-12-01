@@ -1,6 +1,5 @@
 const { Client } = require('discord.js')
 const translationBackend = require('i18next-node-fs-backend')
-const i18next = require('i18next')
 const fs = require('fs')
 
 const FileUtils = require('./utils/FileUtils.js')
@@ -22,6 +21,7 @@ module.exports = class Switchblade extends Client {
     this.cldr = { languages: {} }
     this.listeners = []
     this.playerManager = null
+    this.i18next = require('i18next')
 
     this.initializeDatabase(MongoDB, { useNewUrlParser: true })
     this.initializeApis('src/apis').then(() => {
@@ -105,7 +105,7 @@ module.exports = class Switchblade extends Client {
    * @param {String} language - Code for the language that the command will be executed in
    */
   runCommand (command, context, args, language) {
-    context.setFixedT(i18next.getFixedT(language))
+    context.setFixedT(this.i18next.getFixedT(language))
     command._run(context, args).catch(this.logError)
   }
 
@@ -233,7 +233,7 @@ module.exports = class Switchblade extends Client {
       }
 
       try {
-        i18next.use(translationBackend).init({
+        this.i18next.use(translationBackend).init({
           ns: [ 'categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions' ],
           preload: await FileUtils.readdir(dirPath),
           fallbackLng: 'en-US',
@@ -245,7 +245,7 @@ module.exports = class Switchblade extends Client {
           },
           returnEmptyString: false
         }, () => {
-          resolve(this.loadLanguagesDisplayNames(Object.keys(i18next.store.data)))
+          resolve(this.loadLanguagesDisplayNames(Object.keys(this.i18next.store.data)))
           this.log('[32mi18next initialized', 'Localization')
         })
       } catch (e) {
