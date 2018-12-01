@@ -495,7 +495,7 @@ module.exports = class CanvasTemplates {
       const MEME = Math.random() > 0.99 && '"Comic Sans MS"'
       const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
       const REGULAR = MEME || '"Montserrat"'
-      const LIGHT = MEME || '"Montserrat LIGHT"'
+      const LIGHT = MEME || '"Montserrat Light"'
       return {
         TITLE: `17px ${EXTRABOLD}`,
         TEMPERATURE: `bold 90px ${EXTRABOLD}`,
