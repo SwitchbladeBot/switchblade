@@ -452,7 +452,8 @@
   "clapify": {
     "commandDescription": "Clapifies text",
     "commandUsage": "<text to clapify>",
-    "missingSentence": "You need to give me a sentence to clapify"
+    "missingSentence": "You need to give me a sentence to clapify",
+    "tooLongText": "Your text can't be longer than {{limit}} characters"
   },
   "numberfacts": {
     "validNumber": "You need to give me a number!",
@@ -679,5 +680,10 @@
         "commandDescription": "Shows someone's Steam Ladder profile"
       }
     }
+  },
+  "currency": {
+    "commandDescription": "Shows the current rate of a currency or a pair.",
+    "commandUsage": "<to> [from] [value]",
+    "noCurrency": "You have to give me a valid currency or a pair."
   }
 }

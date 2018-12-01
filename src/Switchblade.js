@@ -117,7 +117,7 @@ module.exports = class Switchblade extends Client {
     let success = 0
     let failed = 0
     FileUtils.requireDirectory(dirPath, (NewCommand) => {
-      if (Object.getPrototypeOf(NewCommand) !== Command || NewCommand.ignore) return
+      if (NewCommand.ignore) return
       this.addCommand(new NewCommand(this)) ? success++ : failed++
     }, this.logError).then(() => {
       if (failed === 0) {

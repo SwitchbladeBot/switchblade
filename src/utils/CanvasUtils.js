@@ -1,6 +1,5 @@
 const request = require('request')
-const canvg = require('canvg')
-const { createCanvas, registerFont, loadImage, Canvas, Context2d, Image } = require('canvas')
+const { createCanvas, registerFont, loadImage, Context2d, Image } = require('canvas')
 
 const FileUtils = require('./FileUtils.js')
 
@@ -44,16 +43,6 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-ExtraBoldItalic.ttf', { family: 'Montserrat ExtraBold', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Black.ttf', { family: 'Montserrat Black' })
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', { family: 'Montserrat Black', style: 'italic' })
-
-    // Canvas
-    Canvas.createSVGCanvas = function (svg, w, h) {
-      return new Promise((resolve, reject) => {
-        const canvas = createCanvas(w, h)
-        canvg(canvas, svg, {
-          renderCallback: () => resolve(canvas)
-        })
-      })
-    }
 
     // Image loading
     Image.from = function (url, localFile = false) {
@@ -182,8 +171,8 @@ module.exports = class CanvasUtils {
       return lastWrite
     }
 
-    Canvas.prototype.blur = function (blur) {
-      const ctx = this.getContext('2d')
+    Context2d.prototype.blur = function (blur) {
+      const ctx = this
 
       const delta = 5
       const alphaLeft = 1 / (2 * Math.PI * delta * delta)
@@ -208,8 +197,21 @@ module.exports = class CanvasUtils {
       const canvas = createCanvas(w, h)
       const ctx = canvas.getContext('2d')
       ctx.drawImage(image, 0, 0, w, h)
-      canvas.blur(blur)
+      ctx.blur(blur)
       this.drawImage(canvas, imageX, imageY, w, h)
+    }
+
+    Context2d.prototype.drawIcon = function (image, x, y, w, h, color) {
+      const canvas = createCanvas(image.width, image.height)
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(image, 0, 0, image.width, image.height)
+      if (color) {
+        ctx.globalCompositeOperation = 'source-in'
+        ctx.fillStyle = color
+        ctx.fillRect(0, 0, image.width, image.height)
+      }
+      this.drawImage(canvas, x, y, w, h)
+      return canvas
     }
   }
 
