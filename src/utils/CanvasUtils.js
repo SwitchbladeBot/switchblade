@@ -29,6 +29,8 @@ module.exports = class CanvasUtils {
     const self = this
 
     // Initiliaze fonts
+    registerFont('src/assets/fonts/Montserrat-Thin.ttf', { family: 'Montserrat Thin' })
+    registerFont('src/assets/fonts/Montserrat-ThinItalic.ttf', { family: 'Montserrat Thin', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Light.ttf', { family: 'Montserrat Light' })
     registerFont('src/assets/fonts/Montserrat-LightItalic.ttf', { family: 'Montserrat Light', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Regular.ttf', { family: 'Montserrat' })
@@ -201,10 +203,24 @@ module.exports = class CanvasUtils {
       this.drawImage(canvas, imageX, imageY, w, h)
     }
 
-    Context2d.prototype.drawIcon = function (image, x, y, w, h, color) {
+    Context2d.prototype.drawIcon = function (image, x, y, w, h, color, rotate) {
       const canvas = createCanvas(image.width, image.height)
       const ctx = canvas.getContext('2d')
+
+      ctx.save()
+
+      if (rotate) {
+        const centerX = canvas.width * 0.5
+        const centerY = canvas.height * 0.5
+        ctx.save()
+        ctx.translate(centerX, centerY)
+        ctx.rotate(rotate * Math.PI / 180)
+        ctx.translate(-centerX, -centerY)
+      }
+
       ctx.drawImage(image, 0, 0, image.width, image.height)
+      ctx.restore()
+
       if (color) {
         ctx.globalCompositeOperation = 'source-in'
         ctx.fillStyle = color

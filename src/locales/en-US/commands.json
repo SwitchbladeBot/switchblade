@@ -634,6 +634,12 @@
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
+  "weather": {
+    "commandDescription": "Shows the weather forecast for a city",
+    "commandUsage": "<city name>",
+    "noCity": "You need to give me a valid city.",
+    "notFound": "Couldn't find this city."
+  },
   "currency": {
     "commandDescription": "Shows the current rate of a currency or a pair.",
     "commandUsage": "<to> [from] [value]",

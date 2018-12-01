@@ -1,5 +1,6 @@
 /**
  * Base API Wrapper structure
+ * @constructor
  */
 module.exports = class APIWrapper {
   constructor () {
@@ -17,7 +18,7 @@ module.exports = class APIWrapper {
 
   /**
    * Loads the API
-   * @returns {Object} - The loaded API
+   * @returns {APIWrapper} - The loaded API
    */
   load () {
     return this
