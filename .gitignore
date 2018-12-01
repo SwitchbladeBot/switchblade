@@ -64,3 +64,5 @@ typings/
 
 src/locales/*
 !src/locales/en-US/
+
+nodemon.json*
