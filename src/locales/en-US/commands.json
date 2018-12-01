@@ -636,6 +636,6 @@
   "currency": {
     "commandDescription": "Shows the current rate of a currency or a pair.",
     "commandUsage": "<to> [from] [value]",
-    "invalidCurrency": "You have to give me a valid currency or a pair."
+    "noCurrency": "You have to give me a valid currency or a pair."
   }
 }
