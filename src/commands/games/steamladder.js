@@ -63,9 +63,11 @@ module.exports = class SteamLadder extends Command {
 
   async run ({ t, author, channel, language }, ladderType = 'xp', regionOrCountry) {
     channel.startTyping()
+
     if (ladderType === 'age') ladderType = 'steam_age'
-    let embed = new SwitchbladeEmbed(author)
     if (regionOrCountry) regionOrCountry = regionOrCountry.toLowerCase()
+
+    let embed = new SwitchbladeEmbed(author)
     try {
       const steamLadderResponse = await this.client.apis.steamladder.getLadder(ladderType, regionOrCountry)
       embed
@@ -74,6 +76,7 @@ module.exports = class SteamLadder extends Command {
         .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
         .setColor(embedColor)
     } catch (e) {
+      console.log(e)
       embed = new SwitchbladeEmbed(author)
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:steamladder.ladderNotFound'))
@@ -81,60 +84,41 @@ module.exports = class SteamLadder extends Command {
     channel.send(embed).then(channel.stopTyping())
   }
 
-  generateLadderEmbedTitle (steamLadderResponse, t, language) {
-    let title = t(`commands:steamladder.ladders.${steamLadderResponse.type}`)
-
-    if (steamLadderResponse.country_code !== null) {
-      if (this.client.i18next.exists(`commands:steamladder.regions.${steamLadderResponse.country_code}`)) {
-        title = t(`commands:steamladder.regions.${steamLadderResponse.country_code}`) + ' - ' + title
-      } else if (countries.getName(steamLadderResponse.country_code, language.substring(0, 2))) {
-        title = countries.getName(steamLadderResponse.country_code, language.substring(0, 2)) + ' - ' + title
+  generateLadderEmbedTitle ({ type, country_code: cc }, t, language) {
+    const title = t(`commands:steamladder.ladders.${type}`)
+    if (cc) {
+      const suffix = ` - ${title}`
+      if (this.client.i18next.exists(`commands:steamladder.regions.${cc}`)) {
+        return t(`commands:steamladder.regions.${cc}`) + suffix
+      } else if (countries.getName(cc, language.substring(0, 2))) {
+        return countries.getName(cc, language.substring(0, 2)) + suffix
       } else {
-        title = steamLadderResponse.country_code + ' - ' + title
+        return cc + suffix
       }
     }
     return title
   }
 
-  generateLadderEmbedDescription (steamLadderResponse, t, language) {
-    let description = ''
-    for (let i = 0; i < 10; i++) {
-      let entry = steamLadderResponse.ladder[i]
-      description += this.generateLadderEmbedLine(steamLadderResponse.type, entry, t, language) + `\n`
-    }
-    return description
+  generateLadderEmbedDescription ({ ladder, type }, t, language) {
+    return ladder.slice(0, 10).map(entry => this.generateLadderEmbedLine(type, entry, t, language)).join('\n')
   }
 
-  generateLadderEmbedLine (ladderType, entry, t, language) {
+  generateLadderEmbedLine (ladderType, { pos, steam_user: user, steam_stats: stats }, t, language) {
     const formatter = new Intl.NumberFormat(language)
 
-    let line = `\`${('0' + (entry.pos + 1)).slice(-2)}.\` `
-    line += EmojiUtils.getFlag(entry.steam_user.steam_country_code)
-    line += ` **[${entry.steam_user.steam_name}](${entry.steam_user.steamladder_url})**`
+    const position = `\`${('0' + (pos + 1)).slice(-2)}.\` `
+    const flag = EmojiUtils.getFlag(user.steam_country_code)
+    const username = ` **[${user.steam_name}](${user.steamladder_url})**`
 
-    switch (ladderType) {
-      case 'XP':
-        line += ` - ${t('commands:steamladder.levelWithNumber', { level: formatter.format(entry.steam_stats.level) })}`
-        break
-
-      case 'G':
-        line += ` - ${t('commands:steamladder.gamesWithCount', { count: formatter.format(entry.steam_stats.games.total_games) })}`
-        break
-
-      case 'PT':
-        line += ` - ${t('commands:steamladder.hoursInGame', { count: formatter.format(Math.round(entry.steam_stats.games.total_playtime_min / 60)) })}`
-        break
-
-      case 'B':
-        line += ` - ${t('commands:steamladder.badgesWithCount', { count: formatter.format(entry.steam_stats.badges.total) })}`
-        break
-
-      case 'A':
-        line += ` - ${t('commands:steamladder.joinedOn', { date: new Intl.DateTimeFormat(language).format(new Date(entry.steam_user.steam_join_date)) })}`
-        break
+    const typeStrings = {
+      XP: () => t('commands:steamladder.levelWithNumber', { level: formatter.format(stats.level) }),
+      G: () => t('commands:steamladder.gamesWithCount', { count: formatter.format(stats.games.total_games) }),
+      PT: () => t('commands:steamladder.hoursInGame', { count: formatter.format(Math.round(stats.games.total_playtime_min / 60)) }),
+      B: () => t('commands:steamladder.badgesWithCount', { count: formatter.format(stats.badges.total) }),
+      A: () => t('commands:steamladder.joinedOn', { date: new Intl.DateTimeFormat(language).format(new Date(user.steam_join_date)) })
     }
 
-    return line
+    return `${position}${flag}${username} - ${typeStrings[ladderType]()}`
   }
 }
 
@@ -158,34 +142,43 @@ class SteamLadderProfile extends Command {
     let embed = new SwitchbladeEmbed(author)
     try {
       const steamid = await this.client.apis.steam.resolve(query)
-      const steamLadderResponse = await this.client.apis.steamladder.getProfile(steamid)
-      let description = EmojiUtils.getFlag(steamLadderResponse.steam_user.steam_country_code)
-      if (steamLadderResponse.steam_ladder_info.is_staff) description += ' ' + Constants.STEAMLADDER_STAFF
-      if (steamLadderResponse.steam_ladder_info.is_winter_18) description += ' ' + Constants.STEAMLADDER_WINTER
-      if (steamLadderResponse.steam_ladder_info.is_donator) description += ' ' + Constants.STEAMLADDER_DONATOR
-      if (steamLadderResponse.steam_ladder_info.is_top_donator) description += ' ' + Constants.STEAMLADDER_TOP_DONATOR
+      const {
+        steam_user: user,
+        steam_ladder_info: info,
+        steam_stats: stats,
+        ladder_rank: rank
+      } = await this.client.apis.steamladder.getProfile(steamid)
+      const description = [ EmojiUtils.getFlag(user.steam_country_code) ]
+      if (info.is_staff) description.push(Constants.STEAMLADDER_STAFF)
+      if (info.is_winter_18) description.push(Constants.STEAMLADDER_WINTER)
+      if (info.is_donator) description.push(Constants.STEAMLADDER_DONATOR)
+      if (info.is_top_donator) description.push(Constants.STEAMLADDER_TOP_DONATOR)
       embed
         .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
         .setColor(embedColor)
-        .setThumbnail(steamLadderResponse.steam_user.steam_avatar_src)
-        .setTitle(`${steamLadderResponse.steam_user.steam_name} \`${steamLadderResponse.steam_user.steam_id}\``)
-        .setURL(steamLadderResponse.steam_user.steamladder_url)
-        .setDescription(description)
+        .setThumbnail(user.steam_avatar_src)
+        .setTitle(`${user.steam_name} \`${user.steam_id}\``)
+        .setURL(user.steamladder_url)
+        .setDescription(description.join(' '))
+
         .addField(t('commands:steamladder.level'), [
-          `**${formatter.format(steamLadderResponse.steam_stats.level)}** (${formatter.format(steamLadderResponse.steam_stats.xp)} XP)`,
-          `\`${t('commands:steamladder.inTheWorld', { position: formatter.format(steamLadderResponse.ladder_rank.worldwide_xp) })}\``
+          `**${formatter.format(stats.level)}** (${formatter.format(stats.xp)} XP)`,
+          `\`${t('commands:steamladder.inTheWorld', { position: formatter.format(rank.worldwide_xp) })}\``
         ].join('\n'), true)
+
         .addField(t('commands:steamladder.playtime'), [
-          t('commands:steamladder.hours', { count: `**${formatter.format(Math.round(steamLadderResponse.steam_stats.games.total_playtime_min / 60))}**` }),
-          `\`${t('commands:steamladder.inTheWorld', { position: formatter.format(steamLadderResponse.ladder_rank.worldwide_playtime) })}\``
+          t('commands:steamladder.hours', { count: `**${formatter.format(Math.round(stats.games.total_playtime_min / 60))}**` }),
+          `\`${t('commands:steamladder.inTheWorld', { position: formatter.format(rank.worldwide_playtime) })}\``
         ].join('\n'), true)
+
         .addField(t('commands:steamladder.games'), [
-          `**${formatter.format(Math.round(steamLadderResponse.steam_stats.games.total_games))}**`,
-          `\`${t('commands:steamladder.inTheWorld', { position: formatter.format(steamLadderResponse.ladder_rank.worldwide_games) })}\``
+          `**${formatter.format(Math.round(stats.games.total_games))}**`,
+          `\`${t('commands:steamladder.inTheWorld', { position: formatter.format(rank.worldwide_games) })}\``
         ].join('\n'), true)
+
         .addField(t('commands:steamladder.others'), [
-          t('commands:steamladder.badgesWithCount', { count: `**${formatter.format(Math.round(steamLadderResponse.steam_stats.badges.total))}**` }),
-          t('commands:steamladder.joinedOn', { date: `**${new Intl.DateTimeFormat(language).format(new Date(steamLadderResponse.steam_user.steam_join_date))}**` })
+          t('commands:steamladder.badgesWithCount', { count: `**${formatter.format(Math.round(stats.badges.total))}**` }),
+          t('commands:steamladder.joinedOn', { date: `**${new Intl.DateTimeFormat(language).format(new Date(user.steam_join_date))}**` })
         ].join('\n'), true)
     } catch (e) {
       embed = new SwitchbladeEmbed(author)
