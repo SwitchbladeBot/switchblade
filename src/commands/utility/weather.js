@@ -41,7 +41,7 @@ module.exports = class Weather extends Command {
 
       const cityName = city.address_components.find(({ types }) => types.includes('administrative_area_level_2') || types.includes('locality')).short_name
       const state = city.address_components.find(({ types }) => types.includes('administrative_area_level_1'))
-      const weather = await CanvasTemplates.weather({ t }, `${cityName}${state ? ` - ${state.short_name}` : ''}`, weatherInfo)
+      const weather = await CanvasTemplates.weather({ t }, `${cityName.toUpperCase()}${state ? ` - ${state.short_name}` : ''}`, weatherInfo)
 
       channel.send(new Attachment(weather, 'weather.png')).then(() => channel.stopTyping())
     } else {
