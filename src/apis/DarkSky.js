@@ -15,13 +15,13 @@ module.exports = class DarkSkyAPI extends APIWrapper {
    * Get a forecast informaitons
    * @param {number} lat The latitude of the location (in decimal degrees)
    * @param {number} lng The longitude of the location (in decimal degrees)
-   * @param {Object} options The request options
-   * @param {string} [options.lang=en] The language for the summary, does not apply to units
-   * @param {string} [options.units=auto] The units to the weather conditions, see more in https://darksky.net/dev/docs#forecast-request
+   * @param {Object} [options] The request options
+   * @param {string} [options.lang='en'] The language for the summary, does not apply to units
+   * @param {string} [options.units='auto'] The units to the weather conditions, see more in https://darksky.net/dev/docs#forecast-request
    * @returns {Promise<Object>} Promise with object with weather forecast info, see more in https://darksky.net/dev/docs#response-format
    */
-  getForecast (lat, lng, options) {
-    if (!options.units) options.units = 'auto'
+  getForecast (lat, lng, options = {}) {
+    options = Object.assign({ lang: 'en', units: 'auto' }, options)
     return this.request('/forecast', lat, lng, options)
   }
 
