@@ -634,7 +634,6 @@
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
-<<<<<<< HEAD
   "steamladder": {
     "commandDescription": "Displays a ladder from Steam Ladder",
     "commandUsage": "[ladder] [country or region]",
