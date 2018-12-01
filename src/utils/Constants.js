@@ -47,10 +47,24 @@ module.exports = {
   REPUTATION_SVG: 'src/assets/svg/reputation.svg',
   MEDAL_SVG: 'src/assets/svg/medal.svg',
 
+  WEATHER_CLEAR_DAY: 'src/assets/svg/weather/clear-day.svg',
+  WEATHER_CLEAR_NIGHT: 'src/assets/svg/weather/clear-night.svg',
+  WEATHER_CLOUDY: 'src/assets/svg/weather/cloudy.svg',
+  WEATHER_FOG: 'src/assets/svg/weather/fog.svg',
+  WEATHER_PARTLY_CLOUDY_DAY: 'src/assets/svg/weather/partly-cloudy-day.svg',
+  WEATHER_PARTLY_CLOUDY_NIGHT: 'src/assets/svg/weather/partly-cloudy-night.svg',
+  WEATHER_RAIN: 'src/assets/svg/weather/rain.svg',
+  WEATHER_SNOW: 'src/assets/svg/weather/snow.svg',
+  WEATHER_THUNDERSTORM: 'src/assets/svg/weather/thunderstorm.svg',
+  WEATHER_WIND: 'src/assets/svg/weather/wind.svg',
+  ARROW_SVG: 'src/assets/svg/arrow.svg',
+  WIND_SVG: 'src/assets/svg/wind.svg',
+
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
 
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
+  DEFAULT_BACKGROUND_GRAY_PNG: 'src/assets/png/backgrounds/default_gray.png',
   TESTING_BACKGROUND_PNG: 'src/assets/png/backgrounds/testing.png'
 }

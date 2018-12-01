@@ -172,7 +172,7 @@ module.exports = class Switchblade extends Client {
 
   /**
    * Adds a new API Wrapper to the Client.
-   * @param {Object} api - API Wrapper to be added
+   * @param {APIWrapper} api - API Wrapper to be added
    */
   addApi (api) {
     if (!(api instanceof APIWrapper)) {
@@ -215,6 +215,7 @@ module.exports = class Switchblade extends Client {
 
   /**
    * Initializes i18next.
+   * @param {string} dirPath - Path to the locales directory
    */
   downloadAndInitializeLocales (dirPath) {
     return new Promise(async (resolve, reject) => {
@@ -255,6 +256,7 @@ module.exports = class Switchblade extends Client {
 
   /**
    * Loads language display names
+   * @param {Array} codes
    */
   async loadLanguagesDisplayNames (codes) {
     const lw = (s) => s.toLowerCase()

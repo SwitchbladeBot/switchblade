@@ -481,4 +481,131 @@ module.exports = class CanvasTemplates {
 
     return encoder.out.getData()
   }
+
+  static async weather ({ t }, title, { now, daily }) {
+    const WIDTH = 390
+    const HEIGHT = 286
+
+    const CARD_HEIGHT = 270
+    const CARD_Y_MARGIN = HEIGHT - CARD_HEIGHT
+
+    const INNER_MARGIN = 14
+
+    const FONTS = (() => {
+      const MEME = Math.random() > 0.99 && '"Comic Sans MS"'
+      const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
+      const REGULAR = MEME || '"Montserrat"'
+      const LIGHT = MEME || '"Montserrat Light"'
+      return {
+        TITLE: `17px ${EXTRABOLD}`,
+        TEMPERATURE: `bold 90px ${EXTRABOLD}`,
+        INFORMATIONS: `17px ${LIGHT}`,
+        WEEK_DAYS: `17px ${REGULAR}`,
+        WEEK_TEMPERATURES: `29px ${LIGHT}`
+      }
+    })()
+
+    // General
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.DEFAULT_BACKGROUND_GRAY_PNG, true),
+      Image.from(Constants.ARROW_SVG, true),
+      Image.from(Constants.WIND_SVG, true)
+    ])
+
+    const icon = (i) => i.toUpperCase().replace(/-/g, '_')
+    const iconIndex = (i) => usedIcons.indexOf(icon(i))
+    const usedIcons = daily.map(d => icon(d.icon)).reduce((a, i) => {
+      if (!a.includes(i)) a.push(i)
+      return a
+    }, [ icon(now.icon) ])
+
+    const ICONS_ASSETS = Promise.all(usedIcons.map(i => Image.from(Constants[`WEATHER_${i}`])))
+
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    // Card
+    const BRIGHTER_HEIGHT = 150
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.051)'
+    ctx.fillRect(0, CARD_Y_MARGIN, WIDTH, BRIGHTER_HEIGHT)
+
+    // Currently
+    const BRIGHTER_Y_CENTER = CARD_Y_MARGIN + BRIGHTER_HEIGHT * 0.5
+    //   Temperature
+    ctx.fillStyle = '#FFFFFF'
+    ctx.write(now.temperature, INNER_MARGIN, BRIGHTER_Y_CENTER, FONTS.TEMPERATURE, ALIGN.CENTER_LEFT)
+    //   Extra info
+    const INFO_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT - INNER_MARGIN
+    const INFO_ICON_SIZE = 16
+
+    const currentlyMax = ctx.write(now.max, INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+    const currentlyMin = ctx.write(now.min, currentlyMax.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+    const currentlyWind = ctx.write(now.wind, currentlyMin.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+
+    // Daily
+    const DAY_ICON_SIZE = 40
+    const DAY_MARGIN = 22
+    const DAY_WIDTH = ((WIDTH - (INNER_MARGIN * 2) - (DAY_MARGIN * (daily.length - 1))) / daily.length)
+    daily.forEach((day, i) => {
+      const DAY_X = INNER_MARGIN + (i * DAY_WIDTH + i * DAY_MARGIN) // (i * INNER_MARGIN * 2 + i * DAY_ICON_SIZE)
+      const DAY_TEXT_X = DAY_X + DAY_ICON_SIZE * 0.5
+
+      const WEEKDAY_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT + INNER_MARGIN
+      const TEMPERATURE_Y = HEIGHT - INNER_MARGIN
+      ctx.write(day.weekday, DAY_TEXT_X, WEEKDAY_Y, FONTS.WEEK_DAYS, ALIGN.TOP_CENTER)
+      ctx.write(`${day.temperature}º`, DAY_TEXT_X, TEMPERATURE_Y, FONTS.WEEK_DAYS, ALIGN.BOTTOM_CENTER)
+
+      day.iconX = DAY_X
+      day.iconY = (HEIGHT - ((CARD_HEIGHT - BRIGHTER_HEIGHT) * 0.5)) - DAY_ICON_SIZE * 0.5
+    })
+
+    // Assets
+    const ICONS = await ICONS_ASSETS
+    const getIcon = (i) => ICONS[iconIndex(i)]
+
+    // Main Icon
+    const MAIN_ICON_SIZE = 100
+    ctx.drawIcon(getIcon(now.icon), WIDTH - INNER_MARGIN - MAIN_ICON_SIZE, BRIGHTER_Y_CENTER - MAIN_ICON_SIZE * 0.5, MAIN_ICON_SIZE, MAIN_ICON_SIZE, '#fff')
+
+    // Daily Icons
+    daily.forEach(day => {
+      ctx.drawIcon(getIcon(day.icon), day.iconX, day.iconY, DAY_ICON_SIZE, DAY_ICON_SIZE, '#fff')
+    })
+
+    const [ backgroundImage, arrowImage, windImage ] = await IMAGE_ASSETS
+
+    // Max
+    ctx.drawIcon(arrowImage, INNER_MARGIN, currentlyMax.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff')
+    // Min
+    ctx.drawIcon(arrowImage, currentlyMin.leftX - INFO_ICON_SIZE, currentlyMin.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff', 180)
+    // Wind
+    ctx.drawIcon(windImage, currentlyWind.leftX - INFO_ICON_SIZE - 5, currentlyWind.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff')
+
+    ctx.save()
+    // Background
+    ctx.globalCompositeOperation = 'destination-over'
+    ctx.drawImage(backgroundImage, 0, CARD_Y_MARGIN, WIDTH * 1.4, HEIGHT * 1.7)
+
+    // Modal
+    ctx.fillStyle = '#FFFFFF'
+    ctx.globalCompositeOperation = 'destination-in'
+    ctx.roundRect(0, CARD_Y_MARGIN, WIDTH, CARD_HEIGHT, 10, true)
+
+    ctx.restore()
+    // Card title
+    const TITLE_X = WIDTH * 0.5
+
+    //   Title modal
+    ctx.fillStyle = '#ffffff'
+    const TITLE_RECT_X_MARGIN = 45
+    const TITLE_RECT_WIDTH = measureText(ctx, FONTS.TITLE, title).width + TITLE_RECT_X_MARGIN
+    const TITLE_RECT_HEIGHT = 32
+    const TITLE_RECT_X = TITLE_X - TITLE_RECT_WIDTH * 0.5
+    ctx.roundRect(TITLE_RECT_X, 0, TITLE_RECT_WIDTH, TITLE_RECT_HEIGHT, 15, true)
+    //   Title text
+    ctx.fillStyle = '#000000'
+    ctx.write(title, TITLE_X, CARD_Y_MARGIN, FONTS.TITLE, ALIGN.CENTER)
+
+    return canvas.toBuffer()
+  }
 }
