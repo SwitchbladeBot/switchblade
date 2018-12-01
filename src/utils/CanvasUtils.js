@@ -215,7 +215,7 @@ module.exports = class CanvasUtils {
         ctx.save()
         ctx.translate(centerX, centerY)
         ctx.rotate(rotate * Math.PI / 180)
-        ctx.translate(-centerX, -centerY);
+        ctx.translate(-centerX, -centerY)
       }
 
       ctx.drawImage(image, 0, 0, image.width, image.height)

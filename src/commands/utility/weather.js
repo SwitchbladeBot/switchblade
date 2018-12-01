@@ -3,17 +3,6 @@ const { Command, CommandParameters, StringParameter } = CommandStructures
 const { Attachment } = require('discord.js')
 const moment = require('moment')
 
-const icons = [ 'clear-day',
-  'clear-night',
-  'cloudy',
-  'fog',
-  'partly-cloudy-day',
-  'partly-cloudy-night',
-  'rain',
-  'snow',
-  'thunderstorm',
-  'wind' ]
-
 module.exports = class Weather extends Command {
   constructor (client) {
     super(client)
@@ -51,7 +40,6 @@ module.exports = class Weather extends Command {
       }
 
       const cityName = city.address_components.find(({ types }) => types.includes('administrative_area_level_2') || types.includes('locality')).short_name
-      // FIX NO STATE
       const state = city.address_components.find(({ types }) => types.includes('administrative_area_level_1'))
       const weather = await CanvasTemplates.weather({ t }, `${cityName}${state ? ` - ${state.short_name}` : ''}`, weatherInfo)
 
