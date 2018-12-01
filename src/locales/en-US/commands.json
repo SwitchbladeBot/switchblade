@@ -632,5 +632,10 @@
     "commandUsage": "<user to slap>",
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
+  },
+  "currency": {
+    "commandDescription": "Shows the current rate of a currency or a pair.",
+    "commandUsage": "<to> [from] [value]",
+    "invalidCurrency": "You have to give me a valid currency or a pair."
   }
 }
