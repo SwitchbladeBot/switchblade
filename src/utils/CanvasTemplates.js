@@ -542,7 +542,7 @@ module.exports = class CanvasTemplates {
     const currentlyMin = ctx.write(now.min, currentlyMax.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
     const currentlyWind = ctx.write(now.wind, currentlyMin.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
 
-    // Daily 
+    // Daily
     const temperatures = daily.map(d => d.temperature)
     const highTemp = Math.max(...temperatures)
     const lowTemp = Math.min(...temperatures)
