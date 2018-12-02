@@ -2,19 +2,14 @@ const Constants = require('./Constants')
 const { ALIGN, measureText } = require('./CanvasUtils.js')
 const Color = require('./Color.js')
 
-const { createCanvas, Image, Canvas: { createSVGCanvas } } = require('canvas')
+const { createCanvas, Image } = require('canvas')
 const GIFEncoder = require('gifencoder')
 const moment = require('moment')
 
 module.exports = class CanvasTemplates {
   static async profile ({ t }, user, userDocument, role) {
-    const WIDTH = 800
+    const WIDTH = 640
     const HEIGHT = 600
-
-    const CARD_WIDTH = 644
-    const CARD_HEIGHT = 600
-    const CARD_X_MARGIN = (WIDTH - CARD_WIDTH) * 0.5
-    const CARD_Y_MARGIN = (HEIGHT - CARD_HEIGHT) * 0.5
 
     const AVATAR_SIZE = 178
 
@@ -40,8 +35,8 @@ module.exports = class CanvasTemplates {
     const { rep, money, personalText, favColor } = userDocument
     const IMAGE_ASSETS = Promise.all([
       Image.from(user.displayAvatarURL.replace('.gif', '.png')),
-      Image.buffer(Constants.COINS_SVG, true),
-      Image.buffer(Constants.REPUTATION_SVG, true),
+      Image.from(Constants.COINS_SVG, true),
+      Image.from(Constants.REPUTATION_SVG, true),
       Image.from(Constants.DEFAULT_BACKGROUND_PNG, true)
     ])
 
@@ -53,18 +48,18 @@ module.exports = class CanvasTemplates {
 
     // Card drawing
     //   Darker rectangle
-    const CARD_MARGIN = 192
+    const CARD_MARGIN = 200
     ctx.fillStyle = 'rgba(29, 29, 29, 0.94)'
-    ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN + CARD_MARGIN, CARD_WIDTH, CARD_HEIGHT - CARD_MARGIN)
+    ctx.fillRect(0, CARD_MARGIN, WIDTH, HEIGHT - CARD_MARGIN)
     //   Brighter rectangle
     const BRIGHTER_HEIGHT = 110
     ctx.fillStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
-    ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN + CARD_MARGIN, CARD_WIDTH, BRIGHTER_HEIGHT)
+    ctx.fillRect(0, CARD_MARGIN, WIDTH, BRIGHTER_HEIGHT)
 
     // Profile
     ctx.fillStyle = TEXTCOLOR
-    const PROFILE_X = CARD_X_MARGIN + INNER_MARGIN * 2 + AVATAR_SIZE
-    const PROFILE_Y = CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT * 0.5
+    const PROFILE_X = INNER_MARGIN * 2 + AVATAR_SIZE
+    const PROFILE_Y = CARD_MARGIN + BRIGHTER_HEIGHT * 0.5
     //   Username
     ctx.write(user.username, PROFILE_X, PROFILE_Y, FONTS.USERNAME, ALIGN.BOTTOM_LEFT)
     //   Discriminator
@@ -75,7 +70,7 @@ module.exports = class CanvasTemplates {
       const TAG_MARGIN = 20
       const TAG_NAME_WIDTH = measureText(ctx, FONTS.TAG_LABEL, TAG_NAME).width
       const TAG_HEIGHT = 34
-      const TAG_Y = CARD_Y_MARGIN + CARD_MARGIN
+      const TAG_Y = CARD_MARGIN
 
       const TAG_COLOR = new Color(role.hexColor)
       ctx.fillStyle = TAG_COLOR.rgba(true)
@@ -87,8 +82,8 @@ module.exports = class CanvasTemplates {
     // XP
     //   XP Label
     const XP_LABEL_RADIUS = 18
-    const XP_X = WIDTH - CARD_X_MARGIN - INNER_MARGIN - XP_LABEL_RADIUS
-    const XP_Y = CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT
+    const XP_X = WIDTH - INNER_MARGIN - XP_LABEL_RADIUS
+    const XP_Y = CARD_MARGIN + BRIGHTER_HEIGHT
     ctx.fillStyle = '#151515'
     ctx.circle(XP_X, XP_Y, XP_LABEL_RADIUS, 0, Math.PI * 2)
     ctx.fillStyle = TEXTCOLOR
@@ -96,11 +91,11 @@ module.exports = class CanvasTemplates {
     //   XP Bar
     ctx.fillStyle = '#151515'
     const XP_BAR_HEIGHT = 13
-    const XP_BAR_WIDTH = CARD_WIDTH - INNER_MARGIN * 2 - INNER_MARGIN * 0.5 - XP_LABEL_RADIUS * 2
-    ctx.roundRect(CARD_X_MARGIN + INNER_MARGIN, XP_Y - XP_BAR_HEIGHT * 0.5, XP_BAR_WIDTH, XP_BAR_HEIGHT, XP_BAR_HEIGHT * 0.5, true)
+    const XP_BAR_WIDTH = WIDTH - INNER_MARGIN * 2 - INNER_MARGIN * 0.5 - XP_LABEL_RADIUS * 2
+    ctx.roundRect(INNER_MARGIN, XP_Y - XP_BAR_HEIGHT * 0.5, XP_BAR_WIDTH, XP_BAR_HEIGHT, XP_BAR_HEIGHT * 0.5, true)
     //   XP Bar current
     ctx.fillStyle = FAVCOLOR.rgba(true)
-    ctx.roundRect(CARD_X_MARGIN + INNER_MARGIN, XP_Y - XP_BAR_HEIGHT * 0.5, XP_BAR_WIDTH * 0.5, XP_BAR_HEIGHT, XP_BAR_HEIGHT * 0.5, true)
+    ctx.roundRect(INNER_MARGIN, XP_Y - XP_BAR_HEIGHT * 0.5, XP_BAR_WIDTH * 0.5, XP_BAR_HEIGHT, XP_BAR_HEIGHT * 0.5, true)
 
     // Sections
     const SECTION_INNER_MARGIN = 16
@@ -108,41 +103,42 @@ module.exports = class CanvasTemplates {
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
     ctx.fillStyle = TEXTCOLOR
     //   Info sections
-    const INFO_WIDTH = (CARD_WIDTH - INNER_MARGIN * 3) * 0.5
+    const INFO_WIDTH = (WIDTH - INNER_MARGIN * 3) * 0.5
     const INFO_HEIGHT = 82
-    const INFO_Y = HEIGHT - CARD_Y_MARGIN - INNER_MARGIN - INFO_HEIGHT
+    const INFO_Y = HEIGHT - INNER_MARGIN - INFO_HEIGHT
+
+    const ICON_SIZE = 50
+    const ICON_Y = INFO_Y + INFO_HEIGHT * 0.5 - ICON_SIZE * 0.5
 
     //     Switchcoins
-    const COINS_HEIGHT = INFO_HEIGHT - SECTION_INNER_MARGIN * 2 // 57
-    const COINS_WIDTH = 57 / COINS_HEIGHT * 55 // 55
-    const COINS_X = CARD_X_MARGIN + SECTION_INNER_MARGIN * 2
-    const COINS_Y = INFO_Y + INFO_HEIGHT * 0.5 - COINS_HEIGHT * 0.5
-    ctx.roundRect(CARD_X_MARGIN + INNER_MARGIN, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
-    ctx.write('Switchcoins', COINS_X + COINS_WIDTH, INFO_Y + INFO_HEIGHT * 0.5 - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
-    ctx.write(money, COINS_X + COINS_WIDTH, INFO_Y + INFO_HEIGHT * 0.5 + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
+    const COINS_X = INNER_MARGIN + SECTION_INNER_MARGIN
+    const COINS_TEXT_X = COINS_X + SECTION_INNER_MARGIN + ICON_SIZE - 7
+    const COINS_TEXT_Y = INFO_Y + INFO_HEIGHT * 0.5
+    ctx.roundRect(INNER_MARGIN, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
+    ctx.write('Switchcoins', COINS_TEXT_X, COINS_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
+    ctx.write(money, COINS_TEXT_X, COINS_TEXT_Y + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
 
     //     Reputation
-    const REP_WIDTH = INFO_HEIGHT - SECTION_INNER_MARGIN * 2 // 46
-    const REP_HEIGHT = 46 / REP_WIDTH * 65 // 65
-    const REP_X = WIDTH - CARD_X_MARGIN - INNER_MARGIN - INFO_WIDTH
-    const REP_Y = INFO_Y + INFO_HEIGHT * 0.5 - REP_HEIGHT * 0.5
+    const REP_X = WIDTH - INNER_MARGIN - INFO_WIDTH
+    const REP_TEXT_X = REP_X + SECTION_INNER_MARGIN + ICON_SIZE + 7
+    const REP_TEXT_Y = INFO_Y + INFO_HEIGHT * 0.5
     ctx.roundRect(REP_X, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
-    ctx.write('Reputation', REP_X + REP_WIDTH + SECTION_INNER_MARGIN, INFO_Y + INFO_HEIGHT * 0.5 - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
-    ctx.write(rep, REP_X + REP_WIDTH + SECTION_INNER_MARGIN, INFO_Y + INFO_HEIGHT * 0.5 + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
+    ctx.write('Reputation', REP_TEXT_X, REP_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
+    ctx.write(rep, REP_TEXT_X, REP_TEXT_Y + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
 
     //   About section
-    const ABOUT_WIDTH = CARD_WIDTH - INNER_MARGIN * 2
+    const ABOUT_WIDTH = WIDTH - INNER_MARGIN * 2
     const ABOUT_HEIGHT = 132
     const ABOUT_Y = INFO_Y - INNER_MARGIN - ABOUT_HEIGHT
-    ctx.roundRect(CARD_X_MARGIN + INNER_MARGIN, ABOUT_Y, ABOUT_WIDTH, ABOUT_HEIGHT, 10, false, true)
+    ctx.roundRect(INNER_MARGIN, ABOUT_Y, ABOUT_WIDTH, ABOUT_HEIGHT, 10, false, true)
 
-    const about = ctx.write('About me', CARD_X_MARGIN + SECTION_INNER_MARGIN * 2, ABOUT_Y + SECTION_INNER_MARGIN, FONTS.ABOUT_LABEL, ALIGN.TOP_LEFT)
+    const about = ctx.write('About me', SECTION_INNER_MARGIN * 2, ABOUT_Y + SECTION_INNER_MARGIN, FONTS.ABOUT_LABEL, ALIGN.TOP_LEFT)
     ctx.writeParagraph(
       personalText,
       FONTS.ABOUT_VALUE,
       about.leftX,
       about.bottomY + INNER_MARGIN * 0.5,
-      WIDTH - CARD_X_MARGIN - INNER_MARGIN * 2,
+      WIDTH - INNER_MARGIN * 2,
       ABOUT_Y + ABOUT_HEIGHT - INNER_MARGIN
     )
 
@@ -150,31 +146,29 @@ module.exports = class CanvasTemplates {
     const [ avatarImage, coinsImage, repImage, backgroundImage ] = await IMAGE_ASSETS
 
     const AVATAR_HALF = AVATAR_SIZE * 0.5
-    const AVATAR_Y = CARD_Y_MARGIN + CARD_MARGIN - (AVATAR_SIZE * 0.5)
+    const AVATAR_Y = CARD_MARGIN - (AVATAR_SIZE * 0.5)
     //   Avatar shadow
     ctx.save()
     ctx.fillStyle = '#00000099'
     ctx.shadowColor = '#00000099'
     ctx.shadowBlur = 10
-    ctx.circle(CARD_X_MARGIN + INNER_MARGIN + AVATAR_HALF, AVATAR_Y + AVATAR_HALF, AVATAR_HALF, 0, Math.PI * 2)
+    ctx.circle(INNER_MARGIN + AVATAR_HALF, AVATAR_Y + AVATAR_HALF, AVATAR_HALF, 0, Math.PI * 2)
     ctx.restore()
     //   Avatar
-    ctx.roundImage(avatarImage, CARD_X_MARGIN + INNER_MARGIN, AVATAR_Y, AVATAR_SIZE, AVATAR_SIZE)
+    ctx.roundImage(avatarImage, INNER_MARGIN, AVATAR_Y, AVATAR_SIZE, AVATAR_SIZE)
 
     //   Info section
-    const coinsSVG = await createSVGCanvas(coinsImage.toString().replace(/\$COLOR/g, TEXTCOLOR), COINS_WIDTH, COINS_HEIGHT)
-    ctx.drawImage(coinsSVG, COINS_X, COINS_Y, COINS_WIDTH, COINS_HEIGHT)
-    const repSVG = await createSVGCanvas(repImage.toString().replace(/\$COLOR/g, TEXTCOLOR), REP_WIDTH, REP_HEIGHT)
-    ctx.drawImage(repSVG, REP_X + SECTION_INNER_MARGIN, REP_Y, REP_WIDTH, REP_HEIGHT)
+    ctx.drawIcon(coinsImage, COINS_X, ICON_Y, ICON_SIZE, ICON_SIZE, TEXTCOLOR)
+    ctx.drawIcon(repImage, REP_X + SECTION_INNER_MARGIN, ICON_Y, ICON_SIZE, ICON_SIZE, TEXTCOLOR)
 
     //   Background image
     ctx.globalCompositeOperation = 'destination-over'
-    ctx.drawImage(backgroundImage, CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT)
+    ctx.drawImage(backgroundImage, 0, 0, WIDTH, HEIGHT)
 
     // Modal
     ctx.fillStyle = '#FFFFFF'
     ctx.globalCompositeOperation = 'destination-in'
-    ctx.roundRect(CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT, 10, true)
+    ctx.roundRect(0, 0, WIDTH, HEIGHT, 10, true)
 
     return canvas.toBuffer()
   }
@@ -277,12 +271,10 @@ module.exports = class CanvasTemplates {
   }
 
   static async leaderboard ({ t }, top, { icon, iconWidth, iconHeight, title, valueFunction }) {
-    const WIDTH = 800
+    const WIDTH = 680
     const HEIGHT = 654
 
-    const CARD_WIDTH = 680
     const CARD_HEIGHT = 590
-    const CARD_X_MARGIN = (WIDTH - CARD_WIDTH) * 0.5
     const CARD_Y_MARGIN = (HEIGHT - CARD_HEIGHT) * 0.5
 
     const TOP_AVATAR_SIZE = 134
@@ -312,7 +304,8 @@ module.exports = class CanvasTemplates {
     const avatarCoords = []
     const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png')))
     const IMAGE_ASSETS = Promise.all([
-      Image.buffer(icon, true),
+      Image.from(icon, true),
+      Image.from(Constants.MEDAL_SVG, true),
       Image.from(Constants.DEFAULT_BACKGROUND_PNG, true),
       ...avatarPictures
     ])
@@ -327,16 +320,16 @@ module.exports = class CanvasTemplates {
     //   Darker rectangle
     const CARD_MARGIN = 102
     ctx.fillStyle = 'rgba(29, 29, 29, 0.94)'
-    ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN + CARD_MARGIN, CARD_WIDTH, CARD_HEIGHT - CARD_MARGIN)
+    ctx.fillRect(0, CARD_Y_MARGIN + CARD_MARGIN, WIDTH, CARD_HEIGHT - CARD_MARGIN)
     //   Brighter rectangle
     const BRIGHTER_HEIGHT = 110
     ctx.fillStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
-    ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN + CARD_MARGIN, CARD_WIDTH, BRIGHTER_HEIGHT)
+    ctx.fillRect(0, CARD_Y_MARGIN + CARD_MARGIN, WIDTH, BRIGHTER_HEIGHT)
 
     // Top user
     ctx.fillStyle = TEXTCOLOR
-    const TOP_USER_AVATAR_COORDS = [CARD_X_MARGIN + INNER_MARGIN + TOP_AVATAR_RADIUS, CARD_Y_MARGIN + CARD_MARGIN + INNER_MARGIN]
-    const PROFILE_X = CARD_X_MARGIN + INNER_MARGIN * 2 + TOP_AVATAR_SIZE
+    const TOP_USER_AVATAR_COORDS = [INNER_MARGIN + TOP_AVATAR_RADIUS, CARD_Y_MARGIN + CARD_MARGIN + INNER_MARGIN]
+    const PROFILE_X = INNER_MARGIN * 2 + TOP_AVATAR_SIZE
     const PROFILE_Y = CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT * 0.5
     //   Username
     const topUsername = ctx.write(TOP_USER.user.username, PROFILE_X, PROFILE_Y, FONTS.TOP_USERNAME, ALIGN.BOTTOM_LEFT)
@@ -350,11 +343,11 @@ module.exports = class CanvasTemplates {
     ctx.lineWidth = 1
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
     //   Info sections
-    const SECTION_WIDTH = (CARD_WIDTH - INNER_MARGIN * 3) / 2
+    const SECTION_WIDTH = (WIDTH - INNER_MARGIN * 3) / 2
     const SECTION_HEIGHT = ((CARD_HEIGHT - CARD_MARGIN - BRIGHTER_HEIGHT) - INNER_MARGIN * 4) / 3
     top.forEach((u, i) => {
       i++
-      const SECTION_X = CARD_X_MARGIN + INNER_MARGIN + (i % 2 ? 0 : SECTION_WIDTH + INNER_MARGIN)
+      const SECTION_X = INNER_MARGIN + (i % 2 ? 0 : SECTION_WIDTH + INNER_MARGIN)
       const SECTION_Y = CARD_Y_MARGIN + CARD_MARGIN + BRIGHTER_HEIGHT + INNER_MARGIN + (Math.ceil(i / 2) - 1) * (SECTION_HEIGHT + INNER_MARGIN)
       ctx.roundRect(SECTION_X, SECTION_Y, SECTION_WIDTH, SECTION_HEIGHT, 10, false, true)
 
@@ -385,14 +378,14 @@ module.exports = class CanvasTemplates {
     })
 
     // Image handling
-    const [ valueImage, backgroundImage, ...avatarImages ] = await IMAGE_ASSETS
+    const [ valueImage, medalImage, backgroundImage, ...avatarImages ] = await IMAGE_ASSETS
 
     const avatarImage = avatarImages.shift()
     //   Top avatar shadow
     const [ TOP_USER_AVATAR_X, TOP_USER_AVATAR_Y ] = TOP_USER_AVATAR_COORDS
     ctx.save()
-    ctx.fillStyle = '#000000'
-    ctx.shadowColor = '#000000'
+    ctx.fillStyle = '#00000099'
+    ctx.shadowColor = '#00000099'
     ctx.shadowBlur = 10
     ctx.circle(TOP_USER_AVATAR_X, TOP_USER_AVATAR_Y, TOP_AVATAR_RADIUS, 0, Math.PI * 2)
     ctx.restore()
@@ -404,8 +397,7 @@ module.exports = class CanvasTemplates {
     const MEDAL_X = TOP_USER_AVATAR_X + TOP_AVATAR_RADIUS - MEDAL_RADIUS
     const MEDAL_Y = TOP_USER_AVATAR_Y + TOP_AVATAR_RADIUS - MEDAL_RADIUS
     ctx.circle(MEDAL_X, MEDAL_Y, MEDAL_RADIUS, 0, Math.PI * 2)
-    ctx.fillStyle = '#0000008f'
-    ctx.write('1', MEDAL_X, MEDAL_Y, FONTS.TOP_POSITION, ALIGN.CENTER)
+    ctx.drawIcon(medalImage, MEDAL_X - 15, MEDAL_Y - 15, 31, 31, '#0000008f')
 
     // Others avatars
     avatarImages.forEach((avatar, i) => {
@@ -424,18 +416,18 @@ module.exports = class CanvasTemplates {
     //   Background image
     ctx.save()
     ctx.globalCompositeOperation = 'destination-over'
-    ctx.drawImage(backgroundImage, CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT)
+    ctx.drawImage(backgroundImage, 0, CARD_Y_MARGIN, WIDTH, CARD_HEIGHT)
 
     //   Modal
     ctx.fillStyle = '#FFFFFF'
     ctx.globalCompositeOperation = 'destination-in'
-    ctx.roundRect(CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT, 10, true)
+    ctx.roundRect(0, CARD_Y_MARGIN, WIDTH, CARD_HEIGHT, 10, true)
     ctx.restore()
 
     //   Title
     ctx.fillStyle = '#FFFFFF'
     const TITLE_CIRCLE_RADIUS = 32
-    const TITLE_X = CARD_X_MARGIN + TITLE_CIRCLE_RADIUS
+    const TITLE_X = TITLE_CIRCLE_RADIUS
     const TITLE_Y = CARD_Y_MARGIN
     ctx.circle(TITLE_X, TITLE_Y, TITLE_CIRCLE_RADIUS, 0, Math.PI * 2)
 
@@ -446,8 +438,7 @@ module.exports = class CanvasTemplates {
 
     ctx.roundRect(TITLE_X, TITLE_Y - TITLE_RECT_HEIGHT * 0.5, TITLE_RECT_WIDTH, TITLE_RECT_HEIGHT, TITLE_RECT_HEIGHT * 0.5, true)
 
-    const valueSVG = await createSVGCanvas(valueImage.toString().replace(/\$COLOR/g, '#000000'), iconWidth, iconHeight)
-    ctx.drawImage(valueSVG, TITLE_X - iconWidth * 0.5, TITLE_Y - iconHeight * 0.5, iconWidth, iconHeight)
+    ctx.drawIcon(valueImage, TITLE_X - iconWidth * 0.5, TITLE_Y - iconHeight * 0.5, iconWidth, iconHeight, '#000000')
 
     ctx.fillStyle = '#000000'
     ctx.write(title, TITLE_X + TITLE_RECT_INNER_MARGIN * 1.5, TITLE_Y, FONTS.TITLE, ALIGN.CENTER_LEFT)
@@ -491,14 +482,14 @@ module.exports = class CanvasTemplates {
     return encoder.out.getData()
   }
 
-  static async weather ({ t }, title, weather ) {
-    const WIDTH = 430
-    const HEIGHT = 350
+  static async weather ({ t }, title, { now, daily }) {
+    const WIDTH = 400
+    const HEIGHT = 286
 
-    const CARD_WIDTH = 383
-    const CARD_HEIGHT = 264
-    const CARD_X_MARGIN = (WIDTH - CARD_WIDTH) * 0.5
-    const CARD_Y_MARGIN = (HEIGHT - CARD_HEIGHT) * 0.5
+    const CARD_HEIGHT = 270
+    const CARD_Y_MARGIN = HEIGHT - CARD_HEIGHT
+
+    const INNER_MARGIN = 14
 
     const FONTS = (() => {
       const MEME = Math.random() > 0.99 && '"Comic Sans MS"'
@@ -507,128 +498,140 @@ module.exports = class CanvasTemplates {
       const LIGHT = MEME || '"Montserrat Light"'
       return {
         TITLE: `17px ${EXTRABOLD}`,
-        TEMPERATURE: `bold 90px ${EXTRABOLD}`, 
+        TEMPERATURE: `bold 90px ${EXTRABOLD}`,
         INFORMATIONS: `17px ${LIGHT}`,
         WEEK_DAYS: `17px ${REGULAR}`,
-        WEEK_TEMPERATURES: `bold 29px ${LIGHT}`,
+        WEEK_TEMPERATURES: `29px ${LIGHT}`
       }
     })()
 
+    // General
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.DEFAULT_BACKGROUND_GRAY_PNG, true),
-      Image.buffer(Constants.ARROW_UP_SVG, true),
-      Image.buffer(Constants.WIND_SVG, true)
+      Image.from(Constants.ARROW_SVG, true),
+      Image.from(Constants.WIND_SVG, true)
     ])
 
-    const WEATHER_ICONS = Promise.all([
-      Image.buffer(Constants.WEATHER_CLEAR_DAY, true),
-      Image.buffer(Constants.WEATHER_CLEAR_NIGHT, true),
-      Image.buffer(Constants.WEATHER_CLOUDY, true),
-      Image.buffer(Constants.WEATHER_FOG, true),
-      Image.buffer(Constants.WEATHER_PARTLY_CLOUDY_DAY, true),
-      Image.buffer(Constants.WEATHER_PARTLY_CLOUDY_NIGHT, true),
-      Image.buffer(Constants.WEATHER_RAIN, true),
-      Image.buffer(Constants.WEATHER_SNOW, true),
-      Image.buffer(Constants.WEATHER_THUNDERSTORM, true),
-      Image.buffer(Constants.WEATHER_WIND, true)
-    ])
+    const icon = (i) => i.toUpperCase().replace(/-/g, '_')
+    const iconIndex = (i) => usedIcons.indexOf(icon(i))
+    const usedIcons = daily.map(d => icon(d.icon)).reduce((a, i) => {
+      if (!a.includes(i)) a.push(i)
+      return a
+    }, [ icon(now.icon) ])
+
+    const ICONS_ASSETS = Promise.all(usedIcons.map(i => Image.from(Constants[`WEATHER_${i}`])))
 
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
-
-    // CARD DRAWING
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
-    ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT)
-
+    // Card
     const BRIGHTER_HEIGHT = 150
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
-    ctx.fillRect(CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, BRIGHTER_HEIGHT)
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.051)'
+    ctx.fillRect(0, CARD_Y_MARGIN, WIDTH, BRIGHTER_HEIGHT)
 
-    // MAIN TEMPERATURE
-    const MAIN_TEMPERATURE_Y = 150
+    // Currently
+    const BRIGHTER_Y_CENTER = CARD_Y_MARGIN + BRIGHTER_HEIGHT * 0.5
+    //   Temperature
     ctx.fillStyle = '#FFFFFF'
-    ctx.write(weather.now.temperature, CARD_X_MARGIN * 1.5, MAIN_TEMPERATURE_Y, FONTS.TEMPERATURE, ALIGN.BOTTOM_LEFT)
+    ctx.write(now.temperature, INNER_MARGIN, BRIGHTER_Y_CENTER, FONTS.TEMPERATURE, ALIGN.CENTER_LEFT)
+    //   Extra info
+    const INFO_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT - INNER_MARGIN
+    const INFO_ICON_SIZE = 16
 
-    const DAILY_MARGIN = CARD_X_MARGIN + 35
-    const DAYS_SEPARATOR = 63
-    const DAILY_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT + 20
-    const WEATHER_ICONS_SIZE = 40
+    const currentlyMax = ctx.write(now.max, INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+    const currentlyMin = ctx.write(now.min, currentlyMax.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+    const currentlyWind = ctx.write(now.wind, currentlyMin.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
 
-    // MAIN INFORMATIONS
+    // Daily
+    const temperatures = daily.map(d => d.temperature)
+    const highTemp = Math.max(...temperatures)
+    const lowTemp = Math.min(...temperatures)
+    const tempDiff = highTemp - lowTemp
 
-    const MAIN_INFORMATIONS_Y = 180
-    const MAIN_INFORMATIONS_X_MARGIN = 35
-    const MAIN_INFORMATIONS_X_MARGIN_BETWEEN = 30
+    const DAY_ICON_SIZE = 40
+    const DAY_MARGIN = 22
+    const DAY_WIDTH = ((WIDTH - (INNER_MARGIN * 2) - (DAY_MARGIN * (daily.length - 1))) / daily.length)
+    daily.forEach((day, i) => {
+      const DAY_X = INNER_MARGIN + (i * DAY_WIDTH + i * DAY_MARGIN) // (i * INNER_MARGIN * 2 + i * DAY_ICON_SIZE)
+      const DAY_TEXT_X = DAY_X + DAY_ICON_SIZE * 0.5
 
-    ctx.write(weather.now.max, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN, MAIN_INFORMATIONS_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
-    const MAIN_INFORMATIONS_MAX_W = measureText(ctx, FONTS.INFORMATIONS, weather.now.max).width
-    ctx.write(weather.now.min, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN + MAIN_INFORMATIONS_MAX_W + MAIN_INFORMATIONS_X_MARGIN_BETWEEN, MAIN_INFORMATIONS_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
-    const MAIN_INFORMATIONS_MIN_W = measureText(ctx, FONTS.INFORMATIONS, weather.now.min).width
-    ctx.write(weather.now.wind, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN + MAIN_INFORMATIONS_MAX_W + MAIN_INFORMATIONS_MIN_W + MAIN_INFORMATIONS_X_MARGIN_BETWEEN * 2, MAIN_INFORMATIONS_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
-    
+      const WEEKDAY_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT + INNER_MARGIN
+      const TEMPERATURE_Y = HEIGHT - INNER_MARGIN
+      ctx.write(day.weekday, DAY_TEXT_X, WEEKDAY_Y, FONTS.WEEK_DAYS, ALIGN.TOP_CENTER)
+      ctx.write(`${day.temperature}º`, DAY_TEXT_X, TEMPERATURE_Y, FONTS.WEEK_DAYS, ALIGN.BOTTOM_CENTER)
 
-    const [ ...WEATHER_SVG_ICONS ] = await WEATHER_ICONS 
+      day.iconX = DAY_X
+      day.iconY = (HEIGHT - ((CARD_HEIGHT - BRIGHTER_HEIGHT) * 0.5)) - DAY_ICON_SIZE * 0.5
 
-    const AWAIT_ICONS = Promise.all(WEATHER_SVG_ICONS.map(async icon => {
-      return await createSVGCanvas(icon.toString().replace(/\$COLOR/g, '#FFFFFF'), WEATHER_ICONS_SIZE, WEATHER_ICONS_SIZE)
-    }))
-
-    // MAIN TEMPERATURE ICON
-
-    const MAIN_ICON_SIZE = 100
-    const MAIN_ICON_RIGHT_MARGIN = 15
-    const MAIN_ICON_Y = 70
-
-    const mainTemperatureIcon = await createSVGCanvas(WEATHER_SVG_ICONS[weather.now.icon].toString().replace(/\$COLOR/g, '#FFFFFF'), MAIN_ICON_SIZE, MAIN_ICON_SIZE)
-
-    ctx.drawImage(mainTemperatureIcon, CARD_X_MARGIN + CARD_WIDTH - MAIN_ICON_RIGHT_MARGIN - MAIN_ICON_SIZE, MAIN_ICON_Y, MAIN_ICON_SIZE, MAIN_ICON_SIZE)
-
-
-    // WEATHER DAILY ICONS
-
-    const [ ...ICONS ] = await AWAIT_ICONS
-
-    weather.daily.forEach(async (day, index) => {
-      ctx.write(day.weekday, DAILY_MARGIN + index * DAYS_SEPARATOR, DAILY_Y, FONTS.WEEK_DAYS, ALIGN.CENTER)
-      ctx.drawImage(ICONS[day.icon], (DAILY_MARGIN + (index * DAYS_SEPARATOR) - WEATHER_ICONS_SIZE / 2) - 0.5, DAILY_Y + 15, WEATHER_ICONS_SIZE, WEATHER_ICONS_SIZE)
-      ctx.write(day.temperature, DAILY_MARGIN + index * DAYS_SEPARATOR, DAILY_Y + WEATHER_ICONS_SIZE + 35, FONTS.WEEK_DAYS, ALIGN.CENTER)
+      day.graphX = DAY_TEXT_X
+      day.graphPoint = day.iconY - 5 + (((highTemp - day.temperature) / tempDiff) * (TEMPERATURE_Y + 10 - day.iconY))
     })
 
-    const [ backgroundImage, arrowSVG, windSVG ] = await IMAGE_ASSETS
+    // Assets
+    const ICONS = await ICONS_ASSETS
+    const getIcon = (i) => ICONS[iconIndex(i)]
 
-    const MAIN_INFORMATIONS_ICON_SIZE = 15
+    // Main Icon
+    const MAIN_ICON_SIZE = 100
+    ctx.drawIcon(getIcon(now.icon), WIDTH - INNER_MARGIN - MAIN_ICON_SIZE, BRIGHTER_Y_CENTER - MAIN_ICON_SIZE * 0.5, MAIN_ICON_SIZE, MAIN_ICON_SIZE, '#fff')
 
-    const arrow = await createSVGCanvas(arrowSVG.toString().replace(/\$COLOR/g, '#FFFFFF'), MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
-    const wind = await createSVGCanvas(windSVG.toString().replace(/\$COLOR/g, '#FFFFFF'), MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
+    // Daily Icons
+    daily.forEach(day => {
+      ctx.drawIcon(getIcon(day.icon), day.iconX, day.iconY, DAY_ICON_SIZE, DAY_ICON_SIZE, '#fff')
+    })
 
-    ctx.drawImage(arrow, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN - MAIN_INFORMATIONS_ICON_SIZE * 1.2, MAIN_INFORMATIONS_Y - MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
-    ctx.drawImage(arrow, CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN - MAIN_INFORMATIONS_ICON_SIZE * 1.2 + MAIN_INFORMATIONS_X_MARGIN_BETWEEN * 0.9 + MAIN_INFORMATIONS_MAX_W, MAIN_INFORMATIONS_Y - MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
-    ctx.drawImage(wind,  CARD_X_MARGIN + MAIN_INFORMATIONS_X_MARGIN - MAIN_INFORMATIONS_ICON_SIZE * 1.2 + MAIN_INFORMATIONS_X_MARGIN_BETWEEN * 1.9 + MAIN_INFORMATIONS_MAX_W + MAIN_INFORMATIONS_MIN_W, MAIN_INFORMATIONS_Y - MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE, MAIN_INFORMATIONS_ICON_SIZE)
+    const [ backgroundImage, arrowImage, windImage ] = await IMAGE_ASSETS
 
+    // Max
+    ctx.drawIcon(arrowImage, INNER_MARGIN, currentlyMax.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff')
+    // Min
+    ctx.drawIcon(arrowImage, currentlyMin.leftX - INFO_ICON_SIZE, currentlyMin.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff', 180)
+    // Wind
+    ctx.drawIcon(windImage, currentlyWind.leftX - INFO_ICON_SIZE - 5, currentlyWind.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff')
 
-    // BACKGROUND
     ctx.save()
+    // Background operations
     ctx.globalCompositeOperation = 'destination-over'
-    ctx.drawImage(backgroundImage, CARD_X_MARGIN, CARD_Y_MARGIN, WIDTH * 1.4, HEIGHT * 1.7)
 
-    // MODAL
+    // Graph
+    const graphGradient = ctx.createLinearGradient(0, 0, WIDTH, 0)
+    graphGradient.addColorStop(0, 'rgba(0, 0, 0, 0.15)')
+    graphGradient.addColorStop(1, 'rgba(0, 0, 0, 0.35)')
+    ctx.fillStyle = graphGradient
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'
+    daily.forEach((day, i) => {
+      if (i === 0) ctx.moveTo(0, day.graphPoint)
+      ctx.lineTo(day.graphX, day.graphPoint)
+      if (i === daily.length - 1) ctx.lineTo(WIDTH, day.graphPoint)
+    })
+    ctx.stroke()
+    ctx.lineTo(WIDTH, HEIGHT)
+    ctx.lineTo(0, HEIGHT)
+    ctx.fill()
+
+    // Background image
+    ctx.drawImage(backgroundImage, 0, CARD_Y_MARGIN, WIDTH * 1.4, HEIGHT * 1.7)
+
+    // Modal
     ctx.fillStyle = '#FFFFFF'
     ctx.globalCompositeOperation = 'destination-in'
-    ctx.roundRect(CARD_X_MARGIN, CARD_Y_MARGIN, CARD_WIDTH, CARD_HEIGHT, 10, true)
+    ctx.roundRect(0, CARD_Y_MARGIN, WIDTH, CARD_HEIGHT, 10, true)
+
     ctx.restore()
+    // Card title
+    const TITLE_X = WIDTH * 0.5
 
-    // TITLE
-    ctx.fillStyle = '#FFFFFF'
-    const TITLE_RECT_WIDTH = measureText(ctx, FONTS.TITLE, title).width
-    const TITLE_RECT_HEIGHT = 33
+    //   Title modal
+    ctx.fillStyle = '#ffffff'
     const TITLE_RECT_X_MARGIN = 45
-    const TITLE_X = WIDTH / 2 - (TITLE_RECT_WIDTH + TITLE_RECT_X_MARGIN) / 2
-    const TITLE_Y = CARD_Y_MARGIN
-    ctx.roundRect(TITLE_X, TITLE_Y - TITLE_RECT_HEIGHT * 0.5, TITLE_RECT_WIDTH + TITLE_RECT_X_MARGIN, TITLE_RECT_HEIGHT, TITLE_RECT_HEIGHT * 0.5, true)
-
+    const TITLE_RECT_WIDTH = measureText(ctx, FONTS.TITLE, title).width + TITLE_RECT_X_MARGIN
+    const TITLE_RECT_HEIGHT = 32
+    const TITLE_RECT_X = TITLE_X - TITLE_RECT_WIDTH * 0.5
+    ctx.roundRect(TITLE_RECT_X, 0, TITLE_RECT_WIDTH, TITLE_RECT_HEIGHT, 15, true)
+    //   Title text
     ctx.fillStyle = '#000000'
-    ctx.write(title, WIDTH / 2, TITLE_Y, FONTS.TITLE, ALIGN.CENTER)
+    ctx.write(title, TITLE_X, CARD_Y_MARGIN, FONTS.TITLE, ALIGN.CENTER)
 
     return canvas.toBuffer()
   }

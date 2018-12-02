@@ -5,11 +5,11 @@ module.exports = {
   ERROR_COLOR: '#FF3333',
   EIGHTBALL_COLOR: '#000000',
   NPM_COLOR: '#CB3837',
-  E621_COLOR: '258CF5',
-  XKCD_COLOR: '96A8C8',
-  DEEZER_COLOR: 'E3231D',
-  MAL_COLOR: '2E51A2',
-  GELBOORU_COLOR: '2887FD',
+  E621_COLOR: '#258CF5',
+  XKCD_COLOR: '#96A8C8',
+  DEEZER_COLOR: '#E3231D',
+  MAL_COLOR: '#2E51A2',
+  GELBOORU_COLOR: '#2887FD',
   GENIUS_COLOR: '#FFFB66',
 
   // Emojis
@@ -26,6 +26,14 @@ module.exports = {
   CROWDIN_LOGO: '<:CrowdinLogo:465159290995474434>',
   GITHUB_LOGO: '<:GithubLogo:465159291545059328>',
   SWITCHBLADE_LOGO: '<:switchblade:494575477659271168>',
+  PATREON_LOGO: '<:patreon:516783030543712273>',
+  UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
+
+  // SteamLadder Emoji
+  STEAMLADDER_STAFF: '<:steamladder_staff_icon:516812022155968512>',
+  STEAMLADDER_WINTER: '<:steamladder_winter_badge:516812022285860864>',
+  STEAMLADDER_TOP_DONATOR: '<:steamladder_top_donator:516812022017687572>',
+  STEAMLADDER_DONATOR: '<:steamladder_donator:516812018955714570>',
 
   // Assets
 
@@ -38,6 +46,7 @@ module.exports = {
   DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
   REPUTATION_SVG: 'src/assets/svg/reputation.svg',
   MEDAL_SVG: 'src/assets/svg/medal.svg',
+
   WEATHER_CLEAR_DAY: 'src/assets/svg/weather/clear-day.svg',
   WEATHER_CLEAR_NIGHT: 'src/assets/svg/weather/clear-night.svg',
   WEATHER_CLOUDY: 'src/assets/svg/weather/cloudy.svg',
@@ -48,7 +57,7 @@ module.exports = {
   WEATHER_SNOW: 'src/assets/svg/weather/snow.svg',
   WEATHER_THUNDERSTORM: 'src/assets/svg/weather/thunderstorm.svg',
   WEATHER_WIND: 'src/assets/svg/weather/wind.svg',
-  ARROW_UP_SVG: 'src/assets/svg/arrow.svg',
+  ARROW_SVG: 'src/assets/svg/arrow.svg',
   WIND_SVG: 'src/assets/svg/wind.svg',
 
   // Misc

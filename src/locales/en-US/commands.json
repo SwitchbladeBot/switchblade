@@ -184,7 +184,7 @@
     "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
     "cantPayYourself": "You can't pay yourself",
-    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}} successfully!"
+    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}}!"
   },
   "xkcd": {
     "commandDescription": "Shows an XKCD",
@@ -236,7 +236,8 @@
     "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
     "translate": "{{Constants.CROWDIN_LOGO}} **[Translate me to your language](https://translate.switchblade.xyz)**",
     "github": "{{Constants.GITHUB_LOGO}} **[GitHub repository](https://github.com/SwitchbladeBot/switchblade)**",
-    "website": "{{Constants.SWITCHBLADE_LOGO}} **[My Website](https://switchblade.xyz)**"
+    "website": "{{Constants.SWITCHBLADE_LOGO}} **[My Website](https://switchblade.xyz)**",
+    "patreon": "{{Constants.PATREON_LOGO}} **[Support me](https://www.patreon.com/switchblade)**"
   },
   "guildinfo": {
     "commandDescription": "Sends information about the current server or from another guild",
@@ -336,13 +337,13 @@
         "commandUsage": "<language code>",
         "noCode": "You need to give me a language code.",
         "availableLanguages": "Available languages",
-        "changedSuccessfully": "Language changed successfully to `{{lang}}`!"
+        "changedSuccessfully": "Language changed to `{{lang}}`."
       },
       "prefix": {
         "commandDescription": "Change the current guild prefix",
         "commandUsage": "<new prefix>",
         "noPrefix": "You need to give me a prefix.",
-        "changedSuccessfully": "Prefix changed successfully to `{{prefix}}`!"
+        "changedSuccessfully": "Prefix changed to `{{prefix}}`."
       }
     }
   },
@@ -405,7 +406,7 @@
   "favcolor": {
     "commandDescription": "Set a background color to your profile",
     "commandUsage": "<#hexcode>",
-    "changedSuccessfully": "Profile color changed successfully to {{hexcode}}."
+    "changedSuccessfully": "Profile color changed to {{hexcode}}."
   },
   "rep": {
     "commandDescription": "Gives a reputation point to someone",
@@ -451,7 +452,8 @@
   "clapify": {
     "commandDescription": "Clapifies text",
     "commandUsage": "<text to clapify>",
-    "missingSentence": "You need to give me a sentence to clapify"
+    "missingSentence": "You need to give me a sentence to clapify",
+    "tooLongText": "Your text can't be longer than {{limit}} characters"
   },
   "numberfacts": {
     "validNumber": "You need to give me a number!",
@@ -463,7 +465,7 @@
     "commandUsage": "<user> <reason>",
     "missingUser": "You need to give me an user to blacklist",
     "missingReason": "You need to give me a reason for blacklisting",
-    "successTitle": "User added to the blacklist successfully"
+    "successTitle": "User added to the blacklist"
   },
   "kick": {
     "commandDescription": "Kicks a member from this server",
@@ -471,7 +473,7 @@
     "missingUser": "You need to give me a member to kick",
     "missingReason": "You need to give me a reason for kicking",
     "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
-    "successTitle": "Member was kicked succesfully",
+    "successTitle": "Member was kicked",
     "cantKick": "I can't kick this member"
   },
   "ban": {
@@ -480,7 +482,7 @@
     "missingUser": "You need to give me a member to ban",
     "missingReason": "You need to give me a reason for banning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
-    "successTitle": "Member was banned succesfully",
+    "successTitle": "Member was banned",
     "cantBan": "I can't ban this member"
   },
   "softban": {
@@ -489,13 +491,13 @@
     "missingUser": "You need to give me a member to softban",
     "missingReason": "You need to give me a reason for softbanning",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
-    "successTitle": "Member was softbanned succesfully",
+    "successTitle": "Member was softbanned",
     "cantSoftban": "I can't softban this member"
   },
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist",
     "commandUsage": "<user>",
-    "success": "{{user}} has been removed from the blacklist successfully",
+    "success": "{{user}} has been removed from the blacklist",
     "missingUser": "You need to give me an user to remove from the blacklist",
     "notBlacklisted": "That user isn't blacklisted"
   },
@@ -632,9 +634,71 @@
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
+  "steamladder": {
+    "commandDescription": "Displays a ladder from Steam Ladder",
+    "commandUsage": "[ladder] [country or region]",
+    "userNotFound": "I couldn't find that user.",
+    "ladderNotFound": "I couldn't find that ladder.",
+    "noRegion": "You need to give me a valid region name or country code",
+    "noLadder": "You need to give me a valid ladder.",
+    "noUser": "You need to give me a user",
+    "youCanAlsoUse": "You can also use alpha-2 country codes.",
+    "availableRegions": "Available regions",
+    "availableLadders": "Available ladders",
+    "gamesWithCount": "{{count}} games",
+    "games": "Games",
+    "levelWithNumber": "Level {{level}}",
+    "level": "Level",
+    "playtime": "Playtime",
+    "hours": "{{count}} hours",
+    "hoursInGame": "{{count}} hours in game",
+    "inTheWorld": "#{{position}} in the world",
+    "badgesWithCount": "{{count}} badges",
+    "badges": "Badges",
+    "joinedOn": "Joined on {{date}}",
+    "friendsWithCount": "{{count}} friends",
+    "others": "Others",
+    "ladders": {
+      "XP": "Highest Level",
+      "G": "Most Games",
+      "PT": "Most Playtime",
+      "B": "Most Badges",
+      "A": "Longest on Steam"
+    },
+    "regions": {
+      "EUROPE": "Europe",
+      "NORTH_AMERICA": "North America",
+      "SOUTH_AMERICA": "South America",
+      "ASIA": "Asia",
+      "AFRICA": "Africa",
+      "OCEANIA": "Oceania",
+      "ANTARCTICA": "Antarctica"
+    },
+    "subcommands": {
+      "profile": {
+        "commandUsage": "<username>",
+        "commandDescription": "Shows someone's Steam Ladder profile"
+      }
+    }
+  },
   "weather": {
+    "commandDescription": "Shows the weather forecast for a city",
+    "commandUsage": "<city name>",
     "noCity": "You need to give me a valid city.",
     "notFound": "Couldn't find this city."
+  },
+  "currency": {
+    "commandDescription": "Shows the current rate of a currency or a pair.",
+    "commandUsage": "<to> [from] [value]",
+    "noCurrency": "You have to give me a valid currency or a pair."
+  },
+  "joinlock": {
+    "commandDescription": "Enables or disables the join lock",
+    "commandUsage": "<on|off>",
+    "sameValue_true": "The join lock is already enabled.",
+    "sameValue_false": "The join lock is already disabled.",
+    "success_true": "Join lock enabled.",
+    "success_false": "Join lock disabled."
   },
   "pusheen": {
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"

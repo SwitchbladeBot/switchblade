@@ -4,15 +4,15 @@ module.exports = class CommandContext {
    * @prop {Switchblade} client The SwitchBlade client
    * @prop {Message} message The command message
    * @prop {User} user The author of the message
-   * @prop {GuildMember} member The author of the message as a guild member
+   * @prop {?GuildMember} member The author of the message as a guild member
    * @prop {TextChannel} channel The channel of the message
    * @prop {?VoiceChannel} voiceChannel The voice channel of the author of the message, if any
-   * @prop {Guild} guild The guild of the channel of the message
+   * @prop {?Guild} guild The guild of the channel of the message
    * @prop {Object} guildDocument The document of the guild
    * @prop {string} language The language used
    * @prop {Object} userDocument The document of the user
    * @prop {Command} command The command
-   * @prop {?Array<string>} aliase
+   * @prop {string} aliase
    * @prop {string} prefix The command prefix
    * @prop {Object} flags
    */

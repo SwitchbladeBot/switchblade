@@ -1,18 +1,7 @@
 const { CanvasTemplates, CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const { Attachment } = require('discord.js')
-const moment = require('moment-timezone');
-
-const icons = [ 'clear-day',
-  'clear-night',
-  'cloudy',
-  'fog',
-  'partly-cloudy-day',
-  'partly-cloudy-night',
-  'rain',
-  'snow',
-  'thunderstorm',
-  'wind' ]
+const moment = require('moment')
 
 module.exports = class Weather extends Command {
   constructor (client) {
@@ -26,35 +15,33 @@ module.exports = class Weather extends Command {
   }
 
   async run ({ t, author, channel, language }, address) {
-    moment.locale(language);
+    moment.locale(language)
     channel.startTyping()
     const city = await this.client.apis.gmaps.searchCity(address)
     if (city) {
-      const cityLocation = city.geometry.location
-      const weatherData = await this.client.apis.darksky.getForecast(cityLocation.lat, cityLocation.lng, { lang: language.split('-')[0], units: 'ca' })
-      const currently = weatherData.currently
-      const daily = weatherData.daily.data
+      const [ lang ] = language.split('-')
+      const { lat, lng } = city.geometry.location
+      const { currently, daily: { data: daily }, timezone } = await this.client.apis.darksky.getForecast(lat, lng, { lang, units: 'ca' })
 
+      const now = daily.shift()
       const weatherInfo = {
         now: {
           temperature: `${this.tempHumanize(currently.temperature)}°`,
           wind: `${this.tempHumanize(currently.windSpeed)} km/h`,
-          max: `${this.tempHumanize(daily[0].temperatureHigh)}°`,
-          min: `${this.tempHumanize(daily[0].temperatureLow)}°`,
-          icon: icons.indexOf(currently.icon)
-        }
+          max: `${this.tempHumanize(now.temperatureHigh)}°`,
+          min: `${this.tempHumanize(now.temperatureLow)}°`,
+          icon: currently.icon
+        },
+        daily: daily.slice(0, 6).map(d => {
+          d.temperature = this.tempHumanize((d.temperatureHigh + d.temperatureLow) * 0.5)
+          d.weekday = moment.unix(d.time).tz(timezone).format('ddd') // this.getTimeData(d.time, timezone).format('ddd')
+          return d
+        })
       }
 
-      daily.map(d => {
-        d.temperature = this.tempHumanize((d.temperatureHigh + d.temperatureLow) / 2),
-        d.icon = icons.indexOf(d.icon)
-        d.weekday = this.getTimeData(d.time, weatherData.timezone).format('ddd')
-      })
-
-      weatherInfo.daily = daily
-      const cityName = city.address_components.find(comp => comp.types.includes('administrative_area_level_2') || comp.types.includes('locality')).short_name
-      const stateName = city.address_components.find(comp => comp.types.includes('administrative_area_level_1')).short_name
-      const weather = await CanvasTemplates.weather({ t }, `${cityName} - ${stateName}`, weatherInfo)
+      const cityName = city.address_components.find(({ types }) => types.includes('administrative_area_level_2') || types.includes('locality')).short_name
+      const state = city.address_components.find(({ types }) => types.includes('administrative_area_level_1'))
+      const weather = await CanvasTemplates.weather({ t }, `${cityName.toUpperCase()}${state ? ` - ${state.short_name}` : ''}`, weatherInfo)
 
       channel.send(new Attachment(weather, 'weather.png')).then(() => channel.stopTyping())
     } else {
@@ -62,7 +49,6 @@ module.exports = class Weather extends Command {
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:weather.notFound')))
     }
-
   }
 
   getTimeData (time, tz) {
@@ -71,7 +57,7 @@ module.exports = class Weather extends Command {
     return moment(time)
   }
 
-  tempHumanize(temp) {
+  tempHumanize (temp) {
     return parseFloat(temp.toFixed(1))
   }
 }
