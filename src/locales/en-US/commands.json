@@ -691,5 +691,13 @@
     "commandDescription": "Shows the current rate of a currency or a pair.",
     "commandUsage": "<to> [from] [value]",
     "noCurrency": "You have to give me a valid currency or a pair."
+  },
+  "joinlock": {
+    "commandDescription": "Enables or disables the join lock",
+    "commandUsage": "<on|off>",
+    "sameValue_true": "The join lock is already enabled.",
+    "sameValue_false": "The join lock is already disabled.",
+    "success_true": "Join lock enabled.",
+    "success_false": "Join lock disabled."
   }
 }
