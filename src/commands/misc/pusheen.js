@@ -1,4 +1,5 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed, CommandStructures } = require('../../')
+const { CommandRequirements } = CommandStructures
 
 module.exports = class Pusheen extends Command {
   constructor (client) {
