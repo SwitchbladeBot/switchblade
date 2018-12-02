@@ -174,8 +174,6 @@ module.exports = class CanvasUtils {
     }
 
     Context2d.prototype.blur = function (blur) {
-      const ctx = this
-
       const delta = 5
       const alphaLeft = 1 / (2 * Math.PI * delta * delta)
       const step = blur < 3 ? 1 : 2
@@ -188,11 +186,11 @@ module.exports = class CanvasUtils {
       }
       for (let y = -blur; y <= blur; y += step) {
         for (let x = -blur; x <= blur; x += step) {
-          ctx.globalAlpha = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta)) / sum * blur
-          ctx.drawImage(this, x, y)
+          this.globalAlpha = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta)) / sum * blur
+          this.drawImage(this.canvas, x, y)
         }
       }
-      ctx.globalAlpha = 1
+      this.globalAlpha = 1
     }
 
     Context2d.prototype.drawBlurredImage = function (image, blur, imageX, imageY, w = image.width, h = image.height) {
