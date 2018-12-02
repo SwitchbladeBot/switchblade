@@ -701,7 +701,7 @@
     "success_false": "Join lock disabled."
   },
   "pusheen": {
-    "commandDescription": "Shows a random post from the pusheen tumblr."
+    "commandDescription": "Shows a random post from the pusheen tumblr.",
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
   }
 }
