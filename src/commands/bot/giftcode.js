@@ -31,7 +31,7 @@ class GiftcodeGenerate extends Command {
     )
   }
 
-  async run({ t, author, channel, userDocument, prefix, alias }, value) {
+  async run ({ t, author, channel, userDocument, prefix, alias }, value) {
     const embed = new SwitchbladeEmbed(author)
     const userEmbed = new SwitchbladeEmbed(author)
     channel.startTyping()
@@ -56,7 +56,7 @@ class GiftcodeGenerate extends Command {
   generateRandomString (length) {
     const str = []
     for (let i = 0; i < length; i++) {
-        str.push(Math.round(Math.random() * 36).toString(36))
+      str.push(Math.round(Math.random() * 36).toString(36))
     }
     return str.join('').toUpperCase()
   }
@@ -72,7 +72,7 @@ class GiftcodeRedeem extends Command {
     )
   }
 
-  async run({ t, author, channel, userDocument }, giftcode) {
+  async run ({ t, author, channel, userDocument }, giftcode) {
     const embed = new SwitchbladeEmbed(author)
     giftcode = giftcode.toUpperCase()
     channel.startTyping()
