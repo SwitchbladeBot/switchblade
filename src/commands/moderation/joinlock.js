@@ -1,7 +1,7 @@
 const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
 const { Command, CommandRequirements, CommandParameters, BooleanParameter } = CommandStructures
 
-module.exports = class Ban extends Command {
+module.exports = class JoinLock extends Command {
   constructor (client) {
     super(client)
     this.name = 'joinlock'
