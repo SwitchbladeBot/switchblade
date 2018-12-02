@@ -42,6 +42,7 @@ class GiftcodeGenerate extends Command {
       const identifier = await this.generateRandomString(10)
       const giftcodeDocument = await this.client.database.giftcodes.get(identifier)
       giftcodeDocument.value = value
+      giftcodeDocument.generatedBy = author.id
       userDocument.money -= value
       giftcodeDocument.save()
       userDocument.save()

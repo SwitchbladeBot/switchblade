@@ -31,6 +31,7 @@ module.exports = {
     _id: String,
     value: { type: Number, default: 0 },
     claimed: { type: Boolean, default: false },
-    claimedBy: String
+    claimedBy: String,
+    generatedBy: String
   })
 }
