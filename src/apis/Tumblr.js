@@ -1,4 +1,3 @@
-// https://api.tumblr.com/v2/blog/pitchersandpoets.tumblr.com/posts/photo?
 const { APIWrapper } = require('../')
 const snekfetch = require('snekfetch')
 
