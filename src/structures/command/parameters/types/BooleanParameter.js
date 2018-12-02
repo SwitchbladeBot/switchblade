@@ -8,7 +8,7 @@ module.exports = class StringParameter extends Parameter {
     this.falseValues = options.falseValues || ['false', 'no', 'off']
   }
 
-  parse (arg) {
+  parse (arg, {t}) {
     if (!this.trueValues.concat(this.falseValues).includes(arg)) return new CommandError(t('errors:notTrueOrFalse'))
     return this.trueValues.includes(arg)
   }
