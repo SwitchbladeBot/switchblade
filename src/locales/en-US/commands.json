@@ -635,5 +635,8 @@
   "weather": {
     "noCity": "You need to give me a valid city.",
     "notFound": "Couldn't find this city."
+  },
+  "pusheen": {
+    "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
   }
 }
