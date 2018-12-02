@@ -8,8 +8,7 @@ module.exports = class Ban extends Command {
     this.aliases = ['jl']
     this.category = 'moderation'
 
-    // this.requirements = new CommandRequirements(this, { guildOnly: true, botPermissions: ['KICK_MEMBERS'], permissions: ['MANAGE_GUILD'] })
-    this.requirements = new CommandRequirements(this, { guildOnly: true })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, botPermissions: ['KICK_MEMBERS'], permissions: ['MANAGE_GUILD'] })
     this.parameters = new CommandParameters(this,
       new BooleanParameter({ missingError: 'commands:joinlock.missingState' })
     )
