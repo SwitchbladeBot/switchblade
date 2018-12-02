@@ -542,7 +542,12 @@ module.exports = class CanvasTemplates {
     const currentlyMin = ctx.write(now.min, currentlyMax.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
     const currentlyWind = ctx.write(now.wind, currentlyMin.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
 
-    // Daily
+    // Daily 
+    const temperatures = daily.map(d => d.temperature)
+    const highTemp = Math.max(...temperatures)
+    const lowTemp = Math.min(...temperatures)
+    const tempDiff = highTemp - lowTemp
+
     const DAY_ICON_SIZE = 40
     const DAY_MARGIN = 22
     const DAY_WIDTH = ((WIDTH - (INNER_MARGIN * 2) - (DAY_MARGIN * (daily.length - 1))) / daily.length)
@@ -557,6 +562,9 @@ module.exports = class CanvasTemplates {
 
       day.iconX = DAY_X
       day.iconY = (HEIGHT - ((CARD_HEIGHT - BRIGHTER_HEIGHT) * 0.5)) - DAY_ICON_SIZE * 0.5
+
+      day.graphX = DAY_TEXT_X
+      day.graphPoint = day.iconY - 5 + (((highTemp - day.temperature) / tempDiff) * (TEMPERATURE_Y + 10 - day.iconY))
     })
 
     // Assets
@@ -582,8 +590,27 @@ module.exports = class CanvasTemplates {
     ctx.drawIcon(windImage, currentlyWind.leftX - INFO_ICON_SIZE - 5, currentlyWind.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff')
 
     ctx.save()
-    // Background
+    // Background operations
     ctx.globalCompositeOperation = 'destination-over'
+
+    // Graph
+    const graphGradient = ctx.createLinearGradient(0, 0, WIDTH, 0)
+    graphGradient.addColorStop(0, 'rgba(0, 0, 0, 0.15)')
+    graphGradient.addColorStop(1, 'rgba(0, 0, 0, 0.35)')
+    ctx.fillStyle = graphGradient
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'
+    daily.forEach((day, i) => {
+      if (i === 0) ctx.moveTo(0, day.graphPoint)
+      ctx.lineTo(day.graphX, day.graphPoint)
+      if (i === daily.length - 1) ctx.lineTo(WIDTH, day.graphPoint)
+    })
+    ctx.stroke()
+    ctx.lineTo(WIDTH, HEIGHT)
+    ctx.lineTo(0, HEIGHT)
+    ctx.fill()
+
+    // Background image
     ctx.drawImage(backgroundImage, 0, CARD_Y_MARGIN, WIDTH * 1.4, HEIGHT * 1.7)
 
     // Modal
