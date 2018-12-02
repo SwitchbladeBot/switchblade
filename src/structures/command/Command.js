@@ -38,7 +38,7 @@ module.exports = class Command {
    * @param {Array<string>} args Command arguments
    */
   async _run (context, args) {
-    const requirements = this.handleRequirements(context, args)
+    const requirements = await this.handleRequirements(context, args)
     if (requirements instanceof CommandError) return this.error(context, requirements.content, requirements.showUsage)
 
     const [ subcmd ] = args

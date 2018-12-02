@@ -24,5 +24,13 @@ module.exports = {
     language: { type: String, default: 'en-US' },
     joinLock: { type: Boolean, default: false },
     joinLockMessage: String
+  }),
+
+  // Giftcode Schema
+  Giftcode: new Schema({
+    _id: String,
+    value: { type: Number, default: 0 },
+    claimed: { type: Boolean, default: false },
+    claimedBy: String
   })
 }

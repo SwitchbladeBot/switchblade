@@ -19,7 +19,7 @@ module.exports = class CommandRequirements {
     this.databaseOnly = !!options.databaseOnly
     this.playerManagerOnly = this.guildPlaying || !!options.playerManagerOnly
     this.apis = options.apis || []
-    this.openedDms = !!options.openedDms
+    this.openDms = !!options.openDms
     this.envVars = options.envVars || []
 
     this.errors = Object.assign({
@@ -37,7 +37,7 @@ module.exports = class CommandRequirements {
     }, options.errors)
   }
 
-  handle ({ t, author, channel, client, guild, member, voiceChannel }, args) {
+  async handle ({ t, author, channel, client, guild, member, voiceChannel }, args) {
     if (this.databaseOnly && !client.database) {
       return new CommandError(t(this.errors.databaseOnly))
     }
@@ -97,10 +97,12 @@ module.exports = class CommandRequirements {
       }
     }
 
-    if (this.openedDms) {
-      author.send().catch(err => {
-        if (err.code === 50007) return new CommandError(t(this.errors.openYourDms))
-      })
+    if (this.openDms) {
+      try {
+        await author.send()
+      } catch (e) {
+        if (e.code === 50007) return new CommandError(t(this.errors.openYourDms))
+      }
     }
   }
 
