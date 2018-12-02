@@ -74,6 +74,7 @@ class GiftcodeRedeem extends Command {
 
   async run({ t, author, channel, userDocument }, giftcode) {
     const embed = new SwitchbladeEmbed(author)
+    giftcode = giftcode.toUpperCase()
     channel.startTyping()
     const giftcodeDocument = await this.client.database.giftcodes.findOne(giftcode)
     if (!giftcodeDocument) {
