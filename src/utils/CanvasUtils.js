@@ -1,6 +1,5 @@
 const request = require('request')
-const canvg = require('canvg')
-const { createCanvas, registerFont, Canvas, Context2d, Image } = require('canvas')
+const { createCanvas, registerFont, loadImage, Context2d, Image } = require('canvas')
 
 const FileUtils = require('./FileUtils.js')
 
@@ -30,6 +29,8 @@ module.exports = class CanvasUtils {
     const self = this
 
     // Initiliaze fonts
+    registerFont('src/assets/fonts/Montserrat-Thin.ttf', { family: 'Montserrat Thin' })
+    registerFont('src/assets/fonts/Montserrat-ThinItalic.ttf', { family: 'Montserrat Thin', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Light.ttf', { family: 'Montserrat Light' })
     registerFont('src/assets/fonts/Montserrat-LightItalic.ttf', { family: 'Montserrat Light', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Regular.ttf', { family: 'Montserrat' })
@@ -45,25 +46,9 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-Black.ttf', { family: 'Montserrat Black' })
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', { family: 'Montserrat Black', style: 'italic' })
 
-    // Canvas
-    Canvas.createSVGCanvas = function (svg, w, h) {
-      return new Promise((resolve, reject) => {
-        const canvas = createCanvas(w, h)
-        canvg(canvas, svg, {
-          renderCallback: () => resolve(canvas)
-        })
-      })
-    }
-
     // Image loading
     Image.from = function (url, localFile = false) {
-      return new Promise(async (resolve, reject) => {
-        const b = await Image.buffer(url, localFile)
-        const img = new Image()
-        img.onerror = (e) => reject(e)
-        img.onload = () => resolve(img)
-        img.src = b
-      })
+      return loadImage(url)
     }
 
     Image.buffer = (url, localFile = false) => localFile ? FileUtils.readFile(url) : URLtoBuffer(url)
@@ -188,8 +173,8 @@ module.exports = class CanvasUtils {
       return lastWrite
     }
 
-    Canvas.prototype.blur = function (blur) {
-      const ctx = this.getContext('2d')
+    Context2d.prototype.blur = function (blur) {
+      const ctx = this
 
       const delta = 5
       const alphaLeft = 1 / (2 * Math.PI * delta * delta)
@@ -214,8 +199,35 @@ module.exports = class CanvasUtils {
       const canvas = createCanvas(w, h)
       const ctx = canvas.getContext('2d')
       ctx.drawImage(image, 0, 0, w, h)
-      canvas.blur(blur)
+      ctx.blur(blur)
       this.drawImage(canvas, imageX, imageY, w, h)
+    }
+
+    Context2d.prototype.drawIcon = function (image, x, y, w, h, color, rotate) {
+      const canvas = createCanvas(image.width, image.height)
+      const ctx = canvas.getContext('2d')
+
+      ctx.save()
+
+      if (rotate) {
+        const centerX = canvas.width * 0.5
+        const centerY = canvas.height * 0.5
+        ctx.save()
+        ctx.translate(centerX, centerY)
+        ctx.rotate(rotate * Math.PI / 180)
+        ctx.translate(-centerX, -centerY)
+      }
+
+      ctx.drawImage(image, 0, 0, image.width, image.height)
+      ctx.restore()
+
+      if (color) {
+        ctx.globalCompositeOperation = 'source-in'
+        ctx.fillStyle = color
+        ctx.fillRect(0, 0, image.width, image.height)
+      }
+      this.drawImage(canvas, x, y, w, h)
+      return canvas
     }
   }
 

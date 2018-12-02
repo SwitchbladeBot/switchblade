@@ -24,6 +24,11 @@ module.exports = class Play extends Command {
   async run ({ t, author, channel, guild, voiceChannel }, identifier) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
+
+    if (!voiceChannel.joinable) {
+      return channel.send(embed.setTitle(t('errors:voiceChannelJoin')))
+    }
+
     const playerManager = this.client.playerManager
     try {
       let { result, tryAgain } = await playerManager.loadTracks(identifier, author)

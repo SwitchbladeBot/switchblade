@@ -12,7 +12,8 @@ module.exports = class MainListener extends EventListener {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     // Lavalink connection
-    if (process.env.LAVALINK_HOST) {
+    const lavalinkRequiredVariables = ['LAVALINK_HOST', 'LAVALINK_PORT', 'LAVALINK_PASSWORD']
+    if (lavalinkRequiredVariables.every(variable => !!process.env[variable])) {
       const nodes = [{
         'host': process.env.LAVALINK_HOST,
         'port': process.env.LAVALINK_PORT || '1337',
@@ -22,9 +23,9 @@ module.exports = class MainListener extends EventListener {
         user: this.user.id,
         shards: 1
       })
-      this.log('Player manager connection established!', 'Music')
+      this.log('[32mLavalink connection established!', 'Music')
     } else {
-      this.log('Player manager connection didn\'t establish!', 'Music')
+      this.log(`[31mFailed to establish Lavalink connection - Required environment variable(s) (${lavalinkRequiredVariables.filter(variable => !process.env[variable]).join(', ')}) not set.`, 'Music')
     }
 
     // TODO: Make stat posters modular
@@ -35,8 +36,8 @@ module.exports = class MainListener extends EventListener {
           .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
           .set('Authorization', process.env.DISCORDBOTSPW_TOKEN)
           .send({ server_count: client.guilds.size })
-          .then(() => client.log('Posted statistics successfully', 'bots.discord.pw'))
-          .catch(() => client.log('Failed to post statistics', 'bots.discord.pw'))
+          .then(() => client.log('[32mPosted statistics successfully', 'bots.discord.pw'))
+          .catch(() => client.log('[31mFailed to post statistics', 'bots.discord.pw'))
       }
 
       // discordbots.org
@@ -45,8 +46,8 @@ module.exports = class MainListener extends EventListener {
           .post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
           .set('Authorization', process.env.DBL_TOKEN)
           .send({ server_count: client.guilds.size })
-          .then(() => client.log('Posted statistics successfully', 'discordbots.org'))
-          .catch(() => client.log('Failed to post statistics', 'discordbots.org'))
+          .then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
+          .catch(() => client.log('[31mFailed to post statistics', 'discordbots.org'))
       }
 
       // botsfordiscord.com
@@ -55,8 +56,8 @@ module.exports = class MainListener extends EventListener {
           .post(`https://botsfordiscord.com/api/bots/${client.user.id}`)
           .set('Authorization', process.env.BOTSFORDISCORD_TOKEN)
           .send({ server_count: client.guilds.size })
-          .then(() => client.log('Posted statistics successfully', 'botsfordiscord.com'))
-          .catch(() => client.log('Failed to post statistics', 'botsfordiscord.com'))
+          .then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
+          .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
       }
     }
 

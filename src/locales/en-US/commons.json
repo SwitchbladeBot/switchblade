@@ -12,5 +12,6 @@
   "reputationWithCount": "{{count}} Reputation",
   "heads": "Heads",
   "tails": "Tails",
-  "youCanDoItAgainIn": "You can do that again in **{{time}}**"
+  "youCanDoItAgainIn": "You can do that again in **{{time}}**",
+  "to": "to"
 }

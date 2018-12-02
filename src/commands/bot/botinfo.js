@@ -26,7 +26,8 @@ module.exports = class BotInfo extends Command {
         t('commands:botinfo.supportServer', { Constants }),
         t('commands:botinfo.website', { Constants }),
         t('commands:botinfo.translate', { Constants }),
-        t('commands:botinfo.github', { Constants })
+        t('commands:botinfo.github', { Constants }),
+        t('commands:botinfo.patreon', { Constants })
       ].join('\n'))
 
     channel.send(embed).then(() => channel.stopTyping())

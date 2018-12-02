@@ -1,6 +1,8 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const snekfetch = require('snekfetch')
+// eslint-disable-next-line no-useless-escape
+const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 
 module.exports = class Strawpoll extends Command {
   constructor (client) {
@@ -15,7 +17,7 @@ module.exports = class Strawpoll extends Command {
 
   async run ({ t, author, channel }, text) {
     const embed = new SwitchbladeEmbed(author)
-    const options = text.split('|')
+    const options = EscapeMarkdown(text).split('|')
     const title = options.shift()
 
     if (options.length >= 2 && options.length <= 30) {

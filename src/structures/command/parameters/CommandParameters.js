@@ -3,6 +3,10 @@ const CommandError = require('../CommandError.js')
 const isNull = (n) => n === null || n === undefined
 const funcOrString = (f, sf, ...args) => typeof f === 'function' ? f(...args) : sf ? sf(f) : f
 
+/**
+ * @constructor
+ * @param {Command} command
+ */
 module.exports = class CommandParameters {
   constructor (command, ...params) {
     this.command = command
@@ -11,6 +15,10 @@ module.exports = class CommandParameters {
     this.parameters = params || []
   }
 
+  /**
+   * @param {CommandContext} context The command context
+   * @param {Array<string>} args Array of the command args
+   */
   handle (context, args) {
     const flagsError = this.handleFlags(context, args)
     if (flagsError) return flagsError
@@ -18,6 +26,10 @@ module.exports = class CommandParameters {
     return this.handleArguments(context, args)
   }
 
+  /**
+   * @param {CommandContext} context The command context
+   * @param {Array<string>} args Array of the command args
+   */
   handleFlags (context, args) {
     if (this.flags) {
       const flagCheck = (a, f) => a.startsWith('--') && (a.startsWith(`--${f.name}`) || f.aliases.includes(a.substring(2)))
@@ -49,6 +61,9 @@ module.exports = class CommandParameters {
     }
   }
 
+  /**
+   * @param {CommandContext} context The command context
+   */
   handleArguments (context, args) {
     const parsedArgs = []
     for (let i = 0; i < this.parameters.length; i++) {
