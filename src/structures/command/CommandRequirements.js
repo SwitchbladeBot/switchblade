@@ -19,6 +19,7 @@ module.exports = class CommandRequirements {
     this.databaseOnly = !!options.databaseOnly
     this.playerManagerOnly = this.guildPlaying || !!options.playerManagerOnly
     this.apis = options.apis || []
+    this.openedDms = !!options.openedDms
     this.envVars = options.envVars || []
 
     this.errors = Object.assign({
@@ -31,7 +32,8 @@ module.exports = class CommandRequirements {
       voiceChannelOnly: 'errors:voiceChannelOnly',
       guildPlaying: 'errors:notPlaying',
       cooldown: 'errors:cooldown',
-      onlyOldAccounts: 'errors:onlyOldAccounts'
+      onlyOldAccounts: 'errors:onlyOldAccounts',
+      openYourDms: 'errors:openYourDms'
     }, options.errors)
   }
 
@@ -93,6 +95,12 @@ module.exports = class CommandRequirements {
       if (this.cooldown.feedback) {
         return new CommandError(t(this.errors.cooldown))
       }
+    }
+
+    if (this.openedDms) {
+      author.send().catch(err => {
+        if (err.code === 50007) return new CommandError(t(this.errors.openYourDms))
+      })
     }
   }
 
