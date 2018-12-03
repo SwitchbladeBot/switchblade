@@ -1,21 +1,19 @@
-
-
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 const snekfetch = require("snekfetch")
 
-module.exports = class Avatar extends Command {
+module.exports = class DiscordJSDocs extends Command {
   constructor (client) {
     super(client)
     this.name = 'discordjs'
-    this.aliases = ['doc', 'docs',"djs","d.js"]
+    this.aliases = ['djs']
     this.category = 'utility'
     this.parameters = new CommandParameters(this,
         new StringParameter({ full: true, required: true, missingError: 'commands:djs.saySomething' })
       )
     
   }
-  async run ({ t, author, channel },content) {
+  async run ({ t, author, channel }, content) {
       let {body} = await snekfetch.get("https://cdn.jsdelivr.net/gh/discordjs/discord.js@docs/stable.json")
       let args = content.split(" ")
     let doc = body.classes.find(a => a.name.toLowerCase() == args[0].toLowerCase())
