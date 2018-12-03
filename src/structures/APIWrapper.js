@@ -1,5 +1,6 @@
 /**
  * Base API Wrapper structure
+ * @constructor
  */
 module.exports = class APIWrapper {
   constructor () {
@@ -12,12 +13,12 @@ module.exports = class APIWrapper {
    * @returns {boolean} - Whether the API can load
    */
   canLoad () {
-    return this.envVars.length ? this.envVars.every(v => process.env[v]) : true
+    return true
   }
 
   /**
    * Loads the API
-   * @returns {Object} - The loaded API
+   * @returns {APIWrapper} - The loaded API
    */
   load () {
     return this

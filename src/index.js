@@ -20,6 +20,7 @@ module.exports = {
   CanvasTemplates: require('./utils/CanvasTemplates.js'),
   PermissionUtils: require('./utils/PermissionUtils.js'),
   BlacklistUtils: require('./utils/BlacklistUtils.js'),
+  EmojiUtils: require('./utils/EmojiUtils.js'),
 
   // Etc
   Switchblade: require('./Switchblade.js')
