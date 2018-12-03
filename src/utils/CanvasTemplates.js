@@ -483,7 +483,7 @@ module.exports = class CanvasTemplates {
   }
 
   static async weather ({ t }, title, { now, daily }) {
-    const WIDTH = 390
+    const WIDTH = 400
     const HEIGHT = 286
 
     const CARD_HEIGHT = 270
