@@ -30,14 +30,10 @@ module.exports = class SAMP extends Command {
         .addField(t('commands:samp.gameMode'), response.gamemode, true)
         .addField(t('commands:samp.time'), response.rules.worldtime, true)
     } catch (err) {
-      embed.setColor(Constants.ERROR_COLOR)
-      if (err === 'Host unavailable') {
-        embed.setTitle(t('commands:samp.serverUnreachableTitle'))
-          .setDescription(t('commands:samp.serverUnreachableDescription'))
-      } else {
-        embed.setTitle(t('errors:generic'))
-          .setDescription(`\`${err}\``)
-      }
+      embed
+        .setColor(Constants.ERROR_COLOR)
+        .setTitle(t('commands:samp.serverUnreachableTitle'))
+        .setDescription(t('commands:samp.serverUnreachableDescription'))
     }
     channel.send(embed).then(channel.stopTyping())
   }

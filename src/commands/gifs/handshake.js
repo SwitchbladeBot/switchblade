@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, UserParameter } = CommandStructures
 
 const handshakeArray = [
@@ -15,22 +15,15 @@ module.exports = class Handshake extends Command {
     this.category = 'images'
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:handshake.noMention', acceptBot: true })
+      new UserParameter({ missingError: 'commands:handshake.noMention', acceptBot: true, acceptSelf: false })
     )
   }
 
   run ({ t, channel, author }, user) {
     const handshakeImg = handshakeArray[Math.floor(Math.random() * handshakeArray.length)]
     const embed = new SwitchbladeEmbed(author)
-    if (user.id === author.id) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:handshake.notYourself'))
-        .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:handshake.commandUsage')}`)
-    } else {
-      embed.setImage(handshakeImg)
-        .setDescription(t('commands:handshake.success', { handshaker: author, handshaked: user }))
-    }
+    embed.setImage(handshakeImg)
+      .setDescription(t('commands:handshake.success', { handshaker: author, handshaked: user }))
     channel.send(embed).then(() => channel.stopTyping())
   }
 }
