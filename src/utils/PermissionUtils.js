@@ -13,4 +13,12 @@ module.exports = class PermissionUtils {
       return member.roles.filter(r => r.hoist).sort((a, b) => b.position - a.position).first()
     }
   }
+
+  static isManager (client, user) {
+    const botGuild = client.guilds.get(process.env.BOT_GUILD)
+    const developerRole = botGuild && botGuild.roles.get(process.env.DEVELOPER_ROLE)
+    const managerRole = botGuild && botGuild.roles.get(process.env.MANAGER_ROLE)
+    const isManager = (managerRole && managerRole.members.has(user.id)) || (developerRole && developerRole.members.has(user.id))
+    return isManager
+  }
 }
