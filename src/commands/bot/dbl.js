@@ -3,7 +3,7 @@ const { Command, CommandRequirements } = CommandStructures
 const moment = require('moment')
 const snekfetch = require('snekfetch')
 
-const INTERVAL = 24 * 60 * 60 * 1000
+const INTERVAL = 12 * 60 * 60 * 1000
 
 module.exports = class DBL extends Command {
   constructor (client) {
