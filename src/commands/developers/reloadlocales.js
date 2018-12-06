@@ -7,7 +7,7 @@ module.exports = class reloadlocales extends Command {
     this.category = 'developers'
     this.hidden = true
 
-    this.requirements = new CommandRequirements(this, { devOnly: true })
+    this.requirements = new CommandRequirements(this, { managersOnly: true })
   }
 
   async run ({ t, channel, author }) {
