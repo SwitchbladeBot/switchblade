@@ -19,7 +19,7 @@ module.exports = class BotInfo extends Command {
       .setThumbnail(this.client.user.displayAvatarURL)
       .setDescription([
         t('commands:botinfo.hello', { user: this.client.user }),
-        t('commands:botinfo.statistics', { guilds: this.client.guilds, commands: this.client.commands, uptime, Discord, nodeVersion: process.version, users: this.client.users.filter(u => u.bot === false).size })
+        t('commands:botinfo.statistics', { guilds: this.client.guilds, commands: this.client.commands, uptime, Discord, nodeVersion: process.version, users: this.client.users.filter(u => !u.bot).size })
       ].join('\n\n'))
       .addField(t('commands:botinfo.links'), [
         t('commands:botinfo.inviteLink', { Constants }),
