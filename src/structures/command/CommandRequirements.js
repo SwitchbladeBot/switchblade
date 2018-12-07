@@ -21,6 +21,7 @@ module.exports = class CommandRequirements {
     this.apis = options.apis || []
     this.openDms = !!options.openDms
     this.envVars = options.envVars || []
+    this.managersOnly = options.managersOnly
 
     this.errors = Object.assign({
       databaseOnly: 'errors:databaseOnly',
@@ -33,7 +34,8 @@ module.exports = class CommandRequirements {
       guildPlaying: 'errors:notPlaying',
       cooldown: 'errors:cooldown',
       onlyOldAccounts: 'errors:onlyOldAccounts',
-      openYourDms: 'errors:openYourDms'
+      openYourDms: 'errors:openYourDms',
+      managersOnly: 'errors:managersOnly'
     }, options.errors)
   }
 
@@ -48,6 +50,10 @@ module.exports = class CommandRequirements {
 
     if (this.devOnly && !PermissionUtils.isDeveloper(client, author)) {
       return new CommandError(t(this.errors.devOnly))
+    }
+
+    if (this.managersOnly && !PermissionUtils.isManager(client, author)) {
+      return new CommandError(t(this.errors.managersOnly))
     }
 
     if (this.guildOnly && !guild) {
