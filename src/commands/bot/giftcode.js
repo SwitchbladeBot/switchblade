@@ -27,7 +27,7 @@ class GiftcodeGenerate extends Command {
     this.name = 'generate'
 
     this.parameters = new CommandParameters(this,
-      new NumberParameter({ min: 1, max: 50000, missingError: 'commands:giftcode.subcommands.generate.noValue' })
+      new NumberParameter({ min: 25000, max: 50000, missingError: 'commands:giftcode.subcommands.generate.noValue' })
     )
   }
 
