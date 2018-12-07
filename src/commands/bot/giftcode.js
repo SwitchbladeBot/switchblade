@@ -8,7 +8,7 @@ module.exports = class Giftcode extends Command {
     this.category = 'bot'
     this.subcommands = [new GiftcodeGenerate(client, this), new GiftcodeRedeem(client, this)]
 
-    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, openDms: true })
+    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, openDms: true, onlyOldAccounts: true })
   }
 
   run ({ t, author, prefix, alias, channel }) {
