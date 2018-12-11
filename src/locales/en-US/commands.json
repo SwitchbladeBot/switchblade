@@ -644,7 +644,7 @@
         "commandUsage": "<value>",
         "noValue": "You need to give me a valid number of $t(commons:currency_plural) to create a gift code",
         "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
-        "generationSuccessful": "You've generated a **{{value}} $t(commons:currency_plural)** gift code!\nCheck your DMs for your gift code, and instructions on how to activate it.",
+        "generationSuccessful": "You've generated a **{{value}} $t(commons:currency_plural)** gift code!\nCheck your DMs for instructions on how to activate the gift code which you have just received.",
         "hereIsYourGiftcode": "Here's your gift code: **{{giftcode}}**. It is worth **{{value}} $t(commons:currency_plural)**.\nRedeem it with `{{command}} redeem <code>`"
       },
       "redeem": {
@@ -653,7 +653,7 @@
         "noCode": "You need to give me a valid gift code",
         "invalidGiftcode": "Invalid gift code",
         "alreadyRedeemed": "That gift code has already been redeemed",
-        "redeemSuccessfulTitle": "Gift code redeemed successfully!",
+        "redeemSuccessfulTitle": "Gift code redeemed!",
         "redeemSuccessfulDescription": "**{{value}} $t(commons:currency_plural)** have been added to your balance!"
       }
     }
