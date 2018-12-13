@@ -12,7 +12,7 @@ module.exports = class Pusheen extends Command {
   async run ({ t, author, channel }) {
     channel.startTyping()
     const getRandom = (r) => r[Math.floor(Math.random() * r.length)]
-    const getRandomPhoto = (r) => r[Math.floor(Math.random() * ( r.length - 1 )) + 1]
+    const getRandomPhoto = (r) => r[Math.floor(Math.random() * (r.length - 1)) + 1]
     const pusheenAvatars = [
       'Ih84hUP',
       'kO0L435',
