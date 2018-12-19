@@ -1,7 +1,7 @@
 const { APIWrapper } = require('../')
 const snekfetch = require('snekfetch')
 
-const API_URL = 'https://api.twitch.tv/helix'
+const API_URL = 'https://api.twitch.tv/kraken'
 
 module.exports = class TwitchAPI extends APIWrapper {
   constructor () {
@@ -11,11 +11,11 @@ module.exports = class TwitchAPI extends APIWrapper {
   }
 
   getUser (id) {
-    return this.request('/users', { id }).then(u => u && u.data[0])
+    return this.request(`/users/${id}`).then(u => u)
   }
 
   getStreamByUsername (username) {
-    return this.request('/streams', { user_login: username }).then(s => s && s.data[0])
+    return this.request(`/streams/${username}`).then(s => s)
   }
 
   request (endpoint, queryParams = {}) {
