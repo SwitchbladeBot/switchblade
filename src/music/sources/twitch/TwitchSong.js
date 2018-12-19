@@ -11,9 +11,10 @@ module.exports = class TwitchSong extends Song {
   async loadInfo () {
     const tw = this._Twitch
     const userLogin = MusicUtils.twitchUserLogin(this.uri)
-    const stream = await tw.getStreamByUsername(userLogin)
+    const { stream } = await tw.getStreamByUsername(userLogin)
+    console.log(stream)
     if (stream) {
-      const thumbnailUrl = stream.thumbnail_url.replace('{width}', '1920').replace('{height}', '1080')
+      const thumbnailUrl = stream.preview.template.replace('{width}', '1920').replace('{height}', '1080')
       const user = await tw.getUser(stream.user_id)
       if (user) {
         this.artwork = user.profile_image_url
