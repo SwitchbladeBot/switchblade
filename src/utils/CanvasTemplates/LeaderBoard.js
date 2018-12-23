@@ -184,4 +184,4 @@ class LeaderBoard {
   }
 }
 
-module.exports = LeaderBoard;
+module.exports = LeaderBoard
