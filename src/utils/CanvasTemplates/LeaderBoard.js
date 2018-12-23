@@ -1,7 +1,6 @@
-const Constants = require('../Constants');
-const { ALIGN, measureText } = require('../CanvasUtils.js');
-
-const { createCanvas, Image, Canvas: { createSVGCanvas } } = require('canvas');
+const Constants = require('../Constants')
+const { ALIGN, measureText } = require('../CanvasUtils.js')
+const { createCanvas, Image, Canvas: { createSVGCanvas } } = require('canvas')
 
 class LeaderBoard {
   static async render ({ t }, top, { icon, iconWidth, iconHeight, title, valueFunction }) {

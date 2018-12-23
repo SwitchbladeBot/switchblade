@@ -52,7 +52,7 @@ class ButtSlap {
     for (const i in frames) {
       const frame = await loadImage(await streamToBuffer(frames[i].getImage()))
 
-      await ctx.drawImage(frame, 0, 0, this.x, this.y);
+      await ctx.drawImage(frame, 0, 0, this.x, this.y)
       await ctx.drawImage(TOM_AVATAR, tomX, tomY, this.tom_x, this.tom_y)
       await ctx.drawImage(KETTIN_AVATAR, kettinX, kettinY, this.kettin_x, this.kettin_y)
 
