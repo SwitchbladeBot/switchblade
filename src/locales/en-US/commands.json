@@ -632,7 +632,6 @@
     "noMention": "You need to mention someone",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
-
   "buttslap": {
     "commandUsage": "<user to slap>",
     "noMention": "You need to mention someone",

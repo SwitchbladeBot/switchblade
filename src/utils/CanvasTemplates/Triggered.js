@@ -1,4 +1,4 @@
-const Constants = require('./Constants')
+const Constants = require('../Constants')
 const { createCanvas, Image } = require('canvas')
 const GIFEncoder = require('gifencoder')
 
