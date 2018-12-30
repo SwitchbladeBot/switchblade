@@ -24,7 +24,7 @@ class DailyModule extends Module {
 
   async claim (_user) {
     const user = await this._users.get(_user, 'money lastDaily')
-    const { money, lastDaily } = user
+    const { lastDaily } = user
 
     const now = Date.now()
     if (now - lastDaily < DAILY_INTERVAL) {
@@ -37,7 +37,7 @@ class DailyModule extends Module {
     await user.save()
 
     return { collectedMoney }
-  }  
+  } 
 }
 
 // Economy
