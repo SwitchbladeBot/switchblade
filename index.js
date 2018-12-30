@@ -1,3 +1,5 @@
+const { readFileSync } = require('fs')
+
 // Initiliaze functions
 require('moment')
 require('moment-duration-format')
@@ -8,6 +10,8 @@ const CLIENT_OPTIONS = {
   'fetchAllMembers': true,
   'enableEveryone': false
 }
+
+console.log(readFileSync('bigtitle.txt', 'utf8').toString())
 
 const Switchblade = require('./src/Switchblade.js')
 const client = new Switchblade(CLIENT_OPTIONS)
