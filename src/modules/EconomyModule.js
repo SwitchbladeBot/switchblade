@@ -37,7 +37,7 @@ class DailyModule extends Module {
     await user.save()
 
     return { collectedMoney }
-  } 
+  }
 }
 
 // Economy
