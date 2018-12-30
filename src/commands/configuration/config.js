@@ -74,7 +74,7 @@ class ConfigLanguage extends Command {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
     }
-    
+
     channel.send(embed)
   }
 }
@@ -99,7 +99,7 @@ class ConfigPrefix extends Command {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
     }
-    
+
     channel.send(embed)
   }
 }
