@@ -1,7 +1,7 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
-const regexpSpecialChars = /([\[\]\^\$\|\(\)\\\+\*\?\{\}\=\!])/gi
+const regexpSpecialChars = /([[\]^$|()\\+*?{}=!.])/gi
 const quoteRegex = (text) => text.replace(regexpSpecialChars, '\\$1')
 const prefixRegex = (prefix) => new RegExp(`^${quoteRegex(prefix)}`)
 
