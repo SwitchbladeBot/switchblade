@@ -1,6 +1,6 @@
 const { Module } = require('../')
 
-// Economy
+// Configuration
 module.exports = class ConfigurationModule extends Module {
   constructor (client) {
     super(client)
@@ -16,14 +16,10 @@ module.exports = class ConfigurationModule extends Module {
   }
 
   async setPrefix (_guild, prefix) {
-    const guild = await this._guilds.get(_guild)
-    guild.prefix = prefix
-    await guild.save()
+    await this._guilds.update(_guild, { prefix })
   }
 
   async setLanguage (_guild, language) {
-    const guild = await this._guilds.get(_guild)
-    guild.language = language
-    await guild.save()
+    await this._guilds.update(_guild, { language })
   }
 }

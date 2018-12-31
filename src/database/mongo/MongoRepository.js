@@ -40,4 +40,8 @@ module.exports = class MongoRepository extends Repository {
   remove (id) {
     return this.model.findByIdAndRemove(id).then(this.parse)
   }
+
+  update (id, entity) {
+    return this.model.updateOne({ _id: id }, entity)
+  }
 }
