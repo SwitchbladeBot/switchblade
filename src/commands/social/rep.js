@@ -35,7 +35,6 @@ module.exports = class Rep extends Command {
           default:
             embed.setTitle(t('errors:generic'))
         }
-        console.log(e)
       }
     }
 
