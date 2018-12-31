@@ -1,3 +1,5 @@
+// TODO
+
 const { CanvasTemplates, CommandStructures, PermissionUtils } = require('../../')
 const { Command, CommandParameters, UserParameter } = CommandStructures
 const { Attachment } = require('discord.js')

@@ -15,7 +15,7 @@ module.exports = class Leaderboard extends Command {
     this.requirements = new CommandRequirements(this, { databaseOnly: true })
   }
 
-  async run ({ t, author, prefix, alias, channel, guildDocument }) {
+  async run ({ t, author, prefix, alias, channel }) {
     const embed = new SwitchbladeEmbed(author)
     embed.setDescription(this.subcommands.map(subcmd => {
       return `**${prefix}${subcmd.fullName}** - ${t(`commands:${subcmd.tPath}.commandDescription`)}`

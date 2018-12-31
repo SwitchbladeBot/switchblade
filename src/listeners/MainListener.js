@@ -71,8 +71,8 @@ module.exports = class MainListener extends EventListener {
     const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id, 'prefix language')
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
 
-    const botMention = this.client.user.toString()
-    const usedPrefix = message.content.startsWith(botMention) ?`${botMention} ` : message.content.startsWith(prefix) ? prefix : null
+    const botMention = this.user.toString()
+    const usedPrefix = message.content.startsWith(botMention) ? `${botMention} ` : message.content.startsWith(prefix) ? prefix : null
 
     if (usedPrefix) {
       const fullCmd = message.content.substring(usedPrefix.length).split(/\s+/g).filter(a => a).map(s => s.trim())
@@ -81,19 +81,18 @@ module.exports = class MainListener extends EventListener {
 
       const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
       if (command) {
-        const userDocument = this.database && await this.database.users.findOne(message.author.id)
+        const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
         if (userDocument && userDocument.blacklisted) return
 
         const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
           prefix: usedPrefix,
+          defaultPrefix: prefix,
           aliase: cmd,
           client: this,
           message,
           command,
-          guildDocument,
-          language,
-          userDocument
+          language
         })
 
         this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')

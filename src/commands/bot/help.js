@@ -1,7 +1,9 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
-const prefixRegex = (prefix) => new RegExp(`^(?:${prefix})?(.+)`)
+const regexpSpecialChars = /([\[\]\^\$\|\(\)\\\+\*\?\{\}\=\!])/gi
+const quoteRegex = (text) => text.replace(regexpSpecialChars, '\\$1')
+const prefixRegex = (prefix) => new RegExp(`^${quoteRegex(prefix)}`)
 
 module.exports = class Help extends Command {
   constructor (client) {
@@ -15,9 +17,8 @@ module.exports = class Help extends Command {
     )
   }
 
-  async run ({ t, author, channel, guild, guildDocument }, cmd) {
+  async run ({ t, author, channel, guild, defaultPrefix: prefix }, cmd) {
     const embed = new SwitchbladeEmbed(author)
-    const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
     const validCommands = this.client.commands.filter(c => !c.hidden)
 
     if (cmd) {
