@@ -12,7 +12,7 @@ module.exports = class Leaderboard extends Command {
       new ReputationLeaderboard(client, this)
     ]
 
-    this.requirements = new CommandRequirements(this, { databaseOnly: true })
+    this.requirements = new CommandRequirements(this, { databaseOnly: true, canvasOnly: true })
   }
 
   async run ({ t, author, prefix, alias, channel, guildDocument }) {

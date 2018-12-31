@@ -1,5 +1,5 @@
 const { CanvasTemplates, CommandStructures } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
 
 const { Attachment } = require('discord.js')
 
@@ -13,6 +13,7 @@ module.exports = class Triggered extends Command {
     this.parameters = new CommandParameters(this,
       new UserParameter({ full: true, required: false, acceptBot: true })
     )
+    this.requirements = new CommandRequirements(this, { canvasOnly: true })
   }
 
   async run ({ t, author, channel }, user) {

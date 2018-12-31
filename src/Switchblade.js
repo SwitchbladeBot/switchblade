@@ -16,6 +16,8 @@ module.exports = class Switchblade extends Client {
     console.log(fs.readFileSync('bigtitle.txt', 'utf8').toString())
 
     super(options)
+    this.canvasLoaded = options.canvasLoaded
+
     this.apis = {}
     this.commands = []
     this.cldr = { languages: {} }
@@ -91,6 +93,11 @@ module.exports = class Switchblade extends Client {
         if (!process.env[variable]) this.log(`[31m${command.name} failed to load - Required environment variable "${variable}" is not set.`, 'Commands')
         return !!process.env[variable]
       })) return false
+
+      if (command.requirements.canvasOnly && !this.canvasLoaded) {
+        this.log(`[31m${command.name} failed to load - Canvas is not loaded.`, 'Commands')
+        return false
+      }
     }
 
     this.commands.push(command)

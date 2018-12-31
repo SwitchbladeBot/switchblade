@@ -21,6 +21,7 @@ module.exports = class CommandRequirements {
     this.apis = options.apis || []
     this.envVars = options.envVars || []
     this.managersOnly = options.managersOnly
+    this.canvasOnly = options.canvasOnly
 
     this.errors = Object.assign({
       databaseOnly: 'errors:databaseOnly',

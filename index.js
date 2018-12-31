@@ -1,12 +1,20 @@
 // Initiliaze functions
 require('moment')
 require('moment-duration-format')
-require('./src/utils/CanvasUtils.js').initializeHelpers()
+
+// Initiliaze Canvas
+let canvasLoaded = false
+try {
+  require('canvas')
+  require('./src/utils/CanvasUtils.js').initializeHelpers()
+  canvasLoaded = true
+} catch (e) {}
 
 // Initialize client
 const CLIENT_OPTIONS = {
-  'fetchAllMembers': true,
-  'enableEveryone': false
+  fetchAllMembers: true,
+  enableEveryone: false,
+  canvasLoaded
 }
 
 const Switchblade = require('./src/Switchblade.js')
