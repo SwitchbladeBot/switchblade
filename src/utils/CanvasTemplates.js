@@ -4,10 +4,15 @@ const Color = require('./Color.js')
 const GIFEncoder = require('gifencoder')
 const moment = require('moment')
 
+let Canvas = {}
+let CanvasUtils = {}
 try {
-  const { createCanvas, Image } = require('canvas')
-  const { ALIGN, measureText } = require('./CanvasUtils.js')
+  Canvas = require('canvas')
+  CanvasUtils = require('./CanvasUtils.js')
 } catch (e) {}
+
+const { createCanvas, Image } = Canvas
+const { ALIGN, measureText } = CanvasUtils
 
 module.exports = class CanvasTemplates {
   static async profile ({ t }, user, userDocument, role) {

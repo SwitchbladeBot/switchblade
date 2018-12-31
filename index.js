@@ -1,8 +1,8 @@
-// Initiliaze functions
+// Initialize functions
 require('moment')
 require('moment-duration-format')
 
-// Initiliaze Canvas
+// Initialize Canvas
 let canvasLoaded = false
 try {
   require('canvas')
