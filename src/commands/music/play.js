@@ -39,9 +39,7 @@ module.exports = class Play extends Command {
       if (result) {
         this.loadSongs({ t, channel, voiceChannel }, result, playerManager).then(() => channel.stopTyping())
       } else {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('music:songNotFound'))
-        channel.send(embed).then(() => channel.stopTyping())
+        throw new CommandError(t('music:songNotFound'))
       }
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

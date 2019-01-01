@@ -45,9 +45,7 @@ module.exports = class Weather extends Command {
 
       channel.send(new Attachment(weather, 'weather.png')).then(() => channel.stopTyping())
     } else {
-      channel.send(new SwitchbladeEmbed(author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:weather.notFound')))
+      throw new CommandError(t('commands:weather.notFound'))
     }
   }
 

@@ -30,10 +30,9 @@ module.exports = class SAMP extends Command {
         .addField(t('commands:samp.gameMode'), response.gamemode, true)
         .addField(t('commands:samp.time'), response.rules.worldtime, true)
     } catch (err) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
+      throw new CommandError(new SwitchbladeEmbed(author)
         .setTitle(t('commands:samp.serverUnreachableTitle'))
-        .setDescription(t('commands:samp.serverUnreachableDescription'))
+        .setDescription(t('commands:samp.serverUnreachableDescription')))
     }
     channel.send(embed).then(channel.stopTyping())
   }

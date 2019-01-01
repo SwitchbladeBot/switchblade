@@ -35,9 +35,7 @@ module.exports = class Strawpoll extends Command {
         .setAuthor(body.title, 'https://i.imgur.com/Dceju2J.jpg')
         .setDescription(body.options.map(o => `**>** ${o}`).join('\n') + `\n\n[${t('commands:strawpoll.clickHere')}](http://strawpoll.me/${body.id})\n\`http://strawpoll.me/${body.id}\``)
     } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:strawpoll.optionsNumberError'))
+      throw new CommandError(t('commands:strawpoll.optionsNumberError'))
     }
 
     channel.send(embed).then(() => channel.stopTyping())

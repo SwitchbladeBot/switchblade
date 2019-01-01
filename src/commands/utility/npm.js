@@ -24,9 +24,7 @@ module.exports = class Npm extends Command {
           .setAuthor(data.name, 'https://i.imgur.com/24yrZxG.png', `https://www.npmjs.com/package/${data.name}`)
           .setDescription(`${description}\nhttps://www.npmjs.com/package/${data.name}\n\n\`npm i ${data.name} --save\``)
       } else {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setAuthor(t('commands:npm.notFound'))
-          .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:npm.commandUsage')}`)
+        throw new CommandError(t('commands:npm.notFound'), true)
       }
       channel.send(embed).then(() => channel.stopTyping())
     })

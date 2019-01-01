@@ -30,10 +30,9 @@ module.exports = class MCQuery extends Command {
           .setDescription(`**${t('commands:mcquery.status')}:** \`${t('commands:mcquery.online')}\`\n**${t('commands:mcquery.messageOfTheDay')}:** \`${info.motd}\`\n**${t('commands:mcquery.players')}**: \`${info.currentPlayers}/${info.maxPlayers}\`\n**${t('commands:mcquery.version')}**: \`${info.version}\``)
       }
     } else if (info.timeout) {
-      embed
-        .setTitle(t('commands:mcquery.unknownServer'))
-        .setColor(Constants.ERROR_COLOR)
+      throw new CommandError(t('commands:mcquery.unknownServer'))
     }
+
     channel.send(embed).then(() => channel.stopTyping())
   }
   cleanMOTD (motd) {

@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
 
 const regexpSpecialChars = /([[\]^$|()\\+*?{}=!.])/gi
 const quoteRegex = (text) => text.replace(regexpSpecialChars, '\\$1')
@@ -42,8 +42,7 @@ module.exports = class Help extends Command {
         embed.setTitle(command.fullName)
           .setDescription(description.join('\n'))
       } else {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:help.commandNotFound'))
+        throw new CommandError(t('commands:help.commandNotFound'))
       }
     } else {
       embed

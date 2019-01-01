@@ -28,8 +28,7 @@ module.exports = class Spotify extends Command {
         .setThumbnail(cover.url)
         .setDescription(`[**${track.name}**](${track.external_urls.spotify}) (${duration})\n${artists}`)
     } else {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:spotify.noTracksFound'))
+     throw new CommandError(t('commands:spotify.noTracksFound'))
     }
 
     channel.send(embed).then(() => channel.stopTyping())

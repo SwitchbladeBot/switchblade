@@ -26,10 +26,8 @@ module.exports = class XKCD extends Command {
         } else if (arg.match(/^\d+$/)) {
           response = await snekfetch.get(baseUrl + `/${arg}/info.0.json`)
         } else {
-          embed.setColor(Constants.ERROR_COLOR)
-            .setTitle(t('commands:xkcd.invalidArgument'))
-            .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:xkcd.commandUsage')}\``)
-          channel.send(embed).then(() => channel.stopTyping())
+          throw new CommandError(new SwitchbladeEmbed(author).setTitle(t('commands:xkcd.invalidArgument'))
+            .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:xkcd.commandUsage')}\``))
         }
       } else {
         const latestResp = await snekfetch.get(`${baseUrl}/info.0.json`)
@@ -42,9 +40,8 @@ module.exports = class XKCD extends Command {
         embed.setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:xkcd.notFound'))
       } else {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('errors:generic'))
-          .setDescription(`\`${e.message}\`\n\n[${t('commons:reportThis')}](https://github.com/SwitchbladeBot/switchblade/issues)`)
+        throw new CommandError(new SwitchbladeEmbed(author).setTitle(t('errors:generic'))
+          .setDescription(`\`${e.message}\`\n\n[${t('commons:reportThis')}](https://github.com/SwitchbladeBot/switchblade/issues)`))
       }
       channel.send(embed).then(() => channel.stopTyping())
     }

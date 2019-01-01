@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, NumberParameter, StringParameter } = CommandStructures
+const { Command, CommandError, CommandParameters, NumberParameter, StringParameter } = CommandStructures
 
 module.exports = class Betflip extends Command {
   constructor (client) {
@@ -17,8 +17,7 @@ module.exports = class Betflip extends Command {
     const userDoc = await this.client.database.users.get(author.id)
     channel.startTyping()
     if (userDoc.money < bet) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setDescription(t('errors:notEnoughMoney'))
+      throw new CommandError(t('errors:notEnoughMoney'))
     } else {
       const sides = ['heads', 'tails']
       const chosenSide = sides[Math.floor(Math.random() * sides.length)]

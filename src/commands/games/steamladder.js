@@ -73,10 +73,8 @@ module.exports = class SteamLadder extends Command {
         .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
         .setColor(embedColor)
     } catch (e) {
-      console.log(e)
-      embed = new SwitchbladeEmbed(author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:steamladder.ladderNotFound'))
+      console.error(e)
+      throw new CommandError(t('commands:steamladder.ladderNotFound'))
     }
     channel.send(embed).then(channel.stopTyping())
   }
@@ -178,9 +176,7 @@ class SteamLadderProfile extends Command {
           t('commands:steamladder.joinedOn', { date: `**${new Intl.DateTimeFormat(language).format(new Date(user.steam_join_date))}**` })
         ].join('\n'), true)
     } catch (e) {
-      embed = new SwitchbladeEmbed(author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:steamladder.userNotFound'))
+      throw new CommandError(t('commands:steamladder.userNotFound'))
     }
     channel.send(embed).then(channel.stopTyping())
   }

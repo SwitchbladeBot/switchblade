@@ -57,7 +57,13 @@ module.exports = class Command {
     }
 
     this.applyCooldown(context.author)
-    return this.run(context, ...args)
+    
+    try {
+      const result = await this.run(context, ...args)
+      return result
+    } catch (e) {
+      this.error(context, e)
+    }
   }
 
   /**
@@ -95,7 +101,7 @@ module.exports = class Command {
       const usage = this.usage(t, prefix)
       const embed = error.embed || new SwitchbladeEmbed(author)
         .setTitle(error.message)
-        .setDescription(error.showUsage ? usage : null)
+        .setDescription(error.showUsage ? usage : '')
       return channel.send(embed.setColor(Constants.ERROR_COLOR)).then(() => channel.stopTyping())
     }
     console.error(error)

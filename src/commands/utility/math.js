@@ -27,9 +27,7 @@ module.exports = class Math extends Command {
         .setDescription(error.stack)
     } finally {
       if (isNaN(parseFloat(result))) {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:math.invalidMathExpression'))
-          .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:math.commandUsage')}`)
+        throw new CommandError(t('commands:math.invalidMathExpression'), true)
       } else {
         embed.setTitle(t('commands:math.result', { result }))
       }
