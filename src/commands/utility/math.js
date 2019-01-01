@@ -17,7 +17,6 @@ module.exports = class Math extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    let result
     try {
       const result = math.eval(expression)
       embed.setTitle(t('commands:math.result', { result }))
