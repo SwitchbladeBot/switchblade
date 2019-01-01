@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
 
 const npm = require('api-npm')
 

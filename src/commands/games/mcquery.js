@@ -1,6 +1,6 @@
 /* eslint-disable no-control-regex */
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
 const net = require('net')
 
 module.exports = class MCQuery extends Command {

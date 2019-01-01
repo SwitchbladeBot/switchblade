@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandError, CommandParameters, NumberParameter, StringParameter } = CommandStructures
 
 module.exports = class Betflip extends Command {

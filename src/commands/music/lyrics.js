@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
+const { Command, CommandError, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
 
 module.exports = class Lyrics extends Command {
   constructor (client) {

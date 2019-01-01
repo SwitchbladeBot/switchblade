@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, CommandParameters } = require('../../')
-const { Command, CommandRequirements, GuildParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, CommandRequirements, CommandParameters, GuildParameter } = CommandStructures
 
 module.exports = class GuildIcon extends Command {
   constructor (client) {

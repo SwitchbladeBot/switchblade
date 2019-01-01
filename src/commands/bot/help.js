@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
 
 const regexpSpecialChars = /([[\]^$|()\\+*?{}=!.])/gi
