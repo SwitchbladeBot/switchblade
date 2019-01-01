@@ -18,17 +18,17 @@ module.exports = class UserParameter extends Parameter {
     if (!arg) return
 
     const regexResult = MENTION_REGEX.exec(arg)
-    let userId = regexResult && regexResult[1]
+    const userId = regexResult && regexResult[1]
     return this.user(context, userId)
   }
 
   user ({ t, client, author }, id) {
     const user = client.users.get(id)
-    if (!user) return new CommandError(t('errors:invalidUser'))
-    if (!this.self && id === author.id) return new CommandError(t('errors:sameUser'))
-    if (!this.acceptBot && user.bot) return new CommandError(t('errors:invalidUserBot'))
-    if (!this.acceptUser && !user.bot) return new CommandError(t('errors:invalidUserNotBot'))
-    if (!this.acceptDeveloper && PermissionUtils.isDeveloper(client, user)) return new CommandError(t('errors:userCantBeDeveloper'), false)
+    if (!user) throw new CommandError(t('errors:invalidUser'))
+    if (!this.self && id === author.id) throw new CommandError(t('errors:sameUser'))
+    if (!this.acceptBot && user.bot) throw new CommandError(t('errors:invalidUserBot'))
+    if (!this.acceptUser && !user.bot) throw new CommandError(t('errors:invalidUserNotBot'))
+    if (!this.acceptDeveloper && PermissionUtils.isDeveloper(client, user)) throw new CommandError(t('errors:userCantBeDeveloper'), false)
     return user
   }
 }

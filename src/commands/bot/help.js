@@ -22,8 +22,7 @@ module.exports = class Help extends Command {
     const validCommands = this.client.commands.filter(c => !c.hidden)
 
     if (cmd) {
-      const regexMatch = cmd.match(prefixRegex(prefix))
-      cmd = regexMatch && regexMatch[1]
+      cmd = cmd.replace(prefixRegex(prefix), '')
       const command = cmd.split(' ').reduce((o, ca) => {
         const arr = (Array.isArray(o) && o) || (o && o.subcommands)
         if (!arr) return o

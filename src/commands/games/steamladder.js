@@ -27,31 +27,28 @@ module.exports = class SteamLadder extends Command {
         whitelist: ladders,
         required: false,
         missingError: ({ t, prefix }) => {
-          return {
-            title: t('commands:steamladder.noLadder'),
-            description: [
+          return new SwitchbladeEmbed().setTitle(t('commands:steamladder.noLadder'))
+            .setDescription([
               `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:steamladder.commandUsage')}\``,
               '',
               `__**${t('commands:steamladder.availableLadders')}:**__`,
               `**${ladders.map(l => `\`${l}\``).join(', ')}**`
-            ].join('\n')
-          }
-        } }),
+            ].join('\n'))
+        }
+      }),
       new StringParameter({
         required: false,
         whitelist: Object.keys(countries.getNames('en')).map(c => c.toLowerCase()).concat(Object.keys(countries.getNames('en'))).concat(regions),
         missingError: ({ t, prefix }) => {
-          return {
-            title: t('commands:steamladder.noRegion'),
-            description: [
+          return new SwitchbladeEmbed().setTitle(t('commands:steamladder.noRegion'))
+            .setDescription([
               `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:steamladder.commandUsage')}\``,
               '',
               `__**${t('commands:steamladder.availableRegions')}:**__`,
               `**${regions.map(l => `\`${l}\``).join(', ')}**`,
               '',
               `[${t('commands:steamladder.youCanAlsoUse')}](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)`
-            ].join('\n')
-          }
+            ].join('\n'))
         }
       })
     )
