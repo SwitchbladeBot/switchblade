@@ -1,5 +1,3 @@
-// TODO
-
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandRequirements } = CommandStructures
 const moment = require('moment')

@@ -1,5 +1,3 @@
-// TODO
-
 const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
 const { Command, CommandRequirements, CommandParameters, BooleanParameter } = CommandStructures
 
