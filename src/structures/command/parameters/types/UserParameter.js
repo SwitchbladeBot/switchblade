@@ -10,8 +10,8 @@ module.exports = class UserParameter extends Parameter {
       acceptBot: false,
       acceptUser: true,
       acceptDeveloper: true,
-      acceptSelf: false }
-    , options)
+      acceptSelf: false
+    }, options)
 
     super(options)
     this.acceptBot = !!options.acceptBot
