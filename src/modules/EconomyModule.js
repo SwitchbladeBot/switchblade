@@ -2,38 +2,64 @@ const { Module } = require('../')
 
 const moment = require('moment')
 
-// Daily
-class DailyCooldownError extends Error {
-  constructor (lastDaily, formattedCooldown) {
-    super('IN_COOLDOWN')
-    this.lastDaily = lastDaily
+// Bonus
+class BonusCooldownError extends Error {
+  constructor (lastClaim, formattedCooldown) {
+    super('ALREADY_CLAIMED')
+    this.lastClaim = lastClaim
     this.formattedCooldown = formattedCooldown
   }
 }
 
-const DAILY_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
-class DailyModule extends Module {
+const BONUS_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
+class BonusModule extends Module {
   constructor (...args) {
     super(...args)
-    this.name = 'daily'
+    this.name = 'bonus'
   }
 
   get _users () {
     return this.client.database.users
   }
 
-  async claim (_user) {
+  checkClaim (lastClaim) {
+    return Date.now() - lastClaim < BONUS_INTERVAL
+  }
+
+  formatClaimTime (lastClaim) {
+    return moment.duration(BONUS_INTERVAL - (Date.now() - lastClaim)).format('h[h] m[m] s[s]')
+  }
+
+  async claimDaily (_user) {
     const user = await this._users.get(_user, 'money lastDaily')
     const { lastDaily } = user
 
-    const now = Date.now()
-    if (now - lastDaily < DAILY_INTERVAL) {
-      throw new DailyCooldownError(lastDaily, moment.duration(DAILY_INTERVAL - (now - lastDaily)).format('h[h] m[m] s[s]'))
+    if (this.checkClaim(lastDaily)) {
+      throw new BonusCooldownError(lastDaily, this.formatClaimTime(lastDaily))
     }
 
     const collectedMoney = Math.ceil(Math.random() * 2000) + 750
     user.money += collectedMoney
-    user.lastDaily = now
+    user.lastDaily = Date.now()
+    await user.save()
+
+    return { collectedMoney }
+  }
+
+  async claimDBLBonus (_user) {
+    const user = await this._users.get(_user, 'money lastDBLBonusClaim')
+    const { lastDBLBonusClaim } = user
+
+    if (this.checkClaim(lastDBLBonusClaim)) {
+      throw new BonusCooldownError(lastDBLBonusClaim, this.formatClaimTime(lastDBLBonusClaim))
+    }
+
+    const voted = await this.client.apis.dbl.checkVote(this.client.user.id, _user)
+    if (!voted) throw new Error('NOT_VOTED')
+
+    const collectedMoney = 500
+    user.money += collectedMoney
+    user.lastDBLBonusClaim = Date.now()
     await user.save()
 
     return { collectedMoney }
@@ -45,7 +71,7 @@ module.exports = class EconomyModule extends Module {
   constructor (client) {
     super(client)
     this.name = 'economy'
-    this.submodules = [ new DailyModule(client, this) ]
+    this.submodules = [ new BonusModule(client, this) ]
   }
 
   canLoad () {
@@ -73,5 +99,20 @@ module.exports = class EconomyModule extends Module {
   async balance (_user) {
     const { money } = await this._users.get(_user, 'money')
     return money
+  }
+
+  async betflip (_user, amount, side) {
+    const user = this._users.get(_user, 'money')
+
+    if (user.money < amount) throw new Error('NOT_ENOUGH_MONEY')
+
+    const chosenSide = Math.random() > 0.5 ? 'heads' : 'tails'
+    const won = side === chosenSide
+    const bet = won ? amount : -amount
+
+    user.money += bet
+    await user.save()
+
+    return { won, chosenSide }
   }
 }

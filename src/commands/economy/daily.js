@@ -15,12 +15,12 @@ module.exports = class Daily extends Command {
     channel.startTyping()
 
     try {
-      const { collectedMoney } = await this.client.modules.economy.daily.claim(author.id)
+      const { collectedMoney } = await this.client.modules.economy.bonus.claimDaily(author.id)
       embed.setDescription(t('commands:daily.claimedSuccessfully', { count: collectedMoney }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)
       switch (e.message) {
-        case 'IN_COOLDOWN':
+        case 'ALREADY_CLAIMED':
           embed.setTitle(t('commands:daily.alreadyClaimedTitle'))
             .setDescription(t('commands:daily.alreadyClaimedDescription', { time: e.formattedCooldown }))
           break
