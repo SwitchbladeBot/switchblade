@@ -95,7 +95,7 @@ module.exports = class Switchblade extends Client {
       })) return false
 
       if (command.requirements.canvasOnly && !this.canvasLoaded) {
-        this.log(`[31m${command.name} failed to load - Canvas is not loaded.`, 'Commands')
+        this.log(`[31m${command.name} failed to load - Canvas is not installed.`, 'Commands')
         return false
       }
     }
