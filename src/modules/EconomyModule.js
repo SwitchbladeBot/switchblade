@@ -83,17 +83,10 @@ module.exports = class EconomyModule extends Module {
   }
 
   async transfer (_from, _to, amount) {
-    const [ from, to ] = await Promise.all([
-      this._users.get(_from, 'money'),
-      this._users.get(_to, 'money')
-    ])
-
+    const from = this._users.get(_from, 'money')
     if (from.money < amount) throw new Error('NOT_ENOUGH_MONEY')
-
     from.money -= amount
-    to.money += amount
-
-    await Promise.all([ from.save(), to.save() ])
+    await Promise.all([ from.save(), this._users.update(_to, { $inc: { money: amount } }) ])
   }
 
   async balance (_user) {
