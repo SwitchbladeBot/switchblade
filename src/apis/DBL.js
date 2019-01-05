@@ -3,7 +3,7 @@ const snekfetch = require('snekfetch')
 
 const API_URL = 'https://discordbots.org/api'
 
-module.exports = class TwitchAPI extends APIWrapper {
+module.exports = class DiscordBotListAPI extends APIWrapper {
   constructor () {
     super()
     this.name = 'dbl'
