@@ -14,12 +14,11 @@ module.exports = class Money extends Command {
     )
   }
 
-  async run ({ t, author, channel }, user) {
-    user = user || author
+  async run ({ t, author, channel }, user = author) {
     channel.startTyping()
 
     const embed = new SwitchbladeEmbed(author)
-    const { money } = await this.client.database.users.get(user.id)
+    const money = await this.client.modules.economy.balance(user.id)
     if (author.id === user.id) {
       embed.setDescription(t('commands:money.youHave', { count: money }))
     } else {
