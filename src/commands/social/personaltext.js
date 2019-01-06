@@ -1,8 +1,6 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
-const PERSONAL_TEXT_LIMIT = 260
-
 module.exports = class Personaltext extends Command {
   constructor (client) {
     super(client)
@@ -15,22 +13,26 @@ module.exports = class Personaltext extends Command {
     )
   }
 
-  async run ({ t, author, channel }, profileText) {
+  async run ({ t, author, channel }, text) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    if (profileText.length > PERSONAL_TEXT_LIMIT) {
-      embed
-        .setTitle(t('commands:personaltext.tooLongText', { limit: PERSONAL_TEXT_LIMIT }))
-        .setColor(Constants.ERROR_COLOR)
-    } else {
-      // Database
-      const userData = await this.client.database.users.get(author.id)
-      userData.personalText = profileText
-      userData.save()
-      embed
-        .setTitle(t('commands:personaltext.changedSuccessfully', { profileText: 'zap' }))
-        .setDescription(profileText)
+
+    const socialModule = this.client.modules.social
+    try {
+      await socialModule.setPersonalText(author.id, text)
+      embed.setTitle(t('commands:personaltext.changedSuccessfully'))
+        .setDescription(text)
+    } catch (e) {
+      embed.setColor(Constants.ERROR_COLOR)
+      switch (e.message) {
+        case 'TEXT_LENGTH':
+          embed.setTitle(t('commands:personaltext.tooLongText', { limit: socialModule.PERSONAL_TEXT_LIMIT }))
+          break
+        default:
+          embed.setTitle(t('errors:generic'))
+      }
     }
+
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

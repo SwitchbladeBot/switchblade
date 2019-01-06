@@ -1,4 +1,6 @@
 // Initialize functions
+const { readFileSync } = require('fs')
+
 require('moment')
 require('moment-duration-format')
 
@@ -16,6 +18,8 @@ const CLIENT_OPTIONS = {
   enableEveryone: false,
   canvasLoaded
 }
+
+console.log(readFileSync('bigtitle.txt', 'utf8').toString())
 
 const Switchblade = require('./src/Switchblade.js')
 const client = new Switchblade(CLIENT_OPTIONS)

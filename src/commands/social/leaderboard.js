@@ -15,7 +15,7 @@ module.exports = class Leaderboard extends Command {
     this.requirements = new CommandRequirements(this, { databaseOnly: true, canvasOnly: true })
   }
 
-  async run ({ t, author, prefix, alias, channel, guildDocument }) {
+  async run ({ t, author, prefix, alias, channel }) {
     const embed = new SwitchbladeEmbed(author)
     embed.setDescription(this.subcommands.map(subcmd => {
       return `**${prefix}${subcmd.fullName}** - ${t(`commands:${subcmd.tPath}.commandDescription`)}`
@@ -34,13 +34,7 @@ class MoneyLeaderboard extends Command {
   async run ({ t, author, channel }) {
     channel.startTyping()
 
-    const db = this.client.database.users
-    let top = await db.model.find().sort({ money: -1 }).limit(16).then(res => res.map(db.parse))
-    top = top.filter(u => {
-      u.user = this.client.users.get(u.id)
-      return !!u.user
-    })
-
+    const top = await this.client.modules.social.leaderboard('money')
     const leaderboard = await CanvasTemplates.leaderboard({ t }, top, {
       icon: Constants.COINS_SVG,
       iconWidth: 48,
@@ -63,13 +57,7 @@ class ReputationLeaderboard extends Command {
   async run ({ t, author, channel }) {
     channel.startTyping()
 
-    const db = this.client.database.users
-    let top = await db.model.find().sort({ rep: -1 }).limit(16).then(res => res.map(db.parse))
-    top = top.filter(u => {
-      u.user = this.client.users.get(u.id)
-      return !!u.user
-    })
-
+    const top = await this.client.modules.social.leaderboard('rep')
     const leaderboard = await CanvasTemplates.leaderboard({ t }, top, {
       icon: Constants.REPUTATION_SVG,
       iconWidth: 48,

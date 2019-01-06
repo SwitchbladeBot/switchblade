@@ -7,13 +7,14 @@ module.exports = class MainListener extends EventListener {
   }
 
   async onGuildMemberAdd (member) {
-    const guildDocument = this.database && await this.database.guilds.findOne(member.guild.id)
     const guild = member.guild
+    const guildDocument = this.database && await this.database.guilds.findOne(guild.id, 'joinLock joinLockMessage language')
 
     // TODO: Write a function to parse {placeholders} like the one used below
-    if (guildDocument && guildDocument.joinLock && guild.me.hasPermission('KICK_MEMBERS') && member.kickable) {
+    if (guildDocument && guildDocument.joinLock && member.kickable) {
       const t = this.i18next.getFixedT(guildDocument.language)
-      member.send(guildDocument.joinLockMessage ? guildDocument.joinLockMessage.replace('{server}', guild.name) : t('moderation:joinLock.defaultPrivateMessage', { guild })).catch(() => {})
+      const message = guildDocument.joinLockMessage ? guildDocument.joinLockMessage.replace('{server}', guild.name) : t('moderation:joinLock.defaultPrivateMessage', { guild })
+      member.send(message).catch(() => {})
       member.kick(t('moderation:joinLock.kickReason'))
     }
   }
