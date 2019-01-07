@@ -42,7 +42,7 @@ workflows:
             - test
           filters:
             branches:
-              only: /master|dev|circleci/
+              only: /master|dev/
   crowdin:
     jobs:
       - crowdin-upload:
