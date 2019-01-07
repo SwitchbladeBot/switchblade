@@ -6,14 +6,32 @@ jobs:
     steps:
       - checkout
       - run: crowdin upload resources
+  test:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install modules
+          command: npm install
+      - save_cache:
+          key: dependencies-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Test
+          command: npm test
+
 workflows:
   version: 2
+  test-and-deploy:
+    jobs:
+      - test
   crowdin:
     jobs:
       - crowdin-upload:
           filters:
             branches:
-              only:
-                - master
-                - dev
-                - circleci
+              only: /master|dev/
