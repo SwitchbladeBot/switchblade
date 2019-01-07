@@ -7,7 +7,8 @@
     "start": "node index.js",
     "start-dev": "nodemon --exec node -r dotenv/config index.js",
     "test": "mocha src/test --recursive",
-    "fix": "standard --fix"
+    "fix": "standard --fix",
+    "crowdin": "crowdin upload sources"
   },
   "standard": {
     "env": [
