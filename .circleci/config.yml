@@ -37,6 +37,8 @@ workflows:
     jobs:
       - test
       - deploy:
+          requires:
+            - test
           filters:
             branches:
               only: /master|dev|circleci/
