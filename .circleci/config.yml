@@ -34,9 +34,19 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  test:
     jobs:
-      - test
+      - test:
+          filters:
+            branches:
+              only:
+                /}/
+  deploy:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: /^((?!master|dev).)*$/
       - deploy:
           requires:
             - test
