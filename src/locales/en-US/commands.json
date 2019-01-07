@@ -703,5 +703,8 @@
   "pusheen": {
     "commandDescription": "Shows a random post from the pusheen tumblr.",
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
+  },
+  "commandtest": {
+    "sorryagain": "Okay, i m testing on commands.json now, and tell pedro to make some bitch lasagna"
   }
 }
