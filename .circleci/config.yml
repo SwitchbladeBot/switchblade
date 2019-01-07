@@ -34,15 +34,15 @@ jobs:
 
 workflows:
   version: 2
-  test-and-deploy:
+  build:
     jobs:
       - test
       - deploy:
-          requires:
-            - test
-          filters:
-            branches:
-              only: /master|dev/
+        requires:
+          - test
+        filters:
+          branches:
+            only: /master|dev/
   crowdin:
     jobs:
       - crowdin-upload:
