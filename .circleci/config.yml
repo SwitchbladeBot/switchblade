@@ -23,12 +23,23 @@ jobs:
       - run:
           name: Test
           command: npm test
+  deploy:
+    docker:
+      - image: alpine/git
+    steps:
+      - checkout
+      - run: git remote add dokku dokku@$DOKKU_SERVER_ADDRESS:switchblade-$CIRCLE_BRANCH
+      - run: git push dokku master
 
 workflows:
   version: 2
   test-and-deploy:
     jobs:
       - test
+      - deploy:
+          filters:
+            branches:
+              only: /master|dev/
   crowdin:
     jobs:
       - crowdin-upload:
