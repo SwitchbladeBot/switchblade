@@ -1,13 +1,11 @@
 version: 2
-
 jobs:
   crowdin-upload:
-     docker:
-       - image: alconost/crowdin
-     steps:
-       - checkout
-       - run: crowdin upload resources
-
+    docker:
+      - image: alconost/crowdin
+    steps:
+      - checkout
+      - run: crowdin upload resources
 workflows:
   version: 2
   crowdin:
