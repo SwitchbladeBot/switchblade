@@ -39,7 +39,7 @@ workflows:
       - deploy:
           filters:
             branches:
-              only: /master|dev/
+              only: /master|dev|circleci/
   crowdin:
     jobs:
       - crowdin-upload:
