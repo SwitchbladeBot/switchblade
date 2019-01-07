@@ -46,7 +46,7 @@ workflows:
       - test:
           filters:
             branches:
-              only: /^((?!master|dev).)*$/
+              ignore: /master|dev/
       - deploy:
           requires:
             - test
