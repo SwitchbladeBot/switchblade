@@ -38,11 +38,11 @@ workflows:
     jobs:
       - test
       - deploy:
-        requires:
-          - test
-        filters:
-          branches:
-            only: /master|dev/
+          requires:
+            - test
+          filters:
+            branches:
+              only: /master|dev/
   crowdin:
     jobs:
       - crowdin-upload:
