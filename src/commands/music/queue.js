@@ -9,7 +9,7 @@ module.exports = class Queue extends Command {
     this.aliases = ['playlist']
     this.category = 'music'
 
-    this.subcommands = [ new QueueClear(client, this) ]
+    this.subcommands = [ new QueueClear(client, this), new QueueShuffle(client, this) ]
     this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true })
   }
 
@@ -57,3 +57,26 @@ class QueueClear extends Command {
     channel.send(embed)
   }
 }
+
+class QueueShuffle extends Command {
+  constructor (client, parentCommand) {
+    super(client, parentCommand)
+    this.name = 'shuffle'
+    this.aliases = ['sf']
+  }
+
+  async run ({ t, author, channel, guild }) {
+    const guildPlayer = this.client.playerManager.get(guild.id)
+    const embed = new SwitchbladeEmbed(author)
+
+    if (guildPlayer.queue.length > 0) {
+      guildPlayer.queue = guildPlayer.queue.sort(() => Math.random() > 0.5 ? -1 : 1)
+      embed.setTitle(t(`commands:${this.tPath}.queueShuffled`))
+    } else {
+      embed.setTitle(t('music:noneAfterCurrent'))
+    }
+
+    channel.send(embed)
+  }
+}
+
