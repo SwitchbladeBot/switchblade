@@ -18,7 +18,9 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     options.player = GuildPlayer
     super(client, nodes, options)
 
-    this.REST_ADDRESS = `${process.env.LAVALINK_HOST}:${process.env.LAVALINK_PORT}`
+    // TODO: Rest API based on guild's region (or maybe bot's location)
+    this.REST_ADDRESS = `${nodes[0].host}:${nodes[0].port}`
+    this.REST_PASSWORD = nodes[0].password
   }
 
   onMessage (message) {
@@ -34,7 +36,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
 
     const res = await snekfetch.get(`http://${this.REST_ADDRESS}/loadtracks`)
       .query({ identifier })
-      .set('Authorization', process.env.LAVALINK_PASSWORD)
+      .set('Authorization', this.REST_PASSWORD)
       .catch(e => {
         this.client.logError(new Error(`Lavalink fetchTracks ${e}`))
       })
