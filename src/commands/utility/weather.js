@@ -1,4 +1,4 @@
-const { CanvasTemplates, CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CanvasTemplates, CommandStructures } = require('../../')
 const { Command, CommandError, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
 const { Attachment } = require('discord.js')
 const moment = require('moment')
