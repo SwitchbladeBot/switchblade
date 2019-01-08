@@ -25,7 +25,7 @@ module.exports = class Play extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    if (!voiceChannel.joinable) {
+    if (!voiceChannel.joinable && !voiceChannel.connection) {
       return channel.send(embed.setTitle(t('errors:voiceChannelJoin')))
     }
 
