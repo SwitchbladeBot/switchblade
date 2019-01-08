@@ -39,7 +39,7 @@ workflows:
       - test:
           filters:
             branches:
-              ignore: /master|dev
+              ignore: /master|dev/
   deploy:
     jobs:
       - test:
