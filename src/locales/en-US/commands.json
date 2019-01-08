@@ -144,7 +144,14 @@
     "noTrackIdentifier": "You need to give me a track name or URL!"
   },
   "queue": {
-    "commandDescription": "Shows the current queue"
+    "commandDescription": "Shows the current queue",
+    "clearAdvice": "You can clear the music queue using `{{usage}}`.",
+    "subcommands": {
+      "clear": {
+        "commandDescription": "Clears the current queue",
+        "queueCleared": "Music queue has been cleared!"
+      }
+    }
   },
   "skip": {
     "commandDescription": "Skips the current song"
