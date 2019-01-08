@@ -5,7 +5,7 @@ jobs:
       - image: alconost/crowdin
     steps:
       - checkout
-      - run: crowdin upload resources
+      - run: crowdin upload sources
   test:
     docker:
       - image: node:latest
