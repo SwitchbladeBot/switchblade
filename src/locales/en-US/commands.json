@@ -158,6 +158,7 @@
     "commandUsage": "<0-150>",
     "missingVolumeParameter": "You need to give me the volume level!",
     "invalidVolumeParameter": "You need to give me a valid number!",
+    "notPlaying": "Can't adjust volume while not playing anything!",
     "volumeSet": "Volume set to {{volume}}%"
   },
   "help": {
