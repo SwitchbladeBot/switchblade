@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, ColorParameter } = CommandStructures
 
 module.exports = class FavColor extends Command {
@@ -17,11 +17,16 @@ module.exports = class FavColor extends Command {
     const hexcode = color.rgb(true)
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    userDocument.favColor = hexcode
-    userDocument.save()
-    embed
-      .setTitle(t('commands:favcolor.changedSuccessfully', { hexcode }))
-      .setColor(hexcode)
+
+    try {
+      await this.client.modules.social.setFavoriteColor(author.id, hexcode)
+      embed.setColor(hexcode)
+        .setTitle(t('commands:favcolor.changedSuccessfully', { hexcode }))
+    } catch (e) {
+      embed.setColor(Constants.ERROR_COLOR)
+        .setTitle(t('errors:generic'))
+    }
+
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

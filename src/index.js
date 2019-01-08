@@ -12,6 +12,7 @@ module.exports = {
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),
   EventListener: require('./structures/EventListener.js'),
+  Module: require('./structures/Module.js'),
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),
 
   // Utils
