@@ -154,6 +154,11 @@
       "shuffle": {
         "commandDescription": "Shuffles the current queue",
         "queueShuffled": "Music queue has been shuffled!"
+      },
+      "remove": {
+        "commandDescription": "Removes a song from the current queue",
+        "missingIndexParameter": "You need to give me a song index to remove from the queue",
+        "songRemoved": "{{- songName}} has been removed from the queue"
       }
     }
   },
