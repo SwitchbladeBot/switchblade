@@ -30,7 +30,7 @@ jobs:
       - checkout
       - run: git remote add dokku dokku@$DOKKU_SERVER_ADDRESS:switchblade-$CIRCLE_BRANCH
       - run: ssh-keyscan -H $DOKKU_SERVER_ADDRESS >> ~/.ssh/known_hosts
-      - run: git push -q dokku $CIRCLE_BRANCH:master
+      - run: git push -q -f dokku $CIRCLE_BRANCH:master
 
 workflows:
   version: 2
