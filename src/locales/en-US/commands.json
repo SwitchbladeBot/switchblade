@@ -150,6 +150,10 @@
       "clear": {
         "commandDescription": "Clears the current queue",
         "queueCleared": "Music queue has been cleared!"
+      },
+      "shuffle": {
+        "commandDescription": "Shuffles the current queue",
+        "queueShuffled": "Music queue has been shuffled!"
       }
     }
   },
