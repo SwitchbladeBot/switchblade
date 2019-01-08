@@ -1,5 +1,5 @@
 const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandRequirements, CommandParameters, BooleanFlagParameter, StringParameter } = CommandStructures
 const { Song, Playlist } = require('../../music/structures')
 
 module.exports = class Play extends Command {
@@ -17,11 +17,15 @@ module.exports = class Play extends Command {
     })
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' })
+      new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' }),
+      [
+        new BooleanFlagParameter({ name: 'soundcloud', aliases: [ 'sc' ] }),
+        new BooleanFlagParameter({ name: 'youtube', aliases: [ 'yt' ] })
+      ]
     )
   }
 
-  async run ({ t, author, channel, guild, voiceChannel }, identifier) {
+  async run ({ t, author, channel, flags, guild, voiceChannel }, identifier) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
@@ -31,8 +35,12 @@ module.exports = class Play extends Command {
 
     const playerManager = this.client.playerManager
     try {
+      const specificSearch = flags['soundcloud'] || flags['youtube']
+      if (flags['soundcloud']) identifier = `scsearch:${identifier}`
+      else if (flags['youtube']) identifier = `ytsearch:${identifier}`
+
       let { result, tryAgain } = await playerManager.loadTracks(identifier, author)
-      if (tryAgain && !result) {
+      if (tryAgain && !result && !specificSearch) {
         result = (await playerManager.loadTracks(`ytsearch:${identifier}`, author)).result
       }
 
