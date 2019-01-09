@@ -10,7 +10,13 @@ module.exports = class Queue extends Command {
     this.aliases = ['playlist']
     this.category = 'music'
 
-    this.subcommands = [ new QueueClear(client, this), new QueueShuffle(client, this), new QueueRemove(client, this) ]
+    this.subcommands = [
+      new QueueClear(client, this),
+      new QueueJump(client, this),
+      new QueueRemove(client, this),
+      new QueueShuffle(client, this)
+    ]
+
     this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true })
   }
 
@@ -106,6 +112,40 @@ class QueueRemove extends Command {
       const songName = `[${song.title}](${song.uri}) ${duration}`
       embed.setDescription(t(`commands:${this.tPath}.songRemoved`, { songName }))
         .setThumbnail(song.artwork)
+    } else {
+      embed.setTitle(t('music:noneAfterCurrent'))
+    }
+
+    channel.send(embed)
+  }
+}
+
+class QueueJump extends Command {
+  constructor (client, parentCommand) {
+    super(client, parentCommand)
+    this.name = 'jump'
+    this.aliases = ['jumpto', 'skipto']
+
+    this.parameters = new CommandParameters(this,
+      new NumberParameter({ full: true, missingError: `commands:${this.tPath}.missingIndexParameter`, min: 1 })
+    )
+  }
+
+  async run ({ t, author, channel, guild }, index) {
+    const guildPlayer = this.client.playerManager.get(guild.id)
+    const embed = new SwitchbladeEmbed(author)
+
+    if (guildPlayer.queue.length > 0) {
+      if (index > guildPlayer.queue.length) {
+        throw new CommandError(t(`commands:${this.tPath}.missingIndexParameter`))
+      }
+
+      const song = guildPlayer.queue.splice(0, index).pop()
+      const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
+      const songName = `[${song.title}](${song.uri}) ${duration}`
+
+      guildPlayer.play(song, true)
+      embed.setDescription(t(`commands:${this.tPath}.jumpedToSong`, { songName }))
     } else {
       embed.setTitle(t('music:noneAfterCurrent'))
     }
