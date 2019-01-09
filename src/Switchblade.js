@@ -96,7 +96,7 @@ module.exports = class Switchblade extends Client {
     if (typeof subCommand.parentCommand === 'string') {
       parentCommand = this.commands.find(c => c.name === subCommand.parentCommand)
     } else if (Array.isArray(subCommand.parentCommand)) {
-      parentCommand = subcommand.parentCommand.reduce((o, ca) => {
+      parentCommand = subCommand.parentCommand.reduce((o, ca) => {
         const arr = (Array.isArray(o) && o) || (o && o.subcommands)
         if (!arr) return
         return arr.find(c => c.name === ca)

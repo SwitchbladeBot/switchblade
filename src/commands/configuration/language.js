@@ -20,7 +20,7 @@ module.exports = class ConfigLanguage extends Command {
           return {
             title: t('commands:config.subcommands.language.noCode'),
             description: [
-              `**${t('commons:usage')}:** \`${prefix}${parentCommand.name} ${this.name} ${t('commands:config.subcommands.language.commandUsage')}\``,
+              this.usage(t, prefix),
               '',
               `__**${t('commands:config.subcommands.language.availableLanguages')}:**__`,
               `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`,
@@ -56,5 +56,4 @@ module.exports = class ConfigLanguage extends Command {
 
     channel.send(embed)
   }
-
 }
