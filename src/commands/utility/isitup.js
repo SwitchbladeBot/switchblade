@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
 const snekfetch = require('snekfetch')
 
 const PROTOCOL_REGEX = /^[a-zA-Z]+:\/\//
@@ -23,8 +23,7 @@ module.exports = class IsItUp extends Command {
       embed.setTitle(t('commands:isitup.isUp'))
         .setDescription(t('commands:isitup.details', { body }))
     } else {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:isitup.isDown'))
+      throw new CommandError(t('commands:isitup.isDown'))
     }
     channel.send(embed).then(() => channel.stopTyping())
   }

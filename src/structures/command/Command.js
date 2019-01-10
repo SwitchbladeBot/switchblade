@@ -38,8 +38,11 @@ module.exports = class Command {
    * @param {Array<string>} args Command arguments
    */
   async _run (context, args) {
-    const requirements = this.handleRequirements(context, args)
-    if (requirements instanceof CommandError) return this.error(context, requirements.content, requirements.showUsage)
+    try {
+      this.handleRequirements(context, args)
+    } catch (e) {
+      return this.error(context, e)
+    }
 
     const [ subcmd ] = args
     const subcommand = this.subcommands.find(c => c.name.toLowerCase() === subcmd || c.aliases.includes(subcmd))
@@ -47,11 +50,20 @@ module.exports = class Command {
       return subcommand._run(context, args.splice(1))
     }
 
-    args = this.handleParameters(context, args)
-    if (args instanceof CommandError) return this.error(context, args.content, args.showUsage)
+    try {
+      args = this.handleParameters(context, args)
+    } catch (e) {
+      return this.error(context, e)
+    }
 
     this.applyCooldown(context.author)
-    return this.run(context, ...args)
+
+    try {
+      const result = await this.run(context, ...args)
+      return result
+    } catch (e) {
+      this.error(context, e)
+    }
   }
 
   /**
@@ -84,20 +96,15 @@ module.exports = class Command {
     return this.requirements && this.requirements.applyCooldown(user, time)
   }
 
-  error ({ t, author, channel, prefix }, content, showUsage = false) {
-    const embedContent = typeof content === 'object'
-    const embed = new SwitchbladeEmbed(author)
-      .setColor(Constants.ERROR_COLOR)
-      .setTitle(embedContent ? content.title : content)
-
-    if ((content.showUsage || showUsage) && !embedContent) {
+  error ({ t, author, channel, prefix }, error) {
+    if (error instanceof CommandError) {
       const usage = this.usage(t, prefix)
-      if (usage) embed.setDescription(usage)
-    } else if (embedContent) {
-      embed.setDescription(content.description)
+      const embed = error.embed || new SwitchbladeEmbed(author)
+        .setTitle(error.message)
+        .setDescription(error.showUsage ? usage : '')
+      return channel.send(embed.setColor(Constants.ERROR_COLOR)).then(() => channel.stopTyping())
     }
-
-    return channel.send(embed).then(() => channel.stopTyping())
+    console.error(error)
   }
 
   get tPath () {

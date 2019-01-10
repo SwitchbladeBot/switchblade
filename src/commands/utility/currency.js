@@ -11,7 +11,7 @@ module.exports = class Currency extends Command {
     this.envVars = ['KSOFT_KEY']
   }
 
-  async run ({ t, author, channel, guildDocument }, tocoin, fromcoin, value) {
+  async run ({ t, author, channel, defaultPrefix }, tocoin, fromcoin, value) {
     const embed = new SwitchbladeEmbed(author)
     fromcoin = fromcoin || 'USD'
     value = value || 1
@@ -29,13 +29,13 @@ module.exports = class Currency extends Command {
         embed
           .setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:currency.noCurrency'))
-          .setDescription(`**${t('commons:usage')}**: \`${guildDocument.prefix}currency ${t('commands:currency.commandUsage')}\``)
+          .setDescription(`**${t('commons:usage')}**: \`${defaultPrefix}currency ${t('commands:currency.commandUsage')}\``)
       }
     } catch (e) {
       embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:currency.noCurrency'))
-        .setDescription(`**${t('commons:usage')}**: \`${guildDocument.prefix}currency ${t('commands:currency.commandUsage')}\``)
+        .setDescription(`**${t('commons:usage')}**: \`${defaultPrefix}currency ${t('commands:currency.commandUsage')}\``)
     }
     channel.send(embed)
   }

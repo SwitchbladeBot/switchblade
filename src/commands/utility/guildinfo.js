@@ -15,9 +15,9 @@ module.exports = class GuildInfo extends Command {
     )
   }
 
-  run ({ t, author, channel, guildDocument }, guild) {
+  run ({ t, author, channel, language }, guild) {
     const embed = new SwitchbladeEmbed(author)
-    moment.locale(guildDocument.language)
+    moment.locale(language)
     channel.startTyping()
     guild = guild || channel.guild
     embed.setTitle(guild.name)
