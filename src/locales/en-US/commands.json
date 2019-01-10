@@ -568,8 +568,8 @@
   "time": {
     "commandDescription": "Get the current time in a specified place",
     "commandUsage": "<timezone>",
-    "invalidTimezone": "You need to give me an `iana tz database` timezone or timezone abbreviation",
-    "currentTime": "The current time in {{timezone}} is"
+    "currentTime": "The current time in {{timezone}} is",
+    "notFound": "Couldn't find this place."
   },
   "dbl": {
     "commandDescription": "Gives you a bonus for voting on Discord Bot List",
