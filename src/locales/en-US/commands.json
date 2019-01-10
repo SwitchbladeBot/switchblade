@@ -145,24 +145,24 @@
   },
   "queue": {
     "commandDescription": "Shows the current queue",
-    "clearAdvice": "You can clear the music queue using `{{usage}}`.",
+    "clearAdvice": "You can clear the queue using `{{usage}}`.",
     "subcommands": {
       "clear": {
-        "commandDescription": "Clears the current queue",
-        "queueCleared": "Music queue has been cleared!"
+        "commandDescription": "Clears the queue",
+        "queueCleared": "The queue has been cleared!"
       },
       "shuffle": {
-        "commandDescription": "Shuffles the current queue",
-        "queueShuffled": "Music queue has been shuffled!"
+        "commandDescription": "Shuffles the queue",
+        "queueShuffled": "The queue has been shuffled!"
       },
       "remove": {
-        "commandDescription": "Removes a song from the current queue",
-        "missingIndexParameter": "You need to give me a song index to remove from the queue",
+        "commandDescription": "Removes a song from the queue",
+        "missingIndexParameter": "You need to give me the number of the song you want to remove from the queue",
         "songRemoved": "{{- songName}} has been removed from the queue"
       },
       "jump": {
-        "commandDescription": "Removes a song from the current queue",
-        "missingIndexParameter": "You need to give me a song index to jump to",
+        "commandDescription": "Removes a song from the queue",
+        "missingIndexParameter": "You need to give me the number of the song you want to jump to",
         "jumpedToSong": "Jumped to {{- songName}}"
       }
     }
