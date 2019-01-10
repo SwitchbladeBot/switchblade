@@ -8,9 +8,7 @@ module.exports = class CommandContext {
    * @prop {TextChannel} channel The channel of the message
    * @prop {?VoiceChannel} voiceChannel The voice channel of the author of the message, if any
    * @prop {?Guild} guild The guild of the channel of the message
-   * @prop {Object} guildDocument The document of the guild
    * @prop {string} language The language used
-   * @prop {Object} userDocument The document of the user
    * @prop {Command} command The command
    * @prop {string} aliase
    * @prop {string} prefix The command prefix
@@ -25,15 +23,11 @@ module.exports = class CommandContext {
     this.channel = options.message.channel
     this.voiceChannel = options.message.member.voiceChannel
     this.guild = options.message.guild
-
-    this.guildDocument = options.guildDocument
     this.language = options.language
-
-    this.userDocument = options.userDocument
-
     this.command = options.command
     this.aliase = options.aliase
     this.prefix = options.prefix
+    this.defaultPrefix = options.defaultPrefix
 
     this.t = () => { throw new Error('Invalid FixedT') }
     this.flags = {}

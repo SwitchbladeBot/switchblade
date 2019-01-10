@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
 const malScraper = require('mal-scraper')
 
 module.exports = class MyAnimeList extends Command {
@@ -34,9 +34,7 @@ module.exports = class MyAnimeList extends Command {
           .addField(t('commands:myanimelist.aired'), data.aired, true)
       }
     } catch (e) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:myanimelist.animeNotFound'))
+      throw new CommandError(t('commands:myanimelist.animeNotFound'))
     }
 
     channel.send(embed).then(() => channel.stopTyping())

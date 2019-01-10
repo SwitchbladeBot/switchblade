@@ -37,19 +37,18 @@ class ConfigLanguage extends Command {
       new StringParameter({
         full: true,
         whitelist: (arg) => languageCodes().concat(languageAliases(this.client)).some(l => l.toLowerCase() === arg.toLowerCase()),
-        missingError: ({ t, prefix }) => {
-          return {
-            title: t('commands:config.subcommands.language.noCode'),
-            description: [
+        missingError: ({ t, prefix, author }) => {
+          return new SwitchbladeEmbed().setTitle(t('commands:config.subcommands.language.noCode'))
+            .setDescription([
               `**${t('commons:usage')}:** \`${prefix}${parentCommand.name} ${this.name} ${t('commands:config.subcommands.language.commandUsage')}\``,
               '',
               `__**${t('commands:config.subcommands.language.availableLanguages')}:**__`,
               `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`,
               '',
               `${t('commands:config.missingTranslation')}`
-            ].join('\n')
-          }
-        } })
+            ].join('\n'))
+        }
+      })
     )
   }
 
