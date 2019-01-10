@@ -26,7 +26,7 @@ module.exports = class Time extends Command {
     }
 
     const { lat, lng } = place.geometry.location
-    const { timeZoneName, timeZoneId } = await this.client.apis.gmaps.getTimezone(lat, lng)
+    const { timeZoneId } = await this.client.apis.gmaps.getTimezone(lat, lng)
     const time = moment.tz(timeZoneId).format('LLLL (z)')
 
     embed
