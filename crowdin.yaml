@@ -2,6 +2,6 @@
 "api_key_env": CROWDIN_API_KEY
 
 files: [{
-  "source" : "en-US/*.json",
+  "source" : "/src/locales/en-US/*.json",
   "translation" : "%locale%/%original_file_name%",
 }]
