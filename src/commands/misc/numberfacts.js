@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, NumberParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, CommandParameters, NumberParameter } = CommandStructures
 const snekfetch = require('snekfetch')
 
 module.exports = class NumberFacts extends Command {
@@ -21,10 +21,7 @@ module.exports = class NumberFacts extends Command {
       embed.setTitle(body)
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
-      embed
-        .setTitle(t('commands:numberfacts.validNumber'))
-        .setColor(Constants.ERROR_COLOR)
-      channel.send(embed).then(() => channel.stopTyping())
+      throw new CommandError(t('commands:numberfacts.validNumber'))
     }
   }
 }

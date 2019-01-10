@@ -20,9 +20,7 @@ module.exports = class CommandParameters {
    * @param {Array<string>} args Array of the command args
    */
   handle (context, args) {
-    const flagsError = this.handleFlags(context, args)
-    if (flagsError) return flagsError
-
+    this.handleFlags(context, args)
     return this.handleArguments(context, args)
   }
 
@@ -49,7 +47,6 @@ module.exports = class CommandParameters {
             }
 
             const parsedFlag = this.parseParameter(context, flag, flagValue, missingErr)
-            if (parsedFlag instanceof CommandError) return parsedFlag
             flagsObject[flag.name] = parsedFlag
           }
         }).find(e => e)
@@ -73,7 +70,6 @@ module.exports = class CommandParameters {
       if (param.full) arg = args.slice(i).join(param.fullJoin || ' ')
 
       const parsedArg = this.parseParameter(context, param, arg, funcOrString(param.missingError, context.t, context))
-      if (parsedArg instanceof CommandError) return parsedArg
       parsedArgs.push(parsedArg)
     }
     return parsedArgs
@@ -81,11 +77,8 @@ module.exports = class CommandParameters {
 
   parseParameter (context, param, arg, missingErr) {
     const parsedArg = param.parse(arg, context)
-    if (parsedArg instanceof CommandError) {
-      parsedArg.showUsage = param.showUsage
-      return parsedArg
-    } else if (isNull(parsedArg) && param.required) {
-      return new CommandError(missingErr, param.showUsage)
+    if (isNull(parsedArg) && param.required) {
+      throw new CommandError(missingErr, param.showUsage)
     }
 
     if (!isNull(parsedArg)) {
@@ -93,7 +86,7 @@ module.exports = class CommandParameters {
         const whitelist = funcOrString(param.whitelist, null, parsedArg, context)
         const whitelisted = Array.isArray(whitelist) ? whitelist.includes(parsedArg) : !!whitelist
         if (!whitelisted) {
-          return new CommandError(missingErr, param.showUsage)
+          throw new CommandError(missingErr, param.showUsage)
         }
       }
     }

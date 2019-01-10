@@ -40,51 +40,51 @@ module.exports = class CommandRequirements {
 
   handle ({ t, author, channel, client, guild, member, voiceChannel }, args) {
     if (this.databaseOnly && !client.database) {
-      return new CommandError(t(this.errors.databaseOnly))
+      throw new CommandError(t(this.errors.databaseOnly))
     }
 
     if (this.playerManagerOnly && !client.playerManager) {
-      return new CommandError(t(this.errors.playerManagerOnly))
+      throw new CommandError(t(this.errors.playerManagerOnly))
     }
 
     if (this.devOnly && !PermissionUtils.isDeveloper(client, author)) {
-      return new CommandError(t(this.errors.devOnly))
+      throw new CommandError(t(this.errors.devOnly))
     }
 
     if (this.managersOnly && !PermissionUtils.isManager(client, author)) {
-      return new CommandError(t(this.errors.managersOnly))
+      throw new CommandError(t(this.errors.managersOnly))
     }
 
     if (this.guildOnly && !guild) {
-      return new CommandError(t(this.errors.guildOnly))
+      throw new CommandError(t(this.errors.guildOnly))
     }
 
     if (this.nsfwOnly && guild && !channel.nsfw) {
-      return new CommandError(t(this.errors.nsfwOnly))
+      throw new CommandError(t(this.errors.nsfwOnly))
     }
 
     if (this.sameVoiceChannelOnly && guild.me.voiceChannelID && (!voiceChannel || guild.me.voiceChannelID !== voiceChannel.id)) {
-      return new CommandError(t(this.errors.sameVoiceChannelOnly))
+      throw new CommandError(t(this.errors.sameVoiceChannelOnly))
     }
 
     if (this.voiceChannelOnly && !voiceChannel) {
-      return new CommandError(t(this.errors.voiceChannelOnly))
+      throw new CommandError(t(this.errors.voiceChannelOnly))
     }
 
     if (this.onlyOldAccounts && moment(author.createdTimestamp).format('MM, YYYY') === moment().format('MM, YYYY')) {
-      return new CommandError(t(this.errors.onlyOldAccounts))
+      throw new CommandError(t(this.errors.onlyOldAccounts))
     }
 
     const guildPlayer = client.playerManager && client.playerManager.get(guild.id)
     if (this.guildPlaying && (!guildPlayer || !guildPlayer.playing)) {
-      return new CommandError(t(this.errors.guildPlaying))
+      throw new CommandError(t(this.errors.guildPlaying))
     }
 
     if (this.permissions.length > 0) {
       if (!channel.permissionsFor(member).has(this.permissions)) {
         const permission = this.permissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
         const sentence = this.permissions.length >= 1 ? 'errors:missingOnePermission' : 'errors:missingMultiplePermissions'
-        return new CommandError(t(sentence, { permission }))
+        throw new CommandError(t(sentence, { permission }))
       }
     }
 
@@ -92,13 +92,13 @@ module.exports = class CommandRequirements {
       if (!channel.permissionsFor(guild.me).has(this.permissions)) {
         const permission = this.botPermissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
         const sentence = this.botPermissions.length >= 1 ? 'errors:botMissingOnePermission' : 'errors:botMissingMultiplePermissions'
-        return new CommandError(t(sentence, { permission }))
+        throw new CommandError(t(sentence, { permission }))
       }
     }
 
     if (this.cooldown.enabled && this.cooldownMap.has(author.id)) {
       if (this.cooldown.feedback) {
-        return new CommandError(t(this.errors.cooldown))
+        throw new CommandError(t(this.errors.cooldown))
       }
     }
   }

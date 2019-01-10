@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
+const { Command, CommandError, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
 
 module.exports = class Lyrics extends Command {
   constructor (client) {
@@ -33,9 +33,7 @@ module.exports = class Lyrics extends Command {
         .setURL(`http://genius.com${data.result.path}`)
       return channel.send(embed).then(() => channel.stopTyping())
     } else {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:lyrics.noLyricsFound'))
-      channel.send(embed).then(() => channel.stopTyping())
+      throw new CommandError(t('commands:lyrics.noLyricsFound'))
     }
   }
 }
