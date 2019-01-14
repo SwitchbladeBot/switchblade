@@ -11,7 +11,7 @@ module.exports = class DBL extends Command {
     this.requirements = new CommandRequirements(this, { databaseOnly: true, apis: ['dbl'] })
   }
 
-  async run ({ t, author, channel, prefix, alias, userDocument }) {
+  async run ({ t, author, channel, prefix, alias }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
