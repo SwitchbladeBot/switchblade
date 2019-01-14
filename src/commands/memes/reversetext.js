@@ -15,7 +15,7 @@ module.exports = class ReverseText extends Command {
   async run ({ t, author, channel }, text) {
     channel.send(
       new SwitchbladeEmbed(author)
-        .setDescription(text.split('').reverse().join(''))
+        .setDescription(`${text.split('').reverse().join('')}`)
     )
   }
 }
