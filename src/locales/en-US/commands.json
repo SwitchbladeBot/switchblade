@@ -230,7 +230,7 @@
   "botinfo": {
     "commandDescription": "Sends information about myself",
     "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
-    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds.size}} servers** with **{{commands.length}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
+    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds.size}} servers** and **{{users}} users** with **{{commands.length}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
     "links": "Useful links",
     "inviteLink": "{{Constants.BOT_BADGE}} **[Invite me to your server](https://invite.switchblade.xyz)**",
     "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
@@ -568,8 +568,8 @@
   "time": {
     "commandDescription": "Get the current time in a specified place",
     "commandUsage": "<timezone>",
-    "invalidTimezone": "You need to give me an `iana tz database` timezone or timezone abbreviation",
-    "currentTime": "The current time in {{timezone}} is"
+    "currentTime": "The current time in {{timezone}} is",
+    "notFound": "Couldn't find this place."
   },
   "dbl": {
     "commandDescription": "Gives you a bonus for voting on Discord Bot List",
@@ -703,5 +703,9 @@
   "pusheen": {
     "commandDescription": "Shows a random post from the pusheen tumblr.",
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
+  },
+  "reversetext": {
+    "commandDescription": "Reverses a text",
+    "missingSentence": "You need to give me a sentence to reverse"
   }
 }
