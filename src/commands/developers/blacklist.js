@@ -16,12 +16,12 @@ module.exports = class BlacklistCommand extends Command {
   }
 
   async run ({ channel, author, t }, user, reason) {
-    const embed = new SwitchbladeEmbed(author)
     const doc = await this.client.database.users.get(user.id)
     await BlacklistUtils.addUser(doc, reason, author)
-    embed
+    channel.send(
+      new SwitchbladeEmbed(author)
       .setTitle(t('commands:blacklist.successTitle'))
       .setDescription(`${user} - \`${reason}\``)
-    channel.send(embed)
+    )
   }
 }
