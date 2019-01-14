@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandParameters, CommandRequirements, StringParameter, CommandError } = CommandStructures
 
 const i18next = require('i18next')
 
@@ -18,12 +18,13 @@ module.exports = class Config extends Command {
   }
 
   run ({ t, author, prefix, alias, channel }) {
-    const embed = new SwitchbladeEmbed(author)
-    embed.setDescription([
-      t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` }),
-      t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` })
-    ].join('\n'))
-    channel.send(embed)
+    channel.send(
+      new SwitchbladeEmbed(author)
+        .setDescription([
+          t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` }),
+          t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` })
+        ].join('\n'))
+    )
   }
 }
 
@@ -47,6 +48,7 @@ class ConfigLanguage extends Command {
               '',
               `${t('commands:config.missingTranslation')}`
             ].join('\n'))
+            .setFooter(author.tag)
         }
       })
     )
@@ -64,17 +66,15 @@ class ConfigLanguage extends Command {
     const language = langDisplayNames[lang] && langDisplayNames[lang][lang]
     const langDisplayName = language && language[0]
 
-    const embed = new SwitchbladeEmbed(author)
-
     try {
       await this.client.modules.configuration.setLanguage(guild.id, lang)
-      embed.setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
+      channel.send(
+        new SwitchbladeEmbed(author)
+          .setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
+      )
     } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('errors:generic'))
+      throw new CommandError(t('errors:generic'))
     }
-
-    channel.send(embed)
   }
 }
 
@@ -89,16 +89,14 @@ class ConfigPrefix extends Command {
   }
 
   async run ({ t, author, channel, guild }, prefix = process.env.PREFIX) {
-    const embed = new SwitchbladeEmbed(author)
-
     try {
       await this.client.modules.configuration.setPrefix(guild.id, prefix)
-      embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', { prefix }))
+      channel.send(
+        new SwitchbladeEmbed(author)
+          .setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', { prefix }))
+      )
     } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('errors:generic'))
+      throw new CommandError(t('errors:generic'))
     }
-
-    channel.send(embed)
   }
 }
