@@ -11,9 +11,6 @@ const embedColor = 0x292B2D
 const ladders = ['xp', 'games', 'badges', 'playtime', 'age']
 const regions = ['europe', 'north_america', 'south_america', 'asia', 'africa', 'oceania', 'antarctica']
 
-// TODO: Finish the ladder command
-// TODO: Add profile subcommand
-
 module.exports = class SteamLadder extends Command {
   constructor (client) {
     super(client)
