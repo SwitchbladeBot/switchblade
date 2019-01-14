@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, CommandRequirements, StringParameter } = CommandStructures
 
 const i18next = require('i18next')
@@ -17,7 +17,7 @@ module.exports = class Config extends Command {
     this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD'] })
   }
 
-  run ({ t, author, prefix, alias, channel, guildDocument }) {
+  run ({ t, author, prefix, alias, channel }) {
     const embed = new SwitchbladeEmbed(author)
     embed.setDescription([
       t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` }),
@@ -37,23 +37,22 @@ class ConfigLanguage extends Command {
       new StringParameter({
         full: true,
         whitelist: (arg) => languageCodes().concat(languageAliases(this.client)).some(l => l.toLowerCase() === arg.toLowerCase()),
-        missingError: ({ t, prefix }) => {
-          return {
-            title: t('commands:config.subcommands.language.noCode'),
-            description: [
+        missingError: ({ t, prefix, author }) => {
+          return new SwitchbladeEmbed().setTitle(t('commands:config.subcommands.language.noCode'))
+            .setDescription([
               `**${t('commons:usage')}:** \`${prefix}${parentCommand.name} ${this.name} ${t('commands:config.subcommands.language.commandUsage')}\``,
               '',
               `__**${t('commands:config.subcommands.language.availableLanguages')}:**__`,
               `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`,
               '',
               `${t('commands:config.missingTranslation')}`
-            ].join('\n')
-          }
-        } })
+            ].join('\n'))
+        }
+      })
     )
   }
 
-  async run ({ t, author, channel, guildDocument }, lang) {
+  async run ({ t, author, channel, guild }, lang) {
     lang = lang.toLowerCase()
     const langCodes = languageCodes()
     const langDisplayNames = this.client.cldr.languages
@@ -66,9 +65,15 @@ class ConfigLanguage extends Command {
     const langDisplayName = language && language[0]
 
     const embed = new SwitchbladeEmbed(author)
-    guildDocument.language = lang
-    guildDocument.save()
-    embed.setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
+
+    try {
+      await this.client.modules.configuration.setLanguage(guild.id, lang)
+      embed.setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
+    } catch (e) {
+      embed.setColor(Constants.ERROR_COLOR)
+        .setTitle(t('errors:generic'))
+    }
+
     channel.send(embed)
   }
 }
@@ -83,12 +88,17 @@ class ConfigPrefix extends Command {
     )
   }
 
-  async run ({ t, author, channel, guildDocument }, prefix) {
+  async run ({ t, author, channel, guild }, prefix = process.env.PREFIX) {
     const embed = new SwitchbladeEmbed(author)
-    prefix = prefix || process.env.PREFIX
-    guildDocument.prefix = prefix
-    await guildDocument.save()
-    embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', { prefix }))
+
+    try {
+      await this.client.modules.configuration.setPrefix(guild.id, prefix)
+      embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', { prefix }))
+    } catch (e) {
+      embed.setColor(Constants.ERROR_COLOR)
+        .setTitle(t('errors:generic'))
+    }
+
     channel.send(embed)
   }
 }

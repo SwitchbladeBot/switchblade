@@ -9,7 +9,7 @@ module.exports = class GuildParameter extends Parameter {
 
   guild ({ t, client }, id) {
     const guild = client.guilds.get(id)
-    if (!guild) return new CommandError(t('errors:invalidGuild'))
+    if (!guild) throw new CommandError(t('errors:invalidGuild'))
     return guild
   }
 }

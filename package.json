@@ -7,7 +7,8 @@
     "start": "node index.js",
     "start-dev": "nodemon --exec node -r dotenv/config index.js",
     "test": "mocha src/test --recursive",
-    "fix": "standard --fix"
+    "fix": "standard --fix",
+    "crowdin": "crowdin upload sources"
   },
   "standard": {
     "env": [
@@ -34,7 +35,6 @@
     "api-npm": "^1.0.0",
     "booru": "^1.3.4",
     "bufferutil": "^4.0.0",
-    "canvas": "^2.1.0",
     "cheerio": "^1.0.0-rc.2",
     "cldr-core": "^34.0.0",
     "cldr-localenames-modern": "^34.0.0",
@@ -47,8 +47,8 @@
     "figlet": "^1.2.0",
     "gifencoder": "^1.1.0",
     "googleapis": "^34.0.0",
-    "i18next": "^12.1.0",
     "i18n-iso-countries": "^3.7.8",
+    "i18next": "^12.1.0",
     "i18next-node-fs-backend": "^2.1.0",
     "icecast-parser": "^3.0.0",
     "intl": "^1.2.5",
@@ -86,5 +86,8 @@
     "ignore": [
       "locales/*"
     ]
+  },
+  "optionalDependencies": {
+    "canvas": "^2.2.0"
   }
 }

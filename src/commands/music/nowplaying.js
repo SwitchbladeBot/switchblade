@@ -18,7 +18,7 @@ module.exports = class NowPlaying extends Command {
   async run ({ t, author, channel, flags, guild }) {
     const guildPlayer = this.client.playerManager.get(guild.id)
     const song = guildPlayer.playingSong
-    if (!flags['text']) {
+    if (!flags['text'] && this.client.canvasLoaded) {
       const nowPlaying = await CanvasTemplates.nowPlaying({ t }, guildPlayer, song)
       channel.send(new Attachment(nowPlaying, 'nowplaying.png')).then(() => channel.stopTyping())
     } else {

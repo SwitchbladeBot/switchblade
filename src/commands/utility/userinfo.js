@@ -14,10 +14,10 @@ module.exports = class UserInfo extends Command {
     )
   }
 
-  run ({ t, member: author, channel, guildDocument }, member) {
+  run ({ t, member: author, channel, language }, member) {
     const embed = new SwitchbladeEmbed(author.user)
     member = member || author
-    moment.locale(guildDocument.language)
+    moment.locale(language)
     const filter = this.client.guilds.filter(g => g.members.has(member.id)).map(g => g.name)
     const charLimit = (s) => s.length > 1024 ? `${s.substr(0, 1020)}...` : s
     channel.startTyping()

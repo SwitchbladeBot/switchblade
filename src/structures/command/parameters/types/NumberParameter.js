@@ -16,7 +16,7 @@ module.exports = class NumberParameter extends Parameter {
 
     let nmb = Number(arg)
     if (isNull(nmb)) {
-      return new CommandError(t('errors:invalidNumber'))
+      throw new CommandError(t('errors:invalidNumber'))
     }
 
     if (!isNull(this.min)) nmb = Math.max(nmb, this.min)

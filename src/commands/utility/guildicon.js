@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, CommandParameters } = require('../../')
-const { Command, CommandRequirements, GuildParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, CommandRequirements, CommandParameters, GuildParameter } = CommandStructures
 
 module.exports = class GuildIcon extends Command {
   constructor (client) {
@@ -22,8 +22,7 @@ module.exports = class GuildIcon extends Command {
       embed.setImage(guild.iconURL)
         .setDescription(t('commands:guildicon.iconDescription', { guild: guild.name }))
     } else {
-      embed.setDescription(t('commands:guildicon.noIcon'))
-        .setColor(Constants.ERROR_COLOR)
+      throw new CommandError(t('commands:guildicon.noIcon'))
     }
     channel.send(embed).then(() => channel.stopTyping())
   }

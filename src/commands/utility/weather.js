@@ -1,5 +1,5 @@
-const { CanvasTemplates, CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { CanvasTemplates, CommandStructures } = require('../../')
+const { Command, CommandError, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
 const { Attachment } = require('discord.js')
 const moment = require('moment')
 
@@ -12,6 +12,7 @@ module.exports = class Weather extends Command {
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, required: true, missingError: 'commands:weather.noCity' })
     )
+    this.requirements = new CommandRequirements(this, { canvasOnly: true })
   }
 
   async run ({ t, author, channel, language }, address) {
@@ -45,9 +46,7 @@ module.exports = class Weather extends Command {
 
       channel.send(new Attachment(weather, 'weather.png')).then(() => channel.stopTyping())
     } else {
-      channel.send(new SwitchbladeEmbed(author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:weather.notFound')))
+      throw new CommandError(t('commands:weather.notFound'))
     }
   }
 
