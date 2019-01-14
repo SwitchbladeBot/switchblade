@@ -26,7 +26,7 @@ module.exports = class Betflip extends Command {
         case 'NOT_ENOUGH_MONEY':
           throw new CommandError(t('errors:notEnoughMoney'))
         default:
-          throw new CommandError(t('errors:notEnoughMoney'))
+          throw new CommandError(t('errors:generic'))
       }
     }
 
