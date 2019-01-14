@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, CommandRequirements, NumberParameter, UserParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandParameters, CommandRequirements, NumberParameter, UserParameter, CommandError } = CommandStructures
 
 module.exports = class Pay extends Command {
   constructor (client) {
@@ -11,27 +11,25 @@ module.exports = class Pay extends Command {
     this.parameters = new CommandParameters(this,
       new UserParameter({ missingError: 'commands:pay.noMember', acceptSelf: false, errors: { acceptSelf: 'commands:pay.cantPayYourself' } }),
       new NumberParameter({ min: 1, missingError: 'commands:pay.noValue' })
-    )
+  )
   }
 
   async run ({ t, author, channel }, receiver, value) {
-    const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-
     try {
       await this.client.modules.economy.transfer(author.id, receiver.id, value)
-      embed.setDescription(t('commands:pay.transactionSuccessful', { receiver, value }))
+      channel.send(
+        new SwitchbladeEmbed(author)
+          .setDescription(t('commands:pay.transactionSuccessful', { receiver, value }))
+      )
     } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
       switch (e.message) {
         case 'NOT_ENOUGH_MONEY':
-          embed.setTitle(t('commands:pay.notEnoughMoney'))
-          break
+          throw new CommandError(t('commands:pay.notEnoughMoney'))
         default:
-          embed.setTitle(t('errors:generic'))
+          throw new CommandError(t('errors:generic'))
       }
     }
-
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.stopTyping()
   }
 }
