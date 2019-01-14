@@ -14,11 +14,12 @@ module.exports = class E621 extends Command {
 
   async run ({ t, author, channel }) {
     channel.startTyping()
-    const embed = new SwitchbladeEmbed(author)
-    const [ image ] = await booru.search('e621.net', ['rating:e'], { limit: 1, random: true }).then(booru.commonfy)
-    embed.setImage(image.common.file_url)
-      .setDescription(t('commands:e621.hereIsYour_yiff'))
-      .setColor(Constants.E621_COLOR)
-    channel.send(embed).then(() => channel.stopTyping())
+    const [ image ] = await booru.search('e621.net', ['rating:e'], { limit: 1, random: true })
+    channel.send(
+      new SwitchbladeEmbed(author)
+        .setImage(image.common.file_url)
+        .setDescription(t('commands:e621.hereIsYour_yiff'))
+        .setColor(Constants.E621_COLOR)
+    ).then(() => channel.stopTyping())
   }
 }
