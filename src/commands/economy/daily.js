@@ -21,7 +21,8 @@ module.exports = class Daily extends Command {
       embed.setColor(Constants.ERROR_COLOR)
       switch (e.message) {
         case 'ALREADY_CLAIMED':
-          embed.setTitle(t('commands:daily.alreadyClaimedTitle'))
+          embed
+            .setTitle(t('commands:daily.alreadyClaimedTitle'))
             .setDescription(t('commands:daily.alreadyClaimedDescription', { time: e.formattedCooldown }))
           break
         default:
