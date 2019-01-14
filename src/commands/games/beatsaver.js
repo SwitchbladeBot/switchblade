@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandParameters, StringParameter } = CommandStructures
 
 const snekfetch = require('snekfetch')
@@ -18,36 +18,27 @@ module.exports = class BeatSaver extends Command {
 
   async run ({ t, author, channel }, query) {
     channel.startTyping()
-    const embed = new SwitchbladeEmbed(author)
-    let url = await parseQuery(query)
+    const url = await parseQuery(query)
 
-    if (!url) {
-      embed
-        .setTitle(t('commands:beatsaver.notFound'))
-        .setColor(Constants.ERROR_COLOR)
-      channel.send(embed).then(channel.stopTyping())
-      return
-    }
+    if (!url) throw new CommandError(t('commands:beatsaver.notFound'))
 
     const { body } = await snekfetch.get(url)
     const $ = cheerio.load(body)
-    if (body) {
-      const title = $('body > div > div > h2').text()
-      const downloadUrl = $('body > div > div > div > div > a').attr('href')
-      const imageUrl = $('body > div > div > div > div > img').attr('src')
-      embed
+
+    if (!body) throw new CommandError(t('commands:beatsaver.notFound'), true)
+
+    const title = $('body > div > div > h2').text()
+    const downloadUrl = $('body > div > div > div > div > a').attr('href')
+    const imageUrl = $('body > div > div > div > div > img').attr('src')
+
+    channel.send(
+      new SwitchbladeEmbed(author)
         .setColor(0x3C347B)
         .setAuthor('Beat Saver', 'https://i.imgur.com/yK8SmyX.png')
         .setTitle(title)
         .setThumbnail(imageUrl)
         .setDescription(`**[${t('commands:beatsaver.download')}](${downloadUrl})** - [${t('commands:beatsaver.details')}](${url})`)
-    } else {
-      embed
-        .setTitle(t('commands:beatsaver.notFound'))
-        .setColor(Constants.ERROR_COLOR)
-    }
-
-    channel.send(embed).then(channel.stopTyping())
+    ).then(channel.stopTyping())
   }
 }
 
