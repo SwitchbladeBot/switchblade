@@ -1,5 +1,5 @@
-const { CommandStructures, BlacklistUtils, SwitchbladeEmbed, Constants } = require('../../index')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { CommandStructures, BlacklistUtils, SwitchbladeEmbed } = require('../../index')
+const { Command, CommandRequirements, CommandParameters, UserParameter, CommandError } = CommandStructures
 
 module.exports = class WhyBlacklisted extends Command {
   constructor (client) {
@@ -15,22 +15,19 @@ module.exports = class WhyBlacklisted extends Command {
   }
 
   async run ({ channel, author, t }, user) {
-    const embed = new SwitchbladeEmbed(author)
     const doc = await this.client.database.users.get(user.id)
     const info = await BlacklistUtils.getInfo(doc)
     if (info) {
-      const text = { user: user, blacklister: `<@${info.blacklisterId}>` }
-      embed.setDescription(
-        [
-          `**${t('commands:whyblacklisted.reasonTitle', text)}**`,
-          `\`${info.reason}\``
-        ].join('\n')
-      )
+      channel.send(new SwitchbladeEmbed(author)
+        .setDescription(
+          [
+            `**${t('commands:whyblacklisted.reasonTitle', { user, blacklister: `<@${info.blacklisterId}>` })}**`,
+            `\`${info.reason}\``
+          ].join('\n')
+        ))
     } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:whyblacklisted.notBlacklisted'))
+      throw new CommandError(t('commands:whyblacklisted.notBlacklisted'))
     }
-    channel.send(embed)
+
   }
 }
