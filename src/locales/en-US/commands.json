@@ -703,10 +703,5 @@
   "pusheen": {
     "commandDescription": "Shows a random post from the pusheen tumblr.",
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
-  },
-  "reversetext": {
-    "commandDescription": "Reverses a text",
-    "missingSentence": "You need to give me a sentence to reverse.",
-    "commandUsage": "<text to reverse>"
   }
 }
