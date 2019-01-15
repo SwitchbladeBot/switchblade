@@ -17,6 +17,7 @@
   <a title="JetBrains" target="_blank" href="https://www.jetbrains.com/?from=switchblade/"><img src="https://img.shields.io/badge/Powered%20by%20JetBrains-gray.svg?logo=webstorm&style=flat-square"></a>
   <a href="https://codeclimate.com/github/SwitchbladeBot/switchblade/maintainability"><img src="https://api.codeclimate.com/v1/badges/7e68f7e251b58a3b9576/maintainability" /></a>
   <a href="https://discordbots.org/bot/445277324175474689"><img src="https://discordbots.org/api/widget/status/445277324175474689.svg" /></a>
+  <a href="https://circleci.com/gh/SwitchbladeBot/switchblade"><img src="https://img.shields.io/circleci/project/github/SwitchbladeBot/switchblade/dev.svg?style=flat-square&logo=circleci"/></a>
     <br>
     Vote on <a href="https://discordbots.org/bot/445277324175474689/vote" target="_blank">DBL</a>
   </p>
