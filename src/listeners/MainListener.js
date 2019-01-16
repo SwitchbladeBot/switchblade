@@ -62,7 +62,7 @@ module.exports = class MainListener extends EventListener {
 
       if (process.env.DBL2_TOKEN) {
         snekfetch
-          .post(`https://discordbotlist.com/api/bots/445277324175474689/stats`)
+          .post(`https://discordbotlist.com/api/bots/${client.user.id}/stats`)
           .set('Authorization', `Bot ${process.env.DBL2_TOKEN}`)
           .send({
             guilds: client.guilds.size,
