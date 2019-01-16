@@ -715,5 +715,10 @@
     "info": "Information",
     "warn": "Warning",
     "error": "Critical"
+  },
+  "reversetext": {
+    "commandDescription": "Reverses a text",
+    "missingSentence": "You need to give me a sentence to reverse",
+    "commandUsage": "<text to reverse>"
   }
 }

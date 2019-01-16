@@ -1,6 +1,6 @@
 const { EventListener } = require('../')
 
-module.exports = class MainListener extends EventListener {
+module.exports = class AutoModerator extends EventListener {
   constructor (client) {
     super(client)
     this.events = ['guildMemberAdd']
