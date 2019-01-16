@@ -59,6 +59,18 @@ module.exports = class MainListener extends EventListener {
           .then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
           .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
       }
+
+      if (process.env.DBL2_TOKEN) {
+        snekfetch
+          .post(`https://discordbotlist.com/api/bots/445277324175474689/stats`)
+          .set('Authorization', `Bot ${process.env.DBL2_TOKEN}`)
+          .send({
+            guilds: client.guilds.size,
+            users: client.users.size
+          })
+          .then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
+          .catch(() => client.log('[31mFailed to post statistics', 'discordbotlist.com'))
+      }
     }
 
     postStats(this)
