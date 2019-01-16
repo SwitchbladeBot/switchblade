@@ -28,7 +28,7 @@ module.exports = class LoLStatus extends Command {
 
   async run ({ t, author, channel, language }, server) {
     channel.startTyping()
-    const {body} = await snekfetch.get(`https://status.leagueoflegends.com/shards/${server}/summary`)
+    const { body } = await snekfetch.get(`https://status.leagueoflegends.com/shards/${server}/summary`)
     if (!body.messages.length) throw new CommandError(t('commands:lolstatus.noStatusMessages'))
     channel.send(
       new SwitchbladeEmbed(author)
@@ -45,7 +45,7 @@ module.exports = class LoLStatus extends Command {
     channel.stopTyping()
   }
 
-  getLocalizedContent(message, language) {
+  getLocalizedContent (message, language) {
     if (message.translations.find(t => t.locale === language.replace('-', '_'))) {
       return message.translations.find(t => t.locale === language.replace('-', '_')).content
     } else {
