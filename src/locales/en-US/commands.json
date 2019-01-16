@@ -704,6 +704,18 @@
     "commandDescription": "Shows a random post from the pusheen tumblr.",
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
   },
+  "lolstatus": {
+    "commandDescription": "Shows the current status of a League of Legends server",
+    "commandUsage": "<server>",
+    "missingServer": "You need to give me a valid League of Legends server",
+    "availableServers": "Available servers",
+    "noStatusMessages": "There are no status messages for this server",
+    "online": "Online",
+    "offline": "Offline",
+    "info": "Information",
+    "warn": "Warning",
+    "error": "Critical"
+  },
   "reversetext": {
     "commandDescription": "Reverses a text",
     "missingSentence": "You need to give me a sentence to reverse",

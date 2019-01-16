@@ -31,6 +31,13 @@ module.exports = {
   PATREON_LOGO: '<:patreon:516783030543712273>',
   UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
 
+  // League of Legends Status Emoji
+  LOL_STATUS_INFO: '<:lolinfo:534989137913184277>',
+  LOL_STATUS_WARN: '<:lolwarn:534989138005458944>',
+  LOL_STATUS_ERROR: '<:lolerror:513764139412357130>',
+  LOL_STATUS_ONLINE: '<:lolonline:534989137984487424>',
+  LOL_STATUS_OFFLINE: '<:loloffline:534989137913053199>',
+
   // SteamLadder Emoji
   STEAMLADDER_STAFF: '<:steamladder_staff_icon:516812022155968512>',
   STEAMLADDER_WINTER: '<:steamladder_winter_badge:516812022285860864>',
