@@ -10,7 +10,7 @@ module.exports = class Support extends Command {
   async run ({ t, channel }) {
     channel.send(
       new SwitchbladeEmbed()
-        .setImage('https://i.imgur.com/FDemvyo.png')
+        .setImage('https://i.imgur.com/wuuQaZu.png')
         .setDescription(`${Constants.DISCORD_LOGO} ${t('commands:support.clickHere')}`)
     )
   }
