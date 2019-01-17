@@ -19,7 +19,7 @@ const verifySelectFilter = (select, length) => {
   return number <= length
 }
 
-module.exports = class Config extends Command {
+module.exports = class LastFM extends Command {
   constructor (client) {
     super(client)
     this.name = 'lastfm'
