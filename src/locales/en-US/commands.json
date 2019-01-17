@@ -720,5 +720,9 @@
     "commandDescription": "Reverses a text",
     "missingSentence": "You need to give me a sentence to reverse",
     "commandUsage": "<text to reverse>"
+  },
+  "support": {
+    "commandDescription": "Shows the link to Switchblade support server",
+    "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   }
 }
