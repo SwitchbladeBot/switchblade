@@ -726,6 +726,8 @@
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   },
   "lastfm": {
+    "commandDescription": "Get an user information or search for a track, album or artist on last.fm",
+    "commandUsage": "<action> <query>",
     "userHelp": "To get an user's information, use {{- command}} <user>",
     "trackHelp": "To get an track, use {{- command}} <query>",
     "albumHelp": "To get an album, use {{- command}} <query>",
