@@ -3,5 +3,5 @@
 
 files: [{
   "source" : "/src/locales/en-US/*.json",
-  "translation" : "/src/locales/%locale%/%original_file_name%",
+  "translation" : "%locale%/%original_file_name%",
 }]

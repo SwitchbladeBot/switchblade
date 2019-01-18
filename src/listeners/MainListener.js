@@ -57,6 +57,18 @@ module.exports = class MainListener extends EventListener {
           .then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
           .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
       }
+
+      if (process.env.DBL2_TOKEN) {
+        snekfetch
+          .post(`https://discordbotlist.com/api/bots/${client.user.id}/stats`)
+          .set('Authorization', `Bot ${process.env.DBL2_TOKEN}`)
+          .send({
+            guilds: client.guilds.size,
+            users: client.users.size
+          })
+          .then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
+          .catch(() => client.log('[31mFailed to post statistics', 'discordbotlist.com'))
+      }
     }
 
     postStats(this)
@@ -93,7 +105,7 @@ module.exports = class MainListener extends EventListener {
           language
         })
 
-        this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
+        this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
         this.runCommand(command, context, args, language)
       }
     }

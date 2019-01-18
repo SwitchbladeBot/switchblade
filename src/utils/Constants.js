@@ -11,6 +11,8 @@ module.exports = {
   MAL_COLOR: '#2E51A2',
   GELBOORU_COLOR: '#2887FD',
   GENIUS_COLOR: '#FFFB66',
+  GUILD_LOST_COLOR: '#BD4351',
+  GUILD_ADDED_COLOR: '#41A57A',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',
@@ -28,6 +30,13 @@ module.exports = {
   SWITCHBLADE_LOGO: '<:switchblade:494575477659271168>',
   PATREON_LOGO: '<:patreon:516783030543712273>',
   UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
+
+  // League of Legends Status Emoji
+  LOL_STATUS_INFO: '<:lolinfo:534989137913184277>',
+  LOL_STATUS_WARN: '<:lolwarn:534989138005458944>',
+  LOL_STATUS_ERROR: '<:lolerror:513764139412357130>',
+  LOL_STATUS_ONLINE: '<:lolonline:534989137984487424>',
+  LOL_STATUS_OFFLINE: '<:loloffline:534989137913053199>',
 
   // SteamLadder Emoji
   STEAMLADDER_STAFF: '<:steamladder_staff_icon:516812022155968512>',
