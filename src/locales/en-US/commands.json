@@ -591,8 +591,8 @@
   "time": {
     "commandDescription": "Get the current time in a specified place",
     "commandUsage": "<timezone>",
-    "currentTime": "The current time in {{timezone}} is",
-    "notFound": "Couldn't find this place."
+    "invalidTimezone": "You need to give me an `iana tz database` timezone or timezone abbreviation",
+    "currentTime": "The current time in {{timezone}} is"
   },
   "dbl": {
     "commandDescription": "Gives you a bonus for voting on Discord Bot List",
@@ -727,30 +727,12 @@
     "commandDescription": "Shows a random post from the pusheen tumblr.",
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
   },
-  "lolstatus": {
-    "commandDescription": "Shows the current status of a League of Legends server",
-    "commandUsage": "<server>",
-    "missingServer": "You need to give me a valid League of Legends server",
-    "availableServers": "Available servers",
-    "noStatusMessages": "There are no status messages for this server",
-    "online": "Online",
-    "offline": "Offline",
-    "info": "Information",
-    "warn": "Warning",
-    "error": "Critical"
-  },
-  "reversetext": {
-    "commandDescription": "Reverses a text",
-    "missingSentence": "You need to give me a sentence to reverse",
-    "commandUsage": "<text to reverse>"
-  },
-  "support": {
-    "commandDescription": "Shows the link to Switchblade support server",
-    "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
-  },
-  "presidentialalert": {
-    "commandDescription": "Generates a Presidential Alert notification",
-    "commandUsage": "<text>",
-    "missingText": "You need to give me some text for the alert"
+  "seek": {
+    "commandDescription": "Adjusts the volume of the music playback",
+    "commandUsage": "<+10|-10|1:30>",
+    "missingSeekParameter": "You need to give me a valid position!",
+    "lengthExceeded": "The given position exceeds the song duration!",
+    "notLive": "I can't change livestreams positions!",
+    "positionSet": "Player position set to `{{position}}`"
   }
 }
