@@ -212,7 +212,6 @@ class LastfmAlbum extends Command {
         embed.addField(t('commands:lastfm.labels.tracks') + ` (${album.tracks.track.length})`, tracksList)
       }
     } catch (e) {
-      console.error(e)
     }
 
     channel.send(embed)
