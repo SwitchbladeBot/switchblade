@@ -23,7 +23,7 @@ module.exports = class Seek extends Command {
 
     const position = guildPlayer.state.position + target
     if (position > playingSong.length) throw new CommandError(t('commands:seek.lengthExceeded'))
-    
+
     guildPlayer.seek(position)
     const formattedPosition = moment.duration(position).format('hh:mm:ss', { stopTrim: 'm' })
     channel.send(embed.setTitle(t('commands:seek.positionSet', { position: formattedPosition })))
