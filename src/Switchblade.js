@@ -5,7 +5,7 @@ const express = require('express')
 const cors = require('cors')
 
 const FileUtils = require('./utils/FileUtils.js')
-const { Command, EventListener, APIWrapper, Route, Webhook } = require('./structures')
+const { Command, EventListener, APIWrapper, Module, Route, Webhook } = require('./structures')
 const { MongoDB } = require('./database')
 const app = express()
 
@@ -16,10 +16,12 @@ const app = express()
  */
 module.exports = class Switchblade extends Client {
   constructor (options = {}) {
-    console.log(fs.readFileSync('bigtitle.txt', 'utf8').toString())
-
     super(options)
+    this.canvasLoaded = options.canvasLoaded
+
     this.apis = {}
+    this.modules = {}
+
     this.commands = []
     this.cldr = { languages: {} }
     this.listeners = []
@@ -33,8 +35,10 @@ module.exports = class Switchblade extends Client {
     this.initializeApis('src/apis').then(() => {
       this.initializeListeners('src/listeners')
       this.downloadAndInitializeLocales('src/locales').then(() => {
-        this.initializeCommands('src/commands')
-        this.initializeHttpServer(process.env.PORT)
+        this.initializeModules('src/modules').then(() => {
+          this.initializeCommands('src/commands')
+          this.initializeHttpServer(process.env.PORT)
+        })
       })
     })
   }
@@ -98,6 +102,11 @@ module.exports = class Switchblade extends Client {
         if (!process.env[variable]) this.log(`[31m${command.name} failed to load - Required environment variable "${variable}" is not set.`, 'Commands')
         return !!process.env[variable]
       })) return false
+
+      if (command.requirements.canvasOnly && !this.canvasLoaded) {
+        this.log(`[31m${command.name} failed to load - Canvas is not installed.`, 'Commands')
+        return false
+      }
     }
 
     this.commands.push(command)
@@ -127,11 +136,7 @@ module.exports = class Switchblade extends Client {
       if (NewCommand.ignore) return
       this.addCommand(new NewCommand(this)) ? success++ : failed++
     }, this.logError).then(() => {
-      if (failed === 0) {
-        this.log(`[32mAll ${success} commands loaded without errors.`, 'Commands')
-      } else {
-        this.log(`[33m${success} commands loaded, ${failed} failed.`, 'Commands')
-      }
+      this.log(failed ? `[33m${success} commands loaded, ${failed} failed.` : `[32mAll ${success} commands loaded without errors.`, 'Commands')
     }).catch(this.logError)
   }
 
@@ -167,11 +172,7 @@ module.exports = class Switchblade extends Client {
       if (Object.getPrototypeOf(NewListener) !== EventListener) return
       this.addListener(new NewListener(this)) ? success++ : failed++
     }, this.logError).then(() => {
-      if (failed === 0) {
-        this.log(`[32mAll ${success} listeners loaded without errors.`, 'Listeners')
-      } else {
-        this.log(`[33m${success} listeners loaded, ${failed} failed.`, 'Listeners')
-      }
+      this.log(failed ? `[33m${success} listeners loaded, ${failed} failed.` : `[32mAll ${success} listeners loaded without errors.`, 'Listeners')
     })
   }
 
@@ -203,7 +204,7 @@ module.exports = class Switchblade extends Client {
 
   /**
    * Initializes all API Wrappers.
-   * @param {string} dirPath - Path to the listeners directory
+   * @param {string} dirPath - Path to the apis directory
    */
   initializeApis (dirPath) {
     let success = 0
@@ -212,11 +213,41 @@ module.exports = class Switchblade extends Client {
       if (Object.getPrototypeOf(NewAPI) !== APIWrapper) return
       this.addApi(new NewAPI()) ? success++ : failed++
     }, this.logError).then(() => {
-      if (failed === 0) {
-        this.log(`[32mAll ${success} API wrappers loaded without errors.`, 'APIs')
-      } else {
-        this.log(`[33m${success} API wrappers loaded, ${failed} failed.`, 'APIs')
-      }
+      this.log(failed ? `[33m${success} API wrappers loaded, ${failed} failed.` : `[32mAll ${success} API wrappers loaded without errors.`, 'APIs')
+    })
+  }
+
+  /**
+   * Adds a new module to the Client.
+   * @param {Module} module - Module to be added
+   */
+  addModule (module) {
+    if (!(module instanceof Module)) {
+      this.log(`[31m${module.name} failed to load - Not an Module`, 'Modules')
+      return false
+    }
+
+    if (module.canLoad() !== true) {
+      this.log(`[31m${module.name} failed to load - ${module.canLoad() || 'canLoad function did not return true.'}`, 'APIs')
+      return false
+    }
+
+    this.modules[module.name] = module.load()
+    return true
+  }
+
+  /**
+   * Initializes all modules.
+   * @param {string} dirPath - Path to the modules directory
+   */
+  initializeModules (dirPath) {
+    let success = 0
+    let failed = 0
+    return FileUtils.requireDirectory(dirPath, (NewModule) => {
+      if (Object.getPrototypeOf(NewModule) !== Module) return
+      this.addModule(new NewModule(this)) ? success++ : failed++
+    }, this.logError).then(() => {
+      this.log(failed ? `[33m${success} modules loaded, ${failed} failed.` : `[32mAll ${success} modules loaded without errors.`, 'Modules')
     })
   }
 
@@ -241,7 +272,7 @@ module.exports = class Switchblade extends Client {
 
       try {
         this.i18next.use(translationBackend).init({
-          ns: [ 'categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions', 'moderation' ],
+          ns: [ 'categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions', 'moderation', 'lolservers' ],
           preload: await FileUtils.readdir(dirPath),
           fallbackLng: 'en-US',
           backend: {

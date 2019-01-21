@@ -1,5 +1,5 @@
-const { Command, CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { CommandParameters, StringParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
 const math = require('mathjs')
 
 module.exports = class Math extends Command {
@@ -13,26 +13,16 @@ module.exports = class Math extends Command {
     )
   }
 
-  run ({ t, author, channel }, expression) {
+  async run ({ t, author, channel }, expression) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    let result
     try {
-      result = math.eval(expression)
+      const result = math.eval(expression)
+      embed.setTitle(t('commands:math.result', { result }))
     } catch (error) {
       this.client.log(`Failed math calculation ${expression}\nError: ${error.stack}`, this.name)
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('errors:mathEvaluationError'))
-        .setDescription(error.stack)
-    } finally {
-      if (isNaN(parseFloat(result))) {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:math.invalidMathExpression'))
-          .setDescription(`**${t('commons:usage')}:** ${process.env.PREFIX}${this.name} ${t('commands:math.commandUsage')}`)
-      } else {
-        embed.setTitle(t('commands:math.result', { result }))
-      }
+      throw new CommandError(t('commands:math.invalidMathExpression'), true)
     }
 
     channel.send(embed).then(() => channel.stopTyping())

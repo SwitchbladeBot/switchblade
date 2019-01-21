@@ -9,7 +9,7 @@ module.exports = class Pay extends Command {
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, onlyOldAccounts: true })
     this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:pay.noMember' }),
+      new UserParameter({ missingError: 'commands:pay.noMember', acceptSelf: false, errors: { acceptSelf: 'commands:pay.cantPayYourself' } }),
       new NumberParameter({ min: 1, missingError: 'commands:pay.noValue' })
     )
   }
@@ -17,21 +17,21 @@ module.exports = class Pay extends Command {
   async run ({ t, author, channel }, receiver, value) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const senderDoc = await this.client.database.users.get(author.id)
-    if (author === receiver) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:pay.cantPayYourself'))
-    } else if (value > senderDoc.money) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:pay.notEnoughMoney'))
-    } else {
-      const receiverDoc = await this.client.database.users.get(receiver.id)
-      senderDoc.money -= value
-      receiverDoc.money += value
-      senderDoc.save()
-      receiverDoc.save()
+
+    try {
+      await this.client.modules.economy.transfer(author.id, receiver.id, value)
       embed.setDescription(t('commands:pay.transactionSuccessful', { receiver, value }))
+    } catch (e) {
+      embed.setColor(Constants.ERROR_COLOR)
+      switch (e.message) {
+        case 'NOT_ENOUGH_MONEY':
+          embed.setTitle(t('commands:pay.notEnoughMoney'))
+          break
+        default:
+          embed.setTitle(t('errors:generic'))
+      }
     }
+
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

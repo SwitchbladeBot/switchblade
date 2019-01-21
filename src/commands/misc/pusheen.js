@@ -1,6 +1,33 @@
 const { Command, SwitchbladeEmbed, CommandStructures } = require('../../')
 const { CommandRequirements } = CommandStructures
 
+const getRandom = (r) => r[Math.floor(Math.random() * r.length)]
+const getRandomPhoto = (r) => r[Math.floor(Math.random() * (r.length - 1)) + 1]
+const pusheenAvatars = [
+  'Ih84hUP',
+  'kO0L435',
+  'tyOm4cb',
+  '8AHt1g4',
+  '3iqrRUo',
+  'EaQlpvI',
+  'jG2SFTz'
+]
+const pusheenMessages = [
+  '=^● ⋏ ● ^=',
+  '/ᐠ｡ꞈ｡ᐟ\\',
+  'ฅ/ᐠ｡ᆽ｡ᐟ \\',
+  '(≈ㅇᆽㅇ≈)♡',
+  'ก₍⸍⸌̣ʷ̣̫⸍̣⸌₎ค',
+  '*:･ﾟ✧(=✪ ᆺ ✪=)*:･ﾟ✧',
+  '（＾・ﻌ・＾✿）',
+  '（ฅ＾・ﻌ・＾）ฅ',
+  '=^._.^= ∫',
+  '(^._.^)= ﾉ',
+  '(^・x・^)',
+  '(=♡ ᆺ ♡=)',
+  '(=◕ᆽ◕ฺ=)'
+]
+
 module.exports = class Pusheen extends Command {
   constructor (client) {
     super(client)
@@ -11,32 +38,6 @@ module.exports = class Pusheen extends Command {
 
   async run ({ t, author, channel }) {
     channel.startTyping()
-    const getRandom = (r) => r[Math.floor(Math.random() * r.length)]
-    const getRandomPhoto = (r) => r[Math.floor(Math.random() * (r.length - 1)) + 1]
-    const pusheenAvatars = [
-      'Ih84hUP',
-      'kO0L435',
-      'tyOm4cb',
-      '8AHt1g4',
-      '3iqrRUo',
-      'EaQlpvI',
-      'jG2SFTz'
-    ]
-    const pusheenMessages = [
-      '=^● ⋏ ● ^=',
-      '/ᐠ｡ꞈ｡ᐟ\\',
-      'ฅ/ᐠ｡ᆽ｡ᐟ \\',
-      '(≈ㅇᆽㅇ≈)♡',
-      'ก₍⸍⸌̣ʷ̣̫⸍̣⸌₎ค',
-      '*:･ﾟ✧(=✪ ᆺ ✪=)*:･ﾟ✧',
-      '（＾・ﻌ・＾✿）',
-      '（ฅ＾・ﻌ・＾）ฅ',
-      '=^._.^= ∫',
-      '(^._.^)= ﾉ',
-      '(^・x・^)',
-      '(=♡ ᆺ ♡=)',
-      '(=◕ᆽ◕ฺ=)'
-    ]
     const posts = await this.client.apis.tumblr.getPhotoPosts('pusheen.com', { offset: Math.floor(Math.random() * 155) })
     const randomPost = getRandom(posts.response.posts)
     const embed = new SwitchbladeEmbed(author)

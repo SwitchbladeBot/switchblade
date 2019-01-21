@@ -5,12 +5,14 @@ module.exports = {
   CommandStructures,
   Command: CommandStructures.Command,
   CommandContext: CommandStructures.CommandContext,
+  CommandError: CommandStructures.CommandError,
   CommandParameters: CommandStructures.CommandParameters,
   CommandRequirements: CommandStructures.CommandRequirements,
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),
   EventListener: require('./structures/EventListener.js'),
+  Module: require('./structures/Module.js'),
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),
   Route: require('./structures/Route.js'),
   Webhook: require('./structures/Webhook.js'),

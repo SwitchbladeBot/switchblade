@@ -25,19 +25,23 @@ module.exports = class MongoRepository extends Repository {
     return this.model.create(entity).then(this.parse)
   }
 
-  findOne (id) {
-    return this.model.findById(id).then(this.parse)
+  findOne (id, projection) {
+    return this.model.findById(id, projection).then(this.parse)
   }
 
-  findAll () {
-    return this.model.find({}).then(e => e.map(this.parse))
+  findAll (projection) {
+    return this.model.find({}, projection).then(e => e.map(this.parse))
   }
 
-  get (id) {
-    return this.findOne(id).then(e => this.parse(e) || this.add({ _id: id }))
+  get (id, projection) {
+    return this.findOne(id, projection).then(e => this.parse(e) || this.add({ _id: id }))
   }
 
   remove (id) {
     return this.model.findByIdAndRemove(id).then(this.parse)
+  }
+
+  update (id, entity) {
+    return this.model.updateOne({ _id: id }, entity)
   }
 }

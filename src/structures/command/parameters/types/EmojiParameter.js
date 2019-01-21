@@ -4,13 +4,12 @@ const CommandError = require('../../CommandError.js')
 const EMOJI_REGEX = /^(?:<:)(.*?)(?::)([0-9]{18})(?:>)$/
 const ANIMATED_REGEX = /^(?:<a:)(.*?)(?::)([0-9]{18})(?:>)$/
 
-module.exports = class GuildParameter extends Parameter {
+module.exports = class EmojiParameter extends Parameter {
   parse (arg, { t }) {
-    if (!arg) return
     const staticRegexResult = EMOJI_REGEX.exec(arg)
     const animatedRegexResult = ANIMATED_REGEX.exec(arg)
     const regexResult = staticRegexResult || animatedRegexResult
-    if (!regexResult) return new CommandError(t('errors:invalidEmoji'))
+    if (!regexResult) throw new CommandError(t('errors:invalidEmoji'))
     return this.emoji(regexResult[1], regexResult[2], Boolean(animatedRegexResult))
   }
 

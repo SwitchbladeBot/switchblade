@@ -41,7 +41,6 @@ module.exports = class MainListener extends EventListener {
       }
 
       // discordbots.org
-      /*
       if (process.env.DBL_TOKEN) {
         snekfetch
           .post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
@@ -49,7 +48,7 @@ module.exports = class MainListener extends EventListener {
           .send({ server_count: client.guilds.size })
           .then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
           .catch(() => client.log('[31mFailed to post statistics', 'discordbots.org'))
-      } */
+      }
 
       // botsfordiscord.com
       if (process.env.BOTSFORDISCORD_TOKEN) {
@@ -60,6 +59,18 @@ module.exports = class MainListener extends EventListener {
           .then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
           .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
       }
+
+      if (process.env.DBL2_TOKEN) {
+        snekfetch
+          .post(`https://discordbotlist.com/api/bots/${client.user.id}/stats`)
+          .set('Authorization', `Bot ${process.env.DBL2_TOKEN}`)
+          .send({
+            guilds: client.guilds.size,
+            users: client.users.size
+          })
+          .then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
+          .catch(() => client.log('[31mFailed to post statistics', 'discordbotlist.com'))
+      }
     }
 
     postStats(this)
@@ -68,33 +79,35 @@ module.exports = class MainListener extends EventListener {
 
   async onMessage (message) {
     if (message.author.bot) return
-    const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
+
+    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id, 'prefix language')
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
-    const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)
-    const regexResult = prefixRegex.exec(message.content)
-    if (regexResult) {
-      const usedPrefix = regexResult[1]
+
+    const botMention = this.user.toString()
+    const usedPrefix = message.content.startsWith(botMention) ? `${botMention} ` : message.content.startsWith(prefix) ? prefix : null
+
+    if (usedPrefix) {
       const fullCmd = message.content.substring(usedPrefix.length).split(/\s+/g).filter(a => a).map(s => s.trim())
       const args = fullCmd.slice(1)
       const cmd = fullCmd[0].toLowerCase().trim()
-      const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
 
+      const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
       if (command) {
-        const userDocument = this.database && await this.database.users.get(message.author.id)
+        const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
         if (userDocument && userDocument.blacklisted) return
 
         const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
           prefix: usedPrefix,
+          defaultPrefix: prefix,
           aliase: cmd,
           client: this,
           message,
           command,
-          guildDocument,
-          language,
-          userDocument
+          language
         })
-        this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
+
+        this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
         this.runCommand(command, context, args, language)
       }
     }
