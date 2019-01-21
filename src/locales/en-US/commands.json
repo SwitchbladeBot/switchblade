@@ -574,8 +574,7 @@
   "dbl": {
     "commandDescription": "Gives you a bonus for voting on Discord Bot List",
     "alreadyClaimed": "You've already claimed your DBL bonus today",
-    "howToVote": "**[Vote on DBL]({{link}})** and then run `{{command}}` again to claim your bonus",
-    "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+    "howToVote": "**[Vote on DBL]({{link}})** to claim your bonus"
   },
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder",

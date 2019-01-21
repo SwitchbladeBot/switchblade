@@ -1,10 +1,13 @@
 const { Client } = require('discord.js')
 const translationBackend = require('i18next-node-fs-backend')
 const fs = require('fs')
+const express = require('express')
+const cors = require('cors')
 
 const FileUtils = require('./utils/FileUtils.js')
-const { Command, EventListener, APIWrapper } = require('./structures')
+const { Command, EventListener, APIWrapper, Route, Webhook } = require('./structures')
 const { MongoDB } = require('./database')
+const app = express()
 
 /**
  * Custom Discord.js Client.
@@ -22,12 +25,16 @@ module.exports = class Switchblade extends Client {
     this.listeners = []
     this.playerManager = null
     this.i18next = require('i18next')
+    this.httpServer = app
+    this.httpRoutes = []
+    this.httpWebhooks = []
 
     this.initializeDatabase(MongoDB, { useNewUrlParser: true })
     this.initializeApis('src/apis').then(() => {
       this.initializeListeners('src/listeners')
       this.downloadAndInitializeLocales('src/locales').then(() => {
         this.initializeCommands('src/commands')
+        this.initializeHttpServer(process.env.PORT)
       })
     })
   }
@@ -289,5 +296,97 @@ module.exports = class Switchblade extends Client {
         this.logError('DB', e.message)
         this.database = null
       })
+  }
+
+  // HTTP Server
+
+  initializeHttpServer (port) {
+    port = port || this.options.port || 8000
+
+    // Use CORS with Express
+    app.use(cors())
+    // Parse JSON body
+    app.use(express.json())
+
+    app.listen(port, () => {
+      this.log(`[32mListening on port "${port}"`, `HTTP`)
+      this.httpServer = app
+    })
+
+    return this.initializeRoutes('src/http/api/').then(() => {
+      this.initializeWebhooks('src/http/webhooks/')
+    })
+  }
+
+  // Routes
+
+  /**
+   * Adds a new route to the HTTP server
+   * @param {Route} route - Route to be added
+   */
+  addRoute (route) {
+    if (!(route instanceof Route)) {
+      this.log(`[31m${route.name} failed to load - Not a Route`, 'HTTP')
+      return false
+    }
+
+    route._register(app)
+    this.httpRoutes.push(route)
+    return true
+  }
+
+  /**
+   * Initializes all routes
+   * @param {string} dirPath - Path to the routes directory
+   */
+  initializeRoutes (dirPath) {
+    let success = 0
+    let failed = 0
+    return FileUtils.requireDirectory(dirPath, (NewRoute) => {
+      if (Object.getPrototypeOf(NewRoute) !== Route) return
+      this.addRoute(new NewRoute(this)) ? success++ : failed++
+    }, this.logError).then(() => {
+      if (failed === 0) {
+        this.log(`[32mAll ${success} HTTP routes loaded without errors.`, 'HTTP')
+      } else {
+        this.log(`[33m${success} HTTP routes loaded, ${failed} failed.`, 'HTTP')
+      }
+    })
+  }
+
+  // Webhooks
+
+  /**
+   * Adds a new webhook to the HTTP server
+   * @param {Webhook} webhook - Webhook to be added
+   */
+  addWebhook (webhook) {
+    if (!(webhook instanceof Webhook)) {
+      this.log(`[31m${webhook.name} failed to load - Not a Webhook`, 'HTTP')
+      return false
+    }
+
+    webhook._register(app)
+    this.httpWebhooks.push(webhook)
+    return true
+  }
+
+  /**
+   * Initializes all webhooks
+   * @param {string} dirPath - Path to the webhooks directory
+   */
+  initializeWebhooks (dirPath) {
+    let success = 0
+    let failed = 0
+    return FileUtils.requireDirectory(dirPath, (NewWebhook) => {
+      if (Object.getPrototypeOf(NewWebhook) !== Webhook) return
+      this.addWebhook(new NewWebhook(this)) ? success++ : failed++
+    }, this.logError).then(() => {
+      if (failed === 0) {
+        this.log(`[32mAll ${success} HTTP webhooks loaded without errors.`, 'HTTP')
+      } else {
+        this.log(`[33m${success} HTTP webhooks loaded, ${failed} failed.`, 'HTTP')
+      }
+    })
   }
 }

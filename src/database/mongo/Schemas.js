@@ -24,5 +24,19 @@ module.exports = {
     language: { type: String, default: 'en-US' },
     joinLock: { type: Boolean, default: false },
     joinLockMessage: String
+  }),
+
+  // Background Schema
+  Background: new Schema({
+    _id: String,
+    displayName: { type: String, default: 'Default' },
+    description: { type: String, default: 'default background' },
+    fullSizeURL: { type: String, default: 'https://i.imgur.com/T0vfmnF.jpg' },
+    croppedURL: { type: String, default: 'https://i.imgur.com/F9iKKLT.png' },
+    tags: { type: String, default: 'off' },
+    disabled: { type: Boolean, default: false },
+    hidden: { type: Boolean, default: false },
+    purchasable: { type: Boolean, default: true },
+    price: { type: Number, default: 0 }
   })
 }

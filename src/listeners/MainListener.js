@@ -41,6 +41,7 @@ module.exports = class MainListener extends EventListener {
       }
 
       // discordbots.org
+      /*
       if (process.env.DBL_TOKEN) {
         snekfetch
           .post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
@@ -48,7 +49,7 @@ module.exports = class MainListener extends EventListener {
           .send({ server_count: client.guilds.size })
           .then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
           .catch(() => client.log('[31mFailed to post statistics', 'discordbots.org'))
-      }
+      } */
 
       // botsfordiscord.com
       if (process.env.BOTSFORDISCORD_TOKEN) {
