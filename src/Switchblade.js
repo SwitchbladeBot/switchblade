@@ -36,7 +36,7 @@ module.exports = class Switchblade extends Client {
       this.downloadAndInitializeLocales('src/locales').then(() => {
         this.initializeModules('src/modules').then(() => {
           this.initializeCommands('src/commands')
-          this.initializeHttpServer(process.env.PORT)
+          this.initializeHttpServer(process.env.PORT || 8080)
         })
       })
     })
@@ -331,15 +331,13 @@ module.exports = class Switchblade extends Client {
   // HTTP Server
 
   initializeHttpServer (port) {
-    port = port || this.options.port || 8000
-
     // Use CORS with Express
     app.use(cors())
     // Parse JSON body
     app.use(express.json())
 
     app.listen(port, () => {
-      this.log(`[32mListening on port "${port}"`, `HTTP`)
+      this.log(`[32mListening on port ${port}`, `HTTP`)
       this.httpServer = app
     })
 
