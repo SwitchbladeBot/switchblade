@@ -411,9 +411,9 @@ module.exports = class Switchblade extends Client {
       this.addWebhook(new NewWebhook(this)) ? success++ : failed++
     }, this.logError).then(() => {
       if (failed === 0) {
-        this.log(`[32mAll ${success} HTTP webhooks loaded without errors.`, 'HTTP')
+        this.log(`[32mAll ${success} webhooks loaded without errors.`, 'HTTP')
       } else {
-        this.log(`[33m${success} HTTP webhooks loaded, ${failed} failed.`, 'HTTP')
+        this.log(`[33m${success} webhooks loaded, ${failed} failed.`, 'HTTP')
       }
     })
   }

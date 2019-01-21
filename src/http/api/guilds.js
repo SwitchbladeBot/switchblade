@@ -51,8 +51,8 @@ module.exports = class Guilds extends Route {
      *      "error": "Guild not found"
      *    }
      */
-    router.get('/members/:guildId', async (req, res) => {
-      const guild = this.client.guilds.get(req.params.guildId)
+    router.get('/:id/members/', async (req, res) => {
+      const guild = this.client.guilds.get(req.params.id)
       if (guild) {
         const { id, name, icon, memberCount } = guild
         return res.json({ id, name, icon, memberCount })
