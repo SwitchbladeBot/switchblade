@@ -1,6 +1,5 @@
 const { Client } = require('discord.js')
 const translationBackend = require('i18next-node-fs-backend')
-const fs = require('fs')
 const express = require('express')
 const cors = require('cors')
 

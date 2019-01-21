@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandRequirements } = CommandStructures
 
 module.exports = class DBL extends Command {
@@ -14,7 +14,7 @@ module.exports = class DBL extends Command {
   async run ({ t, author, channel, prefix, alias, userDocument }) {
     channel.startTyping()
     channel.send(new SwitchbladeEmbed(author)
-      .setDescription(t('commands:dbl.howToVote', { link: `https://discordbots.org/bot/${this.client.user.id}/vote`)))
+      .setDescription(t('commands:dbl.howToVote', { link: `https://discordbots.org/bot/${this.client.user.id}/vote` })))
       .then(() => channel.stopTyping())
   }
 }
