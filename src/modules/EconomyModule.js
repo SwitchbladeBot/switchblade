@@ -49,7 +49,7 @@ class BonusModule extends Module {
   async claimDBLBonus (_user) {
     const user = await this._users.get(_user, 'money')
 
-    const collectedMoney = 500
+    const collectedMoney = 250
     user.money += collectedMoney
     await user.save()
 

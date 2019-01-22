@@ -64,10 +64,10 @@ module.exports = class EndpointUtils {
     }
   }
 
-  static handleDblPayload () {
+  static handleDBLPayload () {
     return async (req, res, next) => {
       const authorization = req.get('Authorization')
-      if (authorization && authorization === process.env.DBL_TOKEN) {
+      if (authorization && authorization === process.env.DBL_WEBHOOK_SECRET) {
         const payload = req.body
         if (payload !== {}) {
           const PayloadSchema = Joi.object().keys({

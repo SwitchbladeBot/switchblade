@@ -15,7 +15,7 @@ module.exports = class DBL extends Webhook {
   register (app) {
     const router = Router()
 
-    router.post('/', cors(corsOptions), EndpointUtils.handleDblPayload(), async (req, res) => {
+    router.post('/', cors(corsOptions), EndpointUtils.handleDBLPayload(), async (req, res) => {
       const user = this.client.users.get(req.body.user)
       try {
         const { collectedMoney } = await this.client.modules.economy.bonus.claimDBLBonus(user.id)
