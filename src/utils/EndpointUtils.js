@@ -1,19 +1,20 @@
 const fetch = require('node-fetch')
+const Joi = require('joi')
 
 const API_URL = 'https://discordapp.com/api'
 
 module.exports = class EndpointUtils {
   static authenticate (acceptUserToken = true) {
     return async (req, res, next) => {
-      const authentication = req.get('Authentication')
-      if (authentication) {
-        const [ tokenType, token ] = authentication.split(' ')
-        switch (tokenType) {
+      const authorization = req.get('Authorization')
+      if (authorization) {
+        const [ identifier, token ] = authorization.split(' ')
+        switch (identifier) {
           case 'User':
             if (acceptUserToken) {
               try {
                 const user = await EndpointUtils.fetchOAuthUser(token)
-                req.authenticationType = 'USER'
+                req.authorizationType = 'USER'
                 req.user = user
                 return next()
               } catch (e) {
@@ -23,14 +24,14 @@ module.exports = class EndpointUtils {
             break
           case 'Admin':
             if (token === process.env.ADMIN_TOKEN) {
-              req.authenticationType = 'ADMIN'
+              req.authorizationType = 'ADMIN'
               return next()
             }
             break
         }
-        return res.status(401).json({ error: 'Invalid Authentication header' })
+        return res.status(401).json({ error: 'Invalid Authorization header' })
       }
-      return res.status(401).json({ error: 'Missing Authentication header' })
+      return res.status(401).json({ error: 'Missing Authorization header' })
     }
   }
 
@@ -49,10 +50,10 @@ module.exports = class EndpointUtils {
       if (id) {
         switch (id) {
           case '@me':
-            id = req.authenticationType === 'ADMIN' ? client.user.id : req.user.id
+            id = req.authorizationType === 'ADMIN' ? client.user.id : req.user.id
             break
           default:
-            if (req.authenticationType !== 'ADMIN' && id !== req.user.id) {
+            if (req.authorizationType !== 'ADMIN' && id !== req.user.id) {
               return res.status(401)
             }
         }
@@ -60,6 +61,25 @@ module.exports = class EndpointUtils {
         next()
       }
       return res.status(401)
+    }
+  }
+
+  static handleDblPayload () {
+    return async (req, res, next) => {
+      const authorization = req.get('Authorization')
+      if (authorization && authorization === process.env.DBL_TOKEN) {
+        const payload = req.body
+        if (payload !== {}) {
+          const PayloadSchema = Joi.object().keys({
+            bot: Joi.string().min(18).max(18).required(),
+            user: Joi.string().min(17).max(18).required(),
+            type: Joi.string().equal('upvote').required()
+          })
+          Joi.validate(payload, PayloadSchema).then(output => {
+            next()
+          }).catch(error => res.status(500).json(error))
+        } else return res.status(400).json({ error: 'No body' })
+      } else return res.status(401).json({ error: 'Invalid Authorization header' })
     }
   }
 }

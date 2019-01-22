@@ -47,19 +47,10 @@ class BonusModule extends Module {
   }
 
   async claimDBLBonus (_user) {
-    const user = await this._users.get(_user, 'money lastDBLBonusClaim')
-    const { lastDBLBonusClaim } = user
-
-    if (this.checkClaim(lastDBLBonusClaim)) {
-      throw new BonusCooldownError(lastDBLBonusClaim, this.formatClaimTime(lastDBLBonusClaim))
-    }
-
-    const voted = await this.client.apis.dbl.checkVote(this.client.user.id, _user)
-    if (!voted) throw new Error('NOT_VOTED')
+    const user = await this._users.get(_user, 'money')
 
     const collectedMoney = 500
     user.money += collectedMoney
-    user.lastDBLBonusClaim = Date.now()
     await user.save()
 
     return { collectedMoney }
