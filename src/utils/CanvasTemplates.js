@@ -643,4 +643,21 @@ module.exports = class CanvasTemplates {
 
     return canvas.toBuffer()
   }
+
+  static async presidentialAlert (text) {
+    const WIDTH = 1242
+    const HEIGHT = 1050
+    const background = await Image.from(Constants.PRESIDENTIAL_ALERT_TEMPLATE)
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    const PARAGRAPH_START_X = 60
+    const PARAGRAPH_START_Y = 830
+    const PARAGRAPH_HEIGHT = 80
+    const PARAGRAPH_WIDTH = 1120
+
+    ctx.drawImage(background, 0, 0, WIDTH, HEIGHT)
+    ctx.writeParagraph(text, '38px "SF Pro Display"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.TOP_LEFT)
+    return canvas.toBuffer()
+  }
 }
