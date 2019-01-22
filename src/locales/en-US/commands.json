@@ -769,5 +769,10 @@
         "commandUsage": "<user>"
       }
     }
+  },
+  "presidentialalert": {
+    "commandDescription": "Generates a Presidential Alert notifications",
+    "commandUsage": "<text>",
+    "missingText": "You need to give me some text for the alert"
   }
 }
