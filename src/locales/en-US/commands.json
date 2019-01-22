@@ -727,58 +727,47 @@
   },
   "lastfm": {
     "commandDescription": "Get an user information or search for a track, album or artist on last.fm",
-    "commandUsage": "<action> <query>",
-    "userHelp": "To get an user's information, use {{- command}} <user>",
-    "trackHelp": "To get an track, use {{- command}} <query>",
-    "albumHelp": "To get an album, use {{- command}} <query>",
-    "artistHelp": "To get an artist, use {{- command}} <query>",
+    "commandUsage": "<type> <query>",
+    "notFound": "The results for {{query}} returned 0 matches.",
+    "topArtists": "Top artists (1 month)",
+    "playcount": "Playcount",
+    "playcountCount": "Played {{times}} times",
+    "listeners": "Listeners",
+    "listenersCount": "{{listeners}} listeners",
+    "selectQuery": "Please send the number of the result (10 seconds)",
+    "readMore": "Read more on Last.fm",
+    "tags": "Tags",
+    "tracks": "Tracks",
+    "registered": "Registered in",
     "subcommands": {
       "track": {
-        "help": "To get an track, use {{- command}} <query>",
-        "missing": "Please insert a query to search",
-        "notFound": "The results for {{- query}} returned 0 matches",
-        "results": "Track results for {{- query}}",
-        "resultsCount": "{{- results}} tracks found",
-        "commandDescription": "Get an track information in lastfm",
+        "missing": "Please insert a track to search.",
+        "results": "Track results for {{query}}",
+        "resultsCount": "{{count}} tracks found",
+        "commandDescription": "Search for a track on last.fm",
         "commandUsage": "<track>"
       },
       "album": {
-        "help": "To get an album, use {{- command}} <query>",
-        "missing": "Please insert a query to search",
-        "notFound": "The results for {{- query}} returned 0 matches",
-        "results": "Album results for {{- query}}",
-        "resultsCount": "{{- results}} albums found",
-        "commandDescription": "Get an album information in lastfm",
+        "missing": "Please insert an album to search.",
+        "results": "Album results for {{query}}",
+        "resultsCount": "{{count}} albums found",
+        "commandDescription": "Search for an album on last.fm",
         "commandUsage": "<album>"
       },
       "artist": {
-        "help": "To get an artist, use {{- command}} <query>",
         "missing": "Please insert a query to search",
-        "notFound": "The results for {{- query}} returned 0 matches",
-        "results": "Artist results for {{- query}}",
-        "resultsCount": "{{- results}} artists found",
-        "commandDescription": "Get an artist information in lastfm",
+        "results": "Artist results for {{query}}",
+        "resultsCount": "{{count}} artists found",
+        "commandDescription": "Search for an artist on last.fm",
         "commandUsage": "<artist>"
       },
       "user": {
-        "registered": "Registered in",
-        "missing": "Please insert a valid user to get info",
-        "notFound": "User not found",
-        "commandDescription": "Get an user information in lastfm",
+        "missing": "Please insert a query to search",
+        "results": "Artist results for {{query}}",
+        "notFound": "This user wasn't found on last.fm",
+        "commandDescription": "Get information about an user on last.fm",
         "commandUsage": "<user>"
       }
-    },
-    "labels": {
-      "topArtists": "Top artists",
-      "oneMonth": "1 month",
-      "playcount": "Playcount",
-      "playcountCount": "Played {{- times}} times",
-      "listeners": "Listeners",
-      "listenersCount": "{{- listeners}} listeners",
-      "selectQuery": "Type the number of the result (10 seconds)",
-      "readMore": "Read more on Last.fm",
-      "tags": "Tags",
-      "tracks": "Tracks"
     }
   }
 }
