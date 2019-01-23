@@ -14,6 +14,10 @@ module.exports = class TwitchAPI extends APIWrapper {
     return this.request('/users', { id }).then(u => u && u.data[0])
   }
 
+  getUserByUsername (login) {
+    return this.request('/users', { login }).then(u => u && u.data[0])
+  }
+
   getStreamByUsername (username) {
     return this.request('/streams', { user_login: username }).then(s => s && s.data[0])
   }

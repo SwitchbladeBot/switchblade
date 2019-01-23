@@ -590,6 +590,17 @@
     "noQuery": "I can't google something for you without keywords",
     "search": "[This]({{link}}) might help ¯\\_(ツ)_/¯"
   },
+  "twitch": {
+    "commandDescription": "Searches for someone on Twitch",
+    "commandUsage": "<twitch username>",
+    "noChannel": "You need to give me a Twitch username",
+    "biography": "Biography",
+    "noBiography": "This user doesn't have a biography",
+    "totalViews": "Total Views",
+    "streamingTitle": "Streaming",
+    "streamingDescription": "**{{title}}** for {{viewers}} viewers",
+    "userNotFound": "Twitch User not found"
+  },
   "mcquery": {
     "commandDescription": "Shows information about a Minecraft: Java Edition server",
     "commandUsage": "<address>[:port]",

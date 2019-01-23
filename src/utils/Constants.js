@@ -13,6 +13,7 @@ module.exports = {
   GENIUS_COLOR: '#FFFB66',
   GUILD_LOST_COLOR: '#BD4351',
   GUILD_ADDED_COLOR: '#41A57A',
+  TWITCH_COLOR: '#4B367C',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',
