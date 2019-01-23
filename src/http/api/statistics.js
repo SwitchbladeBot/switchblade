@@ -2,7 +2,7 @@ const { Route } = require('../../index')
 const { Router } = require('express')
 const i18next = require('i18next')
 
-module.exports = class Status extends Route {
+module.exports = class Statistics extends Route {
   constructor (client) {
     super(client)
     this.name = 'statistics'
