@@ -1,11 +1,17 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandParameters, CommandRequirements, StringParameter, CommandError } = CommandStructures
 const moment = require('moment')
+const Intl = require('intl')
 
+Intl.__disableRegExpRestore()
+
+// Formatting index for lists
 const formatIndex = index => index < 10 ? `0${index}` : index
 
+// Formatting url for embeds
 const formatUrl = name => name.replace(/\)/g, '%29').replace(/\(/g, '%28')
 
+// Regex to change the Read More from last.fm bio
 const READ_MORE_REGEX = /<a href="(https?:\/\/www.last.fm\/music\/[-a-zA-Z0-9@:%_+.~#?&/=]*)">Read more on Last.fm<\/a>/g
 
 const messageCollector = (channel, filter, callback) => {
@@ -58,35 +64,39 @@ class LastfmTrack extends Command {
   }
 
   async run ({ t, author, channel, language }, query) {
+    channel.startTyping()
+
     const embed = new SwitchbladeEmbed(author)
     const { results } = await this.client.apis.lastfm.searchTrack(query, 10)
     const tracks = results.trackmatches.track
 
     if (tracks.length < 1) throw new CommandError(t('commands:lastfm.notFound', { query }))
 
-    embed.setColor('#d51007')
-    embed.setAuthor(t('commands:lastfm.subcommands.track.results', { query }), 'https://i.imgur.com/TppYCun.png')
-    embed.setTitle(t('commands:lastfm.subcommands.track.resultsCount', { count: results['opensearch:totalResults'] }))
+    embed.setColor(Constants.LASTFM_COLOR)
+      .setAuthor(t('commands:lastfm.subcommands.track.results', { query }), 'https://i.imgur.com/TppYCun.png')
+      .setTitle(t('commands:lastfm.subcommands.track.resultsCount', { count: results['opensearch:totalResults'] }))
     const resultList = tracks.map((track, i) => `\`${formatIndex(++i)}\`. [${track.name}](${formatUrl(track.url)}) - ${track.artist}`)
 
     resultList.push(`\n\n${t('commands:lastfm.selectQuery')}`)
     embed.setDescription(resultList)
 
     channel.send(embed).then(() => {
+      channel.stopTyping()
       const filter = c => c.author.id === author.id && verifySelectFilter(c.content, tracks.length)
       messageCollector(channel, filter, index => {
-        this.sendTrack(t, channel, author, tracks[--index])
+        this.sendTrack(t, channel, author, tracks[--index], language)
       })
     })
   }
 
-  sendTrack (t, channel, author, track) {
+  sendTrack (t, channel, author, track, language) {
+    const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
-    embed.setColor('#d51007')
-    embed.setAuthor(track.name, 'https://i.imgur.com/TppYCun.png', track.url)
-    embed.setTitle(track.artist)
-    embed.setDescription(t('commands:lastfm.listenersCount', { listeners: track.listeners }))
-    embed.setThumbnail(track.image[3]['#text'])
+      .setColor(Constants.LASTFM_COLOR)
+      .setAuthor(track.name, 'https://i.imgur.com/TppYCun.png', track.url)
+      .setTitle(track.artist)
+      .setDescription(t('commands:lastfm.listenersCount', { listeners: formatter.format(track.listeners) }))
+      .setThumbnail(track.image[3]['#text'])
 
     channel.send(embed)
   }
@@ -113,7 +123,7 @@ class LastfmArtist extends Command {
 
     if (artists.length < 1) throw new CommandError(t('commands:lastfm.notFound', { query }))
 
-    embed.setColor('#d51007')
+    embed.setColor(Constants.LASTFM_COLOR)
     embed.setAuthor(t('commands:lastfm.subcommands.artist.results', { query }), 'https://i.imgur.com/TppYCun.png')
     embed.setTitle(t('commands:lastfm.subcommands.artist.resultsCount', { results: results['opensearch:totalResults'] }))
     const resultList = artists.map((artist, i) => `\`${formatIndex(i + 1)}\`. [${artist.name}](${formatUrl(artist.url)})`)
@@ -130,18 +140,18 @@ class LastfmArtist extends Command {
   }
 
   async sendArtist (t, channel, author, language, artistInfo) {
+    const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
-
-    embed.setColor('#d51007')
-    embed.setAuthor(artistInfo.name, 'https://i.imgur.com/TppYCun.png', artistInfo.url)
-    embed.addField(t('commands:lastfm.listeners'), artistInfo.listeners, true)
-    embed.setThumbnail(artistInfo.image[3]['#text'])
+      .setColor(Constants.LASTFM_COLOR)
+      .setAuthor(artistInfo.name, 'https://i.imgur.com/TppYCun.png', artistInfo.url)
+      .addField(t('commands:lastfm.listeners'), formatter.format(artistInfo.listeners), true)
+      .setThumbnail(artistInfo.image[3]['#text'])
 
     try {
       let { artist } = await this.client.apis.lastfm.getArtistInfo(artistInfo.name, language.split('-')[0])
 
-      embed.addField(t('commands:lastfm.playcount'), artist.stats.playcount, true)
-      embed.addField(t('commands:lastfm.tags'), artist.tags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
+      embed.addField(t('commands:lastfm.playcount'), formatter.format(artist.stats.playcount), true)
+        .addField(t('commands:lastfm.tags'), artist.tags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
       if (artist.bio.summary) {
         let regex = READ_MORE_REGEX.exec(artist.bio.summary)
         embed.setDescription(`${artist.bio.summary.replace(READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
@@ -174,9 +184,9 @@ class LastfmAlbum extends Command {
 
     if (albums.length < 1) throw new CommandError(t('commands:lastfm.notFound', { query }))
 
-    embed.setColor('#d51007')
-    embed.setAuthor(t('commands:lastfm.subcommands.album.results', { query }), 'https://i.imgur.com/TppYCun.png')
-    embed.setTitle(t('commands:lastfm.subcommands.album.resultsCount', { count: results['opensearch:totalResults'] }))
+    embed.setColor(Constants.LASTFM_COLOR)
+      .setAuthor(t('commands:lastfm.subcommands.album.results', { query }), 'https://i.imgur.com/TppYCun.png')
+      .setTitle(t('commands:lastfm.subcommands.album.resultsCount', { count: results['opensearch:totalResults'] }))
     const resultList = albums.map((album, i) => `\`${formatIndex(i + 1)}\`. [${album.name}](${formatUrl(album.url)}) - ${album.artist}`)
 
     resultList.push(`\n\n${t('commands:lastfm.selectQuery')}`)
@@ -191,18 +201,18 @@ class LastfmAlbum extends Command {
   }
 
   async sendAlbum (t, channel, author, language, albumInfo) {
+    const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
-
-    embed.setColor('#d51007')
-    embed.setAuthor(albumInfo.name, 'https://i.imgur.com/TppYCun.png', albumInfo.url)
-    embed.setTitle(albumInfo.artist)
-    embed.setThumbnail(albumInfo.image[3]['#text'])
+      .setColor(Constants.LASTFM_COLOR)
+      .setAuthor(albumInfo.name, 'https://i.imgur.com/TppYCun.png', albumInfo.url)
+      .setTitle(albumInfo.artist)
+      .setThumbnail(albumInfo.image[3]['#text'])
 
     try {
       let { album } = await this.client.apis.lastfm.getAlbumInfo(albumInfo.name, albumInfo.artist, language.split('-')[0])
 
-      embed.addField(t('commands:lastfm.playcount'), album.playcount, true)
-      embed.addField(t('commands:lastfm.listeners'), album.listeners, true)
+      embed.addField(t('commands:lastfm.playcount'), formatter.format(album.playcount), true)
+        .addField(t('commands:lastfm.listeners'), formatter.format(album.listeners), true)
       if (album.tags.tag.length > 1) embed.addField(t('commands:lastfm.tags'), album.tags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
       if (album.wiki) {
         let regex = READ_MORE_REGEX.exec(album.wiki.summary)
@@ -236,6 +246,7 @@ class LastfmUser extends Command {
   }
 
   async run ({ t, author, channel, guild, language }, param) {
+    const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
 
     try {
@@ -246,10 +257,10 @@ class LastfmUser extends Command {
       topartists = topartists.artist
 
       embed.setAuthor(user.realname ? user.realname : user.name, 'https://i.imgur.com/TppYCun.png', user.url)
-      embed.setThumbnail(user.image[3]['#text'])
-      embed.addField(t('commands:lastfm.playcount'), user.playcount, true)
-      embed.addField(t('commands:lastfm.registered'), time, true)
-      embed.setColor('#d51007')
+        .setThumbnail(user.image[3]['#text'])
+        .addField(t('commands:lastfm.playcount'), formatter.format(user.playcount), true)
+        .addField(t('commands:lastfm.registered'), time, true)
+        .setColor(Constants.LASTFM_COLOR)
 
       if (user.realname) embed.setTitle(user.name)
       if (topartists.length) {
