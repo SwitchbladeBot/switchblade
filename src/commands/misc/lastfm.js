@@ -93,8 +93,9 @@ class LastfmTrack extends Command {
     const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.LASTFM_COLOR)
-      .setAuthor(track.name, 'https://i.imgur.com/TppYCun.png', track.url)
-      .setTitle(track.artist)
+      .setAuthor(track.artist, 'https://i.imgur.com/TppYCun.png', `https://www.last.fm/music/${encodeURI(track.artist)}`)
+      .setTitle(track.name)
+      .setURL(track.url)
       .setDescription(t('commands:lastfm.listenersCount', { listeners: formatter.format(track.listeners) }))
       .setThumbnail(track.image[3]['#text'])
 
@@ -204,8 +205,9 @@ class LastfmAlbum extends Command {
     const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.LASTFM_COLOR)
-      .setAuthor(albumInfo.name, 'https://i.imgur.com/TppYCun.png', albumInfo.url)
-      .setTitle(albumInfo.artist)
+      .setAuthor(albumInfo.artist, 'https://i.imgur.com/TppYCun.png', `https://www.last.fm/music/${encodeURI(albumInfo.artist)}`)
+      .setTitle(albumInfo.name)
+      .setURL(albumInfo.url)
       .setThumbnail(albumInfo.image[3]['#text'])
 
     try {
