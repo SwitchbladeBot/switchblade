@@ -5,9 +5,9 @@ const SpotifySong = require('./SpotifySong.js')
 
 module.exports = class SpotifySongSource extends SongSource {
   static get customSources () {
-    const albumHandler = ([ , id], m, r) => this.provideAlbum(m, id, r)
-    const playlistHandler = ([ , id], m, r) => this.providePlaylist(m, id, r)
-    const trackHandler = async ([ , id], m, r) => {
+    const albumHandler = ([ , id ], m, r) => this.provideAlbum(m, id, r)
+    const playlistHandler = ([ , id ], m, r) => this.providePlaylist(m, id, r)
+    const trackHandler = async ([ , id ], m, r) => {
       const track = await m.client.apis.spotify.getTrack(id)
       return this.provideTrack(m, track, r)
     }
@@ -54,7 +54,6 @@ module.exports = class SpotifySongSource extends SongSource {
         return new SpotifySong(song, requestedBy, track, album).loadInfo()
       } catch (e) {
         console.error(e)
-        return
       }
     }
   }
