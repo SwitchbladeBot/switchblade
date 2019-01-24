@@ -726,12 +726,12 @@
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   },
   "presidentialalert": {
-    "commandDescription": "Generates a Presidential Alert notifications",
+    "commandDescription": "Generates a Presidential Alert notification",
     "commandUsage": "<text>",
     "missingText": "You need to give me some text for the alert"
   },
   "tictactoe": {
-    "commandDescription": "Challenge someone to a game of tic tac toe",
+    "commandDescription": "Challenge someone to a game of Tic Tac Toe",
     "commandUsage": "<user to challenge>",
     "missingUser": "You need to give me someone to challenge",
     "title": "Tic Tac Toe",
