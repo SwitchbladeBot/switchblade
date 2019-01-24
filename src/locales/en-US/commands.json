@@ -729,5 +729,20 @@
     "commandDescription": "Generates a Presidential Alert notifications",
     "commandUsage": "<text>",
     "missingText": "You need to give me some text for the alert"
+  },
+  "tictactoe": {
+    "commandDescription": "Challenge someone to a game of tic tac toe",
+    "commandUsage": "<user to challenge>",
+    "missingUser": "You need to give me someone to challenge",
+    "title": "Tic Tac Toe",
+    "pleaseWait": "Please wait, loading board...",
+    "currentPlayer": "Current player",
+    "itsYourTurn": "It's your turn, {{player}}",
+    "itsATie": "It's a tie!",
+    "wins": "{{player}} wins!",
+    "timeout": "This Tic Tac Toe invite has timed out.",
+    "hasChallenged": "{{player}} has challenged you to a game of Tic Tac Toe",
+    "clickTheReaction": "Click the {{CONFIRMATION_EMOJI}} reaction button below to accept.",
+    "thisTimeoutsIn": "This timeouts in {{COLLECTOR_TIMEOUT}} seconds"
   }
 }
