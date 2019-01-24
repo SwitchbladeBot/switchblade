@@ -14,7 +14,6 @@ module.exports = class SongSource {
       return result
     } catch (e) {
       console.log(e)
-      return
     }
   }
 
