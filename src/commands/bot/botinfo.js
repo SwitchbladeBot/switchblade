@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
 const Discord = require('discord.js')
 const moment = require('moment')
 
@@ -10,7 +10,7 @@ module.exports = class BotInfo extends Command {
     this.category = 'bot'
   }
 
-  run ({ channel, author, t }) {
+  run ({ channel, author, t, language }) {
     const uptime = moment.duration(process.uptime() * 1000).format('d[d] h[h] m[m] s[s]')
     channel.send(
       new SwitchbladeEmbed(author)
@@ -18,7 +18,7 @@ module.exports = class BotInfo extends Command {
         .setThumbnail(this.client.user.displayAvatarURL)
         .setDescription([
           t('commands:botinfo.hello', { user: this.client.user }),
-          t('commands:botinfo.statistics', { guilds: this.client.guilds, commands: this.client.commands, uptime, Discord, nodeVersion: process.version, users: this.client.users.filter(u => !u.bot).size })
+          t('commands:botinfo.statistics', { guilds: MiscUtils.formatNumber(this.client.guilds.size, language), commands: MiscUtils.formatNumber(this.client.commands.length, language), uptime, Discord, nodeVersion: process.version, users: MiscUtils.formatNumber(this.client.users.filter(u => !u.bot).size, language) })
         ].join('\n\n'))
         .addField(t('commands:botinfo.links'), [
           t('commands:botinfo.inviteLink', { Constants }),

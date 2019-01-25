@@ -1,14 +1,14 @@
 const { Playlist } = require('../../structures')
 
-module.exports = class SpotifyPlaylist extends Playlist {
+module.exports = class DeezerPlaylist extends Playlist {
   constructor (data = {}, songs = [], requestedBy) {
     super(data, songs, requestedBy)
 
     this.identifier = data.id
-    this.uri = data.external_urls.spotify
-    this.title = data.name
+    this.uri = data.link
+    this.title = data.title
 
-    this.source = 'spotify'
+    this.source = 'deezer'
   }
 
   loadInfo () {
