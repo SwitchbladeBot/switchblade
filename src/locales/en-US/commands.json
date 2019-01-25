@@ -144,7 +144,28 @@
     "noTrackIdentifier": "You need to give me a track name or URL!"
   },
   "queue": {
-    "commandDescription": "Shows the current queue"
+    "commandDescription": "Shows the current queue",
+    "clearAdvice": "You can clear the queue using `{{usage}}`.",
+    "subcommands": {
+      "clear": {
+        "commandDescription": "Clears the queue",
+        "queueCleared": "The queue has been cleared!"
+      },
+      "shuffle": {
+        "commandDescription": "Shuffles the queue",
+        "queueShuffled": "The queue has been shuffled!"
+      },
+      "remove": {
+        "commandDescription": "Removes a song from the queue",
+        "missingIndexParameter": "You need to give me the number of the song you want to remove from the queue",
+        "songRemoved": "{{- songName}} has been removed from the queue"
+      },
+      "jump": {
+        "commandDescription": "Jumps to a specific song in the queue",
+        "missingIndexParameter": "You need to give me the number of the song you want to jump to",
+        "jumpedToSong": "Jumped to {{- songName}}"
+      }
+    }
   },
   "skip": {
     "commandDescription": "Skips the current song"
@@ -158,6 +179,7 @@
     "commandUsage": "<0-150>",
     "missingVolumeParameter": "You need to give me the volume level!",
     "invalidVolumeParameter": "You need to give me a valid number!",
+    "notPlaying": "Volume can't be adjusted while not playing anything!",
     "volumeSet": "Volume set to {{volume}}%"
   },
   "help": {
@@ -367,6 +389,7 @@
     "commandDescription": "Find the lyrics of a song",
     "commandUsage": "<track name>",
     "noLyricsFound": "The provided song's lyrics could not be found.",
+    "noLyricsFoundPlaying": "The current song's lyrics could not be found.",
     "noTrackName": "You need to give me a track name.",
     "fullLyrics": "Click here to see the full lyrics"
   },
@@ -704,6 +727,14 @@
     "commandDescription": "Shows a random post from the pusheen tumblr.",
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
   },
+  "seek": {
+    "commandDescription": "Adjusts the position of the music playback",
+    "commandUsage": "<+10|-10|1:30>",
+    "missingSeekParameter": "You need to give me a valid position!",
+    "lengthExceeded": "The given position exceeds the song duration!",
+    "notLive": "I can't change livestreams' positions!",
+    "positionSet": "Player position set to `{{position}}`"
+  },
   "lolstatus": {
     "commandDescription": "Shows the current status of a League of Legends server",
     "commandUsage": "<server>",
@@ -771,8 +802,13 @@
       }
     }
   },
+  "bassboost": {
+    "commandDescription": "Toggle bassboost mode for the music playback",
+    "bassboost_true": "DROP THE BASS! Bassboost enabled.",
+    "bassboost_false": "Bassboost disabled."
+  },
   "presidentialalert": {
-    "commandDescription": "Generates a Presidential Alert notifications",
+    "commandDescription": "Generates a Presidential Alert notification",
     "commandUsage": "<text>",
     "missingText": "You need to give me some text for the alert"
   }
