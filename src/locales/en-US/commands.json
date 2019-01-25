@@ -726,7 +726,20 @@
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   },
   "roleinfo": {
-    "commandDescription": "Shows info about a role. Can use ID, name or mention the role."
+    "commandDescription": "Shows info about a role. Can use ID, name or mention the role.",
+    "commandUsage": "[role id, name or mention]",
+    "id": "ID",
+    "name": "Name",
+    "mention": "Mention",
+    "createdat": "Created At",
+    "members": "Members",
+    "position": "Position",
+    "mentionable": "Mentionable",
+    "hoisted": "Hoisted",
+    "color": "Color",
+    "online": "{{count}} online",
+    "yes": "Yes",
+    "no": "No"
   },
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification",

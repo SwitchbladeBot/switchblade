@@ -12,7 +12,7 @@ module.exports = class RoleParameter extends Parameter {
   }
 
   role ({ t, guild }, arg) {
-    const role = guild.roles.get(arg) || guild.roles.find(r => r.name.toLowerCase() === arg.toLowerCase())
+    const role = guild.roles.get(arg) || guild.roles.find(r => r.name.toLowerCase().includes(arg.toLowerCase()))
     if (!role) throw new CommandError(t('errors:invalidRole'))
     return role
   }
