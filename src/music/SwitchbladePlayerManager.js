@@ -13,12 +13,27 @@ const snekfetch = require('snekfetch')
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
 
+// Region resolver
+const defaultRegions = {
+  asia: [ 'sydney', 'singapore', 'japan', 'hongkong' ],
+  eu: [ 'london', 'frankfurt', 'amsterdam', 'russia', 'eu-central', 'eu-west', 'southafrica' ],
+  us: [ 'us-central', 'us-west', 'us-east', 'us-south' ],
+  sam: [ 'brazil' ]
+}
+const resolveRegion = (region) => {
+  region = region.replace('vip-', '')
+  const dRegion = Object.entries(defaultRegions).find(([ , r ]) => r.includes(region))
+  return dRegion && dRegion[0]
+}
+
 module.exports = class SwitchbladePlayerManager extends PlayerManager {
   constructor (client, nodes = [], options = {}) {
     options.player = GuildPlayer
     super(client, nodes, options)
 
-    this.REST_ADDRESS = `${process.env.LAVALINK_HOST}:${process.env.LAVALINK_PORT}`
+    // TODO: Rest API based on guild's region (or maybe bot's location)
+    this.REST_ADDRESS = `${nodes[0].host}:${nodes[0].port}`
+    this.REST_PASSWORD = nodes[0].password
   }
 
   onMessage (message) {
@@ -34,7 +49,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
 
     const res = await snekfetch.get(`http://${this.REST_ADDRESS}/loadtracks`)
       .query({ identifier })
-      .set('Authorization', process.env.LAVALINK_PASSWORD)
+      .set('Authorization', this.REST_PASSWORD)
       .catch(e => {
         this.client.logError(new Error(`Lavalink fetchTracks ${e}`))
       })
@@ -86,7 +101,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
 
   async play (song, channel) {
     if (song && song instanceof Song) {
-      const host = this.nodes.first().host
+      const host = this.getIdealHost(channel.guild.region)
       const player = this.join({
         guild: channel.guild.id,
         channel: channel.id,
@@ -96,5 +111,11 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
       return song
     }
     return null
+  }
+
+  getIdealHost (region) {
+    region = resolveRegion(region)
+    const { host } = (region && this.nodes.find(n => n.ready && n.region === region)) || this.nodes.first()
+    return host
   }
 }
