@@ -760,5 +760,10 @@
     "commandDescription": "Adjusts the volume of the music playback",
     "bassboost_true": "DROP THE BASS! Bassboost enabled.",
     "bassboost_false": "Bassboost disabled."
+  },
+  "presidentialalert": {
+    "commandDescription": "Generates a Presidential Alert notification",
+    "commandUsage": "<text>",
+    "missingText": "You need to give me some text for the alert"
   }
 }

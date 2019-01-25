@@ -71,6 +71,7 @@ module.exports = {
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
+  PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
 
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
