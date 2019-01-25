@@ -161,7 +161,7 @@
         "songRemoved": "{{- songName}} has been removed from the queue"
       },
       "jump": {
-        "commandDescription": "Removes a song from the queue",
+        "commandDescription": "Jumps to a specific song in the queue",
         "missingIndexParameter": "You need to give me the number of the song you want to jump to",
         "jumpedToSong": "Jumped to {{- songName}}"
       }
@@ -728,7 +728,7 @@
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
   },
   "seek": {
-    "commandDescription": "Adjusts the volume of the music playback",
+    "commandDescription": "Adjusts the position of the music playback",
     "commandUsage": "<+10|-10|1:30>",
     "missingSeekParameter": "You need to give me a valid position!",
     "lengthExceeded": "The given position exceeds the song duration!",
@@ -757,7 +757,7 @@
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   },
   "bassboost": {
-    "commandDescription": "Adjusts the volume of the music playback",
+    "commandDescription": "Toggle bassboost mode for the music playback",
     "bassboost_true": "DROP THE BASS! Bassboost enabled.",
     "bassboost_false": "Bassboost disabled."
   }
