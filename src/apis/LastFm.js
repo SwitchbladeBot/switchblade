@@ -19,6 +19,10 @@ module.exports = class LastFM extends APIWrapper {
     return this.request('album.getInfo', { album, artist, lang, autocorrect: 1 })
   }
 
+  getTrackInfo (track, artist, lang = 'en') {
+    return this.request('track.getInfo', { track, artist, lang, autocorrect: 1 })
+  }
+
   getUserInfo (user) {
     return this.request('user.getInfo', { user })
   }
