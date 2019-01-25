@@ -6,7 +6,7 @@ const Intl = require('intl')
 Intl.__disableRegExpRestore()
 
 // Formatting index for lists
-const formatIndex = index.toString().padStart(2, '0')
+const formatIndex = index => index.toString().padStart(2, '0')
 
 // Formatting url for embeds
 const formatUrl = name => name.replace(/\)/g, '%29').replace(/\(/g, '%28')
