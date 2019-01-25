@@ -14,6 +14,7 @@ module.exports = {
     YoutubeSong: require('./youtube/YoutubeSong.js')
   },
   Sources: {
+    DeezerSongSource: require('./deezer/DeezerSongSource.js'),
     SpotifySongSource: require('./spotify/SpotifySongSource.js')
   }
 }
