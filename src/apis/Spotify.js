@@ -20,6 +20,10 @@ module.exports = class SpotifyAPI extends APIWrapper {
     return this.search(query, 'album', limit).then(res => res.albums && res.albums.total > 0 ? res.albums.items : [])
   }
 
+  searchArtists (query, limit = 20) {
+    return this.search(query, 'artist', limit).then(res => res.artists && res.artists.total > 0 ? res.artists.items : [])
+  }
+
   search (query, type, limit = 20) {
     return this.request('/search', { q: query, type, limit }).then(u => u && u.data ? u.data[0] : u)
   }

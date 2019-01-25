@@ -42,10 +42,25 @@
     "commandDescription": "Checks if the bot is online"
   },
   "spotify": {
-    "commandDescription": "Searches for a song on Spotify",
-    "commandUsage": "<track name>",
+    "commandDescription": "Searches for a song, album, artist or a playlist and displays an user info on Spotify",
+    "commandUsage": "<type> <query>",
     "noTracksFound": "I couldn't find any tracks with that name.",
-    "noTrackName": "You need to give me a track name."
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "album": "Album",
+    "artist": "Artist",
+    "artistPlural": "Artists",
+    "selectResult": "Please send the number of the result (10 seconds)",
+    "subcommands": {
+      "track": {
+        "commandDescription": "Searches for a song on Spotify",
+        "commandUsage": "<song>",
+        "noTrack": "You need to give me a track name.",
+        "notFound": "I couldn't find any tracks with that name.",
+        "results": "Track results for {{query}}",
+        "trackInfo": "Track information"
+      }
+    }
   },
   "copypasta": {
     "commandDescription": "Random text from /r/copypasta"

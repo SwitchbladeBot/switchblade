@@ -30,6 +30,7 @@ module.exports = {
   SWITCHBLADE_LOGO: '<:switchblade:494575477659271168>',
   PATREON_LOGO: '<:patreon:516783030543712273>',
   UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
+  EXPLICIT: '<:explicit:509449378700853258>',
 
   // League of Legends Status Emoji
   LOL_STATUS_INFO: '<:lolinfo:534989137913184277>',
