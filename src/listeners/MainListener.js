@@ -87,7 +87,7 @@ module.exports = class MainListener extends EventListener {
     const usedPrefix = message.content.startsWith(botMention) ? `${botMention} ` : message.content.startsWith(prefix) ? prefix : null
 
     if (usedPrefix) {
-      const fullCmd = message.content.substring(usedPrefix.length).split(/\s+/g).filter(a => a).map(s => s.trim())
+      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
       const args = fullCmd.slice(1)
       const cmd = fullCmd[0].toLowerCase().trim()
 
