@@ -762,8 +762,8 @@
     "bassboost_false": "Bassboost disabled."
   },
   "roleinfo": {
-    "commandDescription": "Shows info about a role. Can use ID, name or mention the role.",
-    "commandUsage": "[role id, name or mention]",
+    "commandDescription": "Shows information about a role",
+    "commandUsage": "[role]",
     "id": "ID",
     "name": "Name",
     "mention": "Mention",
