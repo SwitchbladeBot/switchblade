@@ -755,5 +755,10 @@
   "support": {
     "commandDescription": "Shows the link to Switchblade support server",
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
+  },
+  "bassboost": {
+    "commandDescription": "Adjusts the volume of the music playback",
+    "bassboost_true": "DROP THE BASS! Bassboost enabled.",
+    "bassboost_false": "Bassboost disabled."
   }
 }
