@@ -725,6 +725,9 @@
     "commandDescription": "Shows the link to Switchblade support server",
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   },
+  "roleinfo": {
+    "commandDescription": "Shows info about a role. Can use ID, name or mention the role."
+  },
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification",
     "commandUsage": "<text>",
