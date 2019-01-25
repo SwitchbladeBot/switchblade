@@ -89,15 +89,34 @@ class LastfmTrack extends Command {
     })
   }
 
-  sendTrack (t, channel, author, track, language) {
+  async sendTrack (t, channel, author, trackInfo, language) {
     const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.LASTFM_COLOR)
-      .setAuthor(track.artist, 'https://i.imgur.com/TppYCun.png', `https://www.last.fm/music/${encodeURI(track.artist)}`)
-      .setTitle(track.name)
-      .setURL(track.url)
-      .setDescription(t('commands:lastfm.listenersCount', { listeners: formatter.format(track.listeners) }))
-      .setThumbnail(track.image[3]['#text'])
+      .setAuthor(trackInfo.artist, 'https://i.imgur.com/TppYCun.png', `https://www.last.fm/music/${encodeURI(trackInfo.artist)}`)
+      .setTitle(trackInfo.name)
+      .setURL(trackInfo.url)
+      .addField(t('commands:lastfm.listeners'), formatter.format(trackInfo.listeners), true)
+      .setThumbnail(trackInfo.image[3]['#text'])
+
+    try {
+      let { track } = await this.client.apis.lastfm.getTrackInfo(trackInfo.name, trackInfo.artist, language.split('-')[0])
+
+      embed.addField(t('commands:lastfm.playcount'), formatter.format(track.playcount), true)
+
+      if (track.album) {
+        embed.addField(t('commands:lastfm.album'), `[${track.album.title}](${track.album.url})`, true)
+      }
+      if (track.artist) {
+        embed.addField(t('commands:lastfm.artist'), `[${track.artist.name}](${track.artist.url})`, true)
+      }
+      embed.addField(t('commands:lastfm.tags'), track.toptags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
+      if (track.wiki) {
+        let regex = READ_MORE_REGEX.exec(track.wiki.summary)
+        embed.setDescription(`${track.wiki.summary.replace(READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
+      }
+    } catch (e) {
+    }
 
     channel.send(embed)
   }
