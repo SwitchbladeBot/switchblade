@@ -21,6 +21,9 @@ module.exports = class GuildPlayer extends Player {
     this.queue = []
     this._volume = 25
     this._loop = false
+
+    this._previousVolume = null
+    this._bassboost = false
   }
 
   event (message) {
@@ -73,6 +76,24 @@ module.exports = class GuildPlayer extends Player {
     super.volume(volume)
   }
 
+  get bassboosted () {
+    return this._bassboost
+  }
+
+  bassboost (state = true) {
+    this._bassboost = state
+    if (state) {
+      this._previousVolume = this._volume
+      this.volume(150)
+      this.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 1 })))
+      return true
+    }
+
+    if (this._previousVolume !== null) this.volume(this._previousVolume)
+    this.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 0 })))
+    return false
+  }
+
   get looping () {
     return this._loop
   }
@@ -90,5 +111,16 @@ module.exports = class GuildPlayer extends Player {
 
   get voiceChannel () {
     return this.client.channels.get(this.channel)
+  }
+
+  // Internal
+
+  setEQ (bands) {
+    this.node.send({
+      op: 'equalizer',
+      guildId: this.id,
+      bands
+    })
+    return this
   }
 }
