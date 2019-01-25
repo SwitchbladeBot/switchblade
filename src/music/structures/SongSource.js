@@ -13,7 +13,7 @@ module.exports = class SongSource {
       const result = await cb(getRegex(regex, identifier).exec(identifier), manager, requestedBy)
       return result
     } catch (e) {
-      console.log(e)
+      manager.client.logError(e)
     }
   }
 

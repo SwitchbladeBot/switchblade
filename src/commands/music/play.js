@@ -50,13 +50,14 @@ module.exports = class Play extends Command {
         throw new CommandError(t('music:songNotFound'))
       }
     } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
+      if (e instanceof CommandError) throw e
+
+      this.client.logError(e)
+      channel.send(embed
+        .setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
         .setDescription(e)
-      channel.send(embed).then(() => {
-        channel.stopTyping()
-        this.client.logError(e)
-      })
+      ).then(() => channel.stopTyping())
     }
   }
 
