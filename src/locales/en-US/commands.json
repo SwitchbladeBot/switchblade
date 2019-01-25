@@ -743,6 +743,6 @@
     "timeout": "This Tic Tac Toe invite has timed out.",
     "hasChallenged": "{{player}} has challenged you to a game of Tic Tac Toe",
     "clickTheReaction": "Click the {{CONFIRMATION_EMOJI}} reaction button below to accept.",
-    "thisTimeoutsIn": "This timeouts in {{COLLECTOR_TIMEOUT}} seconds"
+    "thisTimeoutsIn": "You have {{COLLECTOR_TIMEOUT}} seconds to accept it"
   }
 }
