@@ -9,9 +9,10 @@ module.exports = class SoundcloudSong extends Song {
 
   async loadInfo () {
     const sc = this._Soundcloud
-    const track = await sc.getTrack(this.identifier)
-    if (track) {
-      const artwork = track.artwork_url || track.user.avatar_url
+    const [ id, secret ] = this.identifier.split('|')
+    const track = await sc.getTrack(id, secret)
+    if (track && !track.errors) {
+      const artwork = track.artwork_url || (track.user && track.user.avatar_url)
       this.artwork = artwork ? artwork.replace('large', 't500x500') : null
       this.richInfo = {
         playbackCount: track.playback_count,
