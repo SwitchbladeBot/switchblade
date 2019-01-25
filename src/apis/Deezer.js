@@ -22,6 +22,10 @@ module.exports = class DeezerAPI extends APIWrapper {
     return this.request(`/artist/${id}`)
   }
 
+  getPlaylist (id) {
+    return this.request(`/playlist/${id}`)
+  }
+
   // Search
   findTracks (q) {
     return this.request('/search', { q })
