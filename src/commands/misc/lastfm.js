@@ -9,16 +9,17 @@ Intl.__disableRegExpRestore()
 const formatIndex = index => index.toString().padStart(2, '0')
 
 // Formatting url for embeds
-const formatUrl = name => name.replace(/\)/g, '%29').replace(/\(/g, '%28')
+const formatUrl = name => name.replace(/\)/g, '%29').replace(/\(/g, '%28').replace(/_/g, '%25')
 
 // Regex to change the Read More from last.fm bio
 const READ_MORE_REGEX = /<a href="(https?:\/\/www.last.fm\/music\/[-a-zA-Z0-9@:%_+.~#?&/=]*)">Read more on Last.fm<\/a>/g
 
-const messageCollector = (channel, filter, callback) => {
-  const collector = channel.createMessageCollector(filter, { time: 10000, maxMatches: 1 })
-  collector.on('end', collected => {
-    if (collected.size > 0) callback(Number(collected.first().content))
-  })
+const awaitQuerySelect = (channel, filter, callback) => {
+  channel.awaitMessages(filter, { time: 10000, max: 1, errors: ['time'] })
+    .then(collected => {
+      if (collected.size > 0) callback(Number(collected.first().content))
+    })
+    .catch(() => false)
 }
 
 const verifySelectFilter = (select, length) => {
@@ -83,7 +84,7 @@ class LastfmTrack extends Command {
     channel.send(embed).then(() => {
       channel.stopTyping()
       const filter = c => c.author.id === author.id && verifySelectFilter(c.content, tracks.length)
-      messageCollector(channel, filter, index => {
+      awaitQuerySelect(channel, filter, index => {
         this.sendTrack(t, channel, author, tracks[--index], language)
       })
     })
@@ -153,7 +154,7 @@ class LastfmArtist extends Command {
 
     channel.send(embed).then(() => {
       const filter = c => c.author.id === author.id && verifySelectFilter(c.content, artists.length)
-      messageCollector(channel, filter, index => {
+      awaitQuerySelect(channel, filter, index => {
         this.sendArtist(t, channel, author, language, artists[--index])
       })
     })
@@ -214,7 +215,7 @@ class LastfmAlbum extends Command {
 
     channel.send(embed).then(() => {
       const filter = c => c.author.id === author.id && verifySelectFilter(c.content, albums.length)
-      messageCollector(channel, filter, index => {
+      awaitQuerySelect(channel, filter, index => {
         this.sendAlbum(t, channel, author, language, albums[--index])
       })
     })
