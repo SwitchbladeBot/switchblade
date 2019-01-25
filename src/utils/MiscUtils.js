@@ -7,7 +7,7 @@ module.exports = class MiscUtils {
       return arr.indexOf(value) !== index
     })
   }
-  
+
   formatNumber (value, language = 'en-US') {
     const formatter = new Intl.NumberFormat(language)
     return formatter.format(value)
