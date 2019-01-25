@@ -230,7 +230,7 @@
   "botinfo": {
     "commandDescription": "Sends information about myself",
     "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
-    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds.size}} servers** and **{{users}} users** with **{{commands.length}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
+    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds}} servers** and **{{users}} users** with **{{commands}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
     "links": "Useful links",
     "inviteLink": "{{Constants.BOT_BADGE}} **[Invite me to your server](https://invite.switchblade.xyz)**",
     "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
@@ -270,7 +270,8 @@
     "status": "Status",
     "createdAt": "Created at",
     "joinedAt": "Joined at",
-    "serversInCommon": "Servers in common ({{count}})"
+    "serversInCommon": "Servers in common ({{count}})",
+    "memberNumber": "Member #{{count}}"
   },
   "samp": {
     "commandDescription": "Shows information about a GTA San Andreas: Multiplayer server",
@@ -597,8 +598,9 @@
     "biography": "Biography",
     "noBiography": "This user doesn't have a biography",
     "totalViews": "Total Views",
-    "streamingTitle": "Streaming",
+    "streamingTitle": "Streaming {{gameName}}",
     "streamingDescription": "**{{title}}** for {{viewers}} viewers",
+    "followers": "Followers",
     "userNotFound": "Twitch User not found"
   },
   "mcquery": {

@@ -8,7 +8,7 @@ module.exports = class MiscUtils {
     })
   }
 
-  formatNumber (value, language = 'en-US') {
+  static formatNumber (value, language) {
     const formatter = new Intl.NumberFormat(language)
     return formatter.format(value)
   }
