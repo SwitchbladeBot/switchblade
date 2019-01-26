@@ -20,4 +20,11 @@ module.exports = class SongSource {
   static get customSources () {
     return []
   }
+
+  static async getClosestVideo (client, title) {
+    const { items } = await client.apis.youtube.searchVideos(title, 3)
+    const videos = await client.apis.youtube.getVideos(items.map(v => v.id.videoId), 'contentDetails')
+    const video = videos.find(v => !v.contentDetails.regionRestriction)
+    return video.id
+  }
 }

@@ -59,7 +59,6 @@ module.exports = class DeezerSongSource extends SongSource {
   }
 
   static async getClosestVideo ({ client }, track) {
-    const { items: [ item ] } = await client.apis.youtube.searchVideos(`${track.artist.name} - ${track.title}`)
-    return item
+    return super.getClosestVideo(client, `${track.artist.name} - ${track.title}`)
   }
 }
