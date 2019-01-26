@@ -769,6 +769,52 @@
     "commandDescription": "Shows the link to Switchblade support server",
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   },
+  "lastfm": {
+    "commandDescription": "Get an user information or search for a track, album or artist on Last.fm",
+    "commandUsage": "<type> <query>",
+    "notFound": "The results for {{query}} returned 0 matches.",
+    "topArtists": "Top artists (1 month)",
+    "playcount": "Playcount",
+    "playcountCount": "Played {{times}} times",
+    "listeners": "Listeners",
+    "album": "Album",
+    "artist": "Artist",
+    "selectQuery": "Please send the number of the result (10 seconds)",
+    "readMore": "Read more on Last.fm",
+    "tags": "Tags",
+    "tracks": "Tracks",
+    "registered": "Registered in",
+    "subcommands": {
+      "track": {
+        "missing": "Please insert a track to search.",
+        "results": "Track results for {{query}}",
+        "resultsCount": "{{count}} tracks found",
+        "commandDescription": "Search for a track on Last.fm",
+        "commandUsage": "<track>"
+      },
+      "album": {
+        "missing": "Please insert an album to search.",
+        "results": "Album results for {{query}}",
+        "resultsCount": "{{count}} albums found",
+        "commandDescription": "Search for an album on Last.fm",
+        "commandUsage": "<album>"
+      },
+      "artist": {
+        "missing": "Please insert a query to search",
+        "results": "Artist results for {{query}}",
+        "resultsCount": "{{count}} artists found",
+        "commandDescription": "Search for an artist on Last.fm",
+        "commandUsage": "<artist>"
+      },
+      "user": {
+        "missing": "Please insert a query to search",
+        "results": "Artist results for {{query}}",
+        "notFound": "This user wasn't found on Last.fm",
+        "commandDescription": "Get information about an user on Last.fm",
+        "commandUsage": "<user>"
+      }
+    }
+  },
   "bassboost": {
     "commandDescription": "Toggle bassboost mode for the music playback",
     "bassboost_true": "DROP THE BASS! Bassboost enabled.",
