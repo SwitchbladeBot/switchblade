@@ -770,7 +770,7 @@
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   },
   "lastfm": {
-    "commandDescription": "Get an user information or search for a track, album or artist on last.fm",
+    "commandDescription": "Get an user information or search for a track, album or artist on Last.fm",
     "commandUsage": "<type> <query>",
     "notFound": "The results for {{query}} returned 0 matches.",
     "topArtists": "Top artists (1 month)",
@@ -789,28 +789,28 @@
         "missing": "Please insert a track to search.",
         "results": "Track results for {{query}}",
         "resultsCount": "{{count}} tracks found",
-        "commandDescription": "Search for a track on last.fm",
+        "commandDescription": "Search for a track on Last.fm",
         "commandUsage": "<track>"
       },
       "album": {
         "missing": "Please insert an album to search.",
         "results": "Album results for {{query}}",
         "resultsCount": "{{count}} albums found",
-        "commandDescription": "Search for an album on last.fm",
+        "commandDescription": "Search for an album on Last.fm",
         "commandUsage": "<album>"
       },
       "artist": {
         "missing": "Please insert a query to search",
         "results": "Artist results for {{query}}",
         "resultsCount": "{{count}} artists found",
-        "commandDescription": "Search for an artist on last.fm",
+        "commandDescription": "Search for an artist on Last.fm",
         "commandUsage": "<artist>"
       },
       "user": {
         "missing": "Please insert a query to search",
         "results": "Artist results for {{query}}",
-        "notFound": "This user wasn't found on last.fm",
-        "commandDescription": "Get information about an user on last.fm",
+        "notFound": "This user wasn't found on Last.fm",
+        "commandDescription": "Get information about an user on Last.fm",
         "commandUsage": "<user>"
       }
     }
