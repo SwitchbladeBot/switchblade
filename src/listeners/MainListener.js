@@ -12,20 +12,18 @@ module.exports = class MainListener extends EventListener {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     // Lavalink connection
-    const lavalinkRequiredVariables = ['LAVALINK_HOST', 'LAVALINK_PORT', 'LAVALINK_PASSWORD']
-    if (lavalinkRequiredVariables.every(variable => !!process.env[variable])) {
-      const nodes = [{
-        'host': process.env.LAVALINK_HOST,
-        'port': process.env.LAVALINK_PORT || '1337',
-        'password': process.env.LAVALINK_PASSWORD || 'password'
-      }]
-      this.playerManager = new SwitchbladePlayerManager(this, nodes, {
-        user: this.user.id,
-        shards: 1
-      })
-      this.log('[32mLavalink connection established!', 'Music')
-    } else {
-      this.log(`[31mFailed to establish Lavalink connection - Required environment variable(s) (${lavalinkRequiredVariables.filter(variable => !process.env[variable]).join(', ')}) not set.`, 'Music')
+    if (process.env.LAVALINK_NODES) {
+      try {
+        let nodes = JSON.parse(process.env.LAVALINK_NODES)
+        if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR')
+        this.playerManager = new SwitchbladePlayerManager(this, nodes, {
+          user: this.user.id,
+          shards: 1
+        })
+        this.log('[32mLavalink connection established!', 'Music')
+      } catch (e) {
+        this.log(`[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, 'Music')
+      }
     }
 
     // TODO: Make stat posters modular
@@ -87,7 +85,7 @@ module.exports = class MainListener extends EventListener {
     const usedPrefix = message.content.startsWith(botMention) ? `${botMention} ` : message.content.startsWith(prefix) ? prefix : null
 
     if (usedPrefix) {
-      const fullCmd = message.content.substring(usedPrefix.length).split(/\s+/g).filter(a => a).map(s => s.trim())
+      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
       const args = fullCmd.slice(1)
       const cmd = fullCmd[0].toLowerCase().trim()
 
