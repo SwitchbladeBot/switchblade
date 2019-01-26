@@ -12,7 +12,7 @@ module.exports = class RoleInfo extends Command {
     this.requirements = new CommandRequirements(this, { guildOnly: true })
 
     this.parameters = new CommandParameters(this,
-      new RoleParameter({ full: true, required: false, missingError: 'commands:roleinfo.invalidRole' })
+      new RoleParameter({ full: true, required: true, missingError: 'commands:roleinfo.invalidRole' })
     )
   }
 
