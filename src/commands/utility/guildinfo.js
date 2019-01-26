@@ -1,4 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, CommandParameters } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants, CommandParameters, MiscUtils } = require('../../')
 const { Command, CommandRequirements, GuildParameter } = CommandStructures
 const moment = require('moment')
 
@@ -25,20 +25,20 @@ module.exports = class GuildInfo extends Command {
       .addField(t('commands:guildinfo.id'), guild.id, true)
       .addField(t('commands:guildinfo.owner'), guild.owner, true)
       .addField(t('commands:guildinfo.region'), t(`regions:${guild.region}`), true)
-      .addField(t('commands:guildinfo.channels', { count: guild.channels.size }), [
-        t('commands:guildinfo.textChannels', { count: guild.channels.filter(g => g.type === 'text' || g.type === 'category').size }),
-        t('commands:guildinfo.voiceChannels', { count: guild.channels.filter(g => g.type === 'voice').size })
+      .addField(t('commands:guildinfo.channels', { count: MiscUtils.formatNumber(guild.channels.size, language) }), [
+        t('commands:guildinfo.textChannels', { count: MiscUtils.formatNumber(guild.channels.filter(g => g.type === 'text' || g.type === 'category').size, language) }),
+        t('commands:guildinfo.voiceChannels', { count: MiscUtils.formatNumber(guild.channels.filter(g => g.type === 'voice').size, language) })
       ].join('\n'), true)
-      .addField(t('commands:guildinfo.createdAt'), moment(guild.createdTimestamp).format('LLL'), true)
-      .addField(t('commands:guildinfo.joinedAt'), moment(guild.joinedTimestamp).format('LLL'), true)
-      .addField(t('commands:guildinfo.members', { count: guild.members.size }), [
-        `${Constants.STREAMING_STATUS} ${t('commands:guildinfo.streaming', { count: guild.members.filter(m => m.game === 'streaming').size })}`,
-        `${Constants.ONLINE_STATUS} ${t('commands:guildinfo.online', { count: guild.members.filter(m => m.presence.status === 'online').size })}`,
-        `${Constants.IDLE_STATUS} ${t('commands:guildinfo.idle', { count: guild.members.filter(m => m.presence.status === 'idle').size })}`,
-        `${Constants.DND_STATUS} ${t('commands:guildinfo.dnd', { count: guild.members.filter(m => m.presence.status === 'dnd').size })}`,
-        `${Constants.OFFLINE_STATUS} ${t('commands:guildinfo.offline', { count: guild.members.filter(m => m.presence.status === 'offline').size })}\n`,
-        t('commands:guildinfo.users', { count: guild.members.filter(m => !m.user.bot).size }),
-        t('commands:guildinfo.bots', { count: guild.members.filter(m => m.user.bot).size })
+      .addField(t('commands:guildinfo.createdAt'), `${moment(guild.createdTimestamp).format('LLL')}\n(${moment(guild.createdTimestamp).fromNow()})`, true)
+      .addField(t('commands:guildinfo.joinedAt'), `${moment(guild.joinedTimestamp).format('LLL')}\n(${moment(guild.joinedTimestamp).fromNow()})`, true)
+      .addField(t('commands:guildinfo.members', { count: MiscUtils.formatNumber(guild.members.size, language) }), [
+        `${Constants.STREAMING_STATUS} ${t('commands:guildinfo.streaming', { count: MiscUtils.formatNumber(guild.members.filter(m => m.game === 'streaming').size, language) })}`,
+        `${Constants.ONLINE_STATUS} ${t('commands:guildinfo.online', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'online').size, language) })}`,
+        `${Constants.IDLE_STATUS} ${t('commands:guildinfo.idle', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'idle').size, language) })}`,
+        `${Constants.DND_STATUS} ${t('commands:guildinfo.dnd', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'dnd').size, language) })}`,
+        `${Constants.OFFLINE_STATUS} ${t('commands:guildinfo.offline', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'offline').size, language) })}\n`,
+        t('commands:guildinfo.users', { count: MiscUtils.formatNumber(guild.members.filter(m => !m.user.bot).size, language) }),
+        t('commands:guildinfo.bots', { count: MiscUtils.formatNumber(guild.members.filter(m => m.user.bot).size, language) })
       ].join('\n'))
 
     channel.send(embed).then(() => channel.stopTyping())
