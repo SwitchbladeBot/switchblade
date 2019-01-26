@@ -774,6 +774,22 @@
     "bassboost_true": "DROP THE BASS! Bassboost enabled.",
     "bassboost_false": "Bassboost disabled."
   },
+  "roleinfo": {
+    "commandDescription": "Shows information about a role",
+    "commandUsage": "[role]",
+    "id": "ID",
+    "name": "Name",
+    "mention": "Mention",
+    "createdat": "Created At",
+    "members": "Members",
+    "position": "Position",
+    "mentionable": "Mentionable",
+    "hoisted": "Hoisted",
+    "color": "Color",
+    "online": "{{count}} online",
+    "yes": "Yes",
+    "no": "No"
+  },
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification",
     "commandUsage": "<text>",
