@@ -7,12 +7,14 @@ module.exports = {
   NPM_COLOR: '#CB3837',
   E621_COLOR: '#258CF5',
   XKCD_COLOR: '#96A8C8',
-  DEEZER_COLOR: '#E3231D',
+  DEEZER_COLOR: '#00C7F2',
   MAL_COLOR: '#2E51A2',
   GELBOORU_COLOR: '#2887FD',
   GENIUS_COLOR: '#FFFB66',
   GUILD_LOST_COLOR: '#BD4351',
   GUILD_ADDED_COLOR: '#41A57A',
+  LASTFM_COLOR: '#D51007',
+  TWITCH_COLOR: '#4B367C',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',
@@ -71,6 +73,7 @@ module.exports = {
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
+  PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
 
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
