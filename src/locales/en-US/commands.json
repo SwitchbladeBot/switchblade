@@ -822,7 +822,7 @@
   },
   "roleinfo": {
     "commandDescription": "Shows information about a role",
-    "commandUsage": "[role]",
+    "commandUsage": "<role name, mention or id>",
     "id": "ID",
     "name": "Name",
     "mention": "Mention",
