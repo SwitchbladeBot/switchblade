@@ -578,7 +578,7 @@
     "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
   },
   "zap": {
-    "commandDescription": "Adds emoji to a sentence based on context",
+    "commandDescription": "Adds emoji to a sentence, based on the context",
     "commandUsage": "<sentence>",
     "missingZap": "You need to give me a sentence to add emoji to"
   },
