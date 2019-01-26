@@ -22,7 +22,8 @@ module.exports = class SongSource {
   }
 
   static async getClosestVideo (client, title) {
-    const { items } = await client.apis.youtube.searchVideos(title, 3)
+    console.log(title)
+    const { items } = await client.apis.youtube.searchVideos(title, undefined, 3)
     const videos = await client.apis.youtube.getVideos(items.map(v => v.id.videoId), 'contentDetails')
     const video = videos.find(v => !v.contentDetails.regionRestriction)
     return video.id
