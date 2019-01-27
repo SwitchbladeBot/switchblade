@@ -13,7 +13,7 @@ module.exports = class Cowsay extends Command {
     )
   }
 
-  run ({ channel }, text) {
-    channel.send(`\`\`\`${cowsay.say({ text })}\`\`\``)
+  run ({ channel, message }) {
+    channel.send(`\`\`\`${cowsay.say({ text: message.cleanContent.split(' ').slice(1).join(' ') })}\`\`\``)
   }
 }

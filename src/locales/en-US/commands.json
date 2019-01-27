@@ -745,6 +745,7 @@
     "commandUsage": "<+10|-10|1:30>",
     "missingSeekParameter": "You need to give me a valid position!",
     "lengthExceeded": "The given position exceeds the song duration!",
+    "noNegativeValues": "The given position goes before the song starts!",
     "notLive": "I can't change livestreams' positions!",
     "positionSet": "Player position set to `{{position}}`"
   },

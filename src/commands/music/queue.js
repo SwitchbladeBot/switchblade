@@ -99,6 +99,7 @@ class QueueRemove extends Command {
   }
 
   async run ({ t, author, channel, guild }, index) {
+    index = Math.round(index)
     const { queue } = this.client.playerManager.get(guild.id)
     const embed = new SwitchbladeEmbed(author)
 
@@ -132,6 +133,7 @@ class QueueJump extends Command {
   }
 
   async run ({ t, author, channel, guild }, index) {
+    index = Math.round(index)
     const guildPlayer = this.client.playerManager.get(guild.id)
     const embed = new SwitchbladeEmbed(author)
 

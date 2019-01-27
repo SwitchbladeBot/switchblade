@@ -23,6 +23,7 @@ module.exports = class Seek extends Command {
 
     const position = guildPlayer.state.position + target
     if (position > playingSong.length) throw new CommandError(t('commands:seek.lengthExceeded'))
+    if (position < 0) throw new CommandError(t('commands:seek.noNegativeValues'))
 
     guildPlayer.seek(position)
     const formattedPosition = moment.duration(position).format('hh:mm:ss', { stopTrim: 'm' })

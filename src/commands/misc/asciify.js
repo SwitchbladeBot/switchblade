@@ -13,8 +13,8 @@ module.exports = class Asciify extends Command {
     )
   }
 
-  run ({ channel }, text) {
-    const bigtext = figlet.textSync(text, {
+  run ({ channel, message }) {
+    const bigtext = figlet.textSync(message.cleanContent.split(' ').slice(1).join(' '), {
       font: 'Big',
       horizontalLayout: 'universal smushing',
       verticalLayout: 'universal smushing'
