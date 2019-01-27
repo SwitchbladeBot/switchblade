@@ -842,6 +842,9 @@
     "commandUsage": "<text>",
     "missingText": "You need to give me some text for the alert"
   },
+  "uigradient": {
+    "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)"
+  },
   "tictactoe": {
     "commandDescription": "Challenge someone to a game of Tic Tac Toe",
     "commandUsage": "<user to challenge>",
