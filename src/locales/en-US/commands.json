@@ -50,6 +50,10 @@
     "album": "Album",
     "artist": "Artist",
     "artistPlural": "Artists",
+    "moreTracks": "...and more {{tracks}} tracks",
+    "moreAlbums": "...and more {{albums}} albums",
+    "followers": "Followers",
+    "followersCount": "{{followers}} followers",
     "selectResult": "Please send the number of the result (10 seconds)",
     "subcommands": {
       "track": {

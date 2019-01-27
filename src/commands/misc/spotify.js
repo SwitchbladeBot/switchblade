@@ -1,6 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
+const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
 const { Command, CommandError, CommandParameters, StringParameter, CommandRequirements } = CommandStructures
-
 const moment = require('moment')
 
 const SPOTIFY_LOGO = 'https://i.imgur.com/vw8svty.png'
@@ -14,12 +13,16 @@ class Spotify extends Command {
     this.name = 'spotify'
     this.aliases = ['sp']
     this.requirements = new CommandRequirements(this, { apis: ['spotify'] })
-    this.subcommands = [new SpotifyTrack(client, this)]
-    // TODO: fix when use the command with another type it doesnt reply
+    this.subcommands = [
+      new SpotifyTrack(client, this),
+      new SpotifyAlbum(client, this),
+      new SpotifyArtist(client, this),
+      new SpotifyPlaylist(client, this)]
     this.parameters = new CommandParameters(this,
       new StringParameter({
         full: true,
-        whiteList: types,
+        whitelist: types.reduce((a, v) => a.concat(v), []),
+        required: true,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commands:spotify.noType'))
             .setDescription([
@@ -51,7 +54,7 @@ class Spotify extends Command {
   async searchHandler (query, type, prefix) {
     if (!prefix) prefix = (obj, i) => `\`${Spotify.formatIndex(++i)}\`. [${obj.name}](${obj.external_urls.spotify}) - [${obj.artists[0].name}](${obj.artists[0].external_urls.spotify})`
 
-    const method = type === 'album' ? 'searchAlbums' : type === 'track' ? 'searchTracks' : 'searchArtists'
+    const method = type === 'album' ? 'searchAlbums' : type === 'track' ? 'searchTracks' : type === 'artist' ? 'searchArtists' : 'searchPlaylists'
     const results = await this.client.apis.spotify[method](query, 10)
     return results ? { description: results.map(prefix), ids: results.map(r => r.id) } : false
   }
@@ -88,10 +91,11 @@ class SpotifyTrack extends Command {
 
     const { description, ids } = results
 
-    const embed = new SpotifyEmbed(author)
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(Constants.SPOTIFY_COLOR)
       .setDescription(description)
-      .setAuthor(t('commands:spotify:subcommands:track:results', { query }), SPOTIFY_LOGO)
-      .setTitle(t('commands:spotify:selectResult'))
+      .setAuthor(t('commands:spotify.subcommands.track.results', { query }), SPOTIFY_LOGO)
+      .setTitle(t('commands:spotify.selectResult'))
 
     await channel.send(embed)
     await channel.stopTyping()
@@ -102,21 +106,182 @@ class SpotifyTrack extends Command {
   async getTrack (t, id, channel, author) {
     const { album, artists, name, duration_ms: duration, explicit, external_urls: urls } = await this.client.apis.spotify.getTrack(id)
     const [ cover ] = album.images.sort((a, b) => b.width - a.width)
-    const artistTitle = artists.length > 1 ? t('commands:spotify:artistPlural') : t('commands:spotify:artist')
-    const embed = new SpotifyEmbed(author)
-      .setAuthor(t('commands:spotify:subcommands:track:trackInfo'), SPOTIFY_LOGO, urls.spotify)
-      .setDescription(`${explicit ? `${Constants.EXPLICIT} ` : ''} [${name}](${urls.spotify}) \`(${Spotify.formatDuration(duration)})\``)
+    const artistTitle = artists.length > 1 ? t('commands:spotify.artistPlural') : t('commands:spotify.artist')
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(Constants.SPOTIFY_COLOR)
+      .setAuthor(t('commands:spotify.subcommands.track.trackInfo'), SPOTIFY_LOGO, urls.spotify)
+      .setDescription(`${explicit ? `${Constants.EXPLICIT} ` : ' '}[${name}](${urls.spotify}) \`(${Spotify.formatDuration(duration)})\``)
       .setThumbnail(cover.url)
-      .addField(t('commands:spotify:album'), `[${album.name}](${album.external_urls.spotify})`, true)
+      .addField(t('commands:spotify.album'), `[${album.name}](${album.external_urls.spotify}) \`(${album.release_date.split('-')[0]})\``, true)
       .addField(artistTitle, artists.map(a => `[${a.name}](${a.external_urls.spotify})`).join(', '), true)
 
     channel.send(embed)
   }
 }
 
-class SpotifyEmbed extends SwitchbladeEmbed {
-  constructor (author, data = {}) {
-    super(author, data)
-    this.setColor(Constants.SPOTIFY_COLOR)
+class SpotifyAlbum extends Command {
+  constructor (client, parentCommand) {
+    super(client, parentCommand)
+    this.name = types[1][0]
+    this.aliases = types[1].shift()
+    this.parentCommand = parentCommand
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.album.noAlbum' })
+    )
+  }
+
+  async run ({ t, author, channel, message }, query) {
+    channel.startTyping()
+
+    const results = await this.parentCommand.searchHandler(query, 'album')
+    if (results.ids.length === 0) throw new CommandError(t('commands:spotify.subcommands.album.notFound', { query }))
+
+    const { description, ids } = results
+
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(Constants.SPOTIFY_COLOR)
+      .setDescription(description)
+      .setAuthor(t('commands:spotify.subcommands.album.results', { query }), SPOTIFY_LOGO)
+      .setTitle(t('commands:spotify.selectResult'))
+
+    await channel.send(embed)
+    await channel.stopTyping()
+
+    this.parentCommand.awaitResponseMessage(message, ids, id => this.getAlbum(t, id, channel, author))
+  }
+
+  async getAlbum (t, id, channel, author) {
+    const { album_type: type, artists, name, release_date: release, total_tracks: total, tracks, images, external_urls: urls } = await this.client.apis.spotify.getAlbum(id)
+    const [ cover ] = images.sort((a, b) => b.width - a.width)
+    const artistTitle = artists.length > 1 ? t('commands:spotify.artistPlural') : t('commands:spotify.artist')
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(Constants.SPOTIFY_COLOR)
+      .setAuthor(t('commands:spotify.subcommands.album.albumInfo'), SPOTIFY_LOGO, urls.spotify)
+      .setDescription(`[${name}](${urls.spotify}) \`(${release.split('-')[0]})\``)
+      .setThumbnail(cover.url)
+      .addField(artistTitle, artists.map(a => `[${a.name}](${a.external_urls.spotify})`).join(', '), true)
+
+    if (type !== 'album') embed.addField(t('commands:spotify.subcommands.album.albumType'), t(`commands:spotify.subcommands.album.types.${type}`), true)
+
+    const trackMapper = (track, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) \`(${Spotify.formatDuration(track.duration_ms)})\``
+    const trackList = tracks.items.map(trackMapper).slice(0, 5)
+
+    if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
+
+    embed.addField(total > 1 ? `${t('commands:spotify.trackPlural')} (${total})` : `${t('commands:spotify.track')}`, trackList)
+    channel.send(embed)
+  }
+}
+
+class SpotifyArtist extends Command {
+  constructor (client, parentCommand) {
+    super(client, parentCommand)
+    this.name = types[2][0]
+    this.aliases = types[2].shift()
+    this.parentCommand = parentCommand
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.artist.noArtist' })
+    )
+  }
+
+  async run ({ t, author, channel, message, language }, query) {
+    channel.startTyping()
+
+    const prefix = (obj, i) => `\`${Spotify.formatIndex(++i)}\`. [${obj.name}](${obj.external_urls.spotify}) - ${t('commands:spotify.followersCount', { followers: MiscUtils.formatNumber(obj.followers.total, language) })}`
+    const results = await this.parentCommand.searchHandler(query, 'artist', prefix)
+    if (results.ids.length === 0) throw new CommandError(t('commands:spotify.subcommands.artist.notFound', { query }))
+
+    const { description, ids } = results
+
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(Constants.SPOTIFY_COLOR)
+      .setDescription(description)
+      .setAuthor(t('commands:spotify.subcommands.artist.results', { query }), SPOTIFY_LOGO)
+      .setTitle(t('commands:spotify.selectResult'))
+
+    await channel.send(embed)
+    await channel.stopTyping()
+
+    this.parentCommand.awaitResponseMessage(message, ids, id => this.getArtist(t, id, channel, author, language))
+  }
+
+  async getArtist (t, id, channel, author, language) {
+    const { name, genres, followers, images, external_urls: urls } = await this.client.apis.spotify.getArtist(id)
+    const [ cover ] = images.sort((a, b) => b.width - a.width)
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(Constants.SPOTIFY_COLOR)
+      .setAuthor(t('commands:spotify.subcommands.artist.artistInfo'), SPOTIFY_LOGO, urls.spotify)
+      .setDescription(`[${name}](${urls.spotify})`)
+      .setThumbnail(cover.url)
+      .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
+
+    const { items: tracks, total } = await this.client.apis.spotify.getArtistAlbums(id, 5)
+    const trackList = tracks.map((album, i) => `\`${++i}.\` [${album.name}](${album.external_urls.spotify}) \`(${album.release_date.split('-')[0]})\``)
+
+    if (total > 5) trackList.push(t('commands:spotify.moreAlbums', { albums: total - 5 }))
+    if (genres.length) embed.addField(t('commands:spotify.genres'), `\`${genres.join('`, `')}\``, true)
+
+    embed.addField(`${t('commands:spotify.albumPlural')} (${total})`, trackList)
+    channel.send(embed)
+  }
+}
+
+class SpotifyPlaylist extends Command {
+  constructor (client, parentCommand) {
+    super(client, parentCommand)
+    this.name = types[3][0]
+    this.aliases = types[3].shift()
+    this.parentCommand = parentCommand
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.playlist.noPlaylist' })
+    )
+  }
+
+  async run ({ t, author, channel, message, language }, query) {
+    channel.startTyping()
+
+    const prefix = (obj, i) => `\`${Spotify.formatIndex(++i)}\`. [${obj.name}](${obj.external_urls.spotify}) - [${obj.owner.display_name}](${obj.owner.external_urls.spotify})`
+    const results = await this.parentCommand.searchHandler(query, 'playlist', prefix)
+    if (results.ids.length === 0) throw new CommandError(t('commands:spotify.subcommands.playlist.notFound', { query }))
+
+    const { description, ids } = results
+
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(Constants.SPOTIFY_COLOR)
+      .setDescription(description)
+      .setAuthor(t('commands:spotify.subcommands.playlist.results', { query }), SPOTIFY_LOGO)
+      .setTitle(t('commands:spotify.selectResult'))
+
+    await channel.send(embed)
+    await channel.stopTyping()
+
+    this.parentCommand.awaitResponseMessage(message, ids, id => this.getPlaylist(t, id, channel, author, language))
+  }
+
+  async getPlaylist (t, id, channel, author, language) {
+    const { name, description, external_urls: urls, followers, images, owner, tracks } = await this.client.apis.spotify.getPlaylist(id)
+    const [ cover ] = images.sort((a, b) => b.width - a.width)
+    console.log(owner)
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(Constants.SPOTIFY_COLOR)
+      .setAuthor(t('commands:spotify.subcommands.playlist.playlistInfo'), SPOTIFY_LOGO, urls.spotify)
+      .setTitle(name)
+      .setURL(urls.spotify)
+      .setDescription(description)
+      .setThumbnail(cover.url)
+      .addField(t('commands:spotify.subcommands.playlist.owner'), `[${owner.display_name}](${owner.external_urls.spotify})`, true)
+      .addField(t('commands:spotify.followers'), followers.total, true)
+
+    const trackList = tracks.items.slice(0, 5).map(t => t.track).map((track, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) \`(${Spotify.formatDuration(track.duration_ms)})\``)
+    const total = tracks.total
+
+    if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
+
+    embed.addField(`${t('commands:spotify.trackPlural')} (${total})`, trackList)
+
+    channel.send(embed)
   }
 }
