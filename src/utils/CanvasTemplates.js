@@ -660,4 +660,20 @@ module.exports = class CanvasTemplates {
     ctx.writeParagraph(text, '38px "SF Pro Display"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.TOP_LEFT)
     return canvas.toBuffer()
   }
+
+  static gradient (colors, width, height) {
+    // TODO: more gradient directions besides linear
+    const canvas = createCanvas(width, height)
+    const ctx = canvas.getContext('2d')
+    const grd = ctx.createLinearGradient(0, 0, width, 0)
+
+    colors.forEach((color, i) => {
+      grd.addColorStop((i / (colors.length - 1)), color)
+    })
+
+    ctx.fillStyle = grd
+    ctx.fillRect(0, 0, width, height)
+
+    return canvas.toBuffer()
+  }
 }
