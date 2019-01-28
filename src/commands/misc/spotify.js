@@ -137,9 +137,7 @@ class SpotifyAlbum extends Command {
 
     const results = await this.parentCommand.searchHandler(query, 'album')
     if (results.ids.length === 0) throw new CommandError(t('commands:spotify.subcommands.album.notFound', { query }))
-
     const { description, ids } = results
-
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.SPOTIFY_COLOR)
       .setDescription(description)
@@ -164,10 +162,8 @@ class SpotifyAlbum extends Command {
       .addField(artistTitle, artists.map(a => `[${a.name}](${a.external_urls.spotify})`).join(', '), true)
 
     if (type !== 'album') embed.addField(t('commands:spotify.subcommands.album.albumType'), t(`commands:spotify.subcommands.album.types.${type}`), true)
-
     const trackMapper = (track, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) \`(${Spotify.formatDuration(track.duration_ms)})\``
     const trackList = tracks.items.map(trackMapper).slice(0, 5)
-
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
 
     embed.addField(total > 1 ? `${t('commands:spotify.trackPlural')} (${total})` : `${t('commands:spotify.track')}`, trackList)
@@ -193,9 +189,7 @@ class SpotifyArtist extends Command {
     const prefix = (obj, i) => `\`${Spotify.formatIndex(++i)}\`. [${obj.name}](${obj.external_urls.spotify}) - ${t('commands:spotify.followersCount', { followers: MiscUtils.formatNumber(obj.followers.total, language) })}`
     const results = await this.parentCommand.searchHandler(query, 'artist', prefix)
     if (results.ids.length === 0) throw new CommandError(t('commands:spotify.subcommands.artist.notFound', { query }))
-
     const { description, ids } = results
-
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.SPOTIFY_COLOR)
       .setDescription(description)
@@ -219,11 +213,9 @@ class SpotifyArtist extends Command {
 
     const { items: albums, total } = await this.client.apis.spotify.getArtistAlbums(id, 5)
     const albumList = albums.map((album, i) => `\`${++i}.\` [${album.name}](${album.external_urls.spotify}) \`(${album.release_date.split('-')[0]})\``)
-
     if (cover) embed.setThumbnail(cover.url)
     if (total > 5) albumList.push(t('commands:spotify.moreAlbums', { albums: total - 5 }))
     if (genres.length) embed.addField(t('commands:spotify.genres'), `\`${genres.join('`, `')}\``, true)
-
     if (albums.length) embed.addField(`${t('commands:spotify.albumPlural')} (${total})`, albumList)
     channel.send(embed)
   }
@@ -235,7 +227,6 @@ class SpotifyPlaylist extends Command {
     this.name = types[3][0]
     this.aliases = types[3].slice(1)
     this.parentCommand = parentCommand
-
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.playlist.noPlaylist' })
     )
@@ -247,9 +238,7 @@ class SpotifyPlaylist extends Command {
     const prefix = (obj, i) => `\`${Spotify.formatIndex(++i)}\`. [${obj.name}](${obj.external_urls.spotify}) - [${obj.owner.display_name}](${obj.owner.external_urls.spotify})`
     const results = await this.parentCommand.searchHandler(query, 'playlist', prefix)
     if (results.ids.length === 0) throw new CommandError(t('commands:spotify.subcommands.playlist.notFound', { query }))
-
     const { description, ids } = results
-
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.SPOTIFY_COLOR)
       .setDescription(description)
@@ -258,7 +247,6 @@ class SpotifyPlaylist extends Command {
 
     await channel.send(embed)
     await channel.stopTyping()
-
     this.parentCommand.awaitResponseMessage(message, ids, id => this.getPlaylist(t, id, channel, author, language))
   }
 
@@ -277,7 +265,6 @@ class SpotifyPlaylist extends Command {
 
     const trackList = tracks.items.slice(0, 5).map(t => t.track).map((track, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) - [${track.artists[0].name}](${track.artists[0].external_urls.spotify})`)
     const total = tracks.total
-
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
     embed.addField(`${t('commands:spotify.trackPlural')} (${total})`, trackList)
     channel.send(embed)
