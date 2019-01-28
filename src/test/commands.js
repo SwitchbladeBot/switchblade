@@ -4,7 +4,8 @@ const MiscUtils = require('../utils/MiscUtils.js')
 const commands = []
 
 FileUtils.requireDirectory('src/commands', (NewCommand) => {
-  commands.push(NewCommand)
+  const { parentCommand } = new NewCommand()
+  if (typeof parentCommand !== 'string' && !Array.isArray(parentCommand)) commands.push(NewCommand)
 }, console.error).catch(console.error)
 
 describe('Commands', () => {
