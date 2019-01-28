@@ -22,7 +22,7 @@ module.exports = class Seek extends Command {
     if (playingSong.isStream) throw new CommandError(t('commands:seek.notLive'))
 
     const position = guildPlayer.state.position + target
-    if (position > playingSong.length) throw new CommandError(t('commands:seek.lengthExceeded'))
+    if (position > Math.round(playingSong.length / 1000) * 1000) throw new CommandError(t('commands:seek.lengthExceeded'))
     if (position < 0) throw new CommandError(t('commands:seek.noNegativeValues'))
 
     guildPlayer.seek(position)
