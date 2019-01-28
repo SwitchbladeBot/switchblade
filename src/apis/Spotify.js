@@ -34,6 +34,10 @@ module.exports = class SpotifyAPI extends APIWrapper {
   }
 
   // Gets
+  getUser (user) {
+    return this.request(`/users/${user}`)
+  }
+
   getAlbum (id) {
     return this.request(`/albums/${id}`)
   }

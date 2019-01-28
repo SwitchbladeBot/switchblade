@@ -17,7 +17,8 @@ class Spotify extends Command {
       new SpotifyTrack(client, this),
       new SpotifyAlbum(client, this),
       new SpotifyArtist(client, this),
-      new SpotifyPlaylist(client, this)]
+      new SpotifyPlaylist(client, this),
+      new SpotifyUser(client, this)]
     this.parameters = new CommandParameters(this,
       new StringParameter({
         full: true,
@@ -75,7 +76,7 @@ class SpotifyTrack extends Command {
   constructor (client, parentCommand) {
     super(client, parentCommand)
     this.name = types[0][0]
-    this.aliases = types[0].shift()
+    this.aliases = types[0].slice(1)
     this.parentCommand = parentCommand
 
     this.parameters = new CommandParameters(this,
@@ -123,7 +124,7 @@ class SpotifyAlbum extends Command {
   constructor (client, parentCommand) {
     super(client, parentCommand)
     this.name = types[1][0]
-    this.aliases = types[1].shift()
+    this.aliases = types[1].slice(1)
     this.parentCommand = parentCommand
 
     this.parameters = new CommandParameters(this,
@@ -178,7 +179,7 @@ class SpotifyArtist extends Command {
   constructor (client, parentCommand) {
     super(client, parentCommand)
     this.name = types[2][0]
-    this.aliases = types[2].shift()
+    this.aliases = types[2].slice(1)
     this.parentCommand = parentCommand
 
     this.parameters = new CommandParameters(this,
@@ -214,16 +215,16 @@ class SpotifyArtist extends Command {
       .setColor(Constants.SPOTIFY_COLOR)
       .setAuthor(t('commands:spotify.subcommands.artist.artistInfo'), SPOTIFY_LOGO, urls.spotify)
       .setDescription(`[${name}](${urls.spotify})`)
-      .setThumbnail(cover.url)
       .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
 
-    const { items: tracks, total } = await this.client.apis.spotify.getArtistAlbums(id, 5)
-    const trackList = tracks.map((album, i) => `\`${++i}.\` [${album.name}](${album.external_urls.spotify}) \`(${album.release_date.split('-')[0]})\``)
+    const { items: albums, total } = await this.client.apis.spotify.getArtistAlbums(id, 5)
+    const albumList = albums.map((album, i) => `\`${++i}.\` [${album.name}](${album.external_urls.spotify}) \`(${album.release_date.split('-')[0]})\``)
 
-    if (total > 5) trackList.push(t('commands:spotify.moreAlbums', { albums: total - 5 }))
+    if (cover) embed.setThumbnail(cover.url)
+    if (total > 5) albumList.push(t('commands:spotify.moreAlbums', { albums: total - 5 }))
     if (genres.length) embed.addField(t('commands:spotify.genres'), `\`${genres.join('`, `')}\``, true)
 
-    embed.addField(`${t('commands:spotify.albumPlural')} (${total})`, trackList)
+    if (albums.length) embed.addField(`${t('commands:spotify.albumPlural')} (${total})`, albumList)
     channel.send(embed)
   }
 }
@@ -232,7 +233,7 @@ class SpotifyPlaylist extends Command {
   constructor (client, parentCommand) {
     super(client, parentCommand)
     this.name = types[3][0]
-    this.aliases = types[3].shift()
+    this.aliases = types[3].slice(1)
     this.parentCommand = parentCommand
 
     this.parameters = new CommandParameters(this,
@@ -264,7 +265,6 @@ class SpotifyPlaylist extends Command {
   async getPlaylist (t, id, channel, author, language) {
     const { name, description, external_urls: urls, followers, images, owner, tracks } = await this.client.apis.spotify.getPlaylist(id)
     const [ cover ] = images.sort((a, b) => b.width - a.width)
-    console.log(owner)
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.SPOTIFY_COLOR)
       .setAuthor(t('commands:spotify.subcommands.playlist.playlistInfo'), SPOTIFY_LOGO, urls.spotify)
@@ -272,16 +272,49 @@ class SpotifyPlaylist extends Command {
       .setURL(urls.spotify)
       .setDescription(description)
       .setThumbnail(cover.url)
-      .addField(t('commands:spotify.subcommands.playlist.owner'), `[${owner.display_name}](${owner.external_urls.spotify})`, true)
-      .addField(t('commands:spotify.followers'), followers.total, true)
+      .addField(t('commands:spotify.subcommands.playlist.createdBy'), `[${owner.display_name}](${owner.external_urls.spotify})`, true)
+      .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
 
-    const trackList = tracks.items.slice(0, 5).map(t => t.track).map((track, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) \`(${Spotify.formatDuration(track.duration_ms)})\``)
+    const trackList = tracks.items.slice(0, 5).map(t => t.track).map((track, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) - [${track.artists[0].name}](${track.artists[0].external_urls.spotify})`)
     const total = tracks.total
 
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
-
     embed.addField(`${t('commands:spotify.trackPlural')} (${total})`, trackList)
-
     channel.send(embed)
+  }
+}
+
+class SpotifyUser extends Command {
+  constructor (client, parentCommand) {
+    super(client, parentCommand)
+    this.name = types[4][0]
+    this.aliases = types[4].slice(1)
+    this.parentCommand = parentCommand
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.user.noUser' })
+    )
+  }
+
+  async run ({ t, author, channel, language }, user) {
+    if (!await this.getUser(t, author, channel, language, user)) throw new CommandError(t('commands:spotify.subcommands.user.notFound', { user }))
+  }
+
+  async getUser (t, author, channel, language, user) {
+    try {
+      const { display_name: name, images, followers, external_urls: urls } = await this.client.apis.spotify.getUser(user)
+      const [image] = images.sort((a, b) => b.width - a.width)
+      const embed = new SwitchbladeEmbed(author)
+        .setColor(Constants.SPOTIFY_COLOR)
+        .setAuthor(t('commands:spotify.subcommands.user.userInfo'), SPOTIFY_LOGO, urls.spotify)
+        .setDescription(name || user)
+        .setThumbnail(image.url)
+        .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
+
+      await channel.send(embed)
+      return true
+    } catch (e) {
+      return false
+    }
   }
 }
