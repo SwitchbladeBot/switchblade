@@ -42,7 +42,7 @@
     "commandDescription": "Checks if the bot is online"
   },
   "spotify": {
-    "commandDescription": "Searches for a song, album, artist or a playlist and displays an user info on Spotify",
+    "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, and displays a user info.",
     "commandUsage": "<type> <query>",
     "noTracksFound": "I couldn't find any tracks with that name.",
     "noType": "Please insert a valid type",
@@ -54,8 +54,8 @@
     "track": "Track",
     "trackPlural": "Tracks",
     "albumPlural": "Albums",
-    "moreTracks": "...and more {{tracks}} tracks",
-    "moreAlbums": "...and more {{albums}} albums",
+    "moreTracks": "...and {{tracks}} more tracks",
+    "moreAlbums": "...and {{albums}} more albums",
     "followers": "Followers",
     "followersCount": "{{followers}} followers",
     "selectResult": "Please send the number of the result (10 seconds)",
@@ -99,10 +99,10 @@
         "createdBy": "Created by"
       },
       "user": {
-        "commandDescription": "Get information about an user on Spotify",
+        "commandDescription": "Get information about a user on Spotify",
         "commandUsage": "<user>",
         "noUser": "You need to give me a valid user.",
-        "notFound": "I couldn't find any user.",
+        "notFound": "I couldn't find any users.",
         "userInfo": "User information"
       }
     }
