@@ -16,20 +16,21 @@ module.exports = class DBL extends Command {
     channel.startTyping()
 
     try {
-      const { collectedMoney } = await this.client.modules.economy.bonus.claimDaily(author.id)
+      const { collectedMoney } = await this.client.modules.economy.bonus.claimDBLBonus(author.id)
       embed.setDescription(t('commands:dbl.thanksForVoting', { count: collectedMoney }))
     } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
       switch (e.message) {
         case 'ALREADY_CLAIMED':
           embed.setTitle(t('commands:dbl.alreadyClaimed'))
             .setDescription(t('commons:youCanDoItAgainIn', { time: e.formattedCooldown }))
+            .setColor(Constants.ERROR_COLOR)
           break
         case 'NOT_VOTED':
           embed.setDescription(t('commands:dbl.howToVote', { link: `https://discordbots.org/bot/${this.client.user.id}/vote`, command: `${prefix}${alias || this.name}` }))
           break
         default:
           embed.setTitle(t('errors:generic'))
+            .setColor(Constants.ERROR_COLOR)
       }
     }
 
