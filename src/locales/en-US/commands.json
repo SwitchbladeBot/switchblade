@@ -157,11 +157,13 @@
       },
       "remove": {
         "commandDescription": "Removes a song from the queue",
+        "commandUsage": "<music number>",
         "missingIndexParameter": "You need to give me the number of the song you want to remove from the queue",
         "songRemoved": "{{- songName}} has been removed from the queue"
       },
       "jump": {
         "commandDescription": "Jumps to a specific song in the queue",
+        "commandUsage": "<music number>",
         "missingIndexParameter": "You need to give me the number of the song you want to jump to",
         "jumpedToSong": "Jumped to {{- songName}}"
       }
@@ -593,6 +595,7 @@
     "commandDescription": "Get the current time in a specified place",
     "commandUsage": "<timezone>",
     "currentTime": "The current time in {{timezone}} is",
+    "noZone": "You need to give me a place to get the time",
     "notFound": "Couldn't find this place."
   },
   "dbl": {
@@ -745,6 +748,7 @@
     "commandUsage": "<+10|-10|1:30>",
     "missingSeekParameter": "You need to give me a valid position!",
     "lengthExceeded": "The given position exceeds the song duration!",
+    "noNegativeValues": "The given position goes before the song starts!",
     "notLive": "I can't change livestreams' positions!",
     "positionSet": "Player position set to `{{position}}`"
   },
