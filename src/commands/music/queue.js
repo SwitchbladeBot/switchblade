@@ -51,17 +51,14 @@ class QueueClear extends Command {
   }
 
   async run ({ t, author, channel, guild }) {
-    const { queue } = this.client.playerManager.get(guild.id)
-    const embed = new SwitchbladeEmbed(author)
-
-    if (queue.length > 0) {
-      queue.splice(0, queue.length)
-      embed.setTitle(t(`commands:${this.tPath}.queueCleared`))
+    const guildPlayer = this.client.playerManager.get(guild.id)
+    if (guildPlayer.nextSong) {
+      guildPlayer.clearQueue()
+      channel.send(new SwitchbladeEmbed(author)
+        .setTitle(t(`commands:${this.tPath}.queueCleared`)))
     } else {
-      embed.setTitle(t('music:noneAfterCurrent'))
+      throw new CommandError(t('music:noneAfterCurrent'))
     }
-
-    channel.send(embed)
   }
 }
 
@@ -74,16 +71,13 @@ class QueueShuffle extends Command {
 
   async run ({ t, author, channel, guild }) {
     const guildPlayer = this.client.playerManager.get(guild.id)
-    const embed = new SwitchbladeEmbed(author)
-
-    if (guildPlayer.queue.length > 0) {
-      guildPlayer.queue = guildPlayer.queue.sort(() => Math.random() > 0.5 ? -1 : 1)
-      embed.setTitle(t(`commands:${this.tPath}.queueShuffled`))
+    if (guildPlayer.nextSong) {
+      guildPlayer.shuffleQueue()
+      channel.send(new SwitchbladeEmbed(author)
+        .setTitle(t(`commands:${this.tPath}.queueShuffled`)))
     } else {
-      embed.setTitle(t('music:noneAfterCurrent'))
+      throw new CommandError(t('music:noneAfterCurrent'))
     }
-
-    channel.send(embed)
   }
 }
 
@@ -99,25 +93,21 @@ class QueueRemove extends Command {
   }
 
   async run ({ t, author, channel, guild }, index) {
-    index = Math.round(index)
-    const { queue } = this.client.playerManager.get(guild.id)
-    const embed = new SwitchbladeEmbed(author)
-
-    if (queue.length > 0) {
-      if (index > queue.length) {
+    const guildPlayer = this.client.playerManager.get(guild.id)
+    if (guildPlayer.nextSong) {
+      try {
+        const song = guildPlayer.removeFromQueue(Math.round(index) - 1)
+        const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
+        const songName = `[${song.title}](${song.uri}) ${duration}`
+        channel.send(new SwitchbladeEmbed(author)
+          .setDescription(t(`commands:${this.tPath}.songRemoved`, { songName }))
+          .setThumbnail(song.artwork))
+      } catch (e) {
         throw new CommandError(t(`commands:${this.tPath}.missingIndexParameter`))
       }
-
-      const [ song ] = queue.splice(index - 1, 1)
-      const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
-      const songName = `[${song.title}](${song.uri}) ${duration}`
-      embed.setDescription(t(`commands:${this.tPath}.songRemoved`, { songName }))
-        .setThumbnail(song.artwork)
     } else {
-      embed.setTitle(t('music:noneAfterCurrent'))
+      throw new CommandError(t('music:noneAfterCurrent'))
     }
-
-    channel.send(embed)
   }
 }
 
@@ -133,25 +123,19 @@ class QueueJump extends Command {
   }
 
   async run ({ t, author, channel, guild }, index) {
-    index = Math.round(index)
     const guildPlayer = this.client.playerManager.get(guild.id)
-    const embed = new SwitchbladeEmbed(author)
-
-    if (guildPlayer.queue.length > 0) {
-      if (index > guildPlayer.queue.length) {
+    if (guildPlayer.nextSong) {
+      try {
+        const song = guildPlayer.jumpToIndex(Math.round(index))
+        const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
+        const songName = `[${song.title}](${song.uri}) ${duration}`
+        channel.send(new SwitchbladeEmbed(author)
+          .setDescription(t(`commands:${this.tPath}.jumpedToSong`, { songName })))
+      } catch (e) {
         throw new CommandError(t(`commands:${this.tPath}.missingIndexParameter`))
       }
-
-      const song = guildPlayer.queue.splice(0, index).pop()
-      const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
-      const songName = `[${song.title}](${song.uri}) ${duration}`
-
-      guildPlayer.play(song, true)
-      embed.setDescription(t(`commands:${this.tPath}.jumpedToSong`, { songName }))
     } else {
-      embed.setTitle(t('music:noneAfterCurrent'))
+      throw new CommandError(t('music:noneAfterCurrent'))
     }
-
-    channel.send(embed)
   }
 }
