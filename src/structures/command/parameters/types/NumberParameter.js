@@ -19,8 +19,8 @@ module.exports = class NumberParameter extends Parameter {
       throw new CommandError(t('errors:invalidNumber'))
     }
 
-    if (!!this.min && nmb < this.min) throw new CommandError(t('errors:needBiggerNumber', { number: this.min }))
-    if (!!this.max && nmb > this.max) throw new CommandError(t('errors:needSmallerNumber', { number: this.max }))
+    if (!isNull(this.min) && nmb < this.min) throw new CommandError(t('errors:needBiggerNumber', { number: this.min }))
+    if (!isNull(this.max) && nmb > this.max) throw new CommandError(t('errors:needSmallerNumber', { number: this.max }))
 
     return nmb
   }
