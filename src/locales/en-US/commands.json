@@ -42,7 +42,7 @@
     "commandDescription": "Checks if the bot is online"
   },
   "spotify": {
-    "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, and displays a user info.",
+    "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, or displays a user info.",
     "commandUsage": "<type> <query>",
     "noTracksFound": "I couldn't find any tracks with that name.",
     "noType": "Please insert a valid type",
