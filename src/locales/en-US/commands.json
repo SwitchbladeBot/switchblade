@@ -42,10 +42,70 @@
     "commandDescription": "Checks if the bot is online"
   },
   "spotify": {
-    "commandDescription": "Searches for a song on Spotify",
-    "commandUsage": "<track name>",
+    "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, and displays a user info.",
+    "commandUsage": "<type> <query>",
     "noTracksFound": "I couldn't find any tracks with that name.",
-    "noTrackName": "You need to give me a track name."
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "album": "Album",
+    "genres": "Genres",
+    "artist": "Artist",
+    "artistPlural": "Artists",
+    "track": "Track",
+    "trackPlural": "Tracks",
+    "albumPlural": "Albums",
+    "moreTracks": "...and {{tracks}} more tracks",
+    "moreAlbums": "...and {{albums}} more albums",
+    "followers": "Followers",
+    "followersCount": "{{followers}} followers",
+    "selectResult": "Please send the number of the result (10 seconds)",
+    "subcommands": {
+      "track": {
+        "commandDescription": "Searches for a song on Spotify",
+        "commandUsage": "<song>",
+        "noTrack": "You need to give me a track name.",
+        "notFound": "I couldn't find any track with that name.",
+        "results": "Track results for {{query}}",
+        "trackInfo": "Track information"
+      },
+      "album": {
+        "commandDescription": "Searches for an album on Spotify",
+        "commandUsage": "<album>",
+        "noAlbum": "You need to give me an album name.",
+        "notFound": "I couldn't find any album with that name.",
+        "results": "Album results for {{query}}",
+        "albumInfo": "Album information",
+        "albumType": "Album type",
+        "types": {
+          "single": "Single",
+          "compilation": "Compilation"
+        }
+      },
+      "artist": {
+        "commandDescription": "Searches for an artist on Spotify",
+        "commandUsage": "<artist>",
+        "noArtist": "You need to give me an artist name.",
+        "notFound": "I couldn't find any artist with that name.",
+        "results": "Artist results for {{query}}",
+        "artistInfo": "Artist information"
+      },
+      "playlist": {
+        "commandDescription": "Searches for a playlist on Spotify",
+        "commandUsage": "<playlist>",
+        "noPlaylist": "You need to give me a playlist name.",
+        "notFound": "I couldn't find any playlist with that name.",
+        "results": "Playlist results for {{query}}",
+        "playlistInfo": "Playlist information",
+        "createdBy": "Created by"
+      },
+      "user": {
+        "commandDescription": "Get information about a user on Spotify",
+        "commandUsage": "<user>",
+        "noUser": "You need to give me a valid user.",
+        "notFound": "I couldn't find any users.",
+        "userInfo": "User information"
+      }
+    }
   },
   "copypasta": {
     "commandDescription": "Random text from /r/copypasta"
@@ -804,15 +864,14 @@
         "commandUsage": "<album>"
       },
       "artist": {
-        "missing": "Please insert a query to search",
+        "missing": "Please insert an artist to search",
         "results": "Artist results for {{query}}",
         "resultsCount": "{{count}} artists found",
         "commandDescription": "Search for an artist on Last.fm",
         "commandUsage": "<artist>"
       },
       "user": {
-        "missing": "Please insert a query to search",
-        "results": "Artist results for {{query}}",
+        "missing": "Please insert a valid user to get information about",
         "notFound": "This user wasn't found on Last.fm",
         "commandDescription": "Get information about an user on Last.fm",
         "commandUsage": "<user>"
