@@ -1,6 +1,5 @@
 const { CommandContext, EventListener } = require('../')
 const { SwitchbladePlayerManager } = require('../music')
-const snekfetch = require('snekfetch')
 
 module.exports = class MainListener extends EventListener {
   constructor (client) {
@@ -29,48 +28,28 @@ module.exports = class MainListener extends EventListener {
     }
 
     // TODO: Make stat posters modular
-    function postStats (client) {
-      // bots.discord.pw
-      if (process.env.DISCORDBOTSPW_TOKEN) {
-        snekfetch
-          .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-          .set('Authorization', process.env.DISCORDBOTSPW_TOKEN)
-          .send({ server_count: client.guilds.size })
-          .then(() => client.log('[32mPosted statistics successfully', 'bots.discord.pw'))
-          .catch(() => client.log('[31mFailed to post statistics', 'bots.discord.pw'))
-      }
-
-      // discordbots.org
-      if (process.env.DBL_TOKEN) {
-        snekfetch
-          .post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-          .set('Authorization', process.env.DBL_TOKEN)
-          .send({ server_count: client.guilds.size })
-          .then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
-          .catch(() => client.log('[31mFailed to post statistics', 'discordbots.org'))
-      }
-
-      // botsfordiscord.com
-      if (process.env.BOTSFORDISCORD_TOKEN) {
-        snekfetch
-          .post(`https://botsfordiscord.com/api/bots/${client.user.id}`)
-          .set('Authorization', process.env.BOTSFORDISCORD_TOKEN)
-          .send({ server_count: client.guilds.size })
-          .then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
-          .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
-      }
-
-      if (process.env.DBL2_TOKEN) {
-        snekfetch
-          .post(`https://discordbotlist.com/api/bots/${client.user.id}/stats`)
-          .set('Authorization', `Bot ${process.env.DBL2_TOKEN}`)
-          .send({
-            guilds: client.guilds.size,
-            users: client.users.size
-          })
-          .then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
-          .catch(() => client.log('[31mFailed to post statistics', 'discordbotlist.com'))
-      }
+    async function postStats (client) {
+      let success = 0
+      let failed = 0
+      await Promise.all(
+        client.botlists.map(async l => {
+          try {
+            await l.postStatistics({
+              id: client.user.id,
+              shardId: 0,
+              shardCount: 1,
+              serverCount: client.guilds.size,
+              userCount: client.users.size,
+              voiceConnections: client.voiceConnections.size
+            })
+            success++
+          } catch (e) {
+            client.log(`[31mFailed to post statistics to ${l.name}`, 'Bot Lists')
+            failed++
+          }
+        })
+      )
+      client.log(failed ? `[33mPosted statistics to ${success} bot lists, ${failed} failed.` : `[32mPosted statistics to all ${success} bot lists without errors.`, 'Bot Lists')
     }
 
     postStats(this)

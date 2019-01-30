@@ -2,7 +2,7 @@ const { Client } = require('discord.js')
 const translationBackend = require('i18next-node-fs-backend')
 
 const FileUtils = require('./utils/FileUtils.js')
-const { APIWrapper, Command, EventListener, Module } = require('./structures')
+const { APIWrapper, Command, EventListener, Module, BotList } = require('./structures')
 const { MongoDB } = require('./database')
 
 /**
@@ -18,6 +18,7 @@ module.exports = class Switchblade extends Client {
     this.apis = {}
     this.modules = {}
 
+    this.botlists = []
     this.commands = []
     this.cldr = { languages: {} }
     this.listeners = []
@@ -27,6 +28,7 @@ module.exports = class Switchblade extends Client {
     this.initializeDatabase(MongoDB, { useNewUrlParser: true })
     this.initializeApis('src/apis').then(() => {
       this.initializeListeners('src/listeners')
+      this.initializeBotLists('src/botlists')
       this.downloadAndInitializeLocales('src/locales').then(() => {
         this.initializeModules('src/modules').then(() => {
           this.initializeCommands('src/commands')
@@ -319,5 +321,49 @@ module.exports = class Switchblade extends Client {
         this.logError('DB', e.message)
         this.database = null
       })
+  }
+
+  // Bot Lists
+  /**
+   * Adds a new bot list to the Client.
+   * @param {BotList} botlist - Bot List to be added
+   */
+  addBotList (botlist) {
+    if (!(botlist instanceof BotList)) {
+      this.log(`[31m${botlist} failed to load - Not a Bot List`, 'Bot Lists')
+      return false
+    }
+
+    if (botlist.canLoad() !== true) {
+      this.log(`[31m${botlist.name} failed to load - ${botlist.canLoad() || 'canLoad function did not return true.'}`, 'Bot Lists')
+      return false
+    }
+
+    if (!botlist.apis.every(api => {
+      if (!this.apis[api]) this.log(`[31m${botlist.name} failed to load - Required API wrapper "${api}" not found.`, 'Bot Lists')
+      return !!this.apis[api]
+    })) return false
+
+    if (!botlist.envVars.every(variable => {
+      if (!process.env[variable]) this.log(`[31m${botlist.name} failed to load - Required environment variable "${variable}" is not set.`, 'Bot Lists')
+      return !!process.env[variable]
+    })) return false
+
+    this.botlists.push(botlist)
+    return true
+  }
+
+  /**
+   * Initializes all Client Bot Lists.
+   * @param {string} dirPath - Path to the bot list directory
+   */
+  initializeBotLists (dirPath) {
+    let success = 0
+    let failed = 0
+    FileUtils.requireDirectory(dirPath, (NewBotList) => {
+      this.addBotList(new NewBotList(this)) ? success++ : failed++
+    }, this.logError).then(() => {
+      this.log(failed ? `[33m${success} bot lists loaded, ${failed} failed.` : `[32mAll ${success} bot lists loaded without errors.`, 'Bot Lists')
+    }).catch(this.logError)
   }
 }
