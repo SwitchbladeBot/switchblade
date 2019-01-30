@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError } = CommandStructures
 const snekfetch = require('snekfetch')
 
 module.exports = class Currency extends Command {
@@ -17,13 +17,14 @@ module.exports = class Currency extends Command {
       const { body } = await snekfetch.get('https://api.ksoft.si/kumo/currency').query({ to, from, value }).set({
         'Authorization': `Bearer ${process.env.KSOFT_KEY}`
       })
+
       if (body.pretty) {
-        channel.send(embed
+        return channel.send(embed
           .setTitle(`${from.toUpperCase()} ${t('commons:to')} ${to.toUpperCase()}`)
           .setDescription(`${value} ${from.toUpperCase()} = ${body.pretty}`))
-      } else {
-        throw new CommandError(t('commands:currency.noCurrency'), true)
       }
+
+      throw new Error('INVALID_REQUEST')
     } catch (e) {
       throw new CommandError(t('commands:currency.noCurrency'), true)
     }
