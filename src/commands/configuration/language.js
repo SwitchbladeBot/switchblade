@@ -19,7 +19,7 @@ module.exports = class ConfigLanguage extends Command {
         missingError: ({ t, prefix, author }) => {
           return new SwitchbladeEmbed().setTitle(t('commands:config.subcommands.language.noCode'))
             .setDescription([
-              `**${t('commons:usage')}:** \`${prefix}${parentCommand.name} ${this.name} ${t('commands:config.subcommands.language.commandUsage')}\``,
+              this.usage(t, prefix),
               '',
               `__**${t('commands:config.subcommands.language.availableLanguages')}:**__`,
               `**${languageCodes().map(l => `\`${l}\``).join(', ')}**`,
