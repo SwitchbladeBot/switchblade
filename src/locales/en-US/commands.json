@@ -923,6 +923,9 @@
     "thisTimeoutsIn": "You have {{COLLECTOR_TIMEOUT}} seconds to accept it"
   },
   "ship": {
+    "commandDescription": "Ship you or someone with someone else.",
+    "commandUsage": "<first user> [second user]",
+    "noUser": "Please insert someone to ship",
     "messages": {
       "high": {
         "0": "{{shipName}}, what a beautiful couple",
