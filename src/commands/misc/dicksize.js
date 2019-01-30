@@ -11,7 +11,7 @@ module.exports = class Dicksize extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    const size = author.id.slice(0, 3) % 20 + 1
+    const size = author.id.slice(-3) % 20 + 1
     embed
       .setTitle(t('commands:dicksize.yourDickSize'))
       .setDescription(`${size} cm\n8${'='.repeat(size)}D`)
