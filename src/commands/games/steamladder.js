@@ -29,7 +29,7 @@ module.exports = class SteamLadder extends Command {
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commands:steamladder.noLadder'))
             .setDescription([
-              `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:steamladder.commandUsage')}\``,
+              this.usage(t, prefix),
               '',
               `__**${t('commands:steamladder.availableLadders')}:**__`,
               `**${ladders.map(l => `\`${l}\``).join(', ')}**`
@@ -42,7 +42,7 @@ module.exports = class SteamLadder extends Command {
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commands:steamladder.noRegion'))
             .setDescription([
-              `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:steamladder.commandUsage')}\``,
+              this.usage(t, prefix),
               '',
               `__**${t('commands:steamladder.availableRegions')}:**__`,
               `**${regions.map(l => `\`${l}\``).join(', ')}**`,
