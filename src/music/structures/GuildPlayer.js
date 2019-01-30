@@ -34,11 +34,6 @@ module.exports = class GuildPlayer extends Player {
     }
   }
 
-  queueTrack (song) {
-    this.queue.push(song)
-    song.emit('queue')
-  }
-
   play (song, forcePlay = false, options = {}) {
     if (this.playing && !forcePlay) {
       this.queueTrack(song)
@@ -59,7 +54,7 @@ module.exports = class GuildPlayer extends Player {
   }
 
   next (user) {
-    if (this._loop) this.queueTrack(this.playingSong)
+    if (this._loop) this.queueTrack(this.playingSong, true)
     const nextSong = this.queue.shift()
     if (nextSong) {
       this.play(nextSong, true)
@@ -70,6 +65,48 @@ module.exports = class GuildPlayer extends Player {
       this.emit('stop', user)
     }
   }
+
+  // Queue
+  get nextSong () {
+    return this.queue[0]
+  }
+
+  queueTrack (song, silent = false) {
+    this.queueTracks([ song ], silent)
+    return song
+  }
+
+  queueTracks (songs, silent = false) {
+    this.queue.push(...songs)
+    if (!silent) songs.forEach(s => s.emit('queue'))
+    return songs
+  }
+
+  clearQueue () {
+    return this.queue.splice(0)
+  }
+
+  shuffleQueue () {
+    this.queue = this.queue.sort(() => Math.random() > 0.5 ? -1 : 1)
+  }
+
+  removeFromQueue (index) {
+    if (index < 0 || index >= this.queue.length) throw new Error('INDEX_OUT_OF_BOUNDS')
+    return this.queue.splice(index, 1)[0]
+  }
+
+  jumpToIndex (index, ignoreLoop = false) {
+    if (index < 0 || index >= this.queue.length) throw new Error('INDEX_OUT_OF_BOUNDS')
+
+    const songs = this.queue.splice(0, index)
+    const song = songs.pop()
+    if (!ignoreLoop && this._loop) this.queueTracks([ this.playingSong, ...songs ])
+    this.play(song, true)
+
+    return song
+  }
+
+  // Volume
 
   volume (volume = 50) {
     this._volume = volume

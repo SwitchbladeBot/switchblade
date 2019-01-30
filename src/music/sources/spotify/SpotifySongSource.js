@@ -50,7 +50,7 @@ module.exports = class SpotifySongSource extends SongSource {
     const video = await this.getClosestVideo(manager, track)
     if (video) {
       try {
-        const [ song ] = await manager.fetchTracks(video.id.videoId)
+        const [ song ] = await manager.fetchTracks(video)
         return new SpotifySong(song, requestedBy, track, album).loadInfo()
       } catch (e) {
         manager.client.logError(e)
@@ -58,8 +58,7 @@ module.exports = class SpotifySongSource extends SongSource {
     }
   }
 
-  static async getClosestVideo ({ client }, track) {
-    const { items: [ item ] } = await client.apis.youtube.searchVideos(`${track.artists[0].name} - ${track.name}`)
-    return item
+  static getClosestVideo ({ client }, track) {
+    return super.getClosestVideo(client, `${track.artists[0].name} - ${track.name}`)
   }
 }
