@@ -43,7 +43,6 @@ module.exports = class Ship extends Command {
       }
     })
 
-    // console.log(await Promise.all(users))
     const image = await CanvasTemplates.ship(users, shipName, percent)
 
     const embed = new SwitchbladeEmbed(author)
