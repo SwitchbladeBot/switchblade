@@ -11,32 +11,21 @@ module.exports = class Currency extends Command {
     this.envVars = ['KSOFT_KEY']
   }
 
-  async run ({ t, author, channel, defaultPrefix }, tocoin, fromcoin, value) {
+  async run ({ t, author, channel, defaultPrefix }, to, from = 'USD', value = 1) {
     const embed = new SwitchbladeEmbed(author)
-    fromcoin = fromcoin || 'USD'
-    value = value || 1
     try {
-      const { body } = await snekfetch.get(`https://api.ksoft.si/kumo/currency?from=${fromcoin}&to=${tocoin}&value=${value}`, {
-        headers: {
-          'Authorization': `Bearer ${process.env.KSOFT_KEY}`
-        }
+      const { body } = await snekfetch.get('https://api.ksoft.si/kumo/currency').query({ to, from, value }).set({
+        'Authorization': `Bearer ${process.env.KSOFT_KEY}`
       })
       if (body.pretty) {
-        embed
-          .setTitle(`${fromcoin.toUpperCase()} ${t('commons:to')} ${tocoin.toUpperCase()}`)
-          .setDescription(`${value} ${fromcoin.toUpperCase()} = ${body.pretty}`)
+        channel.send(embed
+          .setTitle(`${from.toUpperCase()} ${t('commons:to')} ${to.toUpperCase()}`)
+          .setDescription(`${value} ${from.toUpperCase()} = ${body.pretty}`))
       } else {
-        embed
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:currency.noCurrency'))
-          .setDescription(`**${t('commons:usage')}**: \`${defaultPrefix}currency ${t('commands:currency.commandUsage')}\``)
+        throw new CommandError(t('commands:currency.noCurrency'), true)
       }
     } catch (e) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:currency.noCurrency'))
-        .setDescription(`**${t('commons:usage')}**: \`${defaultPrefix}currency ${t('commands:currency.commandUsage')}\``)
+      throw new CommandError(t('commands:currency.noCurrency'), true)
     }
-    channel.send(embed)
   }
 }

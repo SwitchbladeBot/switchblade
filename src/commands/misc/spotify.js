@@ -22,7 +22,7 @@ module.exports = class Spotify extends Command {
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commands:spotify.noType'))
             .setDescription([
-              `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:spotify.commandUsage')}\``,
+              this.usage(t, prefix),
               '',
               `__**${t('commands:spotify.types')}:**__`,
               `\`${['track', 'album', 'artist', 'playlist', 'user'].join('`, `')}\``
