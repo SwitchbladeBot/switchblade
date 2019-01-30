@@ -727,7 +727,7 @@ module.exports = class CanvasTemplates {
 
     // Heart
     const HEART_W = 88
-    const HEART_H = 80
+    const HEART_H = 81
     const HEART_X = WIDTH * 0.5
     const HEART_Y = AVATAR_BACKGROUND_Y
     const HEART_COLOR = '#be1931'
