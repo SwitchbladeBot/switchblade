@@ -10,15 +10,15 @@ module.exports = class DeezerSongSource extends SongSource {
     const trackHandler = async ([ , id ], m, r) => this.provideTrack(m, id, r)
     return [
       [
-        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/track\/(\d+)/,
+        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/(?:\w{2}\/)?track\/(\d+)/,
         trackHandler
       ],
       [
-        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/album\/(\d+)/,
+        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/(?:\w{2}\/)?album\/(\d+)/,
         albumHandler
       ],
       [
-        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/playlist\/(\d+)/,
+        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/(?:\w{2}\/)?playlist\/(\d+)/,
         playlistHandler
       ]
     ]
