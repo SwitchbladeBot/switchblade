@@ -30,7 +30,7 @@ module.exports = class Ship extends Command {
     const type = percent < 35 ? 'low' : percent > 60 ? 'high' : 'medium'
 
     const messagesCount = 6
-    const messageKeys = { shipName, first, second, percent }
+    const messageKeys = { shipName, firstName, secondName, percent }
     const result = Math.floor((Math.random() * messagesCount))
     const randomMessage = t(`commands:ship.messages.${type}.${result}`, messageKeys)
     const message = first.equals(second) ? t(`commands:ship.messages.self.${result}`, messageKeys) : randomMessage

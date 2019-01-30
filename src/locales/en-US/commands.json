@@ -930,15 +930,15 @@
       "high": {
         "0": "{{shipName}}, what a beautiful couple",
         "1": "I always knew about {{shipName}}",
-        "2": "insert something here",
-        "3": "insert something here",
-        "4": "insert something here",
+        "2": "{{shipName}}?!!? thats cute :3",
+        "3": "{{firstName}} you may kiss {{secondName}}",
+        "4": "{{shipName}}?!!? OwO",
         "5": "insert something here",
         "6": "insert something here"
       },
       "medium": {
-        "0": "insert something here",
-        "1": "insert something here",
+        "0": "{{firstName}} could try but i don't think that {{secondName}} would want",
+        "1": "{{percent}}%... well,  there are more people in the world...",
         "2": "insert something here",
         "3": "insert something here",
         "4": "insert something here",
@@ -946,8 +946,8 @@
         "6": "insert something here"
       },
       "low": {
-        "0": "{{shipName}}?? are you serious?",
-        "1": "insert something here",
+        "0": "{{shipName}}? are you serious?",
+        "1": "{{shipName}}? i dont think {{firstName}} will like it",
         "2": "insert something here",
         "3": "insert something here",
         "4": "insert something here",
