@@ -921,5 +921,45 @@
     "hasChallenged": "{{player}} has challenged you to a game of Tic Tac Toe",
     "clickTheReaction": "Click the {{CONFIRMATION_EMOJI}} reaction button below to accept.",
     "thisTimeoutsIn": "You have {{COLLECTOR_TIMEOUT}} seconds to accept it"
+  },
+  "ship": {
+    "messages": {
+      "high": {
+        "0": "{{shipName}}, what a beautiful couple",
+        "1": "I always knew about {{shipName}}",
+        "2": "insert something here",
+        "3": "insert something here",
+        "4": "insert something here",
+        "5": "insert something here",
+        "6": "insert something here"
+      },
+      "medium": {
+        "0": "insert something here",
+        "1": "insert something here",
+        "2": "insert something here",
+        "3": "insert something here",
+        "4": "insert something here",
+        "5": "insert something here",
+        "6": "insert something here"
+      },
+      "low": {
+        "0": "{{shipName}}?? are you serious?",
+        "1": "insert something here",
+        "2": "insert something here",
+        "3": "insert something here",
+        "4": "insert something here",
+        "5": "insert something here",
+        "6": "insert something here"
+      },
+      "self": {
+        "0": "Well, self love is all",
+        "1": "You may kiss yourself",
+        "2": "insert something here",
+        "3": "insert something here",
+        "4": "insert something here",
+        "5": "insert something here",
+        "6": "insert something here"
+      }
+    }
   }
 }
