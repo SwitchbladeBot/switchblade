@@ -928,7 +928,7 @@
     "noUser": "Please insert someone to ship",
     "messages": {
       "high": {
-        "0": "{{shipName}}, what a beautiful couple",
+        "0": "the image says {{percent}}% but i say 200%",
         "1": "I always knew about {{shipName}}",
         "2": "{{shipName}}?!!? thats cute :3",
         "3": "{{firstName}} you may kiss {{secondName}}",
@@ -938,7 +938,7 @@
       },
       "medium": {
         "0": "{{firstName}} could try but i don't think that {{secondName}} would want",
-        "1": "{{percent}}%... well,  there are more people in the world...",
+        "1": "{{percent}}%... well... there are more people in the world you know...",
         "2": "{{firstName}} and {{secondName}} friends, but maybe....",
         "3": "{{shipName}}: I approve!",
         "4": "{{secondName}} do you aprove that?",
@@ -955,13 +955,13 @@
         "6": "i think neither {{firstName}} and {{secondName}} liked it"
       },
       "self": {
-        "0": "Well, self love is all",
+        "0": "Well, self love is everything",
         "1": "You may kiss yourself",
         "2": "\"I wish i had that confidence\" - a random switchblade developer",
-        "3": "insert something here",
-        "4": "insert something here",
-        "5": "insert something here",
-        "6": "insert something here"
+        "3": "...wait what?",
+        "4": "Lots of love for {{firstName}} and.... {{secondName}}?",
+        "5": "Self love!! thats the spirit!!",
+        "6": "What a beautiful couple! {{firstName}} and... {{secondName}}?"
       }
     }
   }
