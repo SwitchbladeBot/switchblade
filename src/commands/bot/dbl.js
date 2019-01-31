@@ -1,7 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
 const { Command, CommandRequirements } = CommandStructures
-const moment = require('moment')
-const snekfetch = require('snekfetch')
 
 module.exports = class DBL extends Command {
   constructor (client) {
