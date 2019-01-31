@@ -1,10 +1,18 @@
 const Constants = require('./Constants')
-const { ALIGN, measureText } = require('./CanvasUtils.js')
 const Color = require('./Color.js')
 
-const { createCanvas, Image } = require('canvas')
 const GIFEncoder = require('gifencoder')
 const moment = require('moment')
+
+let Canvas = {}
+let CanvasUtils = {}
+try {
+  Canvas = require('canvas')
+  CanvasUtils = require('./CanvasUtils.js')
+} catch (e) {}
+
+const { createCanvas, Image } = Canvas
+const { ALIGN, measureText } = CanvasUtils
 
 module.exports = class CanvasTemplates {
   static async profile ({ t }, user, userDocument, role) {
@@ -632,6 +640,39 @@ module.exports = class CanvasTemplates {
     //   Title text
     ctx.fillStyle = '#000000'
     ctx.write(title, TITLE_X, CARD_Y_MARGIN, FONTS.TITLE, ALIGN.CENTER)
+
+    return canvas.toBuffer()
+  }
+
+  static async presidentialAlert (text) {
+    const WIDTH = 1242
+    const HEIGHT = 1050
+    const background = await Image.from(Constants.PRESIDENTIAL_ALERT_TEMPLATE)
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    const PARAGRAPH_START_X = 60
+    const PARAGRAPH_START_Y = 830
+    const PARAGRAPH_HEIGHT = 80
+    const PARAGRAPH_WIDTH = 1120
+
+    ctx.drawImage(background, 0, 0, WIDTH, HEIGHT)
+    ctx.writeParagraph(text, '38px "SF Pro Display"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.TOP_LEFT)
+    return canvas.toBuffer()
+  }
+
+  static gradient (colors, width, height) {
+    // TODO: more gradient directions besides linear
+    const canvas = createCanvas(width, height)
+    const ctx = canvas.getContext('2d')
+    const grd = ctx.createLinearGradient(0, 0, width, 0)
+
+    colors.forEach((color, i) => {
+      grd.addColorStop((i / (colors.length - 1)), color)
+    })
+
+    ctx.fillStyle = grd
+    ctx.fillRect(0, 0, width, height)
 
     return canvas.toBuffer()
   }

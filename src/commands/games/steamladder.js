@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, EmojiUtils, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
 const countries = require('i18n-iso-countries')
 
 // We're using a Polyfill for Intl, as node doesn't come with all locales for formatting.
@@ -27,31 +27,28 @@ module.exports = class SteamLadder extends Command {
         whitelist: ladders,
         required: false,
         missingError: ({ t, prefix }) => {
-          return {
-            title: t('commands:steamladder.noLadder'),
-            description: [
-              `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:steamladder.commandUsage')}\``,
+          return new SwitchbladeEmbed().setTitle(t('commands:steamladder.noLadder'))
+            .setDescription([
+              this.usage(t, prefix),
               '',
               `__**${t('commands:steamladder.availableLadders')}:**__`,
               `**${ladders.map(l => `\`${l}\``).join(', ')}**`
-            ].join('\n')
-          }
-        } }),
+            ].join('\n'))
+        }
+      }),
       new StringParameter({
         required: false,
         whitelist: Object.keys(countries.getNames('en')).map(c => c.toLowerCase()).concat(Object.keys(countries.getNames('en'))).concat(regions),
         missingError: ({ t, prefix }) => {
-          return {
-            title: t('commands:steamladder.noRegion'),
-            description: [
-              `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:steamladder.commandUsage')}\``,
+          return new SwitchbladeEmbed().setTitle(t('commands:steamladder.noRegion'))
+            .setDescription([
+              this.usage(t, prefix),
               '',
               `__**${t('commands:steamladder.availableRegions')}:**__`,
               `**${regions.map(l => `\`${l}\``).join(', ')}**`,
               '',
               `[${t('commands:steamladder.youCanAlsoUse')}](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)`
-            ].join('\n')
-          }
+            ].join('\n'))
         }
       })
     )
@@ -76,10 +73,8 @@ module.exports = class SteamLadder extends Command {
         .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
         .setColor(embedColor)
     } catch (e) {
-      console.log(e)
-      embed = new SwitchbladeEmbed(author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:steamladder.ladderNotFound'))
+      this.client.logError(e)
+      throw new CommandError(t('commands:steamladder.ladderNotFound'))
     }
     channel.send(embed).then(channel.stopTyping())
   }
@@ -181,9 +176,7 @@ class SteamLadderProfile extends Command {
           t('commands:steamladder.joinedOn', { date: `**${new Intl.DateTimeFormat(language).format(new Date(user.steam_join_date))}**` })
         ].join('\n'), true)
     } catch (e) {
-      embed = new SwitchbladeEmbed(author)
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:steamladder.userNotFound'))
+      throw new CommandError(t('commands:steamladder.userNotFound'))
     }
     channel.send(embed).then(channel.stopTyping())
   }

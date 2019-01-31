@@ -32,12 +32,14 @@ module.exports = class BeatSaver extends Command {
     const { body } = await snekfetch.get(url)
     const $ = cheerio.load(body)
     if (body) {
-      const downloadUrl = $('body > div > div > table > tbody > tr:nth-child(1) > th.text-center > div:nth-child(3) > a')[0].attribs.href
+      const title = $('body > div > div > h2').text()
+      const downloadUrl = $('body > div > div > div > div > a').attr('href')
+      const imageUrl = $('body > div > div > div > div > img').attr('src')
       embed
         .setColor(0x3C347B)
         .setAuthor('Beat Saver', 'https://i.imgur.com/yK8SmyX.png')
-        .setTitle($('body > div > div > h2').text())
-        .setThumbnail(($('body > div > div > table > tbody > tr:nth-child(1) > th.text-center > div:nth-child(1) > img')[0].attribs.src))
+        .setTitle(title)
+        .setThumbnail(imageUrl)
         .setDescription(`**[${t('commands:beatsaver.download')}](${downloadUrl})** - [${t('commands:beatsaver.details')}](${url})`)
     } else {
       embed
@@ -50,13 +52,12 @@ module.exports = class BeatSaver extends Command {
 }
 
 async function parseQuery (query) {
-  const match = query.match(/[0-9]*-[0-9]*/)
+  const match = query.match(/\d+-\d+/)
   if (match) {
     return `https://beatsaver.com/browse/detail/${match}`
   } else {
-    const { body } = await snekfetch.get(`https://beatsaver.com/search/all/${encodeURIComponent(query)}`)
+    const { body } = await snekfetch.get(`https://beatsaver.com/search/all/0?key=${encodeURIComponent(query)}`)
     const $ = cheerio.load(body)
-    const map = $('body > div > div > table:nth-child(3) > tbody > tr:nth-child(1) > th.text-center > div:nth-child(3) > a')[0]
-    if (map) return map.attribs.href
+    return $('body > div > div:nth-child(3) > h2 > a').attr('href')
   }
 }
