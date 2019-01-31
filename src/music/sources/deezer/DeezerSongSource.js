@@ -10,15 +10,15 @@ module.exports = class DeezerSongSource extends SongSource {
     const trackHandler = async ([ , id ], m, r) => this.provideTrack(m, id, r)
     return [
       [
-        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/track\/(\d+)/,
+        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/(?:\w{2}\/)?track\/(\d+)/,
         trackHandler
       ],
       [
-        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/album\/(\d+)/,
+        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/(?:\w{2}\/)?album\/(\d+)/,
         albumHandler
       ],
       [
-        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/playlist\/(\d+)/,
+        /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/(?:\w{2}\/)?playlist\/(\d+)/,
         playlistHandler
       ]
     ]
@@ -50,7 +50,7 @@ module.exports = class DeezerSongSource extends SongSource {
     const video = await this.getClosestVideo(manager, track)
     if (video) {
       try {
-        const [ song ] = await manager.fetchTracks(video.id.videoId)
+        const [ song ] = await manager.fetchTracks(video)
         return new DeezerSong(song, requestedBy, track, album).loadInfo()
       } catch (e) {
         manager.client.logError(e)
@@ -59,7 +59,6 @@ module.exports = class DeezerSongSource extends SongSource {
   }
 
   static async getClosestVideo ({ client }, track) {
-    const { items: [ item ] } = await client.apis.youtube.searchVideos(`${track.artist.name} - ${track.title}`)
-    return item
+    return super.getClosestVideo(client, `${track.artist.name} - ${track.title}`)
   }
 }

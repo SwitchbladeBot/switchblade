@@ -16,7 +16,7 @@ module.exports = class LoLStatus extends Command {
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commands:lolstatus.missingServer'))
             .setDescription([
-              `**${t('commons:usage')}:** \`${prefix}${this.name} ${t('commands:lolstatus.commandUsage')}\``,
+              this.usage(t, prefix),
               '',
               `__**${t('commands:lolstatus.availableServers')}:**__`,
               `**${servers.map(l => `\`${l}\``).join(', ')}**`

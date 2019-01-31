@@ -42,10 +42,70 @@
     "commandDescription": "Checks if the bot is online"
   },
   "spotify": {
-    "commandDescription": "Searches for a song on Spotify",
-    "commandUsage": "<track name>",
+    "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, or displays a user info.",
+    "commandUsage": "<type> <query>",
     "noTracksFound": "I couldn't find any tracks with that name.",
-    "noTrackName": "You need to give me a track name."
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "album": "Album",
+    "genres": "Genres",
+    "artist": "Artist",
+    "artistPlural": "Artists",
+    "track": "Track",
+    "trackPlural": "Tracks",
+    "albumPlural": "Albums",
+    "moreTracks": "...and {{tracks}} more tracks",
+    "moreAlbums": "...and {{albums}} more albums",
+    "followers": "Followers",
+    "followersCount": "{{followers}} followers",
+    "selectResult": "Please send the number of the result (10 seconds)",
+    "subcommands": {
+      "track": {
+        "commandDescription": "Searches for a song on Spotify",
+        "commandUsage": "<song>",
+        "noTrack": "You need to give me a track name.",
+        "notFound": "I couldn't find any track with that name.",
+        "results": "Track results for {{query}}",
+        "trackInfo": "Track information"
+      },
+      "album": {
+        "commandDescription": "Searches for an album on Spotify",
+        "commandUsage": "<album>",
+        "noAlbum": "You need to give me an album name.",
+        "notFound": "I couldn't find any album with that name.",
+        "results": "Album results for {{query}}",
+        "albumInfo": "Album information",
+        "albumType": "Album type",
+        "types": {
+          "single": "Single",
+          "compilation": "Compilation"
+        }
+      },
+      "artist": {
+        "commandDescription": "Searches for an artist on Spotify",
+        "commandUsage": "<artist>",
+        "noArtist": "You need to give me an artist name.",
+        "notFound": "I couldn't find any artist with that name.",
+        "results": "Artist results for {{query}}",
+        "artistInfo": "Artist information"
+      },
+      "playlist": {
+        "commandDescription": "Searches for a playlist on Spotify",
+        "commandUsage": "<playlist>",
+        "noPlaylist": "You need to give me a playlist name.",
+        "notFound": "I couldn't find any playlist with that name.",
+        "results": "Playlist results for {{query}}",
+        "playlistInfo": "Playlist information",
+        "createdBy": "Created by"
+      },
+      "user": {
+        "commandDescription": "Get information about a user on Spotify",
+        "commandUsage": "<user>",
+        "noUser": "You need to give me a valid user.",
+        "notFound": "I couldn't find any users.",
+        "userInfo": "User information"
+      }
+    }
   },
   "copypasta": {
     "commandDescription": "Random text from /r/copypasta"
@@ -157,11 +217,13 @@
       },
       "remove": {
         "commandDescription": "Removes a song from the queue",
+        "commandUsage": "<music number>",
         "missingIndexParameter": "You need to give me the number of the song you want to remove from the queue",
         "songRemoved": "{{- songName}} has been removed from the queue"
       },
       "jump": {
         "commandDescription": "Jumps to a specific song in the queue",
+        "commandUsage": "<music number>",
         "missingIndexParameter": "You need to give me the number of the song you want to jump to",
         "jumpedToSong": "Jumped to {{- songName}}"
       }
@@ -252,7 +314,7 @@
   "botinfo": {
     "commandDescription": "Sends information about myself",
     "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
-    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds.size}} servers** and **{{users}} users** with **{{commands.length}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
+    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds}} servers** and **{{users}} users** with **{{commands}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
     "links": "Useful links",
     "inviteLink": "{{Constants.BOT_BADGE}} **[Invite me to your server](https://invite.switchblade.xyz)**",
     "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
@@ -292,7 +354,8 @@
     "status": "Status",
     "createdAt": "Created at",
     "joinedAt": "Joined at",
-    "serversInCommon": "Servers in common ({{count}})"
+    "serversInCommon": "Servers in common ({{count}})",
+    "memberNumber": "Member #{{count}}"
   },
   "samp": {
     "commandDescription": "Shows information about a GTA San Andreas: Multiplayer server",
@@ -592,6 +655,7 @@
     "commandDescription": "Get the current time in a specified place",
     "commandUsage": "<timezone>",
     "currentTime": "The current time in {{timezone}} is",
+    "noZone": "You need to give me a place to get the time",
     "notFound": "Couldn't find this place."
   },
   "dbl": {
@@ -612,6 +676,18 @@
     "commandUsage": "<query>",
     "noQuery": "I can't google something for you without keywords",
     "search": "[This]({{link}}) might help ¯\\_(ツ)_/¯"
+  },
+  "twitch": {
+    "commandDescription": "Searches for someone on Twitch",
+    "commandUsage": "<twitch username>",
+    "noChannel": "You need to give me a Twitch username",
+    "biography": "Biography",
+    "noBiography": "This user doesn't have a biography",
+    "totalViews": "Total Views",
+    "streamingTitle": "Streaming {{gameName}}",
+    "streamingDescription": "**{{title}}** for {{viewers}} viewers",
+    "followers": "Followers",
+    "userNotFound": "Twitch User not found"
   },
   "mcquery": {
     "commandDescription": "Shows information about a Minecraft: Java Edition server",
@@ -732,6 +808,7 @@
     "commandUsage": "<+10|-10|1:30>",
     "missingSeekParameter": "You need to give me a valid position!",
     "lengthExceeded": "The given position exceeds the song duration!",
+    "noNegativeValues": "The given position goes before the song starts!",
     "notLive": "I can't change livestreams' positions!",
     "positionSet": "Player position set to `{{position}}`"
   },
@@ -756,9 +833,93 @@
     "commandDescription": "Shows the link to Switchblade support server",
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
   },
+  "lastfm": {
+    "commandDescription": "Get an user information or search for a track, album or artist on Last.fm",
+    "commandUsage": "<type> <query>",
+    "notFound": "The results for {{query}} returned 0 matches.",
+    "topArtists": "Top artists (1 month)",
+    "playcount": "Playcount",
+    "playcountCount": "Played {{times}} times",
+    "listeners": "Listeners",
+    "album": "Album",
+    "artist": "Artist",
+    "selectQuery": "Please send the number of the result (10 seconds)",
+    "readMore": "Read more on Last.fm",
+    "tags": "Tags",
+    "tracks": "Tracks",
+    "registered": "Registered in",
+    "subcommands": {
+      "track": {
+        "missing": "Please insert a track to search.",
+        "results": "Track results for {{query}}",
+        "resultsCount": "{{count}} tracks found",
+        "commandDescription": "Search for a track on Last.fm",
+        "commandUsage": "<track>"
+      },
+      "album": {
+        "missing": "Please insert an album to search.",
+        "results": "Album results for {{query}}",
+        "resultsCount": "{{count}} albums found",
+        "commandDescription": "Search for an album on Last.fm",
+        "commandUsage": "<album>"
+      },
+      "artist": {
+        "missing": "Please insert an artist to search",
+        "results": "Artist results for {{query}}",
+        "resultsCount": "{{count}} artists found",
+        "commandDescription": "Search for an artist on Last.fm",
+        "commandUsage": "<artist>"
+      },
+      "user": {
+        "missing": "Please insert a valid user to get information about",
+        "notFound": "This user wasn't found on Last.fm",
+        "commandDescription": "Get information about an user on Last.fm",
+        "commandUsage": "<user>"
+      }
+    }
+  },
   "bassboost": {
     "commandDescription": "Toggle bassboost mode for the music playback",
     "bassboost_true": "DROP THE BASS! Bassboost enabled.",
     "bassboost_false": "Bassboost disabled."
+  },
+  "roleinfo": {
+    "commandDescription": "Shows information about a role",
+    "commandUsage": "<role name, mention or id>",
+    "id": "ID",
+    "name": "Name",
+    "mention": "Mention",
+    "createdat": "Created At",
+    "members": "Members",
+    "position": "Position",
+    "mentionable": "Mentionable",
+    "hoisted": "Hoisted",
+    "color": "Color",
+    "online": "{{count}} online",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "presidentialalert": {
+    "commandDescription": "Generates a Presidential Alert notification",
+    "commandUsage": "<text>",
+    "missingText": "You need to give me some text for the alert"
+  },
+  "uigradient": {
+    "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)"
+  },
+  "tictactoe": {
+    "commandDescription": "Challenge someone to a game of Tic Tac Toe",
+    "commandUsage": "<user to challenge>",
+    "missingUser": "You need to give me someone to challenge",
+    "title": "Tic Tac Toe",
+    "pleaseWait": "Please wait, loading board...",
+    "currentPlayer": "Current player",
+    "itsYourTurn": "It's your turn, {{player}}",
+    "itsATie": "It's a tie!",
+    "wins": "{{player}} wins!",
+    "timeout": "This Tic Tac Toe invite has timed out.",
+    "hasChallenged": "{{player}} has challenged you to a game of Tic Tac Toe",
+    "clickTheReaction": "Click the {{CONFIRMATION_EMOJI}} reaction button below to accept.",
+    "thisTimeoutsIn": "You have {{COLLECTOR_TIMEOUT}} seconds to accept it"
   }
 }
