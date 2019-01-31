@@ -933,31 +933,31 @@
         "2": "{{shipName}}?!!? thats cute :3",
         "3": "{{firstName}} you may kiss {{secondName}}",
         "4": "{{shipName}}?!!? OwO",
-        "5": "insert something here",
-        "6": "insert something here"
+        "5": "\"I accept that\" - a random switchblade developer",
+        "6": "{{firstName}} don't be scared and DM {{secondName}}"
       },
       "medium": {
         "0": "{{firstName}} could try but i don't think that {{secondName}} would want",
         "1": "{{percent}}%... well,  there are more people in the world...",
-        "2": "insert something here",
-        "3": "insert something here",
-        "4": "insert something here",
-        "5": "insert something here",
-        "6": "insert something here"
+        "2": "{{firstName}} and {{secondName}} friends, but maybe....",
+        "3": "{{shipName}}: I approve!",
+        "4": "{{secondName}} do you aprove that?",
+        "5": "Nothing is impossible!",
+        "6": "{{firstName}} and {{secondName}} seem to be only knows"
       },
       "low": {
         "0": "{{shipName}}? are you serious?",
         "1": "{{shipName}}? i dont think {{firstName}} will like it",
-        "2": "insert something here",
-        "3": "insert something here",
-        "4": "insert something here",
-        "5": "insert something here",
-        "6": "insert something here"
+        "2": "Nothing is impossible.... but this is",
+        "3": "owo whats this? {{shipName}}?? owo im out",
+        "4": "{{secondName}} may not accept it, but i'm always here supporting you :)",
+        "5": "{{shipName}}? WHY?",
+        "6": "i think neither {{firstName}} and {{secondName}} liked it"
       },
       "self": {
         "0": "Well, self love is all",
         "1": "You may kiss yourself",
-        "2": "insert something here",
+        "2": "\"I wish i had that confidence\" - a random switchblade developer",
         "3": "insert something here",
         "4": "insert something here",
         "5": "insert something here",
