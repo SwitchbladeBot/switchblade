@@ -22,12 +22,13 @@ module.exports = class Weather extends Command {
     if (city) {
       const [ lang ] = language.split('-')
       const { lat, lng } = city.geometry.location
+      // TODO: configurable units
       const { currently, daily: { data: daily }, timezone } = await this.client.apis.darksky.getForecast(lat, lng, { lang, units: 'ca' })
 
       const now = daily.shift()
       const weatherInfo = {
         now: {
-          temperature: `${this.tempHumanize(currently.temperature)}°`,
+          temperature: `${this.tempHumanize(currently.temperature)}`,
           wind: `${this.tempHumanize(currently.windSpeed)} km/h`,
           max: `${this.tempHumanize(now.temperatureHigh)}°`,
           min: `${this.tempHumanize(now.temperatureLow)}°`,
@@ -42,7 +43,7 @@ module.exports = class Weather extends Command {
 
       const cityName = city.address_components.find(({ types }) => types.includes('administrative_area_level_2') || types.includes('locality')).short_name
       const state = city.address_components.find(({ types }) => types.includes('administrative_area_level_1'))
-      const weather = await CanvasTemplates.weather({ t }, `${cityName.toUpperCase()}${state ? ` - ${state.short_name}` : ''}`, weatherInfo)
+      const weather = await CanvasTemplates.weather({ t }, `${cityName.toUpperCase()}${state ? ` - ${state.short_name}` : ''}`, weatherInfo, '°C')
 
       channel.send(new Attachment(weather, 'weather.png')).then(() => channel.stopTyping())
     } else {
@@ -50,13 +51,8 @@ module.exports = class Weather extends Command {
     }
   }
 
-  getTimeData (time, tz) {
-    let timeTz = moment.unix(time).tz(tz)
-    time = new Date(timeTz._d.valueOf() + timeTz._d.getTimezoneOffset() * 60000)
-    return moment(time)
-  }
-
-  tempHumanize (temp) {
+  tempHumanize (temp, fixSize = false) {
+    if (fixSize && temp < 0) return parseFloat(temp.toFixed(0))
     return parseFloat(temp.toFixed(1))
   }
 }
