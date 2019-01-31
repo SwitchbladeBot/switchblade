@@ -26,7 +26,7 @@ module.exports = class RoleInfo extends Command {
         .addField(t('commands:roleinfo.id'), role.id, true)
         .addField(t('commands:roleinfo.name'), role.name, true)
         .addField(t('commands:roleinfo.mention'), `\`${role}\``, true)
-        .addField(t('commands:roleinfo.createdat'), `${moment(role.createdAt).format('LLL')}\n(${moment(role.createdAt).fromNow()})`, true)
+        .addField(t('commands:roleinfo.createdAt'), `${moment(role.createdAt).format('LLL')}\n(${moment(role.createdAt).fromNow()})`, true)
         .addField(t('commands:roleinfo.members'), `**${MiscUtils.formatNumber(role.members.size, language)}** (${t('commands:roleinfo.online', { count: MiscUtils.formatNumber(role.members.filter(m => m.user.presence.status !== 'offline').size, language) })})`, true)
         .addField(t('commands:roleinfo.position'), MiscUtils.formatNumber(role.position, language), true)
         .addField(t('commands:roleinfo.mentionable'), role.mentionable ? t('commands:roleinfo.yes') : t('commands:roleinfo.no'), true)
