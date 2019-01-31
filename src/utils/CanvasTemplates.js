@@ -490,7 +490,7 @@ module.exports = class CanvasTemplates {
     return encoder.out.getData()
   }
 
-  static async weather ({ t }, title, { now, daily }) {
+  static async weather ({ t }, title, { now, daily }, unit) {
     const WIDTH = 400
     const HEIGHT = 286
 
@@ -504,12 +504,14 @@ module.exports = class CanvasTemplates {
       const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
       const REGULAR = MEME || '"Montserrat"'
       const LIGHT = MEME || '"Montserrat Light"'
+      const BLACK = MEME || '"Montserrat Black"'
       return {
         TITLE: `17px ${EXTRABOLD}`,
         TEMPERATURE: `bold 90px ${EXTRABOLD}`,
         INFORMATIONS: `17px ${LIGHT}`,
         WEEK_DAYS: `17px ${REGULAR}`,
-        WEEK_TEMPERATURES: `29px ${LIGHT}`
+        WEEK_TEMPERATURES: `29px ${LIGHT}`,
+        UNIT: `34px ${BLACK}`
       }
     })()
 
@@ -542,6 +544,11 @@ module.exports = class CanvasTemplates {
     //   Temperature
     ctx.fillStyle = '#FFFFFF'
     ctx.write(now.temperature, INNER_MARGIN, BRIGHTER_Y_CENTER, FONTS.TEMPERATURE, ALIGN.CENTER_LEFT)
+    const TEMP_SIZE = measureText(ctx, FONTS.TEMPERATURE, now.temperature)
+    const UNIT_MARGIN = 4
+    const UNIT_X = INNER_MARGIN + TEMP_SIZE.width + UNIT_MARGIN
+    const UNIT_Y = BRIGHTER_Y_CENTER - TEMP_SIZE.height * 0.5
+    ctx.write(unit, UNIT_X, UNIT_Y, FONTS.UNIT, ALIGN.TOP_LEFT)
     //   Extra info
     const INFO_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT - INNER_MARGIN
     const INFO_ICON_SIZE = 16
