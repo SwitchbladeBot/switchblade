@@ -681,7 +681,7 @@ module.exports = class CanvasTemplates {
     users = await Promise.all(users)
 
     const WIDTH = 420
-    const HEIGHT = 275
+    const HEIGHT = 240
 
     const avatarPictures = users.map(u => Image.from(u.profile))
     const IMAGE_ASSETS = Promise.all([
@@ -749,19 +749,19 @@ module.exports = class CanvasTemplates {
 
     // Card Title
     const TITLE_X = WIDTH * 0.5
-    const TITLE_Y_MARGIN = 36
 
     //  Title modal
     ctx.fillStyle = '#fff'
     const TITLE_RECT_X_MARGIN = 45
     const TITLE_RECT_WIDTH = measureText(ctx, FONTS.TITLE, shipName).width + TITLE_RECT_X_MARGIN
     const TITLE_RECT_HEIGHT = 37
+    const TITLE_RECT_Y = 28
     const TITLE_RECT_X = TITLE_X - TITLE_RECT_WIDTH * 0.5
     const TITLE_TEXT_MARGIN = TITLE_RECT_HEIGHT * 0.5
-    ctx.roundRect(TITLE_RECT_X, TITLE_RECT_HEIGHT, TITLE_RECT_WIDTH, TITLE_RECT_HEIGHT, 20, true)
+    ctx.roundRect(TITLE_RECT_X, TITLE_RECT_Y, TITLE_RECT_WIDTH, TITLE_RECT_HEIGHT, 20, true)
     //   Title text
     ctx.fillStyle = '#000000'
-    ctx.write(shipName, TITLE_X, TITLE_Y_MARGIN + TITLE_TEXT_MARGIN, FONTS.TITLE, ALIGN.CENTER)
+    ctx.write(shipName, TITLE_X, TITLE_RECT_Y + TITLE_TEXT_MARGIN, FONTS.TITLE, ALIGN.CENTER)
 
     return canvas.toBuffer()
   }
