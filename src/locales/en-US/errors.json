@@ -30,5 +30,7 @@
   "onlyOldAccounts": "Your account must be at least one month old in order to do that",
   "voiceChannelJoin": "I can't join this voice channel!",
   "sameUser": "You need to give me a user that isn't you.",
-  "managersOnly": "Huhuhuhuhuhuhu, yond thou art not a Translation Manag'r huhuhuhuhuhuhuhuhuhuhu"
+  "managersOnly": "Huhuhuhuhuhuhu, yond thou art not a Translation Manag'r huhuhuhuhuhuhuhuhuhuhu",
+  "needBiggerNumber": "You need to give a number higher than {{number}}.",
+  "needSmallerNumber": "You need to give a number smaller than {{number}}."
 }
