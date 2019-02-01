@@ -122,4 +122,18 @@ module.exports = class Command {
       return `**${t('commons:usage')}:** \`${prefix}${this.fullName} ${usage}\``
     }
   }
+
+  asJSON (t, command = this) {
+    const aliases = command.aliases > 0 ? command.aliases : undefined
+    const usage = t([`commands:${command.tPath}.commandUsage`, '']) !== '' ? t(`commands:${command.tPath}.commandUsage`) : undefined
+    const subcommands = command.subcommands.length > 0 ? command.subcommands.map(sc => this.asJSON(t, sc)) : undefined
+
+    return {
+      name: command.fullName,
+      aliases,
+      description: t(`commands:${command.tPath}.commandDescription`),
+      usage,
+      subcommands
+    }
+  }
 }
