@@ -390,7 +390,11 @@
     "commandDescription": "Searches for a song on Deezer",
     "commandUsage": "<track name>",
     "noTrackName": "You need to give me a track name.",
-    "noTracksFound": "I couldn't find any tracks with that name."
+    "noTracksFound": "I couldn't find any tracks with that name.",
+    "fans": "Fans",
+    "album": {
+      "albumInfo": "Album information"
+    }
   },
   "profile": {
     "commandDescription": "Shows your or someone else's profile",
