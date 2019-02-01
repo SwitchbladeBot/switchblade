@@ -130,6 +130,7 @@ module.exports = class Command {
 
     return {
       name: command.fullName,
+      category: command.category || command.parentCommand.category,
       aliases,
       description: t(`commands:${command.tPath}.commandDescription`),
       usage,
