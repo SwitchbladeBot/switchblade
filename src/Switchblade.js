@@ -373,6 +373,8 @@ module.exports = class Switchblade extends Client {
   // HTTP Server
 
   initializeHTTPServer (port) {
+    if (!process.env.PORT) return this.log(`[31mHTTP server not started - Required environment variable "PORT" is not set.`, 'HTTP')
+
     // Use CORS with Express
     app.use(cors())
     // Parse JSON body
