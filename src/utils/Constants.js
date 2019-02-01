@@ -58,6 +58,7 @@ module.exports = {
   DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
   REPUTATION_SVG: 'src/assets/svg/reputation.svg',
   MEDAL_SVG: 'src/assets/svg/medal.svg',
+  HEART_SVG: 'src/assets/svg/heart.svg',
 
   WEATHER_CLEAR_DAY: 'src/assets/svg/weather/clear-day.svg',
   WEATHER_CLEAR_NIGHT: 'src/assets/svg/weather/clear-night.svg',

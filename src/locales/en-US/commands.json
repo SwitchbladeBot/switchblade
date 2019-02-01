@@ -921,5 +921,48 @@
     "hasChallenged": "{{player}} has challenged you to a game of Tic Tac Toe",
     "clickTheReaction": "Click the {{CONFIRMATION_EMOJI}} reaction button below to accept.",
     "thisTimeoutsIn": "You have {{COLLECTOR_TIMEOUT}} seconds to accept it"
+  },
+  "ship": {
+    "commandDescription": "Ship yourself or someone with somebody else.",
+    "commandUsage": "<first user> [second user]",
+    "noUser": "Please insert someone to ship",
+    "messages": {
+      "high": {
+        "0": "The image says {{percent}}%, but I say 200%",
+        "1": "I always knew about {{shipName}}",
+        "2": "{{shipName}}?!!? That's cute :3",
+        "3": "{{firstName}} you may kiss {{secondName}}",
+        "4": "{{shipName}}?!!? OwO",
+        "5": "\"I accept that\" - a random Switchblade developer",
+        "6": "{{firstName}}, don't be scared and DM {{secondName}}"
+      },
+      "medium": {
+        "0": "{{firstName}} could try but I don't think {{secondName}} would want that",
+        "1": "{{percent}}%... well... there are more people in the world you know...",
+        "2": "{{firstName}} and {{secondName}} could be friends, but maybe...",
+        "3": "{{shipName}}: I approve!",
+        "4": "{{secondName}}, do you approve this?",
+        "5": "Nothing is impossible!",
+        "6": "Seems like {{firstName}} and {{secondName}} are just strangers to each other"
+      },
+      "low": {
+        "0": "{{shipName}}? are you serious?",
+        "1": "{{shipName}}? I don't think {{firstName}} will like it",
+        "2": "Nothing is impossible... but this is",
+        "3": "owo what's this? {{shipName}}?? owo I'm out",
+        "4": "{{secondName}} may not accept it, but I'm always here supporting you :)",
+        "5": "{{shipName}}? WHY?",
+        "6": "i think neither {{firstName}} and {{secondName}} liked it"
+      },
+      "self": {
+        "0": "Well, self love is everything",
+        "1": "You may kiss yourself",
+        "2": "\"I wish I had that confidence\" - a random Switchblade developer",
+        "3": "...wait what?",
+        "4": "Lots of love for {{firstName}} and... {{secondName}}?",
+        "5": "Self love!! That's the spirit!!",
+        "6": "What a beautiful couple! {{firstName}} and... {{secondName}}?"
+      }
+    }
   }
 }
