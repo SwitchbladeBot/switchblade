@@ -25,17 +25,18 @@ module.exports = class Weather extends Command {
       // TODO: configurable units
       const { currently, daily: { data: daily }, timezone } = await this.client.apis.darksky.getForecast(lat, lng, { lang, units: 'ca' })
 
+      const currentlyTempUnit = '°C'
       const now = daily.shift()
       const weatherInfo = {
         now: {
-          temperature: `${this.tempHumanize(currently.temperature)}`,
+          temperature: `${this.tempHumanize(currently.temperature, true)}`,
           wind: `${this.tempHumanize(currently.windSpeed)} km/h`,
-          max: `${this.tempHumanize(now.temperatureHigh)}°`,
-          min: `${this.tempHumanize(now.temperatureLow)}°`,
+          max: `${this.tempHumanize(now.temperatureHigh)}${currentlyTempUnit}`,
+          min: `${this.tempHumanize(now.temperatureLow)}${currentlyTempUnit}`,
           icon: currently.icon
         },
         daily: daily.slice(0, 6).map(d => {
-          d.temperature = this.tempHumanize((d.temperatureHigh + d.temperatureLow) * 0.5)
+          d.temperature = this.tempHumanize((d.temperatureHigh + d.temperatureLow) * 0.5, true) + currentlyTempUnit
           d.weekday = moment.unix(d.time).tz(timezone).format('ddd') // this.getTimeData(d.time, timezone).format('ddd')
           return d
         })
@@ -43,7 +44,7 @@ module.exports = class Weather extends Command {
 
       const cityName = city.address_components.find(({ types }) => types.includes('administrative_area_level_2') || types.includes('locality')).short_name
       const state = city.address_components.find(({ types }) => types.includes('administrative_area_level_1'))
-      const weather = await CanvasTemplates.weather({ t }, `${cityName.toUpperCase()}${state ? ` - ${state.short_name}` : ''}`, weatherInfo, '°C')
+      const weather = await CanvasTemplates.weather({ t }, `${cityName.toUpperCase()}${state ? ` - ${state.short_name}` : ''}`, weatherInfo, currentlyTempUnit)
 
       channel.send(new Attachment(weather, 'weather.png')).then(() => channel.stopTyping())
     } else {
