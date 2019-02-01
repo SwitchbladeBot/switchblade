@@ -98,7 +98,7 @@ module.exports = class GuildPlayer extends Player {
   jumpToIndex (index, ignoreLoop = false) {
     if (index < 0 || index >= this.queue.length) throw new Error('INDEX_OUT_OF_BOUNDS')
 
-    const songs = this.queue.splice(0, index)
+    const songs = this.queue.splice(0, index + 1)
     const song = songs.pop()
     if (!ignoreLoop && this._loop) this.queueTracks([ this.playingSong, ...songs ])
     this.play(song, true)
