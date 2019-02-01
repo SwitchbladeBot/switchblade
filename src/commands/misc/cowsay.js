@@ -9,11 +9,11 @@ module.exports = class Cowsay extends Command {
     this.aliases = ['cs']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:cowsay.noText' })
+      new StringParameter({ full: true, clean: true, missingError: 'commands:cowsay.noText' })
     )
   }
 
-  run ({ channel }, text) {
+  run ({ channel, message }, text) {
     channel.send(`\`\`\`${cowsay.say({ text })}\`\`\``)
   }
 }

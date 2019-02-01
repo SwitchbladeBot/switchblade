@@ -8,7 +8,7 @@ module.exports = class DBL extends Command {
     this.category = 'bot'
   }
 
-  async run ({ t, author, channel, prefix, alias, userDocument }) {
+  async run ({ t, author, channel }) {
     channel.startTyping()
     channel.send(new SwitchbladeEmbed(author)
       .setDescription(t('commands:dbl.howToVote', { link: `https://discordbots.org/bot/${this.client.user.id}/vote` })))

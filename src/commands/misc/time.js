@@ -11,7 +11,7 @@ module.exports = class Time extends Command {
     this.category = 'general'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:time.invalidTimezone' })
+      new StringParameter({ full: true, missingError: 'commands:time.noZone' })
     )
   }
 

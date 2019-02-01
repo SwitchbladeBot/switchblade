@@ -284,7 +284,7 @@ class LastfmUser extends Command {
         .addField(t('commands:lastfm.registered'), time, true)
         .setColor(Constants.LASTFM_COLOR)
 
-      if (user.realname) embed.setTitle(user.name)
+      embed.setTitle(user.realname || user.name)
       if (topartists.length) {
         const topField = topartists.map(artist => `\`${artist['@attr'].rank}.\` [${artist.name}](${artist.url}) - ${t('commands:lastfm.playcountCount', { times: artist.playcount })}`)
         embed.addField(t('commands:lastfm.topArtists'), topField)
