@@ -39,6 +39,14 @@ module.exports = class DeezerAPI extends APIWrapper {
     return this.request('/search/artist', { q })
   }
 
+  findPlaylists (q) {
+    return this.request('/search/playlist', { q })
+  }
+
+  findUser (q) {
+    return this.request('/search/user', { q })
+  }
+
   // Default
   request (endpoint, queryParams = {}) {
     return snekfetch.get(`${API_URL}${endpoint}`).query(queryParams).then(r => r.body)

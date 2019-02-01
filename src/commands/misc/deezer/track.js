@@ -6,7 +6,7 @@ module.exports = class DeezerTrack extends SearchCommand {
     super(client, parentCommand || 'deezer')
 
     this.name = 'track'
-    this.aliases = ['song', 't']
+    this.aliases = ['song', 't', 's']
     this.embedColor = Constants.DEEZER_COLOR
     this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
   }
@@ -25,7 +25,7 @@ module.exports = class DeezerTrack extends SearchCommand {
     const explicit = explicitLyric ? Constants.EXPLICIT : ''
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
-      .setAuthor(t('commands:deezer.album.albumInfo'), this.embedLogoURL, link)
+      .setAuthor(t('commands:deezer.subcommands.track.trackInfo'), this.embedLogoURL, link)
       .setThumbnail(album.cover_big)
       .setDescription(`${explicit} [${title}](${link}) \`(${MiscUtils.formatDuration(duration * 1000)})\``)
       .addField(t('music:artist'), `[${artist.name}](${artist.link})`, true)

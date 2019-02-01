@@ -20,7 +20,7 @@ module.exports = class SearchCommand extends Command {
     const results = resultsAll.slice(0, this.maxResults)
 
     if (!results) throw new CommandError(t('commons:search.searchFail'))
-    const description = results.map((item, i) => `\`${this.formatIndex(i, results)}\`. ${this.searchResultFormatter(item)}`)
+    const description = results.map((item, i) => `\`${this.formatIndex(i, results)}\`. ${this.searchResultFormatter(item, context)}`)
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
       .setTitle(t('commons:search.typeHelper'))
@@ -31,7 +31,7 @@ module.exports = class SearchCommand extends Command {
     this.awaitResponseMessage(context, results)
   }
 
-  async search (context, query) {
+  async search () {
     return null
   }
 
@@ -63,7 +63,7 @@ module.exports = class SearchCommand extends Command {
     return number <= length && !isNaN(number) && number > 0
   }
 
-  handleResult (context, result) {
+  handleResult () {
     return null
   }
 }

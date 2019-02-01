@@ -392,8 +392,17 @@
     "noTrackName": "You need to give me a track name.",
     "noTracksFound": "I couldn't find any tracks with that name.",
     "fans": "Fans",
-    "album": {
-      "albumInfo": "Album information"
+    "fansCount": "{{fans}} fans",
+    "subcommands": {
+      "track": {
+        "trackInfo": "Track information"
+      },
+      "album": {
+        "albumInfo": "Album information"
+      },
+      "artist": {
+        "artistInfo": "Artist information"
+      }
     }
   },
   "profile": {
