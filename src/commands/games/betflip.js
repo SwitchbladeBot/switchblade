@@ -17,7 +17,7 @@ module.exports = class Betflip extends Command {
     channel.startTyping()
 
     try {
-      const { won, chosenSide } = await this.modules.economy.betflip(author.id, bet, side)
+      const { won, chosenSide } = await this.client.modules.economy.betflip(author.id, bet, side)
       embed.setImage(`https://raw.githubusercontent.com/bolsomito/koi/master/bin/assets/${chosenSide}.png`)
         .setDescription(t(`commands:betflip.${won ? 'victory' : 'loss'}`, { chosenSide, count: bet }))
     } catch (e) {
