@@ -25,7 +25,7 @@ module.exports = class Ship extends Command {
     const { username: secondName } = second
 
     const shipName = firstName.substr(0, firstName.length * 0.5) + secondName.substr(secondName.length * 0.5)
-    const percentCalc = (Number(second.id.slice(-3)) + Number(first.id.slice(-3))) % 100
+    const percentCalc = (Number(second.id.slice(-3)) + Number(first.id.slice(-3))) % 101
     const percent = first.equals(second) ? 101 : percentCalc
     const type = percent < 35 ? 'low' : percent > 70 ? 'high' : 'medium'
 
