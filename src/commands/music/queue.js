@@ -126,7 +126,7 @@ class QueueJump extends Command {
     const guildPlayer = this.client.playerManager.get(guild.id)
     if (guildPlayer.nextSong) {
       try {
-        const song = guildPlayer.jumpToIndex(Math.round(index))
+        const song = guildPlayer.jumpToIndex(Math.round(index) - 1)
         const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
         const songName = `[${song.title}](${song.uri}) ${duration}`
         channel.send(new SwitchbladeEmbed(author)
