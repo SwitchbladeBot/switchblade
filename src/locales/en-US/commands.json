@@ -831,7 +831,7 @@
   },
   "support": {
     "commandDescription": "Shows the link to Switchblade support server",
-    "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
+    "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
   "lastfm": {
     "commandDescription": "Get an user information or search for a track, album or artist on Last.fm",
