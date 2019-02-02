@@ -724,5 +724,10 @@
   "support": {
     "commandDescription": "Shows the link to Switchblade support server",
     "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
+  },
+  "presidentialalert": {
+    "commandDescription": "Generates a Presidential Alert notification",
+    "commandUsage": "<text>",
+    "missingText": "You need to give me some text for the alert"
   }
 }

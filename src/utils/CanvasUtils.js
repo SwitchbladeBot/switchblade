@@ -45,6 +45,7 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-ExtraBoldItalic.ttf', { family: 'Montserrat ExtraBold', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Black.ttf', { family: 'Montserrat Black' })
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', { family: 'Montserrat Black', style: 'italic' })
+    registerFont('src/assets/fonts/SFProDisplay-Regular.ttf', { family: 'SF Pro Display' })
 
     // Image loading
     Image.from = function (url, localFile = false) {
