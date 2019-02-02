@@ -15,6 +15,7 @@ module.exports = {
   GUILD_ADDED_COLOR: '#41A57A',
   LASTFM_COLOR: '#D51007',
   TWITCH_COLOR: '#4B367C',
+  GITHUB_COLOR: '#FAFAFA',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',
@@ -33,6 +34,7 @@ module.exports = {
   PATREON_LOGO: '<:patreon:516783030543712273>',
   UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
   EXPLICIT: '<:explicit:539583498541989907>',
+  FORKED: '<:forked:541299552959856650>',
 
   // League of Legends Status Emoji
   LOL_STATUS_INFO: '<:lolinfo:534989137913184277>',
@@ -58,6 +60,7 @@ module.exports = {
   DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
   REPUTATION_SVG: 'src/assets/svg/reputation.svg',
   MEDAL_SVG: 'src/assets/svg/medal.svg',
+  HEART_SVG: 'src/assets/svg/heart.svg',
 
   WEATHER_CLEAR_DAY: 'src/assets/svg/weather/clear-day.svg',
   WEATHER_CLEAR_NIGHT: 'src/assets/svg/weather/clear-night.svg',

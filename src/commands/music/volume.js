@@ -12,7 +12,7 @@ module.exports = class Volume extends Command {
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, errors: { guildPlaying: 'commands:volume.notPlaying' } })
     this.parameters = new CommandParameters(this,
-      new NumberParameter({ full: true, missingError: 'commands:volume.missingVolumeParameter', min: 0, max: MAX_VOLUME })
+      new NumberParameter({ full: true, missingError: 'commands:volume.missingVolumeParameter', min: 0, max: MAX_VOLUME, forceMin: true, forceMax: true })
     )
   }
 

@@ -310,7 +310,7 @@ module.exports = class CanvasTemplates {
     })()
 
     const avatarCoords = []
-    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png')))
+    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')))
     const IMAGE_ASSETS = Promise.all([
       Image.from(icon, true),
       Image.from(Constants.MEDAL_SVG, true),
@@ -673,6 +673,95 @@ module.exports = class CanvasTemplates {
 
     ctx.fillStyle = grd
     ctx.fillRect(0, 0, width, height)
+
+    return canvas.toBuffer()
+  }
+
+  static async ship (users, shipName, percent) {
+    users = await Promise.all(users)
+
+    const WIDTH = 420
+    const HEIGHT = 240
+
+    const avatarPictures = users.map(u => Image.from(u.profile))
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.HEART_SVG),
+      ...avatarPictures
+    ])
+
+    const FONTS = (() => {
+      const MEME = Math.random() > 0.99 && '"Comic Sans MS"'
+      const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
+      const BLACK = MEME || '"Montserrat Black"'
+      return {
+        TITLE: `italic 27px ${EXTRABOLD}`,
+        PERCENT: `italic 27px ${BLACK}`
+      }
+    })()
+
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    // Avatar background
+    const AVATAR_BACKGROUND_RADIUS = 68
+    const AVATAR_SIZE = AVATAR_BACKGROUND_RADIUS * 1.84
+    const AVATAR_INNER_MARGIN = 122
+    const AVATAR_BACKGROUND_Y = HEIGHT * 0.57
+    const getAvatarXCord = i => WIDTH * 0.5 + (i === 1 ? AVATAR_INNER_MARGIN : -Math.abs(AVATAR_INNER_MARGIN))
+
+    users.forEach((user, i) => {
+      ctx.fillStyle = user.document.favColor
+      ctx.circle(getAvatarXCord(i), AVATAR_BACKGROUND_Y, AVATAR_BACKGROUND_RADIUS, 0, Math.PI * 2)
+    })
+
+    //  IMAGES
+    const [ heartIcon, ...avatarImages ] = await IMAGE_ASSETS
+
+    // Avatars
+    users.forEach((user, i) => {
+      const AVATAR_X = getAvatarXCord(i) - AVATAR_SIZE * 0.5
+      const AVATAR_Y = AVATAR_BACKGROUND_Y - AVATAR_SIZE * 0.5
+
+      ctx.roundImage(avatarImages[i], AVATAR_X, AVATAR_Y, AVATAR_SIZE, AVATAR_SIZE)
+    })
+
+    // Heart
+    const HEART_W = 88
+    const HEART_H = 81
+    const HEART_X = WIDTH * 0.5
+    const HEART_Y = AVATAR_BACKGROUND_Y
+    const HEART_COLOR = '#be1931'
+
+    ctx.drawIcon(heartIcon, HEART_X - HEART_W * 0.5, HEART_Y - HEART_H * 0.5, HEART_W, HEART_H, HEART_COLOR)
+
+    // Grey heart
+    const HEART_GREY_COLOR = '#5c616b'
+    ctx.globalCompositeOperation = 'source-atop'
+
+    const GREY_HEIGHT = (1 - (percent / 100)) * HEART_H
+    ctx.fillStyle = HEART_GREY_COLOR
+    ctx.fillRect(HEART_X - HEART_W * 0.5, HEART_Y - HEART_H * 0.5, 100, GREY_HEIGHT)
+
+    ctx.globalCompositeOperation = 'source-over'
+    // Percent
+    ctx.fillStyle = '#fff'
+    ctx.write(`${percent}%`, HEART_X, HEART_Y * 0.96, FONTS.PERCENT, ALIGN.CENTER)
+
+    // Card Title
+    const TITLE_X = WIDTH * 0.5
+
+    //  Title modal
+    ctx.fillStyle = '#fff'
+    const TITLE_RECT_X_MARGIN = 45
+    const TITLE_RECT_WIDTH = measureText(ctx, FONTS.TITLE, shipName).width + TITLE_RECT_X_MARGIN
+    const TITLE_RECT_HEIGHT = 37
+    const TITLE_RECT_Y = 28
+    const TITLE_RECT_X = TITLE_X - TITLE_RECT_WIDTH * 0.5
+    const TITLE_TEXT_MARGIN = TITLE_RECT_HEIGHT * 0.5
+    ctx.roundRect(TITLE_RECT_X, TITLE_RECT_Y, TITLE_RECT_WIDTH, TITLE_RECT_HEIGHT, 20, true)
+    //   Title text
+    ctx.fillStyle = '#000000'
+    ctx.write(shipName, TITLE_X, TITLE_RECT_Y + TITLE_TEXT_MARGIN, FONTS.TITLE, ALIGN.CENTER)
 
     return canvas.toBuffer()
   }

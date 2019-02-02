@@ -74,7 +74,7 @@ module.exports = class EconomyModule extends Module {
   }
 
   async transfer (_from, _to, amount) {
-    const from = this._users.get(_from, 'money')
+    const from = await this._users.get(_from, 'money')
     if (from.money < amount) throw new Error('NOT_ENOUGH_MONEY')
     from.money -= amount
     await Promise.all([ from.save(), this._users.update(_to, { $inc: { money: amount } }) ])
@@ -86,7 +86,7 @@ module.exports = class EconomyModule extends Module {
   }
 
   async betflip (_user, amount, side) {
-    const user = this._users.get(_user, 'money')
+    const user = await this._users.get(_user, 'money')
 
     if (user.money < amount) throw new Error('NOT_ENOUGH_MONEY')
 
