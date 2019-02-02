@@ -441,7 +441,8 @@
     "noText": "You need to give me some text to asciify"
   },
   "hentai": {
-    "commandDescription": "Fetches a random image from r/hentai and displays it."
+    "commandDescription": "Sends hentai in a NSFW channel",
+    "hereIsYourHentai": "Here's your hentai!"
   },
   "shiba": {
     "commandDescription": "Fetches a random Shiba Inu and displays it. Woof!",
