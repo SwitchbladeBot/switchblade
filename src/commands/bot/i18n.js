@@ -12,7 +12,7 @@ module.exports = class i18n extends Command {
     const embed = new SwitchbladeEmbed()
     channel.startTyping()
     embed
-      .setDescription(`${Constants.CROWDIN_LOGO} ${t('commands:i18n.TranslateMe')}`)
+      .setDescription(`${Constants.CROWDIN_LOGO} ${t('commands:i18n.translateMe')}`)
       .setImage('https://i.imgur.com/UVIAzg0.gif')
     channel.send(embed).then(() => channel.stopTyping())
   }
