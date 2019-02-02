@@ -478,7 +478,7 @@
     "hereIsYourCat": "Here's your cat!"
   },
   "i18n": {
-    "commandDescription": "Fetches a random cat and displays it. Nya~",
+    "commandDescription": "Shows the link to Switchblade translation page",
     "translateMe": "**[Translate me to your language](https://translate.switchblade.xyz)**"
   },
   "beatsaver": {
