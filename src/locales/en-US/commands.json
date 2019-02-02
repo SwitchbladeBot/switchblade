@@ -41,6 +41,37 @@
   "ping": {
     "commandDescription": "Checks if the bot is online"
   },
+  "github": {
+    "commandDescription": "Searches for a user, repository or organization on Github",
+    "commandUsage": "<type> <query>",
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "selectResult": "Please send the number of the result (10 seconds)",
+    "subcommands": {
+      "user": {
+        "commandDescription": "Searches for an user on GitHub",
+        "commandUsage": "<username>",
+        "noUser":  "You need to give me a valid user",
+        "userNotFound": "User not found",
+        "moreRepos": "...and [{{repos}} more repositories]({{url}})"
+      },
+      "repository": {
+        "commandDescription": "Searches for a repository on GitHub",
+        "commandUsage": "<repository name>",
+        "noRepo": "You need to give me a repository name",
+        "results": "Repository results for {{query}}",
+        "selectResult": "Please send the number of the result (10 seconds)",
+        "repoNotFound": "Repository not found"
+      },
+      "organization": {
+        "commandDescription": "Searches for an organization on Github",
+        "commandUsage": "<organization name>",
+        "noOrg": "You need to give me a valid organization",
+        "orgNotFound": "Organization not found",
+        "moreRepos": "...and [{{repos}} more repositories]({{url}})"
+      }
+    }
+  },
   "spotify": {
     "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, or displays a user info.",
     "commandUsage": "<type> <query>",
