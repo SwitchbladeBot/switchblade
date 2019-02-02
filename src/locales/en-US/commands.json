@@ -53,7 +53,12 @@
         "commandUsage": "<username>",
         "noUser":  "You need to give me a valid user",
         "userNotFound": "User not found",
-        "moreRepos": "...and [{{repos}} more repositories]({{url}})"
+        "moreRepos": "...and {{repos}} more repositories",
+        "noDescription": "This user doesn't have a description",
+        "followers": "Followers",
+        "following": "Following",
+        "createdAt": "Account created at",
+        "repositories": "Repositories ({{count}})"
       },
       "repository": {
         "commandDescription": "Searches for a repository on GitHub",
@@ -61,14 +66,23 @@
         "noRepo": "You need to give me a repository name",
         "results": "Repository results for {{query}}",
         "selectResult": "Please send the number of the result (10 seconds)",
-        "repoNotFound": "Repository not found"
+        "repoNotFound": "Repository not found",
+        "noDescription": "This repository has no description",
+        "watchers": "Watchers",
+        "stars": "Stars",
+        "forks": "Forks",
+        "license": "License"
       },
       "organization": {
         "commandDescription": "Searches for an organization on Github",
         "commandUsage": "<organization name>",
         "noOrg": "You need to give me a valid organization",
         "orgNotFound": "Organization not found",
-        "moreRepos": "...and [{{repos}} more repositories]({{url}})"
+        "moreRepos": "...and {{repos}} more repositories",
+        "noDescription": "This organization doesn't have a description",
+        "members": "Members",
+        "createdAt": "Organization created at",
+        "repositories": "Repositories ({{count}})"
       }
     }
   },

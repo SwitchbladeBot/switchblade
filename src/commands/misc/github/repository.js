@@ -44,12 +44,12 @@ module.exports = class GitHubRepository extends Command {
       .setTitle(data.full_name)
       .setURL(data.html_url)
       .setThumbnail(data.owner.avatar_url)
-      .setDescription(data.description || 'This repository has no description')
-      .addField('Watchers', MiscUtils.formatNumber(data.watchers, language), true)
-      .addField('Stars', MiscUtils.formatNumber(data.stargazers_count, language), true)
-      .addField('Forks', MiscUtils.formatNumber(data.forks, language), true)
+      .setDescription(data.description || t('commands:github.subcommands.repository.noDescription'))
+      .addField(t('commands:github.subcommands.repository.watchers'), MiscUtils.formatNumber(data.watchers, language), true)
+      .addField(t('commands:github.subcommands.repository.stars'), MiscUtils.formatNumber(data.stargazers_count, language), true)
+      .addField(t('commands:github.subcommands.repository.forks'), MiscUtils.formatNumber(data.forks, language), true)
     if (data.license && data.license.key !== 'other') {
-      embed.addField('License', `[${data.license.spdx_id}](${data.license.url})`, true)
+      embed.addField(t('commands:github.subcommands.repository.license'), `[${data.license.spdx_id}](${data.license.url})`, true)
     }
 
     channel.send(embed).then(() => channel.stopTyping())

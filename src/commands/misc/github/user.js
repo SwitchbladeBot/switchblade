@@ -28,13 +28,13 @@ module.exports = class GitHubUser extends Command {
         .setTitle(`${data.login}${data.name ? ` - ${data.name}` : ''}`)
         .setURL(data.html_url)
         .setThumbnail(data.avatar_url)
-        .setDescription(data.description || 'This user doesn\'t have a description')
-        .addField('Followers', MiscUtils.formatNumber(data.followers, language), true)
-        .addField('Following', MiscUtils.formatNumber(data.following, language), true)
-        .addField('Account created at', `${moment(data.created_at).format('LLL')}\n(${moment(data.created_at).fromNow()})`, true)
+        .setDescription(data.description || t('commands:github.subcommands.user.noDescription'))
+        .addField(t('commands:github.subcommands.user.followers'), MiscUtils.formatNumber(data.followers, language), true)
+        .addField(t('commands:github.subcommands.user.following'), MiscUtils.formatNumber(data.following, language), true)
+        .addField(t('commands:github.subcommands.user.createdAt'), `${moment(data.created_at).format('LLL')}\n(${moment(data.created_at).fromNow()})`, true)
       if (data.public_repos > 0) {
         const repos = await this.client.apis.github.getUserRepositories(user)
-        embed.addField(`Repositories (${data.public_repos})`, `${repos.slice(0, 5).map(r => `${r.fork ? `${Constants.FORKED} ` : ''}\`${r.full_name}\``).join('\n')}${data.public_repos > 5 ? `\n${t('commands:github.subcommands.user.moreRepos', { url: `${data.html_url}/repositories`, repos: data.public_repos - 5 })}` : ''}`, true)
+        embed.addField(t('commands:github.subcommands.user.repositories', { count: data.public_repos }), `${repos.slice(0, 5).map(r => `${r.fork ? `${Constants.FORKED} ` : ''}\`${r.full_name}\``).join('\n')}${data.public_repos > 5 ? `\n${t('commands:github.subcommands.user.moreRepos', { repos: data.public_repos - 5 })}` : ''}`, true)
       }
 
       await channel.send(embed).then(() => channel.stopTyping())
