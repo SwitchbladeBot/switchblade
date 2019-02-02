@@ -964,5 +964,32 @@
         "6": "What a beautiful couple! {{firstName}} and... {{secondName}}?"
       }
     }
+  },
+  "anal": {
+    "commandDescription": "Fetches a random image from r/anal and displays it."
+  },
+  "ass": {
+    "commandDescription": "Fetches a random image from r/ass and displays it."
+  },
+  "boobs": {
+    "commandDescription": "Fetches a random image from r/boobs and displays it."
+  },
+  "porn": {
+    "commandDescription": "Fetches a random image from r/porn and displays it."
+  },
+  "porngifs": {
+    "commandDescription": "Fetches a random image from r/porngifs and displays it."
+  },
+  "pussy": {
+    "commandDescription": "Fetches a random image from r/pussy and displays it."
+  },
+  "yaoi": {
+    "commandDescription": "Fetches a random image from r/yaoi and displays it."
+  },
+  "yiff": {
+    "commandDescription": "Fetches a random image from r/yiff and displays it. (A.K.A Furry Porn)"
+  },
+  "yuri": {
+    "commandDescription": "Fetches a random image from r/yuri and displays it."
   }
 }
