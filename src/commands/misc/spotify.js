@@ -41,7 +41,7 @@ module.exports = class Spotify extends Command {
   }
 
   verifyCollected (selected, length) {
-    const number = Number(selected)
+    const number = Math.round(Number(selected))
     if (isNaN(number)) return false
     if (number < 1) return false
     return number <= length
@@ -60,7 +60,7 @@ module.exports = class Spotify extends Command {
 
     message.channel.awaitMessages(filter, { time: 10000, max: 1 })
       .then(collected => {
-        if (collected.size > 0) callback(ids[Number(collected.first().content) - 1])
+        if (collected.size > 0) callback(ids[Math.round(Number(collected.first().content)) - 1])
       })
   }
 }
