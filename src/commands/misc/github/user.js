@@ -28,7 +28,7 @@ module.exports = class GitHubUser extends Command {
         .setTitle(`${data.login}${data.name ? ` - ${data.name}` : ''}`)
         .setURL(data.html_url)
         .setThumbnail(data.avatar_url)
-        .setDescription(data.description || t('commands:github.subcommands.user.noDescription'))
+        .setDescription(data.bio || t('commands:github.subcommands.user.noBio'))
         .addField(t('commands:github.subcommands.user.followers'), MiscUtils.formatNumber(data.followers, language), true)
         .addField(t('commands:github.subcommands.user.following'), MiscUtils.formatNumber(data.following, language), true)
         .addField(t('commands:github.subcommands.user.createdAt'), `${moment(data.created_at).format('LLL')}\n(${moment(data.created_at).fromNow()})`, true)

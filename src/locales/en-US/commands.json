@@ -54,7 +54,7 @@
         "noUser":  "You need to give me a valid user",
         "userNotFound": "User not found",
         "moreRepos": "...and {{repos}} more repositories",
-        "noDescription": "This user doesn't have a description",
+        "noBio": "This user doesn't have a biography",
         "followers": "Followers",
         "following": "Following",
         "createdAt": "Account created at",
