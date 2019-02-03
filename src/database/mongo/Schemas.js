@@ -34,4 +34,5 @@ module.exports = {
     claimedBy: String,
     generatedBy: String
   })
+
 }

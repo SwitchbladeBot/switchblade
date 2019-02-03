@@ -26,6 +26,15 @@ module.exports = class GoogleMapsAPI extends APIWrapper {
     }
   }
 
+  async searchPlace (address, language = 'en-us') {
+    const { results: [ result ] } = await this.request('/geocode', { address, language })
+    return result
+  }
+
+  async getTimezone (lat, lng, language = 'en-us') {
+    return this.request('/timezone', { language, location: `${lat},${lng}`, timestamp: Date.now() / 1000 })
+  }
+
   // Default
   request (endpoint, queryParams = {}) {
     queryParams.key = process.env.GMAPS_KEY

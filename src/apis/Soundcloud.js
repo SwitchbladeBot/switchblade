@@ -1,5 +1,7 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+
+const fetch = require('node-fetch')
+const { URLSearchParams } = require('url')
 
 const API_URL = 'http://api.soundcloud.com'
 
@@ -21,8 +23,8 @@ module.exports = class SoundcloudAPI extends APIWrapper {
     return this
   }
 
-  getTrack (id) {
-    return this.request(`/tracks/${id}`)
+  getTrack (id, secret) {
+    return this.request(`/tracks/${id}`, { secret_token: secret })
   }
 
   getUser (id) {
@@ -34,14 +36,15 @@ module.exports = class SoundcloudAPI extends APIWrapper {
   }
 
   // Client ID
-  async request (endpoint, queryParams = {}) {
+  async request (endpoint, queryParams = {}, tries = 0) {
     await this.updateClientId()
 
     queryParams['client_id'] = this.clientId
-    return snekfetch.get(`${API_URL}${endpoint}`).query(queryParams).then(r => r.body).catch(e => {
-      if (e.statusCode === 401) {
+    const query = new URLSearchParams(queryParams)
+    return fetch(`${API_URL}${endpoint}?${query}`).then(r => r.json()).catch(e => {
+      if (e.statusCode === 401 && tries < 5) {
         this.lastClientIdUpdate = 0
-        return this.request(endpoint, queryParams)
+        return this.request(endpoint, queryParams, ++tries)
       }
       return e
     })
@@ -63,27 +66,28 @@ module.exports = class SoundcloudAPI extends APIWrapper {
   }
 
   findClientIdFromSite () {
-    return this.findApplicationScriptUrl().then(this.findClientIdFromApplicationScript, e => {
+    return this.findApplicationScriptUrl().then(this.findClientIdFromApplicationScript).catch(e => {
       console.error('Could not find application script from main page.', e.statusCode || e)
     })
   }
 
   async findApplicationScriptUrl () {
-    return snekfetch.get('https://soundcloud.com').then(res => {
-      if (res && res.statusCode === 200) {
-        const body = res.body.toString()
+    return fetch('https://soundcloud.com').then(async res => {
+      if (res.ok) {
+        const body = await res.text()
         const regex = PAGE_APP_SCRIPT_REGEX.exec(body)
         if (regex) {
           return regex[0]
         }
       }
+      return Promise.reject(new Error(res))
     })
   }
 
   async findClientIdFromApplicationScript (url) {
-    return snekfetch.get(url).then(res => {
-      if (res && res.statusCode === 200) {
-        const body = res.body.toString()
+    return fetch(url).then(async res => {
+      if (res.ok) {
+        const body = await res.text()
         const regex = APP_SCRIPT_CLIENT_ID_REGEX.exec(body)
         if (regex) {
           return regex[1]

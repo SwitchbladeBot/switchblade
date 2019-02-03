@@ -9,11 +9,11 @@ module.exports = class Asciify extends Command {
     this.aliases = ['bigtext']
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commands:asciify.noText' })
+      new StringParameter({ full: true, required: true, clean: true, missingError: 'commands:asciify.noText' })
     )
   }
 
-  run ({ channel }, text) {
+  run ({ channel, message }, text) {
     const bigtext = figlet.textSync(text, {
       font: 'Big',
       horizontalLayout: 'universal smushing',
