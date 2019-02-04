@@ -432,21 +432,43 @@
     "embedAuthor": "NASA Image of the Day"
   },
   "deezer": {
-    "commandDescription": "Searches for a song on Deezer",
-    "commandUsage": "<track name>",
+    "commandDescription": "Searches for a track, album, artist, playlist, user or podcast on Deezer",
+    "commandUsage": "<type> <query>",
     "noTrackName": "You need to give me a track name.",
     "noTracksFound": "I couldn't find any tracks with that name.",
     "fans": "Fans",
     "fansCount": "{{fans}} fans",
     "subcommands": {
       "track": {
+        "commandDescription": "Searches for a track on deezer",
+        "commandUsage": "<track>",
         "trackInfo": "Track information"
       },
       "album": {
-        "albumInfo": "Album information"
+        "commandDescription": "Searches for an album on deezer",
+        "commandUsage": "<album> [--tracks]",
+        "albumInfo": "Album information",
+        "albumTracks": "Album tracks"
       },
       "artist": {
-        "artistInfo": "Artist information"
+        "commandDescription": "Searches for an artist on deezer",
+        "commandUsage": "<artist> [--albums | --related]",
+        "artistInfo": "Artist information",
+        "artistAlbums": "Artist albums",
+        "artistRelated": "Related artists"
+      },
+      "playlist": {
+        "commandDescription": "Searches for a playlist on deezer",
+        "commandUsage": "<playlist> [--tracks]",
+        "playlistInfo": "Playlist information",
+        "playlistTracks": "Playlist tracks"
+      },
+      "podcast": {
+        "commandDescription": "Searches for a podcast on deezer",
+        "commandUsage": "<podcast> [--episodes]",
+        "podcastInfo": "Podcast information",
+        "podcastEpisodes": "Podcast episodes",
+        "moreEpisodes": "...and {{episodes}} more episodes"
       }
     }
   },

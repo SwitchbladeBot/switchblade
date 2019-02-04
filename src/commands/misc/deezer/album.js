@@ -14,7 +14,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
     this.parameters = new CommandParameters(this,
       new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' }),
       [
-        new BooleanFlagParameter({ name: 'tracks', aliases: [ 't' ] })
+        new BooleanFlagParameter({ name: 'tracks', aliases: [ 'songs', 's', 't' ] })
       ]
     )
   }

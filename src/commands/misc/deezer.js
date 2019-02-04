@@ -1,7 +1,7 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
 const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
 
-const types = ['track', 'song', 't', 's', 'album', 'al', 'artist', 'ar', 'playlist', 'p', 'user', 'u']
+const types = ['track', 'song', 't', 's', 'album', 'al', 'artist', 'ar', 'playlist', 'p', 'user', 'u', 'podcast', 'pod']
 
 module.exports = class Deezer extends Command {
   constructor (client) {
@@ -22,7 +22,7 @@ module.exports = class Deezer extends Command {
               this.usage(t, prefix),
               '',
               `__**${t('commons:search.types')}:**__`,
-              `\`${['track', 'album', 'artist', 'playlist', 'user'].join('`, `')}\``
+              `\`${['track', 'album', 'artist', 'playlist', 'user', 'podcast'].join('`, `')}\``
             ].join('\n'))
         }
       })

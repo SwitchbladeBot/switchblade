@@ -52,10 +52,10 @@ module.exports = class DeezerArtist extends SearchCommand {
 
     if (flags['related']) {
       const { data } = await this.client.apis.deezer.getArtistRelated(id)
-      const artistList = data.map((artist, i) => {
+      const artistList = data.slice(0, 10).map((artist, i) => {
         return `\`${this.formatIndex(i, data)}\`. [${artist.name}](${artist.link}) - ${t('commands:deezer.fansCount', { fans: MiscUtils.formatNumber(artist.nb_fan, language) })}`
       })
-      if (albums > 10) artistList.push(t('music:moreArtists', { artists: data.length - 10 }))
+      if (albums.length > 10) artistList.push(t('music:moreArtists', { artists: data.length - 10 }))
       return channel.send(embed
         .setDescription(artistList)
         .setTitle(name)

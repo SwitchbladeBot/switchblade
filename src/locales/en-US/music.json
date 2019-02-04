@@ -32,5 +32,6 @@
   "albumsCount": "{{albums}} albums",
   "tracksCountParentheses": "Tracks ({{tracks}})",
   "moreTracks": "...and {{tracks}} more tracks",
-  "moreAlbums": "...and {{albums}} more albums"
+  "moreAlbums": "...and {{albums}} more albums",
+  "moreArtists": "...and {{artists}} more artists"
 }

@@ -26,8 +26,8 @@ module.exports = class DeezerAPI extends APIWrapper {
     return this.request(`/artist/${id}/albums`, { limit })
   }
 
-  getArtistRelated (id, limit = 10) {
-    return this.request(`/artist/${id}/related`, { limit })
+  getArtistRelated (id) {
+    return this.request(`/artist/${id}/related`)
   }
 
   getPlaylist (id) {
@@ -44,6 +44,10 @@ module.exports = class DeezerAPI extends APIWrapper {
 
   getUserChart (id, chart = 'artists') {
     return this.request(`/user/${id}/charts/${chart}`)
+  }
+
+  getPodcastEpisodes (id) {
+    return this.request(`/podcast/${id}/episodes`)
   }
 
   // Search
