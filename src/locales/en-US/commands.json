@@ -41,6 +41,51 @@
   "ping": {
     "commandDescription": "Checks if the bot is online"
   },
+  "github": {
+    "commandDescription": "Searches for a user, repository or organization on Github",
+    "commandUsage": "<type> <query>",
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "selectResult": "Please send the number of the result (10 seconds)",
+    "subcommands": {
+      "user": {
+        "commandDescription": "Searches for an user on GitHub",
+        "commandUsage": "<username>",
+        "noUser":  "You need to give me a valid user",
+        "userNotFound": "User not found",
+        "moreRepos": "...and {{repos}} more repositories",
+        "noBio": "This user doesn't have a biography",
+        "followers": "Followers",
+        "following": "Following",
+        "createdAt": "Account created at",
+        "repositories": "Repositories ({{count}})"
+      },
+      "repository": {
+        "commandDescription": "Searches for a repository on GitHub",
+        "commandUsage": "<repository name>",
+        "noRepo": "You need to give me a repository name",
+        "results": "Repository results for {{query}}",
+        "selectResult": "Please send the number of the result (10 seconds)",
+        "repoNotFound": "Repository not found",
+        "noDescription": "This repository has no description",
+        "watchers": "Watchers",
+        "stars": "Stars",
+        "forks": "Forks",
+        "license": "License"
+      },
+      "organization": {
+        "commandDescription": "Searches for an organization on Github",
+        "commandUsage": "<organization name>",
+        "noOrg": "You need to give me a valid organization",
+        "orgNotFound": "Organization not found",
+        "moreRepos": "...and {{repos}} more repositories",
+        "noDescription": "This organization doesn't have a description",
+        "members": "Members",
+        "createdAt": "Organization created at",
+        "repositories": "Repositories ({{count}})"
+      }
+    }
+  },
   "spotify": {
     "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, or displays a user info.",
     "commandUsage": "<type> <query>",
@@ -491,7 +536,7 @@
     "hereIsYourCat": "Here's your cat!"
   },
   "i18n": {
-    "commandDescription": "Fetches a random cat and displays it. Nya~",
+    "commandDescription": "Shows the link to Switchblade translation page",
     "translateMe": "**[Translate me to your language](https://translate.switchblade.xyz)**"
   },
   "beatsaver": {
@@ -844,7 +889,7 @@
   },
   "support": {
     "commandDescription": "Shows the link to Switchblade support server",
-    "clickHere": "**[Click here to join my support server](https://invite.switchblade.xyz)**"
+    "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
   "lastfm": {
     "commandDescription": "Get an user information or search for a track, album or artist on Last.fm",
@@ -934,5 +979,75 @@
     "hasChallenged": "{{player}} has challenged you to a game of Tic Tac Toe",
     "clickTheReaction": "Click the {{CONFIRMATION_EMOJI}} reaction button below to accept.",
     "thisTimeoutsIn": "You have {{COLLECTOR_TIMEOUT}} seconds to accept it"
+  },
+  "ship": {
+    "commandDescription": "Ship yourself or someone with somebody else.",
+    "commandUsage": "<first user> [second user]",
+    "noUser": "Please insert someone to ship",
+    "messages": {
+      "high": {
+        "0": "The image says {{percent}}%, but I say 200%",
+        "1": "I always knew about {{shipName}}",
+        "2": "{{shipName}}?!!? That's cute :3",
+        "3": "{{firstName}} you may kiss {{secondName}}",
+        "4": "{{shipName}}?!!? OwO",
+        "5": "\"I accept that\" - a random Switchblade developer",
+        "6": "{{firstName}}, don't be scared and DM {{secondName}}"
+      },
+      "medium": {
+        "0": "{{firstName}} could try but I don't think {{secondName}} would want that",
+        "1": "{{percent}}%... well... there are more people in the world you know...",
+        "2": "{{firstName}} and {{secondName}} could be friends, but maybe...",
+        "3": "{{shipName}}: I approve!",
+        "4": "{{secondName}}, do you approve this?",
+        "5": "Nothing is impossible!",
+        "6": "Seems like {{firstName}} and {{secondName}} are just strangers to each other"
+      },
+      "low": {
+        "0": "{{shipName}}? are you serious?",
+        "1": "{{shipName}}? I don't think {{firstName}} will like it",
+        "2": "Nothing is impossible... but this is",
+        "3": "owo what's this? {{shipName}}?? owo I'm out",
+        "4": "{{secondName}} may not accept it, but I'm always here supporting you :)",
+        "5": "{{shipName}}? WHY?",
+        "6": "i think neither {{firstName}} and {{secondName}} liked it"
+      },
+      "self": {
+        "0": "Well, self love is everything",
+        "1": "You may kiss yourself",
+        "2": "\"I wish I had that confidence\" - a random Switchblade developer",
+        "3": "...wait what?",
+        "4": "Lots of love for {{firstName}} and... {{secondName}}?",
+        "5": "Self love!! That's the spirit!!",
+        "6": "What a beautiful couple! {{firstName}} and... {{secondName}}?"
+      }
+    }
+  },
+  "anal": {
+    "commandDescription": "Fetches a random image from r/anal and displays it."
+  },
+  "ass": {
+    "commandDescription": "Fetches a random image from r/ass and displays it."
+  },
+  "boobs": {
+    "commandDescription": "Fetches a random image from r/boobs and displays it."
+  },
+  "porn": {
+    "commandDescription": "Fetches a random image from r/porn and displays it."
+  },
+  "porngifs": {
+    "commandDescription": "Fetches a random image from r/porngifs and displays it."
+  },
+  "pussy": {
+    "commandDescription": "Fetches a random image from r/pussy and displays it."
+  },
+  "yaoi": {
+    "commandDescription": "Fetches a random image from r/yaoi and displays it."
+  },
+  "yiff": {
+    "commandDescription": "Fetches a random image from r/yiff and displays it. (A.K.A Furry Porn)"
+  },
+  "yuri": {
+    "commandDescription": "Fetches a random image from r/yuri and displays it."
   }
 }

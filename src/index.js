@@ -14,6 +14,8 @@ module.exports = {
   EventListener: require('./structures/EventListener.js'),
   Module: require('./structures/Module.js'),
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),
+  Route: require('./structures/Route.js'),
+  Webhook: require('./structures/Webhook.js'),
 
   // Utils
   Reddit: require('./utils/Reddit.js'),
@@ -24,6 +26,7 @@ module.exports = {
   PermissionUtils: require('./utils/PermissionUtils.js'),
   BlacklistUtils: require('./utils/BlacklistUtils.js'),
   EmojiUtils: require('./utils/EmojiUtils.js'),
+  EndpointUtils: require('./utils/EndpointUtils.js'),
 
   // Etc
   Switchblade: require('./Switchblade.js')
