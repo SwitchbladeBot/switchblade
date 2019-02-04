@@ -8,7 +8,7 @@ module.exports = class Deezer extends Command {
     super(client)
 
     this.name = 'deezer'
-    this.aliases = 'dz'
+    this.aliases = ['dz']
 
     this.requirements = new CommandRequirements(this, { apis: ['deezer'] })
     this.parameters = new CommandParameters(this,

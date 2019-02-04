@@ -26,6 +26,18 @@ module.exports = class DeezerAPI extends APIWrapper {
     return this.request(`/playlist/${id}`)
   }
 
+  getUserFollowers (id) {
+    return this.request(`/user/${id}/followers`)
+  }
+
+  getUserFollowings (id) {
+    return this.request(`/user/${id}/followings`)
+  }
+
+  getUserChart (id, chart = 'artists') {
+    return this.request(`/user/${id}/charts/${chart}`)
+  }
+
   // Search
   findTracks (q) {
     return this.request('/search', { q })

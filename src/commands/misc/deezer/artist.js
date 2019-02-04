@@ -6,7 +6,7 @@ module.exports = class DeezerArtist extends SearchCommand {
     super(client, parentCommand || 'deezer')
 
     this.name = 'artist'
-    this.aliases = 'ar'
+    this.aliases = ['ar']
     this.embedColor = Constants.DEEZER_COLOR
     this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
   }

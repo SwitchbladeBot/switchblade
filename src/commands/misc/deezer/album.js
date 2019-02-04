@@ -6,7 +6,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
     super(client, parentCommand || 'deezer')
 
     this.name = 'album'
-    this.aliases = 'al'
+    this.aliases = ['al']
     this.embedColor = Constants.DEEZER_COLOR
     this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
   }
@@ -37,7 +37,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
       .addField(t('music:artist'), `[${artist.name}](https://www.deezer.com/artist/${artist.id})`, true)
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
       .addField(t('music:genres'), genres.data.map(g => g.name).join(', '), true)
-      .addField(t('music:tracksCount', { tracks: trackNumber }), trackList)
+      .addField(t('music:tracksCountParentheses', { tracks: trackNumber }), trackList)
     channel.send(embed)
   }
 }
