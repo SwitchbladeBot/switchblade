@@ -29,6 +29,8 @@
   "albumPlural": "Albums",
   "genres": "Genres",
   "tracksCount": "{{tracks}} tracks",
+  "albumsCount": "{{albums}} albums",
   "tracksCountParentheses": "Tracks ({{tracks}})",
-  "moreTracks": "...and {{tracks}} more tracks"
+  "moreTracks": "...and {{tracks}} more tracks",
+  "moreAlbums": "...and {{albums}} more albums"
 }

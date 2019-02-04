@@ -44,7 +44,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
     if (flags['tracks']) {
       if (trackList.length > 10) trackList.push(t('music:moreTracks', { tracks: trackNumber - 10 }))
       embed.setAuthor(t('commands:deezer.subcommands.album.albumTracks'), this.embedLogoURL, link)
-        .setTitle(t('music:tracksCountParentheses', { tracks: trackNumber }))
+        .setTitle(title)
         .setDescription(trackList)
       channel.send(embed)
       return

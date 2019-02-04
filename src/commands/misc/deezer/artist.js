@@ -1,5 +1,6 @@
 const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SwitchbladeEmbed, Constants, MiscUtils, CommandStructures } = require('../../../')
+const { BooleanFlagParameter, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class DeezerArtist extends SearchCommand {
   constructor (client, parentCommand) {
@@ -9,6 +10,14 @@ module.exports = class DeezerArtist extends SearchCommand {
     this.aliases = ['ar']
     this.embedColor = Constants.DEEZER_COLOR
     this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' }),
+      [
+        new BooleanFlagParameter({ name: 'albums', aliases: [ 'a' ] }),
+        new BooleanFlagParameter({ name: 'related', aliases: [ 'r' ] })
+      ]
+    )
   }
 
   async search (context, query) {
@@ -20,13 +29,42 @@ module.exports = class DeezerArtist extends SearchCommand {
     return `[${item.name}](${item.link}) - ${t('commands:deezer.fansCount', { fans: MiscUtils.formatNumber(item.nb_fan, language) })}`
   }
 
-  handleResult ({ t, channel, author }, artist) {
-    const { name, link, nb_album: albums, picture_big: cover, nb_fan: fans } = artist
+  async handleResult ({ t, channel, author, language, flags }, artist) {
+    const { id, name, link, nb_album: albums, picture_big: cover, nb_fan: fans } = artist
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
       .setAuthor(t('commands:deezer.subcommands.artist.artistInfo'), this.embedLogoURL, link)
       .setThumbnail(cover)
-      .setDescription(`[${name}](${link})`)
+    if (flags['albums']) {
+      const { data } = await this.client.apis.deezer.getArtistAlbums(id)
+      const albumList = data.map((album, i) => {
+        const explicit = album.explicit_lyrics ? Constants.EXPLICIT : ''
+        return `\`${this.formatIndex(i, data)}\`. ${explicit} [${album.title}](${album.link}) \`(${album.release_date.split('-')[0]})\``
+      })
+      if (albums > 10) albumList.push(t('music:moreAlbums', { albums: albums - 10 }))
+      return channel.send(embed
+        .setDescription(albumList)
+        .setTitle(name)
+        .setURL(link)
+        .setAuthor(t('commands:deezer.subcommands.artist.artistAlbums'), this.embedLogoURL, link)
+      )
+    }
+
+    if (flags['related']) {
+      const { data } = await this.client.apis.deezer.getArtistRelated(id)
+      const artistList = data.map((artist, i) => {
+        return `\`${this.formatIndex(i, data)}\`. [${artist.name}](${artist.link}) - ${t('commands:deezer.fansCount', { fans: MiscUtils.formatNumber(artist.nb_fan, language) })}`
+      })
+      if (albums > 10) artistList.push(t('music:moreArtists', { artists: data.length - 10 }))
+      return channel.send(embed
+        .setDescription(artistList)
+        .setTitle(name)
+        .setURL(link)
+        .setAuthor(t('commands:deezer.subcommands.artist.artistRelated'), this.embedLogoURL, link)
+      )
+    }
+
+    embed.setDescription(`[${name}](${link})`)
       .addField(t('music:albumPlural'), albums, true)
       .addField(t('commands:deezer.fans'), fans, true)
     channel.send(embed)
