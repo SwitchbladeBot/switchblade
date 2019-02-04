@@ -1,5 +1,6 @@
 const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SwitchbladeEmbed, Constants, MiscUtils, CommandStructures } = require('../../../')
+const { BooleanFlagParameter, CommandParameters, StringParameter } = CommandStructures
 const moment = require('moment')
 
 module.exports = class DeezerPlaylist extends SearchCommand {
@@ -10,6 +11,13 @@ module.exports = class DeezerPlaylist extends SearchCommand {
     this.aliases = ['p']
     this.embedColor = Constants.DEEZER_COLOR
     this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
+
+    this.parameters = new CommandParameters(this,
+      new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' }),
+      [
+        new BooleanFlagParameter({ name: 'tracks', aliases: [ 't' ] })
+      ]
+    )
   }
 
   async search (context, query) {
@@ -18,24 +26,31 @@ module.exports = class DeezerPlaylist extends SearchCommand {
   }
 
   searchResultFormatter (item, { t, language }) {
-    return `[${item.title}](${item.link}) - ${t('music:tracksCount2', { tracks: MiscUtils.formatNumber(item.nb_tracks, language) })}`
+    return `[${item.title}](${item.link}) - ${t('music:tracksCount', { tracks: MiscUtils.formatNumber(item.nb_tracks, language) })}`
   }
 
-  async handleResult ({ t, channel, author, language }, { id }) {
+  async handleResult ({ t, channel, author, language, flags }, { id }) {
     const playlist = await this.client.apis.deezer.getPlaylist(id)
     const { title, link, description, nb_tracks: trackNumber, fans, creation_date: date, picture_big: cover, creator, tracks } = playlist
-    const trackList = tracks.data.slice(0, 5).map((track, i) => {
+    let trackList = tracks.data.slice(0, 10).map((track, i) => {
       const explicit = track.explicit_lyrics ? Constants.EXPLICIT : ''
       return `\`${this.formatIndex(i, tracks)}\`. ${explicit} [${track.title_short}](${track.link}) \`(${MiscUtils.formatDuration(track.duration * 1000)})\``
     })
-    if (tracks.data.length > 5) trackList.push(t('music:moreTracks', { tracks: tracks.data.length }))
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
       .setAuthor(t('commands:deezer.subcommands.playlist.playlistInfo'), this.embedLogoURL, link)
       .setThumbnail(cover)
       .setTitle(title)
       .setURL(link)
-      .setDescription(description)
+    if (flags['tracks']) {
+      if (tracks.data.length > 10) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 10 }))
+      embed.setAuthor(t('commands:deezer.subcommands.playlist.playlistTracks'), this.embedLogoURL, link)
+        .setDescription(trackList)
+      return channel.send(embed)
+    }
+    trackList = trackList.slice(0, 5)
+    if (tracks.data.length > 5) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 5 }))
+    embed.setDescription(description)
       .addField(t('commands:deezer.createdAt'), moment(date).format('LLL'), true)
       .addField(t('commands:deezer.createdBy'), `[${creator.name}](https://www.deezer.com/profile/${creator.id})`, true)
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
