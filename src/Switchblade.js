@@ -117,7 +117,7 @@ module.exports = class Switchblade extends Client {
       subCommand.parentCommand = parentCommand
     } else {
       parentCommand = subCommand.parentCommand
-      const name = (Array.isArray(parentCommand) ? parentCommand : [ parentCommand]).concat([ subCommand.name ]).join(' ')
+      const name = (Array.isArray(parentCommand) ? parentCommand : [ parentCommand ]).concat([ subCommand.name ]).join(' ')
       this.log(`[31m${name} failed to load - Couldn't find parent command.`, 'Commands')
       return false
     }

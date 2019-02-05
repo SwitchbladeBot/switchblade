@@ -1,4 +1,4 @@
-const { Route, EndpointUtils } = require('../../index')
+const { Route } = require('../../index')
 const { Router } = require('express')
 
 const jwt = require('jsonwebtoken')
@@ -47,7 +47,7 @@ module.exports = class Web extends Route {
     if (!token) throw new Error('INVALID_TOKEN')
 
     return fetch(`https://discordapp.com/api${endpoint}`, {
-      headers: { 'Authorization': `Bearer ${token}`}
+      headers: { 'Authorization': `Bearer ${token}` }
     }).then(res => res.ok ? res.json() : Promise.reject(res))
   }
 }
