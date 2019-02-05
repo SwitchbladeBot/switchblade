@@ -19,7 +19,7 @@
     "types": "Types",
     "noParams": "Please insert something to search",
     "searchFail": "An error has occurred",
-    "noResults": "This search four 0 results",
+    "noResults": "This search found 0 results",
     "typeHelper": "Please send the number according with the result (10 seconds)",
     "results": "Results for {{query}}"
   }

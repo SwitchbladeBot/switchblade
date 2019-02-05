@@ -63,10 +63,6 @@
       "repository": {
         "commandDescription": "Searches for a repository on GitHub",
         "commandUsage": "<repository name>",
-        "noRepo": "You need to give me a repository name",
-        "results": "Repository results for {{query}}",
-        "selectResult": "Please send the number of the result (10 seconds)",
-        "repoNotFound": "Repository not found",
         "noDescription": "This repository has no description",
         "watchers": "Watchers",
         "stars": "Stars",
