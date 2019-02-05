@@ -33,5 +33,6 @@
   "sameUser": "You need to give me a user that isn't you.",
   "managersOnly": "Huhuhuhuhuhuhu, yond thou art not a Translation Manag'r huhuhuhuhuhuhuhuhuhuhu",
   "needBiggerNumber": "You need to give a number higher than {{number}}.",
+  "openYourDms": "You need to open your direct messages for this command to work",
   "needSmallerNumber": "You need to give a number smaller than {{number}}."
 }

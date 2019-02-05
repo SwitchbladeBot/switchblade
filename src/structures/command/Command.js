@@ -39,7 +39,7 @@ module.exports = class Command {
    */
   async _run (context, args) {
     try {
-      this.handleRequirements(context, args)
+      await this.handleRequirements(context, args)
     } catch (e) {
       return this.error(context, e)
     }

@@ -14,6 +14,7 @@ module.exports = class CommandRequirements {
     this.onlyOldAccounts = !!options.onlyOldAccounts
     this.nsfwOnly = !!options.nsfwOnly
     this.sameVoiceChannelOnly = !!options.sameVoiceChannelOnly
+    this.openDms = !!options.openDms
     this.voiceChannelOnly = !!options.voiceChannelOnly
     this.guildPlaying = !!options.guildPlaying
     this.databaseOnly = !!options.databaseOnly
@@ -34,11 +35,12 @@ module.exports = class CommandRequirements {
       guildPlaying: 'errors:notPlaying',
       cooldown: 'errors:cooldown',
       onlyOldAccounts: 'errors:onlyOldAccounts',
-      managersOnly: 'errors:managersOnly'
+      managersOnly: 'errors:managersOnly',
+      openYourDms: 'errors:openYourDms'
     }, options.errors)
   }
 
-  handle ({ t, author, channel, client, guild, member, voiceChannel }, args) {
+  async handle ({ t, author, channel, client, guild, member, voiceChannel }, args) {
     if (this.databaseOnly && !client.database) {
       throw new CommandError(t(this.errors.databaseOnly))
     }
@@ -85,6 +87,14 @@ module.exports = class CommandRequirements {
         const permission = this.permissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
         const sentence = this.permissions.length >= 1 ? 'errors:missingOnePermission' : 'errors:missingMultiplePermissions'
         throw new CommandError(t(sentence, { permission }))
+      }
+    }
+
+    if (this.openDms) {
+      try {
+        await author.send()
+      } catch (e) {
+        if (e.code === 50007) throw new CommandError(t(this.errors.openYourDms))
       }
     }
 

@@ -73,6 +73,10 @@ module.exports = class EconomyModule extends Module {
     return this.client.database.users
   }
 
+  get _giftcode () {
+    return this.client.database.giftcodes
+  }
+
   async transfer (_from, _to, amount) {
     const from = await this._users.get(_from, 'money')
     if (from.money < amount) throw new Error('NOT_ENOUGH_MONEY')
@@ -98,5 +102,55 @@ module.exports = class EconomyModule extends Module {
     await user.save()
 
     return { won, chosenSide }
+  }
+
+  async removeMoney (_user, amount) {
+    const user = await this._users.get(_user, 'money')
+
+    if (user.money < amount) throw new Error('NOT_ENOUGH_MONEY')
+
+    user.money -= amount
+    await user.save()
+  }
+
+  async addMoney (_user, amount) {
+    const user = await this._users.get(_user, 'money')
+
+    user.money += amount
+    await user.save()
+  }
+
+  async createGiftCode (_user, amount) {
+    const user = await this._users.get(_user, 'money')
+    if (user.money < amount) throw new Error('NOT_ENOUGH_MONEY')
+    const identifier = await this.generateRandomString(12)
+    const giftcodeDoc = await this._giftcode.get(identifier)
+
+    giftcodeDoc.value = amount
+    giftcodeDoc.generatedBy = _user
+    this.removeMoney(_user, amount)
+    await giftcodeDoc.save()
+
+    return { identifier, giftcodeDoc }
+  }
+
+  async redeemGiftCode (_user, giftcode) {
+    const gCode = await this._giftcode.findOne(giftcode)
+
+    if (!gCode) throw new Error('INVALID_CODE')
+    if (gCode.claimed === true) throw new Error('ALREADY_CLAIMED')
+    gCode.claimed = true
+    gCode.claimedBy = _user
+    await gCode.save()
+    this.addMoney(_user, gCode.value)
+    return { gCode }
+  }
+
+  generateRandomString (length) {
+    const str = []
+    for (let i = 0; i < length; i++) {
+      str.push(Math.round(Math.random() * 36).toString(36))
+    }
+    return str.join('').toUpperCase()
   }
 }
