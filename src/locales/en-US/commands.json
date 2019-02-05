@@ -438,6 +438,8 @@
     "noTracksFound": "I couldn't find any tracks with that name.",
     "fans": "Fans",
     "fansCount": "{{fans}} fans",
+    "createdAt": "Created at",
+    "createdBy": "Created by",
     "subcommands": {
       "track": {
         "commandDescription": "Searches for a track on deezer",

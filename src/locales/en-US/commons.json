@@ -13,5 +13,10 @@
   "heads": "Heads",
   "tails": "Tails",
   "youCanDoItAgainIn": "You can do that again in **{{time}}**",
-  "to": "to"
+  "to": "to",
+  "search": {
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "noParams": "Please insert something to search"
+  }
 }
