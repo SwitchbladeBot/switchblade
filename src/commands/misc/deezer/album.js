@@ -42,7 +42,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
       .setURL(link)
 
     if (flags['tracks']) {
-      if (trackList.length > 10) trackList.push(t('music:moreTracks', { tracks: trackNumber - 10 }))
+      if (tracks.data.length > 10) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 10 }))
       embed.setAuthor(t('commands:deezer.subcommands.album.albumTracks'), this.embedLogoURL, link)
         .setTitle(title)
         .setDescription(trackList)
