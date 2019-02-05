@@ -22,23 +22,23 @@ module.exports = class MongoRepository extends Repository {
   }
 
   add (entity) {
-    return this.model.create(entity).then(this.parse)
+    return this.model.create(entity)
   }
 
   findOne (id, projection) {
-    return this.model.findById(id, projection).then(this.parse)
+    return this.model.findById(id, projection)
   }
 
   findAll (projection) {
-    return this.model.find({}, projection).then(e => e.map(this.parse))
+    return this.model.find({}, projection).then(e => e)
   }
 
   get (id, projection) {
-    return this.findOne(id, projection).then(e => this.parse(e) || this.add({ _id: id }))
+    return this.findOne(id, projection).then(e => e || this.add({ _id: id }))
   }
 
   remove (id) {
-    return this.model.findByIdAndRemove(id).then(this.parse)
+    return this.model.findByIdAndRemove(id)
   }
 
   update (id, entity) {

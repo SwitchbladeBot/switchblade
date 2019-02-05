@@ -23,7 +23,7 @@ module.exports = {
     prefix: { type: String, default: process.env.PREFIX },
     language: { type: String, default: 'en-US' },
     joinLock: { type: Boolean, default: false },
+    twitterNotifications: String,
     joinLockMessage: String
   })
-
 }

@@ -71,6 +71,7 @@
     "steamapi": "^2.0.3",
     "steamladder": "^1.0.4",
     "transform-props": "^1.0.1",
+    "twit": "^2.2.11",
     "uws": "^10.148.2"
   },
   "devDependencies": {

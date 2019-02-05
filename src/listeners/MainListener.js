@@ -8,7 +8,7 @@ module.exports = class MainListener extends EventListener {
     this.events = ['ready', 'message']
   }
 
-  onReady () {
+  async onReady () {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     // Lavalink connection
@@ -23,6 +23,15 @@ module.exports = class MainListener extends EventListener {
         this.log('[32mLavalink connection established!', 'Music')
       } catch (e) {
         this.log(`[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, 'Music')
+      }
+    }
+
+    // Twitter notifications
+    if (this.database && this.database.guilds) {
+      const twitterNotifications = await this.database.guilds.findAll('twitterChannel')
+      const twitterGuilds = twitterNotifications.filter(g => !!g.twitterChannel).map(g => g._id)
+      if (twitterGuilds.length > 0) {
+        this.log(`[32mFound ${twitterGuilds.length} guild(s) that have Twitter notifications active.`, 'Twitter')
       }
     }
 

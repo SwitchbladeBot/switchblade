@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { CommandStructures, SwitchbladeEmbed } = require('../../')
+const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
 
 const i18next = require('i18next')
 
@@ -43,16 +43,14 @@ module.exports = class ConfigLanguage extends Command {
     const language = langDisplayNames[lang] && langDisplayNames[lang][lang]
     const langDisplayName = language && language[0]
 
-    const embed = new SwitchbladeEmbed(author)
-
     try {
       await this.client.modules.configuration.setLanguage(guild.id, lang)
-      embed.setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
+      channel.send(
+        new SwitchbladeEmbed(author)
+          .setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
+      )
     } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('errors:generic'))
+      throw new CommandError(t('errors:generic'))
     }
-
-    channel.send(embed)
   }
 }

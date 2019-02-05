@@ -19,6 +19,8 @@
   "mathEvaluationError": "An error occurred while evaluating the math expression",
   "invalidNumber": "You need to give me a valid number.",
   "invalidUser": "You need to give me a valid user.",
+  "invalidChannel": "You need to give me a valid channel.",
+  "onlyTextChannels": "This command only accepts text channels.",
   "invalidUserBot": "You need to give me a user that isn't a bot.",
   "invalidUserNotBot": "You need to give me a user that is a bot.",
   "databaseOnly": "Sorry, I don't have a database connection right now!",
