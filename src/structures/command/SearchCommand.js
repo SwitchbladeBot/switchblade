@@ -32,8 +32,8 @@ module.exports = class SearchCommand extends Command {
     this.awaitResponseMessage(context, results)
   }
 
-  async search () {
-    return null
+  async search ({ t }) {
+    throw new CommandError(t('errors:generic'))
   }
 
   searchResultFormatter (item) {
@@ -53,18 +53,18 @@ module.exports = class SearchCommand extends Command {
     channel.awaitMessages(filter, { time: 10000, max: 1 })
       .then(collected => {
         if (collected.size > 0) {
-          const result = results[Number(collected.first().content) - 1]
+          const result = results[Math.round(Number(collected.first().content)) - 1]
           this.handleResult(context, result)
         }
       })
   }
 
   verifyCollected (selected, length) {
-    const number = Number(selected)
+    const number = Math.round(Number(selected))
     return number <= length && !isNaN(number) && number > 0
   }
 
-  handleResult () {
-    return null
+  handleResult ({ t }) {
+    throw new CommandError(t('errors:generic'))
   }
 }
