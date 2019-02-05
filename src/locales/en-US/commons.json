@@ -17,6 +17,10 @@
   "search": {
     "noType": "Please insert a valid type",
     "types": "Types",
-    "noParams": "Please insert something to search"
+    "noParams": "Please insert something to search",
+    "searchFail": "An error has occurred",
+    "noResults": "This search four 0 results",
+    "typeHelper": "Please send the number according with the result (10 seconds)",
+    "results": "Results for {{query}}"
   }
 }
