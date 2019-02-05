@@ -19,11 +19,11 @@ module.exports = class Spotify extends Command {
         whitelist: types,
         required: true,
         missingError: ({ t, prefix }) => {
-          return new SwitchbladeEmbed().setTitle(t('commands:spotify.noType'))
+          return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
             .setDescription([
               this.usage(t, prefix),
               '',
-              `__**${t('commands:spotify.types')}:**__`,
+              `__**${t('commons:search.types')}:**__`,
               `\`${['track', 'album', 'artist', 'playlist', 'user'].join('`, `')}\``
             ].join('\n'))
         }

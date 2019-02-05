@@ -19,11 +19,11 @@ module.exports = class GitHub extends Command {
         whitelist: types,
         required: true,
         missingError: ({ t, prefix }) => {
-          return new SwitchbladeEmbed().setTitle(t('commands:github.noType'))
+          return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
             .setDescription([
               this.usage(t, prefix),
               '',
-              `__**${t('commands:github.types')}:**__`,
+              `__**${t('commons:search.types')}:**__`,
               `\`${['user', 'repository', 'organization'].join('`, `')}\``
             ].join('\n'))
         }
