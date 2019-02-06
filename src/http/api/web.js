@@ -3,6 +3,9 @@ const { Router } = require('express')
 
 const jwt = require('jsonwebtoken')
 const fetch = require('node-fetch')
+const { URLSearchParams } = require('url')
+
+const API_URL = 'https://discordapp.com/api'
 
 module.exports = class Web extends Route {
   constructor (client) {
@@ -17,10 +20,28 @@ module.exports = class Web extends Route {
     router.get('/login', async (req, res) => {
       const { code } = req.query
       if (code) {
-        const token = jwt.sign({ accessToken: 'ifvAnVxaK6ouNFJ5IdlW7KxFPd2E3R' }, process.env.JWT_SECRET)
-        res.json({ ok: true, token })
+        try {
+          const {
+            access_token: accessToken,
+            expires_in: expiresIn,
+            refresh_token: refreshToken,
+            token_type: tokenType,
+            scope
+          } = await this._exchangeCode(code).catch(console.error)
+
+          res.json({ token: jwt.sign({
+            accessToken,
+            refreshToken,
+            expiresIn,
+            expiresAt: Date.now() + expiresIn * 1000,
+            tokenType,
+            scope
+          }, process.env.JWT_SECRET) })
+        } catch (e) {
+          res.status(403)
+        }
       } else {
-        res.status(401).json({ ok: false })
+        res.status(400)
       }
     })
 
@@ -29,14 +50,14 @@ module.exports = class Web extends Route {
       try {
         // TODO: This should be a middleware
         const token = req.get('Authorization')
-        if (!token) throw new Error('MISSING_HEADER')
+        if (!token) return res.status(400)
 
         const { accessToken } = jwt.verify(token, process.env.JWT_SECRET)
         const user = await this._request('/users/@me', accessToken)
         if (req.query.guilds) res.json({ user, guilds: await this._request('/users/@me/guilds', accessToken) })
         else res.json({ user })
       } catch (e) {
-        res.status(401).json({ ok: false })
+        res.status(401)
       }
     })
 
@@ -46,8 +67,31 @@ module.exports = class Web extends Route {
   _request (endpoint, token) {
     if (!token) throw new Error('INVALID_TOKEN')
 
-    return fetch(`https://discordapp.com/api${endpoint}`, {
+    return fetch(`${API_URL}${endpoint}`, {
       headers: { 'Authorization': `Bearer ${token}` }
+    }).then(res => res.ok ? res.json() : Promise.reject(res))
+  }
+
+  _exchangeCode (code) {
+    return this._tokenRequest({ code, grant_type: 'authorization_code' })
+  }
+
+  _refreshToken (refreshToken) {
+    return this._tokenRequest({ refresh_token: refreshToken, grant_type: 'refresh_token' })
+  }
+
+  _tokenRequest (params = {}) {
+    const body = new URLSearchParams({ ...{
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      redirect_uri: process.env.REDIRECT_URI,
+      scope: 'guilds identify'
+    }, ...params })
+
+    return fetch(`${API_URL}/oauth2/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
     }).then(res => res.ok ? res.json() : Promise.reject(res))
   }
 }
