@@ -1,4 +1,4 @@
-const { Route } = require('../../index')
+const { Route } = require('../../')
 const { Router } = require('express')
 const i18next = require('i18next')
 

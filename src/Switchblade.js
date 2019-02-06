@@ -1,5 +1,6 @@
 const { Client } = require('discord.js')
 const translationBackend = require('i18next-node-fs-backend')
+
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
@@ -380,15 +381,15 @@ module.exports = class Switchblade extends Client {
     // Parse JSON body
     app.use(express.json())
     // Morgan - Request logger middleware
-    app.use(morgan('[36m[HTTP] [32m:method :url - IP :remote-addr - Code :status - Size :res[content-length] B - Handled in :response-time ms'))
+    app.use(morgan('[36m[HTTP][0m [32m:method :url - IP :remote-addr - Code :status - Size :res[content-length] B - Handled in :response-time ms[0m'))
 
     app.listen(port, () => {
       this.log(`[32mListening on port ${port}`, 'HTTP')
       this.httpServer = app
     })
 
-    return this.initializeRoutes('src/http/api/').then(() => {
-      this.initializeWebhooks('src/http/webhooks/')
+    return this.initializeRoutes('src/http/api').then(() => {
+      this.initializeWebhooks('src/http/webhooks')
     })
   }
 

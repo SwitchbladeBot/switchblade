@@ -1,4 +1,4 @@
-const { Route } = require('../../index')
+const { Route } = require('../../')
 const { Router } = require('express')
 
 module.exports = class Commands extends Route {
