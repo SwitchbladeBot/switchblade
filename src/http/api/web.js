@@ -1,4 +1,4 @@
-const { Route } = require('../../index')
+const { Route, EndpointUtils } = require('../../')
 const { Router } = require('express')
 
 const jwt = require('jsonwebtoken')
@@ -27,7 +27,7 @@ module.exports = class Web extends Route {
             refresh_token: refreshToken,
             token_type: tokenType,
             scope
-          } = await this._exchangeCode(code).catch(console.error)
+          } = await this._exchangeCode(code)
 
           res.json({ token: jwt.sign({
             accessToken,
@@ -38,27 +38,16 @@ module.exports = class Web extends Route {
             scope
           }, process.env.JWT_SECRET) })
         } catch (e) {
-          res.status(403)
+          res.status(403).json({ ok: false })
         }
       } else {
-        res.status(400)
+        res.status(400).json({ ok: false })
       }
     })
 
     // @me
-    router.get('/@me', async (req, res) => {
-      try {
-        // TODO: This should be a middleware
-        const token = req.get('Authorization')
-        if (!token) return res.status(400)
-
-        const { accessToken } = jwt.verify(token, process.env.JWT_SECRET)
-        const user = await this._request('/users/@me', accessToken)
-        if (req.query.guilds) res.json({ user, guilds: await this._request('/users/@me/guilds', accessToken) })
-        else res.json({ user })
-      } catch (e) {
-        res.status(401)
-      }
+    router.get('/@me', EndpointUtils.authenticate(this, false, true), (req, res) => {
+      res.json({ user: req.user, guilds: req.guilds })
     })
 
     app.use(this.path, router)
