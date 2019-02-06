@@ -81,12 +81,13 @@ module.exports = class Web extends Route {
   }
 
   _tokenRequest (params = {}) {
-    const body = new URLSearchParams({ ...{
+    const body = new URLSearchParams({
       client_id: process.env.CLIENT_ID,
       client_secret: process.env.CLIENT_SECRET,
       redirect_uri: process.env.REDIRECT_URI,
-      scope: 'guilds identify'
-    }, ...params })
+      scope: 'guilds identify',
+      ...params
+    })
 
     return fetch(`${API_URL}/oauth2/token`, {
       method: 'POST',
