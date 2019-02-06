@@ -15,6 +15,6 @@ module.exports = class MiscUtils {
   }
 
   static formatDuration (duration) {
-    return moment.duration(duration).format('mm:ss')
+    return moment.duration(duration).format('hh:mm:ss', { stopTrim: 'm' })
   }
 }

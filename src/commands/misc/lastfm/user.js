@@ -26,7 +26,7 @@ module.exports = class LastfmUser extends Command {
       let { topartists } = await this.client.apis.lastfm.getUserTop(param, 'artists', '1month', 5)
       topartists = topartists.artist
 
-      embed.setAuthor(user.realname ? user.realname : user.name, 'https://i.imgur.com/TppYCun.png', user.url)
+      embed.setAuthor(user.realname || user.name, 'https://i.imgur.com/TppYCun.png', user.url)
         .setThumbnail(user.image[3]['#text'])
         .addField(t('commands:lastfm.playcount'), MiscUtils.formatNumber(user.playcount, language), true)
         .addField(t('commands:lastfm.registered'), time, true)
