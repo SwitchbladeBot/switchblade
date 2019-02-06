@@ -14,7 +14,7 @@ module.exports = class Users extends Route {
     router.get('/:userId/money', EndpointUtils.authenticate(this), EndpointUtils.handleUser(this), async (req, res) => {
       const id = req.userId
       try {
-        const { money } = await this.client.modules.economy.balance(id)
+        const money = await this.client.modules.economy.balance(id)
         res.status(200).json({ id, money })
       } catch (e) {
         res.status(500).json({ ok: false })
