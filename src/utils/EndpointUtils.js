@@ -58,7 +58,7 @@ module.exports = class EndpointUtils {
 
   static handleUser ({ client }) {
     return (req, res, next) => {
-      let id = req.params.id
+      let id = req.params.userId
       if (id) {
         switch (id) {
           case '@me':
@@ -69,7 +69,7 @@ module.exports = class EndpointUtils {
               return res.status(403).json({ ok: false })
             }
         }
-        req.id = id
+        req.userId = id
         return next()
       }
       return res.status(401).json({ ok: false })
