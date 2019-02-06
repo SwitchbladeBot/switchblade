@@ -379,7 +379,7 @@ module.exports = class Switchblade extends Client {
     if (!port) return this.log(`[31mHTTP server not started - Required environment variable "PORT" is not set.`, 'HTTP')
 
     // Use CORS with Express
-    app.use(cors({}))
+    app.use(cors())
     // Parse JSON body
     app.use(express.json())
     // Morgan - Request logger middleware
