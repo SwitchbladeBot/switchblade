@@ -20,7 +20,7 @@
     "noParams": "Please insert something to search",
     "searchFail": "An error has occurred",
     "noResults": "This search found 0 results",
-    "typeHelper": "Please send the number according with the result (10 seconds)",
+    "typeHelper": "Please send the number of the result which you want to proceed with (10 seconds)",
     "results": "Results for {{query}}"
   }
 }
