@@ -1,66 +1,78 @@
 const fetch = require('node-fetch')
 const Joi = require('joi')
+const jwt = require('jsonwebtoken')
 
 const API_URL = 'https://discordapp.com/api'
 
 module.exports = class EndpointUtils {
-  static authenticate (acceptUserToken = true) {
+  static authenticate ({ client }, adminOnly = false, fetchGuilds = false) {
     return async (req, res, next) => {
       const authorization = req.get('Authorization')
       if (authorization) {
         const [ identifier, token ] = authorization.split(' ')
+        if (!identifier || !token) return res.status(400).json({ ok: false })
+
         switch (identifier) {
           case 'User':
-            if (acceptUserToken) {
+            if (!adminOnly) {
               try {
-                const user = await EndpointUtils.fetchOAuthUser(token)
-                req.authorizationType = 'USER'
-                req.user = user
+                const { accessToken } = jwt.verify(token, process.env.JWT_SECRET)
+                req.user = await this._fetchUser(client, accessToken)
+                if (fetchGuilds) req.guilds = await this._fetchGuilds(client, accessToken)
                 return next()
               } catch (e) {
-                return res.status(401).json({ error: 'Invalid Bearer token' })
+                return res.status(401).json({ ok: false })
               }
             }
             break
           case 'Admin':
             if (token === process.env.ADMIN_TOKEN) {
-              req.authorizationType = 'ADMIN'
+              req.isAdmin = true
               return next()
             }
-            break
         }
-        return res.status(401).json({ error: 'Invalid Authorization header' })
+        return res.status(401).json({ ok: false })
       }
-      return res.status(401).json({ error: 'Missing Authorization header' })
+      return res.status(400).json({ ok: false })
     }
   }
 
-  static async fetchOAuthUser (token) {
-    return fetch(`${API_URL}/users/@me`, {
+  static _fetchUser (client, token) {
+    return this._requestDiscord('/users/@me', token)
+  }
+
+  static async _fetchGuilds (client, token) {
+    return this._requestDiscord('/users/@me/guilds', token).then(gs => gs.map(g => {
+      g.common = client.guilds.has(g.id)
+      return g
+    }))
+  }
+
+  static _requestDiscord (endpoint, token) {
+    if (!token) throw new Error('INVALID_TOKEN')
+
+    return fetch(`${API_URL}${endpoint}`, {
       headers: { 'Authorization': `Bearer ${token}` }
-    }).then(res => {
-      const user = res.ok && res.json()
-      return user || Promise.reject(res)
-    })
+    }).then(res => res.ok ? res.json() : Promise.reject(res))
   }
 
   static handleUser ({ client }) {
     return (req, res, next) => {
-      let id = req.params.id
+      let id = req.params.userId
       if (id) {
         switch (id) {
           case '@me':
-            id = req.authorizationType === 'ADMIN' ? client.user.id : req.user.id
+            id = req.isAdmin ? client.user.id : req.user.id
             break
           default:
-            if (req.authorizationType !== 'ADMIN' && id !== req.user.id) {
-              return res.status(401)
+            if (!req.isAdmin && id !== req.user.id) {
+              return res.status(403).json({ ok: false })
             }
         }
-        req.id = id
-        next()
+        req.userId = id
+        return next()
       }
-      return res.status(401)
+      return res.status(401).json({ ok: false })
     }
   }
 
