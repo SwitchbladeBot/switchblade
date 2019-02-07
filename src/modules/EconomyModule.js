@@ -11,7 +11,8 @@ class BonusCooldownError extends Error {
   }
 }
 
-const BONUS_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
+const DAILY_BONUS_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
+const DBL_BONUS_INTERVAL = 12 * 60 * 60 * 1000 // 1 day
 class BonusModule extends Module {
   constructor (...args) {
     super(...args)
@@ -22,12 +23,12 @@ class BonusModule extends Module {
     return this.client.database.users
   }
 
-  checkClaim (lastClaim) {
-    return Date.now() - lastClaim < BONUS_INTERVAL
+  checkClaim (lastClaim, interval = DAILY_BONUS_INTERVAL) {
+    return Date.now() - lastClaim < interval
   }
 
-  formatClaimTime (lastClaim) {
-    return moment.duration(BONUS_INTERVAL - (Date.now() - lastClaim)).format('h[h] m[m] s[s]')
+  formatClaimTime (lastClaim, interval = DAILY_BONUS_INTERVAL) {
+    return moment.duration(interval - (Date.now() - lastClaim)).format('h[h] m[m] s[s]')
   }
 
   async claimDaily (_user) {
@@ -50,8 +51,8 @@ class BonusModule extends Module {
     const user = await this._users.get(_user, 'money lastDBLBonusClaim')
     const { lastDBLBonusClaim } = user
 
-    if (this.checkClaim(lastDBLBonusClaim)) {
-      throw new BonusCooldownError(lastDBLBonusClaim, this.formatClaimTime(lastDBLBonusClaim))
+    if (this.checkClaim(lastDBLBonusClaim, DBL_BONUS_INTERVAL)) {
+      throw new BonusCooldownError(lastDBLBonusClaim, this.formatClaimTime(lastDBLBonusClaim, DBL_BONUS_INTERVAL))
     }
 
     const voted = await this.client.apis.dbl.checkVote(this.client.user.id, _user)

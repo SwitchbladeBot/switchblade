@@ -10,11 +10,7 @@ module.exports = class MongoRepository extends Repository {
     if (!mongoose || !model) throw new Error('Mongoose model cannot be null.')
     this.mongoose = mongoose
 
-    if (typeof model === 'string') {
-      this.model = mongoose.model(model)
-    } else {
-      this.model = model
-    }
+    this.model = typeof model === 'string' ? mongoose.model(model) : model
   }
 
   parse (entity) {
@@ -41,7 +37,7 @@ module.exports = class MongoRepository extends Repository {
     return this.model.findByIdAndRemove(id).then(this.parse)
   }
 
-  update (id, entity) {
-    return this.model.updateOne({ _id: id }, entity)
+  update (id, entity, options = { upsert: true }) {
+    return this.model.updateOne({ _id: id }, entity, options)
   }
 }
