@@ -490,7 +490,7 @@ module.exports = class CanvasTemplates {
     return encoder.out.getData()
   }
 
-  static async weather ({ t }, title, { now, daily }) {
+  static async weather ({ t }, title, { now, daily }, unit) {
     const WIDTH = 400
     const HEIGHT = 286
 
@@ -504,12 +504,14 @@ module.exports = class CanvasTemplates {
       const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
       const REGULAR = MEME || '"Montserrat"'
       const LIGHT = MEME || '"Montserrat Light"'
+      const BLACK = MEME || '"Montserrat Black"'
       return {
         TITLE: `17px ${EXTRABOLD}`,
         TEMPERATURE: `bold 90px ${EXTRABOLD}`,
         INFORMATIONS: `17px ${LIGHT}`,
         WEEK_DAYS: `17px ${REGULAR}`,
-        WEEK_TEMPERATURES: `29px ${LIGHT}`
+        WEEK_TEMPERATURES: `29px ${LIGHT}`,
+        UNIT: `34px ${BLACK}`
       }
     })()
 
@@ -541,13 +543,16 @@ module.exports = class CanvasTemplates {
     const BRIGHTER_Y_CENTER = CARD_Y_MARGIN + BRIGHTER_HEIGHT * 0.5
     //   Temperature
     ctx.fillStyle = '#FFFFFF'
-    ctx.write(now.temperature, INNER_MARGIN, BRIGHTER_Y_CENTER, FONTS.TEMPERATURE, ALIGN.CENTER_LEFT)
+    const temperature = ctx.write(now.temperature, INNER_MARGIN, BRIGHTER_Y_CENTER, FONTS.TEMPERATURE, ALIGN.CENTER_LEFT)
+    //   Temperature unit
+    const UNIT_MARGIN = 4
+    ctx.write(unit, temperature.rightX + UNIT_MARGIN, temperature.topY, FONTS.UNIT, ALIGN.TOP_LEFT)
     //   Extra info
     const INFO_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT - INNER_MARGIN
     const INFO_ICON_SIZE = 16
 
-    const currentlyMax = ctx.write(now.max, INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
-    const currentlyMin = ctx.write(now.min, currentlyMax.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+    const currentlyMax = ctx.write(now.max + unit, INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+    const currentlyMin = ctx.write(now.min + unit, currentlyMax.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
     const currentlyWind = ctx.write(now.wind, currentlyMin.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
 
     // Daily
@@ -566,7 +571,7 @@ module.exports = class CanvasTemplates {
       const WEEKDAY_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT + INNER_MARGIN
       const TEMPERATURE_Y = HEIGHT - INNER_MARGIN
       ctx.write(day.weekday, DAY_TEXT_X, WEEKDAY_Y, FONTS.WEEK_DAYS, ALIGN.TOP_CENTER)
-      ctx.write(`${day.temperature}º`, DAY_TEXT_X, TEMPERATURE_Y, FONTS.WEEK_DAYS, ALIGN.BOTTOM_CENTER)
+      ctx.write(`${day.temperature}${unit}`, DAY_TEXT_X, TEMPERATURE_Y, FONTS.WEEK_DAYS, ALIGN.BOTTOM_CENTER)
 
       day.iconX = DAY_X
       day.iconY = (HEIGHT - ((CARD_HEIGHT - BRIGHTER_HEIGHT) * 0.5)) - DAY_ICON_SIZE * 0.5
@@ -608,10 +613,10 @@ module.exports = class CanvasTemplates {
     ctx.fillStyle = graphGradient
 
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'
-    daily.forEach((day, i) => {
-      if (i === 0) ctx.moveTo(0, day.graphPoint)
-      ctx.lineTo(day.graphX, day.graphPoint)
-      if (i === daily.length - 1) ctx.lineTo(WIDTH, day.graphPoint)
+    daily.forEach(({ graphPoint, graphX }, i) => {
+      if (i === 0) ctx.moveTo(0, graphPoint)
+      ctx.lineTo(graphX, graphPoint)
+      if (i === daily.length - 1) ctx.lineTo(WIDTH, graphPoint)
     })
     ctx.stroke()
     ctx.lineTo(WIDTH, HEIGHT)
