@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandParameters, StringParameter } = CommandStructures
 
 const npm = require('api-npm')
 
@@ -24,7 +24,7 @@ module.exports = class Npm extends Command {
           .setAuthor(data.name, 'https://i.imgur.com/24yrZxG.png', `https://www.npmjs.com/package/${data.name}`)
           .setDescription(`${description}\nhttps://www.npmjs.com/package/${data.name}\n\n\`npm i ${data.name} --save\``)
       } else {
-        throw new CommandError(t('commands:npm.notFound'), true)
+        embed.setColor(Constants.ERROR_COLOR).setTitle(t('commands:npm.notFound'))
       }
       channel.send(embed).then(() => channel.stopTyping())
     })

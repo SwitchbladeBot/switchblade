@@ -1,42 +1,29 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const SearchCommand = require('../../../structures/command/SearchCommand.js')
+const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
-module.exports = class SpotifyArtist extends Command {
+module.exports = class SpotifyArtist extends SearchCommand {
   constructor (client, parentCommand) {
     super(client, parentCommand || 'spotify')
     this.name = 'artist'
     this.aliases = ['ar']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.artist.noArtist' })
-    )
+    this.embedColor = Constants.SPOTIFY_COLOR
+    this.embedLogoURL = 'https://i.imgur.com/vw8svty.png'
   }
 
-  async run ({ t, author, channel, message, language }, query) {
-    channel.startTyping()
-
-    const prefix = (obj, i) => `\`${this.parentCommand.formatIndex(++i)}\`. [${obj.name}](${obj.external_urls.spotify}) - ${t('commands:spotify.followersCount', { followers: MiscUtils.formatNumber(obj.followers.total, language) })}`
-    const results = await this.parentCommand.searchHandler(query, 'artist', prefix)
-    if (results.ids.length === 0) throw new CommandError(t('commands:spotify.subcommands.artist.notFound', { query }))
-    const { description, ids } = results
-    const embed = new SwitchbladeEmbed(author)
-      .setColor(Constants.SPOTIFY_COLOR)
-      .setDescription(description)
-      .setAuthor(t('commands:spotify.subcommands.artist.results', { query }), this.parentCommand.SPOTIFY_LOGO)
-      .setTitle(t('commands:spotify.selectResult'))
-
-    await channel.send(embed)
-    await channel.stopTyping()
-
-    this.parentCommand.awaitResponseMessage(message, ids, id => this.getArtist(t, id, channel, author, language))
+  async search (context, query) {
+    return this.client.apis.spotify.searchArtists(query, 10)
   }
 
-  async getArtist (t, id, channel, author, language) {
+  searchResultFormatter (item, { t, language }) {
+    return `[${item.name}](${item.external_urls.spotify}) - ${t('commands:spotify.followersCount', { followers: MiscUtils.formatNumber(item.followers.total, language) })}`
+  }
+
+  async handleResult ({ t, channel, author, language, flags }, { id }) {
     const { name, genres, followers, images, external_urls: urls } = await this.client.apis.spotify.getArtist(id)
     const [ cover ] = images.sort((a, b) => b.width - a.width)
     const embed = new SwitchbladeEmbed(author)
-      .setColor(Constants.SPOTIFY_COLOR)
-      .setAuthor(t('commands:spotify.subcommands.artist.artistInfo'), this.parentCommand.SPOTIFY_LOGO, urls.spotify)
+      .setColor(this.embedColor)
+      .setAuthor(t('commands:spotify.subcommands.artist.artistInfo'), this.embedLogoURL, urls.spotify)
       .setDescription(`[${name}](${urls.spotify})`)
       .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
 
