@@ -31,7 +31,7 @@ module.exports = class SocialModule extends Module {
 
   validateProfile (entity) {
     return Joi.validate(entity, Joi.object().keys({
-      personalText: Joi.string().max(260).truncate(),
+      personalText: Joi.string().max(260).truncate().empty(''),
       favColor: Joi.string().regex(/^#([a-f\d]{3}|[a-f\d]{6})$/i)
     }))
   }
