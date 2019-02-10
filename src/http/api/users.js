@@ -48,17 +48,4 @@ module.exports = class Users extends Route {
 
     app.use(this.path, router)
   }
-
-  get handleProfilePayload () {
-    return async (req, res, next) => {
-      if (!req.body) res.status(400).json({ ok: false })
-      try {
-        await this.client.modules.social.validateProfile(req.body)
-        next()
-      } catch (e) {
-        console.log(e)
-        res.status(500).json({ ok: false })
-      }
-    }
-  }
 }
