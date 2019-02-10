@@ -1,6 +1,7 @@
 const { Module } = require('../')
 
 const moment = require('moment')
+const Joi = require('joi')
 
 const REP_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 class RepCooldownError extends Error {
@@ -26,6 +27,17 @@ module.exports = class SocialModule extends Module {
 
   get _users () {
     return this.client.database.users
+  }
+
+  validateProfile (entity) {
+    return Joi.validate(entity, Joi.object().keys({
+      personalText: Joi.string().min(1).max(260).truncate(),
+      favColor: Joi.string().regex(/^#([a-f\d]{3}|[a-f\d]{6})$/i)
+    }))
+  }
+
+  async updateProfile (_user, entity) {
+    return this.validateProfile(entity).then(() => this._users.update(_user, entity))
   }
 
   async setFavoriteColor (_user, favColor) {
