@@ -1,6 +1,5 @@
 const { Route, EndpointUtils } = require('../../')
 const { Router } = require('express')
-const Joi = require('joi')
 
 module.exports = class Users extends Route {
   constructor (client) {
