@@ -450,6 +450,8 @@
         "moreEpisodes": "...and {{episodes}} more episodes"
       },
       "user":  {
+        "commandDescription": "Searches for a user on Deezer",
+        "commandUsage": "<user>",
         "userinfo": "User Info"
       }
     }
