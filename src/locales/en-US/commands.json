@@ -415,6 +415,8 @@
     "fansCount": "{{fans}} fans",
     "createdAt": "Created at",
     "createdBy": "Created by",
+    "followers": "Followers",
+    "following": "Following",
     "subcommands": {
       "track": {
         "commandDescription": "Searches for a track on deezer",
@@ -446,6 +448,9 @@
         "podcastInfo": "Podcast information",
         "podcastEpisodes": "Podcast episodes",
         "moreEpisodes": "...and {{episodes}} more episodes"
+      },
+      "user":  {
+        "userinfo": "User Info"
       }
     }
   },
