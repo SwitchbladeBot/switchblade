@@ -10,7 +10,7 @@ module.exports = class DBL extends APIWrapper {
     this.envVars = ['DBL_TOKEN']
   }
 
-  searchBot (query, maxValues) {
+  searchBots (query, maxValues) {
     return this.request('/bots', { search: query, limit: maxValues }).then(u => u.results)
   }
 
