@@ -184,14 +184,17 @@ module.exports = class CanvasTemplates {
   static async nowPlaying ({ t }, guildPlayer, song) {
     const WIDTH = 800
     const HEIGHT = 257
+    console.log(song)
 
     const THUMBNAIL_WIDTH = 263
     let THUMBNAIL_HEIGHT = HEIGHT
 
     const IMAGE_ASSETS = Promise.all([
       Image.from(song.mainImage || Constants.DEFAULT_SONG_PNG, !song.mainImage),
-      Image.from(song.backgroundImage || Constants.DEFAULT_SONG_PNG, !song.backgroundImage)
+      Image.from(song.backgroundImage || Constants.DEFAULT_SONG_PNG, !song.backgroundImage),
+      Image.from(Constants[`${song.source.toUpperCase()}_BRAND_SVG`])
     ])
+    console.log(`${song.source.toUpperCase()}_BRAND_SVG`)
 
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
@@ -245,7 +248,12 @@ module.exports = class CanvasTemplates {
     ctx.writeParagraph(song.title, TITLE_FONT, LEFT_TEXT_MARGIN, TITLE_Y, RIGHT_TEXT_MARGIN, TITLE_Y + 1, 5, ALIGN.BOTTOM_LEFT)
 
     // Image handling
-    const [ mainImage, backgroundImage ] = await IMAGE_ASSETS
+    const [ mainImage, backgroundImage, brand ] = await IMAGE_ASSETS
+
+    // Brand
+    const BRAND_MARGIN = 12
+    const BRAND_SIZE = 44
+    ctx.drawIcon(brand, THUMBNAIL_WIDTH + BRAND_MARGIN, BRAND_MARGIN, BRAND_SIZE, BRAND_SIZE, '#fff')
 
     // Thumbnail
     ctx.fillStyle = '#000000'

@@ -62,6 +62,7 @@ module.exports = {
   MEDAL_SVG: 'src/assets/svg/medal.svg',
   HEART_SVG: 'src/assets/svg/heart.svg',
 
+  //  Weather
   WEATHER_CLEAR_DAY: 'src/assets/svg/weather/clear-day.svg',
   WEATHER_CLEAR_NIGHT: 'src/assets/svg/weather/clear-night.svg',
   WEATHER_CLOUDY: 'src/assets/svg/weather/cloudy.svg',
@@ -74,6 +75,13 @@ module.exports = {
   WEATHER_WIND: 'src/assets/svg/weather/wind.svg',
   ARROW_SVG: 'src/assets/svg/arrow.svg',
   WIND_SVG: 'src/assets/svg/wind.svg',
+
+  //  Brands
+  SPOTIFY_BRAND_SVG: 'src/assets/svg/brands/spotify.svg',
+  YOUTUBE_BRAND_SVG: 'src/assets/svg/brands/youtube.svg',
+  SOUNDCLOUD_BRAND_SVG: 'src/assets/svg/brands/soundcloud.svg',
+  DEEZER_BRAND_SVG: 'src/assets/svg/brands/deezer.svg',
+  TWITCH_BRAND_SVG: 'src/assets/svg/brands/twitch.svg',
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
