@@ -1,4 +1,4 @@
-const { Route, EndpointUtils } = require('../../index')
+const { Route, EndpointUtils } = require('../../')
 const { Router } = require('express')
 
 module.exports = class Users extends Route {
@@ -11,10 +11,14 @@ module.exports = class Users extends Route {
     const router = Router()
 
     // Balance
-    router.get('/:id/money', EndpointUtils.authenticate(), EndpointUtils.handleUser(this), async (req, res) => {
-      const id = req.params.id
-      const { money } = await this.client.modules.economy.balance(id)
-      res.status(200).json({ id, money })
+    router.get('/:userId/money', EndpointUtils.authenticate(this), EndpointUtils.handleUser(this), async (req, res) => {
+      const id = req.userId
+      try {
+        const money = await this.client.modules.economy.balance(id)
+        res.status(200).json({ id, money })
+      } catch (e) {
+        res.status(500).json({ ok: false })
+      }
     })
 
     app.use(this.path, router)
