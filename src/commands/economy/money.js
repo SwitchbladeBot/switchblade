@@ -4,7 +4,7 @@ const { Command, CommandRequirements, CommandParameters, UserParameter, BooleanP
 module.exports = class Money extends Command {
   constructor (client) {
     super(client)
-    this.name = 'money'
+this.name = 'money'
     this.aliases = ['balance', 'bal']
     this.category = 'economy'
 
