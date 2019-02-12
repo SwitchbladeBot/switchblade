@@ -407,7 +407,7 @@
     "embedAuthor": "NASA Image of the Day"
   },
   "deezer": {
-    "commandDescription": "Searches for a track, playlist, podcast, an album or an artist Deezer, or displays a user info.",
+    "commandDescription": "Searches for a track, playlist, podcast, an album, user or an artist on Deezer.",
     "commandUsage": "<type> <query>",
     "noTrackName": "You need to give me a track name.",
     "noTracksFound": "I couldn't find any tracks with that name.",
