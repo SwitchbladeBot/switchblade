@@ -407,7 +407,7 @@
     "embedAuthor": "NASA Image of the Day"
   },
   "deezer": {
-    "commandDescription": "Searches for a track, playlist, podcast, an album or an artist Deezer, or displays a user info.",
+    "commandDescription": "Searches for a track, album, artist, playlist, user or podcast on Deezer",
     "commandUsage": "<type> <query>",
     "noTrackName": "You need to give me a track name.",
     "noTracksFound": "I couldn't find any tracks with that name.",
@@ -415,44 +415,37 @@
     "fansCount": "{{fans}} fans",
     "createdAt": "Created at",
     "createdBy": "Created by",
-    "followers": "Followers",
-    "following": "Following",
     "subcommands": {
       "track": {
-        "commandDescription": "Searches for a track on Deezer",
+        "commandDescription": "Searches for a track on deezer",
         "commandUsage": "<track>",
         "trackInfo": "Track information"
       },
       "album": {
-        "commandDescription": "Searches for an album on Deezer",
+        "commandDescription": "Searches for an album on deezer",
         "commandUsage": "<album> [--tracks]",
         "albumInfo": "Album information",
         "albumTracks": "Album tracks"
       },
       "artist": {
-        "commandDescription": "Searches for an artist on Deezer",
+        "commandDescription": "Searches for an artist on deezer",
         "commandUsage": "<artist> [--albums | --related]",
         "artistInfo": "Artist information",
         "artistAlbums": "Artist albums",
         "artistRelated": "Related artists"
       },
       "playlist": {
-        "commandDescription": "Searches for a playlist on Deezer",
+        "commandDescription": "Searches for a playlist on deezer",
         "commandUsage": "<playlist> [--tracks]",
         "playlistInfo": "Playlist information",
         "playlistTracks": "Playlist tracks"
       },
       "podcast": {
-        "commandDescription": "Searches for a podcast on Deezer",
+        "commandDescription": "Searches for a podcast on deezer",
         "commandUsage": "<podcast> [--episodes]",
         "podcastInfo": "Podcast information",
         "podcastEpisodes": "Podcast episodes",
         "moreEpisodes": "...and {{episodes}} more episodes"
-      },
-      "user":  {
-        "commandDescription": "Searches for a user on Deezer",
-        "commandUsage": "<user>",
-        "userinfo": "User Info"
       }
     }
   },
