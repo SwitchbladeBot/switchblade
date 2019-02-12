@@ -23,7 +23,7 @@ module.exports = class ConfigurationModule extends Module {
     await this._guilds.update(_guild, { language })
   }
 
-  async deleteUserMessage (_guild, state) {
+  async setDeleteUserMessage (_guild, state) {
     const guild = await this._guilds.get(_guild, 'deleteUserMessage')
     if (guild.deleteUserMessage === state) throw new Error('SAME_STATE')
     guild.deleteUserMessage = state
