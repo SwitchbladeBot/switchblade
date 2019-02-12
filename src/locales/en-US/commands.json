@@ -722,11 +722,33 @@
     "noZone": "You need to give me a place to get the time",
     "notFound": "Couldn't find this place."
   },
+  "vote": {
+    "commandDescription": "Gives you a bonus for voting on bot lists",
+    "howToVote": {
+      "dbl": "**[Vote on DBL]({{link}})** to claim your bonus"
+    }
+  },
   "dbl": {
-    "commandDescription": "Gives you a bonus for voting on Discord Bot List",
-    "alreadyClaimed": "You've already claimed your DBL bonus today",
-    "howToVote": "**[Vote on DBL]({{link}})** and then run `{{command}}` again to claim your bonus",
-    "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+    "commandDescription": "Searches for a bot on Discord Bot List",
+    "commandUsage": "<bot name>",
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "selectResult": "Please send the number of the result (10 seconds)",
+    "noBotName":  "You need to give me a valid bot name",
+    "botNotFound": "Bot not found",
+    "results": "Bot results for {{query}}",
+    "noDescription": "This bot doesn't have a description",
+    "prefix": "Prefix",
+    "library": "Library",
+    "owner": "Owner",
+    "ownerPlural": "Owners",
+    "acceptedAt": "Accepted at",
+    "servers": "Servers",
+    "shards": "Shards",
+    "website": "Website",
+    "supportServer": "Support Server",
+    "githubRepository": "GitHub Repository",
+    "clickHere": "[Click here]({{link}})"
   },
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder",

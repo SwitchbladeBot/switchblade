@@ -16,6 +16,7 @@ module.exports = {
   LASTFM_COLOR: '#B90000',
   TWITCH_COLOR: '#4B367C',
   GITHUB_COLOR: '#FAFAFA',
+  DBL_COLOR: '#7289DA',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',
