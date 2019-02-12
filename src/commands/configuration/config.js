@@ -15,7 +15,8 @@ module.exports = class Config extends Command {
     const embed = new SwitchbladeEmbed(author)
     embed.setDescription([
       t('commands:config.guildPrefix', { command: `${prefix}${alias || this.name}` }),
-      t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` })
+      t('commands:config.guildLang', { command: `${prefix}${alias || this.name}` }),
+      t('commands:config.deleteUserMessages', { command: `${prefix}${alias || this.name}` })
     ].join('\n'))
     channel.send(embed)
   }

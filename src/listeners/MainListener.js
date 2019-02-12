@@ -78,7 +78,7 @@ module.exports = class MainListener extends EventListener {
   async onMessage (message) {
     if (message.author.bot) return
 
-    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id, 'prefix language')
+    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id, 'prefix language deleteUserMessage')
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
 
     const botMention = this.user.toString()
@@ -94,6 +94,9 @@ module.exports = class MainListener extends EventListener {
         const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
         if (userDocument && userDocument.blacklisted) return
 
+        if (guildDocument && guildDocument.deleteUserMessage) {
+          message.delete()
+        }
         const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
           prefix: usedPrefix,

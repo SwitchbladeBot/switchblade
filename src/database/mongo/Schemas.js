@@ -23,7 +23,8 @@ module.exports = {
     prefix: { type: String, default: process.env.PREFIX },
     language: { type: String, default: 'en-US' },
     joinLock: { type: Boolean, default: false },
-    joinLockMessage: String
+    joinLockMessage: String,
+    deleteUserMessage: { type: Boolean, default: false }
   })
 
 }
