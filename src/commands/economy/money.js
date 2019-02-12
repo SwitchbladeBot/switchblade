@@ -1,5 +1,5 @@
 const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { Command, CommandRequirements, CommandParameters, UserParameter, BooleanParameter } = CommandStructures
 
 module.exports = class Money extends Command {
   constructor (client) {
