@@ -415,37 +415,44 @@
     "fansCount": "{{fans}} fans",
     "createdAt": "Created at",
     "createdBy": "Created by",
+    "followers": "Followers",
+    "following": "Following",
     "subcommands": {
       "track": {
-        "commandDescription": "Searches for a track on deezer",
+        "commandDescription": "Searches for a track on Deezer",
         "commandUsage": "<track>",
         "trackInfo": "Track information"
       },
       "album": {
-        "commandDescription": "Searches for an album on deezer",
+        "commandDescription": "Searches for an album on Deezer",
         "commandUsage": "<album> [--tracks]",
         "albumInfo": "Album information",
         "albumTracks": "Album tracks"
       },
       "artist": {
-        "commandDescription": "Searches for an artist on deezer",
+        "commandDescription": "Searches for an artist on Deezer",
         "commandUsage": "<artist> [--albums | --related]",
         "artistInfo": "Artist information",
         "artistAlbums": "Artist albums",
         "artistRelated": "Related artists"
       },
       "playlist": {
-        "commandDescription": "Searches for a playlist on deezer",
+        "commandDescription": "Searches for a playlist on Deezer",
         "commandUsage": "<playlist> [--tracks]",
         "playlistInfo": "Playlist information",
         "playlistTracks": "Playlist tracks"
       },
       "podcast": {
-        "commandDescription": "Searches for a podcast on deezer",
+        "commandDescription": "Searches for a podcast on Deezer",
         "commandUsage": "<podcast> [--episodes]",
         "podcastInfo": "Podcast information",
         "podcastEpisodes": "Podcast episodes",
         "moreEpisodes": "...and {{episodes}} more episodes"
+      },
+      "user":  {
+        "commandDescription": "Searches for a user on Deezer",
+        "commandUsage": "<user>",
+        "userInfo": "User Info"
       }
     }
   },
