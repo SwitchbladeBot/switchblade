@@ -10,6 +10,7 @@ module.exports = class BolinaDeGorfe extends Command {
   }
 
   run ({ author, channel }) {
+    // TODO: make this command only works in pt-BR
     const embed = new SwitchbladeEmbed(author)
     embed
       .setTitle('ooo, boliña de gorfe')
