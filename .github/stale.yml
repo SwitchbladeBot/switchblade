@@ -6,7 +6,7 @@ pulls:
   closeComment: >
     This pull request has been automatically closed because it has not had recent activity.
   # Number of days of inactivity before an issue becomes stale
-  daysUntilStale: 365
+  daysUntilStale: 30
   # Number of days of inactivity before a stale issue is closed
   daysUntilClose: 7
   # Label to use when marking an issue as stale
