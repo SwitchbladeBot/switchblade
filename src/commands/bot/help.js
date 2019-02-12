@@ -9,7 +9,7 @@ module.exports = class Help extends Command {
   constructor (client) {
     super(client)
     this.name = 'help'
-    this.aliases = ['commands', 'ajuda']
+    this.aliases = ['commands', 'ajuda', 'halp']
     this.category = 'bot'
 
     this.parameters = new CommandParameters(this,
