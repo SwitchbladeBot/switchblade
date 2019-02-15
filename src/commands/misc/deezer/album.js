@@ -29,6 +29,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, album) {
+    channel.startTyping()
     album = await this.client.apis.deezer.getAlbum(album.id)
     const { link, title, cover_big: cover, artist, nb_tracks: trackNumber, tracks, genres, release_date: date, explicit_lyrics: explicitLyric, fans } = album
     let trackList = tracks.data.slice(0, 10).map((track, i) => {
@@ -46,7 +47,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
       embed.setAuthor(t('commands:deezer.subcommands.album.albumTracks'), this.embedLogoURL, link)
         .setTitle(title)
         .setDescription(trackList)
-      channel.send(embed)
+      channel.send(embed).then(() => channel.stopTyping())
       return
     }
 
@@ -58,6 +59,6 @@ module.exports = class DeezerAlbum extends SearchCommand {
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
       .addField(t('music:genres'), genres.data.map(g => g.name).join(', '), true)
       .addField(t('music:tracksCountParentheses', { tracks: trackNumber }), trackList)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

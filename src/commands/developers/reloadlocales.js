@@ -11,18 +11,19 @@ module.exports = class reloadlocales extends Command {
   }
 
   async run ({ t, channel, author }) {
+    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
       this.client.downloadAndInitializeLocales('src/locales').then(() => {
         embed
           .setTitle(t('commands:reloadlocales:reloaded'))
-        channel.send(embed)
+        channel.send(embed).then(() => channel.stopTyping())
       })
     } catch (e) {
       embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
-      channel.send(embed)
+      channel.send(embed).then(() => channel.stopTyping())
     }
   }
 }

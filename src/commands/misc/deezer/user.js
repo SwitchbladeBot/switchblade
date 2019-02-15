@@ -21,6 +21,7 @@ module.exports = class DeezerUser extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, user) {
+    channel.startTyping()
     const { name, picture_big: cover, id } = user
     const link = `https://www.deezer.com/profile/${id}`
     const followers = await this.client.apis.deezer.getUserFollowers(id)
@@ -33,6 +34,6 @@ module.exports = class DeezerUser extends SearchCommand {
       .setURL(link)
       .addField(t('commands:deezer.followers'), MiscUtils.formatNumber(followers.total, language), true)
       .addField(t('commands:deezer.following'), MiscUtils.formatNumber(followings.total, language), true)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

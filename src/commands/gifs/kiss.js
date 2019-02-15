@@ -18,6 +18,7 @@ module.exports = class Kiss extends Command {
   async run ({ t, channel, author }, user) {
     const { body } = await snekfetch.get('https://nekos.life/api/v2/img/kiss')
     const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     embed.setImage(body.url)
       .setDescription(t('commands:kiss.success', { kisser: author, kissed: user }))
     channel.send(embed).then(() => channel.stopTyping())
