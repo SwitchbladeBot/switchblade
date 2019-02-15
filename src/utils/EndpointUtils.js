@@ -65,12 +65,12 @@ module.exports = class EndpointUtils {
             id = req.isAdmin ? client.user.id : req.user.id
             break
           default:
-            if (!req.isAdmin && id !== req.user.id) return res.status(403).json({ ok: false })
+            if (!req.isAdmin && id !== req.user.id) return res.status(403).json({ error: 'Missing permissions!' })
         }
         req.userId = id
         return next()
       }
-      return res.status(401).json({ ok: false })
+      return res.status(401).json({ error: 'Invalid user id!' })
     }
   }
 
@@ -82,12 +82,12 @@ module.exports = class EndpointUtils {
         if (!guild) return res.status(400).json({ ok: false })
         if (!req.isAdmin) {
           const member = await guild.fetchMember(req.user.id)
-          if (!member || !member.hasPermission('MANAGE_GUILD')) return res.status(403).json({ ok: false })
+          if (!member || !member.hasPermission('MANAGE_GUILD')) return res.status(403).json({ error: 'Missing permissions!' })
         }
         req.guildId = id
         return next()
       }
-      return res.status(401).json({ ok: false })
+      return res.status(401).json({ error: 'Invalid guild id!' })
     }
   }
 
