@@ -42,7 +42,6 @@ module.exports = class Guilds extends Route {
           res.status(200).json({ id })
         } catch (e) {
           if (e.isJoi) return res.status(400).json({ error: e.name })
-          this.client.logError(e)
           res.status(500).json({ error: 'Internal server error!' })
         }
       })
