@@ -65,11 +65,26 @@ module.exports = class EndpointUtils {
             id = req.isAdmin ? client.user.id : req.user.id
             break
           default:
-            if (!req.isAdmin && id !== req.user.id) {
-              return res.status(403).json({ ok: false })
-            }
+            if (!req.isAdmin && id !== req.user.id) return res.status(403).json({ ok: false })
         }
         req.userId = id
+        return next()
+      }
+      return res.status(401).json({ ok: false })
+    }
+  }
+
+  static handleGuild ({ client }) {
+    return async (req, res, next) => {
+      let id = req.params.guildId
+      if (id) {
+        const guild = client.guilds.get(id)
+        if (!guild) return res.status(400).json({ ok: false })
+        if (!req.isAdmin) {
+          const member = await guild.fetchMember(req.user.id)
+          if (!member.hasPermission('MANAGE_GUILD')) return res.status(403).json({ ok: false })
+        }
+        req.guildId = id
         return next()
       }
       return res.status(401).json({ ok: false })

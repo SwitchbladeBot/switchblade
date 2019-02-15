@@ -1,4 +1,4 @@
-const { Route } = require('../../')
+const { Route, EndpointUtils } = require('../../')
 const { Router } = require('express')
 
 module.exports = class Guilds extends Route {
@@ -10,26 +10,41 @@ module.exports = class Guilds extends Route {
   register (app) {
     const router = Router()
 
-    router.post('/common', async (req, res) => {
-      const { body } = req
-      if (body) {
-        const guilds = body instanceof Array ? body : body.guilds instanceof Array ? body.guilds : null
-        if (guilds) {
-          const common = guilds.filter(id => this.client.guilds.has(id))
-          return res.json(common)
-        }
+    // Info
+    router.get('/:guildId/members', async (req, res) => {
+      const guild = this.client.guilds.get(req.params.guildId)
+      if (guild) {
+        const { id, name, icon, members: { size } } = guild
+        return res.status(200).json({ id, name, icon, memberCount: size })
       }
-      res.status(400).json({ error: 'Invalid request' })
+      res.status(400).json({ error: 'Guild not found!' })
     })
 
-    router.get('/:id/members/', async (req, res) => {
-      const guild = this.client.guilds.get(req.params.id)
-      if (guild) {
-        const { id, name, icon, memberCount } = guild
-        return res.json({ id, name, icon, memberCount })
+    // Configuration
+    router.get('/:guildId/config', EndpointUtils.authenticate(this), EndpointUtils.handleGuild(this), async (req, res) => {
+      const id = req.guildId
+      try {
+        const { prefix, language } = await this.client.modules.configuration.retrieve(id)
+        const availableLanguages = Object.keys(this.client.i18next.store.data)
+        res.status(200).json({ id, prefix, language, availableLanguages })
+      } catch (e) {
+        res.status(500).json({ error: 'Internal server error!' })
       }
-      res.status(404).json({ error: 'Guild not found' })
     })
+
+    router.patch('/:guildId/config',
+      EndpointUtils.authenticate(this),
+      EndpointUtils.handleGuild(this),
+      async (req, res) => {
+        const id = req.guildId
+        try {
+          await this.client.modules.configuration.update(id, req.body)
+          res.status(200).json({ id })
+        } catch (e) {
+          if (e.isJoi) return res.status(400).json({ error: e.name })
+          res.status(500).json({ error: 'Internal server error!' })
+        }
+      })
 
     app.use(this.path, router)
   }

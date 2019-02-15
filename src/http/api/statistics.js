@@ -12,15 +12,13 @@ module.exports = class Statistics extends Route {
     const router = Router()
 
     router.get('/', (req, res) => {
-      const payload = {
+      res.status(200).json({
         serverCount: this.client.guilds.size,
         userCount: this.client.users.size,
         uptime: process.uptime() * 1000,
         commandCount: this.client.commands.length,
         languageCount: Object.keys(i18next.store.data).length
-      }
-
-      res.status(200).json(payload)
+      })
     })
 
     app.use(this.path, router)
