@@ -14,10 +14,10 @@ module.exports = class Guilds extends Route {
     router.get('/:guildId/members', async (req, res) => {
       const guild = this.client.guilds.get(req.params.guildId)
       if (guild) {
-        const { id, name, icon, memberCount } = guild
-        return res.json({ id, name, icon, memberCount })
+        const { id, name, icon, members: { size } } = guild
+        return res.status(200).json({ id, name, icon, memberCount: size })
       }
-      res.status(404).json({ error: 'Guild not found' })
+      res.status(400).json({ error: 'Guild not found!' })
     })
 
     // Configuration
@@ -28,7 +28,7 @@ module.exports = class Guilds extends Route {
         const availableLanguages = Object.keys(this.client.i18next.store.data)
         res.status(200).json({ id, prefix, language, availableLanguages })
       } catch (e) {
-        res.status(500).json({ ok: false })
+        res.status(500).json({ error: 'Internal server error!' })
       }
     })
 
@@ -41,8 +41,9 @@ module.exports = class Guilds extends Route {
           await this.client.modules.configuration.update(id, req.body)
           res.status(200).json({ id })
         } catch (e) {
-          console.log(e)
-          res.status(500).json({ ok: false })
+          if (e.isJoi) return res.status(400).json({ error: e.name })
+          this.client.logError(e)
+          res.status(500).json({ error: 'Internal server error!' })
         }
       })
 
