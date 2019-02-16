@@ -15,7 +15,7 @@ const { createCanvas, Image } = Canvas
 const { ALIGN, measureText } = CanvasUtils
 
 module.exports = class CanvasTemplates {
-  static async profile ({ t }, user, userDocument, role) {
+  static async profile ({ t }, user, userDocument, role, bg) {
     const WIDTH = 640
     const HEIGHT = 600
 
@@ -45,7 +45,7 @@ module.exports = class CanvasTemplates {
       Image.from(user.displayAvatarURL.replace('.gif', '.png')),
       Image.from(Constants.COINS_SVG, true),
       Image.from(Constants.REPUTATION_SVG, true),
-      Image.from(Constants.DEFAULT_BACKGROUND_PNG, true)
+      Image.from(`src/assets/png/backgrounds/${bg}.png`, true)
     ])
 
     const FAVCOLOR = new Color(favColor)
@@ -171,7 +171,8 @@ module.exports = class CanvasTemplates {
 
     //   Background image
     ctx.globalCompositeOperation = 'destination-over'
-    ctx.drawImage(backgroundImage, 0, 0, WIDTH, HEIGHT)
+    ctx.drawImage(backgroundImage, 0, 0, WIDTH, CARD_MARGIN)
+    ctx.drawBlurredImage(backgroundImage, 5, 0, CARD_MARGIN, WIDTH, HEIGHT - CARD_MARGIN)
 
     // Modal
     ctx.fillStyle = '#FFFFFF'
