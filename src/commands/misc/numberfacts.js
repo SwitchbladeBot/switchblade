@@ -21,7 +21,7 @@ module.exports = class NumberFacts extends Command {
       embed.setTitle(body)
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
-      throw new CommandError(t('commands:numberfacts.validNumber'))
+      throw new CommandError(t('commands:numberfacts.validNumber')).then(() => channel.stopTyping())
     }
   }
 }

@@ -30,6 +30,7 @@ module.exports = class DeezerPlaylist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, { id }) {
+    channel.startTyping()
     const playlist = await this.client.apis.deezer.getPlaylist(id)
     const { title, link, description, nb_tracks: trackNumber, fans, creation_date: date, picture_big: cover, creator, tracks } = playlist
     let trackList = tracks.data.slice(0, 10).map((track, i) => {
@@ -46,7 +47,7 @@ module.exports = class DeezerPlaylist extends SearchCommand {
       if (tracks.data.length > 10) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 10 }))
       embed.setAuthor(t('commands:deezer.subcommands.playlist.playlistTracks'), this.embedLogoURL, link)
         .setDescription(trackList)
-      return channel.send(embed)
+      return channel.send(embed).then(() => channel.stopTyping())
     }
     trackList = trackList.slice(0, 5)
     if (tracks.data.length > 5) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 5 }))
@@ -55,6 +56,6 @@ module.exports = class DeezerPlaylist extends SearchCommand {
       .addField(t('commands:deezer.createdBy'), `[${creator.name}](https://www.deezer.com/profile/${creator.id})`, true)
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
       .addField(t('music:tracksCountParentheses', { tracks: trackNumber }), trackList)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

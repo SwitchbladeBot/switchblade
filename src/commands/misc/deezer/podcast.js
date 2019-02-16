@@ -29,6 +29,7 @@ module.exports = class DeezerPodcast extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, podcast) {
+    channel.startTyping()
     const { id, title, description, link, fans, picture_big: cover } = podcast
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
@@ -43,10 +44,10 @@ module.exports = class DeezerPodcast extends SearchCommand {
       if (data.length > 10) episodesList.push(t('commands:deezer.subcommands.podcast.moreEpisodes', { episodes: data.length - 10 }))
       embed.setDescription(episodesList)
         .setAuthor(t('commands:deezer.subcommands.podcast.podcastEpisodes'), this.embedLogoURL, link)
-      return channel.send(embed)
+      return channel.send(embed).then(() => channel.stopTyping())
     }
     embed.setDescription(description.length < 2040 ? description : description.substring(0, 2040) + '...')
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }
