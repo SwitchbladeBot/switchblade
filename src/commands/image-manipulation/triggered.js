@@ -18,7 +18,6 @@ module.exports = class Triggered extends Command {
 
   async run ({ t, author, channel }, user) {
     user = user || author
-    channel.startTyping()
     const triggered = await CanvasTemplates.triggered(user)
     channel.send(new Attachment(triggered, 'triggered.gif')).then(() => channel.stopTyping())
   }
