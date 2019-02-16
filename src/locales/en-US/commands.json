@@ -1036,5 +1036,26 @@
   },
   "yuri": {
     "commandDescription": "Fetches a random image from r/yuri and displays it."
+  },
+  "zapify": {
+    "commandDescription": "Zapifies some text (adds emoji to it)",
+    "commandUsage": "<text>",
+    "noZap": "You need to give me some text to zap",
+    "chooseHumor": "Choose the humor for your zapification",
+    "pleaseReact": "You have {{COLLECTOR_TIMEOUT}} seconds to choose",
+    "humors": {
+      "happy": "Happy",
+      "angry": "Angry",
+      "sassy": "Sassy",
+      "sad": "Sad",
+      "sick": "Sick"
+    },
+    "levels": [
+      "Not so strong zap",
+      "Strong zap",
+      "Now this is a zap",
+      "Monster zap",
+      "Top zap"
+    ]
   }
 }
