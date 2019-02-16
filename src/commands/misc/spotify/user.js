@@ -17,6 +17,7 @@ module.exports = class SpotifyUser extends Command {
   }
 
   async getUser (t, author, channel, language, user) {
+    channel.startTyping()
     try {
       const { display_name: name, images, followers, external_urls: urls } = await this.client.apis.spotify.getUser(user)
       const [image] = images.sort((a, b) => b.width - a.width)
@@ -27,7 +28,7 @@ module.exports = class SpotifyUser extends Command {
         .setThumbnail(image.url)
         .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
 
-      await channel.send(embed)
+      await channel.send(embed).then(() => channel.stopTyping())
       return true
     } catch (e) {
       return false
