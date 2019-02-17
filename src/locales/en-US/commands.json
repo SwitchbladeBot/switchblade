@@ -999,7 +999,7 @@
   },
   "ship": {
     "commandDescription": "Ship yourself or someone with somebody else.",
-    "commandUsage": "<first user> [second user]",
+    "commandUsage": "[first user] <second user>",
     "noUser": "Please insert someone to ship",
     "messages": {
       "high": {

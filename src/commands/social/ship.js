@@ -9,16 +9,12 @@ module.exports = class Ship extends Command {
     this.category = 'social'
 
     this.parameters = new CommandParameters(this,
-      new UserParameter({ required: true, acceptSelf: true, missingError: 'commands:ship.noUser' }),
-      new UserParameter({ required: false, acceptSelf: true })
+      new UserParameter({ acceptSelf: true, required: false }),
+      new UserParameter({ acceptSelf: true, missingError: 'commands:ship.noUser' }),
     )
   }
 
-  async run ({ t, author, channel, guild }, first, second) {
-    if (!second) {
-      second = first
-      first = author
-    }
+  async run ({ t, author, channel, guild }, first = author, second) {
     channel.startTyping()
 
     const { username: firstName } = first
