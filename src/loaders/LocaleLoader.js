@@ -22,7 +22,7 @@ module.exports = class LocaleLoader extends Loader {
     return false
   }
 
-    /**
+  /**
    * Initializes i18next.
    * @param {string} dirPath - Path to the locales directory
    */
