@@ -82,7 +82,9 @@ module.exports = class MainListener extends EventListener {
     const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
 
     const botMention = this.user.toString()
-    const usedPrefix = message.content.startsWith(botMention) ? `${botMention} ` : message.content.startsWith(prefix) ? prefix : null
+
+    const sw = s => Array.isArray(s) ? s.some(st => message.content.startsWith(st)) : message.content.startsWith(s)
+    const usedPrefix = sw([ botMention, `<@!${this.user.id}>` ]) ? `${botMention} ` : sw(prefix) ? prefix : null
 
     if (usedPrefix) {
       const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
@@ -96,10 +98,10 @@ module.exports = class MainListener extends EventListener {
 
         const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
-          prefix: usedPrefix,
-          defaultPrefix: prefix,
+          defaultPrefix: usedPrefix,
           aliase: cmd,
           client: this,
+          prefix,
           message,
           command,
           language

@@ -11,7 +11,7 @@ module.exports = class Currency extends Command {
     this.envVars = ['KSOFT_KEY']
   }
 
-  async run ({ t, author, channel, defaultPrefix }, to, from = 'USD', value = 1) {
+  async run ({ t, author, channel }, to, from = 'USD', value = 1) {
     const embed = new SwitchbladeEmbed(author)
     try {
       const { body } = await snekfetch.get('https://api.ksoft.si/kumo/currency').query({ to, from, value }).set({

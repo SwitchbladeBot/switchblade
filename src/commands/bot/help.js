@@ -17,7 +17,7 @@ module.exports = class Help extends Command {
     )
   }
 
-  async run ({ t, author, channel, guild, defaultPrefix: prefix }, cmd) {
+  async run ({ t, author, channel, guild, prefix }, cmd) {
     const embed = new SwitchbladeEmbed(author)
     const validCommands = this.client.commands.filter(c => !c.hidden)
 
