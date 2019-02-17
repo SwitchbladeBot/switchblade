@@ -55,8 +55,8 @@ module.exports = class HTTPLoader extends Loader {
     let failed = 0
     return FileUtils.requireDirectory(dirPath, (NewRoute) => {
       if (Object.getPrototypeOf(NewRoute) !== Route) return
-      this.addRoute(new NewRoute(this)) ? success++ : failed++
-    }, this.logError).then(() => {
+      this.addRoute(new NewRoute(this.client)) ? success++ : failed++
+    }, this.logError.bind(this)).then(() => {
       if (failed === 0) {
         this.log(`[32mAll ${success} HTTP routes loaded without errors.`, 'HTTP')
       } else {
@@ -91,8 +91,8 @@ module.exports = class HTTPLoader extends Loader {
     let failed = 0
     return FileUtils.requireDirectory(dirPath, (NewWebhook) => {
       if (Object.getPrototypeOf(NewWebhook) !== Webhook) return
-      this.addWebhook(new NewWebhook(this)) ? success++ : failed++
-    }, this.logError).then(() => {
+      this.addWebhook(new NewWebhook(this.client)) ? success++ : failed++
+    }, this.logError.bind(this)).then(() => {
       if (failed === 0) {
         this.log(`[32mAll ${success} webhooks loaded without errors.`, 'HTTP')
       } else {

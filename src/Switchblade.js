@@ -47,6 +47,18 @@ module.exports = class Switchblade extends Client {
     console.error('[ErrorLog]', ...tags, args[args.length - 1])
   }
 
+  /**
+   * Runs a command.
+   * @param {Command} command - Command to be runned
+   * @param {CommandContext} context - CommandContext containing run information
+   * @param {Array<string>} args - Array of command arguments
+   * @param {String} language - Code for the language that the command will be executed in
+   */
+  runCommand (command, context, args, language) {
+    context.setFixedT(this.i18next.getFixedT(language))
+    command._run(context, args).catch(this.logError)
+  }
+
   async initializeLoaders () {
     for (let Loader of Object.values(Loaders)) {
       const loader = new Loader(this)
