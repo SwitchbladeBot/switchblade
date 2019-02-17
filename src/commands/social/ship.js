@@ -10,7 +10,7 @@ module.exports = class Ship extends Command {
 
     this.parameters = new CommandParameters(this,
       new UserParameter({ acceptSelf: true, required: false }),
-      new UserParameter({ acceptSelf: true, missingError: 'commands:ship.noUser' }),
+      new UserParameter({ acceptSelf: true, missingError: 'commands:ship.noUser' })
     )
   }
 
