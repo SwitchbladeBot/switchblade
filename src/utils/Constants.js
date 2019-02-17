@@ -83,6 +83,7 @@ module.exports = {
   SOUNDCLOUD_BRAND_SVG: 'src/assets/svg/brands/soundcloud.svg',
   DEEZER_BRAND_SVG: 'src/assets/svg/brands/deezer.svg',
   TWITCH_BRAND_SVG: 'src/assets/svg/brands/twitch.svg',
+  HTTP_BRAND_SVG: 'src/assets/svg/brands/http.svg',
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
