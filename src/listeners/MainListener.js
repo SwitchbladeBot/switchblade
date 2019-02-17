@@ -83,8 +83,8 @@ module.exports = class MainListener extends EventListener {
 
     const botMention = this.user.toString()
 
-    const sw = s => Array.isArray(s) ? s.some(st => message.content.startsWith(st)) : message.content.startsWith(s)
-    const usedPrefix = sw([ botMention, `<@!${this.user.id}>` ]) ? `${botMention} ` : sw(prefix) ? prefix : null
+    const sw = (...s) => s.some(st => message.content.startsWith(st))
+    const usedPrefix = sw(botMention, `<@!${this.user.id}>`) ? `${botMention} ` : sw(prefix) ? prefix : null
 
     if (usedPrefix) {
       const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
