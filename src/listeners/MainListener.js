@@ -89,8 +89,9 @@ module.exports = class MainListener extends EventListener {
     if (usedPrefix) {
       const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
       const args = fullCmd.slice(1)
-      const cmd = fullCmd[0].toLowerCase().trim()
+      if (!fullCmd.length) return
 
+      const cmd = fullCmd[0].toLowerCase().trim()
       const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
       if (command) {
         const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
