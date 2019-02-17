@@ -63,14 +63,26 @@ module.exports = class CommandParameters {
    */
   handleArguments (context, args) {
     const parsedArgs = []
+
+    let argIndex = 0
     for (let i = 0; i < this.parameters.length; i++) {
       const param = this.parameters[i]
 
-      let arg = args[i]
-      if (param.full) arg = args.slice(i).join(param.fullJoin || ' ')
+      let arg = args[argIndex]
+      if (
+        this.parameters.length > args.length &&
+        !param.required && argIndex === args.length - 1 &&
+        this.parameters.some((p, pi) => pi > i && p.required)
+      ) {
+        parsedArgs.push(undefined)
+        continue
+      }
+
+      if (param.full) arg = args.slice(argIndex).join(param.fullJoin || ' ')
 
       const parsedArg = this.parseParameter(context, param, arg, funcOrString(param.missingError, context.t, context))
       parsedArgs.push(parsedArg)
+      argIndex++
     }
     return parsedArgs
   }
