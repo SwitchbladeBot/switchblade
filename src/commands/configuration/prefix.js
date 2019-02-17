@@ -7,7 +7,7 @@ module.exports = class ConfigPrefix extends Command {
     this.name = 'prefix'
 
     this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: false, missingError: 'commands:config.subcommands.prefix.noPrefix' })
+      new StringParameter({ full: true, required: false, maxLength: 50, missingError: 'commands:config.subcommands.prefix.noPrefix' })
     )
   }
 
