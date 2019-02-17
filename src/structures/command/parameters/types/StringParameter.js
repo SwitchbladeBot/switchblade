@@ -5,10 +5,10 @@ const CommandError = require('../../CommandError.js')
 module.exports = class StringParameter extends Parameter {
   constructor (options = {}) {
     super(options)
-    this.clean = !!options.clean
 
-    this.maxLength = 0
-    this.truncate = true
+    this.clean = !!options.clean
+    this.maxLength = Number(options.maxLength) || 0
+    this.truncate = !!options.truncate || true
   }
 
   parse (arg, { t, message }) {
@@ -17,7 +17,7 @@ module.exports = class StringParameter extends Parameter {
 
     if (this.clean) arg = DiscordUtils.cleanContent(arg, message)
 
-    if (this.maxLength > 0) {
+    if (this.maxLength > 0 && arg.length > this.maxLength) {
       if (!this.truncate) throw new CommandError(t('errors:needSmallerString', { number: this.maxLength }))
       arg = arg.substring(0, this.maxLength)
     }
