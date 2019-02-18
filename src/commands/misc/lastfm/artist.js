@@ -20,6 +20,7 @@ module.exports = class LastfmArtist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, artistInfo) {
+    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.LASTFM_COLOR)
       .setAuthor(artistInfo.name, 'https://i.imgur.com/TppYCun.png', artistInfo.url)
@@ -38,6 +39,6 @@ module.exports = class LastfmArtist extends SearchCommand {
     } catch (e) {
     }
 
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

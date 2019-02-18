@@ -20,6 +20,7 @@ module.exports = class SpotifyAlbum extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, { id }) {
+    channel.startTyping()
     const { album_type: type, artists, name, release_date: release, total_tracks: total, tracks, images, external_urls: urls } = await this.client.apis.spotify.getAlbum(id)
     const [ cover ] = images.sort((a, b) => b.width - a.width)
     const artistTitle = artists.length > 1 ? t('commands:spotify.artistPlural') : t('commands:spotify.artist')
@@ -36,6 +37,6 @@ module.exports = class SpotifyAlbum extends SearchCommand {
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
 
     embed.addField(total > 1 ? `${t('commands:spotify.trackPlural')} (${total})` : `${t('commands:spotify.track')}`, trackList)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

@@ -19,6 +19,7 @@ module.exports = class SpotifyPlaylist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, { id }) {
+    channel.startTyping()
     const { name, description, external_urls: urls, followers, images, owner, tracks } = await this.client.apis.spotify.getPlaylist(id)
     const [ cover ] = images.sort((a, b) => b.width - a.width)
     const embed = new SwitchbladeEmbed(author)
@@ -35,6 +36,6 @@ module.exports = class SpotifyPlaylist extends SearchCommand {
     const total = tracks.total
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
     embed.addField(`${t('commands:spotify.trackPlural')} (${total})`, trackList)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }
