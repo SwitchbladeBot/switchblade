@@ -151,7 +151,7 @@ module.exports = class CanvasTemplates {
     )
 
     // Image handling
-    const [ avatarImage, coinsImage, repImage, backgroundImage ] = await IMAGE_ASSETS
+    const [avatarImage, coinsImage, repImage, backgroundImage] = await IMAGE_ASSETS
 
     const AVATAR_HALF = AVATAR_SIZE * 0.5
     const AVATAR_Y = CARD_MARGIN - (AVATAR_SIZE * 0.5)
@@ -245,7 +245,7 @@ module.exports = class CanvasTemplates {
     ctx.writeParagraph(song.title, TITLE_FONT, LEFT_TEXT_MARGIN, TITLE_Y, RIGHT_TEXT_MARGIN, TITLE_Y + 1, 5, ALIGN.BOTTOM_LEFT)
 
     // Image handling
-    const [ mainImage, backgroundImage ] = await IMAGE_ASSETS
+    const [mainImage, backgroundImage] = await IMAGE_ASSETS
 
     // Thumbnail
     ctx.fillStyle = '#000000'
@@ -386,11 +386,11 @@ module.exports = class CanvasTemplates {
     })
 
     // Image handling
-    const [ valueImage, medalImage, backgroundImage, ...avatarImages ] = await IMAGE_ASSETS
+    const [valueImage, medalImage, backgroundImage, ...avatarImages] = await IMAGE_ASSETS
 
     const avatarImage = avatarImages.shift()
     //   Top avatar shadow
-    const [ TOP_USER_AVATAR_X, TOP_USER_AVATAR_Y ] = TOP_USER_AVATAR_COORDS
+    const [TOP_USER_AVATAR_X, TOP_USER_AVATAR_Y] = TOP_USER_AVATAR_COORDS
     ctx.save()
     ctx.fillStyle = '#00000099'
     ctx.shadowColor = '#00000099'
@@ -409,7 +409,7 @@ module.exports = class CanvasTemplates {
 
     // Others avatars
     avatarImages.forEach((avatar, i) => {
-      const [ avatarX, avatarY ] = avatarCoords[i]
+      const [avatarX, avatarY] = avatarCoords[i]
       ctx.roundImage(avatar, avatarX, avatarY, OTHERS_AVATAR_SIZE, OTHERS_AVATAR_SIZE)
 
       const POSITION_RADIUS = 12
@@ -471,7 +471,7 @@ module.exports = class CanvasTemplates {
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
-    const [ triggeredLabel, avatarImage ] = await IMAGE_ASSETS
+    const [triggeredLabel, avatarImage] = await IMAGE_ASSETS
 
     const AVATAR_RANDOM_MAX = 20
     const LABEL_RANDOM_MAX = 10
@@ -527,7 +527,7 @@ module.exports = class CanvasTemplates {
     const usedIcons = daily.map(d => icon(d.icon)).reduce((a, i) => {
       if (!a.includes(i)) a.push(i)
       return a
-    }, [ icon(now.icon) ])
+    }, [icon(now.icon)])
 
     const ICONS_ASSETS = Promise.all(usedIcons.map(i => Image.from(Constants[`WEATHER_${i}`])))
 
@@ -593,7 +593,7 @@ module.exports = class CanvasTemplates {
       ctx.drawIcon(getIcon(day.icon), day.iconX, day.iconY, DAY_ICON_SIZE, DAY_ICON_SIZE, '#fff')
     })
 
-    const [ backgroundImage, arrowImage, windImage ] = await IMAGE_ASSETS
+    const [backgroundImage, arrowImage, windImage] = await IMAGE_ASSETS
 
     // Max
     ctx.drawIcon(arrowImage, INNER_MARGIN, currentlyMax.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff')
@@ -720,7 +720,7 @@ module.exports = class CanvasTemplates {
     })
 
     //  IMAGES
-    const [ heartIcon, ...avatarImages ] = await IMAGE_ASSETS
+    const [heartIcon, ...avatarImages] = await IMAGE_ASSETS
 
     // Avatars
     users.forEach((user, i) => {
@@ -769,5 +769,15 @@ module.exports = class CanvasTemplates {
     ctx.write(shipName, TITLE_X, TITLE_RECT_Y + TITLE_TEXT_MARGIN, FONTS.TITLE, ALIGN.CENTER)
 
     return canvas.toBuffer()
+  }
+
+  static async morejpeg (text) {
+    const myimg = await Image.from(text)
+    const WIDTH = myimg.width
+    const HEIGHT = myimg.height
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(myimg, 0, 0, WIDTH, HEIGHT)
+    return canvas.toBuffer('image/jpeg', { quality: 0.08 })
   }
 }
