@@ -33,10 +33,10 @@ module.exports = class ConfigurationModule extends Module {
   }
 
   async setPrefix (_guild, prefix) {
-    await this._guilds.update(_guild, { prefix })
+    await this.update(_guild, { prefix })
   }
 
   async setLanguage (_guild, language) {
-    await this._guilds.update(_guild, { language })
+    await this.update(_guild, { language })
   }
 }
