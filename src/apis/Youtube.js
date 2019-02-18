@@ -35,6 +35,10 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   searchVideos (query, part = 'snippet', maxResults = 5) {
-    return this.Youtube.search.list({ q: query, type: 'video', part, maxResults }).then(r => r.data)
+    return this.search(query, ['video'], part, 'relevance', maxResults)
+  }
+
+  search (query, type = ['video', 'channel', 'playlist'], part = 'snippet', order = 'relevance', maxResults = 5) {
+    return this.Youtube.search.list({ q: query, type: type.join(), part, order, maxResults }).then(r => r.data)
   }
 }
