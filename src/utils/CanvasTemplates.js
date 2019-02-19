@@ -315,8 +315,10 @@ module.exports = class CanvasTemplates {
       }
     })()
 
+    const DEFAULT_AVATAR = Image.from('https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png')
+
     const avatarCoords = []
-    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')))
+    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')).catch(() => DEFAULT_AVATAR))
     const IMAGE_ASSETS = Promise.all([
       Image.from(icon, true),
       Image.from(Constants.MEDAL_SVG, true),
