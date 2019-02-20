@@ -20,6 +20,7 @@
   "invalidNumber": "You need to give me a valid number.",
   "invalidUser": "You need to give me a valid user.",
   "invalidUserBot": "You need to give me a user that isn't a bot.",
+  "emojiNotFromSameGuild": "You need to give me an emoji that is from this guild.",
   "invalidUserNotBot": "You need to give me a user that is a bot.",
   "databaseOnly": "Sorry, I don't have a database connection right now!",
   "playerManagerOnly": "Sorry, I don't have a player connection right now!",
