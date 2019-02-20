@@ -476,25 +476,25 @@
     "yourDickSize": "Your Dick Size"
   },
   "restrictemoji": {
-    "commandDescription": "Adds, removes or resets the role(s) that can use an emoji",
-    "addRole": "To add a role from using an emoji, `{{command}} add <emoji> <role>`",
-    "removeRole": "To remove a role from using an emoji, `{{command}} remove <emoji> <role>`",
-    "reset": "To reset the roles that can use an emoji, `{{command}} reset <emoji>`",
+    "commandDescription": "Permits, rejects or resets emoji usage permission for a role.",
+    "addRole": "To permit an emoji usage for a role, use `{{command}} add <emoji> <role>`.",
+    "removeRole": "To reject an emoji usage for a role, use `{{command}} remove <emoji> <role>`.",
+    "reset": "To reset emoji usage permission for a role, use `{{command}} reset <emoji>`.",
     "subcommands": {
       "add": {
-        "commandDescription": "Adds a role from using an emoji",
+        "commandDescription": "Permits using an emoji for a role.",
         "commandUsage": "<emoji> <role>",
         "canUse": "Role `{{role}}` can now use `{{emoji}}`."
       },
       "remove": {
-        "commandDescription": "Removes a role from using an emoji",
+        "commandDescription": "Rejects using an emoji for a role.",
         "commandUsage": "<emoji> <role>",
         "cantUse": "Role `{{role}}` can't use `{{emoji}}` anymore."
       },
       "reset": {
-        "commandDescription": "Reset the roles that can use an emoji",
+        "commandDescription": "Resets emoji usage permission for roles which can use an emoji",
         "commandUsage": "<emoji>",
-        "resetted": "Resetted roles that can use `{{emoji}}`."
+        "resetted": "Resetted emoji usage permission for roles which could use `{{emoji}}`."
       }
     }
   },
