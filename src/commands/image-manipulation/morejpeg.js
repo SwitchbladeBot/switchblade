@@ -7,7 +7,7 @@ module.exports = class MoreJpeg extends Command {
   constructor (client) {
     super(client)
     this.name = 'morejpeg'
-    this.aliases = ['needsmorejpeg', 'needsmorejpg', 'jpg', 'pixelate', 'compress']
+    this.aliases = ['needsmorejpeg', 'needsmorejpg', 'jpg', 'compress']
     this.category = 'images'
     this.parameters = new CommandParameters(this,
       new StringParameter({ required: false })
