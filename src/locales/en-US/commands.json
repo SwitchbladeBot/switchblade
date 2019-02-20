@@ -479,7 +479,7 @@
     "commandDescription": "Permits, rejects or resets emoji usage permission for a role.",
     "addRole": "To permit an emoji usage for a role, use `{{command}} add <emoji> <role>`.",
     "removeRole": "To reject an emoji usage for a role, use `{{command}} remove <emoji> <role>`.",
-    "reset": "To reset emoji usage permission for a role, use `{{command}} reset <emoji>`.",
+    "reset": "To reset emoji usage permission for roles, use `{{command}} reset <emoji>`.",
     "subcommands": {
       "add": {
         "commandDescription": "Permits using an emoji for a role.",
