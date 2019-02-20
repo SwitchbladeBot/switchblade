@@ -492,7 +492,7 @@
         "cantUse": "Role `{{role}}` can't use `{{emoji}}` anymore."
       },
       "reset": {
-        "commandDescription": "Resets emoji usage permission for roles which can use an emoji",
+        "commandDescription": "Resets emoji usage permission for roles which can use an emoji.",
         "commandUsage": "<emoji>",
         "resetted": "Resetted emoji usage permission for roles which could use `{{emoji}}`."
       }
