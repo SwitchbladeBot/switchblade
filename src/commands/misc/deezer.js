@@ -9,7 +9,9 @@ module.exports = class Deezer extends Command {
       aliases: 'dz',
       requirements: { apis: ['deezer'] },
       parameters: [{
-        type: 'string', full: true, whitelist: types,
+        type: 'string',
+        full: true,
+        whitelist: types,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
             .setDescription([

@@ -3,7 +3,7 @@ const { Command, SwitchbladeEmbed } = require('../../')
 module.exports = class BolinaDeGorfe extends Command {
   constructor (client) {
     super(client, {
-      name: 'bolinadegolfe',
+      name: 'bolinadegorfe',
       aliases: ['bolinhadegolfe', 'bolinhadegorfe', 'bolinadegolfe'],
       category: 'memes'
     })

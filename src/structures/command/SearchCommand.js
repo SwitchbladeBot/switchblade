@@ -1,5 +1,4 @@
-const { Command, SwitchbladeEmbed, CommandStructures } = require('../../')
-const { CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 module.exports = class SearchCommand extends Command {
   constructor (client, options) {

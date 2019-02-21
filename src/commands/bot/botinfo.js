@@ -1,4 +1,5 @@
 const { Command, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
+const Discord = require('discord.js')
 const moment = require('moment')
 
 module.exports = class BotInfo extends Command {

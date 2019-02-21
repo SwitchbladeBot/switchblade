@@ -15,7 +15,9 @@ module.exports = class LastFM extends Command {
       aliases: ['lfm'],
       requirements: { apis: ['lastfm'] },
       parameters: [{
-        type: 'string', full: false, whitelist: types,
+        type: 'string',
+        full: false,
+        whitelist: types,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
             .setDescription([

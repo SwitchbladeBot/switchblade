@@ -8,10 +8,14 @@ module.exports = class Pay extends Command {
       category: 'economy',
       requirements: { guildOnly: true, databaseOnly: true, onlyOldAccounts: true },
       parameters: [{
-        type: 'user', missingError: 'commands:pay.noMember',
-        acceptSelf: false, errors: { acceptSelf: 'commands:pay.cantPayYourself' }
+        type: 'user',
+        acceptSelf: false,
+        missingError: 'commands:pay.noMember',
+        errors: { acceptSelf: 'commands:pay.cantPayYourself' }
       }, {
-        type: 'number', min: 1, missingError: 'commands:pay.noValue'
+        type: 'number',
+        min: 1,
+        missingError: 'commands:pay.noValue'
       }]
     })
   }

@@ -8,8 +8,10 @@ module.exports = class WelcomeTranslator extends Command {
       hidden: true,
       requirements: { managersOnly: true },
       parameters: [{
-        type: 'user', missingError: 'commands:welcometranslator.noMember',
-        acceptSelf: false, errors: { acceptSelf: 'commands:welcometranslator.cantWelcomeYourself' }
+        type: 'user',
+        acceptSelf: false,
+        missingError: 'commands:welcometranslator.noMember',
+        errors: { acceptSelf: 'commands:welcometranslator.cantWelcomeYourself' }
       }]
     })
   }

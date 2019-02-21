@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const snekfetch = require('snekfetch')
 // eslint-disable-next-line no-useless-escape

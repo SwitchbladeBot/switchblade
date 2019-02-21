@@ -9,7 +9,9 @@ module.exports = class GitHub extends Command {
       aliases: ['gh'],
       requirements: { apis: ['github'] },
       parameters: [{
-        type: 'string', full: false, whitelist: types,
+        type: 'string',
+        full: false,
+        whitelist: types,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
             .setDescription([
