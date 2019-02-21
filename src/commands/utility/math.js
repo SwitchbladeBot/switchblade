@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const math = require('mathjs')
 
 module.exports = class Math extends Command {

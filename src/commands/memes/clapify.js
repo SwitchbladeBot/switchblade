@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../index')
 
 const emoji = '\uD83D\uDC4F'
 const CLAPIFY_LIMIT = 128

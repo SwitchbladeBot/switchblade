@@ -1,5 +1,4 @@
-const { SwitchbladeEmbed, Constants, MiscUtils, CommandParameters, CommandStructures, Command } = require('../../../')
-const { StringParameter, CommandError } = CommandStructures
+const { SwitchbladeEmbed, Constants, MiscUtils, Command, CommandError } = require('../../../')
 const moment = require('moment')
 
 module.exports = class LastfmUser extends Command {

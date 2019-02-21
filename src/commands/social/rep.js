@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, UserParameter, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Rep extends Command {
   constructor (client) {

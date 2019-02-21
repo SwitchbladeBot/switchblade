@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Coinflip extends Command {
   constructor (client) {

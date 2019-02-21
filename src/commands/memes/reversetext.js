@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../index')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../index')
 
 module.exports = class ReverseText extends Command {
   constructor (client) {

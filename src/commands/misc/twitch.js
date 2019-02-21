@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
-const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
+
 const TWITCH_URL = 'https://twitch.tv/'
 
 module.exports = class Twitch extends Command {

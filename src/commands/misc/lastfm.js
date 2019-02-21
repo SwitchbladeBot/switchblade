@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 // Formatting url for embeds
 const formatUrl = name => name.replace(/\)/g, '%29').replace(/\(/g, '%28').replace(/_/g, '%25')

@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, CommandError, Parameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const moment = require('moment')
 
 module.exports = class Seek extends Command {

@@ -1,6 +1,6 @@
 const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils, CommandStructures } = require('../../../')
-const { BooleanFlagParameter, CommandParameters, StringParameter } = CommandStructures
+const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+
 const moment = require('moment')
 
 module.exports = class DeezerPlaylist extends SearchCommand {

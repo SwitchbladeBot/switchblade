@@ -1,4 +1,4 @@
-const { Command, CommandRequirements, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Loop extends Command {
   constructor (client) {

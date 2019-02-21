@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandRequirements, CommandParameters, NumberParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const MAX_PLAYLIST_LENGTH = 10
 

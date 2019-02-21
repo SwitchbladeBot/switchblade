@@ -1,5 +1,4 @@
-const { CanvasTemplates, CommandStructures, PermissionUtils } = require('../../')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { CanvasTemplates, Command, PermissionUtils } = require('../../')
 const { Attachment } = require('discord.js')
 
 module.exports = class Profile extends Command {

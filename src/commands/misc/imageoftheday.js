@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
+
 const Parser = require('rss-parser')
 const parser = new Parser()
 

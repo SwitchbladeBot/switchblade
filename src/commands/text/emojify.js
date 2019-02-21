@@ -1,5 +1,4 @@
-const { CommandStructures } = require('../../index')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command } = require('../../')
 
 const specialCodes = {
   '0': ':zero:',

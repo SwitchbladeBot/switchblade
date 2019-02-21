@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
-const { CommandParameters, StringParameter, CommandRequirements } = CommandStructures
+const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
 const SearchCommand = require('../../structures/command/SearchCommand.js')
 
 const moment = require('moment')

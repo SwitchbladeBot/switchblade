@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, MemberParameter, CommandRequirements, BooleanFlagParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const COLLECTOR_TIMEOUT = 30
 const CONFIRMATION_EMOJI = '✅'

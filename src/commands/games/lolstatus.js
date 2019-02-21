@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 const snekfetch = require('snekfetch')
 
 const servers = ['na', 'euw', 'eune', 'lan', 'las', 'br', 'tr', 'ru', 'oce', 'jp', 'kr']

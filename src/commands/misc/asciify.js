@@ -1,5 +1,4 @@
-const { CommandStructures } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command } = require('../../')
 const figlet = require('figlet')
 
 module.exports = class Asciify extends Command {

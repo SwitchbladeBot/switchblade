@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
+
 const snekfetch = require('snekfetch')
 
 module.exports = class InspiroBot extends Command {

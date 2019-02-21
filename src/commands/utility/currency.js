@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const snekfetch = require('snekfetch')
 
 module.exports = class Currency extends Command {

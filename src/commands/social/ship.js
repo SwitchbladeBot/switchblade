@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, CanvasTemplates } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, CanvasTemplates } = require('../../')
 const { Attachment } = require('discord.js')
 
 module.exports = class Ship extends Command {

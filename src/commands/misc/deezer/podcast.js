@@ -1,6 +1,5 @@
 const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils, CommandStructures } = require('../../../')
-const { BooleanFlagParameter, CommandParameters, StringParameter } = CommandStructures
+const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class DeezerPodcast extends SearchCommand {
   constructor (client) {

@@ -1,5 +1,4 @@
-const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, BooleanParameter } = CommandStructures
+const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class JoinLock extends Command {
   constructor (client) {

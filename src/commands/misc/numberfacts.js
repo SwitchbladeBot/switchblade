@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, NumberParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
+
 const snekfetch = require('snekfetch')
 
 module.exports = class NumberFacts extends Command {

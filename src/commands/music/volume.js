@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, NumberParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 const MAX_VOLUME = 150
 

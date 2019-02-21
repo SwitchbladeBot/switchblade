@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
+
 // eslint-disable-next-line no-useless-escape
 const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 

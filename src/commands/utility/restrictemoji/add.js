@@ -1,15 +1,18 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../../')
-const { Command, CommandParameters, CommandError, RoleParameter, EmojiParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class RestrictEmojiAdd extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'restrictemoji')
-    this.name = 'add'
-
-    this.parameters = new CommandParameters(this,
-      new EmojiParameter({ full: false, required: true, sameGuildOnly: true }),
-      new RoleParameter({ full: true, required: true })
-    )
+    super(client, {
+      name: 'add',
+      parentCommand: 'restrictemoji',
+      parameters: [{
+        type: 'emoji',
+        sameGuildOnly: true
+      }, {
+        type: 'role',
+        full: true
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, emoji, role) {

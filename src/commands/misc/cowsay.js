@@ -1,5 +1,4 @@
-const { CommandStructures } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command } = require('../../')
 const cowsay = require('cowsay')
 
 module.exports = class Cowsay extends Command {

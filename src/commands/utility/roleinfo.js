@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, CommandParameters, MiscUtils } = require('../../')
-const { Command, CommandRequirements, RoleParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, CommandParameters, MiscUtils } = require('../../')
 const moment = require('moment')
 const Color = require('../../utils/Color.js')
 

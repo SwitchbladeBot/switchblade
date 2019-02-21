@@ -1,5 +1,4 @@
-const { CommandStructures } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { Command } = require('../../')
 
 module.exports = class VideoChat extends Command {
   constructor (client) {

@@ -1,4 +1,4 @@
-const { Command, CommandRequirements, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Stop extends Command {
   constructor (client) {

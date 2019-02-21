@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, StringParameter, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 const types = ['user', 'u', 'repository', 'repo', 'organization', 'org']
 

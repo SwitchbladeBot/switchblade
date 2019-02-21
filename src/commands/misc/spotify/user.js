@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
-const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class SpotifyUser extends Command {
   constructor (client, parentCommand) {

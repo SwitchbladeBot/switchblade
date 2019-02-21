@@ -1,5 +1,5 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
+
 module.exports = class reloadlocales extends Command {
   constructor (client) {
     super(client, {

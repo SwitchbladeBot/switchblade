@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 const BinaryRegex = '(?=^1*(01*0)*1*$)^.(..)*$'
 
 module.exports = class Binary extends Command {

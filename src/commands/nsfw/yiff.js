@@ -1,6 +1,4 @@
 const RandomRedditPostCommand = require('../../structures/command/RandomRedditPostCommand.js')
-const { CommandStructures } = require('../../')
-const { CommandRequirements } = CommandStructures
 
 module.exports = class Yiff extends RandomRedditPostCommand {
   constructor (client) {

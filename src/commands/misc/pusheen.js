@@ -1,5 +1,4 @@
-const { Command, SwitchbladeEmbed, CommandStructures } = require('../../')
-const { CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 const getRandom = (r) => r[Math.floor(Math.random() * r.length)]
 const getRandomPhoto = (r) => r[Math.floor(Math.random() * (r.length - 1)) + 1]

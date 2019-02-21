@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, CommandParameters } = require('../../')
-const { Command, EmojiParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, CommandParameters } = require('../../')
 
 module.exports = class Emoji extends Command {
   constructor (client) {

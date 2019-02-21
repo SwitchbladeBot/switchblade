@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, EmojiUtils, Constants } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, EmojiUtils, Constants } = require('../../')
 const countries = require('i18n-iso-countries')
 
 // We're using a Polyfill for Intl, as node doesn't come with all locales for formatting.

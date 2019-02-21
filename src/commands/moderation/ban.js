@@ -1,5 +1,4 @@
-const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter, MemberParameter } = CommandStructures
+const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Ban extends Command {
   constructor (client) {

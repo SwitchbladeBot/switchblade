@@ -1,5 +1,4 @@
-const { CanvasTemplates, CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { CanvasTemplates, Command, Constants, SwitchbladeEmbed } = require('../../')
 const { Attachment } = require('discord.js')
 
 module.exports = class Leaderboard extends Command {

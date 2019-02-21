@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Bassboost extends Command {
   constructor (client) {

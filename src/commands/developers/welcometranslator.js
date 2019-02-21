@@ -1,6 +1,6 @@
-const { CommandStructures } = require('../../')
-const { Command, CommandParameters, CommandRequirements, UserParameter } = CommandStructures
-module.exports = class welcometranslator extends Command {
+const { Command } = require('../../')
+
+module.exports = class WelcomeTranslator extends Command {
   constructor (client) {
     super(client, {
       name: 'welcometranslator',

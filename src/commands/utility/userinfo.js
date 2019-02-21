@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
-const { Command, CommandRequirements, CommandParameters, MemberParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
 const moment = require('moment')
 
 module.exports = class UserInfo extends Command {

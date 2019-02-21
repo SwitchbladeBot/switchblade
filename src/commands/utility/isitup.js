@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const snekfetch = require('snekfetch')
 
 const PROTOCOL_REGEX = /^[a-zA-Z]+:\/\//

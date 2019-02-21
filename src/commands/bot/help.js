@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const regexpSpecialChars = /([[\]^$|()\\+*?{}=!.])/gi
 const quoteRegex = (text) => text.replace(regexpSpecialChars, '\\$1')
