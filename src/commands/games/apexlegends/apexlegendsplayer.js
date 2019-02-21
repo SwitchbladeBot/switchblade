@@ -22,17 +22,10 @@ module.exports = class ApexLegendsPlayer extends Command {
 
   async run ({ t, channel, author, language }, platform, player) {
     channel.startTyping()
-    // TODO: DONE - Handling user not found error
-    // TODO: DONE - Handle invalid platform requests
-    // TODO: DONE - Create a map with key value pairs for each available platform - user experience
-    // TODO: Determine if the player has multiple legends
-    // if data.children has multiple objects ==> legends must be listed so the user can select one of them
-    // TODO: List all of the legends
-    // some form of loop, which displays all of the legends (legend names) of the user
     // TODO: Return the stats of the selected legend
     // TODO: Optional flag for lifetime stats of user
     //
-    // TODO: display design idea for lifetime stats of user
+    // display design idea for lifetime stats of user
     // Username
     // Platform - Value
     // Level - Value          Rank - Value
@@ -40,7 +33,7 @@ module.exports = class ApexLegendsPlayer extends Command {
     // Damage done - Value    Rank - Value
     //
     //
-    // TODO: display design idea for each legend:
+    // display design idea for each legend:
     // Username
     // Legend name
     // Kills - Value          Rank - Value
