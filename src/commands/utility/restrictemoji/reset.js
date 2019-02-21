@@ -7,7 +7,7 @@ module.exports = class RestrictEmojiReset extends Command {
     this.name = 'reset'
 
     this.parameters = new CommandParameters(this,
-      new EmojiParameter({ full: false, required: true, sameGuildOnly: true })
+      new EmojiParameter({ full: false, required: true })
     )
   }
 

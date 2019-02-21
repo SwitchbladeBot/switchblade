@@ -7,7 +7,7 @@ module.exports = class RestrictEmojiRemove extends Command {
     this.name = 'remove'
 
     this.parameters = new CommandParameters(this,
-      new EmojiParameter({ full: false, required: true, sameGuildOnly: true }),
+      new EmojiParameter({ full: false, required: true }),
       new RoleParameter({ full: true, required: true })
     )
   }
