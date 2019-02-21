@@ -3,12 +3,12 @@ const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class XKCD37 extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'xkcd37'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'errors:noSentence' })
-    )
+    super(client, {
+      name: 'xkcd37',
+      parameters: [{
+        type: 'string', full: true
+      }]
+    })
   }
 
   // Context: https://xkcd.com/37/

@@ -4,10 +4,11 @@ const { CommandRequirements } = CommandStructures
 
 module.exports = class Yaoi extends RandomRedditPostCommand {
   constructor (client) {
-    super(client)
-    this.name = 'yaoi'
-    this.subreddit = 'yaoi'
-    this.category = 'nsfw'
-    this.requirements = new CommandRequirements(this, { nsfwOnly: true })
+    super(client, {
+      name: 'yaoi',
+      subreddit: 'yaoi',
+      category: 'nsfw',
+      requirements: { nsfwOnly: true }
+    })
   }
 }

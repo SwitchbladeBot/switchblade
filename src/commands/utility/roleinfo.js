@@ -5,15 +5,17 @@ const Color = require('../../utils/Color.js')
 
 module.exports = class RoleInfo extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'roleinfo'
-    this.aliases = ['rolinfo', 'rol', 'ri', 'roli']
-    this.category = 'utility'
-    this.requirements = new CommandRequirements(this, { guildOnly: true })
-
-    this.parameters = new CommandParameters(this,
-      new RoleParameter({ full: true, missingError: 'errors:invalidRole' })
-    )
+    super(client, {
+      name: 'roleinfo',
+      aliases: ['rolinfo', 'rol', 'ri', 'roli'],
+      category: 'utility',
+      requirements: { guildOnly: true },
+      parameters: [{
+        type: 'role',
+        full: true,
+        missingError: 'errors:invalidRole'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, role) {

@@ -3,13 +3,13 @@ const { Command, EmojiParameter } = CommandStructures
 
 module.exports = class Emoji extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'emoji'
-    this.aliases = ['enlarge', 'bigemoji']
-
-    this.parameters = new CommandParameters(this,
-      new EmojiParameter({ full: true })
-    )
+    super(client, {
+      name: 'emoji',
+      aliases: ['enlarge', 'bigemoji'],
+      parameters: [{
+        type: 'emoji', full: true
+      }]
+    })
   }
 
   run ({ t, author, channel }, emoji) {

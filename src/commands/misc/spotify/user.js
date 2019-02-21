@@ -3,13 +3,14 @@ const { Command, CommandParameters, StringParameter, CommandError } = CommandStr
 
 module.exports = class SpotifyUser extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'spotify')
-    this.name = 'user'
-    this.aliases = ['u']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.user.noUser' })
-    )
+    super(client, {
+      name: 'user',
+      aliases: ['u'],
+      parentCommand: 'spotify',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:spotify.subcommands.user.noUser'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, user) {

@@ -3,15 +3,16 @@ const DiscordUtils = require('../../../../utils/DiscordUtils.js')
 const CommandError = require('../../CommandError.js')
 
 module.exports = class StringParameter extends Parameter {
-  constructor (options = {}) {
-    super(options)
-
-    this.clean = !!options.clean
-    this.maxLength = Number(options.maxLength) || 0
-    this.truncate = !!options.truncate || true
+  static parseOptions (options = {}) {
+    return {
+      ...super.parseOptions(options),
+      clean: !!options.clean,
+      maxLength: Number(options.maxLength) || 0,
+      truncate: !!options.truncate
+    }
   }
 
-  parse (arg, { t, message }) {
+  static parse (arg, { t, message }) {
     arg = arg ? (typeof arg === 'string' ? arg : String(arg)) : undefined
     if (!arg) return
 

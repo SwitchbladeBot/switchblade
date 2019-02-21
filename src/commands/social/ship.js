@@ -4,14 +4,21 @@ const { Attachment } = require('discord.js')
 
 module.exports = class Ship extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'ship'
-    this.category = 'social'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ required: true, acceptSelf: true, missingError: 'commands:ship.noUser' }),
-      new UserParameter({ required: false, acceptSelf: true })
-    )
+    super(client, {
+      name: 'ship',
+      category: 'social',
+      requirements: { databaseOnly: true },
+      parameters: [{
+        type: 'user',
+        required: true,
+        acceptSelf: true,
+        missingError: 'commands:ship.noUser'
+      }, {
+        type: 'user',
+        required: false,
+        acceptSelf: true
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, first, second) {

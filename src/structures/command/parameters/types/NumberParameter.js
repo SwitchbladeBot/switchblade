@@ -4,16 +4,17 @@ const CommandError = require('../../CommandError.js')
 const isNull = (n) => n === null || n === undefined || isNaN(n)
 
 module.exports = class NumberParameter extends Parameter {
-  constructor (options = {}) {
-    super(options)
-
-    this.min = Number(options.min)
-    this.max = Number(options.max)
-    this.forceMin = !!options.forceMin
-    this.forceMax = !!options.forceMax
+  static parseOptions (options = {}) {
+    return {
+      ...super.parseOptions(options),
+      min: Number(options.min),
+      max: Number(options.max),
+      forceMin: !!options.forceMin,
+      forceMax: !!options.forceMax
+    }
   }
 
-  parse (arg, { t }) {
+  static parse (arg, { t }) {
     if (!arg) return
 
     let nmb = Number(arg)

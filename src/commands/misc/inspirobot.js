@@ -4,9 +4,10 @@ const snekfetch = require('snekfetch')
 
 module.exports = class InspiroBot extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'inspirobot'
-    this.aliases = ['inspiro', 'ibot']
+    super(client, {
+      name: 'inspirobot',
+      aliases: ['inspiro', 'ibot']
+    })
   }
 
   async run ({ t, author, channel }) {

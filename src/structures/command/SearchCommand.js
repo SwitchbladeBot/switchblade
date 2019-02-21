@@ -2,15 +2,17 @@ const { Command, SwitchbladeEmbed, CommandStructures } = require('../../')
 const { CommandParameters, StringParameter, CommandError } = CommandStructures
 
 module.exports = class SearchCommand extends Command {
-  constructor (client, parentCommand) {
-    super(client, parentCommand)
-    this.embedColor = null
-    this.embedLogoURL = null
-    this.maxResults = 10
+  constructor (client, options) {
+    super(client, {
+      parameters: [{
+        type: 'string', full: true, missingError: 'commons:search.noParams'
+      }],
+      ...options
+    })
 
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' })
-    )
+    this.embedColor = options.embedColor
+    this.embedLogoURL = options.embedLogoURL
+    this.maxResults = options.maxResults || 10
   }
 
   async run (context, query) {

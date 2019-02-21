@@ -3,15 +3,15 @@ const { Command, CommandError, CommandParameters, CommandRequirements, StringPar
 
 module.exports = class Lyrics extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'lyrics'
-    this.aliases = ['lyric', 'genius']
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, { apis: ['genius'] })
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: false })
-    )
+    super(client, {
+      name: 'lyrics',
+      aliases: ['lyric', 'genius'],
+      category: 'music',
+      requirements: { apis: ['genius'] },
+      parameters: [{
+        type: 'string', full: true, required: false
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, song) {

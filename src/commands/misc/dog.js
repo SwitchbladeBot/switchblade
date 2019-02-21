@@ -3,10 +3,11 @@ const snekfetch = require('snekfetch')
 
 module.exports = class Dog extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'dog'
-    this.aliases = ['doggo', 'dogpics', 'randomdog']
-    this.category = 'general'
+    super(client, {
+      name: 'dog',
+      aliases: ['doggo', 'dogpics', 'randomdog'],
+      category: 'general'
+    })
   }
 
   async run ({ t, author, channel }) {

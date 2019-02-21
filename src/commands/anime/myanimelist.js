@@ -4,14 +4,14 @@ const malScraper = require('mal-scraper')
 
 module.exports = class MyAnimeList extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'myanimelist'
-    this.aliases = ['mal']
-    this.category = 'anime'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:myanimelist.noAnime' })
-    )
+    super(client, {
+      name: 'myanimelist',
+      aliases: ['mal'],
+      category: 'anime',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:myanimelist.noAnime'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, anime) {

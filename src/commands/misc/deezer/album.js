@@ -3,20 +3,19 @@ const { SwitchbladeEmbed, Constants, MiscUtils, CommandStructures } = require('.
 const { BooleanFlagParameter, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class DeezerAlbum extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'deezer')
-
-    this.name = 'album'
-    this.aliases = ['al']
-    this.embedColor = Constants.DEEZER_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' }),
-      [
-        new BooleanFlagParameter({ name: 'tracks', aliases: [ 'songs', 's', 't' ] })
-      ]
-    )
+  constructor (client) {
+    super(client, {
+      name: 'album',
+      aliases: ['al'],
+      parentCommand: 'deezer',
+      embedColor: Constants.DEEZER_COLOR,
+      embedLogoURL: 'https://i.imgur.com/lKlFtbs.png',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commons:search.noParams'
+      }, [{
+        type: 'booleanFlag', name: 'tracks', aliases: [ 'songs', 's', 't' ]
+      }]]
+    })
   }
 
   async search (context, query) {

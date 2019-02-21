@@ -3,11 +3,11 @@ const { Command, CommandRequirements } = CommandStructures
 
 module.exports = class Daily extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'daily'
-    this.category = 'economy'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true })
+    super(client, {
+      name: 'daily',
+      category: 'economy',
+      requirements: { databaseOnly: true }
+    })
   }
 
   async run ({ t, author, channel }) {

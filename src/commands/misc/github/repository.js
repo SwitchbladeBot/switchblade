@@ -3,12 +3,14 @@ const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 const moment = require('moment')
 
 module.exports = class GitHubRepository extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'github')
-    this.name = 'repository'
-    this.aliases = ['repo']
-    this.embedColor = Constants.GITHUB_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/gsY6oYB.png'
+  constructor (client) {
+    super(client, {
+      name: 'repository',
+      aliases: ['repo'],
+      parentCommand: 'github',
+      embedColor: Constants.GITHUB_COLOR,
+      embedLogoURL: 'https://i.imgur.com/gsY6oYB.png'
+    })
   }
 
   async search (context, query) {

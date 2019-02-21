@@ -3,15 +3,19 @@ const { Command, CommandParameters, UserParameter, CommandRequirements } = Comma
 
 module.exports = class Rep extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'rep'
-    this.category = 'social'
-
-    this.requirements = new CommandRequirements(this, { onlyOldAccounts: true, databaseOnly: true })
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:rep.noMention', acceptBot: false, acceptSelf: false, errors: { acceptSelf: 'commands:rep.repYourself' } })
-    )
+    super(client, {
+      name: 'rep',
+      aliases: ['reputation'],
+      category: 'social',
+      requirements: { databaseOnly: true, onlyOldAccounts: true },
+      parameters: [{
+        type: 'user',
+        acceptBot: false,
+        acceptSelf: false,
+        missingError: 'commands:rep.noMention',
+        errors: { acceptSelf: 'commands:rep.repYourself' }
+      }]
+    })
   }
 
   async run ({ t, author, channel }, user) {

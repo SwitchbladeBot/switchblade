@@ -5,19 +5,12 @@ const types = ['user', 'u', 'repository', 'repo', 'organization', 'org']
 
 module.exports = class GitHub extends Command {
   constructor (client) {
-    super(client)
-
-    this.name = 'github'
-    this.aliases = ['gh']
-    this.requirements = new CommandRequirements(this, { apis: ['github'] })
-
-    this.GITHUB_LOGO = 'https://i.imgur.com/gsY6oYB.png'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({
-        full: false,
-        whitelist: types,
-        required: true,
+    super(client, {
+      name: 'github',
+      aliases: ['gh'],
+      requirements: { apis: ['github'] },
+      parameters: [{
+        type: 'string', full: false, whitelist: types,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
             .setDescription([
@@ -27,7 +20,9 @@ module.exports = class GitHub extends Command {
               `\`${['user', 'repository', 'organization'].join('`, `')}\``
             ].join('\n'))
         }
-      })
-    )
+      }]
+    })
+
+    this.GITHUB_LOGO = 'https://i.imgur.com/gsY6oYB.png'
   }
 }

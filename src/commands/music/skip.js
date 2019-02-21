@@ -2,12 +2,12 @@ const { Command, CommandRequirements, Constants, SwitchbladeEmbed } = require('.
 
 module.exports = class Skip extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'skip'
-    this.aliases = ['next']
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true })
+    super(client, {
+      name: 'skip',
+      aliases: ['next'],
+      category: 'music',
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
+    })
   }
 
   async run ({ t, author, channel, guild }) {

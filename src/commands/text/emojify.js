@@ -21,13 +21,15 @@ const specialCodes = {
 
 module.exports = class Emojify extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'emojify'
-    this.category = 'memes'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:emojify.missingSentence' })
-    )
+    super(client, {
+      name: 'emojify',
+      category: 'memes',
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:emojify.missingSentence'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, text) {

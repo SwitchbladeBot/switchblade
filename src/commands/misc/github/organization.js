@@ -3,14 +3,15 @@ const { Command, CommandParameters, StringParameter, CommandError } = CommandStr
 const moment = require('moment')
 
 module.exports = class GitHubOrganization extends Command {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'github')
-    this.name = 'organization'
-    this.aliases = ['org']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: false, required: true, missingError: 'commands:github.subcommands.organization.noOrg' })
-    )
+  constructor (client) {
+    super(client, {
+      name: 'organization',
+      aliases: ['org'],
+      parentCommand: 'github',
+      parameters: [{
+        type: 'string', missingError: 'commands:github.subcommands.organization.noOrg'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, organization) {

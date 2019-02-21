@@ -3,11 +3,13 @@ const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class SpotifyPlaylist extends SearchCommand {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'spotify')
-    this.name = 'playlist'
-    this.aliases = ['p']
-    this.embedColor = Constants.SPOTIFY_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/vw8svty.png'
+    super(client, {
+      name: 'playlist',
+      aliases: ['p'],
+      parentCommand: 'spotify',
+      embedColor: Constants.SPOTIFY_COLOR,
+      embedLogoURL: 'https://i.imgur.com/vw8svty.png'
+    })
   }
 
   async search (context, query) {

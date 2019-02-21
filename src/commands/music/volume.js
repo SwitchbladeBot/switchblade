@@ -5,15 +5,28 @@ const MAX_VOLUME = 150
 
 module.exports = class Volume extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'volume'
-    this.aliases = ['vol']
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, errors: { guildPlaying: 'commands:volume.notPlaying' } })
-    this.parameters = new CommandParameters(this,
-      new NumberParameter({ full: true, missingError: 'commands:volume.missingVolumeParameter', min: 0, max: MAX_VOLUME, forceMin: true, forceMax: true })
-    )
+    super(client, {
+      name: 'volume',
+      aliases: ['vol'],
+      category: 'music',
+      requirements: {
+        guildOnly: true,
+        sameVoiceChannelOnly: true,
+        guildPlaying: true,
+        errors: {
+          guildPlaying: 'commands:volume.notPlaying'
+        }
+      },
+      parameters: [{
+        type: 'number',
+        full: true,
+        min: 0,
+        max: MAX_VOLUME,
+        forceMin: true,
+        forceMax: true,
+        missingError: 'commands:volume.missingVolumeParameter'
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, volume) {

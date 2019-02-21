@@ -5,17 +5,18 @@ const MAX_PLAYLIST_LENGTH = 10
 
 module.exports = class Queue extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'queue'
-    this.aliases = ['playlist']
-    this.category = 'music'
-
-    this.subcommands = [
-      new QueueClear(client, this),
-      new QueueJump(client, this),
-      new QueueRemove(client, this),
-      new QueueShuffle(client, this)
-    ]
+    super(client, {
+      name: 'queue',
+      aliases: ['playlist'],
+      category: 'music',
+      requirements: { guildOnly: true, guildPlaying: true },
+      subcommands: [
+        new QueueClear(client, this),
+        new QueueJump(client, this),
+        new QueueRemove(client, this),
+        new QueueShuffle(client, this)
+      ]
+    })
 
     this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true })
   }
@@ -45,9 +46,11 @@ module.exports = class Queue extends Command {
 
 class QueueClear extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand)
-    this.name = 'clear'
-    this.aliases = ['cl']
+    super(client, {
+      name: 'clear',
+      aliases: ['cl'],
+      parentCommand
+    })
   }
 
   async run ({ t, author, channel, guild }) {
@@ -64,9 +67,11 @@ class QueueClear extends Command {
 
 class QueueShuffle extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand)
-    this.name = 'shuffle'
-    this.aliases = ['sf']
+    super(client, {
+      name: 'shuffle',
+      aliases: ['sf'],
+      parentCommand
+    })
   }
 
   async run ({ t, author, channel, guild }) {
@@ -83,13 +88,14 @@ class QueueShuffle extends Command {
 
 class QueueRemove extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand)
-    this.name = 'remove'
-    this.aliases = ['rm']
-
-    this.parameters = new CommandParameters(this,
-      new NumberParameter({ full: true, missingError: `commands:${this.tPath}.missingIndexParameter`, min: 1 })
-    )
+    super(client, {
+      name: 'remove',
+      aliases: ['rm'],
+      parentCommand,
+      parameters: [{
+        type: 'number', full: true, min: 1, missingError: ({ t }) => t(`commands:${this.tPath}.missingIndexParameter`)
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, index) {
@@ -113,13 +119,14 @@ class QueueRemove extends Command {
 
 class QueueJump extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand)
-    this.name = 'jump'
-    this.aliases = ['jumpto', 'skipto']
-
-    this.parameters = new CommandParameters(this,
-      new NumberParameter({ full: true, missingError: `commands:${this.tPath}.missingIndexParameter`, min: 1 })
-    )
+    super(client, {
+      name: 'jump',
+      aliases: ['jumpto', 'skipto'],
+      parentCommand,
+      parameters: [{
+        type: 'number', full: true, min: 1, missingError: ({ t }) => t(`commands:${this.tPath}.missingIndexParameter`)
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, index) {

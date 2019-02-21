@@ -3,12 +3,12 @@ const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class FlipText extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'fliptext'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:fliptext.noSentence' })
-    )
+    super(client, {
+      name: 'fliptext',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:fliptext.noSentence'
+      }]
+    })
   }
 
   run ({ author, channel }, text) {

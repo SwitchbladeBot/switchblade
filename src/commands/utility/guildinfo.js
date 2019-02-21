@@ -4,22 +4,23 @@ const moment = require('moment')
 
 module.exports = class GuildInfo extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'guildinfo'
-    this.aliases = ['serverinfo', 'server', 'guild', 'si', 'gi', 'sinfo', 'ginfo']
-    this.category = 'utility'
-    this.requirements = new CommandRequirements(this, { guildOnly: true })
-
-    this.parameters = new CommandParameters(this,
-      new GuildParameter({ full: true, required: false })
-    )
+    super(client, {
+      name: 'guildinfo',
+      aliases: ['serverinfo', 'server', 'guild', 'si', 'gi', 'sinfo', 'ginfo'],
+      category: 'utility',
+      requirements: { guildOnly: true },
+      parameters: [{
+        type: 'guild',
+        full: true,
+        required: false
+      }]
+    })
   }
 
-  run ({ t, author, channel, language }, guild) {
+  run ({ t, author, channel, language }, guild = channel.guild) {
     const embed = new SwitchbladeEmbed(author)
     moment.locale(language)
     channel.startTyping()
-    guild = guild || channel.guild
     embed.setTitle(guild.name)
       .setThumbnail(guild.iconURL ? guild.iconURL : 'https://i.imgur.com/o0P9VYp.jpg')
       .addField(t('commands:guildinfo.id'), guild.id, true)

@@ -4,18 +4,22 @@ const SearchCommand = require('../../structures/command/SearchCommand.js')
 
 const moment = require('moment')
 
+// TODO: Search command rework
 module.exports = class DBL extends SearchCommand {
   constructor (client) {
-    super(client)
-    this.name = 'dbl'
-    this.aliases = ['discordbotlist']
-    this.embedColor = Constants.DBL_COLOR
+    super(client, {
+      name: 'dbl',
+      aliases: ['discordbotlist'],
+      category: 'bot',
+      requirements: { apis: ['dbl'] },
+      parameters: [{
+        type: 'string', full: true, missingError: 'commons:search.noParams'
+      }],
+      embedColor: Constants.DBL_COLOR,
+      embedLogoURL: 'https://i.imgur.com/aSsYKFp.png'
+    })
+
     this.MAIN_URL = 'https://discordbots.org/bot/'
-    this.embedLogoURL = 'https://i.imgur.com/aSsYKFp.png'
-    this.requirements = new CommandRequirements(this, { apis: ['dbl'] })
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:dbl.noBotName' })
-    )
   }
 
   async search (context, query) {

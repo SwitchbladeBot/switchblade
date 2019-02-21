@@ -3,18 +3,20 @@ const { Command, CommandError, CommandRequirements, CommandParameters, GuildPara
 
 module.exports = class GuildIcon extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'guildicon'
-    this.aliases = ['gicon', 'sicon', 'srvicn', 'servericon']
-    this.category = 'utility'
-    this.requirements = new CommandRequirements(this, { guildOnly: true })
-
-    this.parameters = new CommandParameters(this,
-      new GuildParameter({ full: true, required: false })
-    )
+    super(client, {
+      name: 'guildicon',
+      aliases: ['gicon', 'sicon', 'srvicn', 'servericon'],
+      category: 'utility',
+      requirements: { guildOnly: true },
+      parameters: [{
+        type: 'guild',
+        full: true,
+        required: false
+      }]
+    })
   }
 
-  run ({ t, author, channel }, guild) {
+  run ({ t, author, channel }, guild = channel.guild) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     guild = guild || channel.guild

@@ -4,10 +4,10 @@ const snekfetch = require('snekfetch')
 
 module.exports = class UIGradient extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'uigradient'
-    this.aliases = ['rg', 'randomgradient']
-    this.category = 'general'
+    super(client, {
+      name: 'uigradient',
+      aliases: ['rg', 'randomgradient']
+    })
   }
 
   async run ({ t, author, channel }) {

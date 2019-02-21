@@ -3,14 +3,17 @@ const { Command, CommandParameters, StringParameter } = CommandStructures
 
 module.exports = class Personaltext extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'personaltext'
-    this.aliases = ['profiletext']
-    this.category = 'social'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:personaltext.noText' })
-    )
+    super(client, {
+      name: 'personaltext',
+      aliases: ['profiletext'],
+      category: 'social',
+      requirements: { databaseOnly: true },
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:personaltext.noText'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, text) {

@@ -30,10 +30,10 @@ const pusheenMessages = [
 
 module.exports = class Pusheen extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'pusheen'
-    this.category = 'general'
-    this.requirements = new CommandRequirements(this, { apis: ['tumblr'] })
+    super(client, {
+      name: 'pusheen',
+      requirements: { apis: ['tumblr'] }
+    })
   }
 
   async run ({ t, author, channel }) {

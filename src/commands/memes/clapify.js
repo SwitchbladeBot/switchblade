@@ -6,13 +6,13 @@ const CLAPIFY_LIMIT = 128
 
 module.exports = class Clapify extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'clapify'
-    this.category = 'memes'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:clapify.missingSentence' })
-    )
+    super(client, {
+      name: 'clapify',
+      category: 'memes',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:clapify.missingSentence'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, text) {

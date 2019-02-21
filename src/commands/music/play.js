@@ -4,25 +4,19 @@ const { Song, Playlist } = require('../../music/structures')
 
 module.exports = class Play extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'play'
-    this.aliases = []
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, {
-      guildOnly: true,
-      sameVoiceChannelOnly: true,
-      voiceChannelOnly: true,
-      playerManagerOnly: true
+    super(client, {
+      name: 'play',
+      aliases: ['p'],
+      category: 'music',
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, voiceChannelOnly: true, playerManagerOnly: true },
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:play.noTrackIdentifier'
+      }, [{
+        type: 'booleanFlag', name: 'soundcloud', aliases: ['sc']
+      }, {
+        type: 'booleanFlag', name: 'youtube', aliases: ['yt']
+      }]]
     })
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' }),
-      [
-        new BooleanFlagParameter({ name: 'soundcloud', aliases: [ 'sc' ] }),
-        new BooleanFlagParameter({ name: 'youtube', aliases: [ 'yt' ] })
-      ]
-    )
   }
 
   async run ({ t, author, channel, flags, guild, voiceChannel }, identifier) {

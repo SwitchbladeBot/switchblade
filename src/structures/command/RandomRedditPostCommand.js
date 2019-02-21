@@ -1,13 +1,15 @@
 const { Command, Reddit, SwitchbladeEmbed } = require('../../')
 
+const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
+
 module.exports = class RandomRedditPostCommand extends Command {
-  constructor (client) {
-    super(client)
-    this.embedColor = null
-    this.titleString = null
-    this.addTitle = true
-    this.addPermalink = true
-    this.subreddit = 'all'
+  constructor (client, options = {}) {
+    super(client, options)
+    this.embedColor = options.embedColor
+    this.titleString = options.titleString
+    this.addTitle = defVal(options, 'addTitle', true)
+    this.addPermalink = defVal(options, 'addPermalink', true)
+    this.subreddit = options.subreddit || 'all'
   }
 
   // TODO: Check if the URL is an image type supported by reddit

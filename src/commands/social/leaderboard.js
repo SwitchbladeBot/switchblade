@@ -4,15 +4,16 @@ const { Attachment } = require('discord.js')
 
 module.exports = class Leaderboard extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'leaderboard'
-    this.aliases = [ 'top', 'ranking' ]
-    this.subcommands = [
-      new MoneyLeaderboard(client, this),
-      new ReputationLeaderboard(client, this)
-    ]
-
-    this.requirements = new CommandRequirements(this, { databaseOnly: true, canvasOnly: true })
+    super(client, {
+      name: 'leaderboard',
+      aliases: ['top', 'ranking'],
+      category: 'social',
+      requirements: { databaseOnly: true, canvasOnly: true },
+      subcommands: [
+        new MoneyLeaderboard(client, this),
+        new ReputationLeaderboard(client, this)
+      ]
+    })
   }
 
   async run ({ t, author, prefix, alias, channel }) {

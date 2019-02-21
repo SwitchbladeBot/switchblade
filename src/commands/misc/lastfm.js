@@ -11,19 +11,12 @@ const types = ['track', 'song', 't', 's', 'artist', 'ar', 'album', 'al', 'user',
 
 module.exports = class LastFM extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'lastfm'
-    this.aliases = ['lfm']
-    this.formatUrl = formatUrl
-    this.READ_MORE_REGEX = READ_MORE_REGEX
-
-    this.requirements = new CommandRequirements(this, { apis: ['lastfm'] })
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({
-        full: true,
-        whitelist: types,
-        required: true,
+    super(client, {
+      name: 'lastfm',
+      aliases: ['lfm'],
+      requirements: { apis: ['lastfm'] },
+      parameters: [{
+        type: 'string', full: false, whitelist: types,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
             .setDescription([
@@ -33,7 +26,9 @@ module.exports = class LastFM extends Command {
               `\`${types.join('`, `')}\``
             ].join('\n'))
         }
-      })
-    )
+      }]
+    })
+    this.formatUrl = formatUrl
+    this.READ_MORE_REGEX = READ_MORE_REGEX
   }
 }

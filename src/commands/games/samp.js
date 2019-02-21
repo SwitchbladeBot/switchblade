@@ -4,13 +4,13 @@ const query = require('samp-query')
 
 module.exports = class SAMP extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'samp'
-    this.category = 'games'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ missingError: 'commands:samp.noIP' })
-    )
+    super(client, {
+      name: 'samp',
+      category: 'games',
+      parameters: [{
+        type: 'string', missingError: 'commands:samp.noIP'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, address) {

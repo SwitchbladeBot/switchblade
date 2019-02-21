@@ -2,10 +2,11 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class i18n extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'i18n'
-    this.aliases = ['crowdin']
-    this.category = 'bot'
+    super(client, {
+      name: 'i18n',
+      aliases: ['crowdin'],
+      category: 'bot'
+    })
   }
 
   async run ({ t, channel }) {

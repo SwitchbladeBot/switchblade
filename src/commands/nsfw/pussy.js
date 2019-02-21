@@ -4,10 +4,11 @@ const { CommandRequirements } = CommandStructures
 
 module.exports = class Pussy extends RandomRedditPostCommand {
   constructor (client) {
-    super(client)
-    this.name = 'pussy'
-    this.subreddit = 'pussy'
-    this.category = 'nsfw'
-    this.requirements = new CommandRequirements(this, { nsfwOnly: true })
+    super(client, {
+      name: 'pussy',
+      subreddit: 'pussy',
+      category: 'nsfw',
+      requirements: { nsfwOnly: true }
+    })
   }
 }

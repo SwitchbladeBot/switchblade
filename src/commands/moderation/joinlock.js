@@ -3,15 +3,15 @@ const { Command, CommandRequirements, CommandParameters, BooleanParameter } = Co
 
 module.exports = class JoinLock extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'joinlock'
-    this.aliases = ['jl']
-    this.category = 'moderation'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, botPermissions: ['KICK_MEMBERS'], permissions: ['MANAGE_GUILD'] })
-    this.parameters = new CommandParameters(this,
-      new BooleanParameter({ missingError: 'commands:joinlock.missingState' })
-    )
+    super(client, {
+      name: 'joinlock',
+      aliases: ['jl'],
+      category: 'moderation',
+      requirements: { guildOnly: true, botPermissions: ['KICK_MEMBERS'], permissions: ['MANAGE_GUILD'] },
+      parameters: [{
+        type: 'boolean', missingError: 'commands:joinlock.missingState'
+      }]
+    })
   }
 
   async run ({ t, channel, guild, author }, newState) {

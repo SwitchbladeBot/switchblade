@@ -4,11 +4,17 @@ const snekfetch = require('snekfetch')
 
 module.exports = class Currency extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'currency'
-    this.aliases = ['currencyconverter', 'converter']
-    this.category = 'utility'
-    this.envVars = ['KSOFT_KEY']
+    super(client, {
+      name: 'currency',
+      aliases: ['currencyconverter', 'converter'],
+      category: 'utility',
+      requirements: { envVars: ['KSOFT_KEY'] },
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:vaporwave.missingSentence'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, to, from = 'USD', value = 1) {

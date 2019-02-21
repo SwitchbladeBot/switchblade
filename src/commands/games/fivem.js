@@ -7,13 +7,13 @@ const request = require('request')
 
 module.exports = class FiveM extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'fivem'
-    this.category = 'games'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ missingError: 'commands:fivem.noIP' })
-    )
+    super(client, {
+      name: 'fivem',
+      category: 'games',
+      parameters: [{
+        type: 'string', missingError: 'commands:fivem.noIP'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, address) {

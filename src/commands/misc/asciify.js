@@ -4,13 +4,13 @@ const figlet = require('figlet')
 
 module.exports = class Asciify extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'asciify'
-    this.aliases = ['bigtext']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, clean: true, missingError: 'commands:asciify.noText' })
-    )
+    super(client, {
+      name: 'asciify',
+      aliases: ['bigtext'],
+      parameters: [{
+        type: 'string', full: true, clean: true, missingError: 'commands:asciify.noText'
+      }]
+    })
   }
 
   run ({ channel, message }, text) {

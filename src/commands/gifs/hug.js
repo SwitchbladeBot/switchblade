@@ -5,13 +5,13 @@ const snekfetch = require('snekfetch')
 
 module.exports = class Hug extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'hug'
-    this.category = 'images'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:hug.noMention', acceptBot: true, acceptSelf: false })
-    )
+    super(client, {
+      name: 'hug',
+      category: 'images',
+      parameters: [{
+        type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:hug.noMention'
+      }]
+    })
   }
 
   async run ({ t, channel, author }, user) {
