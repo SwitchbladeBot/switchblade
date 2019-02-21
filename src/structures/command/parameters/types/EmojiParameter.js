@@ -6,10 +6,9 @@ const ANIMATED_REGEX = /^(?:<a:)(.*?)(?::)([0-9]{18})(?:>)$/
 
 module.exports = class EmojiParameter extends Parameter {
   constructor (options = {}) {
-    options = Object.assign({ sameGuildOnly: false, acceptEmojiNames: true }, options)
+    options = Object.assign({ sameGuildOnly: false }, options)
     super(options)
     this.sameGuildOnly = !!options.sameGuildOnly
-    this.acceptEmojiNames = !!options.acceptEmojiNames
   }
 
   parse (arg, { t, guild }) {
@@ -21,14 +20,14 @@ module.exports = class EmojiParameter extends Parameter {
     let emojiId = ''
     let emojiIsAnimated = ''
 
-    if (!this.acceptEmojiNames) {
-      if (!regexResult) throw new CommandError(t('errors:invalidEmoji'))
+    if (regexResult) {
+      if (this.sameGuildOnly && !guild.emojis.get(regexResult[2])) throw new CommandError(t('errors:emojiNotFromSameGuild'))
       emojiName = regexResult[1]
       emojiId = regexResult[2]
       emojiIsAnimated = Boolean(animatedRegexResult)
     }
 
-    if (this.acceptEmojiNames) {
+    if (!regexResult) {
       const emoji = guild.emojis.find('name', arg)
       if (!emoji) throw new CommandError(t('errors:invalidEmoji'))
       if (this.sameGuildOnly && !emoji) throw new CommandError(t('errors:emojiNotFromSameGuild'))
