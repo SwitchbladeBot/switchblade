@@ -40,8 +40,8 @@ module.exports = class ApexLegendsPlayer extends Command {
     // Damage done - Value    Rank - Value
     // FullSquadWins - Value  Rank - Value
     // text = text.replace(/\s/g, '/')
-    const endpoint = `${platforms[platform]}/${player}`
-    const response = await this.client.apis.apexlegendsapi.request(endpoint)
+    platform = platforms[platform]
+    const response = await this.client.apis.apexlegends.getPlayer(platform, player)
 
     if (response.errors) {
       // TODO: Write the account not found string

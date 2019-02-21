@@ -9,7 +9,7 @@ module.exports = class ApexLegends extends Command {
     this.name = 'apexlegends'
     this.aliases = ['apex', 'al', 'apexl']
 
-    this.requirements = new CommandRequirements(this, { apis: ['apexlegendsapi'] })
+    this.requirements = new CommandRequirements(this, { apis: ['apexlegends'] })
 
     this.parameters = new CommandParameters(this,
       new StringParameter({
