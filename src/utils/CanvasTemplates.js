@@ -778,4 +778,14 @@ module.exports = class CanvasTemplates {
 
     return canvas.toBuffer()
   }
+
+  static async morejpeg (text) {
+    const myimg = await Image.from(text)
+    const WIDTH = myimg.width
+    const HEIGHT = myimg.height
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(myimg, 0, 0, WIDTH, HEIGHT)
+    return canvas.toBuffer('image/jpeg', { quality: 0.08 })
+  }
 }
