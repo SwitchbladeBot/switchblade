@@ -8,6 +8,7 @@ module.exports = {
   CommandError: CommandStructures.CommandError,
   CommandParameters: CommandStructures.CommandParameters,
   CommandRequirements: CommandStructures.CommandRequirements,
+  Parameter: CommandStructures.Parameter,
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),

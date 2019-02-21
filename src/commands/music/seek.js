@@ -1,4 +1,4 @@
-const { Command, CommandError, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, Parameter, SwitchbladeEmbed } = require('../../')
 const moment = require('moment')
 
 module.exports = class Seek extends Command {
@@ -34,7 +34,7 @@ const TIMESTAMP_REGEX = /^(\d+):(\d+)(?::(\d+))?$/
 const FORWARD_REGEX = /^\+(\d+)$/
 const BACKWARD_REGEX = /^-(\d+)$/
 class TargetParameter extends Parameter {
-  parse (arg, { client, guild }) {
+  static parse (arg, { client, guild }) {
     if (TIMESTAMP_REGEX.test(arg)) {
       const [ , f, s, t ] = TIMESTAMP_REGEX.exec(arg)
       const { state: { position } } = client.playerManager.get(guild.id)
