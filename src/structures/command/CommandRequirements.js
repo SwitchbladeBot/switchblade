@@ -76,7 +76,7 @@ module.exports = class CommandRequirements {
       throw new CommandError(t(opts.errors.voiceChannelOnly))
     }
 
-    if (opts.onlyOldAccounts && moment(author.createdTimestamp).format('MM, YYYY') === moment().format('MM, YYYY')) {
+    if (opts.onlyOldAccounts && moment().isSame(author.createdTimestamp, 'month')) {
       throw new CommandError(t(opts.errors.onlyOldAccounts))
     }
 
