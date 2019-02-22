@@ -4,14 +4,11 @@ const CommandError = require('../../CommandError.js')
 const EMOJI_REGEX = /^(?:<:)(.*?)(?::)([0-9]{18})(?:>)$/
 const ANIMATED_REGEX = /^(?:<a:)(.*?)(?::)([0-9]{18})(?:>)$/
 
-const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
-
 module.exports = class EmojiParameter extends Parameter {
   static parseOptions (options = {}) {
     return {
       ...options,
-      sameGuildOnly: !!options.sameGuildOnly,
-      acceptEmojiNames: defVal(options, 'acceptEmojiNames', true)
+      sameGuildOnly: !!options.sameGuildOnly
     }
   }
 
@@ -24,14 +21,14 @@ module.exports = class EmojiParameter extends Parameter {
     let id = ''
     let isAnimated = ''
 
-    if (!this.acceptEmojiNames) {
-      if (!regexResult) throw new CommandError(t('errors:invalidEmoji'))
-      name = regexResult[1]
-      id = regexResult[2]
-      isAnimated = Boolean(animatedRegexResult)
+    if (regexResult) {
+      if (this.sameGuildOnly && !guild.emojis.get(regexResult[2])) throw new CommandError(t('errors:emojiNotFromSameGuild'))
+      emojiName = regexResult[1]
+      emojiId = regexResult[2]
+      emojiIsAnimated = Boolean(animatedRegexResult)
     }
 
-    if (this.acceptEmojiNames) {
+    if (!regexResult) {
       const emoji = guild.emojis.find('name', arg)
       if (!emoji) throw new CommandError(t('errors:invalidEmoji'))
       if (this.sameGuildOnly && !emoji) throw new CommandError(t('errors:emojiNotFromSameGuild'))

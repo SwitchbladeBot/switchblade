@@ -6,8 +6,7 @@ module.exports = class RestrictEmojiRemove extends Command {
       name: 'remove',
       parentCommand: 'restrictemoji',
       parameters: [{
-        type: 'emoji',
-        sameGuildOnly: true
+        type: 'emoji'
       }, {
         type: 'role',
         full: true

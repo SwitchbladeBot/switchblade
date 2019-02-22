@@ -1096,5 +1096,10 @@
     "noMember": "You need to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
     "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
+  },
+  "morejpeg": {
+	"commandDescription": "Adds JPEG compression to an image.",
+	"commandUsage": "[image link]",
+	"missingImage": "You need to give me a link or an image!"
   }
 }

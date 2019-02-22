@@ -5,8 +5,7 @@ module.exports = class RestrictEmojiReset extends Command {
       name: 'reset',
       parentCommand: 'restrictemoji',
       parameters: [{
-        type: 'emoji',
-        sameGuildOnly: true
+        type: 'emoji'
       }]
     })
   }
