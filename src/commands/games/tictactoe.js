@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, MemberParameter, CommandRequirements, BooleanFlagParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const COLLECTOR_TIMEOUT = 30
 const CONFIRMATION_EMOJI = '✅'
@@ -43,24 +42,21 @@ const gridToLinear = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2
 
 module.exports = class TicTacToe extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'tictactoe'
-    this.aliases = ['ttt']
-
-    this.category = 'games'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, botPermissions: ['MANAGE_MESSAGES'], permissions: ['ADD_REACTIONS'] })
-
-    this.parameters = new CommandParameters(this,
-      new MemberParameter({ missingError: 'commands:tictactoe.missingUser', acceptSelf: false }),
-      [
-        new BooleanFlagParameter({ name: 'text' })
-      ]
-    )
+    super(client, {
+      name: 'tictactoe',
+      aliases: ['ttt'],
+      category: 'games',
+      requirements: { guildOnly: true, botPermissions: ['MANAGE_MESSAGES'], permissions: ['ADD_REACTIONS'] },
+      parameters: [{
+        type: 'member', acceptSelf: false, missingError: 'commands:tictactoe.missingUser'
+      }, [{
+        type: 'booleanFlag', name: 'text'
+      }]]
+    })
   }
 
   async run ({ channel, member, author, t, flags }, opponent) {
-    const selectedBoard = flags['text'] ? BOARDS['text'] : BOARDS['default']
+    const selectedBoard = BOARDS[flags.text ? 'text' : 'default']
     const gameMessage = await channel.send(
       opponent,
       new SwitchbladeEmbed(author)

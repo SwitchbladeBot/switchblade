@@ -1,13 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class SpotifyPlaylist extends SearchCommand {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'spotify')
-    this.name = 'playlist'
-    this.aliases = ['p']
-    this.embedColor = Constants.SPOTIFY_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/vw8svty.png'
+    super(client, {
+      name: 'playlist',
+      aliases: ['p'],
+      parentCommand: 'spotify',
+      embedColor: Constants.SPOTIFY_COLOR,
+      embedLogoURL: 'https://i.imgur.com/vw8svty.png'
+    })
   }
 
   async search (context, query) {
@@ -19,6 +20,7 @@ module.exports = class SpotifyPlaylist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, { id }) {
+    channel.startTyping()
     const { name, description, external_urls: urls, followers, images, owner, tracks } = await this.client.apis.spotify.getPlaylist(id)
     const [ cover ] = images.sort((a, b) => b.width - a.width)
     const embed = new SwitchbladeEmbed(author)
@@ -35,6 +37,6 @@ module.exports = class SpotifyPlaylist extends SearchCommand {
     const total = tracks.total
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
     embed.addField(`${t('commands:spotify.trackPlural')} (${total})`, trackList)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

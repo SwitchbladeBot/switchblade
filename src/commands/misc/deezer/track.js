@@ -1,14 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class DeezerTrack extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'deezer')
-
-    this.name = 'track'
-    this.aliases = ['song', 't', 's']
-    this.embedColor = Constants.DEEZER_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
+  constructor (client) {
+    super(client, {
+      name: 'track',
+      aliases: ['song', 't', 's'],
+      parentCommand: 'deezer',
+      embedColor: Constants.DEEZER_COLOR,
+      embedLogoURL: 'https://i.imgur.com/lKlFtbs.png'
+    })
   }
 
   async search (context, query) {
@@ -21,6 +21,7 @@ module.exports = class DeezerTrack extends SearchCommand {
   }
 
   handleResult ({ t, channel, author }, track) {
+    channel.startTyping()
     const { link, title, duration, explicit_lyrics: explicitLyric, artist, album } = track
     const explicit = explicitLyric ? Constants.EXPLICIT : ''
     const embed = new SwitchbladeEmbed(author)
@@ -30,6 +31,6 @@ module.exports = class DeezerTrack extends SearchCommand {
       .setDescription(`${explicit} [${title}](${link}) \`(${MiscUtils.formatDuration(duration * 1000)})\``)
       .addField(t('music:artist'), `[${artist.name}](${artist.link})`, true)
       .addField(t('music:album'), `[${album.title}](https://www.deezer.com/album/${album.id})`, true)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

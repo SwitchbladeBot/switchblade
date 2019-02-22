@@ -1,14 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class DeezerUser extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'deezer')
-
-    this.name = 'user'
-    this.aliases = ['u']
-    this.embedColor = Constants.DEEZER_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
+  constructor (client) {
+    super(client, {
+      name: 'user',
+      aliases: ['u'],
+      parentCommand: 'deezer',
+      embedColor: Constants.DEEZER_COLOR,
+      embedLogoURL: 'https://i.imgur.com/lKlFtbs.png'
+    })
   }
 
   async search (context, query) {
@@ -21,6 +21,7 @@ module.exports = class DeezerUser extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, user) {
+    channel.startTyping()
     const { name, picture_big: cover, id } = user
     const link = `https://www.deezer.com/profile/${id}`
     const followers = await this.client.apis.deezer.getUserFollowers(id)
@@ -33,6 +34,6 @@ module.exports = class DeezerUser extends SearchCommand {
       .setURL(link)
       .addField(t('commands:deezer.followers'), MiscUtils.formatNumber(followers.total, language), true)
       .addField(t('commands:deezer.following'), MiscUtils.formatNumber(followings.total, language), true)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

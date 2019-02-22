@@ -1,13 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class LastfmTrack extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'lastfm')
-    this.name = 'track'
-    this.aliases = ['song', 's', 't']
-    this.embedColor = Constants.LASTFM_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/TppYCun.png'
+  constructor (client) {
+    super(client, {
+      name: 'track',
+      aliases: ['song', 's', 't'],
+      parentCommand: 'lastfm',
+      embedColor: Constants.LASTFM_COLOR,
+      embedLogoURL: 'https://i.imgur.com/TppYCun.png'
+    })
   }
 
   async search (context, query) {
@@ -20,6 +21,7 @@ module.exports = class LastfmTrack extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, trackInfo) {
+    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.LASTFM_COLOR)
       .setAuthor(trackInfo.artist, 'https://i.imgur.com/TppYCun.png', `https://www.last.fm/music/${encodeURI(trackInfo.artist)}`)
@@ -47,6 +49,6 @@ module.exports = class LastfmTrack extends SearchCommand {
     } catch (e) {
     }
 
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

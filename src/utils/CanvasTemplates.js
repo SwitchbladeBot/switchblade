@@ -190,7 +190,8 @@ module.exports = class CanvasTemplates {
 
     const IMAGE_ASSETS = Promise.all([
       Image.from(song.mainImage || Constants.DEFAULT_SONG_PNG, !song.mainImage),
-      Image.from(song.backgroundImage || Constants.DEFAULT_SONG_PNG, !song.backgroundImage)
+      Image.from(song.backgroundImage || Constants.DEFAULT_SONG_PNG, !song.backgroundImage),
+      Image.from(Constants[`${song.source.toUpperCase()}_BRAND_SVG`])
     ])
 
     const canvas = createCanvas(WIDTH, HEIGHT)
@@ -245,7 +246,12 @@ module.exports = class CanvasTemplates {
     ctx.writeParagraph(song.title, TITLE_FONT, LEFT_TEXT_MARGIN, TITLE_Y, RIGHT_TEXT_MARGIN, TITLE_Y + 1, 5, ALIGN.BOTTOM_LEFT)
 
     // Image handling
-    const [ mainImage, backgroundImage ] = await IMAGE_ASSETS
+    const [ mainImage, backgroundImage, brand ] = await IMAGE_ASSETS
+
+    // Brand
+    const BRAND_MARGIN = 12
+    const BRAND_SIZE = 44
+    ctx.drawIcon(brand, THUMBNAIL_WIDTH + BRAND_MARGIN, BRAND_MARGIN, BRAND_SIZE, BRAND_SIZE, '#fff')
 
     // Thumbnail
     ctx.fillStyle = '#000000'
@@ -309,8 +315,10 @@ module.exports = class CanvasTemplates {
       }
     })()
 
+    const DEFAULT_AVATAR = Image.from('https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png')
+
     const avatarCoords = []
-    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')))
+    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')).catch(() => DEFAULT_AVATAR))
     const IMAGE_ASSETS = Promise.all([
       Image.from(icon, true),
       Image.from(Constants.MEDAL_SVG, true),
@@ -769,5 +777,15 @@ module.exports = class CanvasTemplates {
     ctx.write(shipName, TITLE_X, TITLE_RECT_Y + TITLE_TEXT_MARGIN, FONTS.TITLE, ALIGN.CENTER)
 
     return canvas.toBuffer()
+  }
+
+  static async morejpeg (text) {
+    const myimg = await Image.from(text)
+    const WIDTH = myimg.width
+    const HEIGHT = myimg.height
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(myimg, 0, 0, WIDTH, HEIGHT)
+    return canvas.toBuffer('image/jpeg', { quality: 0.08 })
   }
 }

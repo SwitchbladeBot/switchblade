@@ -1,16 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
-const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 const moment = require('moment')
 
 module.exports = class GitHubUser extends Command {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'github')
-    this.name = 'user'
-    this.aliases = ['u']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: false, required: true, missingError: 'commands:github.subcommands.user.noUser' })
-    )
+  constructor (client) {
+    super(client, {
+      name: 'user',
+      aliases: ['u'],
+      parentCommand: 'github',
+      parameters: [{
+        type: 'string', missingError: 'commands:github.subcommands.user.noUser'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, user) {

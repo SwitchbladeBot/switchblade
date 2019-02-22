@@ -38,10 +38,10 @@ module.exports = class Web extends Route {
             scope
           }, process.env.JWT_SECRET) })
         } catch (e) {
-          res.status(403).json({ ok: false })
+          res.status(403).json({ error: 'Couldn\'t validate authentication code!' })
         }
       } else {
-        res.status(400).json({ ok: false })
+        res.status(400).json({ error: 'An authentication code wasn\'t provided!' })
       }
     })
 

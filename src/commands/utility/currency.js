@@ -1,17 +1,28 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const snekfetch = require('snekfetch')
 
 module.exports = class Currency extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'currency'
-    this.aliases = ['currencyconverter', 'converter']
-    this.category = 'utility'
-    this.envVars = ['KSOFT_KEY']
+    super(client, {
+      name: 'currency',
+      aliases: ['currencyconverter', 'converter'],
+      category: 'utility',
+      requirements: { envVars: ['KSOFT_KEY'] },
+      parameters: [{
+        type: 'string',
+        required: false
+      }, {
+        type: 'number',
+        required: false,
+        min: 1
+      }, {
+        type: 'string',
+        missingError: 'commands:currency.noCurrency'
+      }]
+    })
   }
 
-  async run ({ t, author, channel, defaultPrefix }, to, from = 'USD', value = 1) {
+  async run ({ t, author, channel }, from = 'USD', value = 1, to) {
     const embed = new SwitchbladeEmbed(author)
     try {
       const { body } = await snekfetch.get('https://api.ksoft.si/kumo/currency').query({ to, from, value }).set({

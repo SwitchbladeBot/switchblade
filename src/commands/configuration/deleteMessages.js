@@ -1,14 +1,15 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, BooleanParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class ConfigDeleteMessages extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'config')
-    this.name = 'deleteMessages'
-
-    this.parameters = new CommandParameters(this,
-      new BooleanParameter({ missingError: 'commands:deleteMessage.missingState' })
-    )
+    super(client, {
+      name: 'deleteMessages',
+      parentCommand: 'config',
+      parameters: [{
+        type: 'boolean',
+        missingError: 'commands:deleteMessage.missingState'
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, newState) {

@@ -1,12 +1,13 @@
-const RandomRedditPostCommand = require('../../structures/command/RandomRedditPostCommand.js')
+const { RandomRedditPostCommand } = require('../../')
 
 module.exports = class Aww extends RandomRedditPostCommand {
   constructor (client) {
-    super(client)
-    this.name = 'aww'
-    this.aliases = ['aw', 'cute', 'eyebleach']
-    this.category = 'memes'
-    this.titleString = 'commands:aww.title'
-    this.subreddit = 'aww'
+    super(client, {
+      name: 'aww',
+      aliases: ['aw', 'cute', 'eyebleach'],
+      category: 'memes',
+      subreddit: 'aww',
+      titleString: 'commands:aww.title'
+    })
   }
 }

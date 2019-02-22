@@ -1,22 +1,19 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils, CommandStructures } = require('../../../')
-const { BooleanFlagParameter, CommandParameters, StringParameter } = CommandStructures
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class DeezerPodcast extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'deezer')
-
-    this.name = 'podcast'
-    this.aliases = ['pod']
-    this.embedColor = Constants.DEEZER_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' }),
-      [
-        new BooleanFlagParameter({ name: 'episodes', aliases: [ 'e', 'eps', 'ep' ] })
-      ]
-    )
+  constructor (client) {
+    super(client, {
+      name: 'podcast',
+      aliases: ['pod'],
+      parentCommand: 'deezer',
+      embedColor: Constants.DEEZER_COLOR,
+      embedLogoURL: 'https://i.imgur.com/lKlFtbs.png',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commons:search.noParams'
+      }, [{
+        type: 'booleanFlag', name: 'episodes', aliases: [ 'e', 'eps', 'ep' ]
+      }]]
+    })
   }
 
   async search (context, query) {
@@ -29,6 +26,7 @@ module.exports = class DeezerPodcast extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, podcast) {
+    channel.startTyping()
     const { id, title, description, link, fans, picture_big: cover } = podcast
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
@@ -43,10 +41,10 @@ module.exports = class DeezerPodcast extends SearchCommand {
       if (data.length > 10) episodesList.push(t('commands:deezer.subcommands.podcast.moreEpisodes', { episodes: data.length - 10 }))
       embed.setDescription(episodesList)
         .setAuthor(t('commands:deezer.subcommands.podcast.podcastEpisodes'), this.embedLogoURL, link)
-      return channel.send(embed)
+      return channel.send(embed).then(() => channel.stopTyping())
     }
     embed.setDescription(description.length < 2040 ? description : description.substring(0, 2040) + '...')
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }
