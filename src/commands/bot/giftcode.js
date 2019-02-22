@@ -1,20 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 const types = ['redeem', 'generate']
 
 module.exports = class GiftCode extends Command {
   constructor (client) {
-    super(client)
-
-    this.name = 'giftcode'
-    this.aliases = ['gc']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({
-        full: false,
+    super(client, {
+      name: 'giftcode',
+      aliaes: ['gc'],
+      requirements: { databaseOnly: true },
+      parameters: [{
+        type: 'string',
         whitelist: types,
-        required: true,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed()
             .setDescription([
@@ -22,7 +18,7 @@ module.exports = class GiftCode extends Command {
               t('commands:giftcode.redeem', { command: `${prefix}${this.name}` })
             ].join('\n'))
         }
-      })
-    )
+      }]
+    })
   }
 }

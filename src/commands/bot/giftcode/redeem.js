@@ -1,17 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../../')
-const { Command, CommandParameters, StringParameter, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../../')
 
 module.exports = class GiftCodeRedeem extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'giftcode')
-    this.name = 'redeem'
-    this.aliases = ['rdm']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: false, required: true, missingError: 'commands:giftcode.subcommands.redeem.noCode' })
-    )
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, openDms: true, onlyOldAccounts: true })
+    super(client, {
+      name: 'redeem',
+      aliases: ['rdm'],
+      parentCommand: 'giftcode',
+      parameters: [{
+        type: 'string',
+        missingError: 'commands:giftcode.subcommands.redeem.noCode'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, giftcode) {

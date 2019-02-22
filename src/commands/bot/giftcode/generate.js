@@ -1,17 +1,19 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../../')
-const { Command, CommandParameters, NumberParameter, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../../')
 
 module.exports = class GiftCodeGenerate extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'giftcode')
-    this.name = 'generate'
-    this.aliases = ['gnr']
-
-    this.parameters = new CommandParameters(this,
-      new NumberParameter(({ min: 25000, max: 50000, missingError: 'commands:giftcode.subcommands.generate.noValue' }))
-    )
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, openDms: true, onlyOldAccounts: true })
+    super(client, {
+      name: 'generate',
+      aliases: ['gnr'],
+      parentCommand: 'giftcode',
+      requirements: { openDms: true, onlyOldAccounts: true },
+      parameters: [{
+        type: 'number',
+        min: 25000,
+        max: 50000,
+        missingError: 'commands:giftcode.subcommands.generate.noValue'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, value) {
