@@ -7,7 +7,7 @@ const ANIMATED_REGEX = /^(?:<a:)(.*?)(?::)([0-9]{18})(?:>)$/
 module.exports = class EmojiParameter extends Parameter {
   static parseOptions (options = {}) {
     return {
-      ...options,
+      ...super.parseOptions(options),
       sameGuildOnly: !!options.sameGuildOnly
     }
   }

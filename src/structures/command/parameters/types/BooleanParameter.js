@@ -4,7 +4,7 @@ const CommandError = require('../../CommandError.js')
 module.exports = class BooleanParameter extends Parameter {
   static parseOptions (options = {}) {
     return {
-      ...options,
+      ...super.parseOptions(options),
       trueValues: options.trueValues || ['true', 'yes', 'on'],
       falseValues: options.falseValues || ['false', 'no', 'off']
     }
