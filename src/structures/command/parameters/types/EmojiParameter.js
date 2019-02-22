@@ -5,20 +5,38 @@ const EMOJI_REGEX = /^(?:<:)(.*?)(?::)([0-9]{18})(?:>)$/
 const ANIMATED_REGEX = /^(?:<a:)(.*?)(?::)([0-9]{18})(?:>)$/
 
 module.exports = class EmojiParameter extends Parameter {
-  parse (arg, { t }) {
+  static parseOptions (options = {}) {
+    return {
+      ...super.parseOptions(options),
+      sameGuildOnly: !!options.sameGuildOnly
+    }
+  }
+
+  static parse (arg, { t, guild }) {
     const staticRegexResult = EMOJI_REGEX.exec(arg)
     const animatedRegexResult = ANIMATED_REGEX.exec(arg)
     const regexResult = staticRegexResult || animatedRegexResult
-    if (!regexResult) throw new CommandError(t('errors:invalidEmoji'))
-    return this.emoji(regexResult[1], regexResult[2], Boolean(animatedRegexResult))
-  }
 
-  emoji (name, id, isAnimated) {
-    return {
-      name,
-      id,
-      isAnimated,
-      url: `https://cdn.discordapp.com/emojis/${id}.${isAnimated ? 'gif' : 'png'}`
+    let name = ''
+    let id = ''
+    let isAnimated = ''
+
+    if (regexResult) {
+      if (this.sameGuildOnly && !guild.emojis.get(regexResult[2])) throw new CommandError(t('errors:emojiNotFromSameGuild'))
+      name = regexResult[1]
+      id = regexResult[2]
+      isAnimated = Boolean(animatedRegexResult)
     }
+
+    if (!regexResult) {
+      const emoji = guild.emojis.find(e => e.name === arg)
+      if (!emoji) throw new CommandError(t('errors:invalidEmoji'))
+      if (this.sameGuildOnly && !emoji) throw new CommandError(t('errors:emojiNotFromSameGuild'))
+      name = emoji.name
+      id = emoji.id
+      emoji.isAnimated = emoji.animated
+    }
+
+    return { name, id, isAnimated, url: `https://cdn.discordapp.com/emojis/${id}.${isAnimated ? 'gif' : 'png'}` }
   }
 }

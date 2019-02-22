@@ -1,11 +1,12 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Coinflip extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'coinflip'
-    this.category = 'games'
+    super(client, {
+      name: 'coinflip',
+      aliases: ['cf'],
+      category: 'games'
+    })
   }
 
   run ({ channel, author, t }) {

@@ -4,10 +4,10 @@ const snekfetch = require('snekfetch')
 
 module.exports = class UIGradient extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'uigradient'
-    this.aliases = ['rg', 'randomgradient']
-    this.category = 'general'
+    super(client, {
+      name: 'uigradient',
+      aliases: ['rg', 'randomgradient']
+    })
   }
 
   async run ({ t, author, channel }) {
@@ -20,7 +20,7 @@ module.exports = class UIGradient extends Command {
     const gradient = CanvasTemplates.gradient(colors, 300, 100)
 
     embed.setTitle(name)
-      .setURL(`https://uigradients.com/#${name.replace(' ', '')}`)
+      .setURL(`https://uigradients.com/#${name.replace(/\s+/g, '')}`)
       .setColor(colors[0])
       .setImage('attachment://gradient.png')
       .setDescription(`\`${colors.join(`\`, \``)}\``)

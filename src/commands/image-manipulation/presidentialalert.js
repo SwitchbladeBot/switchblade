@@ -1,19 +1,18 @@
-const { CanvasTemplates, CommandStructures } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { CanvasTemplates, Command } = require('../../')
 
 const { Attachment } = require('discord.js')
 
 module.exports = class PresidentialAlert extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'presidentialalert'
-    this.aliases = ['pa']
-    this.category = 'images'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commands:presidentialalert.missingText' })
-    )
-    this.requirements = new CommandRequirements(this, { canvasOnly: true })
+    super(client, {
+      name: 'presidentialalert',
+      aliases: ['pa'],
+      category: 'images',
+      requirements: { canvasOnly: true },
+      parameters: [{
+        type: 'string', full: true, required: true, missingError: 'commands:presidentialalert.missingText'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, text) {

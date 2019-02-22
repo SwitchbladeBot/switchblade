@@ -1,17 +1,17 @@
 /* eslint-disable no-control-regex */
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const net = require('net')
 
 module.exports = class MCQuery extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'mcquery'
-    this.category = 'games'
-    this.aliases = ['minecraftquery']
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ missingError: 'commands:mcquery.noIP' })
-    )
+    super(client, {
+      name: 'mcquery',
+      aliases: ['minecraftquery'],
+      category: 'games',
+      parameters: [{
+        type: 'string', missingError: 'commands:mcquery.noIP'
+      }]
+    })
   }
   async run ({ t, author, channel }, server) {
     let [ address, port = 25565 ] = server.split(':')

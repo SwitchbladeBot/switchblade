@@ -55,7 +55,8 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
       })
 
     const { body } = res
-    if (!body || ['LOAD_FAILED', 'NO_MATCHES'].includes(body.loadType) || !body.tracks.length) return
+    if (!body) return false
+    if (['LOAD_FAILED', 'NO_MATCHES'].includes(body.loadType) || !body.tracks.length) return body.loadType !== 'LOAD_FAILED'
 
     const songs = body.tracks
     songs.searchResult = body.loadType === 'SEARCH_RESULT'
@@ -96,7 +97,8 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
         }
       }
     }
-    return new SongSearchResult(true)
+
+    return new SongSearchResult(typeof songs === 'boolean' ? songs : true)
   }
 
   async play (song, channel) {
