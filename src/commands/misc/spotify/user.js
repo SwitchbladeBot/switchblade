@@ -1,15 +1,15 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
-const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class SpotifyUser extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'spotify')
-    this.name = 'user'
-    this.aliases = ['u']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.user.noUser' })
-    )
+    super(client, {
+      name: 'user',
+      aliases: ['u'],
+      parentCommand: 'spotify',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:spotify.subcommands.user.noUser'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, user) {

@@ -1,14 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class DeezerUser extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'deezer')
-
-    this.name = 'user'
-    this.aliases = ['u']
-    this.embedColor = Constants.DEEZER_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
+  constructor (client) {
+    super(client, {
+      name: 'user',
+      aliases: ['u'],
+      parentCommand: 'deezer',
+      embedColor: Constants.DEEZER_COLOR,
+      embedLogoURL: 'https://i.imgur.com/lKlFtbs.png'
+    })
   }
 
   async search (context, query) {

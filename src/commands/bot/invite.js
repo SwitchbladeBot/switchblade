@@ -2,9 +2,10 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Invite extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'invite'
-    this.category = 'bot'
+    super(client, {
+      name: 'invite',
+      category: 'bot'
+    })
   }
 
   async run ({ t, channel }) {

@@ -1,13 +1,13 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 const snekfetch = require('snekfetch')
 const nekoAPI = 'https://nekos.life/api/v2/img/'
 
 module.exports = class NekoGif extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'nekogif'
-    this.category = 'anime'
+    super(client, {
+      name: 'nekogif',
+      category: 'anime'
+    })
   }
 
   async run ({ t, author, channel }) {

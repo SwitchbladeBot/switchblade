@@ -1,17 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, CommandError, Parameter } = CommandStructures
+const { Command, CommandError, Parameter, SwitchbladeEmbed } = require('../../')
 const moment = require('moment')
 
 module.exports = class Seek extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'seek'
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true })
-    this.parameters = new CommandParameters(this,
-      new TargetParameter({ full: true, missingError: 'commands:seek.missingSeekParameter' })
-    )
+    super(client, {
+      name: 'seek',
+      category: 'music',
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true },
+      parameters: [{
+        type: TargetParameter, full: true, missingError: 'commands:seek.missingSeekParameter'
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, target) {
@@ -35,7 +34,7 @@ const TIMESTAMP_REGEX = /^(\d+):(\d+)(?::(\d+))?$/
 const FORWARD_REGEX = /^\+(\d+)$/
 const BACKWARD_REGEX = /^-(\d+)$/
 class TargetParameter extends Parameter {
-  parse (arg, { client, guild }) {
+  static parse (arg, { client, guild }) {
     if (TIMESTAMP_REGEX.test(arg)) {
       const [ , f, s, t ] = TIMESTAMP_REGEX.exec(arg)
       const { state: { position } } = client.playerManager.get(guild.id)
