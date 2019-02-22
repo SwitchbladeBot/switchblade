@@ -23,9 +23,9 @@ module.exports = class EmojiParameter extends Parameter {
 
     if (regexResult) {
       if (this.sameGuildOnly && !guild.emojis.get(regexResult[2])) throw new CommandError(t('errors:emojiNotFromSameGuild'))
-      emojiName = regexResult[1]
-      emojiId = regexResult[2]
-      emojiIsAnimated = Boolean(animatedRegexResult)
+      name = regexResult[1]
+      id = regexResult[2]
+      isAnimated = Boolean(animatedRegexResult)
     }
 
     if (!regexResult) {
