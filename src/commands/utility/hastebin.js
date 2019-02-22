@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const snekfetch = require('snekfetch')
 
@@ -7,15 +6,16 @@ const baseURL = 'https://hastebin.com'
 
 module.exports = class Hastebin extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'hastebin'
-    this.aliases = ['haste']
-
-    this.category = 'utility'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:npm.noNameProvided' })
-    )
+    super(client, {
+      name: 'hastebin',
+      aliases: 'haste',
+      category: 'utility',
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:hastebin.missingCode'
+      }]
+    })
   }
 
   async run ({ t, author, channel, message }, code) {
