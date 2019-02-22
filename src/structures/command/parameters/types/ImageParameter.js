@@ -44,6 +44,7 @@ module.exports = class ImageParameter extends Parameter {
       authorAvatar: defVal(options, 'authorAvatar', true),
       lastMessages: {
         accept: true,
+        limit: 10,
         attachment: true,
         embed: true,
         embedImage: true,
@@ -108,7 +109,7 @@ module.exports = class ImageParameter extends Parameter {
 
     // Last attachment from channel's last 10 messages
     if (this.lastMessages.accept) {
-      const lastMessages = channel.messages.last(10)
+      const lastMessages = channel.messages.last(this.lastMessages.limit)
       if (lastMessages.length) {
         for (let i = 0; i < lastMessages.length; i++) {
           const msg = lastMessages[i]
