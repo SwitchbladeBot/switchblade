@@ -52,7 +52,7 @@ module.exports = class Command {
     }
 
     const [ subcmd ] = args
-    const subcommand = this.subcommands.find(c => c.name.toLowerCase() === subcmd || c.aliases.includes(subcmd))
+    const subcommand = this.subcommands.find(c => c.name.toLowerCase() === subcmd || (c.aliases && c.aliases.includes(subcmd)))
     if (subcommand) {
       return subcommand._run(context, args.splice(1))
     }
@@ -135,7 +135,7 @@ module.exports = class Command {
   }
 
   asJSON (t, command = this) {
-    const aliases = command.aliases > 0 ? command.aliases : undefined
+    const aliases = command.aliases && command.aliases.length ? command.aliases : undefined
     const usage = t([`commands:${command.tPath}.commandUsage`, '']) !== '' ? t(`commands:${command.tPath}.commandUsage`) : undefined
     const subcommands = command.subcommands.length > 0 ? command.subcommands.map(sc => this.asJSON(t, sc)) : undefined
 

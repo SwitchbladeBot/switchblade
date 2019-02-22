@@ -25,7 +25,7 @@ module.exports = class Help extends Command {
       const command = cmd.split(' ').reduce((o, ca) => {
         const arr = (Array.isArray(o) && o) || (o && o.subcommands)
         if (!arr) return o
-        return arr.find(c => c.name === ca || c.aliases.includes(ca))
+        return arr.find(c => c.name === ca || (c.aliases && c.aliases.includes(ca)))
       }, validCommands)
 
       if (command) {
@@ -35,7 +35,7 @@ module.exports = class Help extends Command {
           command.usage(t, prefix, false)
         ]
 
-        if (command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
+        if (command.aliases && command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
         if (command.subcommands.length > 0) description.push(`**${t('commands:help.subcommands')}:** ${command.subcommands.map(a => `\`${a.name}\``).join(', ')}`)
 
         embed.setTitle(command.fullName)
