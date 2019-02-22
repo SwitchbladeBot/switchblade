@@ -1,23 +1,23 @@
-const { Constants, CommandStructures, SwitchbladeEmbed } = require('../../../')
-const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, Constants, SwitchbladeEmbed } = require('../../../')
 
 const platforms = { xbox: '1', psn: '2', origin: '5', pc: '5' }
 
 module.exports = class ApexLegendsPlayer extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'apexlegends')
-    this.name = 'player'
-    this.aliases = ['user', 'p']
-    this.embedColor = Constants.APEX_LEGENDS_COLOR
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({
-        required: true,
+    super(client, {
+      name: 'player',
+      aliaes: ['user', 'p', 'u'],
+      parentCommand: 'apexlegends',
+      parameters: [{
+        type: 'string',
         whitelist: platforms,
         missingError: 'commands:apexlegends.noPlatform'
-      }),
-      new StringParameter({ required: true, missingError: 'commands:apexlegends.noPlayer' })
-    )
+      }, {
+        type: 'string',
+        missingError: 'commands:apexlegends.noPlayer'
+      }],
+      embedColor: Constants.APEX_LEGENDS_COLOR
+    })
   }
 
   async run ({ t, channel, author, language }, platform, player) {
