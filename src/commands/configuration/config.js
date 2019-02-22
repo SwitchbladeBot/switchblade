@@ -1,14 +1,13 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Config extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'config'
-    this.aliases = ['cfg']
-    this.category = 'configuration'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD'] })
+    super(client, {
+      name: 'config',
+      aliases: ['cfg'],
+      category: 'configuration',
+      requirements: { guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD'] }
+    })
   }
 
   run ({ t, author, prefix, alias, channel }) {

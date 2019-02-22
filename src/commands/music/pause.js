@@ -1,13 +1,13 @@
-const { Command, CommandRequirements, Constants, SwitchbladeEmbed } = require('../../')
+const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Pause extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'pause'
-    this.aliases = ['resume']
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true })
+    super(client, {
+      name: 'pause',
+      aliases: ['resume'],
+      category: 'music',
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
+    })
   }
 
   async run ({ t, author, channel, guild }) {

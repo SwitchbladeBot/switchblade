@@ -1,18 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const moment = require('moment-timezone')
 
 module.exports = class Time extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'time'
-    this.aliases = ['currenttime']
-    this.category = 'general'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:time.noZone' })
-    )
+    super(client, {
+      name: 'time',
+      aliases: ['currenttime'],
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:time.noZone'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, address) {

@@ -8,6 +8,11 @@ module.exports = {
   CommandError: CommandStructures.CommandError,
   CommandParameters: CommandStructures.CommandParameters,
   CommandRequirements: CommandStructures.CommandRequirements,
+  Parameter: CommandStructures.Parameter,
+
+  // Command extensions
+  RandomRedditPostCommand: CommandStructures.RandomRedditPostCommand,
+  SearchCommand: CommandStructures.SearchCommand,
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),

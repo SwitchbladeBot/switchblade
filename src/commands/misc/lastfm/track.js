@@ -1,13 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class LastfmTrack extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'lastfm')
-    this.name = 'track'
-    this.aliases = ['song', 's', 't']
-    this.embedColor = Constants.LASTFM_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/TppYCun.png'
+  constructor (client) {
+    super(client, {
+      name: 'track',
+      aliases: ['song', 's', 't'],
+      parentCommand: 'lastfm',
+      embedColor: Constants.LASTFM_COLOR,
+      embedLogoURL: 'https://i.imgur.com/TppYCun.png'
+    })
   }
 
   async search (context, query) {

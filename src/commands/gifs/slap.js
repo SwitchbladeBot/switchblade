@@ -1,17 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 const snekfetch = require('snekfetch')
 
 module.exports = class Slap extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'slap'
-    this.category = 'images'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:slap.noMention', acceptBot: true, acceptSelf: false })
-    )
+    super(client, {
+      name: 'slap',
+      category: 'images',
+      parameters: [{
+        type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:slap.noMention'
+      }]
+    })
   }
 
   async run ({ t, channel, author }, user) {

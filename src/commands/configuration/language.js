@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const i18next = require('i18next')
 
@@ -8,12 +7,12 @@ const languageAliases = (cli) => Object.values(cli.cldr.languages).map(v => Obje
 
 module.exports = class ConfigLanguage extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'config')
-    this.name = 'language'
-    this.aliases = ['lang']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({
+    super(client, {
+      name: 'language',
+      aliases: ['lang'],
+      parentCommand: 'config',
+      parameters: [{
+        type: 'string',
         full: true,
         whitelist: (arg) => languageCodes().concat(languageAliases(this.client)).some(l => l.toLowerCase() === arg.toLowerCase()),
         missingError: ({ t, prefix, author }) => {
@@ -27,8 +26,8 @@ module.exports = class ConfigLanguage extends Command {
               `${t('commands:config.missingTranslation')}`
             ].join('\n'))
         }
-      })
-    )
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, lang) {

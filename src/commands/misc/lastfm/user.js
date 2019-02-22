@@ -1,19 +1,16 @@
-const { SwitchbladeEmbed, Constants, MiscUtils, CommandParameters, CommandStructures, Command } = require('../../../')
-const { StringParameter, CommandError } = CommandStructures
+const { SwitchbladeEmbed, Constants, MiscUtils, Command, CommandError } = require('../../../')
 const moment = require('moment')
 
 module.exports = class LastfmUser extends Command {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'lastfm')
-    this.name = 'user'
-    this.aliases = ['u']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({
-        full: true,
-        missingError: 'commands:lastfm.subcommands.user.missing'
-      })
-    )
+  constructor (client) {
+    super(client, {
+      name: 'user',
+      aliases: ['u'],
+      parentCommand: 'lastfm',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:lastfm.subcommands.user.missing'
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild, language }, param) {
