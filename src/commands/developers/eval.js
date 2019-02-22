@@ -1,21 +1,20 @@
 /* eslint-disable no-eval */
 
-const { CommandStructures } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { Command } = require('../../')
 const util = require('util')
 
 module.exports = class Eval extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'eval'
-    this.aliases = ['execute']
-    this.category = 'developers'
-    this.hidden = true
-
-    this.requirements = new CommandRequirements(this, { devOnly: true })
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'errors:missingParameters', showUsage: false })
-    )
+    super(client, {
+      name: 'eval',
+      aliases: ['execute'],
+      category: 'developers',
+      hidden: true,
+      requirements: { devOnly: true },
+      parameters: [{
+        type: 'string', full: true, missingError: 'errors:missingParameters', showUsage: false
+      }]
+    })
   }
 
   async run ({ channel, message }, expr) {

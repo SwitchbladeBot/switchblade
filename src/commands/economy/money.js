@@ -1,17 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Money extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'money'
-    this.aliases = ['balance', 'bal']
-    this.category = 'economy'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true })
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ full: true, required: false })
-    )
+    super(client, {
+      name: 'money',
+      aliases: ['balance', 'bal'],
+      category: 'economy',
+      requirements: { guildOnly: true, databaseOnly: true },
+      parameters: [{
+        type: 'user', full: true, required: false
+      }]
+    })
   }
 
   async run ({ t, author, channel }, user = author) {

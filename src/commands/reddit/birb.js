@@ -1,12 +1,13 @@
-const RandomRedditPostCommand = require('../../structures/command/RandomRedditPostCommand.js')
+const { RandomRedditPostCommand } = require('../../')
 
 module.exports = class Birb extends RandomRedditPostCommand {
   constructor (client) {
-    super(client)
-    this.name = 'birb'
-    this.aliases = ['bird', 'borb']
-    this.category = 'memes'
-    this.titleString = 'commands:birb.hereIsYourBirb'
-    this.subreddit = 'birbs'
+    super(client, {
+      name: 'birb',
+      aliases: ['bird', 'borb'],
+      category: 'memes',
+      subreddit: 'birbs',
+      titleString: 'commands:birb.hereIsYourBirb'
+    })
   }
 }

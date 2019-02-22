@@ -1,14 +1,13 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Bassboost extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'bassboost'
-    this.aliases = ['bass', 'earrape']
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true })
+    super(client, {
+      name: 'bassboost',
+      aliases: ['bass', 'earrape'],
+      category: 'music',
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
+    })
   }
 
   async run ({ t, author, channel, guild }, volume) {

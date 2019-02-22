@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 const handshakeArray = [
   'https://i.gifer.com/C9M7.gif',
@@ -9,19 +8,20 @@ const handshakeArray = [
 
 module.exports = class Handshake extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'handshake'
-    this.aliases = ['hs', 'hands']
-    this.category = 'images'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:handshake.noMention', acceptBot: true, acceptSelf: false })
-    )
+    super(client, {
+      name: 'handshake',
+      aliases: ['hs', 'hands'],
+      category: 'images',
+      parameters: [{
+        type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:handshake.noMention'
+      }]
+    })
   }
 
   run ({ t, channel, author }, user) {
     const handshakeImg = handshakeArray[Math.floor(Math.random() * handshakeArray.length)]
     const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     embed.setImage(handshakeImg)
       .setDescription(t('commands:handshake.success', { handshaker: author, handshaked: user }))
     channel.send(embed).then(() => channel.stopTyping())

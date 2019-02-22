@@ -1,13 +1,13 @@
-const { Command, CommandRequirements, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Loop extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'loop'
-    this.aliases = ['repeat']
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true })
+    super(client, {
+      name: 'loop',
+      aliases: ['repeat'],
+      category: 'music',
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
+    })
   }
 
   async run ({ t, author, channel, guild }) {

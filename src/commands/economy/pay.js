@@ -1,17 +1,23 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, CommandRequirements, NumberParameter, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Pay extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'pay'
-    this.category = 'economy'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, onlyOldAccounts: true })
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:pay.noMember', acceptSelf: false, errors: { acceptSelf: 'commands:pay.cantPayYourself' } }),
-      new NumberParameter({ min: 1, missingError: 'commands:pay.noValue' })
-    )
+    super(client, {
+      name: 'pay',
+      aliases: ['transfer'],
+      category: 'economy',
+      requirements: { guildOnly: true, databaseOnly: true, onlyOldAccounts: true },
+      parameters: [{
+        type: 'user',
+        acceptSelf: false,
+        missingError: 'commands:pay.noMember',
+        errors: { acceptSelf: 'commands:pay.cantPayYourself' }
+      }, {
+        type: 'number',
+        min: 1,
+        missingError: 'commands:pay.noValue'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, receiver, value) {
