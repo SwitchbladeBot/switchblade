@@ -1,16 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, NumberParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
+
 const snekfetch = require('snekfetch')
 
 module.exports = class NumberFacts extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'numberfacts'
-    this.aliases = ['number', 'numfacts', 'numf']
-
-    this.parameters = new CommandParameters(this,
-      new NumberParameter({ min: 0, missingError: 'commands:numberfacts.validNumber' })
-    )
+    super(client, {
+      name: 'numberfacts',
+      aliases: ['number', 'numfacts', 'numf'],
+      parameters: [{
+        type: 'number', min: 0, missingError: 'commands:numberfacts.validNumber'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, number) {

@@ -1,18 +1,17 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../index')
 
 const emoji = '\uD83D\uDC4F'
 const CLAPIFY_LIMIT = 128
 
 module.exports = class Clapify extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'clapify'
-    this.category = 'memes'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:clapify.missingSentence' })
-    )
+    super(client, {
+      name: 'clapify',
+      category: 'memes',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:clapify.missingSentence'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, text) {

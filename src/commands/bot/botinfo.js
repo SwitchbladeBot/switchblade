@@ -4,10 +4,11 @@ const moment = require('moment')
 
 module.exports = class BotInfo extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'botinfo'
-    this.aliases = ['bi', 'binfo']
-    this.category = 'bot'
+    super(client, {
+      name: 'botinfo',
+      aliases: ['bi', 'binfo'],
+      category: 'bot'
+    })
   }
 
   run ({ channel, author, t, language }) {

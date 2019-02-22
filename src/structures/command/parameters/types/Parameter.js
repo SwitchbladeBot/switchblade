@@ -1,21 +1,26 @@
+const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
+
 module.exports = class Parameter {
-  constructor (options = {}) {
-    options = Object.assign({ required: true, full: false, showUsage: true }, options)
+  static parseOptions (options = {}) {
+    return {
+      required: defVal(options, 'required', true),
+      showUsage: defVal(options, 'showUsage', true),
+      full: !!options.full,
+      whitelist: options.whitelist,
+      fullJoin: options.fullJoin,
+      missingError: options.missingError || 'errors:generic',
 
-    this.showUsage = options.showUsage
-
-    this.whitelist = options.whitelist
-    this.required = !!options.required
-    this.full = !!options.full
-    this.fullJoin = options.fullJoin
-    this.missingError = options.missingError || 'errors:generic'
-
-    // Flags
-    this.name = options.name || 'parameter'
-    this.aliases = options.aliases || []
+      // Flags
+      name: options.name,
+      aliases: options.aliases
+    }
   }
 
-  parse (arg) {
+  static _parse (arg, options, context) {
+    return this.parse.call(options, arg, context)
+  }
+
+  static parse (arg) {
     return arg
   }
 }

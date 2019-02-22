@@ -1,13 +1,12 @@
-const RandomRedditPostCommand = require('../../structures/command/RandomRedditPostCommand.js')
-const { CommandStructures } = require('../../')
-const { CommandRequirements } = CommandStructures
+const { RandomRedditPostCommand } = require('../../')
 
 module.exports = class Pussy extends RandomRedditPostCommand {
   constructor (client) {
-    super(client)
-    this.name = 'pussy'
-    this.subreddit = 'pussy'
-    this.category = 'nsfw'
-    this.requirements = new CommandRequirements(this, { nsfwOnly: true })
+    super(client, {
+      name: 'pussy',
+      subreddit: 'pussy',
+      category: 'nsfw',
+      requirements: { nsfwOnly: true }
+    })
   }
 }

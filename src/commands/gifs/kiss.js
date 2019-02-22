@@ -1,18 +1,17 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 const snekfetch = require('snekfetch')
 
 module.exports = class Kiss extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'kiss'
-    this.aliases = ['beijo', 'beijar']
-    this.category = 'images'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:kiss.noMention', acceptBot: true, acceptSelf: false })
-    )
+    super(client, {
+      name: 'kiss',
+      aliases: ['beijo', 'beijar'],
+      category: 'images',
+      parameters: [{
+        type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:kiss.noMention'
+      }]
+    })
   }
 
   async run ({ t, channel, author }, user) {

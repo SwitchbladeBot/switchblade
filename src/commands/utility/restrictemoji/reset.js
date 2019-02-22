@@ -1,14 +1,13 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../../')
-const { Command, CommandParameters, CommandError, EmojiParameter } = CommandStructures
-
+const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 module.exports = class RestrictEmojiReset extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'restrictemoji')
-    this.name = 'reset'
-
-    this.parameters = new CommandParameters(this,
-      new EmojiParameter({ full: false, required: true })
-    )
+    super(client, {
+      name: 'reset',
+      parentCommand: 'restrictemoji',
+      parameters: [{
+        type: 'emoji'
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, emoji) {

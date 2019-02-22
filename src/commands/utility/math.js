@@ -1,16 +1,17 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const math = require('mathjs')
 
 module.exports = class Math extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'math'
-    this.category = 'utility'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:math.needMathExpression', id: 'expression' })
-    )
+    super(client, {
+      name: 'math',
+      category: 'utility',
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:math.needMathExpression'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, expression) {

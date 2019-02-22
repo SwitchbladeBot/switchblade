@@ -1,18 +1,19 @@
-const { CanvasTemplates, CommandStructures } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, CanvasTemplates } = require('../../')
 
 const { Attachment } = require('discord.js')
 
 module.exports = class MoreJpeg extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'morejpeg'
-    this.aliases = ['needsmorejpeg', 'needsmorejpg', 'jpg', 'compress']
-    this.category = 'images'
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ required: false })
-    )
-    this.requirements = new CommandRequirements(this, { canvasOnly: true })
+    super(client, {
+      name: 'morejpeg',
+      aliases: ['needsmorejpeg', 'needsmorejpg', 'jpg', 'compress'],
+      category: 'images',
+      requirements: { canvasOnly: true },
+      parameters: [{
+        type: 'string',
+        required: false
+      }]
+    })
   }
 
   async run ({ t, author, channel, message }, text) {

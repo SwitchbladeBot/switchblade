@@ -1,13 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class SpotifyTrack extends SearchCommand {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'spotify')
-    this.name = 'track'
-    this.aliases = ['song', 't']
-    this.embedColor = Constants.SPOTIFY_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/vw8svty.png'
+    super(client, {
+      name: 'track',
+      aliases: ['song', 't', 's'],
+      parentCommand: 'spotify',
+      embedColor: Constants.SPOTIFY_COLOR,
+      embedLogoURL: 'https://i.imgur.com/vw8svty.png'
+    })
   }
 
   async search (context, query) {

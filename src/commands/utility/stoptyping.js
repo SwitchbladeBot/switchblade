@@ -2,10 +2,11 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class StopTyping extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'stoptyping'
-    this.aliases = ['st']
-    this.category = 'utility'
+    super(client, {
+      name: 'stoptyping',
+      aliases: ['st'],
+      category: 'utility'
+    })
   }
 
   run ({ t, author, channel }) {

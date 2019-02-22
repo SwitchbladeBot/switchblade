@@ -93,12 +93,12 @@ module.exports = class CommandLoader extends Loader {
     }
 
     if (command.requirements) {
-      if (!command.requirements.apis.every(api => {
+      if (command.requirements.apis && !command.requirements.apis.every(api => {
         if (!this.client.apis[api]) this.log(`[31m${command.fullName} failed to load - Required API wrapper "${api}" not found.`, 'Commands')
         return !!this.client.apis[api]
       })) return false
 
-      if (!command.requirements.envVars.every(variable => {
+      if (command.requirements.envVars && !command.requirements.envVars.every(variable => {
         if (!process.env[variable]) this.log(`[31m${command.fullName} failed to load - Required environment variable "${variable}" is not set.`, 'Commands')
         return !!process.env[variable]
       })) return false

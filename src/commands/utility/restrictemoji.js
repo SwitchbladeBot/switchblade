@@ -1,12 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class RestrictEmoji extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'restrictemoji'
-    this.category = 'utility'
-    this.requirements = new CommandRequirements(this, { guildOnly: true, botPermissions: ['MANAGE_EMOJIS'], permissions: ['MANAGE_EMOJIS'] })
+    super(client, {
+      name: 'restrictemoji',
+      category: 'utility',
+      requirements: {
+        guildOnly: true,
+        botPermissions: ['MANAGE_EMOJIS'],
+        permissions: ['MANAGE_EMOJIS']
+      }
+    })
   }
 
   run ({ t, author, prefix, alias, channel }) {

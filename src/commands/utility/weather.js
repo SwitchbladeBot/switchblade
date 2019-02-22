@@ -1,18 +1,19 @@
-const { CanvasTemplates, CommandStructures } = require('../../')
-const { Command, CommandError, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { CanvasTemplates, Command, CommandError } = require('../../')
 const { Attachment } = require('discord.js')
 const moment = require('moment')
 
 module.exports = class Weather extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'weather'
-    this.category = 'utility'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commands:weather.noCity' })
-    )
-    this.requirements = new CommandRequirements(this, { canvasOnly: true })
+    super(client, {
+      name: 'weather',
+      category: 'utility',
+      requirements: { canvasOnly: true },
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:weather.noCity'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, address) {

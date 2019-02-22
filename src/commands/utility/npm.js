@@ -1,17 +1,19 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const npm = require('api-npm')
 
 module.exports = class Npm extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'npm'
-    this.category = 'utility'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, fullJoin: '-', missingError: 'commands:npm.noNameProvided' })
-    )
+    super(client, {
+      name: 'npm',
+      category: 'utility',
+      parameters: [{
+        type: 'string',
+        full: true,
+        fullJoin: '-',
+        missingError: 'commands:npm.noNameProvided'
+      }]
+    })
   }
 
   run ({ t, author, channel }, pkg) {
