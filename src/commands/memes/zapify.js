@@ -15,12 +15,15 @@ const levelEmoji = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣']
 
 module.exports = class Zapify extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'zapify'
-    this.category = 'memes'
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:zapify.noZap' })
-    )
+    super(client, {
+      name: 'zapify',
+      category: 'memes',
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:zapify.noZap'
+      }]
+    })
   }
 
   async run ({ channel, author, t }, zap) {
