@@ -16,9 +16,13 @@ module.exports = class EmojiParameter extends Parameter {
     if (regexResult) {
       const [ ,,, id ] = regexResult
       const emoji = client.emojis.get(id)
+      if (!emoji) throw new CommandError(t('errors:invalidEmoji'), this.showUsage)
       if (this.sameGuildOnly && emoji.guild.id !== guild.id) throw new CommandError(t('errors:emojiNotFromSameGuild'))
       return emoji
     }
-    return (this.sameGuildOnly ? guild : client).emojis.find(e => e.name === arg)
+
+    const emoji = (this.sameGuildOnly ? guild : client).emojis.find(e => e.name === arg)
+    if (!emoji) throw new CommandError(t('errors:invalidEmoji'), this.showUsage)
+    return emoji
   }
 }
