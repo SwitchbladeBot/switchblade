@@ -1,4 +1,6 @@
-const { Command, CommandError, SwitchbladeEmbed } = require('../../')
+const Command = require('./Command.js')
+const CommandError = require('./Command.js')
+const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 
 module.exports = class SearchCommand extends Command {
   constructor (client, options) {

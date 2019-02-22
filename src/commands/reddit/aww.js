@@ -1,4 +1,4 @@
-const RandomRedditPostCommand = require('../../structures/command/RandomRedditPostCommand.js')
+const { RandomRedditPostCommand } = require('../../')
 
 module.exports = class Aww extends RandomRedditPostCommand {
   constructor (client) {

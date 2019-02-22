@@ -1,4 +1,6 @@
-const { Command, Reddit, SwitchbladeEmbed } = require('../../')
+const Command = require('./Command.js')
+const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
+const Reddit = require('../../utils/Reddit.js')
 
 const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
 

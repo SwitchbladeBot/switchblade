@@ -1,5 +1,4 @@
 const { Command, CommandError, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
-
 const moment = require('moment')
 
 module.exports = class GitHubOrganization extends Command {
