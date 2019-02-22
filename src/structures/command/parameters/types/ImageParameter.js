@@ -74,7 +74,7 @@ module.exports = class ImageParameter extends Parameter {
         return buffer
       } catch (e) {
         client.logError(e)
-        throw new CommandError('error while fetching attachment image')
+        throw new CommandError(t('errors:imageParsingError'))
       }
     }
 
@@ -86,7 +86,7 @@ module.exports = class ImageParameter extends Parameter {
           return buffer
         } catch (e) {
           client.logError(e)
-          throw new CommandError('invalid image URL')
+          throw new CommandError(t('errors:invalidImageLink'), this.showUsage)
         }
       }
 
@@ -100,7 +100,7 @@ module.exports = class ImageParameter extends Parameter {
               return buffer
             } catch (e) {
               client.logError(e)
-              throw new CommandError('error while fetching mentioned user avatar')
+              throw new CommandError(t('errors:imageParsingError'))
             }
           }
         } catch (e) {}
@@ -121,7 +121,7 @@ module.exports = class ImageParameter extends Parameter {
               return buffer
             } catch (e) {
               client.logError(e)
-              throw new CommandError('error while fetching last messages attachment image')
+              throw new CommandError(t('errors:imageParsingError'))
             }
           }
 
@@ -140,7 +140,7 @@ module.exports = class ImageParameter extends Parameter {
                 return buffer
               } catch (e) {
                 client.logError(e)
-                throw new CommandError('error while fetching last messages embed image')
+                throw new CommandError(t('errors:imageParsingError'))
               }
             }
           }
@@ -156,7 +156,7 @@ module.exports = class ImageParameter extends Parameter {
         return buffer
       } catch (e) {
         client.logError(e)
-        throw new CommandError('error while fetching author avatar')
+        throw new CommandError(t('errors:imageParsingError'))
       }
     }
   }
