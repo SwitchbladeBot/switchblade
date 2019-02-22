@@ -9,22 +9,17 @@ module.exports = class Ship extends Command {
       requirements: { databaseOnly: true },
       parameters: [{
         type: 'user',
-        required: true,
-        acceptSelf: true,
-        missingError: 'commands:ship.noUser'
-      }, {
-        type: 'user',
         required: false,
         acceptSelf: true
+      }, {
+        type: 'user',
+        acceptSelf: true,
+        missingError: 'commands:ship.noUser'
       }]
     })
   }
 
-  async run ({ t, author, channel, guild }, first, second) {
-    if (!second) {
-      second = first
-      first = author
-    }
+  async run ({ t, author, channel, guild }, first = author, second) {
     channel.startTyping()
 
     const { username: firstName } = first
