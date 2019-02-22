@@ -76,7 +76,6 @@ module.exports = class CommandParameters {
 
   static parseParameter (context, param, arg, missingErr) {
     const parsedArg = param.type._parse(arg, param, context)
-    // console.log(param)
     if (isNull(parsedArg) && param.required) {
       throw new CommandError(missingErr, param.showUsage)
     }

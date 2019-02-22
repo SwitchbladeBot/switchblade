@@ -1,8 +1,6 @@
 const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
-
 const moment = require('moment')
 
-// TODO: Search command rework
 module.exports = class DBL extends SearchCommand {
   constructor (client) {
     super(client, {
