@@ -2,7 +2,6 @@ const CommandError = require('./CommandError.js')
 const PermissionUtils = require('../../utils/PermissionUtils.js')
 const moment = require('moment')
 
-// TODO: Static class
 module.exports = class CommandRequirements {
   static parseOptions (options = {}) {
     return {
