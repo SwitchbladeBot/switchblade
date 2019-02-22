@@ -18,7 +18,7 @@ module.exports = class NumberParameter extends Parameter {
     if (!arg) return
 
     let nmb = Number(arg)
-    if (isNull(nmb)) throw new CommandError(t('errors:invalidNumber'))
+    if (isNull(nmb)) throw new CommandError(t('errors:invalidNumber'), this.showUsage)
     if (!isNull(this.min) && nmb < this.min) {
       if (!this.forceMin) throw new CommandError(t('errors:needBiggerNumber', { number: this.min }))
       nmb = this.min
