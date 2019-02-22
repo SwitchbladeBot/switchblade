@@ -1,27 +1,39 @@
-const SearchCommand = require('../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, CommandStructures, Constants, MiscUtils } = require('../../')
-const { CommandRequirements, CommandParameters, StringParameter, BooleanFlagParameter } = CommandStructures
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
 const moment = require('moment')
 
 module.exports = class YouTube extends SearchCommand {
   constructor (client) {
-    super(client)
-
-    this.name = 'youtube'
-    this.aliases = ['yt']
-    this.embedColor = Constants.YOUTUBE_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/yQy45qO.png'
-
-    this.requirements = new CommandRequirements(this, { apis: ['youtube'] })
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' }),
-      [
-        new BooleanFlagParameter({ name: 'video', aliases: [ 'v', 'videos' ] }),
-        new BooleanFlagParameter({ name: 'channel', aliases: [ 'c', 'channels' ] }),
-        new BooleanFlagParameter({ name: 'playlist', aliases: [ 'p', 'playlists' ] }),
-        new StringParameter({ name: 'order', aliases: 'o', full: false, required: false, whitelist: ['date', 'rating', 'relevance', 'title', 'videoCount', 'viewCount'] })
-      ]
-    )
+    super(client, {
+      name: 'youtube',
+      aliases: ['yt'],
+      requirements: { apis: ['youtube'] },
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commons:search.noParams'
+      }, [
+        {
+          type: 'booleanFlag',
+          name: 'video',
+          aliases: [ 'v', 'videos' ]
+        }, {
+          type: 'booleanFlag',
+          name: 'channel',
+          aliases: [ 'c', 'channels' ]
+        }, {
+          type: 'booleanFlag',
+          name: 'playlist',
+          aliases: [ 'p', 'playlists' ]
+        }, {
+          type: 'string',
+          name: 'order',
+          aliases: [ 'o' ],
+          whitelist: ['date', 'rating', 'relevance', 'title', 'videoCount', 'viewCount']
+        }
+      ]],
+      embedColor: Constants.YOUTUBE_COLOR,
+      embedLogoURL: 'https://i.imgur.com/yQy45qO.png'
+    })
   }
 
   async search (context, query) {
