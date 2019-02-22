@@ -4,6 +4,7 @@ module.exports = {
   color: require('./ColorParameter.js'),
   emoji: require('./EmojiParameter.js'),
   guild: require('./GuildParameter.js'),
+  image: require('./ImageParameter.js'),
   member: require('./MemberParameter.js'),
   number: require('./NumberParameter.js'),
   role: require('./RoleParameter.js'),
