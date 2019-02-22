@@ -843,24 +843,24 @@
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
   "giftcode": {
-    "commandDescription": "Generate and redeem gift codes",
-    "generate": "To generate a gift code, `{{command}} generate <value>`",
-    "redeem": "To redeem a gift code, `{{command}} redeem <code>`",
+    "commandDescription": "Generates and redeems gift codes.",
+    "generate": "To generate a gift code, use `{{command}} generate <value>`.",
+    "redeem": "To redeem a gift code, use `{{command}} redeem <code>`.",
     "subcommands": {
       "generate": {
-        "commandDescription": "Generate a gift code",
+        "commandDescription": "Generates a gift code.",
         "commandUsage": "<value>",
-        "noValue": "You need to give me a valid number of $t(commons:currency_plural) to create a gift code",
-        "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
-        "generationSuccessful": "You've generated a **{{value}} $t(commons:currency_plural)** gift code!\nCheck your DMs for instructions on how to activate the gift code which you have just received.",
-        "hereIsYourGiftcode": "Here's your gift code: **{{giftcode}}**. It is worth **{{value}} $t(commons:currency_plural)**.\nRedeem it with `{{command}} redeem <code>`"
+        "noValue": "You need to give me a valid number of $t(commons:currency_plural) to create a gift code!",
+        "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that!",
+        "generationSuccessful": "You've generated a **{{value}} $t(commons:currency_plural)** gift code!\nCheck your DMs for instructions on how to redeem the gift code which you have just received.",
+        "hereIsYourGiftcode": "Here's your gift code: **{{giftcode}}**. It is worth **{{value}} $t(commons:currency_plural)**.\nRedeem it using `{{command}} redeem <code>`."
       },
       "redeem": {
-        "commandDescription": "Redeem a gift code",
+        "commandDescription": "Redeems a gift code.",
         "commandUsage": "<code>",
-        "noCode": "You need to give me a valid gift code",
-        "invalidGiftcode": "Invalid gift code",
-        "alreadyRedeemed": "That gift code has already been redeemed",
+        "noCode": "You need to give me a valid gift code!",
+        "invalidGiftcode": "Invalid gift code!",
+        "alreadyRedeemed": "That gift code has already been redeemed!",
         "redeemSuccessfulTitle": "Gift code redeemed!",
         "redeemSuccessfulDescription": "**{{value}} $t(commons:currency_plural)** have been added to your balance!"
       }
