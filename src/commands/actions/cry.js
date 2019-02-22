@@ -1,12 +1,12 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Cry extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'cry'
-    this.category = 'actions'
-    this.requirements = new CommandRequirements(this, { apis: ['giphy'] })
+    super(client, {
+      name: 'cry',
+      category: 'actions',
+      requirements: { apis: ['giphy'] }
+    })
   }
 
   async run ({ t, channel, author }) {

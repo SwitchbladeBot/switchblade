@@ -9,8 +9,10 @@ module.exports = class SpotifySong extends Song {
     this.title = track.name
     this.uri = track.external_urls.spotify
 
-    const [ cover ] = album.images.sort((a, b) => b.width - a.width)
-    this.artwork = cover.url
+    if (album) {
+      const [ cover ] = album.images.sort((a, b) => b.width - a.width)
+      this.artwork = cover.url
+    }
 
     this.source = 'spotify'
     this.color = '#1DB954'

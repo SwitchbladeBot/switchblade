@@ -12,20 +12,18 @@ module.exports = class MainListener extends EventListener {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     // Lavalink connection
-    const lavalinkRequiredVariables = ['LAVALINK_HOST', 'LAVALINK_PORT', 'LAVALINK_PASSWORD']
-    if (lavalinkRequiredVariables.every(variable => !!process.env[variable])) {
-      const nodes = [{
-        'host': process.env.LAVALINK_HOST,
-        'port': process.env.LAVALINK_PORT || '1337',
-        'password': process.env.LAVALINK_PASSWORD || 'password'
-      }]
-      this.playerManager = new SwitchbladePlayerManager(this, nodes, {
-        user: this.user.id,
-        shards: 1
-      })
-      this.log('[32mLavalink connection established!', 'Music')
-    } else {
-      this.log(`[31mFailed to establish Lavalink connection - Required environment variable(s) (${lavalinkRequiredVariables.filter(variable => !process.env[variable]).join(', ')}) not set.`, 'Music')
+    if (process.env.LAVALINK_NODES) {
+      try {
+        let nodes = JSON.parse(process.env.LAVALINK_NODES)
+        if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR')
+        this.playerManager = new SwitchbladePlayerManager(this, nodes, {
+          user: this.user.id,
+          shards: 1
+        })
+        this.log('[32mLavalink connection established!', 'Music')
+      } catch (e) {
+        this.log(`[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, 'Music')
+      }
     }
 
     // TODO: Make stat posters modular
@@ -59,6 +57,18 @@ module.exports = class MainListener extends EventListener {
           .then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
           .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
       }
+
+      if (process.env.DBL2_TOKEN) {
+        snekfetch
+          .post(`https://discordbotlist.com/api/bots/${client.user.id}/stats`)
+          .set('Authorization', `Bot ${process.env.DBL2_TOKEN}`)
+          .send({
+            guilds: client.guilds.size,
+            users: client.users.size
+          })
+          .then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
+          .catch(() => client.log('[31mFailed to post statistics', 'discordbotlist.com'))
+      }
     }
 
     postStats(this)
@@ -67,33 +77,38 @@ module.exports = class MainListener extends EventListener {
 
   async onMessage (message) {
     if (message.author.bot) return
-    const guildDocument = message.guild && this.database && await this.database.guilds.get(message.guild.id)
-    const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
-    const prefixRegex = new RegExp(`^(<@[!]?${this.user.id}>[ ]?|${prefix}).+`)
-    const regexResult = prefixRegex.exec(message.content)
-    if (regexResult) {
-      const usedPrefix = regexResult[1]
-      const fullCmd = message.content.substring(usedPrefix.length).split(/\s+/g).filter(a => a).map(s => s.trim())
-      const args = fullCmd.slice(1)
-      const cmd = fullCmd[0].toLowerCase().trim()
-      const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
 
+    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id, 'prefix language')
+    const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
+
+    const botMention = this.user.toString()
+
+    const sw = (...s) => s.some(st => message.content.startsWith(st))
+    const usedPrefix = sw(botMention, `<@!${this.user.id}>`) ? `${botMention} ` : sw(prefix) ? prefix : null
+
+    if (usedPrefix) {
+      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
+      const args = fullCmd.slice(1)
+      if (!fullCmd.length) return
+
+      const cmd = fullCmd[0].toLowerCase().trim()
+      const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
       if (command) {
-        const userDocument = this.database && await this.database.users.get(message.author.id)
+        const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
         if (userDocument && userDocument.blacklisted) return
 
         const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
-          prefix: usedPrefix,
+          defaultPrefix: usedPrefix,
           aliase: cmd,
           client: this,
+          prefix,
           message,
           command,
-          guildDocument,
-          language,
-          userDocument
+          language
         })
-        this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
+
+        this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
         this.runCommand(command, context, args, language)
       }
     }

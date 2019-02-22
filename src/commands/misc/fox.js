@@ -3,9 +3,7 @@ const snekfetch = require('snekfetch')
 
 module.exports = class Fox extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'fox'
-    this.category = 'general'
+    super(client, { name: 'fox' })
   }
 
   async run ({ t, author, channel }) {

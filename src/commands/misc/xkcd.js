@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 
 const snekfetch = require('snekfetch')
 
@@ -7,15 +6,15 @@ const baseUrl = 'https://xkcd.com'
 
 module.exports = class XKCD extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'xkcd'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: false })
-    )
+    super(client, {
+      name: 'xkcd',
+      parameters: [{
+        type: 'string', full: true, required: false
+      }]
+    })
   }
 
-  async run ({ t, channel }, arg) {
+  async run ({ t, author, channel }, arg) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed()
     let response
@@ -26,10 +25,7 @@ module.exports = class XKCD extends Command {
         } else if (arg.match(/^\d+$/)) {
           response = await snekfetch.get(baseUrl + `/${arg}/info.0.json`)
         } else {
-          embed.setColor(Constants.ERROR_COLOR)
-            .setTitle(t('commands:xkcd.invalidArgument'))
-            .setDescription(`**${t('commons:usage')}:** \`${process.env.PREFIX}${this.name} ${t('commands:xkcd.commandUsage')}\``)
-          channel.send(embed).then(() => channel.stopTyping())
+          throw new CommandError(t('commands:xkcd.invalidArgument'), true)
         }
       } else {
         const latestResp = await snekfetch.get(`${baseUrl}/info.0.json`)
@@ -39,14 +35,10 @@ module.exports = class XKCD extends Command {
       }
     } catch (e) {
       if (e.statusCode === 404) {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:xkcd.notFound'))
-      } else {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('errors:generic'))
-          .setDescription(`\`${e.message}\`\n\n[${t('commons:reportThis')}](https://github.com/SwitchbladeBot/switchblade/issues)`)
+        throw new CommandError(t('commands:xkcd.notFound'))
       }
-      channel.send(embed).then(() => channel.stopTyping())
+      throw new CommandError(new SwitchbladeEmbed(author).setTitle(t('errors:generic'))
+        .setDescription(`\`${e.message}\`\n\n[${t('commons:reportThis')}](https://github.com/SwitchbladeBot/switchblade/issues)`))
     }
 
     if (response && response.ok) {

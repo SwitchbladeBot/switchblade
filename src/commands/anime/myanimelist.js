@@ -1,17 +1,16 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 const malScraper = require('mal-scraper')
 
 module.exports = class MyAnimeList extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'myanimelist'
-    this.aliases = ['mal']
-    this.category = 'anime'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:myanimelist.noAnime' })
-    )
+    super(client, {
+      name: 'myanimelist',
+      aliases: ['mal'],
+      category: 'anime',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:myanimelist.noAnime'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, anime) {
@@ -34,9 +33,7 @@ module.exports = class MyAnimeList extends Command {
           .addField(t('commands:myanimelist.aired'), data.aired, true)
       }
     } catch (e) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:myanimelist.animeNotFound'))
+      throw new CommandError(t('commands:myanimelist.animeNotFound'))
     }
 
     channel.send(embed).then(() => channel.stopTyping())

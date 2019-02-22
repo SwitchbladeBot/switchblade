@@ -1,37 +1,43 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, CommandRequirements, NumberParameter, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Pay extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'pay'
-    this.category = 'economy'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, databaseOnly: true, onlyOldAccounts: true })
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:pay.noMember' }),
-      new NumberParameter({ min: 1, missingError: 'commands:pay.noValue' })
-    )
+    super(client, {
+      name: 'pay',
+      aliases: ['transfer'],
+      category: 'economy',
+      requirements: { guildOnly: true, databaseOnly: true, onlyOldAccounts: true },
+      parameters: [{
+        type: 'user',
+        acceptSelf: false,
+        missingError: 'commands:pay.noMember',
+        errors: { acceptSelf: 'commands:pay.cantPayYourself' }
+      }, {
+        type: 'number',
+        min: 1,
+        missingError: 'commands:pay.noValue'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, receiver, value) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const senderDoc = await this.client.database.users.get(author.id)
-    if (author === receiver) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:pay.cantPayYourself'))
-    } else if (value > senderDoc.money) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:pay.notEnoughMoney'))
-    } else {
-      const receiverDoc = await this.client.database.users.get(receiver.id)
-      senderDoc.money -= value
-      receiverDoc.money += value
-      senderDoc.save()
-      receiverDoc.save()
+
+    try {
+      await this.client.modules.economy.transfer(author.id, receiver.id, value)
       embed.setDescription(t('commands:pay.transactionSuccessful', { receiver, value }))
+    } catch (e) {
+      embed.setColor(Constants.ERROR_COLOR)
+      switch (e.message) {
+        case 'NOT_ENOUGH_MONEY':
+          embed.setTitle(t('commands:pay.notEnoughMoney'))
+          break
+        default:
+          embed.setTitle(t('errors:generic'))
+      }
     }
+
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

@@ -1,55 +1,34 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const moment = require('moment-timezone')
 
-// Create a map of tz abbreviations to locations
-// { PDT: [ 'America/Dawson', 'America/Ensenada', 'America/Los_Angeles', ... ], ... }
-const mappedZones = moment.tz.names()
-  .reduce((zones, tzName) => {
-    const abbr = moment.tz(tzName).format('z')
-
-    if (zones[abbr] && zones[abbr] instanceof Array) {
-      zones[abbr].push(tzName)
-    } else {
-      zones[abbr] = [ tzName ]
-    }
-
-    return zones
-  }, {})
-
 module.exports = class Time extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'time'
-    this.aliases = ['currenttime']
-    this.category = 'general'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:time.invalidTimezone' })
-    )
+    super(client, {
+      name: 'time',
+      aliases: ['currenttime'],
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:time.noZone'
+      }]
+    })
   }
 
-  run ({ t, author, channel, guildDocument }, requestedTz) {
+  async run ({ t, author, channel, language }, address) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    moment.locale(guildDocument.language)
+    moment.locale(language)
 
-    let reqTz = requestedTz
-
-    if (mappedZones[reqTz]) {
-      reqTz = mappedZones[reqTz][0]
+    const place = await this.client.apis.gmaps.searchPlace(address, language)
+    if (!place) {
+      throw new CommandError(t('commands:time.notFound'))
     }
 
-    let time
-    if (!moment.tz.zone(reqTz)) {
-      time = t('commands:time.invalidTimezone')
-    } else {
-      time = moment.tz(reqTz).format('LLLL [(]z[)]')
-    }
+    const { lat, lng } = place.geometry.location
+    const { timeZoneId } = await this.client.apis.gmaps.getTimezone(lat, lng)
+    const time = moment.tz(timeZoneId).format('LLLL (z)')
 
     embed
-      .setTitle(t('commands:time.currentTime', { timezone: requestedTz }))
+      .setTitle(t('commands:time.currentTime', { timezone: place.formatted_address }))
       .setDescription(time)
     channel.send(embed).then(() => channel.stopTyping())
   }

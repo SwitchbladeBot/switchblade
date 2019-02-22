@@ -1,12 +1,13 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
+
 const snekfetch = require('snekfetch')
 
 module.exports = class Shiba extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'shiba'
-    this.aliases = ['shibainu', 'doge']
+    super(client, {
+      name: 'shiba',
+      aliases: ['shibainu', 'doge']
+    })
   }
 
   async run ({ t, author, channel }) {

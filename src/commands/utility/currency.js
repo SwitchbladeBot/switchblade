@@ -1,42 +1,43 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const snekfetch = require('snekfetch')
 
 module.exports = class Currency extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'currency'
-    this.aliases = ['currencyconverter', 'converter']
-    this.category = 'utility'
-    this.envVars = ['KSOFT_KEY']
+    super(client, {
+      name: 'currency',
+      aliases: ['currencyconverter', 'converter'],
+      category: 'utility',
+      requirements: { envVars: ['KSOFT_KEY'] },
+      parameters: [{
+        type: 'string',
+        required: false
+      }, {
+        type: 'number',
+        required: false,
+        min: 1
+      }, {
+        type: 'string',
+        missingError: 'commands:currency.noCurrency'
+      }]
+    })
   }
 
-  async run ({ t, author, channel, guildDocument }, tocoin, fromcoin, value) {
+  async run ({ t, author, channel }, from = 'USD', value = 1, to) {
     const embed = new SwitchbladeEmbed(author)
-    fromcoin = fromcoin || 'USD'
-    value = value || 1
     try {
-      const { body } = await snekfetch.get(`https://api.ksoft.si/kumo/currency?from=${fromcoin}&to=${tocoin}&value=${value}`, {
-        headers: {
-          'Authorization': `Bearer ${process.env.KSOFT_KEY}`
-        }
+      const { body } = await snekfetch.get('https://api.ksoft.si/kumo/currency').query({ to, from, value }).set({
+        'Authorization': `Bearer ${process.env.KSOFT_KEY}`
       })
+
       if (body.pretty) {
-        embed
-          .setTitle(`${fromcoin.toUpperCase()} ${t('commons:to')} ${tocoin.toUpperCase()}`)
-          .setDescription(`${value} ${fromcoin.toUpperCase()} = ${body.pretty}`)
-      } else {
-        embed
-          .setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:currency.noCurrency'))
-          .setDescription(`**${t('commons:usage')}**: \`${guildDocument.prefix}currency ${t('commands:currency.commandUsage')}\``)
+        return channel.send(embed
+          .setTitle(`${from.toUpperCase()} ${t('commons:to')} ${to.toUpperCase()}`)
+          .setDescription(`${value} ${from.toUpperCase()} = ${body.pretty}`))
       }
+
+      throw new Error('INVALID_REQUEST')
     } catch (e) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:currency.noCurrency'))
-        .setDescription(`**${t('commons:usage')}**: \`${guildDocument.prefix}currency ${t('commands:currency.commandUsage')}\``)
+      throw new CommandError(t('commands:currency.noCurrency'), true)
     }
-    channel.send(embed)
   }
 }

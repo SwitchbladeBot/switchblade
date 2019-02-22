@@ -1,16 +1,16 @@
-const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
+
 // eslint-disable-next-line no-useless-escape
 const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 
 module.exports = class Poll extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'poll'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:poll.noQuestion' })
-    )
+    super(client, {
+      name: 'poll',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:poll.noQuestion'
+      }]
+    })
   }
 
   run ({ t, author, channel }, question) {
@@ -20,9 +20,7 @@ module.exports = class Poll extends Command {
     if (pollPcs.length > 1) {
       const maxOptions = 26
       if (pollPcs.slice(1).length > maxOptions) {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:poll.tooManyOptions', { maxOptions }))
-        channel.send(embed)
+        throw new CommandError(t('commands:poll.tooManyOptions', { maxOptions }))
       } else {
         let description = ''
         const alphabet = ('abcdefghijklmnopqrstuvwxyz').split('')

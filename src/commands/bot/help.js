@@ -1,32 +1,31 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
-const prefixRegex = (prefix) => new RegExp(`^(?:${prefix})?(.+)`)
+const regexpSpecialChars = /([[\]^$|()\\+*?{}=!.])/gi
+const quoteRegex = (text) => text.replace(regexpSpecialChars, '\\$1')
+const prefixRegex = (prefix) => new RegExp(`^${quoteRegex(prefix)}`)
 
 module.exports = class Help extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'help'
-    this.aliases = ['commands', 'ajuda']
-    this.category = 'bot'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: false })
-    )
+    super(client, {
+      name: 'help',
+      aliases: ['commands', 'ajuda', 'halp'],
+      category: 'bot',
+      parameters: [{
+        type: 'string', full: true, required: false
+      }]
+    })
   }
 
-  async run ({ t, author, channel, guild, guildDocument }, cmd) {
+  async run ({ t, author, channel, guild, prefix }, cmd) {
     const embed = new SwitchbladeEmbed(author)
-    const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
     const validCommands = this.client.commands.filter(c => !c.hidden)
 
     if (cmd) {
-      const regexMatch = cmd.match(prefixRegex(prefix))
-      cmd = regexMatch && regexMatch[1]
+      cmd = cmd.replace(prefixRegex(prefix), '')
       const command = cmd.split(' ').reduce((o, ca) => {
         const arr = (Array.isArray(o) && o) || (o && o.subcommands)
         if (!arr) return o
-        return arr.find(c => c.name === ca || c.aliases.includes(ca))
+        return arr.find(c => c.name === ca || (c.aliases && c.aliases.includes(ca)))
       }, validCommands)
 
       if (command) {
@@ -36,14 +35,13 @@ module.exports = class Help extends Command {
           command.usage(t, prefix, false)
         ]
 
-        if (command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
+        if (command.aliases && command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
         if (command.subcommands.length > 0) description.push(`**${t('commands:help.subcommands')}:** ${command.subcommands.map(a => `\`${a.name}\``).join(', ')}`)
 
         embed.setTitle(command.fullName)
           .setDescription(description.join('\n'))
       } else {
-        embed.setColor(Constants.ERROR_COLOR)
-          .setTitle(t('commands:help.commandNotFound'))
+        throw new CommandError(t('commands:help.commandNotFound'))
       }
     } else {
       embed

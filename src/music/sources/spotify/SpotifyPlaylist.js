@@ -6,9 +6,9 @@ module.exports = class SpotifyPlaylist extends Playlist {
 
     this.identifier = data.id
     this.uri = data.external_urls.spotify
-    this.source = 'spotify'
-
     this.title = data.name
+
+    this.source = 'spotify'
   }
 
   loadInfo () {

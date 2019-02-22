@@ -25,4 +25,5 @@ module.exports = {
     joinLock: { type: Boolean, default: false },
     joinLockMessage: String
   })
+
 }

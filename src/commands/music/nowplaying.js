@@ -1,24 +1,25 @@
-const { CanvasTemplates, CommandStructures, SwitchbladeEmbed } = require('../../')
-const { BooleanFlagParameter, Command, CommandParameters, CommandRequirements } = CommandStructures
+const { CanvasTemplates, Command, SwitchbladeEmbed } = require('../../')
 
 const { Attachment } = require('discord.js')
 const moment = require('moment')
 
 module.exports = class NowPlaying extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'nowplaying'
-    this.aliases = ['np', 'currentplaying']
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, guildPlaying: true })
-    this.parameters = new CommandParameters(this, [ new BooleanFlagParameter({ name: 'text' }) ])
+    super(client, {
+      name: 'nowplaying',
+      aliases: ['np', 'currentplaying'],
+      category: 'music',
+      requirements: { guildOnly: true, guildPlaying: true },
+      parameters: [[{
+        type: 'booleanFlag', name: 'text'
+      }]]
+    })
   }
 
   async run ({ t, author, channel, flags, guild }) {
     const guildPlayer = this.client.playerManager.get(guild.id)
     const song = guildPlayer.playingSong
-    if (!flags['text']) {
+    if (!flags['text'] && this.client.canvasLoaded) {
       const nowPlaying = await CanvasTemplates.nowPlaying({ t }, guildPlayer, song)
       channel.send(new Attachment(nowPlaying, 'nowplaying.png')).then(() => channel.stopTyping())
     } else {

@@ -1,5 +1,4 @@
-const { CommandStructures } = require('../../index')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command } = require('../../')
 
 const specialCodes = {
   '0': ':zero:',
@@ -21,13 +20,15 @@ const specialCodes = {
 
 module.exports = class Emojify extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'emojify'
-    this.category = 'memes'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:emojify.missingSentence' })
-    )
+    super(client, {
+      name: 'emojify',
+      category: 'memes',
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:emojify.missingSentence'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, text) {

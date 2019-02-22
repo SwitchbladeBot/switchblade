@@ -1,16 +1,15 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const query = require('samp-query')
 
 module.exports = class SAMP extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'samp'
-    this.category = 'games'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ missingError: 'commands:samp.noIP' })
-    )
+    super(client, {
+      name: 'samp',
+      category: 'games',
+      parameters: [{
+        type: 'string', missingError: 'commands:samp.noIP'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, address) {
@@ -30,10 +29,9 @@ module.exports = class SAMP extends Command {
         .addField(t('commands:samp.gameMode'), response.gamemode, true)
         .addField(t('commands:samp.time'), response.rules.worldtime, true)
     } catch (err) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
+      throw new CommandError(new SwitchbladeEmbed(author)
         .setTitle(t('commands:samp.serverUnreachableTitle'))
-        .setDescription(t('commands:samp.serverUnreachableDescription'))
+        .setDescription(t('commands:samp.serverUnreachableDescription')))
     }
     channel.send(embed).then(channel.stopTyping())
   }
