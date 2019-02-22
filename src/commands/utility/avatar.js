@@ -1,16 +1,18 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Avatar extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'avatar'
-    this.aliases = ['profilepicture', 'pfp']
-    this.category = 'utility'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ full: true, required: false, acceptBot: true })
-    )
+    super(client, {
+      name: 'avatar',
+      aliases: ['profilepicture', 'pfp'],
+      category: 'utility',
+      parameters: [{
+        type: 'user',
+        full: true,
+        required: false,
+        acceptBot: true
+      }]
+    })
   }
 
   run ({ t, author, channel }, user) {

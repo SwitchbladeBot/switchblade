@@ -22,6 +22,34 @@ module.exports = class DeezerAPI extends APIWrapper {
     return this.request(`/artist/${id}`)
   }
 
+  getArtistAlbums (id, limit = 10) {
+    return this.request(`/artist/${id}/albums`, { limit })
+  }
+
+  getArtistRelated (id) {
+    return this.request(`/artist/${id}/related`)
+  }
+
+  getPlaylist (id) {
+    return this.request(`/playlist/${id}`)
+  }
+
+  getUserFollowers (id) {
+    return this.request(`/user/${id}/followers`)
+  }
+
+  getUserFollowings (id) {
+    return this.request(`/user/${id}/followings`)
+  }
+
+  getUserChart (id, chart = 'artists') {
+    return this.request(`/user/${id}/charts/${chart}`)
+  }
+
+  getPodcastEpisodes (id) {
+    return this.request(`/podcast/${id}/episodes`)
+  }
+
   // Search
   findTracks (q) {
     return this.request('/search', { q })
@@ -33,6 +61,18 @@ module.exports = class DeezerAPI extends APIWrapper {
 
   findArtists (q) {
     return this.request('/search/artist', { q })
+  }
+
+  findPlaylists (q) {
+    return this.request('/search/playlist', { q })
+  }
+
+  findPodcasts (q) {
+    return this.request('/search/podcast', { q })
+  }
+
+  findUser (q) {
+    return this.request('/search/user', { q })
   }
 
   // Default

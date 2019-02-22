@@ -1,38 +1,39 @@
-const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, Constants, SwitchbladeEmbed } = require('../../')
 const { Song, Playlist } = require('../../music/structures')
 
 module.exports = class Play extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'play'
-    this.aliases = []
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, {
-      guildOnly: true,
-      sameVoiceChannelOnly: true,
-      voiceChannelOnly: true,
-      playerManagerOnly: true
+    super(client, {
+      name: 'play',
+      aliases: ['p'],
+      category: 'music',
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, voiceChannelOnly: true, playerManagerOnly: true },
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:play.noTrackIdentifier'
+      }, [{
+        type: 'booleanFlag', name: 'soundcloud', aliases: ['sc']
+      }, {
+        type: 'booleanFlag', name: 'youtube', aliases: ['yt']
+      }]]
     })
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' })
-    )
   }
 
-  async run ({ t, author, channel, guild, voiceChannel }, identifier) {
+  async run ({ t, author, channel, flags, guild, voiceChannel }, identifier) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    if (!voiceChannel.joinable) {
+    if (!voiceChannel.joinable && !voiceChannel.connection) {
       return channel.send(embed.setTitle(t('errors:voiceChannelJoin')))
     }
 
     const playerManager = this.client.playerManager
     try {
+      const specificSearch = flags['soundcloud'] || flags['youtube']
+      if (flags['soundcloud']) identifier = `scsearch:${identifier}`
+      else if (flags['youtube']) identifier = `ytsearch:${identifier}`
+
       let { result, tryAgain } = await playerManager.loadTracks(identifier, author)
-      if (tryAgain && !result) {
+      if (tryAgain && !result && !specificSearch) {
         result = (await playerManager.loadTracks(`ytsearch:${identifier}`, author)).result
       }
 
@@ -42,13 +43,14 @@ module.exports = class Play extends Command {
         throw new CommandError(t('music:songNotFound'))
       }
     } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
+      if (e instanceof CommandError) throw e
+
+      this.client.logError(e)
+      channel.send(embed
+        .setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
         .setDescription(e)
-      channel.send(embed).then(() => {
-        channel.stopTyping()
-        this.client.logError(e)
-      })
+      ).then(() => channel.stopTyping())
     }
   }
 

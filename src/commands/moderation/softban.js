@@ -1,18 +1,18 @@
-const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter, MemberParameter } = CommandStructures
+const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Softban extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'softban'
-    this.aliases = ['softbanir']
-    this.category = 'moderation'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, botPermissions: ['BAN_MEMBERS'], permissions: ['BAN_MEMBERS'] })
-    this.parameters = new CommandParameters(this,
-      new MemberParameter({ acceptBot: true, missingError: 'commands:softban.missingUser' }),
-      new StringParameter({ full: true, missingError: 'commands:softban.missingReason' })
-    )
+    super(client, {
+      name: 'softban',
+      aliases: ['softbanir'],
+      category: 'moderation',
+      requirements: { guildOnly: true, botPermissions: ['BAN_MEMBERS'], permissions: ['BAN_MEMBERS'] },
+      parameters: [{
+        type: 'member', acceptBot: true, missingError: 'commands:softban.missingUser'
+      }, {
+        type: 'string', full: true, missingError: 'commands:softban.missingReason'
+      }]
+    })
   }
 
   async run ({ channel, guild, author, t }, member, reason) {

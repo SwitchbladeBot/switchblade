@@ -47,19 +47,10 @@ class BonusModule extends Module {
   }
 
   async claimDBLBonus (_user) {
-    const user = await this._users.get(_user, 'money lastDBLBonusClaim')
-    const { lastDBLBonusClaim } = user
+    const user = await this._users.get(_user, 'money')
 
-    if (this.checkClaim(lastDBLBonusClaim)) {
-      throw new BonusCooldownError(lastDBLBonusClaim, this.formatClaimTime(lastDBLBonusClaim))
-    }
-
-    const voted = await this.client.apis.dbl.checkVote(this.client.user.id, _user)
-    if (!voted) throw new Error('NOT_VOTED')
-
-    const collectedMoney = 500
+    const collectedMoney = 250
     user.money += collectedMoney
-    user.lastDBLBonusClaim = Date.now()
     await user.save()
 
     return { collectedMoney }
@@ -83,7 +74,7 @@ module.exports = class EconomyModule extends Module {
   }
 
   async transfer (_from, _to, amount) {
-    const from = this._users.get(_from, 'money')
+    const from = await this._users.get(_from, 'money')
     if (from.money < amount) throw new Error('NOT_ENOUGH_MONEY')
     from.money -= amount
     await Promise.all([ from.save(), this._users.update(_to, { $inc: { money: amount } }) ])
@@ -95,7 +86,7 @@ module.exports = class EconomyModule extends Module {
   }
 
   async betflip (_user, amount, side) {
-    const user = this._users.get(_user, 'money')
+    const user = await this._users.get(_user, 'money')
 
     if (user.money < amount) throw new Error('NOT_ENOUGH_MONEY')
 

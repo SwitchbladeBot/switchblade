@@ -1,20 +1,13 @@
-const { Command, SwitchbladeEmbed } = require('../../')
-const snekfetch = require('snekfetch')
+const { RandomRedditPostCommand } = require('../../')
 
-module.exports = class Cat extends Command {
+module.exports = class Cat extends RandomRedditPostCommand {
   constructor (client) {
-    super(client)
-    this.name = 'cat'
-    this.aliases = ['catto', 'kitty']
-    this.category = 'general'
-  }
-
-  async run ({ t, author, channel }) {
-    const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
-    const { body } = await snekfetch.get('http://aws.random.cat/meow')
-    embed.setImage(body.file)
-      .setDescription(t('commands:cat.hereIsYourCat'))
-    channel.send(embed).then(() => channel.stopTyping())
+    super(client, {
+      name: 'cat',
+      aliases: ['catto', 'kitty'],
+      category: 'general',
+      titleString: 'commands:cat.hereIsYourCat',
+      subreddit: 'catpictures'
+    })
   }
 }

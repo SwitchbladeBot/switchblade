@@ -21,6 +21,9 @@ module.exports = class GuildPlayer extends Player {
     this.queue = []
     this._volume = 25
     this._loop = false
+
+    this._previousVolume = null
+    this._bassboost = false
   }
 
   event (message) {
@@ -29,11 +32,6 @@ module.exports = class GuildPlayer extends Player {
     } else {
       super.event(message)
     }
-  }
-
-  queueTrack (song) {
-    this.queue.push(song)
-    song.emit('queue')
   }
 
   play (song, forcePlay = false, options = {}) {
@@ -56,7 +54,7 @@ module.exports = class GuildPlayer extends Player {
   }
 
   next (user) {
-    if (this._loop) this.queueTrack(this.playingSong)
+    if (this._loop) this.queueTrack(this.playingSong, true)
     const nextSong = this.queue.shift()
     if (nextSong) {
       this.play(nextSong, true)
@@ -68,9 +66,69 @@ module.exports = class GuildPlayer extends Player {
     }
   }
 
+  // Queue
+  get nextSong () {
+    return this.queue[0]
+  }
+
+  queueTrack (song, silent = false) {
+    this.queueTracks([ song ], silent)
+    return song
+  }
+
+  queueTracks (songs, silent = false) {
+    this.queue.push(...songs)
+    if (!silent) songs.forEach(s => s.emit('queue'))
+    return songs
+  }
+
+  clearQueue () {
+    return this.queue.splice(0)
+  }
+
+  shuffleQueue () {
+    this.queue = this.queue.sort(() => Math.random() > 0.5 ? -1 : 1)
+  }
+
+  removeFromQueue (index) {
+    if (index < 0 || index >= this.queue.length) throw new Error('INDEX_OUT_OF_BOUNDS')
+    return this.queue.splice(index, 1)[0]
+  }
+
+  jumpToIndex (index, ignoreLoop = false) {
+    if (index < 0 || index >= this.queue.length) throw new Error('INDEX_OUT_OF_BOUNDS')
+
+    const songs = this.queue.splice(0, index + 1)
+    const song = songs.pop()
+    if (!ignoreLoop && this._loop) this.queueTracks([ this.playingSong, ...songs ])
+    this.play(song, true)
+
+    return song
+  }
+
+  // Volume
+
   volume (volume = 50) {
     this._volume = volume
     super.volume(volume)
+  }
+
+  get bassboosted () {
+    return this._bassboost
+  }
+
+  bassboost (state = true) {
+    this._bassboost = state
+    if (state) {
+      this._previousVolume = this._volume
+      this.volume(150)
+      this.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 1 })))
+      return true
+    }
+
+    if (this._previousVolume !== null) this.volume(this._previousVolume)
+    this.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 0 })))
+    return false
   }
 
   get looping () {
@@ -90,5 +148,16 @@ module.exports = class GuildPlayer extends Player {
 
   get voiceChannel () {
     return this.client.channels.get(this.channel)
+  }
+
+  // Internal
+
+  setEQ (bands) {
+    this.node.send({
+      op: 'equalizer',
+      guildId: this.id,
+      bands
+    })
+    return this
   }
 }

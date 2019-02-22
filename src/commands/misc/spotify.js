@@ -1,36 +1,29 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
-const moment = require('moment')
+const types = ['track', 'song', 't', 's', 'album', 'al', 'artist', 'ar', 'playlist', 'p', 'user', 'u']
 
 module.exports = class Spotify extends Command {
   constructor (client) {
-    super(client)
+    super(client, {
+      name: 'spotify',
+      aliases: ['sp'],
+      requirements: { apis: ['spotify'] },
+      parameters: [{
+        type: 'string',
+        full: true,
+        whitelist: types,
+        missingError: ({ t, prefix }) => {
+          return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
+            .setDescription([
+              this.usage(t, prefix),
+              '',
+              `__**${t('commons:search.types')}:**__`,
+              `\`${['track', 'album', 'artist', 'playlist', 'user'].join('`, `')}\``
+            ].join('\n'))
+        }
+      }]
+    })
 
-    this.name = 'spotify'
-    this.requirements = new CommandRequirements(this, { apis: ['spotify'] })
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:spotify.noTrackName' })
-    )
-  }
-
-  async run ({ t, author, channel }, trackName) {
-    channel.startTyping()
-
-    const embed = new SwitchbladeEmbed(author)
-    const [ track ] = await this.client.apis.spotify.searchTracks(trackName, 1)
-    if (track) {
-      const [ cover ] = track.album.images.sort((a, b) => b.width - a.width)
-      const duration = moment.duration(track.duration_ms).format('mm:ss')
-      const artists = track.artists.map(a => a.name).join(', ')
-      embed.setColor(Constants.SPOTIFY_COLOR)
-        .setAuthor('Spotify', 'https://i.imgur.com/vw8svty.png')
-        .setThumbnail(cover.url)
-        .setDescription(`[**${track.name}**](${track.external_urls.spotify}) (${duration})\n${artists}`)
-    } else {
-      throw new CommandError(t('commands:spotify.noTracksFound'))
-    }
-
-    channel.send(embed).then(() => channel.stopTyping())
+    this.SPOTIFY_LOGO = 'https://i.imgur.com/vw8svty.png'
   }
 }

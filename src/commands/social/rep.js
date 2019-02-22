@@ -1,17 +1,20 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, UserParameter, CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Rep extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'rep'
-    this.category = 'social'
-
-    this.requirements = new CommandRequirements(this, { onlyOldAccounts: true, databaseOnly: true })
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:rep.noMention', acceptBot: false, acceptSelf: false, errors: { acceptSelf: 'commands:rep.repYourself' } })
-    )
+    super(client, {
+      name: 'rep',
+      aliases: ['reputation'],
+      category: 'social',
+      requirements: { databaseOnly: true, onlyOldAccounts: true },
+      parameters: [{
+        type: 'user',
+        acceptBot: false,
+        acceptSelf: false,
+        missingError: 'commands:rep.noMention',
+        errors: { acceptSelf: 'commands:rep.repYourself' }
+      }]
+    })
   }
 
   async run ({ t, author, channel }, user) {
@@ -20,7 +23,7 @@ module.exports = class Rep extends Command {
 
     try {
       await this.client.modules.social.addReputation(author.id, user.id)
-      embed.setTitle(t('commands:rep.reputationPoint', { user }))
+      embed.setDescription(t('commands:rep.reputationPoint', { user }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)
       switch (e.message) {

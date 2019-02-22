@@ -1,17 +1,16 @@
-const { CommandStructures, BlacklistUtils, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { Command, BlacklistUtils, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Unblacklist extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'unblacklist'
-    this.category = 'developers'
-    this.hidden = true
-
-    this.requirements = new CommandRequirements(this, { devOnly: true })
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ showUsage: false, missingError: 'commands:unblacklist.missingUser' })
-    )
+    super(client, {
+      name: 'unblacklist',
+      category: 'developers',
+      hidden: true,
+      requirements: { devOnly: true },
+      parameters: [{
+        type: 'user', showUsage: false, missingError: 'commands:unblacklist.missingUser'
+      }]
+    })
   }
 
   async run ({ channel, author, t }, user) {
