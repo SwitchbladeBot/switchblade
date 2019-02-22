@@ -1,10 +1,11 @@
-const RandomRedditPostCommand = require('../../structures/command/RandomRedditPostCommand.js')
+const { RandomRedditPostCommand } = require('../../')
 
 module.exports = class Copypasta extends RandomRedditPostCommand {
   constructor (client) {
-    super(client)
-    this.name = 'copypasta'
-    this.category = 'memes'
-    this.subreddit = 'copypasta'
+    super(client, {
+      name: 'copypasta',
+      category: 'memes',
+      subreddit: 'copypasta'
+    })
   }
 }

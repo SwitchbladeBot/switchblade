@@ -44,9 +44,6 @@
   "github": {
     "commandDescription": "Searches for a user, repository or organization on Github",
     "commandUsage": "<type> <query>",
-    "noType": "Please insert a valid type",
-    "types": "Types",
-    "selectResult": "Please send the number of the result (10 seconds)",
     "subcommands": {
       "user": {
         "commandDescription": "Searches for an user on GitHub",
@@ -63,10 +60,6 @@
       "repository": {
         "commandDescription": "Searches for a repository on GitHub",
         "commandUsage": "<repository name>",
-        "noRepo": "You need to give me a repository name",
-        "results": "Repository results for {{query}}",
-        "selectResult": "Please send the number of the result (10 seconds)",
-        "repoNotFound": "Repository not found",
         "noDescription": "This repository has no description",
         "watchers": "Watchers",
         "stars": "Stars",
@@ -89,9 +82,6 @@
   "spotify": {
     "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, or displays a user info.",
     "commandUsage": "<type> <query>",
-    "noTracksFound": "I couldn't find any tracks with that name.",
-    "noType": "Please insert a valid type",
-    "types": "Types",
     "album": "Album",
     "genres": "Genres",
     "artist": "Artist",
@@ -103,22 +93,15 @@
     "moreAlbums": "...and {{albums}} more albums",
     "followers": "Followers",
     "followersCount": "{{followers}} followers",
-    "selectResult": "Please send the number of the result (10 seconds)",
     "subcommands": {
       "track": {
         "commandDescription": "Searches for a song on Spotify",
         "commandUsage": "<song>",
-        "noTrack": "You need to give me a track name.",
-        "notFound": "I couldn't find any track with that name.",
-        "results": "Track results for {{query}}",
         "trackInfo": "Track information"
       },
       "album": {
         "commandDescription": "Searches for an album on Spotify",
         "commandUsage": "<album>",
-        "noAlbum": "You need to give me an album name.",
-        "notFound": "I couldn't find any album with that name.",
-        "results": "Album results for {{query}}",
         "albumInfo": "Album information",
         "albumType": "Album type",
         "types": {
@@ -129,25 +112,17 @@
       "artist": {
         "commandDescription": "Searches for an artist on Spotify",
         "commandUsage": "<artist>",
-        "noArtist": "You need to give me an artist name.",
-        "notFound": "I couldn't find any artist with that name.",
-        "results": "Artist results for {{query}}",
         "artistInfo": "Artist information"
       },
       "playlist": {
         "commandDescription": "Searches for a playlist on Spotify",
         "commandUsage": "<playlist>",
-        "noPlaylist": "You need to give me a playlist name.",
-        "notFound": "I couldn't find any playlist with that name.",
-        "results": "Playlist results for {{query}}",
         "playlistInfo": "Playlist information",
         "createdBy": "Created by"
       },
       "user": {
         "commandDescription": "Get information about a user on Spotify",
         "commandUsage": "<user>",
-        "noUser": "You need to give me a valid user.",
-        "notFound": "I couldn't find any users.",
         "userInfo": "User information"
       }
     }
@@ -432,10 +407,54 @@
     "embedAuthor": "NASA Image of the Day"
   },
   "deezer": {
-    "commandDescription": "Searches for a song on Deezer",
-    "commandUsage": "<track name>",
+    "commandDescription": "Searches for a track, playlist, podcast, an album, user or an artist on Deezer.",
+    "commandUsage": "<type> <query>",
     "noTrackName": "You need to give me a track name.",
-    "noTracksFound": "I couldn't find any tracks with that name."
+    "noTracksFound": "I couldn't find any tracks with that name.",
+    "fans": "Fans",
+    "fansCount": "{{fans}} fans",
+    "createdAt": "Created at",
+    "createdBy": "Created by",
+    "followers": "Followers",
+    "following": "Following",
+    "subcommands": {
+      "track": {
+        "commandDescription": "Searches for a track on Deezer",
+        "commandUsage": "<track>",
+        "trackInfo": "Track information"
+      },
+      "album": {
+        "commandDescription": "Searches for an album on Deezer",
+        "commandUsage": "<album> [--tracks]",
+        "albumInfo": "Album information",
+        "albumTracks": "Album tracks"
+      },
+      "artist": {
+        "commandDescription": "Searches for an artist on Deezer",
+        "commandUsage": "<artist> [--albums | --related]",
+        "artistInfo": "Artist information",
+        "artistAlbums": "Artist albums",
+        "artistRelated": "Related artists"
+      },
+      "playlist": {
+        "commandDescription": "Searches for a playlist on Deezer",
+        "commandUsage": "<playlist> [--tracks]",
+        "playlistInfo": "Playlist information",
+        "playlistTracks": "Playlist tracks"
+      },
+      "podcast": {
+        "commandDescription": "Searches for a podcast on Deezer",
+        "commandUsage": "<podcast> [--episodes]",
+        "podcastInfo": "Podcast information",
+        "podcastEpisodes": "Podcast episodes",
+        "moreEpisodes": "...and {{episodes}} more episodes"
+      },
+      "user":  {
+        "commandDescription": "Searches for a user on Deezer",
+        "commandUsage": "<user>",
+        "userInfo": "User Info"
+      }
+    }
   },
   "profile": {
     "commandDescription": "Shows your or someone else's profile",
@@ -455,6 +474,29 @@
   "dicksize": {
     "commandDescription": "Shows how small your dick is",
     "yourDickSize": "Your Dick Size"
+  },
+  "restrictemoji": {
+    "commandDescription": "Permits, rejects or resets emoji usage permission for a role.",
+    "addRole": "To permit an emoji usage for a role, use `{{command}} add <emoji> <role>`.",
+    "removeRole": "To reject an emoji usage for a role, use `{{command}} remove <emoji> <role>`.",
+    "reset": "To reset emoji usage permission for roles, use `{{command}} reset <emoji>`.",
+    "subcommands": {
+      "add": {
+        "commandDescription": "Permits using an emoji for a role.",
+        "commandUsage": "<emoji> <role>",
+        "canUse": "Role `{{role}}` can now use `{{emoji}}`."
+      },
+      "remove": {
+        "commandDescription": "Rejects using an emoji for a role.",
+        "commandUsage": "<emoji> <role>",
+        "cantUse": "Role `{{role}}` can't use `{{emoji}}` anymore."
+      },
+      "reset": {
+        "commandDescription": "Resets emoji usage permission for roles which can use an emoji.",
+        "commandUsage": "<emoji>",
+        "resetted": "Resetted emoji usage permission for roles which could use `{{emoji}}`."
+      }
+    }
   },
   "config": {
     "commandDescription": "Change the current guild configuration",
@@ -703,11 +745,33 @@
     "noZone": "You need to give me a place to get the time",
     "notFound": "Couldn't find this place."
   },
+  "vote": {
+    "commandDescription": "Gives you a bonus for voting on bot lists",
+    "howToVote": {
+      "dbl": "**[Vote on DBL]({{link}})** to claim your bonus"
+    }
+  },
   "dbl": {
-    "commandDescription": "Gives you a bonus for voting on Discord Bot List",
-    "alreadyClaimed": "You've already claimed your DBL bonus today",
-    "howToVote": "**[Vote on DBL]({{link}})** and then run `{{command}}` again to claim your bonus",
-    "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+    "commandDescription": "Searches for a bot on Discord Bot List",
+    "commandUsage": "<bot name>",
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "selectResult": "Please send the number of the result (10 seconds)",
+    "noBotName":  "You need to give me a valid bot name",
+    "botNotFound": "Bot not found",
+    "results": "Bot results for {{query}}",
+    "noDescription": "This bot doesn't have a description",
+    "prefix": "Prefix",
+    "library": "Library",
+    "owner": "Owner",
+    "ownerPlural": "Owners",
+    "acceptedAt": "Accepted at",
+    "servers": "Servers",
+    "shards": "Shards",
+    "website": "Website",
+    "supportServer": "Support Server",
+    "githubRepository": "GitHub Repository",
+    "clickHere": "[Click here]({{link}})"
   },
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder",
@@ -833,7 +897,7 @@
   },
   "currency": {
     "commandDescription": "Shows the current rate of a currency or a pair.",
-    "commandUsage": "<to> [from] [value]",
+    "commandUsage": "[from] [value] <to>",
     "noCurrency": "You have to give me a valid currency or a pair."
   },
   "joinlock": {
@@ -881,37 +945,26 @@
   "lastfm": {
     "commandDescription": "Get an user information or search for a track, album or artist on Last.fm",
     "commandUsage": "<type> <query>",
-    "notFound": "The results for {{query}} returned 0 matches.",
     "topArtists": "Top artists (1 month)",
     "playcount": "Playcount",
     "playcountCount": "Played {{times}} times",
     "listeners": "Listeners",
     "album": "Album",
     "artist": "Artist",
-    "selectQuery": "Please send the number of the result (10 seconds)",
     "readMore": "Read more on Last.fm",
     "tags": "Tags",
     "tracks": "Tracks",
     "registered": "Registered in",
     "subcommands": {
       "track": {
-        "missing": "Please insert a track to search.",
-        "results": "Track results for {{query}}",
-        "resultsCount": "{{count}} tracks found",
         "commandDescription": "Search for a track on Last.fm",
         "commandUsage": "<track>"
       },
       "album": {
-        "missing": "Please insert an album to search.",
-        "results": "Album results for {{query}}",
-        "resultsCount": "{{count}} albums found",
         "commandDescription": "Search for an album on Last.fm",
         "commandUsage": "<album>"
       },
       "artist": {
-        "missing": "Please insert an artist to search",
-        "results": "Artist results for {{query}}",
-        "resultsCount": "{{count}} artists found",
         "commandDescription": "Search for an artist on Last.fm",
         "commandUsage": "<artist>"
       },
@@ -969,7 +1022,7 @@
   },
   "ship": {
     "commandDescription": "Ship yourself or someone with somebody else.",
-    "commandUsage": "<first user> [second user]",
+    "commandUsage": "[first user] <second user>",
     "noUser": "Please insert someone to ship",
     "messages": {
       "high": {
@@ -1036,5 +1089,17 @@
   },
   "yuri": {
     "commandDescription": "Fetches a random image from r/yuri and displays it."
+  },
+  "welcometranslator": {
+    "commandDescription": "Welcomes a new translator.",
+    "commandUsage": "<user>",
+    "noMember": "You need to mention someone!",
+    "cantWelcomeYourself": "You can't welcome yourself!",
+    "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
+  },
+  "morejpeg": {
+	"commandDescription": "Adds JPEG compression to an image.",
+	"commandUsage": "[image link]",
+	"missingImage": "You need to give me a link or an image!"
   }
 }

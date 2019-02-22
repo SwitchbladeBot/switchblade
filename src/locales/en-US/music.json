@@ -22,5 +22,16 @@
   "addedToTheQueue": "{{- songName}} has been added to the queue",
   "andMore": "and {{missing}} more...",
   "noneAfterCurrent": "There are no songs after the current one.",
-  "wasSkipped": "{{- songName}} was skipped!"
+  "wasSkipped": "{{- songName}} was skipped!",
+  "artist": "Artist",
+  "track": "Track",
+  "album": "Album",
+  "albumPlural": "Albums",
+  "genres": "Genres",
+  "tracksCount": "{{tracks}} tracks",
+  "albumsCount": "{{albums}} albums",
+  "tracksCountParentheses": "Tracks ({{tracks}})",
+  "moreTracks": "...and {{tracks}} more tracks",
+  "moreAlbums": "...and {{albums}} more albums",
+  "moreArtists": "...and {{artists}} more artists"
 }

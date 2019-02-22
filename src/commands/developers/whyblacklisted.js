@@ -1,17 +1,16 @@
-const { CommandStructures, BlacklistUtils, SwitchbladeEmbed, Constants } = require('../../index')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { Command, BlacklistUtils, SwitchbladeEmbed, Constants } = require('../../index')
 
 module.exports = class WhyBlacklisted extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'whyblacklisted'
-    this.category = 'developers'
-    this.hidden = true
-
-    this.requirements = new CommandRequirements(this, { devOnly: true })
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ showUsage: false, missingError: 'commands:whyblacklisted.missingUser' })
-    )
+    super(client, {
+      name: 'whyblacklisted',
+      category: 'developers',
+      hidden: true,
+      requirements: { devOnly: true },
+      parameters: [{
+        type: 'user', showUsage: false, missingError: 'commands:whyblacklisted.missingUser'
+      }]
+    })
   }
 
   async run ({ channel, author, t }, user) {

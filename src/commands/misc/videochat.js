@@ -1,11 +1,14 @@
-const { CommandStructures } = require('../../')
-const { Command, CommandRequirements } = CommandStructures
+const { Command } = require('../../')
 
 module.exports = class VideoChat extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'videochat'
-    this.requirements = new CommandRequirements(this, { guildOnly: true, voiceChannelOnly: true })
+    super(client, {
+      name: 'videochat',
+      requirements: {
+        guildOnly: true,
+        voiceChannelOnly: true
+      }
+    })
   }
 
   run ({ t, channel, guild, voiceChannel }) {

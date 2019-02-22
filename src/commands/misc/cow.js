@@ -3,9 +3,7 @@ const cows = require('cows')
 
 module.exports = class Cow extends Command {
   constructor (client) {
-    super(client)
-
-    this.name = 'cow'
+    super(client, { name: 'cow' })
   }
 
   run ({ channel }) {

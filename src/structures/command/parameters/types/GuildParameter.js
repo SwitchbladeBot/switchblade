@@ -2,13 +2,9 @@ const Parameter = require('./Parameter.js')
 const CommandError = require('../../CommandError.js')
 
 module.exports = class GuildParameter extends Parameter {
-  parse (arg, context) {
+  static parse (arg, { t, client }) {
     if (!arg) return
-    return this.guild(context, arg)
-  }
-
-  guild ({ t, client }, id) {
-    const guild = client.guilds.get(id)
+    const guild = client.guilds.get(arg)
     if (!guild) throw new CommandError(t('errors:invalidGuild'))
     return guild
   }
