@@ -24,15 +24,6 @@ module.exports = class CommandRequirements {
       apis: options.apis || [],
       envVars: options.envVars || [],
 
-      // TODO: Move cooldown to command structure
-      cooldown: {
-        enabled: false,
-        feedback: true,
-        time: 1,
-        ...(options.cooldown || {})
-      },
-      cooldownMap: new Map(),
-
       errors: {
         databaseOnly: 'errors:databaseOnly',
         playerManagerOnly: 'errors:playerManagerOnly',
