@@ -36,5 +36,5 @@
   "needBiggerNumber": "You need to give me a number higher than {{number}}.",
   "needSmallerNumber": "You need to give me a number smaller than {{number}}.",
   "needSmallerString": "You need to give me a sentence smaller than {{number}} characters.",
-  "invalidURL": "You need to give me a valid URL"
+  "invalidURL": "You need to give me a valid URL!"
 }
