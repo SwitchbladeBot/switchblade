@@ -10,7 +10,7 @@ module.exports = class Serverinvite extends Command {
         this.hidden = true;
         
         this.requirements = new CommandRequirements(this, { devOnly: true });
-        this.parameters = new CommandParameters(this, new StringParameter({ full: true, missingError: 'errors:missingParameters', showUsage: false });
+        this.parameters = new CommandParameters(this, new StringParameter({ full: true, missingError: 'errors:missingParameters', showUsage: false }));
     }
     
     async run({ channel, message }, expr) {
