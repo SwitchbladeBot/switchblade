@@ -680,6 +680,9 @@
   "eval": {
     "commandDescription": "Evals a JS string"
   },
+  "serverinvite": {
+    "commandDescription": "Gets the server invite for any server Switchblade is in"
+  },
   "oddlysatisfying": {
     "commandDescription": "Random image from /r/oddlysatisfying"
   },
