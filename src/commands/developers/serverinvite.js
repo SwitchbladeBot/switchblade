@@ -6,7 +6,7 @@ module.exports = class Serverinvite extends Command {
   constructor(client) {
     super(client)
     this.name = 'serverinvite'
-    this.aliases = ['execute']
+    this.aliases = ['sinvite']
     this.category = 'developers'
     this.hidden = true
 
