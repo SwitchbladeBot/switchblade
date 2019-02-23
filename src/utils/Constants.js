@@ -78,11 +78,12 @@ module.exports = {
   WIND_SVG: 'src/assets/svg/wind.svg',
 
   //  Brands
+  SOUNDCLOUD_BRAND_SVG: 'src/assets/svg/brands/soundcloud.svg',
   SPOTIFY_BRAND_SVG: 'src/assets/svg/brands/spotify.svg',
   YOUTUBE_BRAND_SVG: 'src/assets/svg/brands/youtube.svg',
-  SOUNDCLOUD_BRAND_SVG: 'src/assets/svg/brands/soundcloud.svg',
   DEEZER_BRAND_SVG: 'src/assets/svg/brands/deezer.svg',
   TWITCH_BRAND_SVG: 'src/assets/svg/brands/twitch.svg',
+  MIXER_BRAND_SVG: 'src/assets/svg/brands/mixer.svg',
   HTTP_BRAND_SVG: 'src/assets/svg/brands/http.svg',
 
   // Misc
