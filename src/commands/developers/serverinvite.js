@@ -1,6 +1,5 @@
 const { CommandStructures } = require('../../')
 const { Command, CommandRequirements, CommandParameters, StringParameter } = CommandStructures
-const util = require('util')
 
 module.exports = class Serverinvite extends Command {
   constructor(client) {
