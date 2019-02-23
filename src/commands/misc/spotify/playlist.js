@@ -28,11 +28,11 @@ module.exports = class SpotifyPlaylist extends SearchCommand {
       .setTitle(name)
       .setURL(urls.spotify)
       .setDescription(description)
-      .setThumbnail(cover.url)
+      .setThumbnail(cover ? cover.url : 'https://i.imgur.com/CYqOieu.png')
       .addField(t('commands:spotify.subcommands.playlist.createdBy'), `[${owner.display_name}](${owner.external_urls.spotify})`, true)
       .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
 
-    const trackList = tracks.items.slice(0, 5).map(t => t.track).map((track, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) - [${track.artists[0].name}](${track.artists[0].external_urls.spotify})`)
+    const trackList = tracks.items.slice(0, 5).map(({ track }, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) - [${track.artists[0].name}](${track.artists[0].external_urls.spotify})`)
     const total = tracks.total
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
     embed.addField(`${t('commands:spotify.trackPlural')} (${total})`, trackList)
