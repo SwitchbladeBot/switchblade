@@ -1,11 +1,11 @@
 const { Command } = require('../../')
-const request = require('request')
+const fetch = require('node-fetch')
 
 module.exports = class Tinyurl extends Command {
   constructor (client) {
     super(client, {
       name: 'tinyurl',
-      aliases: ['short', 'shorturl']
+      aliases: ['short', 'shorturl'],
       category: 'utility',
       parameters: [{
         type: 'string',
@@ -17,7 +17,9 @@ module.exports = class Tinyurl extends Command {
 
   async run ({ t, author, channel }, text) {
    channel.startTyping()
-   request(`http://tinyurl.com/api-create.php?url=${encodeURIComponent(text)}`, function (e, r, b) {
-   channel.send(b)
- }).then(() => channel.stopTyping())
+   fetch(`http://tinyurl.com/api-create.php?url=${encodeURIComponent(text)}`).then(shorturl => {
+	   channel.send(shorturl)
+   })
+   channel.stopTyping()
+ }
 }
