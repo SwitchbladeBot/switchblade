@@ -20,7 +20,7 @@ module.exports = class MixerSong extends Song {
         createdAt: channel.createdAt,
         updatedAt: channel.updatedAt,
         bannerUrl: channel.bannerUrl,
-        userAvatarUrl : channel.user ? channel.user.avatarUrl : null,
+        userAvatarUrl: channel.user ? channel.user.avatarUrl : null,
         coverUrl: channel.cover ? channel.cover.url : null
       }
       this.artwork = this.richInfo.userAvatarUrl || this.richInfo.bannerUrl || this.richInfo.coverUrl
