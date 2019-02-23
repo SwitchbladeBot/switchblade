@@ -1101,5 +1101,17 @@
 	"commandDescription": "Adds JPEG compression to an image.",
 	"commandUsage": "[image link]",
 	"missingImage": "You need to give me a link or an image!"
+  },
+  "youtube": {
+    "commandDescription": "Searches for a video, playlist and/or channel on YouTube",
+    "commandUsage": "<query> [--video | --channel | --playlists | --order]",
+    "likes": "Likes",
+    "dislikes": "Dislikes",
+    "comments": "Comments",
+    "channel": "Channel",
+    "publishedAt": "Published At",
+    "video": {
+      "info": "Video information"
+    }
   }
 }

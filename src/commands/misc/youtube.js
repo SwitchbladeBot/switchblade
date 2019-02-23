@@ -61,16 +61,16 @@ module.exports = class YouTube extends SearchCommand {
 
   async getVideo ({ t, author, language }, { id: videoID }) {
     moment.locale(language)
-    const { id, snippet, statistics, contentDetails } = await this.client.apis.youtube.getVideo(videoID.videoId, 'snippet,statistics,contentDetails')
-    const { publishedAt, channelId, title, thumbnails, channelTitle, tags } = snippet
-    const description = `[${title}](https://youtu.be/${id.videoId}) `
+    const { snippet, statistics, contentDetails } = await this.client.apis.youtube.getVideo(videoID.videoId, 'snippet,statistics,contentDetails')
+    const { publishedAt, channelId, title, thumbnails, channelTitle } = snippet
     const embed = new SwitchbladeEmbed(author)
-      .setDescription(description.size > 2040 ? description.slice(0, 2040) + '...' : description)
+      .setDescription(`[${title}](https://youtu.be/${videoID.videoId}) \`(${MiscUtils.formatDuration(contentDetails.duration)})\``)
       .addField(t('commands:youtube.likes'), MiscUtils.formatNumber(statistics.likeCount, language), true)
       .addField(t('commands:youtube.dislikes'), MiscUtils.formatNumber(statistics.dislikeCount, language), true)
       .addField(t('commands:youtube.comments'), MiscUtils.formatNumber(statistics.commentCount, language), true)
       .addField(t('commands:youtube.channel'), `[${channelTitle}](https://www.youtube.com/channel/${channelId})`, true)
       .addField(t('commands:youtube.publishedAt'), moment(publishedAt).format('LLL'), true)
+      .setThumbnail(this.client.apis.youtube.getBestThumbnail(thumbnails).url)
     return embed
   }
 
