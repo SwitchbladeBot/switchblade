@@ -20,8 +20,8 @@ module.exports = class CommandParameters {
     const length = params.length
     const hasFlags = Array.isArray(params[length - 1])
     return {
-      flags: hasFlags ? params[length - 1] : null,
-      parameters: (hasFlags ? params.slice(0, length - 2) : params).map(normalizeParam)
+      flags: hasFlags ? params[length - 1].map(normalizeParam) : null,
+      parameters: (hasFlags ? params.slice(0, length - 1) : params).map(normalizeParam)
     }
   }
 
