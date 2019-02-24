@@ -10,16 +10,16 @@
     "noSentence": "You need to give me some text to reverse!"
   },
   "hmmm": {
-    "commandDescription": "Random image from /r/hmmm."
+    "commandDescription": "Shows a random image from /r/hmmm."
   },
   "smart": {
     "commandDescription": "Shows the Roll Safe meme."
   },
   "softwaregore": {
-    "commandDescription": "Random image from /r/softwaregore."
+    "commandDescription": "Shows a random image from /r/softwaregore."
   },
   "thinking": {
-    "commandDescription": "Random :thinking: image from /r/thinking."
+    "commandDescription": "Shows a random :thinking: image from /r/thinking."
   },
   "adorable": {
     "commandDescription": "Generates an adorable avatar."
@@ -34,7 +34,7 @@
     "hereIsYourDog": "Here's your dog!"
   },
   "invite": {
-    "commandDescription": "Shows the invite link for Switchblade.",
+    "commandDescription": "Shows Switchblade's invite link.",
     "clickHere": "Click here to invite me to your server",
     "noteThat": "Note that you need the **$t(permissions:MANAGE_GUILD)** permission in order to invite bots."
   },
@@ -80,7 +80,7 @@
     }
   },
   "spotify": {
-    "commandDescription": "Searches for a track, playlist, an album or an artist on Spotify, or displays a user info.",
+    "commandDescription": "Searches for a track, playlist, album or an artist on Spotify, or displays a user info.",
     "commandUsage": "<type> <query>",
     "album": "Album",
     "genres": "Genres",
@@ -129,19 +129,19 @@
     }
   },
   "copypasta": {
-    "commandDescription": "Random text from /r/copypasta."
+    "commandDescription": "Shows a random text from /r/copypasta."
   },
   "owo": {
     "commandDescription": "Owoifies your text.",
     "commandUsage": "<text>",
     "missingSentence": "You need to give me some text to owoify!",
     "tooLongTitle": "Your text is longer than 200 characters!",
-    "tooLongDescription": "Try shortening your text down or separate it into multiple commands!"
+    "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
   "daily": {
     "commandDescription": "Claims your daily reward.",
-    "alreadyClaimedTitle": "You've already claimed your daily reward",
-    "alreadyClaimedDescription": "You can do it again in **{{time}}**.",
+    "alreadyClaimedTitle": "Already claimed",
+    "alreadyClaimedDescription": "You've already claimed your daily reward. You can do it again in **{{time}}**.",
     "claimedSuccessfully": "You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as your daily reward!"
   },
   "money": {
@@ -408,7 +408,7 @@
     "embedAuthor": "NASA Image of the Day"
   },
   "deezer": {
-    "commandDescription": "Searches for a track, playlist, podcast, an album or an artist Deezer, or displays a user info.",
+    "commandDescription": "Searches for a track, playlist, podcast, album or an artist Deezer, or displays a user info.",
     "commandUsage": "<type> <query>",
     "noTrackName": "You need to give me a track name.",
     "noTracksFound": "I couldn't find any tracks with that name.",
