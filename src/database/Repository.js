@@ -8,13 +8,6 @@ module.exports = class Repository {
   }
 
   /**
-   * Parses an entity into custom repository response (e.: with a save propertie)
-   * @param {Object} entity - Unparsed entity
-   * @returns {Object} - Parsed entity
-   */
-  parse (entity) {}
-
-  /**
    * Saves an entity into the repository
    * @param {Object} entity - Entity to be save
    * @returns {Object} - Added entity

@@ -39,20 +39,14 @@ class BonusModule extends Module {
     }
 
     const collectedMoney = Math.ceil(Math.random() * 2000) + 750
-    user.money += collectedMoney
-    user.lastDaily = Date.now()
-    await user.save()
+    await this._users.update(_to, { $inc: { money: collectedMoney }, lastDaily: Date.now() })
 
     return { collectedMoney }
   }
 
   async claimDBLBonus (_user) {
-    const user = await this._users.get(_user, 'money')
-
     const collectedMoney = 250
-    user.money += collectedMoney
-    await user.save()
-
+    await this._users.update(_user, { $inc: { money: collectedMoney } })
     return { collectedMoney }
   }
 }
@@ -76,8 +70,10 @@ module.exports = class EconomyModule extends Module {
   async transfer (_from, _to, amount) {
     const from = await this._users.get(_from, 'money')
     if (from.money < amount) throw new Error('NOT_ENOUGH_MONEY')
-    from.money -= amount
-    await Promise.all([ from.save(), this._users.update(_to, { $inc: { money: amount } }) ])
+    await Promise.all([
+      this._users.update(_from, { $inc: { money: -amount } }),
+      this._users.update(_to, { $inc: { money: amount } })
+    ])
   }
 
   async balance (_user) {
@@ -93,9 +89,7 @@ module.exports = class EconomyModule extends Module {
     const chosenSide = Math.random() > 0.5 ? 'heads' : 'tails'
     const won = side === chosenSide
     const bet = won ? amount : -amount
-
-    user.money += bet
-    await user.save()
+    await this._users.update(_user, { $inc: { money: bet } })
 
     return { won, chosenSide }
   }

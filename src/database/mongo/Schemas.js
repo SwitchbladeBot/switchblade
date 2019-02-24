@@ -7,11 +7,11 @@ module.exports = {
     money: { type: Number, default: 0 },
     lastDaily: { type: Number, default: 0 },
     globalXp: { type: Number, default: 0 },
-    personalText: { type: String, default: 'Did you know you can edit this in the future dashboard or using the personaltext command? :o' },
-    blacklisted: { type: Boolean, default: false },
+    personalText: String,
+    blacklisted: Boolean,
     blacklistReason: String,
     blacklisterId: String,
-    favColor: { type: String, default: process.env.EMBED_COLOR },
+    favColor: String,
     rep: { type: Number, default: 0 },
     lastRep: { type: Number, default: 0 },
     lastDBLBonusClaim: { type: Number, default: 0 }
@@ -20,10 +20,9 @@ module.exports = {
   // Guild Schema
   Guild: new Schema({
     _id: String,
-    prefix: { type: String, default: process.env.PREFIX },
-    language: { type: String, default: 'en-US' },
-    joinLock: { type: Boolean, default: false },
+    prefix: String,
+    language: String,
+    joinLock: Boolean,
     joinLockMessage: String
   })
-
 }

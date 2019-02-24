@@ -50,10 +50,7 @@ module.exports = class SocialModule extends Module {
   }
 
   async addReputation (_from, _to) {
-    const [ from, to ] = await Promise.all([
-      this._users.get(_from, 'lastRep'),
-      this._users.get(_to, 'rep')
-    ])
+    const from = await this._users.get(_from, 'lastRep')
 
     const now = Date.now()
     const lastRep = from.lastRep
@@ -62,13 +59,21 @@ module.exports = class SocialModule extends Module {
     }
 
     from.lastRep = now
-    to.rep++
 
-    await Promise.all([ from.save(), to.save() ])
+    await Promise.all([
+      this._users.update(_from, { lastRep: now }),
+      this._users.update(_to, { $inc: { rep: 1 } }) ])
   }
 
   async retrieveProfile (_user) {
-    return this._users.get(_user, 'money rep personalText favColor')
+    const {
+      money = 0,
+      rep = 0,
+      personalText = 'Did you know you can edit this in the future dashboard or using the personaltext command? :o',
+      favColor = process.env.EMBED_COLOR
+     } = (this._users.findOne(_user, 'money rep personalText favColor') || {})
+
+    return { money, rep, personalText, favColor }
   }
 
   async leaderboard (sortField, projection = sortField, size = 16) {
