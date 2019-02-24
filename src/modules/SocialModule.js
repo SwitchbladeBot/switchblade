@@ -75,15 +75,15 @@ module.exports = class SocialModule extends Module {
   }
 
   async retrieveProfile (_user, projection = 'money rep personalText favColor') {
-    return {
+    return _user ? {
       ...defaultUser,
       ...(await this._users.findOne(_user, projection) || {})
-    }
+    } : {}
   }
 
   async leaderboard (sortField, projection = sortField, size = 10) {
     const top = (await this._users.findAll(projection).sort({ [sortField]: -1 }).limit(size + 6)).filter(u => {
-      u.user = this.client.users.get(u.id)
+      u.user = this.client.users.get(u._id)
       return !!u.user
     })
 

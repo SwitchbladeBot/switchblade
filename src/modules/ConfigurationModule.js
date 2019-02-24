@@ -24,10 +24,10 @@ module.exports = class ConfigurationModule extends Module {
   }
 
   async retrieve (_guild, projection = 'prefix language') {
-    return {
+    return _guild ? {
       ...defaultGuild,
       ...(await this._guilds.findOne(_guild, projection) || {})
-    }
+    } : {}
   }
 
   validateConfiguration (entity) {

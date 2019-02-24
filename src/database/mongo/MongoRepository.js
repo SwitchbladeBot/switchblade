@@ -1,5 +1,8 @@
 const Repository = require('../Repository.js')
 
+const transformProps = require('transform-props')  
+const castToString = arg => String(arg)
+
 module.exports = class MongoRepository extends Repository {
   constructor (mongoose, model) {
     super()
@@ -14,16 +17,20 @@ module.exports = class MongoRepository extends Repository {
     }
   }
 
+  parse (entity) {
+    return entity ? transformProps(entity.toObject({ versionKey: false }), castToString, '_id') : null
+  }
+
   add (entity) {
-    return this.model.create(entity)
+    return this.model.create(entity).then(this.parse)
   }
 
   findOne (id, projection) {
-    return this.model.findById(id, projection)
+    return this.model.findById(id, projection).then(this.parse)
   }
 
   findAll (projection) {
-    return this.model.find({}, projection)
+    return this.model.find({}, projection).then(r => r.map(this.parse))
   }
 
   get (id, projection) {
@@ -31,7 +38,7 @@ module.exports = class MongoRepository extends Repository {
   }
 
   remove (id) {
-    return this.model.findByIdAndRemove(id)
+    return this.model.findByIdAndRemove(id).then(this.parse)
   }
 
   update (id, entity) {

@@ -1,4 +1,4 @@
-const { Command, BlacklistUtils, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class BlacklistCommand extends Command {
   constructor (client) {
@@ -17,8 +17,7 @@ module.exports = class BlacklistCommand extends Command {
 
   async run ({ channel, author, t }, user, reason) {
     const embed = new SwitchbladeEmbed(author)
-    const doc = await this.client.database.users.get(user.id)
-    await BlacklistUtils.addUser(doc, reason, author)
+    await this.modules.developers.blacklist(user.id, reason, author.id)
     embed
       .setTitle(t('commands:blacklist.successTitle'))
       .setDescription(`${user} - \`${reason}\``)

@@ -7,6 +7,13 @@ module.exports = class Repository {
     if (this.constructor === Repository) throw new Error('Cannot instantiate abstract class')
   }
 
+  /**  
+   * Parses an entity
+   * @param {Object} entity - Unparsed entity  
+   * @returns {Object} - Parsed entity  
+   */  
+  parse (entity) {}
+
   /**
    * Saves an entity into the repository
    * @param {Object} entity - Entity to be save
