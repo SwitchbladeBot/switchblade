@@ -16,10 +16,12 @@ const normalizeParam = (p) => {
  * @param {Command} command
  */
 module.exports = class CommandParameters {
-  static parseOptions (parameters = []) {
+  static parseOptions (params = []) {
+    const length = params.length
+    const hasFlags = Array.isArray(params[length - 1])
     return {
-      flags: Array.isArray(parameters[parameters.length - 1]) ? parameters.pop().map(normalizeParam) : null,
-      parameters: parameters.map(normalizeParam)
+      flags: hasFlags ? params[length - 1] : null,
+      parameters: (hasFlags ? params.slice(0, length - 2) : params).map(normalizeParam)
     }
   }
 
