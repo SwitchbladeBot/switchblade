@@ -16,7 +16,7 @@ module.exports = class Unblacklist extends Command {
   async run ({ channel, author, t }, user) {
     const embed = new SwitchbladeEmbed(author)
     await this.modules.developers.unblacklist(user.id)
-    embed.setDescription(`**${t('commands:unblacklist.success', { user: user })}**`)
+    embed.setDescription(`**${t('commands:unblacklist.success', { user })}**`)
     channel.send(embed)
   }
 }

@@ -1,6 +1,6 @@
 const Repository = require('../Repository.js')
 
-const transformProps = require('transform-props')  
+const transformProps = require('transform-props')
 const castToString = arg => String(arg)
 
 module.exports = class MongoRepository extends Repository {
@@ -30,7 +30,7 @@ module.exports = class MongoRepository extends Repository {
   }
 
   findAll (projection) {
-    return this.model.find({}, projection).then(r => r.map(this.parse))
+    return this.model.find({}, projection).then(e => e.map(this.parse))
   }
 
   get (id, projection) {
