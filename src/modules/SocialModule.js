@@ -61,7 +61,7 @@ module.exports = class SocialModule extends Module {
     const from = await this._users.get(_from, 'lastRep')
 
     const now = Date.now()
-    const lastRep = from.lastRep
+    const { lastRep } = from
     if (now - lastRep < REP_INTERVAL) {
       throw new RepCooldownError(lastRep, moment.duration(REP_INTERVAL - (now - lastRep)).format('h[h] m[m] s[s]'))
     }
@@ -82,7 +82,8 @@ module.exports = class SocialModule extends Module {
   }
 
   async leaderboard (sortField, projection = sortField, size = 10) {
-    const top = (await this._users.findAll(projection).sort({ [sortField]: -1 }).limit(size + 6)).filter(u => {
+    const dbRes = await this._users.model.find({}, projection).sort({ [sortField]: -1 }).limit(size + 6)
+    const top = dbRes.map(this._users.parse).filter(u => {
       u.user = this.client.users.get(u._id)
       return !!u.user
     })
