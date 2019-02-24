@@ -1,13 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class LastfmArtist extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'lastfm')
-    this.name = 'artist'
-    this.aliases = ['ar']
-    this.embedColor = Constants.LASTFM_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/TppYCun.png'
+  constructor (client) {
+    super(client, {
+      name: 'artist',
+      aliases: ['ar'],
+      parentCommand: 'lastfm',
+      embedColor: Constants.LASTFM_COLOR,
+      embedLogoURL: 'https://i.imgur.com/TppYCun.png'
+    })
   }
 
   async search (context, query) {
@@ -20,6 +21,7 @@ module.exports = class LastfmArtist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, artistInfo) {
+    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.LASTFM_COLOR)
       .setAuthor(artistInfo.name, 'https://i.imgur.com/TppYCun.png', artistInfo.url)
@@ -38,6 +40,6 @@ module.exports = class LastfmArtist extends SearchCommand {
     } catch (e) {
     }
 
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

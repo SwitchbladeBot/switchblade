@@ -20,6 +20,7 @@
   "invalidNumber": "You need to give me a valid number.",
   "invalidUser": "You need to give me a valid user.",
   "invalidUserBot": "You need to give me a user that isn't a bot.",
+  "emojiNotFromSameGuild": "You need to give me an emoji that is from this guild.",
   "invalidUserNotBot": "You need to give me a user that is a bot.",
   "databaseOnly": "Sorry, I don't have a database connection right now!",
   "playerManagerOnly": "Sorry, I don't have a player connection right now!",
@@ -32,6 +33,8 @@
   "voiceChannelJoin": "I can't join this voice channel!",
   "sameUser": "You need to give me a user that isn't you.",
   "managersOnly": "Huhuhuhuhuhuhu, yond thou art not a Translation Manag'r huhuhuhuhuhuhuhuhuhuhu",
-  "needBiggerNumber": "You need to give a number higher than {{number}}.",
-  "needSmallerNumber": "You need to give a number smaller than {{number}}."
+  "needBiggerNumber": "You need to give me a number higher than {{number}}.",
+  "needSmallerNumber": "You need to give me a number smaller than {{number}}.",
+  "needSmallerString": "You need to give me a sentence smaller than {{number}} characters.",
+  "invalidURL": "You need to give me a valid URL!"
 }

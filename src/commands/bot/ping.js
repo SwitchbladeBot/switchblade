@@ -2,10 +2,11 @@ const { Command } = require('../../')
 
 module.exports = class Ping extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'ping'
-    this.aliases = ['pang', 'peng', 'pong', 'pung']
-    this.category = 'bot'
+    super(client, {
+      name: 'ping',
+      aliases: ['pang', 'peng', 'pong', 'pung'],
+      category: 'bot'
+    })
   }
 
   run ({ channel }) {

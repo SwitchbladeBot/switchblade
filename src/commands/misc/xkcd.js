@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 
 const snekfetch = require('snekfetch')
 
@@ -7,12 +6,12 @@ const baseUrl = 'https://xkcd.com'
 
 module.exports = class XKCD extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'xkcd'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: false })
-    )
+    super(client, {
+      name: 'xkcd',
+      parameters: [{
+        type: 'string', full: true, required: false
+      }]
+    })
   }
 
   async run ({ t, author, channel }, arg) {

@@ -1,5 +1,4 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const snekfetch = require('snekfetch')
 
 const PROTOCOL_REGEX = /^[a-zA-Z]+:\/\//
@@ -7,10 +6,15 @@ const PATH_REGEX = /(\/(.+)?)/g
 
 module.exports = class IsItUp extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'isitup'
-    this.category = 'utility'
-    this.parameters = new CommandParameters(this, new StringParameter({ full: true, missingError: 'commands:isitup.noWebsite' }))
+    super(client, {
+      name: 'isitup',
+      category: 'utility',
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:isitup.noWebsite'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, url) {

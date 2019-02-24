@@ -1,19 +1,18 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const snekfetch = require('snekfetch')
 const cheerio = require('cheerio')
 
 module.exports = class BeatSaver extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'beatsaver'
-    this.aliases = ['beatsaber', 'bsaver']
-    this.category = 'games'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ missingError: 'commands:beatsaver.noQuery' })
-    )
+    super(client, {
+      name: 'beatsaver',
+      aliases: ['beatsaber', 'bsaver'],
+      category: 'games',
+      parameters: [{
+        type: 'string', missingError: 'commands:beatsaver.noQuery'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, query) {

@@ -1,23 +1,21 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils, CommandStructures } = require('../../../')
-const { BooleanFlagParameter, CommandParameters, StringParameter } = CommandStructures
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+
 const moment = require('moment')
 
 module.exports = class DeezerPlaylist extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'deezer')
-
-    this.name = 'playlist'
-    this.aliases = ['p']
-    this.embedColor = Constants.DEEZER_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' }),
-      [
-        new BooleanFlagParameter({ name: 'tracks', aliases: [ 'songs', 's', 't' ] })
-      ]
-    )
+  constructor (client) {
+    super(client, {
+      name: 'playlist',
+      aliases: ['p'],
+      parentCommand: 'deezer',
+      embedColor: Constants.DEEZER_COLOR,
+      embedLogoURL: 'https://i.imgur.com/lKlFtbs.png',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commons:search.noParams'
+      }, [{
+        type: 'booleanFlag', name: 'tracks', aliases: [ 'songs', 's', 't' ]
+      }]]
+    })
   }
 
   async search (context, query) {
@@ -30,6 +28,7 @@ module.exports = class DeezerPlaylist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, { id }) {
+    channel.startTyping()
     const playlist = await this.client.apis.deezer.getPlaylist(id)
     const { title, link, description, nb_tracks: trackNumber, fans, creation_date: date, picture_big: cover, creator, tracks } = playlist
     let trackList = tracks.data.slice(0, 10).map((track, i) => {
@@ -46,7 +45,7 @@ module.exports = class DeezerPlaylist extends SearchCommand {
       if (tracks.data.length > 10) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 10 }))
       embed.setAuthor(t('commands:deezer.subcommands.playlist.playlistTracks'), this.embedLogoURL, link)
         .setDescription(trackList)
-      return channel.send(embed)
+      return channel.send(embed).then(() => channel.stopTyping())
     }
     trackList = trackList.slice(0, 5)
     if (tracks.data.length > 5) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 5 }))
@@ -55,6 +54,6 @@ module.exports = class DeezerPlaylist extends SearchCommand {
       .addField(t('commands:deezer.createdBy'), `[${creator.name}](https://www.deezer.com/profile/${creator.id})`, true)
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
       .addField(t('music:tracksCountParentheses', { tracks: trackNumber }), trackList)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

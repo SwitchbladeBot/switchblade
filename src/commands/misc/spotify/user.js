@@ -1,15 +1,15 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
-const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class SpotifyUser extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'spotify')
-    this.name = 'user'
-    this.aliases = ['u']
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commands:spotify.subcommands.user.noUser' })
-    )
+    super(client, {
+      name: 'user',
+      aliases: ['u'],
+      parentCommand: 'spotify',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:spotify.subcommands.user.noUser'
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, user) {
@@ -17,6 +17,7 @@ module.exports = class SpotifyUser extends Command {
   }
 
   async getUser (t, author, channel, language, user) {
+    channel.startTyping()
     try {
       const { display_name: name, images, followers, external_urls: urls } = await this.client.apis.spotify.getUser(user)
       const [image] = images.sort((a, b) => b.width - a.width)
@@ -27,7 +28,7 @@ module.exports = class SpotifyUser extends Command {
         .setThumbnail(image.url)
         .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
 
-      await channel.send(embed)
+      await channel.send(embed).then(() => channel.stopTyping())
       return true
     } catch (e) {
       return false

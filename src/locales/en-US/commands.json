@@ -417,7 +417,7 @@
     "createdAt": "Created at",
     "createdBy": "Created by",
     "followers": "Followers",
-    "following": "following",
+    "following": "Following",
     "subcommands": {
       "track": {
         "commandDescription": "Searches for a track on Deezer.",
@@ -899,7 +899,7 @@
   },
   "currency": {
     "commandDescription": "Shows the current rate of a currency or a pair.",
-    "commandUsage": "<to> [from] [value]",
+    "commandUsage": "[from] [value] <to>",
     "noCurrency": "You have to give me a valid currency or a pair."
   },
   "joinlock": {
@@ -1024,7 +1024,7 @@
   },
   "ship": {
     "commandDescription": "Ship yourself or someone with somebody else.",
-    "commandUsage": "<first user> [second user]",
+    "commandUsage": "[first user] <second user>",
     "noUser": "Please insert someone to ship!",
     "messages": {
       "high": {

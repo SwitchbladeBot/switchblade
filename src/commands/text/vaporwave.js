@@ -1,15 +1,16 @@
-const { CommandStructures } = require('../../index')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command } = require('../../')
 
 module.exports = class Vaporwave extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'vaporwave'
-    this.category = 'memes'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:vaporwave.missingSentence' })
-    )
+    super(client, {
+      name: 'vaporwave',
+      category: 'memes',
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:vaporwave.missingSentence'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, text) {

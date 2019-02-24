@@ -1,13 +1,14 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class SpotifyArtist extends SearchCommand {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'spotify')
-    this.name = 'artist'
-    this.aliases = ['ar']
-    this.embedColor = Constants.SPOTIFY_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/vw8svty.png'
+    super(client, {
+      name: 'artist',
+      aliases: ['ar'],
+      parentCommand: 'spotify',
+      embedColor: Constants.SPOTIFY_COLOR,
+      embedLogoURL: 'https://i.imgur.com/vw8svty.png'
+    })
   }
 
   async search (context, query) {
@@ -19,6 +20,7 @@ module.exports = class SpotifyArtist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, { id }) {
+    channel.startTyping()
     const { name, genres, followers, images, external_urls: urls } = await this.client.apis.spotify.getArtist(id)
     const [ cover ] = images.sort((a, b) => b.width - a.width)
     const embed = new SwitchbladeEmbed(author)
@@ -33,6 +35,6 @@ module.exports = class SpotifyArtist extends SearchCommand {
     if (total > 5) albumList.push(t('commands:spotify.moreAlbums', { albums: total - 5 }))
     if (genres.length) embed.addField(t('commands:spotify.genres'), `\`${genres.join('`, `')}\``, true)
     if (albums.length) embed.addField(`${t('commands:spotify.albumPlural')} (${total})`, albumList)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }
