@@ -80,7 +80,7 @@
     }
   },
   "spotify": {
-    "commandDescription": "Searches for a track, playlist, album or an artist on Spotify, or displays a user info.",
+    "commandDescription": "Searches for a track, playlist, album or an artist on Spotify, or displays information about a user.",
     "commandUsage": "<type> <query>",
     "album": "Album",
     "genres": "Genres",
@@ -158,11 +158,11 @@
     "success": "{{- kisser}} kissed {{- kissed}}."
   },
   "handshake": {
-    "commandDescription": "Handshake someone.",
+    "commandDescription": "Handshakes with someone.",
     "commandUsage": "<user to handshake>",
     "noMention": "You need to mention someone!",
     "notYourself": "You can't handshake yourself!",
-    "success": "{{- handshaker}} handshaked {{- handshaked}}"
+    "success": "{{- handshaker}} handshaked with {{- handshaked}}"
   },
   "triggered": {
     "commandDescription": "Triggers someone.",
@@ -214,7 +214,7 @@
     "tooManyOptions": "You can't exceed {{maxOptions}} options!"
   },
   "nowplaying": {
-    "commandDescription": "Shows the name of the song being played."
+    "commandDescription": "Shows the name of the current song."
   },
   "pause": {
     "commandDescription": "Pauses or resumes the music playback."
@@ -260,7 +260,7 @@
   "volume": {
     "commandDescription": "Adjusts the volume of the music playback.",
     "commandUsage": "<0-150>",
-    "missingVolumeParameter": "You need to give me the volume level!",
+    "missingVolumeParameter": "You need to give me a volume level!",
     "invalidVolumeParameter": "You need to give me a valid number!",
     "notPlaying": "Volume can't be adjusted while not playing anything!",
     "volumeSet": "Volume set to {{volume}}%"
@@ -276,7 +276,7 @@
     "subcommands": "Subcommands",
     "noDescriptionProvided": "No description provided.",
     "noUsageProvided": "No usage provided.",
-    "commandNotFound": "I couldn't find a command with that name."
+    "commandNotFound": "I couldn't find any command with that name."
   },
   "e621": {
     "commandDescription": "Sends random yiff from e621.",
@@ -292,13 +292,13 @@
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}}."
   },
   "xkcd": {
-    "commandDescription": "Shows an XKCD.",
+    "commandDescription": "Shows an XKCD webcomic.",
     "commandUsage": "[#|\"latest\"]",
     "invalidArgument": "You need to give me a valid XKCD number!",
     "notFound": "XKCD not found."
   },
   "xkcd37": {
-    "commandDescription": "Whenever anyone calls something an [adjective]-ass [noun], move the hyphen one word to the right.",
+    "commandDescription": "Whenever anyone calls something an [adjective]-ass [noun], moves the hyphen one word to the right.",
     "commandUsage": "<text>"
   },
   "math": {
@@ -313,7 +313,7 @@
     "tryingToStop": "Trying to stop typing..."
   },
   "isitup": {
-    "commandDescription": "Check whether a website is up or down.",
+    "commandDescription": "Checks whether a website is up or down.",
     "commandUsage": "<address>",
     "isUp": "That website is up!",
     "isDown": "That website is down.",
@@ -333,7 +333,7 @@
     "noCoin": "You need to give me a coin side to bet on!"
   },
   "botinfo": {
-    "commandDescription": "Sends information about myself.",
+    "commandDescription": "Sends information about me.",
     "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
     "statistics": "I've been up for **{{uptime}}**, helping **{{guilds}} servers** and **{{users}} users** with **{{commands}} commands**. Currently running on **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
     "links": "Useful links",
@@ -365,7 +365,7 @@
     "bots": "Bots: **{{count}}**"
   },
   "userinfo": {
-    "commandDescription": "Sends yours or someone else's user information",
+    "commandDescription": "Sends yours or someone else's user information.",
     "online": "{{Constants.ONLINE_STATUS}} Online",
     "idle": "{{Constants.IDLE_STATUS}} Idle",
     "dnd": "{{Constants.DND_STATUS}} Do Not Disturb",
@@ -400,7 +400,7 @@
     "commandDescription": "Creates a Straw Poll.",
     "commandUsage": "<poll title|<option 1|option 2|option 3...>",
     "noParameters": "You need to give me a title and some options!",
-    "optionsNumberError": "You need to give me between 2 and 30 options!",
+    "optionsNumberError": "You need to give me a number of options between 2 and 30!",
     "clickHere": "Click here to vote"
   },
   "imageoftheday": {
@@ -408,7 +408,7 @@
     "embedAuthor": "NASA Image of the Day"
   },
   "deezer": {
-    "commandDescription": "Searches for a track, playlist, podcast, album or an artist Deezer, or displays a user info.",
+    "commandDescription": "Searches for a track, playlist, podcast, album or an artist Deezer, or displays information about a user.",
     "commandUsage": "<type> <query>",
     "noTrackName": "You need to give me a track name.",
     "noTracksFound": "I couldn't find any tracks with that name.",
@@ -470,7 +470,7 @@
     "studio": "Studio",
     "studio_plural": "Studios",
     "aired": "Aired",
-    "animeNotFound": "I couldn't find an anime by that name!"
+    "animeNotFound": "I couldn't find an anime with that name!"
   },
   "dicksize": {
     "commandDescription": "Shows how small your dick is.",
@@ -501,8 +501,8 @@
   },
   "config": {
     "commandDescription": "Changes the current server's configuration.",
-    "guildLang": "To change the server language, `{{command}} language <language code>`",
-    "guildPrefix": "To change the server prefix, `{{command}} prefix <new prefix>`",
+    "guildLang": "To change the server language, use `{{command}} language <language code>`",
+    "guildPrefix": "To change the server prefix, use `{{command}} prefix <new prefix>`",
     "missingTranslation": "**(A few translations might be missing)**",
     "subcommands": {
       "language": {
@@ -529,7 +529,7 @@
     "noText": "You need to give me some text to asciify!"
   },
   "hentai": {
-    "commandDescription": "Sends hentai in a NSFW channel.",
+    "commandDescription": "Sends hentai in an NSFW channel.",
     "hereIsYourHentai": "Here's your hentai!"
   },
   "shiba": {
@@ -537,11 +537,11 @@
     "hereIsYourShiba": "Here's your Shiba!"
   },
   "lyrics": {
-    "commandDescription": "Find the lyrics of a song.",
+    "commandDescription": "Finds the lyrics of a song.",
     "commandUsage": "<track name>",
     "noLyricsFound": "The provided song's lyrics could not be found.",
     "noLyricsFoundPlaying": "The current song's lyrics could not be found.",
-    "noTrackName": "You need to give me a track name.",
+    "noTrackName": "You need to give me a track name!",
     "fullLyrics": "Click here to see the full lyrics"
   },
   "binary": {
@@ -551,7 +551,7 @@
     "textToBinary": "In Binary",
     "binaryToText": "In Text",
     "tooLongTitle": "Your text is longer than 200 characters!",
-    "tooLongDescription": "Try shortening your text down or separate it into multiple commands!"
+    "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
   "cowsay": {
     "commandDescription": "Turns your text into cowsay.",
@@ -566,7 +566,7 @@
     "hereIsYourCat": "Here's your cat!"
   },
   "i18n": {
-    "commandDescription": "Shows the link to Switchblade translation page.",
+    "commandDescription": "Shows the link to Switchblade's translation page.",
     "translateMe": "**[Translate me to your language](https://translate.switchblade.xyz)**"
   },
   "beatsaver": {
@@ -574,7 +574,7 @@
     "commandUsage": "<beatmap name, track, id, author or uploader>",
     "download": "Download",
     "details": "Details",
-    "noQuery": "You need to give me a map name, track, id, author or uploader.",
+    "noQuery": "You need to give me a map name, track, author, id or an uploader.",
     "notFound": "No Beatmaps were found."
   },
   "favcolor": {
@@ -587,8 +587,8 @@
     "commandUsage": "<user>",
     "noMention": "You need to mention someone!",
     "reputationPoint": "You gave a reputation point to {{user}}.",
-    "againIn": "You can do it again in **{{time}}**.",
-    "alreadyGave": "You already gave a reputation point to someone today.",
+    "againIn": "You already gave a reputation point to someone today. You can do it again in **{{time}}**.",
+    "alreadyGave": "Already gave reputation",
     "repYourself": "You can't give a reputation point to yourself!"
   },
   "personaltext": {
@@ -620,11 +620,11 @@
     "noGameName": "Not found"
   },
   "emoji": {
-    "commandDescription": "Enlarges emojis.",
+    "commandDescription": "Enlarges an emoji.",
     "hereIsYourEmoji": "Here's your emoji!"
   },
   "clapify": {
-    "commandDescription": "Clapifies text.",
+    "commandDescription": "Clapifies your text.",
     "commandUsage": "<text to clapify>",
     "missingSentence": "You need to give me some text to clapify!",
     "tooLongText": "Your text can't be longer than {{limit}} characters!"
@@ -637,7 +637,7 @@
   "blacklist": {
     "commandDescription": "Adds a user to the blacklist.",
     "commandUsage": "<user> <reason>",
-    "missingUser": "You need to give me an user to blacklist!",
+    "missingUser": "You need to give me a user to blacklist!",
     "missingReason": "You need to give me a reason for blacklisting!",
     "successTitle": "User added to the blacklist!"
   },
@@ -680,7 +680,7 @@
     "commandUsage": "<user>",
     "missingUser": "You need to give me a user to check the reason!",
     "notBlacklisted": "That user isn't blacklisted.",
-    "reasonTitle": "{{user}} was blacklisted by {{blacklister}}."
+    "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
   },
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme."
@@ -706,14 +706,14 @@
     "commandDescription": "Evals a JS string."
   },
   "oddlysatisfying": {
-    "commandDescription": "Random image from /r/oddlysatisfying."
+    "commandDescription": "Shows a random image from /r/oddlysatisfying."
   },
   "geekjokes": {
-    "commandDescription": "Random geekjoke."
+    "commandDescription": "Shows a random geekjoke."
   },
   "aww": {
     "title": "Here is some eyebleach for ya!",
-    "commandDescription": "Random image from /r/aww."
+    "commandDescription": "Shows a random image from /r/aww."
   },
   "videochat": {
     "commandDescription": "Enables videochat for the voice channel that you're currently connected to and shares a link to it. (Beta feature!)",
@@ -730,11 +730,11 @@
     "missingSentence": "You need to give me some text to emojify!"
   },
   "fox": {
-    "commandDescription": "Fetches a random image of a fox.",
+    "commandDescription": "Shows a random image of a fox.",
     "hereIsYourFox": "Here's your fox!"
   },
   "birb": {
-    "commandDescription": "Fetches a random image of a birb.",
+    "commandDescription": "Shows a random image of a birb.",
     "hereIsYourBirb": "Here's your birb!"
   },
   "loop": {
@@ -780,7 +780,7 @@
     "reloaded": "Locales reloaded!"
   },
   "tesla": {
-    "commandDescription": "Random image from /r/TeslaPorn."
+    "commandDescription": "Shows a random image /r/TeslaPorn."
   },
   "lmgtfy": {
     "commandDescription": "Google something for someone that they should have googled.",
@@ -812,12 +812,12 @@
     "status": "Status"
   },
   "kemonomimi": {
-    "commandDescription": "Fetches a random kemonomimi (lewd if the channel is NSFW) and displays it. (Girls with animal ears)",
+    "commandDescription": "Shows a random kemonomimi (lewd if the channel is NSFW). (Girls with animal ears)",
     "hereIsYour_kemonomimi": "Here's your kemonomimi!",
     "hereIsYour_lewdkemo": "Here's your lewd kemonomimi!"
   },
   "kitsune": {
-    "commandDescription": "Fetches a random kitsune girl (lewd if the channel is NSFW) and displays it.",
+    "commandDescription": "Shows a random kitsune girl (lewd if the channel is NSFW).",
     "hereIsYour_fox_girl": "Here's your kitsune!",
     "hereIsYour_lewdk": "Here's your lewd kitsune!"
   },
@@ -834,7 +834,7 @@
     "success": "{{- hugger}} hugged {{- hugged}}"
   },
   "nekogif": {
-    "commandDescription": "Fetches a random neko girl gif (lewd if the channel is NSFW) and displays it.",
+    "commandDescription": "Shows a random neko girl gif (lewd if the channel is NSFW).",
     "hereIsYour_ngif": "Here's your neko!",
     "hereIsYour_nsfw_neko_gif": "Here's your lewd neko!"
   },
@@ -945,7 +945,7 @@
     "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
   "lastfm": {
-    "commandDescription": "Searches for a track, an album or an artist on Last.fm, or displays a user info.",
+    "commandDescription": "Searches for a track, an album or an artist on Last.fm, or displays information about a user.",
     "commandUsage": "<type> <query>",
     "topArtists": "Top artists (1 month)",
     "playcount": "Playcount",
@@ -1066,31 +1066,31 @@
     }
   },
   "anal": {
-    "commandDescription": "Random image from r/anal."
+    "commandDescription": "Shows a random image from r/anal."
   },
   "ass": {
-    "commandDescription": "Random image from r/ass."
+    "commandDescription": "Shows a random image from r/ass."
   },
   "boobs": {
-    "commandDescription": "Random image from r/boobs."
+    "commandDescription": "Shows a random image from r/boobs."
   },
   "porn": {
-    "commandDescription": "Random image from r/porn."
+    "commandDescription": "Shows a random image from r/porn."
   },
   "porngifs": {
-    "commandDescription": "Random image from r/porngifs."
+    "commandDescription": "Shows a random image from r/porngifs."
   },
   "pussy": {
-    "commandDescription": "Random image from r/pussy."
+    "commandDescription": "Shows a random image from r/pussy."
   },
   "yaoi": {
-    "commandDescription": "Random image from r/yaoi."
+    "commandDescription": "Shows a random image from r/yaoi."
   },
   "yiff": {
-    "commandDescription": "Random image from r/yiff. (A.K.A Furry Porn)"
+    "commandDescription": "Shows a random image from r/yiff. (A.K.A Furry Porn)"
   },
   "yuri": {
-    "commandDescription": "Random image from r/yuri."
+    "commandDescription": "Shows a random image from r/yuri."
   },
   "welcometranslator": {
     "commandDescription": "Welcomes a new translator.",
@@ -1102,6 +1102,6 @@
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",
     "commandUsage": "[image link]",
-    "missingImage": "You need to give me a link or an image!"
+    "missingImage": "You need to give me an image or a link!"
   }
 }
