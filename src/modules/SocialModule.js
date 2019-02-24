@@ -62,7 +62,8 @@ module.exports = class SocialModule extends Module {
 
     await Promise.all([
       this._users.update(_from, { lastRep: now }),
-      this._users.update(_to, { $inc: { rep: 1 } }) ])
+      this._users.update(_to, { $inc: { rep: 1 } })
+    ])
   }
 
   async retrieveProfile (_user) {
