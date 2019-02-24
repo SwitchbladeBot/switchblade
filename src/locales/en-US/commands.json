@@ -4,7 +4,7 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
-    "reverse": {
+  "reverse": {
     "commandDescription": "Reverses the text.",
     "commandUsage": "<text>",
     "noSentence": "You need to give me some text to reverse!"
@@ -48,7 +48,7 @@
       "user": {
         "commandDescription": "Searches for a user on GitHub.",
         "commandUsage": "<username>",
-        "noUser":  "You need to give me a valid user!",
+        "noUser": "You need to give me a valid user!",
         "userNotFound": "User not found.",
         "moreRepos": "...and {{repos}} more repositories.",
         "noBio": "This user doesn't have a biography.",
@@ -123,7 +123,7 @@
       "user": {
         "commandDescription": "Gets information about a user on Spotify.",
         "commandUsage": "<user>",
-		"notFound": "User not found.",
+        "notFound": "User not found.",
         "userInfo": "User information"
       }
     }
@@ -417,7 +417,7 @@
     "createdAt": "Created at",
     "createdBy": "Created by",
     "followers": "Followers",
-	"following": "following",
+    "following": "following",
     "subcommands": {
       "track": {
         "commandDescription": "Searches for a track on Deezer.",
@@ -450,7 +450,7 @@
         "podcastEpisodes": "Podcast episodes",
         "moreEpisodes": "...and {{episodes}} more episodes"
       },
-	  "user": {
+      "user": {
         "commandDescription": "Gets information about a user on Deezer.",
         "commandUsage": "<user>",
         "userInfo": "User information"
@@ -687,7 +687,7 @@
   },
   "leaderboard": {
     "commandDescription": "Shows a leaderboard.",
-	"commandUsage": "<type>",
+    "commandUsage": "<type>",
     "subcommands": {
       "money": {
         "commandDescription": "Shows a list of the richest users.",
@@ -759,7 +759,7 @@
     "noType": "Please insert a valid type",
     "types": "Types",
     "selectResult": "Please send the number of the result (10 seconds)",
-    "noBotName":  "You need to give me a valid bot name",
+    "noBotName": "You need to give me a valid bot name",
     "botNotFound": "Bot not found",
     "results": "Bot results for {{query}}",
     "noDescription": "This bot doesn't have a description",
@@ -945,7 +945,7 @@
     "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
   "lastfm": {
-	"commandDescription": "Searches for a track, an album or an artist on Last.fm, or displays a user info.",
+    "commandDescription": "Searches for a track, an album or an artist on Last.fm, or displays a user info.",
     "commandUsage": "<type> <query>",
     "topArtists": "Top artists (1 month)",
     "playcount": "Playcount",
@@ -1100,8 +1100,8 @@
     "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
   },
   "morejpeg": {
-	"commandDescription": "Adds JPEG compression to an image.",
-	"commandUsage": "[image link]",
-	"missingImage": "You need to give me a link or an image!"
+    "commandDescription": "Adds JPEG compression to an image.",
+    "commandUsage": "[image link]",
+    "missingImage": "You need to give me a link or an image!"
   }
 }
