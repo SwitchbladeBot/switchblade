@@ -476,6 +476,29 @@
     "commandDescription": "Shows how small your dick is.",
     "yourDickSize": "Your Dick Size"
   },
+  "restrictemoji": {
+    "commandDescription": "Permits, rejects or resets emoji usage permission for a role.",
+    "addRole": "To permit an emoji usage for a role, use `{{command}} add <emoji> <role>`.",
+    "removeRole": "To reject an emoji usage for a role, use `{{command}} remove <emoji> <role>`.",
+    "reset": "To reset emoji usage permission for roles, use `{{command}} reset <emoji>`.",
+    "subcommands": {
+      "add": {
+        "commandDescription": "Permits using an emoji for a role.",
+        "commandUsage": "<emoji> <role>",
+        "canUse": "Role `{{role}}` can now use `{{emoji}}`."
+      },
+      "remove": {
+        "commandDescription": "Rejects using an emoji for a role.",
+        "commandUsage": "<emoji> <role>",
+        "cantUse": "Role `{{role}}` can't use `{{emoji}}` anymore."
+      },
+      "reset": {
+        "commandDescription": "Resets emoji usage permission for roles which can use an emoji.",
+        "commandUsage": "<emoji>",
+        "resetted": "Resetted emoji usage permission for roles which could use `{{emoji}}`."
+      }
+    }
+  },
   "config": {
     "commandDescription": "Changes the current server's configuration.",
     "guildLang": "To change the server language, `{{command}} language <language code>`",
@@ -724,11 +747,33 @@
     "noZone": "You need to give me a place to get the time!",
     "notFound": "Couldn't find this place."
   },
+  "vote": {
+    "commandDescription": "Gives you a bonus for voting on bot lists",
+    "howToVote": {
+      "dbl": "**[Vote on DBL]({{link}})** to claim your bonus"
+    }
+  },
   "dbl": {
-    "commandDescription": "Gives you a bonus for voting on Discord Bot List.",
-    "alreadyClaimed": "You've already claimed your DBL bonus today.",
-    "howToVote": "**[Vote on DBL]({{link}})** and then run `{{command}}` again to claim your bonus.",
-    "thanksForVoting": "**Thanks for voting!** You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as a bonus."
+    "commandDescription": "Searches for a bot on Discord Bot List",
+    "commandUsage": "<bot name>",
+    "noType": "Please insert a valid type",
+    "types": "Types",
+    "selectResult": "Please send the number of the result (10 seconds)",
+    "noBotName":  "You need to give me a valid bot name",
+    "botNotFound": "Bot not found",
+    "results": "Bot results for {{query}}",
+    "noDescription": "This bot doesn't have a description",
+    "prefix": "Prefix",
+    "library": "Library",
+    "owner": "Owner",
+    "ownerPlural": "Owners",
+    "acceptedAt": "Accepted at",
+    "servers": "Servers",
+    "shards": "Shards",
+    "website": "Website",
+    "supportServer": "Support Server",
+    "githubRepository": "GitHub Repository",
+    "clickHere": "[Click here]({{link}})"
   },
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder.",
@@ -1053,5 +1098,10 @@
     "noMember": "You need to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
     "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
+  },
+  "morejpeg": {
+	"commandDescription": "Adds JPEG compression to an image.",
+	"commandUsage": "[image link]",
+	"missingImage": "You need to give me a link or an image!"
   }
 }
