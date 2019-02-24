@@ -39,7 +39,7 @@ class BonusModule extends Module {
     }
 
     const collectedMoney = Math.ceil(Math.random() * 2000) + 750
-    await this._users.update(_to, { $inc: { money: collectedMoney }, lastDaily: Date.now() })
+    await this._users.update(_user, { $inc: { money: collectedMoney }, lastDaily: Date.now() })
 
     return { collectedMoney }
   }

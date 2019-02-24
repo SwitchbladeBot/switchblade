@@ -71,7 +71,7 @@ module.exports = class SocialModule extends Module {
       rep = 0,
       personalText = 'Did you know you can edit this in the future dashboard or using the personaltext command? :o',
       favColor = process.env.EMBED_COLOR
-     } = (this._users.findOne(_user, 'money rep personalText favColor') || {})
+    } = (this._users.findOne(_user, 'money rep personalText favColor') || {})
 
     return { money, rep, personalText, favColor }
   }
