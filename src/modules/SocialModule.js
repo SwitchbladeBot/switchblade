@@ -12,6 +12,14 @@ class RepCooldownError extends Error {
   }
 }
 
+// Defaults
+const defaultUser = {
+  money: 0,
+  rep: 0,
+  personalText: 'Did you know you can edit this in the future dashboard or using the personaltext command? :o',
+  favColor: process.env.EMBED_COLOR
+}
+
 // Social
 module.exports = class SocialModule extends Module {
   constructor (client) {
@@ -66,19 +74,15 @@ module.exports = class SocialModule extends Module {
     ])
   }
 
-  async retrieveProfile (_user) {
-    const {
-      money = 0,
-      rep = 0,
-      personalText = 'Did you know you can edit this in the future dashboard or using the personaltext command? :o',
-      favColor = process.env.EMBED_COLOR
-    } = (this._users.findOne(_user, 'money rep personalText favColor') || {})
-
-    return { money, rep, personalText, favColor }
+  async retrieveProfile (_user, projection = 'money rep personalText favColor') {
+    return {
+      ...defaultUser,
+      ...(await this._users.findOne(_user, projection) || {})
+    }
   }
 
-  async leaderboard (sortField, projection = sortField, size = 16) {
-    const top = (await this._users.model.find({}, projection).sort({ [sortField]: -1 }).limit(16)).map(this._users.parse).filter(u => {
+  async leaderboard (sortField, projection = sortField, size = 10) {
+    const top = (await this._users.findAll(projection).sort({ [sortField]: -1 }).limit(size + 6)).filter(u => {
       u.user = this.client.users.get(u.id)
       return !!u.user
     })
