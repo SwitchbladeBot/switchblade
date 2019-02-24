@@ -1,4 +1,4 @@
-const { Command, BlacklistUtils, SwitchbladeEmbed, Constants } = require('../../index')
+const { Command, SwitchbladeEmbed, Constants } = require('../../index')
 
 module.exports = class WhyBlacklisted extends Command {
   constructor (client) {
