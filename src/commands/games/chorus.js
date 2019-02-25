@@ -1,4 +1,4 @@
-const { SearchCommand, SwitchbladeEmbed, MiscUtils } = require('../../')
+const { SearchCommand, SwitchbladeEmbed, MiscUtils, Constants } = require('../../')
 
 const color = '#2C3E50'
 const icon = 'https://chorus.fightthe.pw/assets/images/favicon_128.png'
@@ -59,9 +59,9 @@ module.exports = class Chorus extends SearchCommand {
           `${MiscUtils.formatDuration(chart.length * 1000)} (${MiscUtils.formatDuration(chart.effectiveLength * 1000)})`,
           '',
           `${Object.keys(features).filter(k => features[k]).map(k => `\`${t(`commands:chorus.features.${k}`)}\``).join(', ')}`,
-          '',
-          ``,
-          '',
+          Object.keys(features) ? '' : undefined,
+          `${Object.keys(chart.noteCounts).filter(i => ['drums', 'guitarghl', 'keys', 'guitar', 'bassghl', 'bass'].includes(i)).map(i => `${Constants[`CLONEHERO_${i.toUpperCase()}`]} ${Object.keys(chart.noteCounts[i]).map(d => d.toUpperCase()).join('')}`).join(' ')}`,
+          Object.keys(chart.noteCounts).length > 0 ? '' : undefined,
           `[${this.getDownloadLinkText(chart, t)}](${chart.link})`,
           chart.sources[0] ? (chart.sources[0].isSetlist ? `[${t('commands:chorus.downloadFullSetlist', {setlistName: chart.sources[0].name})}](${chart.sources[0].link})` : undefined) : undefined
         ])
