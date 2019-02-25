@@ -1105,6 +1105,6 @@
   "tinyurl": {
     "commandDescription": "URL Shortener",
     "commandUsage": "<url>",
-    "missingSentence": "You need to give me a URL to short"
+    "missingSentence": "You need to give me a URL to shorten"
   }
 }
