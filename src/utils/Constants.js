@@ -50,6 +50,9 @@ module.exports = {
   STEAMLADDER_TOP_DONATOR: '<:steamladder_top_donator:516812022017687572>',
   STEAMLADDER_DONATOR: '<:steamladder_donator:516812018955714570>',
 
+  // Clone Hero Emoji
+  // TODO: Add emoji
+
   // Assets
 
   // Icons PNG

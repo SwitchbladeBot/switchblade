@@ -1101,5 +1101,51 @@
 	"commandDescription": "Adds JPEG compression to an image.",
 	"commandUsage": "[image link]",
 	"missingImage": "You need to give me a link or an image!"
+  },
+  "chorus": {
+    "commandDescription": "Searches for a Clone Hero chart on chorus",
+    "commandUsage": "<search query>",
+    "downloadHere": "Download here",
+    "downloadChart": "Download **{{charterName}}'s** chart",
+    "downloadPack": "Download **{{charterName}}'s** pack",
+    "downloadFullSetlist": "Download the full **{{setlistName}}** setlist",
+    "features": {
+      "hasOpen": "open notes",
+      "hasForced": "forced notes",
+      "hasTap": "tap notes",
+      "hasSections": "sections",
+      "hasSoloSections": "solo sections",
+      "hasStarPower": "star power",
+      "hasStems": "stems (multi-track)",
+      "hasVideo": "video background",
+      "hasLyrics": "lyrics"
+    },
+    "warnings": {
+      "driveFolder": "[how to download a google drive folder]({{link}})",
+      "needsRenaming": "needs renaming (to notes.chart/song.mp3)",
+      "is120": "120 bpm alert",
+      "hasNoAudio": "no audio",
+      "no5FretLead": "no 5-fret lead guitar chart",
+      "hasBrokenNotes": "possible broken notes (e.g. notes hidden behind others, broken chords)",
+      "notesAfterEnd": "might have notes after end of song"
+    },
+    "noteDensityRatings": [
+      "Are there even any notes?",
+      "First steps",
+      "Warmup",
+      "Apprentice",
+      "Solid",
+      "Moderate",
+      "Challenging",
+      "Nightmare",
+      "Pretty hard",
+      "Pretty damn hard",
+      "It's starting to hurt",
+      "Carpal tunnel",
+      "Basically Soulless 4",
+      "ouch",
+      "God help me",
+      "...I'm out"
+    ]
   }
 }
