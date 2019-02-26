@@ -48,7 +48,7 @@
       "user": {
         "commandDescription": "Searches for an user on GitHub",
         "commandUsage": "<username>",
-        "noUser":  "You need to give me a valid user",
+        "noUser": "You need to give me a valid user",
         "userNotFound": "User not found",
         "moreRepos": "...and {{repos}} more repositories",
         "noBio": "This user doesn't have a biography",
@@ -449,7 +449,7 @@
         "podcastEpisodes": "Podcast episodes",
         "moreEpisodes": "...and {{episodes}} more episodes"
       },
-      "user":  {
+      "user": {
         "commandDescription": "Searches for a user on Deezer",
         "commandUsage": "<user>",
         "userInfo": "User Info"
@@ -757,7 +757,7 @@
     "noType": "Please insert a valid type",
     "types": "Types",
     "selectResult": "Please send the number of the result (10 seconds)",
-    "noBotName":  "You need to give me a valid bot name",
+    "noBotName": "You need to give me a valid bot name",
     "botNotFound": "Bot not found",
     "results": "Bot results for {{query}}",
     "noDescription": "This bot doesn't have a description",
@@ -1099,20 +1099,13 @@
   },
   "apexlegends": {
     "commandDescription": "Searches for an Apex Legends player's information on https://apex.tracker.gg/",
-    "commandUsage": "<type> <platform> <query>",
-	  "noPlatform": "You need to give me a valid platform!",
-	  "noPlayer": "You need to give a valid player name!",
-    "subcommands": {
-	    "player": {
-		    "commandDescription": "Searches for an Apex Legends player's statistics on https://apex.tracker.gg/",
-		    "commandUsage": "<platform> <player>",
-        "playerInfo": "Player information"
-	    }
-    }
-	},
+    "commandUsage": "<type> <platform>",
+    "noPlatform": "You need to give me a valid platform!",
+    "noPlayer": "You need to give a valid player name!"
+  },
   "morejpeg": {
-	  "commandDescription": "Adds JPEG compression to an image.",
-	  "commandUsage": "[image link]",
-	  "missingImage": "You need to give me a link or an image!"
+    "commandDescription": "Adds JPEG compression to an image.",
+    "commandUsage": "[image link]",
+    "missingImage": "You need to give me a link or an image!"
   }
 }
