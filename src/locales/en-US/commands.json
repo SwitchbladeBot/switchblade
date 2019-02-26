@@ -1109,7 +1109,7 @@
     "downloadChart": "Download **{{charterName}}'s** chart",
     "downloadPack": "Download **{{charterName}}'s** pack",
     "downloadFullSetlist": "Download the full **{{setlistName}}** setlist",
-    "notesPerSecond": "{{nps}} notes per second (average)",
+    "notesPerSecond": "{{nps}} notes per second",
     "features": {
       "hasOpen": "open notes",
       "hasForced": "forced notes",
