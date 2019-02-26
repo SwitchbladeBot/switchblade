@@ -554,7 +554,8 @@
   },
   "cowsay": {
     "commandDescription": "Turns your text into cowsay",
-    "noText": "You need to give me a sentence!"
+    "noText": "You need to give me a sentence!",
+    "commandUsage": "<text>"
   },
   "inspirobot": {
     "commandDescription": "Shows a random InspiroBot quote",
