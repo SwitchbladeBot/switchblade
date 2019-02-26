@@ -6,7 +6,7 @@ module.exports = class Deezer extends Command {
   constructor (client) {
     super(client, {
       name: 'deezer',
-      aliases: 'dz',
+      aliases: ['dz'],
       requirements: { apis: ['deezer'] },
       parameters: [{
         type: 'string',

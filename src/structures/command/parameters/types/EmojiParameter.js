@@ -1,8 +1,7 @@
 const Parameter = require('./Parameter.js')
 const CommandError = require('../../CommandError.js')
 
-const EMOJI_REGEX = /^(?:<:)(.*?)(?::)([0-9]{18})(?:>)$/
-const ANIMATED_REGEX = /^(?:<a:)(.*?)(?::)([0-9]{18})(?:>)$/
+const EMOJI_REGEX = /^<(a)?:(\w+):(\d{16,18})>$/
 
 module.exports = class EmojiParameter extends Parameter {
   static parseOptions (options = {}) {
@@ -12,31 +11,18 @@ module.exports = class EmojiParameter extends Parameter {
     }
   }
 
-  static parse (arg, { t, guild }) {
-    const staticRegexResult = EMOJI_REGEX.exec(arg)
-    const animatedRegexResult = ANIMATED_REGEX.exec(arg)
-    const regexResult = staticRegexResult || animatedRegexResult
-
-    let name = ''
-    let id = ''
-    let isAnimated = ''
-
+  static parse (arg, { t, client, guild }) {
+    const regexResult = EMOJI_REGEX.exec(arg)
     if (regexResult) {
-      if (this.sameGuildOnly && !guild.emojis.get(regexResult[2])) throw new CommandError(t('errors:emojiNotFromSameGuild'))
-      name = regexResult[1]
-      id = regexResult[2]
-      isAnimated = Boolean(animatedRegexResult)
+      const [ ,,, id ] = regexResult
+      const emoji = client.emojis.get(id)
+      if (!emoji) throw new CommandError(t('errors:invalidEmoji'), this.showUsage)
+      if (this.sameGuildOnly && emoji.guild.id !== guild.id) throw new CommandError(t('errors:emojiNotFromSameGuild'))
+      return emoji
     }
 
-    if (!regexResult) {
-      const emoji = guild.emojis.find(e => e.name === arg)
-      if (!emoji) throw new CommandError(t('errors:invalidEmoji'))
-      if (this.sameGuildOnly && !emoji) throw new CommandError(t('errors:emojiNotFromSameGuild'))
-      name = emoji.name
-      id = emoji.id
-      emoji.isAnimated = emoji.animated
-    }
-
-    return { name, id, isAnimated, url: `https://cdn.discordapp.com/emojis/${id}.${isAnimated ? 'gif' : 'png'}` }
+    const emoji = (this.sameGuildOnly ? guild : client).emojis.find(e => e.name === arg)
+    if (!emoji) throw new CommandError(t('errors:invalidEmoji'), this.showUsage)
+    return emoji
   }
 }
