@@ -80,24 +80,24 @@
     }
   },
   "spotify": {
-    "commandDescription": "Searches for a track, playlist, album or an artist on Spotify, or displays information about a user.",
+    "commandDescription": "Searches for a song, playlist, album or an artist on Spotify, or displays information about a user.",
     "commandUsage": "<type> <query>",
     "album": "Album",
     "genres": "Genres",
     "artist": "Artist",
     "artistPlural": "Artists",
-    "track": "Track",
-    "trackPlural": "Tracks",
+    "track": "Song",
+    "trackPlural": "Songs",
     "albumPlural": "Albums",
-    "moreTracks": "...and {{tracks}} more tracks.",
+    "moreTracks": "...and {{tracks}} more songs.",
     "moreAlbums": "...and {{albums}} more albums.",
     "followers": "Followers",
     "followersCount": "{{followers}} followers",
     "subcommands": {
       "track": {
-        "commandDescription": "Searches for a track on Spotify.",
+        "commandDescription": "Searches for a song on Spotify.",
         "commandUsage": "<song>",
-        "trackInfo": "Track information"
+        "trackInfo": "Song information"
       },
       "album": {
         "commandDescription": "Searches for an album on Spotify.",
@@ -161,7 +161,7 @@
     "commandDescription": "Handshakes with someone.",
     "commandUsage": "<user to handshake>",
     "noMention": "You need to mention someone!",
-    "notYourself": "You can't handshake yourself!",
+    "notYourself": "You can't handshake with yourself!",
     "success": "{{- handshaker}} handshaked with {{- handshaked}}"
   },
   "triggered": {
@@ -221,8 +221,8 @@
   },
   "play": {
     "commandDescription": "Plays a certain song or adds it to the queue.",
-    "commandUsage": "<track name or URL>",
-    "noTrackIdentifier": "You need to give me a track name or URL!"
+    "commandUsage": "<song name or URL>",
+    "noTrackIdentifier": "You need to give me a song name or URL!"
   },
   "queue": {
     "commandDescription": "Shows the current queue.",
@@ -335,7 +335,7 @@
   "botinfo": {
     "commandDescription": "Sends information about me.",
     "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
-    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds}} servers** and **{{users}} users** with **{{commands}} commands**. Currently running on **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
+    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds}} servers** and **{{users}} users** with **{{commands}} commands**. Currently running on **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**.",
     "links": "Useful links",
     "inviteLink": "{{Constants.BOT_BADGE}} **[Invite me to your server](https://invite.switchblade.xyz)**",
     "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
@@ -408,10 +408,10 @@
     "embedAuthor": "NASA Image of the Day"
   },
   "deezer": {
-    "commandDescription": "Searches for a track, playlist, podcast, album or an artist Deezer, or displays information about a user.",
+    "commandDescription": "Searches for a song, playlist, podcast, album or an artist Deezer, or displays information about a user.",
     "commandUsage": "<type> <query>",
-    "noTrackName": "You need to give me a track name.",
-    "noTracksFound": "I couldn't find any tracks with that name.",
+    "noTrackName": "You need to give me a song name.",
+    "noTracksFound": "I couldn't find any song with that name.",
     "fans": "Fans",
     "fansCount": "{{fans}} fans",
     "createdAt": "Created at",
@@ -420,15 +420,15 @@
     "following": "Following",
     "subcommands": {
       "track": {
-        "commandDescription": "Searches for a track on Deezer.",
-        "commandUsage": "<track>",
-        "trackInfo": "Track information"
+        "commandDescription": "Searches for a song on Deezer.",
+        "commandUsage": "<song>",
+        "trackInfo": "Song information"
       },
       "album": {
         "commandDescription": "Searches for an album on Deezer.",
         "commandUsage": "<album> [--tracks]",
         "albumInfo": "Album information",
-        "albumTracks": "Album tracks"
+        "albumTracks": "Album songs"
       },
       "artist": {
         "commandDescription": "Searches for an artist on Deezer.",
@@ -441,7 +441,7 @@
         "commandDescription": "Searches for a playlist on Deezer.",
         "commandUsage": "<playlist> [--tracks]",
         "playlistInfo": "Playlist information",
-        "playlistTracks": "Playlist tracks"
+        "playlistTracks": "Playlist songs"
       },
       "podcast": {
         "commandDescription": "Searches for a podcast on Deezer.",
@@ -538,10 +538,10 @@
   },
   "lyrics": {
     "commandDescription": "Finds the lyrics of a song.",
-    "commandUsage": "<track name>",
+    "commandUsage": "<song name>",
     "noLyricsFound": "The provided song's lyrics could not be found.",
     "noLyricsFoundPlaying": "The current song's lyrics could not be found.",
-    "noTrackName": "You need to give me a track name!",
+    "noTrackName": "You need to give me a song name!",
     "fullLyrics": "Click here to see the full lyrics"
   },
   "binary": {
@@ -571,10 +571,10 @@
   },
   "beatsaver": {
     "commandDescription": "Searches for a Beatmap on Beat Saver.",
-    "commandUsage": "<beatmap name, track, id, author or uploader>",
+    "commandUsage": "<beatmap name, song, id, author or uploader>",
     "download": "Download",
     "details": "Details",
-    "noQuery": "You need to give me a map name, track, author, id or an uploader.",
+    "noQuery": "You need to give me a map name, song, author, id or an uploader.",
     "notFound": "No Beatmaps were found."
   },
   "favcolor": {
@@ -748,21 +748,21 @@
     "notFound": "Couldn't find this place."
   },
   "vote": {
-    "commandDescription": "Gives you a bonus for voting on bot lists",
+    "commandDescription": "Gives you a bonus for voting on bot lists.",
     "howToVote": {
-      "dbl": "**[Vote on DBL]({{link}})** to claim your bonus"
+      "dbl": "**[Vote on DBL]({{link}})** to claim your bonus."
     }
   },
   "dbl": {
-    "commandDescription": "Searches for a bot on Discord Bot List",
+    "commandDescription": "Searches for a bot on Discord Bot List.",
     "commandUsage": "<bot name>",
-    "noType": "Please insert a valid type",
+    "noType": "Please insert a valid type!",
     "types": "Types",
-    "selectResult": "Please send the number of the result (10 seconds)",
-    "noBotName": "You need to give me a valid bot name",
-    "botNotFound": "Bot not found",
+    "selectResult": "Please send the number of the result! (10 seconds)",
+    "noBotName": "You need to give me a valid bot name.",
+    "botNotFound": "Bot not found.",
     "results": "Bot results for {{query}}",
-    "noDescription": "This bot doesn't have a description",
+    "noDescription": "This bot doesn't have a description.",
     "prefix": "Prefix",
     "library": "Library",
     "owner": "Owner",
@@ -780,7 +780,7 @@
     "reloaded": "Locales reloaded!"
   },
   "tesla": {
-    "commandDescription": "Shows a random image /r/TeslaPorn."
+    "commandDescription": "Shows a random image from /r/TeslaPorn."
   },
   "lmgtfy": {
     "commandDescription": "Google something for someone that they should have googled.",
@@ -789,7 +789,7 @@
     "search": "[This]({{link}}) might help ¯\\_(ツ)_/¯"
   },
   "twitch": {
-    "commandDescription": "Searches for someone on Twitch.",
+    "commandDescription": "Searches for user on Twitch.",
     "commandUsage": "<twitch username>",
     "noChannel": "You need to give me a valid Twitch username!",
     "biography": "Biography",
@@ -831,7 +831,7 @@
     "commandDescription": "Hugs someone.",
     "commandUsage": "<user to hug>",
     "noMention": "You need to mention someone!",
-    "success": "{{- hugger}} hugged {{- hugged}}"
+    "success": "{{- hugger}} hugged {{- hugged}}."
   },
   "nekogif": {
     "commandDescription": "Shows a random neko girl gif (lewd if the channel is NSFW).",
@@ -839,7 +839,7 @@
     "hereIsYour_nsfw_neko_gif": "Here's your lewd neko!"
   },
   "slap": {
-    "commandDescription": "Slap someone.",
+    "commandDescription": "Slaps someone.",
     "commandUsage": "<user to slap>",
     "noMention": "You need to mention someone!",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
@@ -921,7 +921,7 @@
     "lengthExceeded": "The given position exceeds the song duration!",
     "noNegativeValues": "The given position goes before the song starts!",
     "notLive": "I can't change livestreams' positions!",
-    "positionSet": "Player position set to `{{position}}`"
+    "positionSet": "Player position set to `{{position}}`."
   },
   "lolstatus": {
     "commandDescription": "Shows the current status of a League of Legends server.",
@@ -945,7 +945,7 @@
     "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
   "lastfm": {
-    "commandDescription": "Searches for a track, an album or an artist on Last.fm, or displays information about a user.",
+    "commandDescription": "Searches for a song, album or an artist on Last.fm, or displays information about a user.",
     "commandUsage": "<type> <query>",
     "topArtists": "Top artists (1 month)",
     "playcount": "Playcount",
@@ -955,12 +955,12 @@
     "artist": "Artist",
     "readMore": "Read more on Last.fm",
     "tags": "Tags",
-    "tracks": "Tracks",
+    "tracks": "Songs",
     "registered": "Registered in",
     "subcommands": {
       "track": {
-        "commandDescription": "Searches for a track on Last.fm",
-        "commandUsage": "<track>"
+        "commandDescription": "Searches for a song on Last.fm",
+        "commandUsage": "<song>"
       },
       "album": {
         "commandDescription": "Searches for an album on Last.fm",
@@ -971,7 +971,7 @@
         "commandUsage": "<artist>"
       },
       "user": {
-        "commandDescription": "Gets information about an user on Last.fm",
+        "commandDescription": "Gets information about a user on Last.fm",
         "commandUsage": "<user>",
         "missing": "You need to give me a valid user!",
         "notFound": "User not found."
@@ -1097,7 +1097,7 @@
     "commandUsage": "<user>",
     "noMember": "You need to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
-    "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
+    "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any question, feel free to ask!"
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",
