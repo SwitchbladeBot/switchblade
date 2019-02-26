@@ -779,8 +779,8 @@ module.exports = class CanvasTemplates {
     return canvas.toBuffer()
   }
 
-  static async morejpeg (text) {
-    const myimg = await Image.from(text)
+  static async moreJpeg (buffer) {
+    const myimg = await Image.from(buffer)
     const WIDTH = myimg.width
     const HEIGHT = myimg.height
     const canvas = createCanvas(WIDTH, HEIGHT)
