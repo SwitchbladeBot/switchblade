@@ -158,11 +158,11 @@
     "success": "{{- kisser}} kissed {{- kissed}}."
   },
   "handshake": {
-    "commandDescription": "Handshakes with someone.",
-    "commandUsage": "<user to handshake>",
+    "commandDescription": "Shakes hands with someone.",
+    "commandUsage": "<user to shake hands with>",
     "noMention": "You have to mention someone!",
-    "notYourself": "You can't handshake with yourself!",
-    "success": "{{- handshaker}} handshaked with {{- handshaked}}"
+    "notYourself": "You can't shake hands with yourself!",
+    "success": "{{- handshaker}} shook hands with {{- handshaked}}"
   },
   "triggered": {
     "commandDescription": "Triggers someone.",
@@ -279,7 +279,7 @@
     "commandNotFound": "I couldn't find any command with that name."
   },
   "e621": {
-    "commandDescription": "Sends random yiff from e621.",
+    "commandDescription": "Sends a random yiff from e621.",
     "hereIsYour_yiff": "Here's your yiff!"
   },
   "pay": {
@@ -448,7 +448,7 @@
         "commandUsage": "<podcast> [--episodes]",
         "podcastInfo": "Podcast information",
         "podcastEpisodes": "Podcast episodes",
-        "moreEpisodes": "...and {{episodes}} more episodes"
+        "moreEpisodes": "...and {{episodes}} more episodes."
       },
       "user": {
         "commandDescription": "Gets information about a user on Deezer.",
@@ -789,7 +789,7 @@
     "search": "[This]({{link}}) might help ¯\\_(ツ)_/¯"
   },
   "twitch": {
-    "commandDescription": "Searches for user on Twitch.",
+    "commandDescription": "Searches for a user on Twitch.",
     "commandUsage": "<twitch username>",
     "noChannel": "You have to give me a valid Twitch username!",
     "biography": "Biography",
@@ -979,7 +979,7 @@
     }
   },
   "bassboost": {
-    "commandDescription": "Toggle bassboost mode for the music playback.",
+    "commandDescription": "Toggles bassboost mode for the music playback.",
     "bassboost_true": "DROP THE BASS! Bassboost enabled.",
     "bassboost_false": "Bassboost disabled."
   },
@@ -1097,7 +1097,7 @@
     "commandUsage": "<user>",
     "noMember": "You have to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
-    "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any question, feel free to ask!"
+    "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",
