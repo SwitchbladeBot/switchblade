@@ -7,7 +7,7 @@
   "reverse": {
     "commandDescription": "Reverses the text.",
     "commandUsage": "<text>",
-    "noSentence": "You need to give me some text to reverse!"
+    "noSentence": "You have to give me some text to reverse!"
   },
   "hmmm": {
     "commandDescription": "Shows a random image from /r/hmmm."
@@ -48,7 +48,7 @@
       "user": {
         "commandDescription": "Searches for a user on GitHub.",
         "commandUsage": "<username>",
-        "noUser": "You need to give me a valid user!",
+        "noUser": "You have to give me a valid user!",
         "userNotFound": "User not found.",
         "moreRepos": "...and {{repos}} more repositories.",
         "noBio": "This user doesn't have a biography.",
@@ -69,7 +69,7 @@
       "organization": {
         "commandDescription": "Searches for an organization on Github.",
         "commandUsage": "<organization name>",
-        "noOrg": "You need to give me a valid organization.",
+        "noOrg": "You have to give me a valid organization.",
         "orgNotFound": "Organization not found.",
         "moreRepos": "...and {{repos}} more repositories.",
         "noDescription": "This organization doesn't have a description.",
@@ -134,7 +134,7 @@
   "owo": {
     "commandDescription": "Owoifies your text.",
     "commandUsage": "<text>",
-    "missingSentence": "You need to give me some text to owoify!",
+    "missingSentence": "You have to give me some text to owoify!",
     "tooLongTitle": "Your text is longer than 200 characters!",
     "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
@@ -153,14 +153,14 @@
   "kiss": {
     "commandDescription": "Kisses someone.",
     "commandUsage": "<user to kiss>",
-    "noMention": "You need to mention someone.",
+    "noMention": "You have to mention someone.",
     "notYourself": "You can't kiss yourself!",
     "success": "{{- kisser}} kissed {{- kissed}}."
   },
   "handshake": {
     "commandDescription": "Handshakes with someone.",
     "commandUsage": "<user to handshake>",
-    "noMention": "You need to mention someone!",
+    "noMention": "You have to mention someone!",
     "notYourself": "You can't handshake with yourself!",
     "success": "{{- handshaker}} handshaked with {{- handshaked}}"
   },
@@ -171,7 +171,7 @@
   "8ball": {
     "commandDescription": "Asks the magic 8-Ball about something.",
     "commandUsage": "<question>",
-    "noQuestion": "You need to ask me something!",
+    "noQuestion": "You have to ask me something!",
     "answers": {
       "0": "It is certain.",
       "1": "It is decidedly so.",
@@ -198,19 +198,19 @@
   "fliptext": {
     "commandDescription": "Flips the text upside down.",
     "commandUsage": "<text to be flipped>",
-    "noSentence": "You need to give me some text to flip!"
+    "noSentence": "You have to give me some text to flip!"
   },
   "npm": {
     "commandDescription": "Shows information about an NPM package.",
     "commandUsage": "<package name>",
     "noDescription": "No description provided.",
     "notFound": "Package not found.",
-    "noNameProvided": "You need to give me a package name!"
+    "noNameProvided": "You have to give me a package name!"
   },
   "poll": {
     "commandDescription": "Creates a poll.",
     "commandUsage": "<poll title> [|option 1|option 2|option 3|...]",
-    "noQuestion": "You need to give me something to be voted!",
+    "noQuestion": "You have to give me something to be voted!",
     "tooManyOptions": "You can't exceed {{maxOptions}} options!"
   },
   "nowplaying": {
@@ -222,7 +222,7 @@
   "play": {
     "commandDescription": "Plays a certain song or adds it to the queue.",
     "commandUsage": "<song name or URL>",
-    "noTrackIdentifier": "You need to give me a song name or URL!"
+    "noTrackIdentifier": "You have to give me a song name or URL!"
   },
   "queue": {
     "commandDescription": "Shows the current queue.",
@@ -239,13 +239,13 @@
       "remove": {
         "commandDescription": "Removes a song from the queue.",
         "commandUsage": "<music number>",
-        "missingIndexParameter": "You need to give me the number of the song you want to remove from the queue.",
+        "missingIndexParameter": "You have to give me the number of the song you want to remove from the queue.",
         "songRemoved": "{{- songName}} has been removed from the queue!"
       },
       "jump": {
         "commandDescription": "Jumps to a specific song in the queue.",
         "commandUsage": "<music number>",
-        "missingIndexParameter": "You need to give me the number of the song you want to jump to.",
+        "missingIndexParameter": "You have to give me the number of the song you want to jump to.",
         "jumpedToSong": "Jumped to {{- songName}}."
       }
     }
@@ -260,8 +260,8 @@
   "volume": {
     "commandDescription": "Adjusts the volume of the music playback.",
     "commandUsage": "<0-150>",
-    "missingVolumeParameter": "You need to give me a volume level!",
-    "invalidVolumeParameter": "You need to give me a valid number!",
+    "missingVolumeParameter": "You have to give me a volume level!",
+    "invalidVolumeParameter": "You have to give me a valid number!",
     "notPlaying": "Volume can't be adjusted while not playing anything!",
     "volumeSet": "Volume set to {{volume}}%"
   },
@@ -285,8 +285,8 @@
   "pay": {
     "commandDescription": "Pays $t(commons:currency_plural) to a user.",
     "commandUsage": "<@member> <value>",
-    "noMember": "You need to mention someone!",
-    "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send!",
+    "noMember": "You have to mention someone!",
+    "noValue": "You have to give me a valid number of $t(commons:currency_plural) to send!",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that!",
     "cantPayYourself": "You can't pay yourself!",
     "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}}."
@@ -294,7 +294,7 @@
   "xkcd": {
     "commandDescription": "Shows an XKCD webcomic.",
     "commandUsage": "[#|\"latest\"]",
-    "invalidArgument": "You need to give me a valid XKCD number!",
+    "invalidArgument": "You have to give me a valid XKCD number!",
     "notFound": "XKCD not found."
   },
   "xkcd37": {
@@ -304,7 +304,7 @@
   "math": {
     "commandDescription": "Evaluates a math expression.",
     "commandUsage": "<expression>",
-    "needMathExpression": "You need to give me a math expression to evaluate!",
+    "needMathExpression": "You have to give me a math expression to evaluate!",
     "invalidMathExpression": "Invalid math expression.",
     "result": "Result: `{{result}}`"
   },
@@ -318,7 +318,7 @@
     "isUp": "That website is up!",
     "isDown": "That website is down.",
     "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
-    "noWebsite": "You need to give me a website to check!"
+    "noWebsite": "You have to give me a website to check!"
   },
   "coinflip": {
     "commandDescription": "Flips a coin.",
@@ -329,8 +329,8 @@
     "commandUsage": "<value to bet> <heads | tails>",
     "victory": "Yay, it landed **$t(commons:{{chosenSide}})**, so you won **$t(commons:currencyWithCount, { 'count': {{count}} })**!",
     "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**.",
-    "noBetValue": "You need to give me a value to bet!",
-    "noCoin": "You need to give me a coin side to bet on!"
+    "noBetValue": "You have to give me a value to bet!",
+    "noCoin": "You have to give me a coin side to bet on!"
   },
   "botinfo": {
     "commandDescription": "Sends information about me.",
@@ -381,7 +381,7 @@
   "samp": {
     "commandDescription": "Shows information about a GTA San Andreas: Multiplayer server.",
     "commandUsage": "<ip>[:port]",
-    "noIP": "You need to give me an IP!",
+    "noIP": "You have to give me an IP!",
     "serverUnreachableTitle": "I couldn't reach this server.",
     "serverUnreachableDescription": "Check the IP and port, or try again later.",
     "address": "Address",
@@ -394,13 +394,13 @@
   "qrcode": {
     "commandDescription": "Generates a QR Code.",
     "commandUsage": "<text>",
-    "noText": " You need to give me some text!"
+    "noText": " You have to give me some text!"
   },
   "strawpoll": {
     "commandDescription": "Creates a Straw Poll.",
     "commandUsage": "<poll title|<option 1|option 2|option 3...>",
-    "noParameters": "You need to give me a title and some options!",
-    "optionsNumberError": "You need to give me a number of options between 2 and 30!",
+    "noParameters": "You have to give me a title and some options!",
+    "optionsNumberError": "You have to give me a number of options between 2 and 30!",
     "clickHere": "Click here to vote"
   },
   "imageoftheday": {
@@ -410,7 +410,7 @@
   "deezer": {
     "commandDescription": "Searches for a song, playlist, podcast, album or an artist Deezer, or displays information about a user.",
     "commandUsage": "<type> <query>",
-    "noTrackName": "You need to give me a song name.",
+    "noTrackName": "You have to give me a song name.",
     "noTracksFound": "I couldn't find any song with that name.",
     "fans": "Fans",
     "fansCount": "{{fans}} fans",
@@ -464,7 +464,7 @@
   "myanimelist": {
     "commandDescription": "Searches for an anime on MyAnimeList.",
     "commandUsage": "<anime name>",
-    "noAnime": "You need to give me an anime to search for!",
+    "noAnime": "You have to give me an anime to search for!",
     "score": "Score",
     "episodes": "Episodes",
     "studio": "Studio",
@@ -508,14 +508,14 @@
       "language": {
         "commandDescription": "Changes the current server language.",
         "commandUsage": "<language code>",
-        "noCode": "You need to give me a language code!",
+        "noCode": "You have to give me a language code!",
         "availableLanguages": "Available languages",
         "changedSuccessfully": "Language changed to `{{lang}}`."
       },
       "prefix": {
         "commandDescription": "Changes the current server prefix.",
         "commandUsage": "<new prefix>",
-        "noPrefix": "You need to give me a prefix!",
+        "noPrefix": "You have to give me a prefix!",
         "changedSuccessfully": "Prefix changed to `{{prefix}}`."
       }
     }
@@ -526,7 +526,7 @@
   "asciify": {
     "commandDescription": "Turns your text into an ASCII art.",
     "commandUsage": "<text>",
-    "noText": "You need to give me some text to asciify!"
+    "noText": "You have to give me some text to asciify!"
   },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",
@@ -541,13 +541,13 @@
     "commandUsage": "<song name>",
     "noLyricsFound": "The provided song's lyrics could not be found.",
     "noLyricsFoundPlaying": "The current song's lyrics could not be found.",
-    "noTrackName": "You need to give me a song name!",
+    "noTrackName": "You have to give me a song name!",
     "fullLyrics": "Click here to see the full lyrics"
   },
   "binary": {
     "commandDescription": "Converts your text into binary.",
     "commandUsage": "<text>",
-    "missingText": "You need to give me some text or binary!",
+    "missingText": "You have to give me some text or binary!",
     "textToBinary": "In Binary",
     "binaryToText": "In Text",
     "tooLongTitle": "Your text is longer than 200 characters!",
@@ -555,7 +555,7 @@
   },
   "cowsay": {
     "commandDescription": "Turns your text into cowsay.",
-    "noText": "You need to give me some text!"
+    "noText": "You have to give me some text!"
   },
   "inspirobot": {
     "commandDescription": "Shows a random InspiroBot quote.",
@@ -574,7 +574,7 @@
     "commandUsage": "<beatmap name, song, id, author or uploader>",
     "download": "Download",
     "details": "Details",
-    "noQuery": "You need to give me a map name, song, author, id or an uploader.",
+    "noQuery": "You have to give me a map name, song, author, id or an uploader.",
     "notFound": "No Beatmaps were found."
   },
   "favcolor": {
@@ -585,7 +585,7 @@
   "rep": {
     "commandDescription": "Gives a reputation point to someone.",
     "commandUsage": "<user>",
-    "noMention": "You need to mention someone!",
+    "noMention": "You have to mention someone!",
     "reputationPoint": "You gave a reputation point to {{user}}.",
     "againIn": "You already gave a reputation point to someone today. You can do it again in **{{time}}**.",
     "alreadyGave": "Already gave reputation",
@@ -594,7 +594,7 @@
   "personaltext": {
     "commandDescription": "Sets a personal text on your profile.",
     "commandUsage": "<personal text>",
-    "noText": "You need to give me some text!",
+    "noText": "You have to give me some text!",
     "tooLongText": "Your text is longer than {{limit}} characters!",
     "changedSuccessfully": "Personal text changed!"
   },
@@ -606,7 +606,7 @@
   "fivem": {
     "commandDescription": "Shows information about a FiveM server.",
     "commandUsage": "<ip>[:port]",
-    "noIP": "You need to give me an IP!",
+    "noIP": "You have to give me an IP!",
     "serverUnreachableTitle": "I couldn't reach this server.",
     "serverUnreachableDescription": "Check the IP and port, or try again later.",
     "address": "Address",
@@ -626,26 +626,26 @@
   "clapify": {
     "commandDescription": "Clapifies your text.",
     "commandUsage": "<text to clapify>",
-    "missingSentence": "You need to give me some text to clapify!",
+    "missingSentence": "You have to give me some text to clapify!",
     "tooLongText": "Your text can't be longer than {{limit}} characters!"
   },
   "numberfacts": {
     "commandDescription": "Shows a fact about a number.",
     "commandUsage": "<number>",
-    "validNumber": "You need to give me a number!"
+    "validNumber": "You have to give me a number!"
   },
   "blacklist": {
     "commandDescription": "Adds a user to the blacklist.",
     "commandUsage": "<user> <reason>",
-    "missingUser": "You need to give me a user to blacklist!",
-    "missingReason": "You need to give me a reason for blacklisting!",
+    "missingUser": "You have to give me a user to blacklist!",
+    "missingReason": "You have to give me a reason for blacklisting!",
     "successTitle": "User added to the blacklist!"
   },
   "kick": {
     "commandDescription": "Kicks a member from this server.",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me a member to kick!",
-    "missingReason": "You need to give me a reason for kicking!",
+    "missingUser": "You have to give me a member to kick!",
+    "missingReason": "You have to give me a reason for kicking!",
     "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member.",
     "successTitle": "Member was kicked!",
     "cantKick": "I can't kick this member!"
@@ -653,8 +653,8 @@
   "ban": {
     "commandDescription": "Bans a member from this server.",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me a member to ban!",
-    "missingReason": "You need to give me a reason for banning!",
+    "missingUser": "You have to give me a member to ban!",
+    "missingReason": "You have to give me a reason for banning!",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member.",
     "successTitle": "Member was banned!",
     "cantBan": "I can't ban this member!"
@@ -662,8 +662,8 @@
   "softban": {
     "commandDescription": "Bans a member, removes all of their messages and then unbans them.",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me a member to softban!",
-    "missingReason": "You need to give me a reason for softbanning!",
+    "missingUser": "You have to give me a member to softban!",
+    "missingReason": "You have to give me a reason for softbanning!",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member.",
     "successTitle": "Member was softbanned!",
     "cantSoftban": "I can't softban this member!"
@@ -672,13 +672,13 @@
     "commandDescription": "Removes a user from the blacklist.",
     "commandUsage": "<user>",
     "success": "{{user}} has been removed from the blacklist!",
-    "missingUser": "You need to give me a user to remove from the blacklist!",
+    "missingUser": "You have to give me a user to remove from the blacklist!",
     "notBlacklisted": "That user isn't blacklisted."
   },
   "whyblacklisted": {
     "commandDescription": "Shows why someone is blacklisted.",
     "commandUsage": "<user>",
-    "missingUser": "You need to give me a user to check the reason!",
+    "missingUser": "You have to give me a user to check the reason!",
     "notBlacklisted": "That user isn't blacklisted.",
     "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
   },
@@ -722,12 +722,12 @@
   "vaporwave": {
     "commandDescription": "Vaporwavefies the text.",
     "commandUsage": "<text>",
-    "missingSentence": "You need to give me some text to vaporwavefy!"
+    "missingSentence": "You have to give me some text to vaporwavefy!"
   },
   "emojify": {
     "commandDescription": "Emojifies the text.",
     "commandUsage": "<text>",
-    "missingSentence": "You need to give me some text to emojify!"
+    "missingSentence": "You have to give me some text to emojify!"
   },
   "fox": {
     "commandDescription": "Shows a random image of a fox.",
@@ -744,7 +744,7 @@
     "commandDescription": "Get the current time in a specified place.",
     "commandUsage": "<timezone>",
     "currentTime": "The current time in {{timezone}} is",
-    "noZone": "You need to give me a place to get the time!",
+    "noZone": "You have to give me a place to get the time!",
     "notFound": "Couldn't find this place."
   },
   "vote": {
@@ -759,7 +759,7 @@
     "noType": "Please insert a valid type!",
     "types": "Types",
     "selectResult": "Please send the number of the result! (10 seconds)",
-    "noBotName": "You need to give me a valid bot name.",
+    "noBotName": "You have to give me a valid bot name.",
     "botNotFound": "Bot not found.",
     "results": "Bot results for {{query}}",
     "noDescription": "This bot doesn't have a description.",
@@ -791,7 +791,7 @@
   "twitch": {
     "commandDescription": "Searches for user on Twitch.",
     "commandUsage": "<twitch username>",
-    "noChannel": "You need to give me a valid Twitch username!",
+    "noChannel": "You have to give me a valid Twitch username!",
     "biography": "Biography",
     "noBiography": "This user doesn't have a biography.",
     "totalViews": "Total Views",
@@ -804,7 +804,7 @@
     "commandDescription": "Shows information about a Minecraft: Java Edition server.",
     "commandUsage": "<address>[:port]",
     "unknownServer": "Server is offline or doesn't exist.",
-    "noIP": "You need to give me an address.",
+    "noIP": "You have to give me an address.",
     "players": "Players",
     "version": "Version",
     "online": "Online",
@@ -824,13 +824,13 @@
   "pat": {
     "commandDescription": "Pats someone.",
     "commandUsage": "<user to pat>",
-    "noMention": "You need to mention someone!",
+    "noMention": "You have to mention someone!",
     "success": "{{- _author}} pats {{- pat}}"
   },
   "hug": {
     "commandDescription": "Hugs someone.",
     "commandUsage": "<user to hug>",
-    "noMention": "You need to mention someone!",
+    "noMention": "You have to mention someone!",
     "success": "{{- hugger}} hugged {{- hugged}}."
   },
   "nekogif": {
@@ -841,7 +841,7 @@
   "slap": {
     "commandDescription": "Slaps someone.",
     "commandUsage": "<user to slap>",
-    "noMention": "You need to mention someone!",
+    "noMention": "You have to mention someone!",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
   "steamladder": {
@@ -849,9 +849,9 @@
     "commandUsage": "[ladder] [country or region]",
     "userNotFound": "I couldn't find that user.",
     "ladderNotFound": "I couldn't find that ladder.",
-    "noRegion": "You need to give me a valid region name or country code!",
-    "noLadder": "You need to give me a valid ladder!",
-    "noUser": "You need to give me a valid user!",
+    "noRegion": "You have to give me a valid region name or country code!",
+    "noLadder": "You have to give me a valid ladder!",
+    "noUser": "You have to give me a valid user!",
     "youCanAlsoUse": "You can also use alpha-2 country codes.",
     "availableRegions": "Available regions",
     "availableLadders": "Available ladders",
@@ -894,7 +894,7 @@
   "weather": {
     "commandDescription": "Shows the weather forecast for a city.",
     "commandUsage": "<city name>",
-    "noCity": "You need to give me a valid city.",
+    "noCity": "You have to give me a valid city.",
     "notFound": "Couldn't find this city."
   },
   "currency": {
@@ -917,7 +917,7 @@
   "seek": {
     "commandDescription": "Adjusts the position of the music playback.",
     "commandUsage": "<+10|-10|1:30>",
-    "missingSeekParameter": "You need to give me a valid position!",
+    "missingSeekParameter": "You have to give me a valid position!",
     "lengthExceeded": "The given position exceeds the song duration!",
     "noNegativeValues": "The given position goes before the song starts!",
     "notLive": "I can't change livestreams' positions!",
@@ -926,7 +926,7 @@
   "lolstatus": {
     "commandDescription": "Shows the current status of a League of Legends server.",
     "commandUsage": "<server>",
-    "missingServer": "You need to give me a valid League of Legends server!",
+    "missingServer": "You have to give me a valid League of Legends server!",
     "availableServers": "Available servers",
     "noStatusMessages": "There are no status messages for this server.",
     "online": "Online",
@@ -937,7 +937,7 @@
   },
   "reversetext": {
     "commandDescription": "Reverses the text.",
-    "missingSentence": "You need to give me some text to reverse!",
+    "missingSentence": "You have to give me some text to reverse!",
     "commandUsage": "<text to reverse>"
   },
   "support": {
@@ -973,7 +973,7 @@
       "user": {
         "commandDescription": "Gets information about a user on Last.fm",
         "commandUsage": "<user>",
-        "missing": "You need to give me a valid user!",
+        "missing": "You have to give me a valid user!",
         "notFound": "User not found."
       }
     }
@@ -1002,7 +1002,7 @@
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification.",
     "commandUsage": "<text>",
-    "missingText": "You need to give me some text for the alert!"
+    "missingText": "You have to give me some text for the alert!"
   },
   "uigradient": {
     "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)."
@@ -1010,7 +1010,7 @@
   "tictactoe": {
     "commandDescription": "Challenge someone to a game of Tic Tac Toe.",
     "commandUsage": "<user to challenge>",
-    "missingUser": "You need to give me someone to challenge!",
+    "missingUser": "You have to give me someone to challenge!",
     "title": "Tic Tac Toe",
     "pleaseWait": "Please wait, loading board...",
     "currentPlayer": "Current player",
@@ -1095,13 +1095,13 @@
   "welcometranslator": {
     "commandDescription": "Welcomes a new translator.",
     "commandUsage": "<user>",
-    "noMember": "You need to mention someone!",
+    "noMember": "You have to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
     "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any question, feel free to ask!"
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",
     "commandUsage": "[image link]",
-    "missingImage": "You need to give me an image or a link!"
+    "missingImage": "You have to give me an image or a link!"
   }
 }
