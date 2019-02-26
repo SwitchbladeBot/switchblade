@@ -90,8 +90,7 @@ module.exports = class Chorus extends SearchCommand {
     const instrument = noteCounts.guitar ? "guitar" : Object.keys(noteCounts)[0]
     if (!instrument || !noteCounts[instrument]) return 0
     const difficulty = ["x", "h", "m", "e"].find(d => noteCounts[instrument][d])
-    const density = (noteCounts[instrument][difficulty] / length).toFixed(2)
-    return density
+    return (noteCounts[instrument][difficulty] / length).toFixed(2)
   }
 
   getNotePerSecondRating(t, average) {
