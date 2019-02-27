@@ -1110,8 +1110,14 @@
     "comments": "Comments",
     "channel": "Channel",
     "publishedAt": "Published At",
-    "video": {
-      "info": "Video information"
-    }
+    "subscribers": "Subscribers",
+    "hiddenSubscribers": "Hidden subscribers",
+    "views": "Views",
+    "videos": "Videos",
+    "createdAt": "Created at",
+    "videosCount": "{{videos}} videos",
+    "videoInfo": "Video information",
+    "channelInfo": "Channel information",
+    "playlistInfo": "Playlist information"
   }
 }

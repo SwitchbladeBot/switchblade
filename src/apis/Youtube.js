@@ -17,11 +17,19 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   getVideos (ids, part = 'snippet,statistics') {
-    return this.Youtube.videos.list({ id: ids.join(','), part }).then(r => r && r.data.items)
+    return this.Youtube.videos.list({ id: ids.join(), part }).then(r => r && r.data.items)
   }
 
   getVideo (id, part = 'snippet,statistics') {
     return this.getVideos([ id ], part).then(r => r && r[0])
+  }
+
+  getChannels (ids, part = 'snippet,statistics') {
+    return this.Youtube.channels.list({ id: ids.join(), part }).then(r => r && r.data.items)
+  }
+
+  getChannel (id, part = 'snippet,statistics') {
+    return this.getChannels([ id ], part).then(r => r && r[0])
   }
 
   getPlaylist (id, part = 'snippet') {

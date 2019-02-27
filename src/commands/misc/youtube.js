@@ -54,7 +54,7 @@ module.exports = class YouTube extends SearchCommand {
     await channel.startTyping()
     const type = this.getType(item.id)
     const embed = await this[`get${MiscUtils.capitalizeFirstLetter(type)}`](ctx, item)
-    embed.setAuthor(t(`commands:youtube.${type}.info`), this.embedLogoURL)
+    embed.setAuthor(t(`commands:youtube.${type}Info`), this.embedLogoURL)
       .setColor(this.embedColor)
     channel.send(embed).then(() => channel.stopTyping())
   }
@@ -63,7 +63,7 @@ module.exports = class YouTube extends SearchCommand {
     moment.locale(language)
     const { snippet, statistics, contentDetails } = await this.client.apis.youtube.getVideo(videoID.videoId, 'snippet,statistics,contentDetails')
     const { publishedAt, channelId, title, thumbnails, channelTitle } = snippet
-    const embed = new SwitchbladeEmbed(author)
+    return new SwitchbladeEmbed(author)
       .setDescription(`[${title}](https://youtu.be/${videoID.videoId}) \`(${MiscUtils.formatDuration(contentDetails.duration)})\``)
       .addField(t('commands:youtube.likes'), MiscUtils.formatNumber(statistics.likeCount, language), true)
       .addField(t('commands:youtube.dislikes'), MiscUtils.formatNumber(statistics.dislikeCount, language), true)
@@ -71,7 +71,30 @@ module.exports = class YouTube extends SearchCommand {
       .addField(t('commands:youtube.channel'), `[${channelTitle}](https://www.youtube.com/channel/${channelId})`, true)
       .addField(t('commands:youtube.publishedAt'), moment(publishedAt).format('LLL'), true)
       .setThumbnail(this.client.apis.youtube.getBestThumbnail(thumbnails).url)
-    return embed
+  }
+
+  async getChannel ({ t, author, language }, { id: channelId }) {
+    moment.locale(language)
+    const { snippet, statistics } = await this.client.apis.youtube.getChannel(channelId.channelId, 'snippet,statistics')
+    const { publishedAt, title, thumbnails } = snippet
+    return new SwitchbladeEmbed(author)
+      .setDescription(`[${title}](https://www.youtube.com/channel/${channelId.channelId})`)
+      .addField(t('commands:youtube.subscribers'), statistics.hiddenSubscriberCount ? t('commands:youtube.hiddenSubscribers') : MiscUtils.formatNumber(statistics.subscriberCount, language), true)
+      .addField(t('commands:youtube.views'), MiscUtils.formatNumber(statistics.viewCount, language), true)
+      .addField(t('commands:youtube.videos'), MiscUtils.formatNumber(statistics.videoCount, language), true)
+      .addField(t('commands:youtube.createdAt'), moment(publishedAt).format('LLL'), true)
+      .setThumbnail(this.client.apis.youtube.getBestThumbnail(thumbnails).url)
+  }
+
+  async getPlaylist ({ t, author, language }, { id }) {
+    moment.locale(language)
+    const { snippet, contentDetails } = await this.client.apis.youtube.getPlaylist(id.playlistId, 'snippet,contentDetails')
+    const { publishedAt, channelId, title, thumbnails, channelTitle, description } = snippet
+    return new SwitchbladeEmbed(author)
+      .setDescription(`[${title}](https://www.youtube.com/playlist?list=${id.playlistId}) \`(${t('commands:youtube.videosCount', { videos: contentDetails.itemCount })})\`\n${description}`)
+      .addField(t('commands:youtube.channel'), `[${channelTitle}](https://www.youtube.com/channel/${channelId})`, true)
+      .addField(t('commands:youtube.publishedAt'), moment(publishedAt).format('LLL'), true)
+      .setThumbnail(this.client.apis.youtube.getBestThumbnail(thumbnails).url)
   }
 
   getType ({ kind }) {

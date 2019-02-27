@@ -1,5 +1,5 @@
 const Command = require('./Command.js')
-const CommandError = require('./Command.js')
+const CommandError = require('./CommandError.js')
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 
 module.exports = class SearchCommand extends Command {
