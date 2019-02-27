@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const snekfetch = require('snekfetch')
+const crypto = require('crypto')
 
 const API_URL = 'http://ws.audioscrobbler.com/2.0/'
 
@@ -7,7 +8,7 @@ module.exports = class LastFM extends APIWrapper {
   constructor () {
     super()
     this.name = 'lastfm'
-    this.envVars = ['LASTFM_KEY']
+    this.envVars = ['LASTFM_KEY', 'LASTFM_SECRET']
   }
 
   // GET METHODS
@@ -45,10 +46,23 @@ module.exports = class LastFM extends APIWrapper {
     return this.request('album.search', { album, limit })
   }
 
+  // Auth
+  getSession (token) {
+    return this.request('auth.getSession', { token }, true).then(r => r.session)
+  }
+
   // MAIN REQUEST
-  request (method, queryParams = {}) {
+  request (method, queryParams = {}, signature = false) {
     const params = { method, api_key: process.env.LASTFM_KEY, format: 'json' }
     Object.assign(queryParams, params)
+    if (signature) queryParams.api_sig = this.getSignature(queryParams)
     return snekfetch.get(API_URL).query(queryParams).then(r => r.body)
+  }
+
+  getSignature (params) {
+    const keys = Object.keys(params)
+    keys.splice(Object.keys(params).indexOf('format'), 1)
+    const signature = keys.sort().map(p => `${p}${params[p]}`).join('')
+    return crypto.createHash('md5').update(`${signature}${process.env.LASTFM_SECRET}`, 'utf8').digest('hex')
   }
 }

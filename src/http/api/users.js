@@ -46,6 +46,20 @@ module.exports = class Users extends Route {
         }
       })
 
+    router.patch('/:userId/connections',
+      EndpointUtils.authenticate(this),
+      EndpointUtils.handleUser(this),
+      async (req, res) => {
+        const id = req.userId
+        try {
+          await this.client.modules.social.updateProfile(id, req.body)
+          res.status(200).json({ id })
+        } catch (e) {
+          if (e.isJoi) return res.status(400).json({ error: e.name })
+          res.status(500).json({ error: 'Internal server error!' })
+        }
+      })
+
     app.use(this.path, router)
   }
 }

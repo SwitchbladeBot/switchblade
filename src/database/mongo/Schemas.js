@@ -1,5 +1,11 @@
 const { Schema } = require('mongoose')
 
+const UserConnection = new Schema({
+  name: String,
+  tokens: { type: Object, default: {} },
+  config: { type: Object, default: {} }
+})
+
 module.exports = {
   // User Schema
   User: new Schema({
@@ -14,7 +20,8 @@ module.exports = {
     favColor: { type: String, default: process.env.EMBED_COLOR },
     rep: { type: Number, default: 0 },
     lastRep: { type: Number, default: 0 },
-    lastDBLBonusClaim: { type: Number, default: 0 }
+    lastDBLBonusClaim: { type: Number, default: 0 },
+    connections: [ UserConnection ]
   }),
 
   // Guild Schema
