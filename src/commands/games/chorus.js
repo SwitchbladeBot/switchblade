@@ -2,6 +2,10 @@ const { SearchCommand, SwitchbladeEmbed, MiscUtils, Constants } = require('../..
 
 const color = '#2C3E50'
 const icon = 'https://chorus.fightthe.pw/assets/images/favicon_128.png'
+const instruments = ['drums', 'guitarghl', 'keys', 'guitar', 'bassghl', 'bass']
+const warningLinks = {
+  driveFolderExampleLink: 'https://i.imgur.com/DsTwJsv.png'
+}
 
 module.exports = class Chorus extends SearchCommand {
   constructor (client) {
@@ -54,20 +58,23 @@ module.exports = class Chorus extends SearchCommand {
         .setAuthor('chorus', icon, 'https://chorus.fightthe.pw/')
         .setTitle(`${chart.artist} - ${chart.name}`)
         .setDescription([
-          chart.album ? `**${chart.album}${chart.year ? ` (${chart.year})` : ''}**` : undefined,
-          chart.genre || undefined,
-          `${MiscUtils.formatDuration(chart.length * 1000)} (${MiscUtils.formatDuration(chart.effectiveLength * 1000)})`,
-          '',
-          `${Object.keys(features).filter(k => features[k]).map(k => `\`${t(`commands:chorus.features.${k}`)}\``).join(', ')}`,
-          Object.keys(features) ? '' : undefined,
-          `**${this.getNotePerSecondRating(t, this.getNotePerSecondAverage(chart.length, chart.noteCounts))}**`,
-          t('commands:chorus.notesPerSecond', {nps: this.getNotePerSecondAverage(chart.length, chart.noteCounts)}),
-          '',
-          `${Object.keys(chart.noteCounts).filter(i => ['drums', 'guitarghl', 'keys', 'guitar', 'bassghl', 'bass'].includes(i)).map(i => `${Constants[`CLONEHERO_${i.toUpperCase()}`]} ${this.getDifficultyString(chart.noteCounts[i])}`).join(' ')}`,
-          Object.keys(chart.noteCounts).length > 0 ? '' : undefined,
-          `[${this.getDownloadLinkText(chart, t)}](${chart.link})`,
-          chart.sources[0] ? (chart.sources[0].isSetlist ? `[${t('commands:chorus.downloadFullSetlist', {setlistName: chart.sources[0].name})}](${chart.sources[0].link})` : undefined) : undefined
+          chart.album ? `**${chart.album}${chart.year ? ` (${chart.year})` : ''}**` : undefined, // Album name (album year)
+          chart.genre || undefined, // Chart genre
+          `${MiscUtils.formatDuration(chart.length * 1000)} (${MiscUtils.formatDuration(chart.effectiveLength * 1000)})`, // Chart length (effective length)
+          '', // Empty line
+          Object.keys(features).filter(k => features[k]).map(k => `\`${t(`commands:chorus.features.${k}`)}\``).join(', '), // Chart features
+          Object.keys(features).filter(k => features[k]) ? '' : undefined, // Add an empty line if there are features
+          Object.keys(warnings).filter(k => warnings[k]).map(k => `**>** _${t(`commands:chorus.warnings.${k}`, warningLinks)}_`).join('\n'),
+          Object.keys(warnings).filter(k => warnings[k]) ? '' : undefined, // Add an empty line if there are warnings
+          `**${this.getNotePerSecondRating(t, this.getNotePerSecondAverage(chart.length, chart.noteCounts))}**`, // NPS Rating
+          t('commands:chorus.notesPerSecond', {nps: this.getNotePerSecondAverage(chart.length, chart.noteCounts)}), // NPS average
+          '', // Empty line
+          `${Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).map(i => `${Constants[`CLONEHERO_${i.toUpperCase()}`]} ${this.getDifficultyString(chart.noteCounts[i])}`).join(' ')}`, // Difficulties per instrument
+          Object.keys(chart.noteCounts).length > 0 ? '' : undefined, // Add an empty line if there are difficulties being shown
+          `[${this.getDownloadLinkText(chart, t)}](${chart.link})`, // Download link
+          chart.sources[0] ? (chart.sources[0].isSetlist && chart.sources[0].name && chart.sources[0].link ? `[${t('commands:chorus.downloadFullSetlist', {setlistName: chart.sources[0].name})}](${chart.sources[0].link})` : undefined) : undefined // Download full setlist link
         ])
+        .addField(t('commands:source'))
     )
   }
 
