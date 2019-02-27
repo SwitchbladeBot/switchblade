@@ -555,6 +555,7 @@
   },
   "cowsay": {
     "commandDescription": "Turns your text into cowsay.",
+    "commandUsage": "<text>",
     "noText": "You have to give me some text!"
   },
   "inspirobot": {
