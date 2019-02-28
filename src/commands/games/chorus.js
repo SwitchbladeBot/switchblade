@@ -39,7 +39,7 @@ module.exports = class Chorus extends SearchCommand {
       hasStarPower: chart.hasStarPower,
       hasStems: chart.hasStems,
       hasVideo: chart.hasVideo,
-      hasLyrics: chart.hasLyrics,
+      hasLyrics: chart.hasLyrics
     }
 
     const warnings = {
@@ -66,34 +66,34 @@ module.exports = class Chorus extends SearchCommand {
             chart.length && chart.effectiveLength ? `${MiscUtils.formatDuration(chart.length * 1000)} (${MiscUtils.formatDuration(chart.effectiveLength * 1000)})` : null // Chart length (effective length)
           ],
           [
-            Object.keys(features).filter(k => features[k]).map(k => `\`${t(`commands:chorus.features.${k}`)}\``).join(', '), // Chart features
+            Object.keys(features).filter(k => features[k]).map(k => `\`${t(`commands:chorus.features.${k}`)}\``).join(', ') // Chart features
           ],
           [
-            Object.keys(warnings).filter(k => warnings[k]).map(k => `**>** _${t(`commands:chorus.warnings.${k}`, warningLinks)}_`).join('\n'), // Chart warnings
+            Object.keys(warnings).filter(k => warnings[k]).map(k => `**>** _${t(`commands:chorus.warnings.${k}`, warningLinks)}_`).join('\n') // Chart warnings
           ],
           [
             `**${this.getNotePerSecondRating(t, nps)}**`, // NPS Rating
             t('commands:chorus.notesPerSecond', { nps }) // NPS average
           ],
           [
-            chart.noteCounts && Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).length > 0 ? `${Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).map(i => `${Constants[`CLONEHERO_${i.toUpperCase()}`]} ${this.getDifficultyString(chart.noteCounts[i])}`).join(' ')}` : null, // Difficulties per instrument
+            chart.noteCounts && Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).length > 0 ? `${Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).map(i => `${Constants[`CLONEHERO_${i.toUpperCase()}`]} ${this.getDifficultyString(chart.noteCounts[i])}`).join(' ')}` : null // Difficulties per instrument
           ],
           [
             `[${this.getDownloadLinkText(chart, t)}](${chart.link})`, // Download link
-            chart.sources[0] ? (chart.sources[0].isSetlist && chart.sources[0].name && chart.sources[0].link ? `[${t('commands:chorus.downloadFullSetlist', {setlistName: chart.sources[0].name})}](${chart.sources[0].link})` : null) : null // Download full setlist link
+            chart.sources[0] ? (chart.sources[0].isSetlist && chart.sources[0].name && chart.sources[0].link ? `[${t('commands:chorus.downloadFullSetlist', { setlistName: chart.sources[0].name })}](${chart.sources[0].link})` : null) : null // Download full setlist link
           ]
         ].map(blockLines => blockLines.join('\n')).join('\n\n'))
-        .addField(t('commands:chorus.source', {count: chart.sources.length}), chart.sources.map(s => `${s.parent ? `[${s.parent.name}](${s.parent.link}) in ` : ''}${`[${s.name}](${s.link})`}`).join('\n'))
+        .addField(t('commands:chorus.source', { count: chart.sources.length }), chart.sources.map(s => `${s.parent ? `[${s.parent.name}](${s.parent.link}) in ` : ''}${`[${s.name}](${s.link})`}`).join('\n'))
     )
   }
 
-  getDownloadLinkText(chart, t) {
-    if (!chart.charter) return t('commands:chorus.downloadHere', {charterName: chart.charter})
-    if (chart.isPack) return t('commands:chorus.downloadPack', {charterName: chart.charter})
-    return t('commands:chorus.downloadChart', {charterName: chart.charter})
+  getDownloadLinkText (chart, t) {
+    if (!chart.charter) return t('commands:chorus.downloadHere', { charterName: chart.charter })
+    if (chart.isPack) return t('commands:chorus.downloadPack', { charterName: chart.charter })
+    return t('commands:chorus.downloadChart', { charterName: chart.charter })
   }
 
-  getDifficultyString(instrument) {
+  getDifficultyString (instrument) {
     let string = ''
     if (instrument.e) string += 'E'
     if (instrument.m) string += 'M'
@@ -102,15 +102,15 @@ module.exports = class Chorus extends SearchCommand {
     return string
   }
 
-  getNotePerSecondAverage(length, noteCounts) {
+  getNotePerSecondAverage (length, noteCounts) {
     if (!noteCounts) return 0
-    const instrument = noteCounts.guitar ? "guitar" : Object.keys(noteCounts)[0]
+    const instrument = noteCounts.guitar ? 'guitar' : Object.keys(noteCounts)[0]
     if (!instrument || !noteCounts[instrument]) return 0
-    const difficulty = ["x", "h", "m", "e"].find(d => noteCounts[instrument][d])
+    const difficulty = ['x', 'h', 'm', 'e'].find(d => noteCounts[instrument][d])
     return (noteCounts[instrument][difficulty] / length).toFixed(2)
   }
 
-  getNotePerSecondRating(t, average) {
+  getNotePerSecondRating (t, average) {
     return average > 15 ? t(`commands:chorus.noteDensityRatings.15`) : t(`commands:chorus.noteDensityRatings.${average >> 0}`)
   }
 }
