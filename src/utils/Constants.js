@@ -17,6 +17,8 @@ module.exports = {
   TWITCH_COLOR: '#4B367C',
   GITHUB_COLOR: '#FAFAFA',
   DBL_COLOR: '#7289DA',
+  MIXER_COLOR: '#1FBAED',
+  SOUNDCLOUD_COLOR: '#FF5500',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',

@@ -1,10 +1,11 @@
 const { Song } = require('../../structures')
+const Constants = require('../../../utils/Constants.js')
 
 module.exports = class MixerSong extends Song {
   constructor (data = {}, requestedBy, Mixer) {
     super(data, requestedBy)
     this._Mixer = Mixer
-    this.color = '#1FBAED'
+    this.color = Constants.MIXER_COLOR
   }
 
   async loadInfo () {
