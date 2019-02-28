@@ -19,6 +19,9 @@ module.exports = {
   DBL_COLOR: '#7289DA',
   MIXER_COLOR: '#1FBAED',
   SOUNDCLOUD_COLOR: '#FF5500',
+  HIBP_COLOR: '#3A9AC4',
+  NOT_PWNED_COLOR: '#348F38',
+  PWNED_COLOR: '#BA4343',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',

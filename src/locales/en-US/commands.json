@@ -41,6 +41,30 @@
   "ping": {
     "commandDescription": "Checks if the bot is online"
   },
+  "hibp": {
+    "commandDescription": "Checks if an email has been found in a data breach or paste.",
+    "commandUsage": "<type> <query>",
+    "noEmail": "You have to give me a valid email address!",
+    "notBreached": "Good news! - No pwnage found!",
+    "breached": "Oh no! - Pwned!",
+    "andMore": "...and **{{count}}** more.",
+    "subcommands": {
+      "breach": {
+        "commandDescription": "Checks if an email has been found in a data breach.",
+        "commandUsage": "<email>",
+        "pwnedInSingular": "Pwned in one breach.",
+        "pwnedInPlural": "Pwned in **{{count}}** breaches.",
+        "notFoundBreach": "Your email wasn't found in any data breach."
+      },
+      "paste": {
+        "commandDescription": "Checks if an email has been found in a data paste.",
+        "commandUsage": "<email>",
+        "pwnedInSingular": "Pwned in one paste.",
+        "pwnedInPlural": "Pwned in **{{count}}** pastes.",
+        "notFoundPaste": "Your email wasn't found in any data paste."
+      }
+    }
+  },
   "github": {
     "commandDescription": "Searches for a user, repository or organization on Github",
     "commandUsage": "<type> <query>",
@@ -554,7 +578,8 @@
   },
   "cowsay": {
     "commandDescription": "Turns your text into cowsay",
-    "noText": "You need to give me a sentence!"
+    "noText": "You need to give me a sentence!",
+    "commandUsage": "<text>"
   },
   "inspirobot": {
     "commandDescription": "Shows a random InspiroBot quote",
