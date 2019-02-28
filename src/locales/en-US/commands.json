@@ -1110,6 +1110,8 @@
     "downloadPack": "Download **{{charterName}}'s** pack",
     "downloadFullSetlist": "Download the full **{{setlistName}}** setlist",
     "notesPerSecond": "{{nps}} notes per second",
+    "source": "Source",
+    "source_plural": "Sources",
     "features": {
       "hasOpen": "open notes",
       "hasForced": "forced notes",
@@ -1122,7 +1124,7 @@
       "hasLyrics": "lyrics"
     },
     "warnings": {
-      "driveFolder": "[how to download a google drive folder]({{link}})",
+      "driveFolder": "[how to download a google drive folder]({{driveFolderExampleLink}})",
       "needsRenaming": "needs renaming (to notes.chart/song.mp3)",
       "is120": "120 bpm alert",
       "hasNoAudio": "no audio",
