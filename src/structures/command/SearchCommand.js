@@ -6,7 +6,7 @@ module.exports = class SearchCommand extends Command {
   constructor (client, options) {
     super(client, {
       parameters: [{
-        type: 'string', full: true, missingError: 'commons:search.noParams'
+        type: 'string', full: true, missingError: 'commons:search.noParams', maxLength: 200, clean: true
       }],
       ...options
     })
