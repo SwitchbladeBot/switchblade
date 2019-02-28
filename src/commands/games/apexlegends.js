@@ -14,14 +14,15 @@ module.exports = class ApexLegendsPlayer extends Command {
         missingError: 'commands:apexlegends.noPlatform'
       }, {
         type: 'string',
-        full: true,
         missingError: 'commands:apexlegends.noPlayer'
-      }],
+      }, [{
+        type: 'booleanFlag', name: 'legends', aliases: ['legend']
+      }]],
       embedColor: Constants.APEX_LEGENDS_COLOR
     })
   }
 
-  async run ({ t, channel, author, language }, platform, player) {
+  async run ({ t, channel, author, language, flags }, platform, player) {
     channel.startTyping()
     // TODO: Return lifetime stats of the user + available legends when no flgas.
     // TODO: Return lifetime stats of the user + legend infos - each in separate embed.
@@ -37,33 +38,69 @@ module.exports = class ApexLegendsPlayer extends Command {
       let description = '**Legends**\n\n'
       const embed = new SwitchbladeEmbed()
         .setAuthor(response.data.metadata.platformUserHandle)
-        .addField(response.data.stats[0].metadata.name, response.data.stats[0].displayValue, true)
-        .addField(response.data.stats[1].metadata.name, response.data.stats[1].displayValue, true)
-        .addField(response.data.stats[2].metadata.name, response.data.stats[2].displayValue, true)
-        .addField(`Rank`, `#${response.data.stats[0].displayRank}`, true)
-        .addField(`Rank`, `#${response.data.stats[1].displayRank}`, true)
-        .addField(`Rank`, `#${response.data.stats[2].displayRank}`, true)
+        .addField(this.getMetadataName(response.data.stats[0]), this.getDisplayValue(response.data.stats[0]), true)
+        .addField(this.getMetadataName(response.data.stats[1]), this.getDisplayValue(response.data.stats[1]), true)
+        .addField(this.getMetadataName(response.data.stats[2]), this.getDisplayValue(response.data.stats[2]), true)
+        .addField(`Rank`, `#${this.getDisplayRank(response.data.stats[0])}`, true)
+        .addField(`Rank`, `#${this.getDisplayRank(response.data.stats[1])}`, true)
+        .addField(`Rank`, `#${this.getDisplayRank(response.data.stats[2])}`, true)
       for (var i = 0; i < response.data.children.length; i++) {
         const line = `\`${i + 1}\`. ${response.data.children[i].metadata.legend_name}\n`
         description = description.concat(line)
       }
-
       embed.setDescription(description)
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send(embed)
+
+      console.log(response.data.children.length)
+      if (flags['legends']) {
+        console.log(`reached flag checking`)
+        for (let i = 0; i < response.data.children.length; i++) {
+          console.log(i)
+          const legendEmbed = new SwitchbladeEmbed()
+            .setAuthor(response.data.metadata.platformUserHandle)
+            .setTitle(response.data.children[i].metadata.legend_name)
+            .addField(this.getMetadataName(response.data.children[i].stats[0]), this.getDisplayValue(response.data.children[i].stats[0]), true)
+            .addField(this.getMetadataName(response.data.children[i].stats[1]), this.getDisplayValue(response.data.children[i].stats[1]), true)
+            .addField(this.getMetadataName(response.data.children[i].stats[2]), this.getDisplayValue(response.data.children[i].stats[2]), true)
+            .addField(`Rank`, `#${this.getRank(response.data.children[i].stats[0])}`, true)
+            .addField(`Rank`, `#${this.getRank(response.data.children[i].stats[1])}`, true)
+            .addField(`Rank`, `#${this.getRank(response.data.children[i].stats[2])}`, true)
+          await channel.send(legendEmbed)
+        }
+      }
+      channel.stopTyping()
     }
   }
 
-  displayLegend (channel, result, response) {
-    channel.startTyping()
-    const embed = new SwitchbladeEmbed()
-      .setAuthor(response.data.metadata.platformUserHandle)
-      .setTitle(response.data.metadata.legend_name)
-      .addField(response.data.children[result].stats[0].metadata.name, response.data.children[result].stats[0].displayValue, true)
-      .addField(response.data.children[result].stats[1].metadata.name, response.data.children[result].stats[1].displayValue, true, true)
-      .addField(response.data.children[result].stats[2].metadata.name, response.data.children[result].stats[2].displayValue, true, true)
-      .addField('Rank', response.data.children[result].stats[0].displayRank, true)
-      .addField('Rank', response.data.children[result].stats[1].displayRank, true)
-      .addField('Rank', response.data.children[result].stats[2].displayRank, true)
-    channel.send(embed).then(() => channel.stopTyping())
+  getMetadataName (data) {
+    if (!data) {
+      return `No data`
+    } else {
+      return data.metadata.name
+    }
+  }
+
+  getDisplayValue (data) {
+    if (!data) {
+      return `No data`
+    } else {
+      return data.displayValue
+    }
+  }
+
+  getRank (data) {
+    if (!data) {
+      return `No data`
+    } else {
+      return data.rank
+    }
+  }
+
+  getDisplayRank (data) {
+    if (!data) {
+      return `No data`
+    } else {
+      return data.displayRank
+    }
   }
 }

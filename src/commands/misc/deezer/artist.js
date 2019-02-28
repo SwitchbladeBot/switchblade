@@ -29,6 +29,8 @@ module.exports = class DeezerArtist extends SearchCommand {
 
   async handleResult ({ t, channel, author, language, flags }, artist) {
     channel.startTyping()
+    console.log(flags)
+    console.log(artist)
     const { id, name, link, nb_album: albums, picture_big: cover, nb_fan: fans } = artist
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
