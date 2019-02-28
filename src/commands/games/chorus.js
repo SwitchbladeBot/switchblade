@@ -82,7 +82,7 @@ module.exports = class Chorus extends SearchCommand {
             `[${this.getDownloadLinkText(chart, t)}](${chart.link})`, // Download link
             chart.sources[0] ? (chart.sources[0].isSetlist && chart.sources[0].name && chart.sources[0].link ? `[${t('commands:chorus.downloadFullSetlist', { setlistName: chart.sources[0].name })}](${chart.sources[0].link})` : null) : null // Download full setlist link
           ]
-        ].map(blockLines => blockLines.join('\n')).join('\n\n'))
+        ].map(blockLines => blockLines.filter(l => !!l).join('\n')).filter(b => b.length > 0).join('\n\n'))
         .addField(t('commands:chorus.source', { count: chart.sources.length }), chart.sources.map(s => `${s.parent ? `[${s.parent.name}](${s.parent.link}) in ` : ''}${`[${s.name}](${s.link})`}`).join('\n'))
     )
   }
