@@ -1,6 +1,5 @@
 const { SearchCommand, SwitchbladeEmbed, MiscUtils, Constants } = require('../../')
 
-const color = '#2C3E50'
 const icon = 'https://chorus.fightthe.pw/assets/images/favicon_128.png'
 const instruments = ['drums', 'guitarghl', 'keys', 'guitar', 'bassghl', 'bass']
 const warningLinks = {
@@ -15,7 +14,7 @@ module.exports = class Chorus extends SearchCommand {
       requirements: {
         apis: ['chorus']
       },
-      embedColor: color,
+      embedColor: Constants.CHORUS_COLOR,
       embedLogoURL: icon
     })
   }
@@ -56,7 +55,7 @@ module.exports = class Chorus extends SearchCommand {
 
     channel.send(
       new SwitchbladeEmbed(author)
-        .setColor(color)
+        .setColor(Constants.CHORUS_COLOR)
         .setAuthor('chorus', icon, 'https://chorus.fightthe.pw/')
         .setTitle(`${chart.artist} - ${chart.name}`)
         .setDescription([
@@ -82,7 +81,6 @@ module.exports = class Chorus extends SearchCommand {
             `[${this.getDownloadLinkText(chart, t)}](${chart.link})`, // Download link
             chart.sources[0] ? (chart.sources[0].isSetlist && chart.sources[0].name && chart.sources[0].link ? `[${t('commands:chorus.downloadFullSetlist', { setlistName: chart.sources[0].name })}](${chart.sources[0].link})` : null) : null // Download full setlist link
           ]
-        ].map(blockLines => blockLines.filter(l => !!l).join('\n')).filter(b => b.length > 0).join('\n\n'))
         .addField(t('commands:chorus.source', { count: chart.sources.length }), chart.sources.map(s => `${s.parent ? `[${s.parent.name}](${s.parent.link}) in ` : ''}${`[${s.name}](${s.link})`}`).join('\n'))
     )
   }
