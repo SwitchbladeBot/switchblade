@@ -1103,7 +1103,7 @@
 	"missingImage": "You need to give me a link or an image!"
   },
   "chorus": {
-    "commandDescription": "Searches for a Clone Hero chart on chorus",
+    "commandDescription": "Searches for a Clone Hero chart on chorus.",
     "commandUsage": "<search query>",
     "downloadHere": "Download here",
     "downloadChart": "Download **{{charterName}}'s** chart",
