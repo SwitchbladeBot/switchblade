@@ -5,27 +5,27 @@
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
   "reverse": {
-    "commandDescription": "Reverses a sentence.",
-    "commandUsage": "<sentence>",
-    "noSentence": "You have to give me something to reverse!"
+    "commandDescription": "Reverses the text.",
+    "commandUsage": "<text>",
+    "noSentence": "You have to give me some text to reverse!"
   },
   "hmmm": {
-    "commandDescription": "Random image from /r/hmmm"
+    "commandDescription": "Shows a random image from /r/hmmm."
   },
   "smart": {
-    "commandDescription": "Shows the Roll Safe meme"
+    "commandDescription": "Shows the Roll Safe meme."
   },
   "softwaregore": {
-    "commandDescription": "Random image from /r/softwaregore"
+    "commandDescription": "Shows a random image from /r/softwaregore."
   },
   "thinking": {
-    "commandDescription": "Random :thinking: image from /r/thinking"
+    "commandDescription": "Shows a random :thinking: image from /r/thinking."
   },
   "adorable": {
-    "commandDescription": "Generates an adorable avatar"
+    "commandDescription": "Generates an adorable avatar."
   },
   "avatar": {
-    "commandDescription": "Shows your or someone else's",
+    "commandDescription": "Shows yours or someone else's avatar.",
     "commandUsage": "[user]",
     "someonesAvatar": "{{- user}}'s avatar"
   },
@@ -34,45 +34,69 @@
     "hereIsYourDog": "Here's your dog!"
   },
   "invite": {
-    "commandDescription": "Shows the link to invite Switchblade to your server",
+    "commandDescription": "Shows Switchblade's invite link.",
     "clickHere": "Click here to invite me to your server",
     "noteThat": "Note that you need the **$t(permissions:MANAGE_GUILD)** permission in order to invite bots."
   },
   "ping": {
-    "commandDescription": "Checks if the bot is online"
+    "commandDescription": "Checks if the bot is online."
+  },
+  "hibp": {
+    "commandDescription": "Checks if an email has been found in a data breach or paste.",
+    "commandUsage": "<type> <query>",
+    "noEmail": "You have to give me a valid email address!",
+    "notBreached": "Good news! - No pwnage found!",
+    "breached": "Oh no! - Pwned!",
+    "andMore": "...and **{{count}}** more.",
+    "subcommands": {
+      "breach": {
+        "commandDescription": "Checks if an email has been found in a data breach.",
+        "commandUsage": "<email>",
+        "pwnedInSingular": "Pwned in one breach.",
+        "pwnedInPlural": "Pwned in **{{count}}** breaches.",
+        "notFoundBreach": "Your email wasn't found in any data breach."
+      },
+      "paste": {
+        "commandDescription": "Checks if an email has been found in a data paste.",
+        "commandUsage": "<email>",
+        "pwnedInSingular": "Pwned in one paste.",
+        "pwnedInPlural": "Pwned in **{{count}}** pastes.",
+        "notFoundPaste": "Your email wasn't found in any data paste."
+      }
+    }
   },
   "github": {
-    "commandDescription": "Searches for a user, repository or organization on Github",
+    "commandDescription": "Searches for a user, repository or an organization on Github.",
     "commandUsage": "<type> <query>",
     "subcommands": {
       "user": {
-        "commandDescription": "Searches for an user on GitHub",
+        "commandDescription": "Searches for a user on GitHub.",
         "commandUsage": "<username>",
-        "noUser":  "You need to give me a valid user",
-        "userNotFound": "User not found",
-        "moreRepos": "...and {{repos}} more repositories",
-        "noBio": "This user doesn't have a biography",
+        "noUser": "You have to give me a valid user!",
+        "userNotFound": "User not found.",
+        "moreRepos": "...and {{repos}} more repositories.",
+        "noBio": "This user doesn't have a biography.",
         "followers": "Followers",
         "following": "Following",
         "createdAt": "Account created at",
         "repositories": "Repositories ({{count}})"
       },
       "repository": {
-        "commandDescription": "Searches for a repository on GitHub",
+        "commandDescription": "Searches for a repository on GitHub.",
         "commandUsage": "<repository name>",
-        "noDescription": "This repository has no description",
+        "noDescription": "This repository has no description.",
         "watchers": "Watchers",
         "stars": "Stars",
         "forks": "Forks",
         "license": "License"
       },
       "organization": {
-        "commandDescription": "Searches for an organization on Github",
+        "commandDescription": "Searches for an organization on Github.",
         "commandUsage": "<organization name>",
-        "noOrg": "You need to give me a valid organization",
-        "orgNotFound": "Organization not found",
-        "moreRepos": "...and {{repos}} more repositories",
-        "noDescription": "This organization doesn't have a description",
+        "noOrg": "You have to give me a valid organization.",
+        "orgNotFound": "Organization not found.",
+        "moreRepos": "...and {{repos}} more repositories.",
+        "noDescription": "This organization doesn't have a description.",
         "members": "Members",
         "createdAt": "Organization created at",
         "repositories": "Repositories ({{count}})"
@@ -80,27 +104,27 @@
     }
   },
   "spotify": {
-    "commandDescription": "Searches for a song, album, artist or a playlist on Spotify, or displays a user info.",
+    "commandDescription": "Searches for a song, playlist, album or an artist on Spotify, or displays information about a user.",
     "commandUsage": "<type> <query>",
     "album": "Album",
     "genres": "Genres",
     "artist": "Artist",
     "artistPlural": "Artists",
-    "track": "Track",
-    "trackPlural": "Tracks",
+    "track": "Song",
+    "trackPlural": "Songs",
     "albumPlural": "Albums",
-    "moreTracks": "...and {{tracks}} more tracks",
-    "moreAlbums": "...and {{albums}} more albums",
+    "moreTracks": "...and {{tracks}} more songs.",
+    "moreAlbums": "...and {{albums}} more albums.",
     "followers": "Followers",
     "followersCount": "{{followers}} followers",
     "subcommands": {
       "track": {
-        "commandDescription": "Searches for a song on Spotify",
+        "commandDescription": "Searches for a song on Spotify.",
         "commandUsage": "<song>",
-        "trackInfo": "Track information"
+        "trackInfo": "Song information"
       },
       "album": {
-        "commandDescription": "Searches for an album on Spotify",
+        "commandDescription": "Searches for an album on Spotify.",
         "commandUsage": "<album>",
         "albumInfo": "Album information",
         "albumType": "Album type",
@@ -110,231 +134,232 @@
         }
       },
       "artist": {
-        "commandDescription": "Searches for an artist on Spotify",
+        "commandDescription": "Searches for an artist on Spotify.",
         "commandUsage": "<artist>",
         "artistInfo": "Artist information"
       },
       "playlist": {
-        "commandDescription": "Searches for a playlist on Spotify",
+        "commandDescription": "Searches for a playlist on Spotify.",
         "commandUsage": "<playlist>",
         "playlistInfo": "Playlist information",
         "createdBy": "Created by"
       },
       "user": {
-        "commandDescription": "Get information about a user on Spotify",
+        "commandDescription": "Gets information about a user on Spotify.",
         "commandUsage": "<user>",
+        "notFound": "User not found.",
         "userInfo": "User information"
       }
     }
   },
   "copypasta": {
-    "commandDescription": "Random text from /r/copypasta"
+    "commandDescription": "Shows a random text from /r/copypasta."
   },
   "owo": {
-    "commandDescription": "Owoifies a sentence",
-    "commandUsage": "<sentence>",
-    "missingSentence": "You need to give me a sentence to owoify",
-    "tooLongTitle": "Your sentence is longer than 200 characters",
-    "tooLongDescription": "Try shortening your sentence down or separate it into multiple commands"
+    "commandDescription": "Owoifies your text.",
+    "commandUsage": "<text>",
+    "missingSentence": "You have to give me some text to owoify!",
+    "tooLongTitle": "Your text is longer than 200 characters!",
+    "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
   "daily": {
-    "commandDescription": "Claims your daily reward",
-    "alreadyClaimedTitle": "You've already claimed your daily reward.",
-    "alreadyClaimedDescription": "You can do it again in **{{time}}**",
-    "claimedSuccessfully": "You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as your daily reward"
+    "commandDescription": "Claims your daily reward.",
+    "alreadyClaimedTitle": "Already claimed",
+    "alreadyClaimedDescription": "You've already claimed your daily reward. You can do it again in **{{time}}**.",
+    "claimedSuccessfully": "You've received **$t(commons:currencyWithCount, { 'count': {{count}} })** as your daily reward!"
   },
   "money": {
-    "commandDescription": "Shows how many $t(commons:currency_plural) someone has",
+    "commandDescription": "Shows how many $t(commons:currency_plural) someone has.",
     "commandUsage": "[user to lookup]",
-    "youHave": "You have **$t(commons:currencyWithCount, { 'count': {{count}} })** in your account",
-    "someoneHas": "{{- user}} has **$t(commons:currencyWithCount, { 'count': {{count}} })** in their account"
+    "youHave": "You have **$t(commons:currencyWithCount, { 'count': {{count}} })** in your account.",
+    "someoneHas": "{{- user}} has **$t(commons:currencyWithCount, { 'count': {{count}} })** in their account."
   },
   "kiss": {
-    "commandDescription": "Kisses someone",
+    "commandDescription": "Kisses someone.",
     "commandUsage": "<user to kiss>",
-    "noMention": "You need to mention someone",
+    "noMention": "You have to mention someone.",
     "notYourself": "You can't kiss yourself!",
-    "success": "{{- kisser}} kissed {{- kissed}}"
+    "success": "{{- kisser}} kissed {{- kissed}}."
   },
   "handshake": {
-    "commandDescription": "Handshake someone",
-    "commandUsage": "<user to handshake>",
-    "noMention": "You need to mention someone",
-    "notYourself": "You can't handshake yourself!",
-    "success": "{{- handshaker}} handshaked {{- handshaked}}"
+    "commandDescription": "Shakes hands with someone.",
+    "commandUsage": "<user to shake hands with>",
+    "noMention": "You have to mention someone!",
+    "notYourself": "You can't shake hands with yourself!",
+    "success": "{{- handshaker}} shook hands with {{- handshaked}}"
   },
   "triggered": {
-    "commandDescription": "Triggers someone",
+    "commandDescription": "Triggers someone.",
     "commandUsage": "[user to trigger]"
   },
   "8ball": {
-    "commandDescription": "Asks the magic 8-Ball about something",
+    "commandDescription": "Asks the magic 8-Ball about something.",
     "commandUsage": "<question>",
-    "noQuestion": "You need to ask me something",
+    "noQuestion": "You have to ask me something!",
     "answers": {
-      "0": "It is certain",
-      "1": "It is decidedly so",
-      "2": "Without a doubt",
-      "3": "Yes definitely",
-      "4": "You may rely on it",
-      "5": "As I see it, yes",
-      "6": "Most likely",
-      "7": "Outlook good",
-      "8": "Yes",
-      "9": "Signs point to yes",
-      "10": "Reply hazy try again",
-      "11": "Ask again later",
-      "12": "Better not tell you now",
-      "13": "Cannot predict now",
-      "14": "Concentrate and ask again",
-      "15": "Don't count on it",
-      "16": "My reply is no",
-      "17": "My sources say no",
-      "18": "Outlook not so good",
-      "19": "Very doubtful"
+      "0": "It is certain.",
+      "1": "It is decidedly so.",
+      "2": "Without a doubt!",
+      "3": "Yes definitely!",
+      "4": "You may rely on it.",
+      "5": "As I see it, yes!",
+      "6": "Most likely.",
+      "7": "Outlook good!",
+      "8": "Yes.",
+      "9": "Signs point to yes.",
+      "10": "Reply hazy try again!",
+      "11": "Ask again later.",
+      "12": "Better not tell you now.",
+      "13": "Cannot predict now.",
+      "14": "Concentrate and ask again!",
+      "15": "Don't count on it.",
+      "16": "My reply is no.",
+      "17": "My sources say no.",
+      "18": "Outlook not so good.",
+      "19": "Very doubtful."
     }
   },
   "fliptext": {
-    "commandDescription": "Flips text upside down",
+    "commandDescription": "Flips the text upside down.",
     "commandUsage": "<text to be flipped>",
-    "noSentence": "You need to give me a sentence to flip"
+    "noSentence": "You have to give me some text to flip!"
   },
   "npm": {
-    "commandDescription": "Shows information about a NPM package",
+    "commandDescription": "Shows information about an NPM package.",
     "commandUsage": "<package name>",
-    "noDescription": "No description provided",
+    "noDescription": "No description provided.",
     "notFound": "Package not found.",
-    "noNameProvided": "You need to give me a package name."
+    "noNameProvided": "You have to give me a package name!"
   },
   "poll": {
-    "commandDescription": "Creates a poll",
+    "commandDescription": "Creates a poll.",
     "commandUsage": "<poll title> [|option 1|option 2|option 3|...]",
-    "noQuestion": "You need to give me something to be voted",
-    "tooManyOptions": "You can't exceed {{maxOptions}} options"
+    "noQuestion": "You have to give me something to be voted!",
+    "tooManyOptions": "You can't exceed {{maxOptions}} options!"
   },
   "nowplaying": {
-    "commandDescription": "Shows the name of the song being played"
+    "commandDescription": "Shows the name of the current song."
   },
   "pause": {
-    "commandDescription": "Pauses or resumes the music playback"
+    "commandDescription": "Pauses or resumes the music playback."
   },
   "play": {
-    "commandDescription": "Plays a certain song or adds it to the queue",
-    "commandUsage": "<track name or URL>",
-    "noTrackIdentifier": "You need to give me a track name or URL!"
+    "commandDescription": "Plays a certain song or adds it to the queue.",
+    "commandUsage": "<song name or URL>",
+    "noTrackIdentifier": "You have to give me a song name or URL!"
   },
   "queue": {
-    "commandDescription": "Shows the current queue",
+    "commandDescription": "Shows the current queue.",
     "clearAdvice": "You can clear the queue using `{{usage}}`.",
     "subcommands": {
       "clear": {
-        "commandDescription": "Clears the queue",
+        "commandDescription": "Clears the queue.",
         "queueCleared": "The queue has been cleared!"
       },
       "shuffle": {
-        "commandDescription": "Shuffles the queue",
+        "commandDescription": "Shuffles the queue.",
         "queueShuffled": "The queue has been shuffled!"
       },
       "remove": {
-        "commandDescription": "Removes a song from the queue",
+        "commandDescription": "Removes a song from the queue.",
         "commandUsage": "<music number>",
-        "missingIndexParameter": "You need to give me the number of the song you want to remove from the queue",
-        "songRemoved": "{{- songName}} has been removed from the queue"
+        "missingIndexParameter": "You have to give me the number of the song you want to remove from the queue.",
+        "songRemoved": "{{- songName}} has been removed from the queue!"
       },
       "jump": {
-        "commandDescription": "Jumps to a specific song in the queue",
+        "commandDescription": "Jumps to a specific song in the queue.",
         "commandUsage": "<music number>",
-        "missingIndexParameter": "You need to give me the number of the song you want to jump to",
-        "jumpedToSong": "Jumped to {{- songName}}"
+        "missingIndexParameter": "You have to give me the number of the song you want to jump to.",
+        "jumpedToSong": "Jumped to {{- songName}}."
       }
     }
   },
   "skip": {
-    "commandDescription": "Skips the current song"
+    "commandDescription": "Skips the current song."
   },
   "stop": {
-    "commandDescription": "Stops the music playback",
+    "commandDescription": "Stops the music playback.",
     "stopped": "Playback has been stopped, leaving the voice channel."
   },
   "volume": {
-    "commandDescription": "Adjusts the volume of the music playback",
+    "commandDescription": "Adjusts the volume of the music playback.",
     "commandUsage": "<0-150>",
-    "missingVolumeParameter": "You need to give me the volume level!",
-    "invalidVolumeParameter": "You need to give me a valid number!",
+    "missingVolumeParameter": "You have to give me a volume level!",
+    "invalidVolumeParameter": "You have to give me a valid number!",
     "notPlaying": "Volume can't be adjusted while not playing anything!",
     "volumeSet": "Volume set to {{volume}}%"
   },
   "help": {
-    "commandDescription": "Shows information about commands or lists them",
+    "commandDescription": "Shows information about commands or lists them.",
     "commandUsage": "[command name]",
     "listTitle": "Available commands",
     "prefix": "Prefix",
-    "youCanUse": "You can also use {{- botMention}} as a prefix",
-    "specificInformation": "Type {{helpString}} for command specific information",
+    "youCanUse": "You can also use {{- botMention}} as a prefix.",
+    "specificInformation": "Type {{helpString}} for command specific information.",
     "aliases": "Aliases",
     "subcommands": "Subcommands",
-    "noDescriptionProvided": "No description provided",
-    "noUsageProvided": "No usage provided",
-    "commandNotFound": "I couldn't find a command with that name"
+    "noDescriptionProvided": "No description provided.",
+    "noUsageProvided": "No usage provided.",
+    "commandNotFound": "I couldn't find any command with that name."
   },
   "e621": {
-    "commandDescription": "Sends random yiff from e621",
+    "commandDescription": "Sends a random yiff from e621.",
     "hereIsYour_yiff": "Here's your yiff!"
   },
   "pay": {
-    "commandDescription": "Pays $t(commons:currency_plural) to a user",
+    "commandDescription": "Pays $t(commons:currency_plural) to a user.",
     "commandUsage": "<@member> <value>",
-    "noMember": "You need to mention someone",
-    "noValue": "You need to give me a valid number of $t(commons:currency_plural) to send",
-    "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that",
-    "cantPayYourself": "You can't pay yourself",
-    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}}!"
+    "noMember": "You have to mention someone!",
+    "noValue": "You have to give me a valid number of $t(commons:currency_plural) to send!",
+    "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that!",
+    "cantPayYourself": "You can't pay yourself!",
+    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}}."
   },
   "xkcd": {
-    "commandDescription": "Shows an XKCD",
+    "commandDescription": "Shows an XKCD webcomic.",
     "commandUsage": "[#|\"latest\"]",
-    "invalidArgument": "You need to give me a valid XKCD number",
-    "notFound": "XKCD not found"
+    "invalidArgument": "You have to give me a valid XKCD number!",
+    "notFound": "XKCD not found."
   },
   "xkcd37": {
-    "commandDescription": "Whenever anyone calls something an [adjective]-ass [noun], move the hyphen one word to the right.",
-    "commandUsage": "<sentence>"
+    "commandDescription": "Whenever anyone calls something an [adjective]-ass [noun], moves the hyphen one word to the right.",
+    "commandUsage": "<text>"
   },
   "math": {
-    "commandDescription": "Evaluates a math expression",
+    "commandDescription": "Evaluates a math expression.",
     "commandUsage": "<expression>",
-    "needMathExpression": "You need to give me a math expression to evaluate",
-    "invalidMathExpression": "Invalid math expression",
+    "needMathExpression": "You have to give me a math expression to evaluate!",
+    "invalidMathExpression": "Invalid math expression.",
     "result": "Result: `{{result}}`"
   },
   "stoptyping": {
-    "commandDescription": "Forces the bot to stop typing",
+    "commandDescription": "Forces the bot to stop typing.",
     "tryingToStop": "Trying to stop typing..."
   },
   "isitup": {
-    "commandDescription": "Check whether a website is up or down",
+    "commandDescription": "Checks whether a website is up or down.",
     "commandUsage": "<address>",
     "isUp": "That website is up!",
     "isDown": "That website is down.",
     "details": "It took **{{body.response_time}}ms** for **{{body.response_ip}}** to respond with HTTP code **{{body.response_code}}**.",
-    "noWebsite": "You need to give me a website to check"
+    "noWebsite": "You have to give me a website to check!"
   },
   "coinflip": {
-    "commandDescription": "Flips a coin",
-    "landed": "I've flipped a coin and it landed **$t(commons:{{chosenSide}})**"
+    "commandDescription": "Flips a coin.",
+    "landed": "I've flipped a coin and it landed **$t(commons:{{chosenSide}})**!"
   },
   "betflip": {
-    "commandDescription": "Bets $t(commons:currency_plural) on a coin flip",
+    "commandDescription": "Bets $t(commons:currency_plural) on a coin flip.",
     "commandUsage": "<value to bet> <heads | tails>",
     "victory": "Yay, it landed **$t(commons:{{chosenSide}})**, so you won **$t(commons:currencyWithCount, { 'count': {{count}} })**!",
-    "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**",
-    "noBetValue": "You need to give me a value to bet",
-    "noCoin": "You need to give me a coin side to bet on"
+    "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**.",
+    "noBetValue": "You have to give me a value to bet!",
+    "noCoin": "You have to give me a coin side to bet on!"
   },
   "botinfo": {
-    "commandDescription": "Sends information about myself",
+    "commandDescription": "Sends information about me.",
     "hello": "Hello, my name is **{{user.username}}**, and I'm a multi-purpose Discord bot, built to help you with all of your server problems and needs.",
-    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds}} servers** and **{{users}} users** with **{{commands}} commands**. Currently running **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**",
+    "statistics": "I've been up for **{{uptime}}**, helping **{{guilds}} servers** and **{{users}} users** with **{{commands}} commands**. Currently running on **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**.",
     "links": "Useful links",
     "inviteLink": "{{Constants.BOT_BADGE}} **[Invite me to your server](https://invite.switchblade.xyz)**",
     "supportServer": "{{Constants.DISCORD_LOGO}} **[Join my support server](https://support.switchblade.xyz)**",
@@ -344,8 +369,8 @@
     "patreon": "{{Constants.PATREON_LOGO}} **[Support me](https://www.patreon.com/switchblade)**"
   },
   "guildinfo": {
-    "commandDescription": "Sends information about the current server or from another guild",
-    "commandUsage": "[guild id]",
+    "commandDescription": "Sends information about the current or another server.",
+    "commandUsage": "[server id]",
     "id": "ID",
     "owner": "Owner",
     "region": "Region",
@@ -364,7 +389,7 @@
     "bots": "Bots: **{{count}}**"
   },
   "userinfo": {
-    "commandDescription": "Sends your or someone else's user information",
+    "commandDescription": "Sends yours or someone else's user information.",
     "online": "{{Constants.ONLINE_STATUS}} Online",
     "idle": "{{Constants.IDLE_STATUS}} Idle",
     "dnd": "{{Constants.DND_STATUS}} Do Not Disturb",
@@ -378,10 +403,10 @@
     "memberNumber": "Member #{{count}}"
   },
   "samp": {
-    "commandDescription": "Shows information about a GTA San Andreas: Multiplayer server",
+    "commandDescription": "Shows information about a GTA San Andreas: Multiplayer server.",
     "commandUsage": "<ip>[:port]",
-    "noIP": "You need to give me an IP!",
-    "serverUnreachableTitle": "I couldn't reach this server",
+    "noIP": "You have to give me an IP!",
+    "serverUnreachableTitle": "I couldn't reach this server.",
     "serverUnreachableDescription": "Check the IP and port, or try again later.",
     "address": "Address",
     "version": "Version",
@@ -391,26 +416,26 @@
     "time": "Time"
   },
   "qrcode": {
-    "commandDescription": "Generates a QR Code",
+    "commandDescription": "Generates a QR Code.",
     "commandUsage": "<text>",
-    "noText": " You need to give me some text!"
+    "noText": " You have to give me some text!"
   },
   "strawpoll": {
-    "commandDescription": "Creates a Straw Poll",
+    "commandDescription": "Creates a Straw Poll.",
     "commandUsage": "<poll title|<option 1|option 2|option 3...>",
-    "noParameters": "You need to give me a title and some options",
-    "optionsNumberError": "You need to give me between 2 and 30 options",
+    "noParameters": "You have to give me a title and some options!",
+    "optionsNumberError": "You have to give me a number of options between 2 and 30!",
     "clickHere": "Click here to vote"
   },
   "imageoftheday": {
-    "commandDescription": "Shows the NASA Image of the Day",
+    "commandDescription": "Shows the NASA Image of the Day.",
     "embedAuthor": "NASA Image of the Day"
   },
   "deezer": {
-    "commandDescription": "Searches for a track, playlist, podcast, an album, user or an artist on Deezer.",
+    "commandDescription": "Searches for a song, playlist, podcast, album or an artist Deezer, or displays information about a user.",
     "commandUsage": "<type> <query>",
-    "noTrackName": "You need to give me a track name.",
-    "noTracksFound": "I couldn't find any tracks with that name.",
+    "noTrackName": "You have to give me a song name.",
+    "noTracksFound": "I couldn't find any song with that name.",
     "fans": "Fans",
     "fansCount": "{{fans}} fans",
     "createdAt": "Created at",
@@ -419,60 +444,60 @@
     "following": "Following",
     "subcommands": {
       "track": {
-        "commandDescription": "Searches for a track on Deezer",
-        "commandUsage": "<track>",
-        "trackInfo": "Track information"
+        "commandDescription": "Searches for a song on Deezer.",
+        "commandUsage": "<song>",
+        "trackInfo": "Song information"
       },
       "album": {
-        "commandDescription": "Searches for an album on Deezer",
+        "commandDescription": "Searches for an album on Deezer.",
         "commandUsage": "<album> [--tracks]",
         "albumInfo": "Album information",
-        "albumTracks": "Album tracks"
+        "albumTracks": "Album songs"
       },
       "artist": {
-        "commandDescription": "Searches for an artist on Deezer",
+        "commandDescription": "Searches for an artist on Deezer.",
         "commandUsage": "<artist> [--albums | --related]",
         "artistInfo": "Artist information",
         "artistAlbums": "Artist albums",
         "artistRelated": "Related artists"
       },
       "playlist": {
-        "commandDescription": "Searches for a playlist on Deezer",
+        "commandDescription": "Searches for a playlist on Deezer.",
         "commandUsage": "<playlist> [--tracks]",
         "playlistInfo": "Playlist information",
-        "playlistTracks": "Playlist tracks"
+        "playlistTracks": "Playlist songs"
       },
       "podcast": {
-        "commandDescription": "Searches for a podcast on Deezer",
+        "commandDescription": "Searches for a podcast on Deezer.",
         "commandUsage": "<podcast> [--episodes]",
         "podcastInfo": "Podcast information",
         "podcastEpisodes": "Podcast episodes",
-        "moreEpisodes": "...and {{episodes}} more episodes"
+        "moreEpisodes": "...and {{episodes}} more episodes."
       },
-      "user":  {
-        "commandDescription": "Searches for a user on Deezer",
+      "user": {
+        "commandDescription": "Gets information about a user on Deezer.",
         "commandUsage": "<user>",
-        "userInfo": "User Info"
+        "userInfo": "User information"
       }
     }
   },
   "profile": {
-    "commandDescription": "Shows your or someone else's profile",
+    "commandDescription": "Shows yours or someone else's profile.",
     "commandUsage": "[user]"
   },
   "myanimelist": {
-    "commandDescription": "Searches for an anime on MyAnimeList",
+    "commandDescription": "Searches for an anime on MyAnimeList.",
     "commandUsage": "<anime name>",
-    "noAnime": "You need to give me an anime to search for",
+    "noAnime": "You have to give me an anime to search for!",
     "score": "Score",
     "episodes": "Episodes",
     "studio": "Studio",
     "studio_plural": "Studios",
     "aired": "Aired",
-    "animeNotFound": "I couldn't find an anime by that name"
+    "animeNotFound": "I couldn't find an anime with that name!"
   },
   "dicksize": {
-    "commandDescription": "Shows how small your dick is",
+    "commandDescription": "Shows how small your dick is.",
     "yourDickSize": "Your Dick Size"
   },
   "restrictemoji": {
@@ -499,36 +524,36 @@
     }
   },
   "config": {
-    "commandDescription": "Change the current guild configuration",
-    "guildLang": "To change the guild language, `{{command}} language <language code>`",
-    "guildPrefix": "To change the guild prefix, `{{command}} prefix <new prefix>`",
+    "commandDescription": "Changes the current server's configuration.",
+    "guildLang": "To change the server language, use `{{command}} language <language code>`",
+    "guildPrefix": "To change the server prefix, use `{{command}} prefix <new prefix>`",
     "missingTranslation": "**(A few translations might be missing)**",
     "subcommands": {
       "language": {
-        "commandDescription": "Change the current guild language",
+        "commandDescription": "Changes the current server language.",
         "commandUsage": "<language code>",
-        "noCode": "You need to give me a language code.",
+        "noCode": "You have to give me a language code!",
         "availableLanguages": "Available languages",
         "changedSuccessfully": "Language changed to `{{lang}}`."
       },
       "prefix": {
-        "commandDescription": "Change the current guild prefix",
+        "commandDescription": "Changes the current server prefix.",
         "commandUsage": "<new prefix>",
-        "noPrefix": "You need to give me a prefix.",
+        "noPrefix": "You have to give me a prefix!",
         "changedSuccessfully": "Prefix changed to `{{prefix}}`."
       }
     }
   },
   "cow": {
-    "commandDescription": "Shows a random ASCII cow"
+    "commandDescription": "Shows a random ASCII cow."
   },
   "asciify": {
-    "commandDescription": "Turns your text into ASCII art",
+    "commandDescription": "Turns your text into an ASCII art.",
     "commandUsage": "<text>",
-    "noText": "You need to give me some text to asciify"
+    "noText": "You have to give me some text to asciify!"
   },
   "hentai": {
-    "commandDescription": "Sends hentai in a NSFW channel",
+    "commandDescription": "Sends hentai in an NSFW channel.",
     "hereIsYourHentai": "Here's your hentai!"
   },
   "shiba": {
@@ -536,28 +561,29 @@
     "hereIsYourShiba": "Here's your Shiba!"
   },
   "lyrics": {
-    "commandDescription": "Find the lyrics of a song",
-    "commandUsage": "<track name>",
+    "commandDescription": "Finds the lyrics of a song.",
+    "commandUsage": "<song name>",
     "noLyricsFound": "The provided song's lyrics could not be found.",
     "noLyricsFoundPlaying": "The current song's lyrics could not be found.",
-    "noTrackName": "You need to give me a track name.",
+    "noTrackName": "You have to give me a song name!",
     "fullLyrics": "Click here to see the full lyrics"
   },
   "binary": {
-    "commandDescription": "Converts your text into binary",
+    "commandDescription": "Converts your text into binary.",
     "commandUsage": "<text>",
-    "missingText": "You need to give me some text or binary",
+    "missingText": "You have to give me some text or binary!",
     "textToBinary": "In Binary",
     "binaryToText": "In Text",
-    "tooLongTitle": "Your text is longer than 200 characters",
-    "tooLongDescription": "Try shortening your text down or separate it into multiple commands"
+    "tooLongTitle": "Your text is longer than 200 characters!",
+    "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
   "cowsay": {
-    "commandDescription": "Turns your text into cowsay",
-    "noText": "You need to give me a sentence!"
+    "commandDescription": "Turns your text into cowsay.",
+    "commandUsage": "<text>",
+    "noText": "You have to give me some text!"
   },
   "inspirobot": {
-    "commandDescription": "Shows a random InspiroBot quote",
+    "commandDescription": "Shows a random InspiroBot quote.",
     "quote": "Here's your InspiroBot quote!"
   },
   "cat": {
@@ -565,48 +591,48 @@
     "hereIsYourCat": "Here's your cat!"
   },
   "i18n": {
-    "commandDescription": "Shows the link to Switchblade translation page",
+    "commandDescription": "Shows the link to Switchblade's translation page.",
     "translateMe": "**[Translate me to your language](https://translate.switchblade.xyz)**"
   },
   "beatsaver": {
-    "commandDescription": "Searches for a Beatmap on Beat Saver",
+    "commandDescription": "Searches for a Beatmap on Beat Saver.",
     "commandUsage": "<beatmap name, song, id, author or uploader>",
     "download": "Download",
     "details": "Details",
-    "noQuery": "You need to give me a map name, song, id, author or uploader.",
+    "noQuery": "You have to give me a map name, song, author, id or an uploader.",
     "notFound": "No Beatmaps were found."
   },
   "favcolor": {
-    "commandDescription": "Set a background color to your profile",
+    "commandDescription": "Sets a background color on your profile.",
     "commandUsage": "<#hexcode>",
     "changedSuccessfully": "Profile color changed to {{hexcode}}."
   },
   "rep": {
-    "commandDescription": "Gives a reputation point to someone",
+    "commandDescription": "Gives a reputation point to someone.",
     "commandUsage": "<user>",
-    "noMention": "You need to mention someone",
-    "reputationPoint": "You gave a reputation point to {{user}}",
-    "againIn": "You can do it again in **{{time}}**",
-    "alreadyGave": "You already gave a reputation point to someone today",
-    "repYourself": "You can't give a reputation point to yourself"
+    "noMention": "You have to mention someone!",
+    "reputationPoint": "You gave a reputation point to {{user}}.",
+    "againIn": "You already gave a reputation point to someone today. You can do it again in **{{time}}**.",
+    "alreadyGave": "Already gave reputation",
+    "repYourself": "You can't give a reputation point to yourself!"
   },
   "personaltext": {
-    "commandDescription": "Sets a personal text to your profile",
+    "commandDescription": "Sets a personal text on your profile.",
     "commandUsage": "<personal text>",
-    "noText": "You need to give me some text",
-    "tooLongText": "Your text is longer than {{limit}} characters",
+    "noText": "You have to give me some text!",
+    "tooLongText": "Your text is longer than {{limit}} characters!",
     "changedSuccessfully": "Personal text changed!"
   },
   "guildicon": {
-    "commandDescription": "Shows the current or another server's icon",
+    "commandDescription": "Shows the current or another server's icon.",
     "iconDescription": "{{guild}}'s icon:",
     "noIcon": "This server doesn't have an icon!"
   },
   "fivem": {
-    "commandDescription": "Shows information about a FiveM server",
+    "commandDescription": "Shows information about a FiveM server.",
     "commandUsage": "<ip>[:port]",
-    "noIP": "You need to give me an IP!",
-    "serverUnreachableTitle": "I couldn't reach this server",
+    "noIP": "You have to give me an IP!",
+    "serverUnreachableTitle": "I couldn't reach this server.",
     "serverUnreachableDescription": "Check the IP and port, or try again later.",
     "address": "Address",
     "version": "Version",
@@ -619,148 +645,149 @@
     "noGameName": "Not found"
   },
   "emoji": {
-    "commandDescription": "Enlarges emojis",
+    "commandDescription": "Enlarges an emoji.",
     "hereIsYourEmoji": "Here's your emoji!"
   },
   "clapify": {
-    "commandDescription": "Clapifies text",
+    "commandDescription": "Clapifies your text.",
     "commandUsage": "<text to clapify>",
-    "missingSentence": "You need to give me a sentence to clapify",
-    "tooLongText": "Your text can't be longer than {{limit}} characters"
+    "missingSentence": "You have to give me some text to clapify!",
+    "tooLongText": "Your text can't be longer than {{limit}} characters!"
   },
   "numberfacts": {
-    "validNumber": "You need to give me a number!",
+    "commandDescription": "Shows a fact about a number.",
     "commandUsage": "<number>",
-    "commandDescription": "Shows a fact about a number"
+    "validNumber": "You have to give me a number!"
   },
   "blacklist": {
-    "commandDescription": "Adds a user to the blacklist",
+    "commandDescription": "Adds a user to the blacklist.",
     "commandUsage": "<user> <reason>",
-    "missingUser": "You need to give me an user to blacklist",
-    "missingReason": "You need to give me a reason for blacklisting",
-    "successTitle": "User added to the blacklist"
+    "missingUser": "You have to give me a user to blacklist!",
+    "missingReason": "You have to give me a reason for blacklisting!",
+    "successTitle": "User added to the blacklist!"
   },
   "kick": {
-    "commandDescription": "Kicks a member from this server",
+    "commandDescription": "Kicks a member from this server.",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me a member to kick",
-    "missingReason": "You need to give me a reason for kicking",
-    "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member",
-    "successTitle": "Member was kicked",
-    "cantKick": "I can't kick this member"
+    "missingUser": "You have to give me a member to kick!",
+    "missingReason": "You have to give me a reason for kicking!",
+    "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member.",
+    "successTitle": "Member was kicked!",
+    "cantKick": "I can't kick this member!"
   },
   "ban": {
-    "commandDescription": "Bans a member from this server",
+    "commandDescription": "Bans a member from this server.",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me a member to ban",
-    "missingReason": "You need to give me a reason for banning",
-    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member",
-    "successTitle": "Member was banned",
-    "cantBan": "I can't ban this member"
+    "missingUser": "You have to give me a member to ban!",
+    "missingReason": "You have to give me a reason for banning!",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member.",
+    "successTitle": "Member was banned!",
+    "cantBan": "I can't ban this member!"
   },
   "softban": {
-    "commandDescription": "Bans a member, removes all of their messages and unbans",
+    "commandDescription": "Bans a member, removes all of their messages and then unbans them.",
     "commandUsage": "<member> <reason>",
-    "missingUser": "You need to give me a member to softban",
-    "missingReason": "You need to give me a reason for softbanning",
-    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member",
-    "successTitle": "Member was softbanned",
-    "cantSoftban": "I can't softban this member"
+    "missingUser": "You have to give me a member to softban!",
+    "missingReason": "You have to give me a reason for softbanning!",
+    "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member.",
+    "successTitle": "Member was softbanned!",
+    "cantSoftban": "I can't softban this member!"
   },
   "unblacklist": {
-    "commandDescription": "Removes a user from the blacklist",
+    "commandDescription": "Removes a user from the blacklist.",
     "commandUsage": "<user>",
-    "success": "{{user}} has been removed from the blacklist",
-    "missingUser": "You need to give me an user to remove from the blacklist",
-    "notBlacklisted": "That user isn't blacklisted"
+    "success": "{{user}} has been removed from the blacklist!",
+    "missingUser": "You have to give me a user to remove from the blacklist!",
+    "notBlacklisted": "That user isn't blacklisted."
   },
   "whyblacklisted": {
-    "commandDescription": "Shows why someone is blacklisted",
+    "commandDescription": "Shows why someone is blacklisted.",
     "commandUsage": "<user>",
-    "missingUser": "You need to give me an user to check the reason",
-    "notBlacklisted": "That user isn't blacklisted",
+    "missingUser": "You have to give me a user to check the reason!",
+    "notBlacklisted": "That user isn't blacklisted.",
     "reasonTitle": "{{user}} was blacklisted by {{blacklister}}"
   },
   "tipsfedora": {
-    "commandDescription": "Shows the Tips Fedora meme"
+    "commandDescription": "Shows the Tips Fedora meme."
   },
   "leaderboard": {
-    "commandDescription": "Shows a leaderboard",
+    "commandDescription": "Shows a leaderboard.",
+    "commandUsage": "<type>",
     "subcommands": {
       "money": {
-        "commandDescription": "Shows a list of the richest users",
+        "commandDescription": "Shows a list of the richest users.",
         "title": "Money Leaderboard"
       },
       "reputation": {
-        "commandDescription": "Shows a list of the users with the most reputation points",
+        "commandDescription": "Shows a list of the users with the most reputation points.",
         "title": "Reputation Leaderboard"
       }
     }
   },
   "bolinadegorfe": {
-    "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker"
+    "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker."
   },
   "eval": {
-    "commandDescription": "Evals a JS string"
+    "commandDescription": "Evals a JS string."
   },
   "oddlysatisfying": {
-    "commandDescription": "Random image from /r/oddlysatisfying"
+    "commandDescription": "Shows a random image from /r/oddlysatisfying."
   },
   "geekjokes": {
-    "commandDescription": "Random geekjoke"
+    "commandDescription": "Shows a random geekjoke."
   },
   "aww": {
     "title": "Here is some eyebleach for ya!",
-    "commandDescription": "Random image from /r/aww"
+    "commandDescription": "Shows a random image from /r/aww."
   },
   "videochat": {
-    "commandDescription": "Enables videochat for the voice channel that you're currently connected to and shares a link to it (Beta feature!)",
-    "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}})`"
+    "commandDescription": "Enables videochat for the voice channel that you're currently connected to and shares a link to it. (Beta feature!)",
+    "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}}!)`"
   },
   "vaporwave": {
-    "commandDescription": "Vaporwavefies a sentence",
-    "commandUsage": "<sentence>",
-    "missingSentence": "You need to give me a sentence to vaporwavefy"
+    "commandDescription": "Vaporwavefies the text.",
+    "commandUsage": "<text>",
+    "missingSentence": "You have to give me some text to vaporwavefy!"
   },
   "emojify": {
-    "commandDescription": "Emojifies a sentence",
-    "commandUsage": "<sentence>",
-    "missingSentence": "You need to give me a sentence to emojify"
+    "commandDescription": "Emojifies the text.",
+    "commandUsage": "<text>",
+    "missingSentence": "You have to give me some text to emojify!"
   },
   "fox": {
-    "commandDescription": "Fetches a random image of a fox",
+    "commandDescription": "Shows a random image of a fox.",
     "hereIsYourFox": "Here's your fox!"
   },
   "birb": {
-    "commandDescription": "Fetches a random image of a birb",
+    "commandDescription": "Shows a random image of a birb.",
     "hereIsYourBirb": "Here's your birb!"
   },
   "loop": {
-    "commandDescription": "Activates or deactivates the music playback's loop mode"
+    "commandDescription": "Activates or deactivates the music playback's loop mode."
   },
   "time": {
-    "commandDescription": "Get the current time in a specified place",
+    "commandDescription": "Get the current time in a specified place.",
     "commandUsage": "<timezone>",
     "currentTime": "The current time in {{timezone}} is",
-    "noZone": "You need to give me a place to get the time",
+    "noZone": "You have to give me a place to get the time!",
     "notFound": "Couldn't find this place."
   },
   "vote": {
-    "commandDescription": "Gives you a bonus for voting on bot lists",
+    "commandDescription": "Gives you a bonus for voting on bot lists.",
     "howToVote": {
-      "dbl": "**[Vote on DBL]({{link}})** to claim your bonus"
+      "dbl": "**[Vote on DBL]({{link}})** to claim your bonus."
     }
   },
   "dbl": {
-    "commandDescription": "Searches for a bot on Discord Bot List",
+    "commandDescription": "Searches for a bot on Discord Bot List.",
     "commandUsage": "<bot name>",
-    "noType": "Please insert a valid type",
+    "noType": "Please insert a valid type!",
     "types": "Types",
-    "selectResult": "Please send the number of the result (10 seconds)",
-    "noBotName":  "You need to give me a valid bot name",
-    "botNotFound": "Bot not found",
+    "selectResult": "Please send the number of the result! (10 seconds)",
+    "noBotName": "You have to give me a valid bot name.",
+    "botNotFound": "Bot not found.",
     "results": "Bot results for {{query}}",
-    "noDescription": "This bot doesn't have a description",
+    "noDescription": "This bot doesn't have a description.",
     "prefix": "Prefix",
     "library": "Library",
     "owner": "Owner",
@@ -774,35 +801,35 @@
     "clickHere": "[Click here]({{link}})"
   },
   "reloadlocales": {
-    "commandDescription": "Reloads the locales folder",
+    "commandDescription": "Reloads the locales folder.",
     "reloaded": "Locales reloaded!"
   },
   "tesla": {
-    "commandDescription": "Random image from /r/TeslaPorn"
+    "commandDescription": "Shows a random image from /r/TeslaPorn."
   },
   "lmgtfy": {
-    "commandDescription": "Google something for someone that they should have googled",
+    "commandDescription": "Google something for someone that they should have googled.",
     "commandUsage": "<query>",
-    "noQuery": "I can't google something for you without keywords",
+    "noQuery": "I can't google something for you without keywords!",
     "search": "[This]({{link}}) might help ¯\\_(ツ)_/¯"
   },
   "twitch": {
-    "commandDescription": "Searches for someone on Twitch",
+    "commandDescription": "Searches for a user on Twitch.",
     "commandUsage": "<twitch username>",
-    "noChannel": "You need to give me a Twitch username",
+    "noChannel": "You have to give me a valid Twitch username!",
     "biography": "Biography",
-    "noBiography": "This user doesn't have a biography",
+    "noBiography": "This user doesn't have a biography.",
     "totalViews": "Total Views",
     "streamingTitle": "Streaming {{gameName}}",
     "streamingDescription": "**{{title}}** for {{viewers}} viewers",
     "followers": "Followers",
-    "userNotFound": "Twitch User not found"
+    "userNotFound": "Twitch user not found!"
   },
   "mcquery": {
-    "commandDescription": "Shows information about a Minecraft: Java Edition server",
+    "commandDescription": "Shows information about a Minecraft: Java Edition server.",
     "commandUsage": "<address>[:port]",
-    "unknownServer": "Server is offline or doesn't exist",
-    "noIP": "You need to give me an address.",
+    "unknownServer": "Server is offline or doesn't exist.",
+    "noIP": "You have to give me an address.",
     "players": "Players",
     "version": "Version",
     "online": "Online",
@@ -810,46 +837,46 @@
     "status": "Status"
   },
   "kemonomimi": {
-    "commandDescription": "Fetches a random kemonomimi (lewd if the channel is NSFW) and displays it. (Girls with animal ears)",
+    "commandDescription": "Shows a random kemonomimi (lewd if the channel is NSFW). (Girls with animal ears)",
     "hereIsYour_kemonomimi": "Here's your kemonomimi!",
     "hereIsYour_lewdkemo": "Here's your lewd kemonomimi!"
   },
   "kitsune": {
-    "commandDescription": "Fetches a random kitsune girl (lewd if the channel is NSFW) and displays it.",
+    "commandDescription": "Shows a random kitsune girl (lewd if the channel is NSFW).",
     "hereIsYour_fox_girl": "Here's your kitsune!",
     "hereIsYour_lewdk": "Here's your lewd kitsune!"
   },
   "pat": {
-    "commandDescription": "Pats someone",
+    "commandDescription": "Pats someone.",
     "commandUsage": "<user to pat>",
-    "noMention": "You need to mention someone",
+    "noMention": "You have to mention someone!",
     "success": "{{- _author}} pats {{- pat}}"
   },
   "hug": {
-    "commandDescription": "Hugs someone",
+    "commandDescription": "Hugs someone.",
     "commandUsage": "<user to hug>",
-    "noMention": "You need to mention someone",
-    "success": "{{- hugger}} hugged {{- hugged}}"
+    "noMention": "You have to mention someone!",
+    "success": "{{- hugger}} hugged {{- hugged}}."
   },
   "nekogif": {
-    "commandDescription": "Fetches a random neko girl gif (lewd if the channel is NSFW) and displays it.",
+    "commandDescription": "Shows a random neko girl gif (lewd if the channel is NSFW).",
     "hereIsYour_ngif": "Here's your neko!",
     "hereIsYour_nsfw_neko_gif": "Here's your lewd neko!"
   },
   "slap": {
-    "commandDescription": "Slap someone",
+    "commandDescription": "Slaps someone.",
     "commandUsage": "<user to slap>",
-    "noMention": "You need to mention someone",
+    "noMention": "You have to mention someone!",
     "success": "{{- _author}} slapped {{- slapped}} BAKA :<"
   },
   "steamladder": {
-    "commandDescription": "Displays a ladder from Steam Ladder",
+    "commandDescription": "Displays a ladder from Steam Ladder.",
     "commandUsage": "[ladder] [country or region]",
     "userNotFound": "I couldn't find that user.",
     "ladderNotFound": "I couldn't find that ladder.",
-    "noRegion": "You need to give me a valid region name or country code",
-    "noLadder": "You need to give me a valid ladder.",
-    "noUser": "You need to give me a user",
+    "noRegion": "You have to give me a valid region name or country code!",
+    "noLadder": "You have to give me a valid ladder!",
+    "noUser": "You have to give me a valid user!",
     "youCanAlsoUse": "You can also use alpha-2 country codes.",
     "availableRegions": "Available regions",
     "availableLadders": "Available ladders",
@@ -885,14 +912,14 @@
     "subcommands": {
       "profile": {
         "commandUsage": "<username>",
-        "commandDescription": "Shows someone's Steam Ladder profile"
+        "commandDescription": "Shows someone's Steam Ladder profile."
       }
     }
   },
   "weather": {
-    "commandDescription": "Shows the weather forecast for a city",
+    "commandDescription": "Shows the weather forecast for a city.",
     "commandUsage": "<city name>",
-    "noCity": "You need to give me a valid city.",
+    "noCity": "You have to give me a valid city.",
     "notFound": "Couldn't find this city."
   },
   "currency": {
@@ -901,7 +928,7 @@
     "noCurrency": "You have to give me a valid currency or a pair."
   },
   "joinlock": {
-    "commandDescription": "Enables or disables the join lock",
+    "commandDescription": "Enables or disables the join lock.",
     "commandUsage": "<on|off>",
     "sameValue_true": "The join lock is already enabled.",
     "sameValue_false": "The join lock is already disabled.",
@@ -913,20 +940,20 @@
     "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
   },
   "seek": {
-    "commandDescription": "Adjusts the position of the music playback",
+    "commandDescription": "Adjusts the position of the music playback.",
     "commandUsage": "<+10|-10|1:30>",
-    "missingSeekParameter": "You need to give me a valid position!",
+    "missingSeekParameter": "You have to give me a valid position!",
     "lengthExceeded": "The given position exceeds the song duration!",
     "noNegativeValues": "The given position goes before the song starts!",
     "notLive": "I can't change livestreams' positions!",
-    "positionSet": "Player position set to `{{position}}`"
+    "positionSet": "Player position set to `{{position}}`."
   },
   "lolstatus": {
-    "commandDescription": "Shows the current status of a League of Legends server",
+    "commandDescription": "Shows the current status of a League of Legends server.",
     "commandUsage": "<server>",
-    "missingServer": "You need to give me a valid League of Legends server",
+    "missingServer": "You have to give me a valid League of Legends server!",
     "availableServers": "Available servers",
-    "noStatusMessages": "There are no status messages for this server",
+    "noStatusMessages": "There are no status messages for this server.",
     "online": "Online",
     "offline": "Offline",
     "info": "Information",
@@ -934,16 +961,16 @@
     "error": "Critical"
   },
   "reversetext": {
-    "commandDescription": "Reverses a text",
-    "missingSentence": "You need to give me a sentence to reverse",
+    "commandDescription": "Reverses the text.",
+    "missingSentence": "You have to give me some text to reverse!",
     "commandUsage": "<text to reverse>"
   },
   "support": {
-    "commandDescription": "Shows the link to Switchblade support server",
+    "commandDescription": "Shows the link to Switchblade support server.",
     "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
   "lastfm": {
-    "commandDescription": "Get an user information or search for a track, album or artist on Last.fm",
+    "commandDescription": "Searches for a song, album or an artist on Last.fm, or displays information about a user.",
     "commandUsage": "<type> <query>",
     "topArtists": "Top artists (1 month)",
     "playcount": "Playcount",
@@ -953,36 +980,36 @@
     "artist": "Artist",
     "readMore": "Read more on Last.fm",
     "tags": "Tags",
-    "tracks": "Tracks",
+    "tracks": "Songs",
     "registered": "Registered in",
     "subcommands": {
       "track": {
-        "commandDescription": "Search for a track on Last.fm",
-        "commandUsage": "<track>"
+        "commandDescription": "Searches for a song on Last.fm",
+        "commandUsage": "<song>"
       },
       "album": {
-        "commandDescription": "Search for an album on Last.fm",
+        "commandDescription": "Searches for an album on Last.fm",
         "commandUsage": "<album>"
       },
       "artist": {
-        "commandDescription": "Search for an artist on Last.fm",
+        "commandDescription": "Searches for an artist on Last.fm",
         "commandUsage": "<artist>"
       },
       "user": {
-        "missing": "Please insert a valid user to get information about",
-        "notFound": "This user wasn't found on Last.fm",
-        "commandDescription": "Get information about an user on Last.fm",
-        "commandUsage": "<user>"
+        "commandDescription": "Gets information about a user on Last.fm",
+        "commandUsage": "<user>",
+        "missing": "You have to give me a valid user!",
+        "notFound": "User not found."
       }
     }
   },
   "bassboost": {
-    "commandDescription": "Toggle bassboost mode for the music playback",
+    "commandDescription": "Toggles bassboost mode for the music playback.",
     "bassboost_true": "DROP THE BASS! Bassboost enabled.",
     "bassboost_false": "Bassboost disabled."
   },
   "roleinfo": {
-    "commandDescription": "Shows information about a role",
+    "commandDescription": "Shows information about a role.",
     "commandUsage": "<role name, mention or id>",
     "id": "ID",
     "name": "Name",
@@ -998,17 +1025,17 @@
     "no": "No"
   },
   "presidentialalert": {
-    "commandDescription": "Generates a Presidential Alert notification",
+    "commandDescription": "Generates a Presidential Alert notification.",
     "commandUsage": "<text>",
-    "missingText": "You need to give me some text for the alert"
+    "missingText": "You have to give me some text for the alert!"
   },
   "uigradient": {
-    "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)"
+    "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)."
   },
   "tictactoe": {
-    "commandDescription": "Challenge someone to a game of Tic Tac Toe",
+    "commandDescription": "Challenge someone to a game of Tic Tac Toe.",
     "commandUsage": "<user to challenge>",
-    "missingUser": "You need to give me someone to challenge",
+    "missingUser": "You have to give me someone to challenge!",
     "title": "Tic Tac Toe",
     "pleaseWait": "Please wait, loading board...",
     "currentPlayer": "Current player",
@@ -1016,46 +1043,46 @@
     "itsATie": "It's a tie!",
     "wins": "{{player}} wins!",
     "timeout": "This Tic Tac Toe invite has timed out.",
-    "hasChallenged": "{{player}} has challenged you to a game of Tic Tac Toe",
+    "hasChallenged": "{{player}} has challenged you to a game of Tic Tac Toe.",
     "clickTheReaction": "Click the {{CONFIRMATION_EMOJI}} reaction button below to accept.",
-    "thisTimeoutsIn": "You have {{COLLECTOR_TIMEOUT}} seconds to accept it"
+    "thisTimeoutsIn": "You have {{COLLECTOR_TIMEOUT}} seconds to accept it."
   },
   "ship": {
     "commandDescription": "Ship yourself or someone with somebody else.",
     "commandUsage": "[first user] <second user>",
-    "noUser": "Please insert someone to ship",
+    "noUser": "Please insert someone to ship!",
     "messages": {
       "high": {
         "0": "The image says {{percent}}%, but I say 200%",
-        "1": "I always knew about {{shipName}}",
+        "1": "I always knew about {{shipName}}!",
         "2": "{{shipName}}?!!? That's cute :3",
-        "3": "{{firstName}} you may kiss {{secondName}}",
+        "3": "{{firstName}} you may kiss {{secondName}}!",
         "4": "{{shipName}}?!!? OwO",
-        "5": "\"I accept that\" - a random Switchblade developer",
-        "6": "{{firstName}}, don't be scared and DM {{secondName}}"
+        "5": "\"I accept that\" - a random Switchblade developer.",
+        "6": "{{firstName}}, don't be scared and DM {{secondName}}!"
       },
       "medium": {
-        "0": "{{firstName}} could try but I don't think {{secondName}} would want that",
+        "0": "{{firstName}} could try but I don't think {{secondName}} would want that.",
         "1": "{{percent}}%... well... there are more people in the world you know...",
         "2": "{{firstName}} and {{secondName}} could be friends, but maybe...",
         "3": "{{shipName}}: I approve!",
         "4": "{{secondName}}, do you approve this?",
         "5": "Nothing is impossible!",
-        "6": "Seems like {{firstName}} and {{secondName}} are just strangers to each other"
+        "6": "Seems like {{firstName}} and {{secondName}} are just strangers to each other."
       },
       "low": {
         "0": "{{shipName}}? are you serious?",
-        "1": "{{shipName}}? I don't think {{firstName}} will like it",
-        "2": "Nothing is impossible... but this is",
-        "3": "owo what's this? {{shipName}}?? owo I'm out",
+        "1": "{{shipName}}? I don't think {{firstName}} will like it.",
+        "2": "Nothing is impossible... but this is.",
+        "3": "owo what's this? {{shipName}}?? owo I'm out!",
         "4": "{{secondName}} may not accept it, but I'm always here supporting you :)",
         "5": "{{shipName}}? WHY?",
         "6": "i think neither {{firstName}} and {{secondName}} liked it"
       },
       "self": {
-        "0": "Well, self love is everything",
-        "1": "You may kiss yourself",
-        "2": "\"I wish I had that confidence\" - a random Switchblade developer",
+        "0": "Well, self love is everything.",
+        "1": "You may kiss yourself!",
+        "2": "\"I wish I had that confidence\" - a random Switchblade developer.",
         "3": "...wait what?",
         "4": "Lots of love for {{firstName}} and... {{secondName}}?",
         "5": "Self love!! That's the spirit!!",
@@ -1064,43 +1091,43 @@
     }
   },
   "anal": {
-    "commandDescription": "Fetches a random image from r/anal and displays it."
+    "commandDescription": "Shows a random image from r/anal."
   },
   "ass": {
-    "commandDescription": "Fetches a random image from r/ass and displays it."
+    "commandDescription": "Shows a random image from r/ass."
   },
   "boobs": {
-    "commandDescription": "Fetches a random image from r/boobs and displays it."
+    "commandDescription": "Shows a random image from r/boobs."
   },
   "porn": {
-    "commandDescription": "Fetches a random image from r/porn and displays it."
+    "commandDescription": "Shows a random image from r/porn."
   },
   "porngifs": {
-    "commandDescription": "Fetches a random image from r/porngifs and displays it."
+    "commandDescription": "Shows a random image from r/porngifs."
   },
   "pussy": {
-    "commandDescription": "Fetches a random image from r/pussy and displays it."
+    "commandDescription": "Shows a random image from r/pussy."
   },
   "yaoi": {
-    "commandDescription": "Fetches a random image from r/yaoi and displays it."
+    "commandDescription": "Shows a random image from r/yaoi."
   },
   "yiff": {
-    "commandDescription": "Fetches a random image from r/yiff and displays it. (A.K.A Furry Porn)"
+    "commandDescription": "Shows a random image from r/yiff. (A.K.A Furry Porn)"
   },
   "yuri": {
-    "commandDescription": "Fetches a random image from r/yuri and displays it."
+    "commandDescription": "Shows a random image from r/yuri."
   },
   "welcometranslator": {
     "commandDescription": "Welcomes a new translator.",
     "commandUsage": "<user>",
-    "noMember": "You need to mention someone!",
+    "noMember": "You have to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
     "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
   },
   "morejpeg": {
 	"commandDescription": "Adds JPEG compression to an image.",
 	"commandUsage": "[image link]",
-	"missingImage": "You need to give me a link or an image!"
+	"missingImage": "You have to give me an image or a link!"
   },
   "chorus": {
     "commandDescription": "Searches for a Clone Hero chart on chorus.",

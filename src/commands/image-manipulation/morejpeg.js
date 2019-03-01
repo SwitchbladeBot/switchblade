@@ -10,22 +10,19 @@ module.exports = class MoreJpeg extends Command {
       category: 'images',
       requirements: { canvasOnly: true },
       parameters: [{
-        type: 'string',
-        required: false
+        type: 'image',
+        missingError: 'commands:morejpeg.missingImage'
       }]
     })
   }
 
-  async run ({ t, author, channel, message }, text) {
+  async run ({ t, author, channel, message }, image) {
     channel.startTyping()
-    if (!message.attachments.first() && !text) {
-      channel.stopTyping()
-      throw new CommandError(t('commands:morejpeg.missingImage'), true)
-    } else if (message.attachments.first()) {
-      text = message.attachments.first().url
+    try {
+      const jpeg = await CanvasTemplates.moreJpeg(image)
+      channel.send(new Attachment(jpeg, 'jpegified.jpg')).then(() => channel.stopTyping())
+    } catch (e) {
+      throw new CommandError(t('commands:morejpeg.missingImage'))
     }
-    const jpeg = await CanvasTemplates.morejpeg(text)
-    channel.send(new Attachment(jpeg, 'jpegified.jpg'))
-    channel.stopTyping()
   }
 }
