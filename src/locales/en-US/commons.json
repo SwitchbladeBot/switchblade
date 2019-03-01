@@ -15,12 +15,12 @@
   "youCanDoItAgainIn": "You can do that again in **{{time}}**",
   "to": "to",
   "search": {
-    "noType": "Please insert a valid type",
+    "noType": "Please insert a valid type!",
     "types": "Types",
-    "noParams": "Please insert something to search",
-    "searchFail": "An error has occurred",
-    "noResults": "This search found 0 results",
-    "typeHelper": "Please send the number of the result which you want to proceed with (10 seconds)",
+    "noParams": "Please insert something to search!",
+    "searchFail": "An error has occurred.",
+    "noResults": "This search found 0 results.",
+    "typeHelper": "Please send the number of the result which you want to proceed with! (10 seconds)",
     "results": "Results for {{query}}"
   }
 }
