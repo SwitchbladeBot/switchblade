@@ -1103,13 +1103,13 @@
 	"missingImage": "You need to give me a link or an image!"
   },
   "youtube": {
-    "commandDescription": "Searches for a video, playlist and/or channel on YouTube",
+    "commandDescription": "Searches for a video, playlist or a channel on YouTube.",
     "commandUsage": "<query> [--video | --channel | --playlists | --order]",
     "likes": "Likes",
     "dislikes": "Dislikes",
     "comments": "Comments",
     "channel": "Channel",
-    "publishedAt": "Published At",
+    "publishedAt": "Published at",
     "subscribers": "Subscribers",
     "hiddenSubscribers": "Hidden subscribers",
     "views": "Views",
