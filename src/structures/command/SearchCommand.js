@@ -1,12 +1,12 @@
 const Command = require('./Command.js')
-const CommandError = require('./Command.js')
+const CommandError = require('./CommandError.js')
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 
 module.exports = class SearchCommand extends Command {
   constructor (client, options) {
     super(client, {
       parameters: [{
-        type: 'string', full: true, missingError: 'commons:search.noParams'
+        type: 'string', full: true, missingError: 'commons:search.noParams', maxLength: 200, clean: true
       }],
       ...options
     })
