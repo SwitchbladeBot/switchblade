@@ -1129,6 +1129,55 @@
     "commandUsage": "[image link]",
     "missingImage": "You have to give me an image or a link!"
   },
+  "chorus": {
+    "commandDescription": "Searches for a Clone Hero chart on chorus.",
+    "commandUsage": "<search query>",
+    "downloadHere": "Download here",
+    "downloadChart": "Download **{{charterName}}'s** chart",
+    "downloadPack": "Download **{{charterName}}'s** pack",
+    "downloadFullSetlist": "Download the full **{{setlistName}}** setlist",
+    "notesPerSecond": "{{nps}} notes per second",
+    "source": "Source",
+    "source_plural": "Sources",
+    "features": {
+      "hasOpen": "open notes",
+      "hasForced": "forced notes",
+      "hasTap": "tap notes",
+      "hasSections": "sections",
+      "hasSoloSections": "solo sections",
+      "hasStarPower": "star power",
+      "hasStems": "stems (multi-track)",
+      "hasVideo": "video background",
+      "hasLyrics": "lyrics"
+    },
+    "warnings": {
+      "driveFolder": "[how to download a google drive folder]({{driveFolderExampleLink}})",
+      "needsRenaming": "needs renaming (to notes.chart/song.mp3)",
+      "is120": "120 bpm alert",
+      "hasNoAudio": "no audio",
+      "no5FretLead": "no 5-fret lead guitar chart",
+      "hasBrokenNotes": "possible broken notes (e.g. notes hidden behind others, broken chords)",
+      "notesAfterEnd": "might have notes after end of song"
+    },
+    "noteDensityRatings": [
+      "Are there even any notes?",
+      "First steps",
+      "Warmup",
+      "Apprentice",
+      "Solid",
+      "Moderate",
+      "Challenging",
+      "Nightmare",
+      "Pretty hard",
+      "Pretty damn hard",
+      "It's starting to hurt",
+      "Carpal tunnel",
+      "Basically Soulless 4",
+      "ouch",
+      "God help me",
+      "...I'm out"
+    ]
+  },
   "youtube": {
     "commandDescription": "Searches for a video, playlist and/or channel on YouTube",
     "commandUsage": "<query> [--video | --channel | --playlists | --order]",
