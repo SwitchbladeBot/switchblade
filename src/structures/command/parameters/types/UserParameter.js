@@ -24,15 +24,15 @@ module.exports = class UserParameter extends Parameter {
     }
   }
 
-  static parse (arg, { t, client, author }) {
+  static parse (arg, { t, client, author, guild }) {
     if (!arg) return
 
     const regexResult = MENTION_REGEX.exec(arg)
     const id = regexResult && regexResult[1]
 
-    const user = client.users.get(id)
+    const user = client.users.get(id) || guild.members.find(m => m.user.username.toLowerCase().includes(arg.toLowerCase()) || m.displayName.toLowerCase().includes(arg.toLowerCase()))
     if (!user) throw new CommandError(t(this.errors.invalidUser))
-    if (!this.acceptSelf && id === author.id) throw new CommandError(t(this.errors.acceptSelf))
+    if (!this.acceptSelf && user.id === author.id) throw new CommandError(t(this.errors.acceptSelf))
     if (!this.acceptBot && user.bot) throw new CommandError(t(this.errors.acceptBot))
     if (!this.acceptUser && !user.bot) throw new CommandError(t(this.errors.acceptUser))
     if (!this.acceptDeveloper && PermissionUtils.isDeveloper(client, user)) throw new CommandError(t(this.errors.acceptDeveloper), false)
