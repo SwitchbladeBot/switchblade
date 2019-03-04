@@ -603,7 +603,7 @@
     "notFound": "No Beatmaps were found."
   },
   "favcolor": {
-    "commandDescription": "Sets a background color on your profile.",
+    "commandDescription": "Sets your profile color.",
     "commandUsage": "<#hexcode>",
     "changedSuccessfully": "Profile color changed to {{hexcode}}."
   },
