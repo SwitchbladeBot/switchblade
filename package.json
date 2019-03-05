@@ -87,6 +87,7 @@
     "mocha": "^5.2.0",
     "mocha-standard": "^1.0.0",
     "nodemon": "^1.18.7",
+    "pirate-speak": "^1.0.1",
     "standard": "^12.0.1"
   },
   "nodemonConfig": {
