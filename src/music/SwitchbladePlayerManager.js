@@ -1,7 +1,7 @@
 const { GuildPlayer, Song, SongSearchResult, SongSource, Playlist } = require('./structures')
 const {
   Songs: {
-    HTTPSong, SoundcloudSong, TwitchSong, YoutubeSong, YoutubePlaylist
+    HTTPSong, MixerSong, SoundcloudSong, TwitchSong, YoutubeSong, YoutubePlaylist
   },
   Sources
 } = require('./sources')
@@ -84,8 +84,10 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
             return searchResult.setResult(new TwitchSong(song, requestedBy, this.client.apis.twitch).loadInfo())
           case 'soundcloud':
             return searchResult.setResult(new SoundcloudSong(song, requestedBy, this.client.apis.soundcloud).loadInfo())
+          case 'mixer':
+            return searchResult.setResult(new MixerSong(song, requestedBy, this.client.apis.mixer).loadInfo())
           default:
-            return searchResult.setResult(new Song(songs[0], requestedBy).loadInfo())
+            return searchResult.setResult(new Song(song, requestedBy).loadInfo())
         }
       } else {
         const pInfo = MusicUtils.getPlaylistInfo(identifier)
