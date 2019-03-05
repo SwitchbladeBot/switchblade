@@ -1,6 +1,8 @@
-const { CommandContext, EventListener } = require('../')
+const { CommandContext, EventListener, MiscUtils } = require('../')
 const { SwitchbladePlayerManager } = require('../music')
 const snekfetch = require('snekfetch')
+
+const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 
 module.exports = class MainListener extends EventListener {
   constructor (client) {
@@ -9,7 +11,28 @@ module.exports = class MainListener extends EventListener {
   }
 
   onReady () {
+    const client = this
+
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
+
+    const presences = [
+      {
+        name: `@${this.user.username} help`,
+        type: 'PLAYING'
+      }, {
+        name: `${MiscUtils.formatNumber(this.guilds.size, 'en-US')} Guilds`,
+        type: 'WATCHING'
+      }, {
+        name: `${MiscUtils.formatNumber(this.users.size, 'en-US')} Users`,
+        type: 'WATCHING'
+      }
+    ]
+
+    setInterval(function () {
+      const presence = presences[Math.floor(Math.random() * presences.length)]
+      client.user.setPresence({ game: presence })
+      client.log(`[32mChanged presence to "${presence.name}", type "${presence.type}"`, 'Presence')
+    }, PRESENCE_INTERVAL)
 
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
