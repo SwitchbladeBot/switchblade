@@ -50,15 +50,11 @@ module.exports = class SocialModule extends Module {
   }
 
   async addReputation (_from, _to) {
-    const from = await this._users.findOne(_from, 'lastRep')
-
+    const { lastRep } = await this._users.findOne(_from, 'lastRep')
     const now = Date.now()
-    const { lastRep } = from
     if (now - lastRep < REP_INTERVAL) {
       throw new RepCooldownError(lastRep, moment.duration(REP_INTERVAL - (now - lastRep)).format('h[h] m[m] s[s]'))
     }
-
-    from.lastRep = now
 
     await Promise.all([
       this._users.update(_from, { lastRep: now }),
