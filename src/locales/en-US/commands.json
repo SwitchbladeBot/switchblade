@@ -1177,5 +1177,23 @@
       "God help me",
       "...I'm out"
     ]
+  },
+  "youtube": {
+    "commandDescription": "Searches for a video, playlist or a channel on YouTube.",
+    "commandUsage": "<query> [--video | --channel | --playlists | --order]",
+    "likes": "Likes",
+    "dislikes": "Dislikes",
+    "comments": "Comments",
+    "channel": "Channel",
+    "publishedAt": "Published at",
+    "subscribers": "Subscribers",
+    "hiddenSubscribers": "Hidden subscribers",
+    "views": "Views",
+    "videos": "Videos",
+    "createdAt": "Created at",
+    "videosCount": "{{videos}} videos",
+    "videoInfo": "Video information",
+    "channelInfo": "Channel information",
+    "playlistInfo": "Playlist information"
   }
 }

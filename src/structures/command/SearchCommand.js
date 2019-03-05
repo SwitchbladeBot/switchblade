@@ -20,6 +20,7 @@ module.exports = class SearchCommand extends Command {
     const { t, channel, author } = context
     await channel.startTyping()
     const resultsAll = await this.search(context, query)
+    if (!Array.isArray(resultsAll)) throw new TypeError(`SearchCommand.search needs to return an array. ${typeof resultsAll} given in ${this.constructor.name}.`)
     const results = resultsAll.slice(0, this.maxResults)
 
     if (!results) throw new CommandError(t('commons:search.searchFail'))
@@ -35,8 +36,8 @@ module.exports = class SearchCommand extends Command {
     this.awaitResponseMessage(context, results)
   }
 
-  async search ({ t }) {
-    throw new CommandError(t('errors:generic'))
+  async search () {
+    throw new TypeError(`SearchCommand.search needs return the results in ${this.constructor.name}.`)
   }
 
   searchResultFormatter (item) {
@@ -67,7 +68,7 @@ module.exports = class SearchCommand extends Command {
     return number <= length && !isNaN(number) && number > 0
   }
 
-  handleResult ({ t }) {
-    throw new CommandError(t('errors:generic'))
+  handleResult () {
+    throw new TypeError(`SearchCommand.handleResult should handle the result in ${this.constructor.name}.`)
   }
 }

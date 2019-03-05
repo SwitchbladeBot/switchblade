@@ -2,6 +2,7 @@ module.exports = {
   // Colors
   REDDIT_COLOR: '#FF4500',
   SPOTIFY_COLOR: '#1DB954',
+  YOUTUBE_COLOR: '#ff0000',
   ERROR_COLOR: '#FF3333',
   EIGHTBALL_COLOR: '#000000',
   NPM_COLOR: '#CB3837',

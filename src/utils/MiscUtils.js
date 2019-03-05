@@ -17,4 +17,10 @@ module.exports = class MiscUtils {
   static formatDuration (duration) {
     return moment.duration(duration).format('hh:mm:ss', { stopTrim: 'm' })
   }
+
+  static capitalizeFirstLetter (string, everyWord = false) {
+    const capitalizeWord = w => w.charAt(0).toUpperCase() + w.slice(1)
+    if (everyWord) return string.split(' ').map(capitalizeWord).join(' ')
+    return capitalizeWord(string)
+  }
 }
