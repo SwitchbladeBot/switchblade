@@ -17,7 +17,7 @@ module.exports = class Purge extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     channel.bulkDelete(number || 50).then(() => {
-      embed.setDescription(`Pruned **${number || 50}** messages successfully.`)
+      embed.setDescription(t('commands:purge.purged', { count: number || 50 }))
       channel.send(embed).then(() => channel.stopTyping())
     }).catch(() => {
       throw new CommandError('errors:generic')
