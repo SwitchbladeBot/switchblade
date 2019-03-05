@@ -1,5 +1,6 @@
 const { SearchCommand, SwitchbladeEmbed, Constants } = require('../../')
 const npm = require('search-npm-registry')
+const moment = require('moment')
 
 module.exports = class Npm extends SearchCommand {
   constructor (client) {
@@ -25,12 +26,16 @@ module.exports = class Npm extends SearchCommand {
     return `[${obj.name}](${obj.links.npm})`
   }
 
-  async handleResult ({ t, channel, author }, pkg) {
+  async handleResult ({ t, channel, author, language }, pkg) {
     const embed = new SwitchbladeEmbed(author)
+    moment.locale(language)
     channel.startTyping()
     embed.setColor(Constants.NPM_COLOR)
-      .setAuthor(pkg.name, this.embedLogoURL, pkg.links.npm)
-      .setDescription(`${pkg.description || t('commands:npm.noDescription')}\n${pkg.links.npm}\n\n\`npm install --save ${pkg.name}\``)
+      .setAuthor(`${pkg.name} - v${pkg.version}`, this.embedLogoURL, pkg.links.npm)
+      .setDescription(`${pkg.description || t('commands:npm.noDescription')}\n${pkg.links.npm}`)
+      .addField(t('commands:npm.lastPublish'), moment(pkg.date).format('LLL'), true)
+      .addField(t('commands:npm.install'), `\`npm install --save ${pkg.name}\``, true)
+    if (pkg.keywords.length > 0) embed.addField(t('commands:npm:keywords'), pkg.keywords.map(k => `\`${k}\``).join(', '), true)
     channel.send(embed).then(() => channel.stopTyping())
   }
 }
