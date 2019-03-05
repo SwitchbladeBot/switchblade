@@ -2,12 +2,6 @@ const { Module } = require('../')
 
 const Joi = require('joi')
 
-// Defaults
-const defaultGuild = {
-  prefix: process.env.PREFIX,
-  language: 'en-US'
-}
-
 // Configuration
 module.exports = class ConfigurationModule extends Module {
   constructor (client) {
@@ -23,11 +17,8 @@ module.exports = class ConfigurationModule extends Module {
     return this.client.database.guilds
   }
 
-  async retrieve (_guild, projection = 'prefix language') {
-    return _guild ? {
-      ...defaultGuild,
-      ...(await this._guilds.findOne(_guild, projection) || {})
-    } : {}
+  retrieve (_guild, projection = 'prefix language') {
+    return this._guilds.findOne(_guild, projection)
   }
 
   validateConfiguration (entity) {

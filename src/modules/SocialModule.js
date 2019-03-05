@@ -12,14 +12,6 @@ class RepCooldownError extends Error {
   }
 }
 
-// Defaults
-const defaultUser = {
-  money: 0,
-  rep: 0,
-  personalText: 'Did you know you can edit this in the future dashboard or using the personaltext command? :o',
-  favColor: process.env.EMBED_COLOR
-}
-
 // Social
 module.exports = class SocialModule extends Module {
   constructor (client) {
@@ -58,7 +50,7 @@ module.exports = class SocialModule extends Module {
   }
 
   async addReputation (_from, _to) {
-    const from = await this._users.get(_from, 'lastRep')
+    const from = await this._users.findOne(_from, 'lastRep')
 
     const now = Date.now()
     const { lastRep } = from
@@ -74,11 +66,8 @@ module.exports = class SocialModule extends Module {
     ])
   }
 
-  async retrieveProfile (_user, projection = 'money rep personalText favColor') {
-    return _user ? {
-      ...defaultUser,
-      ...(await this._users.findOne(_user, projection) || {})
-    } : {}
+  retrieveProfile (_user, projection = 'money rep personalText favColor') {
+    return this._users.findOne(_user, projection)
   }
 
   async leaderboard (sortField, projection = sortField, size = 10) {

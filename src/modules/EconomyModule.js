@@ -31,7 +31,7 @@ class BonusModule extends Module {
   }
 
   async claimDaily (_user) {
-    const user = await this._users.get(_user, 'money lastDaily')
+    const user = await this._users.findOne(_user, 'money lastDaily')
     const { lastDaily } = user
 
     if (this.checkClaim(lastDaily)) {
@@ -68,7 +68,7 @@ module.exports = class EconomyModule extends Module {
   }
 
   async transfer (_from, _to, amount) {
-    const from = await this._users.get(_from, 'money')
+    const from = await this._users.findOne(_from, 'money')
     if (from.money < amount) throw new Error('NOT_ENOUGH_MONEY')
     await Promise.all([
       this._users.update(_from, { $inc: { money: -amount } }),
@@ -77,12 +77,12 @@ module.exports = class EconomyModule extends Module {
   }
 
   async balance (_user) {
-    const { money } = await this._users.get(_user, 'money')
+    const { money } = await this._users.findOne(_user, 'money')
     return money
   }
 
   async betflip (_user, amount, side) {
-    const user = await this._users.get(_user, 'money')
+    const user = await this._users.findOne(_user, 'money')
 
     if (user.money < amount) throw new Error('NOT_ENOUGH_MONEY')
 
