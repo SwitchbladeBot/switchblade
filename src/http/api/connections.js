@@ -1,4 +1,4 @@
-const { Route, EndpointUtils } = require('../../')
+const { Route, EndpointUtils } = require('../..')
 const { Router } = require('express')
 const callbackRedirect = `${process.env.HTTP_URL}/profile/connections`
 
@@ -25,6 +25,6 @@ module.exports = class Connections extends Route {
         }
       })
 
-    app.use(this.path, router)
+    app.use('/connections', router)
   }
 }

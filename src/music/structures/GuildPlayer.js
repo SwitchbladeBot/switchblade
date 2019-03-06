@@ -24,6 +24,8 @@ module.exports = class GuildPlayer extends Player {
 
     this._previousVolume = null
     this._bassboost = false
+
+    this._listening = new Map()
   }
 
   event (message) {
@@ -49,6 +51,7 @@ module.exports = class GuildPlayer extends Player {
 
   stop () {
     this.queue = []
+    this._listening.clear()
     this.emit('stop')
     super.stop()
   }
@@ -159,5 +162,36 @@ module.exports = class GuildPlayer extends Player {
       bands
     })
     return this
+  }
+
+  // Voice Update
+
+  async updateVoiceState (oldMember, newMember) {
+    const switchId = newMember.guild.me.user.id
+    if (newMember.user.bot && newMember.user.id !== switchId) return
+    const { voiceChannel: oldChannel } = oldMember
+    const { voiceChannel: newChannel } = newMember
+    const isSwitch = newMember.user.id === switchId
+    console.log(isSwitch)
+    // Voice join
+    if (!oldChannel && newChannel) {
+      if (isSwitch) newChannel.members.filter(m => !m.user.bot).forEach(m => this._listening.set(m.user.id, new Date()))
+      else if (newChannel.members.has(switchId)) this._listening.set(newMember.user.id, new Date())
+      else return
+    }
+    // Voice leave
+    if (oldChannel && !newChannel) {
+      if (isSwitch) oldChannel.members.filter(m => !m.user.bot).forEach(m => this._listening.delete(m.user.id))
+      else if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
+      else return
+    }
+    if (oldChannel && newChannel) {
+      // Voice channel change
+      if (!oldChannel.equals(newChannel)) {
+        if (newChannel.members.has(switchId)) this._listening.set(newMember.user.id, new Date())
+        if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
+      }
+    }
+    console.log(this._listening)
   }
 }

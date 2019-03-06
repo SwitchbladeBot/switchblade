@@ -5,7 +5,7 @@ const snekfetch = require('snekfetch')
 module.exports = class MainListener extends EventListener {
   constructor (client) {
     super(client)
-    this.events = ['ready', 'message']
+    this.events = ['ready', 'message', 'voiceStateUpdate']
   }
 
   onReady () {
@@ -112,5 +112,11 @@ module.exports = class MainListener extends EventListener {
         this.runCommand(command, context, args, language)
       }
     }
+  }
+
+  async onVoiceStateUpdate (oldMember, newMember) {
+    const playerManager = this.playerManager.get(newMember.guild.id)
+    if (!playerManager) return
+    playerManager.updateVoiceState(oldMember, newMember)
   }
 }

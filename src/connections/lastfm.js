@@ -10,8 +10,9 @@ module.exports = class LastFM extends Connection {
     return `https://www.last.fm/api/auth?api_key=${process.env.LASTFM_KEY}&cb=${this.authCallbackURL}`
   }
 
-  async callbackHandler (req) {
+  async callback (req) {
     const session = await this.client.apis.lastfm.getSession(req.query.token)
-    return !!session.key
+    console.log(session)
+    return session.key
   }
 }
