@@ -17,8 +17,8 @@ module.exports = class ConfigurationModule extends Module {
     return this.client.database.guilds
   }
 
-  retrieve (_guild) {
-    return this._guilds.get(_guild)
+  retrieve (_guild, projection = 'prefix language') {
+    return this._guilds.findOne(_guild, projection)
   }
 
   validateConfiguration (entity) {

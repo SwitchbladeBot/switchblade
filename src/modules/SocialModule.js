@@ -50,30 +50,26 @@ module.exports = class SocialModule extends Module {
   }
 
   async addReputation (_from, _to) {
-    const [ from, to ] = await Promise.all([
-      this._users.get(_from, 'lastRep'),
-      this._users.get(_to, 'rep')
-    ])
-
+    const { lastRep } = await this._users.findOne(_from, 'lastRep')
     const now = Date.now()
-    const lastRep = from.lastRep
     if (now - lastRep < REP_INTERVAL) {
       throw new RepCooldownError(lastRep, moment.duration(REP_INTERVAL - (now - lastRep)).format('h[h] m[m] s[s]'))
     }
 
-    from.lastRep = now
-    to.rep++
-
-    await Promise.all([ from.save(), to.save() ])
+    await Promise.all([
+      this._users.update(_from, { lastRep: now }),
+      this._users.update(_to, { $inc: { rep: 1 } })
+    ])
   }
 
-  async retrieveProfile (_user) {
-    return this._users.get(_user, 'money rep personalText favColor')
+  retrieveProfile (_user, projection = 'money rep personalText favColor') {
+    return this._users.findOne(_user, projection)
   }
 
-  async leaderboard (sortField, projection = sortField, size = 16) {
-    const top = (await this._users.model.find({}, projection).sort({ [sortField]: -1 }).limit(16)).map(this._users.parse).filter(u => {
-      u.user = this.client.users.get(u.id)
+  async leaderboard (sortField, projection = sortField, size = 10) {
+    const dbRes = await this._users.model.find({}, projection).sort({ [sortField]: -1 }).limit(size + 6)
+    const top = dbRes.map(this._users.parse).filter(u => {
+      u.user = this.client.users.get(u._id)
       return !!u.user
     })
 
