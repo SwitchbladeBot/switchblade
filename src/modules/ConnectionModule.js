@@ -36,7 +36,10 @@ module.exports = class ConnectionModule extends Module {
     const user = await this._users.get(_user)
     const connection = user.connections.find(c => c.name === _connection)
     console.log(connection.config)
-    const newConfig = Object.assign({}, connection.config, _config)
+    const newConfig = {
+        ...connection.config,
+        ..._config
+    }
     console.log(_config)
     console.log(newConfig)
     try {
