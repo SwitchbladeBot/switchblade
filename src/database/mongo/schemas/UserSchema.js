@@ -8,8 +8,8 @@ const BlacklistedSchema = new Schema({
 
 const UserConnection = new Schema({
   name: String,
-  tokens: { type: Object, default: {} },
-  config: { type: Object, default: {} }
+  tokens: Object,
+  config: Object
 })
 
 module.exports = new Schema({
