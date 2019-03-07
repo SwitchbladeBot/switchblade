@@ -33,7 +33,7 @@ module.exports = class ConnectionModule extends Module {
   }
 
   async editConfig (_user, _connection, _config) {
-    const user = await this._users.get(_user)
+    const user = await this._users.findOne(_user)
     const connection = user.connections.find(c => c.name === _connection)
     console.log(connection.config)
     const newConfig = {
