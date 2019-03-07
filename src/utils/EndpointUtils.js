@@ -82,7 +82,7 @@ module.exports = class EndpointUtils {
         if (!guild) return res.status(400).json({ ok: false })
         if (!req.isAdmin) {
           const member = await guild.fetchMember(req.user.id)
-          if (!member || (permissions && !member.hasPermission(permissions))) return res.status(403).json({ error: 'Missing permissions!' }) 
+          if (!member || (permissions && !member.hasPermission(permissions))) return res.status(403).json({ error: 'Missing permissions!' })
         }
         req.guildId = id
         return next()
