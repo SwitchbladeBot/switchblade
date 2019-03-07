@@ -16,7 +16,7 @@ module.exports = class ConnectionModule extends Module {
 
     console.log('a')
     //const user = await this._users.get(_user, 'connections')
-    const user = await this._users.get(_user)
+    const user = await this._users.findOne(_user)
     console.log(user)
     if (user.connections.find(c => c.name === _connection.name)) return 'alreadyConnected'
     const connection = {
