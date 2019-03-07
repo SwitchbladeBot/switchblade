@@ -11,20 +11,17 @@ module.exports = class Connections extends Route {
   register (app) {
     const router = Router()
 
-    router.get('/:connName/callback',
-      async (req, res) => {
-        try {
-          const connection = this.client.connections[req.params.connName]
-          if (!connection) return res.status(400).json({ error: 'Connection not found' })
+    router.get('/:connName/authURL',
+        async (req, res) => {
+          try {
+            const connection = this.client.connections[req.params.connName]
+            res.redirect(await connection.getAuthLink())
+          } catch (e) {
+            console.error(e)
+            res.status(500).json({ error: 'Internal server error!' })
+          }
+        })
 
-          const callback = await connection.callbackHandler(req)
-          res.redirect(`${callbackRedirect}?connection=${req.params.connName}&success=${callback}`)
-        } catch (e) {
-          console.error(e)
-          res.status(500).json({ error: 'Internal server error!' })
-        }
-      })
-
-    app.use('/connections', router)
+    app.use(this.path, router)
   }
 }

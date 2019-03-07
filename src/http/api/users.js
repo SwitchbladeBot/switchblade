@@ -87,7 +87,23 @@ module.exports = class Users extends Route {
           if (e.isJoi) return res.status(400).json({ error: e.name })
           res.status(500).json({ error: 'Internal server error!' })
         }
-      })
+    })
+
+  router.get('/:userId/connections/:connName/callback',
+      EndpointUtils.authenticate(this),
+      EndpointUtils.handleUser(this),
+      async (req, res) => {
+          try {
+              const connection = this.client.connections[req.params.connName]
+              if (!connection) return res.status(400).json({ error: 'Connection not found' })
+
+              const callback = await connection.callbackHandler(req)
+              res.status(200).json({ success: true })
+          } catch (e) {
+              console.error(e)
+              res.status(500).json({ success: false, error: 'Internal server error!' })
+          }
+  })
 
     app.use(this.path, router)
   }
