@@ -17,8 +17,8 @@ module.exports = class ConfigurationModule extends Module {
     return this.client.database.guilds
   }
 
-  retrieve (_guild) {
-    return this._guilds.get(_guild)
+  retrieve (_guild, projection = 'prefix language') {
+    return this._guilds.findOne(_guild, projection)
   }
 
   validateConfiguration (entity) {
@@ -33,10 +33,10 @@ module.exports = class ConfigurationModule extends Module {
   }
 
   async setPrefix (_guild, prefix) {
-    await this._guilds.update(_guild, { prefix })
+    await this.update(_guild, { prefix })
   }
 
   async setLanguage (_guild, language) {
-    await this._guilds.update(_guild, { language })
+    await this.update(_guild, { language })
   }
 }

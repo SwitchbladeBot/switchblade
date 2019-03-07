@@ -78,28 +78,30 @@ module.exports = class MainListener extends EventListener {
   async onMessage (message) {
     if (message.author.bot) return
 
-    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id, 'prefix language')
-    const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
+    const guildId = message.guild && message.guild.id
+    const { prefix, language } = await this.modules.configuration.retrieve(guildId, 'prefix language')
 
     const botMention = this.user.toString()
-    const usedPrefix = message.content.startsWith(botMention) ? `${botMention} ` : message.content.startsWith(prefix) ? prefix : null
+
+    const sw = (...s) => s.some(st => message.content.startsWith(st))
+    const usedPrefix = sw(botMention, `<@!${this.user.id}>`) ? `${botMention} ` : sw(prefix) ? prefix : null
 
     if (usedPrefix) {
       const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
       const args = fullCmd.slice(1)
-      const cmd = fullCmd[0].toLowerCase().trim()
+      if (!fullCmd.length) return
 
-      const command = this.commands.find(c => c.name.toLowerCase() === cmd || c.aliases.includes(cmd))
+      const cmd = fullCmd[0].toLowerCase().trim()
+      const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
       if (command) {
         const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
         if (userDocument && userDocument.blacklisted) return
 
-        const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
-          prefix: usedPrefix,
-          defaultPrefix: prefix,
+          defaultPrefix: usedPrefix,
           aliase: cmd,
           client: this,
+          prefix,
           message,
           command,
           language

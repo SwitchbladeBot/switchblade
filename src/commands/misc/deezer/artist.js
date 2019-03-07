@@ -1,23 +1,21 @@
-const SearchCommand = require('../../../structures/command/SearchCommand.js')
-const { SwitchbladeEmbed, Constants, MiscUtils, CommandStructures } = require('../../../')
-const { BooleanFlagParameter, CommandParameters, StringParameter } = CommandStructures
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class DeezerArtist extends SearchCommand {
-  constructor (client, parentCommand) {
-    super(client, parentCommand || 'deezer')
-
-    this.name = 'artist'
-    this.aliases = ['ar']
-    this.embedColor = Constants.DEEZER_COLOR
-    this.embedLogoURL = 'https://i.imgur.com/lKlFtbs.png'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: true, missingError: 'commons:search.noParams' }),
-      [
-        new BooleanFlagParameter({ name: 'albums', aliases: [ 'a' ] }),
-        new BooleanFlagParameter({ name: 'related', aliases: [ 'r' ] })
-      ]
-    )
+  constructor (client) {
+    super(client, {
+      name: 'artist',
+      aliases: ['ar'],
+      parentCommand: 'deezer',
+      embedColor: Constants.DEEZER_COLOR,
+      embedLogoURL: 'https://i.imgur.com/lKlFtbs.png',
+      parameters: [{
+        type: 'string', full: true, missingError: 'commons:search.noParams'
+      }, [{
+        type: 'booleanFlag', name: 'albums', aliases: [ 'a' ]
+      }, {
+        type: 'booleanFlag', name: 'related', aliases: [ 'r' ]
+      }]]
+    })
   }
 
   async search (context, query) {
@@ -30,6 +28,7 @@ module.exports = class DeezerArtist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, artist) {
+    channel.startTyping()
     const { id, name, link, nb_album: albums, picture_big: cover, nb_fan: fans } = artist
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
@@ -47,7 +46,7 @@ module.exports = class DeezerArtist extends SearchCommand {
         .setTitle(name)
         .setURL(link)
         .setAuthor(t('commands:deezer.subcommands.artist.artistAlbums'), this.embedLogoURL, link)
-      )
+      ).then(() => channel.stopTyping())
     }
 
     if (flags['related']) {
@@ -61,12 +60,12 @@ module.exports = class DeezerArtist extends SearchCommand {
         .setTitle(name)
         .setURL(link)
         .setAuthor(t('commands:deezer.subcommands.artist.artistRelated'), this.embedLogoURL, link)
-      )
+      ).then(() => channel.stopTyping())
     }
 
     embed.setDescription(`[${name}](${link})`)
       .addField(t('music:albumPlural'), MiscUtils.formatNumber(albums, language), true)
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
-    channel.send(embed)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

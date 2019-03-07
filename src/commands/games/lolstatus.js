@@ -1,17 +1,15 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter, CommandError } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 const snekfetch = require('snekfetch')
 
 const servers = ['na', 'euw', 'eune', 'lan', 'las', 'br', 'tr', 'ru', 'oce', 'jp', 'kr']
 
 module.exports = class LoLStatus extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'lolstatus'
-    this.category = 'games'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({
+    super(client, {
+      name: 'lolstatus',
+      category: 'games',
+      parameters: [{
+        type: 'string',
         whitelist: servers,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commands:lolstatus.missingServer'))
@@ -22,8 +20,8 @@ module.exports = class LoLStatus extends Command {
               `**${servers.map(l => `\`${l}\``).join(', ')}**`
             ].join('\n'))
         }
-      })
-    )
+      }]
+    })
   }
 
   async run ({ t, author, channel, language }, server) {

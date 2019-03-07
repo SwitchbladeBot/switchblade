@@ -1,6 +1,6 @@
 {
   "joinLock": {
     "defaultPrivateMessage": "You've been kicked from **{{guild.name}}** because the join lock is enabled. Please try joining again later.",
-    "kickReason": "Join lock is enabled"
+    "kickReason": "Join lock is enabled."
   }
 }

@@ -1,5 +1,4 @@
-const { Command, SwitchbladeEmbed, CommandStructures } = require('../../')
-const { CommandRequirements } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
 const getRandom = (r) => r[Math.floor(Math.random() * r.length)]
 const getRandomPhoto = (r) => r[Math.floor(Math.random() * (r.length - 1)) + 1]
@@ -30,10 +29,10 @@ const pusheenMessages = [
 
 module.exports = class Pusheen extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'pusheen'
-    this.category = 'general'
-    this.requirements = new CommandRequirements(this, { apis: ['tumblr'] })
+    super(client, {
+      name: 'pusheen',
+      requirements: { apis: ['tumblr'] }
+    })
   }
 
   async run ({ t, author, channel }) {
