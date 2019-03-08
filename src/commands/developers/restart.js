@@ -13,7 +13,7 @@ module.exports = class Restart extends Command {
   }
 
   async run({ message }) {
-    const embed = new SwitchbladeEmbed();
+    const embed = new SwitchbladeEmbed(;
 
     message.channel.send(embed
       .setTitle('Service Restart')
