@@ -281,6 +281,9 @@
     "commandDescription": "Sends random yiff from e621",
     "hereIsYour_yiff": "Here's your yiff!"
   },
+  "restart": {
+    "commandDescription": "Restarts bot",
+  },
   "pay": {
     "commandDescription": "Pays $t(commons:currency_plural) to a user",
     "commandUsage": "<@member> <value>",
