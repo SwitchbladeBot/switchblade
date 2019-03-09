@@ -16,9 +16,8 @@ module.exports = class ModerationModule extends Module {
   }
 
   async setJoinLock (_guild, state) {
-    const guild = await this._guilds.get(_guild, 'joinLock')
+    const guild = await this._guilds.findOne(_guild, 'joinLock')
     if (guild.joinLock === state) throw new Error('SAME_STATE')
-    guild.joinLock = state
-    await guild.save()
+    await this._guilds.update(_guild, { joinLock: state })
   }
 }

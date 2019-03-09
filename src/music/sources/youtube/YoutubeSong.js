@@ -1,10 +1,11 @@
 const { Song } = require('../../structures')
+const Constants = require('../../../utils/Constants.js')
 
 module.exports = class YoutubeSong extends Song {
   constructor (data = {}, requestedBy, Youtube) {
     super(data, requestedBy)
     this._Youtube = Youtube
-    this.color = '#FF0000'
+    this.color = Constants.YOUTUBE_COLOR
   }
 
   async loadInfo () {

@@ -1,16 +1,16 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const types = ['track', 'song', 't', 's', 'album', 'al', 'artist', 'ar', 'playlist', 'p', 'user', 'u', 'podcast', 'pod']
+const types = ['breach', 'paste', 'b', 'p']
 
-module.exports = class Deezer extends Command {
+module.exports = class HIBP extends Command {
   constructor (client) {
     super(client, {
-      name: 'deezer',
-      aliases: ['dz'],
-      requirements: { apis: ['deezer'] },
+      name: 'hibp',
+      aliases: ['haveibeenpwned'],
+      requirements: { apis: ['hibp'] },
       parameters: [{
         type: 'string',
-        full: true,
+        full: false,
         whitelist: types,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
@@ -18,10 +18,12 @@ module.exports = class Deezer extends Command {
               this.usage(t, prefix),
               '',
               `__**${t('commons:search.types')}:**__`,
-              `\`${['track', 'album', 'artist', 'playlist', 'user', 'podcast'].join('`, `')}\``
+              `\`${['breach', 'paste'].join('`, `')}\``
             ].join('\n'))
         }
       }]
     })
+
+    this.HIBP_LOGO = 'https://haveibeenpwned.com/Content/Images/SocialLogo.png'
   }
 }

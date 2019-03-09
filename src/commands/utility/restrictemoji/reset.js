@@ -5,7 +5,8 @@ module.exports = class RestrictEmojiReset extends Command {
       name: 'reset',
       parentCommand: 'restrictemoji',
       parameters: [{
-        type: 'emoji'
+        type: 'emoji',
+        sameGuildOnly: true
       }]
     })
   }
@@ -13,11 +14,10 @@ module.exports = class RestrictEmojiReset extends Command {
   async run ({ t, author, channel, guild }, emoji) {
     channel.startTyping()
     try {
-      const guildEmoji = guild.emojis.get(emoji.id)
-      await guildEmoji.edit({ roles: [] })
+      await emoji.edit({ roles: [] })
       channel.send(
         new SwitchbladeEmbed(author)
-          .setTitle(t('commands:restrictemoji.subcommands.reset.resetted', { emoji: guildEmoji.name }))
+          .setTitle(t('commands:restrictemoji.subcommands.reset.resetted', { emoji: emoji.name }))
       ).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()

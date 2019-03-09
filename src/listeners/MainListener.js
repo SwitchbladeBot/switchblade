@@ -78,8 +78,8 @@ module.exports = class MainListener extends EventListener {
   async onMessage (message) {
     if (message.author.bot) return
 
-    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id, 'prefix language')
-    const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
+    const guildId = message.guild && message.guild.id
+    const { prefix, language } = await this.modules.configuration.retrieve(guildId, 'prefix language')
 
     const botMention = this.user.toString()
 
@@ -97,7 +97,6 @@ module.exports = class MainListener extends EventListener {
         const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
         if (userDocument && userDocument.blacklisted) return
 
-        const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
           defaultPrefix: usedPrefix,
           aliase: cmd,
