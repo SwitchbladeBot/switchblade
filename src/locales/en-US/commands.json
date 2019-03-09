@@ -72,19 +72,10 @@
       "user": {
         "commandDescription": "Searches for a user on GitHub.",
         "commandUsage": "<username>",
-        <<<<<<<
-        HEAD
-        "noUser": "You need to give me a valid user",
-        "userNotFound": "User not found",
-        "moreRepos": "...and {{repos}} more repositories",
-        "noBio": "This user doesn't have a biography",
-        =======
         "noUser": "You have to give me a valid user!",
         "userNotFound": "User not found.",
         "moreRepos": "...and {{repos}} more repositories.",
         "noBio": "This user doesn't have a biography.",
-        >>>>>>>
-        dev
         "followers": "Followers",
         "following": "Following",
         "createdAt": "Account created at",
@@ -484,13 +475,7 @@
         "moreEpisodes": "...and {{episodes}} more episodes."
       },
       "user": {
-        <<<<<<<
-        HEAD
-        "commandDescription": "Searches for a user on Deezer",
-        =======
         "commandDescription": "Gets information about a user on Deezer.",
-        >>>>>>>
-        dev
         "commandUsage": "<user>",
         "userInfo": "User information"
       }
@@ -798,17 +783,9 @@
     "commandUsage": "<bot name>",
     "noType": "Please insert a valid type!",
     "types": "Types",
-    <<<<<<<
-    HEAD
-    "selectResult": "Please send the number of the result (10 seconds)",
-    "noBotName": "You need to give me a valid bot name",
-    "botNotFound": "Bot not found",
-    =======
     "selectResult": "Please send the number of the result! (10 seconds)",
     "noBotName": "You have to give me a valid bot name.",
     "botNotFound": "Bot not found.",
-    >>>>>>>
-    dev
     "results": "Bot results for {{query}}",
     "noDescription": "This bot doesn't have a description.",
     "prefix": "Prefix",
