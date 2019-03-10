@@ -229,7 +229,10 @@
     "commandUsage": "<package name>",
     "noDescription": "No description provided.",
     "notFound": "Package not found.",
-    "noNameProvided": "You have to give me a package name!"
+    "noNameProvided": "You have to give me a package name!",
+    "lastPublish": "Last publish",
+    "install": "Install",
+    "keywords": "Keywords"
   },
   "poll": {
     "commandDescription": "Creates a poll.",
