@@ -10,8 +10,8 @@ module.exports = class Controller {
   }
 
   load () {
-    this.subcontrollers.forEach(submodule => {
-      Object.defineProperty(this, submodule.name, { get: () => submodule })
+    this.subcontrollers.forEach(subcontroller => {
+      Object.defineProperty(this, subcontroller.name, { get: () => subcontroller })
     })
 
     return this
