@@ -1,12 +1,11 @@
-const { Module } = require('../')
+const { Controller } = require('../')
 
 const Joi = require('joi')
 
 // Configuration
-module.exports = class ConfigurationModule extends Module {
+module.exports = class ConfigurationController extends Controller {
   constructor (client) {
-    super(client)
-    this.name = 'configuration'
+    super('configuration', client)
   }
 
   canLoad () {

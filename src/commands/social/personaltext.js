@@ -19,7 +19,7 @@ module.exports = class Personaltext extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    const socialModule = this.client.modules.social
+    const socialModule = this.client.controllers.social
     try {
       await socialModule.setPersonalText(author.id, text)
       embed.setTitle(t('commands:personaltext.changedSuccessfully'))

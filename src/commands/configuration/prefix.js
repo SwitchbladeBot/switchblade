@@ -19,7 +19,7 @@ module.exports = class ConfigPrefix extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     try {
-      await this.client.modules.configuration.setPrefix(guild.id, prefix)
+      await this.client.controllers.configuration.setPrefix(guild.id, prefix)
       embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', { prefix }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

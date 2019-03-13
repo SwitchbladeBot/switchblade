@@ -1,4 +1,4 @@
-const { Module } = require('../')
+const { Controller } = require('../')
 
 const moment = require('moment')
 
@@ -12,10 +12,9 @@ class BonusCooldownError extends Error {
 }
 
 const BONUS_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
-class BonusModule extends Module {
+class BonusController extends Controller {
   constructor (...args) {
-    super(...args)
-    this.name = 'bonus'
+    super('bonus', ...args)
   }
 
   get _users () {
@@ -52,11 +51,10 @@ class BonusModule extends Module {
 }
 
 // Economy
-module.exports = class EconomyModule extends Module {
+module.exports = class EconomyController extends Controller {
   constructor (client) {
-    super(client)
-    this.name = 'economy'
-    this.submodules = [ new BonusModule(client, this) ]
+    super('economy', client)
+    this.subcontrollers = [ new BonusController(client, this) ]
   }
 
   canLoad () {
