@@ -1135,7 +1135,10 @@
   "purge": {
     "commandDescription": "Purges messages from a channel, default: 50.",
     "commandUsage": "[number of messages]",
-    "purged": "Purged **{{count}}** messages successfully."
+    "purgedSingular": "Purged **{{count}}** message successfully.",
+    "purgedPlural": "Purged **{{count}}** messages successfully.",
+    "purgedMemberSingular": "Purged **{{count}}** message from **{{user}}** successfully.",
+    "purgedMemberPlural": "Purged **{{count}}** messages from **{{user}}** successfully."
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",
