@@ -194,8 +194,8 @@
     "success": "{{- handshaker}} shook hands with {{- handshaked}}"
   },
   "triggered": {
-    "commandDescription": "Triggers someone.",
-    "commandUsage": "[user to trigger]"
+    "commandDescription": "Triggers something or someone.",
+    "commandUsage": "[image link]"
   },
   "8ball": {
     "commandDescription": "Asks the magic 8-Ball about something.",
@@ -306,6 +306,9 @@
     "specificInformation": "Type {{helpString}} for command specific information.",
     "aliases": "Aliases",
     "subcommands": "Subcommands",
+    "permissions": "Permissions",
+    "botPermissions": "Bot Permissions",
+    "flags": "Flags",
     "noDescriptionProvided": "No description provided.",
     "noUsageProvided": "No usage provided.",
     "commandNotFound": "I couldn't find any command with that name."
@@ -1134,7 +1137,7 @@
   },
   "purge": {
     "commandDescription": "Purges messages from a channel, default: 50.",
-    "commandUsage": "[number of messages]",
+    "commandUsage": "[number of messages] [user]",
     "purgedSingular": "Purged **{{count}}** message successfully.",
     "purgedPlural": "Purged **{{count}}** messages successfully.",
     "purgedMemberSingular": "Purged **{{count}}** message from **{{user}}** successfully.",
