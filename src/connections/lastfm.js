@@ -8,7 +8,14 @@ module.exports = class LastFM extends Connection {
 
   get defaultConfig () {
     return {
-      enabled: false
+      scrobbling: false,
+      percent: 70
+    }
+  }
+
+  get configPattern () {
+    return {
+      percent: p => (p >= 45 && p <= 95)
     }
   }
 
