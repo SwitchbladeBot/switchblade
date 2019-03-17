@@ -8,7 +8,7 @@ module.exports = class PirateSpeak extends Command {
       aliases: ['ps', 'yarrspeak'],
       category: 'memes',
       parameters: [{
-        type: 'string', full: true, missingError: 'commands:piratespeak.missingSentence'
+        type: 'string', full: true, clean: true, missingError: 'commands:piratespeak.missingSentence'
       }]
     })
   }

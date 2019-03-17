@@ -13,11 +13,11 @@ module.exports = class Purge extends Command {
     })
   }
 
-  async run ({ channel, guild, author, t }, number) {
+  async run ({ channel, guild, author, t }, number = 50) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
-    channel.bulkDelete(number || 50).then(() => {
-      embed.setDescription(t('commands:purge.purged', { count: number || 50 }))
+    channel.bulkDelete(number).then(() => {
+      embed.setDescription(t('commands:purge.purged', { count: number }))
       channel.send(embed).then(() => channel.stopTyping())
     }).catch(() => {
       throw new CommandError('errors:generic')
