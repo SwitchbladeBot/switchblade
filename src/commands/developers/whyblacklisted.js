@@ -1,4 +1,4 @@
-const { Command, BlacklistUtils, SwitchbladeEmbed, Constants } = require('../../index')
+const { Command, SwitchbladeEmbed, Constants } = require('../../index')
 
 module.exports = class WhyBlacklisted extends Command {
   constructor (client) {
@@ -15,10 +15,9 @@ module.exports = class WhyBlacklisted extends Command {
 
   async run ({ channel, author, t }, user) {
     const embed = new SwitchbladeEmbed(author)
-    const doc = await this.client.database.users.get(user.id)
-    const info = await BlacklistUtils.getInfo(doc)
+    const info = await this.modules.developers.blacklisted(user.id)
     if (info) {
-      const text = { user: user, blacklister: `<@${info.blacklisterId}>` }
+      const text = { user, blacklister: `<@${info.blacklister}>` }
       embed.setDescription(
         [
           `**${t('commands:whyblacklisted.reasonTitle', text)}**`,

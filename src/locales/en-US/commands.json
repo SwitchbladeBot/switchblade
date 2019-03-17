@@ -234,7 +234,10 @@
     "commandUsage": "<package name>",
     "noDescription": "No description provided.",
     "notFound": "Package not found.",
-    "noNameProvided": "You have to give me a package name!"
+    "noNameProvided": "You have to give me a package name!",
+    "lastPublish": "Last publish",
+    "install": "Install",
+    "keywords": "Keywords"
   },
   "poll": {
     "commandDescription": "Creates a poll.",
@@ -608,7 +611,7 @@
     "notFound": "No Beatmaps were found."
   },
   "favcolor": {
-    "commandDescription": "Sets a background color on your profile.",
+    "commandDescription": "Sets your profile color.",
     "commandUsage": "<#hexcode>",
     "changedSuccessfully": "Profile color changed to {{hexcode}}."
   },
@@ -1187,5 +1190,23 @@
       "God help me",
       "...I'm out"
     ]
+  },
+  "youtube": {
+    "commandDescription": "Searches for a video, playlist or a channel on YouTube.",
+    "commandUsage": "<query> [--video | --channel | --playlists | --order]",
+    "likes": "Likes",
+    "dislikes": "Dislikes",
+    "comments": "Comments",
+    "channel": "Channel",
+    "publishedAt": "Published at",
+    "subscribers": "Subscribers",
+    "hiddenSubscribers": "Hidden subscribers",
+    "views": "Views",
+    "videos": "Videos",
+    "createdAt": "Created at",
+    "videosCount": "{{videos}} videos",
+    "videoInfo": "Video information",
+    "channelInfo": "Channel information",
+    "playlistInfo": "Playlist information"
   }
 }

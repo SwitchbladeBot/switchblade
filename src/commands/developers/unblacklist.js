@@ -1,4 +1,4 @@
-const { Command, BlacklistUtils, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Unblacklist extends Command {
   constructor (client) {
@@ -15,15 +15,8 @@ module.exports = class Unblacklist extends Command {
 
   async run ({ channel, author, t }, user) {
     const embed = new SwitchbladeEmbed(author)
-    const doc = await this.client.database.users.get(user.id)
-    const ok = await BlacklistUtils.removeUser(doc)
-    if (ok) {
-      embed.setDescription(`**${t('commands:unblacklist.success', { user: user })}**`)
-    } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:unblacklist.notBlacklisted'))
-    }
+    await this.modules.developers.unblacklist(user.id)
+    embed.setDescription(`**${t('commands:unblacklist.success', { user })}**`)
     channel.send(embed)
   }
 }

@@ -1,8 +1,8 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { SearchCommand, SwitchbladeEmbed, Constants } = require('../../')
+const npm = require('search-npm-registry')
+const moment = require('moment')
 
-const npm = require('api-npm')
-
-module.exports = class Npm extends Command {
+module.exports = class Npm extends SearchCommand {
   constructor (client) {
     super(client, {
       name: 'npm',
@@ -12,23 +12,30 @@ module.exports = class Npm extends Command {
         full: true,
         fullJoin: '-',
         missingError: 'commands:npm.noNameProvided'
-      }]
+      }],
+      embedColor: Constants.NPM_COLOR,
+      embedLogoURL: 'https://i.imgur.com/24yrZxG.png'
     })
   }
 
-  run ({ t, author, channel }, pkg) {
+  async search (context, query) {
+    return npm().text(query).size(10).search()
+  }
+
+  searchResultFormatter (obj) {
+    return `[${obj.name}](${obj.links.npm})`
+  }
+
+  async handleResult ({ t, channel, author, language }, pkg) {
     const embed = new SwitchbladeEmbed(author)
+    moment.locale(language)
     channel.startTyping()
-    npm.getdetails(pkg, data => {
-      if (data.name) {
-        const description = data.description || t('commands:npm.noDescription')
-        embed.setColor(Constants.NPM_COLOR)
-          .setAuthor(data.name, 'https://i.imgur.com/24yrZxG.png', `https://www.npmjs.com/package/${data.name}`)
-          .setDescription(`${description}\nhttps://www.npmjs.com/package/${data.name}\n\n\`npm i ${data.name} --save\``)
-      } else {
-        embed.setColor(Constants.ERROR_COLOR).setTitle(t('commands:npm.notFound'))
-      }
-      channel.send(embed).then(() => channel.stopTyping())
-    })
+    embed.setColor(Constants.NPM_COLOR)
+      .setAuthor(`${pkg.name} - v${pkg.version}`, this.embedLogoURL, pkg.links.npm)
+      .setDescription(`${pkg.description || t('commands:npm.noDescription')}\n${pkg.links.npm}`)
+      .addField(t('commands:npm.lastPublish'), moment(pkg.date).format('LLL'), true)
+      .addField(t('commands:npm.install'), `\`npm install --save ${pkg.name}\``, true)
+    if (pkg.keywords.length > 0) embed.addField(t('commands:npm:keywords'), pkg.keywords.map(k => `\`${k}\``).join(', '), true)
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }

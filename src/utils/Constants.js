@@ -2,6 +2,7 @@ module.exports = {
   // Colors
   REDDIT_COLOR: '#FF4500',
   SPOTIFY_COLOR: '#1DB954',
+  YOUTUBE_COLOR: '#ff0000',
   ERROR_COLOR: '#FF3333',
   EIGHTBALL_COLOR: '#000000',
   NPM_COLOR: '#CB3837',
@@ -17,6 +18,8 @@ module.exports = {
   TWITCH_COLOR: '#4B367C',
   GITHUB_COLOR: '#FAFAFA',
   DBL_COLOR: '#7289DA',
+  MIXER_COLOR: '#1FBAED',
+  SOUNDCLOUD_COLOR: '#FF5500',
   HIBP_COLOR: '#3A9AC4',
   NOT_PWNED_COLOR: '#348F38',
   PWNED_COLOR: '#BA4343',
@@ -90,11 +93,12 @@ module.exports = {
   WIND_SVG: 'src/assets/svg/wind.svg',
 
   //  Brands
+  SOUNDCLOUD_BRAND_SVG: 'src/assets/svg/brands/soundcloud.svg',
   SPOTIFY_BRAND_SVG: 'src/assets/svg/brands/spotify.svg',
   YOUTUBE_BRAND_SVG: 'src/assets/svg/brands/youtube.svg',
-  SOUNDCLOUD_BRAND_SVG: 'src/assets/svg/brands/soundcloud.svg',
   DEEZER_BRAND_SVG: 'src/assets/svg/brands/deezer.svg',
   TWITCH_BRAND_SVG: 'src/assets/svg/brands/twitch.svg',
+  MIXER_BRAND_SVG: 'src/assets/svg/brands/mixer.svg',
   HTTP_BRAND_SVG: 'src/assets/svg/brands/http.svg',
 
   // Misc

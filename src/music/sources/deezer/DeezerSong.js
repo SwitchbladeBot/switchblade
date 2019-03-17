@@ -1,4 +1,5 @@
 const { Song } = require('../../structures')
+const Constants = require('../../../utils/Constants.js')
 
 module.exports = class DeezerSong extends Song {
   constructor (data = {}, requestedBy, track, album = track.album) {
@@ -12,7 +13,7 @@ module.exports = class DeezerSong extends Song {
     if (album) this.artwork = album.cover_xl
 
     this.source = 'deezer'
-    this.color = '#00C7F2'
+    this.color = Constants.DEEZER_COLOR
 
     this.deezerTrack = track
   }
