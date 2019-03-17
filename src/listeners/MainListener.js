@@ -11,27 +11,22 @@ module.exports = class MainListener extends EventListener {
   }
 
   onReady () {
-    const client = this
-
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
 
     const presences = [
       {
-        name: `@${this.user.username} help`,
-        type: 'PLAYING'
-      }, {
-        name: `${MiscUtils.formatNumber(this.guilds.size, 'en-US')} Guilds`,
+        name: `${MiscUtils.formatNumber(this.guilds.size, 'en-US')} Guilds | @${this.user.username} help`,
         type: 'WATCHING'
       }, {
-        name: `${MiscUtils.formatNumber(this.users.size, 'en-US')} Users`,
+        name: `${MiscUtils.formatNumber(this.users.size, 'en-US')} Users | @${this.user.username} help`,
         type: 'WATCHING'
       }
     ]
 
-    setInterval(function () {
+    setInterval(() => {
       const presence = presences[Math.floor(Math.random() * presences.length)]
-      client.user.setPresence({ game: presence })
-      client.log(`[32mChanged presence to "${presence.name}", type "${presence.type}"`, 'Presence')
+      this.user.setPresence({ game: presence })
+      this.log(`[32mChanged presence to "${presence.name}", type "${presence.type}"`, 'Presence')
     }, PRESENCE_INTERVAL)
 
     // Lavalink connection
