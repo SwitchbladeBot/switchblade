@@ -10,7 +10,8 @@ module.exports = class Profile extends Command {
       parameters: [{
         type: 'user',
         full: true,
-        required: false
+        required: false,
+        acceptSelf: true
       }]
     })
   }
