@@ -307,7 +307,7 @@
     "aliases": "Aliases",
     "subcommands": "Subcommands",
     "permissions": "Permissions",
-    "botPermissions": "Bot Permissions",
+    "botPermissions": "Bot permissions",
     "flags": "Flags",
     "noDescriptionProvided": "No description provided.",
     "noUsageProvided": "No usage provided.",
@@ -1138,10 +1138,10 @@
   "purge": {
     "commandDescription": "Purges messages from a channel, default: 50.",
     "commandUsage": "[number of messages] [user]",
-    "purgedSingular": "Purged **{{count}}** message successfully.",
-    "purgedPlural": "Purged **{{count}}** messages successfully.",
-    "purgedMemberSingular": "Purged **{{count}}** message from **{{user}}** successfully.",
-    "purgedMemberPlural": "Purged **{{count}}** messages from **{{user}}** successfully."
+    "purgedSingular": "Purged **{{count}}** message.",
+    "purgedPlural": "Purged **{{count}}** messages.",
+    "purgedMemberSingular": "Purged **{{count}}** message sent by **{{user}}**.",
+    "purgedMemberPlural": "Purged **{{count}}** messages sent by **{{user}}**."
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",
