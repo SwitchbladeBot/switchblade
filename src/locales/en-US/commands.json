@@ -162,6 +162,11 @@
     "tooLongTitle": "Your text is longer than 200 characters!",
     "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
+  "piratespeak": {
+    "commandDescription": "Pirateifies your text.",
+    "commandUsage": "<text>",
+    "missingSentence": "You have to give me some text to pirateify!"
+  },
   "daily": {
     "commandDescription": "Claims your daily reward.",
     "alreadyClaimedTitle": "Already claimed",
@@ -189,8 +194,8 @@
     "success": "{{- handshaker}} shook hands with {{- handshaked}}"
   },
   "triggered": {
-    "commandDescription": "Triggers someone.",
-    "commandUsage": "[user to trigger]"
+    "commandDescription": "Triggers something or someone.",
+    "commandUsage": "[image link]"
   },
   "8ball": {
     "commandDescription": "Asks the magic 8-Ball about something.",
@@ -301,6 +306,9 @@
     "specificInformation": "Type {{helpString}} for command specific information.",
     "aliases": "Aliases",
     "subcommands": "Subcommands",
+    "permissions": "Permissions",
+    "botPermissions": "Bot permissions",
+    "flags": "Flags",
     "noDescriptionProvided": "No description provided.",
     "noUsageProvided": "No usage provided.",
     "commandNotFound": "I couldn't find any command with that name."
@@ -1126,6 +1134,14 @@
     "noMember": "You have to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
     "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
+  },
+  "purge": {
+    "commandDescription": "Purges messages from a channel. (Default: 50)",
+    "commandUsage": "[number of messages] [user]",
+    "purgedSingular": "Purged **{{count}}** message.",
+    "purgedPlural": "Purged **{{count}}** messages.",
+    "purgedMemberSingular": "Purged **{{count}}** message sent by **{{user}}**.",
+    "purgedMemberPlural": "Purged **{{count}}** messages sent by **{{user}}**."
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",
