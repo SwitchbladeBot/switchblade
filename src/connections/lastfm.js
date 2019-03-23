@@ -40,4 +40,13 @@ module.exports = class LastFM extends Connection {
       avatar: bestRes ? bestRes['#text'] : null
     }
   }
+
+  async checkScrobble (scrobble, user) {
+    const { lastfm } = await this.client.modules.connection.getConnections(user)
+    return lastfm.connected ? lastfm : false
+  }
+
+  updateNowPlaying (user, song) {
+
+  }
 }

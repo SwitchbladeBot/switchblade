@@ -46,7 +46,7 @@ module.exports = class LastFM extends APIWrapper {
     return this.request('album.search', { album, limit })
   }
 
-  // Auth
+  // AUTH
   getSession (token) {
     return this.request('auth.getSession', { token }, true).then(r => r.session)
   }
@@ -54,12 +54,36 @@ module.exports = class LastFM extends APIWrapper {
     return this.request('user.getInfo', { sk }, true).then(r => r.user)
   }
 
+  // NOWPLAYING
+  updateNowPlaying ({ title, author, length }, sk) {
+    return this.request('track.updateNowPlaying', {
+      sk,
+      track: title,
+      artist: author,
+      duration: length / 1000
+    }, true, true).then(r => r.nowplaying)
+  }
+
+  // SCROBBLE
+  scrobbleSong ({ title, author, length }, timestamp, sk) {
+    return this.request('track.scrobble', {
+      sk,
+      track: title,
+      artist: author,
+      duration: length / 1000,
+      timestamp: timestamp.getTime() / 1000
+    }, true, true).then(r => r.scrobbles)
+  }
+
   // MAIN REQUEST
-  request (method, queryParams = {}, signature = false) {
+  request (method, queryParams = {}, signature = false, write = false) {
     const params = { method, api_key: process.env.LASTFM_KEY, format: 'json' }
     Object.assign(queryParams, params)
     if (signature) queryParams.api_sig = this.getSignature(queryParams)
-    return snekfetch.get(API_URL).query(queryParams).then(r => r.body)
+    console.log(queryParams)
+    if (!write) return snekfetch.get(API_URL).query(queryParams).then(r => r.body)
+    return snekfetch.post(API_URL)
+      .set('content-type', 'application/x-www-form-urlencoded').send(queryParams).then(r => r.body)
   }
 
   getSignature (params) {

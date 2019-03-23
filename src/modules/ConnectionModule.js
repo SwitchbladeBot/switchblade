@@ -45,7 +45,7 @@ module.exports = class ConnectionModule extends Module {
     })
     newConfig = {
       ...connection.config,
-      ...(config)
+      ...config
     }
     try {
       await this._users.update(_user,
