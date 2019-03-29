@@ -959,24 +959,30 @@
     "notLive": "I can't change livestreams' positions!",
     "positionSet": "Player position set to `{{position}}`."
   },
-  "lolstatus": {
-    "commandDescription": "Shows the current status of a League of Legends server.",
-    "commandUsage": "<server>",
-    "missingServer": "You have to give me a valid League of Legends server!",
-    "availableServers": "Available servers",
-    "noStatusMessages": "There are no status messages for this server.",
-    "online": "Online",
-    "offline": "Offline",
-    "info": "Information",
-    "warn": "Warning",
-    "error": "Critical"
-  },
   "leagueoflegends": {
-    "commandDescription": "Gets statistics from a League of Legends champion",
-    "commandUsage": "<champion name>",
-    "noChampion": "You need to give me a champion name to search for.",
-    "invalidChamp": "Invalid champion.",
-    "spells": "Spells"
+    "commandDescription": "Gets a League of Legends' server status or champion information.",
+    "commandUsage": "<type> <query>",
+    "subcommands": {
+      "status": {
+        "commandDescription": "Shows the current status of a League of Legends server.",
+        "commandUsage": "<server>",
+        "missingServer": "You have to give me a valid League of Legends server!",
+        "availableServers": "Available servers",
+        "noStatusMessages": "There are no status messages for this server.",
+        "online": "Online",
+        "offline": "Offline",
+        "info": "Information",
+        "warn": "Warning",
+        "error": "Critical"
+      },
+      "champion": {
+        "commandDescription": "Gets statistics from a League of Legends champion.",
+        "commandUsage": "<champion name>",
+        "noChampion": "You need to give me a champion name to search for.",
+        "invalidChamp": "Invalid champion.",
+        "spells": "Spells"
+      } 
+    }
   },
   "reversetext": {
     "commandDescription": "Reverses the text.",
