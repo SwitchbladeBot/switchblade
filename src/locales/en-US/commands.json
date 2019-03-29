@@ -971,6 +971,13 @@
     "warn": "Warning",
     "error": "Critical"
   },
+  "leagueoflegends": {
+    "commandDescription": "Gets statistics from a League of Legends champion",
+    "commandUsage": "<champion name>",
+    "noChampion": "You need to give me a champion name to search for.",
+    "invalidChamp": "Invalid champion.",
+    "spells": "Spells"
+  },
   "reversetext": {
     "commandDescription": "Reverses the text.",
     "missingSentence": "You have to give me some text to reverse!",
