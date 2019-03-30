@@ -851,6 +851,12 @@
         "commandUsage": "<username/UUID>",
         "noName": "You have to give me an name or UUID.",
         "unknownName": "Name or UUID not found."
+      },
+      "namehistory": {
+        "commandDescription": "View the previous names of a Minecraft user, by username or UUID.",
+        "commandUsage": "<username/UUID>",
+        "noName": "You have to give me an name or UUID.",
+        "unknownName": "Name or UUID not found."
       }
     }
   },
