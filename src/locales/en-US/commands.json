@@ -837,14 +837,20 @@
     "userNotFound": "Twitch user not found!"
   },
   "minecraft": {
-    "commandDescription": "Shows information about Minecraft server and user.",
+    "commandDescription": "Shows information about Minecraft.",
     "commandUsage": "<type> <query>",
     "subcommands": {
       "server": {
-        "commandDescription": "Searches for a minecraft server",
+        "commandDescription": "Get information such as players and MOTD from a Minecraft server.",
         "commandUsage": "<address>",
         "noIP": "You have to give me an address.",
         "unknownServer": "Server is offline or doesn't exist."
+      },
+      "skin": {
+        "commandDescription": "Get the skin of a Minecraft player.",
+        "commandUsage": "<username/UUID>",
+        "noName": "You have to give me an name or UUID.",
+        "unknownName": "Name or UUID not found."
       }
     }
   },
