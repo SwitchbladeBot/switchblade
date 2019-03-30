@@ -37,14 +37,14 @@ module.exports = class MinecraftNameHistory extends Command {
   }
 
   async nameToUUID (name) {
-    const match = await snekfetch.get(`https://api.mojang.com/users/profiles/minecraft/${name}?at=${moment().format('x')}`)
-    if (match.body.id) return { uuid: match.body.id, name: match.body.name }
+    const { body } = await snekfetch.get(`https://api.mojang.com/users/profiles/minecraft/${name}?at=${moment().format('x')}`)
+    if (body.id) return { uuid: body.id, name: body.name }
     return false
   }
 
   async uuidToName (uuid) {
-    const match = await snekfetch.get(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`)
-    if (match.body.id) return { uuid: match.body.id, name: match.body.name }
+    const { body } = await snekfetch.get(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`)
+    if (body.id) return { uuid: body.id, name: body.name }
     return false
   }
 }
