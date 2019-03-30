@@ -22,7 +22,6 @@ module.exports = class MinecraftServer extends Command {
     const { body } = await snekfetch.get(`https://mcapi.us/server/status?ip=${host}&port=${port}`)
 
     if (body.online) {
-      const imageData = this.decodeBase64Image(body.favicon)
       channel.send(
         new SwitchbladeEmbed(author)
           .setAuthor('Minecraft Server', this.parentCommand.MINECRAFT_LOGO)
@@ -31,17 +30,17 @@ module.exports = class MinecraftServer extends Command {
           .addField('Address', `\`${host}:${port}\``, true)
           .addField('Players', `${body.players.now}/${body.players.max}`, true)
           .addField('Version', body.server.name, true)
-          .attachFile(new Attachment(imageData, 'favIcon.png'))
+          .attachFile(new Attachment(this.decodeBase64Image(body.favicon), 'favIcon.png'))
           .setThumbnail('attachment://favIcon.png')
       ).then(channel.stopTyping())
     } else {
-      throw new CommandError(t('commands:minecraft.subcommands.server.unknownServer'))
       channel.stopTyping()
+      throw new CommandError(t('commands:minecraft.subcommands.server.unknownServer'))
     }
   }
 
   decodeBase64Image (str) {
-    const matches = str.match(/^data:([A-Za-z-+\/]+);base64,([\s\S]+)/)
+    const matches = str.match(/^data:([A-Za-z-+]+);base64,([\s\S]+)/)
     if (!matches || matches.length !== 3) return Buffer.from(str, 'base64')
     return Buffer.from(matches[2], 'base64')
   }
