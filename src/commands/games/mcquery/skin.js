@@ -26,7 +26,7 @@ module.exports = class MinecraftServer extends Command {
           .setImage(`https://visage.surgeplay.com/full/512/${body.id}.png`)
           .setTitle('NameMC profile (click here)')
           .setURL(`https://namemc.com/profile/${body.id}`)
-          .setAuthor(`${name}'s Skin!`, `https://visage.surgeplay.com/head/312/${body.id}.png`)
+          .setAuthor(`${body.name}'s Skin!`, `https://visage.surgeplay.com/head/312/${body.id}.png`)
       ).then(channel.stopTyping())
     } else {
       channel.stopTyping()
