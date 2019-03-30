@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const types = ['server', 'namehistory', 'skin', 's', 'nh', 'minecraftskin', 'mskin']
+const types = ['server', 'sv', 'namehistory', 'skin', 's', 'nh', 'nameh', 'minecraftskin', 'mskin']
 
 module.exports = class Minecraft extends Command {
   constructor (client) {

@@ -25,10 +25,10 @@ module.exports = class MinecraftNameHistory extends Command {
       const nameHistory = await snekfetch.get(`https://api.mojang.com/user/profiles/${body.id}/names`)
       channel.send(
         new SwitchbladeEmbed(author)
-          .setDescription(nameHistory.body.map(n => `\`${n.name}\` (${n.changedToAt ? moment(n.changedToAt).fromNow() : 'Original Name'})`).join('\n'))
-          .setTitle('NameMC profile (click here)')
+          .setDescription(nameHistory.body.map(n => `\`${n.name}\` (${n.changedToAt ? moment(n.changedToAt).fromNow() : t('commands:minecraft.subcommands.namehistory.originalname')})`).join('\n'))
+          .setTitle(t('commands:minecraft.namemcprofile'))
           .setURL(`https://namemc.com/profile/${body.id}`)
-          .setAuthor(`${body.name}'s name history!`, `https://visage.surgeplay.com/head/512/${body.id}.png`)
+          .setAuthor(t('commands:minecraft.subcommands.skin.title', { name: body.name }), `https://visage.surgeplay.com/head/512/${body.id}.png`)
       ).then(channel.stopTyping())
     } else {
       channel.stopTyping()

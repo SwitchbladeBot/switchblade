@@ -7,7 +7,7 @@ module.exports = class MinecraftSkin extends Command {
   constructor (client) {
     super(client, {
       name: 'skin',
-      aliases: ['minecraftskin', 'mskin'],
+      aliases: ['minecraftskin', 'mskin', 's'],
       parentCommand: 'minecraft',
       parameters: [{
         type: 'string',
@@ -24,9 +24,9 @@ module.exports = class MinecraftSkin extends Command {
       channel.send(
         new SwitchbladeEmbed(author)
           .setImage(`https://visage.surgeplay.com/full/512/${body.id}.png`)
-          .setTitle('NameMC profile (click here)')
+          .setTitle(t('commands:minecraft.namemcprofile'))
           .setURL(`https://namemc.com/profile/${body.id}`)
-          .setAuthor(`${body.name}'s Skin!`, `https://visage.surgeplay.com/head/512/${body.id}.png`)
+          .setAuthor(t('commands:minecraft.subcommands.skin.title', { name: body.name }), `https://visage.surgeplay.com/head/512/${body.id}.png`)
       ).then(channel.stopTyping())
     } else {
       channel.stopTyping()

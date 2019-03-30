@@ -8,7 +8,7 @@ module.exports = class MinecraftServer extends Command {
   constructor (client) {
     super(client, {
       name: 'server',
-      aliases: ['s'],
+      aliases: ['sv'],
       parentCommand: 'minecraft',
       parameters: [{
         type: 'string',
@@ -25,12 +25,12 @@ module.exports = class MinecraftServer extends Command {
     if (body.online) {
       channel.send(
         new SwitchbladeEmbed(author)
-          .setAuthor('Minecraft Server', this.parentCommand.MINECRAFT_LOGO)
+          .setAuthor(t('commands:minecraft.subcommands.server.server'), this.parentCommand.MINECRAFT_LOGO)
           .setDescription(body.motd.replace(/§[0-9a-fk-or]/g, ''))
-          .addField('Status', body.online ? 'Online' : 'Offline', true)
-          .addField('Address', `\`${host}:${port}\``, true)
-          .addField('Players', `${body.players.now}/${body.players.max}`, true)
-          .addField('Version', body.server.name, true)
+          .addField(t('commands:minecraft.subcommands.server.status'), body.online ? 'Online' : 'Offline', true)
+          .addField(t('commands:minecraft.subcommands.server.address'), `\`${host}:${port}\``, true)
+          .addField(t('commands:minecraft.subcommands.server.players'), `${body.players.now}/${body.players.max}`, true)
+          .addField(t('commands:minecraft.subcommands.server.version'), body.server.name, true)
           .attachFile(new Attachment(this.decodeBase64Image(body.favicon), 'favIcon.png'))
           .setThumbnail('attachment://favIcon.png')
       ).then(channel.stopTyping())
