@@ -836,16 +836,38 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
-  "mcquery": {
-    "commandDescription": "Shows information about a Minecraft: Java Edition server.",
-    "commandUsage": "<address>[:port]",
-    "unknownServer": "Server is offline or doesn't exist.",
-    "noIP": "You have to give me an address.",
-    "players": "Players",
-    "version": "Version",
-    "online": "Online",
-    "messageOfTheDay": "Message of the day (MOTD)",
-    "status": "Status"
+  "minecraft": {
+    "commandDescription": "Shows information related to Minecraft.",
+    "commandUsage": "<type> <query>",
+    "namemcprofile": "NameMC profile (click here)",
+    "subcommands": {
+      "server": {
+        "commandDescription": "Shows information about a Minecraft server such as number of players and MOTD.",
+        "commandUsage": "<address>",
+        "noIP": "You have to give me an address.",
+        "unknownServer": "Server is offline or doesn't exist.",
+        "server": "Minecraft Server",
+        "status": "Status",
+        "address": "Address",
+        "players": "Players",
+        "version": "Version"
+      },
+      "skin": {
+        "commandDescription": "Shows the skin of a Minecraft player.",
+        "commandUsage": "<username/UUID>",
+        "noName": "You have to give me a username or a UUID.",
+        "unknownName": "Name or UUID not found.",
+        "title": "{{name}}'s skin!"
+      },
+      "namehistory": {
+        "commandDescription": "Shows the previous names of a Minecraft player, by username or UUID.",
+        "commandUsage": "<username/UUID>",
+        "noName": "You have to give me a username or a UUID.",
+        "unknownName": "Name or UUID not found.",
+        "title": "{{name}}'s name history!",
+        "originalname": "Original Name"
+      }
+    }
   },
   "kemonomimi": {
     "commandDescription": "Shows a random kemonomimi (lewd if the channel is NSFW). (Girls with animal ears)",
