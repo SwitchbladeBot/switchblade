@@ -842,7 +842,7 @@
     "namemcprofile": "NameMC profile (click here)",
     "subcommands": {
       "server": {
-        "commandDescription": "Shows information about a Minecraft server such as number of players and MOTD",
+        "commandDescription": "Shows information about a Minecraft server such as number of players and MOTD.",
         "commandUsage": "<address>",
         "noIP": "You have to give me an address.",
         "unknownServer": "Server is offline or doesn't exist.",
