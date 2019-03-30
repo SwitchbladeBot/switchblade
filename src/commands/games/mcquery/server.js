@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 const { Attachment } = require('discord.js')
@@ -40,7 +41,7 @@ module.exports = class MinecraftServer extends Command {
   }
 
   decodeBase64Image (str) {
-    const matches = str.match(/^data:([A-Za-z-+]+);base64,([\s\S]+)/)
+    const matches = str.match(/^data:([A-Za-z-+\/]+);base64,([\s\S]+)/)
     if (!matches || matches.length !== 3) return Buffer.from(str, 'base64')
     return Buffer.from(matches[2], 'base64')
   }
