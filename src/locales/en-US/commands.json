@@ -845,19 +845,24 @@
         "commandDescription": "Shows information about a Minecraft server such as number of players and MOTD",
         "commandUsage": "<address>",
         "noIP": "You have to give me an address.",
-        "unknownServer": "Server is offline or doesn't exist."
+        "unknownServer": "Server is offline or doesn't exist.",
+        "server": "Minecraft Server",
+        "status": "Status",
+        "address": "Address",
+        "players": "Players",
+        "version": "Version"
       },
       "skin": {
         "commandDescription": "Shows the skin of a Minecraft player.",
         "commandUsage": "<username/UUID>",
-        "noName": "You have to give me a name or UUID.",
+        "noName": "You have to give me a username or a UUID.",
         "unknownName": "Name or UUID not found.",
         "title": "{{name}}'s skin!"
       },
       "namehistory": {
         "commandDescription": "Shows the previous names of a Minecraft player, by username or UUID.",
         "commandUsage": "<username/UUID>",
-        "noName": "You have to give me a name or UUID.",
+        "noName": "You have to give me a username or a UUID.",
         "unknownName": "Name or UUID not found.",
         "title": "{{name}}'s name history!",
         "originalname": "Original Name"
