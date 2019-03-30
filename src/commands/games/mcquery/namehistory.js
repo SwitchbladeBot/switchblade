@@ -19,20 +19,32 @@ module.exports = class MinecraftNameHistory extends Command {
   async run ({ t, author, channel, language }, name) {
     channel.startTyping()
     moment.locale(language)
-    const { body } = await snekfetch.get(`https://api.mojang.com/users/profiles/minecraft/${name}?at=${moment().format('x')}`)
+    const findPlayer = await this.nameToUUID(name) || await this.uuidToName(name)
 
-    if (body && body.id) {
-      const nameHistory = await snekfetch.get(`https://api.mojang.com/user/profiles/${body.id}/names`)
+    if (findPlayer.uuid) {
+      const nameHistory = await snekfetch.get(`https://api.mojang.com/user/profiles/${findPlayer.uuid}/names`)
       channel.send(
         new SwitchbladeEmbed(author)
           .setDescription(nameHistory.body.map(n => `\`${n.name}\` (${n.changedToAt ? moment(n.changedToAt).fromNow() : t('commands:minecraft.subcommands.namehistory.originalname')})`).join('\n'))
           .setTitle(t('commands:minecraft.namemcprofile'))
-          .setURL(`https://namemc.com/profile/${body.id}`)
-          .setAuthor(t('commands:minecraft.subcommands.skin.title', { name: body.name }), `https://visage.surgeplay.com/head/512/${body.id}.png`)
+          .setURL(`https://namemc.com/profile/${findPlayer.uuid}`)
+          .setAuthor(t('commands:minecraft.subcommands.namehistory.title', { name: findPlayer.name }), `https://visage.surgeplay.com/head/512/${findPlayer.uuid}.png`)
       ).then(channel.stopTyping())
     } else {
       channel.stopTyping()
       throw new CommandError(t('commands:minecraft.subcommands.namehistory.unknownName'))
     }
+  }
+
+  async nameToUUID (name) {
+    const match = await snekfetch.get(`https://api.mojang.com/users/profiles/minecraft/${name}?at=${moment().format('x')}`)
+    if (match.body.id) return { uuid: match.body.id, name: match.body.name }
+    return false
+  }
+
+  async uuidToName (uuid) {
+    const match = await snekfetch.get(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`)
+    if (match.body.id) return { uuid: match.body.id, name: match.body.name }
+    return false
   }
 }
