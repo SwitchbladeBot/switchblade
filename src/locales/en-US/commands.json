@@ -836,16 +836,17 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
-  "mcquery": {
-    "commandDescription": "Shows information about a Minecraft: Java Edition server.",
-    "commandUsage": "<address>[:port]",
-    "unknownServer": "Server is offline or doesn't exist.",
-    "noIP": "You have to give me an address.",
-    "players": "Players",
-    "version": "Version",
-    "online": "Online",
-    "messageOfTheDay": "Message of the day (MOTD)",
-    "status": "Status"
+  "minecraft": {
+    "commandDescription": "Shows information about Minecraft server and user.",
+    "commandUsage": "<type> <query>",
+    "subcommands": {
+      "server": {
+        "commandDescription": "Searches for a minecraft server",
+        "commandUsage": "<address>",
+        "noIP": "You have to give me an address.",
+        "unknownServer": "Server is offline or doesn't exist."
+      }
+    }
   },
   "kemonomimi": {
     "commandDescription": "Shows a random kemonomimi (lewd if the channel is NSFW). (Girls with animal ears)",
