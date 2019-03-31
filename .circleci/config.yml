@@ -57,4 +57,4 @@ workflows:
       - crowdin-upload:
           filters:
             branches:
-              only: /dev/
+              only: /dev|crowdin-docker-fix/
