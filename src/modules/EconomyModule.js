@@ -11,8 +11,7 @@ class BonusCooldownError extends Error {
   }
 }
 
-const DAILY_BONUS_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
-const DBL_BONUS_INTERVAL = 12 * 60 * 60 * 1000 // 1 day
+const BONUS_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 class BonusModule extends Module {
   constructor (...args) {
     super(...args)
@@ -23,12 +22,12 @@ class BonusModule extends Module {
     return this.client.database.users
   }
 
-  checkClaim (lastClaim, interval = DAILY_BONUS_INTERVAL) {
-    return Date.now() - lastClaim < interval
+  checkClaim (lastClaim) {
+    return Date.now() - lastClaim < BONUS_INTERVAL
   }
 
-  formatClaimTime (lastClaim, interval = DAILY_BONUS_INTERVAL) {
-    return moment.duration(interval - (Date.now() - lastClaim)).format('h[h] m[m] s[s]')
+  formatClaimTime (lastClaim) {
+    return moment.duration(BONUS_INTERVAL - (Date.now() - lastClaim)).format('h[h] m[m] s[s]')
   }
 
   async claimDaily (_user) {
