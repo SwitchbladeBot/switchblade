@@ -1,22 +1,24 @@
-const { CommandStructures, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
-const { Command, CommandRequirements, CommandParameters, MemberParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
 const moment = require('moment')
 
 module.exports = class UserInfo extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'userinfo'
-    this.aliases = ['user', 'ui', 'uinfo']
-    this.category = 'utility'
-    this.requirements = new CommandRequirements(this, { guildOnly: true })
-    this.parameters = new CommandParameters(this,
-      new MemberParameter({ full: true, required: false, acceptBot: true })
-    )
+    super(client, {
+      name: 'userinfo',
+      aliases: ['user', 'ui', 'uinfo'],
+      category: 'utility',
+      requirements: { guildOnly: true },
+      parameters: [{
+        type: 'member',
+        full: true,
+        required: false,
+        acceptBot: true
+      }]
+    })
   }
 
-  run ({ t, guild, member: author, channel, language }, member) {
+  run ({ t, guild, member: author, channel, language }, member = author) {
     const embed = new SwitchbladeEmbed()
-    member = member || author
     moment.locale(language)
     const filter = this.client.guilds.filter(g => g.members.has(member.id)).map(g => g.name)
     const charLimit = (s) => s.length > 1024 ? `${s.substr(0, 1020)}...` : s

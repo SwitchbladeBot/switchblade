@@ -1,18 +1,18 @@
-const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandRequirements, CommandParameters, StringParameter, MemberParameter } = CommandStructures
+const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Kick extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'kick'
-    this.aliases = ['expulsar']
-    this.category = 'moderation'
-
-    this.requirements = new CommandRequirements(this, { guildOnly: true, botPermissions: ['KICK_MEMBERS'], permissions: ['KICK_MEMBERS'] })
-    this.parameters = new CommandParameters(this,
-      new MemberParameter({ acceptBot: true, missingError: 'commands:kick.missingUser' }),
-      new StringParameter({ full: true, missingError: 'commands:kick.missingReason' })
-    )
+    super(client, {
+      name: 'kick',
+      aliases: ['expulsar'],
+      category: 'moderation',
+      requirements: { guildOnly: true, botPermissions: ['KICK_MEMBERS'], permissions: ['KICK_MEMBERS'] },
+      parameters: [{
+        type: 'member', acceptBot: true, missingError: 'commands:kick.missingUser'
+      }, {
+        type: 'string', full: true, missingError: 'commands:kick.missingReason'
+      }]
+    })
   }
 
   async run ({ channel, guild, author, t }, member, reason) {

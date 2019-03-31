@@ -14,7 +14,7 @@ module.exports = class MongoRepository extends Repository {
   }
 
   parse (entity) {
-    return entity && transformProps(entity, castToString, '_id')
+    return entity ? transformProps(entity.toObject({ versionKey: false }), castToString, '_id') : null
   }
 
   add (entity) {
@@ -30,7 +30,7 @@ module.exports = class MongoRepository extends Repository {
   }
 
   get (id, projection) {
-    return this.findOne(id, projection).then(e => this.parse(e) || this.add({ _id: id }))
+    return this.findOne(id, projection).then(e => e || this.add({ _id: id }))
   }
 
   remove (id) {

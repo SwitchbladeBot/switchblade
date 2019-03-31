@@ -1,6 +1,9 @@
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 const Constants = require('../../utils/Constants.js')
+
 const CommandError = require('./CommandError.js')
+const CommandRequirements = require('./CommandRequirements.js')
+const CommandParameters = require('./parameters/CommandParameters.js')
 
 /**
  * Base command structure.
@@ -8,20 +11,24 @@ const CommandError = require('./CommandError.js')
  * @param {Switchblade} client - Switchblade client
  */
 module.exports = class Command {
-  constructor (client, parentCommand) {
+  constructor (client, options = {}) {
     this.client = client
 
-    this.name = 'CommandName'
-    this.aliases = []
-    this.category = 'general'
+    this.name = options.name || 'invalid'
+    this.aliases = options.aliases
+    this.category = options.category || 'general'
+    this.hidden = options.hidden
 
-    this.hidden = false
+    this.subcommands = options.subcommands || []
 
-    this.subcommands = []
+    this.requirements = options.requirements // Run requirements
+    this.parameters = options.parameters // Run parameters
 
-    this.requirements = null // Run requirements
-    this.parameters = null // Run parameters
-    this.parentCommand = parentCommand
+    this.cooldownTime = 0
+    this.cooldownFeedback = true
+    this.cooldownMap = this.cooldownTime > 0 ? new Map() : null
+
+    this.parentCommand = options.parentCommand
   }
 
   /**
@@ -45,13 +52,13 @@ module.exports = class Command {
     }
 
     const [ subcmd ] = args
-    const subcommand = this.subcommands.find(c => c.name.toLowerCase() === subcmd || c.aliases.includes(subcmd))
+    const subcommand = this.subcommands.find(c => c.name.toLowerCase() === subcmd || (c.aliases && c.aliases.includes(subcmd)))
     if (subcommand) {
       return subcommand._run(context, args.splice(1))
     }
 
     try {
-      args = this.handleParameters(context, args)
+      args = await this.handleParameters(context, args)
     } catch (e) {
       return this.error(context, e)
     }
@@ -80,11 +87,11 @@ module.exports = class Command {
    * @returns {boolean} Whether this command can run
    */
   handleRequirements (context, args) {
-    return this.requirements ? this.requirements.handle(context, args) : true
+    return this.requirements ? CommandRequirements.handle(context, this.requirements, args) : true
   }
 
   handleParameters (context, args) {
-    return this.parameters ? this.parameters.handle(context, args) : args
+    return this.parameters ? CommandParameters.handle(context, this.parameters, args) : args
   }
 
   /**
@@ -93,7 +100,11 @@ module.exports = class Command {
    * @param {number} time Cooldown time in seconds
    */
   applyCooldown (user, time) {
-    return this.requirements && this.requirements.applyCooldown(user, time)
+    if (!user || !this.cooldownTime > 0) return false
+    if (!this.cooldownMap.has(user.id)) {
+      this.cooldownMap.set(user.id, Date.now())
+      user.client.setTimeout(() => this.cooldownMap.delete(user.id), time * 1000)
+    }
   }
 
   error ({ t, author, channel, prefix }, error) {
@@ -120,6 +131,21 @@ module.exports = class Command {
     const usage = noUsage ? t(`commands:${usagePath}`) : t([`commands:${usagePath}`, ''])
     if (usage !== usagePath) {
       return `**${t('commons:usage')}:** \`${prefix}${this.fullName} ${usage}\``
+    }
+  }
+
+  asJSON (t, command = this) {
+    const aliases = command.aliases && command.aliases.length ? command.aliases : undefined
+    const usage = t([`commands:${command.tPath}.commandUsage`, '']) !== '' ? t(`commands:${command.tPath}.commandUsage`) : undefined
+    const subcommands = command.subcommands.length > 0 ? command.subcommands.map(sc => this.asJSON(t, sc)) : undefined
+
+    return {
+      name: command.fullName,
+      category: command.category || command.parentCommand.category,
+      aliases,
+      description: t(`commands:${command.tPath}.commandDescription`),
+      usage,
+      subcommands
     }
   }
 }

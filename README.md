@@ -80,4 +80,5 @@ Happy hacking!
 <div align="center">
   <img src="https://discordbots.org/api/widget/445277324175474689.svg" height="150">
   <img src="https://botsfordiscord.com/api/bot/445277324175474689/widget" height="150">
+  <a href="https://discordbotlist.com/bots/445277324175474689"><img src="https://discordbotlist.com/bots/445277324175474689/widget" width="380" height="140" alt="Switchblade on Discord Bot List"></a>
 </div>

@@ -2,6 +2,7 @@ module.exports = {
   // Colors
   REDDIT_COLOR: '#FF4500',
   SPOTIFY_COLOR: '#1DB954',
+  YOUTUBE_COLOR: '#ff0000',
   ERROR_COLOR: '#FF3333',
   EIGHTBALL_COLOR: '#000000',
   NPM_COLOR: '#CB3837',
@@ -13,8 +14,16 @@ module.exports = {
   GENIUS_COLOR: '#FFFB66',
   GUILD_LOST_COLOR: '#BD4351',
   GUILD_ADDED_COLOR: '#41A57A',
-  LASTFM_COLOR: '#D51007',
+  LASTFM_COLOR: '#B90000',
   TWITCH_COLOR: '#4B367C',
+  GITHUB_COLOR: '#FAFAFA',
+  DBL_COLOR: '#7289DA',
+  MIXER_COLOR: '#1FBAED',
+  SOUNDCLOUD_COLOR: '#FF5500',
+  HIBP_COLOR: '#3A9AC4',
+  NOT_PWNED_COLOR: '#348F38',
+  PWNED_COLOR: '#BA4343',
+  CHORUS_COLOR: '#2C3E50',
 
   // Emojis
   PLAY_BUTTON: '<:playbutton:465209209479495690>',
@@ -33,6 +42,7 @@ module.exports = {
   PATREON_LOGO: '<:patreon:516783030543712273>',
   UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
   EXPLICIT: '<:explicit:539583498541989907>',
+  FORKED: '<:forked:541299552959856650>',
 
   // League of Legends Status Emoji
   LOL_STATUS_INFO: '<:lolinfo:534989137913184277>',
@@ -47,6 +57,14 @@ module.exports = {
   STEAMLADDER_TOP_DONATOR: '<:steamladder_top_donator:516812022017687572>',
   STEAMLADDER_DONATOR: '<:steamladder_donator:516812018955714570>',
 
+  // Clone Hero Emoji
+  CLONEHERO_DRUMS: '<:drums:549677501778231327>',
+  CLONEHERO_GUITARGHL: '<:guitarghl:549677324828934180>',
+  CLONEHERO_KEYS: '<:keys:549677324665094155>',
+  CLONEHERO_GUITAR: '<:guitar:549677324166234162>',
+  CLONEHERO_BASSGHL: '<:bassghl:549677323834884110>',
+  CLONEHERO_BASS: '<:bass:549677323549409280>',
+
   // Assets
 
   // Icons PNG
@@ -58,7 +76,9 @@ module.exports = {
   DAILY_CLOCK_SVG: 'src/assets/svg/daily_clock.svg',
   REPUTATION_SVG: 'src/assets/svg/reputation.svg',
   MEDAL_SVG: 'src/assets/svg/medal.svg',
+  HEART_SVG: 'src/assets/svg/heart.svg',
 
+  //  Weather
   WEATHER_CLEAR_DAY: 'src/assets/svg/weather/clear-day.svg',
   WEATHER_CLEAR_NIGHT: 'src/assets/svg/weather/clear-night.svg',
   WEATHER_CLOUDY: 'src/assets/svg/weather/cloudy.svg',
@@ -71,6 +91,15 @@ module.exports = {
   WEATHER_WIND: 'src/assets/svg/weather/wind.svg',
   ARROW_SVG: 'src/assets/svg/arrow.svg',
   WIND_SVG: 'src/assets/svg/wind.svg',
+
+  //  Brands
+  SOUNDCLOUD_BRAND_SVG: 'src/assets/svg/brands/soundcloud.svg',
+  SPOTIFY_BRAND_SVG: 'src/assets/svg/brands/spotify.svg',
+  YOUTUBE_BRAND_SVG: 'src/assets/svg/brands/youtube.svg',
+  DEEZER_BRAND_SVG: 'src/assets/svg/brands/deezer.svg',
+  TWITCH_BRAND_SVG: 'src/assets/svg/brands/twitch.svg',
+  MIXER_BRAND_SVG: 'src/assets/svg/brands/mixer.svg',
+  HTTP_BRAND_SVG: 'src/assets/svg/brands/http.svg',
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',

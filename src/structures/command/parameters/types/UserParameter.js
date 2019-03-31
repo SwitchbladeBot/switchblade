@@ -3,46 +3,41 @@ const CommandError = require('../../CommandError.js')
 const PermissionUtils = require('../../../../utils/PermissionUtils.js')
 
 const MENTION_REGEX = /^(?:<@!?)?([0-9]{16,18})(?:>)?$/
+const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
 
 module.exports = class UserParameter extends Parameter {
-  constructor (options = {}) {
-    options = Object.assign({
-      acceptBot: false,
-      acceptUser: true,
-      acceptDeveloper: true,
-      acceptSelf: false
-    }, options)
-
-    super(options)
-    this.acceptBot = !!options.acceptBot
-    this.acceptUser = !!options.acceptUser
-    this.acceptDeveloper = !!options.acceptDeveloper
-    this.acceptSelf = !!options.acceptSelf
-
-    this.errors = Object.assign({
-      invalidUser: 'errors:invalidUser',
-      acceptSelf: 'errors:sameUser',
-      acceptBot: 'errors:invalidUserBot',
-      acceptUser: 'errors:invalidUserNotBot',
-      acceptDeveloper: 'errors:userCantBeDeveloper'
-    }, options.errors)
+  static parseOptions (options = {}) {
+    return {
+      ...super.parseOptions(options),
+      acceptBot: !!options.acceptBot,
+      acceptUser: defVal(options, 'acceptUser', true),
+      acceptDeveloper: defVal(options, 'acceptDeveloper', true),
+      acceptSelf: !!options.acceptSelf,
+      errors: {
+        invalidUser: 'errors:invalidUser',
+        acceptSelf: 'errors:sameUser',
+        acceptBot: 'errors:invalidUserBot',
+        acceptUser: 'errors:invalidUserNotBot',
+        acceptDeveloper: 'errors:userCantBeDeveloper',
+        ...(options.errors || {})
+      }
+    }
   }
 
-  parse (arg, context) {
+  static parse (arg, { t, client, author, guild }) {
     if (!arg) return
 
     const regexResult = MENTION_REGEX.exec(arg)
-    const userId = regexResult && regexResult[1]
-    return this.user(context, userId)
-  }
+    const id = regexResult && regexResult[1]
+    const findMember = guild.members.find(m => m.user.username.toLowerCase().includes(arg.toLowerCase()) || m.displayName.toLowerCase().includes(arg.toLowerCase()))
 
-  user ({ t, client, author }, id) {
-    const user = client.users.get(id)
+    const user = client.users.get(id) || (!!findMember && findMember.user)
     if (!user) throw new CommandError(t(this.errors.invalidUser))
-    if (!this.acceptSelf && id === author.id) throw new CommandError(t(this.errors.acceptSelf))
+    if (!this.acceptSelf && user.id === author.id) throw new CommandError(t(this.errors.acceptSelf))
     if (!this.acceptBot && user.bot) throw new CommandError(t(this.errors.acceptBot))
     if (!this.acceptUser && !user.bot) throw new CommandError(t(this.errors.acceptUser))
     if (!this.acceptDeveloper && PermissionUtils.isDeveloper(client, user)) throw new CommandError(t(this.errors.acceptDeveloper), false)
+
     return user
   }
 }

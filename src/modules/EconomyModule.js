@@ -32,7 +32,7 @@ class BonusModule extends Module {
   }
 
   async claimDaily (_user) {
-    const user = await this._users.get(_user, 'money lastDaily')
+    const user = await this._users.findOne(_user, 'money lastDaily')
     const { lastDaily } = user
 
     if (this.checkClaim(lastDaily)) {
@@ -40,29 +40,14 @@ class BonusModule extends Module {
     }
 
     const collectedMoney = Math.ceil(Math.random() * 2000) + 750
-    user.money += collectedMoney
-    user.lastDaily = Date.now()
-    await user.save()
+    await this._users.update(_user, { $inc: { money: collectedMoney }, lastDaily: Date.now() })
 
     return { collectedMoney }
   }
 
   async claimDBLBonus (_user) {
-    const user = await this._users.get(_user, 'money lastDBLBonusClaim')
-    const { lastDBLBonusClaim } = user
-
-    if (this.checkClaim(lastDBLBonusClaim, DBL_BONUS_INTERVAL)) {
-      throw new BonusCooldownError(lastDBLBonusClaim, this.formatClaimTime(lastDBLBonusClaim, DBL_BONUS_INTERVAL))
-    }
-
-    const voted = await this.client.apis.dbl.checkVote(this.client.user.id, _user)
-    if (!voted) throw new Error('NOT_VOTED')
-
-    const collectedMoney = 500
-    user.money += collectedMoney
-    user.lastDBLBonusClaim = Date.now()
-    await user.save()
-
+    const collectedMoney = 250
+    await this._users.update(_user, { $inc: { money: collectedMoney } })
     return { collectedMoney }
   }
 }
@@ -84,28 +69,28 @@ module.exports = class EconomyModule extends Module {
   }
 
   async transfer (_from, _to, amount) {
-    const from = await this._users.get(_from, 'money')
+    const from = await this._users.findOne(_from, 'money')
     if (from.money < amount) throw new Error('NOT_ENOUGH_MONEY')
-    from.money -= amount
-    await Promise.all([ from.save(), this._users.update(_to, { $inc: { money: amount } }) ])
+    await Promise.all([
+      this._users.update(_from, { $inc: { money: -amount } }),
+      this._users.update(_to, { $inc: { money: amount } })
+    ])
   }
 
   async balance (_user) {
-    const { money } = await this._users.get(_user, 'money')
+    const { money } = await this._users.findOne(_user, 'money')
     return money
   }
 
   async betflip (_user, amount, side) {
-    const user = await this._users.get(_user, 'money')
+    const user = await this._users.findOne(_user, 'money')
 
     if (user.money < amount) throw new Error('NOT_ENOUGH_MONEY')
 
     const chosenSide = Math.random() > 0.5 ? 'heads' : 'tails'
     const won = side === chosenSide
     const bet = won ? amount : -amount
-
-    user.money += bet
-    await user.save()
+    await this._users.update(_user, { $inc: { money: bet } })
 
     return { won, chosenSide }
   }

@@ -1,14 +1,18 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class ConfigPrefix extends Command {
   constructor (client, parentCommand) {
-    super(client, parentCommand || 'config')
-    this.name = 'prefix'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: false, missingError: 'commands:config.subcommands.prefix.noPrefix' })
-    )
+    super(client, {
+      name: 'prefix',
+      parentCommand: 'config',
+      parameters: [{
+        type: 'string',
+        full: true,
+        required: false,
+        maxLength: 50,
+        missingError: 'commands:config.subcommands.prefix.noPrefix'
+      }]
+    })
   }
 
   async run ({ t, author, channel, guild }, prefix = process.env.PREFIX) {

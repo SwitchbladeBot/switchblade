@@ -1,16 +1,18 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, ColorParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class FavColor extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'favcolor'
-    this.aliases = ['favoritecolor', 'sethex', 'setcolor']
-    this.category = 'social'
-
-    this.parameters = new CommandParameters(this,
-      new ColorParameter({ full: true, missingError: 'errors:invalidColor' })
-    )
+    super(client, {
+      name: 'favcolor',
+      aliases: ['favoritecolor', 'sethex', 'setcolor'],
+      category: 'social',
+      requirements: { databaseOnly: true },
+      parameters: [{
+        type: 'color',
+        full: true,
+        missingError: 'errors:invalidColor'
+      }]
+    })
   }
 
   async run ({ t, author, channel, userDocument }, color) {

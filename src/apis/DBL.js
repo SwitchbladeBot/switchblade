@@ -3,21 +3,25 @@ const snekfetch = require('snekfetch')
 
 const API_URL = 'https://discordbots.org/api'
 
-module.exports = class DiscordBotListAPI extends APIWrapper {
+module.exports = class DBL extends APIWrapper {
   constructor () {
     super()
     this.name = 'dbl'
     this.envVars = ['DBL_TOKEN']
   }
 
-  checkVote (botId, userId) {
-    return this.request(`/bots/${botId}/check`, { userId }).then(res => res.voted === 1)
+  searchBots (query, maxValues) {
+    return this.request('/bots', { search: query, limit: maxValues }).then(u => u.results)
+  }
+
+  getBot (id) {
+    return this.request(`/bots/${id}`).then(u => u)
   }
 
   request (endpoint, queryParams = {}) {
-    return snekfetch.get(`${API_URL}${endpoint}`)
+    return snekfetch.get(API_URL + endpoint)
       .query(queryParams)
-      .set({ 'Authorization': process.env.DBL_TOKEN })
+      .set('Authorization', process.env.DBL_TOKEN)
       .then(r => r.body)
   }
 }
