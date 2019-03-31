@@ -27,7 +27,7 @@ module.exports = class MinecraftServer extends Command {
         new SwitchbladeEmbed(author)
           .setAuthor(t('commands:minecraft.subcommands.server.server'), this.parentCommand.MINECRAFT_LOGO)
           .setDescription(body.motd.replace(/§[0-9a-fk-or]/g, ''))
-          .addField(t('commands:minecraft.subcommands.server.status'), body.online ? 'Online' : 'Offline', true)
+          .addField(t('commands:minecraft.subcommands.server.status'), body.online ? t('commands:minecraft.subcommands.server.online') : t('commands:minecraft.subcommands.server.offline'), true)
           .addField(t('commands:minecraft.subcommands.server.address'), `\`${host}:${port}\``, true)
           .addField(t('commands:minecraft.subcommands.server.players'), `${body.players.now}/${body.players.max}`, true)
           .addField(t('commands:minecraft.subcommands.server.version'), body.server.name, true)
