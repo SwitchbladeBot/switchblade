@@ -2,7 +2,7 @@ version: 2
 jobs:
   crowdin-upload:
     docker:
-      - image: alconost/crowdin
+      - image: dougley/crowdin
     steps:
       - checkout
       - run: crowdin upload sources
