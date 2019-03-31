@@ -49,7 +49,7 @@
     "googleapis": "^34.0.0",
     "i18n-iso-countries": "^3.7.8",
     "i18next": "^12.1.0",
-    "i18next-node-fs-backend": "^2.1.0",
+    "i18next-node-fs-backend": "^2.1.2",
     "icecast-parser": "^3.0.0",
     "intl": "^1.2.5",
     "mal-scraper": "^2.4.3",
