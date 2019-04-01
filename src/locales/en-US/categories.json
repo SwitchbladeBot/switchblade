@@ -1,16 +1,16 @@
 {
-  "anime": "Anyime",
+  "anime": "Anime",
   "bot": "Bot",
-  "configuration": "Conyfiguwationy",
-  "developers": "Devewopews",
-  "economy": "Econyomy",
+  "configuration": "Configuration",
+  "developers": "Developers",
+  "economy": "Economy",
   "games": "Games",
-  "general": "Genyewaw",
+  "general": "General",
   "images": "Images",
   "memes": "Memes",
-  "moderation": "Modewationy",
+  "moderation": "Moderation",
   "music": "Music",
-  "nsfw": "NYSFW",
-  "social": "Sociaw",
-  "utility": "Utiwity"
+  "nsfw": "NSFW",
+  "social": "Social",
+  "utility": "Utility"
 }
