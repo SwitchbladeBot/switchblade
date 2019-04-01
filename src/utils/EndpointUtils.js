@@ -101,7 +101,7 @@ module.exports = class EndpointUtils {
             bot: Joi.string().min(17).max(18).required(),
             user: Joi.string().min(17).max(18).required(),
             type: Joi.string().equal('upvote').required(),
-            query: Joi.string(),
+            query: Joi.string().allow(''),
             isWeekend: Joi.boolean()
           })
           Joi.validate(payload, PayloadSchema).then(output => {
