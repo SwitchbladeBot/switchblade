@@ -16,40 +16,28 @@ const { ALIGN, measureText } = CanvasUtils
 
 module.exports = class CanvasTemplates {
   static async profile ({ t }, user, userDocument, role) {
-    const WIDTH = 640
-    const HEIGHT = 600
+    const WIDTH = 492
+    const HEIGHT = 261
 
-    const AVATAR_SIZE = 178
-
-    const INNER_MARGIN = 20
+    const AVATAR_SIZE = 125
 
     const FONTS = (() => {
-      const MEME = Math.random() > 0.99 && '"Comic Sans MS"'
-      const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
-      const REGULAR = MEME || '"Montserrat"'
-      const LIGHT = MEME || '"Montserrat Light"'
+      const ALL = '"Comic Sans MS"'
       return {
-        USERNAME: `bold 29px ${REGULAR}`,
-        DISCRIMINATOR: `20px ${LIGHT}`,
-        TAG_LABEL: `16px ${EXTRABOLD}`,
-        XP_LABEL: `bold 16px ${REGULAR}`,
-        INFO_LABEL: `23px ${REGULAR}`,
-        INFO_VALUE: `28px ${EXTRABOLD}`,
-        ABOUT_LABEL: `25px ${EXTRABOLD}`,
-        ABOUT_VALUE: `16px ${REGULAR}`
+        USERNAME: `16px ${ALL}`,
+        TAG_LABEL: `16px ${ALL}`,
+        INFO_LABEL: `16px ${ALL}`,
+        INFO_VALUE: `16px ${ALL}`
       }
     })()
 
-    const { rep, money, personalText, favColor } = userDocument
+    const { money } = userDocument
     const IMAGE_ASSETS = Promise.all([
       Image.from(user.displayAvatarURL.replace('.gif', '.png')),
-      Image.from(Constants.COINS_SVG, true),
-      Image.from(Constants.REPUTATION_SVG, true),
-      Image.from(Constants.DEFAULT_BACKGROUND_PNG, true)
+      Image.from(Constants.PROFILE_PNG, true)
     ])
 
-    const FAVCOLOR = new Color(favColor)
-    const TEXTCOLOR = '#FFF'
+    const TEXTCOLOR = '#000'
 
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
@@ -57,126 +45,36 @@ module.exports = class CanvasTemplates {
     // Card drawing
     //   Darker rectangle
     const CARD_MARGIN = 200
-    ctx.fillStyle = 'rgba(29, 29, 29, 0.94)'
-    ctx.fillRect(0, CARD_MARGIN, WIDTH, HEIGHT - CARD_MARGIN)
     //   Brighter rectangle
-    const BRIGHTER_HEIGHT = 110
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
-    ctx.fillRect(0, CARD_MARGIN, WIDTH, BRIGHTER_HEIGHT)
 
     // Profile
     ctx.fillStyle = TEXTCOLOR
-    const PROFILE_X = INNER_MARGIN * 2 + AVATAR_SIZE
-    const PROFILE_Y = CARD_MARGIN + BRIGHTER_HEIGHT * 0.5
     //   Username
-    ctx.write(user.username, PROFILE_X, PROFILE_Y, FONTS.USERNAME, ALIGN.BOTTOM_LEFT)
-    //   Discriminator
-    ctx.write(`#${user.discriminator}`, PROFILE_X, PROFILE_Y + 10, FONTS.DISCRIMINATOR, ALIGN.TOP_LEFT)
-    //   Tags
-    if (role) {
-      const TAG_NAME = role.name.toUpperCase()
-      const TAG_MARGIN = 20
-      const TAG_NAME_WIDTH = measureText(ctx, FONTS.TAG_LABEL, TAG_NAME).width
-      const TAG_HEIGHT = 34
-      const TAG_Y = CARD_MARGIN
+    ctx.write(user.username, 175, 147, FONTS.USERNAME, ALIGN.BOTTOM_LEFT)
+    ctx.write('lorem ipsum dolor', 175, 170, FONTS.USERNAME, ALIGN.BOTTOM_LEFT)
+    ctx.write('sit amet', 175, 190, FONTS.USERNAME, ALIGN.BOTTOM_LEFT)
 
-      const TAG_COLOR = new Color(role.hexColor)
-      ctx.fillStyle = TAG_COLOR.rgba(true)
-      ctx.roundRect(PROFILE_X, TAG_Y - (TAG_HEIGHT * 0.5), TAG_NAME_WIDTH + TAG_MARGIN * 2, TAG_HEIGHT, TAG_HEIGHT * 0.5, true)
-      ctx.fillStyle = TAG_COLOR.colorInvert.rgba(true)
-      ctx.write(TAG_NAME, PROFILE_X + TAG_MARGIN, TAG_Y, FONTS.TAG_LABEL, ALIGN.CENTER_LEFT)
-    }
-
-    // XP
-    //   XP Label
-    const XP_LABEL_RADIUS = 18
-    const XP_X = WIDTH - INNER_MARGIN - XP_LABEL_RADIUS
-    const XP_Y = CARD_MARGIN + BRIGHTER_HEIGHT
-    ctx.fillStyle = '#151515'
-    ctx.circle(XP_X, XP_Y, XP_LABEL_RADIUS, 0, Math.PI * 2)
-    ctx.fillStyle = TEXTCOLOR
-    ctx.write('XP', XP_X, XP_Y, FONTS.XP_LABEL, ALIGN.CENTER)
-    //   XP Bar
-    ctx.fillStyle = '#151515'
-    const XP_BAR_HEIGHT = 13
-    const XP_BAR_WIDTH = WIDTH - INNER_MARGIN * 2 - INNER_MARGIN * 0.5 - XP_LABEL_RADIUS * 2
-    ctx.roundRect(INNER_MARGIN, XP_Y - XP_BAR_HEIGHT * 0.5, XP_BAR_WIDTH, XP_BAR_HEIGHT, XP_BAR_HEIGHT * 0.5, true)
-    //   XP Bar current
-    ctx.fillStyle = FAVCOLOR.rgba(true)
-    ctx.roundRect(INNER_MARGIN, XP_Y - XP_BAR_HEIGHT * 0.5, XP_BAR_WIDTH * 0.5, XP_BAR_HEIGHT, XP_BAR_HEIGHT * 0.5, true)
-
-    // Sections
-    const SECTION_INNER_MARGIN = 16
     ctx.lineWidth = 1
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)' // #FFFFFF1A
     ctx.fillStyle = TEXTCOLOR
-    //   Info sections
-    const INFO_WIDTH = (WIDTH - INNER_MARGIN * 3) * 0.5
-    const INFO_HEIGHT = 82
-    const INFO_Y = HEIGHT - INNER_MARGIN - INFO_HEIGHT
-
-    const ICON_SIZE = 50
-    const ICON_Y = INFO_Y + INFO_HEIGHT * 0.5 - ICON_SIZE * 0.5
 
     //     Switchcoins
-    const COINS_X = INNER_MARGIN + SECTION_INNER_MARGIN
-    const COINS_TEXT_X = COINS_X + SECTION_INNER_MARGIN + ICON_SIZE - 7
-    const COINS_TEXT_Y = INFO_Y + INFO_HEIGHT * 0.5
-    ctx.roundRect(INNER_MARGIN, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
-    ctx.write('Switchcoins', COINS_TEXT_X, COINS_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
-    ctx.write(money, COINS_TEXT_X, COINS_TEXT_Y + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
-
-    //     Reputation
-    const REP_X = WIDTH - INNER_MARGIN - INFO_WIDTH
-    const REP_TEXT_X = REP_X + SECTION_INNER_MARGIN + ICON_SIZE + 7
-    const REP_TEXT_Y = INFO_Y + INFO_HEIGHT * 0.5
-    ctx.roundRect(REP_X, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
-    ctx.write('Reputation', REP_TEXT_X, REP_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
-    ctx.write(rep, REP_TEXT_X, REP_TEXT_Y + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
-
-    //   About section
-    const ABOUT_WIDTH = WIDTH - INNER_MARGIN * 2
-    const ABOUT_HEIGHT = 132
-    const ABOUT_Y = INFO_Y - INNER_MARGIN - ABOUT_HEIGHT
-    ctx.roundRect(INNER_MARGIN, ABOUT_Y, ABOUT_WIDTH, ABOUT_HEIGHT, 10, false, true)
-
-    const about = ctx.write('About me', SECTION_INNER_MARGIN * 2, ABOUT_Y + SECTION_INNER_MARGIN, FONTS.ABOUT_LABEL, ALIGN.TOP_LEFT)
-    ctx.writeParagraph(
-      personalText,
-      FONTS.ABOUT_VALUE,
-      about.leftX,
-      about.bottomY + INNER_MARGIN * 0.5,
-      WIDTH - INNER_MARGIN * 2,
-      ABOUT_Y + ABOUT_HEIGHT - INNER_MARGIN
-    )
+    ctx.write(`$ ${money} coisn`, 37, 187, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
 
     // Image handling
-    const [ avatarImage, coinsImage, repImage, backgroundImage ] = await IMAGE_ASSETS
+    const [ avatarImage, profile ] = await IMAGE_ASSETS
 
-    const AVATAR_HALF = AVATAR_SIZE * 0.5
-    const AVATAR_Y = CARD_MARGIN - (AVATAR_SIZE * 0.5)
-    //   Avatar shadow
-    ctx.save()
-    ctx.fillStyle = '#00000099'
-    ctx.shadowColor = '#00000099'
-    ctx.shadowBlur = 10
-    ctx.circle(INNER_MARGIN + AVATAR_HALF, AVATAR_Y + AVATAR_HALF, AVATAR_HALF, 0, Math.PI * 2)
-    ctx.restore()
+    const AVATAR_Y = CARD_MARGIN - (AVATAR_SIZE * 1.15)
     //   Avatar
-    ctx.roundImage(avatarImage, INNER_MARGIN, AVATAR_Y, AVATAR_SIZE, AVATAR_SIZE)
-
-    //   Info section
-    ctx.drawIcon(coinsImage, COINS_X, ICON_Y, ICON_SIZE, ICON_SIZE, TEXTCOLOR)
-    ctx.drawIcon(repImage, REP_X + SECTION_INNER_MARGIN, ICON_Y, ICON_SIZE, ICON_SIZE, TEXTCOLOR)
-
-    //   Background image
-    ctx.globalCompositeOperation = 'destination-over'
-    ctx.drawImage(backgroundImage, 0, 0, WIDTH, HEIGHT)
+    ctx.roundImage(avatarImage, 17, AVATAR_Y, AVATAR_SIZE, AVATAR_SIZE)
 
     // Modal
     ctx.fillStyle = '#FFFFFF'
     ctx.globalCompositeOperation = 'destination-in'
     ctx.roundRect(0, 0, WIDTH, HEIGHT, 10, true)
+
+    ctx.globalCompositeOperation = 'destination-over'
+    ctx.drawImage(profile, 0, 0, WIDTH, HEIGHT)
 
     return canvas.toBuffer()
   }
@@ -298,20 +196,20 @@ module.exports = class CanvasTemplates {
     const INNER_MARGIN = 25
 
     const FONTS = (() => {
-      const MEME = Math.random() > 0.99 && '"Comic Sans MS"'
+      const MEME = Math.random() > 0 && '"Comic Sans MS"'
       const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
       const REGULAR = MEME || '"Montserrat"'
       const LIGHT = MEME || '"Montserrat Light"'
       return {
         TITLE: `28px ${EXTRABOLD}`,
-        TOP_USERNAME: `bold 29px ${REGULAR}`,
+        TOP_USERNAME: `29px ${REGULAR}`,
         TOP_DISCRIMINATOR: `20px ${LIGHT}`,
         TOP_VALUE: `20px ${LIGHT}`,
-        TOP_POSITION: `bold 29px ${REGULAR}`,
-        OTHERS_USERNAME: `bold 19px ${REGULAR}`,
+        TOP_POSITION: `29px ${REGULAR}`,
+        OTHERS_USERNAME: `19px ${REGULAR}`,
         OTHERS_DISCRIMINATOR: `14px ${LIGHT}`,
         OTHERS_VALUE: `14px ${LIGHT}`,
-        OTHERS_POSITION: `bold 15px ${REGULAR}`
+        OTHERS_POSITION: `15px ${REGULAR}`
       }
     })()
 
@@ -508,14 +406,14 @@ module.exports = class CanvasTemplates {
     const INNER_MARGIN = 14
 
     const FONTS = (() => {
-      const MEME = Math.random() > 0.99 && '"Comic Sans MS"'
+      const MEME = Math.random() > 0 && '"Comic Sans MS"'
       const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
       const REGULAR = MEME || '"Montserrat"'
       const LIGHT = MEME || '"Montserrat Light"'
       const BLACK = MEME || '"Montserrat Black"'
       return {
         TITLE: `17px ${EXTRABOLD}`,
-        TEMPERATURE: `bold 90px ${EXTRABOLD}`,
+        TEMPERATURE: `90px ${EXTRABOLD}`,
         INFORMATIONS: `17px ${LIGHT}`,
         WEEK_DAYS: `17px ${REGULAR}`,
         WEEK_TEMPERATURES: `29px ${LIGHT}`,
@@ -703,12 +601,12 @@ module.exports = class CanvasTemplates {
     ])
 
     const FONTS = (() => {
-      const MEME = Math.random() > 0.99 && '"Comic Sans MS"'
+      const MEME = Math.random() > 0 && '"Comic Sans MS"'
       const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
       const BLACK = MEME || '"Montserrat Black"'
       return {
-        TITLE: `italic 27px ${EXTRABOLD}`,
-        PERCENT: `italic 27px ${BLACK}`
+        TITLE: `27px ${EXTRABOLD}`,
+        PERCENT: `27px ${BLACK}`
       }
     })()
 
