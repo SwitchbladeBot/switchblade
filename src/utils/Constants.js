@@ -108,5 +108,6 @@ module.exports = {
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
   DEFAULT_BACKGROUND_GRAY_PNG: 'src/assets/png/backgrounds/default_gray.png',
-  TESTING_BACKGROUND_PNG: 'src/assets/png/backgrounds/testing.png'
+  TESTING_BACKGROUND_PNG: 'src/assets/png/backgrounds/testing.png',
+  PROFILE_PNG: 'src/assets/png/profiles/oof.png'
 }
