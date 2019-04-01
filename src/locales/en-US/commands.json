@@ -1,12 +1,12 @@
 {
   "neko": {
-    "commandDescription": "˙ʇᴉ sʎɐldsᴉp puɐ (MℲSN sᴉ lǝuuɐɥɔ ǝɥʇ ɟᴉ pʍǝl) lɹᴉƃ oʞǝu ɯopuɐɹ ɐ sǝɥɔʇǝℲ",
-    "hereIsYour_neko": "¡oʞǝu ɹnoʎ s,ǝɹǝH",
-    "hereIsYour_lewd": "¡oʞǝu pʍǝl ɹnoʎ s,ǝɹǝH"
+    "commandDescription": "Fetches a wanydom nyeko giww (wewd if the chanynyew is NYSFW) anyd dispways it.",
+    "hereIsYour_neko": "Hewe's youw nyeko owo",
+    "hereIsYour_lewd": "Hewe's youw wewd nyeko ^w^"
   },
   "reverse": {
     "commandDescription": "Reverses the text.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "noSentence": "You have to give me some text to reverse!"
   },
   "hmmm": {
@@ -26,17 +26,17 @@
   },
   "avatar": {
     "commandDescription": "Shows yours or someone else's avatar.",
-    "commandUsage": "[ɹǝsn]",
-    "someonesAvatar": "ɹɐʇɐʌɐ s,{{- user}}"
+    "commandUsage": "[usew]",
+    "someonesAvatar": "{{- user}}'s avataw"
   },
   "dog": {
-    "commandDescription": "¡ɟooM ˙ʇᴉ sʎɐldsᴉp puɐ ƃop ɯopuɐɹ ɐ sǝɥɔʇǝℲ",
-    "hereIsYourDog": "¡ƃop ɹnoʎ s,ǝɹǝH"
+    "commandDescription": "Fetches a wanydom dog anyd dispways it. Woof >w<",
+    "hereIsYourDog": "Hewe's youw dog >w<"
   },
   "invite": {
     "commandDescription": "Shows Switchblade's invite link.",
-    "clickHere": "ɹǝʌɹǝs ɹnoʎ oʇ ǝɯ ǝʇᴉʌuᴉ oʇ ǝɹǝɥ ʞɔᴉlƆ",
-    "noteThat": "˙sʇoq ǝʇᴉʌuᴉ oʇ ɹǝpɹo uᴉ uoᴉssᴉɯɹǝd **$t(permissions:MANAGE_GUILD)** ǝɥʇ pǝǝu noʎ ʇɐɥʇ ǝʇoN"
+    "clickHere": "Cwick hewe to invite me to youw sewvew owo",
+    "noteThat": "Note that you nyeed the **$t(permissions:MANAGE_GUILD)** permission in owdew to inyvite bots."
   },
   "ping": {
     "commandDescription": "Checks if the bot is online."
@@ -71,7 +71,7 @@
     "subcommands": {
       "user": {
         "commandDescription": "Searches for a user on GitHub.",
-        "commandUsage": "<ǝɯɐuɹǝsn>",
+        "commandUsage": "<usewnyame>",
         "noUser": "You have to give me a valid user!",
         "userNotFound": "User not found.",
         "moreRepos": "...and {{repos}} more repositories.",
@@ -107,12 +107,12 @@
     "commandDescription": "Searches for a song, playlist, album or an artist on Spotify, or displays information about a user.",
     "commandUsage": "<type> <query>",
     "album": "Album",
-    "genres": "Genres",
+    "genres": "Genwes",
     "artist": "Artist",
-    "artistPlural": "Artists",
+    "artistPlural": "Awtists",
     "track": "Song",
     "trackPlural": "Songs",
-    "albumPlural": "Albums",
+    "albumPlural": "Awbums",
     "moreTracks": "...and {{tracks}} more songs.",
     "moreAlbums": "...and {{albums}} more albums.",
     "followers": "Followers",
@@ -146,7 +146,7 @@
       },
       "user": {
         "commandDescription": "Gets information about a user on Spotify.",
-        "commandUsage": "<ɹǝsn>",
+        "commandUsage": "<usew>",
         "notFound": "User not found.",
         "userInfo": "User information"
       }
@@ -157,14 +157,14 @@
   },
   "owo": {
     "commandDescription": "Owoifies your text.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "missingSentence": "You have to give me some text to owoify!",
     "tooLongTitle": "Your text is longer than 200 characters!",
     "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
   "piratespeak": {
     "commandDescription": "Pirateifies your text.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "missingSentence": "You have to give me some text to pirateify!"
   },
   "daily": {
@@ -175,15 +175,15 @@
   },
   "money": {
     "commandDescription": "Shows how many $t(commons:currency_plural) someone has.",
-    "commandUsage": "[dnʞool oʇ ɹǝsn]",
+    "commandUsage": "[usew to wookup]",
     "youHave": "You have **$t(commons:currencyWithCount, { 'count': {{count}} })** in your account.",
     "someoneHas": "{{- user}} has **$t(commons:currencyWithCount, { 'count': {{count}} })** in their account."
   },
   "kiss": {
     "commandDescription": "Kisses someone.",
-    "commandUsage": "<ssᴉʞ oʇ ɹǝsn>",
+    "commandUsage": "<usew to kiss>",
     "noMention": "You have to mention someone.",
-    "notYourself": "¡ɟlǝsɹnoʎ ssᴉʞ ʇ,uɐɔ no⅄",
+    "notYourself": "You cany't kiss youwsewf! >w<",
     "success": "{{- kisser}} kissed {{- kissed}}."
   },
   "handshake": {
@@ -199,7 +199,7 @@
   },
   "8ball": {
     "commandDescription": "Asks the magic 8-Ball about something.",
-    "commandUsage": "<uoᴉʇsǝnb>",
+    "commandUsage": "<questiony>",
     "noQuestion": "You have to ask me something!",
     "answers": {
       "0": "It is certain.",
@@ -226,14 +226,14 @@
   },
   "fliptext": {
     "commandDescription": "Flips the text upside down.",
-    "commandUsage": "<pǝddᴉlɟ ǝq oʇ ʇxǝʇ>",
+    "commandUsage": "<text to be fwipped>",
     "noSentence": "You have to give me some text to flip!"
   },
   "npm": {
     "commandDescription": "Shows information about an NPM package.",
-    "commandUsage": "<ǝɯɐu ǝƃɐʞɔɐd>",
+    "commandUsage": "<package nyame>",
     "noDescription": "No description provided.",
-    "notFound": "˙punoɟ ʇou ǝƃɐʞɔɐԀ",
+    "notFound": "Package nyot founyd. TwT",
     "noNameProvided": "You have to give me a package name!",
     "lastPublish": "Last publish",
     "install": "Install",
@@ -241,7 +241,7 @@
   },
   "poll": {
     "commandDescription": "Creates a poll.",
-    "commandUsage": "[˙˙˙|Ɛ uoᴉʇdo|ᄅ uoᴉʇdo|Ɩ uoᴉʇdo|] <ǝlʇᴉʇ llod>",
+    "commandUsage": "<poww titwe> [|optiony 1|optiony 2|optiony 3|...]",
     "noQuestion": "You have to give me something to be voted!",
     "tooManyOptions": "You can't exceed {{maxOptions}} options!"
   },
@@ -287,25 +287,25 @@
   },
   "stop": {
     "commandDescription": "Stops the music playback.",
-    "stopped": "˙lǝuuɐɥɔ ǝɔᴉoʌ ǝɥʇ ƃuᴉʌɐǝl 'pǝddoʇs uǝǝq sɐɥ ʞɔɐqʎɐlԀ"
+    "stopped": "Pwayback has beeny stopped, weavinyg the voice chanynyew."
   },
   "volume": {
     "commandDescription": "Adjusts the volume of the music playback.",
-    "commandUsage": "<0ϛƖ-0>",
+    "commandUsage": "<0-150>",
     "missingVolumeParameter": "You have to give me a volume level!",
     "invalidVolumeParameter": "You have to give me a valid number!",
     "notPlaying": "Volume can't be adjusted while not playing anything!",
-    "volumeSet": "%{{volume}} oʇ ʇǝs ǝɯnloΛ"
+    "volumeSet": "Vowume set to {{volume}}%"
   },
   "help": {
     "commandDescription": "Shows information about commands or lists them.",
-    "commandUsage": "[ǝɯɐu puɐɯɯoɔ]",
-    "listTitle": "spuɐɯɯoɔ ǝlqɐlᴉɐʌ∀",
-    "prefix": "xᴉɟǝɹԀ",
+    "commandUsage": "[commanyd nyame]",
+    "listTitle": "Avaiwabwe commanyds",
+    "prefix": "Pwefix",
     "youCanUse": "You can also use {{- botMention}} as a prefix.",
     "specificInformation": "Type {{helpString}} for command specific information.",
-    "aliases": "sǝsɐᴉl∀",
-    "subcommands": "spuɐɯɯoɔqnS",
+    "aliases": "Awiases",
+    "subcommands": "Subcommanyds",
     "permissions": "Permissions",
     "botPermissions": "Bot permissions",
     "flags": "Flags",
@@ -315,11 +315,11 @@
   },
   "e621": {
     "commandDescription": "Sends a random yiff from e621.",
-    "hereIsYour_yiff": "¡ɟɟᴉʎ ɹnoʎ s,ǝɹǝH"
+    "hereIsYour_yiff": "Hewe's youw yiff!"
   },
   "pay": {
     "commandDescription": "Pays $t(commons:currency_plural) to a user.",
-    "commandUsage": "<ǝnlɐʌ> <ɹǝqɯǝɯ@>",
+    "commandUsage": "<@membew> <vawue>",
     "noMember": "You have to mention someone!",
     "noValue": "You have to give me a valid number of $t(commons:currency_plural) to send!",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that!",
@@ -328,31 +328,31 @@
   },
   "xkcd": {
     "commandDescription": "Shows an XKCD webcomic.",
-    "commandUsage": "[,,ʇsǝʇɐl,,|#]",
+    "commandUsage": "[#|\"latest\"]",
     "invalidArgument": "You have to give me a valid XKCD number!",
     "notFound": "XKCD not found."
   },
   "xkcd37": {
     "commandDescription": "Whenever anyone calls something an [adjective]-ass [noun], moves the hyphen one word to the right.",
-    "commandUsage": "<ʇxǝʇ>"
+    "commandUsage": "<text>"
   },
   "math": {
     "commandDescription": "Evaluates a math expression.",
-    "commandUsage": "<uoᴉssǝɹdxǝ>",
+    "commandUsage": "<expwessiony>",
     "needMathExpression": "You have to give me a math expression to evaluate!",
     "invalidMathExpression": "Invalid math expression.",
-    "result": "`{{result}}` :ʇlnsǝɹ"
+    "result": "Wesuwt: `{{result}}`"
   },
   "stoptyping": {
     "commandDescription": "Forces the bot to stop typing.",
-    "tryingToStop": "˙˙˙ƃuᴉdʎʇ doʇs oʇ ƃuᴉʎɹ┴"
+    "tryingToStop": "Twyinyg to stop typinyg..."
   },
   "isitup": {
     "commandDescription": "Checks whether a website is up or down.",
-    "commandUsage": "<ssǝɹppɐ>",
-    "isUp": "¡dn sᴉ ǝʇᴉsqǝʍ ʇɐɥ┴",
-    "isDown": "˙uʍop sᴉ ǝʇᴉsqǝʍ ʇɐɥ┴",
-    "details": "˙**{{body.response_code}}** ǝpoɔ Ԁ┴┴H ɥʇᴉʍ puodsǝɹ oʇ **{{body.response_ip}}** ɹoɟ **sɯ{{body.response_time}}** ʞooʇ ʇI",
+    "commandUsage": "<addwess>",
+    "isUp": "That website is up! ^w^",
+    "isDown": "That website is downy. TwT",
+    "details": "It took **{{body.response_time}}ms** fow **{{body.response_ip}}** to wesponyd with HTTP code **{{body.response_code}}**.",
     "noWebsite": "You have to give me a website to check!"
   },
   "coinflip": {
@@ -361,86 +361,86 @@
   },
   "betflip": {
     "commandDescription": "Bets $t(commons:currency_plural) on a coin flip.",
-    "commandUsage": "<slᴉɐʇ | spɐǝɥ> <ʇǝq oʇ ǝnlɐʌ>",
-    "victory": "¡**$t(commons:currencyWithCount, { 'count': {{count}} })** uoʍ noʎ os '**$t(commons:{{chosenSide}})** pǝpuɐl ʇᴉ 'ʎɐ⅄",
+    "commandUsage": "<vawue to bet> <heads | tails>",
+    "victory": "Yaaay, it wanyded **$t(commons:{{chosenSide}})**, so you wony **$t(commons:currencyWithCount, { 'count': {{count}} })**! ^w^",
     "loss": "Uh-oh, it landed **$t(commons:{{chosenSide}})**, so you lost **$t(commons:currencyWithCount, { 'count': {{count}} })**.",
     "noBetValue": "You have to give me a value to bet!",
     "noCoin": "You have to give me a coin side to bet on!"
   },
   "botinfo": {
     "commandDescription": "Sends information about me.",
-    "hello": "˙spǝǝu puɐ sɯǝlqoɹd ɹǝʌɹǝs ɹnoʎ ɟo llɐ ɥʇᴉʍ noʎ dlǝɥ oʇ ʇlᴉnq 'ʇoq pɹoɔsᴉp ǝsodɹnd-ᴉʇlnɯ ɐ ɯ,I puɐ '**{{user.username}}** sᴉ ǝɯɐu ʎɯ 'ollǝH",
+    "hello": "Hewwo, my nyame is **{{user.username}}**, anyd I'm a muwti-puwpose Discowd bot, buiwt to hewp you with aww of youw sewvew pwobwems anyd nyeeds.",
     "statistics": "I've been up for **{{uptime}}**, helping **{{guilds}} servers** and **{{users}} users** with **{{commands}} commands**. Currently running on **[Node.js {{nodeVersion}}](https://nodejs.org)** and **[discord.js v{{Discord.version}}](https://discord.js.org)**.",
-    "links": "sʞuᴉl lnɟǝs∩",
-    "inviteLink": " **[ɹǝʌɹǝs ɹnoʎ oʇ ǝɯ ǝʇᴉʌuI](https://invite.switchblade.xyz)** {{Constants.BOT_BADGE}}",
-    "supportServer": "**[ɹǝʌɹǝs ʇɹoddns ʎɯ uᴉoſ](https://support.switchblade.xyz)** {{Constants.DISCORD_LOGO}}",
-    "translate": "**[ǝƃɐnƃuɐl ɹnoʎ oʇ ǝɯ ǝʇɐlsuɐɹ┴](https://translate.switchblade.xyz)** {{Constants.CROWDIN_LOGO}}",
-    "github": "**[ʎɹoʇᴉsodǝɹ qnHʇᴉפ](https://github.com/SwitchbladeBot/switchblade)** {{Constants.GITHUB_LOGO}}",
-    "website": "**[ǝʇᴉsqǝM ʎW](https://switchblade.xyz)** {{Constants.SWITCHBLADE_LOGO}}",
-    "patreon": "{{Constants.PATREON_LOGO}} **[ǝɯ ʇɹoddnS](https://www.patreon.com/switchblade)**"
+    "links": "Usefuw winyks",
+    "inviteLink": "{{Constants.BOT_BADGE}} **[IInyvite me to youw sewvew](https://invite.switchblade.xyz)**",
+    "supportServer": "{{Constants.DISCORD_LOGO}} **[Joiny my suppowt sewvew](https://support.switchblade.xyz)**",
+    "translate": "{{Constants.CROWDIN_LOGO}} **[Twanyswate me to youw wanyguage](https://translate.switchblade.xyz)**",
+    "github": "{{Constants.GITHUB_LOGO}} **[GitHub wepositowy](https://github.com/SwitchbladeBot/switchblade)**",
+    "website": "{{Constants.SWITCHBLADE_LOGO}} **[My Website](https://switchblade.xyz)**",
+    "patreon": "{{Constants.PATREON_LOGO}} **[Suppowt me](https://www.patreon.com/switchblade)**"
   },
   "guildinfo": {
     "commandDescription": "Sends information about the current or another server.",
     "commandUsage": "[server id]",
-    "id": "pI",
-    "owner": "ɹǝuʍO",
-    "region": "uoᴉƃǝɹ",
-    "channels": "**({{count}})** slǝuuɐɥƆ",
-    "textChannels": "**{{count}}** :ʇxǝ┴",
-    "voiceChannels": "**{{count}}** :ǝɔᴉoΛ",
-    "createdAt": "ʇ∀ pǝʇɐǝɹƆ",
-    "joinedAt": "ʇ∀ pǝuᴉoſ",
-    "members": "**({{count}})** sɹǝqɯǝW",
-    "streaming": "**{{count}}** :ƃuᴉɯɐǝɹʇS",
-    "online": "**{{count}}** :ǝuᴉluO",
-    "idle": "**{{count}}** :ǝlpI",
-    "dnd": "**{{count}}** :qɹnʇsᴉp ʇoN op",
-    "offline": "**{{count}}** :ǝuᴉlɟɟO",
-    "users": "**{{count}}** :sɹǝs∩",
-    "bots": "**{{count}}** :sʇoq"
+    "id": "ID",
+    "owner": "Ownyew",
+    "region": "Wegiony",
+    "channels": "Chanynyews **({{count}})**",
+    "textChannels": "Text: **{{count}}**",
+    "voiceChannels": "Voice: **{{count}}**",
+    "createdAt": "Cweated At",
+    "joinedAt": "Joinyed At",
+    "members": "Membews **({{count}})**",
+    "streaming": "Stweaminyg: **{{count}}**",
+    "online": "Onywinye: **{{count}}**",
+    "idle": "Idwe: **{{count}}**",
+    "dnd": "Do NYot Distuwb: **{{count}}**",
+    "offline": "Offwinye: **{{count}}**",
+    "users": "Usews: **{{count}}**",
+    "bots": "Bots: **{{count}}**"
   },
   "userinfo": {
     "commandDescription": "Sends yours or someone else's user information.",
-    "online": "ǝuᴉluO {{Constants.ONLINE_STATUS}}",
-    "idle": "ǝlpI {{Constants.IDLE_STATUS}}",
-    "dnd": "qɹnʇsᴉp ʇoN op {{Constants.DND_STATUS}}",
-    "offline": "ǝuᴉlɟɟO {{Constants.OFFLINE_STATUS}}",
-    "tag": "ƃɐ┴pɹoɔsᴉp",
-    "id": "pI",
-    "status": "snʇɐʇS",
-    "createdAt": "ʇɐ pǝʇɐǝɹƆ",
-    "joinedAt": "ʇɐ pǝuᴉoſ",
-    "serversInCommon": "({{count}}) uoɯɯoɔ uᴉ sɹǝʌɹǝS",
-    "memberNumber": "Member #{{count}}"
+    "online": "{{Constants.ONLINE_STATUS}} Onywinye",
+    "idle": "{{Constants.IDLE_STATUS}} Idwe",
+    "dnd": "{{Constants.DND_STATUS}} Do NYot Distuwb >w<",
+    "offline": "{{Constants.OFFLINE_STATUS}} Offwinye",
+    "tag": "DiscowdTag",
+    "id": "ID",
+    "status": "Status",
+    "createdAt": "Cweated at",
+    "joinedAt": "Joinyed at",
+    "serversInCommon": "Sewvews iny commony ({{count}})",
+    "memberNumber": "Membew #{{count}}"
   },
   "samp": {
     "commandDescription": "Shows information about a GTA San Andreas: Multiplayer server.",
-    "commandUsage": "[ʇɹod:]<dᴉ>",
+    "commandUsage": "<ip>[:powt]",
     "noIP": "You have to give me an IP!",
     "serverUnreachableTitle": "I couldn't reach this server.",
-    "serverUnreachableDescription": "˙ɹǝʇɐl uᴉɐƃɐ ʎɹʇ ɹo 'ʇɹod puɐ ԀI ǝɥʇ ʞɔǝɥƆ",
-    "address": "ssǝɹpp∀",
-    "version": "uoᴉsɹǝΛ",
-    "players": "sɹǝʎɐlԀ",
-    "map": "dɐW",
-    "gameMode": "ǝpoW ǝɯɐפ",
-    "time": "ǝɯᴉ┴"
+    "serverUnreachableDescription": "Check the IP anyd powt, ow twy againy watew.",
+    "address": "Addwess",
+    "version": "Vewsiony",
+    "players": "Pwayews",
+    "map": "Map",
+    "gameMode": "Game Mode",
+    "time": "Time"
   },
   "qrcode": {
     "commandDescription": "Generates a QR Code.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "noText": " You have to give me some text!"
   },
   "strawpoll": {
     "commandDescription": "Creates a Straw Poll.",
-    "commandUsage": "<˙˙˙Ɛ uoᴉʇdo|ᄅ uoᴉʇdo|Ɩ uoᴉʇdo>|ǝlʇᴉʇ llod>",
+    "commandUsage": "<poww titwe|<optiony 1|optiony 2|optiony 3...>",
     "noParameters": "You have to give me a title and some options!",
     "optionsNumberError": "You have to give me a number of options between 2 and 30!",
-    "clickHere": "ǝʇoʌ oʇ ǝɹǝɥ ʞɔᴉlƆ"
+    "clickHere": "Cwick hewe to vote"
   },
   "imageoftheday": {
     "commandDescription": "Shows the NASA Image of the Day.",
-    "embedAuthor": "ʎɐp ǝɥʇ ɟo ǝƃɐɯI ∀S∀N"
+    "embedAuthor": "NYASA Image of the Day"
   },
   "deezer": {
     "commandDescription": "Searches for a song, playlist, podcast, album or an artist Deezer, or displays information about a user.",
@@ -449,7 +449,7 @@
     "noTracksFound": "I couldn't find any song with that name.",
     "fans": "Fans",
     "fansCount": "{{fans}} fans",
-    "createdAt": "ʇɐ pǝʇɐǝɹƆ",
+    "createdAt": "Cweated at",
     "createdBy": "Created by",
     "followers": "Followers",
     "following": "Following",
@@ -487,29 +487,29 @@
       },
       "user": {
         "commandDescription": "Gets information about a user on Deezer.",
-        "commandUsage": "<ɹǝsn>",
+        "commandUsage": "<usew>",
         "userInfo": "User information"
       }
     }
   },
   "profile": {
     "commandDescription": "Shows yours or someone else's profile.",
-    "commandUsage": "[ɹǝsn]"
+    "commandUsage": "[usew]"
   },
   "myanimelist": {
     "commandDescription": "Searches for an anime on MyAnimeList.",
-    "commandUsage": "<ǝɯɐu ǝɯᴉuɐ>",
+    "commandUsage": "<anyime nyame>",
     "noAnime": "You have to give me an anime to search for!",
-    "score": "ǝɹoɔS",
-    "episodes": "sǝposᴉdƎ",
-    "studio": "oᴉpnʇS",
-    "studio_plural": "soᴉpnʇS",
-    "aired": "pǝɹᴉ∀",
+    "score": "Scowe",
+    "episodes": "Episodes",
+    "studio": "Studio",
+    "studio_plural": "Studios",
+    "aired": "Aiwed",
     "animeNotFound": "I couldn't find an anime with that name!"
   },
   "dicksize": {
     "commandDescription": "Shows how small your dick is.",
-    "yourDickSize": "ǝzᴉS ʞɔᴉp ɹno⅄"
+    "yourDickSize": "Youw Dick Size"
   },
   "restrictemoji": {
     "commandDescription": "Permits, rejects or resets emoji usage permission for a role.",
@@ -538,20 +538,20 @@
     "commandDescription": "Changes the current server's configuration.",
     "guildLang": "To change the server language, use `{{command}} language <language code>`",
     "guildPrefix": "To change the server prefix, use `{{command}} prefix <new prefix>`",
-    "missingTranslation": "**(ɥƃnoɥʇ ǝɔuǝʇuǝs sᴉɥʇ ɹoɟ ʇoN ˙ƃuᴉssᴉɯ ǝq ʇɥƃᴉɯ suoᴉʇɐlsuɐɹʇ ʍǝɟ ∀)**",
+    "missingTranslation": " **(A few twanyswationys might be missinyg. NYot fow this senytenyce though ^_^)**",
     "subcommands": {
       "language": {
         "commandDescription": "Changes the current server language.",
-        "commandUsage": "<ǝpoɔ ǝƃɐnƃuɐl>",
+        "commandUsage": "<wanyguage code>",
         "noCode": "You have to give me a language code!",
-        "availableLanguages": "sǝƃɐnƃuɐl ǝlqɐlᴉɐʌ∀",
-        "changedSuccessfully": "˙,{{lang}}, oʇ pǝƃuɐɥɔ ǝƃɐnƃuɐ˥"
+        "availableLanguages": "Avaiwabwe wanyguages",
+        "changedSuccessfully": "Wanyguage chanyged to `{{lang}}`."
       },
       "prefix": {
         "commandDescription": "Changes the current server prefix.",
-        "commandUsage": "<xᴉɟǝɹd ʍǝu>",
+        "commandUsage": "<nyew pwefix>",
         "noPrefix": "You have to give me a prefix!",
-        "changedSuccessfully": "˙,{{prefix}}, oʇ pǝƃuɐɥɔ xᴉɟǝɹԀ"
+        "changedSuccessfully": "Pwefix chanyged to `{{prefix}}`."
       }
     }
   },
@@ -560,67 +560,67 @@
   },
   "asciify": {
     "commandDescription": "Turns your text into an ASCII art.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "noText": "You have to give me some text to asciify!"
   },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",
-    "hereIsYourHentai": "¡ᴉɐʇuǝɥ ɹnoʎ s,ǝɹǝH"
+    "hereIsYourHentai": "Hewe's youw henytai! uwu"
   },
   "shiba": {
-    "commandDescription": "¡ɟooM ˙ʇᴉ sʎɐldsᴉp puɐ nuI ɐqᴉɥS ɯopuɐɹ ɐ sǝɥɔʇǝℲ",
-    "hereIsYourShiba": "¡ɐqᴉɥS ɹnoʎ s,ǝɹǝH"
+    "commandDescription": "Fetches a wanydom Shiba Inyu anyd dispways it. Woof owo",
+    "hereIsYourShiba": "Hewe's youw Shiba owo"
   },
   "lyrics": {
     "commandDescription": "Finds the lyrics of a song.",
     "commandUsage": "<song name>",
-    "noLyricsFound": "˙punoɟ ǝq ʇou plnoɔ sɔᴉɹʎl s,ƃuos pǝpᴉʌoɹd ǝɥ┴",
+    "noLyricsFound": "The pwovided sonyg's wywics couwd nyot be founyd.",
     "noLyricsFoundPlaying": "The current song's lyrics could not be found.",
     "noTrackName": "You have to give me a song name!",
-    "fullLyrics": "sɔᴉɹʎl llnɟ ǝɥʇ ǝǝs oʇ ǝɹǝɥ ʞɔᴉlƆ"
+    "fullLyrics": "Cwick hewe to see the fuww wywics"
   },
   "binary": {
     "commandDescription": "Converts your text into binary.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "missingText": "You have to give me some text or binary!",
-    "textToBinary": "ʎɹɐuᴉq uI",
-    "binaryToText": "ʇxǝ┴ uI",
+    "textToBinary": "Iny Binyawy",
+    "binaryToText": "Iny Text",
     "tooLongTitle": "Your text is longer than 200 characters!",
     "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
   "cowsay": {
     "commandDescription": "Turns your text into cowsay.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "noText": "You have to give me some text!"
   },
   "inspirobot": {
     "commandDescription": "Shows a random InspiroBot quote.",
-    "quote": "¡ǝʇonb ʇoqoɹᴉdsuI ɹnoʎ s,ǝɹǝH"
+    "quote": "Hewe's youw InyspiwoBot quote!"
   },
   "cat": {
-    "commandDescription": "~ɐʎN ˙ʇᴉ sʎɐldsᴉp puɐ ʇɐɔ ɯopuɐɹ ɐ sǝɥɔʇǝℲ",
-    "hereIsYourCat": "¡ʇɐɔ ɹnoʎ s,ǝɹǝH"
+    "commandDescription": "Fetches a wanydom cat anyd dispways it. Nyya~ >w<",
+    "hereIsYourCat": "Hewe's youw cat >w<"
   },
   "i18n": {
     "commandDescription": "Shows the link to Switchblade's translation page.",
-    "translateMe": "**[Translate me to your language](https://translate.switchblade.xyz)**"
+    "translateMe": "**[Twanyswate me to youw wanyguage](https://translate.switchblade.xyz)**"
   },
   "beatsaver": {
     "commandDescription": "Searches for a Beatmap on Beat Saver.",
-    "commandUsage": "<ɹǝpɐoldn ɹo ɹoɥʇnɐ 'pᴉ 'ƃuos 'ǝɯɐu dɐɯʇɐǝq>",
-    "download": "pɐoluʍop",
-    "details": "slᴉɐʇǝp",
+    "commandUsage": "<beatmap nyame, sonyg, id, authow ow upwoadew>",
+    "download": "Downywoad",
+    "details": "Detaiws",
     "noQuery": "You have to give me a map name, song, author, id or an uploader.",
     "notFound": "No Beatmaps were found."
   },
   "favcolor": {
     "commandDescription": "Sets your profile color.",
-    "commandUsage": "<ǝpoɔxǝɥ#>",
-    "changedSuccessfully": "˙{{hexcode}} oʇ pǝƃuɐɥɔ ɹoloɔ ǝlᴉɟoɹԀ"
+    "commandUsage": "<#hexcode>",
+    "changedSuccessfully": "Pwofiwe cowow chanyged to {{hexcode}}."
   },
   "rep": {
     "commandDescription": "Gives a reputation point to someone.",
-    "commandUsage": "<ɹǝsn>",
+    "commandUsage": "<usew>",
     "noMention": "You have to mention someone!",
     "reputationPoint": "You gave a reputation point to {{user}}.",
     "againIn": "You already gave a reputation point to someone today. You can do it again in **{{time}}**.",
@@ -629,57 +629,57 @@
   },
   "personaltext": {
     "commandDescription": "Sets a personal text on your profile.",
-    "commandUsage": "<ʇxǝʇ lɐuosɹǝd>",
+    "commandUsage": "<pewsonaw text>",
     "noText": "You have to give me some text!",
     "tooLongText": "Your text is longer than {{limit}} characters!",
-    "changedSuccessfully": "¡pǝƃuɐɥɔ ʇxǝʇ lɐuosɹǝԀ"
+    "changedSuccessfully": "Pewsonyaw text chanyged!"
   },
   "guildicon": {
     "commandDescription": "Shows the current or another server's icon.",
-    "iconDescription": ":uoɔᴉ s,{{guild}}",
-    "noIcon": "¡uoɔᴉ uɐ ǝʌɐɥ ʇ,usǝop ɹǝʌɹǝs sᴉɥ┴"
+    "iconDescription": "{{guild}}'s icony:",
+    "noIcon": "This sewvew doesny't have any icony TwT"
   },
   "fivem": {
     "commandDescription": "Shows information about a FiveM server.",
-    "commandUsage": "[ʇɹod:]<dᴉ>",
+    "commandUsage": "<ip>[:powt]",
     "noIP": "You have to give me an IP!",
     "serverUnreachableTitle": "I couldn't reach this server.",
-    "serverUnreachableDescription": "˙ɹǝʇɐl uᴉɐƃɐ ʎɹʇ ɹo 'ʇɹod puɐ ԀI ǝɥʇ ʞɔǝɥƆ",
-    "address": "ssǝɹpp∀",
-    "version": "uoᴉsɹǝΛ",
-    "players": "sɹǝʎɐlԀ",
-    "map": "dɐW",
-    "gameMode": "ǝpoW ǝɯɐפ",
-    "gameName": "ǝɯɐN ǝɯɐפ",
-    "noMap": "dɐɯ ʇlnɐɟǝp",
-    "noGameMode": "ǝuoN",
-    "noGameName": "punoɟ ʇoN"
+    "serverUnreachableDescription": "Check the IP anyd powt, ow twy againy watew.",
+    "address": "Addwess",
+    "version": "Vewsiony",
+    "players": "Pwayews",
+    "map": "Map",
+    "gameMode": "Game Mode",
+    "gameName": "Game NYame",
+    "noMap": "Defauwt map",
+    "noGameMode": "NYonye",
+    "noGameName": "NYot founyd"
   },
   "emoji": {
     "commandDescription": "Enlarges an emoji.",
-    "hereIsYourEmoji": "¡ᴉɾoɯǝ ɹnoʎ s,ǝɹǝH"
+    "hereIsYourEmoji": "Hewe's youw emoji!"
   },
   "clapify": {
     "commandDescription": "Clapifies your text.",
-    "commandUsage": "<ʎɟᴉdɐlɔ oʇ ʇxǝʇ>",
+    "commandUsage": "<text to cwapify>",
     "missingSentence": "You have to give me some text to clapify!",
     "tooLongText": "Your text can't be longer than {{limit}} characters!"
   },
   "numberfacts": {
     "commandDescription": "Shows a fact about a number.",
-    "commandUsage": "<ɹǝqɯnu>",
+    "commandUsage": "<nyumbew>",
     "validNumber": "You have to give me a number!"
   },
   "blacklist": {
     "commandDescription": "Adds a user to the blacklist.",
-    "commandUsage": "<uosɐǝɹ> <ɹǝsn>",
+    "commandUsage": "<usew> <weason>",
     "missingUser": "You have to give me a user to blacklist!",
     "missingReason": "You have to give me a reason for blacklisting!",
     "successTitle": "User added to the blacklist!"
   },
   "kick": {
     "commandDescription": "Kicks a member from this server.",
-    "commandUsage": "<uosɐǝɹ> <ɹǝqɯǝɯ>",
+    "commandUsage": "<membew> <weasony>",
     "missingUser": "You have to give me a member to kick!",
     "missingReason": "You have to give me a reason for kicking!",
     "noPermission": "I'm missing the **$t(permissions:KICK_MEMBERS)** permission to kick this member.",
@@ -688,7 +688,7 @@
   },
   "ban": {
     "commandDescription": "Bans a member from this server.",
-    "commandUsage": "<uosɐǝɹ> <ɹǝqɯǝɯ>",
+    "commandUsage": "<membew> <weasony>",
     "missingUser": "You have to give me a member to ban!",
     "missingReason": "You have to give me a reason for banning!",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to ban this member.",
@@ -697,7 +697,7 @@
   },
   "softban": {
     "commandDescription": "Bans a member, removes all of their messages and then unbans them.",
-    "commandUsage": "<uosɐǝɹ> <ɹǝqɯǝɯ>",
+    "commandUsage": "<membew> <weasony>",
     "missingUser": "You have to give me a member to softban!",
     "missingReason": "You have to give me a reason for softbanning!",
     "noPermission": "I'm missing the **$t(permissions:BAN_MEMBERS)** permission to softban this member.",
@@ -706,17 +706,17 @@
   },
   "unblacklist": {
     "commandDescription": "Removes a user from the blacklist.",
-    "commandUsage": "<ɹǝsn>",
+    "commandUsage": "<usew>",
     "success": "{{user}} has been removed from the blacklist!",
     "missingUser": "You have to give me a user to remove from the blacklist!",
     "notBlacklisted": "That user isn't blacklisted."
   },
   "whyblacklisted": {
     "commandDescription": "Shows why someone is blacklisted.",
-    "commandUsage": "<ɹǝsn>",
+    "commandUsage": "<usew>",
     "missingUser": "You have to give me a user to check the reason!",
     "notBlacklisted": "That user isn't blacklisted.",
-    "reasonTitle": "{{blacklister}} ʎq pǝʇsᴉlʞɔɐlq sɐʍ {{user}}"
+    "reasonTitle": "{{user}} was bwackwisted by {{blacklister}}"
   },
   "tipsfedora": {
     "commandDescription": "Shows the Tips Fedora meme."
@@ -727,11 +727,11 @@
     "subcommands": {
       "money": {
         "commandDescription": "Shows a list of the richest users.",
-        "title": "pɹɐoqɹǝpɐǝ˥ ʎǝuoW"
+        "title": "Monyey Weadewboawd"
       },
       "reputation": {
         "commandDescription": "Shows a list of the users with the most reputation points.",
-        "title": "pɹɐoqɹǝpɐǝ˥ uoᴉʇɐʇndǝɹ"
+        "title": "Weputationy Weadewboawd"
       }
     }
   },
@@ -748,7 +748,7 @@
     "commandDescription": "Shows a random geekjoke."
   },
   "aww": {
-    "title": "¡ɐʎ ɹoɟ ɥɔɐǝlqǝʎǝ ǝɯos sᴉ ǝɹǝH",
+    "title": "Hewe is some eyebweach fow ya >w<",
     "commandDescription": "Shows a random image from /r/aww."
   },
   "videochat": {
@@ -757,31 +757,31 @@
   },
   "vaporwave": {
     "commandDescription": "Vaporwavefies the text.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "missingSentence": "You have to give me some text to vaporwavefy!"
   },
   "emojify": {
     "commandDescription": "Emojifies the text.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "missingSentence": "You have to give me some text to emojify!"
   },
   "fox": {
     "commandDescription": "Shows a random image of a fox.",
-    "hereIsYourFox": "¡xoɟ ɹnoʎ s,ǝɹǝH"
+    "hereIsYourFox": "Hewe's youw fox UwU"
   },
   "birb": {
     "commandDescription": "Shows a random image of a birb.",
-    "hereIsYourBirb": "¡qɹᴉq ɹnoʎ s,ǝɹǝH"
+    "hereIsYourBirb": "Hewe's youw biwb UwU"
   },
   "loop": {
     "commandDescription": "Activates or deactivates the music playback's loop mode."
   },
   "time": {
     "commandDescription": "Get the current time in a specified place.",
-    "commandUsage": "<timezone>",
-    "currentTime": "sᴉ {{timezone}} uᴉ ǝɯᴉʇ ʇuǝɹɹnɔ ǝɥ┴",
+    "commandUsage": "<timezonye>",
+    "currentTime": "The cuwwenyt time iny {{timezone}} is",
     "noZone": "You have to give me a place to get the time!",
-    "notFound": "Couldn't find this place."
+    "notFound": "Couwdny't finyd this pwace."
   },
   "vote": {
     "commandDescription": "Gives you a bonus for voting on bot lists.",
@@ -799,9 +799,9 @@
     "botNotFound": "Bot not found.",
     "results": "Bot results for {{query}}",
     "noDescription": "This bot doesn't have a description.",
-    "prefix": "xᴉɟǝɹԀ",
+    "prefix": "Pwefix",
     "library": "Library",
-    "owner": "ɹǝuʍO",
+    "owner": "Ownyew",
     "ownerPlural": "Owners",
     "acceptedAt": "Accepted at",
     "servers": "Servers",
@@ -813,16 +813,16 @@
   },
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder.",
-    "reloaded": "¡pǝpɐolǝɹ sǝlɐɔo˥"
+    "reloaded": "Wocawes wewoaded! ^w^"
   },
   "tesla": {
     "commandDescription": "Shows a random image from /r/TeslaPorn."
   },
   "lmgtfy": {
     "commandDescription": "Google something for someone that they should have googled.",
-    "commandUsage": "<ʎɹǝnb>",
+    "commandUsage": "<quewy>",
     "noQuery": "I can't google something for you without keywords!",
-    "search": "¯/‾(ツ)‾\\¯ dlǝɥ ʇɥƃᴉɯ [sᴉɥ┴]({{link}})"
+    "search": "[This]({{link}}) might hewp ¯\\_(ツ)_/¯"
   },
   "twitch": {
     "commandDescription": "Searches for a user on Twitch.",
@@ -843,14 +843,14 @@
     "subcommands": {
       "server": {
         "commandDescription": "Shows information about a Minecraft server such as number of players and MOTD.",
-        "commandUsage": "<ssǝɹppɐ>",
+        "commandUsage": "<addwess>",
         "noIP": "You have to give me an address.",
         "unknownServer": "Server is offline or doesn't exist.",
         "server": "Minecraft Server",
-        "status": "snʇɐʇS",
-        "address": "ssǝɹpp∀",
-        "players": "sɹǝʎɐlԀ",
-        "version": "uoᴉsɹǝΛ",
+        "status": "Status",
+        "address": "Addwess",
+        "players": "Pwayews",
+        "version": "Vewsiony",
         "online": "Online",
         "offline": "Offline"
       },
@@ -873,106 +873,106 @@
   },
   "kemonomimi": {
     "commandDescription": "Shows a random kemonomimi (lewd if the channel is NSFW). (Girls with animal ears)",
-    "hereIsYour_kemonomimi": "¡ᴉɯᴉɯouoɯǝʞ ɹnoʎ s,ǝɹǝH",
-    "hereIsYour_lewdkemo": "¡ᴉɯᴉɯouoɯǝʞ pʍǝl ɹnoʎ s,ǝɹǝH"
+    "hereIsYour_kemonomimi": "Hewe's youw kemonyomimi! owo",
+    "hereIsYour_lewdkemo": "Hewe's youw wewd kemonyomimi! OwO"
   },
   "kitsune": {
     "commandDescription": "Shows a random kitsune girl (lewd if the channel is NSFW).",
-    "hereIsYour_fox_girl": "¡ǝunsʇᴉʞ ɹnoʎ s,ǝɹǝH",
-    "hereIsYour_lewdk": "¡ǝunsʇᴉʞ pʍǝl ɹnoʎ s,ǝɹǝH"
+    "hereIsYour_fox_girl": "Hewe's youw kitsunye! owo",
+    "hereIsYour_lewdk": "Hewe's youw wewd kitsunye! OwO"
   },
   "pat": {
     "commandDescription": "Pats someone.",
-    "commandUsage": "<ʇɐd oʇ ɹǝsn>",
+    "commandUsage": "<usew to pat>",
     "noMention": "You have to mention someone!",
-    "success": "{{- pat}}} sʇɐd {{- _author}"
+    "success": "{{- _author}} pats {{- pat}} owo"
   },
   "hug": {
     "commandDescription": "Hugs someone.",
-    "commandUsage": "<ƃnɥ oʇ ɹǝsn>",
+    "commandUsage": "<usew to hug>",
     "noMention": "You have to mention someone!",
     "success": "{{- hugger}} hugged {{- hugged}}."
   },
   "nekogif": {
     "commandDescription": "Shows a random neko girl gif (lewd if the channel is NSFW).",
-    "hereIsYour_ngif": "¡oʞǝu ɹnoʎ s,ǝɹǝH",
-    "hereIsYour_nsfw_neko_gif": "¡oʞǝu pʍǝl ɹnoʎ s,ǝɹǝH"
+    "hereIsYour_ngif": "Hewe's youw nyeko owo",
+    "hereIsYour_nsfw_neko_gif": "Hewe's youw wewd nyeko ^w^"
   },
   "slap": {
     "commandDescription": "Slaps someone.",
-    "commandUsage": "<dɐls oʇ ɹǝsn>",
+    "commandUsage": "<usew to swap>",
     "noMention": "You have to mention someone!",
-    "success": ">: ∀ʞ∀q {{- slapped}} pǝddɐls {{- _author}}"
+    "success": "{{- _author}} swapped {{- slapped}} BAKA :< TwT"
   },
   "steamladder": {
     "commandDescription": "Displays a ladder from Steam Ladder.",
-    "commandUsage": "[uoᴉƃǝɹ ɹo ʎɹʇunoɔ] [ɹǝppɐl]",
-    "userNotFound": "˙ɹǝsn ʇɐɥʇ puᴉɟ ʇ,uplnoɔ I",
-    "ladderNotFound": "˙ɹǝppɐl ʇɐɥʇ puᴉɟ ʇ,uplnoɔ I",
+    "commandUsage": "[waddew] [counytwy ow wegiony]",
+    "userNotFound": "I couwdny't finyd that usew.",
+    "ladderNotFound": "I couwdny't finyd that waddew.",
     "noRegion": "You have to give me a valid region name or country code!",
     "noLadder": "You have to give me a valid ladder!",
     "noUser": "You have to give me a valid user!",
-    "youCanAlsoUse": "˙sǝpoɔ ʎɹʇunoɔ ᄅ-ɐɥdlɐ ǝsn oslɐ uɐɔ no⅄",
-    "availableRegions": "suoᴉƃǝɹ ǝlqɐlᴉɐʌ∀",
-    "availableLadders": "sɹǝppɐl ǝlqɐlᴉɐʌ∀",
-    "gamesWithCount": "sǝɯɐƃ {{count}}",
-    "games": "sǝɯɐפ",
-    "levelWithNumber": "{{level}} lǝʌǝ˥",
-    "level": "lǝʌǝ˥",
-    "playtime": "ǝɯᴉʇʎɐlԀ",
-    "hours": "sɹnoɥ {{count}}",
-    "hoursInGame": "ǝɯɐƃ uᴉ sɹnoɥ {{count}}",
-    "inTheWorld": "plɹoʍ ǝɥʇ uᴉ {{position}}#",
-    "badgesWithCount": "sǝƃpɐq {{count}}",
-    "badges": "sǝƃpɐq",
-    "joinedOn": "{{date}} uo pǝuᴉoſ",
-    "friendsWithCount": "spuǝᴉɹɟ {{count}}",
-    "others": "sɹǝɥʇO",
+    "youCanAlsoUse": "You cany awso use awpha-2 counytwy codes.",
+    "availableRegions": "Avaiwabwe wegionys",
+    "availableLadders": "Avaiwabwe waddews",
+    "gamesWithCount": "{{count}} games",
+    "games": "Games",
+    "levelWithNumber": "Wevew {{level}}",
+    "level": "Wevew",
+    "playtime": "Pwaytime",
+    "hours": "{{count}} houws",
+    "hoursInGame": "{{count}} houws iny game",
+    "inTheWorld": "#{{position}} iny the wowwd",
+    "badgesWithCount": "{{count}} badges",
+    "badges": "Badges",
+    "joinedOn": "Joinyed on {{date}}",
+    "friendsWithCount": "{{count}} fwienyds",
+    "others": "Othews",
     "ladders": {
-      "XP": "lǝʌǝ˥ ʇsǝɥƃᴉH",
-      "G": "sǝɯɐפ ʇsoW",
-      "PT": "ǝɯᴉʇʎɐlԀ ʇsoW",
-      "B": "sǝƃpɐq ʇsoW",
-      "A": "ɯɐǝʇS uo ʇsǝƃuo˥"
+      "XP": "Higheest Wevew",
+      "G": "Most Games",
+      "PT": "Most Pwaytime",
+      "B": "Most Badges",
+      "A": "Wongest ony Steam"
     },
     "regions": {
-      "EUROPE": "ǝdoɹnƎ",
-      "NORTH_AMERICA": "ɐɔᴉɹǝɯ∀ ɥʇɹoN",
-      "SOUTH_AMERICA": "ɐɔᴉɹǝɯ∀ ɥʇnoS",
-      "ASIA": "ɐᴉs∀",
-      "AFRICA": "ɐɔᴉɹɟ∀",
-      "OCEANIA": "ɐᴉuɐǝɔO",
-      "ANTARCTICA": "ɐɔᴉʇɔɹɐʇu∀"
+      "EUROPE": "Euwope",
+      "NORTH_AMERICA": "Nyowth Amewica",
+      "SOUTH_AMERICA": "South Amewica",
+      "ASIA": "Asia",
+      "AFRICA": "Afwica",
+      "OCEANIA": "Oceanyia",
+      "ANTARCTICA": "Anytawctica"
     },
     "subcommands": {
       "profile": {
-        "commandUsage": "<ǝɯɐuɹǝsn>",
+        "commandUsage": "<usewnyame>",
         "commandDescription": "Shows someone's Steam Ladder profile."
       }
     }
   },
   "weather": {
     "commandDescription": "Shows the weather forecast for a city.",
-    "commandUsage": "<ǝɯɐu ʎʇᴉɔ>",
+    "commandUsage": "<city nyame>",
     "noCity": "You have to give me a valid city.",
-    "notFound": "˙ʎʇᴉɔ sᴉɥʇ puᴉɟ ʇ,uplnoƆ"
+    "notFound": "Couwdny't finyd this city."
   },
   "currency": {
-    "commandDescription": "˙ɹᴉɐd ɐ ɹo ʎɔuǝɹɹnɔ ɐ ɟo ǝʇɐɹ ʇuǝɹɹnɔ ǝɥʇ sʍoɥS",
+    "commandDescription": "Shows the cuwwenyt wate of a cuwwenycy ow a paiw.",
     "commandUsage": "[from] [value] <to>",
-    "noCurrency": "˙ɹᴉɐd ɐ ɹo ʎɔuǝɹɹnɔ pᴉlɐʌ ɐ ǝɯ ǝʌᴉƃ oʇ ǝʌɐɥ no⅄"
+    "noCurrency": "You have to give me a vawid cuwwenycy ow a paiw."
   },
   "joinlock": {
     "commandDescription": "Enables or disables the join lock.",
-    "commandUsage": "<ɟɟo|uo>",
-    "sameValue_true": "˙pǝlqɐuǝ ʎpɐǝɹlɐ sᴉ ʞɔol uᴉoɾ ǝɥ┴",
-    "sameValue_false": "˙pǝlqɐsᴉp ʎpɐǝɹlɐ sᴉ ʞɔol uᴉoɾ ǝɥ┴",
-    "success_true": "˙pǝlqɐuǝ ʞɔol uᴉoſ",
-    "success_false": "˙pǝlqɐsᴉp ʞɔol uᴉoſ"
+    "commandUsage": "<on|off>",
+    "sameValue_true": "The joiny wock is awweady enyabwed.",
+    "sameValue_false": "The joiny wock is awweady disabwed.",
+    "success_true": "Joiny wock enyabwed.",
+    "success_false": "Joiny wock disabwed."
   },
   "pusheen": {
-    "commandDescription": "Shows a random post from the pusheen tumblr.",
-    "hidden": "Uwu hi there (*´∇｀)ﾉ,  yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖°\nNow that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
+    "commandDescription": "Shows a wanydom post fwom the pusheeny tumbww.",
+    "hidden": "Uwu hi there (*´∇｀)ﾉ, yoou just got the SUPER UPER IPIE SECRETY MESSAGY °˖✧◝(⁰▿⁰)◜✧˖° Now that you are here.... ( ˘͈ ᵕ ˘͈♡) you could help me [here]({{link}}) (ﾉ≧ڡ≦)"
   },
   "seek": {
     "commandDescription": "Adjusts the position of the music playback.",
@@ -1011,7 +1011,7 @@
   "reversetext": {
     "commandDescription": "Reverses the text.",
     "missingSentence": "You have to give me some text to reverse!",
-    "commandUsage": "<text to reverse>"
+    "commandUsage": "<texty to weverwse>"
   },
   "support": {
     "commandDescription": "Shows the link to Switchblade support server.",
@@ -1045,7 +1045,7 @@
       },
       "user": {
         "commandDescription": "Gets information about a user on Last.fm",
-        "commandUsage": "<ɹǝsn>",
+        "commandUsage": "<usew>",
         "missing": "You have to give me a valid user!",
         "notFound": "User not found."
       }
@@ -1059,22 +1059,22 @@
   "roleinfo": {
     "commandDescription": "Shows information about a role.",
     "commandUsage": "<role name, mention or id>",
-    "id": "pI",
+    "id": "ID",
     "name": "Name",
     "mention": "Mention",
-    "createdAt": "ʇ∀ pǝʇɐǝɹƆ",
+    "createdAt": "Cweated At",
     "members": "Members",
     "position": "Position",
     "mentionable": "Mentionable",
     "hoisted": "Hoisted",
     "color": "Color",
     "online": "{{count}} online",
-    "yes": "sǝ⅄",
+    "yes": "Yes",
     "no": "No"
   },
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification.",
-    "commandUsage": "<ʇxǝʇ>",
+    "commandUsage": "<text>",
     "missingText": "You have to give me some text for the alert!"
   },
   "uigradient": {
@@ -1167,7 +1167,7 @@
   },
   "welcometranslator": {
     "commandDescription": "Welcomes a new translator.",
-    "commandUsage": "<ɹǝsn>",
+    "commandUsage": "<usew>",
     "noMember": "You have to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
     "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
@@ -1237,16 +1237,16 @@
   "youtube": {
     "commandDescription": "Searches for a video, playlist or a channel on YouTube.",
     "commandUsage": "<query> [--video | --channel | --playlists | --order]",
-    "likes": "sǝʞᴉ˥",
-    "dislikes": "sǝʞᴉlsᴉp",
+    "likes": "Wikes",
+    "dislikes": "Diswikes",
     "comments": "Comments",
     "channel": "Channel",
     "publishedAt": "Published at",
     "subscribers": "Subscribers",
     "hiddenSubscribers": "Hidden subscribers",
-    "views": "sʍǝᴉΛ",
+    "views": "Views",
     "videos": "Videos",
-    "createdAt": "ʇɐ pǝʇɐǝɹƆ",
+    "createdAt": "Cweated at",
     "videosCount": "{{videos}} videos",
     "videoInfo": "Video information",
     "channelInfo": "Channel information",
