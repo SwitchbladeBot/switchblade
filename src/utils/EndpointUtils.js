@@ -98,7 +98,7 @@ module.exports = class EndpointUtils {
         const payload = req.body
         if (payload !== {}) {
           const PayloadSchema = Joi.object().keys({
-            bot: Joi.string().min(18).max(18).required(),
+            bot: Joi.string().min(17).max(18).required(),
             user: Joi.string().min(17).max(18).required(),
             type: Joi.string().equal('upvote').required(),
             query: Joi.string(),
