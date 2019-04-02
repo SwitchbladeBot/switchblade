@@ -75,9 +75,26 @@ module.exports = class LastFM extends APIWrapper {
     }, true, true).then(r => r.scrobbles)
   }
 
+  // LOVE SONG
+  loveSong ({ title, author, length }, sk) {
+    return this.request('track.love', {
+      sk,
+      track: title,
+      artist: author
+    }, true, true, 'xml')
+  }
+
+  unloveSong ({ title, author, length }, sk) {
+    return this.request('track.unlove', {
+      sk,
+      track: title,
+      artist: author
+    }, true, true, 'xml')
+  }
+
   // MAIN REQUEST
-  request (method, queryParams = {}, signature = false, write = false) {
-    const params = { method, api_key: process.env.LASTFM_KEY, format: 'json' }
+  request (method, queryParams = {}, signature = false, write = false, format = 'json') {
+    const params = { method, api_key: process.env.LASTFM_KEY, format }
     Object.assign(queryParams, params)
     if (signature) queryParams.api_sig = this.getSignature(queryParams)
     console.log(queryParams)

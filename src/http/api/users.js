@@ -52,19 +52,9 @@ module.exports = class Users extends Route {
       async (req, res) => {
         const id = req.userId
         try {
-          const allConn = await this.client.modules.connection.allConnectionsDefault
-          const connections = await this.client.modules.connection.getConnections(id)
-          const userConnections = allConn.map(async conn => {
-            const foundConn = connections.find(c => c.name === conn.name)
-            return foundConn ? {
-              name: foundConn.name,
-              connected: true,
-              account: await this.client.connections[conn.name].getAccountInfo(foundConn.tokens),
-              configuration: foundConn.config
-            } : conn
-          })
+          const userConnections = await this.client.modules.connection.getConnectionsFiltered(id)
 
-          res.status(200).json(await Promise.all(userConnections))
+          res.status(200).json(userConnections)
         } catch (e) {
           if (e.isJoi) return res.status(400).json({ error: e.name })
           res.status(500).json({ error: 'Internal server error!' })
@@ -93,7 +83,7 @@ module.exports = class Users extends Route {
         const id = req.userId
         const conn = req.params.connection
         try {
-          const status = await this.client.modules.connection.disconnectUser(id, conn)
+          await this.client.modules.connection.disconnectUser(id, conn)
           res.status(200).json({ success: true })
         } catch (e) {
           if (e.isJoi) return res.status(400).json({ error: e.name })
@@ -112,7 +102,6 @@ module.exports = class Users extends Route {
           await connection.callbackHandler(req)
           res.status(200).json({ success: true })
         } catch (e) {
-          console.error(e)
           res.status(500).json({ success: false, error: 'Internal server error!' })
         }
       })

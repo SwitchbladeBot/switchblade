@@ -1,4 +1,4 @@
-const { Module, Connection } = require('../')
+const { Module } = require('../')
 
 module.exports = class ConnectionModule extends Module {
   constructor (...args) {
@@ -75,6 +75,21 @@ module.exports = class ConnectionModule extends Module {
   async getConnections (_user) {
     const { connections } = await this._users.findOne(_user, 'connections')
     return connections
+  }
+
+  async getConnectionsFiltered (_user) {
+    const allConn = await this.allConnectionsDefault
+    const connections = await this.getConnections(_user)
+    const userConnections = await Promise.all(allConn.map(async conn => {
+      const foundConn = connections.find(c => c.name === conn.name)
+      return foundConn ? {
+        name: foundConn.name,
+        connected: true,
+        account: await this.client.connections[conn.name].getAccountInfo(foundConn.tokens),
+        configuration: foundConn.config
+      } : conn
+    }))
+    return userConnections
   }
 
   get allConnectionsDefault () {

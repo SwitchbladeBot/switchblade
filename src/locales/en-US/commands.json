@@ -1000,6 +1000,16 @@
         "commandUsage": "<user>",
         "missing": "You have to give me a valid user!",
         "notFound": "User not found."
+      },
+      "love": {
+        "commandDescription": "Loves the current playing track.",
+        "notConnected": "You have to connect your account to last.fm to love. [Connect here]({{link}})",
+        "loved": "Track loved! use `{{unloveCommand}}` to unlove the track."
+      },
+      "unlove": {
+        "commandDescription": "Unloves the current playing track.",
+        "notConnected": "You have to connect your account to last.fm to unlove. [Connect here]({{link}})",
+        "unloved": "Track loved! use `{{loveCommand}}` to love the track."
       }
     }
   },
@@ -1195,5 +1205,11 @@
     "videoInfo": "Video information",
     "channelInfo": "Channel information",
     "playlistInfo": "Playlist information"
+  },
+  "connections": {
+    "commandDescription": "Shows all the accounts your account is connected to.",
+    "title": "Your connections",
+    "connected": "Connected as {{user}}",
+    "notConnected": "Not connected. Click here to connect."
   }
 }

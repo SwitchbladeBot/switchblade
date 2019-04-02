@@ -4,7 +4,7 @@ module.exports = class Connection {
   }
 
   canLoad () {
-    return !!this.client.database
+    return !!(this.client.database && process.env.DASHBOARD_URL)
   }
 
   load () {
@@ -25,7 +25,7 @@ module.exports = class Connection {
   }
 
   get authCallbackURL () {
-    return `http://localhost:8080/connections/${this.name}/callback/`
+    return `${process.env.DASHBOARD_URL}/connections/${this.name}/callback/`
   }
 
   async callbackHandler (req) {
