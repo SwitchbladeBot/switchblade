@@ -55,7 +55,8 @@ module.exports = class LastFM extends APIWrapper {
   }
 
   // NOWPLAYING
-  updateNowPlaying ({ title, source, author, length }, sk) {
+  async updateNowPlaying ({ title, source, author, length }, sk) {
+    if (!await this.checkSong(title, author)) return false
     return this.request('track.updateNowPlaying', {
       sk,
       track: this.getFilteredTrackName(source, author, title),
@@ -65,7 +66,8 @@ module.exports = class LastFM extends APIWrapper {
   }
 
   // SCROBBLE
-  scrobbleSong ({ title, source, author, length }, timestamp, sk) {
+  async scrobbleSong ({ title, source, author, length }, timestamp, sk) {
+    if (!await this.checkSong(title, author)) return false
     return this.request('track.scrobble', {
       sk,
       track: title,
@@ -101,7 +103,6 @@ module.exports = class LastFM extends APIWrapper {
     const params = { method, api_key: process.env.LASTFM_KEY, format }
     Object.assign(queryParams, params)
     if (signature) queryParams.api_sig = this.getSignature(queryParams)
-    console.log(queryParams)
     if (!write) return snekfetch.get(API_URL).query(queryParams).then(r => r.body)
     return snekfetch.post(API_URL)
       .set('content-type', 'application/x-www-form-urlencoded').send(queryParams).then(r => r.body)
@@ -125,5 +126,10 @@ module.exports = class LastFM extends APIWrapper {
     return source === 'youtube'
       ? title.split('-')[0].includes(artist) ? title.replace(artist, '').replace(' - ', '') : title
       : title
+  }
+
+  async checkSong (title, artist) {
+    const { error } = await this.getTrackInfo(title, artist)
+    return error === 6
   }
 }

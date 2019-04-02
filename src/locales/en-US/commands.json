@@ -1211,5 +1211,15 @@
     "title": "Your connections",
     "connected": "Connected as {{user}}",
     "notConnected": "Not connected. Click here to connect."
+  },
+  "scrobbling": {
+    "commandDescription": "Sees information about audio scrobbling on last.fm with Switchblade.",
+    "title": "Audio scrobbling",
+    "notConnectedDescription": "On switchblade you can scrobble the songs you listen to your last.fm account. You can connect you account [here]({{link}}).",
+    "connectedDescription": "On switchblade you can scrobble the songs you listen to your last.fm account. Your scrobble is **{{scrobblingStatus}}** with the percentage **{{percent}}%**. You can just play some music on switchblade and it will automatically scrobble to your account.",
+    "configuration": {
+      "title": "Configuration",
+      "description": "You can also configure your scrobbling settings on the [dashboard]({{link}}) or using these commands:"
+    }
   }
 }

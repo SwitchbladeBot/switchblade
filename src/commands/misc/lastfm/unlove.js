@@ -6,7 +6,7 @@ module.exports = class LastfmUnloveTrack extends Command {
       name: 'unlove',
       aliases: ['un'],
       parentCommand: 'lastfm',
-      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, envVars: ['DASHBOARD_URL'] }
     })
   }
 

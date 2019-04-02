@@ -177,7 +177,7 @@ module.exports = class GuildPlayer extends Player {
     const { voiceChannel: newChannel } = newMember
     const isSwitch = newMember.user.id === switchId
     console.log(isSwitch)
-    // Voice join
+    if (newMember.user.bot && !isSwitch) return
     if (!oldChannel && newChannel) {
       if (isSwitch) this.handleSwitchJoin(newChannel.members)
       else if (newChannel.members.has(switchId)) this.handleNewJoin(newMember.user.id)
@@ -185,6 +185,7 @@ module.exports = class GuildPlayer extends Player {
     }
     // Voice leave
     if (oldChannel && !newChannel) {
+      if (oldChannel.id === newChannel.id) return
       if (isSwitch) oldChannel.members.filter(m => !m.user.bot).forEach(m => this._listening.delete(m.user.id))
       else if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
       else return
@@ -222,6 +223,7 @@ module.exports = class GuildPlayer extends Player {
   // Last.fm
   async getAbleToScrobble () {
     if (this.playingSong.isSteam) return []
+    console.log('listening', this._listening)
     const map = this._listening.map(async (s, u) => {
       const connections = await this.client.modules.connection.getConnections(u)
       const user = { id: u, config: s }

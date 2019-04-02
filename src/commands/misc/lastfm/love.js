@@ -6,7 +6,7 @@ module.exports = class LastfmLoveTrack extends Command {
       name: 'love',
       aliases: ['l'],
       parentCommand: 'lastfm',
-      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, envVars: ['DASHBOARD_URL'] }
     })
   }
 
