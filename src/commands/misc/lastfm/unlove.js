@@ -20,11 +20,7 @@ module.exports = class LastfmUnloveTrack extends Command {
         throw new CommandError(t('commands:lastfm.subcommands.unlove.notConnected', { link: `${process.env.DASHBOARD_URL}/profile` }))
       }
       const { playingSong } = this.client.playerManager.get(guild.id)
-      const { title, author: artist } = playingSong
-      const filteredTitle = playingSong.source === 'youtube'
-        ? title.split('-')[0].includes(artist) ? title.replace(artist, '').replace(' -', '') : title
-        : title
-      await this.client.apis.lastfm.unloveSong({ ...playingSong, title: filteredTitle }, lastfm.tokens.sk)
+      const filteredTitle = await this.client.apis.lastfm.unloveSong(playingSong, lastfm.tokens.sk)
       channel.send(embed.setAuthor(`${playingSong.author} - ${filteredTitle}`, playingSong.mainImage || Constants.DEFAULT_SONG_PNG)
         .setDescription(t('commands:lastfm.subcommands.unlove.unloved', { unloveCommand: `${prefix}lastfm love` })))
     } catch (e) {

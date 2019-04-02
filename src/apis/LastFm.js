@@ -55,17 +55,17 @@ module.exports = class LastFM extends APIWrapper {
   }
 
   // NOWPLAYING
-  updateNowPlaying ({ title, author, length }, sk) {
+  updateNowPlaying ({ title, source, author, length }, sk) {
     return this.request('track.updateNowPlaying', {
       sk,
-      track: title,
+      track: this.getFilteredTrackName(source, author, title),
       artist: author,
       duration: length / 1000
     }, true, true).then(r => r.nowplaying)
   }
 
   // SCROBBLE
-  scrobbleSong ({ title, author, length }, timestamp, sk) {
+  scrobbleSong ({ title, source, author, length }, timestamp, sk) {
     return this.request('track.scrobble', {
       sk,
       track: title,
@@ -76,20 +76,24 @@ module.exports = class LastFM extends APIWrapper {
   }
 
   // LOVE SONG
-  loveSong ({ title, author, length }, sk) {
-    return this.request('track.love', {
+  loveSong ({ title, source, author, length }, sk) {
+    const filtered = this.getFilteredTrackName(source, author, title)
+    this.request('track.love', {
       sk,
-      track: title,
+      track: filtered,
       artist: author
     }, true, true, 'xml')
+    return filtered
   }
 
-  unloveSong ({ title, author, length }, sk) {
-    return this.request('track.unlove', {
+  unloveSong ({ title, source, author, length }, sk) {
+    const filtered = this.getFilteredTrackName(source, author, title)
+    this.request('track.unlove', {
       sk,
-      track: title,
+      track: filtered,
       artist: author
     }, true, true, 'xml')
+    return filtered
   }
 
   // MAIN REQUEST
@@ -108,5 +112,18 @@ module.exports = class LastFM extends APIWrapper {
     keys.splice(Object.keys(params).indexOf('format'), 1)
     const signature = keys.sort().map(p => `${p}${params[p]}`).join('')
     return crypto.createHash('md5').update(`${signature}${process.env.LASTFM_SECRET}`, 'utf8').digest('hex')
+  }
+
+  /**
+   * Filters the name of the current playing song name.
+   * @param {string} source - The song source identifier
+   * @param {string} artist - The song artist
+   * @param {string} title - the song name
+   * @returns {string}
+   */
+  getFilteredTrackName (source, artist, title) {
+    return source === 'youtube'
+      ? title.split('-')[0].includes(artist) ? title.replace(artist, '').replace(' - ', '') : title
+      : title
   }
 }
