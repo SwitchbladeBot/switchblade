@@ -1217,9 +1217,23 @@
     "title": "Audio scrobbling",
     "notConnectedDescription": "On switchblade you can scrobble the songs you listen to your last.fm account. You can connect you account [here]({{link}}).",
     "connectedDescription": "On switchblade you can scrobble the songs you listen to your last.fm account. Your scrobble is **{{scrobblingStatus}}** with the percentage **{{percent}}%**. You can just play some music on switchblade and it will automatically scrobble to your account.",
+    "configNotConnected": "You need to connect your account to your last.fm account. You can connect you account [here]({{link}}).",
     "configuration": {
       "title": "Configuration",
       "description": "You can also configure your scrobbling settings on the [dashboard]({{link}}) or using these commands:"
+    },
+    "subcommands": {
+      "enable": {
+        "commandDescription": "Change your scrobbling configuration.",
+        "commandUsage": "<true/false>",
+        "changed": "Scrobbling successfully changed to **{{scrobblingStatus}}**."
+      },
+      "percent": {
+        "commandDescription": "Change your scrobbling percentage.",
+        "commandUsage": "<45-95>",
+        "missingNumber": "You need to give me a number from 35 to 95!",
+        "changed": "Scrobbling percentage successfully changed to **{{percent}}%**."
+      }
     }
   }
 }

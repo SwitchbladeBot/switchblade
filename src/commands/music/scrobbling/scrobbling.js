@@ -4,6 +4,7 @@ module.exports = class Scrobbling extends Command {
   constructor (client) {
     super(client, {
       name: 'scrobbling',
+      category: 'music',
       aliases: ['scrobble', 'scrobbler', 'audioscrobbler'],
       requirements: { envVars: ['DASHBOARD_URL'] }
     })

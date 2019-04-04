@@ -15,7 +15,7 @@ module.exports = class LastFM extends Connection {
 
   get configPattern () {
     return {
-      percent: p => (p >= 45 && p <= 90)
+      percent: p => (p >= 45 && p <= 95)
     }
   }
 
