@@ -6,7 +6,7 @@ module.exports = class ScrobblingPercent extends Command {
       name: 'percent',
       aliases: ['p'],
       parentCommand: 'scrobbling',
-      parameters: [{ type: 'number', min: 35, max: 95, missingError: 'commands.scrobbling.subcommands.percent.missingNumber' }]
+      parameters: [{ type: 'number', min: 45, max: 95, missingError: 'commands.scrobbling.subcommands.percent.missingNumber' }]
     })
   }
 
