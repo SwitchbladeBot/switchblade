@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, CommandError } = require('../../../')
+const { Command, CommandError } = require('../../../')
 
 module.exports = class LeagueOfLegendsChampion extends Command {
   constructor (client) {
