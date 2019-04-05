@@ -28,7 +28,8 @@ module.exports = class LeagueOfLegendsRotation extends Command {
         paginatedEmbed.addPage(embed)
       }
 
-      return paginatedEmbed.run(await channel.send('Fetching...'))
+      paginatedEmbed.run(await channel.send('Fetching...'))
+      channel.stopTyping()
     } catch (e) {
       throw new CommandError(e.toString())
     }
