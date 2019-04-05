@@ -18,20 +18,26 @@ module.exports = class LeagueOfLegendsRotation extends Command {
     try {
       const paginatedEmbed = new SwitchbladeEmbed.PaginatedEmbed(t)
 
-      const rotation = await this.client.apis.lol.fetchChampionRotation()
+      const champions = await this.client.apis.lol.fetchChampionRotation(language, flags['newplayer'])
       const locale = await this.client.apis.lol.getLocale(language)
-      const champions = flags['newplayer'] ? rotation.freeChampionIdsForNewPlayers : rotation.freeChampionIds
 
       for (var i in champions) {
-        const champion = await this.client.apis.lol.fetchChampionById(champions[i], language)
-        const embed = await this.parentCommand.generateEmbed(champion, locale, author, t)
+        const embed = await this.parentCommand.generateEmbed(champions[i], locale, author, t)
         paginatedEmbed.addPage(embed)
       }
 
-      paginatedEmbed.run(await channel.send('Fetching...'))
+      paginatedEmbed.setInfoPage(
+        new SwitchbladeEmbed(author)
+          .setColor(this.parentCommand.LOL_COLOR)
+          .setAuthor('League of Legends', this.parentCommand.LOL_LOGO, 'https://leagueoflegends.com')
+          .setTitle(t('commands:leagueoflegends.subcommands.rotation.rotation'))
+          .setDescription(champions.map(champ => `**${champ.name}**, ${champ.title}`).join('\n'))
+      )
+
+      paginatedEmbed.run(await channel.send('...'))
       channel.stopTyping()
     } catch (e) {
-      throw new CommandError(e.toString())
+      throw new CommandError(t('commands:leagueoflegends.subcommands.champion.invalidChamp'))
     }
   }
 }

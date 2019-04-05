@@ -59,8 +59,18 @@ module.exports = class LeagueOfLegends extends APIWrapper {
     })
   }
 
-  async fetchChampionRotation () {
-    return this.request('/lol/platform/v3/champion-rotations', false).then(u => u)
+  async fetchChampionRotation (language = 'en_US', newPlayer = false) {
+    const payload = await this.request('/lol/platform/v3/champion-rotations', false).then(u => u)
+    
+    let champions = []
+    const championIds = newPlayer ? payload.freeChampionIdsForNewPlayers : payload.freeChampionIds
+
+    for (var i in championIds) {
+      const champion = await this.fetchChampionById(championIds[i], language)
+      champions.push(champion)
+    }
+
+    return champions
   }
 
   request (endpoint, useDataDragon = true) {
