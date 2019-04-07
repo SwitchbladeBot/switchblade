@@ -1256,6 +1256,6 @@
     "commandDescription": "Uploads code to hastebin.",
     "commandUsage": "<code>",
     "missingCode": "You need to give me some code to upload!",
-    "hereIsYourURL": "Here's your URL!"
+    "hereIsYourURL": "Here's your link!"
   }
 }
