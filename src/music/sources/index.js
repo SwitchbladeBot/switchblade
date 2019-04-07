@@ -3,6 +3,9 @@ module.exports = {
     // HTTP
     HTTPSong: require('./http/HTTPSong.js'),
 
+    // Mixer
+    MixerSong: require('./mixer/MixerSong.js'),
+
     // SoundCloud
     SoundcloudSong: require('./soundcloud/SoundcloudSong.js'),
 

@@ -31,7 +31,6 @@ module.exports = {
   MiscUtils: require('./utils/MiscUtils.js'),
   CanvasTemplates: require('./utils/CanvasTemplates.js'),
   PermissionUtils: require('./utils/PermissionUtils.js'),
-  BlacklistUtils: require('./utils/BlacklistUtils.js'),
   EmojiUtils: require('./utils/EmojiUtils.js'),
   EndpointUtils: require('./utils/EndpointUtils.js')
 }

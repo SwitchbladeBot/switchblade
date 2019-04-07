@@ -6,7 +6,8 @@ module.exports = class RestrictEmojiAdd extends Command {
       name: 'add',
       parentCommand: 'restrictemoji',
       parameters: [{
-        type: 'emoji'
+        type: 'emoji',
+        sameGuildOnly: true
       }, {
         type: 'role',
         full: true
@@ -17,11 +18,10 @@ module.exports = class RestrictEmojiAdd extends Command {
   async run ({ t, author, channel, guild }, emoji, role) {
     channel.startTyping()
     try {
-      const guildEmoji = guild.emojis.get(emoji.id)
-      await guildEmoji.addRestrictedRole(role)
+      await emoji.addRestrictedRole(role)
       channel.send(
         new SwitchbladeEmbed(author)
-          .setTitle(t('commands:restrictemoji.subcommands.add.canUse', { role: role.name, emoji: guildEmoji.name }))
+          .setTitle(t('commands:restrictemoji.subcommands.add.canUse', { role: role.name, emoji: emoji.name }))
       ).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()

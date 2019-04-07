@@ -37,6 +37,8 @@ module.exports = class Help extends Command {
 
         if (command.aliases && command.aliases.length > 0) description.push(`**${t('commands:help.aliases')}:** ${command.aliases.map(a => `\`${a}\``).join(', ')}`)
         if (command.subcommands.length > 0) description.push(`**${t('commands:help.subcommands')}:** ${command.subcommands.map(a => `\`${a.name}\``).join(', ')}`)
+        if (command.requirements && command.requirements.permissions && command.requirements.permissions.length > 0) description.push(`**${t('commands:help.permissions')}:** ${command.requirements.permissions.map(p => `\`${t(`permissions:${p}`)}\``).join(', ')}`)
+        if (command.requirements && command.requirements.botPermissions && command.requirements.botPermissions.length > 0) description.push(`**${t('commands:help.botPermissions')}:** ${command.requirements.botPermissions.map(p => `\`${t(`permissions:${p}`)}\``).join(', ')}`)
 
         embed.setTitle(command.fullName)
           .setDescription(description.join('\n'))

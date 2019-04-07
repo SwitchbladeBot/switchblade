@@ -1,11 +1,12 @@
 const { Song } = require('../../structures')
 const MusicUtils = require('../../MusicUtils.js')
+const Constants = require('../../../utils/Constants.js')
 
 module.exports = class TwitchSong extends Song {
   constructor (data = {}, requestedBy, Twitch) {
     super(data, requestedBy)
     this._Twitch = Twitch
-    this.color = '#4B367C'
+    this.color = Constants.TWITCH_COLOR
   }
 
   async loadInfo () {

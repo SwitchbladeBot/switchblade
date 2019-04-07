@@ -74,7 +74,7 @@ module.exports = class EndpointUtils {
     }
   }
 
-  static handleGuild ({ client }) {
+  static handleGuild ({ client }, permissions = 'MANAGE_GUILD') {
     return async (req, res, next) => {
       let id = req.params.guildId
       if (id) {
@@ -82,7 +82,7 @@ module.exports = class EndpointUtils {
         if (!guild) return res.status(400).json({ ok: false })
         if (!req.isAdmin) {
           const member = await guild.fetchMember(req.user.id)
-          if (!member || !member.hasPermission('MANAGE_GUILD')) return res.status(403).json({ error: 'Missing permissions!' })
+          if (!member || (permissions && !member.hasPermission(permissions))) return res.status(403).json({ error: 'Missing permissions!' })
         }
         req.guildId = id
         return next()
@@ -98,9 +98,11 @@ module.exports = class EndpointUtils {
         const payload = req.body
         if (payload !== {}) {
           const PayloadSchema = Joi.object().keys({
-            bot: Joi.string().min(18).max(18).required(),
+            bot: Joi.string().min(17).max(18).required(),
             user: Joi.string().min(17).max(18).required(),
-            type: Joi.string().equal('upvote').required()
+            type: Joi.string().equal('upvote').required(),
+            query: Joi.string().allow(''),
+            isWeekend: Joi.boolean()
           })
           Joi.validate(payload, PayloadSchema).then(output => {
             next()

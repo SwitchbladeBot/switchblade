@@ -16,10 +16,12 @@ const normalizeParam = (p) => {
  * @param {Command} command
  */
 module.exports = class CommandParameters {
-  static parseOptions (parameters = []) {
+  static parseOptions (params = []) {
+    const length = params.length
+    const hasFlags = Array.isArray(params[length - 1])
     return {
-      flags: Array.isArray(parameters[parameters.length - 1]) ? parameters.pop().map(normalizeParam) : null,
-      parameters: parameters.map(normalizeParam)
+      flags: hasFlags ? params[length - 1].map(normalizeParam) : null,
+      parameters: (hasFlags ? params.slice(0, length - 1) : params).map(normalizeParam)
     }
   }
 
@@ -27,9 +29,9 @@ module.exports = class CommandParameters {
    * @param {CommandContext} context The command context
    * @param {Array<string>} args Array of the command args
    */
-  static handle (context, options, args) {
+  static async handle (context, options, args) {
     const opts = this.parseOptions(options)
-    this.handleFlags(context, opts, args)
+    await this.handleFlags(context, opts, args)
     return this.handleArguments(context, opts, args)
   }
 
@@ -37,21 +39,24 @@ module.exports = class CommandParameters {
    * @param {CommandContext} context The command context
    * @param {Array<string>} args Array of the command args
    */
-  static handleFlags (context, opts, args) {
+  static async handleFlags (context, opts, args) {
     if (opts.flags) {
       const flagIndex = args.findIndex(a => a.startsWith('--'))
       if (flagIndex > -1) {
         const [ , ...allFlags ] = args.splice(flagIndex).join(' ').split('--')
         const flagsObject = {}
-        allFlags.map(s => s.trim().split(/[ \t]+/)).forEach(([ name, ...flagArgs ]) => {
+
+        const flagsParsed = allFlags.map(s => s.trim().split(/[ \t]+/))
+        for (let i = 0; i < flagsParsed.length; i++) {
+          const [ name, ...flagArgs ] = flagsParsed[i]
           const flag = opts.flags.find(f => f.name === name || (f.aliases && f.aliases.includes(name)))
           if (!flag) return
 
           const flagValue = flagArgs.join(' ')
           const missingErr = funcOrString(flag.missingError, context.t, context)
-          const parsedFlag = this.parseParameter(context, flag, flagValue, missingErr)
+          const parsedFlag = await this.parseParameter(context, flag, flagValue, missingErr)
           flagsObject[flag.name] = parsedFlag
-        })
+        }
         context.setFlags(flagsObject)
       }
     }
@@ -60,7 +65,7 @@ module.exports = class CommandParameters {
   /**
    * @param {CommandContext} context The command context
    */
-  static handleArguments (context, opts, args) {
+  static async handleArguments (context, opts, args) {
     const parsedArgs = []
 
     const parseState = context.parseState = { argIndex: 0 }
@@ -79,7 +84,7 @@ module.exports = class CommandParameters {
 
       if (param.full) arg = args.slice(parseState.argIndex).join(param.fullJoin || ' ')
 
-      const parsedArg = this.parseParameter(context, param, arg, funcOrString(param.missingError, context.t, context))
+      const parsedArg = await this.parseParameter(context, param, arg, funcOrString(param.missingError, context.t, context))
       parsedArgs.push(parsedArg)
       parseState.argIndex++
     }
@@ -88,8 +93,8 @@ module.exports = class CommandParameters {
     return parsedArgs
   }
 
-  static parseParameter (context, param, arg, missingErr) {
-    const parsedArg = param.type._parse(arg, param, context)
+  static async parseParameter (context, param, arg, missingErr) {
+    const parsedArg = await param.type._parse(arg, param, context)
     if (isNull(parsedArg) && param.required) {
       throw new CommandError(missingErr, param.showUsage)
     }

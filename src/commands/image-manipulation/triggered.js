@@ -10,14 +10,15 @@ module.exports = class Triggered extends Command {
       category: 'images',
       requirements: { canvasOnly: true },
       parameters: [{
-        type: 'user', full: true, required: false, acceptBot: true
+        type: 'image',
+        missingError: 'commands:morejpeg.missingImage'
       }]
     })
   }
 
-  async run ({ t, author, channel }, user = author) {
+  async run ({ t, author, channel }, image) {
     channel.startTyping()
-    const triggered = await CanvasTemplates.triggered(user)
+    const triggered = await CanvasTemplates.triggered(image)
     channel.send(new Attachment(triggered, 'triggered.gif')).then(() => channel.stopTyping())
   }
 }

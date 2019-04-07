@@ -1,6 +1,8 @@
-const { CommandContext, EventListener } = require('../')
+const { CommandContext, EventListener, MiscUtils } = require('../')
 const { SwitchbladePlayerManager } = require('../music')
 const snekfetch = require('snekfetch')
+
+const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 
 module.exports = class MainListener extends EventListener {
   constructor (client) {
@@ -10,6 +12,22 @@ module.exports = class MainListener extends EventListener {
 
   onReady () {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
+
+    const presences = [
+      {
+        name: `${MiscUtils.formatNumber(this.guilds.size, 'en-US')} Guilds | @${this.user.username} help`,
+        type: 'WATCHING'
+      }, {
+        name: `${MiscUtils.formatNumber(this.users.size, 'en-US')} Users | @${this.user.username} help`,
+        type: 'WATCHING'
+      }
+    ]
+
+    setInterval(() => {
+      const presence = presences[Math.floor(Math.random() * presences.length)]
+      this.user.setPresence({ game: presence })
+      this.log(`[32mChanged presence to "${presence.name}", type "${presence.type}"`, 'Presence')
+    }, PRESENCE_INTERVAL)
 
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
@@ -78,8 +96,8 @@ module.exports = class MainListener extends EventListener {
   async onMessage (message) {
     if (message.author.bot) return
 
-    const guildDocument = message.guild && this.database && await this.database.guilds.findOne(message.guild.id, 'prefix language')
-    const prefix = (guildDocument && guildDocument.prefix) || process.env.PREFIX
+    const guildId = message.guild && message.guild.id
+    const { prefix, language } = await this.modules.configuration.retrieve(guildId, 'prefix language')
 
     const botMention = this.user.toString()
 
@@ -97,7 +115,6 @@ module.exports = class MainListener extends EventListener {
         const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
         if (userDocument && userDocument.blacklisted) return
 
-        const language = (guildDocument && guildDocument.language) || 'en-US'
         const context = new CommandContext({
           defaultPrefix: usedPrefix,
           aliase: cmd,
