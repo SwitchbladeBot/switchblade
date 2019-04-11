@@ -99,7 +99,16 @@ module.exports = class LastFM extends APIWrapper {
   }
 
   // MAIN REQUEST
-  request (method, queryParams = {}, signature = false, write = false, format = 'json') {
+  /**
+   * Creates a request for the Last.fm api
+   * @param {string} method - the request method
+   * @param {Object} queryParams - the query params for the request (and for the body, if write enabled)
+   * @param {boolean} [signature=false] - if the request need's a signature
+   * @param {boolean} [write=false] - if the request is a write type
+   * @param {string} [format=json] - the result format
+   * @returns {Promise|*|Promise<never>|Promise<T>|PromiseLike<T | never>|Promise<T | never>}
+   */
+  request (method, queryParams, signature = false, write = false, format = 'json') {
     const params = { method, api_key: process.env.LASTFM_KEY, format }
     Object.assign(queryParams, params)
     if (signature) queryParams.api_sig = this.getSignature(queryParams)
@@ -108,6 +117,11 @@ module.exports = class LastFM extends APIWrapper {
       .set('content-type', 'application/x-www-form-urlencoded').send(queryParams).then(r => r.body)
   }
 
+  /**
+   * Creates a signature for requests.
+   * @param {Object} params - the params object
+   * @returns {string}
+   */
   getSignature (params) {
     const keys = Object.keys(params)
     keys.splice(Object.keys(params).indexOf('format'), 1)
@@ -128,6 +142,11 @@ module.exports = class LastFM extends APIWrapper {
       : title
   }
 
+  /**
+   * @param {string} title - The song's name
+   * @param {string} artist - The song's artist name
+   * @returns {Promise<boolean>}
+   */
   async checkSong (title, artist) {
     const { error } = await this.getTrackInfo(title, artist)
     return error === 6

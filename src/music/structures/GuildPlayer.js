@@ -178,6 +178,7 @@ module.exports = class GuildPlayer extends Player {
     const isSwitch = newMember.user.id === switchId
     console.log(isSwitch)
     if (newMember.user.bot && !isSwitch) return
+    // Voice join
     if (!oldChannel && newChannel) {
       if (isSwitch) this.handleSwitchJoin(newChannel.members)
       else if (newChannel.members.has(switchId)) this.handleNewJoin(newMember.user.id)
@@ -198,17 +199,13 @@ module.exports = class GuildPlayer extends Player {
         if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
       }
     }
-    console.log('a', this._listening)
   }
 
   async handleNewJoin (user, isSwitch = false) {
     const connections = await this.client.modules.connection.getConnections(user)
-    console.log(user)
-    console.log(connections)
     const lastfm = connections.find(c => c.name === 'lastfm')
     if (!lastfm) return
     this._listening.set(user, { join: new Date(), scrobblePercent: lastfm.config.percent })
-    console.log(this._listening)
     if (!isSwitch) this.client.apis.lastfm.updateNowPlaying(this.playingSong, lastfm.tokens.sk)
   }
 
@@ -223,7 +220,6 @@ module.exports = class GuildPlayer extends Player {
   // Last.fm
   async getAbleToScrobble () {
     if (this.playingSong.isSteam) return []
-    console.log('listening', this._listening)
     const map = this._listening.map(async (s, u) => {
       const connections = await this.client.modules.connection.getConnections(u)
       const user = { id: u, config: s }
@@ -236,15 +232,11 @@ module.exports = class GuildPlayer extends Player {
 
   async updateNowPlaying () {
     const ableToUpdate = await this.getAbleToScrobble()
-    console.log('ABLE TO UPDATE:')
-    console.log(ableToUpdate)
     ableToUpdate.forEach(({ lastfm }) => this.client.apis.lastfm.updateNowPlaying(this.playingSong, lastfm.tokens.sk))
   }
 
   async scrobbleSong (song) {
-    console.log('SCROBBLING')
     const ableToScrobble = await this.getAbleToScrobble()
-    const played = new Date() - song.startedAt
     const canScrobble2 = ableToScrobble.map(o => ({
       ...o,
       listenedPercent: (100 * (new Date() - o.user.config.join)) / song.length
@@ -252,15 +244,5 @@ module.exports = class GuildPlayer extends Player {
     canScrobble2.filter(p => p.listenedPercent >= p.user.config.scrobblePercent).forEach(({ lastfm, user }) => {
       this.client.apis.lastfm.scrobbleSong(song, user.config.join, lastfm.tokens.sk)
     })
-    console.log(canScrobble2.filter(p => p.listenedPercent >= p.user.config.scrobblePercent))
-    console.log(canScrobble2[0].listenedPercent + '%')
-    console.log(`
-    JOINED:     ${ableToScrobble[0].user.config.join}
-    LISTENED:   ${new Date() - ableToScrobble[0].user.config.join}
-    POSITION:   ${this.state.position}
-    LENGTH:     ${song.length}
-    STARTEDAT:  ${song.startedAt}
-    PLAYED:     ${played}
-    `)
   }
 }

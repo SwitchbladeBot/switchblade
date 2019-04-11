@@ -1231,7 +1231,7 @@
       "percent": {
         "commandDescription": "Change your scrobbling percentage.",
         "commandUsage": "<45-95>",
-        "missingNumber": "You need to give me a number from 35 to 95!",
+        "missingNumber": "You need to give me a number from 45 to 95!",
         "changed": "Scrobbling percentage successfully changed to **{{percent}}%**."
       }
     }
