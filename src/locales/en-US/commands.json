@@ -1206,6 +1206,12 @@
     "channelInfo": "Channel information",
     "playlistInfo": "Playlist information"
   },
+  "hastebin": {
+    "commandDescription": "Uploads code to hastebin.",
+    "commandUsage": "<code>",
+    "missingCode": "You need to give me some code to upload!",
+    "hereIsYourURL": "Here's your link!"
+  },
   "connections": {
     "commandDescription": "Shows all the accounts your account is connected to.",
     "title": "Your connections",
