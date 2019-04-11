@@ -114,8 +114,9 @@ module.exports = class MainListener extends EventListener {
   }
 
   async onVoiceStateUpdate (oldMember, newMember) {
-    const playerManager = this.playerManager.get(newMember.guild.id)
-    if (!playerManager) return
-    playerManager.updateVoiceState(oldMember, newMember)
+    if (!this.playerManager) return
+    const guildPlayer = this.playerManager.get(newMember.guild.id)
+    if (!guildPlayer) return
+    guildPlayer.updateVoiceState(oldMember, newMember)
   }
 }
