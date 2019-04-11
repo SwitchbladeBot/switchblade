@@ -10,11 +10,7 @@ module.exports = class MongoRepository extends Repository {
     if (!mongoose || !model) throw new Error('Mongoose model cannot be null.')
     this.mongoose = mongoose
 
-    if (typeof model === 'string') {
-      this.model = mongoose.model(model)
-    } else {
-      this.model = model
-    }
+    this.model = typeof model === 'string' ? mongoose.model(model) : model
   }
 
   parse (entity) {

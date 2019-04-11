@@ -162,6 +162,11 @@
     "tooLongTitle": "Your text is longer than 200 characters!",
     "tooLongDescription": "Try shortening your text or separate it into multiple commands!"
   },
+  "piratespeak": {
+    "commandDescription": "Pirateifies your text.",
+    "commandUsage": "<text>",
+    "missingSentence": "You have to give me some text to pirateify!"
+  },
   "daily": {
     "commandDescription": "Claims your daily reward.",
     "alreadyClaimedTitle": "Already claimed",
@@ -189,8 +194,8 @@
     "success": "{{- handshaker}} shook hands with {{- handshaked}}"
   },
   "triggered": {
-    "commandDescription": "Triggers someone.",
-    "commandUsage": "[user to trigger]"
+    "commandDescription": "Triggers something or someone.",
+    "commandUsage": "[image link]"
   },
   "8ball": {
     "commandDescription": "Asks the magic 8-Ball about something.",
@@ -229,7 +234,10 @@
     "commandUsage": "<package name>",
     "noDescription": "No description provided.",
     "notFound": "Package not found.",
-    "noNameProvided": "You have to give me a package name!"
+    "noNameProvided": "You have to give me a package name!",
+    "lastPublish": "Last publish",
+    "install": "Install",
+    "keywords": "Keywords"
   },
   "poll": {
     "commandDescription": "Creates a poll.",
@@ -298,6 +306,9 @@
     "specificInformation": "Type {{helpString}} for command specific information.",
     "aliases": "Aliases",
     "subcommands": "Subcommands",
+    "permissions": "Permissions",
+    "botPermissions": "Bot permissions",
+    "flags": "Flags",
     "noDescriptionProvided": "No description provided.",
     "noUsageProvided": "No usage provided.",
     "commandNotFound": "I couldn't find any command with that name."
@@ -825,16 +836,40 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
-  "mcquery": {
-    "commandDescription": "Shows information about a Minecraft: Java Edition server.",
-    "commandUsage": "<address>[:port]",
-    "unknownServer": "Server is offline or doesn't exist.",
-    "noIP": "You have to give me an address.",
-    "players": "Players",
-    "version": "Version",
-    "online": "Online",
-    "messageOfTheDay": "Message of the day (MOTD)",
-    "status": "Status"
+  "minecraft": {
+    "commandDescription": "Shows information related to Minecraft.",
+    "commandUsage": "<type> <query>",
+    "namemcprofile": "NameMC profile (click here)",
+    "subcommands": {
+      "server": {
+        "commandDescription": "Shows information about a Minecraft server such as number of players and MOTD.",
+        "commandUsage": "<address>",
+        "noIP": "You have to give me an address.",
+        "unknownServer": "Server is offline or doesn't exist.",
+        "server": "Minecraft Server",
+        "status": "Status",
+        "address": "Address",
+        "players": "Players",
+        "version": "Version",
+        "online": "Online",
+        "offline": "Offline"
+      },
+      "skin": {
+        "commandDescription": "Shows the skin of a Minecraft player.",
+        "commandUsage": "<username/UUID>",
+        "noName": "You have to give me a username or a UUID.",
+        "unknownName": "Name or UUID not found.",
+        "title": "{{name}}'s skin!"
+      },
+      "namehistory": {
+        "commandDescription": "Shows the previous names of a Minecraft player, by username or UUID.",
+        "commandUsage": "<username/UUID>",
+        "noName": "You have to give me a username or a UUID.",
+        "unknownName": "Name or UUID not found.",
+        "title": "{{name}}'s name history!",
+        "originalname": "Original Name"
+      }
+    }
   },
   "kemonomimi": {
     "commandDescription": "Shows a random kemonomimi (lewd if the channel is NSFW). (Girls with animal ears)",
@@ -948,17 +983,30 @@
     "notLive": "I can't change livestreams' positions!",
     "positionSet": "Player position set to `{{position}}`."
   },
-  "lolstatus": {
-    "commandDescription": "Shows the current status of a League of Legends server.",
-    "commandUsage": "<server>",
-    "missingServer": "You have to give me a valid League of Legends server!",
-    "availableServers": "Available servers",
-    "noStatusMessages": "There are no status messages for this server.",
-    "online": "Online",
-    "offline": "Offline",
-    "info": "Information",
-    "warn": "Warning",
-    "error": "Critical"
+  "leagueoflegends": {
+    "commandDescription": "Shows the current issues of a League of Legends server or information about a champion.",
+    "commandUsage": "<type> <query>",
+    "subcommands": {
+      "status": {
+        "commandDescription": "Shows the current issues of a League of Legends server.",
+        "commandUsage": "<server>",
+        "missingServer": "You have to give me a valid League of Legends server!",
+        "availableServers": "Available servers",
+        "noStatusMessages": "There are no status messages for this server.",
+        "online": "Online",
+        "offline": "Offline",
+        "info": "Information",
+        "warn": "Warning",
+        "error": "Critical"
+      },
+      "champion": {
+        "commandDescription": "Shows information about a League of Legends champion.",
+        "commandUsage": "<champion name>",
+        "noChampion": "You have to give me a champion name to search for.",
+        "invalidChamp": "Invalid champion.",
+        "spells": "Spells"
+      }
+    }
   },
   "reversetext": {
     "commandDescription": "Reverses the text.",
@@ -1133,6 +1181,14 @@
     "noMember": "You have to mention someone!",
     "cantWelcomeYourself": "You can't welcome yourself!",
     "welcomeMessage": "Welcome to the team {{member}}!\nIn <#447005926981894144> you can talk about translation related stuff.\nYou will see announcements in <#476110480377905163>.\nYou will get pinged in <#450050899197296651> when there are new strings.\nLast but not least, you can see some useful info in <#447962790918094878>.\n\nIf you have any questions, feel free to ask!"
+  },
+  "purge": {
+    "commandDescription": "Purges messages from a channel. (Default: 50)",
+    "commandUsage": "[number of messages] [user]",
+    "purgedSingular": "Purged **{{count}}** message.",
+    "purgedPlural": "Purged **{{count}}** messages.",
+    "purgedMemberSingular": "Purged **{{count}}** message sent by **{{user}}**.",
+    "purgedMemberPlural": "Purged **{{count}}** messages sent by **{{user}}**."
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",

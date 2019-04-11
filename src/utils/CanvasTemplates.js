@@ -462,13 +462,13 @@ module.exports = class CanvasTemplates {
     return canvas.toBuffer()
   }
 
-  static async triggered (user) {
+  static async triggered (buffer) {
     const WIDTH = 256
     const HEIGHT = 310
 
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.TRIGGERED_LABEL_PNG, true),
-      Image.from(user.displayAvatarURL.replace('.gif', '.png'))
+      Image.from(buffer)
     ])
 
     const encoder = new GIFEncoder(WIDTH, HEIGHT)
@@ -481,12 +481,12 @@ module.exports = class CanvasTemplates {
 
     const [ triggeredLabel, avatarImage ] = await IMAGE_ASSETS
 
-    const AVATAR_RANDOM_MAX = 20
+    const BUFFER_RANDOM_MAX = 20
     const LABEL_RANDOM_MAX = 10
     const random = (max) => Math.floor(Math.random() * max) - max
     for (let i = 0; i < 8; i++) {
       ctx.clearRect(0, 0, WIDTH, HEIGHT)
-      ctx.drawImage(avatarImage, random(AVATAR_RANDOM_MAX), random(AVATAR_RANDOM_MAX), WIDTH + AVATAR_RANDOM_MAX, HEIGHT - 54 + AVATAR_RANDOM_MAX)
+      ctx.drawImage(avatarImage, random(BUFFER_RANDOM_MAX), random(BUFFER_RANDOM_MAX), WIDTH + BUFFER_RANDOM_MAX, HEIGHT - 54 + BUFFER_RANDOM_MAX)
       ctx.fillStyle = '#FF000033'
       ctx.fillRect(0, 0, WIDTH, HEIGHT)
       ctx.drawImage(triggeredLabel, random(LABEL_RANDOM_MAX), HEIGHT - 54 + random(LABEL_RANDOM_MAX), 256 + LABEL_RANDOM_MAX, 54 + LABEL_RANDOM_MAX)
