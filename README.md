@@ -18,7 +18,7 @@
   <a href="https://discordbots.org/bot/445277324175474689"><img src="https://discordbots.org/api/widget/status/445277324175474689.svg" /></a>
   <a href="https://circleci.com/gh/SwitchbladeBot/switchblade"><img src="https://img.shields.io/circleci/project/github/SwitchbladeBot/switchblade/dev.svg?style=flat-square&logo=circleci"/></a>
     <br>
-    <h2><a href="https://invite.switchblade.xyz/">CLICK HERE TO INVITE SWITCHBLADE TO YOUR SERVER</a></h2>
+    <h1><a href="https://invite.switchblade.xyz/">CLICK HERE TO INVITE SWITCHBLADE TO YOUR SERVER</a></h1>
   </p>
 </div>
 
@@ -43,6 +43,9 @@ Switchblade's translation is Crowdsourced too! [Click here to learn more](https:
 
 ## Branching
 New Pull Requests should be made upon the `dev` branch, where **Switchblade Canary**, our private testing instance, runs. Every 1 month, we push code from `dev` to `master`, where the production instance runs.
+
+## Self-hosting
+We kindly ask you not to host your own public instance of Switchblade. [Use the official one instead!](https://invite.switchblade.xyz/)
 
 <div align="center">
   <img src="https://discordbots.org/api/widget/445277324175474689.svg" height="150">
