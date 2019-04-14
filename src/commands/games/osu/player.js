@@ -50,7 +50,7 @@ module.exports = class OsuPlayer extends Command {
           t('commands:osu.subcommands.player.totalScore', { totalScore: MiscUtils.formatNumber(userData.total_score, language) }),
           t('commands:osu.subcommands.player.hitAccuracy', { accuracy: Math.floor(userData.accuracy) }),
           t('commands:osu.subcommands.player.playCount', { playCount: MiscUtils.formatNumber(userData.playcount, language) }),
-          t('commands:osu.subcommands.player.totalHits', { totalHits: MiscUtils.formatNumber((parseInt(userData.count300) + parseInt(userData.count100) + parseInt(userData.count50)), language), 300: userData.count300, 100: userData.count100, 50: userData.count50, Constants })
+          t('commands:osu.subcommands.player.totalHits', { totalHits: MiscUtils.formatNumber((parseInt(userData.count300) + parseInt(userData.count100) + parseInt(userData.count50)), language), 300: MiscUtils.formatNumber(userData.count300, language), 100: MiscUtils.formatNumber(userData.count100, language), 50: MiscUtils.formatNumber(userData.count50, language), Constants })
         ].join('\n'))
 
       channel.send(embed).then(() => channel.stopTyping())
