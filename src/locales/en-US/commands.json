@@ -1017,6 +1017,27 @@
     "commandDescription": "Shows the link to Switchblade support server.",
     "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
+  "osu": {
+    "commandDescription": "Looks up a player or a beatmap on osu!",
+    "commandUsage": "<type> <query>",
+    "subcommands": {
+      "player": {
+        "commandDescription": "Looks up a player on osu!",
+        "commandUsage": "<player name or id>",
+        "noPlayer": "You need to give me a valid osu! player name or ID.",
+        "level": "Level **{{number}}**",
+        "joinedAt": "Joined **{{date}}** ({{timeAgo}})",
+        "globalRanking": "Global Ranking: **#{{rank}}**",
+        "countryRanking": "Country Ranking: **#{{rank}}**",
+        "rankedScore": "Ranked Score: **{{rankedScore}}**",
+        "playTime": "Played for **{{time}}** - **{{pp}}** pp",
+        "totalScore": "Total Score: **{{totalScore}}**",
+        "hitAccuracy": "Hit Accuracy: **{{accuracy}}%**",
+        "playCount": "Play Count: **{{playCount}}**",
+        "totalHits": "Total Hits: **{{totalHits}}** (**{{300}}** {{Constants.OSU_300}}, **{{100}}** {{Constants.OSU_100}}, **{{50}}** {{Constants.OSU_50}}"
+      }
+    }
+  },
   "lastfm": {
     "commandDescription": "Searches for a song, album or an artist on Last.fm, or displays information about a user.",
     "commandUsage": "<type> <query>",
