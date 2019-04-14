@@ -10,7 +10,7 @@ module.exports = class Hastebin extends Command {
   constructor (client) {
     super(client, {
       name: 'hastebin',
-      aliases: 'haste',
+      aliases: ['haste'],
       category: 'utility',
       parameters: [{
         type: 'string',
