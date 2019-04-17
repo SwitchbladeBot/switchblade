@@ -56,16 +56,16 @@ module.exports = class OsuBeatmap extends SearchCommand {
 
     if (scores.length > 0) {
       paginatedEmbed.addPage(new SwitchbladeEmbed(author)
-      .setAuthor(mode[1], this.parentCommand.OSU_LOGO, `https://osu.ppy.sh/b/${data.beatmap_id}`)
-      .setTitle(`${data.artist} - ${data.title} (${data.version})`)
-      .setColor(this.parentCommand.OSU_COLOR)
-      .setDescription([
-        ``,
-        t('commands:osu.subcommands.beatmap.topScores'),
-        scores.map((score, i) => {
-          return `#${i + 1} - **[${score.username}](https://osu.ppy.sh/u/${score.user_id})** ${Constants[`OSU_${score.rank}`]} - ${score.count300} ${Constants.OSU_300} (${score.countgeki} ${Constants.OSU_GEKI}), ${score.count100} ${Constants.OSU_100} (${score.countkatu} ${Constants.OSU_KATU}), ${score.countmiss} ${Constants.OSU_MISS}`
-        }).join('\n')
-      ].join('\n')))
+        .setAuthor(mode[1], this.parentCommand.OSU_LOGO, `https://osu.ppy.sh/b/${data.beatmap_id}`)
+        .setTitle(`${data.artist} - ${data.title} (${data.version})`)
+        .setColor(this.parentCommand.OSU_COLOR)
+        .setDescription([
+          ``,
+          t('commands:osu.subcommands.beatmap.topScores'),
+          scores.map((score, i) => {
+            return `#${i + 1} - **[${score.username}](https://osu.ppy.sh/u/${score.user_id})** ${Constants[`OSU_${score.rank}`]} - ${score.count300} ${Constants.OSU_300} (${score.countgeki} ${Constants.OSU_GEKI}), ${score.count100} ${Constants.OSU_100} (${score.countkatu} ${Constants.OSU_KATU}), ${score.countmiss} ${Constants.OSU_MISS}`
+          }).join('\n')
+        ].join('\n')))
     }
 
     paginatedEmbed.run(await channel.send('...'))

@@ -60,13 +60,13 @@ module.exports = class OsuPlayer extends Command {
         }
 
         paginatedEmbed.addPage(new SwitchbladeEmbed(author)
-        .setColor(this.parentCommand.OSU_COLOR)
-        .setAuthor(mode[1], this.parentCommand.OSU_LOGO)
-        .setDescription([
-          t('commands:osu.subcommands.player.topScores', { user: userData.username }),
-          ``,
-          description.join('\n')
-        ].join('\n')))
+          .setColor(this.parentCommand.OSU_COLOR)
+          .setAuthor(mode[1], this.parentCommand.OSU_LOGO)
+          .setDescription([
+            t('commands:osu.subcommands.player.topScores', { user: userData.username }),
+            ``,
+            description.join('\n')
+          ].join('\n')))
       }
 
       const recentPlays = await this.client.apis.osu.getUserRecentPlays(user, mode[0], 5)
@@ -74,19 +74,19 @@ module.exports = class OsuPlayer extends Command {
       if (recentPlays.length > 0) {
         let description = []
 
-        for (var i in recentPlays) {
-          const beatmap = await this.client.apis.osu.getBeatmap(recentPlays[i].beatmap_id, mode[0])
-          description.push(`#${parseInt(i) + 1} - **[${beatmap[0].artist} - ${beatmap[0].title} (${beatmap[0].version})](https://osu.ppy.sh/b/${recentPlays[i].beatmap_id})** ${Constants[`OSU_${recentPlays[i].rank}`]} - **${MiscUtils.formatNumber(parseInt(recentPlays[i].pp || 0), language)}pp** (${moment(recentPlays[i].date).fromNow()})`)
+        for (var int in recentPlays) {
+          const beatmap = await this.client.apis.osu.getBeatmap(recentPlays[int].beatmap_id, mode[0])
+          description.push(`#${parseInt(int) + 1} - **[${beatmap[0].artist} - ${beatmap[0].title} (${beatmap[0].version})](https://osu.ppy.sh/b/${recentPlays[i].beatmap_id})** ${Constants[`OSU_${recentPlays[i].rank}`]} - **${MiscUtils.formatNumber(parseInt(recentPlays[int].pp || 0), language)}pp** (${moment(recentPlays[int].date).fromNow()})`)
         }
 
         paginatedEmbed.addPage(new SwitchbladeEmbed(author)
-        .setColor(this.parentCommand.OSU_COLOR)
-        .setAuthor(mode[1], this.parentCommand.OSU_LOGO)
-        .setDescription([
-          t('commands:osu.subcommands.player.recentPlays', { user: userData.username }),
-          ``,
-          description.join('\n')
-        ].join('\n')))
+          .setColor(this.parentCommand.OSU_COLOR)
+          .setAuthor(mode[1], this.parentCommand.OSU_LOGO)
+          .setDescription([
+            t('commands:osu.subcommands.player.recentPlays', { user: userData.username }),
+            ``,
+            description.join('\n')
+          ].join('\n')))
       }
 
       paginatedEmbed.run(await channel.send('...'))
