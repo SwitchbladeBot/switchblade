@@ -49,7 +49,7 @@ module.exports = class OsuBeatmap extends SearchCommand {
         ``,
         t('commands:osu.subcommands.beatmap.mappedBy', { mapper: `[${data.creator}](https://osu.ppy.sh/u/${data.creator_id})` }),
         t('commands:osu.subcommands.beatmap.lastUpdate', { date: moment(data.last_update).format('LLL'), timeAgo: moment(data.last_update).fromNow() }),
-        Number(data.approved) > 0 ? t('commands:osu.subcommands.beatmap.tags', { date: moment(data.approved_date).format('LLL'), timeAgo: moment(data.approved_date).fromNow() }) : null,
+        Number(data.approved) > 0 ? t('commands:osu.subcommands.beatmap.approved', { date: moment(data.approved_date).format('LLL'), timeAgo: moment(data.approved_date).fromNow() }) : null,
         data.tags ? t('commands:osu.subcommands.beatmap.tags', { tags: data.tags.split(' ').map(t => `\`${t}\``).join(', ') }) : null,
         t('commands:osu.subcommands.beatmap.download', { link: `https://osu.ppy.sh/beatmapsets/${data.beatmapset_id}/download`, linkNoVideo: `https://osu.ppy.sh/beatmapsets/${data.beatmapset_id}/download?noVideo=1` })
       ].join('\n')))

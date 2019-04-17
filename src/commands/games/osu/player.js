@@ -56,7 +56,7 @@ module.exports = class OsuPlayer extends Command {
 
         for (var i in topScores) {
           const beatmap = await this.client.apis.osu.getBeatmap(topScores[i].beatmap_id, mode[0])
-          description.push(`#${parseInt(i) + 1} - **[${beatmap[0].artist} - ${beatmap[0].title} (${beatmap[0].version})](https://osu.ppy.sh/b/${topScores[i].beatmap_id})** ${Constants[`OSU_${topScores[i].rank}`]} - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), language)}pp**`)
+          if (beatmap.length > 0) description.push(`#${parseInt(i) + 1} - **[${beatmap[0].artist} - ${beatmap[0].title} (${beatmap[0].version})](https://osu.ppy.sh/b/${topScores[i].beatmap_id})** ${Constants[`OSU_${topScores[i].rank}`]} - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), language)}pp**`)
         }
 
         paginatedEmbed.addPage(new SwitchbladeEmbed(author)
