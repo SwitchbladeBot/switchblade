@@ -2,7 +2,6 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 const types = ['player', 'p', 'beatmap', 'b', 'register', 'reg', 'r']
 
-// TODO: Osu Beatmap command
 module.exports = class Osu extends Command {
   constructor (client) {
     super(client, {
