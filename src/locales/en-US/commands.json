@@ -1023,7 +1023,7 @@
     "subcommands": {
       "player": {
         "commandDescription": "Looks up a player on osu!",
-        "commandUsage": "<player name or id>",
+        "commandUsage": "[player name or id]",
         "noPlayer": "You need to give me a valid osu! player name or ID.",
         "level": "Level **{{number}}**",
         "joinedAt": "Joined **{{date}}** ({{timeAgo}})",
@@ -1034,7 +1034,30 @@
         "totalScore": "Total Score: **{{totalScore}}**",
         "hitAccuracy": "Hit Accuracy: **{{accuracy}}%**",
         "playCount": "Play Count: **{{playCount}}**",
-        "totalHits": "Total Hits: **{{totalHits}}** (**{{300}}** {{Constants.OSU_300}}, **{{100}}** {{Constants.OSU_100}}, **{{50}}** {{Constants.OSU_50}}"
+        "totalHits": "Total Hits: **{{totalHits}}** (**{{300}}** {{Constants.OSU_300}}, **{{100}}** {{Constants.OSU_100}}, **{{50}}** {{Constants.OSU_50}})",
+        "topScores": "**{{user}}**'s top scores:",
+        "recentPlays": "**{{user}}**'s most recent plays (24 hours):",
+        "playerNotFound": "Player not found"
+      },
+      "beatmap": {
+        "commandDescription": "Looks up a beatmap or beatmap set on osu!",
+        "commandUsage": "<beatmap or beatmap set id>",
+        "noBeatmap": "You need to give me a valid beatmap or beatmap set ID.",
+        "starDifficulty": "Star Difficulty: **{{difficulty}}**",
+        "successRate": "Success Rate: **{{rate}}%** ({{successfulPlays}} / {{totalPlays}})",
+        "mappedBy": "Mapped by {{mapper}}",
+        "lastUpdate": "Last update on **{{date}}** ({{timeAgo}})",
+        "approved": "Approved on **{{date}}** ({{timeAgo}})",
+        "tags": "Tags: **{{tags}}**",
+        "download": "[Download]({{link}}) [no video]({{linkNoVideo}})",
+        "topScores": "Top scores:"
+      },
+      "register": {
+        "commandDescription": "Register your osu! profile to your Discord account.",
+        "commandUsage": "<player name or id>",
+        "registered": "Player **{{username}}** registered successfully.",
+        "notRegistered": "Unable to register **{{user}}**: {{error}}",
+        "invalidPlayer": "Invalid player name or ID."
       }
     }
   },

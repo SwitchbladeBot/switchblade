@@ -16,5 +16,6 @@ module.exports = new Schema({
   favColor: String,
   rep: Number,
   lastRep: Number,
-  lastDBLBonusClaim: Number
+  lastDBLBonusClaim: Number,
+  osuId: String
 })

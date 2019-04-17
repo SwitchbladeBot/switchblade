@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const types = ['player', 'p', 'beatmap', 'b']
+const types = ['player', 'p', 'beatmap', 'b', 'register', 'reg', 'r']
 
 // TODO: Osu Beatmap command
 module.exports = class Osu extends Command {
@@ -19,7 +19,7 @@ module.exports = class Osu extends Command {
               this.usage(t, prefix),
               '',
               `__**${t('commons:search.types')}:**__`,
-              `\`${['player', 'beatmap'].join('`, `')}\``
+              `\`${['player', 'beatmap', 'register'].join('`, `')}\``
             ].join('\n'))
         }
       }]
@@ -27,5 +27,11 @@ module.exports = class Osu extends Command {
 
     this.OSU_LOGO = 'https://i.imgur.com/Ek0hnam.png'
     this.OSU_COLOR = '#E7669F'
+    this.modes = {
+      'osu': ['0', 'osu!'],
+      'taiko': ['1', 'osu!taiko'],
+      'catchthebeat': ['2', 'osu!catch'],
+      'mania': ['3', 'osu!mania']
+    }
   }
 }
