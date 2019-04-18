@@ -1026,7 +1026,7 @@
         "commandUsage": "[player name or id]",
         "noPlayer": "You need to give me a valid osu! player name or ID.",
         "level": "Level **{{number}}**",
-        "joinedAt": "Joined **{{date}}** ({{timeAgo}})",
+        "joinedAt": "Joined on **{{date}}** ({{timeAgo}})",
         "globalRanking": "Global Ranking: **#{{rank}}**",
         "countryRanking": "Country Ranking: **#{{rank}}**",
         "rankedScore": "Ranked Score: **{{rankedScore}}**",
