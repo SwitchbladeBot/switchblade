@@ -21,7 +21,7 @@ module.exports = class GuildInfo extends Command {
     moment.locale(language)
     channel.startTyping()
     embed.setTitle(guild.name)
-      .setThumbnail(guild.iconURL ? guild.iconURL : 'https://i.imgur.com/o0P9VYp.jpg')
+      .setThumbnail(guild.iconURL ? guild.iconURL : `https://guild-default-icon.herokuapp.com/${guild.nameAcronym}`)
       .addField(t('commands:guildinfo.id'), guild.id, true)
       .addField(t('commands:guildinfo.owner'), guild.owner, true)
       .addField(t('commands:guildinfo.region'), t(`regions:${guild.region}`), true)
