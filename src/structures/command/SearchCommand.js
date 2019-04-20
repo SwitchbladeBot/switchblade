@@ -5,15 +5,23 @@ const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 module.exports = class SearchCommand extends Command {
   constructor (client, options) {
     super(client, {
-      parameters: (options.parameters || [{
+      parameters: options.parameters || [{
         type: 'string', full: true, missingError: 'commons:search.noParams', maxLength: 200, clean: true
-      }]).push([{ type: 'booleanFlag', name: 'lucky', aliases: ['first'] }]),
+      }],
       ...options
     })
 
+    this.parameters = this.mixParameters(this.parameters)
     this.embedColor = options.embedColor
     this.embedLogoURL = options.embedLogoURL
     this.maxResults = options.maxResults || 10
+  }
+
+  mixParameters (commandParameters) {
+    if (!commandParameters[1]) commandParameters.push([{ type: 'booleanFlag', name: 'lucky', aliases: ['first'] }])
+    else commandParameters[1].push({ type: 'booleanFlag', name: 'lucky', aliases: ['first'] })
+
+    return commandParameters
   }
 
   async run (context, query) {
