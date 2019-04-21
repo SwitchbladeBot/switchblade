@@ -1178,7 +1178,8 @@
     "purgedSingular": "Purged **{{count}}** message.",
     "purgedPlural": "Purged **{{count}}** messages.",
     "purgedMemberSingular": "Purged **{{count}}** message sent by **{{user}}**.",
-    "purgedMemberPlural": "Purged **{{count}}** messages sent by **{{user}}**."
+    "purgedMemberPlural": "Purged **{{count}}** messages sent by **{{user}}**.",
+    "invalidNumber": "You have to give me a number between 1 and 100!"
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",

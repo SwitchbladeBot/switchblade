@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, CommandError } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Purge extends Command {
   constructor (client) {
@@ -11,6 +11,12 @@ module.exports = class Purge extends Command {
         type: 'number', required: false, full: false
       }, {
         type: 'member', required: false, full: false, acceptSelf: true, acceptBot: true
+      },
+      {
+        type: 'number',
+        min: 1,
+        max: 100,
+        missingError: 'commands:purge.invalidNumber'
       }]
     })
   }
@@ -26,17 +32,20 @@ module.exports = class Purge extends Command {
             embed.setDescription(t(userMessages.size > 1 ? 'commands:purge.purgedMemberPlural' : 'commands:purge.purgedMemberSingular', { count: number, user: member.displayName }))
             channel.send(embed).then(() => channel.stopTyping())
           }).catch(() => {
-            throw new CommandError('errors:generic')
+            return channel.send(new SwitchbladeEmbed()
+              .setTitle(t('errors:generic')))
           })
         }).catch(() => {
-          throw new CommandError('errors:generic')
+          return channel.send(new SwitchbladeEmbed()
+            .setTitle(t('errors:generic')))
         })
     } else {
       channel.bulkDelete(number).then(() => {
         embed.setDescription(t(number > 1 ? 'commands:purge.purgedPlural' : 'commands:purge.purgedSingular', { count: number }))
         channel.send(embed).then(() => channel.stopTyping())
       }).catch(() => {
-        throw new CommandError('errors:generic')
+        return channel.send(new SwitchbladeEmbed()
+          .setTitle(t('errors:generic')))
       })
     }
   }
