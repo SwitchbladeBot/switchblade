@@ -1018,13 +1018,13 @@
     "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
   "osu": {
-    "commandDescription": "Looks up a player or a beatmap on osu!",
+    "commandDescription": "Searches for a player or a beatmap on osu!",
     "commandUsage": "<type> <query>",
     "subcommands": {
       "player": {
-        "commandDescription": "Looks up a player on osu!",
+        "commandDescription": "Searches for a player on osu!",
         "commandUsage": "[player name or id]",
-        "noPlayer": "You need to give me a valid osu! player name or ID.",
+        "noPlayer": "You have to give me a valid osu! player name or ID.",
         "level": "Level **{{number}}**",
         "joinedAt": "Joined on **{{date}}** ({{timeAgo}})",
         "globalRanking": "Global Ranking: **#{{rank}}**",
@@ -1036,13 +1036,13 @@
         "playCount": "Play Count: **{{playCount}}**",
         "totalHits": "Total Hits: **{{totalHits}}** (**{{300}}** {{Constants.OSU_300}}, **{{100}}** {{Constants.OSU_100}}, **{{50}}** {{Constants.OSU_50}})",
         "topScores": "**{{user}}**'s top scores:",
-        "recentPlays": "**{{user}}**'s most recent plays (24 hours):",
+        "recentPlays": "**{{user}}**'s most recent plays in the last 24 hours:",
         "playerNotFound": "Player not found"
       },
       "beatmap": {
-        "commandDescription": "Looks up a beatmap or beatmap set on osu!",
+        "commandDescription": "Searches for a beatmap or beatmap set on osu!",
         "commandUsage": "<beatmap or beatmap set id>",
-        "noBeatmap": "You need to give me a valid beatmap or beatmap set ID.",
+        "noBeatmap": "You have to give me a valid beatmap or beatmap set ID.",
         "starDifficulty": "Star Difficulty: **{{difficulty}}**",
         "successRate": "Success Rate: **{{rate}}%** ({{successfulPlays}} / {{totalPlays}})",
         "mappedBy": "Mapped by {{mapper}}",
@@ -1055,7 +1055,7 @@
       "register": {
         "commandDescription": "Register your osu! profile to your Discord account.",
         "commandUsage": "<player name or id>",
-        "registered": "Player **{{username}}** registered successfully.",
+        "registered": "Player **{{username}}** registered successfully!",
         "notRegistered": "Unable to register **{{user}}**: {{error}}",
         "invalidPlayer": "Invalid player name or ID."
       }
