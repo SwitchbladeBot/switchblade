@@ -7,7 +7,7 @@ module.exports = class Osu extends Command {
     super(client, {
       name: 'osu',
       category: 'games',
-      requirements: { apis: ['osu'] },
+      requirements: { apis: ['osu'], databaseOnly: true },
       parameters: [{
         type: 'string',
         full: false,
