@@ -1050,14 +1050,14 @@
         "notFound": "User not found."
       },
       "love": {
-        "commandDescription": "Loves the current playing track.",
-        "notConnected": "You have to connect your account to last.fm to love. [Connect here]({{link}})",
-        "loved": "Track loved! Use `{{unloveCommand}}` to unlove the track."
+        "commandDescription": "Loves the current song on Last.fm",
+        "notConnected": "You have to connect your account to Last.fm to love. [Connect here]({{link}})",
+        "loved": "Song loved! To unlove the track, use `{{unloveCommand}}`."
       },
       "unlove": {
-        "commandDescription": "Unloves the current playing track.",
-        "notConnected": "You have to connect your account to last.fm to unlove. [Connect here]({{link}})",
-        "unloved": "Track loved! Use `{{loveCommand}}` to love the track."
+        "commandDescription": "Unloves the current song on Last.fm",
+        "notConnected": "You have to connect your account to Last.fm to unlove. [Connect here]({{link}})",
+        "unloved": "Song unloved! To love the track, use `{{loveCommand}}`."
       }
     }
   },
