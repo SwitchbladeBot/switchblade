@@ -1018,13 +1018,13 @@
     "clickHere": "**[Click here to join my support server](https://support.switchblade.xyz)**"
   },
   "osu": {
-    "commandDescription": "Searches for a player or a beatmap on osu!",
+    "commandDescription": "Searches for a profile or a beatmap on osu!",
     "commandUsage": "<type> <query>",
     "subcommands": {
       "player": {
-        "commandDescription": "Searches for a player on osu!",
-        "commandUsage": "[player name or id]",
-        "noPlayer": "You have to give me a valid osu! player name or ID.",
+        "commandDescription": "Searches for a profile on osu!",
+        "commandUsage": "[profile name or id]",
+        "noPlayer": "You have to give me a valid osu! profile name or ID.",
         "level": "Level **{{number}}**",
         "joinedAt": "Joined on **{{date}}** ({{timeAgo}})",
         "globalRanking": "Global Ranking: **#{{rank}}**",
@@ -1037,7 +1037,7 @@
         "totalHits": "Total Hits: **{{totalHits}}** (**{{300}}** {{Constants.OSU_300}}, **{{100}}** {{Constants.OSU_100}}, **{{50}}** {{Constants.OSU_50}})",
         "topScores": "**{{user}}**'s top scores:",
         "recentPlays": "**{{user}}**'s most recent plays in the last 24 hours:",
-        "playerNotFound": "Player not found"
+        "playerNotFound": "Profile not found."
       },
       "beatmap": {
         "commandDescription": "Searches for a beatmap or beatmap set on osu!",
@@ -1053,11 +1053,11 @@
         "topScores": "Top scores:"
       },
       "register": {
-        "commandDescription": "Register your osu! profile to your Discord account.",
-        "commandUsage": "<player name or id>",
-        "registered": "Player **{{username}}** registered successfully!",
-        "notRegistered": "Unable to register **{{user}}**: {{error}}",
-        "invalidPlayer": "Invalid player name or ID."
+        "commandDescription": "Link your osu! profile to your Discord account in Switchblade's database.",
+        "commandUsage": "<profile name or id>",
+        "registered": "Profile **{{username}}** is now linked to your account!",
+        "notRegistered": "Unable to link profile **{{user}}** to your account: {{error}}",
+        "invalidPlayer": "Invalid profile name or ID."
       }
     }
   },
