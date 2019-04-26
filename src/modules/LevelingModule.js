@@ -22,6 +22,7 @@ module.exports = class LevelingModule extends Module {
   }
 
   levelFromExperience (xp, modifier = 0.37) {
+    xp += 87
     const r = (-this.B + Math.sqrt(Math.pow(this.B, 2) - ((4 * this.A) * ((this.C * (1 + modifier)) - Math.ceil(xp / (1 + modifier)))))) / (2 * this.A)
     return (r < 0 || isNaN(r)) ? 0 : Math.floor(r)
   }
@@ -31,7 +32,7 @@ module.exports = class LevelingModule extends Module {
   }
 
   experienceInCurrentLevel (level, xp, modifier = 0.37) {
-    return xp - this.experienceFromLevel(level)
+    return (xp - this.experienceFromLevel(level)) + 87
   }
 
   experienceBetweenCurrentAndNextLevel (level, modifier = 0.37) {
@@ -40,11 +41,12 @@ module.exports = class LevelingModule extends Module {
 
   async giveExperience (_user) {
     // TODO: change this system
-    const { globalXp } = await this._users.findOne(_user, 'globalXp')
+    let { globalXp } = await this._users.findOne(_user, 'globalXp')
     const newExperience = Math.floor(Math.random() * (this.maxRandomExperience - this.minRandomExperience + 1) + this.minRandomExperience)
+    globalXp += 87
     console.log(`old xp: ${globalXp} new xp: ${globalXp + newExperience}`)
     console.log(`to next: ${this.experienceInCurrentLevel(this.levelFromExperience(globalXp), globalXp)}/${this.experienceBetweenCurrentAndNextLevel(this.levelFromExperience(globalXp))} (total xp: ${globalXp})`)
-    console.log(`percent: ${((globalXp - this.experienceFromLevel(this.levelFromExperience(globalXp))) / (this.experienceFromLevel(this.levelFromExperience(globalXp) + 1) - this.experienceFromLevel(this.levelFromExperience(globalXp)))) * 100}%`)
+    console.log(`percent: ${Math.round(((globalXp - this.experienceFromLevel(this.levelFromExperience(globalXp)) + 87) / (this.experienceFromLevel(this.levelFromExperience(globalXp) + 1) - this.experienceFromLevel(this.levelFromExperience(globalXp)))) * 100)}%`)
     console.log('-----')
     await this._users.update(_user, { $inc: { globalXp: newExperience } })
 
