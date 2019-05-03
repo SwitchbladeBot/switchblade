@@ -5,6 +5,7 @@ module.exports = class OsuRegister extends Command {
     super(client, {
       name: 'register',
       aliases: ['reg', 'r'],
+      requirements: { databaseOnly: true },
       parentCommand: 'osu',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:osu.subcommands.player.noPlayer'
