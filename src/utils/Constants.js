@@ -67,6 +67,7 @@ module.exports = {
   PATREON_LOGO: '<:patreon:516783030543712273>',
   SPOTIFY_LOGO: '<:spotify:447142752115752960>',
   LASTFM_LOGO: '<:lastfm:561645056390332417>',
+  OSU_LOGO: '<:osu_logo:574007153753456671>',
 
   // League of Legends Status Emoji
   LOL_STATUS_INFO: '<:lolinfo:534989137913184277>',

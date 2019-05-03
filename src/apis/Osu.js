@@ -37,10 +37,27 @@ module.exports = class Osu extends APIWrapper {
     return this.request('/get_user_recent', { u: user, m: mode, limit }).then(u => u)
   }
 
+  getAccessToken (authCode) {
+    return this.post('https://osu.ppy.sh/oauth/token', {
+      grant_type: 'authorization_code',
+      client_id: process.env.OSU_CLIENT_ID,
+      client_secret: process.env.OSU_CLIENT_SECRET,
+      redirect_uri: this.client.connections.osu.authCallbackURL,
+      code: authCode
+    }).then(u => u)
+  }
+
   request (endpoint, queryParams = {}) {
     queryParams.k = process.env.OSU_API_KEY
     return snekfetch.get(`${API_URL}${endpoint}`)
       .query(queryParams)
+      .then(r => r.body)
+  }
+
+  post (url, queryParams = {}) {
+    return snekfetch.post(url)
+      .query(queryParams)
+      .set('Content-Type', 'application/x-www-form-urlencoded')
       .then(r => r.body)
   }
 }
