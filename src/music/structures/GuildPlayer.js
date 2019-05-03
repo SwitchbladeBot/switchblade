@@ -186,7 +186,6 @@ module.exports = class GuildPlayer extends Player {
     }
     // Voice leave
     if (oldChannel && !newChannel) {
-      if (oldChannel.id === newChannel.id) return
       if (isSwitch) oldChannel.members.filter(m => !m.user.bot).forEach(m => this._listening.delete(m.user.id))
       else if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
       else return
