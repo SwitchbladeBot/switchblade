@@ -16,6 +16,7 @@ module.exports = {
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),
+  Connection: require('./structures/Connection.js'),
   EventListener: require('./structures/EventListener.js'),
   Loader: require('./structures/Loader.js'),
   Module: require('./structures/Module.js'),

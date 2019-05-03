@@ -6,6 +6,7 @@ module.exports = class SoundcloudSong extends Song {
     super(data, requestedBy)
     this._Soundcloud = Soundcloud
     this.color = Constants.SOUNDCLOUD_COLOR
+    this.source = 'soundcloud'
   }
 
   async loadInfo () {
