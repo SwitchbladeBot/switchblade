@@ -5,5 +5,6 @@ module.exports = {
   LocaleLoader: require('./LocaleLoader.js'),
   ModuleLoader: require('./ModuleLoader.js'),
   HTTPLoader: require('./HTTPLoader.js'),
-  CommandLoader: require('./CommandLoader.js')
+  CommandLoader: require('./CommandLoader.js'),
+  ConnectionLoader: require('./ConnectionLoader.js')
 }

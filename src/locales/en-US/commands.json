@@ -1092,6 +1092,16 @@
         "commandUsage": "<user>",
         "missing": "You have to give me a valid user!",
         "notFound": "User not found."
+      },
+      "love": {
+        "commandDescription": "Loves the current song on Last.fm",
+        "notConnected": "You have to connect your account to Last.fm to love. [Connect here]({{link}})",
+        "loved": "Song loved! To unlove the track, use `{{unloveCommand}}`."
+      },
+      "unlove": {
+        "commandDescription": "Unloves the current song on Last.fm",
+        "notConnected": "You have to connect your account to Last.fm to unlove. [Connect here]({{link}})",
+        "unloved": "Song unloved! To love the track, use `{{loveCommand}}`."
       }
     }
   },
@@ -1222,7 +1232,8 @@
     "purgedSingular": "Purged **{{count}}** message.",
     "purgedPlural": "Purged **{{count}}** messages.",
     "purgedMemberSingular": "Purged **{{count}}** message sent by **{{user}}**.",
-    "purgedMemberPlural": "Purged **{{count}}** messages sent by **{{user}}**."
+    "purgedMemberPlural": "Purged **{{count}}** messages sent by **{{user}}**.",
+    "invalidNumber": "You have to give me a number between 1 and 100!"
   },
   "morejpeg": {
     "commandDescription": "Adds JPEG compression to an image.",
@@ -1301,5 +1312,35 @@
     "commandUsage": "<code>",
     "missingCode": "You need to give me some code to upload!",
     "hereIsYourURL": "Here's your link!"
+  },
+  "connections": {
+    "commandDescription": "Shows all the accounts your account is connected to.",
+    "title": "Your connections",
+    "connected": "Connected as {{user}}",
+    "notConnected": "Not connected. Click here to connect."
+  },
+  "scrobbling": {
+    "commandDescription": "Sees information about audio scrobbling on last.fm with Switchblade.",
+    "title": "Audio scrobbling",
+    "notConnectedDescription": "On Switchblade you can scrobble the songs you listen to your last.fm account. You can connect you account [here]({{link}}).",
+    "connectedDescription": "On Switchblade you can scrobble the songs you listen to your last.fm account. Your scrobble is **{{scrobblingStatus}}** with the percentage **{{percent}}%**. You can just play some music on Switchblade and it will automatically scrobble to your account.",
+    "configNotConnected": "You need to connect your account to your last.fm account. You can connect you account [here]({{link}}).",
+    "configuration": {
+      "title": "Configuration",
+      "description": "You can also configure your scrobbling settings on the [dashboard]({{link}}) or using these commands:"
+    },
+    "subcommands": {
+      "enable": {
+        "commandDescription": "Change your scrobbling configuration.",
+        "commandUsage": "<true/false>",
+        "changed": "Scrobbling successfully changed to **{{scrobblingStatus}}**."
+      },
+      "percent": {
+        "commandDescription": "Change your scrobbling percentage.",
+        "commandUsage": "<45-95>",
+        "missingNumber": "You need to give me a number from 45 to 95!",
+        "changed": "Scrobbling percentage successfully changed to **{{percent}}%**."
+      }
+    }
   }
 }

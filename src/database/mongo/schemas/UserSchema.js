@@ -6,6 +6,12 @@ const BlacklistedSchema = new Schema({
   blacklister: { type: String, required: true }
 })
 
+const UserConnection = new Schema({
+  name: String,
+  tokens: Object,
+  config: Object
+})
+
 module.exports = new Schema({
   _id: String,
   money: Number,
@@ -17,5 +23,5 @@ module.exports = new Schema({
   rep: Number,
   lastRep: Number,
   lastDBLBonusClaim: Number,
-  osuId: String
+  connections: [ UserConnection ]
 })
