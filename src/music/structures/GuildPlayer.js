@@ -176,7 +176,6 @@ module.exports = class GuildPlayer extends Player {
     const { voiceChannel: oldChannel } = oldMember
     const { voiceChannel: newChannel } = newMember
     const isSwitch = newMember.user.id === switchId
-    console.log(isSwitch)
     if (newMember.user.bot && !isSwitch) return
     // Voice join
     if (!oldChannel && newChannel) {
