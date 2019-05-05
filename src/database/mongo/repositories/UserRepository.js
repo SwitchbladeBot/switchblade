@@ -16,6 +16,7 @@ module.exports = class UserRepository extends MongoRepository {
       globalXp: 0,
       personalText: 'Did you know you can edit this in the future dashboard or using the personaltext command? :o',
       favColor: process.env.EMBED_COLOR,
+      connections: [],
       ...(super.parse(entity) || {})
     }
   }

@@ -10,6 +10,13 @@ module.exports = class LeagueOfLegends extends APIWrapper {
     this.version = null
   }
 
+  async getVersion () {
+    return this.request(`/realms/na.json`).then(data => {
+      this.version = data.v
+      return data.v
+    })
+  }
+
   async selectLanguage (language) {
     const languages = await this.request('/cdn/languages.json')
     const normalizedLanguage = language.replace('-', '_').toLowerCase()
@@ -19,17 +26,16 @@ module.exports = class LeagueOfLegends extends APIWrapper {
 
   async getLocale (language) {
     const matchingLanguage = await this.selectLanguage(language)
-    return this.request(`/cdn/${this.version}/data/${matchingLanguage}/language.json`).then(u => u.data)
+    return this.request(`/cdn/${this.version}/data/${matchingLanguage}/language.json`).then(u => {
+      return this.convertBufferToJson(u).then(u => u.data)
+    })
   }
 
   async fetchChampions (version = this.version) {
-    if (!version) {
-      return this.request(`/api/versions.json`).then(versions => {
-        this.version = versions[0]
-        version = versions[0]
-        return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => u.data)
-      })
-    } else return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => u.data)
+    if (!version) version = await this.getVersion()
+    return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => {
+      return this.convertBufferToJson(u).then(u => u.data)
+    })
   }
 
   async fetchChampion (champion, language) {
@@ -48,5 +54,11 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   request (endpoint) {
     return snekfetch.get(API_URL + endpoint)
       .then(r => r.body)
+  }
+
+  async convertBufferToJson (buffer) {
+    const bufferAsJson = JSON.stringify(buffer)
+    const bufferOriginal = Buffer.from(JSON.parse(bufferAsJson).data)
+    return JSON.parse(bufferOriginal.toString('utf8'))
   }
 }

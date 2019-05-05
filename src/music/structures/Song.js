@@ -20,13 +20,19 @@ module.exports = class Song extends EventEmitter {
 
     this.color = '#7289DA'
     this.richInfo = null
+    this.startedAt = null
 
-    this.on('start', () => this.removeAllListeners('queue'))
+    this.on('start', () => this.handleStart())
     this.on('stop', () => this.removeAllListeners())
   }
 
   loadInfo () {
     return this
+  }
+
+  handleStart () {
+    this.removeAllListeners('queue')
+    this.startedAt = new Date()
   }
 
   get formattedDuration () {

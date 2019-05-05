@@ -5,15 +5,23 @@ const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 module.exports = class SearchCommand extends Command {
   constructor (client, options) {
     super(client, {
-      parameters: [{
+      parameters: options.parameters || [{
         type: 'string', full: true, missingError: 'commons:search.noParams', maxLength: 200, clean: true
       }],
       ...options
     })
 
+    this.parameters = this.mixParameters(this.parameters)
     this.embedColor = options.embedColor
     this.embedLogoURL = options.embedLogoURL
     this.maxResults = options.maxResults || 10
+  }
+
+  mixParameters (commandParameters) {
+    if (!commandParameters[1]) commandParameters.push([{ type: 'booleanFlag', name: 'lucky', aliases: ['first'] }])
+    else commandParameters[1].push({ type: 'booleanFlag', name: 'lucky', aliases: ['first'] })
+
+    return commandParameters
   }
 
   async run (context, query) {
@@ -25,6 +33,7 @@ module.exports = class SearchCommand extends Command {
 
     if (!results) throw new CommandError(t('commons:search.searchFail'))
     if (!results.length) throw new CommandError(t('commons:search.noResults'))
+    if (context.flags['lucky']) return this.handleResult(context, results[0]).then(() => channel.stopTyping())
     const description = results.map((item, i) => `\`${this.formatIndex(i, results)}\`. ${this.searchResultFormatter(item, context)}`)
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)

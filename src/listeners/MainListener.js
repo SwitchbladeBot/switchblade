@@ -7,7 +7,7 @@ const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 module.exports = class MainListener extends EventListener {
   constructor (client) {
     super(client)
-    this.events = ['ready', 'message']
+    this.events = ['ready', 'message', 'voiceStateUpdate']
   }
 
   onReady () {
@@ -129,5 +129,12 @@ module.exports = class MainListener extends EventListener {
         this.runCommand(command, context, args, language)
       }
     }
+  }
+
+  async onVoiceStateUpdate (oldMember, newMember) {
+    if (!this.playerManager) return
+    const guildPlayer = this.playerManager.get(newMember.guild.id)
+    if (!guildPlayer) return
+    guildPlayer.updateVoiceState(oldMember, newMember)
   }
 }
