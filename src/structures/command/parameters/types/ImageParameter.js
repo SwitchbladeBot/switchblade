@@ -16,17 +16,17 @@ const isValidURL = (q) => {
 }
 
 const MAX_SIZE = 20000000
-const SUPPORTED_TYPES = [ 'image/jpeg', 'image/png', 'image/svg+xml' ]
-const imageResponseCheck = (res) => (
-  res.ok && SUPPORTED_TYPES.includes(res.headers.get('content-type')) &&
-  res.headers.has('content-length') && Number(res.headers.get('content-length')) <= MAX_SIZE
-)
+const imageResponseCheck = (res, acceptGifs) => {
+  let SUPPORTED_TYPES = [ 'image/jpeg', 'image/png', 'image/svg+xml' ]
+  if (acceptGifs) SUPPORTED_TYPES.push('image/gif')
+  return res.ok && SUPPORTED_TYPES.includes(res.headers.get('content-type')) && res.headers.has('content-length') && Number(res.headers.get('content-length')) <= MAX_SIZE
+}
 
-const imageRequest = (url, client, timeout = 3000) => {
+const imageRequest = (url, client, timeout = 3000, acceptGifs) => {
   const controller = new AbortController()
   const abortTimeout = client.setTimeout(() => controller.abort(), timeout)
   return fetch(url, { signal: controller.signal })
-    .then(res => imageResponseCheck(res) ? res.buffer() : Promise.reject(res))
+    .then(res => imageResponseCheck(res, acceptGifs) ? res.buffer() : Promise.reject(res))
     .finally(() => client.clearTimeout(abortTimeout))
 }
 
@@ -42,6 +42,7 @@ module.exports = class ImageParameter extends Parameter {
       link: defVal(options, 'link', true),
       userOptions: user ? UserParameter.parseOptions(options.userOptions) : null,
       authorAvatar: defVal(options, 'authorAvatar', true),
+      acceptGifs: defVal(options, 'acceptGifs', true),
       lastMessages: {
         accept: true,
         limit: 10,
@@ -70,23 +71,26 @@ module.exports = class ImageParameter extends Parameter {
       parseState.argIndex--
       const attachment = message.attachments.first()
       try {
-        const buffer = await imageRequest(attachment.url, client)
+        const buffer = await imageRequest(attachment.url, client, this.acceptGifs)
         return buffer
       } catch (e) {
-        client.logError(e)
-        throw new CommandError(t('errors:imageParsingError'))
+        throw e
+        // client.logError(e)
+        // throw new CommandError(t('errors:imageParsingError'))
       }
     }
 
     if (arg) {
       // Link
-      if (this.link && isValidURL(arg)) {
+      const link = arg.replace(/>$|^</gi, '')
+      console.log(link)
+      if (this.link && isValidURL(link)) {
         try {
-          const buffer = await imageRequest(arg, client)
+          const buffer = await imageRequest(link, client)
           return buffer
         } catch (e) {
           client.logError(e)
-          throw new CommandError(t('errors:invalidImageLink'), this.showUsage)
+          new CommandError(t('errors:invalidImageLink'), this.showUsage)
         }
       }
 
@@ -111,7 +115,7 @@ module.exports = class ImageParameter extends Parameter {
     if (this.lastMessages.accept) {
       const lastMessages = channel.messages.last(this.lastMessages.limit)
       if (lastMessages.length) {
-        for (let i = 0; i < lastMessages.length; i++) {
+        for (let i = this.lastMessages.limit - 1; i < lastMessages.length; i--) {
           const msg = lastMessages[i]
           if (this.lastMessages.attachment && msg.attachments.size) {
             parseState.argIndex--
