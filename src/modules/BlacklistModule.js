@@ -16,11 +16,11 @@ module.exports = class DeveloperModule extends Module {
   }
 
   async blacklist (_user, reason, blacklister) {
-    await this._users.update(_user, { blacklist: { reason, blacklister } })
+    await this._users.update(_user, { blacklisted: { reason, blacklister } })
   }
 
   async unblacklist (_user) {
-    await this._users.update(_user, { blacklist: null })
+    await this._users.update(_user, { blacklisted: null })
   }
 
   async blacklisted (_user, reason, blacklister) {
