@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed, CanvasTemplates } = require('../../')
 const { Attachment } = require('discord.js')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 module.exports = class UIGradient extends Command {
   constructor (client) {
@@ -14,7 +14,7 @@ module.exports = class UIGradient extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    const { body } = await snekfetch.get('https://cdn.jsdelivr.net/gh/ghosh/uiGradients/gradients.json')
+    const body = await fetch('https://cdn.jsdelivr.net/gh/ghosh/uiGradients/gradients.json').then(res => res.json())
     const { name, colors } = body[Math.floor(Math.random() * body.length)]
 
     const gradient = CanvasTemplates.gradient(colors, 300, 100)

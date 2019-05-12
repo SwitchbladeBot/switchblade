@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 const cheerio = require('cheerio')
 
 module.exports = class BeatSaver extends Command {
@@ -28,7 +28,7 @@ module.exports = class BeatSaver extends Command {
       return
     }
 
-    const { body } = await snekfetch.get(url)
+    const { body } = await fetch(url)
     const $ = cheerio.load(body)
     if (body) {
       const title = $('body > div > div > h2').text()
@@ -55,7 +55,7 @@ async function parseQuery (query) {
   if (match) {
     return `https://beatsaver.com/browse/detail/${match}`
   } else {
-    const { body } = await snekfetch.get(`https://beatsaver.com/search/all/0?key=${encodeURIComponent(query)}`)
+    const { body } = await fetch(`https://beatsaver.com/search/all/0?key=${encodeURIComponent(query)}`)
     const $ = cheerio.load(body)
     return $('body > div > div:nth-child(3) > h2 > a').attr('href')
   }

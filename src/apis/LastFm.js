@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+const qs = require('querystring')
 const crypto = require('crypto')
 
 const API_URL = 'http://ws.audioscrobbler.com/2.0/'
@@ -112,9 +113,11 @@ module.exports = class LastFM extends APIWrapper {
     const params = { method, api_key: process.env.LASTFM_KEY, format }
     Object.assign(queryParams, params)
     if (signature) queryParams.api_sig = this.getSignature(queryParams)
-    if (!write) return snekfetch.get(API_URL).query(queryParams).then(r => r.body)
-    return snekfetch.post(API_URL)
-      .set('content-type', 'application/x-www-form-urlencoded').send(queryParams).then(r => r.body)
+    if (!write) return fetch(API_URL + `?${qs.stringify(queryParams)}`).then(res => res.json())
+    return fetch(API_URL + `?${qs.stringify(queryParams)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+    }).then(res => res.json())
   }
 
   /**

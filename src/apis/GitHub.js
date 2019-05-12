@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://api.github.com'
 
@@ -39,8 +40,7 @@ module.exports = class GitHubAPI extends APIWrapper {
   }
 
   request (endpoint, queryParams = {}) {
-    return snekfetch.get(`${API_URL}${endpoint}?client_id=${process.env.GITHUB_CLIENT_ID}$&client_secret=${process.env.GITHUB_CLIENT_SECRET}`)
-      .query(queryParams)
-      .then(r => r.body)
+    return fetch(`${API_URL}${endpoint}?client_id=${process.env.GITHUB_CLIENT_ID}$&client_secret=${process.env.GITHUB_CLIENT_SECRET}&${qs.stringify(queryParams)}`)
+      .then(res => res.json())
   }
 }

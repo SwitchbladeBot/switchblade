@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 module.exports = class Pat extends Command {
   constructor (client) {
@@ -14,7 +14,7 @@ module.exports = class Pat extends Command {
   }
 
   async run ({ t, channel, author }, user) {
-    const { body } = await snekfetch.get('https://nekos.life/api/v2/img/pat')
+    const body = await fetch('https://nekos.life/api/v2/img/pat')
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     embed.setImage(body.url)

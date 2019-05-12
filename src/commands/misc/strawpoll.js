@@ -1,6 +1,6 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 // eslint-disable-next-line no-useless-escape
 const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 
@@ -23,12 +23,13 @@ module.exports = class Strawpoll extends Command {
     if (options.length >= 2 && options.length <= 30) {
       channel.startTyping()
       const strawOptions = {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        data: { title, options }
+        body: { title, options }
       }
-      const { body } = await snekfetch.post('https://strawpoll.me/api/v2/polls', strawOptions)
+      const body = await fetch('https://strawpoll.me/api/v2/polls', strawOptions).then(res => res.json())
 
       embed
         .setColor(0xffd756)

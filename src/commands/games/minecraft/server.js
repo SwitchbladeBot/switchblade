@@ -2,7 +2,7 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 const { Attachment } = require('discord.js')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 module.exports = class MinecraftServer extends Command {
   constructor (client) {
@@ -20,7 +20,7 @@ module.exports = class MinecraftServer extends Command {
   async run ({ t, author, channel, language }, address) {
     channel.startTyping()
     const [ host, port = 25565 ] = address.split(':')
-    const { body } = await snekfetch.get(`https://mcapi.us/server/status?ip=${host}&port=${port}`)
+    const { body } = await fetch(`https://mcapi.us/server/status?ip=${host}&port=${port}`).then(res => res.json())
 
     if (body.online) {
       channel.send(

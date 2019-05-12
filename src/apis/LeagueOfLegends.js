@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://ddragon.leagueoflegends.com'
 
@@ -52,8 +53,8 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   }
 
   request (endpoint) {
-    return snekfetch.get(API_URL + endpoint)
-      .then(r => r.body)
+    return fetch(API_URL + endpoint)
+      .then(res => res.json())
   }
 
   async convertBufferToJson (buffer) {
