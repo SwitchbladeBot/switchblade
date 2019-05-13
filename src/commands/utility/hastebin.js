@@ -24,7 +24,7 @@ module.exports = class Hastebin extends Command {
     const embed = new SwitchbladeEmbed()
     const { key } = await fetch(`${baseURL}/documents`, {
       method: 'POST',
-      headers: { 'Content-Type', 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: EscapeMarkdown(code)
     }).then(res => res.json())
 

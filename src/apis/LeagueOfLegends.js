@@ -1,6 +1,5 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
-const qs = require('querystring')
 
 const API_URL = 'https://ddragon.leagueoflegends.com'
 

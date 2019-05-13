@@ -116,7 +116,7 @@ module.exports = class LastFM extends APIWrapper {
     if (!write) return fetch(API_URL + `?${qs.stringify(queryParams)}`).then(res => res.json())
     return fetch(API_URL + `?${qs.stringify(queryParams)}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(res => res.json())
   }
 
