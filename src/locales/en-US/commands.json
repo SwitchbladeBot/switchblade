@@ -1298,5 +1298,13 @@
         "changed": "Scrobbling percentage successfully changed to **{{percent}}%**."
       }
     }
+  },
+  "translate": {
+    "commandDescription": "Translates a text from one language to another.",
+    "commandUsage": "<from> <to> <text>",
+    "targetLanguageInvalid": "Target language {{target}} not found. Translated to english.",
+    "translatedFrom": "Translated from",
+    "translatedTo": "Translated to",
+    "automatic": "(automatic detected)"
   }
 }
