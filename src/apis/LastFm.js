@@ -59,7 +59,7 @@ module.exports = class LastFM extends APIWrapper {
     if (!await this.checkSong(title, author)) return false
     return this.request('track.updateNowPlaying', {
       sk,
-      track: this.getFilteredTrackName(source, author, title),
+      track: LastFM.getFilteredTrackName(source, author, title),
       artist: author,
       duration: length / 1000
     }, true, true).then(r => r.nowplaying)
@@ -79,7 +79,7 @@ module.exports = class LastFM extends APIWrapper {
 
   // LOVE SONG
   loveSong ({ title, source, author, length }, sk) {
-    const filtered = this.getFilteredTrackName(source, author, title)
+    const filtered = LastFM.getFilteredTrackName(source, author, title)
     this.request('track.love', {
       sk,
       track: filtered,
@@ -89,7 +89,7 @@ module.exports = class LastFM extends APIWrapper {
   }
 
   unloveSong ({ title, source, author, length }, sk) {
-    const filtered = this.getFilteredTrackName(source, author, title)
+    const filtered = LastFM.getFilteredTrackName(source, author, title)
     this.request('track.unlove', {
       sk,
       track: filtered,
@@ -136,7 +136,7 @@ module.exports = class LastFM extends APIWrapper {
    * @param {string} title - the song name
    * @returns {string}
    */
-  getFilteredTrackName (source, artist, title) {
+  static getFilteredTrackName (source, artist, title) {
     return source === 'youtube'
       ? title.split('-')[0].includes(artist) ? title.replace(artist, '').replace(' - ', '') : title
       : title
@@ -149,6 +149,6 @@ module.exports = class LastFM extends APIWrapper {
    */
   async checkSong (title, artist) {
     const { error } = await this.getTrackInfo(title, artist)
-    return error === 6
+    return error ? error === 6 : true
   }
 }
