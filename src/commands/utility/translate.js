@@ -38,7 +38,8 @@ module.exports = class TranslateCommand extends Command {
     const auto = from === 'auto' ? ' ' + t('commands:translate.automatic') : ''
     embed.setDescription(translated.length > 2000 ? translated.slice(0, 2000) + '...' : translated)
       .addField(t('commands:translate.translatedFrom'), languages[fromT] + auto, true)
-      .addField(t('commands:translate.translatedTo'), languages[toT])
+      .addField(t('commands:translate.translatedTo'), languages[toT], true)
+      .setAuthor(t('commands:translate.title'), 'https://i.imgur.com/snDlsDV.png')
     channel.send(embed)
       .then(() => channel.stopTyping())
   }

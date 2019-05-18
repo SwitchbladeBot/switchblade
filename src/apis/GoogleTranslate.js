@@ -18,7 +18,7 @@ module.exports = class GoogleTranslate extends APIWrapper {
     const params = {
       sl: from,
       tl: to,
-      q: encodeURI(text)
+      q: text
     }
     const res = await snekfetch.get('https://translate.googleapis.com/translate_a/single?client=gtx&dt=t').query(params).then(r => r.body)
 

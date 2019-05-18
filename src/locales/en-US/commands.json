@@ -1305,6 +1305,7 @@
     "targetLanguageInvalid": "Target language {{target}} not found. Translated to english.",
     "translatedFrom": "Translated from",
     "translatedTo": "Translated to",
-    "automatic": "(automatic detected)"
+    "automatic": "(automatic detected)",
+    "title": "Translation"
   }
 }
