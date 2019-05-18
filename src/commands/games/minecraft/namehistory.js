@@ -19,20 +19,25 @@ module.exports = class MinecraftNameHistory extends Command {
   async run ({ t, author, channel, language }, name) {
     channel.startTyping()
     moment.locale(language)
-    const findPlayer = await this.nameToUUID(name) || await this.uuidToName(name)
+    try {
+      const findPlayer = await this.nameToUUID(name) || await this.uuidToName(name)
 
-    if (findPlayer.uuid) {
-      const nameHistory = await fetch(`https://api.mojang.com/user/profiles/${findPlayer.uuid}/names`).then(res => res.json())
-      channel.send(
-        new SwitchbladeEmbed(author)
-          .setDescription(nameHistory.body.map(n => `\`${n.name}\` (${n.changedToAt ? moment(n.changedToAt).fromNow() : t('commands:minecraft.subcommands.namehistory.originalname')})`).join('\n'))
-          .setTitle(t('commands:minecraft.namemcprofile'))
-          .setURL(`https://namemc.com/profile/${findPlayer.uuid}`)
-          .setAuthor(t('commands:minecraft.subcommands.namehistory.title', { name: findPlayer.name }), `https://visage.surgeplay.com/head/512/${findPlayer.uuid}.png`)
-      ).then(channel.stopTyping())
-    } else {
+      if (findPlayer.uuid) {
+        const nameHistory = await fetch(`https://api.mojang.com/user/profiles/${findPlayer.uuid}/names`).then(res => res.json())
+        channel.send(
+          new SwitchbladeEmbed(author)
+            .setDescription(nameHistory.map(n => `\`${n.name}\` (${n.changedToAt ? moment(n.changedToAt).fromNow() : t('commands:minecraft.subcommands.namehistory.originalname')})`).join('\n'))
+            .setTitle(t('commands:minecraft.namemcprofile'))
+            .setURL(`https://namemc.com/profile/${findPlayer.uuid}`)
+            .setAuthor(t('commands:minecraft.subcommands.namehistory.title', { name: findPlayer.name }), `https://visage.surgeplay.com/head/512/${findPlayer.uuid}.png`)
+        ).then(channel.stopTyping())
+      } else {
+        channel.stopTyping()
+        throw new CommandError(t('commands:minecraft.subcommands.namehistory.unknownName'))
+      }
+    } catch (e) {
       channel.stopTyping()
-      throw new CommandError(t('commands:minecraft.subcommands.namehistory.unknownName'))
+      throw new CommandError(t('errors:generic'))
     }
   }
 
