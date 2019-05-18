@@ -23,11 +23,11 @@ module.exports = class Scrobbling extends Command {
       return
     }
     const scrobblingStatus = lastfm.config.scrobbling ? t('commons:enabled') : t('commons:disabled')
-    const config = t('commands.scrobbling.configuration.description', { link }) +
+    const config = t('commands:scrobbling.configuration.description', { link }) +
       `\n\`${prefix}scrobbling enable <true/false>\`\n\`${prefix}scrobbling percent <45-90>\``
     channel.send(embed.setTitle(t('commands:scrobbling.title'))
       .setDescription(t('commands:scrobbling.connectedDescription', { scrobblingStatus, percent: lastfm.config.percent }))
-      .addField(t('commands.scrobbling.configuration.title'), config))
+      .addField(t('commands:scrobbling.configuration.title'), config))
       .then(() => channel.stopTyping())
   }
 }
