@@ -494,6 +494,7 @@
   },
   "profile": {
     "commandDescription": "Shows yours or someone else's profile.",
+    "aboutMe": "About me",
     "commandUsage": "[user]"
   },
   "myanimelist": {
