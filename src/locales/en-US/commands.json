@@ -494,7 +494,8 @@
   },
   "profile": {
     "commandDescription": "Shows yours or someone else's profile.",
-    "commandUsage": "[user]"
+    "commandUsage": "[user]",
+    "aboutMe": "About me"
   },
   "myanimelist": {
     "commandDescription": "Searches for an anime on MyAnimeList.",
