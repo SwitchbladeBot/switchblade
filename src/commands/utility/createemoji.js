@@ -17,7 +17,7 @@ module.exports = class CreateEmoji extends Command {
       }]
     })
   }
-  
+
   async run ({ t, channel, author, guild }, url, name) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()

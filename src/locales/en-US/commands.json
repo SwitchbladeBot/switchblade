@@ -265,7 +265,7 @@
     "noEmoji": "You need to give me the emoji you want to delete.",
     "deleted": "Deleted emoji **{{emoji.name}}** successfully.",
     "error": "An error has occurred while deleting emoji"
-  }
+  },
   "play": {
     "commandDescription": "Plays a certain song or adds it to the queue.",
     "commandUsage": "<song name or URL>",

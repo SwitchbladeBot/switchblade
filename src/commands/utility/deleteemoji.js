@@ -13,7 +13,7 @@ module.exports = class DeleteEmoji extends Command {
       }]
     })
   }
-  
+
   async run ({ t, channel, author, guild }, emoji) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
