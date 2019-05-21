@@ -4,6 +4,7 @@ module.exports = class DeleteEmoji extends Command {
   constructor (client) {
     super(client, {
       name: 'deleteemoji',
+      aliases: ['delemoji'],
       category: 'utility',
       requirements: { guildOnly: true, permissions: ['MANAGE_EMOJIS'], botPermissions: ['MANAGE_EMOJIS'] },
       parameters: [{
