@@ -27,7 +27,6 @@ module.exports = class Npm extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, pkg) {
-    console.log(pkg)
     const embed = new SwitchbladeEmbed(author)
     moment.locale(language)
     channel.startTyping()
