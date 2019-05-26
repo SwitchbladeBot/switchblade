@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Add source
-          command: sudo add-apt-repository --yes ppa:ubuntu-toolchain-r
+          command: add-apt-repository --yes ppa:ubuntu-toolchain-r
       - run:
           name: Update packages from apt
           command: apt-get update
