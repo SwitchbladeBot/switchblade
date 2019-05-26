@@ -18,7 +18,7 @@ jobs:
           key: dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: Install modules
-          command: npm install
+          command: npm install && npm install --global node-gyp
       - save_cache:
           key: dependencies-{{ checksum "package-lock.json" }}
           paths:
