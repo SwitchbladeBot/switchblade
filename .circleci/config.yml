@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Install packages from apt
-          command: sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+          command: apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
       - restore_cache:
           key: dependencies-{{ checksum "package-lock.json" }}
       - run:
