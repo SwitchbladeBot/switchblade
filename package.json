@@ -95,6 +95,6 @@
     ]
   },
   "optionalDependencies": {
-    "canvas": "^2.5.0"
+    "canvas": "^2.3.1"
   }
 }
