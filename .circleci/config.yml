@@ -13,12 +13,12 @@ jobs:
       - checkout
       - run:
           name: Install packages from apt
-          command: apt-get update && apt-get -y install python2.7 python-pip build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev gcc-6 g++-6
+          command: apt-get update && apt-get -y install make python2.7 python-pip build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev gcc-6 g++-6
       - restore_cache:
           key: dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: Install modules
-          command: npm install --unsafe-perm
+          command: npm install
       - save_cache:
           key: dependencies-{{ checksum "package-lock.json" }}
           paths:
