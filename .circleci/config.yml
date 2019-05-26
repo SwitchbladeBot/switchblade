@@ -12,14 +12,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Add source
-          command: add-apt-repository --yes ppa:ubuntu-toolchain-r
-      - run:
-          name: Update packages from apt
-          command: apt-get update
-      - run:
           name: Install packages from apt
-          command: apt-get -y install build-essential libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev librsvg2-dev g++@4.9
+          command: apt-get update && apt-get -y install build-essential libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev librsvg2-dev gcc-6 g++-6
       - restore_cache:
           key: dependencies-{{ checksum "package-lock.json" }}
       - run:
