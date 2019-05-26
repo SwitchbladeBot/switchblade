@@ -27,15 +27,28 @@ module.exports = class Npm extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, pkg) {
+    console.log(pkg)
     const embed = new SwitchbladeEmbed(author)
     moment.locale(language)
     channel.startTyping()
-    embed.setColor(Constants.NPM_COLOR)
-      .setAuthor(`${pkg.name} - v${pkg.version}`, this.embedLogoURL, pkg.links.npm)
-      .setDescription(`${pkg.description || t('commands:npm.noDescription')}\n${pkg.links.npm}`)
-      .addField(t('commands:npm.lastPublish'), moment(pkg.date).format('LLL'), true)
-      .addField(t('commands:npm.install'), `\`npm install --save ${pkg.name}\``, true)
-    if (pkg.keywords.length > 0) embed.addField(t('commands:npm:keywords'), pkg.keywords.map(k => `\`${k}\``).join(', '), true)
+    embed
+      .setColor(Constants.NPM_COLOR)
+      .setAuthor('npm', this.embedLogoURL, 'https://www.npmjs.com/')
+      .setDescriptionFromBlockArray([
+        [
+          `[${pkg.name}](${pkg.links.npm})`,
+          pkg.description ? pkg.description : null
+        ],
+        [
+          pkg.keywords && pkg.keywords.length > 0 ? pkg.keywords.map(k => `\`${k}\``).join(', ') : null
+        ],
+        [
+          t('commands:npm.published', { publisher: pkg.publisher.username, version: pkg.version, timeAgo: moment(pkg.date).fromNow() })
+        ],
+        [
+          `\`\`\`npm i ${pkg.name}\`\`\``
+        ]
+      ])
     channel.send(embed).then(() => channel.stopTyping())
   }
 }
