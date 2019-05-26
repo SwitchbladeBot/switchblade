@@ -43,7 +43,6 @@
     "crowdin-without-vulnerability": "^1.0.0",
     "discord.js": "^11.4.2",
     "discord.js-lavalink": "^2.2.2",
-    "erlpack": "latest",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
     "gifencoder": "^2.0.1",
