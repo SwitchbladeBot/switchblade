@@ -1,6 +1,5 @@
 <div align="center">
   <img src="https://i.imgur.com/LID4HYe.png"><br>
-  <img src="https://i.imgur.com/SVyi88i.png"><br>
   <b>Multi purpose Discord Bot made using discord.js, focused on quality, organization and enjoyability.</b><br><br>
 
   [![support][support-badge]][support-invite]
@@ -15,6 +14,10 @@
   [![backers][backers-badge]][backers-url]
   [![sponsors][sponsors-badge]][sponsors-url]
 </div>
+
+<h2 align="center"><img src="https://i.imgur.com/SVyi88i.png"><br></h2>
+
+Switchblade is a free and open source solution to all of your server managing problems, built from scratch with code organization and quality in mind. We aim to cover as many functionalities as possible, while still maintaining a high quality standard.
 
 <h2 align="center">Contributing</h2>
 
