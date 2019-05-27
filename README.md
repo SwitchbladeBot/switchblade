@@ -1,6 +1,8 @@
 <div align="center">
   <img src="https://i.imgur.com/LID4HYe.png"><br><br>
 
+  <img src="https://i.imgur.com/SVyi88i.png"><br><br>
+
   [![support][support-badge]][support-invite]
   [![crowdin][crowdin-badge]][crowdin-url]
   [![dependencies][dependencies-badge]][dependencies-url]
@@ -14,7 +16,7 @@
   [![sponsors][sponsors-badge]][sponsors-url]
 </div>
 
-<h2 align="center"><img src="https://i.imgur.com/SVyi88i.png"><br></h2>
+<h2 align="center">Switchblade</h2>
 
 Switchblade is a free and open source solution to all of your server managing problems, built from scratch with code organization and quality in mind. We aim to cover as many functionalities as possible, while still maintaining a high quality standard.
 
