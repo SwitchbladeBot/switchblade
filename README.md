@@ -19,10 +19,11 @@
 <h2 align="center">Contributing</h2>
 You want to contribute? That's awesome! There are many ways of doing so, and coding is only one of them. Although we'd love you to make a command or a cool integration, we'd also be thrilled to receive contributions like:
 
- - write
- - cool
- - list
- - here
+
+* write
+* cool
+* list
+* here
 
 <h2 align="center">Sponsors</h2>
 Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!]([sponsors-url])
