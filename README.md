@@ -10,7 +10,6 @@
   [![jetbrains][jetbrains-badge]][jetbrains-url]
   [![codeclimate][codeclimate-badge]][codeclimate-url]
   [![circleci][circleci-badge]][circleci-url]
-  
   ![servers-badge]
   ![users-badge]
   ![commands-badge]
@@ -53,7 +52,7 @@ Backers are the people who contribute to our projects monetarily. They get their
 [support-badge]: https://img.shields.io/badge/dynamic/json.svg?label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online&logo=discord
 
 [switchblade-invite]: https://invite.switchblade.xyz
-[switchblade-badge]: https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg?style=flat-square&logo=discord
+[switchblade-badge]: https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg?logo=discord
 
 [crowdin-url]: https://translate.switchblade.xyz
 [crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
