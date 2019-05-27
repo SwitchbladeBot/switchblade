@@ -18,14 +18,21 @@
 
 Switchblade is a free and open source solution to all of your server managing problems, built from scratch with code organization and quality in mind. We aim to cover as many functionalities as possible, while still maintaining a high quality standard.
 
+<h3>Table of Contents</h3>
+
+- [Contributing](#contributing)
+- [Sponsors](#sponsors)
+- [Backers](#backers)
+
 <h2 align="center">Contributing</h2>
 
-**We want everyone to be able to help with Switchblade as easily as possible.** There are many ways of doing so, and coding is only one of them! Although we'd love you to make a command or a cool integration, we'd also be thrilled to receive contributions like:
+**We want everyone to be able to help with Switchblade as easily as possible.** We've listed some of the many ways you can contribute to the below.
 
-* write
-* cool
-* list
-* here
+<h3 align="center">Making new commands</h3>
+
+<h3 align="center">Translation</h3>
+
+Mussum Ipsum, cacilds vidis litro abertis. Sapien in monti palavris qui num significa nadis i pareci latim. Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Quem num gosta di mé, boa gentis num é.
 
 <h2 align="center">Sponsors</h2>
 
