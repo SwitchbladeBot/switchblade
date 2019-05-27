@@ -4,21 +4,21 @@
   <b>Multi purpose Discord Bot made using discord.js, focused on quality, organization and enjoyability.</b><br><br>
 
   [![support][support-badge]][support-invite]
-  [![switchblade][switchblade-badge]][switchblade-invite]
   [![crowdin][crowdin-badge]][crowdin-url]
   [![dependencies][dependencies-badge]][dependencies-url]
   [![jetbrains][jetbrains-badge]][jetbrains-url]
   [![codeclimate][codeclimate-badge]][codeclimate-url]
   [![circleci][circleci-badge]][circleci-url]
   ![servers-badge]
-  ![users-badge]
   ![commands-badge]
   ![languages-badge]
+  [![backers][backers-badge]][backers-url]
+  [![sponsors][sponsors-badge]][sponsors-url]
 </div>
 
 <h2 align="center">Sponsors</h2>
 
-Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!](https://opencollective.com/switchblade#sponsor)
+Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!]([sponsors-url])
 
 <a href="https://opencollective.com/switchblade/sponsor/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/1/avatar.svg?requireActive=false"></a>
@@ -34,7 +34,7 @@ Sponsors are organizations and companies that contribute to our projects with mo
 
 <h2 align="center">Backers</h2>
 
-Backers are the people who contribute to our projects monetarily. They get their image with a link to their website on this page, an awesome badge on their Switchblade profile and a role that grants exclusive access to some channels in our discord server. [Click here and become a backer today!](https://opencollective.com/switchblade#backer)
+Backers are the people who contribute to our projects monetarily. They get their image with a link to their website on this page, an awesome badge on their Switchblade profile and a role that grants exclusive access to some channels in our discord server. [Click here and become a backer today!]([backers-url])
 
 <a href="https://opencollective.com/switchblade/backer/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/backer/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/1/avatar.svg?requireActive=false"></a>
@@ -51,9 +51,6 @@ Backers are the people who contribute to our projects monetarily. They get their
 [support-invite]: https://support.switchblade.xyz
 [support-badge]: https://img.shields.io/badge/dynamic/json.svg?label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online&logo=discord
 
-[switchblade-invite]: https://invite.switchblade.xyz
-[switchblade-badge]: https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg?logo=discord
-
 [crowdin-url]: https://translate.switchblade.xyz
 [crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
 
@@ -69,11 +66,19 @@ Backers are the people who contribute to our projects monetarily. They get their
 [circleci-url]: https://circleci.com/gh/SwitchbladeBot/switchblade
 [circleci-badge]: https://img.shields.io/circleci/project/github/SwitchbladeBot/switchblade/dev.svg?logo=circleci
 
+[backers-url]: https://opencollective.com/switchblade#backer
+[backers-badge]: https://opencollective.com/switchblade/tiers/backer/badge.svg?label=backers&color=brightgreen
+
+[sponsors-url]: https://opencollective.com/switchblade#sponsor
+[sponsors-badge]: https://opencollective.com/switchblade/tiers/sponsor/badge.svg?label=sponsors&color=brightgreen
+
 [servers-badge]: https://img.shields.io/badge/dynamic/json.svg?label=servers&colorB=7289DA&url=https://prod.switchblade.xyz/api/statistics&query=serverCount
-[users-badge]: https://img.shields.io/badge/dynamic/json.svg?label=users&colorB=7289DA&url=https://prod.switchblade.xyz/api/statistics&query=userCount
+
 [commands-badge]: https://img.shields.io/badge/dynamic/json.svg?label=commands&colorB=7289DA&url=https://prod.switchblade.xyz/api/statistics&query=commandCount
+
 [languages-badge]: https://img.shields.io/badge/dynamic/json.svg?label=languages&colorB=7289DA&url=https://prod.switchblade.xyz/api/statistics&query=languageCount
 
+<!-- Widgets -->
 [discordbots-widget]: https://discordbots.org/api/widget/445277324175474689.svg
 [botsfordiscord-widget]: https://botsfordiscord.com/api/bot/445277324175474689/widget
 [discordbotlist-widget]: https://discordbotlist.com/bots/445277324175474689/widget
