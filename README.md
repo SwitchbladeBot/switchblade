@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/LID4HYe.png"><br>
-  <b>Multi purpose Discord Bot made using discord.js, focused on quality, organization and enjoyability.</b><br><br>
+  <img src="https://i.imgur.com/LID4HYe.png"><br><br><br>
 
   [![support][support-badge]][support-invite]
   [![crowdin][crowdin-badge]][crowdin-url]
