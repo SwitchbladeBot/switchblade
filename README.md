@@ -3,14 +3,13 @@
   <img src="https://i.imgur.com/SVyi88i.png"><br>
   <b>Multi purpose Discord Bot made using discord.js, focused on quality, organization and enjoyability.</b><br><br>
 
-[![support][support-badge]][support-invite]
-[![switchblade][switchblade-badge]][switchblade-invite]
-[![crowdin][crowdin-badge]][crowdin-url]
-[![dependencies][dependencies-badge]][dependencies-url]
-[![jetbrains][jetbrains-badge]][jetbrains-url]
-[![codeclimate][codeclimate-badge]][codeclimate-url]
-[![circleci][circleci-badge]][circleci-url]
-
+  [![support][support-badge]][support-invite]
+  [![switchblade][switchblade-badge]][switchblade-invite]
+  [![crowdin][crowdin-badge]][crowdin-url]
+  [![dependencies][dependencies-badge]][dependencies-url]
+  [![jetbrains][jetbrains-badge]][jetbrains-url]
+  [![codeclimate][codeclimate-badge]][codeclimate-url]
+  [![circleci][circleci-badge]][circleci-url]
 </div>
 
 <h2 align="center">Sponsors</h2>
@@ -29,7 +28,6 @@ Sponsors are organizations and companies that contribute to our projects with mo
 <a href="https://opencollective.com/switchblade/sponsor/9/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/9/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/10/avatar.svg?requireActive=false"></a>
 
-
 <h2 align="center">Backers</h2>
 
 Backers are the people who contribute to our projects monetarily. They get their image with a link to their website on this page, an awesome badge on their Switchblade profile and a role that grants exclusive access to some channels in our discord server. [Click here and become a backer today!](https://opencollective.com/switchblade#backer)
@@ -46,36 +44,27 @@ Backers are the people who contribute to our projects monetarily. They get their
 <a href="https://opencollective.com/switchblade/backer/9/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/9/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/backer/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/10/avatar.svg?requireActive=false"></a>
 
-<!-- Badges -->
-
 [support-invite]: https://support.switchblade.xyz
-[support-badge]: https://img.shields.io/badge/dynamic/json.svg?style=flat-square&label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online&logo=discord
+[support-badge]: https://img.shields.io/badge/dynamic/json.svg?label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online&logo=discord
 
 [switchblade-invite]: https://invite.switchblade.xyz
-[switchblade-badge]: https://img.shields.io/badge/invite-to%20your%20Discord%20server-7289da.svg?style=flat-square&logo=discord
+[switchblade-badge]: https://img.shields.io/badge/dynamic/json.svg?label=servers&colorB=7289DA&url=https://prod.switchblade.xyz/api/statistics&query=serverCount
 
 [crowdin-url]: https://translate.switchblade.xyz
-[crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg?style=flat-square
+[crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
 
 [dependencies-url]: https://david-dm.org/SwitchbladeBot/switchblade/
-[dependencies-badge]: https://david-dm.org/SwitchbladeBot/switchblade/status.svg?style=flat-square
+[dependencies-badge]: https://david-dm.org/SwitchbladeBot/switchblade/status.svg
 
 [jetbrains-url]: https://www.jetbrains.com/?from=switchblade/
-[jetbrains-badge]: https://img.shields.io/badge/Powered%20by%20JetBrains-gray.svg?logo=webstorm&style=flat-square
+[jetbrains-badge]: https://img.shields.io/badge/Powered%20by%20JetBrains-gray.svg?logo=webstorm
 
 [codeclimate-url]: https://codeclimate.com/github/SwitchbladeBot/switchblade/maintainability
-[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg?style=flat-square
+[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg
 
 [circleci-url]: https://circleci.com/gh/SwitchbladeBot/switchblade
-[circleci-badge]: https://img.shields.io/circleci/project/github/SwitchbladeBot/switchblade/dev.svg?style=flat-square&logo=circleci
-
-<!-- End of badges -->
-
-
-<!-- Widgets -->
+[circleci-badge]: https://img.shields.io/circleci/project/github/SwitchbladeBot/switchblade/dev.svg?logo=circleci
 
 [discordbots-widget]: https://discordbots.org/api/widget/445277324175474689.svg
 [botsfordiscord-widget]: https://botsfordiscord.com/api/bot/445277324175474689/widget
 [discordbotlist-widget]: https://discordbotlist.com/bots/445277324175474689/widget
-
-<!-- End of widgets -->
