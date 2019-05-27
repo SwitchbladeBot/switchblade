@@ -2,7 +2,6 @@
   <img src="https://i.imgur.com/LID4HYe.png"><br>
   <img src="https://i.imgur.com/SVyi88i.png"><br>
   <b>Multi purpose Discord Bot made using discord.js, focused on quality, organization and enjoyability.</b><br><br>
-</div>
 
 [![support][support-badge]][support-invite]
 [![switchblade][switchblade-badge]][switchblade-invite]
@@ -11,6 +10,8 @@
 [![jetbrains][jetbrains-badge]][jetbrains-url]
 [![codeclimate][codeclimate-badge]][codeclimate-url]
 [![circleci][circleci-badge]][circleci-url]
+
+</div>
 
 <h2 align="center">Sponsors</h2>
 
