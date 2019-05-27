@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/LID4HYe.png">
+  <img src="https://i.imgur.com/LID4HYe.png"><br>
 
   [![support][support-badge]][support-invite]
   [![crowdin][crowdin-badge]][crowdin-url]
