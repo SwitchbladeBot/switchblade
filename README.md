@@ -17,8 +17,8 @@
 </div>
 
 <h2 align="center">Contributing</h2>
-You want to contribute? That's awesome! There are many ways of doing so, and coding is only one of them. Although we'd love you to make a command or a cool integration, we'd also be thrilled to receive contributions like:
 
+**We want everyone to be able to help with Switchblade as easily as possible.** There are many ways of doing so, and coding is only one of them! Although we'd love you to make a command or a cool integration, we'd also be thrilled to receive contributions like:
 
 * write
 * cool
@@ -26,6 +26,7 @@ You want to contribute? That's awesome! There are many ways of doing so, and cod
 * here
 
 <h2 align="center">Sponsors</h2>
+
 Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!]([sponsors-url])
 
 <a href="https://opencollective.com/switchblade/sponsor/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/0/avatar.svg?requireActive=false"></a>
@@ -41,6 +42,7 @@ Sponsors are organizations and companies that contribute to our projects with mo
 <a href="https://opencollective.com/switchblade/sponsor/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/10/avatar.svg?requireActive=false"></a>
 
 <h2 align="center">Backers</h2>
+
 Backers are the people who contribute to our projects monetarily. They get their image with a link to their website on this page, an awesome badge on their Switchblade profile and a role that grants exclusive access to some channels in our discord server. [Click here and become a backer today!]([backers-url])
 
 <a href="https://opencollective.com/switchblade/backer/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/0/avatar.svg?requireActive=false"></a>
