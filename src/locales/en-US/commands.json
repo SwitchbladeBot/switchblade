@@ -237,7 +237,8 @@
     "noNameProvided": "You have to give me a package name!",
     "lastPublish": "Last publish",
     "install": "Install",
-    "keywords": "Keywords"
+    "keywords": "Keywords",
+    "published": "**{{publisher}}** published `{{version}}` {{timeAgo}}"
   },
   "poll": {
     "commandDescription": "Creates a poll.",
