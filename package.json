@@ -16,7 +16,7 @@
     ]
   },
   "engines": {
-    "node": "^10.12.0"
+    "node": "10.12.0"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "discord"
   ],
   "author": "Switchblade Team",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/SwitchbladeBot/switchblade/issues"
   },
@@ -95,6 +95,6 @@
     ]
   },
   "optionalDependencies": {
-    "canvas": "^2.4.0"
+    "canvas": "^2.5.0"
   }
 }

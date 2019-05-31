@@ -58,7 +58,7 @@ module.exports = class Chorus extends SearchCommand {
         .setColor(Constants.CHORUS_COLOR)
         .setAuthor('chorus', icon, 'https://chorus.fightthe.pw/')
         .setTitle(`${chart.artist} - ${chart.name}`)
-        .setDescription([
+        .setDescriptionFromBlockArray([
           [
             chart.album ? `**${chart.album}${chart.year ? ` (${chart.year})` : ''}**` : (chart.year ? `**${chart.year}**` : null), // Album name (album year)
             chart.genre,

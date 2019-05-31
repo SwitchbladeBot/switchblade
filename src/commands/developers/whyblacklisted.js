@@ -15,7 +15,7 @@ module.exports = class WhyBlacklisted extends Command {
 
   async run ({ channel, author, t }, user) {
     const embed = new SwitchbladeEmbed(author)
-    const info = await this.modules.developers.blacklisted(user.id)
+    const info = await this.client.modules.developer.blacklisted(user.id)
     if (info) {
       const text = { user, blacklister: `<@${info.blacklister}>` }
       embed.setDescription(
