@@ -19,17 +19,7 @@ module.exports = class SwitchbladeEmbed extends RichEmbed {
    * @returns {SwitchbladeEmbed}
    */
   setDescriptionFromBlockArray (blocks) {
-    blocks = blocks
-      .map(
-        blockLines => blockLines.filter(
-          line => line != null
-        )
-      ).filter(
-        blockLines => blockLines.length > 0 && blockLines != null
-      ).map(
-        blockLines => blockLines.join('\n')
-      ).join('\n\n')
-    this.description = blocks
+    this.description = blocks.map(lines => lines.filter(l => !!l).join('\n')).filter(b => !!b.length).join('\n\n')
     return this
   }
 }
