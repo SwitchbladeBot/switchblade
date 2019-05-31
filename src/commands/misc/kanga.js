@@ -18,20 +18,25 @@ module.exports = class KangaCommand extends Command {
   async run ({ t, author, channel, language }, query) {
     channel.startTyping()
     const response = await this.client.apis.kanga.search(query)
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setColor(0xf1592b)
-        .setAuthor(
-          'Kanga',
-          'https://assets-global.website-files.com/5ce578d88cd2e943b4e0f32b/5cec145338469c476baee9a8_kanga_favicon.png',
-          `http://kanga.gg/${process.env.KANGA_REFERRAL_CODE ? `app/inv?r=FocusedWolverineSejuani` : ''}`
-        )
-        .setDescriptionFromBlockArray(response.map(({ metaData, gameData, streamerData }) => {
-          return [
-            `**${streamerData.displayName}** \`${metaData.language}\``,
-            `[${metaData.streamTitle}](http://twitch.tv/${streamerData.streamerUsername})`
-          ]
-        }))
-    ).then(() => channel.stopTyping())
+    const embed = new SwitchbladeEmbed(author)
+      .setColor(0xf1592b)
+      .setAuthor(
+        'Kanga',
+        'https://assets-global.website-files.com/5ce578d88cd2e943b4e0f32b/5cec145338469c476baee9a8_kanga_favicon.png',
+        `http://kanga.gg/${process.env.KANGA_REFERRAL_CODE ? `app/inv?r=${process.env.KANGA_REFERRAL_CODE}` : ''}`
+      )
+
+    if (response.length > 0) {
+      embed.setDescriptionFromBlockArray(response.map(({ metaData, gameData, streamerData }) => {
+        return [
+          `**${streamerData.displayName}** \`${metaData.viewerCount} viewers\``,
+          `[${metaData.streamTitle}](http://twitch.tv/${streamerData.streamerUsername})`,
+          `:fire: ${gameData.fireScore}`
+        ]
+      }))
+    } else {
+      embed.setDescription('No results were found.')
+    }
+    channel.send(embed).then(() => channel.stopTyping())
   }
 }
