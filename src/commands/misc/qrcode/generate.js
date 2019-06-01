@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, } = require('../../../')
+const { Command, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class QRCodeGenerate extends Command {
   constructor (client) {
