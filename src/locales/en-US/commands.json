@@ -428,9 +428,20 @@
     "time": "Time"
   },
   "qrcode": {
-    "commandDescription": "Generates a QR Code.",
-    "commandUsage": "<text>",
-    "noText": " You have to give me some text!"
+    "commandDescription": "Generates or reads a QR Code.",
+    "subcommands": {
+      "generate": {
+        "commandDescription": "Generates a QR Code image.",
+        "commandUsage": "<text>",
+        "noText": " You have to give me some text!"
+      },
+      "read": {
+        "commandDescription": "Reads a QR Code image.",
+        "commandUsage": "<image/URL>",
+        "noImage": "some translation manager help me with this",
+        "unknownImage": "wtf thats not a qr image"
+      }
+    }
   },
   "strawpoll": {
     "commandDescription": "Creates a Straw Poll.",
