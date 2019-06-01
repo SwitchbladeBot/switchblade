@@ -428,18 +428,18 @@
     "time": "Time"
   },
   "qrcode": {
-    "commandDescription": "Generates or reads a QR Code.",
+    "commandDescription": "Generates or reads a QR code.",
     "subcommands": {
       "generate": {
-        "commandDescription": "Generates a QR Code image.",
+        "commandDescription": "Generates a QR code.",
         "commandUsage": "<text>",
         "noText": " You have to give me some text!"
       },
       "read": {
-        "commandDescription": "Reads a QR Code image.",
-        "commandUsage": "<image/URL>",
-        "noImage": "some translation manager help me with this",
-        "unknownImage": "wtf thats not a qr image"
+        "commandDescription": "Reads a QR code.",
+        "commandUsage": "<image/link>",
+        "noImage": "You have to give me an image to read.",
+        "unknownImage": "You have to give me a valid QR code to read."
       }
     }
   },
