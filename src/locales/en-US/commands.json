@@ -400,6 +400,20 @@
     "users": "Users: **{{count}}**",
     "bots": "Bots: **{{count}}**"
   },
+  "country": {
+    "commandDescription": "Gets information about a country.",
+    "commandUsage": "<country name or ISO 3166-1 code>",
+    "noCountry": "You need to give me a country name or ISO 3166-1 country code to get information from.",
+    "aka": "Also known as: `{{alts}}`",
+    "languages": "Languages: {{languages}}",
+    "capital": "Capital: **{{capital}}**",
+    "region": "Region: **{{region}}** ({{subregion}})",
+    "population": "Population: **{{population}}**",
+    "area": "Area: **{{area}} km²**",
+    "timezones": "Timezones: **{{timezones}}**",
+    "currencies": "Currencies: {{currencies}}",
+    "treaties": "Treaties: {{treaties}}"
+  },
   "userinfo": {
     "commandDescription": "Sends yours or someone else's user information.",
     "online": "{{Constants.ONLINE_STATUS}} Online",
