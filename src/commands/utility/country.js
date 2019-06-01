@@ -23,7 +23,7 @@ module.exports = class Country extends Command {
         .then(res => res.json())
         .then(body => body[0] || body)
         .catch(err => err)
-      
+
       embed
         .setTitle(`:flag_${data.alpha2Code.toLowerCase()}: ${data.name}`)
         .setDescriptionFromBlockArray([
@@ -43,7 +43,7 @@ module.exports = class Country extends Command {
             data.regionalBlocs.length > 0 ? t('commands:country.treaties', { treaties: data.regionalBlocs.map(b => `**${b.acronym}** - ${b.name}`).join(', ') }) : null
           ]
         ])
-      
+
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()
