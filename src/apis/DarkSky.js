@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://api.darksky.net'
 
@@ -27,6 +28,7 @@ module.exports = class DarkSkyAPI extends APIWrapper {
 
   // Default
   request (endpoint, lat, lng, queryParams = {}) {
-    return snekfetch.get(`${API_URL}${endpoint}/${process.env.DARKSKY_KEY}/${lat},${lng}`).query(queryParams).then(r => r.body)
+    return fetch(`${API_URL}${endpoint}/${process.env.DARKSKY_KEY}/${lat},${lng}?${qs.stringify(queryParams)}`)
+      .then(res => res.json())
   }
 }

@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 
@@ -22,11 +22,15 @@ module.exports = class Hastebin extends Command {
 
   async run ({ t, author, channel, message }, code) {
     const embed = new SwitchbladeEmbed()
-    const { body } = await snekfetch.post(`${baseURL}/documents`).set('Content-Type', 'application/json').send(EscapeMarkdown(code))
+    const { key } = await fetch(`${baseURL}/documents`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: EscapeMarkdown(code)
+    }).then(res => res.json())
 
     embed
       .setAuthor(t('commands:hastebin.hereIsYourURL'))
-      .setDescription(`${baseURL}/${body.key}`)
+      .setDescription(`${baseURL}/${key}`)
     channel.send(embed)
   }
 }

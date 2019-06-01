@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const API_URL = 'https://haveibeenpwned.com/api/v2'
 const USER_AGENT = 'Switchblade-Discord-Bot'
@@ -19,8 +19,8 @@ module.exports = class HIBP extends APIWrapper {
   }
 
   request (endpoint) {
-    return snekfetch.get(API_URL + endpoint)
-      .set('User-Agent', USER_AGENT)
-      .then(r => r.body)
+    return fetch(API_URL + endpoint, {
+      headers: { 'User-Agent': USER_AGENT }
+    }).then(res => res.json())
   }
 }

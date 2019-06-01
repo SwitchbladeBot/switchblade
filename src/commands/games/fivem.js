@@ -1,8 +1,7 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const { Attachment } = require('discord.js')
-const snekfetch = require('snekfetch')
-const request = require('request')
+const fetch = require('node-fetch')
 
 module.exports = class FiveM extends Command {
   constructor (client) {
@@ -20,7 +19,7 @@ module.exports = class FiveM extends Command {
     channel.startTyping()
     const host = address.split(':')[0]
     const port = address.split(':')[1] || 30120
-    const server = await snekfetch.get(`http://${host}:${port}/info.json`).catch(() => {
+    const server = await fetch(`http://${host}:${port}/info.json`).then(res => res.json()).catch(() => {
       embed.setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:samp.serverUnreachableTitle'))
         .setDescription(t('commands:samp.serverUnreachableDescription'))
@@ -52,10 +51,9 @@ module.exports = class FiveM extends Command {
 
   getAllServers () {
     return new Promise(function (resolve, reject) {
-      request('http://servers-live.fivem.net/api/servers/', function (error, response, body) {
-        if (error) reject(error)
-        else resolve(JSON.parse(body))
-      })
+      fetch('http://servers-live.fivem.net/api/servers/')
+        .then(res => resolve(res.json()))
+        .catch(error => reject(error))
     })
   }
 }

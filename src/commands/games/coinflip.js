@@ -1,4 +1,8 @@
 const { Command, SwitchbladeEmbed } = require('../../')
+const coins = {
+  heads: 'https://i.imgur.com/yStXPCV.png',
+  tails: 'https://i.imgur.com/kSteyPc.png'
+}
 
 module.exports = class Coinflip extends Command {
   constructor (client) {
@@ -15,7 +19,7 @@ module.exports = class Coinflip extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     embed.setDescription(t('commands:coinflip.landed', { chosenSide }))
-      .setImage(`https://raw.githubusercontent.com/bolsomito/koi/master/bin/assets/${chosenSide}.png`)
+      .setThumbnail(coins[chosenSide])
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

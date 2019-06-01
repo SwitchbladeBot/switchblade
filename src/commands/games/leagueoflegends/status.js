@@ -1,5 +1,5 @@
 const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const servers = ['na', 'euw', 'eune', 'lan', 'las', 'br', 'tr', 'ru', 'oce', 'jp', 'kr']
 
@@ -28,7 +28,7 @@ module.exports = class LeagueOfLegendsStatus extends Command {
 
   async run ({ t, author, channel, language }, server) {
     channel.startTyping()
-    const { body } = await snekfetch.get(`https://status.leagueoflegends.com/shards/${server}/summary`)
+    const body = await fetch(`https://status.leagueoflegends.com/shards/${server}/summary`).then(res => res.json())
     if (!body.messages.length) throw new CommandError(t('commands:leagueoflegends.subcommands.status.noStatusMessages'))
     channel.send(
       new SwitchbladeEmbed(author)
