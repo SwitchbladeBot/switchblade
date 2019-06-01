@@ -3,9 +3,14 @@
  * @constructor
  */
 module.exports = class APIWrapper {
-  constructor () {
-    this.name = ''
-    this.envVars = []
+
+  /**
+   * @param {string} name - Name of API Wrapper
+   * @param {string[]} [envVars] - Required Environment Variables
+   */
+  constructor (options = {}) {
+    this.name = options.name
+    this.envVars = options.envVars || []
   }
 
   /**
