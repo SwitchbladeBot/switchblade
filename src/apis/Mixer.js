@@ -6,8 +6,9 @@ const API_URL = 'https://mixer.com/api/v1'
 
 module.exports = class MixerAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'mixer'
+    super({
+      name: 'mixer',
+    })
   }
 
   getUser (id) {

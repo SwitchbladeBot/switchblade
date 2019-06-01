@@ -6,8 +6,9 @@ const API_URL = 'https://chorus.fightthe.pw/api'
 
 module.exports = class ChorusAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'chorus'
+    super({
+      name: 'chorus',
+    })
   }
 
   search (query) {

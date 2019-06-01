@@ -7,9 +7,10 @@ const API_URL = 'http://ws.audioscrobbler.com/2.0/'
 
 module.exports = class LastFM extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'lastfm'
-    this.envVars = ['LASTFM_KEY', 'LASTFM_SECRET']
+    super({
+      name: 'lastfm',
+      envVars: ['LASTFM_KEY', 'LASTFM_SECRET'],
+    })
   }
 
   // GET METHODS

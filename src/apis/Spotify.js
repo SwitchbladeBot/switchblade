@@ -7,9 +7,11 @@ const API_URL = 'https://api.spotify.com/v1'
 
 module.exports = class SpotifyAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'spotify'
-    this.envVars = ['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET']
+    super({
+      name: 'spotify',
+      envVars: ['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET'],
+    })
+
     this.token = null
   }
 

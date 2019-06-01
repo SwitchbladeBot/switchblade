@@ -6,9 +6,10 @@ const API_URL = 'https://discordbots.org/api'
 
 module.exports = class DBL extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'dbl'
-    this.envVars = ['DBL_TOKEN']
+    super({
+      name: 'dbl',
+      envVars: ['DBL_TOKEN'],
+    })
   }
 
   searchBots (query, maxValues) {
