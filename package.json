@@ -16,7 +16,7 @@
     ]
   },
   "engines": {
-    "node": "^10.12.0"
+    "node": "10.12.0"
   },
   "repository": {
     "type": "git",
@@ -93,6 +93,6 @@
     ]
   },
   "optionalDependencies": {
-    "canvas": "^2.4.0"
+    "canvas": "^2.5.0"
   }
 }

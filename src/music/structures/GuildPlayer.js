@@ -191,6 +191,7 @@ module.exports = class GuildPlayer extends Player {
     }
     if (oldChannel && newChannel) {
       // Voice channel change
+      if (oldChannel.id === newChannel.id) return
       if (isSwitch) this.handleSwitchJoin(newChannel.members)
       else if (!oldChannel.equals(newChannel)) {
         if (newChannel.members.has(switchId)) this.handleNewJoin(newMember.user.id)
