@@ -6,9 +6,10 @@ const API_URL = 'https://maps.googleapis.com/maps/api'
 
 module.exports = class GoogleMapsAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'gmaps'
-    this.envVars = ['GMAPS_KEY']
+    super({
+      name: 'gmaps',
+      envVars: ['GMAPS_KEY']
+    })
   }
 
   // Search

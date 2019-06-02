@@ -3,9 +3,10 @@ const { google } = require('googleapis')
 
 module.exports = class YoutubeAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'youtube'
-    this.envVars = ['YOUTUBE_API_KEY']
+    super({
+      name: 'youtube',
+      envVars: ['YOUTUBE_API_KEY']
+    })
   }
 
   load () {

@@ -10,8 +10,9 @@ const APP_SCRIPT_CLIENT_ID_REGEX = /,client_id:"([a-zA-Z0-9-_]+)"/
 
 module.exports = class SoundcloudAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'soundcloud'
+    super({
+      name: 'soundcloud'
+    })
 
     this.lastClientIdUpdate = 0
     this.clientId = null

@@ -6,9 +6,10 @@ const API_URL = 'https://api.twitch.tv/helix'
 
 module.exports = class TwitchAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'twitch'
-    this.envVars = ['TWITCH_CLIENT_ID']
+    super({
+      name: 'twitch',
+      envVars: ['TWITCH_CLIENT_ID']
+    })
   }
 
   getUser (id) {

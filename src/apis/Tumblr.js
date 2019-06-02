@@ -6,9 +6,10 @@ const API_URL = 'https://api.tumblr.com/v2'
 
 module.exports = class TumblrAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'tumblr'
-    this.envVars = ['TUMBLR_API_KEY']
+    super({
+      name: 'tumblr',
+      envVars: ['TUMBLR_API_KEY']
+    })
   }
 
   /**

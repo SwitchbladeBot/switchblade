@@ -7,9 +7,10 @@ const API_URL = 'https://api.genius.com'
 
 module.exports = class GeniusAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'genius'
-    this.envVars = ['GENIUS_API']
+    super({
+      name: 'genius',
+      envVars: ['GENIUS_API']
+    })
   }
 
   // Find a track
