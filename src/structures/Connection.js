@@ -1,6 +1,16 @@
+/**
+ * Base Connection structure
+ * @constructor
+ */
 module.exports = class Connection {
-  constructor (client) {
+  /**
+   * @param {Client} client - Switchblade client
+   * @param {Object} [options] - Options
+   * @param {string} options.name - Name
+   */
+  constructor (client, options = {}) {
     this.client = client
+    this.name = options.name
   }
 
   canLoad () {
