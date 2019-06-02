@@ -7,7 +7,7 @@ const API_URL = 'https://api.deezer.com'
 module.exports = class DeezerAPI extends APIWrapper {
   constructor () {
     super({
-      name: 'deezer',
+      name: 'deezer'
     })
   }
 

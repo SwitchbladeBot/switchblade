@@ -4,7 +4,7 @@ const IcecastParser = require('icecast-parser')
 module.exports = class Icecast extends APIWrapper {
   constructor () {
     super({
-      name: 'icecast',
+      name: 'icecast'
     })
   }
 

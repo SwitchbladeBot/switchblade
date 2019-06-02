@@ -8,7 +8,7 @@ module.exports = class GoogleMapsAPI extends APIWrapper {
   constructor () {
     super({
       name: 'gmaps',
-      envVars: ['GMAPS_KEY'],
+      envVars: ['GMAPS_KEY']
     })
   }
 

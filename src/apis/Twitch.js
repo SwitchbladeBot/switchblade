@@ -8,7 +8,7 @@ module.exports = class TwitchAPI extends APIWrapper {
   constructor () {
     super({
       name: 'twitch',
-      envVars: ['TWITCH_CLIENT_ID'],
+      envVars: ['TWITCH_CLIENT_ID']
     })
   }
 

@@ -8,7 +8,7 @@ module.exports = class GitHubAPI extends APIWrapper {
   constructor () {
     super({
       name: 'github',
-      envVars: ['GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET'],
+      envVars: ['GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET']
     })
   }
 

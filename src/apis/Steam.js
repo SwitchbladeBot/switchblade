@@ -5,7 +5,7 @@ module.exports = class SteamAPI extends APIWrapper {
   constructor () {
     super({
       name: 'steam',
-      envVars: ['STEAM_API_KEY'],
+      envVars: ['STEAM_API_KEY']
     })
   }
 

@@ -6,9 +6,9 @@ const API_URL = 'https://ddragon.leagueoflegends.com'
 module.exports = class LeagueOfLegends extends APIWrapper {
   constructor () {
     super({
-      name: 'lol',
+      name: 'lol'
     })
-    
+
     this.version = null
   }
 

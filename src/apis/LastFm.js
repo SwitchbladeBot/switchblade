@@ -9,7 +9,7 @@ module.exports = class LastFM extends APIWrapper {
   constructor () {
     super({
       name: 'lastfm',
-      envVars: ['LASTFM_KEY', 'LASTFM_SECRET'],
+      envVars: ['LASTFM_KEY', 'LASTFM_SECRET']
     })
   }
 

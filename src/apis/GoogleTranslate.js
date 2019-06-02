@@ -4,7 +4,7 @@ const snekfetch = require('snekfetch')
 module.exports = class GoogleTranslate extends APIWrapper {
   constructor () {
     super({
-      name: 'gtranslate',
+      name: 'gtranslate'
     })
   }
 

@@ -9,7 +9,7 @@ module.exports = class GeniusAPI extends APIWrapper {
   constructor () {
     super({
       name: 'genius',
-      envVars: ['GENIUS_API'],
+      envVars: ['GENIUS_API']
     })
   }
 

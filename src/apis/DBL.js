@@ -8,7 +8,7 @@ module.exports = class DBL extends APIWrapper {
   constructor () {
     super({
       name: 'dbl',
-      envVars: ['DBL_TOKEN'],
+      envVars: ['DBL_TOKEN']
     })
   }
 

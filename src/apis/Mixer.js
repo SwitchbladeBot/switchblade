@@ -7,7 +7,7 @@ const API_URL = 'https://mixer.com/api/v1'
 module.exports = class MixerAPI extends APIWrapper {
   constructor () {
     super({
-      name: 'mixer',
+      name: 'mixer'
     })
   }
 

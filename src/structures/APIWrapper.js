@@ -3,7 +3,6 @@
  * @constructor
  */
 module.exports = class APIWrapper {
-
   /**
    * @param {string} name - Name of API Wrapper
    * @param {string[]} [envVars] - Required Environment Variables

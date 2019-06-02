@@ -9,7 +9,7 @@ module.exports = class SpotifyAPI extends APIWrapper {
   constructor () {
     super({
       name: 'spotify',
-      envVars: ['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET'],
+      envVars: ['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET']
     })
 
     this.token = null

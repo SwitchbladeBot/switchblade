@@ -5,7 +5,7 @@ module.exports = class YoutubeAPI extends APIWrapper {
   constructor () {
     super({
       name: 'youtube',
-      envVars: ['YOUTUBE_API_KEY'],
+      envVars: ['YOUTUBE_API_KEY']
     })
   }
 

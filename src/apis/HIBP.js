@@ -7,7 +7,7 @@ const USER_AGENT = 'Switchblade-Discord-Bot'
 module.exports = class HIBP extends APIWrapper {
   constructor () {
     super({
-      name: 'hibp',
+      name: 'hibp'
     })
   }
 

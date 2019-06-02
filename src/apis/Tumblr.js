@@ -8,7 +8,7 @@ module.exports = class TumblrAPI extends APIWrapper {
   constructor () {
     super({
       name: 'tumblr',
-      envVars: ['TUMBLR_API_KEY'],
+      envVars: ['TUMBLR_API_KEY']
     })
   }
 
