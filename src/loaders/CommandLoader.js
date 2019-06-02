@@ -2,8 +2,9 @@ const { Loader, Command, FileUtils } = require('../')
 
 module.exports = class CommandLoader extends Loader {
   constructor (client) {
-    super(client)
-    this.critical = true
+    super(client, {
+      critical: true
+    })
 
     this.commands = []
     this.posLoadCommands = []

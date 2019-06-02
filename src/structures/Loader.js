@@ -1,7 +1,12 @@
 module.exports = class Loader {
-  constructor (client) {
+  /**
+   * @param {Client} client - Switchblade client
+   * @param {Object} [options] - Options
+   * @param {boolean} [options.critical] - If loader is critical
+   */
+  constructor (client, options = {}) {
     this.client = client
-    this.critical = false
+    this.critical = options.critical || false
   }
 
   load (client) {
