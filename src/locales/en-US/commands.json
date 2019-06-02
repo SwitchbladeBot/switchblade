@@ -252,6 +252,21 @@
   "pause": {
     "commandDescription": "Pauses or resumes the music playback."
   },
+  "createemoji": {
+    "commandDescription": "Creates an emoji.",
+    "commandUsage": "<image link> <name of the emoji>",
+    "noImage": "You have to give me an image link.",
+    "noName": "You have to give me a name for the emoji.",
+    "created": "**{{emoji.name}}** has been created .",
+    "error": "An error has occurred while creating the emoji."
+  },
+  "deleteemoji": {
+    "commandDescription": "Deletes an emoji.",
+    "commandUsage": "<:emoji:|emoji name>",
+    "noEmoji": "You have to give me the emoji you want to delete.",
+    "deleted": "**{{emoji.name}}** has been deleted.",
+    "error": "An error has occurred while deleting emoji."
+  },
   "play": {
     "commandDescription": "Plays a certain song or adds it to the queue.",
     "commandUsage": "<song name or URL>",
