@@ -2,8 +2,9 @@ const { EventListener } = require('../')
 
 module.exports = class ExitOnWebSocketError extends EventListener {
   constructor (client) {
-    super(client)
-    this.events = ['error']
+    super(client, {
+      events: ['error']
+    })
   }
 
   async onError (error) {
