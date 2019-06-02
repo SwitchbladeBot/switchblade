@@ -4,8 +4,9 @@
  */
 module.exports = class APIWrapper {
   /**
-   * @param {string} name - Name of API Wrapper
-   * @param {string[]} [envVars] - Required Environment Variables
+   * @param {Object} [options] - Options
+   * @param {string} options.name - Name
+   * @param {string[]} [options.envVars] - Required Environment Variables
    */
   constructor (options = {}) {
     this.name = options.name
