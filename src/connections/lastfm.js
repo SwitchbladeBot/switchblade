@@ -2,8 +2,9 @@ const { Connection } = require('../')
 
 module.exports = class LastFM extends Connection {
   constructor (client) {
-    super(client)
-    this.name = 'lastfm'
+    super(client, {
+      name: 'lastfm'
+    })
   }
 
   get defaultConfig () {

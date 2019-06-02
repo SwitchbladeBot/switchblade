@@ -6,9 +6,10 @@ const API_URL = 'https://api.github.com'
 
 module.exports = class GitHubAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'github'
-    this.envVars = ['GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET']
+    super({
+      name: 'github',
+      envVars: ['GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET']
+    })
   }
 
   getUser (username) {

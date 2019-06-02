@@ -6,9 +6,10 @@ const API_URL = 'https://api.darksky.net'
 
 module.exports = class DarkSkyAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'darksky'
-    this.envVars = ['DARKSKY_KEY']
+    super({
+      name: 'darksky',
+      envVars: 'DARKSKY_KEY'
+    })
   }
 
   // Get
