@@ -2,10 +2,12 @@
  * Base event listener structure.
  * @constructor
  * @param {Switchblade} client - Switchblade client
+ * @param {Object} [options] - Options
+ * @param {string[]} [options.events] - Events heard by listener
  */
 module.exports = class EventListener {
-  constructor (client) {
+  constructor (client, options = {}) {
     this.client = client
-    this.events = []
+    this.events = options.events || []
   }
 }
