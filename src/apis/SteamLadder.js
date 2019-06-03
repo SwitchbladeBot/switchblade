@@ -7,7 +7,6 @@ module.exports = class SteamLadderAPI extends APIWrapper {
       name: 'steamladder',
       envVars: ['STEAM_LADDER_API_KEY']
     })
-    this.envVars = ['STEAM_LADDER_API_KEY']
   }
 
   load () {
