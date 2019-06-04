@@ -17,7 +17,7 @@ module.exports = class GuildLogging extends EventListener {
         new SwitchbladeEmbed()
           .setColor(Constants.GUILD_ADDED_COLOR)
           .setTitle(`Added to "${guild.name}"`)
-          .setDescription(`\`${guild.id}\`\nGained ${formatter.format(guild.members.size)} members`)
+          .setDescription(`Gained ${formatter.format(guild.members.size)} members\`\n${guild.id}\``)
           .setFooter(`Now on ${formatter.format(this.client.guilds.size)} guilds`)
       )
     }
@@ -30,7 +30,7 @@ module.exports = class GuildLogging extends EventListener {
         new SwitchbladeEmbed()
           .setColor(Constants.GUILD_LOST_COLOR)
           .setTitle(`Removed from "${guild.name}"`)
-          .setDescription(`\`${guild.id}\`\nLost ${formatter.format(guild.members.size)} members`)
+          .setDescription(`Lost ${formatter.format(guild.members.size)} members\n\`${guild.id}\``)
           .setFooter(`Now on ${formatter.format(this.client.guilds.size)} guilds`)
       )
     }
