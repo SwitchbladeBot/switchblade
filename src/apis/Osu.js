@@ -1,13 +1,15 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://osu.ppy.sh/api'
 
 module.exports = class Osu extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'osu'
-    this.envVars = ['OSU_API_KEY']
+    super({
+      name: 'osu',
+      envVars: ['OSU_API_KEY']
+    })
   }
 
   getUser (user, mode) {
@@ -42,22 +44,22 @@ module.exports = class Osu extends APIWrapper {
       grant_type: 'authorization_code',
       client_id: process.env.OSU_CLIENT_ID,
       client_secret: process.env.OSU_CLIENT_SECRET,
-      redirect_uri: this.client.connections.osu.authCallbackURL,
+      redirect_uri: `${process.env.DASHBOARD_URL}/connections/osu/callback/`,
       code: authCode
     }).then(u => u)
   }
 
   request (endpoint, queryParams = {}) {
     queryParams.k = process.env.OSU_API_KEY
-    return snekfetch.get(`${API_URL}${endpoint}`)
-      .query(queryParams)
-      .then(r => r.body)
+    return fetch(API_URL + endpoint + `?${qs.stringify(queryParams)}`)
+      .then(res => res.json())
   }
 
-  post (url, queryParams = {}) {
-    return snekfetch.post(url)
-      .query(queryParams)
-      .set('Content-Type', 'application/x-www-form-urlencoded')
-      .then(r => r.body)
+  post (url, body) {
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
+    }).then(res => res.json())
   }
 }

@@ -20,7 +20,7 @@ module.exports = class OsuPlayer extends Command {
   }
 
   async run ({ t, author, flags, channel, language }, user) {
-    user = user || await this.client.modules.social.retrieveProfile(author.id, 'osuId').then(d => d.osuId)
+    console.log(await this.client.modules.connection.getConnections(author.id))
 
     const mode = this.parentCommand.modes[Object.keys(flags).filter(key => flags[key])[0] || 'osu']
     const paginatedEmbed = new SwitchbladeEmbed.PaginatedEmbed(t)

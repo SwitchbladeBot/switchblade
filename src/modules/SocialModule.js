@@ -49,10 +49,6 @@ module.exports = class SocialModule extends Module {
     await this._users.update(_user, { personalText })
   }
 
-  async setOsuId (_user, osuId) {
-    await this._users.update(_user, { osuId })
-  }
-
   async addReputation (_from, _to) {
     const { lastRep } = await this._users.findOne(_from, 'lastRep')
     const now = Date.now()
