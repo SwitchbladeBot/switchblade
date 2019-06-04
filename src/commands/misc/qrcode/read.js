@@ -8,13 +8,16 @@ module.exports = class QRCodeRead extends Command {
       aliases: ['r'],
       parentCommand: 'qrcode',
       parameters: [{
-        type: 'string', full: true, missingError: 'commands:qrcode.subcommands.read.noImage'
+        type: 'image',
+        authorAvatar: false,
+        url: true,
+        missingError: 'commands:qrcode.subcommands.read.noImage'
       }]
     })
   }
 
-  async run ({ t, channel, author, message }, text) {
-    const body = await fetch(`http://api.qrserver.com/v1/read-qr-code/?fileurl=${message.attachments.first() ? message.attachments.first().url : text}`).then(res => res.json())
+  async run ({ t, channel, author, message }, image) {
+    const body = await fetch(`http://api.qrserver.com/v1/read-qr-code/?fileurl=${encodeURIComponent(image)}`).then(res => res.json())
     if (body[0].symbol[0].data !== null) {
       channel.send(
         new SwitchbladeEmbed(author)
