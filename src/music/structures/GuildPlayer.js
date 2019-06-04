@@ -176,7 +176,6 @@ module.exports = class GuildPlayer extends Player {
     const { voiceChannel: oldChannel } = oldMember
     const { voiceChannel: newChannel } = newMember
     const isSwitch = newMember.user.id === switchId
-    console.log(isSwitch)
     if (newMember.user.bot && !isSwitch) return
     // Voice join
     if (!oldChannel && newChannel) {
@@ -186,13 +185,13 @@ module.exports = class GuildPlayer extends Player {
     }
     // Voice leave
     if (oldChannel && !newChannel) {
-      if (oldChannel.id === newChannel.id) return
       if (isSwitch) oldChannel.members.filter(m => !m.user.bot).forEach(m => this._listening.delete(m.user.id))
       else if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
       else return
     }
     if (oldChannel && newChannel) {
       // Voice channel change
+      if (oldChannel.id === newChannel.id) return
       if (isSwitch) this.handleSwitchJoin(newChannel.members)
       else if (!oldChannel.equals(newChannel)) {
         if (newChannel.members.has(switchId)) this.handleNewJoin(newMember.user.id)

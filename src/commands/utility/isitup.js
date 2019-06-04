@@ -1,5 +1,5 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const PROTOCOL_REGEX = /^[a-zA-Z]+:\/\//
 const PATH_REGEX = /(\/(.+)?)/g
@@ -21,7 +21,7 @@ module.exports = class IsItUp extends Command {
     url = url.replace(PROTOCOL_REGEX, '').replace(PATH_REGEX, '')
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const { body } = await snekfetch.get(`https://isitup.org/${url}.json`)
+    const body = await fetch(`https://isitup.org/${url}.json`).then(res => res.json())
     if (body.response_code) {
       body.response_time *= 1000
       embed.setTitle(t('commands:isitup.isUp'))

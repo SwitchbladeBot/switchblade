@@ -237,7 +237,8 @@
     "noNameProvided": "You have to give me a package name!",
     "lastPublish": "Last publish",
     "install": "Install",
-    "keywords": "Keywords"
+    "keywords": "Keywords",
+    "published": "**{{publisher}}** published `{{version}}` {{timeAgo}}"
   },
   "poll": {
     "commandDescription": "Creates a poll.",
@@ -250,6 +251,21 @@
   },
   "pause": {
     "commandDescription": "Pauses or resumes the music playback."
+  },
+  "createemoji": {
+    "commandDescription": "Creates an emoji.",
+    "commandUsage": "<image link> <name of the emoji>",
+    "noImage": "You have to give me an image link.",
+    "noName": "You have to give me a name for the emoji.",
+    "created": "**{{emoji.name}}** has been created .",
+    "error": "An error has occurred while creating the emoji."
+  },
+  "deleteemoji": {
+    "commandDescription": "Deletes an emoji.",
+    "commandUsage": "<:emoji:|emoji name>",
+    "noEmoji": "You have to give me the emoji you want to delete.",
+    "deleted": "**{{emoji.name}}** has been deleted.",
+    "error": "An error has occurred while deleting emoji."
   },
   "play": {
     "commandDescription": "Plays a certain song or adds it to the queue.",
@@ -399,6 +415,20 @@
     "users": "Users: **{{count}}**",
     "bots": "Bots: **{{count}}**"
   },
+  "country": {
+    "commandDescription": "Gets information about a country.",
+    "commandUsage": "<country name or ISO 3166-1 code>",
+    "noCountry": "You have to give me a country name or ISO 3166-1 country code to get information about.",
+    "aka": "Also known as: `{{alts}}`",
+    "languages": "Languages: {{languages}}",
+    "capital": "Capital: **{{capital}}**",
+    "region": "Region: **{{region}}** ({{subregion}})",
+    "population": "Population: **{{population}}**",
+    "area": "Area: **{{area}} km²**",
+    "timezones": "Timezones: **{{timezones}}**",
+    "currencies": "Currencies: {{currencies}}",
+    "treaties": "Treaties: {{treaties}}"
+  },
   "userinfo": {
     "commandDescription": "Sends yours or someone else's user information.",
     "online": "{{Constants.ONLINE_STATUS}} Online",
@@ -494,7 +524,8 @@
   },
   "profile": {
     "commandDescription": "Shows yours or someone else's profile.",
-    "commandUsage": "[user]"
+    "commandUsage": "[user]",
+    "aboutMe": "About me"
   },
   "myanimelist": {
     "commandDescription": "Searches for an anime on MyAnimeList.",
@@ -1342,5 +1373,14 @@
         "changed": "Scrobbling percentage successfully changed to **{{percent}}%**."
       }
     }
+  },
+  "translate": {
+    "commandDescription": "Translates a text from one language to another.",
+    "commandUsage": "<from> <to> <text>",
+    "targetLanguageInvalid": "Target language {{target}} not found. Translated to english.",
+    "translatedFrom": "Translated from",
+    "translatedTo": "Translated to",
+    "automatic": "(automatic detected)",
+    "title": "Translation"
   }
 }

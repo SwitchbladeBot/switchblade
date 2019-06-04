@@ -1,14 +1,16 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+const qs = require('querystring')
 const crypto = require('crypto')
 
 const API_URL = 'http://ws.audioscrobbler.com/2.0/'
 
 module.exports = class LastFM extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'lastfm'
-    this.envVars = ['LASTFM_KEY', 'LASTFM_SECRET']
+    super({
+      name: 'lastfm',
+      envVars: ['LASTFM_KEY', 'LASTFM_SECRET']
+    })
   }
 
   // GET METHODS
@@ -56,46 +58,50 @@ module.exports = class LastFM extends APIWrapper {
 
   // NOWPLAYING
   async updateNowPlaying ({ title, source, author, length }, sk) {
-    if (!await this.checkSong(title, author)) return false
+    const match = LastFM.getFilteredTrack(source, author, title)
+    const song = await this.getMatchedSong(match.title, match.artist)
+    if (!song) return false
     return this.request('track.updateNowPlaying', {
       sk,
-      track: this.getFilteredTrackName(source, author, title),
-      artist: author,
+      track: song.name,
+      artist: song.artist.name,
       duration: length / 1000
-    }, true, true).then(r => r.nowplaying)
+    }, true, true, 'xml').then(r => r.toString())
   }
 
   // SCROBBLE
   async scrobbleSong ({ title, source, author, length }, timestamp, sk) {
-    if (!await this.checkSong(title, author)) return false
+    const match = LastFM.getFilteredTrack(source, author, title)
+    const song = await this.getMatchedSong(match.title, match.artist)
+    if (!song) return false
     return this.request('track.scrobble', {
       sk,
-      track: title,
-      artist: author,
+      track: song.name,
+      artist: song.artist.name,
       duration: length / 1000,
       timestamp: timestamp.getTime() / 1000
     }, true, true).then(r => r.scrobbles)
   }
 
   // LOVE SONG
-  loveSong ({ title, source, author, length }, sk) {
-    const filtered = this.getFilteredTrackName(source, author, title)
+  async loveSong ({ title, source, author, length }, sk) {
+    const match = LastFM.getFilteredTrack(source, author, title)
+    const song = await this.getMatchedSong(match.title, match.artist)
     this.request('track.love', {
       sk,
-      track: filtered,
-      artist: author
+      track: song.name,
+      artist: song.artist.name
     }, true, true, 'xml')
-    return filtered
   }
 
-  unloveSong ({ title, source, author, length }, sk) {
-    const filtered = this.getFilteredTrackName(source, author, title)
+  async unloveSong ({ title, source, author, length }, sk) {
+    const match = LastFM.getFilteredTrack(source, author, title)
+    const song = await this.getMatchedSong(match.title, match.artist)
     this.request('track.unlove', {
       sk,
-      track: filtered,
-      artist: author
+      track: song.name,
+      artist: song.artist.name
     }, true, true, 'xml')
-    return filtered
   }
 
   // MAIN REQUEST
@@ -112,9 +118,11 @@ module.exports = class LastFM extends APIWrapper {
     const params = { method, api_key: process.env.LASTFM_KEY, format }
     Object.assign(queryParams, params)
     if (signature) queryParams.api_sig = this.getSignature(queryParams)
-    if (!write) return snekfetch.get(API_URL).query(queryParams).then(r => r.body)
-    return snekfetch.post(API_URL)
-      .set('content-type', 'application/x-www-form-urlencoded').send(queryParams).then(r => r.body)
+    if (!write) return fetch(API_URL + `?${qs.stringify(queryParams)}`).then(res => res.json())
+    return fetch(API_URL + `?${qs.stringify(queryParams)}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(res => res.json())
   }
 
   /**
@@ -134,21 +142,24 @@ module.exports = class LastFM extends APIWrapper {
    * @param {string} source - The song source identifier
    * @param {string} artist - The song artist
    * @param {string} title - the song name
-   * @returns {string}
+   * @returns {Object}
    */
-  getFilteredTrackName (source, artist, title) {
-    return source === 'youtube'
-      ? title.split('-')[0].includes(artist) ? title.replace(artist, '').replace(' - ', '') : title
-      : title
+  static getFilteredTrack (source, artist, title) {
+    const titleSplitted = title.split('-')[0]
+    const test = source === 'youtube' ? titleSplitted.toLowerCase().replace(' ', '').includes(artist.toLowerCase().replace('vevo', '').replace(' ', '')) : false
+    artist = test ? title.split(' - ')[0] : artist
+    title = test ? title.split(' - ')[1] : title
+    return { title, artist }
   }
 
   /**
    * @param {string} title - The song's name
    * @param {string} artist - The song's artist name
-   * @returns {Promise<boolean>}
+   * @returns {Promise<Object | Boolean>}
    */
-  async checkSong (title, artist) {
-    const { error } = await this.getTrackInfo(title, artist)
-    return error === 6
+  async getMatchedSong (title, artist) {
+    const req = await this.getTrackInfo(title, artist)
+    const { error } = req
+    return error ? error === 6 : req.track
   }
 }

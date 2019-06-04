@@ -1,5 +1,6 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+const qs = require('querystring')
 
 module.exports = class Currency extends Command {
   constructor (client) {
@@ -25,14 +26,14 @@ module.exports = class Currency extends Command {
   async run ({ t, author, channel }, from = 'USD', value = 1, to) {
     const embed = new SwitchbladeEmbed(author)
     try {
-      const { body } = await snekfetch.get('https://api.ksoft.si/kumo/currency').query({ to, from, value }).set({
-        'Authorization': `Bearer ${process.env.KSOFT_KEY}`
-      })
+      const { pretty } = await fetch(`https://api.ksoft.si/kumo/currency?${qs.stringify({ to, from, value })}`, {
+        headers: { 'Authorization': `Bearer ${process.env.KSOFT_KEY}` }
+      }).then(res => res.json())
 
-      if (body.pretty) {
+      if (pretty) {
         return channel.send(embed
           .setTitle(`${from.toUpperCase()} ${t('commons:to')} ${to.toUpperCase()}`)
-          .setDescription(`${value} ${from.toUpperCase()} = ${body.pretty}`))
+          .setDescription(`${value} ${from.toUpperCase()} = ${pretty}`))
       }
 
       throw new Error('INVALID_REQUEST')

@@ -1,6 +1,6 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 module.exports = class NumberFacts extends Command {
   constructor (client) {
@@ -17,7 +17,7 @@ module.exports = class NumberFacts extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     try {
-      const { body } = await snekfetch.get(`http://numbersapi.com/${number}/trivia`)
+      const body = await fetch(`http://numbersapi.com/${number}/trivia`).then(res => res.json())
       embed.setTitle(body)
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {

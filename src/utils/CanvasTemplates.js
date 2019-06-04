@@ -123,7 +123,7 @@ module.exports = class CanvasTemplates {
     const COINS_TEXT_X = COINS_X + SECTION_INNER_MARGIN + ICON_SIZE - 7
     const COINS_TEXT_Y = INFO_Y + INFO_HEIGHT * 0.5
     ctx.roundRect(INNER_MARGIN, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
-    ctx.write('Switchcoins', COINS_TEXT_X, COINS_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
+    ctx.write(t('commons:currency_plural'), COINS_TEXT_X, COINS_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
     ctx.write(money, COINS_TEXT_X, COINS_TEXT_Y + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
 
     //     Reputation
@@ -131,7 +131,7 @@ module.exports = class CanvasTemplates {
     const REP_TEXT_X = REP_X + SECTION_INNER_MARGIN + ICON_SIZE + 7
     const REP_TEXT_Y = INFO_Y + INFO_HEIGHT * 0.5
     ctx.roundRect(REP_X, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
-    ctx.write('Reputation', REP_TEXT_X, REP_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
+    ctx.write(t('commons:reputation'), REP_TEXT_X, REP_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
     ctx.write(rep, REP_TEXT_X, REP_TEXT_Y + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
 
     //   About section
@@ -140,7 +140,7 @@ module.exports = class CanvasTemplates {
     const ABOUT_Y = INFO_Y - INNER_MARGIN - ABOUT_HEIGHT
     ctx.roundRect(INNER_MARGIN, ABOUT_Y, ABOUT_WIDTH, ABOUT_HEIGHT, 10, false, true)
 
-    const about = ctx.write('About me', SECTION_INNER_MARGIN * 2, ABOUT_Y + SECTION_INNER_MARGIN, FONTS.ABOUT_LABEL, ALIGN.TOP_LEFT)
+    const about = ctx.write(t('commands:profile.aboutMe'), SECTION_INNER_MARGIN * 2, ABOUT_Y + SECTION_INNER_MARGIN, FONTS.ABOUT_LABEL, ALIGN.TOP_LEFT)
     ctx.writeParagraph(
       personalText,
       FONTS.ABOUT_VALUE,
