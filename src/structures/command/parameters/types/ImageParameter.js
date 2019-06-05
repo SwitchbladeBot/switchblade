@@ -38,6 +38,7 @@ module.exports = class ImageParameter extends Parameter {
     return {
       ...super.parseOptions(options),
       user,
+      url: defVal(options, 'url', false),
       attachment: defVal(options, 'attachment', true),
       link: defVal(options, 'link', true),
       userOptions: user ? UserParameter.parseOptions(options.userOptions) : null,
@@ -70,6 +71,7 @@ module.exports = class ImageParameter extends Parameter {
       parseState.argIndex--
       const attachment = message.attachments.first()
       try {
+        if (this.url) return attachment.url
         const buffer = await imageRequest(attachment.url, client)
         return buffer
       } catch (e) {
@@ -82,6 +84,7 @@ module.exports = class ImageParameter extends Parameter {
       // Link
       if (this.link && isValidURL(arg)) {
         try {
+          if (this.url) return arg
           const buffer = await imageRequest(arg, client)
           return buffer
         } catch (e) {
@@ -96,6 +99,7 @@ module.exports = class ImageParameter extends Parameter {
           const user = UserParameter._parse(arg, this.userOptions, context)
           if (user) {
             try {
+              if (this.url) return user.displayAvatarURL
               const buffer = await imageRequest(user.displayAvatarURL, client)
               return buffer
             } catch (e) {
@@ -117,6 +121,7 @@ module.exports = class ImageParameter extends Parameter {
             parseState.argIndex--
             const attachment = msg.attachments.first()
             try {
+              if (this.url) return attachment.url
               const buffer = await imageRequest(attachment.url, client)
               return buffer
             } catch (e) {
@@ -136,6 +141,7 @@ module.exports = class ImageParameter extends Parameter {
             if (url) {
               parseState.argIndex--
               try {
+                if (this.url) return url
                 const buffer = await imageRequest(url, client)
                 return buffer
               } catch (e) {
@@ -152,6 +158,7 @@ module.exports = class ImageParameter extends Parameter {
     if (this.authorAvatar) {
       try {
         parseState.argIndex--
+        if (this.url) return author.displayAvatarURL
         const buffer = await imageRequest(author.displayAvatarURL, client)
         return buffer
       } catch (e) {
