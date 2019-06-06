@@ -47,10 +47,7 @@ module.exports = class Osu extends APIWrapper {
       client_secret: process.env.OSU_CLIENT_SECRET,
       redirect_uri: `${process.env.DASHBOARD_URL}/connections/osu/callback/`,
       code: authCode
-    }).then(u => {
-      console.log(u)
-      return u
-    })
+    }).then(u => u)
   }
 
   getAuthenticatedUserInfo (key) {

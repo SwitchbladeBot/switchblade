@@ -1091,7 +1091,7 @@
         "lastUpdate": "Last update on **{{date}}** ({{timeAgo}})",
         "approved": "Approved on **{{date}}** ({{timeAgo}})",
         "tags": "Tags: **{{tags}}**",
-        "download": "[Download]({{link}}) ([no video]({{linkNoVideo}}))",
+        "download": "[Download]({{link}}) - [no video]({{linkNoVideo}})",
         "topScores": "Top scores:"
       }
     }
