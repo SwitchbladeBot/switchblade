@@ -39,11 +39,11 @@ module.exports = class OsuPlayer extends Command {
         .setThumbnail(`https://a.ppy.sh/${userData.user_id}?${Date.now()}.png`)
         .setDescriptionFromBlockArray([
           [
-            `:flag_${userData.country.toLowerCase()}: **[${userData.username}](https://osu.ppy.sh/u/${userData.user_id})** (${t('commands:osu.subcommands.player.level', { number: MiscUtils.formatNumber(Math.floor(userData.level), language) })})` 
+            `:flag_${userData.country.toLowerCase()}: **[${userData.username}](https://osu.ppy.sh/u/${userData.user_id})** (${t('commands:osu.subcommands.player.level', { number: MiscUtils.formatNumber(Math.floor(userData.level), language) })})`
           ],
           [
             t('commands:osu.subcommands.player.joinedAt', { date: moment(userData.join_date).format('LLL'), timeAgo: moment(userData.join_date).fromNow() }),
-          t('commands:osu.subcommands.player.playTime', { time: moment.duration(userData.total_seconds_played * 1000).format('d[d] h[h] m[m] s[s]'), pp: MiscUtils.formatNumber(Math.floor(userData.pp_raw), language) })
+            t('commands:osu.subcommands.player.playTime', { time: moment.duration(userData.total_seconds_played * 1000).format('d[d] h[h] m[m] s[s]'), pp: MiscUtils.formatNumber(Math.floor(userData.pp_raw), language) })
           ],
           [
             `**${MiscUtils.formatNumber(userData.count_rank_ssh, language)}** ${Constants.OSU_SSH}, **${MiscUtils.formatNumber(userData.count_rank_ss, language)}** ${Constants.OSU_SS}, **${MiscUtils.formatNumber(userData.count_rank_sh, language)}** ${Constants.OSU_SH}, **${MiscUtils.formatNumber(userData.count_rank_s, language)}** ${Constants.OSU_S}, **${MiscUtils.formatNumber(userData.count_rank_a, language)}** ${Constants.OSU_A}`
@@ -59,7 +59,7 @@ module.exports = class OsuPlayer extends Command {
             t('commands:osu.subcommands.player.playCount', { playCount: MiscUtils.formatNumber(userData.playcount, language) }),
             t('commands:osu.subcommands.player.totalHits', { totalHits: MiscUtils.formatNumber((parseInt(userData.count300) + parseInt(userData.count100) + parseInt(userData.count50)), language), 300: MiscUtils.formatNumber(userData.count300, language), 100: MiscUtils.formatNumber(userData.count100, language), 50: MiscUtils.formatNumber(userData.count50, language), Constants })
           ]
-      ]))
+        ]))
 
       const topScores = await this.client.apis.osu.getUserTopScores(user, mode[0], 5)
 

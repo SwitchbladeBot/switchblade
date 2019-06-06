@@ -1,4 +1,4 @@
-  const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 const moment = require('moment')
 
 module.exports = class OsuBeatmap extends SearchCommand {
@@ -70,8 +70,8 @@ module.exports = class OsuBeatmap extends SearchCommand {
           ],
           [
             scores.map((score, i) => {
-            return `#${i + 1} - **[${score.username}](https://osu.ppy.sh/u/${score.user_id})** ${Constants[`OSU_${score.rank}`]} - ${score.count300} ${Constants.OSU_300} (${score.countgeki} ${Constants.OSU_GEKI}), ${score.count100} ${Constants.OSU_100} (${score.countkatu} ${Constants.OSU_KATU}), ${score.countmiss} ${Constants.OSU_MISS}`
-          }).join('\n')
+              return `#${i + 1} - **[${score.username}](https://osu.ppy.sh/u/${score.user_id})** ${Constants[`OSU_${score.rank}`]} - ${score.count300} ${Constants.OSU_300} (${score.countgeki} ${Constants.OSU_GEKI}), ${score.count100} ${Constants.OSU_100} (${score.countkatu} ${Constants.OSU_KATU}), ${score.countmiss} ${Constants.OSU_MISS}`
+            }).join('\n')
           ]
         ]))
     }
