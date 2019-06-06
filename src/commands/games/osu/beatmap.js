@@ -11,19 +11,12 @@ module.exports = class OsuBeatmap extends SearchCommand {
       embedLogoURL: 'https://i.imgur.com/Ek0hnam.png',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:osu.subcommands.beatmap.noBeatmap'
-      }, [{
-        type: 'booleanFlag', name: 'taiko'
-      }, {
-        type: 'booleanFlag', name: 'catchthebeat', aliases: ['ctb', 'catch']
-      }, {
-        type: 'booleanFlag', name: 'mania'
-      }]]
+      }]
     })
   }
 
   async search (context, query) {
-    const mode = this.parentCommand.modes[Object.keys(context.flags).filter(key => context.flags[key])[0] || 'osu']
-    return this.client.apis.osu.getBeatmap(query, mode[0], 10)
+    return this.client.apis.osu.getBeatmap(query, 10)
   }
 
   searchResultFormatter (obj) {
@@ -32,7 +25,7 @@ module.exports = class OsuBeatmap extends SearchCommand {
 
   async handleResult ({ t, channel, author, language, flags }, data) {
     channel.startTyping()
-    const paginatedEmbed = new SwitchbladeEmbed.PaginatedEmbed(t)
+    const paginatedEmbed = new SwitchbladeEmbed.PaginatedEmbed(t, author)
     const mode = this.parentCommand.modes[Object.keys(flags).filter(key => flags[key])[0] || 'osu']
     const scores = await this.client.apis.osu.getBeatmapScores(data.beatmap_id, mode[0], 5)
     moment.locale(language)

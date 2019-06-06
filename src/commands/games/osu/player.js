@@ -26,7 +26,7 @@ module.exports = class OsuPlayer extends Command {
     if (!user && osu.account) user = osu.account.id
 
     const mode = this.parentCommand.modes[Object.keys(flags).filter(key => flags[key])[0] || 'osu']
-    const paginatedEmbed = new SwitchbladeEmbed.PaginatedEmbed(t)
+    const paginatedEmbed = new SwitchbladeEmbed.PaginatedEmbed(t, author)
 
     try {
       channel.startTyping()
@@ -62,12 +62,11 @@ module.exports = class OsuPlayer extends Command {
         ]))
 
       const topScores = await this.client.apis.osu.getUserTopScores(user, mode[0], 5)
-
       if (topScores.length > 0) {
         let description = []
 
         for (var i in topScores) {
-          const beatmap = await this.client.apis.osu.getBeatmap(topScores[i].beatmap_id, mode[0])
+          const beatmap = await this.client.apis.osu.getBeatmap(topScores[i].beatmap_id, 0)
           if (beatmap.length > 0) description.push(`#${parseInt(i) + 1} - **[${beatmap[0].artist} - ${beatmap[0].title} (${beatmap[0].version})](https://osu.ppy.sh/b/${topScores[i].beatmap_id})** ${Constants[`OSU_${topScores[i].rank}`]} - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), language)}pp**`)
         }
 

@@ -26,8 +26,9 @@ module.exports = class SwitchbladeEmbed extends RichEmbed {
 }
 
 module.exports.PaginatedEmbed = class PaginatedEmbed {
-  constructor (t, embed = new RichEmbed()) {
+  constructor (t, author, embed = new RichEmbed()) {
     this.t = t
+    this.author = author
     this.embedTemplate = embed
     this.pages = []
     this.informationPage = null
@@ -78,7 +79,7 @@ module.exports.PaginatedEmbed = class PaginatedEmbed {
 
     return new ReactionHandler(
       msg,
-      (reaction, user) => emojis.includes(reaction.emoji.id || reaction.emoji.name) && user !== message.client.user && options.filter(reaction, user),
+      (reaction, user) => emojis.includes(reaction.emoji.id || reaction.emoji.name) && user !== message.client.user && user === this.author && options.filter(reaction, user),
       options,
       this,
       emojis

@@ -8,7 +8,7 @@ module.exports = class ReactionHandler extends ReactionCollector {
     this.methodMap = new Map(Object.entries(this.display.emojis).map(([key, value]) => [value, key]))
     this.currentPage = this.options.startPage || 0
     this.prompt = this.options.prompt || this.display.t('commons:whichPage')
-    this.time = typeof this.options.time === 'number' ? this.options.time : 30000
+    this.time = typeof this.options.time === 'number' ? this.options.time : 30 * 1000
     this.awaiting = false
     this.selection = this.display.emojis.zero ? new Promise((resolve, reject) => {
       this.reject = reject
@@ -20,12 +20,18 @@ module.exports = class ReactionHandler extends ReactionCollector {
     else return this.stop()
 
     this.on('collect', (reaction, handler) => {
+      clearTimeout(this.timeout)
+
       reaction.remove(reaction.users.last())
       this[this.methodMap.get(reaction.emoji.id || reaction.emoji.name)](handler, reaction.users.last())
+
+      this.timeout = setTimeout(() => {
+        this.stop()
+      }, this.time)
     })
 
     this.on('end', () => {
-      if (this.reactionsDone && !this.message.deleted) this.message.reactions.deleteAll()
+      if (this.reactionsDone && !this.message.deleted) this.message.clearReactions()
     })
   }
 
@@ -74,7 +80,7 @@ module.exports = class ReactionHandler extends ReactionCollector {
 
   stop () {
     if (this.resolve) this.resolve(null)
-    this.message.reactions.deleteAll()
+    this.message.clearReactions()
     super.stop()
   }
 
@@ -84,7 +90,7 @@ module.exports = class ReactionHandler extends ReactionCollector {
 
   async _queueEmojiReactions (emojis) {
     if (this.message.deleted) return this.stop()
-    if (this.ended) return this.message.reactions.deleteAll()
+    if (this.ended) return this.message.clearReactions()
     await this.message.react(emojis.shift())
     if (emojis.length) return this._queueEmojiReactions(emojis)
     this.reactionsDone = true

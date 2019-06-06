@@ -17,15 +17,15 @@ module.exports = class Osu extends APIWrapper {
     return this.request('/get_user', { u: user, m: mode }).then(u => u[0])
   }
 
-  async getBeatmap (beatmap, mode, limit) {
-    return this.request('/get_beatmaps', { b: beatmap, m: mode, limit }).then(data => {
+  async getBeatmap (beatmap, mode, limit = 5) {
+    return this.request('/get_beatmaps', { b: beatmap, limit }).then(data => {
       if (typeof data !== 'undefined' && data.length > 0) return data
-      else return this.getBeatmapSet(beatmap, mode, limit)
+      else return this.getBeatmapSet(beatmap, limit)
     })
   }
 
   async getBeatmapSet (beatmapSet, mode, limit) {
-    return this.request('/get_beatmaps', { s: beatmapSet, m: mode, limit }).then(u => u)
+    return this.request('/get_beatmaps', { s: beatmapSet, limit }).then(u => u)
   }
 
   getBeatmapScores (beatmap, mode, limit) {
