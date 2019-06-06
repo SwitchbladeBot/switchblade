@@ -74,6 +74,7 @@ module.exports = class ReactionHandler extends ReactionCollector {
 
   stop () {
     if (this.resolve) this.resolve(null)
+    this.message.reactions.deleteAll()
     super.stop()
   }
 

@@ -1091,15 +1091,8 @@
         "lastUpdate": "Last update on **{{date}}** ({{timeAgo}})",
         "approved": "Approved on **{{date}}** ({{timeAgo}})",
         "tags": "Tags: **{{tags}}**",
-        "download": "[Download]({{link}}) [no video]({{linkNoVideo}})",
+        "download": "[Download]({{link}}) ([no video]({{linkNoVideo}}))",
         "topScores": "Top scores:"
-      },
-      "register": {
-        "commandDescription": "Link your osu! profile to your Discord account in Switchblade's database.",
-        "commandUsage": "<profile name or id>",
-        "registered": "Profile **{{username}}** is now linked to your account!",
-        "notRegistered": "Unable to link profile **{{user}}** to your account: {{error}}",
-        "invalidPlayer": "Invalid profile name or ID."
       }
     }
   },
@@ -1359,7 +1352,7 @@
     "commandDescription": "Shows all the accounts your account is connected to.",
     "title": "Your connections",
     "connected": "Connected as {{user}}",
-    "notConnected": "Not connected. Click here to connect."
+    "notConnected": "Click here to connect."
   },
   "scrobbling": {
     "commandDescription": "Sees information about audio scrobbling on last.fm with Switchblade.",

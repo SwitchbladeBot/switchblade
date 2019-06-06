@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const types = ['player', 'p', 'beatmap', 'b', 'register', 'reg', 'r']
+const types = ['player', 'p', 'beatmap', 'b']
 
 module.exports = class Osu extends Command {
   constructor (client) {
@@ -18,7 +18,7 @@ module.exports = class Osu extends Command {
               this.usage(t, prefix),
               '',
               `__**${t('commons:search.types')}:**__`,
-              `\`${['player', 'beatmap', 'register'].join('`, `')}\``
+              `\`${['player', 'beatmap'].join('`, `')}\``
             ].join('\n'))
         }
       }]

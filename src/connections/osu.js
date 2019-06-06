@@ -16,4 +16,14 @@ module.exports = class Osu extends Connection {
       token: accessToken.access_token
     }
   }
+  
+  async getAccountInfo ({ token }) {
+    const account = await this.client.apis.osu.getAuthenticatedUserInfo(token)
+    return {
+      user: account.username,
+      url: `https://osu.ppy.sh/u/${account.id}`,
+      avatar: `https://a.ppy.sh/${account.id}?${Date.now()}.jpeg`,
+      id: account.id
+    }
+  }
 }

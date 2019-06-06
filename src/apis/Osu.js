@@ -1,6 +1,7 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
 const qs = require('querystring')
+const { URLSearchParams } = require('url')
 
 const API_URL = 'https://osu.ppy.sh/api'
 
@@ -36,7 +37,7 @@ module.exports = class Osu extends APIWrapper {
   }
 
   getUserRecentPlays (user, mode, limit) {
-    return this.request('/get_user_recent', { u: user, m: mode, limit }).then(u => u)
+    return this.request('/get_user_recent', { u: user, m: mode, limit }).then(u => u.filter(p => p.rank !== 'F'))
   }
 
   getAccessToken (authCode) {
@@ -46,7 +47,16 @@ module.exports = class Osu extends APIWrapper {
       client_secret: process.env.OSU_CLIENT_SECRET,
       redirect_uri: `${process.env.DASHBOARD_URL}/connections/osu/callback/`,
       code: authCode
-    }).then(u => u)
+    }).then(u => {
+      console.log(u)
+      return u
+    })
+  }
+  
+  getAuthenticatedUserInfo (key) {
+    return fetch(API_URL + `/v2/me`, {
+      headers: { Authorization: `Bearer ${key}` }
+    }).then(res => res.json())
   }
 
   request (endpoint, queryParams = {}) {
@@ -56,10 +66,11 @@ module.exports = class Osu extends APIWrapper {
   }
 
   post (url, body) {
+    const params = new URLSearchParams()
+    Object.keys(body).map(k => params.append(k, body[k]))
     return fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body
+      body: params
     }).then(res => res.json())
   }
 }
