@@ -23,6 +23,8 @@ Switchblade is a free and open source solution to all of your server managing pr
 <h3>Table of Contents</h3>
 
 - [Contributing](#contributing)
+  - [Making new commands](#making-new-commands)
+  - [Translation](#translation)
 - [Sponsors](#sponsors)
 - [Backers](#backers)
 
