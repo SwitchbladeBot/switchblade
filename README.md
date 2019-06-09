@@ -41,7 +41,7 @@ There are probably many [bug reports](https://github.com/SwitchbladeBot/switchbl
 
 ### Translation
 
-We want Switchblade to be available and used by as many people as possible. That's why we have put together an awesome team consisting of more than 50 translators from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through Crowdin, a platform made for software localisation. Go to [our page there](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
+We want Switchblade to be available and used by as many people as possible. That's why we have put together an awesome team consisting of more than 50 translators from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through Crowdin, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
 
 <h2 align="center">Sponsors</h2>
 
