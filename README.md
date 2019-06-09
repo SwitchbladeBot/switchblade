@@ -33,13 +33,13 @@ Switchblade is a free and open source solution to all of your server managing pr
 
 **We want everyone to be able to help with Switchblade as easily as possible.** We've listed some of the many ways you can contribute to the below.
 
-<h3 align="center">Writing code</h3>
+### Writing code
 
-<h3 align="center">Checking bug reports</h3>
+### Checking bug reports
 
-There are probably many [bug reports](http://github.com/SwitchbladeBot/switchblade/issues) already on the issues tab of this repo, and you can help us by triaging them and checking if the bugs still exists. Most of the reports should have a step-by-step guide on how to reproduce the problem. Follow it, and then comment about the problem. Has the bug been fixed? Do you have an idea of what could be causing it? Does it only happen in specific scenarios? Let us know!
+There are probably many [bug reports](https://github.com/SwitchbladeBot/switchblade/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22type%3A+bug%22+) already on the issues tab of this repo, and you can help us by triaging them and checking if the bugs still exists. Most of the reports should have a step-by-step guide on how to reproduce the problem. Follow it, and then comment about the problem. Has the bug been fixed? Do you have an idea of what could be causing it? Does it only happen in specific scenarios? Let us know!
 
-<h3 align="center">Translation</h3>
+### Translation
 
 We want Switchblade to be available to as many people as possible, and that's why we have an awesome team of more than 50 translators from different nations around the globe. Want to be part of it? Awesome! We translate our strings through Crowdin, a platform made for software localisation. Go to [our page there](http://translate.switchblade.xyz), request to join the project, and then ping one of the translation managers on our [community server](http://support.switchblade.xyz) so they can accept you and give you your roles. [**Ah, did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
 
