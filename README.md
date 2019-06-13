@@ -24,7 +24,7 @@ Switchblade is a free and open source solution to all of your server managing pr
 
 - [Contributing](#contributing)
   - [Writing code](#writing-code)
-  - [Ideas](#ideas)
+  - [Ideas and discussion](#ideas)
   - [Checking bug reports](#checking-bug-reports)
   - [Translation](#translation)
 - [Sponsors](#sponsors)
@@ -34,9 +34,13 @@ Switchblade is a free and open source solution to all of your server managing pr
 
 **We want everyone to be able to help with Switchblade as easily as possible.** We've listed some of the many ways you can contribute to the bot's development below.
 
+### Ideas and discussion
+
+Have an awesome idea for a new command? We'd love to hear about it!
+
 ### Writing code
 
-### Ideas
+Something something create commands open PRs yada yada yada
 
 ### Checking bug reports
 
