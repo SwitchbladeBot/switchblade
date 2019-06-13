@@ -24,6 +24,7 @@ Switchblade is a free and open source solution to all of your server managing pr
 
 - [Contributing](#contributing)
   - [Writing code](#writing-code)
+  - [Ideas](#ideas)
   - [Checking bug reports](#checking-bug-reports)
   - [Translation](#translation)
 - [Sponsors](#sponsors)
@@ -35,13 +36,15 @@ Switchblade is a free and open source solution to all of your server managing pr
 
 ### Writing code
 
+### Ideas
+
 ### Checking bug reports
 
 There are probably many [bug reports](https://github.com/SwitchbladeBot/switchblade/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22type%3A+bug%22+) in the issues tab of this repo already. You can help us by triaging them and checking if the bugs still exists. Most of the reports should have a step-by-step guide on how to reproduce the problem. Try reproducing them yourself and report back to us. Have the bugs been fixed? Do you have an idea of what could be causing them? In what scenarios do they occur? Let us know!
 
 ### Translation
 
-We want Switchblade to be available and used by as many people as possible. That's why we have put together an awesome team consisting of more than 50 translators from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through Crowdin, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
+We want Switchblade to be available and used by as many people as possible. That's why we have put together an awesome team consisting of **more than 50 translators** from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through **Crowdin**, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
 
 <h2 align="center">Sponsors</h2>
 
