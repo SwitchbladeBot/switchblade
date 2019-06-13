@@ -32,7 +32,7 @@ Switchblade is a free and open source solution to all of your server managing pr
 
 <h2 align="center">Contributing</h2>
 
-**We want everyone to be able to help with Switchblade as easily as possible.** We've listed some of the many ways you can contribute to the below.
+**We want everyone to be able to help with Switchblade as easily as possible.** We've listed some of the many ways you can contribute to the bot's development below.
 
 ### Writing code
 
