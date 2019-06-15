@@ -14,6 +14,8 @@
   ![languages-badge]
   [![backers][backers-badge]][backers-url]
   [![sponsors][sponsors-badge]][sponsors-url]
+  <br>
+  <a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD SWITCHBLADE TO YOUR SERVER</a>
 </div>
 
 <h2 align="center">Switchblade</h2>
@@ -24,7 +26,7 @@ Switchblade is a free and open source solution to all of your server managing pr
 
 - [Contributing](#contributing)
   - [Writing code](#writing-code)
-  - [Ideas and discussion](#ideas)
+  - [Ideas and discussion](#ideas-and-discussion)
   - [Checking bug reports](#checking-bug-reports)
   - [Translation](#translation)
 - [Sponsors](#sponsors)
