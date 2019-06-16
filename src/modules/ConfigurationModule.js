@@ -39,7 +39,7 @@ module.exports = class ConfigurationModule extends Module {
   }
 
   async setLanguage (_guild, language) {
-    this.client.logger.debug(`Changing language of ${_guild} to '${prefix}'`, { label: this.constructor.name, guild: { id: _guild }, language })
+    this.client.logger.debug(`Changing language of ${_guild} to '${language}'`, { label: this.constructor.name, guild: { id: _guild }, language })
     await this.update(_guild, { language })
   }
 }
