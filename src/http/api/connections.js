@@ -16,7 +16,7 @@ module.exports = class Connections extends Route {
           const connection = this.client.connections[req.params.connName]
           res.redirect(await connection.getAuthLink())
         } catch (e) {
-          console.error(e)
+          this.client.logger(e, { label: 'Connections' })
           res.status(500).json({ error: 'Internal server error!' })
         }
       })

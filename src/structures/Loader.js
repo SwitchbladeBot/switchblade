@@ -7,12 +7,4 @@ module.exports = class Loader {
   load (client) {
     return true
   }
-
-  log (...args) {
-    return this.client.log(...args)
-  }
-
-  logError (...args) {
-    return this.client.logError(...args)
-  }
 }

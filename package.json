@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
+    "@shelf/winston-datadog-logs-transport": "^1.0.7",
     "abort-controller": "^2.0.3",
     "bufferutil": "^4.0.1",
     "cheerio": "^1.0.0-rc.2",
@@ -45,6 +46,7 @@
     "discord.js-lavalink": "^2.2.2",
     "erlpack": "github:discordapp/erlpack",
     "express": "^4.16.4",
+    "express-winston": "^3.2.0",
     "figlet": "^1.2.1",
     "gifencoder": "^2.0.1",
     "googleapis": "^38.0.0",
@@ -61,7 +63,6 @@
     "moment-duration-format": "^2.2.2",
     "moment-timezone": "^0.5.23",
     "mongoose": "^5.4.19",
-    "morgan": "^1.9.1",
     "node-fetch": "^2.3.0",
     "node-opus": "^0.3.1",
     "node-spotify-api": "^1.0.7",
@@ -72,7 +73,8 @@
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",
     "transform-props": "^1.0.1",
-    "uws": "^10.148.2"
+    "uws": "^10.148.2",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",

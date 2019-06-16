@@ -11,28 +11,44 @@ module.exports = class GuildLogging extends EventListener {
   }
 
   onGuildCreate (guild) {
-    this.log(`[35mAdded to "${guild.name}" (${guild.id})`, 'Guilds')
-    if (process.env.LOGGING_CHANNEL_ID) {
-      this.channels.get(process.env.LOGGING_CHANNEL_ID).send(
-        new SwitchbladeEmbed()
-          .setColor(Constants.GUILD_ADDED_COLOR)
-          .setTitle(`Added to "${guild.name}"`)
-          .setDescription(`\`${guild.id}\``)
-          .setFooter(`Gained ${formatter.format(guild.members.size)} members`)
-      )
-    }
+    logGuildCreateOrDelete(this, guild)
   }
 
   onGuildDelete (guild) {
-    this.log(`[35mRemoved from "${guild.name}" (${guild.id})`, 'Guilds')
-    if (process.env.LOGGING_CHANNEL_ID) {
-      this.channels.get(process.env.LOGGING_CHANNEL_ID).send(
-        new SwitchbladeEmbed()
-          .setColor(Constants.GUILD_LOST_COLOR)
-          .setTitle(`Removed from "${guild.name}"`)
-          .setDescription(`\`${guild.id}\``)
-          .setFooter(`Lost ${formatter.format(guild.members.size)} members`)
-      )
+    logGuildCreateOrDelete(this, guild, true)
+  }
+}
+
+function logGuildCreateOrDelete (client, guild, deleted) {
+  client.logger.info(deleted ? `Removed from "${guild.name}"` : `Added to "${guild.name}"`, {
+    label: 'Guilds',
+    guild: {
+      name: guild.name,
+      id: guild.id,
+      owner: {
+        name: guild.owner.user.tag,
+        id: guild.ownerID
+      },
+      createdTimestamp: guild.createdTimestamp,
+      large: guild.large,
+      memberCount: guild.members.size,
+      region: guild.region,
+      newGuildCount: client.guilds.size
     }
+  })
+
+  if (process.env.LOGGING_CHANNEL_ID) {
+    client.channels.get(process.env.LOGGING_CHANNEL_ID).send(
+      new SwitchbladeEmbed()
+        .setColor(deleted ? Constants.GUILD_LOST_COLOR : Constants.GUILD_ADDED_COLOR)
+        .setTitle(deleted ? `Removed from "${guild.name}"` : `Added to "${guild.name}"`)
+        .setDescription([
+          `\`${guild.id}\``,
+          `Owned by **${guild.owner.user.tag}** (\`${guild.ownerID}\`)`,
+          `**${formatter.format(guild.members.size)}** members`,
+          `\`${guild.region}\``
+        ])
+        .footer(`Now in ${formatter.format(client.guilds.size)} guilds`)
+    )
   }
 }

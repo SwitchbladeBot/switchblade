@@ -11,6 +11,7 @@ module.exports = class ConnectionModule extends Module {
   }
 
   async connect (_user, _connection, _tokens) {
+    this.client.logger.debug(`Connecting ${_user} to ${_connection}`, { label: this.constructor.name, user: { id: _user }, connection: _connection })
     if (typeof _tokens === 'string') _tokens = { token: _tokens }
     if (typeof _tokens !== 'object') throw new TypeError(`ConnectionModule.connect should have the last argument a string or an object, ${typeof _tokens} given`)
     const user = await this._users.findOne(_user, 'connections')
@@ -43,6 +44,7 @@ module.exports = class ConnectionModule extends Module {
   }
 
   async disconnectUser (_user, _connection) {
+    this.client.logger.debug(`Disconnecting ${_user} from ${_connection}`, { label: this.constructor.name, user: { id: _user }, connection: _connection })
     const user = await this._users.findOne(_user, 'connections')
     const connection = user.connections.find(c => c.name === _connection)
     if (!connection) {

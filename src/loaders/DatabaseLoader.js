@@ -14,7 +14,7 @@ module.exports = class DatabaseLoader extends Loader {
       this.client.database = this.database
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e, { label: this.constructor.name })
     }
     return false
   }
@@ -22,9 +22,9 @@ module.exports = class DatabaseLoader extends Loader {
   initializeDatabase (DBWrapper = MongoDB, options = {}) {
     this.database = new DBWrapper(options)
     this.database.connect()
-      .then(() => this.log('[32mDatabase connection established!', 'DB'))
+      .then(() => this.client.logger.info('Database connection established!', { label: this.constructor.name }))
       .catch(e => {
-        this.logError('DB', e.message)
+        this.client.logger.error(e, { label: this.constructor.name })
         this.database = null
       })
   }

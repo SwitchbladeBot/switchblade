@@ -13,7 +13,7 @@ module.exports = class ModuleLoader extends Loader {
       this.client.modules = this.modules
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e, { label: this.constructor.name })
     }
     return false
   }
@@ -28,8 +28,12 @@ module.exports = class ModuleLoader extends Loader {
     return FileUtils.requireDirectory(dirPath, (NewModule) => {
       if (Object.getPrototypeOf(NewModule) !== Module) return
       this.addModule(new NewModule(this.client)) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
-      this.log(failed ? `[33m${success} modules loaded, ${failed} failed.` : `[32mAll ${success} modules loaded without errors.`, 'Modules')
+    }, e => {
+      this.client.logger.error(e, { label: this.constructor.name })
+    }).then(() => {
+      if (!failed) {
+        this.client.logger.info('All modules loaded successfully', { label: this.constructor.name })
+      }
     })
   }
 
@@ -39,16 +43,21 @@ module.exports = class ModuleLoader extends Loader {
    */
   addModule (module) {
     if (!(module instanceof Module)) {
-      this.log(`[31m${module.name} failed to load - Not an Module`, 'Modules')
+      this.client.logger.warn(`${module.name} failed to load`, { reason: 'Not a module', label: this.constructor.name })
       return false
     }
 
     if (module.canLoad() !== true) {
-      this.log(`[31m${module.name} failed to load - ${module.canLoad() || 'canLoad function did not return true.'}`, 'Modules')
+      this.client.logger.warn(`${module.name} failed to load`, { reason: module.canLoad() || 'canLoad function did not return true.', label: this.constructor.name })
       return false
     }
 
-    this.modules[module.name] = module.load()
+    try {
+      this.modules[module.name] = module.load()
+    } catch (e) {
+      this.client.logger.warn(`${module.name} failed to load`, { reason: 'An error ocurred', label: this.constructor.name })
+      this.client.logger.error(e, { label: this.constructor.name, module: module.name })
+    }
     return true
   }
 }
