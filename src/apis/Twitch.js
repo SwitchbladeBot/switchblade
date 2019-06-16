@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://api.twitch.tv/helix'
 
@@ -32,8 +33,7 @@ module.exports = class TwitchAPI extends APIWrapper {
   }
 
   request (endpoint, queryParams = {}) {
-    const qParams = new URLSearchParams(queryParams)
-    return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
+    return fetch(API_URL + endpoint + `?${qs.stringify(queryParams)}`, {
       headers: { 'Client-ID': process.env.TWITCH_CLIENT_ID }
     }).then(res => res.json())
   }

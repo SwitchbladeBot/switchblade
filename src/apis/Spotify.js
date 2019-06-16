@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const TOKEN_URL = 'https://accounts.spotify.com/api/token'
 const API_URL = 'https://api.spotify.com/v1'
@@ -71,19 +72,17 @@ module.exports = class SpotifyAPI extends APIWrapper {
   // Request
   async request (endpoint, queryParams = {}) {
     if (this.isTokenExpired) await this.getToken()
-    const qParams = new URLSearchParams(queryParams)
-    return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
+    return fetch(API_URL + endpoint + `?${qs.stringify(queryParams)}`, {
       headers: this.tokenHeaders
     }).then(res => res.json())
   }
 
   async getToken () {
-    const grantPar = new URLSearchParams({ 'grant_type': 'client_credentials' })
     const {
       access_token: accessToken,
       token_type: tokenType,
       expires_in: expiresIn
-    } = await fetch(TOKEN_URL + `?${grantPar.toString()}`, {
+    } = await fetch(TOKEN_URL + `?${qs.stringify({ 'grant_type': 'client_credentials' })}`, {
       method: 'POST',
       headers: this.credentialHeaders
     }).then(res => res.json())

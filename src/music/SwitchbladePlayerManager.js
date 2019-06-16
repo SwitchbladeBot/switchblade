@@ -10,6 +10,7 @@ const MusicUtils = require('./MusicUtils.js')
 
 const { PlayerManager } = require('discord.js-lavalink')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
 
@@ -46,19 +47,19 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
   async fetchTracks (identifier) {
     const specialSource = Object.values(Sources).find(source => source.test(identifier))
     if (specialSource) return specialSource
-    const params = new URLSearchParams({ identifier })
 
-    const res = await fetch(`http://${this.REST_ADDRESS}/loadtracks?${params.toString()}`, {
+    const res = await fetch(`http://${this.REST_ADDRESS}/loadtracks?${qs.stringify({ identifier })}`, {
       headers: { Authorization: this.REST_PASSWORD }
     }).then(res => res.json()).catch(e => {
       this.client.logger.error(e, { label: this.constructor.name })
     })
 
-    if (!res) return false
-    if (['LOAD_FAILED', 'NO_MATCHES'].includes(res.loadType) || !res.tracks.length) return res.loadType !== 'LOAD_FAILED'
+    const { body } = res
+    if (!body) return false
+    if (['LOAD_FAILED', 'NO_MATCHES'].includes(body.loadType) || !body.tracks.length) return body.loadType !== 'LOAD_FAILED'
 
-    const songs = res.tracks
-    songs.searchResult = res.loadType === 'SEARCH_RESULT'
+    const songs = body.tracks
+    songs.searchResult = body.loadType === 'SEARCH_RESULT'
     return songs
   }
 

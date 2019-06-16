@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://api.darksky.net'
 
@@ -28,8 +29,7 @@ module.exports = class DarkSkyAPI extends APIWrapper {
 
   // Default
   request (endpoint, lat, lng, queryParams = {}) {
-    const qParams = new URLSearchParams(queryParams)
-    return fetch(`${API_URL}${endpoint}/${process.env.DARKSKY_KEY}/${lat},${lng}?${qParams.toString()}`)
+    return fetch(`${API_URL}${endpoint}/${process.env.DARKSKY_KEY}/${lat},${lng}?${qs.stringify(queryParams)}`)
       .then(res => res.json())
   }
 }

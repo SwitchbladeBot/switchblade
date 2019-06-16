@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 const cheerio = require('cheerio')
 
 const API_URL = 'https://api.genius.com'
@@ -27,8 +28,7 @@ module.exports = class GeniusAPI extends APIWrapper {
 
   // Default
   request (endpoint, queryParams = {}) {
-    const qParams = new URLSearchParams(queryParams)
-    return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
+    return fetch(API_URL + endpoint + `?${qs.stringify(queryParams)}`, {
       headers: { 'Authorization': `Bearer ${process.env.GENIUS_API}` }
     }).then(res => res.json())
   }
