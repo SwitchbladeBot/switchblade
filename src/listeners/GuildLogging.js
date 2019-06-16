@@ -47,6 +47,7 @@ function logGuildCreateOrDelete (client, guild, deleted) {
           `**${formatter.format(guild.members.size)}** members`,
           `\`${guild.region}\``
         ])
+        .footer(`Now in ${formatter.format(client.guilds.size)} guilds`)
     )
   }
 }
