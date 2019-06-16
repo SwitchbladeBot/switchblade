@@ -29,14 +29,17 @@ module.exports = class ConfigurationModule extends Module {
   }
 
   update (_guild, entity) {
+    this.client.logger.info(`Updating guild configuration for ${_guild}`, { label: this.constructor.name, guild: { id: _guild }, entity })
     return this.validateConfiguration(entity).then(() => this._guilds.update(_guild, entity))
   }
 
   async setPrefix (_guild, prefix) {
+    this.client.logger.debug(`Changing prefix of ${_guild} to '${prefix}'`, { label: this.constructor.name, guild: { id: _guild }, prefix })
     await this.update(_guild, { prefix })
   }
 
   async setLanguage (_guild, language) {
+    this.client.logger.debug(`Changing language of ${_guild} to '${prefix}'`, { label: this.constructor.name, guild: { id: _guild }, language })
     await this.update(_guild, { language })
   }
 }
