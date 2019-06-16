@@ -37,7 +37,7 @@ module.exports = class LocaleLoader extends Loader {
           this.client.logger.error(e, { label: this.constructor.name })
         }
       } else {
-        this.client.logger.debug('Could not download locales from Crowdin', { reason: 'API wrapper didn\'t load', label: this.constructor.name })
+        this.client.logger.warn('Could not download locales from Crowdin', { reason: 'API wrapper didn\'t load', label: this.constructor.name })
       }
 
       try {
