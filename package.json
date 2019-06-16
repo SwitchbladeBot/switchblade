@@ -42,7 +42,6 @@
     "cows": "^2.1.0",
     "cowsay": "^1.4.0",
     "crowdin-without-vulnerability": "^1.0.0",
-    "datejs": "^1.0.0-rc3",
     "discord.js": "^11.4.2",
     "discord.js-lavalink": "^2.2.2",
     "erlpack": "github:discordapp/erlpack",
