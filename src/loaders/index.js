@@ -7,5 +7,4 @@ module.exports = {
   HTTPLoader: require('./HTTPLoader.js'),
   CommandLoader: require('./CommandLoader.js'),
   ConnectionLoader: require('./ConnectionLoader.js'),
-  DatadogLoader: require('./DatadogLoader.js')
 }
