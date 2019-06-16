@@ -26,9 +26,9 @@ module.exports = class AutoModerator extends EventListener {
         }
       }
       member.kick(t('moderation:joinLock.kickReason')).then(() => {
-        this.logger.debug(`Kicked "${member.user.tag}" from "${member.guild.name}"`, { label: 'JoinLock', context })
+        this.logger.info(`Kicked "${member.user.tag}" from "${member.guild.name}"`, { label: 'JoinLock', context })
       }).catch(e => {
-        this.logger.debug(`Tried to kick "${member.user.tag}" from "${member.guild.name}" but failed`, { label: 'JoinLock', context, error: e })
+        this.logger.error(`Tried to kick "${member.user.tag}" from "${member.guild.name}" but failed`, { label: 'JoinLock', context, error: e })
       })
     }
   }
