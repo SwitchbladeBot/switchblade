@@ -66,7 +66,8 @@ module.exports = class Switchblade extends Client {
           ),
           level: 'silly'
         })
-      ]
+      ],
+      exitOnError: false
     })
 
     if (process.env.DD_API_KEY && process.env.DD_SERVICE_NAME) {
