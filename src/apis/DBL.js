@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://discordbots.org/api'
 
@@ -20,8 +21,7 @@ module.exports = class DBL extends APIWrapper {
   }
 
   request (endpoint, queryParams = {}) {
-    const qParams = new URLSearchParams(queryParams)
-    return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
+    return fetch(API_URL + endpoint + `?${qs.stringify(queryParams)}`, {
       headers: { 'Authorization': process.env.DBL_TOKEN }
     }).then(res => res.json())
   }

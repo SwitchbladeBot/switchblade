@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://chorus.fightthe.pw/api'
 
@@ -15,8 +16,7 @@ module.exports = class ChorusAPI extends APIWrapper {
   }
 
   request (endpoint, queryParams = {}) {
-    const qParams = new URLSearchParams(queryParams)
-    return fetch(API_URL + endpoint + `?${qParams.toString()}`)
+    return fetch(API_URL + endpoint + `?${qs.stringify(queryParams)}`)
       .then(res => res.json())
   }
 }

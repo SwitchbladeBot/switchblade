@@ -1,5 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://maps.googleapis.com/maps/api'
 
@@ -39,8 +40,7 @@ module.exports = class GoogleMapsAPI extends APIWrapper {
   // Default
   request (endpoint, queryParams = {}) {
     queryParams.key = process.env.GMAPS_KEY
-    const qParams = new URLSearchParams(queryParams)
-    return fetch(`${API_URL}${endpoint}/json?${qParams.toString()}`)
+    return fetch(`${API_URL}${endpoint}/json?${qs.stringify(queryParams)}`)
       .then(res => res.json())
   }
 }
