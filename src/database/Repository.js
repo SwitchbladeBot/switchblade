@@ -8,7 +8,7 @@ module.exports = class Repository {
   }
 
   /**
-   * Parses an entity into custom repository response (e.: with a save propertie)
+   * Parses an entity
    * @param {Object} entity - Unparsed entity
    * @returns {Object} - Parsed entity
    */

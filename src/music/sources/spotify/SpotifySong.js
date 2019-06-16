@@ -1,4 +1,5 @@
 const { Song } = require('../../structures')
+const Constants = require('../../../utils/Constants.js')
 
 module.exports = class SpotifySong extends Song {
   constructor (data = {}, requestedBy, track, album = track.album) {
@@ -15,7 +16,7 @@ module.exports = class SpotifySong extends Song {
     }
 
     this.source = 'spotify'
-    this.color = '#1DB954'
+    this.color = Constants.SPOTIFY_COLOR
 
     this.spotifyTrack = track
   }

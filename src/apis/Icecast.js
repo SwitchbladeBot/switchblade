@@ -3,8 +3,9 @@ const IcecastParser = require('icecast-parser')
 
 module.exports = class Icecast extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'icecast'
+    super({
+      name: 'icecast'
+    })
   }
 
   fetchMetadata (url) {

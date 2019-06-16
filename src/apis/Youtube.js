@@ -3,9 +3,10 @@ const { google } = require('googleapis')
 
 module.exports = class YoutubeAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'youtube'
-    this.envVars = ['YOUTUBE_API_KEY']
+    super({
+      name: 'youtube',
+      envVars: ['YOUTUBE_API_KEY']
+    })
   }
 
   load () {
@@ -17,11 +18,19 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   getVideos (ids, part = 'snippet,statistics') {
-    return this.Youtube.videos.list({ id: ids.join(','), part }).then(r => r && r.data.items)
+    return this.Youtube.videos.list({ id: ids.join(), part }).then(r => r && r.data.items)
   }
 
   getVideo (id, part = 'snippet,statistics') {
     return this.getVideos([ id ], part).then(r => r && r[0])
+  }
+
+  getChannels (ids, part = 'snippet,statistics') {
+    return this.Youtube.channels.list({ id: ids.join(), part }).then(r => r && r.data.items)
+  }
+
+  getChannel (id, part = 'snippet,statistics') {
+    return this.getChannels([ id ], part).then(r => r && r[0])
   }
 
   getPlaylist (id, part = 'snippet') {
@@ -35,6 +44,10 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   searchVideos (query, part = 'snippet', maxResults = 5) {
-    return this.Youtube.search.list({ q: query, type: 'video', part, maxResults }).then(r => r.data)
+    return this.search(query, ['video'], part, 'relevance', maxResults)
+  }
+
+  search (query, type = ['video', 'channel', 'playlist'], part = 'snippet', order = 'relevance', maxResults = 5) {
+    return this.Youtube.search.list({ q: query, type: type.join(), part, order, maxResults }).then(r => r.data)
   }
 }

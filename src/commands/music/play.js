@@ -1,28 +1,21 @@
-const { CommandStructures, Constants, SwitchbladeEmbed } = require('../../')
-const { Command, CommandError, CommandRequirements, CommandParameters, BooleanFlagParameter, StringParameter } = CommandStructures
+const { Command, CommandError, Constants, SwitchbladeEmbed } = require('../../')
 const { Song, Playlist } = require('../../music/structures')
 
 module.exports = class Play extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'play'
-    this.aliases = []
-    this.category = 'music'
-
-    this.requirements = new CommandRequirements(this, {
-      guildOnly: true,
-      sameVoiceChannelOnly: true,
-      voiceChannelOnly: true,
-      playerManagerOnly: true
+    super(client, {
+      name: 'play',
+      aliases: ['p'],
+      category: 'music',
+      requirements: { guildOnly: true, sameVoiceChannelOnly: true, voiceChannelOnly: true, playerManagerOnly: true },
+      parameters: [{
+        type: 'string', full: true, missingError: 'commands:play.noTrackIdentifier'
+      }, [{
+        type: 'booleanFlag', name: 'soundcloud', aliases: ['sc']
+      }, {
+        type: 'booleanFlag', name: 'youtube', aliases: ['yt']
+      }]]
     })
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:play.noTrackIdentifier' }),
-      [
-        new BooleanFlagParameter({ name: 'soundcloud', aliases: [ 'sc' ] }),
-        new BooleanFlagParameter({ name: 'youtube', aliases: [ 'yt' ] })
-      ]
-    )
   }
 
   async run ({ t, author, channel, flags, guild, voiceChannel }, identifier) {
@@ -36,12 +29,12 @@ module.exports = class Play extends Command {
     const playerManager = this.client.playerManager
     try {
       const specificSearch = flags['soundcloud'] || flags['youtube']
-      if (flags['soundcloud']) identifier = `scsearch:${identifier}`
-      else if (flags['youtube']) identifier = `ytsearch:${identifier}`
+      if (flags['soundcloud']) identifier = `scsearch:${identifier.replace(/<?>?/g, '')}`
+      else if (flags['youtube']) identifier = `ytsearch:${identifier.replace(/<?>?/g, '')}`
 
-      let { result, tryAgain } = await playerManager.loadTracks(identifier, author)
+      let { result, tryAgain } = await playerManager.loadTracks(identifier.replace(/<?>?/g, ''), author)
       if (tryAgain && !result && !specificSearch) {
-        result = (await playerManager.loadTracks(`ytsearch:${identifier}`, author)).result
+        result = (await playerManager.loadTracks(`ytsearch:${identifier.replace(/<?>?/g, '')}`, author)).result
       }
 
       if (result) {

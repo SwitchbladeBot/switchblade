@@ -1,22 +1,22 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 module.exports = class Pat extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'pat'
-    this.category = 'images'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:pat.noMention', acceptBot: true, acceptSelf: false })
-    )
+    super(client, {
+      name: 'pat',
+      category: 'images',
+      parameters: [{
+        type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:pat.noMention'
+      }]
+    })
   }
 
   async run ({ t, channel, author }, user) {
-    const { body } = await snekfetch.get('https://nekos.life/api/v2/img/pat')
+    const body = await fetch('https://nekos.life/api/v2/img/pat').then(res => res.json())
     const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     embed.setImage(body.url)
       .setDescription(t('commands:pat.success', { _author: author, pat: user }))
     channel.send(embed).then(() => channel.stopTyping())

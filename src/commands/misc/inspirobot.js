@@ -1,18 +1,19 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
-const snekfetch = require('snekfetch')
+const { Command, SwitchbladeEmbed } = require('../../')
+
+const fetch = require('node-fetch')
 
 module.exports = class InspiroBot extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'inspirobot'
-    this.aliases = ['inspiro', 'ibot']
+    super(client, {
+      name: 'inspirobot',
+      aliases: ['inspiro', 'ibot']
+    })
   }
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const { body } = await snekfetch.get('http://inspirobot.me/api?generate=true')
+    const body = await fetch('http://inspirobot.me/api?generate=true').then(res => res.json())
     embed
       .setImage(body.toString('utf8'))
       .setDescription(t('commands:inspirobot.quote'))

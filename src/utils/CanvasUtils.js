@@ -29,6 +29,7 @@ module.exports = class CanvasUtils {
     const self = this
 
     // Initiliaze fonts
+    registerFont('src/assets/fonts/Comic-Sans-MS.ttf', { family: 'Comic Sans MS' })
     registerFont('src/assets/fonts/Montserrat-Thin.ttf', { family: 'Montserrat Thin' })
     registerFont('src/assets/fonts/Montserrat-ThinItalic.ttf', { family: 'Montserrat Thin', style: 'italic' })
     registerFont('src/assets/fonts/Montserrat-Light.ttf', { family: 'Montserrat Light' })

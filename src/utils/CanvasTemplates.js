@@ -123,7 +123,7 @@ module.exports = class CanvasTemplates {
     const COINS_TEXT_X = COINS_X + SECTION_INNER_MARGIN + ICON_SIZE - 7
     const COINS_TEXT_Y = INFO_Y + INFO_HEIGHT * 0.5
     ctx.roundRect(INNER_MARGIN, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
-    ctx.write('Switchcoins', COINS_TEXT_X, COINS_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
+    ctx.write(t('commons:currency_plural'), COINS_TEXT_X, COINS_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
     ctx.write(money, COINS_TEXT_X, COINS_TEXT_Y + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
 
     //     Reputation
@@ -131,7 +131,7 @@ module.exports = class CanvasTemplates {
     const REP_TEXT_X = REP_X + SECTION_INNER_MARGIN + ICON_SIZE + 7
     const REP_TEXT_Y = INFO_Y + INFO_HEIGHT * 0.5
     ctx.roundRect(REP_X, INFO_Y, INFO_WIDTH, INFO_HEIGHT, 10, false, true)
-    ctx.write('Reputation', REP_TEXT_X, REP_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
+    ctx.write(t('commons:reputation'), REP_TEXT_X, REP_TEXT_Y - 5, FONTS.INFO_LABEL, ALIGN.BOTTOM_LEFT)
     ctx.write(rep, REP_TEXT_X, REP_TEXT_Y + 5, FONTS.INFO_VALUE, ALIGN.TOP_LEFT)
 
     //   About section
@@ -140,7 +140,7 @@ module.exports = class CanvasTemplates {
     const ABOUT_Y = INFO_Y - INNER_MARGIN - ABOUT_HEIGHT
     ctx.roundRect(INNER_MARGIN, ABOUT_Y, ABOUT_WIDTH, ABOUT_HEIGHT, 10, false, true)
 
-    const about = ctx.write('About me', SECTION_INNER_MARGIN * 2, ABOUT_Y + SECTION_INNER_MARGIN, FONTS.ABOUT_LABEL, ALIGN.TOP_LEFT)
+    const about = ctx.write(t('commands:profile.aboutMe'), SECTION_INNER_MARGIN * 2, ABOUT_Y + SECTION_INNER_MARGIN, FONTS.ABOUT_LABEL, ALIGN.TOP_LEFT)
     ctx.writeParagraph(
       personalText,
       FONTS.ABOUT_VALUE,
@@ -190,7 +190,8 @@ module.exports = class CanvasTemplates {
 
     const IMAGE_ASSETS = Promise.all([
       Image.from(song.mainImage || Constants.DEFAULT_SONG_PNG, !song.mainImage),
-      Image.from(song.backgroundImage || Constants.DEFAULT_SONG_PNG, !song.backgroundImage)
+      Image.from(song.backgroundImage || Constants.DEFAULT_SONG_PNG, !song.backgroundImage),
+      Image.from(Constants[`${song.source.toUpperCase()}_BRAND_SVG`])
     ])
 
     const canvas = createCanvas(WIDTH, HEIGHT)
@@ -245,7 +246,12 @@ module.exports = class CanvasTemplates {
     ctx.writeParagraph(song.title, TITLE_FONT, LEFT_TEXT_MARGIN, TITLE_Y, RIGHT_TEXT_MARGIN, TITLE_Y + 1, 5, ALIGN.BOTTOM_LEFT)
 
     // Image handling
-    const [ mainImage, backgroundImage ] = await IMAGE_ASSETS
+    const [ mainImage, backgroundImage, brand ] = await IMAGE_ASSETS
+
+    // Brand
+    const BRAND_MARGIN = 12
+    const BRAND_SIZE = 44
+    ctx.drawIcon(brand, THUMBNAIL_WIDTH + BRAND_MARGIN, BRAND_MARGIN, BRAND_SIZE, BRAND_SIZE, '#fff')
 
     // Thumbnail
     ctx.fillStyle = '#000000'
@@ -309,8 +315,10 @@ module.exports = class CanvasTemplates {
       }
     })()
 
+    const DEFAULT_AVATAR = Image.from('https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png')
+
     const avatarCoords = []
-    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')))
+    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')).catch(() => DEFAULT_AVATAR))
     const IMAGE_ASSETS = Promise.all([
       Image.from(icon, true),
       Image.from(Constants.MEDAL_SVG, true),
@@ -454,13 +462,13 @@ module.exports = class CanvasTemplates {
     return canvas.toBuffer()
   }
 
-  static async triggered (user) {
+  static async triggered (buffer) {
     const WIDTH = 256
     const HEIGHT = 310
 
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.TRIGGERED_LABEL_PNG, true),
-      Image.from(user.displayAvatarURL.replace('.gif', '.png'))
+      Image.from(buffer)
     ])
 
     const encoder = new GIFEncoder(WIDTH, HEIGHT)
@@ -473,12 +481,12 @@ module.exports = class CanvasTemplates {
 
     const [ triggeredLabel, avatarImage ] = await IMAGE_ASSETS
 
-    const AVATAR_RANDOM_MAX = 20
+    const BUFFER_RANDOM_MAX = 20
     const LABEL_RANDOM_MAX = 10
     const random = (max) => Math.floor(Math.random() * max) - max
     for (let i = 0; i < 8; i++) {
       ctx.clearRect(0, 0, WIDTH, HEIGHT)
-      ctx.drawImage(avatarImage, random(AVATAR_RANDOM_MAX), random(AVATAR_RANDOM_MAX), WIDTH + AVATAR_RANDOM_MAX, HEIGHT - 54 + AVATAR_RANDOM_MAX)
+      ctx.drawImage(avatarImage, random(BUFFER_RANDOM_MAX), random(BUFFER_RANDOM_MAX), WIDTH + BUFFER_RANDOM_MAX, HEIGHT - 54 + BUFFER_RANDOM_MAX)
       ctx.fillStyle = '#FF000033'
       ctx.fillRect(0, 0, WIDTH, HEIGHT)
       ctx.drawImage(triggeredLabel, random(LABEL_RANDOM_MAX), HEIGHT - 54 + random(LABEL_RANDOM_MAX), 256 + LABEL_RANDOM_MAX, 54 + LABEL_RANDOM_MAX)
@@ -490,7 +498,7 @@ module.exports = class CanvasTemplates {
     return encoder.out.getData()
   }
 
-  static async weather ({ t }, title, { now, daily }) {
+  static async weather ({ t }, title, { now, daily }, unit) {
     const WIDTH = 400
     const HEIGHT = 286
 
@@ -504,12 +512,14 @@ module.exports = class CanvasTemplates {
       const EXTRABOLD = MEME || '"Montserrat ExtraBold"'
       const REGULAR = MEME || '"Montserrat"'
       const LIGHT = MEME || '"Montserrat Light"'
+      const BLACK = MEME || '"Montserrat Black"'
       return {
         TITLE: `17px ${EXTRABOLD}`,
         TEMPERATURE: `bold 90px ${EXTRABOLD}`,
         INFORMATIONS: `17px ${LIGHT}`,
         WEEK_DAYS: `17px ${REGULAR}`,
-        WEEK_TEMPERATURES: `29px ${LIGHT}`
+        WEEK_TEMPERATURES: `29px ${LIGHT}`,
+        UNIT: `34px ${BLACK}`
       }
     })()
 
@@ -541,13 +551,16 @@ module.exports = class CanvasTemplates {
     const BRIGHTER_Y_CENTER = CARD_Y_MARGIN + BRIGHTER_HEIGHT * 0.5
     //   Temperature
     ctx.fillStyle = '#FFFFFF'
-    ctx.write(now.temperature, INNER_MARGIN, BRIGHTER_Y_CENTER, FONTS.TEMPERATURE, ALIGN.CENTER_LEFT)
+    const temperature = ctx.write(now.temperature, INNER_MARGIN, BRIGHTER_Y_CENTER, FONTS.TEMPERATURE, ALIGN.CENTER_LEFT)
+    //   Temperature unit
+    const UNIT_MARGIN = 4
+    ctx.write(unit, temperature.rightX + UNIT_MARGIN, temperature.topY, FONTS.UNIT, ALIGN.TOP_LEFT)
     //   Extra info
     const INFO_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT - INNER_MARGIN
     const INFO_ICON_SIZE = 16
 
-    const currentlyMax = ctx.write(now.max, INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
-    const currentlyMin = ctx.write(now.min, currentlyMax.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+    const currentlyMax = ctx.write(now.max + unit, INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
+    const currentlyMin = ctx.write(now.min + unit, currentlyMax.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
     const currentlyWind = ctx.write(now.wind, currentlyMin.rightX + INNER_MARGIN + INFO_ICON_SIZE, INFO_Y, FONTS.INFORMATIONS, ALIGN.BOTTOM_LEFT)
 
     // Daily
@@ -566,7 +579,7 @@ module.exports = class CanvasTemplates {
       const WEEKDAY_Y = CARD_Y_MARGIN + BRIGHTER_HEIGHT + INNER_MARGIN
       const TEMPERATURE_Y = HEIGHT - INNER_MARGIN
       ctx.write(day.weekday, DAY_TEXT_X, WEEKDAY_Y, FONTS.WEEK_DAYS, ALIGN.TOP_CENTER)
-      ctx.write(`${day.temperature}º`, DAY_TEXT_X, TEMPERATURE_Y, FONTS.WEEK_DAYS, ALIGN.BOTTOM_CENTER)
+      ctx.write(`${day.temperature}${unit}`, DAY_TEXT_X, TEMPERATURE_Y, FONTS.WEEK_DAYS, ALIGN.BOTTOM_CENTER)
 
       day.iconX = DAY_X
       day.iconY = (HEIGHT - ((CARD_HEIGHT - BRIGHTER_HEIGHT) * 0.5)) - DAY_ICON_SIZE * 0.5
@@ -608,10 +621,10 @@ module.exports = class CanvasTemplates {
     ctx.fillStyle = graphGradient
 
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'
-    daily.forEach((day, i) => {
-      if (i === 0) ctx.moveTo(0, day.graphPoint)
-      ctx.lineTo(day.graphX, day.graphPoint)
-      if (i === daily.length - 1) ctx.lineTo(WIDTH, day.graphPoint)
+    daily.forEach(({ graphPoint, graphX }, i) => {
+      if (i === 0) ctx.moveTo(0, graphPoint)
+      ctx.lineTo(graphX, graphPoint)
+      if (i === daily.length - 1) ctx.lineTo(WIDTH, graphPoint)
     })
     ctx.stroke()
     ctx.lineTo(WIDTH, HEIGHT)
@@ -764,5 +777,15 @@ module.exports = class CanvasTemplates {
     ctx.write(shipName, TITLE_X, TITLE_RECT_Y + TITLE_TEXT_MARGIN, FONTS.TITLE, ALIGN.CENTER)
 
     return canvas.toBuffer()
+  }
+
+  static async moreJpeg (buffer) {
+    const myimg = await Image.from(buffer)
+    const WIDTH = myimg.width
+    const HEIGHT = myimg.height
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(myimg, 0, 0, WIDTH, HEIGHT)
+    return canvas.toBuffer('image/jpeg', { quality: 0.08 })
   }
 }

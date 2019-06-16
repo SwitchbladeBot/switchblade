@@ -2,13 +2,13 @@ version: 2
 jobs:
   crowdin-upload:
     docker:
-      - image: alconost/crowdin
+      - image: dougley/crowdin
     steps:
       - checkout
       - run: crowdin upload sources
   test:
     docker:
-      - image: node:latest
+      - image: node:chakracore-10.13.0
     steps:
       - checkout
       - restore_cache:

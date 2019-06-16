@@ -1,3 +1,4 @@
+const { Collection } = require('discord.js')
 const { Player } = require('discord.js-lavalink')
 const moment = require('moment')
 
@@ -6,6 +7,7 @@ module.exports = class GuildPlayer extends Player {
     super(options)
 
     this.on('end', ({ reason }) => {
+      this.scrobbleSong(this.playingSong)
       if (reason === 'REPLACED') return
       this.playingSong.emit('end')
       if (reason !== 'STOPPED') this.next()
@@ -24,6 +26,8 @@ module.exports = class GuildPlayer extends Player {
 
     this._previousVolume = null
     this._bassboost = false
+
+    this._listening = new Collection()
   }
 
   event (message) {
@@ -49,6 +53,7 @@ module.exports = class GuildPlayer extends Player {
 
   stop () {
     this.queue = []
+    this._listening.clear()
     this.emit('stop')
     super.stop()
   }
@@ -58,6 +63,8 @@ module.exports = class GuildPlayer extends Player {
     const nextSong = this.queue.shift()
     if (nextSong) {
       this.play(nextSong, true)
+      this.updateListening()
+      this.updateNowPlaying()
       return nextSong
     } else {
       super.stop()
@@ -159,5 +166,82 @@ module.exports = class GuildPlayer extends Player {
       bands
     })
     return this
+  }
+
+  // Voice Update
+
+  async updateVoiceState (oldMember, newMember) {
+    const switchId = newMember.guild.me.user.id
+    if (newMember.user.bot && newMember.user.id !== switchId) return
+    const { voiceChannel: oldChannel } = oldMember
+    const { voiceChannel: newChannel } = newMember
+    const isSwitch = newMember.user.id === switchId
+    if (newMember.user.bot && !isSwitch) return
+    // Voice join
+    if (!oldChannel && newChannel) {
+      if (isSwitch) this.handleSwitchJoin(newChannel.members)
+      else if (newChannel.members.has(switchId)) this.handleNewJoin(newMember.user.id)
+      else return
+    }
+    // Voice leave
+    if (oldChannel && !newChannel) {
+      if (isSwitch) oldChannel.members.filter(m => !m.user.bot).forEach(m => this._listening.delete(m.user.id))
+      else if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
+      else return
+    }
+    if (oldChannel && newChannel) {
+      // Voice channel change
+      if (oldChannel.id === newChannel.id) return
+      if (isSwitch) this.handleSwitchJoin(newChannel.members)
+      else if (!oldChannel.equals(newChannel)) {
+        if (newChannel.members.has(switchId)) this.handleNewJoin(newMember.user.id)
+        if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
+      }
+    }
+  }
+
+  async handleNewJoin (user, isSwitch = false) {
+    const connections = await this.client.modules.connection.getConnections(user)
+    const lastfm = connections.find(c => c.name === 'lastfm')
+    if (!lastfm) return
+    this._listening.set(user, { join: new Date(), scrobblePercent: lastfm.config.percent })
+    if (!isSwitch) this.client.apis.lastfm.updateNowPlaying(this.playingSong, lastfm.tokens.sk)
+  }
+
+  async handleSwitchJoin (members) {
+    await Promise.all(members.filter(m => !m.user.bot).map(async ({ id }) => (this.handleNewJoin(id, true))))
+    this.updateNowPlaying()
+  }
+
+  updateListening () {
+    this._listening.forEach(({ scrobblePercent }, k) => this._listening.set(k, { join: new Date(), scrobblePercent }))
+  }
+  // Last.fm
+  async getAbleToScrobble () {
+    if (this.playingSong.isSteam) return []
+    const map = this._listening.map(async (s, u) => {
+      const connections = await this.client.modules.connection.getConnections(u)
+      const user = { id: u, config: s }
+      return { user, lastfm: connections.find(c => c.name === 'lastfm') }
+    })
+    const promise = await Promise.all(map)
+      .then(conns => conns.filter(({ lastfm }) => lastfm ? lastfm.config.scrobbling : false))
+    return promise
+  }
+
+  async updateNowPlaying () {
+    const ableToUpdate = await this.getAbleToScrobble()
+    ableToUpdate.forEach(({ lastfm }) => this.client.apis.lastfm.updateNowPlaying(this.playingSong, lastfm.tokens.sk))
+  }
+
+  async scrobbleSong (song) {
+    const ableToScrobble = await this.getAbleToScrobble()
+    const canScrobble2 = ableToScrobble.map(o => ({
+      ...o,
+      listenedPercent: (100 * (new Date() - o.user.config.join)) / song.length
+    }))
+    canScrobble2.filter(p => p.listenedPercent >= p.user.config.scrobblePercent).forEach(({ lastfm, user }) => {
+      this.client.apis.lastfm.scrobbleSong(song, user.config.join, lastfm.tokens.sk)
+    })
   }
 }

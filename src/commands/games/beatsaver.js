@@ -1,19 +1,18 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 const cheerio = require('cheerio')
 
 module.exports = class BeatSaver extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'beatsaver'
-    this.aliases = ['beatsaber', 'bsaver']
-    this.category = 'games'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ missingError: 'commands:beatsaver.noQuery' })
-    )
+    super(client, {
+      name: 'beatsaver',
+      aliases: ['beatsaber', 'bsaver'],
+      category: 'games',
+      parameters: [{
+        type: 'string', missingError: 'commands:beatsaver.noQuery'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, query) {
@@ -29,7 +28,7 @@ module.exports = class BeatSaver extends Command {
       return
     }
 
-    const { body } = await snekfetch.get(url)
+    const body = await fetch(url).then(res => res.text())
     const $ = cheerio.load(body)
     if (body) {
       const title = $('body > div > div > h2').text()
@@ -56,7 +55,7 @@ async function parseQuery (query) {
   if (match) {
     return `https://beatsaver.com/browse/detail/${match}`
   } else {
-    const { body } = await snekfetch.get(`https://beatsaver.com/search/all/0?key=${encodeURIComponent(query)}`)
+    const body = await fetch(`https://beatsaver.com/search/all/0?key=${encodeURIComponent(query)}`).then(res => res.text())
     const $ = cheerio.load(body)
     return $('body > div > div:nth-child(3) > h2 > a').attr('href')
   }

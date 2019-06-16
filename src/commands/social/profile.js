@@ -1,17 +1,19 @@
-const { CanvasTemplates, CommandStructures, PermissionUtils } = require('../../')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { CanvasTemplates, Command, PermissionUtils } = require('../../')
 const { Attachment } = require('discord.js')
 
 module.exports = class Profile extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'profile'
-    this.category = 'social'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ full: true, required: false })
-    )
-    this.requirements = new CommandRequirements(this, { canvasOnly: true })
+    super(client, {
+      name: 'profile',
+      category: 'social',
+      requirements: { databaseOnly: true, canvasOnly: true },
+      parameters: [{
+        type: 'user',
+        full: true,
+        required: false,
+        acceptSelf: true
+      }]
+    })
   }
 
   async run ({ t, author, channel }, user = author) {

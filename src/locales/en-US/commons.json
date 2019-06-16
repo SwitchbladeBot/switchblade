@@ -13,5 +13,16 @@
   "heads": "Heads",
   "tails": "Tails",
   "youCanDoItAgainIn": "You can do that again in **{{time}}**",
-  "to": "to"
+  "to": "to",
+  "search": {
+    "noType": "Please insert a valid type!",
+    "types": "Types",
+    "noParams": "Please insert something to search!",
+    "searchFail": "An error has occurred.",
+    "noResults": "No results were found.",
+    "typeHelper": "Send the number of the result you want to proceed with! (10 seconds)",
+    "results": "Results for \"{{query}}\""
+  },
+  "enabled": "enabled",
+  "disabled": "disabled"
 }

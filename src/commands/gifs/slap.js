@@ -1,22 +1,22 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, UserParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 module.exports = class Slap extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'slap'
-    this.category = 'images'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ missingError: 'commands:slap.noMention', acceptBot: true, acceptSelf: false })
-    )
+    super(client, {
+      name: 'slap',
+      category: 'images',
+      parameters: [{
+        type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:slap.noMention'
+      }]
+    })
   }
 
   async run ({ t, channel, author }, user) {
-    const { body } = await snekfetch.get('https://nekos.life/api/v2/img/slap')
+    const body = await fetch('https://nekos.life/api/v2/img/slap').then(res => res.json())
     const embed = new SwitchbladeEmbed(author)
+    channel.startTyping()
     embed.setImage(body.url)
       .setDescription(t('commands:slap.success', { _author: author, slapped: user }))
     channel.send(embed).then(() => channel.stopTyping())

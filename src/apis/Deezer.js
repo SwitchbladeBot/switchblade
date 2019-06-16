@@ -1,12 +1,14 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const API_URL = 'https://api.deezer.com'
 
 module.exports = class DeezerAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'deezer'
+    super({
+      name: 'deezer'
+    })
   }
 
   // Get
@@ -22,8 +24,32 @@ module.exports = class DeezerAPI extends APIWrapper {
     return this.request(`/artist/${id}`)
   }
 
+  getArtistAlbums (id, limit = 10) {
+    return this.request(`/artist/${id}/albums`, { limit })
+  }
+
+  getArtistRelated (id) {
+    return this.request(`/artist/${id}/related`)
+  }
+
   getPlaylist (id) {
     return this.request(`/playlist/${id}`)
+  }
+
+  getUserFollowers (id) {
+    return this.request(`/user/${id}/followers`)
+  }
+
+  getUserFollowings (id) {
+    return this.request(`/user/${id}/followings`)
+  }
+
+  getUserChart (id, chart = 'artists') {
+    return this.request(`/user/${id}/charts/${chart}`)
+  }
+
+  getPodcastEpisodes (id) {
+    return this.request(`/podcast/${id}/episodes`)
   }
 
   // Search
@@ -39,8 +65,21 @@ module.exports = class DeezerAPI extends APIWrapper {
     return this.request('/search/artist', { q })
   }
 
+  findPlaylists (q) {
+    return this.request('/search/playlist', { q })
+  }
+
+  findPodcasts (q) {
+    return this.request('/search/podcast', { q })
+  }
+
+  findUser (q) {
+    return this.request('/search/user', { q })
+  }
+
   // Default
   request (endpoint, queryParams = {}) {
-    return snekfetch.get(`${API_URL}${endpoint}`).query(queryParams).then(r => r.body)
+    return fetch(API_URL + endpoint + `?${qs.stringify(queryParams)}`)
+      .then(res => res.json())
   }
 }

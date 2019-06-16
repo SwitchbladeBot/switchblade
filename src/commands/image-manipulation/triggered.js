@@ -1,24 +1,24 @@
-const { CanvasTemplates, CommandStructures } = require('../../')
-const { Command, CommandRequirements, CommandParameters, UserParameter } = CommandStructures
+const { CanvasTemplates, Command } = require('../../')
 
 const { Attachment } = require('discord.js')
 
 module.exports = class Triggered extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'triggered'
-    this.aliases = ['trigger', 'puto']
-    this.category = 'images'
-
-    this.parameters = new CommandParameters(this,
-      new UserParameter({ full: true, required: false, acceptBot: true })
-    )
-    this.requirements = new CommandRequirements(this, { canvasOnly: true })
+    super(client, {
+      name: 'triggered',
+      aliases: ['trigger', 'puto'],
+      category: 'images',
+      requirements: { canvasOnly: true },
+      parameters: [{
+        type: 'image',
+        missingError: 'commands:morejpeg.missingImage'
+      }]
+    })
   }
 
-  async run ({ t, author, channel }, user) {
-    user = user || author
-    const triggered = await CanvasTemplates.triggered(user)
+  async run ({ t, author, channel }, image) {
+    channel.startTyping()
+    const triggered = await CanvasTemplates.triggered(image)
     channel.send(new Attachment(triggered, 'triggered.gif')).then(() => channel.stopTyping())
   }
 }

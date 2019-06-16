@@ -1,21 +1,26 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed } = require('../../')
+
+const types = ['generate', 'create', 'g', 'read', 'r']
 
 module.exports = class QRCode extends Command {
   constructor (client) {
-    super(client)
-
-    this.name = 'qrcode'
-    this.aliases = ['qr']
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:qrcode.noText' })
-    )
-  }
-
-  async run ({ t, author, channel }, text) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setImage(`https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(text)}`)
-    )
+    super(client, {
+      name: 'qrcode',
+      aliases: ['qr'],
+      parameters: [{
+        type: 'string',
+        full: false,
+        whitelist: types,
+        missingError: ({ t, prefix }) => {
+          return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
+            .setDescription([
+              this.usage(t, prefix),
+              '',
+              `__**${t('commons:search.types')}:**__`,
+              `\`${['generate', 'read'].join('`, `')}\``
+            ].join('\n'))
+        }
+      }]
+    })
   }
 }

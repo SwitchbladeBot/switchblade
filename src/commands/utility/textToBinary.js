@@ -1,17 +1,18 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../')
-const { Command, CommandParameters, StringParameter } = CommandStructures
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 const BinaryRegex = '(?=^1*(01*0)*1*$)^.(..)*$'
 
 module.exports = class Binary extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'binary'
-    this.aliases = ['t2b', 'texttobinary', 'ttb']
-    this.category = 'utility'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, missingError: 'commands:binary.missingText' })
-    )
+    super(client, {
+      name: 'binary',
+      aliases: ['t2b', 'texttobinary', 'ttb'],
+      category: 'utility',
+      parameters: [{
+        type: 'string',
+        full: true,
+        missingError: 'commands:binary.missingText'
+      }]
+    })
   }
 
   async run ({ t, author, channel }, input) {

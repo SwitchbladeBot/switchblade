@@ -1,14 +1,14 @@
-const { CommandStructures, SwitchbladeEmbed } = require('../../')
-const { Command } = CommandStructures
-const snekfetch = require('snekfetch')
+const { Command, SwitchbladeEmbed } = require('../../')
+const fetch = require('node-fetch')
 const nekoAPI = 'https://nekos.life/api/v2/img/'
 
 module.exports = class Kitsune extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'kitsune'
-    this.aliases = ['foxgirl']
-    this.category = 'anime'
+    super(client, {
+      name: 'kitsune',
+      aliases: ['foxgirl'],
+      category: 'anime'
+    })
   }
 
   async run ({ t, author, channel }) {
@@ -18,7 +18,7 @@ module.exports = class Kitsune extends Command {
     // Send a lewd kitsune if the channel is NSFW
     const endpoint = channel.nsfw ? 'lewdk' : 'fox_girl'
 
-    const { body: { url } } = await snekfetch.get(nekoAPI + endpoint)
+    const { url } = await fetch(nekoAPI + endpoint).then(res => res.json())
 
     embed.setImage(url)
       .setDescription(t('commands:kitsune.hereIsYour', { context: endpoint }))

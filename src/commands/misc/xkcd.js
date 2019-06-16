@@ -1,18 +1,17 @@
-const { CommandStructures, SwitchbladeEmbed, Constants } = require('../../index')
-const { Command, CommandError, CommandParameters, StringParameter } = CommandStructures
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const baseUrl = 'https://xkcd.com'
 
 module.exports = class XKCD extends Command {
   constructor (client) {
-    super(client)
-    this.name = 'xkcd'
-
-    this.parameters = new CommandParameters(this,
-      new StringParameter({ full: true, required: false })
-    )
+    super(client, {
+      name: 'xkcd',
+      parameters: [{
+        type: 'string', full: true, required: false
+      }]
+    })
   }
 
   async run ({ t, author, channel }, arg) {
@@ -22,17 +21,18 @@ module.exports = class XKCD extends Command {
     try {
       if (arg) {
         if (arg === 'latest') {
-          response = await snekfetch.get(baseUrl + '/info.0.json')
+          response = await fetch(baseUrl + '/info.0.json').then(res => res.json())
         } else if (arg.match(/^\d+$/)) {
-          response = await snekfetch.get(baseUrl + `/${arg}/info.0.json`)
+          response = await fetch(baseUrl + `/${arg}/info.0.json`).then(res => res.json())
         } else {
           throw new CommandError(t('commands:xkcd.invalidArgument'), true)
         }
       } else {
-        const latestResp = await snekfetch.get(`${baseUrl}/info.0.json`)
-        const latestNumber = latestResp.body.num
+        const latestResp = await fetch(`${baseUrl}/info.0.json`).then(res => res.json())
+        console.log(latestResp)
+        const latestNumber = latestResp.num
         const randomNumber = Math.floor(Math.random() * latestNumber + 1)
-        response = await snekfetch.get(`${baseUrl}/${randomNumber}/info.0.json`)
+        response = await fetch(`${baseUrl}/${randomNumber}/info.0.json`).then(res => res.json())
       }
     } catch (e) {
       if (e.statusCode === 404) {
@@ -42,13 +42,12 @@ module.exports = class XKCD extends Command {
         .setDescription(`\`${e.message}\`\n\n[${t('commons:reportThis')}](https://github.com/SwitchbladeBot/switchblade/issues)`))
     }
 
-    if (response && response.ok) {
-      const xkcd = response.body
+    if (response) {
       embed.setColor(Constants.XKCD_COLOR)
-        .setTitle(`#${xkcd.num} - "${xkcd.title}"`)
-        .setURL(`http://xkcd.com/${xkcd.num}`)
-        .setDescription(xkcd.alt)
-        .setImage(xkcd.img)
+        .setTitle(`#${response.num} - "${response.title}"`)
+        .setURL(`http://xkcd.com/${response.num}`)
+        .setDescription(response.alt)
+        .setImage(response.img)
       channel.send(embed).then(() => { channel.stopTyping() })
     }
   }
