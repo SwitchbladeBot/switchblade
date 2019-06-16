@@ -1,8 +1,6 @@
-const { CommandContext, EventListener, MiscUtils } = require('../')
+const { CommandContext, EventListener } = require('../')
 const { SwitchbladePlayerManager } = require('../music')
 const fetch = require('node-fetch')
-
-const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 
 module.exports = class MainListener extends EventListener {
   constructor (client) {
@@ -12,25 +10,6 @@ module.exports = class MainListener extends EventListener {
 
   onReady () {
     this.user.setPresence({ game: { name: `@${this.user.username} help` } })
-
-    const presences = [
-      {
-        name: `${MiscUtils.formatNumber(this.guilds.size, 'en-US')} Guilds | @${this.user.username} help`,
-        type: 'WATCHING'
-      }, {
-        name: `${MiscUtils.formatNumber(this.users.size, 'en-US')} Users | @${this.user.username} help`,
-        type: 'WATCHING'
-      }
-    ]
-
-    setInterval(() => {
-      const presence = presences[Math.floor(Math.random() * presences.length)]
-      this.user.setPresence({ game: presence }).then(() => {
-        this.logger.debug(`Presence changed to "${presence.name}"`, { label: 'Presence', presence })
-      }).catch(e => {
-        this.logger.error(e, { label: 'Presence', presence })
-      })
-    }, PRESENCE_INTERVAL)
 
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
