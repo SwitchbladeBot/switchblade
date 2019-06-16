@@ -67,12 +67,12 @@ module.exports = class SocialModule extends Module {
   }
 
   retrieveProfile (_user, projection = 'money rep personalText favColor') {
-    this.client.logger.debug(`Retrieving ${_user}'s profile`, { label: this.constructor.name, user: { id: _user }, projection })
+    this.client.logger.debug(`Retrieving ${_user}'s profile from the database`, { label: this.constructor.name, user: { id: _user }, projection })
     return this._users.findOne(_user, projection)
   }
 
   async leaderboard (sortField, projection = sortField, size = 10) {
-    this.client.logger.debug(`Retrieving ${sortField} leaderboard`, { label: this.constructor.name, sortField, projection, size })
+    this.client.logger.debug(`Retrieving ${sortField} leaderboard from the database`, { label: this.constructor.name, sortField, projection, size })
     const dbRes = await this._users.model.find({}, projection).sort({ [sortField]: -1 }).limit(size + 6)
     const top = dbRes.map(this._users.parse).filter(u => {
       u.user = this.client.users.get(u._id)
