@@ -13,7 +13,7 @@ module.exports = class APILoader extends Loader {
       this.client.apis = this.apis
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e, { label: 'apiloader', loader: this.constructor.name })
     }
     return false
   }
@@ -28,8 +28,12 @@ module.exports = class APILoader extends Loader {
     return FileUtils.requireDirectory(dirPath, (NewAPI) => {
       if (Object.getPrototypeOf(NewAPI) !== APIWrapper) return
       this.addAPI(new NewAPI()) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
-      this.log(failed ? `[33m${success} API wrappers loaded, ${failed} failed.` : `[32mAll ${success} API wrappers loaded without errors.`, 'APIs')
+    }, e => {
+      this.client.logger.error(e, { label: this.constructor.name })
+    }).then(() => {
+      if (!failed) {
+        this.client.logger.info('All APIs loaded successfully', { label: this.constructor.name })
+      }
     })
   }
 
@@ -39,17 +43,17 @@ module.exports = class APILoader extends Loader {
    */
   addAPI (api) {
     if (!(api instanceof APIWrapper)) {
-      this.log(`[31m${api.name} failed to load - Not an APIWrapper`, 'APIs')
+      this.client.logger.warn(`${api.name} API failed to load`, { reason: 'Not an APIWrapper', label: this.constructor.name })
       return false
     }
 
     if (api.canLoad() !== true) {
-      this.log(`[31m${api.name} failed to load - ${api.canLoad() || 'canLoad function did not return true.'}`, 'APIs')
+      this.client.logger.warn(`${api.name} API failed to load`, { reason: api.canLoad() || 'canLoad function did not return true.', label: this.constructor.name })
       return false
     }
 
     if (!api.envVars.every(variable => {
-      if (!process.env[variable]) this.log(`[31m${api.name} failed to load - Required environment variable "${variable}" is not set.`, 'APIs')
+      if (!process.env[variable]) this.client.logger.warn(`${api.name} API failed to load`, { reason: `Required environment variable "${variable}" is not set.`, label: this.constructor.name })
       return !!process.env[variable]
     })) return false
 

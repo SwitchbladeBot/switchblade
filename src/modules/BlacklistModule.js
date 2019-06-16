@@ -1,10 +1,10 @@
 const { Module } = require('../')
 
 // Developer
-module.exports = class DeveloperModule extends Module {
+module.exports = class BlacklistModule extends Module {
   constructor (client) {
     super(client)
-    this.name = 'developer'
+    this.name = 'blacklist'
   }
 
   canLoad () {
@@ -16,10 +16,12 @@ module.exports = class DeveloperModule extends Module {
   }
 
   async blacklist (_user, reason, blacklister) {
+    this.client.logger.info(`${_user} added to the blacklist`, { label: this.constructor.name, _user, reason, blacklister })
     await this._users.update(_user, { blacklisted: { reason, blacklister } })
   }
 
   async unblacklist (_user) {
+    this.client.logger.info(`${_user} removed to the blacklist`, { label: this.constructor.name, _user })
     await this._users.update(_user, { blacklisted: null })
   }
 

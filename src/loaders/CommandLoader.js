@@ -15,7 +15,7 @@ module.exports = class CommandLoader extends Loader {
       this.client.commands = this.commands
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e, { label: this.constructor.name })
     }
     return false
   }
@@ -29,10 +29,12 @@ module.exports = class CommandLoader extends Loader {
     let failed = 0
     return FileUtils.requireDirectory(dirPath, (NewCommand) => {
       this.addCommand(new NewCommand(this.client)) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
-      const sorted = this.posLoadCommands.sort((a, b) => +(typeof b === 'string') || -(typeof a === 'string') || a.length - b.length)
-      sorted.forEach(subCommand => this.addSubcommand(subCommand))
-      this.log(failed ? `[33m${success} commands loaded, ${failed} failed.` : `[32mAll ${success} commands loaded without errors.`, 'Commands')
+    }, (e) => {
+      this.client.logger.error(e, { label: this.constructor.name })
+    }).then(() => {
+      if (!failed) {
+        this.client.logger.info('All commands loaded successfully', { label: this.constructor.name })
+      }
     })
   }
 
@@ -74,7 +76,7 @@ module.exports = class CommandLoader extends Loader {
     } else {
       parentCommand = subCommand.parentCommand
       const name = (Array.isArray(parentCommand) ? parentCommand : [ parentCommand ]).concat([ subCommand.name ]).join(' ')
-      this.log(`[31m${name} failed to load - Couldn't find parent command.`, 'Commands')
+      this.client.logger.warn(`${name} failed to load`, { reason: 'Couldn\'t find parent command', label: this.constructor.name })
       return false
     }
 
@@ -83,28 +85,28 @@ module.exports = class CommandLoader extends Loader {
 
   checkCommand (command) {
     if (!(command instanceof Command)) {
-      this.log(`[31m${command} failed to load - Not a command`, 'Commands')
+      this.client.logger.warn(`${command.constructor.name} failed to load`, { reason: 'Not a Command', label: this.constructor.name })
       return false
     }
 
     if (command.canLoad() !== true) {
-      this.log(`[31m${command.fullName} failed to load - ${command.canLoad() || 'canLoad function did not return true.'}`, 'Commands')
+      this.client.logger.warn(`${command.fullName} failed to load`, { reason: command.canLoad() || 'canLoad function did not return true', label: this.constructor.name })
       return false
     }
 
     if (command.requirements) {
       if (command.requirements.apis && !command.requirements.apis.every(api => {
-        if (!this.client.apis[api]) this.log(`[31m${command.fullName} failed to load - Required API wrapper "${api}" not found.`, 'Commands')
+        if (!this.client.apis[api]) this.client.logger.warn(`${command.fullName} failed to load`, { reason: `Required API wrapper "${api}" not found`, label: this.constructor.name })
         return !!this.client.apis[api]
       })) return false
 
       if (command.requirements.envVars && !command.requirements.envVars.every(variable => {
-        if (!process.env[variable]) this.log(`[31m${command.fullName} failed to load - Required environment variable "${variable}" is not set.`, 'Commands')
+        if (!process.env[variable]) this.client.logger.warn(`${command.fullName} failed to load`, { reason: `Required environment variable "${variable}" is not set`, label: this.constructor.name })
         return !!process.env[variable]
       })) return false
 
       if (command.requirements.canvasOnly && !this.client.canvasLoaded) {
-        this.log(`[31m${command.fullName} failed to load - Canvas is not installed.`, 'Commands')
+        this.client.logger.warn(`${command.fullName} failed to load`, { reason: 'Canvas is required but not installed', label: this.constructor.name })
         return false
       }
     }

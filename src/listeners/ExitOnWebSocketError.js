@@ -7,7 +7,7 @@ module.exports = class ExitOnWebSocketError extends EventListener {
   }
 
   async onError (error) {
-    console.log(error)
+    this.client.logger.error(error, { label: 'WebSocket' })
     process.exit(1)
   }
 }

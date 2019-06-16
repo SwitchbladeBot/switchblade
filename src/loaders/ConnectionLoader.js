@@ -13,7 +13,7 @@ module.exports = class ModuleLoader extends Loader {
       this.client.connections = this.connections
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e, { label: this.constructor.name })
     }
     return false
   }
@@ -28,7 +28,9 @@ module.exports = class ModuleLoader extends Loader {
     return FileUtils.requireDirectory(dirPath, (NewConnection) => {
       if (Object.getPrototypeOf(NewConnection) !== Connection) return
       this.addConnection(new NewConnection(this.client)) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
+    }, e => {
+      this.client.logger.error(e, { label: this.constructor.name })
+    }).then(() => {
       this.log(failed ? `[33m${success} connections loaded, ${failed} failed.` : `[32mAll ${success} connections loaded without errors.`, 'Connections')
     })
   }

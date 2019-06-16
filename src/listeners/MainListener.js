@@ -26,6 +26,7 @@ module.exports = class MainListener extends EventListener {
     setInterval(() => {
       const presence = presences[Math.floor(Math.random() * presences.length)]
       this.user.setPresence({ game: presence })
+      this.logger.debug(`Presence changed to "${presence.name}"`, { label: 'Presence', presence })
     }, PRESENCE_INTERVAL)
 
     // Lavalink connection
@@ -37,7 +38,7 @@ module.exports = class MainListener extends EventListener {
           user: this.user.id,
           shards: 1
         })
-        this.log('[32mLavalink connection established!', 'Music')
+        this.logger.log('Connection established', { label: 'Lavalink',  })
       } catch (e) {
         this.log(`[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, 'Music')
       }
@@ -121,7 +122,34 @@ module.exports = class MainListener extends EventListener {
           language
         })
 
-        this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
+        const contextForLogging = {
+          channel: {
+            name: message.channel.name,
+            id: message.channel.id
+          },
+          guild: {
+            name: message.guild.name,
+            id: message.guild.id,
+            prefix,
+            language
+          },
+          executor: {
+            name: message.author.tag,
+            id: message.author.id
+          },
+          command: {
+            name: command.constructor.name,
+            alise: cmd
+          },
+          message: {
+            content: message.content,
+            id: message.id
+          }
+        }
+        this.logger.info(`"${message.content}" ran by "${message.author.tag}"`, {
+          label: 'Commands',
+          commandRun: contextForLogging
+        })
         this.runCommand(command, context, args, language)
       }
     }
