@@ -36,7 +36,7 @@ module.exports = class Switchblade extends Client {
    */
   runCommand (command, context, args, language) {
     context.setFixedT(this.i18next.getFixedT(language))
-    command._run(context, args).catch(e => this.logger.error(e, { label: 'commands', command: command.constructor.name, context, language, args }))
+    command._run(context, args).catch(e => this.logger.error(e, { label: 'Commands', command: command.constructor.name, context, language, args }))
   }
 
   async initializeLoaders () {
