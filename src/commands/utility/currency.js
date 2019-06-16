@@ -1,6 +1,5 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 const fetch = require('node-fetch')
-const qs = require('querystring')
 
 module.exports = class Currency extends Command {
   constructor (client) {
@@ -26,7 +25,8 @@ module.exports = class Currency extends Command {
   async run ({ t, author, channel }, from = 'USD', value = 1, to) {
     const embed = new SwitchbladeEmbed(author)
     try {
-      const { pretty } = await fetch(`https://api.ksoft.si/kumo/currency?${qs.stringify({ to, from, value })}`, {
+      const params = new URLSearchParams({ to, from, value })
+      const { pretty } = await fetch(`https://api.ksoft.si/kumo/currency?${params.toString()}`, {
         headers: { 'Authorization': `Bearer ${process.env.KSOFT_KEY}` }
       }).then(res => res.json())
 

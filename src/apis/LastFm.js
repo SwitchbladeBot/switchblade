@@ -1,6 +1,5 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
-const qs = require('querystring')
 const crypto = require('crypto')
 
 const API_URL = 'http://ws.audioscrobbler.com/2.0/'
@@ -119,7 +118,8 @@ module.exports = class LastFM extends APIWrapper {
     Object.assign(queryParams, params)
     if (signature) queryParams.api_sig = this.getSignature(queryParams)
     if (!write) return fetch(API_URL + `?${qs.stringify(queryParams)}`).then(res => res.json())
-    return fetch(API_URL + `?${qs.stringify(queryParams)}`, {
+    const qParams = new URLSearchParams(queryParams)
+    return fetch(API_URL + `?${qParams.toString()}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(res => res.json())
