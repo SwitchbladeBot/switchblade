@@ -25,8 +25,11 @@ module.exports = class MainListener extends EventListener {
 
     setInterval(() => {
       const presence = presences[Math.floor(Math.random() * presences.length)]
-      this.user.setPresence({ game: presence })
-      this.logger.debug(`Presence changed to "${presence.name}"`, { label: 'Presence', presence })
+      this.user.setPresence({ game: presence }).then(() => {
+        this.logger.debug(`Presence changed to "${presence.name}"`, { label: 'Presence', presence })
+      }).catch(e => {
+        this.logger.error(e, { label: 'Presence', presence })
+      })
     }, PRESENCE_INTERVAL)
 
     // Lavalink connection
