@@ -61,7 +61,7 @@ module.exports = class Switchblade extends Client {
             winston.format.colorize(),
             winston.format.timestamp(),
             winston.format.printf(
-              info => `${info.timestamp} ${info.level} [${info.label}]: ${info.message}`
+              info => `${info.timestamp} ${info.level} [${info.label || info.meta.label}]: ${info.message}`
             )
           ),
           level: 'silly'
