@@ -37,19 +37,23 @@ module.exports = class SocialModule extends Module {
   }
 
   async updateProfile (_user, entity) {
+    this.client.logger.debug(`Updating ${_user}'s profile`, { label: this.constructor.name, user: { id: _user }, entity })
     return this.validateProfile(entity).then(() => this._users.update(_user, entity))
   }
 
   async setFavoriteColor (_user, favColor) {
+    this.client.logger.debug(`Updating ${_user}'s favorite color`, { label: this.constructor.name, user: { id: _user }, favColor })
     await this._users.update(_user, { favColor })
   }
 
   async setPersonalText (_user, personalText) {
+    this.client.logger.debug(`Updating ${_user}'s personal text`, { label: this.constructor.name, user: { id: _user }, personalText })
     if (personalText.length > this.PERSONAL_TEXT_LIMIT) throw new Error('TEXT_LENGTH')
     await this._users.update(_user, { personalText })
   }
 
   async addReputation (_from, _to) {
+    this.client.logger.debug(`${_from} is trying to give ${_to} a reputation point`, { label: this.constructor.name, from: { id: _from }, to: { id: _to } })
     const { lastRep } = await this._users.findOne(_from, 'lastRep')
     const now = Date.now()
     if (now - lastRep < REP_INTERVAL) {
@@ -63,10 +67,12 @@ module.exports = class SocialModule extends Module {
   }
 
   retrieveProfile (_user, projection = 'money rep personalText favColor') {
+    this.client.logger.debug(`Retrieving ${_user}'s profile`, { label: this.constructor.name, user: { id: _user }, projection })
     return this._users.findOne(_user, projection)
   }
 
   async leaderboard (sortField, projection = sortField, size = 10) {
+    this.client.logger.debug(`Retrieving ${sortField} leaderboard`, { label: this.constructor.name, sortField, projection, size })
     const dbRes = await this._users.model.find({}, projection).sort({ [sortField]: -1 }).limit(size + 6)
     const top = dbRes.map(this._users.parse).filter(u => {
       u.user = this.client.users.get(u._id)
