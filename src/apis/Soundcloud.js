@@ -62,13 +62,15 @@ module.exports = class SoundcloudAPI extends APIWrapper {
         return id
       }
     }, e => {
-      console.error('SoundCloud client ID update failed.', e.statusCode || e)
+      this.client.logger.warn('SoundCloud client ID update failed', { label: 'SoundCloud' })
+      this.client.logger.error(e, { label: 'SoundCloud' })
     })
   }
 
   findClientIdFromSite () {
     return this.findApplicationScriptUrl().then(this.findClientIdFromApplicationScript).catch(e => {
-      console.error('Could not find application script from main page.', e.statusCode || e)
+      this.client.logger.warn('Could not find application script from main page', { label: 'SoundCloud' })
+      this.client.logger.error(e, { label: 'SoundCloud' })
     })
   }
 

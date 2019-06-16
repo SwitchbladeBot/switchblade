@@ -75,7 +75,7 @@ module.exports = class ImageParameter extends Parameter {
         const buffer = await imageRequest(attachment.url, client)
         return buffer
       } catch (e) {
-        client.logError(e)
+        client.logger.error(e, { label: this.constructor.name, author: author.id, message: message.content, channel: channel.id })
         throw new CommandError(t('errors:imageParsingError'))
       }
     }
@@ -88,7 +88,7 @@ module.exports = class ImageParameter extends Parameter {
           const buffer = await imageRequest(arg, client)
           return buffer
         } catch (e) {
-          client.logError(e)
+          client.logger.error(e, { label: this.constructor.name, author: author.id, message: message.content, channel: channel.id })
           throw new CommandError(t('errors:invalidImageLink'), this.showUsage)
         }
       }
@@ -103,7 +103,7 @@ module.exports = class ImageParameter extends Parameter {
               const buffer = await imageRequest(user.displayAvatarURL, client)
               return buffer
             } catch (e) {
-              client.logError(e)
+              client.logger.error(e, { label: this.constructor.name, author: author.id, message: message.content, channel: channel.id })
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
@@ -125,7 +125,7 @@ module.exports = class ImageParameter extends Parameter {
               const buffer = await imageRequest(attachment.url, client)
               return buffer
             } catch (e) {
-              client.logError(e)
+              client.logger.error(e, { label: this.constructor.name, author: author.id, message: message.content, channel: channel.id })
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
@@ -145,7 +145,7 @@ module.exports = class ImageParameter extends Parameter {
                 const buffer = await imageRequest(url, client)
                 return buffer
               } catch (e) {
-                client.logError(e)
+                client.logger.error(e, { label: this.constructor.name, author: author.id, message: message.content, channel: channel.id })
                 throw new CommandError(t('errors:imageParsingError'))
               }
             }
@@ -162,7 +162,7 @@ module.exports = class ImageParameter extends Parameter {
         const buffer = await imageRequest(author.displayAvatarURL, client)
         return buffer
       } catch (e) {
-        client.logError(e)
+        client.logger.error(e, { label: this.constructor.name, author: author.id, message: message.content, channel: channel.id })
         throw new CommandError(t('errors:imageParsingError'))
       }
     }

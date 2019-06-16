@@ -1,5 +1,7 @@
 const { Client } = require('discord.js')
 const Loaders = require('./loaders')
+const winston = require('winston')
+const os = require('os')
 
 /**
  * Custom Discord.js Client.
@@ -11,7 +13,7 @@ module.exports = class Switchblade extends Client {
     super(options)
     this.canvasLoaded = options.canvasLoaded
     this.playerManager = null
-
+    this.initializeWinston()
     this.initializeLoaders()
   }
 
@@ -25,28 +27,6 @@ module.exports = class Switchblade extends Client {
     return super.login(token)
   }
 
-  // Helpers
-
-  /**
-   * Adds a new log entry to the console.
-   * @param {string} message - Log message
-   * @param {...string} [tags] - Tags to identify the log entry
-   */
-  log (...args) {
-    const message = args[0]
-    const tags = args.slice(1).map(t => `[36m[${t}][0m`)
-    console.log(...tags, message + '[0m')
-  }
-
-  /**
-   * Adds a new error log entry to the console.
-   * @param {string} message - Error message
-   */
-  logError (...args) {
-    const tags = args.length > 1 ? args.slice(0, -1).map(t => `[${t}]`) : []
-    console.error('[ErrorLog]', ...tags, args[args.length - 1])
-  }
-
   /**
    * Runs a command.
    * @param {Command} command - Command to be runned
@@ -56,7 +36,7 @@ module.exports = class Switchblade extends Client {
    */
   runCommand (command, context, args, language) {
     context.setFixedT(this.i18next.getFixedT(language))
-    command._run(context, args).catch(this.logError)
+    command._run(context, args).catch(e => this.logger.error(e, { label: 'Commands', command: command.constructor.name, context, language, args }))
   }
 
   async initializeLoaders () {
@@ -66,10 +46,45 @@ module.exports = class Switchblade extends Client {
       try {
         success = await loader.load()
       } catch (e) {
-        this.logError(e)
+        this.logger.error(e, { label: loader.constructor.name })
       } finally {
         if (!success && loader.critical) process.exit(1)
       }
+    }
+  }
+
+  initializeWinston () {
+    this.logger = winston.createLogger({
+      transports: [
+        new winston.transports.Console({
+          format: winston.format.combine(
+            winston.format.colorize(),
+            winston.format.timestamp(),
+            winston.format.printf(
+              info => `${info.timestamp} ${info.level} [${info.label || info.meta.label}]: ${info.message}`
+            )
+          ),
+          level: 'silly'
+        })
+      ]
+    })
+
+    if (process.env.DD_API_KEY && process.env.DD_SERVICE_NAME) {
+      const DatadogTransport = require('@shelf/winston-datadog-logs-transport')
+      this.logger.add(new DatadogTransport({
+        apiKey: process.env.DD_API_KEY,
+        metadata: {
+          ddsource: `winston`,
+          service: process.env.DD_SERVICE_NAME,
+          host: os.hostname()
+        },
+        format: winston.format.combine(
+          winston.format.errors({ stack: true }),
+          winston.format.timestamp()
+        ),
+        level: 'silly'
+      }))
+      this.logger.info('Datadog Transport enabled', { label: 'Logger' })
     }
   }
 }

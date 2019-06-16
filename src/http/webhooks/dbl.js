@@ -21,8 +21,10 @@ module.exports = class DBL extends Webhook {
         const { collectedMoney } = await this.client.modules.economy.bonus.claimDBLBonus(user.id)
         user.send(new SwitchbladeEmbed(user)
           .setDescription(`**Thanks for voting on DBL!** You've received **${collectedMoney} Switchcoins** as a bonus.`))
+        this.client.logger.info(`${user.tag} voted`, { label: 'DBL', webhookRequestBody: req.body })
         return res.status(200).json({ message: 'OK' })
       } catch (e) {
+        this.client.logger.info(`Did not give voting reward to ${user.tag}`, { label: 'DBL', webhookRequestBody: req.body, reason: e.message })
         switch (e.message) {
           case 'ALREADY_CLAIMED':
             return res.status(400).json({ error: 'Bonus already claimed' })

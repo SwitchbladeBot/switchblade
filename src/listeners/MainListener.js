@@ -26,6 +26,7 @@ module.exports = class MainListener extends EventListener {
     setInterval(() => {
       const presence = presences[Math.floor(Math.random() * presences.length)]
       this.user.setPresence({ game: presence })
+      this.logger.debug(`Presence changed to "${presence.name}"`, { label: 'Presence', presence })
     }, PRESENCE_INTERVAL)
 
     // Lavalink connection
@@ -37,9 +38,9 @@ module.exports = class MainListener extends EventListener {
           user: this.user.id,
           shards: 1
         })
-        this.log('[32mLavalink connection established!', 'Music')
+        this.logger.info('Connection established', { label: 'Lavalink' })
       } catch (e) {
-        this.log(`[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, 'Music')
+        this.logger.warn('Failed to establish connection', { label: 'Lavalink', reason: 'Failed to parse LAVALINK_NODES environment variable.' })
       }
     }
 
@@ -47,41 +48,46 @@ module.exports = class MainListener extends EventListener {
     function postStats (client) {
       // bots.discord.pw
       if (process.env.DISCORDBOTSPW_TOKEN) {
+        const body = { server_count: client.guilds.size }
+        this.logger.debug('Posting statistics to bots.discord.pw', { label: 'BotLists', botList: 'bots.discord.pw', body })
         fetch(`https://bots.discord.pw/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DISCORDBOTSPW_TOKEN },
-          body: { server_count: client.guilds.size }
-        }).then(() => client.log('[32mPosted statistics successfully', 'bots.discord.pw'))
-          .catch(() => client.log('[31mFailed to post statistics', 'bots.discord.pw'))
+          body
+        }).catch(e => this.logger.warn('Failed to post statistics to bots.discord.pw', { label: 'BotLists', botList: 'bots.discord.pw', body }))
       }
 
       // discordbots.org
       if (process.env.DBL_TOKEN) {
+        const body = { server_count: client.guilds.size }
+        this.logger.debug('Posting statistics to discordbots.org', { label: 'BotLists', botList: 'discordbots.org', body })
         fetch(`https://discordbots.org/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DBL_TOKEN },
-          body: { server_count: client.guilds.size }
-        }).then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
-          .catch(() => client.log('[31mFailed to post statistics', 'discordbots.org'))
+          body
+        }).catch(e => this.logger.warn('Failed to post statistics to discordbots.org', { label: 'BotLists', botList: 'discordbots.org', body }))
       }
 
       // botsfordiscord.com
       if (process.env.BOTSFORDISCORD_TOKEN) {
+        const body = { server_count: client.guilds.size }
+        this.logger.debug('Posting statistics to botsfordiscord.com', { label: 'BotLists', botList: 'botsfordiscord.com', body })
         fetch(`https://botsfordiscord.com/api/bots/${client.user.id}`, {
           method: 'POST',
           headers: { Authorization: process.env.BOTSFORDISCORD_TOKEN },
-          body: { server_count: client.guilds.size }
-        }).then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
-          .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
+          body
+        }).catch(e => this.logger.warn('Failed to post statistics to botsfordiscord.com', { label: 'BotLists', botList: 'botsfordiscord.com', body }))
       }
 
+      // discordbotlist.com
       if (process.env.DBL2_TOKEN) {
+        const body = { guilds: client.guilds.size, users: client.users.size }
+        this.logger.debug('Posting statistics to discordbotlist.com', { label: 'BotLists', botList: 'discordbotlist.com', body })
         fetch(`https://discordbotlist.com/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DBL2_TOKEN },
-          body: { guilds: client.guilds.size, users: client.users.size }
-        }).then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
-          .catch(() => client.log('[31mFailed to post statistics', 'discordbotlist.com'))
+          body
+        }).catch(e => this.logger.warn('Failed to post statistics to discordbotlist.com', { label: 'BotLists', botList: 'discordbotlist.com', body }))
       }
     }
 
@@ -121,7 +127,34 @@ module.exports = class MainListener extends EventListener {
           language
         })
 
-        this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
+        const contextForLogging = {
+          channel: {
+            name: message.channel.name,
+            id: message.channel.id
+          },
+          guild: {
+            name: message.guild.name,
+            id: message.guild.id,
+            prefix,
+            language
+          },
+          executor: {
+            name: message.author.tag,
+            id: message.author.id
+          },
+          command: {
+            name: command.constructor.name,
+            alise: cmd
+          },
+          message: {
+            content: message.content,
+            id: message.id
+          }
+        }
+        this.logger.info(`"${message.content}" ran by "${message.author.tag}"`, {
+          label: 'Commands',
+          commandRun: contextForLogging
+        })
         this.runCommand(command, context, args, language)
       }
     }

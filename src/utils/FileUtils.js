@@ -23,7 +23,7 @@ module.exports = class FileUtils {
           return FileUtils.requireDirectory(fullPath, success, error)
         }
       }
-    })).then(() => filesObject).catch(console.error)
+    })).then(() => filesObject)
   }
 }
 

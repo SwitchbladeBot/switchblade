@@ -2,7 +2,7 @@ const { Loader, Route, Webhook, FileUtils } = require('../')
 
 const express = require('express')
 const cors = require('cors')
-const morgan = require('morgan')
+const expressWinston = require('express-winston')
 
 module.exports = class HTTPLoader extends Loader {
   constructor (client) {
@@ -21,24 +21,31 @@ module.exports = class HTTPLoader extends Loader {
       this.client.httpWebhooks = this.httpWebhooks
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e, { label: 'HTTP' })
     }
     return false
   }
 
   initializeHTTPServer (port = process.env.PORT) {
-    if (!port) return this.log(`[31mHTTP server not started - Required environment variable "PORT" is not set.`, 'HTTP')
+    if (!port) return this.client.logger.warn(`Web server did not start`, { reason: 'Required environment variable "PORT" is not set', label: 'HTTP' })
 
     this.app = express()
     // Use CORS with Express
     this.app.use(cors())
     // Parse JSON body
     this.app.use(express.json())
-    // Morgan - Request logger middleware
-    this.app.use(morgan('[36m[HTTP][0m [32m:method :url - IP :remote-addr - Code :status - Size :res[content-length] B - Handled in :response-time ms[0m'))
+    // Log requests to winston
+    this.app.use(expressWinston.logger({
+      winstonInstance: this.client.logger,
+      expressFormat: true,
+      meta: true,
+      baseMeta: {
+        label: 'HTTP'
+      }
+    }))
 
     this.app.listen(port, () => {
-      this.log(`[32mListening on port ${port}`, 'HTTP')
+      this.client.logger.info(`Listening on port ${port}`, { label: 'HTTP' })
     })
 
     return this.initializeRoutes().then(() => this.initializeWebhooks())
@@ -56,11 +63,11 @@ module.exports = class HTTPLoader extends Loader {
     return FileUtils.requireDirectory(dirPath, (NewRoute) => {
       if (Object.getPrototypeOf(NewRoute) !== Route) return
       this.addRoute(new NewRoute(this.client)) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
+    }, e => {
+      this.client.logger.error(e, { label: this.constructor.name })
+    }).then(() => {
       if (failed === 0) {
-        this.log(`[32mAll ${success} HTTP routes loaded without errors.`, 'HTTP')
-      } else {
-        this.log(`[33m${success} HTTP routes loaded, ${failed} failed.`, 'HTTP')
+        this.client.logger.info(`All routes loaded without errors.`, { label: this.constructor.name })
       }
     })
   }
@@ -71,7 +78,7 @@ module.exports = class HTTPLoader extends Loader {
    */
   addRoute (route) {
     if (!(route instanceof Route)) {
-      this.log(`[31m${route} failed to load - Not a Route`, 'HTTP')
+      this.client.logger.warn(`${route} failed to load`, { reason: 'Not a Route', label: this.constructor.name })
       return false
     }
 
@@ -92,11 +99,11 @@ module.exports = class HTTPLoader extends Loader {
     return FileUtils.requireDirectory(dirPath, (NewWebhook) => {
       if (Object.getPrototypeOf(NewWebhook) !== Webhook) return
       this.addWebhook(new NewWebhook(this.client)) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
-      if (failed === 0) {
-        this.log(`[32mAll ${success} webhooks loaded without errors.`, 'HTTP')
-      } else {
-        this.log(`[33m${success} webhooks loaded, ${failed} failed.`, 'HTTP')
+    }, e => {
+      this.client.logger.error(e, { label: this.constructor.name })
+    }).then(() => {
+      if (!failed) {
+        this.client.logger.info(`All webhooks loaded without errors.`, { label: this.constructor.name })
       }
     })
   }
@@ -107,7 +114,7 @@ module.exports = class HTTPLoader extends Loader {
    */
   addWebhook (webhook) {
     if (!(webhook instanceof Webhook)) {
-      this.log(`[31m${webhook} failed to load - Not a Webhook`, 'HTTP')
+      this.client.logger.warn(`${webhook} failed to load`, { reason: 'Not a Webhook', label: this.constructor.name })
       return false
     }
 
