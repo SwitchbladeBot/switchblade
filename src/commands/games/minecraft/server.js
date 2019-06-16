@@ -30,7 +30,7 @@ module.exports = class MinecraftServer extends Command {
           .addField(t('commands:minecraft.subcommands.server.status'), body.online ? t('commands:minecraft.subcommands.server.online') : t('commands:minecraft.subcommands.server.offline'), true)
           .addField(t('commands:minecraft.subcommands.server.address'), `\`${host}:${port}\``, true)
           .addField(t('commands:minecraft.subcommands.server.players'), `${body.players.now}/${body.players.max}`, true)
-          .addField(t('commands:minecraft.subcommands.server.version'), body.server.name.replace(/§[0-9a-fk-or]/g, ''), true)
+          .addField(t('commands:minecraft.subcommands.server.version'), body.server.name, true)
           .attachFile(new Attachment(this.decodeBase64Image(body.favicon), 'favIcon.png'))
           .setThumbnail('attachment://favIcon.png')
       ).then(channel.stopTyping())
@@ -41,7 +41,6 @@ module.exports = class MinecraftServer extends Command {
   }
 
   decodeBase64Image (str) {
-    if (!str) return 'https://i.imgur.com/nZ6nRny.png'
     const matches = str.match(/^data:([A-Za-z-+\/]+);base64,([\s\S]+)/)
     if (!matches || matches.length !== 3) return Buffer.from(str, 'base64')
     return Buffer.from(matches[2], 'base64')
