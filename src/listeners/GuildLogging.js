@@ -32,7 +32,8 @@ function logGuildCreateOrDelete (client, guild, deleted) {
       createdTimestamp: guild.createdTimestamp,
       large: guild.large,
       memberCount: guild.members.size,
-      region: guild.region
+      region: guild.region,
+      newGuildCount: client.guilds.size
     }
   })
 
