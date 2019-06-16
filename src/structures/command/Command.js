@@ -115,7 +115,7 @@ module.exports = class Command {
         .setDescription(error.showUsage ? usage : '')
       return channel.send(embed.setColor(Constants.ERROR_COLOR)).then(() => channel.stopTyping())
     }
-    console.error(error)
+    this.client.logger.error(error, { label: this.constructor.name, author: { id: author.id, name: author.tag }, channel: { id: channel.id, name: channel.name }, prefix })
   }
 
   get tPath () {
