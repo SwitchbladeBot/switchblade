@@ -29,7 +29,7 @@ module.exports = class ConfigurationModule extends Module {
   }
 
   update (_guild, entity) {
-    this.client.logger.info(`Updating guild configuration for ${_guild}`, { label: this.constructor.name, guild: { id: _guild }, entity })
+    this.client.logger.debug(`Updating guild configuration for ${_guild}`, { label: this.constructor.name, guild: { id: _guild }, entity })
     return this.validateConfiguration(entity).then(() => this._guilds.update(_guild, entity))
   }
 

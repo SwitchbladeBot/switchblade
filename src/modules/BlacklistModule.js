@@ -25,7 +25,7 @@ module.exports = class BlacklistModule extends Module {
     await this._users.update(_user, { blacklisted: null })
   }
 
-  async blacklisted (_user, reason, blacklister) {
+  async blacklisted (_user) {
     const user = await this._users.findOne(_user, 'blacklisted')
     return user ? user.blacklisted : null
   }
