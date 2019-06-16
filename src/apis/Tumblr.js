@@ -1,6 +1,5 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
-const qs = require('querystring')
 
 const API_URL = 'https://api.tumblr.com/v2'
 
@@ -23,7 +22,8 @@ module.exports = class TumblrAPI extends APIWrapper {
   // Default
   request (endpoint, queryParams = {}) {
     queryParams.api_key = process.env.TUMBLR_API_KEY
-    return fetch(API_URL + endpoint + `?${qs.stringify(queryParams)}`)
+    const qParams = new URLSearchParams(queryParams)
+    return fetch(API_URL + endpoint + `?${qParams.toString()}`)
       .then(res => res.json())
   }
 }
