@@ -65,7 +65,7 @@ module.exports = class Switchblade extends Client {
             )
           ),
           level: 'silly'
-        }),
+        })
       ]
     })
 

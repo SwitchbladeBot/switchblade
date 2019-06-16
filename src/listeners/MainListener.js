@@ -38,7 +38,7 @@ module.exports = class MainListener extends EventListener {
           user: this.user.id,
           shards: 1
         })
-        this.logger.log('Connection established', { label: 'Lavalink',  })
+        this.logger.log('Connection established', { label: 'Lavalink' })
       } catch (e) {
         this.log(`[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, 'Music')
       }
