@@ -5,7 +5,6 @@ module.exports = class TranslateCommand extends Command {
     super(client, {
       name: 'translate',
       aliases: ['translator'],
-      requirements: { apis: ['gtranslate'] },
       parameters: [
         {
           type: 'string'
