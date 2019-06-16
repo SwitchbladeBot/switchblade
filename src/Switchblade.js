@@ -1,6 +1,7 @@
 const { Client } = require('discord.js')
 const Loaders = require('./loaders')
 const winston = require('winston')
+const os = require('os')
 
 /**
  * Custom Discord.js Client.
@@ -64,8 +65,26 @@ module.exports = class Switchblade extends Client {
             )
           ),
           level: 'silly'
-        })
+        }),
       ]
     })
+
+    if (process.env.DD_API_KEY && process.env.DD_SERVICE_NAME) {
+      const DatadogTransport = require('@shelf/winston-datadog-logs-transport')
+      this.logger.add(new DatadogTransport({
+        apiKey: process.env.DD_API_KEY,
+        metadata: {
+          ddsource: `winston`,
+          service: process.env.DD_SERVICE_NAME,
+          host: os.hostname()
+        },
+        format: winston.format.combine(
+          winston.format.errors({ stack: true }),
+          winston.format.timestamp()
+        ),
+        level: 'silly'
+      }))
+      this.logger.info('Datadog Transport enabled', { label: 'Logger' })
+    }
   }
 }
