@@ -10,6 +10,7 @@ const MusicUtils = require('./MusicUtils.js')
 
 const { PlayerManager } = require('discord.js-lavalink')
 const fetch = require('node-fetch')
+const qs = require('querystring')
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
 
@@ -47,8 +48,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     const specialSource = Object.values(Sources).find(source => source.test(identifier))
     if (specialSource) return specialSource
 
-    const ident = new URLSearchParams({ identifier })
-    const res = await fetch(`http://${this.REST_ADDRESS}/loadtracks?${ident.toString()}`, {
+    const res = await fetch(`http://${this.REST_ADDRESS}/loadtracks?${qs.stringify({ identifier })}`, {
       headers: { Authorization: this.REST_PASSWORD }
     }).catch(e => {
       this.client.logError(new Error(`Lavalink fetchTracks ${e}`))
