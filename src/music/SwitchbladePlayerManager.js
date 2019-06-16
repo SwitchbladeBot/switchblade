@@ -57,7 +57,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     if (!res) return false
     if (['LOAD_FAILED', 'NO_MATCHES'].includes(res.loadType) || !res.tracks.length) return res.loadType !== 'LOAD_FAILED'
 
-    const songs = res.tracks
+    const songs = res
     songs.searchResult = res.loadType === 'SEARCH_RESULT'
     return songs
   }
