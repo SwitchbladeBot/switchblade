@@ -31,7 +31,9 @@ module.exports = class ModuleLoader extends Loader {
     }, e => {
       this.client.logger.error(e, { label: this.constructor.name })
     }).then(() => {
-      this.client.logger.info(`All connections loaded without errors.`, { label: this.constructor.name })
+      if (!failed) {
+        this.client.logger.info(`All connections loaded without errors.`, { label: this.constructor.name })
+      }
     })
   }
 
