@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
+    "@discordjs/uws": "^11.149.1",
     "abort-controller": "^2.0.3",
     "bufferutil": "^4.0.1",
     "cheerio": "^1.0.0-rc.2",
@@ -71,8 +72,7 @@
     "search-npm-registry": "^2.0.3",
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",
-    "transform-props": "^1.0.1",
-    "uws": "^10.148.2"
+    "transform-props": "^1.0.1"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
