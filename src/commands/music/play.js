@@ -49,7 +49,6 @@ module.exports = class Play extends Command {
       channel.send(embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
-        .setDescription(e)
       ).then(() => channel.stopTyping())
     }
   }
