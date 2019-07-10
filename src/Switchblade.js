@@ -20,8 +20,7 @@ module.exports = class Switchblade extends Client {
    * @param {string} [token] - Token of the account to log in with
    * @returns {Promise<string>} Token of the account used
    */
-  login (token) {
-    token = token || process.env.DISCORD_TOKEN
+  login (token = process.env.DISCORD_TOKEN) {
     return super.login(token)
   }
 
@@ -60,7 +59,7 @@ module.exports = class Switchblade extends Client {
   }
 
   async initializeLoaders () {
-    for (let Loader of Object.values(Loaders)) {
+    for (let Loader in Loaders) {
       const loader = new Loader(this)
       let success = false
       try {
