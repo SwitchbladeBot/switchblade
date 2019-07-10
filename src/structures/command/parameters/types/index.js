@@ -10,5 +10,6 @@ module.exports = {
   role: require('./RoleParameter.js'),
   string: require('./StringParameter.js'),
   url: require('./URLParameter.js'),
-  user: require('./UserParameter.js')
+  user: require('./UserParameter.js'),
+  channel: require('./ChannelParameter.js')
 }
