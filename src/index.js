@@ -33,5 +33,6 @@ module.exports = {
   CanvasTemplates: require('./utils/CanvasTemplates.js'),
   PermissionUtils: require('./utils/PermissionUtils.js'),
   EmojiUtils: require('./utils/EmojiUtils.js'),
-  EndpointUtils: require('./utils/EndpointUtils.js')
+  EndpointUtils: require('./utils/EndpointUtils.js'),
+  ConfirmationBox: require('./utils/ConfirmationBox')
 }
