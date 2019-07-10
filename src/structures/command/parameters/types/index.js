@@ -11,5 +11,6 @@ module.exports = {
   string: require('./StringParameter.js'),
   url: require('./URLParameter.js'),
   user: require('./UserParameter.js'),
-  channel: require('./ChannelParameter.js')
+  channel: require('./ChannelParameter.js'),
+  time: require('./TimeParameter.js')
 }
