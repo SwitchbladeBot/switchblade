@@ -59,8 +59,8 @@ module.exports = class Switchblade extends Client {
   }
 
   async initializeLoaders () {
-    for (let Loader in Loaders) {
-      const loader = new Loader(this)
+    for (let name in Loaders) {
+      const loader = new Loaders[name](this)
       let success = false
       try {
         success = await loader.load()
