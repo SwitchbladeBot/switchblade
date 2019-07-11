@@ -46,7 +46,9 @@ Have an awesome idea for a new command? We'd love to hear about it, no matter ho
 
 ### Writing code
 
-We love Pull Requests!
+If you know how to code in JavaScript, then feel free to give [one of the existent ideas](https://github.com/SwitchbladeBot/switchblade/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22type%3A+idea%22+) a try. [Fork this repository](https://github.com/SwitchbladeBot/switchblade/fork), make some changes and then open a pull request! We don't really have much documentation on how the bot ecosystem works, but you should be able to get it with a quick look under the hood.
+
+> ⚠ **Please don't open Pull Requests with features that haven't been discussed as issues yet.** We don't want you to waste time writing a feature that might get denied. If you have an idea and want it to be in the bot, check the [Ideas and discussion](#ideas-and-discussion) paragraph above.
 
 ### Reporting bugs
 
@@ -59,6 +61,14 @@ There are probably many [bug reports](https://github.com/SwitchbladeBot/switchbl
 ### Translation
 
 One of our main goals is to make Switchblade avaliable as many people as possible, and that's why we have put together an awesome team consisting of **more than 50 translators** from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through **Crowdin**, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
+
+<h2 align="center">Branching, canary and updates</h2>
+
+We work on the `dev` branch, which is deployed automagically to **Switchblade Canary**, our private testing , whenever commits are pushed. Canary isn't publicly avaliable for everyone to add to their servers, but, if you ask nicely enough, we might open an exception.
+
+Once we feel like the code on `dev` is stable enough, we merge it to the `master` branch, that gets deployed to **Switchblade**, the public instance that everyone can [add to their servers](https://invite.switchblade.xyz/).
+
+We usually do that every two months or so, but we might skip a month if we're not confident enough about the reliability of the current code. To get to know about updates as soon as they happen, follow us on medium or join our community server. We post detailed updates notes as soon as stuff goes live.
 
 <h2 align="center">Sponsors</h2>
 
