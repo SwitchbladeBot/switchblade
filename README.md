@@ -16,42 +16,49 @@
   [![sponsors][sponsors-badge]][sponsors-url]
   <br>
   <br>
-  <strong><a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD SWITCHBLADE TO YOUR SERVER</a></strong>
+  <strong><a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD THE BOT TO YOUR SERVER</a></strong>
 </div>
+
+---
 
 <h2 align="center">Switchblade</h2>
 
-Switchblade is a free and open source solution to all of your server managing problems, built from scratch with code organization and quality in mind. We aim to cover as many functionalities as possible, while still maintaining a high quality standard.
+Switchblade is a free and open source solution to your server managing problems, built from scratch with code organization and quality in mind. Our goal is to cover as many functionalities and niches as possible, while still maintaining high quality.
 
 <h3>Table of Contents</h3>
 
 - [Contributing](#contributing)
-  - [Writing code](#writing-code)
   - [Ideas and discussion](#ideas-and-discussion)
-  - [Checking bug reports](#checking-bug-reports)
+  - [Writing code](#writing-code)
+  - [Reporting bugs](#reporting-bugs)
+  - [Triaging bug reports](#triaging-bug-reports)
   - [Translation](#translation)
 - [Sponsors](#sponsors)
 - [Backers](#backers)
 
 <h2 align="center">Contributing</h2>
 
-**We want everyone to be able to help with Switchblade as easily as possible.** We've listed some of the many ways you can contribute to the bot's development below.
+**We want everyone to be able to help with Switchblade as easily as possible,** so we've created a list with the many ways you can contribute to the project. Take a look, and if you think you can help with any of these, please do! If you have any questions, don't hesitate to [join our community server](http://support.switchblade.xyz) and ask as many questions as you want.
 
 ### Ideas and discussion
 
-Have an awesome idea for a new command? We'd love to hear about it!
+Have an awesome idea for a new command? We'd love to hear about it, no matter how silly you think it is. For us, no idea is a bad idea, so please [open an issue](https://github.com/SwitchbladeBot/switchblade/issues/new) describing what you have in mind. We'll discuss it and, quite possibly, add it to the bot! You can also help by giving your opinion on [one of the many existing ideas](https://github.com/SwitchbladeBot/switchblade/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22type%3A+idea%22+) we have on our list.
 
 ### Writing code
 
-Something something create commands open PRs yada yada yada
+We love Pull Requests!
 
-### Checking bug reports
+### Reporting bugs
 
-There are probably many [bug reports](https://github.com/SwitchbladeBot/switchblade/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22type%3A+bug%22+) in the issues tab of this repo already. You can help us by triaging them and checking if the bugs still exists. Most of the reports should have a step-by-step guide on how to reproduce the problem. Try reproducing them yourself and report back to us. Have the bugs been fixed? Do you have an idea of what could be causing them? In what scenarios do they occur? Let us know!
+Found something crashes the bot? Something isn't working like intended? Please let us know! Whenever you find a bug flying around, [try using one of these](https://gist.githubusercontent.com/pedrofracassi/fa560c3932eb4438e6033203cc8058bc/raw/37440ba7d730a9c539865f72ebc9992eb32d6b7e/bug.jpg). If that doesn't work, don't hesitate to [write a bug report](https://github.com/SwitchbladeBot/switchblade/issues/new?template=Bug_report.md). Please give us as much information as you can, preferrably filling all of the fields provided on the template.
+
+### Triaging bug reports
+
+There are probably many [bug reports](https://github.com/SwitchbladeBot/switchblade/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22type%3A+bug%22+) in the issues tab of this repo already. You can help by triaging them and telling us if the, or maybe writing a comment with more information about it. The reports should have a step-by-step guide on how to reproduce the problem, so go ahead! Try to reproduce a bug yourself and tell us what you found.
 
 ### Translation
 
-We want Switchblade to be available and used by as many people as possible. That's why we have put together an awesome team consisting of **more than 50 translators** from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through **Crowdin**, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
+One of our main goals is to make Switchblade avaliable as many people as possible, and that's why we have put together an awesome team consisting of **more than 50 translators** from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through **Crowdin**, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
 
 <h2 align="center">Sponsors</h2>
 
