@@ -16,7 +16,7 @@
   [![sponsors][sponsors-badge]][sponsors-url]
   <br>
   <br>
-  <strong><a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD THE BOT TO YOUR SERVER</a></strong>
+  <strong><a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD SWITCHBLADE TO YOUR SERVER</a></strong>
 </div>
 
 ---
