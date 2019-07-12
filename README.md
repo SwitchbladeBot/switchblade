@@ -33,6 +33,8 @@ Switchblade is a free and open source solution to your server managing problems,
   - [Reporting bugs](#reporting-bugs)
   - [Triaging bug reports](#triaging-bug-reports)
   - [Translation](#translation)
+- [Self-hosting](#self-hosting)
+- [Branching, canary and updates](#branching-canary-and-updates)
 - [Sponsors](#sponsors)
 - [Backers](#backers)
 
@@ -61,6 +63,12 @@ There are probably many [bug reports](https://github.com/SwitchbladeBot/switchbl
 ### Translation
 
 One of our main goals is to make Switchblade avaliable as many people as possible, and that's why we have put together an awesome team consisting of **more than 50 translators** from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through **Crowdin**, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
+
+<h2 align="center">Self-hosting</h2>
+
+**We ask you to please not host your own instance of Switchblade.** Even though our license allows it, self-hosted instances of the bot have brought us a lot of headache in the past. If you're considering self-hosting, please [try the official instance of the bot first](http://invite.switchblade.xyz/). If you have any concerns about the security of our instance, please contact us. We'd love to talk and answer any questions you have.
+
+> If you're really really really going to self-host the bot, please [read our license](https://github.com/SwitchbladeBot/switchblade/blob/dev/LICENSE) first, and be aware that we don't provide any self-hosting support. **You'll be on your own.**
 
 <h2 align="center">Branching, canary and updates</h2>
 
