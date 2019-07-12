@@ -1,5 +1,5 @@
 const { Command, SwitchbladeEmbed } = require('../../')
-const fetch = require('node-fetch')
+const snekfetch = require('snekfetch')
 const nekoAPI = 'https://nekos.life/api/v2/img/'
 
 module.exports = class Neko extends Command {
@@ -18,7 +18,7 @@ module.exports = class Neko extends Command {
     // Send a lewd neko if the channel is NSFW
     const endpoint = channel.nsfw ? 'lewd' : 'neko'
 
-    const { url } = await fetch(nekoAPI + endpoint).then(res => res.json())
+    const { body: { url } } = await snekfetch.get(nekoAPI + endpoint)
 
     embed.setImage(url)
       .setDescription(t('commands:neko.hereIsYour', { context: endpoint }))
