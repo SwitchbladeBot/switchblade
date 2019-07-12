@@ -1,7 +1,7 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 const moment = require('moment')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 module.exports = class MinecraftSkin extends Command {
   constructor (client) {
@@ -35,13 +35,13 @@ module.exports = class MinecraftSkin extends Command {
   }
 
   async nameToUUID (name) {
-    const { body } = await snekfetch.get(`https://api.mojang.com/users/profiles/minecraft/${name}?at=${moment().format('x')}`)
+    const body = await fetch(`https://api.mojang.com/users/profiles/minecraft/${name}?at=${moment().format('x')}`).then(res => res.json())
     if (body.id) return { uuid: body.id, name: body.name }
     return false
   }
 
   async uuidToName (uuid) {
-    const { body } = await snekfetch.get(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`)
+    const body = await fetch(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`).then(res => res.json())
     if (body.id) return { uuid: body.id, name: body.name }
     return false
   }

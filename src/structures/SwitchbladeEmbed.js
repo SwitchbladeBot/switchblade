@@ -12,4 +12,14 @@ module.exports = class SwitchbladeEmbed extends RichEmbed {
     this.setColor(process.env.EMBED_COLOR).setTimestamp()
     if (user) this.setFooter(user.tag)
   }
+
+  /**
+   * Sets the description of this embed based on an array of arrays of strings
+   * @param {Array<Array>} Array containing arrays (blocks) of and strings
+   * @returns {SwitchbladeEmbed}
+   */
+  setDescriptionFromBlockArray (blocks) {
+    this.description = blocks.map(lines => lines.filter(l => !!l).join('\n')).filter(b => !!b.length).join('\n\n')
+    return this
+  }
 }

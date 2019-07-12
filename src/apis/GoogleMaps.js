@@ -1,13 +1,14 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const API_URL = 'https://maps.googleapis.com/maps/api'
 
 module.exports = class GoogleMapsAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'gmaps'
-    this.envVars = ['GMAPS_KEY']
+    super({
+      name: 'gmaps',
+      envVars: ['GMAPS_KEY']
+    })
   }
 
   // Search
@@ -38,6 +39,8 @@ module.exports = class GoogleMapsAPI extends APIWrapper {
   // Default
   request (endpoint, queryParams = {}) {
     queryParams.key = process.env.GMAPS_KEY
-    return snekfetch.get(`${API_URL}${endpoint}/json`).query(queryParams).then(r => r.body)
+    const qParams = new URLSearchParams(queryParams)
+    return fetch(`${API_URL}${endpoint}/json?${qParams.toString()}`)
+      .then(res => res.json())
   }
 }

@@ -1,12 +1,13 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const API_URL = 'https://mixer.com/api/v1'
 
 module.exports = class MixerAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'mixer'
+    super({
+      name: 'mixer'
+    })
   }
 
   getUser (id) {
@@ -18,8 +19,8 @@ module.exports = class MixerAPI extends APIWrapper {
   }
 
   request (endpoint, queryParams = {}) {
-    return snekfetch.get(`${API_URL}${endpoint}`)
-      .query(queryParams)
-      .then(r => r.body)
+    const qParams = new URLSearchParams(queryParams)
+    return fetch(API_URL + endpoint + `?${qParams.toString()}`)
+      .then(res => res.json())
   }
 }

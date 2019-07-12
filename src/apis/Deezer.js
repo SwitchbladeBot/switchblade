@@ -1,12 +1,13 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const API_URL = 'https://api.deezer.com'
 
 module.exports = class DeezerAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'deezer'
+    super({
+      name: 'deezer'
+    })
   }
 
   // Get
@@ -77,6 +78,8 @@ module.exports = class DeezerAPI extends APIWrapper {
 
   // Default
   request (endpoint, queryParams = {}) {
-    return snekfetch.get(`${API_URL}${endpoint}`).query(queryParams).then(r => r.body)
+    const qParams = new URLSearchParams(queryParams)
+    return fetch(API_URL + endpoint + `?${qParams.toString()}`)
+      .then(res => res.json())
   }
 }

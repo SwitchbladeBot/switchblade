@@ -1,13 +1,14 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 const API_URL = 'https://api.twitch.tv/helix'
 
 module.exports = class TwitchAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'twitch'
-    this.envVars = ['TWITCH_CLIENT_ID']
+    super({
+      name: 'twitch',
+      envVars: ['TWITCH_CLIENT_ID']
+    })
   }
 
   getUser (id) {
@@ -31,9 +32,9 @@ module.exports = class TwitchAPI extends APIWrapper {
   }
 
   request (endpoint, queryParams = {}) {
-    return snekfetch.get(`${API_URL}${endpoint}`)
-      .query(queryParams)
-      .set({ 'Client-ID': process.env.TWITCH_CLIENT_ID })
-      .then(r => r.body)
+    const qParams = new URLSearchParams(queryParams)
+    return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
+      headers: { 'Client-ID': process.env.TWITCH_CLIENT_ID }
+    }).then(res => res.json())
   }
 }
