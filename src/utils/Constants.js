@@ -109,6 +109,7 @@ module.exports = {
 
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
+  QUIERES_HAND_PNG: 'src/assets/png/quieres.png',
   PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
 
   // Backgrounds
