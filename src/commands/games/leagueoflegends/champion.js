@@ -13,9 +13,6 @@ module.exports = class LeagueOfLegendsChampion extends Command {
         type: 'string', full: true, missingError: 'commands:leagueoflegends.subcommands.champion.noChampion'
       }]
     })
-
-    this.LOL_LOGO = 'https://i.imgur.com/4dKfQZn.jpg'
-    this.LOL_COLOR = '#002366'
   }
 
   async run ({ t, author, channel, language }, champion) {
@@ -24,8 +21,8 @@ module.exports = class LeagueOfLegendsChampion extends Command {
     try {
       const champ = await this.client.apis.lol.fetchChampion(champion, language)
       const locale = await this.client.apis.lol.getLocale(language)
-      embed.setColor(this.LOL_COLOR)
-        .setAuthor('League of Legends', this.LOL_LOGO, 'https://leagueoflegends.com')
+      embed.setColor(this.parentCommand.LOL_COLOR)
+        .setAuthor('League of Legends', this.parentCommand.LOL_LOGO, 'https://leagueoflegends.com')
         .setTitle(`**${champ.name}**, ${champ.title}`)
         .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${this.client.apis.lol.version}/img/champion/${champ.image.full}`)
         .setDescription([
