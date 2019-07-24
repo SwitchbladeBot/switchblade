@@ -53,7 +53,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   }
 
   fetchChampionRotation () {
-    return this.request(`/platform/v3/champion-rotations?api_key=${process.env.RIOT_API_KEY}`, true).then(u => u)
+    return this.request(`/platform/v3/champion-rotations?api_key=${process.env.RIOT_API_KEY}`, true)
   }
 
   request (endpoint, useRiotApi = false) {
