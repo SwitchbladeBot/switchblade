@@ -33,5 +33,6 @@
   "tracksCountParentheses": "Tracks ({{tracks}})",
   "moreTracks": "...and {{tracks}} more tracks",
   "moreAlbums": "...and {{albums}} more albums",
-  "moreArtists": "...and {{artists}} more artists"
+  "moreArtists": "...and {{artists}} more artists",
+  "leftDueToInactivity": "Disconnected from voice channel due to inactivity."
 }
