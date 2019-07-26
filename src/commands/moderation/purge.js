@@ -8,15 +8,13 @@ module.exports = class Purge extends Command {
       category: 'moderation',
       requirements: { guildOnly: true, botPermissions: ['MANAGE_MESSAGES'], permissions: ['MANAGE_MESSAGES'] },
       parameters: [{
-        type: 'number', required: false, full: false
-      }, {
-        type: 'member', required: false, full: false, acceptSelf: true, acceptBot: true
-      },
-      {
         type: 'number',
+        required: false,
         min: 1,
         max: 100,
         missingError: 'commands:purge.invalidNumber'
+      }, {
+        type: 'member', required: false, full: false, acceptSelf: true, acceptBot: true
       }]
     })
   }
