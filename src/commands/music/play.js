@@ -88,6 +88,7 @@ module.exports = class Play extends Command {
 
     song.on('end', () => send(`${Constants.STOP_BUTTON} ${t('music:hasEnded', { songName })}`))
     song.once('stop', u => send(`${Constants.STOP_BUTTON} ${t('music:queueIsEmpty')}`, u))
+    song.once('abruptStop', () => send(`${Constants.STOP_BUTTON} ${t('music:leftDueToInactivity')}`))
 
     if (startFeedback) {
       song.on('start', () => sendWI(`${Constants.PLAY_BUTTON} ${t('music:startedPlaying', { songName })}`))
