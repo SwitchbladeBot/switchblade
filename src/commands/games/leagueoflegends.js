@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const types = ['champion', 'champ', 'c', 'status', 's']
+const types = ['champion', 'champ', 'c', 'status', 's', 'rotation', 'r']
 
 module.exports = class LeagueOfLegends extends Command {
   constructor (client) {
@@ -18,10 +18,13 @@ module.exports = class LeagueOfLegends extends Command {
               this.usage(t, prefix),
               '',
               `__**${t('commons:search.types')}:**__`,
-              `\`${['champion', 'status'].join('`, `')}\``
+              `\`${['champion', 'status', 'rotation'].join('`, `')}\``
             ].join('\n'))
         }
       }]
     })
+
+    this.LOL_LOGO = 'https://i.imgur.com/4dKfQZn.jpg'
+    this.LOL_COLOR = '#002366'
   }
 }

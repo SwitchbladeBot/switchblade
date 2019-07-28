@@ -1,12 +1,14 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
 
-const API_URL = 'https://ddragon.leagueoflegends.com'
+const DATADRAGON_URL = 'https://ddragon.leagueoflegends.com'
+const RIOT_API_URL = 'https://na1.api.riotgames.com/lol'
 
 module.exports = class LeagueOfLegends extends APIWrapper {
   constructor () {
     super({
-      name: 'lol'
+      name: 'lol',
+      envVars: [ 'RIOT_API_KEY' ]
     })
 
     this.version = null
@@ -26,25 +28,22 @@ module.exports = class LeagueOfLegends extends APIWrapper {
     return matchingLanguage || 'en_US'
   }
 
-  async getLocale (language) {
+  async getLocale (language, version = this.version) {
+    if (!version) version = await this.getVersion()
     const matchingLanguage = await this.selectLanguage(language)
-    return this.request(`/cdn/${this.version}/data/${matchingLanguage}/language.json`).then(u => {
-      return this.convertBufferToJson(u).then(u => u.data)
-    })
+    return this.request(`/cdn/${this.version}/data/${matchingLanguage}/language.json`).then(u => u.data)
   }
 
   async fetchChampions (version = this.version) {
     if (!version) version = await this.getVersion()
-    return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => {
-      return this.convertBufferToJson(u).then(u => u.data)
-    })
+    return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => u.data)
   }
 
-  async fetchChampion (champion, language) {
+  async fetchChampion (champion, language, searchById = false) {
     return new Promise(async (resolve, reject) => {
-      champion = champion.replace("'", '').split(' ')
+      champion = parseInt(champion) ? champion.toString() : champion.replace("'", '').split(' ')
       const champions = await this.fetchChampions()
-      const name = Object.keys(champions).find(key => key.toLowerCase() === champion.join('').toLowerCase())
+      const name = Object.keys(champions).find(key => searchById ? (champions[key].key === champion) : (key.toLowerCase() === champion.join('').toLowerCase()))
       if (!name) return reject(new Error('INVALID_CHAMPION'))
 
       const { id } = champions[name]
@@ -53,14 +52,12 @@ module.exports = class LeagueOfLegends extends APIWrapper {
     })
   }
 
-  request (endpoint) {
-    return fetch(API_URL + endpoint)
-      .then(res => res.json())
+  fetchChampionRotation () {
+    return this.request(`/platform/v3/champion-rotations?api_key=${process.env.RIOT_API_KEY}`, true)
   }
 
-  async convertBufferToJson (buffer) {
-    const bufferAsJson = JSON.stringify(buffer)
-    const bufferOriginal = Buffer.from(JSON.parse(bufferAsJson).data)
-    return JSON.parse(bufferOriginal.toString('utf8'))
+  request (endpoint, useRiotApi = false) {
+    return fetch((useRiotApi ? RIOT_API_URL : DATADRAGON_URL) + endpoint)
+      .then(res => res.json())
   }
 }

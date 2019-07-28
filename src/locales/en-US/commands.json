@@ -860,6 +860,12 @@
   "tesla": {
     "commandDescription": "Shows a random image from /r/TeslaPorn."
   },
+  "fursuit": {
+    "commandDescription": "Shows a random image from /r/fursuit."
+  },
+  "parrot": {
+    "commandDescription": "Shows a random image from /r/partyparrot."
+  },
   "lmgtfy": {
     "commandDescription": "Google something for someone that they should have googled.",
     "commandUsage": "<query>",
@@ -1047,6 +1053,10 @@
         "noChampion": "You have to give me a champion name to search for.",
         "invalidChamp": "Invalid champion.",
         "spells": "Spells"
+      },
+      "rotation": {
+        "commandDescription": "Shows the current week's champion rotation.",
+        "weeklyChampRotation": "Weekly Champion Rotation"
       }
     }
   },
