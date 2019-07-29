@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Stop extends Command {
   constructor (client) {
@@ -13,7 +13,7 @@ module.exports = class Stop extends Command {
     const embed = new SwitchbladeEmbed(author)
     const guildPlayer = this.client.playerManager.get(guild.id)
     guildPlayer.stop(author)
-    embed.setDescription(`${Constants.STOP_BUTTON} ${t('commands:stop.stopped')}`)
+    embed.setDescription(`${this.getEmoji('stopButton')} ${t('commands:stop.stopped')}`)
     channel.send(embed)
   }
 }

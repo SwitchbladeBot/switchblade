@@ -30,7 +30,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
     album = await this.client.apis.deezer.getAlbum(album.id)
     const { link, title, cover_big: cover, artist, nb_tracks: trackNumber, tracks, genres, release_date: date, explicit_lyrics: explicitLyric, fans } = album
     let trackList = tracks.data.slice(0, 10).map((track, i) => {
-      const explicit = track.explicit_lyrics ? Constants.EXPLICIT : ''
+      const explicit = track.explicit_lyrics ? this.getEmoji('explicit') : ''
       return `\`${this.formatIndex(i, tracks)}\`. ${explicit} [${track.title_short}](${track.link}) \`(${MiscUtils.formatDuration(track.duration * 1000)})\``
     })
     const embed = new SwitchbladeEmbed(author)
@@ -48,7 +48,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
       return
     }
 
-    const explicit = explicitLyric ? Constants.EXPLICIT : ''
+    const explicit = explicitLyric ? this.getEmoji('explicit') : ''
     trackList = trackList.slice(0, 5)
     if (trackList.length > 5) trackList.push(t('music:moreTracks', { tracks: trackNumber - 5 }))
     embed.setDescription(`${explicit} [${title}](${link}) \`(${date.split('-')[0]})\``)

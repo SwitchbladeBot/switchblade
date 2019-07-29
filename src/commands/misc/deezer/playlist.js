@@ -32,7 +32,7 @@ module.exports = class DeezerPlaylist extends SearchCommand {
     const playlist = await this.client.apis.deezer.getPlaylist(id)
     const { title, link, description, nb_tracks: trackNumber, fans, creation_date: date, picture_big: cover, creator, tracks } = playlist
     let trackList = tracks.data.slice(0, 10).map((track, i) => {
-      const explicit = track.explicit_lyrics ? Constants.EXPLICIT : ''
+      const explicit = track.explicit_lyrics ? this.getEmoji('explicit') : ''
       return `\`${this.formatIndex(i, tracks)}\`. ${explicit} [${track.title_short}](${track.link}) \`(${MiscUtils.formatDuration(track.duration * 1000)})\``
     })
     const embed = new SwitchbladeEmbed(author)

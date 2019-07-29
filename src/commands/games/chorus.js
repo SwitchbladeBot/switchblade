@@ -75,7 +75,7 @@ module.exports = class Chorus extends SearchCommand {
             t('commands:chorus.notesPerSecond', { nps }) // NPS average
           ],
           [
-            chart.noteCounts && Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).length > 0 ? `${Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).map(i => `${Constants[`CLONEHERO_${i.toUpperCase()}`]} ${this.getDifficultyString(chart.noteCounts[i])}`).join(' ')}` : null // Difficulties per instrument
+            chart.noteCounts && Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).length > 0 ? `${Object.keys(chart.noteCounts).filter(i => instruments.includes(i)).map(i => `${this.getEmoji(i)} ${this.getDifficultyString(chart.noteCounts[i])}`).join(' ')}` : null // Difficulties per instrument
           ],
           [
             `[${this.getDownloadLinkText(chart, t)}](${chart.link})`, // Download link

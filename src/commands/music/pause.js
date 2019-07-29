@@ -1,4 +1,4 @@
-const { Command, Constants, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Pause extends Command {
   constructor (client) {
@@ -14,7 +14,7 @@ module.exports = class Pause extends Command {
     const embed = new SwitchbladeEmbed(author)
     const guildPlayer = this.client.playerManager.get(guild.id)
     const pause = !guildPlayer.paused
-    embed.setTitle(`${pause ? Constants.PAUSE_BUTTON : Constants.PLAY_BUTTON} ${t('music:stateChanged', { context: pause ? 'pause' : 'resume' })}`)
+    embed.setTitle(`${pause ? this.getEmoji('pauseButton') : this.getEmoji('playButton')} ${t('music:stateChanged', { context: pause ? 'pause' : 'resume' })}`)
     channel.send(embed).then(() => guildPlayer.pause(pause))
   }
 }

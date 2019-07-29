@@ -37,7 +37,7 @@ module.exports = class DeezerArtist extends SearchCommand {
     if (flags['albums']) {
       const { data } = await this.client.apis.deezer.getArtistAlbums(id)
       const albumList = data.map((album, i) => {
-        const explicit = album.explicit_lyrics ? Constants.EXPLICIT : ''
+        const explicit = album.explicit_lyrics ? this.getEmoji('explicit') : ''
         return `\`${this.formatIndex(i, data)}\`. ${explicit} [${album.title}](${album.link}) \`(${album.release_date.split('-')[0]})\``
       })
       if (albums > 10) albumList.push(t('music:moreAlbums', { albums: albums - 10 }))

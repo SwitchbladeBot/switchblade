@@ -23,7 +23,7 @@ module.exports = class DeezerTrack extends SearchCommand {
   handleResult ({ t, channel, author }, track) {
     channel.startTyping()
     const { link, title, duration, explicit_lyrics: explicitLyric, artist, album } = track
-    const explicit = explicitLyric ? Constants.EXPLICIT : ''
+    const explicit = explicitLyric ? this.getEmoji('explicit') : ''
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
       .setAuthor(t('commands:deezer.subcommands.track.trackInfo'), this.embedLogoURL, link)

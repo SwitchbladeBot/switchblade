@@ -27,7 +27,7 @@ module.exports = class SpotifyTrack extends SearchCommand {
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
       .setAuthor(t('commands:spotify.subcommands.track.trackInfo'), this.embedLogoURL, urls.spotify)
-      .setDescription(`${explicit ? `${Constants.EXPLICIT} ` : ' '}[${name}](${urls.spotify}) \`(${MiscUtils.formatDuration(duration)})\``)
+      .setDescription(`${explicit ? `${this.getEmoji('explicit')} ` : ' '}[${name}](${urls.spotify}) \`(${MiscUtils.formatDuration(duration)})\``)
       .setThumbnail(cover.url)
       .addField(t('commands:spotify.album'), `[${album.name}](${album.external_urls.spotify}) \`(${album.release_date.split('-')[0]})\``, true)
       .addField(artistTitle, artists.map(a => `[${a.name}](${a.external_urls.spotify})`).join(', '), true)
