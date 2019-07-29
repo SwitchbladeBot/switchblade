@@ -1,4 +1,4 @@
-const { Loader, APIWrapper } = require('../')
+const { Loader } = require('../')
 
 module.exports = class EmojiLoader extends Loader {
   constructor (client) {
