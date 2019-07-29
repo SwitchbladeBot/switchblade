@@ -1,6 +1,7 @@
 module.exports = {
   booleanFlag: require('./BooleanFlagParameter.js'),
   boolean: require('./BooleanParameter.js'),
+  channel: require('./ChannelParameter.js'),
   color: require('./ColorParameter.js'),
   emoji: require('./EmojiParameter.js'),
   guild: require('./GuildParameter.js'),
