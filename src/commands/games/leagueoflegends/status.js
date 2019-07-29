@@ -1,4 +1,4 @@
-const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../../')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 const fetch = require('node-fetch')
 
 const servers = ['na', 'euw', 'eune', 'lan', 'las', 'br', 'tr', 'ru', 'oce', 'jp', 'kr']

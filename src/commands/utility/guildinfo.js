@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, Constants, MiscUtils } = require('../../')
+const { Command, SwitchbladeEmbed, MiscUtils } = require('../../')
 const moment = require('moment')
 
 module.exports = class GuildInfo extends Command {

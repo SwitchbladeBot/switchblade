@@ -1,4 +1,4 @@
-const { Command, CommandError, SwitchbladeEmbed, EmojiUtils, Constants } = require('../../../')
+const { Command, CommandError, SwitchbladeEmbed, EmojiUtils } = require('../../../')
 
 // We're using a Polyfill for Intl, as node doesn't come with all locales for formatting.
 const Intl = require('intl')
