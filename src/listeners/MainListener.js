@@ -2,6 +2,8 @@ const { CommandContext, EventListener, MiscUtils } = require('../')
 const { SwitchbladePlayerManager } = require('../music')
 const fetch = require('node-fetch')
 
+const EmojiLoader = require('../loaders/EmojiLoader.js')
+
 const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 
 module.exports = class MainListener extends EventListener {
@@ -87,6 +89,9 @@ module.exports = class MainListener extends EventListener {
 
     postStats(this)
     setInterval(postStats, 1800000, this)
+
+    const emojiLoader = new EmojiLoader(this)
+    emojiLoader.load()
   }
 
   async onMessage (message) {

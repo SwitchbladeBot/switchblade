@@ -150,16 +150,6 @@ module.exports = class Command {
   }
 
   getEmoji (emoji) {
-    const emojiGuilds = process.env.EMOJI_GUILDS && process.env.EMOJI_GUILDS.split(',')
-    if (!emojiGuilds) return '❓'
-
-    const results = emojiGuilds.map(eg => {
-      const matchingEmoji = this.client.emojis.filter(e => e.guild.id === eg && e.name.toLowerCase() === emoji.toLowerCase()).first()
-      if (matchingEmoji) return matchingEmoji.toString()
-      else return null
-    })
-
-    if (results.filter(r => r)) return results.filter(r => r)[0]
-    else return '❓'
+    return this.client.officialEmojis.get(emoji)
   }
 }
