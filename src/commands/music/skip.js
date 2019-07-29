@@ -15,6 +15,6 @@ module.exports = class Skip extends Command {
     const guildPlayer = this.client.playerManager.get(guild.id)
     const song = guildPlayer.playingSong
     const songName = `[${song.title}](${song.uri})`
-    channel.send(embed.setDescription(`${Constants.STOP_BUTTON} ${t('music:wasSkipped', { songName })}`)).then(() => guildPlayer.next())
+    channel.send(embed.setDescription(`${this.getEmoji('stopButton')} ${t('music:wasSkipped', { songName })}`)).then(() => guildPlayer.next())
   }
 }

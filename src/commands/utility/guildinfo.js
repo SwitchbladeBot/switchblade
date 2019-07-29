@@ -32,11 +32,11 @@ module.exports = class GuildInfo extends Command {
       .addField(t('commands:guildinfo.createdAt'), `${moment(guild.createdTimestamp).format('LLL')}\n(${moment(guild.createdTimestamp).fromNow()})`, true)
       .addField(t('commands:guildinfo.joinedAt'), `${moment(guild.joinedTimestamp).format('LLL')}\n(${moment(guild.joinedTimestamp).fromNow()})`, true)
       .addField(t('commands:guildinfo.members', { count: MiscUtils.formatNumber(guild.members.size, language) }), [
-        `${Constants.STREAMING_STATUS} ${t('commands:guildinfo.streaming', { count: MiscUtils.formatNumber(guild.members.filter(m => m.game === 'streaming').size, language) })}`,
-        `${Constants.ONLINE_STATUS} ${t('commands:guildinfo.online', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'online').size, language) })}`,
-        `${Constants.IDLE_STATUS} ${t('commands:guildinfo.idle', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'idle').size, language) })}`,
-        `${Constants.DND_STATUS} ${t('commands:guildinfo.dnd', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'dnd').size, language) })}`,
-        `${Constants.OFFLINE_STATUS} ${t('commands:guildinfo.offline', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'offline').size, language) })}\n`,
+        `${this.getEmoji('streaming')} ${t('commands:guildinfo.streaming', { count: MiscUtils.formatNumber(guild.members.filter(m => m.game === 'streaming').size, language) })}`,
+        `${this.getEmoji('online')} ${t('commands:guildinfo.online', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'online').size, language) })}`,
+        `${this.getEmoji('idle')} ${t('commands:guildinfo.idle', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'idle').size, language) })}`,
+        `${this.getEmoji('dnd')} ${t('commands:guildinfo.dnd', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'dnd').size, language) })}`,
+        `${this.getEmoji('offline')} ${t('commands:guildinfo.offline', { count: MiscUtils.formatNumber(guild.members.filter(m => m.presence.status === 'offline').size, language) })}\n`,
         t('commands:guildinfo.users', { count: MiscUtils.formatNumber(guild.members.filter(m => !m.user.bot).size, language) }),
         t('commands:guildinfo.bots', { count: MiscUtils.formatNumber(guild.members.filter(m => m.user.bot).size, language) })
       ].join('\n'))

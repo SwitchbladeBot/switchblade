@@ -32,7 +32,7 @@ module.exports = class SpotifyAlbum extends SearchCommand {
       .addField(artistTitle, artists.map(a => `[${a.name}](${a.external_urls.spotify})`).join(', '), true)
 
     if (type !== 'album') embed.addField(t('commands:spotify.subcommands.album.albumType'), t(`commands:spotify.subcommands.album.types.${type}`), true)
-    const trackMapper = (track, i) => `\`${i + 1}.\` ${track.explicit ? Constants.EXPLICIT : ''} [${track.name}](${track.external_urls.spotify}) \`(${MiscUtils.formatDuration(track.duration_ms)})\``
+    const trackMapper = (track, i) => `\`${i + 1}.\` ${track.explicit ? this.getEmoji('explicit') : ''} [${track.name}](${track.external_urls.spotify}) \`(${MiscUtils.formatDuration(track.duration_ms)})\``
     const trackList = tracks.items.map(trackMapper).slice(0, 5)
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
 

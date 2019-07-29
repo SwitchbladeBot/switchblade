@@ -22,12 +22,12 @@ module.exports = class BotInfo extends Command {
           t('commands:botinfo.statistics', { guilds: MiscUtils.formatNumber(this.client.guilds.size, language), commands: MiscUtils.formatNumber(this.client.commands.length, language), uptime, Discord, nodeVersion: process.version, users: MiscUtils.formatNumber(this.client.users.filter(u => !u.bot).size, language) })
         ].join('\n\n'))
         .addField(t('commands:botinfo.links'), [
-          t('commands:botinfo.inviteLink', { Constants }),
-          t('commands:botinfo.supportServer', { Constants }),
-          t('commands:botinfo.website', { Constants }),
-          t('commands:botinfo.translate', { Constants }),
-          t('commands:botinfo.github', { Constants }),
-          t('commands:botinfo.patreon', { Constants })
+          t('commands:botinfo.inviteLink', { botBadge: this.getEmoji('botBadge') }),
+          t('commands:botinfo.supportServer', { discordLogo: this.getEmoji('discordLogo') }),
+          t('commands:botinfo.website', { switchbladeLogo: this.getEmoji('switchblade') }),
+          t('commands:botinfo.translate', { crowdinLogo: this.getEmoji('crowdinLogo') }),
+          t('commands:botinfo.github', { githubLogo: this.getEmoji('githubLogo') }),
+          t('commands:botinfo.openCollective', { openCollectiveLogo: this.getEmoji('openCollectiveLogo') })
         ].join('\n'))
     )
   }

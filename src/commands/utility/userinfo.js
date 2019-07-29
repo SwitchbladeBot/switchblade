@@ -28,7 +28,7 @@ module.exports = class UserInfo extends Command {
       .setThumbnail(member.user.displayAvatarURL)
       .addField(t('commands:userinfo.tag'), member.user.tag, true)
       .addField(t('commands:userinfo.id'), member.id, true)
-      .addField(t('commands:userinfo.status'), t(`commands:userinfo.${member.presence.status}`, { Constants }), true)
+      .addField(t('commands:userinfo.status'), t(`commands:userinfo.${member.presence.status}`, { status: this.getEmoji(member.presence.status) }), true)
       .addField(t('commands:userinfo.createdAt'), `${moment(member.user.createdTimestamp).format('LLL')}\n(${moment(member.user.createdTimestamp).fromNow()})`, true)
       .addField(t('commands:userinfo.joinedAt'), `${moment(member.joinedTimestamp).format('LLL')}\n(${moment(member.joinedTimestamp).fromNow()})`, true)
       .addField(t('commands:userinfo.serversInCommon', { count: MiscUtils.formatNumber(filter.length, language) }), charLimit(filter.join(', ')))

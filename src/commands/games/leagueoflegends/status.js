@@ -34,9 +34,9 @@ module.exports = class LeagueOfLegendsStatus extends Command {
       new SwitchbladeEmbed(author)
         .setDescription(
           [
-            `${Constants[`LOL_STATUS_${body.status.toUpperCase()}`]} **[${t(`lolservers:${server}`)} - ${t(`commands:leagueoflegends.subcommands.status.${body.status}`)}](https://status.leagueoflegends.com/?${language.replace('-', '_')}#${server})**\n`,
+            `${this.getEmoji(`lol${body.status}`)} **[${t(`lolservers:${server}`)} - ${t(`commands:leagueoflegends.subcommands.status.${body.status}`)}](https://status.leagueoflegends.com/?${language.replace('-', '_')}#${server})**\n`,
             body.messages.map(m => {
-              return `${Constants[`LOL_STATUS_${m.severity.toUpperCase()}`]} **${t(`commands:leagueoflegends.subcommands.status.${m.severity}`)}:** ${this.getLocalizedContent(m, language)}`
+              return `${this.getEmoji(`lol${m.severity}`)} **${t(`commands:leagueoflegends.subcommands.status.${m.severity}`)}:** ${this.getLocalizedContent(m, language)}`
             }).join('\n\n')
           ].join('\n')
         )

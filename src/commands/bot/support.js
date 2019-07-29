@@ -12,7 +12,7 @@ module.exports = class Support extends Command {
     channel.send(
       new SwitchbladeEmbed()
         .setImage('https://i.imgur.com/wuuQaZu.png')
-        .setDescription(`${Constants.DISCORD_LOGO} ${t('commands:support.clickHere')}`)
+        .setDescription(`${this.getEmoji('discordLogo')} ${t('commands:support.clickHere')}`)
     )
   }
 }

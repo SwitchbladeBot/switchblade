@@ -32,10 +32,10 @@ module.exports = class SteamLadderProfile extends Command {
         ladder_rank: rank
       } = await this.client.apis.steamladder.getProfile(steamid)
       const description = [ EmojiUtils.getFlag(user.steam_country_code) ]
-      if (info.is_staff) description.push(Constants.STEAMLADDER_STAFF)
-      if (info.is_winter_18) description.push(Constants.STEAMLADDER_WINTER)
-      if (info.is_donator) description.push(Constants.STEAMLADDER_DONATOR)
-      if (info.is_top_donator) description.push(Constants.STEAMLADDER_TOP_DONATOR)
+      if (info.is_staff) description.push(this.getEmoji('steamladder_staff_icon'))
+      if (info.is_winter_18) description.push(this.getEmoji('steamladder_winter_badge'))
+      if (info.is_donator) description.push(this.getEmoji('steamladder_donator'))
+      if (info.is_top_donator) description.push(this.getEmoji('steamladder_top_donator'))
       embed
         .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
         .setColor(embedColor)
