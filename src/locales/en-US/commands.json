@@ -669,6 +669,16 @@
     "alreadyGave": "Already gave reputation",
     "repYourself": "You can't give a reputation point to yourself!"
   },
+  "raffle": {
+    "commandDescription": "Raffles X users (default 1) in the whole server, or on a specified role.",
+    "commandUsage": "[amount] [role]",
+    "amountTooHighGuild": "The amount of users being raffled can't be higher than the member size on the server.",
+    "amountTooHighRole": "The amount of users being raffled can't be higher than the member size in that role.",
+    "raffle": "Raffle",
+    "winnerSingular": "And the winner is...",
+    "winnerPlural": "And the winners are..."
+
+  },
   "personaltext": {
     "commandDescription": "Sets a personal text on your profile.",
     "commandUsage": "<personal text>",
