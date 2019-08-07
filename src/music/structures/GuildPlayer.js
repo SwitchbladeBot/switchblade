@@ -58,6 +58,11 @@ module.exports = class GuildPlayer extends Player {
     super.stop()
   }
 
+  leaveOnEmpty (user) {
+    this.playingSong.emit('abruptStop', user)
+    this.stop()
+  }
+
   next (user) {
     if (this._loop) this.queueTrack(this.playingSong, true)
     const nextSong = this.queue.shift()
@@ -186,6 +191,7 @@ module.exports = class GuildPlayer extends Player {
     // Voice leave
     if (oldChannel && !newChannel) {
       if (isSwitch) oldChannel.members.filter(m => !m.user.bot).forEach(m => this._listening.delete(m.user.id))
+      if (oldChannel.members.size === 1 && oldChannel.members.has(switchId)) this.leaveOnEmpty(newMember.user.id)
       else if (oldChannel.members.has(switchId)) this._listening.delete(newMember.user.id)
       else return
     }

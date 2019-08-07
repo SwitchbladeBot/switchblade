@@ -1,6 +1,8 @@
 const { CommandContext, EventListener, MiscUtils } = require('../')
 const { SwitchbladePlayerManager } = require('../music')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
+
+const EmojiLoader = require('../loaders/EmojiLoader.js')
 
 const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 
@@ -26,7 +28,6 @@ module.exports = class MainListener extends EventListener {
     setInterval(() => {
       const presence = presences[Math.floor(Math.random() * presences.length)]
       this.user.setPresence({ game: presence })
-      this.log(`[32mChanged presence to "${presence.name}", type "${presence.type}"`, 'Presence')
     }, PRESENCE_INTERVAL)
 
     // Lavalink connection
@@ -48,49 +49,49 @@ module.exports = class MainListener extends EventListener {
     function postStats (client) {
       // bots.discord.pw
       if (process.env.DISCORDBOTSPW_TOKEN) {
-        snekfetch
-          .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-          .set('Authorization', process.env.DISCORDBOTSPW_TOKEN)
-          .send({ server_count: client.guilds.size })
-          .then(() => client.log('[32mPosted statistics successfully', 'bots.discord.pw'))
+        fetch(`https://bots.discord.pw/api/bots/${client.user.id}/stats`, {
+          method: 'POST',
+          headers: { Authorization: process.env.DISCORDBOTSPW_TOKEN },
+          body: { server_count: client.guilds.size }
+        }).then(() => client.log('[32mPosted statistics successfully', 'bots.discord.pw'))
           .catch(() => client.log('[31mFailed to post statistics', 'bots.discord.pw'))
       }
 
       // discordbots.org
       if (process.env.DBL_TOKEN) {
-        snekfetch
-          .post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
-          .set('Authorization', process.env.DBL_TOKEN)
-          .send({ server_count: client.guilds.size })
-          .then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
+        fetch(`https://discordbots.org/api/bots/${client.user.id}/stats`, {
+          method: 'POST',
+          headers: { Authorization: process.env.DBL_TOKEN },
+          body: { server_count: client.guilds.size }
+        }).then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
           .catch(() => client.log('[31mFailed to post statistics', 'discordbots.org'))
       }
 
       // botsfordiscord.com
       if (process.env.BOTSFORDISCORD_TOKEN) {
-        snekfetch
-          .post(`https://botsfordiscord.com/api/bots/${client.user.id}`)
-          .set('Authorization', process.env.BOTSFORDISCORD_TOKEN)
-          .send({ server_count: client.guilds.size })
-          .then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
+        fetch(`https://botsfordiscord.com/api/bots/${client.user.id}`, {
+          method: 'POST',
+          headers: { Authorization: process.env.BOTSFORDISCORD_TOKEN },
+          body: { server_count: client.guilds.size }
+        }).then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
           .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
       }
 
       if (process.env.DBL2_TOKEN) {
-        snekfetch
-          .post(`https://discordbotlist.com/api/bots/${client.user.id}/stats`)
-          .set('Authorization', `Bot ${process.env.DBL2_TOKEN}`)
-          .send({
-            guilds: client.guilds.size,
-            users: client.users.size
-          })
-          .then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
+        fetch(`https://discordbotlist.com/api/bots/${client.user.id}/stats`, {
+          method: 'POST',
+          headers: { Authorization: process.env.DBL2_TOKEN },
+          body: { guilds: client.guilds.size, users: client.users.size }
+        }).then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
           .catch(() => client.log('[31mFailed to post statistics', 'discordbotlist.com'))
       }
     }
 
     postStats(this)
     setInterval(postStats, 1800000, this)
+
+    const emojiLoader = new EmojiLoader(this)
+    emojiLoader.load()
   }
 
   async onMessage (message) {

@@ -1,4 +1,8 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const coins = {
+  heads: 'https://i.imgur.com/yStXPCV.png',
+  tails: 'https://i.imgur.com/kSteyPc.png'
+}
 
 module.exports = class Betflip extends Command {
   constructor (client) {
@@ -20,7 +24,7 @@ module.exports = class Betflip extends Command {
 
     try {
       const { won, chosenSide } = await this.client.modules.economy.betflip(author.id, bet, side)
-      embed.setImage(`https://raw.githubusercontent.com/bolsomito/koi/master/bin/assets/${chosenSide}.png`)
+      embed.setThumbnail(coins[chosenSide])
         .setDescription(t(`commands:betflip.${won ? 'victory' : 'loss'}`, { chosenSide, count: bet }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

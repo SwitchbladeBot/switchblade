@@ -148,4 +148,8 @@ module.exports = class Command {
       subcommands
     }
   }
+
+  getEmoji (emoji) {
+    return this.client.officialEmojis.get(emoji)
+  }
 }

@@ -1,7 +1,5 @@
 const { APIWrapper } = require('../')
-
 const fetch = require('node-fetch')
-const { URLSearchParams } = require('url')
 
 const API_URL = 'http://api.soundcloud.com'
 
@@ -11,8 +9,9 @@ const APP_SCRIPT_CLIENT_ID_REGEX = /,client_id:"([a-zA-Z0-9-_]+)"/
 
 module.exports = class SoundcloudAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'soundcloud'
+    super({
+      name: 'soundcloud'
+    })
 
     this.lastClientIdUpdate = 0
     this.clientId = null
@@ -40,14 +39,16 @@ module.exports = class SoundcloudAPI extends APIWrapper {
     await this.updateClientId()
 
     queryParams['client_id'] = this.clientId
-    const query = new URLSearchParams(queryParams)
-    return fetch(`${API_URL}${endpoint}?${query}`).then(r => r.json()).catch(e => {
-      if (e.statusCode === 401 && tries < 5) {
-        this.lastClientIdUpdate = 0
-        return this.request(endpoint, queryParams, ++tries)
-      }
-      return e
-    })
+    const qParams = new URLSearchParams(queryParams)
+    return fetch(API_URL + endpoint + `?${qParams.toString()}`)
+      .then(res => res.json())
+      .catch(e => {
+        if (e.statusCode === 401 && tries < 5) {
+          this.lastClientIdUpdate = 0
+          return this.request(endpoint, queryParams, ++tries)
+        }
+        return e
+      })
   }
 
   updateClientId () {

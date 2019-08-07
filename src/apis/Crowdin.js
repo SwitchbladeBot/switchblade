@@ -3,9 +3,10 @@ const Crowdin = require('crowdin-without-vulnerability')
 
 module.exports = class CrowdinAPI extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'crowdin'
-    this.envVars = ['CROWDIN_API_KEY', 'CROWDIN_PROJECT_ID']
+    super({
+      name: 'crowdin',
+      envVars: ['CROWDIN_API_KEY', 'CROWDIN_PROJECT_ID']
+    })
   }
 
   load () {

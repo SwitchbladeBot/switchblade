@@ -1,10 +1,11 @@
 const { APIWrapper } = require('../')
-const snekfetch = require('snekfetch')
+const fetch = require('node-fetch')
 
 module.exports = class GoogleTranslate extends APIWrapper {
   constructor () {
-    super()
-    this.name = 'gtranslate'
+    super({
+      name: 'gtranslate'
+    })
   }
 
   /**
@@ -20,7 +21,10 @@ module.exports = class GoogleTranslate extends APIWrapper {
       tl: to,
       q: text
     }
-    const res = await snekfetch.get('https://translate.googleapis.com/translate_a/single?client=gtx&dt=t').query(params).then(r => r.body)
+
+    const URLqueryParams = new URLSearchParams(params)
+    const res = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&dt=t' + `&${URLqueryParams.toString()}`)
+      .then(res => res.json())
 
     return {
       translated: res[0][0][0],
