@@ -39,4 +39,8 @@ module.exports = class ConfigurationModule extends Module {
   async setLanguage (_guild, language) {
     await this.update(_guild, { language })
   }
+
+  async setAutoRoles (_guild, roles) {
+    await this._guilds.update(_guild, { automaticRoles: roles })
+  }
 }

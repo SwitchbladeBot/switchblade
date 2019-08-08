@@ -24,10 +24,43 @@ module.exports = class Guilds extends Route {
     router.get('/:guildId/config', EndpointUtils.authenticate(this), EndpointUtils.handleGuild(this), async (req, res) => {
       const id = req.guildId
       try {
-        const { prefix, language } = await this.client.modules.configuration.retrieve(id)
+        const { prefix, language, automaticRoles } = await this.client.modules.configuration.retrieve(id)
         const availableLanguages = Object.keys(this.client.i18next.store.data)
         res.status(200).json({ id, prefix, language, availableLanguages })
       } catch (e) {
+        res.status(500).json({ error: 'Internal server error!' })
+      }
+    })
+
+    // Editable and non managed roles
+    router.get('/:guildId/roles', async (req, res) => {
+      const guild = this.client.guilds.get(req.params.guildId)
+      if (guild) {
+        const roles = guild.roles
+          .filter(role => role.name !== '@everyone' && !role.managed && role.editable)
+          .map(role => {
+            return {
+              id: role.id,
+              name: role.name,
+              color: role.hexColor === '#000000' ? '#b9bbbe' : role.hexColor, // #000000 = default role color
+              position: role.position
+            }
+          })
+          .sort((a, b) => b.position - a.position)
+        return res.status(200).json({ roles })
+      }
+      res.status(400).json({ error: 'Guild not found!' })
+    })
+
+    // Roles that are toggled as automatic
+    router.get('/:guildId/automatic-roles', EndpointUtils.authenticate(this), EndpointUtils.handleGuild(this), async (req, res) => {
+      const id = req.guildId
+      try {
+        const { automaticRoles } = await this.client.modules.configuration.retrieve(id, 'automaticRoles')
+        const roles = automaticRoles ? automaticRoles.map(role => { return { id: role.id, onlyBots: role.onlyBots } }) : []
+        return res.status(200).json({ roles })
+      } catch (e) {
+        console.log(e)
         res.status(500).json({ error: 'Internal server error!' })
       }
     })
@@ -42,6 +75,20 @@ module.exports = class Guilds extends Route {
           res.status(200).json({ id })
         } catch (e) {
           if (e.isJoi) return res.status(400).json({ error: e.name })
+          res.status(500).json({ error: 'Internal server error!' })
+        }
+      })
+
+    router.patch('/:guildId/autoroles',
+      EndpointUtils.authenticate(this),
+      EndpointUtils.handleGuild(this),
+      async (req, res) => {
+        const id = req.guildId
+        try {
+          await this.client.modules.configuration.setAutoRoles(id, req.body)
+          res.status(200).json({ id })
+        } catch (e) {
+          console.log(e)
           res.status(500).json({ error: 'Internal server error!' })
         }
       })
