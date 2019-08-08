@@ -6,7 +6,6 @@ const AutomaticRoles = new Schema({
   onlyBots: { type: Boolean, required: true }
 })
 
-
 module.exports = new Schema({
   _id: String,
   prefix: String,
