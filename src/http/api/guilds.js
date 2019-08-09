@@ -55,9 +55,12 @@ module.exports = class Guilds extends Route {
     // Roles that are toggled as automatic
     router.get('/:guildId/automatic-roles', EndpointUtils.authenticate(this), EndpointUtils.handleGuild(this), async (req, res) => {
       const id = req.guildId
+      const guild = this.client.guilds.get(id)
       try {
         const { automaticRoles } = await this.client.modules.configuration.retrieve(id, 'automaticRoles')
-        const roles = automaticRoles ? automaticRoles.map(role => { return { id: role.id, onlyBots: role.onlyBots } }) : []
+        const roles = automaticRoles ? automaticRoles.map(role => {
+          return { id: role.id, name: guild.roles.get(role.id).name, onlyBots: role.onlyBots }
+        }) : []
         return res.status(200).json({ roles })
       } catch (e) {
         console.log(e)
@@ -79,7 +82,7 @@ module.exports = class Guilds extends Route {
         }
       })
 
-    router.patch('/:guildId/autoroles',
+    router.patch('/:guildId/automatic-roles',
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {
