@@ -96,6 +96,7 @@ module.exports = class MainListener extends EventListener {
 
   async onMessage (message) {
     if (message.author.bot) return
+    if (message.channel.type !== 'dm' && !message.author.bot) this.modules.leveling.giveExperience(message.author.id)
 
     const guildId = message.guild && message.guild.id
     const { prefix, language } = await this.modules.configuration.retrieve(guildId, 'prefix language')
