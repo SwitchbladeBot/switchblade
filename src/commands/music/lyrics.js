@@ -39,7 +39,7 @@ module.exports = class Lyrics extends Command {
       const body = await this.client.apis.genius.loadLyrics(url)
 
       embed.setAuthor('Genius', 'https://i.imgur.com/NmCTsoF.png')
-        .setDescription(body.length >= 1900 ? `${body.substr(0, 1900)}\n\n[${t('commands:lyrics.fullLyrics')}](http://genius.com${path})` : body)
+        .setDescription(body.length >= 1900 ? `${body.substr(0, 1900)}...\n\n[${t('commands:lyrics.fullLyrics')}](http://genius.com${path})` : body)
         .setThumbnail(thumbnailUrl)
         .setColor(Constants.GENIUS_COLOR)
         .setTitle(`${title} - ${artist}`)
