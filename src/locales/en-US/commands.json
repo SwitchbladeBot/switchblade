@@ -66,7 +66,7 @@
     }
   },
   "github": {
-    "commandDescription": "Searches for a user, repository or an organization on Github.",
+    "commandDescription": "Searches for a user, repository or an organization on GitHub.",
     "commandUsage": "<type> <query>",
     "subcommands": {
       "user": {
