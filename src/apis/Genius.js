@@ -22,6 +22,7 @@ module.exports = class GeniusAPI extends APIWrapper {
     return fetch(url).then(async r => {
       const _ = await r.text()
       const $ = cheerio.load(_)
+      return $('.lyrics') ? $('.lyrics').text().trim() : null
     })
   }
 
