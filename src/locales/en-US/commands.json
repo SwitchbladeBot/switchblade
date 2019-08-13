@@ -91,7 +91,7 @@
         "license": "License"
       },
       "organization": {
-        "commandDescription": "Searches for an organization on Github.",
+        "commandDescription": "Searches for an organization on GitHub.",
         "commandUsage": "<organization name>",
         "noOrg": "You have to give me a valid organization.",
         "orgNotFound": "Organization not found.",
