@@ -19,8 +19,9 @@ module.exports = class GeniusAPI extends APIWrapper {
 
   // Load lyrics from the html
   loadLyrics (url) {
-    return fetch(url).then(r => {
-      const $ = cheerio.load(r.body)
+    return fetch(url).then(async r => {
+      const _ = await r.text()
+      const $ = cheerio.load(_)
       return $('.lyrics') ? $('.lyrics').text().trim() : null
     })
   }
