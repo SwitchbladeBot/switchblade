@@ -17,14 +17,15 @@ module.exports = class ConfigurationModule extends Module {
     return this.client.database.guilds
   }
 
-  retrieve (_guild, projection = 'prefix language') {
+  retrieve (_guild, projection = 'prefix language joinLockMessage') {
     return this._guilds.findOne(_guild, projection)
   }
 
   validateConfiguration (entity) {
     return Joi.validate(entity, Joi.object().keys({
       prefix: Joi.string().min(1).max(50).truncate(),
-      language: Joi.string().valid(Object.keys(this.client.i18next.store.data))
+      language: Joi.string().valid(Object.keys(this.client.i18next.store.data)),
+      joinLockMessage: Joi.string().min(1).max(200).truncate()
     }))
   }
 
@@ -38,5 +39,9 @@ module.exports = class ConfigurationModule extends Module {
 
   async setLanguage (_guild, language) {
     await this.update(_guild, { language })
+  }
+  
+  async setJoinLockMessage (_guild, joinLockMessage) {
+    await this.update(_guild, { joinLockMessage })
   }
 }

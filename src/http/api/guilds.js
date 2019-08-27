@@ -24,9 +24,9 @@ module.exports = class Guilds extends Route {
     router.get('/:guildId/config', EndpointUtils.authenticate(this), EndpointUtils.handleGuild(this), async (req, res) => {
       const id = req.guildId
       try {
-        const { prefix, language } = await this.client.modules.configuration.retrieve(id)
+        const { prefix, language, joinLockMessage } = await this.client.modules.configuration.retrieve(id)
         const availableLanguages = Object.keys(this.client.i18next.store.data)
-        res.status(200).json({ id, prefix, language, availableLanguages })
+        res.status(200).json({ id, prefix, language, availableLanguages, joinLockMessage })
       } catch (e) {
         res.status(500).json({ error: 'Internal server error!' })
       }
