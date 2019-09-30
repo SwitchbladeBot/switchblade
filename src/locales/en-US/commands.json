@@ -1142,6 +1142,9 @@
   "uigradient": {
     "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)."
   },
+  "portugalgonewild": {
+    "commandDescription": "Shows a random image from r/PortugalGoneWild."
+  },
   "tictactoe": {
     "commandDescription": "Challenge someone to a game of Tic Tac Toe.",
     "commandUsage": "<user to challenge>",
