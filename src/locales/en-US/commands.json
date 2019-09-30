@@ -1101,6 +1101,29 @@
         "missing": "You have to give me a valid user!",
         "notFound": "User not found."
       },
+      "top": {
+        "commandDescription": "Gets the top tracks, albums or artists in a period from some Last.fm user",
+        "commandUsage": "<user> <type> [period]",
+        "missingUser": "You have to give me a valid Last.fm user!",
+        "missingType": "You have to give me a valid type: `tracks`, `artists` or `albums`!",
+        "invalidPeriod": "You have to give me a valid period: `overall`, `7day`, `1month`, `3month`, `6month` or `12month`!",
+        "notFound": "User not found.",
+        "noData": "Nothing found.",
+        "title": "{{top}} in {{period}}",
+        "top":{
+          "tracks": "Top tracks",
+          "albums": "Top albums",
+          "artists": "Top artists"
+        },
+        "period":{
+          "overall": "all time",
+          "7day": "a week",
+          "1month": "a month",
+          "3month": "3 months",
+          "6month": "6 months",
+          "12month": "a year"
+        }
+      },
       "love": {
         "commandDescription": "Loves the current song on Last.fm",
         "notConnected": "You have to connect your account to Last.fm to love. [Connect here]({{link}})",
