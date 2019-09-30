@@ -32,18 +32,19 @@ module.exports = class Guilds extends Route {
       }
     })
 
-    // Editable and non managed roles
+    // Every server roles, can be only the editable and manageable ones
     router.get('/:guildId/roles', async (req, res) => {
       const guild = this.client.guilds.get(req.params.guildId)
       if (guild) {
         const roles = guild.roles
-          .filter(role => role.name !== '@everyone' && !role.managed && role.editable)
+          .filter(role => role.name !== '@everyone')
           .map(role => {
             return {
               id: role.id,
               name: role.name,
               color: role.hexColor === '#000000' ? '#b9bbbe' : role.hexColor, // #000000 = default role color
-              position: role.position
+              position: role.position,
+              canModify: !role.manageable && role.editable
             }
           })
           .sort((a, b) => b.position - a.position)
@@ -53,20 +54,22 @@ module.exports = class Guilds extends Route {
     })
 
     // Roles that are toggled as automatic
-    router.get('/:guildId/automatic-roles', EndpointUtils.authenticate(this), EndpointUtils.handleGuild(this), async (req, res) => {
-      const id = req.guildId
-      const guild = this.client.guilds.get(id)
-      try {
-        const { automaticRoles } = await this.client.modules.configuration.retrieve(id, 'automaticRoles')
-        const roles = automaticRoles ? automaticRoles.map(role => {
-          return { id: role.id, name: guild.roles.get(role.id).name, onlyBots: role.onlyBots }
-        }) : []
-        return res.status(200).json({ roles })
-      } catch (e) {
-        console.log(e)
-        res.status(500).json({ error: 'Internal server error!' })
-      }
-    })
+    router.get('/:guildId/automatic-roles',
+      EndpointUtils.authenticate(this),
+      EndpointUtils.handleGuild(this), async (req, res) => {
+        const id = req.guildId
+        const guild = this.client.guilds.get(id)
+        try {
+          const { automaticRoles } = await this.client.modules.configuration.retrieve(id, 'automaticRoles')
+          const roles = automaticRoles ? automaticRoles.map(role => {
+            return { id: role.id, name: guild.roles.get(role.id).name, onlyBots: role.onlyBots }
+          }) : []
+          return res.status(200).json({ roles })
+        } catch (e) {
+          console.log(e)
+          res.status(500).json({ error: 'Internal server error!' })
+        }
+      })
 
     router.patch('/:guildId/config',
       EndpointUtils.authenticate(this),
