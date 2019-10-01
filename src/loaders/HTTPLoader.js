@@ -27,7 +27,7 @@ module.exports = class HTTPLoader extends Loader {
   }
 
   initializeHTTPServer (port = process.env.PORT) {
-    if (!port) return this.log(`[31mHTTP server not started - Required environment variable "PORT" is not set.`, 'HTTP')
+    if (!port) return this.log('[31mHTTP server not started - Required environment variable "PORT" is not set.', 'HTTP')
 
     this.app = express()
     // Use CORS with Express

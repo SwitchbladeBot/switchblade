@@ -56,7 +56,7 @@ module.exports = class EconomyModule extends Module {
   constructor (client) {
     super(client)
     this.name = 'economy'
-    this.submodules = [ new BonusModule(client, this) ]
+    this.submodules = [new BonusModule(client, this)]
   }
 
   canLoad () {

@@ -22,7 +22,7 @@ module.exports = class SpotifyArtist extends SearchCommand {
   async handleResult ({ t, channel, author, language, flags }, { id }) {
     channel.startTyping()
     const { name, genres, followers, images, external_urls: urls } = await this.client.apis.spotify.getArtist(id)
-    const [ cover ] = images.sort((a, b) => b.width - a.width)
+    const [cover] = images.sort((a, b) => b.width - a.width)
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
       .setAuthor(t('commands:spotify.subcommands.artist.artistInfo'), this.embedLogoURL, urls.spotify)

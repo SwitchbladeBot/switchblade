@@ -11,7 +11,7 @@ module.exports = class SoundcloudSong extends Song {
 
   async loadInfo () {
     const sc = this._Soundcloud
-    const [ id, secret ] = this.identifier.split('|')
+    const [id, secret] = this.identifier.split('|')
     const track = await sc.getTrack(id, secret)
     if (track && !track.errors) {
       const artwork = track.artwork_url || (track.user && track.user.avatar_url)

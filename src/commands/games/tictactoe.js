@@ -82,7 +82,7 @@ module.exports = class TicTacToe extends Command {
       return
     }
 
-    let gameState = {
+    const gameState = {
       players: [member, opponent],
       currentPlayer: 0,
       board: [

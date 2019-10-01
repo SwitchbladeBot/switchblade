@@ -9,7 +9,7 @@ module.exports = class MixerSong extends Song {
   }
 
   async loadInfo () {
-    const [ channelId ] = this.identifier.split('|')
+    const [channelId] = this.identifier.split('|')
     const channel = await this._Mixer.getChannel(channelId)
     if (channel) {
       this.richInfo = {

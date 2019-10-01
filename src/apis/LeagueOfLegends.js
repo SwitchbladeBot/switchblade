@@ -1,3 +1,4 @@
+/* eslint-disable no-async-promise-executor */
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
 
@@ -8,14 +9,14 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   constructor () {
     super({
       name: 'lol',
-      envVars: [ 'RIOT_API_KEY' ]
+      envVars: ['RIOT_API_KEY']
     })
 
     this.version = null
   }
 
   async getVersion () {
-    return this.request(`/realms/na.json`).then(data => {
+    return this.request('/realms/na.json').then(data => {
       this.version = data.v
       return data.v
     })

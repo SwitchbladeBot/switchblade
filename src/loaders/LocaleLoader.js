@@ -1,3 +1,4 @@
+/* eslint-disable no-async-promise-executor */
 const { Loader, FileUtils } = require('../')
 
 const i18next = require('i18next')
@@ -43,7 +44,7 @@ module.exports = class LocaleLoader extends Loader {
 
       try {
         i18next.use(translationBackend).init({
-          ns: [ 'categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions', 'moderation', 'lolservers', 'languages' ],
+          ns: ['categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions', 'moderation', 'lolservers', 'languages'],
           preload: await FileUtils.readdir(dirPath),
           fallbackLng: 'en-US',
           backend: {
@@ -71,13 +72,13 @@ module.exports = class LocaleLoader extends Loader {
     const lw = (s) => s.toLowerCase()
     const langs = codes.reduce((o, l) => { o[l] = {}; return o }, {})
     codes.forEach(lc => {
-      let [ language ] = lc.split('-')
+      const [language] = lc.split('-')
       try {
         const { main } = require(`cldr-localenames-modern/main/${language}/languages`)
         const display = main[language].localeDisplayNames.languages
         codes.forEach(l => {
           const langObj = langs[l][lc] = []
-          let [ lcode ] = l.split('-')
+          const [lcode] = l.split('-')
           if (codes.filter(c => c.startsWith(lcode)).length === 1 && display[lcode]) {
             langObj.push(lw(display[lcode]))
           }

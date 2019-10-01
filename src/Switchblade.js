@@ -59,7 +59,7 @@ module.exports = class Switchblade extends Client {
   }
 
   async initializeLoaders () {
-    for (let name in Loaders) {
+    for (const name in Loaders) {
       const loader = new Loaders[name](this)
       let success = false
       try {

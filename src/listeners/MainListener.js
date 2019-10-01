@@ -33,7 +33,7 @@ module.exports = class MainListener extends EventListener {
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
       try {
-        let nodes = JSON.parse(process.env.LAVALINK_NODES)
+        const nodes = JSON.parse(process.env.LAVALINK_NODES)
         if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR')
         this.playerManager = new SwitchbladePlayerManager(this, nodes, {
           user: this.user.id,
@@ -41,7 +41,7 @@ module.exports = class MainListener extends EventListener {
         })
         this.log('[32mLavalink connection established!', 'Music')
       } catch (e) {
-        this.log(`[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, 'Music')
+        this.log('[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.', 'Music')
       }
     }
 

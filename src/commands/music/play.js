@@ -28,9 +28,9 @@ module.exports = class Play extends Command {
 
     const playerManager = this.client.playerManager
     try {
-      const specificSearch = flags['soundcloud'] || flags['youtube']
-      if (flags['soundcloud']) identifier = `scsearch:${identifier.replace(/<?>?/g, '')}`
-      else if (flags['youtube']) identifier = `ytsearch:${identifier.replace(/<?>?/g, '')}`
+      const specificSearch = flags.soundcloud || flags.youtube
+      if (flags.soundcloud) identifier = `scsearch:${identifier.replace(/<?>?/g, '')}`
+      else if (flags.youtube) identifier = `ytsearch:${identifier.replace(/<?>?/g, '')}`
 
       let { result, tryAgain } = await playerManager.loadTracks(identifier.replace(/<?>?/g, ''), author)
       if (tryAgain && !result && !specificSearch) {

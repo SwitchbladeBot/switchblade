@@ -84,7 +84,7 @@ module.exports = class GuildPlayer extends Player {
   }
 
   queueTrack (song, silent = false) {
-    this.queueTracks([ song ], silent)
+    this.queueTracks([song], silent)
     return song
   }
 
@@ -112,7 +112,7 @@ module.exports = class GuildPlayer extends Player {
 
     const songs = this.queue.splice(0, index + 1)
     const song = songs.pop()
-    if (!ignoreLoop && this._loop) this.queueTracks([ this.playingSong, ...songs ])
+    if (!ignoreLoop && this._loop) this.queueTracks([this.playingSong, ...songs])
     this.play(song, true)
 
     return song
@@ -222,6 +222,7 @@ module.exports = class GuildPlayer extends Player {
   updateListening () {
     this._listening.forEach(({ scrobblePercent }, k) => this._listening.set(k, { join: new Date(), scrobblePercent }))
   }
+
   // Last.fm
   async getAbleToScrobble () {
     if (this.playingSong.isSteam) return []

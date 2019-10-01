@@ -1,3 +1,4 @@
+/* eslint-disable no-async-promise-executor */
 const SwitchbladeEmbed = require('../structures/SwitchbladeEmbed')
 
 module.exports = (author, channel, content) => {
