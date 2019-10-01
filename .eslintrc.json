@@ -1,7 +1,3 @@
 {
-    "extends": "standard",
-    "rules" : {
-
-        "": "off"
-    }
+    "extends": "standard"
 }
