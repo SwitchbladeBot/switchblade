@@ -66,7 +66,7 @@
     }
   },
   "github": {
-    "commandDescription": "Searches for a user, repository or an organization on Github.",
+    "commandDescription": "Searches for a user, repository or an organization on GitHub.",
     "commandUsage": "<type> <query>",
     "subcommands": {
       "user": {
@@ -91,7 +91,7 @@
         "license": "License"
       },
       "organization": {
-        "commandDescription": "Searches for an organization on Github.",
+        "commandDescription": "Searches for an organization on GitHub.",
         "commandUsage": "<organization name>",
         "noOrg": "You have to give me a valid organization.",
         "orgNotFound": "Organization not found.",
