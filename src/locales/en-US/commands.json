@@ -1364,8 +1364,8 @@
     "title": "Translation"
   },
   "quieres": {
-    "commandDescription": "Generetes a \"¿Quieres?\" meme with the provided image",
+    "commandDescription": "Generates a \"¿Quieres?\" meme with the provided image.",
     "commandUsage": "<image>",
-    "missingImage": "You need to give me an image to generate the meme with"
+    "missingImage": "You have to give me an image to generate the meme with."
   }
 }
