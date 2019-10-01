@@ -35,6 +35,7 @@ module.exports = class LastfmUserTop extends Command {
       const res1 = res.topalbums || res.topartists || res.toptracks
       const top = this.formatTopList(t, res1)
       const title = t('commands:lastfm.subcommands.top.title', {
+        user,
         top: t('commands:lastfm.subcommands.top.top.' + type),
         period: t('commands:lastfm.subcommands.top.period.' + period)
       })
