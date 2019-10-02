@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
-    "@discordjs/uws": "^11.149.1",
     "abort-controller": "^2.0.3",
     "bufferutil": "^4.0.1",
     "cheerio": "^1.0.0-rc.2",
@@ -44,7 +43,6 @@
     "crowdin-without-vulnerability": "^1.0.0",
     "discord.js": "^11.4.2",
     "discord.js-lavalink": "^2.2.2",
-    "erlpack": "github:discordapp/erlpack",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
     "gifencoder": "^2.0.1",
@@ -65,7 +63,6 @@
     "morgan": "^1.9.1",
     "ms": "^2.1.2",
     "node-fetch": "^2.3.0",
-    "node-opus": "^0.3.1",
     "node-spotify-api": "^1.0.7",
     "pirate-speak": "^1.0.1",
     "rss-parser": "^3.7.0",
@@ -94,6 +91,9 @@
     ]
   },
   "optionalDependencies": {
-    "canvas": "^2.5.0"
+    "@discordjs/uws": "^11.149.1",
+    "canvas": "^2.5.0",
+    "erlpack": "github:discordapp/erlpack",
+    "node-opus": "^0.3.1"
   }
 }
