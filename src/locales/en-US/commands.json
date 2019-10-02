@@ -572,7 +572,7 @@
       "reset": {
         "commandDescription": "Resets emoji usage permission for roles which can use an emoji.",
         "commandUsage": "<emoji>",
-        "resetted": "Resetted emoji usage permission for roles which could use `{{emoji}}`."
+        "reset": "Reset emoji usage permission for roles which could use `{{emoji}}`."
       }
     }
   },
@@ -1357,15 +1357,15 @@
   "translate": {
     "commandDescription": "Translates a text from one language to another.",
     "commandUsage": "<from> <to> <text>",
-    "targetLanguageInvalid": "Target language {{target}} not found. Translated to english.",
+    "targetLanguageInvalid": "Target language {{target}} not found. Translated to English.",
     "translatedFrom": "Translated from",
     "translatedTo": "Translated to",
     "automatic": "(automatic detected)",
     "title": "Translation"
   },
   "quieres": {
-    "commandDescription": "Generetes a \"¿Quieres?\" meme with the provided image",
+    "commandDescription": "Generates a \"¿Quieres?\" meme with the provided image.",
     "commandUsage": "<image>",
-    "missingImage": "You need to give me an image to generate the meme with"
+    "missingImage": "You need to give me an image to generate the meme with."
   }
 }
