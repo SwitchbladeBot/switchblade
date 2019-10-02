@@ -1364,5 +1364,33 @@
     "commandDescription": "Generetes a \"¿Quieres?\" meme with the provided image",
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with"
+  },
+  "soundcloud": {
+    "commandDescription": "Searches for a song, user or playlist on SoundCloud.",
+    "commandUsage": "<type> <query>",
+    "topArtists": "Top artists (1 month)",
+    "createdAt": "Created at",
+    "duration": "Duration",
+    "genre": "Genre",
+    "stats": "Stats",
+    "website": "Website",
+    "tracks": "Tracks",
+    "trackCount": "`{{tracks}}` tracks",
+    "subcommands": {
+      "track": {
+        "commandDescription": "Searches for a song on SoundCloud.",
+        "commandUsage": "<track name>",
+        "stats": "`{{comments}}` Comments\n`{{downloads}}` Downloads\n`{{playbacks}}` Playbacks\n`{{favorites}}` Favorites\n"
+      },
+      "user": {
+        "commandDescription": "Searches for a user on SoundCloud.",
+        "commandUsage": "<user name>",
+        "stats": "`{{tracks}}` Tracks\n`{{playlists}}` Playlists\n`{{followers}}` Followers\n`{{followings}}` Following\n"
+      },
+      "playlist": {
+        "commandDescription": "Searches for a playlist on SoundCloud.",
+        "commandUsage": "<playlist name>"
+      }
+    }
   }
 }

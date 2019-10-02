@@ -1,13 +1,13 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-const types = ['track', 'song', 't', 's', 'album', 'al', 'artist', 'ar', 'playlist', 'p', 'user', 'u', 'podcast', 'pod']
+const types = ['track', 'song', 't', 's', 'playlist', 'playlists', 'p', 'user', 'u']
 
-module.exports = class DeezerCommand extends Command {
+module.exports = class SoundCloudCommand extends Command {
   constructor (client) {
     super(client, {
-      name: 'deezer',
-      aliases: ['dz'],
-      requirements: { apis: ['deezer'] },
+      name: 'soundcloud',
+      aliases: ['sc'],
+      requirements: { apis: ['soundcloud'] },
       parameters: [{
         type: 'string',
         full: true,
@@ -18,7 +18,7 @@ module.exports = class DeezerCommand extends Command {
               this.usage(t, prefix),
               '',
               `__**${t('commons:search.types')}:**__`,
-              `\`${['track', 'album', 'artist', 'playlist', 'user', 'podcast'].join('`, `')}\``
+              `\`${['track', 'playlist', 'user'].join('`, `')}\``
             ].join('\n'))
         }
       }]

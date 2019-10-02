@@ -26,12 +26,28 @@ module.exports = class SoundcloudAPI extends APIWrapper {
     return this.request(`/tracks/${id}`, { secret_token: secret })
   }
 
+  getTrackById (id) {
+    return this.request(`/tracks/${id}`)
+  }
+
+  searchTrack (q) {
+    return this.request('/tracks/', { q })
+  }
+
   getUser (id) {
     return this.request(`/users/${id}`)
   }
 
+  searchUser (q) {
+    return this.request('/users/', { q })
+  }
+
   getPlaylist (id) {
     return this.request(`/playlists/${id}`)
+  }
+
+  searchPlaylist (q) {
+    return this.request('/playlists/', { q })
   }
 
   // Client ID
