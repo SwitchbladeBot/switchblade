@@ -1145,6 +1145,9 @@
   "portugalgonewild": {
     "commandDescription": "Shows a random image from r/PortugalGoneWild."
   },
+  "keanu": {
+    "commandDescription": "Shows a random image from r/KeanuBeingAwesome."
+  },
   "tictactoe": {
     "commandDescription": "Challenge someone to a game of Tic Tac Toe.",
     "commandUsage": "<user to challenge>",
