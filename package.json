@@ -8,7 +8,9 @@
     "start-dev": "nodemon --exec node -r dotenv/config index.js",
     "test": "mocha src/test --recursive",
     "fix": "standard --fix",
-    "crowdin": "crowdin upload sources"
+    "crowdin": "crowdin upload sources",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "standard": {
     "env": [
@@ -73,7 +75,8 @@
     "search-npm-registry": "^2.0.3",
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",
-    "transform-props": "^1.0.1"
+    "transform-props": "^1.0.1",
+    "snyk": "^1.230.5"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
@@ -95,5 +98,6 @@
   },
   "optionalDependencies": {
     "canvas": "^2.5.0"
-  }
+  },
+  "snyk": true
 }
