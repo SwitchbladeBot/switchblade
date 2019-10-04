@@ -6,8 +6,7 @@ module.exports = class CrappyDesign extends RandomRedditPostCommand {
       name: 'crappydesign',
       aliases: ['cd'],
       category: 'memes',
-      subreddit: 'CrappyDesign',
-      titleString: 'commands:crappydesign.title'
+      subreddit: 'CrappyDesign'
     })
   }
 }
