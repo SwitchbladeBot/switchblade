@@ -1364,5 +1364,9 @@
     "commandDescription": "Generetes a \"¿Quieres?\" meme with the provided image",
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with"
+  },
+  "crappydesign": {
+    "commandDescription": "Shows a random image from r/CrappyDesign.",
+    "title": "Here's your crappy design."
   }
 }
