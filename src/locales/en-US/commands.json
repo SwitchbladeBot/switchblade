@@ -1364,5 +1364,12 @@
     "commandDescription": "Generetes a \"¿Quieres?\" meme with the provided image",
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with"
+  },
+  "color": {
+    "commandDescription": "Gets information about a color.",
+    "commandUsage": "<color>",
+    "hex": "Hex",
+    "rgb": "RGB",
+    "hsl": "HSL"
   }
 }
