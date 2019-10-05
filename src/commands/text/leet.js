@@ -51,7 +51,13 @@ module.exports = class Leet extends Command {
   async run ({ channel, flags }, text) {
     const leetTranslation = text
       .split('')
-      .map(char => leetMap[char][flags.hard ? 'hard' : 'soft'])
+      .map(char => {
+        const normalizedChar = char.toLower()
+        const mappedChar = leetMap[normalizedChar]
+        return mappedChar // if char has leet translation
+          ? mappedChar[flags.hard ? 'hard' : 'soft']
+          : char
+      })
       .join('')
     channel.send(leetTranslation)
   }
