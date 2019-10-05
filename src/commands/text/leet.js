@@ -52,7 +52,7 @@ module.exports = class Leet extends Command {
     const leetTranslation = text
       .split('')
       .map(char => {
-        const normalizedChar = char.toLower()
+        const normalizedChar = char.toLowerCase()
         const mappedChar = leetMap[normalizedChar]
         return mappedChar // if char has leet translation
           ? mappedChar[flags.hard ? 'hard' : 'soft']
