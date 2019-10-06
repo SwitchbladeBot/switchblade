@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, SwitchbladeEmbed, CommandError } = require('../../')
 
 module.exports = class FavColor extends Command {
   constructor (client) {
@@ -17,18 +17,16 @@ module.exports = class FavColor extends Command {
 
   async run ({ t, author, channel, userDocument }, color) {
     const hexcode = color.rgb(true)
-    const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
     try {
+      const embed = new SwitchbladeEmbed(author)
       await this.client.modules.social.setFavoriteColor(author.id, hexcode)
       embed.setColor(hexcode)
         .setTitle(t('commands:favcolor.changedSuccessfully', { hexcode }))
+      channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('errors:generic'))
+      throw new CommandError(t('errors:generic'))
     }
-
-    channel.send(embed).then(() => channel.stopTyping())
   }
 }

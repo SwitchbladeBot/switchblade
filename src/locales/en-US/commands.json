@@ -1147,6 +1147,9 @@
   },
   "showerthoughts": {
     "commandDescription": "Shows a random thought from r/Showertoughts."
+},
+  "keanu": {
+    "commandDescription": "Shows a random image from r/KeanuBeingAwesome."
   },
   "tictactoe": {
     "commandDescription": "Challenge someone to a game of Tic Tac Toe.",
@@ -1373,5 +1376,9 @@
     "commandDescription": "Generetes a \"¿Quieres?\" meme with the provided image",
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with"
+  },
+  "crappydesign": {
+    "commandDescription": "Shows a random image from r/CrappyDesign.",
+    "title": "Here's your crappy design."
   }
 }
