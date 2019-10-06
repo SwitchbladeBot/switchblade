@@ -6,5 +6,5 @@ module.exports = {
   HTTPLoader: require('./HTTPLoader.js'),
   CommandLoader: require('./CommandLoader.js'),
   ConnectionLoader: require('./ConnectionLoader.js'),
-  ListenerLoader: require('./ListenerLoader.js')
+  ListenerLoader: require('./ListenerLoader.js') // DON'T MOVE THIS FFS
 }
