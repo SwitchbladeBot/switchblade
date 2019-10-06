@@ -20,7 +20,6 @@ module.exports = class ColorCommand extends Command {
 
     try {
       const colorInfo = await fetch(`http://www.thecolorapi.com/id?format=json&hex=${hexcode}`).then(r => r.json())
-      console.log(hexcode)
       const embed = new SwitchbladeEmbed(author)
       embed.setAuthor(colorInfo.name.value, `https://www.colourlovers.com/img/${hexcode}/50/50/Sminted.png`)
         .setColor(hexcode)
@@ -30,7 +29,6 @@ module.exports = class ColorCommand extends Command {
 
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
-      console.error(e)
       throw new CommandError(t('errors:generic'))
     }
   }
