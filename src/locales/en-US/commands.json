@@ -1374,6 +1374,13 @@
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with"
   },
+  "color": {
+    "commandDescription": "Gets information about a color.",
+    "commandUsage": "<color>",
+    "hex": "Hex",
+    "rgb": "RGB",
+    "hsl": "HSL"
+  },
   "crappydesign": {
     "commandDescription": "Shows a random image from r/CrappyDesign.",
     "title": "Here's your crappy design."
