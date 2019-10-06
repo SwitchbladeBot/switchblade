@@ -1215,6 +1215,9 @@
   "boobs": {
     "commandDescription": "Shows a random image from r/boobs."
   },
+  "crossdressing": {
+    "commandDescription": "Shows a random crossdressing anime image from r/traphentai."
+  },
   "porn": {
     "commandDescription": "Shows a random image from r/porn."
   },
