@@ -17,7 +17,7 @@ module.exports = class BlacklistCommand extends Command {
 
   async run ({ channel, author, t }, user, reason) {
     const embed = new SwitchbladeEmbed(author)
-    await this.client.modules.developer.blacklist(user.id, reason, author.id)
+    await this.client.controllers.developer.blacklist(user.id, reason, author.id)
     embed
       .setTitle(t('commands:blacklist.successTitle'))
       .setDescription(`${user} - \`${reason}\``)

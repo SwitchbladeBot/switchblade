@@ -98,7 +98,7 @@ module.exports = class MainListener extends EventListener {
     if (message.author.bot) return
 
     const guildId = message.guild && message.guild.id
-    const { prefix, language } = await this.modules.configuration.retrieve(guildId, 'prefix language')
+    const { prefix, language } = await this.controllers.configuration.retrieve(guildId, 'prefix language')
 
     const botMention = this.user.toString()
 

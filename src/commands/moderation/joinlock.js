@@ -18,7 +18,7 @@ module.exports = class JoinLock extends Command {
 
     const stateString = newState.toString()
     try {
-      await this.client.modules.moderation.setJoinLock(guild.id, newState)
+      await this.client.controllers.moderation.setJoinLock(guild.id, newState)
       embed.setTitle(`${newState ? '🔒' : '🔓'} ${t('commands:joinlock.success', { context: stateString })}`)
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

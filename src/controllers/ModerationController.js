@@ -1,7 +1,7 @@
-const { Module } = require('../')
+const { Controller } = require('../')
 
 // Moderation
-module.exports = class ModerationModule extends Module {
+module.exports = class ModerationController extends Controller {
   constructor (client) {
     super(client)
     this.name = 'moderation'

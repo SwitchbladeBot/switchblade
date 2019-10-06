@@ -24,7 +24,7 @@ module.exports = class Guilds extends Route {
     router.get('/:guildId/config', EndpointUtils.authenticate(this), EndpointUtils.handleGuild(this), async (req, res) => {
       const id = req.guildId
       try {
-        const { prefix, language } = await this.client.modules.configuration.retrieve(id)
+        const { prefix, language } = await this.client.controllers.configuration.retrieve(id)
         const availableLanguages = Object.keys(this.client.i18next.store.data)
         res.status(200).json({ id, prefix, language, availableLanguages })
       } catch (e) {
@@ -38,7 +38,7 @@ module.exports = class Guilds extends Route {
       async (req, res) => {
         const id = req.guildId
         try {
-          await this.client.modules.configuration.update(id, req.body)
+          await this.client.controllers.configuration.update(id, req.body)
           res.status(200).json({ id })
         } catch (e) {
           if (e.isJoi) return res.status(400).json({ error: e.name })

@@ -1,4 +1,4 @@
-const { Module } = require('../')
+const { Controller } = require('../')
 
 const moment = require('moment')
 const Joi = require('joi')
@@ -13,7 +13,7 @@ class RepCooldownError extends Error {
 }
 
 // Social
-module.exports = class SocialModule extends Module {
+module.exports = class SocialController extends Controller {
   constructor (client) {
     super(client)
     this.name = 'social'
