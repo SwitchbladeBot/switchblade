@@ -37,7 +37,7 @@ module.exports = class Pusheen extends Command {
 
   async run ({ t, author, channel }) {
     channel.startTyping()
-    const posts = await this.client.apis.tumblr.getPhotoPosts('pusheen.com', { offset: Math.floor(Math.random() * 155) })
+    const posts = await this.client.apis.tumblr.getPhotoPosts('pusheen', { offset: Math.floor(Math.random() * 155) })
     const randomPost = getRandom(posts.response.posts)
     const embed = new SwitchbladeEmbed(author)
       .setAuthor(posts.response.blog.title, `https://i.imgur.com/${getRandom(pusheenAvatars)}.png`, randomPost.post_url)
