@@ -16,9 +16,10 @@ module.exports = {
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),
+  Controller: require('./structures/Controller.js'),
   EventListener: require('./structures/EventListener.js'),
   Loader: require('./structures/Loader.js'),
-  Controller: require('./structures/Controller.js'),
+  Module: require('./structures/module/Module.js'),
   Route: require('./structures/Route.js'),
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),
   Webhook: require('./structures/Webhook.js'),

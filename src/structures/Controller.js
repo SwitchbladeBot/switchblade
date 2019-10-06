@@ -1,5 +1,6 @@
 module.exports = class Controller {
   constructor (name, client, parentModule) {
+    this.name = name
     this.client = client
     this.parentModule = parentModule
     this.subcontrollers = []

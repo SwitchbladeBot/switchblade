@@ -46,6 +46,21 @@ module.exports = class Guilds extends Route {
         }
       })
 
+    // Modules
+    router.get('/:guildId/modules',
+      EndpointUtils.authenticate(this),
+      EndpointUtils.handleGuild(this),
+      async (req, res) => {
+        const id = req.guildId
+        try {
+          const modules = await Promise.all(Object.values(this.client.modules).map(m => m.asJSON(id)))
+          res.status(200).json({ modules })
+        } catch (e) {
+          console.error(e)
+          res.status(500).json({ error: 'Internal server error!' })
+        }
+      })
+
     app.use(this.path, router)
   }
 }

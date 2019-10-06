@@ -41,7 +41,7 @@ module.exports = class MongoRepository extends Repository {
     return this.model.findByIdAndRemove(id).then(this.parse)
   }
 
-  update (id, entity, options = { upsert: true }) {
-    return this.model.updateOne({ _id: id }, entity, options)
+  update (id, entity, options = {}) {
+    return this.model.updateOne({ _id: id }, entity, { upsert: true, ...options })
   }
 }
