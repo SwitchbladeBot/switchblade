@@ -48,6 +48,8 @@ module.exports = class CommandLoader extends Loader {
       if (!check) return check
       this.commands.push(command)
     }
+
+    return true
   }
 
   addSubcommand (subCommand) {
