@@ -26,5 +26,4 @@ module.exports = class PrefixModule extends Module {
       spacePrefix: Joi.boolean()
     }))
   }
-
 }

@@ -5,7 +5,7 @@ module.exports = class Module {
 
     this.toggleable = true
     this.defaultState = true // Default active state
-    this.defaultValues = {}  // Default values
+    this.defaultValues = {} // Default values
   }
 
   // Helpers
@@ -43,7 +43,7 @@ module.exports = class Module {
       toggleable: this.toggleable,
       values: {
         ...this.defaultValues,
-        ...(mod && mod.values || {})
+        ...(mod && mod.values ? mod.values : {})
       },
       input: this.specialInput
     }

@@ -21,5 +21,4 @@ module.exports = class LanguageModule extends Module {
       language: Joi.string().valid(Object.keys(this.client.i18next.store.data))
     }))
   }
-
 }
