@@ -802,6 +802,11 @@
     "commandUsage": "<text>",
     "missingSentence": "You have to give me some text to vaporwavefy!"
   },
+  "leet": {
+    "commandDescription": "Leetifies the t3xt.",
+    "commandUsage": "<text>",
+    "missingSentence": "Y0u h4v3 t0 g1v3 m3 s0m3 t3xt t0 l33t1fy!"
+  },
   "emojify": {
     "commandDescription": "Emojifies the text.",
     "commandUsage": "<text>",
