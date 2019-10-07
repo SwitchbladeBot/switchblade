@@ -2,8 +2,7 @@ const { Controller } = require('../')
 
 module.exports = class ConnectionController extends Controller {
   constructor (...args) {
-    super(...args)
-    this.name = 'connection'
+    super('connection', ...args)
   }
 
   get _users () {

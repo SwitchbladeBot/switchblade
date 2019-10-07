@@ -1,5 +1,6 @@
 module.exports = class Controller {
-  constructor (client, parentController) {
+  constructor (name, client, parentController) {
+    this.name = name
     this.client = client
     this.parentController = parentController
     this.subcontrollers = []
@@ -11,9 +12,7 @@ module.exports = class Controller {
 
   load () {
     this.subcontrollers.forEach(subcontroller => {
-      Object.defineProperty(this, subcontroller.name, {
-        get: () => subcontroller
-      })
+      Object.defineProperty(this, subcontroller.name, { get: () => subcontroller })
     })
 
     return this

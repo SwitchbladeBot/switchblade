@@ -5,8 +5,7 @@ const Joi = require('joi')
 // Configuration
 module.exports = class ConfigurationController extends Controller {
   constructor (client) {
-    super(client)
-    this.name = 'configuration'
+    super('configuration', client)
   }
 
   canLoad () {
@@ -29,7 +28,7 @@ module.exports = class ConfigurationController extends Controller {
   }
 
   update (_guild, entity) {
-    return this.validateConfiguration(entity).then(() => this._guilds.update(_guild, entity))
+    return this.validateConfiguration(entity).then(e => this._guilds.update(_guild, e))
   }
 
   async setPrefix (_guild, prefix) {

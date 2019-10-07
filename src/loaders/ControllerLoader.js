@@ -19,8 +19,8 @@ module.exports = class ControllerLoader extends Loader {
   }
 
   /**
-   * Initializes all controller.
-   * @param {string} dirPath - Path to the controller directory
+   * Initializes all controllers.
+   * @param {string} dirPath - Path to the controllers directory
    */
   initializeControllers (dirPath = 'src/controllers') {
     let success = 0
@@ -29,7 +29,7 @@ module.exports = class ControllerLoader extends Loader {
       if (Object.getPrototypeOf(NewController) !== Controller) return
       this.addController(new NewController(this.client)) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
-      this.log(failed ? `[33m${success} controller loaded, ${failed} failed.` : `[32mAll ${success} controller loaded without errors.`, 'Controllers')
+      this.log(failed ? `[33m${success} controllers loaded, ${failed} failed.` : `[32mAll ${success} controllers loaded without errors.`, 'Controllers')
     })
   }
 

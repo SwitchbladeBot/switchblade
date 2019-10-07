@@ -3,8 +3,7 @@ const { Controller } = require('../')
 // Moderation
 module.exports = class ModerationController extends Controller {
   constructor (client) {
-    super(client)
-    this.name = 'moderation'
+    super('moderation', client)
   }
 
   canLoad () {
