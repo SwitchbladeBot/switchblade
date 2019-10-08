@@ -113,8 +113,16 @@ module.exports = class Holidays extends Command {
       category: 'utility',
       parameters: [{
         type: 'string',
-        missingError: 'commands:holidays.noCountry',
-        required: true
+        whitelist: Object.keys(countries),
+        missingError: ({ t }) => {
+          return new SwitchbladeEmbed()
+            .setTitle(t('commands:holidays.invalidCountry'))
+            .setDescription(Object.entries(countries)
+              .map(([countryCode, countryName]) =>
+                `${countryCode} - ${countryName}`
+              ).join('\n')
+            )
+        }
       }, {
         type: 'number',
         required: false,
@@ -126,30 +134,21 @@ module.exports = class Holidays extends Command {
   async run ({ t, author, channel }, countryCode = '', year = moment().year()) {
     const embed = new SwitchbladeEmbed(author)
     const countryName = countries[countryCode.toUpperCase()]
-    if (!countryName) {
-      return channel.send(embed
-        .setTitle(t('commands:holidays.invalidCountry'))
-        .setDescription(Object.entries(countries)
-          .map(([countryCode, countryName]) =>
-            `${countryCode} - ${countryName}`
-          ).join('\n')
-        ))
-    }
 
     try {
       const url = `https://date.nager.at/api/v2/publicholidays/${year}/${countryCode}`
       const holidays = await fetch(url)
         .then(res => res.json())
         .catch(e => {
-          throw new Error(`INVALID_REQUEST: ${e.message}`)
+          throw new CommandError(`INVALID_REQUEST: ${e.message}`)
         })
 
       if (holidays) {
         return channel.send(embed
-          .setTitle(`${t('commands:holidays.title')} ${countryName} ${t('commands:in')} ${year}`)
+          .setTitle(t('commands:holidays.title', { countryName, year }))
           .setDescription(holidays
             .map(({ date, localName, name }) =>
-              `${moment(date).format('Do MMMM')} - ${localName} (${name})`
+              `**${moment(date).format('Do MMMM')}** ${localName}`
             ).join('\n')
           )
         )
