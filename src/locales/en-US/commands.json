@@ -1412,5 +1412,9 @@
   "crappydesign": {
     "commandDescription": "Shows a random image from r/CrappyDesign.",
     "title": "Here's your crappy design."
+  },
+  "httpcat": {
+    "commandDescription": "A cat for every HTTP status!",
+    "commandUsage": "[code]"
   }
 }
