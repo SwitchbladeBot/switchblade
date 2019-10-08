@@ -14,6 +14,7 @@
   "tails": "Tails",
   "youCanDoItAgainIn": "You can do that again in **{{time}}**",
   "to": "to",
+  "in": "in",
   "search": {
     "noType": "Please insert a valid type!",
     "types": "Types",
