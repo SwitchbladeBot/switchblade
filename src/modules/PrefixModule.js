@@ -17,7 +17,7 @@ module.exports = class PrefixModule extends Module {
       spacePrefix: true
     }
 
-    this.specialInput = { prefix: { min: MIN_PREFIX_SIZE, max: MAX_PREFIX_SIZE } }
+    this.specialInput = { prefix: { max: MAX_PREFIX_SIZE } }
   }
 
   validateValues (entity) {

@@ -22,6 +22,13 @@ module.exports = class Module {
   }
 
   // Retrievers
+  isActive (_guild) {
+    return this._guilds.findOne(_guild, this.buildProjection('active')).then(g => {
+      const mod = g.modules.get(this.name)
+      return this.toggleable ? mod ? mod.active : this.defaultState : true
+    })
+  }
+
   retrieve (_guild, _projection = 'active values') {
     return this._guilds.findOne(_guild, this.buildProjection(_projection)).then(g => g.modules.get(this.name))
   }
@@ -55,23 +62,20 @@ module.exports = class Module {
   }
 
   // Updaters
-  async update (_guild, state, values) {
+  async updateValues (_guild, values) {
     return this.validateValues(values).then(entity => {
-      console.log(entity)
-      return this._guilds.update(_guild, {
-        [`modules.${this.name}`]: {
-          active: this.validateState(state),
-          values: entity
-        }
-      })
+      const basePath = `modules.${this.name}.values`
+      const updateEntries = Object.entries(values).reduce((o, [ k, v ]) => {
+        o[`${basePath}.${k}`] = v
+        return o
+      }, {})
+      return this._guilds.update(_guild, updateEntries)
     })
   }
 
   async updateState (_guild, state) {
     return this._guilds.update(_guild, {
-      [`modules.${this.name}`]: {
-        active: this.validateState(state)
-      }
+      [`modules.${this.name}.active`]: this.validateState(state)
     })
   }
 }

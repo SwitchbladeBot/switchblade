@@ -20,32 +20,6 @@ module.exports = class Guilds extends Route {
       res.status(400).json({ error: 'Guild not found!' })
     })
 
-    // Configuration
-    router.get('/:guildId/config', EndpointUtils.authenticate(this), EndpointUtils.handleGuild(this), async (req, res) => {
-      const id = req.guildId
-      try {
-        const { prefix, language } = await this.client.controllers.configuration.retrieve(id)
-        const availableLanguages = Object.keys(this.client.i18next.store.data)
-        res.status(200).json({ id, prefix, language, availableLanguages })
-      } catch (e) {
-        res.status(500).json({ error: 'Internal server error!' })
-      }
-    })
-
-    router.patch('/:guildId/config',
-      EndpointUtils.authenticate(this),
-      EndpointUtils.handleGuild(this),
-      async (req, res) => {
-        const id = req.guildId
-        try {
-          await this.client.controllers.configuration.update(id, req.body)
-          res.status(200).json({ id })
-        } catch (e) {
-          if (e.isJoi) return res.status(400).json({ error: e.name })
-          res.status(500).json({ error: 'Internal server error!' })
-        }
-      })
-
     // Modules
     router.get('/:guildId/modules',
       EndpointUtils.authenticate(this),
@@ -54,9 +28,9 @@ module.exports = class Guilds extends Route {
         const id = req.guildId
         try {
           const modules = await Promise.all(Object.values(this.client.modules).map(m => m.asJSON(id)))
-          console.log(modules)
           res.status(200).json({ modules })
         } catch (e) {
+          this.client.logError(e, 'HTTP/Modules')
           res.status(500).json({ error: 'Internal server error!' })
         }
       })
@@ -73,7 +47,7 @@ module.exports = class Guilds extends Route {
           await mod.updateState(id, !!req.body.active)
           res.status(200).json({ id })
         } catch (e) {
-          if (e.isJoi) return res.status(400).json({ error: e.name })
+          this.client.logError(e, 'HTTP/Modules/State')
           res.status(500).json({ error: 'Internal server error!' })
         }
       })
@@ -87,9 +61,10 @@ module.exports = class Guilds extends Route {
           const mod = this.client.modules[req.params.modName]
           if (!mod) return res.status(404).json({ error: 'Invalid module name!' })
 
-          await mod.update(id, null, req.body.values)
+          await mod.updateValues(id, req.body.values)
           res.status(200).json({ id })
         } catch (e) {
+          this.client.logError(e, 'HTTP/Modules/Values')
           if (e.isJoi) return res.status(400).json({ error: e.name })
           res.status(500).json({ error: 'Internal server error!' })
         }
