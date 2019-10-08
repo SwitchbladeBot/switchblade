@@ -16,7 +16,7 @@ module.exports = class JoinLockModule extends Module {
 
   validateValues (entity) {
     return Joi.validate(entity, Joi.object().keys({
-      message: Joi.string().max(MAX_MESSAGE_SIZE),
+      message: Joi.string().max(MAX_MESSAGE_SIZE)
     }))
   }
 }
