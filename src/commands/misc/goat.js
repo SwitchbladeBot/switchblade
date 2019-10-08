@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-module.exports = class Pay extends Command {
+module.exports = class Goat extends Command {
   constructor (client) {
     super(client, {
       name: 'goat',
