@@ -1115,12 +1115,12 @@
         "notFound": "User not found.",
         "noData": "Nothing found.",
         "title": "{{user}}'s {{top}} in {{period}}",
-        "top":{
+        "top": {
           "tracks": "top tracks",
           "albums": "top albums",
           "artists": "top artists"
         },
-        "period":{
+        "period": {
           "overall": "all time",
           "7day": "a week",
           "1month": "a month",
@@ -1412,5 +1412,9 @@
   "crappydesign": {
     "commandDescription": "Shows a random image from r/CrappyDesign.",
     "title": "Here's your crappy design."
+  },
+  "tunein": {
+    "commandDescription": "Search for radio stations",
+    "commandUsage": "<query>"
   }
 }

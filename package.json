@@ -64,6 +64,7 @@
     "ms": "^2.1.2",
     "node-fetch": "^2.3.0",
     "node-spotify-api": "^1.0.7",
+    "node-tunein-radio": "^0.3.4",
     "pirate-speak": "^1.0.1",
     "rss-parser": "^3.7.0",
     "samp-query": "latest",
