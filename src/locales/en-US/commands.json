@@ -1416,7 +1416,7 @@
   "tunein": {
     "commandDescription": "Search for radio stations",
     "commandUsage": "<query>",
-    "nowPlaying": "Now Playing:",
-    "genre": "Genre:"
+    "nowPlaying": "Now Playing",
+    "genre": "Genre"
   }
 }
