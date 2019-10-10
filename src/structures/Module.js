@@ -81,8 +81,6 @@ module.exports = class Module {
           dbObj['$set'][pathF(k)] = v
         }
       })
-
-      console.log(dbObj)
       return this._guilds.update(_guild, dbObj)
     })
   }
