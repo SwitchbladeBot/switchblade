@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-var TuneIn = require('node-tunein-radio')
+const TuneIn = require('node-tunein-radio')
 
 module.exports = class TuneInAPI extends APIWrapper {
   constructor () {
