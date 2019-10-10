@@ -67,19 +67,27 @@ module.exports = class Module {
   }
 
   // Updaters
-  async updateValues (_guild, values) {
+  updateValues (_guild, values) {
     if (!this.client.database) return
     return this.validateValues(values).then(entity => {
-      const basePath = `modules.${this.name}.values`
-      const updateEntries = Object.entries(values).reduce((o, [ k, v ]) => {
-        o[`${basePath}.${k}`] = v
-        return o
-      }, {})
-      return this._guilds.update(_guild, updateEntries)
+      const pathF = (k) => `modules.${this.name}.values.${k}`
+      const dbObj = {}
+      Object.entries(values).forEach(([ k, v ]) => {
+        if (this.defaultValues[k] === v) {
+          if (!dbObj['$unset']) dbObj['$unset'] = {}
+          dbObj['$unset'][pathF(k)] = ''
+        } else {
+          if (!dbObj['$set']) dbObj['$set'] = {}
+          dbObj['$set'][pathF(k)] = v
+        }
+      })
+
+      console.log(dbObj)
+      return this._guilds.update(_guild, dbObj)
     })
   }
 
-  async updateState (_guild, state) {
+  updateState (_guild, state) {
     if (!this.client.database || !this.toggleable) return
     return this._guilds.update(_guild, {
       [`modules.${this.name}.active`]: this.validateState(state)

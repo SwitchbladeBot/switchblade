@@ -9,9 +9,7 @@ module.exports = class LanguageModule extends Module {
     this.displayName = 'Language'
 
     this.toggleable = false
-    this.defaultValues = {
-      language: 'en-US'
-    }
+    this.defaultValues = { language: 'en-US' }
 
     this.specialInput = { language: { whitelist: Object.keys(this.client.i18next.store.data) } }
   }
