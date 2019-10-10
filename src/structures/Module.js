@@ -23,7 +23,7 @@ module.exports = class Module {
 
   // Retrievers
   isActive (_guild) {
-    if (!this.client.database) return this.defaultState
+    if (!this.client.database || !this.toggleable) return this.defaultState
     return this._guilds.findOne(_guild, this.buildProjection('active')).then(g => {
       const mod = g.modules.get(this.name)
       return this.toggleable ? mod ? mod.active : this.defaultState : true
@@ -80,7 +80,7 @@ module.exports = class Module {
   }
 
   async updateState (_guild, state) {
-    if (!this.client.database) return
+    if (!this.client.database || !this.toggleable) return
     return this._guilds.update(_guild, {
       [`modules.${this.name}.active`]: this.validateState(state)
     })

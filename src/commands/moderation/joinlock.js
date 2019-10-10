@@ -17,7 +17,7 @@ module.exports = class JoinLock extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     const stateString = newState.toString()
-    const currentState = this.client.modules.joinLock.isActive(guild.id)
+    const currentState = await this.client.modules.joinLock.isActive(guild.id)
     try {
       if (currentState === newState) {
         embed.setTitle(t('commands:joinlock.sameValue', { context: stateString }))
