@@ -132,29 +132,31 @@ module.exports = class Holidays extends Command {
   }
 
   async run ({ t, author, channel }, countryCode = '', year = moment().year()) {
-    const embed = new SwitchbladeEmbed(author)
-    const countryName = countries[countryCode.toUpperCase()]
-
     try {
+      channel.startTyping()
+      const embed = new SwitchbladeEmbed(author)
+      const countryName = countries[countryCode.toUpperCase()]
       const url = `https://date.nager.at/api/v2/publicholidays/${year}/${countryCode}`
       const holidays = await fetch(url)
         .then(res => res.json())
         .catch(e => {
-          throw new CommandError(`INVALID_REQUEST: ${e.message}`)
+          throw new CommandError(t('commands:holidays.noInformation'), true)
         })
 
       if (holidays) {
-        return channel.send(embed
+        channel.send(embed
           .setTitle(t('commands:holidays.title', { countryName, year }))
           .setDescription(holidays
-            .map(({ date, localName, name }) =>
+            .map(({ date, localName }) =>
               `**${moment(date).format('Do MMMM')}** ${localName}`
             ).join('\n')
           )
         )
       }
     } catch (e) {
-      throw new CommandError(t('commands:holidays.noInformation'), true)
+      throw new CommandError(t('commons:error'), true)
+    } finally {
+      channel.stopTyping()
     }
   }
 }
