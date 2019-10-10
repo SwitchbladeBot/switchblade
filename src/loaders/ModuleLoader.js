@@ -8,8 +8,6 @@ module.exports = class ModuleLoader extends Loader {
   }
 
   async load () {
-    if (!this.client.database) return false
-
     try {
       await this.initializeModules()
       this.client.modules = this.modules
