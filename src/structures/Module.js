@@ -50,6 +50,7 @@ module.exports = class Module {
     return {
       name: this.name,
       displayName: this.displayName || this.name,
+      description: this.description,
       active: this.toggleable ? mod ? mod.active : this.defaultState : true,
       toggleable: this.toggleable,
       values: {
