@@ -1115,12 +1115,12 @@
         "notFound": "User not found.",
         "noData": "Nothing found.",
         "title": "{{user}}'s {{top}} in {{period}}",
-        "top":{
+        "top": {
           "tracks": "top tracks",
           "albums": "top albums",
           "artists": "top artists"
         },
-        "period":{
+        "period": {
           "overall": "all time",
           "7day": "a week",
           "1month": "a month",
@@ -1412,5 +1412,13 @@
   "crappydesign": {
     "commandDescription": "Shows a random image from r/CrappyDesign.",
     "title": "Here's your crappy design."
+  },
+  "giverole": {
+    "commandDescription": "Gives a role to the target user",
+    "commandUsage": "<member> <role name>",
+    "missingUser": "You have to give me a member to this role!",
+    "noPermission": "I'm missing the **$t(permissions:MANAGE_ROLES)** permission give this role.",
+    "successTitle": "Role gived!",
+    "cantBan": "I can't give this role!"
   }
 }
