@@ -1419,6 +1419,8 @@
     "missingUser": "You have to give me a member to this role!",
     "noPermission": "I'm missing the **$t(permissions:MANAGE_ROLES)** permission give this role.",
     "successTitle": "Role gived!",
-    "cantBan": "I can't give this role!"
+    "cantGiverole": "I can't give this role!",
+    "roleBelow": "Your role is below this member's",
+    "roleAboveAuthors": "You have to give me a role below yours!"
   }
 }
