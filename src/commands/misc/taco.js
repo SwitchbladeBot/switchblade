@@ -10,7 +10,6 @@ module.exports = class Taco extends Command {
   }
 
   async run ({ t, author, channel }) {
-    this.log(taco)
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     const body = await fetch(
