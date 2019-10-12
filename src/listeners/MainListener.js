@@ -98,7 +98,9 @@ module.exports = class MainListener extends EventListener {
     if (message.author.bot) return
 
     const guildId = message.guild && message.guild.id
-    const { prefix, language } = await this.modules.configuration.retrieve(guildId, 'prefix language')
+
+    const { prefix, spacePrefix } = await this.modules.prefix.retrieveValues(guildId, [ 'prefix', 'spacePrefix' ])
+    const language = await this.modules.language.retrieveValue(guildId, 'language')
 
     const botMention = this.user.toString()
 
@@ -106,7 +108,7 @@ module.exports = class MainListener extends EventListener {
     const usedPrefix = sw(botMention, `<@!${this.user.id}>`) ? `${botMention} ` : sw(prefix) ? prefix : null
 
     if (usedPrefix) {
-      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
+      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => !spacePrefix || a)
       const args = fullCmd.slice(1)
       if (!fullCmd.length) return
 
