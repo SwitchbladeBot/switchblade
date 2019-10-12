@@ -15,6 +15,8 @@ module.exports = class SoundCloudTrack extends SearchCommand {
   async search (context, query) {
     const results = await this.client.apis.soundcloud.searchTrack(query)
     return results
+  search (context, query) {
+    return this.client.apis.soundcloud.searchTrack(query)
   }
 
   searchResultFormatter (track) {
