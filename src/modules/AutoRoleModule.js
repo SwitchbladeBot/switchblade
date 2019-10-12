@@ -19,7 +19,7 @@ module.exports = class AutoRoleModule extends Module {
 
   rolesWhitelist (guildId, userId, idOnly = false) {
     const guild = this.client.guilds.get(guildId)
-    if (!guild) return []
+    if (!guild || !userId) return []
     const member = guild.member(userId)
     const filteredRoles = guild.roles
       .filter(r => r.editable && r.id !== guildId && member.highestRole.comparePositionTo(r) > 0)
@@ -34,11 +34,9 @@ module.exports = class AutoRoleModule extends Module {
   validateValues (entity, guildId, userId) {
     const whitelist = this.rolesWhitelist(guildId, userId, true)
     const whitelistSchema = Joi.array().items(Joi.string().valid(...whitelist)).unique().sparse()
-    const { error, value } = Joi.object().keys({
+    return Joi.object().keys({
       userRoles: whitelistSchema,
       botRoles: whitelistSchema
     }).validate(entity)
-    if (error) throw error
-    return value
   }
 }
