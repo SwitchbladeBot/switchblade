@@ -39,7 +39,7 @@ module.exports = class SoundcloudAPI extends APIWrapper {
   }
 
   searchUser (q) {
-    return this.request('/users/', { q })
+    return this.request('/users', { q })
   }
 
   getPlaylist (id) {
