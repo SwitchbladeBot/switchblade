@@ -8,8 +8,6 @@ module.exports = class AutoRoleModule extends Module {
   constructor (client) {
     super('autoRole', client)
     this.displayName = 'Auto Role'
-
-    this.defaultState = false
     this.defaultValues = { userRoles: [], botRoles: [] }
   }
 
