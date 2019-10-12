@@ -76,7 +76,7 @@ module.exports = class Module {
 
     const pathF = (k) => `modules.${this.name}.values.${k}`
     const dbObj = {}
-    Object.entries(values).forEach(([ k, v ]) => {
+    Object.entries(entity).forEach(([ k, v ]) => {
       if (_.isEqual(this.defaultValues[k], v)) {
         if (!dbObj['$unset']) dbObj['$unset'] = {}
         dbObj['$unset'][pathF(k)] = ''

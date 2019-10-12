@@ -3,8 +3,6 @@ const { Role } = require('discord.js')
 
 const Joi = require('@hapi/joi')
 
-const MAX_MESSAGE_SIZE = 250
-
 // Autorole
 module.exports = class AutoRoleModule extends Module {
   constructor (client) {

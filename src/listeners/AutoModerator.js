@@ -27,8 +27,8 @@ module.exports = class AutoModerator extends EventListener {
       const rolesToAdd = member.user.bot && botRoles.length
         ? botRoles
         : !member.user.bot && userRoles.length
-        ? userRoles
-        : null
+          ? userRoles
+          : null
       if (rolesToAdd) member.addRoles(rolesToAdd, 'AutoRole')
     }
   }
