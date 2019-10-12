@@ -47,7 +47,7 @@ module.exports = class SoundcloudAPI extends APIWrapper {
   }
 
   searchPlaylist (q) {
-    return this.request('/playlists/', { q })
+    return this.request('/playlists', { q })
   }
 
   // Client ID
