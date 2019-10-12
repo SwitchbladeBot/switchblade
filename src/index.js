@@ -26,6 +26,7 @@ module.exports = {
   Webhook: require('./structures/Webhook.js'),
 
   // Utils
+  Color: require('./utils/Color.js'),
   Reddit: require('./utils/Reddit.js'),
   Constants: require('./utils/Constants.js'),
   DiscordUtils: require('./utils/DiscordUtils.js'),

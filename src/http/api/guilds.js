@@ -27,7 +27,7 @@ module.exports = class Guilds extends Route {
       async (req, res) => {
         const id = req.guildId
         try {
-          const modules = await Promise.all(Object.values(this.client.modules).map(m => m.asJSON(id)))
+          const modules = await Promise.all(Object.values(this.client.modules).map(m => m.asJSON(id, undefined, req.user.id)))
           res.status(200).json({ modules })
         } catch (e) {
           this.client.logError(e, 'HTTP/Modules')
@@ -44,7 +44,7 @@ module.exports = class Guilds extends Route {
           const mod = this.client.modules[req.params.modName]
           if (!mod) return res.status(404).json({ error: 'Invalid module name!' })
 
-          await mod.updateState(id, !!req.body.active)
+          await mod.updateState(id, !!req.body.active, req.user.id)
           res.status(200).json({ id })
         } catch (e) {
           this.client.logError(e, 'HTTP/Modules/State')
@@ -61,7 +61,7 @@ module.exports = class Guilds extends Route {
           const mod = this.client.modules[req.params.modName]
           if (!mod) return res.status(404).json({ error: 'Invalid module name!' })
 
-          await mod.updateValues(id, req.body.values)
+          await mod.updateValues(id, req.body.values, req.user.id)
           res.status(200).json({ id })
         } catch (e) {
           this.client.logError(e, 'HTTP/Modules/Values')

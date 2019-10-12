@@ -16,8 +16,20 @@ module.exports = class AutoModerator extends EventListener {
       const joinLockMessage = await this.modules.joinLock.retrieveValue(guild.id, 'message')
       const t = this.i18next.getFixedT(language)
       const message = joinLockMessage ? joinLockMessage.replace('{server}', guild.name) : t('moderation:joinLock.defaultPrivateMessage', { guild })
-      member.send(message).catch(() => {})
-      member.kick(t('moderation:joinLock.kickReason'))
+      return member.send(message).catch(() => {}).then(() => {
+        member.kick(t('moderation:joinLock.kickReason'))
+      })
+    }
+
+    const autoRoleActive = await this.modules.autoRole.isActive(guild.id)
+    if (autoRoleActive) {
+      const { userRoles, botRoles } = await this.modules.autoRole.retrieveValues(guild.id, ['userRoles', 'botRoles'])
+      const rolesToAdd = member.user.bot && botRoles.length
+        ? botRoles
+        : !member.user.bot && userRoles.length
+        ? userRoles
+        : null
+      if (rolesToAdd) member.addRoles(rolesToAdd, 'AutoRole')
     }
   }
 }
