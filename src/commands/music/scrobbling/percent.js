@@ -14,12 +14,12 @@ module.exports = class ScrobblingPercent extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
-      const userConnections = await this.client.modules.connection.getConnections(author.id)
+      const userConnections = await this.client.controllers.connection.getConnections(author.id)
       const lastfm = userConnections.find(c => c.name === 'lastfm')
       if (!lastfm) {
         throw new Error('NOT_CONNECTED')
       }
-      const newConfig = await this.client.modules.connection.editConfig(author.id, 'lastfm', { percent })
+      const newConfig = await this.client.controllers.connection.editConfig(author.id, 'lastfm', { percent })
       embed.setDescription(t('commands:scrobbling.subcommands.percent.changed', { percent: newConfig.percent }))
       await channel.send(embed)
     } catch (e) {

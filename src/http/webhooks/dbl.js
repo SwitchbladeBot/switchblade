@@ -18,7 +18,7 @@ module.exports = class DBL extends Webhook {
     router.post('/', cors(corsOptions), EndpointUtils.handleDBLPayload(), async (req, res) => {
       const user = this.client.users.get(req.body.user)
       try {
-        const { collectedMoney } = await this.client.modules.economy.bonus.claimDBLBonus(user.id)
+        const { collectedMoney } = await this.client.controllers.economy.bonus.claimDBLBonus(user.id)
         user.send(new SwitchbladeEmbed(user)
           .setDescription(`**Thanks for voting on DBL!** You've received **${collectedMoney} Switchcoins** as a bonus.`))
         return res.status(200).json({ message: 'OK' })
