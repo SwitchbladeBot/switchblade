@@ -15,7 +15,9 @@ module.exports = class Guilds extends Route {
       const guild = this.client.guilds.get(req.params.guildId)
       if (guild) {
         const { id, name, icon, members: { size } } = guild
-        return res.status(200).json({ id, name, icon, memberCount: size })
+        const userMembers = guild.members.filter(m => !m.user.bot).size
+        const botMembers = size - userMembers
+        return res.status(200).json({ id, name, icon, totalMembers: size, userMembers, botMembers })
       }
       res.status(400).json({ error: 'Guild not found!' })
     })
