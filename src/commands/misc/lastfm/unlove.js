@@ -14,7 +14,7 @@ module.exports = class LastfmUnloveTrack extends Command {
     try {
       channel.startTyping()
       const embed = new SwitchbladeEmbed(author)
-      const userConnections = await this.client.modules.connection.getConnections(author.id)
+      const userConnections = await this.client.controllers.connection.getConnections(author.id)
       const lastfm = userConnections.find(c => c.name === 'lastfm')
       if (!lastfm) {
         throw new CommandError(t('commands:lastfm.subcommands.unlove.notConnected', { link: `${process.env.DASHBOARD_URL}/profile` }))

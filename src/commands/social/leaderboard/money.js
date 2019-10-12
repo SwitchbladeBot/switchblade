@@ -13,7 +13,7 @@ module.exports = class MoneyLeaderboard extends Command {
   async run ({ t, author, channel }) {
     channel.startTyping()
 
-    const top = await this.client.modules.social.leaderboard('money')
+    const top = await this.client.controllers.social.leaderboard('money')
     const leaderboard = await CanvasTemplates.leaderboard({ t }, top, {
       icon: Constants.COINS_SVG,
       iconWidth: 48,

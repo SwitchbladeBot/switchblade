@@ -43,12 +43,7 @@ module.exports = class ModuleLoader extends Loader {
       return false
     }
 
-    if (module.canLoad() !== true) {
-      this.log(`[31m${module.name} failed to load - ${module.canLoad() || 'canLoad function did not return true.'}`, 'Modules')
-      return false
-    }
-
-    this.modules[module.name] = module.load()
+    this.modules[module.name] = module
     return true
   }
 }

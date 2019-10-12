@@ -14,7 +14,7 @@ module.exports = class Users extends Route {
     router.get('/:userId/money', EndpointUtils.authenticate(this), EndpointUtils.handleUser(this), async (req, res) => {
       const id = req.userId
       try {
-        const money = await this.client.modules.economy.balance(id)
+        const money = await this.client.controllers.economy.balance(id)
         res.status(200).json({ id, money })
       } catch (e) {
         res.status(500).json({ error: 'Internal server error!' })
@@ -25,7 +25,7 @@ module.exports = class Users extends Route {
     router.get('/:userId/profile', EndpointUtils.authenticate(this), EndpointUtils.handleUser(this), async (req, res) => {
       const id = req.userId
       try {
-        const { money, rep, personalText, favColor } = await this.client.modules.social.retrieveProfile(id)
+        const { money, rep, personalText, favColor } = await this.client.controllers.social.retrieveProfile(id)
         res.status(200).json({ id, money, rep, personalText, favColor })
       } catch (e) {
         res.status(500).json({ error: 'Internal server error!' })
@@ -38,7 +38,7 @@ module.exports = class Users extends Route {
       async (req, res) => {
         const id = req.userId
         try {
-          await this.client.modules.social.updateProfile(id, req.body)
+          await this.client.controllers.social.updateProfile(id, req.body)
           res.status(200).json({ id })
         } catch (e) {
           if (e.isJoi) return res.status(400).json({ error: e.name })
@@ -52,7 +52,7 @@ module.exports = class Users extends Route {
       async (req, res) => {
         const id = req.userId
         try {
-          const userConnections = await this.client.modules.connection.getConnectionsFiltered(id)
+          const userConnections = await this.client.controllers.connection.getConnectionsFiltered(id)
 
           res.status(200).json(userConnections)
         } catch (e) {
@@ -68,7 +68,7 @@ module.exports = class Users extends Route {
         const id = req.userId
         const conn = req.params.connection
         try {
-          const newConfig = await this.client.modules.connection.editConfig(id, conn, req.body)
+          const newConfig = await this.client.controllers.connection.editConfig(id, conn, req.body)
           res.status(200).json(newConfig)
         } catch (e) {
           if (e.isJoi) return res.status(400).json({ error: e.name })
@@ -83,7 +83,7 @@ module.exports = class Users extends Route {
         const id = req.userId
         const conn = req.params.connection
         try {
-          await this.client.modules.connection.disconnectUser(id, conn)
+          await this.client.controllers.connection.disconnectUser(id, conn)
           res.status(200).json({ success: true })
         } catch (e) {
           if (e.isJoi) return res.status(400).json({ error: e.name })

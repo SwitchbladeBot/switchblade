@@ -1,6 +1,6 @@
 const { Loader, Connection, FileUtils } = require('../')
 
-module.exports = class ModuleLoader extends Loader {
+module.exports = class ConnectionLoader extends Loader {
   constructor (client) {
     super(client)
 
@@ -20,7 +20,7 @@ module.exports = class ModuleLoader extends Loader {
 
   /**
    * Initializes all connections.
-   * @param {string} dirPath - Path to the modules directory
+   * @param {string} dirPath - Path to the connections directory
    */
   initializeConnections (dirPath = 'src/connections') {
     let success = 0
@@ -35,7 +35,7 @@ module.exports = class ModuleLoader extends Loader {
 
   /**
    * Adds a new Connection to the Client.
-   * @param {Connection} connection - Module to be added
+   * @param {Connection} connection - Connection to be added
    */
   addConnection (connection) {
     if (!(connection instanceof Connection)) {

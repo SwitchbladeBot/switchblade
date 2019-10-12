@@ -8,7 +8,6 @@ module.exports = class LeagueOfLegendsChampion extends Command {
       name: 'champion',
       aliases: ['champ', 'c'],
       parentCommand: 'leagueoflegends',
-      requirements: { apis: ['lol'] },
       parameters: [{
         type: 'string', full: true, missingError: 'commands:leagueoflegends.subcommands.champion.noChampion'
       }]

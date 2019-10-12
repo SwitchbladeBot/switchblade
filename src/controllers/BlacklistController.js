@@ -1,10 +1,9 @@
-const { Module } = require('../')
+const { Controller } = require('../')
 
 // Developer
-module.exports = class DeveloperModule extends Module {
+module.exports = class DeveloperController extends Controller {
   constructor (client) {
-    super(client)
-    this.name = 'developer'
+    super('developer', client)
   }
 
   canLoad () {

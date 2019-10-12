@@ -19,6 +19,7 @@ module.exports = {
   Connection: require('./structures/Connection.js'),
   EventListener: require('./structures/EventListener.js'),
   Loader: require('./structures/Loader.js'),
+  Controller: require('./structures/Controller.js'),
   Module: require('./structures/Module.js'),
   Route: require('./structures/Route.js'),
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),

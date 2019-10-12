@@ -1,21 +1,94 @@
 module.exports = class Module {
-  constructor (client, parentModule) {
+  constructor (name, client) {
+    this.name = name
     this.client = client
-    this.parentModule = parentModule
-    this.submodules = []
+
+    this.toggleable = true
+    this.defaultState = true // Default active state
+    this.defaultValues = {} // Default values
   }
 
-  canLoad () {
-    return true
+  // Helpers
+  get _guilds () {
+    return this.client.database.guilds
   }
 
-  load () {
-    this.submodules.forEach(submodule => {
-      Object.defineProperty(this, submodule.name, {
-        get: () => submodule
-      })
+  buildProjection (fields) {
+    return fields.split(' ').map(f => `modules.${this.name}.${f}`).join(' ')
+  }
+
+  validateState (state) {
+    return this.toggleable ? typeof state !== 'boolean' ? this.defaultState : state : true
+  }
+
+  // Retrievers
+  isActive (_guild) {
+    if (!this.client.database || !this.toggleable) return this.defaultState
+    return this._guilds.findOne(_guild, this.buildProjection('active')).then(g => {
+      const mod = g.modules.get(this.name)
+      return this.toggleable ? mod ? mod.active : this.defaultState : true
     })
+  }
 
-    return this
+  retrieve (_guild, _projection = 'active values') {
+    if (!this.client.database) return { active: this.defaultState, values: this.defaultValues }
+    return this._guilds.findOne(_guild, this.buildProjection(_projection)).then(g => g.modules.get(this.name))
+  }
+
+  retrieveValue (_guild, value) {
+    if (!this.client.database) return this.defaultValues[value]
+    return this.asJSON(_guild, `values.${value}`).then(r => r.values[value])
+  }
+
+  retrieveValues (_guild, values) {
+    if (!this.client.database) return this.defaultValues
+    return this.asJSON(_guild, values.map(v => `values.${v}`).join(' ')).then(r => r.values)
+  }
+
+  async asJSON (_guild, _projection) {
+    const mod = await this.retrieve(_guild, _projection)
+    return {
+      name: this.name,
+      displayName: this.displayName || this.name,
+      description: this.description,
+      active: this.toggleable ? mod ? mod.active : this.defaultState : true,
+      toggleable: this.toggleable,
+      values: {
+        ...this.defaultValues,
+        ...(mod && mod.values ? mod.values : {})
+      },
+      input: this.specialInput
+    }
+  }
+
+  // Validation
+  validateValues (entity) {
+    return Promise.resolve(entity)
+  }
+
+  // Updaters
+  updateValues (_guild, values) {
+    if (!this.client.database) return
+    return this.validateValues(values).then(entity => {
+      const pathF = (k) => `modules.${this.name}.values.${k}`
+      const dbObj = {}
+      Object.entries(values).forEach(([ k, v ]) => {
+        if (this.defaultValues[k] === v) {
+          if (!dbObj['$unset']) dbObj['$unset'] = {}
+          dbObj['$unset'][pathF(k)] = ''
+        } else {
+          if (!dbObj['$set']) dbObj['$set'] = {}
+          dbObj['$set'][pathF(k)] = v
+        }
+      })
+      return this._guilds.update(_guild, dbObj)
+    })
+  }
+
+  updateState (_guild, state) {
+    if (!this.client.database || !this.toggleable) return
+    return this._guilds.update(_guild, {
+      [`modules.${this.name}.active`]: this.validateState(state)
+    })
   }
 }
