@@ -64,7 +64,6 @@ module.exports = class Guilds extends Route {
           await mod.updateValues(id, req.body.values, req.user.id)
           res.status(200).json({ id })
         } catch (e) {
-          console.log(e)
           this.client.logError(e, 'HTTP/Modules/Values')
           if (e.isJoi) return res.status(400).json({ error: e.name })
           res.status(500).json({ error: 'Internal server error!' })
