@@ -6,7 +6,7 @@ module.exports = class Module {
     this.client = client
 
     this.toggleable = true
-    this.defaultState = !this.toggleable // Default active state
+    this.defaultState = true // Default active state
     this.defaultValues = {} // Default values
   }
 

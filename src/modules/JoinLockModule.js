@@ -10,6 +10,7 @@ module.exports = class JoinLockModule extends Module {
     super('joinLock', client)
     this.displayName = 'Join Lock'
 
+    this.defaultState = false
     this.defaultValues = { message: '' }
     this.specialInput = { message: { max: MAX_MESSAGE_SIZE } }
   }
