@@ -14,7 +14,7 @@ module.exports = class Scrobbling extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
       .setTitle(t('commands:scrobbling.title'))
-    const userConnections = await this.client.modules.connection.getConnections(author.id)
+    const userConnections = await this.client.controllers.connection.getConnections(author.id)
     const lastfm = userConnections.find(c => c.name === 'lastfm')
     const link = `${process.env.DASHBOARD_URL}/profile`
     if (!lastfm) {

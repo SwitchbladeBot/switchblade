@@ -41,22 +41,18 @@ module.exports = class CommandLoader extends Loader {
    * @param {Command} command - Command to be added
    */
   addCommand (command) {
-    const check = this.checkCommand(command)
-    if (!check) return check
-
     if (typeof command.parentCommand === 'string' || Array.isArray(command.parentCommand)) {
       this.posLoadCommands.push(command)
     } else {
+      const check = this.checkCommand(command)
+      if (!check) return check
       this.commands.push(command)
     }
 
-    return check
+    return true
   }
 
   addSubcommand (subCommand) {
-    const check = this.checkCommand(subCommand)
-    if (!check) return check
-
     let parentCommand
     if (typeof subCommand.parentCommand === 'string') {
       parentCommand = this.commands.find(c => c.name === subCommand.parentCommand)
@@ -78,6 +74,7 @@ module.exports = class CommandLoader extends Loader {
       return false
     }
 
+    const check = this.checkCommand(subCommand)
     return check
   }
 
