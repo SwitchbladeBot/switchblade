@@ -14,7 +14,7 @@ module.exports = class UserConnections extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     try {
-      const userConnections = await this.client.modules.connection.getConnectionsFiltered(author.id)
+      const userConnections = await this.client.controllers.connection.getConnectionsFiltered(author.id)
       const connections = userConnections.map(conn => {
         const emoji = this.getEmoji(conn.name.toLowerCase())
         return conn.connected

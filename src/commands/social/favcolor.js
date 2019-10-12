@@ -21,7 +21,7 @@ module.exports = class FavColor extends Command {
 
     try {
       const embed = new SwitchbladeEmbed(author)
-      await this.client.modules.social.setFavoriteColor(author.id, hexcode)
+      await this.client.controllers.social.setFavoriteColor(author.id, hexcode)
       embed.setColor(hexcode)
         .setTitle(t('commands:favcolor.changedSuccessfully', { hexcode }))
       channel.send(embed).then(() => channel.stopTyping())
