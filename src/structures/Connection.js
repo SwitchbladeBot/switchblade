@@ -30,7 +30,7 @@ module.exports = class Connection {
 
   async callbackHandler (req) {
     const tokens = await this.callback(req)
-    const connect = await this.client.modules.connection.connect(req.userId, this, tokens)
+    const connect = await this.client.controllers.connection.connect(req.userId, this, tokens)
     return connect
   }
 }

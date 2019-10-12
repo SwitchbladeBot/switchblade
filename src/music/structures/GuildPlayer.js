@@ -207,7 +207,7 @@ module.exports = class GuildPlayer extends Player {
   }
 
   async handleNewJoin (user, isSwitch = false) {
-    const connections = await this.client.modules.connection.getConnections(user)
+    const connections = await this.client.controllers.connection.getConnections(user)
     const lastfm = connections.find(c => c.name === 'lastfm')
     if (!lastfm) return
     this._listening.set(user, { join: new Date(), scrobblePercent: lastfm.config.percent })
@@ -226,7 +226,7 @@ module.exports = class GuildPlayer extends Player {
   async getAbleToScrobble () {
     if (this.playingSong.isSteam) return []
     const map = this._listening.map(async (s, u) => {
-      const connections = await this.client.modules.connection.getConnections(u)
+      const connections = await this.client.controllers.connection.getConnections(u)
       const user = { id: u, config: s }
       return { user, lastfm: connections.find(c => c.name === 'lastfm') }
     })

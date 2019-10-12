@@ -5,7 +5,6 @@
 
   [![support][support-badge]][support-invite]
   [![crowdin][crowdin-badge]][crowdin-url]
-  [![dependencies][dependencies-badge]][dependencies-url]
   [![jetbrains][jetbrains-badge]][jetbrains-url]
   [![codeclimate][codeclimate-badge]][codeclimate-url]
   [![circleci][circleci-badge]][circleci-url]
@@ -142,9 +141,6 @@ Backers are the people who contribute to our projects monetarily. They get their
 
 [crowdin-url]: https://translate.switchblade.xyz
 [crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
-
-[dependencies-url]: https://david-dm.org/SwitchbladeBot/switchblade/
-[dependencies-badge]: https://david-dm.org/SwitchbladeBot/switchblade/status.svg
 
 [jetbrains-url]: https://www.jetbrains.com/?from=switchblade/
 [jetbrains-badge]: https://img.shields.io/badge/Powered%20by%20JetBrains-gray.svg?logo=webstorm

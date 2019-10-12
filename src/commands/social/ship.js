@@ -39,7 +39,7 @@ module.exports = class Ship extends Command {
     const users = [first, second].map(async user => {
       return {
         tag: user.tag,
-        document: await this.client.modules.social.retrieveProfile(user.id),
+        document: await this.client.controllers.social.retrieveProfile(user.id),
         profile: user.displayAvatarURL.replace('.gif', '.png')
       }
     })
