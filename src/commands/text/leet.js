@@ -34,16 +34,17 @@ module.exports = class Leet extends Command {
     super(client, {
       name: 'leet',
       category: 'memes',
-      parameters: [{
-        type: 'booleanFlag',
-        name: 'hard',
-        aliases: [ 'hc', '#4I2|D', 'hardcore' ]
-      },
-      {
-        type: 'string',
-        full: true,
-        missingError: 'commands:leet.missingSentence'
-      }
+      parameters: [
+        {
+          type: 'string',
+          full: true,
+          missingError: 'commands:leet.missingSentence'
+        },
+        [{
+          type: 'booleanFlag',
+          name: 'hard',
+          aliases: [ 'hc', '#4I2|D', 'hardcore' ]
+        }]
       ]
     })
   }

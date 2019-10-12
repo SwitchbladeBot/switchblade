@@ -25,7 +25,7 @@ module.exports = class Pay extends Command {
     channel.startTyping()
 
     try {
-      await this.client.modules.economy.transfer(author.id, receiver.id, value)
+      await this.client.controllers.economy.transfer(author.id, receiver.id, value)
       embed.setDescription(t('commands:pay.transactionSuccessful', { receiver, value }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)
