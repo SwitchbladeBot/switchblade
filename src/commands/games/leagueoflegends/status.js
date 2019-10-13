@@ -10,7 +10,6 @@ module.exports = class LeagueOfLegendsStatus extends Command {
       aliases: ['s'],
       category: 'games',
       parentCommand: 'leagueoflegends',
-      category: 'games',
       parameters: [{
         type: 'string',
         whitelist: servers,
