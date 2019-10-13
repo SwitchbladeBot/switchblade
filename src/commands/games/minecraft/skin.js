@@ -8,6 +8,7 @@ module.exports = class MinecraftSkin extends Command {
     super(client, {
       name: 'skin',
       aliases: ['minecraftskin', 'mskin', 's'],
+      category: 'games',
       parentCommand: 'minecraft',
       parameters: [{
         type: 'string',
