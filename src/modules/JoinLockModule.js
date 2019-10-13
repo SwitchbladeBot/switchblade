@@ -1,6 +1,6 @@
 const { Module } = require('../')
 
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 
 const MAX_MESSAGE_SIZE = 250
 
@@ -16,8 +16,8 @@ module.exports = class JoinLockModule extends Module {
   }
 
   validateValues (entity) {
-    return Joi.validate(entity, Joi.object().keys({
-      message: Joi.string().max(MAX_MESSAGE_SIZE)
-    }))
+    return Joi.object().keys({
+      message: Joi.string().max(MAX_MESSAGE_SIZE).allow('').optional()
+    }).validate(entity)
   }
 }
