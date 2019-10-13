@@ -19,7 +19,7 @@ module.exports = class MinecraftServer extends Command {
 
   async run ({ t, author, channel, language }, address) {
     channel.startTyping()
-    const [ host, port = 25565 ] = address.split(':')
+    const [host, port = 25565] = address.split(':')
     const body = await fetch(`https://mcapi.us/server/status?ip=${host}&port=${port}`).then(res => res.json())
 
     if (body.online) {

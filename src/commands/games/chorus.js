@@ -110,6 +110,6 @@ module.exports = class Chorus extends SearchCommand {
   }
 
   getNotePerSecondRating (t, average) {
-    return average > 15 ? t(`commands:chorus.noteDensityRatings.15`) : t(`commands:chorus.noteDensityRatings.${average >> 0}`)
+    return average > 15 ? t('commands:chorus.noteDensityRatings.15') : t(`commands:chorus.noteDensityRatings.${average >> 0}`)
   }
 }

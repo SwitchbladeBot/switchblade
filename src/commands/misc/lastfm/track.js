@@ -31,7 +31,7 @@ module.exports = class LastfmTrack extends SearchCommand {
       .setThumbnail(trackInfo.image[3]['#text'])
 
     try {
-      let { track } = await this.client.apis.lastfm.getTrackInfo(trackInfo.name, trackInfo.artist, language.split('-')[0])
+      const { track } = await this.client.apis.lastfm.getTrackInfo(trackInfo.name, trackInfo.artist, language.split('-')[0])
 
       embed.addField(t('commands:lastfm.playcount'), MiscUtils.formatNumber(track.playcount, language), true)
 
@@ -43,7 +43,7 @@ module.exports = class LastfmTrack extends SearchCommand {
       }
       embed.addField(t('commands:lastfm.tags'), track.toptags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
       if (track.wiki) {
-        let regex = this.parentCommand.READ_MORE_REGEX.exec(track.wiki.summary)
+        const regex = this.parentCommand.READ_MORE_REGEX.exec(track.wiki.summary)
         embed.setDescription(`${track.wiki.summary.replace(this.parentCommand.READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
       }
     } catch (e) {

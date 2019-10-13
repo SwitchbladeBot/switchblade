@@ -59,7 +59,7 @@ module.exports = class SteamLadder extends Command {
     if (ladderType === 'age') ladderType = 'steam_age'
     if (regionOrCountry) regionOrCountry = regionOrCountry.toLowerCase()
 
-    let embed = new SwitchbladeEmbed(author)
+    const embed = new SwitchbladeEmbed(author)
     try {
       const steamLadderResponse = await this.client.apis.steamladder.getLadder(ladderType, regionOrCountry)
       embed

@@ -14,7 +14,7 @@ module.exports = class EmojiParameter extends Parameter {
   static parse (arg, { t, client, guild }) {
     const regexResult = EMOJI_REGEX.exec(arg)
     if (regexResult) {
-      const [ ,,, id ] = regexResult
+      const [,,, id] = regexResult
       const emoji = client.emojis.get(id)
       if (!emoji) throw new CommandError(t('errors:invalidEmoji'), this.showUsage)
       if (this.sameGuildOnly && emoji.guild.id !== guild.id) throw new CommandError(t('errors:emojiNotFromSameGuild'))

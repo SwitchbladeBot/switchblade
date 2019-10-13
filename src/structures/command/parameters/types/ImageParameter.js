@@ -16,7 +16,7 @@ const isValidURL = (q) => {
 }
 
 const MAX_SIZE = 20000000
-const SUPPORTED_TYPES = [ 'image/jpeg', 'image/png', 'image/svg+xml' ]
+const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml']
 const imageResponseCheck = (res) => (
   res.ok && SUPPORTED_TYPES.includes(res.headers.get('content-type')) &&
   res.headers.has('content-length') && Number(res.headers.get('content-length')) <= MAX_SIZE

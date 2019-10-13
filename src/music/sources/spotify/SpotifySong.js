@@ -11,7 +11,7 @@ module.exports = class SpotifySong extends Song {
     this.uri = track.external_urls.spotify
 
     if (album) {
-      const [ cover ] = album.images.sort((a, b) => b.width - a.width)
+      const [cover] = album.images.sort((a, b) => b.width - a.width)
       this.artwork = cover.url
     }
 

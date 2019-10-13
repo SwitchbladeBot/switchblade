@@ -18,7 +18,7 @@ module.exports = class BeatSaver extends Command {
   async run ({ t, author, channel }, query) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
-    let url = await parseQuery(query)
+    const url = await parseQuery(query)
 
     if (!url) {
       embed

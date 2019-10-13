@@ -15,14 +15,14 @@ const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
 
 // Region resolver
 const defaultRegions = {
-  asia: [ 'sydney', 'singapore', 'japan', 'hongkong' ],
-  eu: [ 'london', 'frankfurt', 'amsterdam', 'russia', 'eu-central', 'eu-west', 'southafrica' ],
-  us: [ 'us-central', 'us-west', 'us-east', 'us-south' ],
-  sam: [ 'brazil' ]
+  asia: ['sydney', 'singapore', 'japan', 'hongkong'],
+  eu: ['london', 'frankfurt', 'amsterdam', 'russia', 'eu-central', 'eu-west', 'southafrica'],
+  us: ['us-central', 'us-west', 'us-east', 'us-south'],
+  sam: ['brazil']
 }
 const resolveRegion = (region) => {
   region = region.replace('vip-', '')
-  const dRegion = Object.entries(defaultRegions).find(([ , r ]) => r.includes(region))
+  const dRegion = Object.entries(defaultRegions).find(([, r]) => r.includes(region))
   return dRegion && dRegion[0]
 }
 
@@ -71,7 +71,7 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     if (songs && songs.length > 0) {
       const searchResult = new SongSearchResult(songs.searchResult)
       if (songs.searchResult || songs.length === 1) {
-        const [ song ] = songs
+        const [song] = songs
         const source = song.info.source = MusicUtils.getSongSource(song)
 
         switch (source) {

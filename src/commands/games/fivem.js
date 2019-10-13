@@ -30,7 +30,7 @@ module.exports = class FiveM extends Command {
       const serverData = JSON.parse(server.body)
       const imageData = Buffer.from(serverData.icon.replace(/^data:image\/([\w+]+);base64,([\s\S]+)/, ''), 'base64')
       await this.getAllServers().then(function (servers) {
-        for (let serv of servers) {
+        for (const serv of servers) {
           if (serv.EndPoint === `${host}:${port}`) serverData.data = serv.Data
         }
       })
