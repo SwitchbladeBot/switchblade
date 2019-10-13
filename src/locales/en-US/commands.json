@@ -802,6 +802,11 @@
     "commandUsage": "<text>",
     "missingSentence": "You have to give me some text to vaporwavefy!"
   },
+  "leet": {
+    "commandDescription": "Leetifies the t3xt.",
+    "commandUsage": "<text>",
+    "missingSentence": "Y0u h4v3 t0 g1v3 m3 s0m3 t3xt t0 l33t1fy!"
+  },
   "emojify": {
     "commandDescription": "Emojifies the text.",
     "commandUsage": "<text>",
@@ -1101,6 +1106,29 @@
         "missing": "You have to give me a valid user!",
         "notFound": "User not found."
       },
+      "top": {
+        "commandDescription": "Gets the top tracks, albums or artists in a period from some Last.fm user",
+        "commandUsage": "<user> <type> [period]",
+        "missingUser": "You have to give me a valid Last.fm user!",
+        "missingType": "You have to give me a valid type: `tracks`, `artists` or `albums`!",
+        "invalidPeriod": "You have to give me a valid period: `overall`, `7day`, `1month`, `3month`, `6month` or `12month`!",
+        "notFound": "User not found.",
+        "noData": "Nothing found.",
+        "title": "{{user}}'s {{top}} in {{period}}",
+        "top":{
+          "tracks": "top tracks",
+          "albums": "top albums",
+          "artists": "top artists"
+        },
+        "period":{
+          "overall": "all time",
+          "7day": "a week",
+          "1month": "a month",
+          "3month": "3 months",
+          "6month": "6 months",
+          "12month": "a year"
+        }
+      },
       "love": {
         "commandDescription": "Loves the current song on Last.fm",
         "notConnected": "You have to connect your account to Last.fm to love. [Connect here]({{link}})",
@@ -1144,6 +1172,9 @@
   },
   "portugalgonewild": {
     "commandDescription": "Shows a random image from r/PortugalGoneWild."
+  },
+  "keanu": {
+    "commandDescription": "Shows a random image from r/KeanuBeingAwesome."
   },
   "tictactoe": {
     "commandDescription": "Challenge someone to a game of Tic Tac Toe.",
@@ -1211,6 +1242,9 @@
   },
   "boobs": {
     "commandDescription": "Shows a random image from r/boobs."
+  },
+  "crossdressing": {
+    "commandDescription": "Shows a random crossdressing anime image from r/traphentai."
   },
   "porn": {
     "commandDescription": "Shows a random image from r/porn."
@@ -1367,5 +1401,16 @@
     "commandDescription": "Generates a \"¿Quieres?\" meme with the provided image.",
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with."
+  },
+  "color": {
+    "commandDescription": "Gets information about a color.",
+    "commandUsage": "<color>",
+    "hex": "Hex",
+    "rgb": "RGB",
+    "hsl": "HSL"
+  },
+  "crappydesign": {
+    "commandDescription": "Shows a random image from r/CrappyDesign.",
+    "title": "Here's your crappy design."
   }
 }
