@@ -128,6 +128,11 @@ module.exports = class MainListener extends EventListener {
           language
         })
 
+        if (context.guild) {
+          const verify = await this.modules.commands.verifyCommand(command, context)
+          if (!verify) return
+        }
+
         this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
         this.runCommand(command, context, args, language)
       }
