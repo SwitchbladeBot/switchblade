@@ -46,7 +46,7 @@ Switchblade has over 130 commands, and having to update a list here would be unp
 
 <h2 align="center">Music</h2>
 
-We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **YouYube**, **SoundCloud**, **Spotify**, **Deezer**, **Mixer**, **Twitch**, and many more. In order to provide you ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection avaliable to the voice server you're in.
+We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **YouTube**, **SoundCloud**, **Spotify**, **Deezer**, **Mixer**, **Twitch**, and many more. In order to provide you ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection available to the voice server you're in.
 
 To play a song, join a voice channel and type **`s!play <query>`**. The `<query>` can be anything you want, from a song name to a **Spotify playlist URL**, we've got you covered!
 
@@ -80,7 +80,7 @@ If you know how to code in JavaScript, then feel free to give [one of the existe
 
 ### Reporting bugs
 
-Found something crashes the bot? Something isn't working like intended? Please let us know! Whenever you find a bug flying around, [try using one of these](https://gist.githubusercontent.com/pedrofracassi/fa560c3932eb4438e6033203cc8058bc/raw/37440ba7d730a9c539865f72ebc9992eb32d6b7e/bug.jpg). If that doesn't work, don't hesitate to [write a bug report](https://github.com/SwitchbladeBot/switchblade/issues/new?template=Bug_report.md). Please give us as much information as you can, preferrably filling all of the fields provided on the template.
+Found something crashes the bot? Something isn't working like intended? Please let us know! Whenever you find a bug flying around, [try using one of these](https://gist.githubusercontent.com/pedrofracassi/fa560c3932eb4438e6033203cc8058bc/raw/37440ba7d730a9c539865f72ebc9992eb32d6b7e/bug.jpg). If that doesn't work, don't hesitate to [write a bug report](https://github.com/SwitchbladeBot/switchblade/issues/new?template=Bug_report.md). Please give us as much information as you can, preferably filling all of the fields provided on the template.
 
 ### Triaging bug reports
 
