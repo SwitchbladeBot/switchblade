@@ -1,6 +1,6 @@
 const { Module } = require('../')
 
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 
 // Language
 module.exports = class LanguageModule extends Module {
@@ -15,8 +15,8 @@ module.exports = class LanguageModule extends Module {
   }
 
   validateValues (entity) {
-    return Joi.validate(entity, Joi.object().keys({
-      language: Joi.string().valid(Object.keys(this.client.i18next.store.data))
-    }))
+    return Joi.object().keys({
+      language: Joi.string().valid(...Object.keys(this.client.i18next.store.data))
+    }).validate(entity)
   }
 }

@@ -1,6 +1,6 @@
 const { Module } = require('../')
 
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 
 const MIN_PREFIX_SIZE = 1
 const MAX_PREFIX_SIZE = 50
@@ -21,9 +21,9 @@ module.exports = class PrefixModule extends Module {
   }
 
   validateValues (entity) {
-    return Joi.validate(entity, Joi.object().keys({
+    return Joi.object().keys({
       prefix: Joi.string().min(MIN_PREFIX_SIZE).max(MAX_PREFIX_SIZE).truncate(),
       spacePrefix: Joi.boolean()
-    }))
+    }).validate(entity)
   }
 }
