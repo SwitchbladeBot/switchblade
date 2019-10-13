@@ -7,7 +7,7 @@ module.exports = class LeagueOfLegends extends Command {
     super(client, {
       name: 'leagueoflegends',
       aliases: ['lol'],
-      category: 'games'
+      category: 'games',
       requirements: { apis: ['lol'] },
       parameters: [{
         type: 'string',
