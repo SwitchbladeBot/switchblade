@@ -5,6 +5,7 @@ module.exports = class LeagueOfLegendsRotation extends Command {
     super(client, {
       name: 'rotation',
       aliases: ['r'],
+      category: 'games',
       parentCommand: 'leagueoflegends',
       parameters: [[{
         type: 'booleanFlag', name: 'newplayers', aliases: ['np']

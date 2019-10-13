@@ -8,6 +8,7 @@ module.exports = class LeagueOfLegendsStatus extends Command {
     super(client, {
       name: 'status',
       aliases: ['s'],
+      category: 'games',
       parentCommand: 'leagueoflegends',
       category: 'games',
       parameters: [{
