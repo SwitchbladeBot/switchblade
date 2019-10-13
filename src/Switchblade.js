@@ -51,9 +51,22 @@ module.exports = class Switchblade extends Client {
    * @param {Array<string>} args - Array of command arguments
    * @param {String} language - Code for the language that the command will be executed in
    */
-  runCommand (command, context, args, language) {
+  async runCommand (command, context, args, language) {
+    // Command rules
+    if (context.guild && !command.hidden) {
+      const deepSubcmd = (c, a) => {
+        const [ arg ] = a
+        const cmd = c.subcommands ?
+          c.subcommands.find(s => s.name.toLowerCase() === arg || (s.aliases && s.aliases.includes(arg))) :
+          null
+        return cmd ? deepSubcmd(cmd, a.slice(1)) : c
+      }
+      const verify = await this.modules.commands.verifyCommand(deepSubcmd(command, args), context)
+      if (!verify) return
+    }
+
     context.setFixedT(this.i18next.getFixedT(language))
-    command._run(context, args).catch(this.logError)
+    return command._run(context, args).catch(this.logError)
   }
 
   async initializeLoaders () {

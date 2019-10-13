@@ -1,6 +1,7 @@
 const { Module } = require('../')
 const { Role } = require('discord.js')
 
+const _ = require('lodash')
 const Joi = require('@hapi/joi')
 
 // Helpers
@@ -26,6 +27,7 @@ module.exports = class CommandsModule extends Module {
 
     this.toggleable = false
     this.defaultValues = {
+      all: {},
       commands: {},
       categories: {}
     }
@@ -48,78 +50,78 @@ module.exports = class CommandsModule extends Module {
     }
 
     const commands = this.client.commands.reduce((a, c) => addCommand(a, c), [])
+    commands.push({
+      name: 'all commands',
+      aliases: [ '*' ],
+      category: 'all'
+    })
     return { commands }
   }
 
   async verifyCommand (command, { guild, channel, member }) {
+    // if (member.hasPermission('ADMINISTRATOR')) return true
+
     const allCommands = recPaths(command)
-    const { commands, categories } = await this.retrieveValues(guild.id, [
+    const { commands, categories, all } = await this.retrieveValues(guild.id, [
       ...allCommands.map(commandsPath),
-      `categories.${command.category}`
+      `categories.${command.category}`,
+      'all'
     ])
+
+    // Typefilter
+    const tf = (t) => (r) => r.type === t
+
+    // Verify
+    const verify = (whitelist, blacklist, end = () => true) => {
+      if (!whitelist.length && !blacklist.length) return end()
+
+      // User whitelist
+      if (whitelist.filter(tf('user')).some(r => r.id === member.id)) return true
+      // User blacklist
+      if (blacklist.filter(tf('user')).some(r => r.id === member.id)) return false
+
+      // Roles
+      const wRoles = whitelist.filter(tf('role')).map(r => member.roles.get(r.id)).filter(r => !!r).sort(Role.comparePositions)
+      const bRoles = blacklist.filter(tf('role')).map(r => member.roles.get(r.id)).filter(r => !!r).sort(Role.comparePositions)
+      if (wRoles.length && !bRoles.length) return true
+      else if (!wRoles.length && bRoles.length) return false
+      else if (wRoles.length && bRoles.length) {
+        return wRoles.pop().comparePositionTo(bRoles.pop()) > 0
+      }
+
+      // Channel whitelist
+      if (whitelist.filter(tf('channel')).some(c => c.id === channel.id)) return true
+      // Channel blacklist
+      if (blacklist.filter(tf('channel')).some(c => c.id === channel.id)) return false
+
+      if (channel.parentID) {
+        // Category whitelist
+        if (whitelist.filter(tf('category')).some(c => c.id === channel.parentID)) return true
+        // Category blacklist
+        if (blacklist.filter(tf('category')).some(c => c.id === channel.parentID)) return false
+      }
+
+      // All whitelist
+      if (whitelist.some(tf('all'))) return true
+      // All blacklist
+      if (blacklist.some(tf('all'))) return false
+
+      return end()
+    }
 
     // Check
     const { whitelist: catWhitelist = [], blacklist: catBlacklist = [] } = categories[command.category] || {}
-
-    const whitelist = allCommands.reduce((a, p) => (a.concat((commands[p] || {}).whitelist || [])), []).concat(catWhitelist)
-    const blacklist = allCommands.reduce((a, p) => (a.concat((commands[p] || {}).blacklist || [])), []).concat(catBlacklist)
-
-    const checkConditions = (whitelist, blacklist) => {
-      let userCheck = null
-      let roleCheck = null
-      let channelCheck = null
-      let categoryCheck = null
-
-      if (whitelist.length) {
-        const channelTypes = whitelist.filter(r => r.type === 'channel')
-        channelCheck = channelTypes.length ? channelTypes.some(r => channel.id === r.id) : null
-
-        const categoryTypes = whitelist.filter(r => r.type === 'category')
-        categoryCheck = categoryTypes.length ? categoryTypes.some(r => (
-          channel.parentID && channel.parentID === r.id
-        )) : null
-
-        const userTypes = whitelist.filter(r => r.type === 'user')
-        userCheck = userTypes.length ? userTypes.some(r => member.id === r.id) : null
-
-        const roleTypes = whitelist.filter(r => r.type === 'role')
-        roleCheck = roleTypes.length ? roleTypes.some(r => member.roles.has(r.id)) : null
-      }
-
-      if (blacklist.length) {
-        if (channelCheck === null) {
-          const bChannelTypes = blacklist.filter(r => r.type === 'channel')
-          channelCheck = bChannelTypes.length ? bChannelTypes.every(r => channel.id !== r.id) : true
-        }
-
-        if (categoryCheck === null) {
-          const bCategoryTypes = blacklist.filter(r => r.type === 'category')
-          categoryCheck = bCategoryTypes.length ? bCategoryTypes.every(r => (
-            !channel.parentID || channel.parentID !== r.id
-          )) : true
-        }
-
-        if (userCheck === null) {
-          const bUserTypes = blacklist.filter(r => r.type === 'user')
-          userCheck = bUserTypes.length ? bUserTypes.every(r => member.id !== r.id) : true
-        }
-
-        if (roleCheck === null) {
-          const bRoleTypes = blacklist.filter(r => r.type === 'role')
-          roleCheck = bRoleTypes.length ? bRoleTypes.every(r => !member.roles.has(r.id)) : true
-        }
-      } else {
-        if (channelCheck === null) channelCheck = true
-        if (categoryCheck === null) categoryCheck = true
-        if (userCheck === null) userCheck = true
-        if (roleCheck === null) roleCheck = true
-      }
-
-      return channelCheck && categoryCheck && userCheck && roleCheck
+    const { whitelist: allWhitelist = [], blacklist: allBlacklist = [] } = all || {}
+    const check = (command) => {
+      const path = parseName(command)
+      const { blacklist = [], whitelist = [] } = commands[path] || {}
+      console.log(path, whitelist, blacklist)
+      return verify(whitelist, blacklist, () => (command.parentCommand ?
+        check(command.parentCommand) :
+        verify(catWhitelist, catBlacklist, () => verify(allWhitelist, allBlacklist))
+      ))
     }
-
-    console.log(whitelist, blacklist)
-    return checkConditions(whitelist, blacklist)
+    return check(command)
   }
 
   // API Methods
@@ -128,13 +130,6 @@ module.exports = class CommandsModule extends Module {
 
     const guild = this.client.guilds.get(guildId)
     if (!guild) return { status: 400 }
-
-    const command = findCommand(this.client.commands, cmd)
-    if (!command) return { status: 400 }
-
-    const path = parseName(command)
-    console.log(commandsPath(path))
-    const { commands: { [path]: data } } = await this.retrieveValues(guildId, [ commandsPath(path) ])
 
     const mapValues = (v) => {
       const o = {
@@ -145,22 +140,42 @@ module.exports = class CommandsModule extends Module {
       switch (v.type) {
         case 'category':
         case 'channel':
-          o.name = guild.channels.get(v.id).name
+          const channel = guild.channels.get(v.id)
+          if (!channel) o.missing = true
+          else o.name = channel.name
           break
         case 'role':
-          o.name = guild.roles.get(v.id).name
+          const role = guild.roles.get(v.id)
+          if (!role) o.missing = true
+          else o.name = role.name
           break
         case 'user':
           const m = guild.member(v.id)
-          o.name = m.user.username
-          o.discriminator = m.user.discriminator
-          o.displayName = m.displayName
+          if (!m) o.missing = true
+          else {
+            o.name = m.user.username
+            o.discriminator = m.user.discriminator
+            o.displayName = m.displayName
+          }
       }
 
       return o
     }
 
-    console.log(data)
+    if (cmd === 'all') {
+      const all = await this.retrieveValue(guildId, 'all')
+      return { payload : {
+        whitelist: all && all.whitelist ? all.whitelist.map(mapValues) : [],
+        blacklist: all && all.blacklist ? all.blacklist.map(mapValues) : []
+      } }
+    }
+
+    const command = findCommand(this.client.commands, cmd)
+    if (!command) return { status: 400 }
+
+    const path = parseName(command)
+    const { commands: { [path]: data } } = await this.retrieveValues(guildId, [ commandsPath(path) ])
+    console.log(commandsPath(path), data)
     return { payload: {
       whitelist: data && data.whitelist ? data.whitelist.map(mapValues) : [],
       blacklist: data && data.blacklist ? data.blacklist.map(mapValues) : []
@@ -170,25 +185,45 @@ module.exports = class CommandsModule extends Module {
   async saveCommand (guildId, userId, { cmd, values } = {}) {
     if (!cmd || typeof cmd !== 'string') return { status: 400 }
 
-    const command = findCommand(this.client.commands, cmd)
+    const command = cmd !== 'all' ? findCommand(this.client.commands, cmd) : true
     if (!command) return { status: 400 }
 
-    const path = commandsPath(parseName(command))
-    console.log(path)
-    // Validate values
+    // Validate
     const candidates = this.fetchAllCandidates(guildId, userId)
-    const schema = Joi.array().items(Joi.object().keys({
-      id: Joi.string().valid(...candidates),
-      type: Joi.string().valid('channel', 'category', 'role', 'user')
-    }).unknown())
-    const { error: wError, value: wValue } = schema.validate(values.whitelist)
-    const { error: bError, value: bValue } = schema.validate(values.blacklist)
-    console.log(wValue, bValue)
-    if (wError || bError) throw wError || bError
+    const validate = (l) => {
+      if (!l || !Array.isArray(l)) return false
+      return l.every(o => {
+        if (!o || typeof o !== 'object' || !o.type || !o.id) return false
+        switch (o.type) {
+          case 'all':
+            return o.id === 'all'
+          default:
+            return candidates.includes(o.id)
+        }
+      })
+    }
+    
+    // Check
+    const { whitelist, blacklist } = values
+    const valid = validate(whitelist) && validate(blacklist)
+    console.log(valid)
+    if (!valid || whitelist.find(v => blacklist.find(oV => _.isEqual(v, oV)))) throw new Error('INVALID_LIST')
 
+    // Clear?
+    const path = cmd !== 'all' ? commandsPath(parseName(command)) : 'all'
+    console.log(path)
+    if (!whitelist.length && !blacklist.length) {
+      await this._guilds.update(guildId, { $unset: { [`modules.${this.name}.values.${path}`]: '' } })
+      return { ok: true }
+    }
+
+    // Update
     const defMap = (o) => ({ id: o.id, type: o.type })
     await this.updateValues(guildId, {
-      [path]: { whitelist: wValue.map(defMap), blacklist: bValue.map(defMap) }
+      [path]: {
+        whitelist: whitelist.map(defMap),
+        blacklist: blacklist.map(defMap)
+      }
     }, null, false)
 
     return { ok: true }
@@ -278,7 +313,8 @@ module.exports = class CommandsModule extends Module {
       ...filteredCategories,
       ...filteredChannels,
       ...filteredRoles,
-      ...filteredUsers
+      ...filteredUsers,
+      { type: 'all', id: 'all' }
     ] } }
   }
 }
