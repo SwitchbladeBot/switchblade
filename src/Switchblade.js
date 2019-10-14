@@ -61,7 +61,7 @@ module.exports = class Switchblade extends Client {
           : null
         return cmd ? deepSubcmd(cmd, a.slice(1)) : c
       }
-      const verify = await this.modules.commands.verifyCommand(deepSubcmd(command, args), context)
+      const verify = await this.modules.commandRules.verifyCommand(deepSubcmd(command, args), context)
       if (!verify) return
     }
 

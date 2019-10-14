@@ -92,7 +92,6 @@ module.exports = class Guilds extends Route {
           } = await mod[methodName](id, req.user.id, req.body, req, res) || {}
           res.status(status).json(payload)
         } catch (e) {
-          console.error(e)
           this.client.logError(e, 'HTTP/Modules/Methods')
           if (e.isJoi) return res.status(400).json({ error: e.name })
           res.status(500).json({ error: 'Internal server error!' })

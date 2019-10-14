@@ -21,8 +21,8 @@ const findCommand = (commands, path) => {
 // Commands
 module.exports = class CommandsModule extends Module {
   constructor (client) {
-    super('commands', client)
-    this.displayName = 'Commands'
+    super('commandRules', client)
+    this.displayName = 'Command Rules'
 
     this.toggleable = false
     this.defaultValues = {
@@ -114,7 +114,6 @@ module.exports = class CommandsModule extends Module {
     const check = (command) => {
       const path = parseName(command)
       const { blacklist = [], whitelist = [] } = commands[path] || {}
-      console.log(path, whitelist, blacklist)
       return verify(whitelist, blacklist, () => (
         command.parentCommand
           ? check(command.parentCommand)
@@ -175,7 +174,6 @@ module.exports = class CommandsModule extends Module {
 
     const path = parseName(command)
     const { commands: { [path]: data } } = await this.retrieveValues(guildId, [ commandsPath(path) ])
-    console.log(commandsPath(path), data)
     return { payload: {
       whitelist: data && data.whitelist ? data.whitelist.map(mapValues) : [],
       blacklist: data && data.blacklist ? data.blacklist.map(mapValues) : []
@@ -206,12 +204,10 @@ module.exports = class CommandsModule extends Module {
     // Check
     const { whitelist, blacklist } = values
     const valid = validate(whitelist) && validate(blacklist)
-    console.log(valid)
     if (!valid || whitelist.find(v => blacklist.find(oV => _.isEqual(v, oV)))) throw new Error('INVALID_LIST')
 
     // Clear?
     const path = cmd !== 'all' ? commandsPath(parseName(command)) : 'all'
-    console.log(path)
     if (!whitelist.length && !blacklist.length) {
       await this._guilds.update(guildId, { $unset: { [`modules.${this.name}.values.${path}`]: '' } })
       return { ok: true }
