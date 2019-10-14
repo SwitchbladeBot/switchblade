@@ -117,8 +117,8 @@ module.exports = class CommandsModule extends Module {
       console.log(path, whitelist, blacklist)
       return verify(whitelist, blacklist, () => (
         command.parentCommand
-        ? check(command.parentCommand)
-        : verify(catWhitelist, catBlacklist, () => verify(allWhitelist, allBlacklist))
+          ? check(command.parentCommand)
+          : verify(catWhitelist, catBlacklist, () => verify(allWhitelist, allBlacklist))
       ))
     }
     return check(command)
