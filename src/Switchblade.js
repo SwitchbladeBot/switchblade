@@ -56,9 +56,9 @@ module.exports = class Switchblade extends Client {
     if (context.guild && !command.hidden) {
       const deepSubcmd = (c, a) => {
         const [ arg ] = a
-        const cmd = c.subcommands ?
-          c.subcommands.find(s => s.name.toLowerCase() === arg || (s.aliases && s.aliases.includes(arg))) :
-          null
+        const cmd = c.subcommands
+          ? c.subcommands.find(s => s.name.toLowerCase() === arg || (s.aliases && s.aliases.includes(arg)))
+          : null
         return cmd ? deepSubcmd(cmd, a.slice(1)) : c
       }
       const verify = await this.modules.commands.verifyCommand(deepSubcmd(command, args), context)

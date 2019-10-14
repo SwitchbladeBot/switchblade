@@ -2,7 +2,6 @@ const { Module } = require('../')
 const { Role } = require('discord.js')
 
 const _ = require('lodash')
-const Joi = require('@hapi/joi')
 
 // Helpers
 const parseName = (c) => c.fullName.replace(/\s+/g, '__')
@@ -116,9 +115,10 @@ module.exports = class CommandsModule extends Module {
       const path = parseName(command)
       const { blacklist = [], whitelist = [] } = commands[path] || {}
       console.log(path, whitelist, blacklist)
-      return verify(whitelist, blacklist, () => (command.parentCommand ?
-        check(command.parentCommand) :
-        verify(catWhitelist, catBlacklist, () => verify(allWhitelist, allBlacklist))
+      return verify(whitelist, blacklist, () => (
+        command.parentCommand
+        ? check(command.parentCommand)
+        : verify(catWhitelist, catBlacklist, () => verify(allWhitelist, allBlacklist))
       ))
     }
     return check(command)
@@ -164,7 +164,7 @@ module.exports = class CommandsModule extends Module {
 
     if (cmd === 'all') {
       const all = await this.retrieveValue(guildId, 'all')
-      return { payload : {
+      return { payload: {
         whitelist: all && all.whitelist ? all.whitelist.map(mapValues) : [],
         blacklist: all && all.blacklist ? all.blacklist.map(mapValues) : []
       } }
@@ -202,7 +202,7 @@ module.exports = class CommandsModule extends Module {
         }
       })
     }
-    
+
     // Check
     const { whitelist, blacklist } = values
     const valid = validate(whitelist) && validate(blacklist)
