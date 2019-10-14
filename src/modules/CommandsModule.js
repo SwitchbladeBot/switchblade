@@ -231,7 +231,7 @@ module.exports = class CommandsModule extends Module {
     if (!valid || whitelist.find(v => blacklist.find(oV => _.isEqual(v, oV)))) throw new Error('INVALID_LIST')
 
     // Clear?
-    const path = cmd !== 'all' ? isCategory ? categoriesPath(command) : commandsPath(parseName(command)) : 'all'
+    const path = cmd !== 'all' ? isCategory ? categoriesPath(parseString(command)) : commandsPath(parseName(command)) : 'all'
     if (!whitelist.length && !blacklist.length) {
       await this._guilds.update(guildId, { $unset: { [`modules.${this.name}.values.${path}`]: '' } })
       return { ok: true }
