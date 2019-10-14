@@ -4,8 +4,10 @@ const { Role } = require('discord.js')
 const _ = require('lodash')
 
 // Helpers
-const parseName = (c) => c.fullName.replace(/\s+/g, '__')
+const parseString = (s) => s.replace(/\s+/g, '__')
+const parseName = (c) => parseString(c.fullName)
 const commandsPath = (c) => `commands.${c}`
+const categoriesPath = (c) => `categories.${c}`
 const recPaths = (c) => {
   const arr = [parseName(c)]
   return c.parentCommand ? arr.concat(recPaths(c.parentCommand)) : arr
@@ -16,6 +18,14 @@ const findCommand = (commands, path) => {
   const [ c, ...sc ] = path.split(/\s+/)
   const cmd = findCA(commands, c)
   return cmd ? sc.length ? sc.reduce((s, n) => findCA(s, n), cmd.subcommands) : cmd : null
+}
+
+const categoryExists = (client, category) => {
+  const categories = client.commands
+    .filter(c => !c.hidden)
+    .map(c => c.category)
+    .filter((v, i, a) => a.indexOf(v) === i)
+  return categories.includes(category)
 }
 
 // Commands
@@ -49,12 +59,18 @@ module.exports = class CommandsModule extends Module {
     }
 
     const commands = this.client.commands.reduce((a, c) => addCommand(a, c), [])
-    commands.push({
-      name: 'all commands',
-      aliases: [ '*' ],
-      category: 'all'
-    })
-    return { commands }
+    const categories = commands.map(c => c.category).filter((v, i, a) => a.indexOf(v) === i)
+    return {
+      commands: commands.concat(categories.map(c => ({
+        name: c,
+        aliases: [],
+        category: 'category'
+      })), [{
+        name: 'all commands',
+        aliases: [ '*' ],
+        category: 'all'
+      }])
+    }
   }
 
   async verifyCommand (command, { guild, channel, member }) {
@@ -63,7 +79,7 @@ module.exports = class CommandsModule extends Module {
     const allCommands = recPaths(command)
     const { commands, categories, all } = await this.retrieveValues(guild.id, [
       ...allCommands.map(commandsPath),
-      `categories.${command.category}`,
+      categoriesPath(command.category),
       'all'
     ])
 
@@ -124,7 +140,7 @@ module.exports = class CommandsModule extends Module {
   }
 
   // API Methods
-  async retrieveCommand (guildId, userId, { cmd } = {}) {
+  async retrieveCommand (guildId, userId, { cmd, isCategory } = {}) {
     if (!cmd || typeof cmd !== 'string') return { status: 400 }
 
     const guild = this.client.guilds.get(guildId)
@@ -167,6 +183,14 @@ module.exports = class CommandsModule extends Module {
         whitelist: all && all.whitelist ? all.whitelist.map(mapValues) : [],
         blacklist: all && all.blacklist ? all.blacklist.map(mapValues) : []
       } }
+    } else if (isCategory) {
+      if (!categoryExists(this.client, cmd)) return { status: 400 }
+      const path = parseString(cmd)
+      const { categories: { [path]: data } } = await this.retrieveValues(guildId, [ categoriesPath(path) ])
+      return { payload: {
+        whitelist: data && data.whitelist ? data.whitelist.map(mapValues) : [],
+        blacklist: data && data.blacklist ? data.blacklist.map(mapValues) : []
+      } }
     }
 
     const command = findCommand(this.client.commands, cmd)
@@ -180,11 +204,11 @@ module.exports = class CommandsModule extends Module {
     } }
   }
 
-  async saveCommand (guildId, userId, { cmd, values } = {}) {
+  async saveCommand (guildId, userId, { cmd, values, isCategory } = {}) {
     if (!cmd || typeof cmd !== 'string') return { status: 400 }
 
-    const command = cmd !== 'all' ? findCommand(this.client.commands, cmd) : true
-    if (!command) return { status: 400 }
+    const command = cmd !== 'all' ? isCategory ? cmd : findCommand(this.client.commands, cmd) : true
+    if (!command || (isCategory && !categoryExists(this.client, command))) return { status: 400 }
 
     // Validate
     const candidates = this.fetchAllCandidates(guildId, userId)
@@ -207,7 +231,7 @@ module.exports = class CommandsModule extends Module {
     if (!valid || whitelist.find(v => blacklist.find(oV => _.isEqual(v, oV)))) throw new Error('INVALID_LIST')
 
     // Clear?
-    const path = cmd !== 'all' ? commandsPath(parseName(command)) : 'all'
+    const path = cmd !== 'all' ? isCategory ? categoriesPath(command) : commandsPath(parseName(command)) : 'all'
     if (!whitelist.length && !blacklist.length) {
       await this._guilds.update(guildId, { $unset: { [`modules.${this.name}.values.${path}`]: '' } })
       return { ok: true }
