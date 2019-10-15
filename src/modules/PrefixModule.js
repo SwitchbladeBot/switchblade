@@ -22,7 +22,7 @@ module.exports = class PrefixModule extends Module {
 
   validateValues (entity) {
     return Joi.object().keys({
-      prefix: Joi.string().min(MIN_PREFIX_SIZE).max(MAX_PREFIX_SIZE).truncate(),
+      prefix: Joi.string().min(MIN_PREFIX_SIZE).max(MAX_PREFIX_SIZE).trim().truncate(),
       spacePrefix: Joi.boolean()
     }).validate(entity)
   }
