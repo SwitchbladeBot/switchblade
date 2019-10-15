@@ -9,5 +9,5 @@ module.exports = class PlaceholderUtils {
       const regex = r.regex || new RegExp(`{${r.name}}`, 'g')
       return t.replace(regex, r.replace.bind(null, context))
     }, text)
-  }  
+  }
 }

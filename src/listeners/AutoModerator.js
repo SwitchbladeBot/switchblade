@@ -1,4 +1,4 @@
-const { EventListener, PlaceholderUtils } = require('../')
+const { EventListener } = require('../')
 
 module.exports = class AutoModerator extends EventListener {
   constructor (client) {

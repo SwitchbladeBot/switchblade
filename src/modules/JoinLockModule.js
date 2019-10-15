@@ -20,7 +20,7 @@ module.exports = class JoinLockModule extends Module {
   }
 
   parseMessage (message, member) {
-    return PlaceholderUtils.parse(joinLockMessage, {
+    return PlaceholderUtils.parse(message, {
       guild: member.guild,
       user: member.user
     }, null, PLACEHOLDER_BLACKLIST)

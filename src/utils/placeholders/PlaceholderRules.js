@@ -31,5 +31,5 @@ module.exports = [
     name: 'channelName',
     description: 'Channels\'s name',
     replace: ({ channel }) => channel.name
-  },
+  }
 ]
