@@ -1414,7 +1414,7 @@
     "title": "Here's your crappy design."
   },
   "createrole": {
-    "commandDescription": "Create a role",
+    "commandDescription": "Create a role.",
     "commandUsage": "<color> <name>",
     "successTitle": "Role was created!",
     "errorTitle": "Role could not be created!",
