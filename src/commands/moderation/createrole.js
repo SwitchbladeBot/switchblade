@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, SwitchbladeEmbed, Constants, Color } = require('../../')
 
 module.exports = class CreateRole extends Command {
   constructor (client) {
@@ -7,20 +7,20 @@ module.exports = class CreateRole extends Command {
       category: 'moderation',
       requirements: { guildOnly: true, botPermissions: ['MANAGE_ROLES'], permissions: ['MANAGE_ROLES'] },
       parameters: [
-        { type: 'color', missingError: 'commands:createrole.noParams' },
-        { type: 'string', full: true, missingError: 'commands:createrole.noParams' }
+        { type: 'string', full: false, missingError: 'commands:createrole.noParams', required: true },
+        { type: 'color', required: false }
       ]
 
     })
   }
 
-  async run ({ channel, guild, author, t }, color, name) {
+  async run ({ channel, guild, author, t }, name, color = new Color('#ffffff')) {
     const hexcode = color.rgb(true)
     const embed = new SwitchbladeEmbed(author)
-    await guild.createRole({ name: name, color: hexcode }).then(role => {
+    await guild.createRole({ name, color: hexcode }).then(role => {
       embed
         .setTitle(t('commands:createrole.successTitle'))
-        .setDescription(`Name of the role: ${name}`)
+        .setDescription(t('commands:createrole.successMessage', { name }))
         .setColor(hexcode)
     }).catch(err => {
       embed
@@ -28,6 +28,7 @@ module.exports = class CreateRole extends Command {
         .setTitle(t('commands:createrole.errorTitle'))
         .setDescription(`\`${err}\``)
     })
+
     channel.send(embed)
   }
 }

@@ -1415,9 +1415,14 @@
   },
   "createrole": {
     "commandDescription": "Create a role.",
+<<<<<<< HEAD
     "commandUsage": "<color> <name>",
+=======
+    "commandUsage": "[color] <name>",
+>>>>>>> Various improvements
     "successTitle": "Role was created!",
     "errorTitle": "Role could not be created!",
-    "noParams": "You need to include a role color in hex and a role name!"
+    "noParams": "You need to include a role name!",
+    "successMessage": "Name of the role: {{name}}"
   }
 }
