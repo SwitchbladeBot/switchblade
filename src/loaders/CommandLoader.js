@@ -67,6 +67,7 @@ module.exports = class CommandLoader extends Loader {
     if (parentCommand) {
       parentCommand.subcommands.push(subCommand)
       subCommand.parentCommand = parentCommand
+      if (subCommand.category === 'general') subCommand.category = parentCommand.category
     } else {
       parentCommand = subCommand.parentCommand
       const name = (Array.isArray(parentCommand) ? parentCommand : [ parentCommand ]).concat([ subCommand.name ]).join(' ')

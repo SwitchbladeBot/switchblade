@@ -8,6 +8,7 @@ module.exports = class Module {
     this.toggleable = true
     this.defaultState = true // Default active state
     this.defaultValues = {} // Default values
+    this.apiMethods = []
   }
 
   // Helpers
@@ -48,6 +49,8 @@ module.exports = class Module {
   }
 
   async asJSON (_guild, _projection, _user) {
+    if (_projection === 'simple') _projection = 'active'
+
     const mod = await this.retrieve(_guild, _projection)
     return {
       name: this.name,
@@ -69,10 +72,15 @@ module.exports = class Module {
   }
 
   // Updaters
-  updateValues (_guild, values, _user) {
+  updateValues (_guild, values, _user, validate = true) {
     if (!this.client.database) return
-    const { error, value: entity } = this.validateValues(values, _guild, _user)
-    if (error) throw error
+
+    let entity = values
+    if (validate) {
+      const { error, value } = this.validateValues(values, _guild, _user)
+      entity = value
+      if (error) throw error
+    }
 
     const pathF = (k) => `modules.${this.name}.values.${k}`
     const dbObj = {}
