@@ -40,102 +40,37 @@ module.exports = class CommandsModule extends Module {
       commands: {},
       categories: {}
     }
-    this.apiMethods = [ 'retrieveCommand', 'saveCommand' ]
+    this.apiMethods = [ 'saveCommand' ]
   }
 
   async specialInput (guildId, userId) {
     const guild = this.client.guilds.get(guildId)
     if (!guild || !userId) return {}
-    // Commands
-    const joinAliases = (c) => {
-      const { aliases = [] } = c
-      return c.parentCommand ? aliases.concat(joinAliases(c.parentCommand)) : aliases
-    }
-    const addCommand = (a, c) => {
-      if (c.hidden) return a
-      a.push({
-        name: c.fullName,
-        parsedName: parseName(c),
-        aliases: joinAliases(c),
-        category: c.category
-      })
-      return c.subcommands.length ? c.subcommands.reduce((na, sc) => addCommand(na, sc), a) : a
-    }
-    const cmds = this.client.commands.reduce((a, c) => addCommand(a, c), [])
-    const ctgs = cmds.map(c => c.category).filter((v, i, a) => a.indexOf(v) === i)
 
-    // Rules
-    const mapValues = (v) => {
-      const o = {
-        type: v.type,
-        id: v.id
-      }
-
-      switch (v.type) {
-        case 'category':
-        case 'channel':
-          const channel = guild.channels.get(v.id)
-          if (!channel) o.missing = true
-          else o.name = channel.name
-          break
-        case 'role':
-          const role = guild.roles.get(v.id)
-          if (!role) o.missing = true
-          else o.name = role.name
-          break
-        case 'user':
-          const m = guild.member(v.id)
-          if (!m) o.missing = true
-          else {
-            o.name = m.user.username
-            o.discriminator = m.user.discriminator
-            o.displayName = m.displayName
-          }
-      }
-
-      return o
-    }
-    const updateObj = (o) => {
-      const v = _.cloneDeep(o)
-      v.whitelist = v.whitelist && v.whitelist.map(mapValues)
-      v.blacklist = v.blacklist && v.blacklist.map(mapValues)
-      return v
-    }
-    const reduceFunc = (o, [ k, v ]) => {
-      o[k] = updateObj(v)
-      return o
-    }
-    const { commands, categories, all } = await this.retrieveValues(guildId, [ 'commands', 'categories', 'all' ])
-    const rules = {
-      commands: Object.entries(commands).reduce(reduceFunc, {}),
-      categories: Object.entries(categories).reduce(reduceFunc, {})
-    }
-    if (all.blacklist || all.whitelist) rules.all = updateObj(all)
-
+    const { commands, categories } = this.fetchCommands()
     // Payload
     return {
       commands: [
-        ...cmds,
-        ...ctgs.map(c => ({
+        {
+          name: 'all commands',
+          aliases: [ '*' ],
+          category: 'all'
+        },
+        ...categories.map(c => ({
           name: c,
           parsedName: parseString(c),
           aliases: [],
           category: 'category'
         })),
-        {
-          name: 'all commands',
-          aliases: [ '*' ],
-          category: 'all'
-        }
+        ...commands
       ],
-      candidates: this.validCandidates(guildId, userId),
-      rules
+      candidates: this.validCandidates(guild, userId),
+      rules: this.fetchRules(guild)
     }
   }
 
-  validCandidates (guildId, userId) {
-    const guild = this.client.guilds.get(guildId)
-    if (!guild || !userId) return []
+  validCandidates (guild, userId) {
+    if (!userId) return []
     const member = guild.member(userId)
 
     // Category
@@ -248,6 +183,77 @@ module.exports = class CommandsModule extends Module {
       ))
     }
     return check(command)
+  }
+
+  fetchRules (guild) {
+    const mapValues = (v) => {
+      const o = {
+        type: v.type,
+        id: v.id
+      }
+
+      switch (v.type) {
+        case 'category':
+        case 'channel':
+          const channel = guild.channels.get(v.id)
+          if (!channel) o.missing = true
+          else o.name = channel.name
+          break
+        case 'role':
+          const role = guild.roles.get(v.id)
+          if (!role) o.missing = true
+          else o.name = role.name
+          break
+        case 'user':
+          const m = guild.member(v.id)
+          if (!m) o.missing = true
+          else {
+            o.name = m.user.username
+            o.discriminator = m.user.discriminator
+            o.displayName = m.displayName
+          }
+      }
+
+      return o
+    }
+    const parseLists = (o) => {
+      return {
+        whitelist: o.whitelist && o.whitelist.map(mapValues),
+        blacklist: o.blacklist && o.blacklist.map(mapValues)
+      }
+    }
+    const reduceFunc = (o, [ k, v ]) => {
+      o[k] = parseLists(v)
+      return o
+    }
+
+    const { commands, categories, all } = await this.retrieveValues(guild.id, [ 'commands', 'categories', 'all' ])
+    const rules = {
+      commands: Object.entries(commands).reduce(reduceFunc, {}),
+      categories: Object.entries(categories).reduce(reduceFunc, {})
+    }
+    if (all.blacklist || all.whitelist) rules.all = parseLists(all)
+    return rules
+  }
+
+  fetchCommands () {
+    const joinAliases = (c) => {
+      const { aliases = [] } = c
+      return c.parentCommand ? aliases.concat(joinAliases(c.parentCommand)) : aliases
+    }
+    const addCommand = (a, c) => {
+      if (c.hidden) return a
+      a.push({
+        name: c.fullName,
+        parsedName: parseName(c),
+        aliases: joinAliases(c),
+        category: c.category
+      })
+      return c.subcommands.length ? c.subcommands.reduce((na, sc) => addCommand(na, sc), a) : a
+    }
+    const commands = this.client.commands.reduce((a, c) => addCommand(a, c), [])
+    const categories = cmds.map(c => c.category).filter((v, i, a) => a.indexOf(v) === i)
+    return { commands, categories }
   }
 
   // API Methods
