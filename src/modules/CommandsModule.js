@@ -55,6 +55,7 @@ module.exports = class CommandsModule extends Module {
       if (c.hidden) return a
       a.push({
         name: c.fullName,
+        parsedName: parseName(c),
         aliases: joinAliases(c),
         category: c.category
       })
@@ -95,15 +96,21 @@ module.exports = class CommandsModule extends Module {
       return o
     }
     const updateObj = (o) => {
-      o.whitelist = o.whitelist && o.whitelist.map(mapValues)
-      o.blacklist = o.blacklist && o.blacklist.map(mapValues)
-      return o
+      const v = _.cloneDeep(o)
+      v.whitelist = v.whitelist && v.whitelist.map(mapValues)
+      v.blacklist = v.blacklist && v.blacklist.map(mapValues)
+      return v
     }
     const reduceFunc = (o, [ k, v ]) => {
       o[k] = updateObj(v)
       return o
     }
-    const { commands = {}, categories = {}, all = {} } = await this.retrieveValues(guildId, [ 'commands', 'categories', 'all' ])
+    const { commands, categories, all } = await this.retrieveValues(guildId, [ 'commands', 'categories', 'all' ])
+    const rules = {
+      commands: Object.entries(commands).reduce(reduceFunc, {}),
+      categories: Object.entries(categories).reduce(reduceFunc, {})
+    }
+    if (all.blacklist || all.whitelist) rules.all = updateObj(all)
 
     // Payload
     return {
@@ -111,6 +118,7 @@ module.exports = class CommandsModule extends Module {
         ...cmds,
         ...ctgs.map(c => ({
           name: c,
+          parsedName: parseString(c),
           aliases: [],
           category: 'category'
         })),
@@ -121,11 +129,7 @@ module.exports = class CommandsModule extends Module {
         }
       ],
       candidates: this.validCandidates(guildId, userId),
-      rules: {
-        commands: Object.entries(commands).reduce(reduceFunc, {}),
-        categories: Object.entries(categories).reduce(reduceFunc, {}),
-        all: updateObj(all)
-      }
+      rules
     }
   }
 
@@ -281,6 +285,7 @@ module.exports = class CommandsModule extends Module {
     }
 
     // Update
+    console.log(whitelist, blacklist)
     const defMap = (o) => ({ id: o.id, type: o.type })
     await this.updateValues(guildId, {
       [path]: {
