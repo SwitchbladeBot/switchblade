@@ -15,7 +15,9 @@ module.exports = class AutoModerator extends EventListener {
       const language = await this.modules.language.retrieveValue(guild.id, 'language')
       const joinLockMessage = await this.modules.joinLock.retrieveValue(guild.id, 'message')
       const t = this.i18next.getFixedT(language)
-      const message = joinLockMessage ? joinLockMessage.replace('{server}', guild.name) : t('moderation:joinLock.defaultPrivateMessage', { guild })
+      const message = joinLockMessage
+        ? this.modules.joinLock.parseMessage(joinLockMessage, member)
+        : t('moderation:joinLock.defaultPrivateMessage', { guild })
       return member.send(message).catch(() => {}).then(() => {
         member.kick(t('moderation:joinLock.kickReason'))
       })
