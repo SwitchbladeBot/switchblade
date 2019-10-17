@@ -3,7 +3,7 @@ const { GuildRepository, UserRepository } = require('./repositories')
 
 const mongoose = require('mongoose')
 
-module.exports = class MongoDB extends DBWrapper {
+class MongoDB extends DBWrapper {
   constructor (options = {}) {
     super(options)
     this.mongoose = mongoose
@@ -16,3 +16,7 @@ module.exports = class MongoDB extends DBWrapper {
     })
   }
 }
+
+MongoDB.envVars = [ 'MONGODB_URI' ]
+
+module.exports = MongoDB
