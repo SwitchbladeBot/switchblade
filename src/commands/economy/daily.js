@@ -14,7 +14,7 @@ module.exports = class Daily extends Command {
     channel.startTyping()
 
     try {
-      const { collectedMoney } = await this.client.modules.economy.bonus.claimDaily(author.id)
+      const { collectedMoney } = await this.client.controllers.economy.bonus.claimDaily(author.id)
       embed.setDescription(t('commands:daily.claimedSuccessfully', { count: collectedMoney }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

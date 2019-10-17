@@ -31,10 +31,8 @@ module.exports = class Switchblade extends Client {
    * @param {string} message - Log message
    * @param {...string} [tags] - Tags to identify the log entry
    */
-  log (...args) {
-    const message = args[0]
-    const tags = args.slice(1).map(t => `[36m[${t}][0m`)
-    console.log(...tags, message + '[0m')
+  log (message, ...tags) {
+    console.log(...tags.map(t => `[36m[${t}][0m`), message + '[0m')
   }
 
   /**
@@ -53,9 +51,22 @@ module.exports = class Switchblade extends Client {
    * @param {Array<string>} args - Array of command arguments
    * @param {String} language - Code for the language that the command will be executed in
    */
-  runCommand (command, context, args, language) {
+  async runCommand (command, context, args, language) {
+    // Command rules
+    if (context.guild && !command.hidden) {
+      const deepSubcmd = (c, a) => {
+        const [ arg ] = a
+        const cmd = c.subcommands
+          ? c.subcommands.find(s => s.name.toLowerCase() === arg || (s.aliases && s.aliases.includes(arg)))
+          : null
+        return cmd ? deepSubcmd(cmd, a.slice(1)) : c
+      }
+      const verify = await this.modules.commandRules.verifyCommand(deepSubcmd(command, args), context)
+      if (!verify) return
+    }
+
     context.setFixedT(this.i18next.getFixedT(language))
-    command._run(context, args).catch(this.logError)
+    return command._run(context, args).catch(this.logError)
   }
 
   async initializeLoaders () {
