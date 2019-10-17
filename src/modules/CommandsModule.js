@@ -291,7 +291,6 @@ module.exports = class CommandsModule extends Module {
     }
 
     // Update
-    console.log(whitelist, blacklist)
     const defMap = (o) => ({ id: o.id, type: o.type })
     await this.updateValues(guildId, {
       [path]: {
