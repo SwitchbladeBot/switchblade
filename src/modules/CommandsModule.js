@@ -20,13 +20,13 @@ const findCommand = (commands, path) => {
   return cmd ? sc.length ? sc.reduce((s, n) => findCA(s, n), cmd.subcommands) : cmd : null
 }
 
-const categoryExists = (client, category) => {
-  const categories = client.commands
+const allCategories = (client) => {
+  return client.commands
     .filter(c => !c.hidden)
     .map(c => c.category)
     .filter((v, i, a) => a.indexOf(v) === i)
-  return categories.includes(category)
 }
+const categoryExists = (client, category) => allCategories(client).includes(category)
 
 // Commands
 module.exports = class CommandsModule extends Module {
@@ -65,7 +65,7 @@ module.exports = class CommandsModule extends Module {
         ...commands
       ],
       candidates: this.validCandidates(guild, userId),
-      rules: this.fetchRules(guild)
+      rules: await this.fetchRules(guild)
     }
   }
 
@@ -92,7 +92,7 @@ module.exports = class CommandsModule extends Module {
 
     // Role
     const filteredRoles = guild.roles
-      .filter(r => r.editable && r.id !== guildId && member.highestRole.comparePositionTo(r) > 0)
+      .filter(r => r.editable && r.id !== guild.id && member.highestRole.comparePositionTo(r) > 0)
       .sort(Role.comparePositions)
       .map(r => ({
         id: r.id,
@@ -185,7 +185,7 @@ module.exports = class CommandsModule extends Module {
     return check(command)
   }
 
-  fetchRules (guild) {
+  async fetchRules (guild) {
     const mapValues = (v) => {
       const o = {
         type: v.type,
@@ -252,7 +252,7 @@ module.exports = class CommandsModule extends Module {
       return c.subcommands.length ? c.subcommands.reduce((na, sc) => addCommand(na, sc), a) : a
     }
     const commands = this.client.commands.reduce((a, c) => addCommand(a, c), [])
-    const categories = cmds.map(c => c.category).filter((v, i, a) => a.indexOf(v) === i)
+    const categories = allCategories(this.client)
     return { commands, categories }
   }
 
