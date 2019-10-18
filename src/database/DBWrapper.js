@@ -3,7 +3,7 @@
  * @constructor
  * @param {Object} options - Options for the DB client
  */
-module.exports = class DBWrapper {
+class DBWrapper {
   constructor (options = {}) {
     if (this.constructor === DBWrapper) throw new Error('Cannot instantiate abstract class')
     this.options = options
@@ -14,3 +14,7 @@ module.exports = class DBWrapper {
    */
   connect () {}
 }
+
+DBWrapper.envVars = []
+
+module.exports = DBWrapper
