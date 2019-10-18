@@ -3,6 +3,7 @@ module.exports = {
   APILoader: require('./APILoader.js'),
   LocaleLoader: require('./LocaleLoader.js'),
   ControllerLoader: require('./ControllerLoader.js'),
+  EmojiLoader: require('./EmojiLoader.js'),
   ModuleLoader: require('./ModuleLoader.js'),
   HTTPLoader: require('./HTTPLoader.js'),
   CommandLoader: require('./CommandLoader.js'),
