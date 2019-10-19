@@ -12,7 +12,6 @@ module.exports = class SubcommandListCommand extends Command {
   }
 
   async run ({ channel, author, t, prefix }) {
-    // TODO: Make this list the subcommands fathered by this command
     channel.send(
       new SwitchbladeEmbed(author)
         .setAuthor(t(this.authorString), this.authorImage, this.authorURL)
