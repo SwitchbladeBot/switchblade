@@ -1425,6 +1425,13 @@
   },
   "legendsofruneterra": {
     "commandDescription": "Utility commands for Legends of Runeterra",
-    "gameName": "Legends of Runeterra"
+    "gameName": "Legends of Runeterra",
+    "subcommands": {
+      "card": {
+        "commandUsage": "<card name or code>",
+        "commandDescription": "Shows information about a Legends of Runeterra card",
+        "illustrationBy": "Illustration by {{artistName}}"
+      }
+    }
   }
 }
