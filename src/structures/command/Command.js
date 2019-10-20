@@ -151,7 +151,7 @@ module.exports = class Command {
     }
   }
 
-  getEmoji (emoji) {
-    return this.client.officialEmojis.get(emoji)
+  getEmoji (emoji, fallback) {
+    return this.client.officialEmojis.get(emoji, fallback)
   }
 }
