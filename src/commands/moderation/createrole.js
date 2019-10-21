@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, Constants, Color } = require('../../')
+const { Command, SwitchbladeEmbed, Color, CommandError } = require('../../')
 
 module.exports = class CreateRole extends Command {
   constructor (client) {
@@ -24,10 +24,7 @@ module.exports = class CreateRole extends Command {
         .setDescription(t('commands:createrole.successMessage', { name }))
         .setColor(hexcode)
     } catch (err) {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:createrole.errorTitle'))
-        .setDescription(`\`${err}\``)
+      throw new CommandError(t('commands:createrole.errorTitle'))
     }
 
     channel.send(embed)
