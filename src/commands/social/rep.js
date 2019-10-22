@@ -22,7 +22,7 @@ module.exports = class Rep extends Command {
     channel.startTyping()
 
     try {
-      await this.client.modules.social.addReputation(author.id, user.id)
+      await this.client.controllers.social.addReputation(author.id, user.id)
       embed.setDescription(t('commands:rep.reputationPoint', { user }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

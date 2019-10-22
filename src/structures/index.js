@@ -5,5 +5,6 @@ module.exports = {
   SwitchbladeEmbed: require('./SwitchbladeEmbed.js'),
   Route: require('./Route.js'),
   Webhook: require('./Webhook.js'),
+  Controller: require('./Controller.js'),
   Module: require('./Module.js')
 }

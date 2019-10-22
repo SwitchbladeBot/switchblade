@@ -17,7 +17,7 @@ module.exports = class RestrictEmojiReset extends Command {
       await emoji.edit({ roles: [] })
       channel.send(
         new SwitchbladeEmbed(author)
-          .setTitle(t('commands:restrictemoji.subcommands.reset.resetted', { emoji: emoji.name }))
+          .setTitle(t('commands:restrictemoji.subcommands.reset.reset', { emoji: emoji.name }))
       ).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()
