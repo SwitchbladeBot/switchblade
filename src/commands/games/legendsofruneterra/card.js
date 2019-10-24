@@ -10,11 +10,13 @@ module.exports = class LegendsOfRuneterraCard extends Command {
       requirements: { apis: ['legendsofruneterra'] },
       parameters: [{
         type: 'string', full: true, missingError: 'commands:legendsofruneterra.subcommands.card.missingCard'
-      }]
+      }, [{
+        type: 'booleanFlag', name: 'base'
+      }]]
     })
   }
 
-  async run ({ t, author, channel, language }, query) {
+  async run ({ t, author, channel, language, flags }, query) {
     const data = await this.client.apis.legendsofruneterra.getCardData(language)
     const globals = await this.client.apis.legendsofruneterra.getCoreData(language)
     const fuse = new Fuse(data, {
@@ -29,7 +31,12 @@ module.exports = class LegendsOfRuneterraCard extends Command {
         'cardCode'
       ]
     })
-    const card = fuse.search(query)[0]
+
+    let card = fuse.search(query)[0]
+
+    if (query.toUpperCase() !== card.cardCode) card = this.levelUp(card, data)
+    if (flags.base) card = this.getBase(card, data)
+
     channel.send(
       new SwitchbladeEmbed(author)
         .setTitle(card.name)
@@ -77,11 +84,22 @@ module.exports = class LegendsOfRuneterraCard extends Command {
         return `[${text}](http://google.com "${keyword.description}")`
       }
 
-      // TODO: Parse card links
-
+      // TODO: Actually link to the Mobalytics page of the linked card
+      if (type === 'card') {
+        return text
+      }
       return text
     })
 
     return description
+  }
+
+  levelUp (card, data) {
+    if (!card.collectible) return card
+    return data.find(c => !c.collectible && c.supertype === 'Champion' && c.cardCode.startsWith(card.cardCode))
+  }
+
+  getBase (card, data) {
+    return data.find(c => c.cardCode === card.cardCode.substring(0, 7))
   }
 }
