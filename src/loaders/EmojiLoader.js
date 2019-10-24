@@ -40,7 +40,6 @@ module.exports = class EmojiLoader extends Loader {
    * @param {string} fallback - Replacement for the default question mark fallback emoji
    */
   getEmoji (emojiName, fallback) {
-    console.log({emojiName})
     if (typeof fallback === 'undefined') fallback = '❓'
     const emojis = Object.keys(this).filter(k => parseInt(k))
     if (!emojis) return fallback
