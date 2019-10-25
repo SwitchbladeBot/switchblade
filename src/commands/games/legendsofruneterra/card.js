@@ -83,8 +83,6 @@ module.exports = class LegendsOfRuneterraCard extends Command {
       return text
     })
 
-    console.log(description)
-
     // Create links
     description = description.replace(/<link=([a-z]*)\.([a-zA-z0-9 ]*)*>((?:.(?!<link))+?)<\/link>/g, (match, type, link, text) => {
       // Keyword Links
