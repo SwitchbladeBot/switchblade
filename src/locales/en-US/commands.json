@@ -1428,7 +1428,7 @@
     "gameName": "Legends of Runeterra",
     "subcommands": {
       "card": {
-        "commandUsage": "<card name or code>",
+        "commandUsage": "<card> [--base]",
         "commandDescription": "Shows information about a Legends of Runeterra card",
         "illustrationBy": "Illustration by {{artistName}}",
         "associatedCards": "Associated cards",
