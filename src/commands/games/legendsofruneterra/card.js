@@ -34,6 +34,8 @@ module.exports = class LegendsOfRuneterraCard extends Command {
 
     let card = fuse.search(query)[0]
 
+    if (!card) throw new CommandError(t('commands:legendsofruneterra.subcommands.card.noCardsFound'), false)
+
     if (query.toUpperCase() !== card.cardCode) card = this.levelUp(card, data)
     if (flags.base) card = this.getBase(card, data)
 
@@ -43,7 +45,7 @@ module.exports = class LegendsOfRuneterraCard extends Command {
         .setURL(`https://lor.mobalytics.gg/cards/${card.cardCode}`)
         .setDescriptionFromBlockArray([
           [
-            this.parseDescription(card.description, data, globals)
+            this.parseDescription(card, data, globals)
           ],
           [
             `${this.getEmoji(`lorregion${card.regionRef.toLowerCase()}`, '')} **${card.region}**`
@@ -53,6 +55,9 @@ module.exports = class LegendsOfRuneterraCard extends Command {
           }),
           [
             `> _${card.flavorText}_`
+          ],
+          [
+            `**${t('commands:legendsofruneterra.subcommands.card.associatedCards')}:** ${card.associatedCardRefs.map(c => `[${this.getCardName(c, data, t)}](https://lor.mobalytics.gg/cards/${c})`).join(', ')}`
           ]
         ])
         .setImage(this.client.apis.legendsofruneterra.getCardImageURL(card.cardCode, language))
@@ -61,7 +66,9 @@ module.exports = class LegendsOfRuneterraCard extends Command {
     )
   }
 
-  parseDescription (description, data, globals) {
+  parseDescription (card, data, globals) {
+    let description = card.description
+
     // Replace Sprites with Discord Emojis
     description = description.replace(/<sprite name=([a-zA-Z]*)>/g, (match, spriteName) => {
       return this.getEmoji(`lorsprite${spriteName.toLowerCase()}`, '')
@@ -76,22 +83,33 @@ module.exports = class LegendsOfRuneterraCard extends Command {
       return text
     })
 
+    console.log(description)
+
     // Create links
-    description = description.replace(/<link=([a-z]*)\.([a-zA-z ]*)>((?:.(?!<link))*?)<\/link>/g, (match, type, link, text) => {
+    description = description.replace(/<link=([a-z]*)\.([a-zA-z0-9 ]*)*>((?:.(?!<link))+?)<\/link>/g, (match, type, link, text) => {
       // Keyword Links
       if (type === 'keyword') {
         const keyword = globals.keywords.find(k => k.nameRef === link)
         return `[${text}](http://google.com "${keyword.description}")`
       }
 
-      // TODO: Actually link to the Mobalytics page of the linked card
-      if (type === 'card') {
-        return text
+      // Card links
+      // TODO: Add vocab and other card link types
+      if (type === 'card' && link === 'level1') {
+        const baseCard = this.getBase(card, data)
+        return `[${text}](https://lor.mobalytics.gg/cards/${baseCard.cardCode})`
       }
+
       return text
     })
 
+    console.log(description)
+
     return description
+  }
+
+  getCardName (cardCode, data, t) {
+    return data.find(c => c.cardCode === cardCode).name
   }
 
   levelUp (card, data) {

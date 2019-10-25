@@ -1430,7 +1430,9 @@
       "card": {
         "commandUsage": "<card name or code>",
         "commandDescription": "Shows information about a Legends of Runeterra card",
-        "illustrationBy": "Illustration by {{artistName}}"
+        "illustrationBy": "Illustration by {{artistName}}",
+        "associatedCards": "Associated cards",
+        "noCardsFound": "I couldn't find a card by that name."
       }
     }
   }
