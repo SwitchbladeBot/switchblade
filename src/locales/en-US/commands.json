@@ -1416,6 +1416,14 @@
     "commandDescription": "Shows a random image from r/CrappyDesign.",
     "title": "Here's your crappy design."
   },
+  "createrole": {
+    "commandDescription": "Create a role.",
+    "commandUsage": "<name> [color]",
+    "successTitle": "Role was created!",
+    "errorTitle": "Role could not be created!",
+    "noParams": "You need to include a role name!",
+    "successMessage": "Name of the role: {{name}}"
+  },
   "goat": {
     "commandDescription": "Shows a goat image from placegoat.com",
     "commandUsage": "[width] [height]",
