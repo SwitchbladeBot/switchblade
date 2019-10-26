@@ -4,8 +4,8 @@ const fetch = require('node-fetch')
 const API_URL = 'http://api.soundcloud.com'
 
 const CLIENT_ID_REFRESH_INTERVAL = 60 * 60 * 1000 // 1 hour
-const PAGE_APP_SCRIPT_REGEX = /https:\/\/[A-Za-z0-9-.]+\/assets\/app-[a-f0-9-]+\.js/
-const APP_SCRIPT_CLIENT_ID_REGEX = /,client_id:"([a-zA-Z0-9-_]+)"/
+const PAGE_APP_SCRIPT_REGEX = /https:\/\/[A-Za-z0-9-.]+\/assets\/[a-f3-7-]+\.js/
+const APP_SCRIPT_CLIENT_ID_REGEX = /client_id:"([a-zA-Z0-9]+)"/
 
 module.exports = class SoundcloudAPI extends APIWrapper {
   constructor () {
@@ -61,8 +61,8 @@ module.exports = class SoundcloudAPI extends APIWrapper {
         this.clientId = id
         return id
       }
-    }, e => {
-      console.error('SoundCloud client ID update failed.', e.statusCode || e)
+    }).catch(e => {
+      console.error('SoundCloud client ID request failed.', e.statusCode || e)
     })
   }
 
