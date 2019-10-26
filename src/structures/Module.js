@@ -1,3 +1,5 @@
+const _ = require('lodash')
+
 module.exports = class Module {
   constructor (name, client) {
     this.name = name
@@ -6,6 +8,7 @@ module.exports = class Module {
     this.toggleable = true
     this.defaultState = true // Default active state
     this.defaultValues = {} // Default values
+    this.apiMethods = []
   }
 
   // Helpers
@@ -45,7 +48,9 @@ module.exports = class Module {
     return this.asJSON(_guild, values.map(v => `values.${v}`).join(' ')).then(r => r.values)
   }
 
-  async asJSON (_guild, _projection) {
+  async asJSON (_guild, _projection, _user) {
+    if (_projection === 'simple') _projection = 'active'
+
     const mod = await this.retrieve(_guild, _projection)
     return {
       name: this.name,
@@ -57,35 +62,41 @@ module.exports = class Module {
         ...this.defaultValues,
         ...(mod && mod.values ? mod.values : {})
       },
-      input: this.specialInput
+      input: typeof this.specialInput === 'function' ? await this.specialInput(_guild, _user) : this.specialInput
     }
   }
 
   // Validation
   validateValues (entity) {
-    return Promise.resolve(entity)
+    return entity
   }
 
   // Updaters
-  updateValues (_guild, values) {
+  updateValues (_guild, values, _user, validate = true) {
     if (!this.client.database) return
-    return this.validateValues(values).then(entity => {
-      const pathF = (k) => `modules.${this.name}.values.${k}`
-      const dbObj = {}
-      Object.entries(values).forEach(([ k, v ]) => {
-        if (this.defaultValues[k] === v) {
-          if (!dbObj['$unset']) dbObj['$unset'] = {}
-          dbObj['$unset'][pathF(k)] = ''
-        } else {
-          if (!dbObj['$set']) dbObj['$set'] = {}
-          dbObj['$set'][pathF(k)] = v
-        }
-      })
-      return this._guilds.update(_guild, dbObj)
+
+    let entity = values
+    if (validate) {
+      const { error, value } = this.validateValues(values, _guild, _user)
+      entity = value
+      if (error) throw error
+    }
+
+    const pathF = (k) => `modules.${this.name}.values.${k}`
+    const dbObj = {}
+    Object.entries(entity).forEach(([ k, v ]) => {
+      if (_.isEqual(this.defaultValues[k], v)) {
+        if (!dbObj['$unset']) dbObj['$unset'] = {}
+        dbObj['$unset'][pathF(k)] = ''
+      } else {
+        if (!dbObj['$set']) dbObj['$set'] = {}
+        dbObj['$set'][pathF(k)] = v
+      }
     })
+    return this._guilds.update(_guild, dbObj)
   }
 
-  updateState (_guild, state) {
+  updateState (_guild, state, _user) {
     if (!this.client.database || !this.toggleable) return
     return this._guilds.update(_guild, {
       [`modules.${this.name}.active`]: this.validateState(state)

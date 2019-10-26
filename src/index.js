@@ -26,6 +26,7 @@ module.exports = {
   Webhook: require('./structures/Webhook.js'),
 
   // Utils
+  Color: require('./utils/Color.js'),
   Reddit: require('./utils/Reddit.js'),
   Constants: require('./utils/Constants.js'),
   DiscordUtils: require('./utils/DiscordUtils.js'),
@@ -35,5 +36,7 @@ module.exports = {
   PermissionUtils: require('./utils/PermissionUtils.js'),
   EmojiUtils: require('./utils/EmojiUtils.js'),
   EndpointUtils: require('./utils/EndpointUtils.js'),
-  ConfirmationBox: require('./utils/ConfirmationBox')
+  ConfirmationBox: require('./utils/ConfirmationBox.js'),
+  PlaceholderUtils: require('./utils/placeholders/PlaceholderUtils.js'),
+  PlaceholderRules: require('./utils/placeholders/PlaceholderRules.js')
 }
