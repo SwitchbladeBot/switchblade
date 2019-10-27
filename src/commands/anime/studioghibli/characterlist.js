@@ -5,7 +5,7 @@ const fetch = require('node-fetch')
 module.exports = class CharacterList extends Command {
   constructor (client) {
     super(client, {
-      name: 'characterList',
+      name: 'characterlist',
       parentCommand: 'studioghibli'
     })
   }
