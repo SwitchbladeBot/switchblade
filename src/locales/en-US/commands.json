@@ -1115,12 +1115,12 @@
         "notFound": "User not found.",
         "noData": "Nothing found.",
         "title": "{{user}}'s {{top}} in {{period}}",
-        "top":{
+        "top": {
           "tracks": "top tracks",
           "albums": "top albums",
           "artists": "top artists"
         },
-        "period":{
+        "period": {
           "overall": "all time",
           "7day": "a week",
           "1month": "a month",
@@ -1175,7 +1175,7 @@
   },
   "showerthoughts": {
     "commandDescription": "Shows a random thought from r/Showerthoughts."
-},
+  },
   "keanu": {
     "commandDescription": "Shows a random image from r/KeanuBeingAwesome."
   },
@@ -1421,5 +1421,50 @@
     "commandUsage": "[width] [height]",
     "hereIsYourGoat": "Here is your goat!",
     "hereIsYourGoat_resolution": "Here is your **{{width}}x{{height}}** goat!"
+  },
+  "studioghibli": {
+    "commandDescription": "Shows you information about Studio Ghibli productions.",
+    "subcommands": {
+      "filmslist": {
+        "commandDescription": "Shows you a list of Studio Ghibli films."
+      },
+      "film": {
+        "commandDescription": "Shows you information about one Studio Ghibli film.",
+        "commandUsage": "<movie title>",
+        "noSearchTerm": "You have to give me a Studio Ghibli movie title!"
+      },
+      "characterlist": {
+        "commandDescription": "Shows you a list of characters from Studio Ghibli film."
+      },
+      "character": {
+        "commandDescription": "Shows you information about a character from a Studio Ghibli film.",
+        "commandUsage": "<character name>",
+        "noSearchTerm": "You have to give me a Studio Ghibli character name!"
+      },
+      "locationslist": {
+        "commandDescription": "Shows you a list of locations from Studio Ghibli films."
+      },
+      "location": {
+        "commandDescription": "Shows you information about a location from a Studio Ghibli film.",
+        "commandUsage": "<location name>",
+        "noSearchTerm": "You have to give me a Studio Ghibli location name!"
+      },
+      "specieslist": {
+        "commandDescription": "Shows you a list of species from Studio Ghibli films."
+      },
+      "species": {
+        "commandDescription": "Shows you information about a species from a Studio Ghibli film.",
+        "commandUsage": "<species name>",
+        "noSearchTerm": "You have to give me a Studio Ghibli species name!"
+      },
+      "vehicleslist": {
+        "commandDescription": "Shows you a list of vehicles from Studio Ghibli films."
+      },
+      "vehicle": {
+        "commandDescription": "Shows you information about a vehicle from a Studio Ghibli film.",
+        "commandUsage": "<vehicle name>",
+        "noSearchTerm": "You have to give me a Studio Ghibli vehicle title!"
+      }
+    }
   }
 }
