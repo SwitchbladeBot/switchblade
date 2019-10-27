@@ -1,0 +1,14 @@
+"scope: repository":
+  - ./*
+  
+"scope: commands":
+  - src/commands/*
+  - src/commands/**/*
+
+"scope: music-system":
+  - src/music/*
+  - src/music/**/*
+  
+  "scope: translation":
+  - src/locales/*
+  - src/locales/**/*
