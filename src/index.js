@@ -13,6 +13,7 @@ module.exports = {
   // Command extensions
   RandomRedditPostCommand: CommandStructures.RandomRedditPostCommand,
   SearchCommand: CommandStructures.SearchCommand,
+  SubcommandListCommand: CommandStructures.SubcommandListCommand,
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),
