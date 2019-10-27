@@ -1432,7 +1432,13 @@
         "commandDescription": "Shows you information about one Studio Ghibli film.",
         "commandUsage": "<movie title>",
         "noSearchTerm": "You have to give me a Studio Ghibli movie title!",
-        "notFound": "Coulnd't find a movie with this title."
+        "notFound": "Coulnd't find a movie with this title.",
+        "name": "Title",
+        "releasedate": "Release Date",
+        "director": "Director",
+        "producer": "Producer",
+        "rtscore": "Rotten Tomatoes Score",
+        "description": "Description"
       },
       "characterlist": {
         "commandDescription": "Shows you a list of characters from Studio Ghibli film."
@@ -1441,7 +1447,13 @@
         "commandDescription": "Shows you information about a character from a Studio Ghibli film.",
         "commandUsage": "<character name>",
         "noSearchTerm": "You have to give me a Studio Ghibli character name!",
-        "notFound": "Coulnd't find a character with this name."
+        "notFound": "Coulnd't find a character with this name.",
+        "name": "Name",
+        "gender": "Gender",
+        "eyecolor": "Eye Color",
+        "haircolor": "Hair Color",
+        "speciesname": "Species",
+        "filmtitle": "Film"
       },
       "locationslist": {
         "commandDescription": "Shows you a list of locations from Studio Ghibli films."
@@ -1450,7 +1462,11 @@
         "commandDescription": "Shows you information about a location from a Studio Ghibli film.",
         "commandUsage": "<location name>",
         "noSearchTerm": "You have to give me a Studio Ghibli location name!",
-        "notFound": "Coulnd't find a location with this name."
+        "notFound": "Coulnd't find a location with this name.",
+        "name": "Name",
+        "climate": "Climate",
+        "terrain": "Terrain",
+        "title": "Film"
       },
       "specieslist": {
         "commandDescription": "Shows you a list of species from Studio Ghibli films."
@@ -1459,7 +1475,13 @@
         "commandDescription": "Shows you information about a species from a Studio Ghibli film.",
         "commandUsage": "<species name>",
         "noSearchTerm": "You have to give me a Studio Ghibli species name!",
-        "notFound": "Coulnd't find a species with this name."
+        "notFound": "Coulnd't find a species with this name.",
+        "name": "Name",
+        "classificaation": "Classification",
+        "eyecolors": "Eye Colors",
+        "haircolors": "Hair Colors",
+        "peoplelist": "People",
+        "filmslist": "Films"
       },
       "vehicleslist": {
         "commandDescription": "Shows you a list of vehicles from Studio Ghibli films."
@@ -1468,7 +1490,13 @@
         "commandDescription": "Shows you information about a vehicle from a Studio Ghibli film.",
         "commandUsage": "<vehicle name>",
         "noSearchTerm": "You have to give me a Studio Ghibli vehicle title!",
-        "notFound": "Coulnd't find a vehicle with this name."
+        "notFound": "Coulnd't find a vehicle with this name.",
+        "name": "Name",
+        "description": "Description",
+        "vehicleclass": "Vehicle Class",
+        "length": "Length",
+        "pilot": "Pilot",
+        "film": "Film"
       }
     }
   }

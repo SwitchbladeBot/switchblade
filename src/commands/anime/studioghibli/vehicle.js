@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const fetch = require('node-fetch')
 
@@ -19,7 +19,9 @@ module.exports = class Vehicle extends Command {
     const vehicleData = body.filter(element => element.name === searchTerm)[0]
 
     if (vehicleData === 'undefined') {
-      embed.setImage(t('commands:studioghibli.vehicle.notFound'))
+      throw new CommandError(
+        t('commands:studioghibli.subcommands.vehicle.notFound')
+      )
     } else {
       const pilotData = await fetch(vehicleData.pilot).then(res => res.json())
 
@@ -27,12 +29,36 @@ module.exports = class Vehicle extends Command {
         res.json()
       )
 
-      embed.addField('Name:', vehicleData.title, false)
-      embed.addField('Description:', vehicleData.description, false)
-      embed.addField('Vehicle Class:', vehicleData.vehicle_class, false)
-      embed.addField('Length:', vehicleData.length, false)
-      embed.addField('Pilot:', pilotData.name, false)
-      embed.addField('Films:', filmData.title, false)
+      embed.addField(
+        t('commands:studioghibli.subcommands.vehicle.name'),
+        vehicleData.name,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.vehicle.description'),
+        vehicleData.description,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.vehicle.vehicleclass'),
+        vehicleData.vehicle_class,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.vehicle.length'),
+        vehicleData.length,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.vehicle.pilot'),
+        pilotData.name,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.vehicle.film'),
+        filmData.title,
+        false
+      )
     }
 
     embed.setDescription(t('commands:studioghibli.vehicle'))

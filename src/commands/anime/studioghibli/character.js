@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const fetch = require('node-fetch')
 
@@ -21,7 +21,9 @@ module.exports = class Character extends Command {
     )[0]
 
     if (characterData === 'undefined') {
-      throw new CommandError(t('commands:studioghibli.subcommands.character.notFound'))
+      throw new CommandError(
+        t('commands:studioghibli.subcommands.character.notFound')
+      )
     } else {
       const speciesData = await fetch(characterData.species).then(res =>
         res.json()
@@ -31,12 +33,36 @@ module.exports = class Character extends Command {
         res.json()
       )
 
-      embed.addField('Name:', characterData.name, false)
-      embed.addField('Gender:', characterData.gender, false)
-      embed.addField('Eye Color:', characterData.eye_color, false)
-      embed.addField('Hair Color:', characterData.hair_color, false)
-      embed.addField('Species:', speciesData.name, false)
-      embed.addField('Film:', filmData.title, false)
+      embed.addField(
+        t('commands:studioghibli.subcommands.character.name'),
+        characterData.name,
+        false
+      )
+      embed.addField(
+        'commands:studioghibli.subcommands.character.gender',
+        characterData.gender,
+        false
+      )
+      embed.addField(
+        'commands:studioghibli.subcommands.character.eyecolor',
+        characterData.eye_color,
+        false
+      )
+      embed.addField(
+        'commands:studioghibli.subcommands.character.haircolor',
+        characterData.hair_color,
+        false
+      )
+      embed.addField(
+        'commands:studioghibli.subcommands.character.speciesname',
+        speciesData.name,
+        false
+      )
+      embed.addField(
+        'commands:studioghibli.subcommands.character.filmtitle',
+        filmData.title,
+        false
+      )
     }
 
     embed.setDescription(t('commands:studioghibli.character'))

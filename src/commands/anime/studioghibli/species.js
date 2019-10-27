@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const fetch = require('node-fetch')
 
@@ -19,7 +19,9 @@ module.exports = class Species extends Command {
     const speciesData = body.filter(element => element.title === searchTerm)[0]
 
     if (speciesData === 'undefined') {
-      embed.setImage(t('commands:studioghibli.species.notFound'))
+      throw new CommandError(
+        t('commands:studioghibli.subcommands.species.notFound')
+      )
     } else {
       const peopleList = []
       for (const character of speciesData.people) {
@@ -33,12 +35,36 @@ module.exports = class Species extends Command {
         filmsList.push(body[0].title)
       }
 
-      embed.addField('Name:', speciesData.name, false)
-      embed.addField('Classification:', speciesData.classification, false)
-      embed.addField('Eye Colors:', speciesData.eye_colors, false)
-      embed.addField('Hair Colors:', speciesData.hair_colors, false)
-      embed.addField('People:', peopleList.join(', '), false)
-      embed.addField('Films:', filmsList.join(', '), false)
+      embed.addField(
+        t('commands:studioghibli.subcommands.species.name'),
+        speciesData.name,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.species.classificaation'),
+        speciesData.classification,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.species.eyecolors'),
+        speciesData.eye_colors,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.species.haircolors'),
+        speciesData.hair_colors,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.species.peoplelist'),
+        peopleList.join(', '),
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.species.filmslist'),
+        filmsList.join(', '),
+        false
+      )
     }
 
     embed.setDescription(t('commands:studioghibli.species'))

@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const fetch = require('node-fetch')
 
@@ -19,14 +19,40 @@ module.exports = class Film extends Command {
     const filmData = body.filter(element => element.title === searchTerm)[0]
 
     if (filmData === 'undefined') {
-      embed.setImage(t('commands:studioghibli.film.notFound'))
+      throw new CommandError(
+        t('commands:studioghibli.subcommands.film.notFound')
+      )
     } else {
-      embed.addField('Name:', filmData.title, false)
-      embed.addField('Release Date:', filmData.release_date, false)
-      embed.addField('Director:', filmData.director, false)
-      embed.addField('Producter:', filmData.producter, false)
-      embed.addField('Rotten Tomatoes Score:', filmData.rt_score, false)
-      embed.addField('Description:', filmData.description, false)
+      embed.addField(
+        t('commands:studioghibli.subcommands.film.name'),
+        filmData.title,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.film.releasedate'),
+        filmData.release_date,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.film.director'),
+        filmData.director,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.film.producer'),
+        filmData.producer,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.film.rtscore'),
+        filmData.rt_score,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.film.description'),
+        filmData.description,
+        false
+      )
     }
 
     embed.setDescription(t('commands:studioghibli.film'))

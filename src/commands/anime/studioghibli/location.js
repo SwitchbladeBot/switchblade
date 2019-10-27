@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 const fetch = require('node-fetch')
 
@@ -19,16 +19,34 @@ module.exports = class Location extends Command {
     const locationData = body.filter(element => element.name === searchTerm)[0]
 
     if (locationData === 'undefined') {
-      embed.setImage(t('commands:studioghibli.location.notFound'))
+      throw new CommandError(
+        t('commands:studioghibli.subcommands.location.notFound')
+      )
     } else {
       const filmData = await fetch(locationData.films[0]).then(res =>
         res.json()
       )
 
-      embed.addField('Name:', locationData.name, false)
-      embed.addField('Climate:', locationData.climate, false)
-      embed.addField('Terrain:', locationData.terrain, false)
-      embed.addField('Film:', filmData.title, false)
+      embed.addField(
+        t('commands:studioghibli.subcommands.location.name'),
+        locationData.name,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.location.climate'),
+        locationData.climate,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.location.terrain'),
+        locationData.terrain,
+        false
+      )
+      embed.addField(
+        t('commands:studioghibli.subcommands.location.title'),
+        filmData.title,
+        false
+      )
     }
 
     embed.setDescription(t('commands:studioghibli.location'))
