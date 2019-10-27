@@ -21,7 +21,7 @@ module.exports = class Character extends Command {
     )[0]
 
     if (characterData === 'undefined') {
-      embed.setImage(t('commands:studioghibli.character.notFound'))
+      throw new CommandError(t('commands:studioghibli.subcommands.character.notFound'))
     } else {
       const speciesData = await fetch(characterData.species).then(res =>
         res.json()
