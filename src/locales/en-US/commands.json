@@ -1431,7 +1431,8 @@
       "film": {
         "commandDescription": "Shows you information about one Studio Ghibli film.",
         "commandUsage": "<movie title>",
-        "noSearchTerm": "You have to give me a Studio Ghibli movie title!"
+        "noSearchTerm": "You have to give me a Studio Ghibli movie title!",
+        "notFound": "Coulnd't find a movie with this title."
       },
       "characterlist": {
         "commandDescription": "Shows you a list of characters from Studio Ghibli film."
@@ -1439,7 +1440,8 @@
       "character": {
         "commandDescription": "Shows you information about a character from a Studio Ghibli film.",
         "commandUsage": "<character name>",
-        "noSearchTerm": "You have to give me a Studio Ghibli character name!"
+        "noSearchTerm": "You have to give me a Studio Ghibli character name!",
+        "notFound": "Coulnd't find a character with this name."
       },
       "locationslist": {
         "commandDescription": "Shows you a list of locations from Studio Ghibli films."
@@ -1447,7 +1449,8 @@
       "location": {
         "commandDescription": "Shows you information about a location from a Studio Ghibli film.",
         "commandUsage": "<location name>",
-        "noSearchTerm": "You have to give me a Studio Ghibli location name!"
+        "noSearchTerm": "You have to give me a Studio Ghibli location name!",
+        "notFound": "Coulnd't find a location with this name."
       },
       "specieslist": {
         "commandDescription": "Shows you a list of species from Studio Ghibli films."
@@ -1455,7 +1458,8 @@
       "species": {
         "commandDescription": "Shows you information about a species from a Studio Ghibli film.",
         "commandUsage": "<species name>",
-        "noSearchTerm": "You have to give me a Studio Ghibli species name!"
+        "noSearchTerm": "You have to give me a Studio Ghibli species name!",
+        "notFound": "Coulnd't find a species with this name."
       },
       "vehicleslist": {
         "commandDescription": "Shows you a list of vehicles from Studio Ghibli films."
@@ -1463,7 +1467,8 @@
       "vehicle": {
         "commandDescription": "Shows you information about a vehicle from a Studio Ghibli film.",
         "commandUsage": "<vehicle name>",
-        "noSearchTerm": "You have to give me a Studio Ghibli vehicle title!"
+        "noSearchTerm": "You have to give me a Studio Ghibli vehicle title!",
+        "notFound": "Coulnd't find a vehicle with this name."
       }
     }
   }
