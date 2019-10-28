@@ -126,11 +126,13 @@ module.exports = class Command {
     return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
   }
 
-  usage (t, prefix, noUsage = true) {
+  usage (t, prefix, noUsage = true, onlyCommand = false) {
     const usagePath = `${this.tPath}.commandUsage`
     const usage = noUsage ? t(`commands:${usagePath}`) : t([`commands:${usagePath}`, ''])
-    if (usage !== usagePath) {
-      return `**${t('commons:usage')}:** \`${prefix}${this.fullName} ${usage}\``
+    if (usage !== usagePath && !onlyCommand) {
+      return `**${t('commons:usage')}:** \`${prefix}${this.fullName}${usage ? ' ' + usage : ''}\``
+    } else if (usage !== usagePath && onlyCommand) {
+      return `${prefix}${this.fullName}${usage ? ' ' + usage : ''}`
     }
   }
 
@@ -149,7 +151,7 @@ module.exports = class Command {
     }
   }
 
-  getEmoji (emoji) {
-    return this.client.officialEmojis.get(emoji)
+  getEmoji (emoji, fallback) {
+    return this.client.officialEmojis.get(emoji, fallback)
   }
 }

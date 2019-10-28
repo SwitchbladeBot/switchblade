@@ -37,13 +37,15 @@ module.exports = class EmojiLoader extends Loader {
   /**
    * Attempts to fetch a required emoji, returns a question mark if not found
    * @param {string} emojiName - Emoji name
+   * @param {string} fallback - Replacement for the default question mark fallback emoji
    */
-  getEmoji (emojiName) {
+  getEmoji (emojiName, fallback) {
+    if (typeof fallback === 'undefined') fallback = '❓'
     const emojis = Object.keys(this).filter(k => parseInt(k))
-    if (!emojis) return '❓'
+    if (!emojis) return fallback
 
     const matchingEmoji = this.find(e => e.name.toLowerCase() === emojiName.toLowerCase())
     if (matchingEmoji) return matchingEmoji.toString()
-    else return '❓'
+    else return fallback
   }
 }

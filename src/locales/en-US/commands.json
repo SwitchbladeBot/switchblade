@@ -1039,6 +1039,7 @@
   "leagueoflegends": {
     "commandDescription": "Shows the current issues of a League of Legends server or information about a champion.",
     "commandUsage": "<type> <query>",
+    "gameName": "League of Legends",
     "subcommands": {
       "status": {
         "commandDescription": "Shows the current issues of a League of Legends server.",
@@ -1416,6 +1417,14 @@
     "commandDescription": "Shows a random image from r/CrappyDesign.",
     "title": "Here's your crappy design."
   },
+  "createrole": {
+    "commandDescription": "Create a role.",
+    "commandUsage": "<name> [color]",
+    "successTitle": "Role was created!",
+    "errorTitle": "Role could not be created!",
+    "noParams": "You need to include a role name!",
+    "successMessage": "Name of the role: {{name}}"
+  },
   "goat": {
     "commandDescription": "Shows a goat image from placegoat.com",
     "commandUsage": "[width] [height]",
@@ -1426,5 +1435,18 @@
     "commandDescription": "Translates the text to how Yoda would say it",
     "commandUsage": "<text>",
     "missingSentence": "You have to give me some text to translate to Yoda"
+},
+  "legendsofruneterra": {
+    "commandDescription": "Utility commands for Legends of Runeterra",
+    "gameName": "Legends of Runeterra",
+    "subcommands": {
+      "card": {
+        "commandUsage": "<card> [--base]",
+        "commandDescription": "Shows information about a Legends of Runeterra card",
+        "illustrationBy": "Illustration by {{artistName}}",
+        "associatedCards": "Associated cards",
+        "noCardsFound": "I couldn't find a card by that name."
+      }
+    }
   }
 }
