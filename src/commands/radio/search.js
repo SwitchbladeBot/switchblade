@@ -20,17 +20,15 @@ module.exports = class TuneIn extends SearchCommand {
     return results
   }
 
-  searchResultFormatter ({ text }) {
-    return `${this.formatTitle(text)}`
-  }
-
   async handleResult ({ t, channel, author }, radio) {
     try {
       const r = await this.getRadioDescription(radio.now_playing_id)
-      const song = r.current_song ? `${r.current_artist} - ${r.current_song}` : 'N/A'
+      const song = r.current_song
+        ? `${r.current_artist} - ${r.current_song}`
+        : t('commands:tunein.notAvailable')
       channel.send(
         new SwitchbladeEmbed(author)
-          .setTitle(this.formatTitle(r.title || r.name))
+          .setTitle(r.title || r.name)
           .addField(t('commands:tunein.nowPlaying'), song, true)
           .addField(t('commands:tunein.genre'), r.genre_name, true)
           .setThumbnail(r.logo)
@@ -45,9 +43,5 @@ module.exports = class TuneIn extends SearchCommand {
   async getRadioDescription (id) {
     const result = await this.client.apis.tunein.describeRadio(id)
     return result
-  }
-
-  formatTitle (title) {
-    return !title.toLowerCase().includes('radio') ? `${title} Radio` : title
   }
 }
