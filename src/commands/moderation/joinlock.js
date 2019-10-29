@@ -17,18 +17,18 @@ module.exports = class JoinLock extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     const stateString = newState.toString()
+    const currentState = await this.client.modules.joinLock.isActive(guild.id)
     try {
-      await this.client.modules.moderation.setJoinLock(guild.id, newState)
-      embed.setTitle(`${newState ? '🔒' : '🔓'} ${t('commands:joinlock.success', { context: stateString })}`)
-    } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
-      switch (e.message) {
-        case 'SAME_STATE':
-          embed.setTitle(t('commands:joinlock.sameValue', { context: stateString }))
-          break
-        default:
-          embed.setTitle(t('errors:generic'))
+      if (currentState === newState) {
+        embed.setTitle(t('commands:joinlock.sameValue', { context: stateString }))
+      } else {
+        await this.client.modules.joinLock.updateState(guild.id, newState)
+        embed.setTitle(`${newState ? '🔒' : '🔓'} ${t('commands:joinlock.success', { context: stateString })}`)
       }
+    } catch (e) {
+      embed
+        .setTitle(t('errors:generic'))
+        .setColor(Constants.ERROR_COLOR)
     }
 
     channel.send(embed)

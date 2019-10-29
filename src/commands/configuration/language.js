@@ -45,7 +45,7 @@ module.exports = class ConfigLanguage extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     try {
-      await this.client.modules.configuration.setLanguage(guild.id, lang)
+      await this.client.modules.language.updateValues(guild.id, { language: lang })
       embed.setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)
