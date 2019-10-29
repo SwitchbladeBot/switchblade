@@ -13,6 +13,7 @@ module.exports = {
   // Command extensions
   RandomRedditPostCommand: CommandStructures.RandomRedditPostCommand,
   SearchCommand: CommandStructures.SearchCommand,
+  SubcommandListCommand: CommandStructures.SubcommandListCommand,
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),
@@ -36,5 +37,7 @@ module.exports = {
   PermissionUtils: require('./utils/PermissionUtils.js'),
   EmojiUtils: require('./utils/EmojiUtils.js'),
   EndpointUtils: require('./utils/EndpointUtils.js'),
-  ConfirmationBox: require('./utils/ConfirmationBox')
+  ConfirmationBox: require('./utils/ConfirmationBox.js'),
+  PlaceholderUtils: require('./utils/placeholders/PlaceholderUtils.js'),
+  PlaceholderRules: require('./utils/placeholders/PlaceholderRules.js')
 }
