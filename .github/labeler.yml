@@ -9,6 +9,6 @@
   - src/music/*
   - src/music/**/*
   
-  "scope: translation":
+"scope: translation":
   - src/locales/*
   - src/locales/**/*
