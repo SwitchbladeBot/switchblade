@@ -137,7 +137,7 @@ Backers are the people who contribute to our projects monetarily. They get their
 <a href="https://opencollective.com/switchblade/backer/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/10/avatar.svg?requireActive=false"></a>
 
 [support-invite]: https://support.switchblade.xyz
-[support-badge]: https://img.shields.io/badge/dynamic/json.svg?label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online&logo=discord
+[support-badge]: https://img.shields.io/discord/445203868624748555?label=chat%20on%20Discord&logo=discord&logoColor=white
 
 [crowdin-url]: https://translate.switchblade.xyz
 [crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
