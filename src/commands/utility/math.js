@@ -1,5 +1,15 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
-const math = require('mathjs')
+const { create, all } = require('mathjs')
+const math = create(all)
+math.import({
+  'import':     function () { throw new Error('Function import is disabled') },
+  'createUnit': function () { throw new Error('Function createUnit is disabled') },
+  'evaluate':   function () { throw new Error('Function evaluate is disabled') },
+  'parse':      function () { throw new Error('Function parse is disabled') },
+  'simplify':   function () { throw new Error('Function simplify is disabled') },
+  'derivative': function () { throw new Error('Function derivative is disabled') },
+  'format': function () { throw new Error('Function format is disabled') }
+}, { override: true })
 
 module.exports = class Math extends Command {
   constructor (client) {
