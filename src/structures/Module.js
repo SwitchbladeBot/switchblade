@@ -1,14 +1,28 @@
 const _ = require('lodash')
+const { Utils } = require('../')
 
 module.exports = class Module {
-  constructor (name, client) {
-    this.name = name
-    this.client = client
+  /**
+   * @param {Object} options
+   * @param {string} options.name
+   * @param {string} options.displayName
+   * @param {boolean} [options.toggleable]
+   * @param {boolean} [options.defaultState]
+   * @param {Object} [options.defaultValues]
+   * @param {string[]} [options.apiMethods]
+   * @param {Object|Function} [options.specialInput]
+   * @param {Client} client
+   */
+  constructor (options = {}, client) {
+    this.name = options.name
+    this.displayName = options.displayName
+    this.toggleable = Utils.default(options.toggleable, true)
+    this.defaultState = Utils.default(options.defaultState, true)
+    this.defaultValues = Utils.default(options.defaultValues, {})
+    this.apiMethods = Utils.default(options.apiMethods, [])
+    this.specialInput = options.specialInput
 
-    this.toggleable = true
-    this.defaultState = true // Default active state
-    this.defaultValues = {} // Default values
-    this.apiMethods = []
+    this.client = client
   }
 
   // Helpers

@@ -5,13 +5,15 @@ const Joi = require('@hapi/joi')
 // Language
 module.exports = class LanguageModule extends Module {
   constructor (client) {
-    super('language', client)
-    this.displayName = 'Language'
-
-    this.toggleable = false
-    this.defaultValues = { language: 'en-US' }
-
-    this.specialInput = { language: { whitelist: Object.keys(this.client.i18next.store.data) } }
+    super({
+      name: 'language',
+      displayName: 'Language',
+      toggleable: false,
+      defaultValues: { language: 'en-US' },
+      specialInput: {
+        language: { whitelist: Object.keys(client.i18next.store.data) }
+      }
+    }, client)
   }
 
   validateValues (entity) {
