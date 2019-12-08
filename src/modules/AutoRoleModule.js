@@ -3,14 +3,17 @@ const { Role } = require('discord.js')
 
 const Joi = require('@hapi/joi')
 
-// Autorole
 module.exports = class AutoRoleModule extends Module {
   constructor (client) {
-    super('autoRole', client)
-    this.displayName = 'Auto Role'
-
-    this.defaultState = false
-    this.defaultValues = { userRoles: [], botRoles: [] }
+    super({
+      name: 'autoRole',
+      displayName: 'Auto Role',
+      defaultState: false,
+      defaultValues: {
+        userRoles: [],
+        botRoles: []
+      }
+    }, client)
   }
 
   specialInput (guildId, userId) {
