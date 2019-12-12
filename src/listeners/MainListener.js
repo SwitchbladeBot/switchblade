@@ -1,6 +1,7 @@
 const { CommandContext, EventListener, MiscUtils } = require('../')
 const { SwitchbladePlayerManager } = require('../music')
 const fetch = require('node-fetch')
+const fuse = require('../utils/Fuse')
 
 const EmojiLoader = require('../loaders/EmojiLoader.js')
 
@@ -107,31 +108,42 @@ module.exports = class MainListener extends EventListener {
     const sw = (...s) => s.some(st => message.content.startsWith(st))
     const usedPrefix = sw(botMention, `<@!${this.user.id}>`) ? `${botMention} ` : sw(prefix) ? prefix : null
 
-    if (usedPrefix) {
-      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => !spacePrefix || a)
-      const args = fullCmd.slice(1)
-      if (!fullCmd.length) return
+    if (!usedPrefix) return
 
-      const cmd = fullCmd[0].toLowerCase().trim()
-      const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
-      if (command) {
-        const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
-        if (userDocument && userDocument.blacklisted) return
+    const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => !spacePrefix || a)
+    const args = fullCmd.slice(1)
+    if (!fullCmd.length) return
 
-        const context = new CommandContext({
-          defaultPrefix: usedPrefix,
-          aliase: cmd,
-          client: this,
-          prefix,
-          message,
-          command,
-          language
-        })
+    const cmd = fullCmd[0].toLowerCase().trim()
+    const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
 
-        this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
-        this.runCommand(command, context, args, language)
-      }
+    if (!command) {
+      const didYouMean = this.modules.didYouMean.isActive(guildId)
+
+      if (!didYouMean) return
+
+      const t = this.i18next.getFixedT(language)
+
+      const result = fuse(this, cmd)
+      if (!result) return
+      return message.reply(t('misc:didYouMean', { command: result }))
     }
+
+    const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
+    if (userDocument && userDocument.blacklisted) return
+
+    const context = new CommandContext({
+      defaultPrefix: usedPrefix,
+      aliase: cmd,
+      client: this,
+      prefix,
+      message,
+      command,
+      language
+    })
+
+    this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
+    this.runCommand(command, context, args, language)
   }
 
   async onVoiceStateUpdate (oldMember, newMember) {

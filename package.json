@@ -46,7 +46,7 @@
     "discord.js-lavalink": "^2.2.2",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
-    "fuse.js": "^3.4.5",
+    "fuse.js": "^3.4.6",
     "gifencoder": "^2.0.1",
     "googleapis": "^39.1.0",
     "i18n-iso-countries": "^3.7.8",
