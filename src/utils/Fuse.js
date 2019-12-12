@@ -23,5 +23,6 @@ module.exports = (client, search) => {
 
   if (!results.length) return false
 
-  return commandList[results[0]]
+  const [ result ] = fuse.search(search)
+  return result ? commandList[result] : false
 }
