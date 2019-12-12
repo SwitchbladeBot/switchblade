@@ -43,7 +43,7 @@ module.exports = class LocaleLoader extends Loader {
 
       try {
         i18next.use(translationBackend).init({
-          ns: [ 'categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions', 'moderation', 'lolservers', 'languages' ],
+          ns: ['categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions', 'moderation', 'lolservers', 'languages', 'misc'],
           preload: await FileUtils.readdir(dirPath),
           fallbackLng: 'en-US',
           backend: {
