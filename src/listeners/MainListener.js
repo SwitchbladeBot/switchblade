@@ -118,7 +118,7 @@ module.exports = class MainListener extends EventListener {
     const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
 
     if (!command) {
-      const didYouMean = this.modules.didYouMean.isActive(guildId)
+      const didYouMean = await this.modules.didYouMean.isActive(guildId)
 
       if (!didYouMean) return
 
