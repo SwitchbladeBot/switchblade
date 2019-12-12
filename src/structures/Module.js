@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const { Utils } = require('../')
+const Utils = require('../utils')
 
 module.exports = class Module {
   /**
