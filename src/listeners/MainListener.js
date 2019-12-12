@@ -117,6 +117,9 @@ module.exports = class MainListener extends EventListener {
     const cmd = fullCmd[0].toLowerCase().trim()
     const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
 
+    const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
+    if (userDocument && userDocument.blacklisted) return
+
     if (!command) {
       const didYouMean = await this.modules.didYouMean.isActive(guildId)
 
@@ -128,9 +131,6 @@ module.exports = class MainListener extends EventListener {
       if (!result) return
       return message.reply(t('misc:didYouMean', { command: result }))
     }
-
-    const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
-    if (userDocument && userDocument.blacklisted) return
 
     const context = new CommandContext({
       defaultPrefix: usedPrefix,
