@@ -63,7 +63,7 @@ module.exports = class LastfmUserTop extends Command {
     } else if (type === 'artist') {
       return top.artist.map(artist => `\`${formatNumber(artist['@attr'].rank)}.\` [${artist.name}](${artist.url}) - ${t('commands:lastfm.playcountCount', { times: artist.playcount })}`)
     } else {
-      return top.track.map(track => `\`${formatNumber(track['@attr'].rank)}.\` [${track.name}](${this.parent.formatUrl(track.url)}) ${track.artist.name} - ${t('commands:lastfm.playcountCount', { times: track.playcount })}`)
+      return top.track.map(track => `\`${formatNumber(track['@attr'].rank)}.\` [${track.name}](${this.parentCommand.formatUrl(track.url)}) ${track.artist.name} - ${t('commands:lastfm.playcountCount', { times: track.playcount })}`)
     }
   }
 }

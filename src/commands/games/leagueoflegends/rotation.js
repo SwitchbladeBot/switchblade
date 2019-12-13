@@ -22,8 +22,8 @@ module.exports = class LeagueOfLegendsRotation extends Command {
         var payload = await this.client.apis.lol.fetchChampion(c, language, true)
         return `**${payload.name}**, ${payload.title}`
       }))
-      embed.setColor(this.parent.LOL_COLOR)
-        .setAuthor('League of Legends', this.parent.LOL_LOGO, 'https://leagueoflegends.com')
+      embed.setColor(this.parentCommand.LOL_COLOR)
+        .setAuthor('League of Legends', this.parentCommand.LOL_LOGO, 'https://leagueoflegends.com')
         .setTitle(t('commands:leagueoflegends.subcommands.rotation.weeklyChampRotation'))
         .setDescription(championPayload.join('\n'))
       channel.send(embed).then(() => channel.stopTyping())

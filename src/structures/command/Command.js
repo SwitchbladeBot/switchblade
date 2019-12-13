@@ -25,7 +25,7 @@ module.exports = class Command {
     this.aliases = options.optional('aliases')
     this.category = options.optional('category', 'general')
     this.hidden = options.optional('hidden', false)
-    this.parent = options.optional('parent')
+    this.parentCommand = options.optional('parent')
     this.requirements = options.optional('requirements')
     this.parameters = options.optional('parameters')
 
@@ -125,11 +125,11 @@ module.exports = class Command {
   }
 
   get tPath () {
-    return this.parent ? `${this.parent.tPath}.subcommands.${this.name}` : `${this.name}`
+    return this.parentCommand ? `${this.parentCommand.tPath}.subcommands.${this.name}` : `${this.name}`
   }
 
   get fullName () {
-    return this.parent ? `${this.parent.fullName} ${this.name}` : this.name
+    return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
   }
 
   usage (t, prefix, noUsage = true, onlyCommand = false) {

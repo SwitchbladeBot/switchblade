@@ -27,7 +27,7 @@ module.exports = class GitHubRepository extends SearchCommand {
     const data = await this.client.apis.github.getRepository(repositorySplitted[0], repositorySplitted[1])
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.GITHUB_COLOR)
-      .setAuthor('GitHub', this.parent.GITHUB_LOGO)
+      .setAuthor('GitHub', this.parentCommand.GITHUB_LOGO)
       .setTitle(data.full_name)
       .setURL(data.html_url)
       .setThumbnail(data.owner.avatar_url)
