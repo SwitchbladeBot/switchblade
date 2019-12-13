@@ -4,7 +4,7 @@ const types = ['server', 'sv', 'namehistory', 'skin', 's', 'nh', 'nameh', 'minec
 
 module.exports = class Minecraft extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'minecraft',
       aliases: ['minecraftquery', 'mc', 'mcquery'],
       category: 'games',
@@ -22,7 +22,7 @@ module.exports = class Minecraft extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
 
     this.MINECRAFT_LOGO = 'https://i.imgur.com/DBkQ0K5.png'
   }

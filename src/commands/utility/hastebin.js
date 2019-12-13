@@ -8,7 +8,7 @@ const baseURL = 'https://hastebin.com'
 
 module.exports = class Hastebin extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'hastebin',
       aliases: ['haste'],
       category: 'utility',
@@ -17,7 +17,7 @@ module.exports = class Hastebin extends Command {
         full: true,
         missingError: 'commands:hastebin.missingCode'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, message }, code) {

@@ -2,8 +2,9 @@ const { Loader, Command, FileUtils } = require('../')
 
 module.exports = class CommandLoader extends Loader {
   constructor (client) {
-    super(client)
-    this.critical = true
+    super({
+      critical: true
+    }, client)
 
     this.commands = []
     this.posLoadCommands = []
@@ -41,7 +42,7 @@ module.exports = class CommandLoader extends Loader {
    * @param {Command} command - Command to be added
    */
   addCommand (command) {
-    if (typeof command.parentCommand === 'string' || Array.isArray(command.parentCommand)) {
+    if (typeof command.parent === 'string' || Array.isArray(command.parent)) {
       this.posLoadCommands.push(command)
     } else {
       const check = this.checkCommand(command)
@@ -53,24 +54,24 @@ module.exports = class CommandLoader extends Loader {
   }
 
   addSubcommand (subCommand) {
-    let parentCommand
-    if (typeof subCommand.parentCommand === 'string') {
-      parentCommand = this.commands.find(c => c.name === subCommand.parentCommand)
-    } else if (Array.isArray(subCommand.parentCommand)) {
-      parentCommand = subCommand.parentCommand.reduce((o, ca) => {
+    let parent
+    if (typeof subCommand.parent === 'string') {
+      parent = this.commands.find(c => c.name === subCommand.parent)
+    } else if (Array.isArray(subCommand.parent)) {
+      parent = subCommand.parent.reduce((o, ca) => {
         const arr = (Array.isArray(o) && o) || (o && o.subcommands)
         if (!arr) return
         return arr.find(c => c.name === ca)
       }, this.commands)
     }
 
-    if (parentCommand) {
-      parentCommand.subcommands.push(subCommand)
-      subCommand.parentCommand = parentCommand
-      if (subCommand.category === 'general') subCommand.category = parentCommand.category
+    if (parent) {
+      parent.subcommands.push(subCommand)
+      subCommand.parent = parent
+      if (subCommand.category === 'general') subCommand.category = parent.category
     } else {
-      parentCommand = subCommand.parentCommand
-      const name = (Array.isArray(parentCommand) ? parentCommand : [ parentCommand ]).concat([ subCommand.name ]).join(' ')
+      parent = subCommand.parent
+      const name = (Array.isArray(parent) ? parent : [ parent ]).concat([ subCommand.name ]).join(' ')
       this.log(`[31m${name} failed to load - Couldn't find parent command.`, 'Commands')
       return false
     }

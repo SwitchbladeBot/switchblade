@@ -5,7 +5,7 @@ const translationBackend = require('i18next-node-fs-backend')
 
 module.exports = class LocaleLoader extends Loader {
   constructor (client) {
-    super(client)
+    super({}, client)
 
     this.cldr = { languages: {} }
   }

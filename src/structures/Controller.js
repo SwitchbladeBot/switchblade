@@ -1,8 +1,20 @@
+const Utils = require('../utils')
+
 module.exports = class Controller {
-  constructor (name, client, parentController) {
-    this.name = name
+  /**
+   * @param {Object} opts
+   * @param {string} opts.name
+   * @param {string} [opts.parent]
+   * @param {Client} client
+   */
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('Controller', opts)
+
+    this.name = options.required('name')
+    this.parentController = options.optional('parent')
+
     this.client = client
-    this.parentController = parentController
+
     this.subcontrollers = []
   }
 

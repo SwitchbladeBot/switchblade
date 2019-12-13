@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class EightBall extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: '8ball',
       aliases: ['eightball', '8b', 'magicball', '8-ball'],
       parameters: [{

@@ -8,8 +8,9 @@ const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 
 module.exports = class MainListener extends EventListener {
   constructor (client) {
-    super(client)
-    this.events = ['ready', 'message', 'voiceStateUpdate']
+    super({
+      events: ['ready', 'message', 'voiceStateUpdate']
+    }, client)
   }
 
   onReady () {

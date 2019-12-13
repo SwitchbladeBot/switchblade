@@ -5,7 +5,7 @@ const moment = require('moment')
 
 module.exports = class NowPlaying extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'nowplaying',
       aliases: ['np', 'currentplaying'],
       category: 'music',
@@ -13,7 +13,7 @@ module.exports = class NowPlaying extends Command {
       parameters: [[{
         type: 'booleanFlag', name: 'text'
       }]]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, flags, guild }) {

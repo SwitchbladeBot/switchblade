@@ -3,13 +3,13 @@ const moment = require('moment')
 
 module.exports = class GitHubRepository extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'repository',
       aliases: ['repo'],
-      parentCommand: 'github',
+      parent: 'github',
       embedColor: Constants.GITHUB_COLOR,
       embedLogoURL: 'https://i.imgur.com/gsY6oYB.png'
-    })
+    }, client)
   }
 
   async search (context, query) {
@@ -27,7 +27,7 @@ module.exports = class GitHubRepository extends SearchCommand {
     const data = await this.client.apis.github.getRepository(repositorySplitted[0], repositorySplitted[1])
     const embed = new SwitchbladeEmbed(author)
       .setColor(Constants.GITHUB_COLOR)
-      .setAuthor('GitHub', this.parentCommand.GITHUB_LOGO)
+      .setAuthor('GitHub', this.parent.GITHUB_LOGO)
       .setTitle(data.full_name)
       .setURL(data.html_url)
       .setThumbnail(data.owner.avatar_url)

@@ -2,13 +2,13 @@ const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../..
 
 module.exports = class LastfmAlbum extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'album',
       aliases: ['al'],
-      parentCommand: 'lastfm',
+      parent: 'lastfm',
       embedColor: Constants.LASTFM_COLOR,
       embedLogoURL: 'https://i.imgur.com/TppYCun.png'
-    })
+    }, client)
   }
 
   async search (context, query) {
@@ -17,7 +17,7 @@ module.exports = class LastfmAlbum extends SearchCommand {
   }
 
   searchResultFormatter (album) {
-    return `[${album.name}](${this.parentCommand.formatUrl(album.url)}) - ${album.artist}`
+    return `[${album.name}](${this.parent.formatUrl(album.url)}) - ${album.artist}`
   }
 
   async handleResult ({ t, channel, author, language, flags }, albumInfo) {
@@ -36,12 +36,12 @@ module.exports = class LastfmAlbum extends SearchCommand {
         .addField(t('commands:lastfm.listeners'), MiscUtils.formatNumber(album.listeners, language), true)
       if (album.tags.tag.length > 1) embed.addField(t('commands:lastfm.tags'), album.tags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
       if (album.wiki) {
-        let regex = this.parentCommand.READ_MORE_REGEX.exec(album.wiki.summary)
-        embed.setDescription(`${album.wiki.summary.replace(this.parentCommand.READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
+        let regex = this.parent.READ_MORE_REGEX.exec(album.wiki.summary)
+        embed.setDescription(`${album.wiki.summary.replace(this.parent.READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
       }
       if (album.tracks.track.length > 0) {
         const tracks = album.tracks.track.slice(0, 5)
-        const tracksList = tracks.map(track => `\`${track['@attr'].rank}.\` [${track.name}](${this.parentCommand.formatUrl(track.url)})`)
+        const tracksList = tracks.map(track => `\`${track['@attr'].rank}.\` [${track.name}](${this.parent.formatUrl(track.url)})`)
         embed.addField(t('commands:lastfm.tracks') + ` (${album.tracks.track.length})`, tracksList)
       }
     } catch (e) {

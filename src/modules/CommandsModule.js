@@ -10,7 +10,7 @@ const commandsPath = (c) => `commands.${c}`
 const categoriesPath = (c) => `categories.${c}`
 const recPaths = (c) => {
   const arr = [parseName(c)]
-  return c.parentCommand ? arr.concat(recPaths(c.parentCommand)) : arr
+  return c.parent ? arr.concat(recPaths(c.parent)) : arr
 }
 
 const findCommand = (commands, path) => {
@@ -177,8 +177,8 @@ module.exports = class CommandsModule extends Module {
       const path = parseName(command)
       const { blacklist = [], whitelist = [] } = commands[path] || {}
       return verify(whitelist, blacklist, () => (
-        command.parentCommand
-          ? check(command.parentCommand)
+        command.parent
+          ? check(command.parent)
           : verify(catWhitelist, catBlacklist, () => verify(allWhitelist, allBlacklist))
       ))
     }
@@ -239,7 +239,7 @@ module.exports = class CommandsModule extends Module {
   fetchCommands () {
     const joinAliases = (c) => {
       const { aliases = [] } = c
-      return c.parentCommand ? aliases.concat(joinAliases(c.parentCommand)) : aliases
+      return c.parent ? aliases.concat(joinAliases(c.parent)) : aliases
     }
     const addCommand = (a, c) => {
       if (c.hidden) return a

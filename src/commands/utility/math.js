@@ -3,7 +3,7 @@ const math = require('mathjs')
 
 module.exports = class Math extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'math',
       category: 'utility',
       parameters: [{
@@ -11,7 +11,7 @@ module.exports = class Math extends Command {
         full: true,
         missingError: 'commands:math.needMathExpression'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, expression) {

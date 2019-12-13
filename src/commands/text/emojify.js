@@ -20,7 +20,7 @@ const specialCodes = {
 
 module.exports = class Emojify extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'emojify',
       category: 'memes',
       parameters: [{
@@ -28,7 +28,7 @@ module.exports = class Emojify extends Command {
         full: true,
         missingError: 'commands:emojify.missingSentence'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, text) {

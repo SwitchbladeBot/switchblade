@@ -5,13 +5,13 @@ const fetch = require('node-fetch')
 
 module.exports = class FiveM extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'fivem',
       category: 'games',
       parameters: [{
         type: 'string', missingError: 'commands:fivem.noIP'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, address) {

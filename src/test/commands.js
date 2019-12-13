@@ -4,8 +4,8 @@ const MiscUtils = require('../utils/MiscUtils.js')
 const commands = []
 
 FileUtils.requireDirectory('src/commands', (NewCommand) => {
-  const { parentCommand } = new NewCommand()
-  if (typeof parentCommand !== 'string' && !Array.isArray(parentCommand)) commands.push(NewCommand)
+  const { parent } = new NewCommand()
+  if (typeof parent !== 'string' && !Array.isArray(parent)) commands.push(NewCommand)
 }, console.error).catch(console.error)
 
 describe('Commands', () => {
@@ -35,13 +35,13 @@ describe('Commands', () => {
   it('should be in commands.json', (done) => {
     const commandsFile = require('../../src/locales/en-US/commands.json')
     const notInCommandsFile = commands.map(CurrentCommand => new CurrentCommand()).filter(command => {
-      const { name, parentCommand } = command
-      if (parentCommand) {
-        if (typeof parentCommand === 'string') {
-          const parentSubcommands = commandsFile[parentCommand] && commandsFile[parentCommand].subcommands
+      const { name, parent } = command
+      if (parent) {
+        if (typeof parent === 'string') {
+          const parentSubcommands = commandsFile[parent] && commandsFile[parent].subcommands
           return !(parentSubcommands && parentSubcommands[name])
-        } else if (Array.isArray(parentCommand)) {
-          return !parentCommand.reduce((o, ca) => {
+        } else if (Array.isArray(parent)) {
+          return !parent.reduce((o, ca) => {
             if (o === undefined) return commandsFile[ca] || false
             return o.subcommands && o.subcommands[ca]
           })
@@ -59,13 +59,13 @@ describe('Commands', () => {
   it('should have descriptions', (done) => {
     const commandsFile = require('../../src/locales/en-US/commands.json')
     const noDescription = commands.map(CurrentCommand => new CurrentCommand()).filter(command => {
-      const { name, parentCommand } = command
-      if (parentCommand) {
-        if (typeof parentCommand === 'string') {
-          const parentSubcommands = commandsFile[parentCommand] && commandsFile[parentCommand].subcommands
+      const { name, parent } = command
+      if (parent) {
+        if (typeof parent === 'string') {
+          const parentSubcommands = commandsFile[parent] && commandsFile[parent].subcommands
           return !(parentSubcommands && parentSubcommands[name] && parentSubcommands[name].commandDescription)
-        } else if (Array.isArray(parentCommand)) {
-          const finalCommand = parentCommand.reduce((o, ca) => {
+        } else if (Array.isArray(parent)) {
+          const finalCommand = parent.reduce((o, ca) => {
             if (o === undefined) return commandsFile[ca] || false
             return o.subcommands && o.subcommands[ca]
           })

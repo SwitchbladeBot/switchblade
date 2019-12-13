@@ -2,13 +2,13 @@ const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../..
 
 module.exports = class LastfmArtist extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'artist',
       aliases: ['ar'],
-      parentCommand: 'lastfm',
+      parent: 'lastfm',
       embedColor: Constants.LASTFM_COLOR,
       embedLogoURL: 'https://i.imgur.com/TppYCun.png'
-    })
+    }, client)
   }
 
   async search (context, query) {
@@ -17,7 +17,7 @@ module.exports = class LastfmArtist extends SearchCommand {
   }
 
   searchResultFormatter (artist) {
-    return `[${artist.name}](${this.parentCommand.formatUrl(artist.url)})`
+    return `[${artist.name}](${this.parent.formatUrl(artist.url)})`
   }
 
   async handleResult ({ t, channel, author, language }, artistInfo) {
@@ -34,8 +34,8 @@ module.exports = class LastfmArtist extends SearchCommand {
       embed.addField(t('commands:lastfm.playcount'), MiscUtils.formatNumber(artist.stats.playcount, language), true)
         .addField(t('commands:lastfm.tags'), artist.tags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
       if (artist.bio.summary) {
-        let regex = this.parentCommand.READ_MORE_REGEX.exec(artist.bio.summary)
-        embed.setDescription(`${artist.bio.summary.replace(this.parentCommand.READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
+        let regex = this.parent.READ_MORE_REGEX.exec(artist.bio.summary)
+        embed.setDescription(`${artist.bio.summary.replace(this.parent.READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
       }
     } catch (e) {
     }

@@ -6,14 +6,14 @@ const prefixRegex = (prefix) => new RegExp(`^${quoteRegex(prefix)}`)
 
 module.exports = class Help extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'help',
       aliases: ['commands', 'ajuda', 'halp'],
       category: 'bot',
       parameters: [{
         type: 'string', full: true, required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild, prefix }, cmd) {

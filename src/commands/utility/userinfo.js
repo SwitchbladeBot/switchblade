@@ -3,7 +3,7 @@ const moment = require('moment')
 
 module.exports = class UserInfo extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'userinfo',
       aliases: ['user', 'ui', 'uinfo'],
       category: 'utility',
@@ -14,7 +14,7 @@ module.exports = class UserInfo extends Command {
         required: false,
         acceptBot: true
       }]
-    })
+    }, client)
   }
 
   run ({ t, guild, member: author, channel, language }, member = author) {

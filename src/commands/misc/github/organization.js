@@ -3,14 +3,14 @@ const moment = require('moment')
 
 module.exports = class GitHubOrganization extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'organization',
       aliases: ['org'],
-      parentCommand: 'github',
+      parent: 'github',
       parameters: [{
         type: 'string', missingError: 'commands:github.subcommands.organization.noOrg'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, organization) {
@@ -25,7 +25,7 @@ module.exports = class GitHubOrganization extends Command {
       const orgMembers = await this.client.apis.github.getOrganizationMembers(organization)
       const embed = new SwitchbladeEmbed(author)
         .setColor(Constants.GITHUB_COLOR)
-        .setAuthor('GitHub', this.parentCommand.GITHUB_LOGO)
+        .setAuthor('GitHub', this.parent.GITHUB_LOGO)
         .setTitle(`${data.login}${data.name ? ` - ${data.name}` : ''}`)
         .setURL(data.html_url)
         .setThumbnail(data.avatar_url)

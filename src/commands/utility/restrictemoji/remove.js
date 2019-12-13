@@ -1,10 +1,10 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class RestrictEmojiRemove extends Command {
-  constructor (client, parentCommand) {
-    super(client, {
+  constructor (client, parent) {
+    super({
       name: 'remove',
-      parentCommand: 'restrictemoji',
+      parent: 'restrictemoji',
       parameters: [{
         type: 'emoji',
         sameGuildOnly: true
@@ -12,7 +12,7 @@ module.exports = class RestrictEmojiRemove extends Command {
         type: 'role',
         full: true
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, emoji, role) {

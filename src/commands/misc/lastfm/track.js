@@ -2,13 +2,13 @@ const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../..
 
 module.exports = class LastfmTrack extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'track',
       aliases: ['song', 's', 't'],
-      parentCommand: 'lastfm',
+      parent: 'lastfm',
       embedColor: Constants.LASTFM_COLOR,
       embedLogoURL: 'https://i.imgur.com/TppYCun.png'
-    })
+    }, client)
   }
 
   async search (context, query) {
@@ -17,7 +17,7 @@ module.exports = class LastfmTrack extends SearchCommand {
   }
 
   searchResultFormatter (track) {
-    return `[${track.name}](${this.parentCommand.formatUrl(track.url)}) - ${track.artist}`
+    return `[${track.name}](${this.parent.formatUrl(track.url)}) - ${track.artist}`
   }
 
   async handleResult ({ t, channel, author, language }, trackInfo) {
@@ -43,8 +43,8 @@ module.exports = class LastfmTrack extends SearchCommand {
       }
       embed.addField(t('commands:lastfm.tags'), track.toptags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
       if (track.wiki) {
-        let regex = this.parentCommand.READ_MORE_REGEX.exec(track.wiki.summary)
-        embed.setDescription(`${track.wiki.summary.replace(this.parentCommand.READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
+        let regex = this.parent.READ_MORE_REGEX.exec(track.wiki.summary)
+        embed.setDescription(`${track.wiki.summary.replace(this.parent.READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
       }
     } catch (e) {
     }

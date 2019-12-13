@@ -2,7 +2,7 @@ const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 module.exports = class GuildIcon extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'guildicon',
       aliases: ['gicon', 'sicon', 'srvicn', 'servericon'],
       category: 'utility',
@@ -12,7 +12,7 @@ module.exports = class GuildIcon extends Command {
         full: true,
         required: false
       }]
-    })
+    }, client)
   }
 
   run ({ t, author, channel }, guild = channel.guild) {

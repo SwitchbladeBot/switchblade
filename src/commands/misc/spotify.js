@@ -4,7 +4,7 @@ const types = ['track', 'song', 't', 's', 'album', 'al', 'artist', 'ar', 'playli
 
 module.exports = class Spotify extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'spotify',
       aliases: ['sp'],
       requirements: { apis: ['spotify'] },
@@ -22,7 +22,7 @@ module.exports = class Spotify extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
 
     this.SPOTIFY_LOGO = 'https://i.imgur.com/vw8svty.png'
   }

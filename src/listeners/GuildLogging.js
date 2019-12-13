@@ -6,8 +6,9 @@ const formatter = new Intl.NumberFormat('en-US')
 
 module.exports = class GuildLogging extends EventListener {
   constructor (client) {
-    super(client)
-    this.events = ['guildCreate', 'guildDelete']
+    super({
+      events: ['guildCreate', 'guildDelete']
+    }, client)
   }
 
   onGuildCreate (guild) {

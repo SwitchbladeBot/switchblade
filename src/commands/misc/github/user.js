@@ -3,14 +3,14 @@ const moment = require('moment')
 
 module.exports = class GitHubUser extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'user',
       aliases: ['u'],
-      parentCommand: 'github',
+      parent: 'github',
       parameters: [{
         type: 'string', missingError: 'commands:github.subcommands.user.noUser'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, user) {
@@ -24,7 +24,7 @@ module.exports = class GitHubUser extends Command {
       const data = await this.client.apis.github.getUser(user)
       const embed = new SwitchbladeEmbed(author)
         .setColor(Constants.GITHUB_COLOR)
-        .setAuthor('GitHub', this.parentCommand.GITHUB_LOGO)
+        .setAuthor('GitHub', this.parent.GITHUB_LOGO)
         .setTitle(`${data.login}${data.name ? ` - ${data.name}` : ''}`)
         .setURL(data.html_url)
         .setThumbnail(data.avatar_url)

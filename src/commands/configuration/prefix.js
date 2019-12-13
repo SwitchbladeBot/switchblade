@@ -1,10 +1,10 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class ConfigPrefix extends Command {
-  constructor (client, parentCommand) {
-    super(client, {
+  constructor (client, parent) {
+    super({
       name: 'prefix',
-      parentCommand: 'config',
+      parent: 'config',
       parameters: [{
         type: 'string',
         full: true,
@@ -12,7 +12,7 @@ module.exports = class ConfigPrefix extends Command {
         maxLength: 50,
         missingError: 'commands:config.subcommands.prefix.noPrefix'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, prefix = process.env.PREFIX) {
