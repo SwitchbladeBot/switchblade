@@ -29,7 +29,6 @@ module.exports = class XKCD extends Command {
         }
       } else {
         const latestResp = await fetch(`${baseUrl}/info.0.json`).then(res => res.json())
-        console.log(latestResp)
         const latestNumber = latestResp.num
         const randomNumber = Math.floor(Math.random() * latestNumber + 1)
         response = await fetch(`${baseUrl}/${randomNumber}/info.0.json`).then(res => res.json())

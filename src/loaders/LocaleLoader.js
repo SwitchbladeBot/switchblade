@@ -29,16 +29,16 @@ module.exports = class LocaleLoader extends Loader {
   downloadAndInitializeLocales (dirPath = 'src/locales') {
     return new Promise(async (resolve, reject) => {
       if (this.client.apis.crowdin) {
-        this.log('Downloading locales from Crowdin', 'Localization')
+        this.log('Downloading locales from Crowdin', { tags: ['Localization'] })
         try {
           await this.client.apis.crowdin.downloadToPath(dirPath)
-          this.log('[32mLocales downloaded', 'Localization')
+          this.log('Locales downloaded', { color: 'green', tags: ['Localization'] })
         } catch (e) {
-          this.log('[31mCouldn\'t download locales - An error ocurred.', 'Localization')
+          this.log('Couldn\'t download locales - An error ocurred.', { color: 'red', tags: ['Localization'] })
           this.logError(e)
         }
       } else {
-        this.log('[31mCouldn\'t download locales - API wrapper didn\'t load.', 'Localization')
+        this.log('Couldn\'t download locales - API wrapper didn\'t load.', { color: 'red', tags: ['Localization'] })
       }
 
       try {
@@ -55,7 +55,7 @@ module.exports = class LocaleLoader extends Loader {
           returnEmptyString: false
         }, () => {
           resolve(this.loadLanguagesDisplayNames(Object.keys(i18next.store.data)))
-          this.log('[32mi18next initialized', 'Localization')
+          this.log('i18next initialized', { color: 'green', tags: ['Localization'] })
         })
       } catch (e) {
         this.logError(e)
