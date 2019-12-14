@@ -30,7 +30,8 @@ module.exports = class ListenerLoader extends Loader {
       if (Object.getPrototypeOf(NewListener) !== EventListener) return
       this.addListener(new NewListener(this.client)) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
-      this.log(failed ? `[33m${success} listeners loaded, ${failed} failed.` : `[32mAll ${success} listeners loaded without errors.`, 'Listeners')
+      if (failed) this.log(`${success} listeners loaded, ${failed} failed.`, { color: 'yellow', tags: ['Listeners'] })
+      else this.log(`All ${success} listeners loaded without errors.`, { color: 'green', tags: ['Listeners'] })
     })
   }
 
@@ -40,7 +41,7 @@ module.exports = class ListenerLoader extends Loader {
    */
   addListener (listener) {
     if (!(listener instanceof EventListener)) {
-      this.log(`[31m${listener.name} failed to load - Not an EventListener`, 'Listeners')
+      this.log(`${listener.name} failed to load - Not an EventListener`, { color: 'red', tags: ['Listeners'] })
       return false
     }
 

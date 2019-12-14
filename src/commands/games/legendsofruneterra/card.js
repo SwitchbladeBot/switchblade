@@ -101,8 +101,6 @@ module.exports = class LegendsOfRuneterraCard extends Command {
       return text
     })
 
-    console.log(description)
-
     return description
   }
 

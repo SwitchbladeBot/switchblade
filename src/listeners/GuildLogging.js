@@ -11,7 +11,7 @@ module.exports = class GuildLogging extends EventListener {
   }
 
   onGuildCreate (guild) {
-    this.log(`[35mAdded to "${guild.name}" (${guild.id})`, 'Guilds')
+    this.log(`Added to "${guild.name}" (${guild.id})`, { color: 'magenta', tags: ['Guilds'] })
     if (process.env.LOGGING_CHANNEL_ID) {
       this.channels.get(process.env.LOGGING_CHANNEL_ID).send(
         new SwitchbladeEmbed()
@@ -24,7 +24,7 @@ module.exports = class GuildLogging extends EventListener {
   }
 
   onGuildDelete (guild) {
-    this.log(`[35mRemoved from "${guild.name}" (${guild.id})`, 'Guilds')
+    this.log(`Removed from "${guild.name}" (${guild.id})`, { color: 'magenta', tags: ['Guilds'] })
     if (process.env.LOGGING_CHANNEL_ID) {
       this.channels.get(process.env.LOGGING_CHANNEL_ID).send(
         new SwitchbladeEmbed()

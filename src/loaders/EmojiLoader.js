@@ -24,14 +24,14 @@ module.exports = class EmojiLoader extends Loader {
    */
   getAndStoreEmojis () {
     const emojiGuilds = process.env.EMOJI_GUILDS && process.env.EMOJI_GUILDS.split(',')
-    if (!emojiGuilds) return this.log(`[31mRequired emojis not loaded - Required environment variable "EMOJI_GUILDS" is not set.`, 'Emojis')
+    if (!emojiGuilds) return this.log(`Required emojis not loaded - Required environment variable "EMOJI_GUILDS" is not set.`, { color: 'red', tags: ['Emojis'] })
 
     emojiGuilds.map(eg => {
       const filteredEmojis = this.client.emojis.filter(e => e.guild.id === eg)
       filteredEmojis.map(emoji => this.officialEmojis.push(emoji))
     })
 
-    this.log(`[32mAll ${this.officialEmojis.length} emojis stored without errors.`, 'Emojis')
+    this.log(`All ${this.officialEmojis.length} emojis stored without errors.`, { color: 'green', tags: ['Emojis'] })
   }
 
   /**

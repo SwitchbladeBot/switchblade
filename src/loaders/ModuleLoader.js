@@ -29,7 +29,8 @@ module.exports = class ModuleLoader extends Loader {
       if (Object.getPrototypeOf(NewModule) !== Module) return
       this.addModule(new NewModule(this.client)) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
-      this.log(failed ? `[33m${success} modules loaded, ${failed} failed.` : `[32mAll ${success} modules loaded without errors.`, 'Modules')
+      if (failed) this.log(`${success} modules loaded, ${failed} failed.`, { color: 'yellow', tags: ['Modules'] })
+      else this.log(`All ${success} modules loaded without errors.`, { color: 'green', tags: ['Modules'] })
     })
   }
 
@@ -39,7 +40,7 @@ module.exports = class ModuleLoader extends Loader {
    */
   addModule (module) {
     if (!(module instanceof Module)) {
-      this.log(`[31m${module.name} failed to load - Not an Module`, 'Modules')
+      this.log(`${module.name} failed to load - Not an Module`, { color: 'red', tags: ['Modules'] })
       return false
     }
 

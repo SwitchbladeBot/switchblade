@@ -22,7 +22,7 @@ module.exports = class Math extends Command {
       const result = math.eval(expression)
       embed.setTitle(t('commands:math.result', { result }))
     } catch (error) {
-      this.client.log(`Failed math calculation ${expression}\nError: ${error.stack}`, this.name)
+      this.client.log(`Failed math calculation ${expression}\nError: ${error.stack}`, { tags: [this.name] })
       throw new CommandError(t('commands:math.invalidMathExpression'), true)
     }
 
