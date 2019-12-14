@@ -2,7 +2,7 @@ const { Loader, Connection, FileUtils } = require('../')
 
 module.exports = class ConnectionLoader extends Loader {
   constructor (client) {
-    super(client)
+    super({}, client)
 
     this.connections = {}
   }

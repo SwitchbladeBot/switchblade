@@ -2,12 +2,12 @@ const { SwitchbladeEmbed, Command, Constants } = require('../../../')
 
 module.exports = class ScrobblingEnabler$ extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'enable',
       aliases: ['e'],
-      parentCommand: 'scrobbling',
+      parent: 'scrobbling',
       parameters: [{ type: 'boolean' }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, scrobbling) {

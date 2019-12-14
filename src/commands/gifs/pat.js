@@ -4,13 +4,13 @@ const fetch = require('node-fetch')
 
 module.exports = class Pat extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'pat',
       category: 'images',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:pat.noMention'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, channel, author }, user) {

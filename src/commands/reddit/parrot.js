@@ -2,9 +2,9 @@ const { RandomRedditPostCommand } = require('../../')
 
 module.exports = class Parrot extends RandomRedditPostCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'parrot',
       subreddit: 'partyparrot'
-    })
+    }, client)
   }
 }

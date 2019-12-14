@@ -2,13 +2,13 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Emoji extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'emoji',
       aliases: ['enlarge', 'bigemoji'],
       parameters: [{
         type: 'emoji', full: true
       }]
-    })
+    }, client)
   }
 
   run ({ t, author, channel }, emoji) {

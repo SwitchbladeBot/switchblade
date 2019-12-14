@@ -3,7 +3,7 @@ const { Attachment } = require('discord.js')
 
 module.exports = class Ship extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'ship',
       category: 'social',
       requirements: { databaseOnly: true },
@@ -16,7 +16,7 @@ module.exports = class Ship extends Command {
         acceptSelf: true,
         missingError: 'commands:ship.noUser'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, first = author, second) {

@@ -8,15 +8,15 @@ const embedColor = 0x292B2D
 
 module.exports = class SteamLadderProfile extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'profile',
       aliases: ['p'],
-      parentCommand: 'steamladder',
+      parent: 'steamladder',
       parameters: [{
         type: 'string',
         missingError: 'commands:steamladder.noUser'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, query) {

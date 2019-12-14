@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Goat extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'goat',
       aliases: ['placegoat'],
       category: 'general',
@@ -13,7 +13,7 @@ module.exports = class Goat extends Command {
         type: 'number',
         required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, width = 500, height = 0) {

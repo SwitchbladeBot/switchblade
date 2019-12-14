@@ -3,7 +3,7 @@ const moment = require('moment')
 
 module.exports = class YouTube extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'youtube',
       aliases: ['yt'],
       requirements: { apis: ['youtube'] },
@@ -33,7 +33,7 @@ module.exports = class YouTube extends SearchCommand {
       ]],
       embedColor: Constants.YOUTUBE_COLOR,
       embedLogoURL: 'https://i.imgur.com/yQy45qO.png'
-    })
+    }, client)
   }
 
   async search (context, query) {

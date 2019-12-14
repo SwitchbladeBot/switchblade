@@ -6,12 +6,12 @@ const baseUrl = 'https://xkcd.com'
 
 module.exports = class XKCD extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'xkcd',
       parameters: [{
         type: 'string', full: true, required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, arg) {

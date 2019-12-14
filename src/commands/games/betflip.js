@@ -6,7 +6,7 @@ const coins = {
 
 module.exports = class Betflip extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'betflip',
       aliases: ['bf'],
       category: 'games',
@@ -15,7 +15,7 @@ module.exports = class Betflip extends Command {
       }, {
         type: 'string', full: true, whitelist: ['heads', 'tails'], missingError: 'commands:betflip.noCoin'
       }]
-    })
+    }, client)
   }
 
   async run ({ channel, author, t }, bet, side) {

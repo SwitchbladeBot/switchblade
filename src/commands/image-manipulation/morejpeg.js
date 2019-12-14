@@ -4,7 +4,7 @@ const { Attachment } = require('discord.js')
 
 module.exports = class MoreJpeg extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'morejpeg',
       aliases: ['needsmorejpeg', 'needsmorejpg', 'jpg', 'compress'],
       category: 'images',
@@ -13,7 +13,7 @@ module.exports = class MoreJpeg extends Command {
         type: 'image',
         missingError: 'commands:morejpeg.missingImage'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, message }, image) {

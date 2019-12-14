@@ -3,17 +3,17 @@ const Fuse = require('fuse.js')
 
 module.exports = class LegendsOfRuneterraCard extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'card',
       aliases: ['c'],
-      parentCommand: 'legendsofruneterra',
+      parent: 'legendsofruneterra',
       requirements: { apis: ['legendsofruneterra'] },
       parameters: [{
         type: 'string', full: true, missingError: 'commands:legendsofruneterra.subcommands.card.missingCard'
       }, [{
         type: 'booleanFlag', name: 'base'
       }]]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language, flags }, query) {

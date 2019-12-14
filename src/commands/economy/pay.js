@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Pay extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'pay',
       aliases: ['transfer'],
       category: 'economy',
@@ -17,7 +17,7 @@ module.exports = class Pay extends Command {
         min: 1,
         missingError: 'commands:pay.noValue'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, receiver, value) {

@@ -4,7 +4,7 @@ const Color = require('../../utils/Color.js')
 
 module.exports = class RoleInfo extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'roleinfo',
       aliases: ['rolinfo', 'rol', 'ri', 'roli'],
       category: 'utility',
@@ -14,7 +14,7 @@ module.exports = class RoleInfo extends Command {
         full: true,
         missingError: 'errors:invalidRole'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, role) {
