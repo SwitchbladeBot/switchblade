@@ -3,10 +3,10 @@ const fetch = require('node-fetch')
 
 module.exports = class GeekJokes extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'geekjokes',
       aliases: ['geek', 'geekjoke', 'geekj']
-    })
+    }, client)
   }
 
   async run ({ author, channel }, number) {

@@ -3,7 +3,9 @@ const { Controller } = require('../')
 // Developer
 module.exports = class DeveloperController extends Controller {
   constructor (client) {
-    super('developer', client)
+    super({
+      name: 'developer'
+    }, client)
   }
 
   canLoad () {

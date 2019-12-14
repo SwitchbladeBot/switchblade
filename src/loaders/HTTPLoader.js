@@ -7,7 +7,7 @@ const morgan = require('morgan')
 
 module.exports = class HTTPLoader extends Loader {
   constructor (client) {
-    super(client)
+    super({}, client)
 
     this.httpServer = null
     this.httpRoutes = []

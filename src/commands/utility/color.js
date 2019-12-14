@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 
 module.exports = class ColorCommand extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'color',
       category: 'utility',
       parameters: [{
@@ -11,7 +11,7 @@ module.exports = class ColorCommand extends Command {
         full: true,
         missingError: 'errors:invalidColor'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, color) {

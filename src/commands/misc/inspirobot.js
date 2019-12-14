@@ -4,10 +4,10 @@ const fetch = require('node-fetch')
 
 module.exports = class InspiroBot extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'inspirobot',
       aliases: ['inspiro', 'ibot']
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

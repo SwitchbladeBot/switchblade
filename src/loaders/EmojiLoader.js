@@ -2,7 +2,7 @@ const { Loader } = require('../')
 
 module.exports = class EmojiLoader extends Loader {
   constructor (client) {
-    super(client)
+    super({}, client)
 
     this.officialEmojis = []
   }

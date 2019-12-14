@@ -1,3 +1,4 @@
+const Utils = require('../../utils')
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 const Constants = require('../../utils/Constants.js')
 
@@ -5,30 +6,35 @@ const CommandError = require('./CommandError.js')
 const CommandRequirements = require('./CommandRequirements.js')
 const CommandParameters = require('./parameters/CommandParameters.js')
 
-/**
- * Base command structure.
- * @constructor
- * @param {Switchblade} client - Switchblade client
- */
 module.exports = class Command {
-  constructor (client, options = {}) {
+  /**
+   * @param {Object} opts
+   * @param {string} opts.name
+   * @param {string[]} [opts.aliases]
+   * @param {string} [opts.category]
+   * @param {boolean} [opts.hidden]
+   * @param {string} [opts.parent]
+   * @param {Object} [opts.requirements]
+   * @param {Object} [opts.parameters]
+   * @param {Client} client
+   */
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('Command', opts)
+
+    this.name = options.required('name')
+    this.aliases = options.optional('aliases')
+    this.category = options.optional('category', 'general')
+    this.hidden = options.optional('hidden', false)
+    this.parentCommand = options.optional('parent')
+    this.requirements = options.optional('requirements')
+    this.parameters = options.optional('parameters')
+
     this.client = client
 
-    this.name = options.name || 'invalid'
-    this.aliases = options.aliases
-    this.category = options.category || 'general'
-    this.hidden = options.hidden
-
-    this.subcommands = options.subcommands || []
-
-    this.requirements = options.requirements // Run requirements
-    this.parameters = options.parameters // Run parameters
-
+    this.subcommands = []
     this.cooldownTime = 0
     this.cooldownFeedback = true
     this.cooldownMap = this.cooldownTime > 0 ? new Map() : null
-
-    this.parentCommand = options.parentCommand
   }
 
   /**
@@ -143,7 +149,7 @@ module.exports = class Command {
 
     return {
       name: command.fullName,
-      category: command.category || command.parentCommand.category,
+      category: command.category || command.parent.category,
       aliases,
       description: t(`commands:${command.tPath}.commandDescription`),
       usage,

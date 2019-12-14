@@ -2,7 +2,7 @@ const { Loader, Module, FileUtils } = require('../')
 
 module.exports = class ModuleLoader extends Loader {
   constructor (client) {
-    super(client)
+    super({}, client)
 
     this.modules = {}
   }

@@ -8,7 +8,7 @@ const warningLinks = {
 
 module.exports = class Chorus extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'chorus',
       aliases: ['clonehero', 'chart'],
       requirements: {
@@ -16,7 +16,7 @@ module.exports = class Chorus extends SearchCommand {
       },
       embedColor: Constants.CHORUS_COLOR,
       embedLogoURL: icon
-    })
+    }, client)
   }
 
   async search (context, query) {

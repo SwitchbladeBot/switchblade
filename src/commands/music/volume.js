@@ -4,7 +4,7 @@ const MAX_VOLUME = 150
 
 module.exports = class Volume extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'volume',
       aliases: ['vol'],
       category: 'music',
@@ -25,7 +25,7 @@ module.exports = class Volume extends Command {
         forceMax: true,
         missingError: 'commands:volume.missingVolumeParameter'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, volume) {

@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 
 module.exports = class Currency extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'currency',
       aliases: ['currencyconverter', 'converter'],
       category: 'utility',
@@ -19,7 +19,7 @@ module.exports = class Currency extends Command {
         type: 'string',
         missingError: 'commands:currency.noCurrency'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, from = 'USD', value = 1, to) {

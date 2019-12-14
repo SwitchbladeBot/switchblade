@@ -2,7 +2,7 @@ const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class JoinLock extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'joinlock',
       aliases: ['jl'],
       category: 'moderation',
@@ -10,7 +10,7 @@ module.exports = class JoinLock extends Command {
       parameters: [{
         type: 'boolean', missingError: 'commands:joinlock.missingState'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, channel, guild, author }, newState) {

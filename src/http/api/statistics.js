@@ -4,8 +4,9 @@ const i18next = require('i18next')
 
 module.exports = class Statistics extends Route {
   constructor (client) {
-    super(client)
-    this.name = 'statistics'
+    super({
+      name: 'statistics'
+    }, client)
   }
 
   register (app) {

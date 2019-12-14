@@ -5,9 +5,9 @@ const PERIODS = ['overall', '7day', '1month', '3month', '6month', '12month']
 
 module.exports = class LastfmUserTop extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'top',
-      parentCommand: 'lastfm',
+      parent: 'lastfm',
       parameters: [{
         type: 'string', missingError: 'commands:lastfm.subcommands.top.missingUser'
       }, {
@@ -15,7 +15,7 @@ module.exports = class LastfmUserTop extends Command {
       }, {
         type: 'string', required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild, language }, user, type, period = '1month') {
