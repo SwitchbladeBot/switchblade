@@ -4,11 +4,7 @@ module.exports = class Controller {
   /**
    * @param {Object} opts
    * @param {string} opts.name
-<<<<<<< HEAD
    * @param {Controller} [opts.parent]
-=======
-   * @param {string} [opts.parent]
->>>>>>> 379416679aabef85436b699ed012d79d596a2d94
    * @param {Client} client
    */
   constructor (opts, client) {
