@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Loop extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'loop',
       aliases: ['repeat'],
       category: 'music',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }) {

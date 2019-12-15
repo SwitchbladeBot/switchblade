@@ -2,7 +2,9 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Adorable extends Command {
   constructor (client) {
-    super(client, { name: 'adorable' })
+    super({
+      name: 'adorable'
+    }, client)
   }
 
   run ({ author, channel }) {

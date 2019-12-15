@@ -2,7 +2,7 @@ const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Softban extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'softban',
       aliases: ['softbanir'],
       category: 'moderation',
@@ -12,7 +12,7 @@ module.exports = class Softban extends Command {
       }, {
         type: 'string', full: true, missingError: 'commands:softban.missingReason'
       }]
-    })
+    }, client)
   }
 
   async run ({ channel, guild, author, t }, member, reason) {

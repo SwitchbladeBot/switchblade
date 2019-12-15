@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Pause extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'pause',
       aliases: ['resume'],
       category: 'music',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }) {

@@ -2,11 +2,11 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Daily extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'daily',
       category: 'economy',
       requirements: { databaseOnly: true }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

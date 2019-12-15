@@ -5,15 +5,15 @@ const fetch = require('node-fetch')
 
 module.exports = class MinecraftSkin extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'skin',
       aliases: ['minecraftskin', 'mskin', 's'],
-      parentCommand: 'minecraft',
+      parent: 'minecraft',
       parameters: [{
         type: 'string',
         missingError: 'commands:minecraft.subcommands.skin.noName'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, name) {

@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Bassboost extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'bassboost',
       aliases: ['bass', 'earrape'],
       category: 'music',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, volume) {

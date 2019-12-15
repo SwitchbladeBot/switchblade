@@ -4,13 +4,13 @@ const fetch = require('node-fetch')
 
 module.exports = class NumberFacts extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'numberfacts',
       aliases: ['number', 'numfacts', 'numf'],
       parameters: [{
         type: 'number', min: 0, missingError: 'commands:numberfacts.validNumber'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, number) {

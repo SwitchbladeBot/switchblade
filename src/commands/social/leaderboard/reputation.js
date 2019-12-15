@@ -3,11 +3,11 @@ const { Attachment } = require('discord.js')
 
 module.exports = class ReputationLeaderboard extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'reputation',
       aliases: ['rep'],
-      parentCommand: 'leaderboard'
-    })
+      parent: 'leaderboard'
+    }, client)
   }
 
   async run ({ t, author, channel }) {

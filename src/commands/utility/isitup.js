@@ -6,7 +6,7 @@ const PATH_REGEX = /(\/(.+)?)/g
 
 module.exports = class IsItUp extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'isitup',
       category: 'utility',
       parameters: [{
@@ -14,7 +14,7 @@ module.exports = class IsItUp extends Command {
         full: true,
         missingError: 'commands:isitup.noWebsite'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, url) {

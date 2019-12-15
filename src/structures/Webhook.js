@@ -1,18 +1,22 @@
-/**
- * Base webhook structure
- * @constructor
- * @param {Client} client - discord.js Client
- * @param {Webhook} parentWebhook - parent webhook to inherit path
- */
-module.exports = class Webhook {
-  constructor (client, parentWebhook) {
-    this.client = client
+const Utils = require('../utils')
 
-    this.name = 'WebhookName'
+module.exports = class Webhook {
+  /**
+   * @param {Object} opts
+   * @param {string} opts.name
+   * @param {Webhook} [opts.parent]
+   * @param {Client} client
+   */
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('Webhook', opts)
+
+    this.name = options.required('name')
+    this.parentWebhook = options.optional('parent')
+
+    this.client = client
 
     this.subWebhooks = null
     this.requirements = null
-    this.parentWebhook = parentWebhook
   }
 
   get path () {

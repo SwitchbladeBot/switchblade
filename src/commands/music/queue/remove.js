@@ -2,14 +2,14 @@ const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class QueueRemove extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'remove',
       aliases: ['rm'],
-      parentCommand: 'queue',
+      parent: 'queue',
       parameters: [{
         type: 'number', full: true, min: 1, missingError: ({ t }) => t(`commands:${this.tPath}.missingIndexParameter`)
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, index) {

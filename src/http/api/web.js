@@ -9,8 +9,9 @@ const API_URL = 'https://discordapp.com/api'
 
 module.exports = class Web extends Route {
   constructor (client) {
-    super(client)
-    this.name = 'web'
+    super({
+      name: 'web'
+    }, client)
   }
 
   register (app) {

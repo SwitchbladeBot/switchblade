@@ -3,14 +3,14 @@ const moment = require('moment')
 
 module.exports = class LastfmUser extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'user',
       aliases: ['u'],
-      parentCommand: 'lastfm',
+      parent: 'lastfm',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:lastfm.subcommands.user.missing'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild, language }, param) {

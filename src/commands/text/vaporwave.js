@@ -2,7 +2,7 @@ const { Command } = require('../../')
 
 module.exports = class Vaporwave extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'vaporwave',
       category: 'memes',
       parameters: [{
@@ -10,7 +10,7 @@ module.exports = class Vaporwave extends Command {
         full: true,
         missingError: 'commands:vaporwave.missingSentence'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, text) {
