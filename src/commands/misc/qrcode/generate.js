@@ -2,14 +2,14 @@ const { Command, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class QRCodeGenerate extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'generate',
       aliases: ['create', 'g'],
-      parentCommand: 'qrcode',
+      parent: 'qrcode',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:qrcode.subcommands.generate.noText'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, text) {

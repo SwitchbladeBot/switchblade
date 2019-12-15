@@ -4,10 +4,10 @@ const fetch = require('node-fetch')
 
 module.exports = class Shiba extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'shiba',
       aliases: ['shibainu', 'doge']
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

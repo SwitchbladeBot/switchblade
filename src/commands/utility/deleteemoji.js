@@ -2,7 +2,7 @@ const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 module.exports = class DeleteEmoji extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'deleteemoji',
       aliases: ['delemoji'],
       category: 'utility',
@@ -12,7 +12,7 @@ module.exports = class DeleteEmoji extends Command {
         sameGuildOnly: true,
         missingError: 'commands:deleteemoji.noEmoji'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, channel, author, guild }, emoji) {

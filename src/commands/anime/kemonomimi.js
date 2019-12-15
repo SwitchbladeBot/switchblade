@@ -4,10 +4,10 @@ const nekoAPI = 'https://nekos.life/api/v2/img/'
 
 module.exports = class Kemonomimi extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'kemonomimi',
       category: 'anime'
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

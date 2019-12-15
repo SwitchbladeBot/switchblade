@@ -1,15 +1,15 @@
 const { Command, CommandError, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
 
 module.exports = class SpotifyUser extends Command {
-  constructor (client, parentCommand) {
-    super(client, {
+  constructor (client) {
+    super({
       name: 'user',
       aliases: ['u'],
-      parentCommand: 'spotify',
+      parent: 'spotify',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:spotify.subcommands.user.noUser'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, user) {

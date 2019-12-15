@@ -6,13 +6,13 @@ const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 
 module.exports = class Strawpoll extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'strawpoll',
       aliases: ['spoll', 'strawp'],
       parameters: [{
         type: 'string', full: true, missingError: 'commands:strawpoll.noParameters'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, text) {

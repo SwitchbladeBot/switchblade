@@ -4,13 +4,13 @@ const TWITCH_URL = 'https://twitch.tv/'
 
 module.exports = class Twitch extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'twitch',
       aliases: ['twitchchannel'],
       parameters: [{
         type: 'string', full: true, missingError: 'commands:twitch.noChannel'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, user) {

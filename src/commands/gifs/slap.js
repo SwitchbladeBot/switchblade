@@ -4,13 +4,13 @@ const fetch = require('node-fetch')
 
 module.exports = class Slap extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'slap',
       category: 'images',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:slap.noMention'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, channel, author }, user) {

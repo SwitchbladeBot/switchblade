@@ -3,14 +3,14 @@ const moment = require('moment')
 
 module.exports = class HIBPBreach extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'breach',
       aliases: ['b'],
-      parentCommand: 'hibp',
+      parent: 'hibp',
       parameters: [{
         type: 'string', missingError: 'commands:hibp.noEmail'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, query) {

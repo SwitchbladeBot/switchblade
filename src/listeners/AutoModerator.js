@@ -2,8 +2,9 @@ const { EventListener } = require('../')
 
 module.exports = class AutoModerator extends EventListener {
   constructor (client) {
-    super(client)
-    this.events = ['guildMemberAdd']
+    super({
+      events: ['guildMemberAdd']
+    }, client)
   }
 
   async onGuildMemberAdd (member) {
