@@ -4,7 +4,7 @@ const types = ['track', 'song', 't', 's', 'album', 'al', 'artist', 'ar', 'playli
 
 module.exports = class Deezer extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'deezer',
       aliases: ['dz'],
       requirements: { apis: ['deezer'] },
@@ -22,6 +22,6 @@ module.exports = class Deezer extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
   }
 }

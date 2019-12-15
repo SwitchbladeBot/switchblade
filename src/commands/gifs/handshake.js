@@ -8,14 +8,14 @@ const handshakeArray = [
 
 module.exports = class Handshake extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'handshake',
       aliases: ['hs', 'hands'],
       category: 'images',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:handshake.noMention'
       }]
-    })
+    }, client)
   }
 
   run ({ t, channel, author }, user) {

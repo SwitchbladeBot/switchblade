@@ -12,7 +12,7 @@ const regions = ['europe', 'north_america', 'south_america', 'asia', 'africa', '
 
 module.exports = class SteamLadder extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'steamladder',
       aliases: ['sl'],
       category: 'games',
@@ -46,7 +46,7 @@ module.exports = class SteamLadder extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
   }
 
   canLoad () {

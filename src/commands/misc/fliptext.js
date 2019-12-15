@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class FlipText extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'fliptext',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:fliptext.noSentence'
       }]
-    })
+    }, client)
   }
 
   run ({ author, channel }, text) {

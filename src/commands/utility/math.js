@@ -13,7 +13,7 @@ math.import({
 
 module.exports = class Math extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'math',
       category: 'utility',
       parameters: [{
@@ -21,7 +21,7 @@ module.exports = class Math extends Command {
         full: true,
         missingError: 'commands:math.needMathExpression'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, expression) {
@@ -32,7 +32,7 @@ module.exports = class Math extends Command {
       const result = math.eval(expression)
       embed.setTitle(t('commands:math.result', { result }))
     } catch (error) {
-      this.client.log(`Failed math calculation ${expression}\nError: ${error.stack}`, this.name)
+      this.client.log(`Failed math calculation ${expression}\nError: ${error.stack}`, { tags: [this.name] })
       throw new CommandError(t('commands:math.invalidMathExpression'), true)
     }
 

@@ -4,12 +4,12 @@ const MAX_PLAYLIST_LENGTH = 10
 
 module.exports = class Queue extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'queue',
       aliases: ['playlist'],
       category: 'music',
       requirements: { guildOnly: true, guildPlaying: true }
-    })
+    }, client)
   }
 
   async run ({ t, aliase, author, channel, guild, prefix }) {

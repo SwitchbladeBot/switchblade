@@ -4,7 +4,7 @@ const { Attachment } = require('discord.js')
 
 module.exports = class Triggered extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'triggered',
       aliases: ['trigger', 'puto'],
       category: 'images',
@@ -13,7 +13,7 @@ module.exports = class Triggered extends Command {
         type: 'image',
         missingError: 'commands:morejpeg.missingImage'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, image) {

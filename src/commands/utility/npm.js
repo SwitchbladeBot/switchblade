@@ -4,7 +4,7 @@ const moment = require('moment')
 
 module.exports = class Npm extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'npm',
       category: 'utility',
       parameters: [{
@@ -15,7 +15,7 @@ module.exports = class Npm extends SearchCommand {
       }],
       embedColor: Constants.NPM_COLOR,
       embedLogoURL: 'https://i.imgur.com/24yrZxG.png'
-    })
+    }, client)
   }
 
   async search (context, query) {

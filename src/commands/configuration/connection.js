@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class UserConnections extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'connections',
       aliases: ['conns', 'conn', 'connection'],
       category: 'configuration',
       requirements: { databaseOnly: true }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

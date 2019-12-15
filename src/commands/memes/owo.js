@@ -4,14 +4,14 @@ const Owoify = require('../../utils/Owoify')
 
 module.exports = class OwO extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'owo',
       aliases: ['uwu', 'whatsthis', 'owoify'],
       category: 'memes',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:owo.missingSentence'
       }]
-    })
+    }, client)
   }
 
   async run ({ author, channel }, text) {

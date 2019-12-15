@@ -2,7 +2,7 @@ const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Kick extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'kick',
       aliases: ['expulsar'],
       category: 'moderation',
@@ -12,7 +12,7 @@ module.exports = class Kick extends Command {
       }, {
         type: 'string', full: true, missingError: 'commands:kick.missingReason'
       }]
-    })
+    }, client)
   }
 
   async run ({ channel, guild, author, t }, member, reason) {

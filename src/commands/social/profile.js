@@ -3,7 +3,7 @@ const { Attachment } = require('discord.js')
 
 module.exports = class Profile extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'profile',
       category: 'social',
       requirements: { databaseOnly: true, canvasOnly: true },
@@ -13,7 +13,7 @@ module.exports = class Profile extends Command {
         required: false,
         acceptSelf: true
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, user = author) {

@@ -1,14 +1,17 @@
 const Command = require('./Command.js')
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
+const Utils = require('../../utils')
 
 module.exports = class SubcommandListCommand extends Command {
-  constructor (client, options = {}) {
-    super(client, options)
-    this.embedColor = options.embedColor
-    this.authorString = options.authorString
-    this.authorImage = options.authorImage
-    this.authorURL = options.authorURL
-    this.embedColor = options.embedColor
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('SubcommandListCommand', opts)
+
+    super(opts, client)
+
+    this.embedColor = options.optional('embedColor')
+    this.authorString = options.required('authorString')
+    this.authorImage = options.required('authorImage')
+    this.authorURL = options.optional('authorURL')
   }
 
   async run ({ channel, author, t, prefix }) {

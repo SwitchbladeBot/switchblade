@@ -2,7 +2,7 @@ const { Command } = require('../../')
 
 module.exports = class WelcomeTranslator extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'welcometranslator',
       category: 'developers',
       hidden: true,
@@ -13,7 +13,7 @@ module.exports = class WelcomeTranslator extends Command {
         missingError: 'commands:welcometranslator.noMember',
         errors: { acceptSelf: 'commands:welcometranslator.cantWelcomeYourself' }
       }]
-    })
+    }, client)
   }
 
   run ({ t, guild, member: author, channel }, member) {

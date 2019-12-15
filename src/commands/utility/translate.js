@@ -2,7 +2,7 @@ const { SwitchbladeEmbed, Command } = require('../../')
 
 module.exports = class TranslateCommand extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'translate',
       aliases: ['translator'],
       parameters: [
@@ -18,7 +18,7 @@ module.exports = class TranslateCommand extends Command {
           clean: true
         }
       ]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, from, to, text) {

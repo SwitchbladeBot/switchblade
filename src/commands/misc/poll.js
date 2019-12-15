@@ -5,12 +5,12 @@ const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 
 module.exports = class Poll extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'poll',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:poll.noQuestion'
       }]
-    })
+    }, client)
   }
 
   run ({ t, author, channel }, question) {

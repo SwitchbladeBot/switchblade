@@ -2,7 +2,7 @@ const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 module.exports = class CreateEmoji extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'createemoji',
       aliases: ['newemoji'],
       category: 'utility',
@@ -15,7 +15,7 @@ module.exports = class CreateEmoji extends Command {
         type: 'string',
         missingError: 'commands:createemoji.noName'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, channel, author, guild }, url, name) {
