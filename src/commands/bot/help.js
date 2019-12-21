@@ -61,7 +61,11 @@ module.exports = class Help extends Command {
             .filter(c => c.category === category)
             .sort((a, b) => a.name.localeCompare(b.name))
             .map(c => `\`${c.name}\``).join('**, **')
-          embed.addField(t(`categories:${category}`), commands, false)
+
+          const length = validCommands
+            .filter(c => c.category === category).length
+
+          embed.addField(`${t(`categories:${category}`)} [**${length}**]`, commands, false)
         })
     }
     channel.send(embed)
