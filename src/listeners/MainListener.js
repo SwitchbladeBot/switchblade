@@ -126,8 +126,9 @@ module.exports = class MainListener extends EventListener {
     if (userDocument && userDocument.blacklisted) return
 
     if (!command) {
+      console.log('command doesnt exist')
       const didYouMean = await this.modules.didYouMean.isActive(guildId)
-
+      console.log(didYouMean)
       if (!didYouMean) return
 
       const t = this.i18next.getFixedT(language)
@@ -147,7 +148,7 @@ module.exports = class MainListener extends EventListener {
       language
     })
 
-    this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
+    this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, { color: 'magenta', tags: ['Commands'] })
     this.runCommand(command, context, args, language)
   }
 

@@ -19,6 +19,8 @@ module.exports = (client, search) => {
     })
   }
 
+console.log(commandList)
+
   const [ result ] = fuse.search(search)
   return result ? commandList[result] : false
 }
