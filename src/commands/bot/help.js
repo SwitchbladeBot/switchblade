@@ -6,14 +6,14 @@ const prefixRegex = (prefix) => new RegExp(`^${quoteRegex(prefix)}`)
 
 module.exports = class Help extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'help',
       aliases: ['commands', 'ajuda', 'halp'],
       category: 'bot',
       parameters: [{
         type: 'string', full: true, required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild, prefix }, cmd) {
@@ -61,7 +61,11 @@ module.exports = class Help extends Command {
             .filter(c => c.category === category)
             .sort((a, b) => a.name.localeCompare(b.name))
             .map(c => `\`${c.name}\``).join('**, **')
-          embed.addField(t(`categories:${category}`), commands, false)
+
+          const length = validCommands
+            .filter(c => c.category === category).length
+
+          embed.addField(`${t(`categories:${category}`)} [**${length}**]`, commands, false)
         })
     }
     channel.send(embed)

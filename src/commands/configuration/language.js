@@ -6,11 +6,11 @@ const languageCodes = () => Object.keys(i18next.store.data)
 const languageAliases = (cli) => Object.values(cli.cldr.languages).map(v => Object.values(v)).reduce((a, v) => a.concat(v), []).reduce((a, v) => a.concat(v), [])
 
 module.exports = class ConfigLanguage extends Command {
-  constructor (client, parentCommand) {
-    super(client, {
+  constructor (client) {
+    super({
       name: 'language',
       aliases: ['lang'],
-      parentCommand: 'config',
+      parent: 'config',
       parameters: [{
         type: 'string',
         full: true,
@@ -27,7 +27,7 @@ module.exports = class ConfigLanguage extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, lang) {

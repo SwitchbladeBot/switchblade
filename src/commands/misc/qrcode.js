@@ -4,7 +4,7 @@ const types = ['generate', 'create', 'g', 'read', 'r']
 
 module.exports = class QRCode extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'qrcode',
       aliases: ['qr'],
       parameters: [{
@@ -21,6 +21,6 @@ module.exports = class QRCode extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
   }
 }

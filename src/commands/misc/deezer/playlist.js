@@ -4,10 +4,10 @@ const moment = require('moment')
 
 module.exports = class DeezerPlaylist extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'playlist',
       aliases: ['p'],
-      parentCommand: 'deezer',
+      parent: 'deezer',
       embedColor: Constants.DEEZER_COLOR,
       embedLogoURL: 'https://i.imgur.com/lKlFtbs.png',
       parameters: [{
@@ -15,7 +15,7 @@ module.exports = class DeezerPlaylist extends SearchCommand {
       }, [{
         type: 'booleanFlag', name: 'tracks', aliases: [ 'songs', 's', 't' ]
       }]]
-    })
+    }, client)
   }
 
   async search (context, query) {

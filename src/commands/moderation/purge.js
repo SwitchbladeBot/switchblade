@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Purge extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'purge',
       aliases: ['prune'],
       category: 'moderation',
@@ -16,7 +16,7 @@ module.exports = class Purge extends Command {
       }, {
         type: 'member', required: false, full: false, acceptSelf: true, acceptBot: true
       }]
-    })
+    }, client)
   }
 
   async run ({ channel, guild, author, t }, number = 50, member) {

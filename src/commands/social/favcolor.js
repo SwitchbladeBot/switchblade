@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed, CommandError } = require('../../')
 
 module.exports = class FavColor extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'favcolor',
       aliases: ['favoritecolor', 'sethex', 'setcolor'],
       category: 'social',
@@ -12,7 +12,7 @@ module.exports = class FavColor extends Command {
         full: true,
         missingError: 'errors:invalidColor'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, userDocument }, color) {

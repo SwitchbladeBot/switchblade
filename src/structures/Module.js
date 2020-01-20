@@ -3,24 +3,26 @@ const Utils = require('../utils')
 
 module.exports = class Module {
   /**
-   * @param {Object} options
-   * @param {string} options.name
-   * @param {string} options.displayName
-   * @param {boolean} [options.toggleable]
-   * @param {boolean} [options.defaultState]
-   * @param {Object} [options.defaultValues]
-   * @param {string[]} [options.apiMethods]
-   * @param {Object|Function} [options.specialInput]
+   * @param {Object} opts
+   * @param {string} opts.name
+   * @param {string} opts.displayName
+   * @param {boolean} [opts.toggleable]
+   * @param {boolean} [opts.defaultState]
+   * @param {Object} [opts.defaultValues]
+   * @param {string[]} [opts.apiMethods]
+   * @param {Object|Function} [opts.specialInput]
    * @param {Client} client
    */
-  constructor (options = {}, client) {
-    this.name = options.name
-    this.displayName = options.displayName
-    this.toggleable = Utils.default(options.toggleable, true)
-    this.defaultState = Utils.default(options.defaultState, true)
-    this.defaultValues = Utils.default(options.defaultValues, {})
-    this.apiMethods = Utils.default(options.apiMethods, [])
-    this.specialInput = options.specialInput
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('Module', opts)
+
+    this.name = options.required('name')
+    this.displayName = options.required('displayName')
+    this.toggleable = options.optional('toggleable', true)
+    this.defaultState = options.optional('defaultState', true)
+    this.defaultValues = options.optional('defaultValues', {})
+    this.apiMethods = options.optional('apiMethods', [])
+    this.specialInput = options.optional('specialInput')
 
     this.client = client
   }

@@ -3,8 +3,9 @@ const { Router } = require('express')
 
 module.exports = class Locales extends Route {
   constructor (client) {
-    super(client)
-    this.name = 'locales'
+    super({
+      name: 'locales'
+    }, client)
   }
 
   register (app) {

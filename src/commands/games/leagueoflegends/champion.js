@@ -4,14 +4,14 @@ const buttons = ['Q', 'W', 'E', 'R']
 
 module.exports = class LeagueOfLegendsChampion extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'champion',
       aliases: ['champ', 'c'],
-      parentCommand: 'leagueoflegends',
+      parent: 'leagueoflegends',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:leagueoflegends.subcommands.champion.noChampion'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, champion) {

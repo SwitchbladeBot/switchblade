@@ -2,14 +2,14 @@ const { Command, SwitchbladeEmbed, CommandError } = require('../../../')
 
 module.exports = class LeagueOfLegendsRotation extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'rotation',
       aliases: ['r'],
-      parentCommand: 'leagueoflegends',
+      parent: 'leagueoflegends',
       parameters: [[{
         type: 'booleanFlag', name: 'newplayers', aliases: ['np']
       }]]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language, flags }) {

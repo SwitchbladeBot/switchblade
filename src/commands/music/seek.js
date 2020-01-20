@@ -3,14 +3,14 @@ const moment = require('moment')
 
 module.exports = class Seek extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'seek',
       category: 'music',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true },
       parameters: [{
         type: TargetParameter, full: true, missingError: 'commands:seek.missingSeekParameter'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, target) {

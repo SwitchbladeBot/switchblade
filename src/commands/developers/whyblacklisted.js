@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../index')
 
 module.exports = class WhyBlacklisted extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'whyblacklisted',
       category: 'developers',
       hidden: true,
@@ -10,7 +10,7 @@ module.exports = class WhyBlacklisted extends Command {
       parameters: [{
         type: 'user', showUsage: false, missingError: 'commands:whyblacklisted.missingUser'
       }]
-    })
+    }, client)
   }
 
   async run ({ channel, author, t }, user) {

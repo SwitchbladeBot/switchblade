@@ -10,7 +10,7 @@ const types = ['track', 'song', 't', 's', 'artist', 'ar', 'album', 'al', 'user',
 
 module.exports = class LastFM extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'lastfm',
       aliases: ['lfm'],
       requirements: { apis: ['lastfm'] },
@@ -28,7 +28,8 @@ module.exports = class LastFM extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
+
     this.formatUrl = formatUrl
     this.READ_MORE_REGEX = READ_MORE_REGEX
   }

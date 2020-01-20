@@ -4,13 +4,13 @@ const moment = require('moment-timezone')
 
 module.exports = class Time extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'time',
       aliases: ['currenttime'],
       parameters: [{
         type: 'string', full: true, missingError: 'commands:time.noZone'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, address) {

@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Rep extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'rep',
       aliases: ['reputation'],
       category: 'social',
@@ -14,7 +14,7 @@ module.exports = class Rep extends Command {
         missingError: 'commands:rep.noMention',
         errors: { acceptSelf: 'commands:rep.repYourself' }
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, user) {
