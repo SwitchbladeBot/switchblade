@@ -137,10 +137,6 @@ module.exports = class MainListener extends EventListener {
       return message.reply(t('misc:didYouMean', { command: result }))
     }
 
-      this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, { color: 'magenta', tags: ['Commands'] })
-      this.runCommand(command, context, args, language)
-    }
-
     const context = new CommandContext({
       defaultPrefix: usedPrefix,
       aliase: cmd,
