@@ -1063,6 +1063,13 @@
       "rotation": {
         "commandDescription": "Shows the current week's champion rotation.",
         "weeklyChampRotation": "Weekly Champion Rotation"
+      },
+      "skin": {
+        "commandDescription": "Shows information about a League of Legends champion's skin.",
+        "commandUsage": "<skin name>|<champion name>",
+        "noSkin": "You have to give me a skin name to search for.",
+        "invalidSkin": "Invalid skin.",
+        "description": "Want to see the skin spotlight video for this skin? Click [here]({{videoUrl}})!"
       }
     }
   },

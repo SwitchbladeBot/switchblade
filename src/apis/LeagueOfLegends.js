@@ -8,7 +8,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   constructor () {
     super({
       name: 'lol',
-      envVars: [ 'RIOT_API_KEY' ]
+      envVars: [ 'RIOT_API_KEY', 'YOUTUBE_API_KEY' ]
     })
 
     this.version = null
@@ -49,6 +49,22 @@ module.exports = class LeagueOfLegends extends APIWrapper {
       const { id } = champions[name]
       const lang = await this.selectLanguage(language)
       this.request(`/cdn/${this.version}/data/${lang}/champion/${id}.json`).then(u => resolve(u.data[id]))
+    })
+  }
+
+  async fetchSkin (skinName, champion, language, client) {
+    return new Promise(async (resolve, reject) => {
+      const champData = await this.fetchChampion(champion, language)
+      const skin = champData.skins.find(s => skinName.split(' ').length > 1
+        ? skinName.split(' ').some(substr => s.name.toLowerCase().includes(substr.toLowerCase()))
+        : s.name.toLowerCase().includes(skinName.toLowerCase()))
+      if (!skin) return reject(new Error('INVALID_SKIN'))
+
+      const { items } = await client.apis.youtube.search(`${skin.name} SkinSpotlight`, ['video'])
+
+      const videoUrl = items.find(i => i.snippet.channelTitle === 'SkinSpotlights').id.videoId
+
+      resolve({ name: skin.name, splashUrl: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champData.id}_${skin.num}.jpg`, videoUrl: `https://youtube.com/watch?v=${videoUrl}` })
     })
   }
 
