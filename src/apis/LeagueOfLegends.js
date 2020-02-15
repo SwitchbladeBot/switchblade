@@ -12,13 +12,32 @@ module.exports = class LeagueOfLegends extends APIWrapper {
     })
 
     this.version = null
+    this.skins = []
   }
 
-  async getVersion () {
-    return this.request(`/realms/na.json`).then(data => {
-      this.version = data.v
-      return data.v
-    })
+  async load () {
+    await this.request(`/realms/na.json`)
+      .then(data => {
+        this.version = data.v
+      })
+
+    await this.loadSkins()
+    return this
+  }
+
+  async loadSkins () {
+    const champions = await this.fetchChampions()
+
+    for (var i in champions) {
+      const champData = await this.fetchChampion(champions[i].id, 'en_US')
+
+      const skins = champData.skins
+
+      skins.forEach(skin => {
+        if (skin.name === 'default') return
+        return this.skins.push({ name: skin.name, splashUrl: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champData.id}_${skin.num}.jpg` })
+      })
+    }
   }
 
   async selectLanguage (language) {
@@ -29,13 +48,11 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   }
 
   async getLocale (language, version = this.version) {
-    if (!version) version = await this.getVersion()
     const matchingLanguage = await this.selectLanguage(language)
     return this.request(`/cdn/${this.version}/data/${matchingLanguage}/language.json`).then(u => u.data)
   }
 
   async fetchChampions (version = this.version) {
-    if (!version) version = await this.getVersion()
     return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => u.data)
   }
 
@@ -52,19 +69,16 @@ module.exports = class LeagueOfLegends extends APIWrapper {
     })
   }
 
-  async fetchSkin (skinName, champion, language, client) {
+  async fetchSkin (skinName, client) {
     return new Promise(async (resolve, reject) => {
-      const champData = await this.fetchChampion(champion, language)
-      const skin = champData.skins.find(s => skinName.split(' ').length > 1
-        ? skinName.split(' ').some(substr => s.name.toLowerCase().includes(substr.toLowerCase()))
-        : s.name.toLowerCase().includes(skinName.toLowerCase()))
+      const skin = this.skins.find(s => skinName.toLowerCase() === s.name.toLowerCase())
       if (!skin) return reject(new Error('INVALID_SKIN'))
 
       const { items } = await client.apis.youtube.search(`${skin.name} SkinSpotlight`, ['video'])
 
       const videoUrl = items.find(i => i.snippet.channelTitle === 'SkinSpotlights').id.videoId
 
-      resolve({ name: skin.name, splashUrl: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champData.id}_${skin.num}.jpg`, videoUrl: `https://youtube.com/watch?v=${videoUrl}` })
+      resolve({ name: skin.name, splashUrl: skin.splashUrl, videoUrl: `https://youtube.com/watch?v=${videoUrl}` })
     })
   }
 

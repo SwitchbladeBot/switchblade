@@ -16,9 +16,7 @@ module.exports = class LeagueOfLegendsSkin extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
-      const split = skin.split('|')
-
-      const skinInfo = await this.client.apis.lol.fetchSkin(split[0], split[1], language, this.client)
+      const skinInfo = await this.client.apis.lol.fetchSkin(skin, this.client)
       embed.setColor(this.parentCommand.embedColor)
         .setAuthor(t(this.parentCommand.authorString), this.parentCommand.authorImage, this.parentCommand.authorURL)
         .setTitle(`${skinInfo.name}`)
