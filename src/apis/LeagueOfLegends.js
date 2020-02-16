@@ -28,7 +28,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   async loadSkins () {
     const champions = await this.fetchChampions()
 
-    for (var i in champions) {
+    for (const i in champions) {
       const champData = await this.fetchChampion(champions[i].id, 'en_US')
 
       const skins = champData.skins
