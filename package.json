@@ -72,6 +72,7 @@
     "runeterra": "0.0.6",
     "samp-query": "latest",
     "search-npm-registry": "^2.0.3",
+    "splitargs": "0.0.7",
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",
     "transform-props": "^1.0.1"
