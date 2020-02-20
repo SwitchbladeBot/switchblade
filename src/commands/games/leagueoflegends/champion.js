@@ -14,14 +14,14 @@ module.exports = class LeagueOfLegendsChampion extends Command {
     }, client)
   }
 
-  async run ({ t, author, channel, language }, champion) {
+  async run ({ t, author, channel, prefix, language }, champion) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
       const champ = await this.client.apis.lol.fetchChampion(champion, language)
       const locale = await this.client.apis.lol.getLocale(language)
-      embed.setColor(this.parentCommand.LOL_COLOR)
-        .setAuthor('League of Legends', this.parentCommand.LOL_LOGO, 'https://leagueoflegends.com')
+      embed.setColor(this.parentCommand.embedColor)
+        .setAuthor(t(this.parentCommand.authorString), this.parentCommand.authorImage, this.parentCommand.authorURL)
         .setTitle(`**${champ.name}**, ${champ.title}`)
         .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${this.client.apis.lol.version}/img/champion/${champ.image.full}`)
         .setDescription([
@@ -36,6 +36,7 @@ module.exports = class LeagueOfLegendsChampion extends Command {
           `**${locale.CriticalStrike}:** ${champ.stats.crit} - ${champ.stats.critperlevel}/${locale.Level}`
         ].join('\n'))
         .addField(t('commands:leagueoflegends.subcommands.champion.spells'), champ.spells.map((spell, i) => `**${spell.name}** (${buttons[i]})`).join(', '), true)
+        .addField(t('commands:leagueoflegends.subcommands.champion.skins'), `${champ.skins.filter(s => s.name !== 'default').map(skin => `**${skin.name}**`).join(', ')}\n\n*${t('commands:leagueoflegends.subcommands.champion.skinText', { skinCommandUsage: `${prefix}leagueoflegends skin ${t('commands:leagueoflegends.subcommands.skin.commandUsage')}` })}*`)
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('commands:leagueoflegends.subcommands.champion.invalidChamp'))
