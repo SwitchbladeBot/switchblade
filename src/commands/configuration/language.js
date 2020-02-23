@@ -6,11 +6,11 @@ const languageCodes = () => Object.keys(i18next.store.data)
 const languageAliases = (cli) => Object.values(cli.cldr.languages).map(v => Object.values(v)).reduce((a, v) => a.concat(v), []).reduce((a, v) => a.concat(v), [])
 
 module.exports = class ConfigLanguage extends Command {
-  constructor (client, parentCommand) {
-    super(client, {
+  constructor (client) {
+    super({
       name: 'language',
       aliases: ['lang'],
-      parentCommand: 'config',
+      parent: 'config',
       parameters: [{
         type: 'string',
         full: true,
@@ -27,7 +27,7 @@ module.exports = class ConfigLanguage extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, lang) {
@@ -45,7 +45,7 @@ module.exports = class ConfigLanguage extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     try {
-      await this.client.modules.configuration.setLanguage(guild.id, lang)
+      await this.client.modules.language.updateValues(guild.id, { language: lang })
       embed.setTitle(i18next.getFixedT(lang)('commands:config.subcommands.language.changedSuccessfully', { lang: langDisplayName || lang }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

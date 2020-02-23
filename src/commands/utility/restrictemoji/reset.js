@@ -1,14 +1,14 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 module.exports = class RestrictEmojiReset extends Command {
-  constructor (client, parentCommand) {
-    super(client, {
+  constructor (client) {
+    super({
       name: 'reset',
-      parentCommand: 'restrictemoji',
+      parent: 'restrictemoji',
       parameters: [{
         type: 'emoji',
         sameGuildOnly: true
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, emoji) {
@@ -17,7 +17,7 @@ module.exports = class RestrictEmojiReset extends Command {
       await emoji.edit({ roles: [] })
       channel.send(
         new SwitchbladeEmbed(author)
-          .setTitle(t('commands:restrictemoji.subcommands.reset.resetted', { emoji: emoji.name }))
+          .setTitle(t('commands:restrictemoji.subcommands.reset.reset', { emoji: emoji.name }))
       ).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()

@@ -6,11 +6,11 @@ const formatUrl = name => name.replace(/\)/g, '%29').replace(/\(/g, '%28').repla
 // Regex to change the Read More from last.fm bio
 const READ_MORE_REGEX = /<a href="(https?:\/\/www.last.fm\/music\/[-a-zA-Z0-9@:%_+.~#?&/=]*)">Read more on Last.fm<\/a>/g
 
-const types = ['track', 'song', 't', 's', 'artist', 'ar', 'album', 'al', 'user', 'u']
+const types = ['track', 'song', 't', 's', 'artist', 'ar', 'album', 'al', 'user', 'u', 'top']
 
 module.exports = class LastFM extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'lastfm',
       aliases: ['lfm'],
       requirements: { apis: ['lastfm'] },
@@ -28,7 +28,8 @@ module.exports = class LastFM extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
+
     this.formatUrl = formatUrl
     this.READ_MORE_REGEX = READ_MORE_REGEX
   }

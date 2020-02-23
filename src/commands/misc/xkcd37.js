@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class XKCD37 extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'xkcd37',
       parameters: [{
         type: 'string', full: true
       }]
-    })
+    }, client)
   }
 
   // Context: https://xkcd.com/37/

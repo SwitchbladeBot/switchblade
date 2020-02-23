@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Money extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'money',
       aliases: ['balance', 'bal'],
       category: 'economy',
@@ -10,14 +10,14 @@ module.exports = class Money extends Command {
       parameters: [{
         type: 'user', full: true, required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, user = author) {
     channel.startTyping()
 
     const embed = new SwitchbladeEmbed(author)
-    const money = await this.client.modules.economy.balance(user.id)
+    const money = await this.client.controllers.economy.balance(user.id)
     if (author.id === user.id) {
       embed.setDescription(t('commands:money.youHave', { count: money }))
     } else {

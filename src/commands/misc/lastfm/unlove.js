@@ -2,19 +2,19 @@ const { SwitchbladeEmbed, Constants, Command, CommandError } = require('../../..
 
 module.exports = class LastfmUnloveTrack extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'unlove',
       aliases: ['un'],
-      parentCommand: 'lastfm',
+      parent: 'lastfm',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, envVars: ['DASHBOARD_URL'] }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild, prefix }) {
     try {
       channel.startTyping()
       const embed = new SwitchbladeEmbed(author)
-      const userConnections = await this.client.modules.connection.getConnections(author.id)
+      const userConnections = await this.client.controllers.connection.getConnections(author.id)
       const lastfm = userConnections.find(c => c.name === 'lastfm')
       if (!lastfm) {
         throw new CommandError(t('commands:lastfm.subcommands.unlove.notConnected', { link: `${process.env.DASHBOARD_URL}/profile` }))

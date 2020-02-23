@@ -29,8 +29,8 @@ class Color {
     return hex ? rgb.map(toHex) : rgb
   }
 
-  rgb (hex = false) {
-    return this.valid ? hex ? `#${this.rgbArray(true).join('')}` : `rgb(${this.rgbArray(false).join(', ')})` : null
+  rgb (hex = false, clean = false) {
+    return this.valid ? hex ? `${clean ? '' : '#'}${this.rgbArray(true).join('')}` : `rgb(${this.rgbArray(false).join(', ')})` : null
   }
 
   // RGBA

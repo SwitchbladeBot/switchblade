@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Pay extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'pay',
       aliases: ['transfer'],
       category: 'economy',
@@ -17,7 +17,7 @@ module.exports = class Pay extends Command {
         min: 1,
         missingError: 'commands:pay.noValue'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, receiver, value) {
@@ -25,8 +25,9 @@ module.exports = class Pay extends Command {
     channel.startTyping()
 
     try {
-      await this.client.modules.economy.transfer(author.id, receiver.id, value)
-      embed.setDescription(t('commands:pay.transactionSuccessful', { receiver, value }))
+      const type = value === 1 ? '' : '_plural'
+      await this.client.controllers.economy.transfer(author.id, receiver.id, value)
+      embed.setDescription(t('commands:pay.transactionSuccessful', { receiver, value, type }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)
       switch (e.message) {

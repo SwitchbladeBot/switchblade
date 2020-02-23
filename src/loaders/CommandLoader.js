@@ -2,8 +2,9 @@ const { Loader, Command, FileUtils } = require('../')
 
 module.exports = class CommandLoader extends Loader {
   constructor (client) {
-    super(client)
-    this.critical = true
+    super({
+      critical: true
+    }, client)
 
     this.commands = []
     this.posLoadCommands = []
@@ -32,7 +33,8 @@ module.exports = class CommandLoader extends Loader {
     }, this.logError.bind(this)).then(() => {
       const sorted = this.posLoadCommands.sort((a, b) => +(typeof b === 'string') || -(typeof a === 'string') || a.length - b.length)
       sorted.forEach(subCommand => this.addSubcommand(subCommand))
-      this.log(failed ? `[33m${success} commands loaded, ${failed} failed.` : `[32mAll ${success} commands loaded without errors.`, 'Commands')
+      if (failed) this.log(`${success} commands loaded, ${failed} failed.`, { color: 'yellow', tags: ['Commands'] })
+      else this.log(`All ${success} commands loaded without errors.`, { color: 'green', tags: ['Commands'] })
     })
   }
 
@@ -41,22 +43,18 @@ module.exports = class CommandLoader extends Loader {
    * @param {Command} command - Command to be added
    */
   addCommand (command) {
-    const check = this.checkCommand(command)
-    if (!check) return check
-
     if (typeof command.parentCommand === 'string' || Array.isArray(command.parentCommand)) {
       this.posLoadCommands.push(command)
     } else {
+      const check = this.checkCommand(command)
+      if (!check) return check
       this.commands.push(command)
     }
 
-    return check
+    return true
   }
 
   addSubcommand (subCommand) {
-    const check = this.checkCommand(subCommand)
-    if (!check) return check
-
     let parentCommand
     if (typeof subCommand.parentCommand === 'string') {
       parentCommand = this.commands.find(c => c.name === subCommand.parentCommand)
@@ -71,40 +69,42 @@ module.exports = class CommandLoader extends Loader {
     if (parentCommand) {
       parentCommand.subcommands.push(subCommand)
       subCommand.parentCommand = parentCommand
+      if (subCommand.category === 'general') subCommand.category = parentCommand.category
     } else {
       parentCommand = subCommand.parentCommand
       const name = (Array.isArray(parentCommand) ? parentCommand : [ parentCommand ]).concat([ subCommand.name ]).join(' ')
-      this.log(`[31m${name} failed to load - Couldn't find parent command.`, 'Commands')
+      this.log(`${name} failed to load - Couldn't find parent command.`, { color: 'red', tags: ['Commands'] })
       return false
     }
 
+    const check = this.checkCommand(subCommand)
     return check
   }
 
   checkCommand (command) {
     if (!(command instanceof Command)) {
-      this.log(`[31m${command} failed to load - Not a command`, 'Commands')
+      this.log(`${command} failed to load - Not a command`, { color: 'red', tags: ['Commands'] })
       return false
     }
 
     if (command.canLoad() !== true) {
-      this.log(`[31m${command.fullName} failed to load - ${command.canLoad() || 'canLoad function did not return true.'}`, 'Commands')
+      this.log(`${command.fullName} failed to load - ${command.canLoad() || 'canLoad function did not return true.'}`, { color: 'red', tags: ['Commands'] })
       return false
     }
 
     if (command.requirements) {
       if (command.requirements.apis && !command.requirements.apis.every(api => {
-        if (!this.client.apis[api]) this.log(`[31m${command.fullName} failed to load - Required API wrapper "${api}" not found.`, 'Commands')
+        if (!this.client.apis[api]) this.log(`${command.fullName} failed to load - Required API wrapper "${api}" not found.`, { color: 'red', tags: ['Commands'] })
         return !!this.client.apis[api]
       })) return false
 
       if (command.requirements.envVars && !command.requirements.envVars.every(variable => {
-        if (!process.env[variable]) this.log(`[31m${command.fullName} failed to load - Required environment variable "${variable}" is not set.`, 'Commands')
+        if (!process.env[variable]) this.log(`${command.fullName} failed to load - Required environment variable "${variable}" is not set.`, { color: 'red', tags: ['Commands'] })
         return !!process.env[variable]
       })) return false
 
       if (command.requirements.canvasOnly && !this.client.canvasLoaded) {
-        this.log(`[31m${command.fullName} failed to load - Canvas is not installed.`, 'Commands')
+        this.log(`${command.fullName} failed to load - Canvas is not installed.`, { color: 'red', tags: ['Commands'] })
         return false
       }
     }

@@ -1,4 +1,6 @@
 const { Client } = require('discord.js')
+const chalk = require('chalk')
+const _ = require('lodash')
 const Loaders = require('./loaders')
 
 /**
@@ -29,12 +31,33 @@ module.exports = class Switchblade extends Client {
   /**
    * Adds a new log entry to the console.
    * @param {string} message - Log message
-   * @param {...string} [tags] - Tags to identify the log entry
+   * @param {Object} [options] - Options
+   * @param {string[]} [options.tags] - Tags to identify the log entry
+   * @param {boolean} [options.bold] - If message will be bold
+   * @param {boolean} [options.italic] - If message will be italic
+   * @param {boolean} [options.underline] - If message will be underline
+   * @param {boolean} [options.reversed] - If message will be reversed
+   * @param {'bgBlack'|'bgBlackBright'|'bgRed'|'bgRedBright'|'bgGreen'|'bgGreenBright'|'bgYellow'|'bgYellowBright'|'bgBlue'|'bgBlueBright'|'bgMagenta'|'bgMagentaBright'|'bgCyan'|'bgCyanBright'|'bgWhite'|'bgWhiteBright'} [options.bgColor] - Background color of message
+   * @param {'black'|'blackBright'|'red'|'redBright'|'green'|'greenBright'|'yellow'|'yellowBright'|'blue'|'blueBright'|'magenta'|'magentaBright'|'cyan'|'cyanBright'|'white'|'whiteBright'} [options.color] - Color of message
    */
-  log (...args) {
-    const message = args[0]
-    const tags = args.slice(1).map(t => `[36m[${t}][0m`)
-    console.log(...tags, message + '[0m')
+  log (
+    message,
+    {
+      tags = [],
+      bold = false,
+      italic = false,
+      underline = false,
+      reversed = false,
+      bgColor = false,
+      color = 'white'
+    } = {}
+  ) {
+    const colorFunction = _.get(
+      chalk,
+      [bold, italic, underline, reversed, bgColor, color].filter(Boolean).join('.')
+    )
+
+    console.log(...tags.map(t => chalk.cyan(`[${t}]`)), colorFunction(message))
   }
 
   /**
@@ -53,9 +76,22 @@ module.exports = class Switchblade extends Client {
    * @param {Array<string>} args - Array of command arguments
    * @param {String} language - Code for the language that the command will be executed in
    */
-  runCommand (command, context, args, language) {
+  async runCommand (command, context, args, language) {
+    // Command rules
+    if (context.guild && !command.hidden) {
+      const deepSubcmd = (c, a) => {
+        const [ arg ] = a
+        const cmd = c.subcommands
+          ? c.subcommands.find(s => s.name.toLowerCase() === arg || (s.aliases && s.aliases.includes(arg)))
+          : null
+        return cmd ? deepSubcmd(cmd, a.slice(1)) : c
+      }
+      const verify = await this.modules.commandRules.verifyCommand(deepSubcmd(command, args), context)
+      if (!verify) return
+    }
+
     context.setFixedT(this.i18next.getFixedT(language))
-    command._run(context, args).catch(this.logError)
+    return command._run(context, args).catch(this.logError)
   }
 
   async initializeLoaders () {

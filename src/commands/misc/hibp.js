@@ -4,7 +4,7 @@ const types = ['breach', 'paste', 'b', 'p']
 
 module.exports = class HIBP extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'hibp',
       aliases: ['haveibeenpwned'],
       requirements: { apis: ['hibp'] },
@@ -22,7 +22,7 @@ module.exports = class HIBP extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
 
     this.HIBP_LOGO = 'https://haveibeenpwned.com/Content/Images/SocialLogo.png'
   }

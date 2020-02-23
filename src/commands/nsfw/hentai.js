@@ -2,11 +2,11 @@ const { RandomRedditPostCommand } = require('../../')
 
 module.exports = class Hentai extends RandomRedditPostCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'hentai',
-      subreddit: 'SamePicOfSteveHarvey',
+      subreddit: 'hentai',
       category: 'nsfw',
       requirements: { nsfwOnly: true }
-    })
+    }, client)
   }
 }

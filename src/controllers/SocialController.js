@@ -1,7 +1,7 @@
-const { Module } = require('../')
+const { Controller } = require('../')
 
 const moment = require('moment')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 
 const REP_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 class RepCooldownError extends Error {
@@ -13,11 +13,11 @@ class RepCooldownError extends Error {
 }
 
 // Social
-module.exports = class SocialModule extends Module {
+module.exports = class SocialController extends Controller {
   constructor (client) {
-    super(client)
-    this.name = 'social'
-
+    super({
+      name: 'social'
+    }, client)
     this.PERSONAL_TEXT_LIMIT = 260
   }
 
@@ -30,14 +30,17 @@ module.exports = class SocialModule extends Module {
   }
 
   validateProfile (entity) {
-    return Joi.validate(entity, Joi.object().keys({
+    const { error, value } = Joi.object().keys({
       personalText: Joi.string().max(this.PERSONAL_TEXT_LIMIT).truncate().empty(''),
       favColor: Joi.string().regex(/^#([a-f\d]{3}|[a-f\d]{6})$/i)
-    }))
+    }).validate(entity)
+    if (error) throw error
+    return value
   }
 
   async updateProfile (_user, entity) {
-    return this.validateProfile(entity).then(() => this._users.update(_user, entity))
+    this.validateProfile(entity)
+    return this._users.update(_user, entity)
   }
 
   async setFavoriteColor (_user, favColor) {

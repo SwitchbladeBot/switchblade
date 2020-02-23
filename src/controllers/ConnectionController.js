@@ -1,9 +1,10 @@
-const { Module } = require('../')
+const { Controller } = require('../')
 
-module.exports = class ConnectionModule extends Module {
-  constructor (...args) {
-    super(...args)
-    this.name = 'connection'
+module.exports = class ConnectionController extends Controller {
+  constructor (client) {
+    super({
+      name: 'connection'
+    }, client)
   }
 
   get _users () {
@@ -12,7 +13,7 @@ module.exports = class ConnectionModule extends Module {
 
   async connect (_user, _connection, _tokens) {
     if (typeof _tokens === 'string') _tokens = { token: _tokens }
-    if (typeof _tokens !== 'object') throw new TypeError(`ConnectionModule.connect should have the last argument a string or an object, ${typeof _tokens} given`)
+    if (typeof _tokens !== 'object') throw new TypeError(`ConnectionController.connect should have the last argument a string or an object, ${typeof _tokens} given`)
     const user = await this._users.findOne(_user, 'connections')
     if (user.connections.some(c => c.name === _connection.name)) return 'alreadyConnected'
     const connection = {

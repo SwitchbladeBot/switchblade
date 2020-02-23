@@ -6,15 +6,15 @@ const fetch = require('node-fetch')
 
 module.exports = class MinecraftServer extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'server',
       aliases: ['sv'],
-      parentCommand: 'minecraft',
+      parent: 'minecraft',
       parameters: [{
         type: 'string',
         missingError: 'commands:minecraft.subcommands.server.noIP'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, address) {

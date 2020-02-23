@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class RestrictEmoji extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'restrictemoji',
       category: 'utility',
       requirements: {
@@ -10,7 +10,7 @@ module.exports = class RestrictEmoji extends Command {
         botPermissions: ['MANAGE_EMOJIS'],
         permissions: ['MANAGE_EMOJIS']
       }
-    })
+    }, client)
   }
 
   run ({ t, author, prefix, alias, channel }) {

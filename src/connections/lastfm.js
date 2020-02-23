@@ -2,8 +2,9 @@ const { Connection } = require('../')
 
 module.exports = class LastFM extends Connection {
   constructor (client) {
-    super(client)
-    this.name = 'lastfm'
+    super({
+      name: 'lastfm'
+    }, client)
   }
 
   get defaultConfig () {
@@ -42,7 +43,7 @@ module.exports = class LastFM extends Connection {
   }
 
   async checkScrobble (scrobble, user) {
-    const { lastfm } = await this.client.modules.connection.getConnections(user)
+    const { lastfm } = await this.client.controllers.connection.getConnections(user)
     return lastfm.connected ? lastfm : false
   }
 

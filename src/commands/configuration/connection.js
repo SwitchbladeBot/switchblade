@@ -2,19 +2,19 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class UserConnections extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'connections',
       aliases: ['conns', 'conn', 'connection'],
       category: 'configuration',
       requirements: { databaseOnly: true }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
 
     try {
-      const userConnections = await this.client.modules.connection.getConnectionsFiltered(author.id)
+      const userConnections = await this.client.controllers.connection.getConnectionsFiltered(author.id)
       const connections = userConnections.map(conn => {
         const emoji = this.getEmoji(conn.name.toLowerCase())
         return conn.connected

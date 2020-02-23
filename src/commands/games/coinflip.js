@@ -6,11 +6,11 @@ const coins = {
 
 module.exports = class Coinflip extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'coinflip',
       aliases: ['cf'],
       category: 'games'
-    })
+    }, client)
   }
 
   run ({ channel, author, t }) {

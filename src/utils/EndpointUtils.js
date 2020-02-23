@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const jwt = require('jsonwebtoken')
 
 const API_URL = 'https://discordapp.com/api'
@@ -104,7 +104,7 @@ module.exports = class EndpointUtils {
             query: Joi.string().allow(''),
             isWeekend: Joi.boolean()
           })
-          Joi.validate(payload, PayloadSchema).then(output => {
+          PayloadSchema.validate(payload).then(output => {
             next()
           }).catch(error => res.status(500).json(error))
         } else return res.status(400).json({ error: 'No body' })

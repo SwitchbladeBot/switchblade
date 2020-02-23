@@ -1,30 +1,16 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { SubcommandListCommand } = require('../../')
 
-const types = ['champion', 'champ', 'c', 'status', 's', 'rotation', 'r']
-
-module.exports = class LeagueOfLegends extends Command {
+module.exports = class LeagueOfLegends extends SubcommandListCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'leagueoflegends',
       aliases: ['lol'],
+      category: 'games',
       requirements: { apis: ['lol'] },
-      parameters: [{
-        type: 'string',
-        full: false,
-        whitelist: types,
-        missingError: ({ t, prefix }) => {
-          return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
-            .setDescription([
-              this.usage(t, prefix),
-              '',
-              `__**${t('commons:search.types')}:**__`,
-              `\`${['champion', 'status', 'rotation'].join('`, `')}\``
-            ].join('\n'))
-        }
-      }]
-    })
-
-    this.LOL_LOGO = 'https://i.imgur.com/4dKfQZn.jpg'
-    this.LOL_COLOR = '#002366'
+      authorString: 'commands:leagueoflegends.gameName',
+      authorImage: 'https://i.imgur.com/4dKfQZn.jpg',
+      authorURL: 'https://leagueoflegends.com',
+      embedColor: '#002366'
+    }, client)
   }
 }

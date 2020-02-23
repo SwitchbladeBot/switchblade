@@ -8,8 +8,9 @@ const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 
 module.exports = class MainListener extends EventListener {
   constructor (client) {
-    super(client)
-    this.events = ['ready', 'message', 'voiceStateUpdate']
+    super({
+      events: ['ready', 'message', 'voiceStateUpdate']
+    }, client)
   }
 
   onReady () {
@@ -39,9 +40,9 @@ module.exports = class MainListener extends EventListener {
           user: this.user.id,
           shards: 1
         })
-        this.log('[32mLavalink connection established!', 'Music')
+        this.log('Lavalink connection established!', { color: 'green', tags: ['Music'] })
       } catch (e) {
-        this.log(`[31mFailed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, 'Music')
+        this.log(`Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, { color: 'red', tags: ['Music'] })
       }
     }
 
@@ -53,8 +54,9 @@ module.exports = class MainListener extends EventListener {
           method: 'POST',
           headers: { Authorization: process.env.DISCORDBOTSPW_TOKEN },
           body: { server_count: client.guilds.size }
-        }).then(() => client.log('[32mPosted statistics successfully', 'bots.discord.pw'))
-          .catch(() => client.log('[31mFailed to post statistics', 'bots.discord.pw'))
+        })
+          .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['bots.discord.pw'] }))
+          .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['bots.discord.pw'] }))
       }
 
       // discordbots.org
@@ -63,8 +65,9 @@ module.exports = class MainListener extends EventListener {
           method: 'POST',
           headers: { Authorization: process.env.DBL_TOKEN },
           body: { server_count: client.guilds.size }
-        }).then(() => client.log('[32mPosted statistics successfully', 'discordbots.org'))
-          .catch(() => client.log('[31mFailed to post statistics', 'discordbots.org'))
+        })
+          .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['discordbots.org'] }))
+          .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['discordbots.org'] }))
       }
 
       // botsfordiscord.com
@@ -73,8 +76,9 @@ module.exports = class MainListener extends EventListener {
           method: 'POST',
           headers: { Authorization: process.env.BOTSFORDISCORD_TOKEN },
           body: { server_count: client.guilds.size }
-        }).then(() => client.log('[32mPosted statistics successfully', 'botsfordiscord.com'))
-          .catch(() => client.log('[31mFailed to post statistics', 'botsfordiscord.com'))
+        })
+          .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['botsfordiscord.com'] }))
+          .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['botsfordiscord.com'] }))
       }
 
       if (process.env.DBL2_TOKEN) {
@@ -82,8 +86,9 @@ module.exports = class MainListener extends EventListener {
           method: 'POST',
           headers: { Authorization: process.env.DBL2_TOKEN },
           body: { guilds: client.guilds.size, users: client.users.size }
-        }).then(() => client.log('[32mPosted statistics successfully', 'discordbotlist.com'))
-          .catch(() => client.log('[31mFailed to post statistics', 'discordbotlist.com'))
+        })
+          .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['discordbotlist.com'] }))
+          .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['discordbotlist.com'] }))
       }
     }
 
@@ -98,7 +103,9 @@ module.exports = class MainListener extends EventListener {
     if (message.author.bot) return
 
     const guildId = message.guild && message.guild.id
-    const { prefix, language } = await this.modules.configuration.retrieve(guildId, 'prefix language')
+
+    const { prefix, spacePrefix } = await this.modules.prefix.retrieveValues(guildId, [ 'prefix', 'spacePrefix' ])
+    const language = await this.modules.language.retrieveValue(guildId, 'language')
 
     const botMention = this.user.toString()
 
@@ -106,7 +113,7 @@ module.exports = class MainListener extends EventListener {
     const usedPrefix = sw(botMention, `<@!${this.user.id}>`) ? `${botMention} ` : sw(prefix) ? prefix : null
 
     if (usedPrefix) {
-      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => a)
+      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => !spacePrefix || a)
       const args = fullCmd.slice(1)
       if (!fullCmd.length) return
 
@@ -126,7 +133,7 @@ module.exports = class MainListener extends EventListener {
           language
         })
 
-        this.log(`[35m"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, 'Commands')
+        this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, { color: 'magenta', tags: ['Commands'] })
         this.runCommand(command, context, args, language)
       }
     }

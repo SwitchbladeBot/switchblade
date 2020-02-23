@@ -5,7 +5,6 @@
 
   [![support][support-badge]][support-invite]
   [![crowdin][crowdin-badge]][crowdin-url]
-  [![dependencies][dependencies-badge]][dependencies-url]
   [![jetbrains][jetbrains-badge]][jetbrains-url]
   [![codeclimate][codeclimate-badge]][codeclimate-url]
   [![circleci][circleci-badge]][circleci-url]
@@ -47,7 +46,7 @@ Switchblade has over 130 commands, and having to update a list here would be unp
 
 <h2 align="center">Music</h2>
 
-We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **YouYube**, **SoundCloud**, **Spotify**, **Deezer**, **Mixer**, **Twitch**, and many more. In order to provide you ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection avaliable to the voice server you're in.
+We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **YouTube**, **SoundCloud**, **Spotify**, **Deezer**, **Mixer**, **Twitch**, and many more. In order to provide you ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection available to the voice server you're in.
 
 To play a song, join a voice channel and type **`s!play <query>`**. The `<query>` can be anything you want, from a song name to a **Spotify playlist URL**, we've got you covered!
 
@@ -81,7 +80,7 @@ If you know how to code in JavaScript, then feel free to give [one of the existe
 
 ### Reporting bugs
 
-Found something crashes the bot? Something isn't working like intended? Please let us know! Whenever you find a bug flying around, [try using one of these](https://gist.githubusercontent.com/pedrofracassi/fa560c3932eb4438e6033203cc8058bc/raw/37440ba7d730a9c539865f72ebc9992eb32d6b7e/bug.jpg). If that doesn't work, don't hesitate to [write a bug report](https://github.com/SwitchbladeBot/switchblade/issues/new?template=Bug_report.md). Please give us as much information as you can, preferrably filling all of the fields provided on the template.
+Found something crashes the bot? Something isn't working like intended? Please let us know! Whenever you find a bug flying around, [try using one of these](https://gist.githubusercontent.com/pedrofracassi/fa560c3932eb4438e6033203cc8058bc/raw/37440ba7d730a9c539865f72ebc9992eb32d6b7e/bug.jpg). If that doesn't work, don't hesitate to [write a bug report](https://github.com/SwitchbladeBot/switchblade/issues/new?template=Bug_report.md). Please give us as much information as you can, preferably filling all of the fields provided on the template.
 
 ### Triaging bug reports
 
@@ -138,13 +137,10 @@ Backers are the people who contribute to our projects monetarily. They get their
 <a href="https://opencollective.com/switchblade/backer/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/10/avatar.svg?requireActive=false"></a>
 
 [support-invite]: https://support.switchblade.xyz
-[support-badge]: https://img.shields.io/badge/dynamic/json.svg?label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online&logo=discord
+[support-badge]: https://img.shields.io/discord/445203868624748555?label=chat%20on%20Discord&logo=discord&logoColor=white
 
 [crowdin-url]: https://translate.switchblade.xyz
 [crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
-
-[dependencies-url]: https://david-dm.org/SwitchbladeBot/switchblade/
-[dependencies-badge]: https://david-dm.org/SwitchbladeBot/switchblade/status.svg
 
 [jetbrains-url]: https://www.jetbrains.com/?from=switchblade/
 [jetbrains-badge]: https://img.shields.io/badge/Powered%20by%20JetBrains-gray.svg?logo=webstorm

@@ -2,11 +2,11 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Daily extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'daily',
       category: 'economy',
       requirements: { databaseOnly: true }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {
@@ -14,7 +14,7 @@ module.exports = class Daily extends Command {
     channel.startTyping()
 
     try {
-      const { collectedMoney } = await this.client.modules.economy.bonus.claimDaily(author.id)
+      const { collectedMoney } = await this.client.controllers.economy.bonus.claimDaily(author.id)
       embed.setDescription(t('commands:daily.claimedSuccessfully', { count: collectedMoney }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

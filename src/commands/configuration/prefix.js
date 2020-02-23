@@ -1,10 +1,10 @@
 const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class ConfigPrefix extends Command {
-  constructor (client, parentCommand) {
-    super(client, {
+  constructor (client) {
+    super({
       name: 'prefix',
-      parentCommand: 'config',
+      parent: 'config',
       parameters: [{
         type: 'string',
         full: true,
@@ -12,14 +12,14 @@ module.exports = class ConfigPrefix extends Command {
         maxLength: 50,
         missingError: 'commands:config.subcommands.prefix.noPrefix'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, prefix = process.env.PREFIX) {
     const embed = new SwitchbladeEmbed(author)
 
     try {
-      await this.client.modules.configuration.setPrefix(guild.id, prefix)
+      await this.client.modules.prefix.updateValues(guild.id, { prefix })
       embed.setTitle(t('commands:config.subcommands.prefix.changedSuccessfully', { prefix }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)

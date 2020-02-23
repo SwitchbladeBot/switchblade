@@ -2,19 +2,19 @@ const { SwitchbladeEmbed, Command } = require('../../../')
 
 module.exports = class Scrobbling extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'scrobbling',
       category: 'music',
       aliases: ['scrobble', 'scrobbler', 'audioscrobbler'],
       requirements: { envVars: ['DASHBOARD_URL'] }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, prefix }) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
       .setTitle(t('commands:scrobbling.title'))
-    const userConnections = await this.client.modules.connection.getConnections(author.id)
+    const userConnections = await this.client.controllers.connection.getConnections(author.id)
     const lastfm = userConnections.find(c => c.name === 'lastfm')
     const link = `${process.env.DASHBOARD_URL}/profile`
     if (!lastfm) {
