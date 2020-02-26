@@ -2,14 +2,14 @@ const { Command, SwitchbladeEmbed, CommandError } = require('../../../')
 
 module.exports = class LeagueOfLegendsRotation extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'rotation',
       aliases: ['r'],
-      parentCommand: 'leagueoflegends',
+      parent: 'leagueoflegends',
       parameters: [[{
         type: 'booleanFlag', name: 'newplayers', aliases: ['np']
       }]]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language, flags }) {
@@ -22,8 +22,8 @@ module.exports = class LeagueOfLegendsRotation extends Command {
         var payload = await this.client.apis.lol.fetchChampion(c, language, true)
         return `**${payload.name}**, ${payload.title}`
       }))
-      embed.setColor(this.parentCommand.LOL_COLOR)
-        .setAuthor('League of Legends', this.parentCommand.LOL_LOGO, 'https://leagueoflegends.com')
+      embed.setColor(this.parentCommand.embedColor)
+        .setAuthor(t(this.parentCommand.authorString), this.parentCommand.authorImage, this.parentCommand.authorURL)
         .setTitle(t('commands:leagueoflegends.subcommands.rotation.weeklyChampRotation'))
         .setDescription(championPayload.join('\n'))
       channel.send(embed).then(() => channel.stopTyping())

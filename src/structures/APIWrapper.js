@@ -1,16 +1,16 @@
-/**
- * Base API Wrapper structure
- * @constructor
- */
+const Utils = require('../utils')
+
 module.exports = class APIWrapper {
   /**
-   * @param {Object} [options] - Options
-   * @param {string} options.name - Name
-   * @param {string[]} [options.envVars] - Required Environment Variables
+   * @param {Object} opts
+   * @param {string} opts.name
+   * @param {string[]} [opts.envVars]
    */
-  constructor (options = {}) {
-    this.name = options.name
-    this.envVars = options.envVars || []
+  constructor (opts) {
+    const options = Utils.createOptionHandler('APIWrapper', opts)
+
+    this.name = options.required('name')
+    this.envVars = options.optional('envVars', [])
   }
 
   /**

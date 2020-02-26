@@ -8,8 +8,9 @@ const corsOptions = {
 
 module.exports = class DBL extends Webhook {
   constructor (client) {
-    super(client)
-    this.name = 'dbl'
+    super({
+      name: 'dbl'
+    }, client)
   }
 
   register (app) {

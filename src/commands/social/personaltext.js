@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Personaltext extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'personaltext',
       aliases: ['profiletext'],
       category: 'social',
@@ -12,7 +12,7 @@ module.exports = class Personaltext extends Command {
         full: true,
         missingError: 'commands:personaltext.noText'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, text) {

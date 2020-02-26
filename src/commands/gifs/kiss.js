@@ -4,14 +4,14 @@ const fetch = require('node-fetch')
 
 module.exports = class Kiss extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'kiss',
       aliases: ['beijo', 'beijar'],
       category: 'images',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:kiss.noMention'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, channel, author }, user) {

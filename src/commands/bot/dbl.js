@@ -3,7 +3,7 @@ const moment = require('moment')
 
 module.exports = class DBL extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'dbl',
       aliases: ['discordbotlist'],
       category: 'bot',
@@ -13,7 +13,7 @@ module.exports = class DBL extends SearchCommand {
       }],
       embedColor: Constants.DBL_COLOR,
       embedLogoURL: 'https://i.imgur.com/aSsYKFp.png'
-    })
+    }, client)
 
     this.MAIN_URL = 'https://discordbots.org/bot/'
   }

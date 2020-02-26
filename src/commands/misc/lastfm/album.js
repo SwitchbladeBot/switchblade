@@ -2,13 +2,13 @@ const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../..
 
 module.exports = class LastfmAlbum extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'album',
       aliases: ['al'],
-      parentCommand: 'lastfm',
+      parent: 'lastfm',
       embedColor: Constants.LASTFM_COLOR,
       embedLogoURL: 'https://i.imgur.com/TppYCun.png'
-    })
+    }, client)
   }
 
   async search (context, query) {

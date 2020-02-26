@@ -2,12 +2,12 @@ const { SwitchbladeEmbed, Command, Constants } = require('../../../')
 
 module.exports = class ScrobblingPercent extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'percent',
       aliases: ['p'],
-      parentCommand: 'scrobbling',
+      parent: 'scrobbling',
       parameters: [{ type: 'number', min: 45, max: 95, missingError: 'commands.scrobbling.subcommands.percent.missingNumber' }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, percent) {

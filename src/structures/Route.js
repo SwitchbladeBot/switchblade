@@ -1,18 +1,22 @@
-/**
- * Base route structure
- * @constructor
- * @param {Client} client - discord.js Client
- * @param {Route} parentRoute - parent route to inherit path
- */
-module.exports = class Route {
-  constructor (client, parentRoute) {
-    this.client = client
+const Utils = require('../utils')
 
-    this.name = 'RouteName'
+module.exports = class Route {
+  /**
+   * @param {Object} opts
+   * @param {string} opts.name
+   * @param {Route} [opts.parent]
+   * @param {Client} client
+   */
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('Route', opts)
+
+    this.name = options.required('name')
+    this.parentRoute = options.optional('parent')
+
+    this.client = client
 
     this.subRoutes = null
     this.requirements = null
-    this.parentRoute = parentRoute
   }
 
   get path () {

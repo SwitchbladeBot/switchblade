@@ -2,7 +2,7 @@ const { Loader, Controller, FileUtils } = require('../')
 
 module.exports = class ControllerLoader extends Loader {
   constructor (client) {
-    super(client)
+    super({}, client)
 
     this.controllers = {}
   }
@@ -29,7 +29,8 @@ module.exports = class ControllerLoader extends Loader {
       if (Object.getPrototypeOf(NewController) !== Controller) return
       this.addController(new NewController(this.client)) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
-      this.log(failed ? `[33m${success} controllers loaded, ${failed} failed.` : `[32mAll ${success} controllers loaded without errors.`, 'Controllers')
+      if (failed) this.log(`${success} controllers loaded, ${failed} failed.`, { color: 'yellow', tags: ['Controllers'] })
+      else this.log(`All ${success} controllers loaded without errors.`, { color: 'green', tags: ['Controllers'] })
     })
   }
 
@@ -39,12 +40,12 @@ module.exports = class ControllerLoader extends Loader {
    */
   addController (controller) {
     if (!(controller instanceof Controller)) {
-      this.log(`[31m${controller.name} failed to load - Not an Controller`, 'Controllers')
+      this.log(`${controller.name} failed to load - Not an Controller`, { color: 'red', tags: ['Controllers'] })
       return false
     }
 
     if (controller.canLoad() !== true) {
-      this.log(`[31m${controller.name} failed to load - ${controller.canLoad() || 'canLoad function did not return true.'}`, 'Controllers')
+      this.log(`${controller.name} failed to load - ${controller.canLoad() || 'canLoad function did not return true.'}`, { color: 'red', tags: ['Controllers'] })
       return false
     }
 

@@ -4,11 +4,11 @@ const nekoAPI = 'https://nekos.life/api/v2/img/'
 
 module.exports = class Neko extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'neko',
       aliases: ['nekogirl'],
       category: 'anime'
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

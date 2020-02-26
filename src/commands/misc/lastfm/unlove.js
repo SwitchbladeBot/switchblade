@@ -2,12 +2,12 @@ const { SwitchbladeEmbed, Constants, Command, CommandError } = require('../../..
 
 module.exports = class LastfmUnloveTrack extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'unlove',
       aliases: ['un'],
-      parentCommand: 'lastfm',
+      parent: 'lastfm',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, envVars: ['DASHBOARD_URL'] }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild, prefix }) {

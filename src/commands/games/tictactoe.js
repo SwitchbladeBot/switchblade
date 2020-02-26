@@ -42,7 +42,7 @@ const gridToLinear = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2
 
 module.exports = class TicTacToe extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'tictactoe',
       aliases: ['ttt'],
       category: 'games',
@@ -52,7 +52,7 @@ module.exports = class TicTacToe extends Command {
       }, [{
         type: 'booleanFlag', name: 'text'
       }]]
-    })
+    }, client)
   }
 
   async run ({ channel, member, author, t, flags }, opponent) {

@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class reloadlocales extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'reloadlocales',
       category: 'developers',
       hidden: true,
       requirements: { managersOnly: true }
-    })
+    }, client)
   }
 
   async run ({ t, channel, author }) {
