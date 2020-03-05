@@ -22,12 +22,12 @@ module.exports = class APILoader extends Loader {
    * Initializes all API Wrappers.
    * @param {string} dirPath - Path to the apis directory
    */
-  initializeAPIs (dirPath = 'src/apis') {
+  async initializeAPIs (dirPath = 'src/apis') {
     let success = 0
     let failed = 0
-    return FileUtils.requireDirectory(dirPath, (NewAPI) => {
+    return FileUtils.requireDirectory(dirPath, async (NewAPI) => {
       if (Object.getPrototypeOf(NewAPI) !== APIWrapper) return
-      this.addAPI(new NewAPI()) ? success++ : failed++
+      await this.addAPI(new NewAPI()) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
       if (failed) this.log(`${success} API wrappers loaded, ${failed} failed.`, { color: 'yellow', tags: ['APIs'] })
       else this.log(`All ${success} API wrappers loaded without errors.`, { color: 'green', tags: ['APIs'] })
@@ -38,7 +38,7 @@ module.exports = class APILoader extends Loader {
    * Adds a new API Wrapper to the Client.
    * @param {APIWrapper} api - API Wrapper to be added
    */
-  addAPI (api) {
+  async addAPI (api) {
     if (!(api instanceof APIWrapper)) {
       this.log(`${api.name} failed to load - Not an APIWrapper`, { color: 'red', tags: ['APIs'] })
       return false
@@ -54,7 +54,7 @@ module.exports = class APILoader extends Loader {
       return !!process.env[variable]
     })) return false
 
-    this.apis[api.name] = api.load()
+    this.apis[api.name] = await api.load()
     return true
   }
 }
