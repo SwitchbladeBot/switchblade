@@ -238,7 +238,7 @@ module.exports = class CommandsModule extends Module {
 
   fetchCommands () {
     const joinAliases = (c) => {
-      const { aliases = [] } = c
+      const aliases = c.aliases || []
       return c.parentCommand ? aliases.concat(joinAliases(c.parentCommand)) : aliases
     }
     const addCommand = (a, c) => {
