@@ -22,7 +22,7 @@ module.exports = class Module {
     this.defaultState = options.optional('defaultState', true)
     this.defaultValues = options.optional('defaultValues', {})
     this.apiMethods = options.optional('apiMethods', [])
-    this.specialInput = options.optional('specialInput')
+    this._specialInput = options.optional('specialInput')
 
     this.client = client
   }
@@ -78,7 +78,7 @@ module.exports = class Module {
         ...this.defaultValues,
         ...(mod && mod.values ? mod.values : {})
       },
-      input: typeof this.specialInput === 'function' ? await this.specialInput(_guild, _user) : this.specialInput
+      input: typeof this.specialInput === 'function' ? await this.specialInput(_guild, _user) : this._specialInput
     }
   }
 
