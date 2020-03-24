@@ -17,8 +17,9 @@ module.exports = class LeagueOfLegendsSkin extends Command {
     const embed = new SwitchbladeEmbed(author)
     try {
       const skinInfo = await this.client.apis.lol.fetchSkin(skin, this.client)
-      embed.setColor(this.parentCommand.embedColor)
-        .setAuthor(t(this.parentCommand.authorString), this.parentCommand.authorImage, this.parentCommand.authorURL)
+      const parentCommand = this.parentCommand
+      embed.setColor(parentCommand.embedColor)
+        .setAuthor(t(parentCommandauthorString), parentCommand.authorImage, parentCommand.authorURL)
         .setTitle(`${skinInfo.name}`)
         .setImage(skinInfo.splashUrl)
         .setDescription(t('commands:leagueoflegends.subcommands.skin.description', { videoUrl: skinInfo.videoUrl }))

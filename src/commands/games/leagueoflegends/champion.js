@@ -1,7 +1,7 @@
 const { Command, SwitchbladeEmbed, CommandError } = require('../../../')
-
+ 
 const buttons = ['Q', 'W', 'E', 'R']
-
+ 
 module.exports = class LeagueOfLegendsChampion extends Command {
   constructor (client) {
     super({
@@ -13,27 +13,31 @@ module.exports = class LeagueOfLegendsChampion extends Command {
       }]
     }, client)
   }
-
+ 
   async run ({ t, author, channel, prefix, language }, champion) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
-      const champ = await this.client.apis.lol.fetchChampion(champion, language)
-      const locale = await this.client.apis.lol.getLocale(language)
-      embed.setColor(this.parentCommand.embedColor)
-        .setAuthor(t(this.parentCommand.authorString), this.parentCommand.authorImage, this.parentCommand.authorURL)
+      const lolApi = this.client.apis.lol
+      const champ = await lolApi.fetchChampion(champion, language)
+      const champStats = champ.stats
+      const locale = await lolApi.getLocale(language)
+      const locLevel = locale.Level
+      const parentCommand = this.parentCommand
+      embed.setColor(parentCommand.embedColor)
+        .setAuthor(t(parentCommand.authorString), parentCommand.authorImage, parentCommand.authorURL)
         .setTitle(`**${champ.name}**, ${champ.title}`)
-        .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${this.client.apis.lol.version}/img/champion/${champ.image.full}`)
+        .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${lolApi.version}/img/champion/${champ.image.full}`)
         .setDescription([
           champ.blurb,
           '',
-          `**${locale.Health}:** ${champ.stats.hp} - ${champ.stats.hpperlevel}/${locale.Level}`,
-          `**${locale.HealthRegen}:** ${champ.stats.hpregen} - ${champ.stats.hpregenperlevel}/${locale.Level}`,
-          `**${locale.Mana}:** ${champ.stats.mp} - ${champ.stats.mpperlevel}/${locale.Level}`,
-          `**${locale.ManaRegen}:** ${champ.stats.mpregen} - ${champ.stats.mpregenperlevel}/${locale.Level}`,
-          `**${locale.Armor}:** ${champ.stats.armor} - ${champ.stats.armorperlevel}/${locale.Level}`,
-          `**${locale.Attack}:** ${champ.stats.attackdamage} - ${champ.stats.attackdamageperlevel}/${locale.Level}`,
-          `**${locale.CriticalStrike}:** ${champ.stats.crit} - ${champ.stats.critperlevel}/${locale.Level}`
+          `**${locale.Health}:** ${champStats.hp} - ${champStats.hpperlevel}/${locLevel}`,
+          `**${locale.HealthRegen}:** ${champStats.hpregen} - ${champStats.hpregenperlevel}/${locLevel}`,
+          `**${locale.Mana}:** ${champStats.mp} - ${champStats.mpperlevel}/${locLevel}`,
+          `**${locale.ManaRegen}:** ${champStats.mpregen} - ${champStats.mpregenperlevel}/${locLevel}`,
+          `**${locale.Armor}:** ${champStats.armor} - ${champStats.armorperlevel}/${locLevel}`,
+          `**${locale.Attack}:** ${champStats.attackdamage} - ${champStats.attackdamageperlevel}/${locLevel}`,
+          `**${locale.CriticalStrike}:** ${champStats.crit} - ${champStats.critperlevel}/${locLevel}`
         ].join('\n'))
         .addField(t('commands:leagueoflegends.subcommands.champion.spells'), champ.spells.map((spell, i) => `**${spell.name}** (${buttons[i]})`).join(', '), true)
         .addField(t('commands:leagueoflegends.subcommands.champion.skins'), `${champ.skins.filter(s => s.name !== 'default').map(skin => `**${skin.name}**`).join(', ')}\n\n*${t('commands:leagueoflegends.subcommands.champion.skinText', { skinCommandUsage: `${prefix}leagueoflegends skin ${t('commands:leagueoflegends.subcommands.skin.commandUsage')}` })}*`)
