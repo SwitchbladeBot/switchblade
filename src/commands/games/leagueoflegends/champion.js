@@ -24,9 +24,9 @@ module.exports = class LeagueOfLegendsChampion extends Command {
       const { hp, hpregen, mp, mpregen, armor, attackdamage, crit, hpperlevel, hpregenperlevel, mpperlevel, mpregenperlevel, attackdamageperlevel, critperlevel } = champFetch.stats
       const locale = await getLocale(language)
       const locLevel = locale.Level
-      const parentCommand = this.parentCommand
-      embed.setColor(parentCommand.embedColor)
-        .setAuthor(t(parentCommand.authorString), parentCommand.authorImage, parentCommand.authorURL)
+      const {embedColor, authorString, authorImage, authorURL} = this.parentCommand
+      embed.setColor(embedColor)
+        .setAuthor(t(authorString), authorImage, authorURL)
         .setTitle(`**${name}**, ${title}`)
         .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${image.full}`)
         .setDescription([
