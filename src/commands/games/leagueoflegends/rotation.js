@@ -18,11 +18,11 @@ module.exports = class LeagueOfLegendsRotation extends Command {
     const { embedColor, authorString, authorImage, authorURL } = this.parentCommand
     const { fetchChampionRotation, fetchChampion } = this.client.apis.lol
     try {
-      const {freeChampionIdsForNewPlayers, freeChampionIds} = await fetchChampionRotation()
-      const champions = flags['newplayers'] ? freeChampionIdsForNewPlayers : freeChampionIds
+      const { freeChampionIdsForNewPlayers, freeChampionIds } = await fetchChampionRotation()
+      const champions = flags.newplayers ? freeChampionIdsForNewPlayers : freeChampionIds
       const championPayload = await Promise.all(champions.map(async c => {
-        var payload = await fetchChampion(c, language, true)
-        return `**${payload.name}**, ${payload.title}`
+        const { name, title } = await fetchChampion(c, language, true)
+        return `**${name}**, ${title}`
       }))
       embed.setColor(embedColor)
         .setAuthor(t(authorString), authorImage, authorURL)
