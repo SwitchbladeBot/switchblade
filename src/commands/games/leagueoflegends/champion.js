@@ -1,7 +1,5 @@
 const { Command, SwitchbladeEmbed, CommandError } = require('../../../')
- 
 const buttons = ['Q', 'W', 'E', 'R']
- 
 module.exports = class LeagueOfLegendsChampion extends Command {
   constructor (client) {
     super({
@@ -13,14 +11,13 @@ module.exports = class LeagueOfLegendsChampion extends Command {
       }]
     }, client)
   }
- 
   async run ({ t, author, channel, prefix, language }, champion) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
       const { fetchChampion, getLocale, version } = this.client.apis.lol
       const { name, title, blurb, image, spells, skins, stats } = await fetchChampion(champion, language)
-      const { hp, hpregen, mp, mpregen, armor, attackdamage, crit, hpperlevel, hpregenperlevel, mpperlevel, mpregenperlevel, attackdamageperlevel, critperlevel } = stats
+      const { hp, hpregen, mp, mpregen, armor, attackdamage, crit, hpperlevel, armorperlevel, hpregenperlevel, mpperlevel, mpregenperlevel, attackdamageperlevel, critperlevel } = stats
       const { Health, HealthRegen, Mana, ManaRegen, Armor, Attack, CriticalStrike, Level } = await getLocale(language)
       const { embedColor, authorString, authorImage, authorURL } = this.parentCommand
       embed.setColor(embedColor)

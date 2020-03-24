@@ -1,5 +1,4 @@
 const { Command, SwitchbladeEmbed, CommandError } = require('../../../')
-
 module.exports = class LeagueOfLegendsRotation extends Command {
   constructor (client) {
     super({
@@ -11,7 +10,6 @@ module.exports = class LeagueOfLegendsRotation extends Command {
       }]]
     }, client)
   }
-
   async run ({ t, author, channel, language, flags }) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
