@@ -18,29 +18,30 @@ module.exports = class LeagueOfLegendsChampion extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
-      const lolApi = this.client.apis.lol
-      const champ = await lolApi.fetchChampion(champion, language)
-      const champStats = champ.stats
-      const locale = await lolApi.getLocale(language)
+      const { fetchChampion, getLocale, version } = this.client.apis.lol
+      const champFetch = await fetchChampion(champion, language)
+      const { name, title, blurb, image, spells, skins } = champFetch
+      const { hp, hpregen, mp, mpregen, armor, attackdamage, crit, hpperlevel, hpregenperlevel, mpperlevel, mpregenperlevel, attackdamageperlevel, critperlevel } = champFetch.stats
+      const locale = await getLocale(language)
       const locLevel = locale.Level
       const parentCommand = this.parentCommand
       embed.setColor(parentCommand.embedColor)
         .setAuthor(t(parentCommand.authorString), parentCommand.authorImage, parentCommand.authorURL)
-        .setTitle(`**${champ.name}**, ${champ.title}`)
-        .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${lolApi.version}/img/champion/${champ.image.full}`)
+        .setTitle(`**${name}**, ${title}`)
+        .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${image.full}`)
         .setDescription([
-          champ.blurb,
+          blurb,
           '',
-          `**${locale.Health}:** ${champStats.hp} - ${champStats.hpperlevel}/${locLevel}`,
-          `**${locale.HealthRegen}:** ${champStats.hpregen} - ${champStats.hpregenperlevel}/${locLevel}`,
-          `**${locale.Mana}:** ${champStats.mp} - ${champStats.mpperlevel}/${locLevel}`,
-          `**${locale.ManaRegen}:** ${champStats.mpregen} - ${champStats.mpregenperlevel}/${locLevel}`,
-          `**${locale.Armor}:** ${champStats.armor} - ${champStats.armorperlevel}/${locLevel}`,
-          `**${locale.Attack}:** ${champStats.attackdamage} - ${champStats.attackdamageperlevel}/${locLevel}`,
-          `**${locale.CriticalStrike}:** ${champStats.crit} - ${champStats.critperlevel}/${locLevel}`
+          `**${locale.Health}:** ${hp} - ${hpperlevel}/${locLevel}`,
+          `**${locale.HealthRegen}:** ${hpregen} - ${hpregenperlevel}/${locLevel}`,
+          `**${locale.Mana}:** ${mp} - ${mpperlevel}/${locLevel}`,
+          `**${locale.ManaRegen}:** ${mpregen} - ${mpregenperlevel}/${locLevel}`,
+          `**${locale.Armor}:** ${armor} - ${armorperlevel}/${locLevel}`,
+          `**${locale.Attack}:** ${attackdamage} - ${attackdamageperlevel}/${locLevel}`,
+          `**${locale.CriticalStrike}:** ${crit} - ${critperlevel}/${locLevel}`
         ].join('\n'))
-        .addField(t('commands:leagueoflegends.subcommands.champion.spells'), champ.spells.map((spell, i) => `**${spell.name}** (${buttons[i]})`).join(', '), true)
-        .addField(t('commands:leagueoflegends.subcommands.champion.skins'), `${champ.skins.filter(s => s.name !== 'default').map(skin => `**${skin.name}**`).join(', ')}\n\n*${t('commands:leagueoflegends.subcommands.champion.skinText', { skinCommandUsage: `${prefix}leagueoflegends skin ${t('commands:leagueoflegends.subcommands.skin.commandUsage')}` })}*`)
+        .addField(t('commands:leagueoflegends.subcommands.champion.spells'), spells.map((spell, i) => `**${spell.name}** (${buttons[i]})`).join(', '), true)
+        .addField(t('commands:leagueoflegends.subcommands.champion.skins'), `${skins.filter(s => s.name !== 'default').map(skin => `**${skin.name}**`).join(', ')}\n\n*${t('commands:leagueoflegends.subcommands.champion.skinText', { skinCommandUsage: `${prefix}leagueoflegends skin ${t('commands:leagueoflegends.subcommands.skin.commandUsage')}` })}*`)
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('commands:leagueoflegends.subcommands.champion.invalidChamp'))

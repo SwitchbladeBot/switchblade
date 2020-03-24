@@ -15,17 +15,17 @@ module.exports = class LeagueOfLegendsRotation extends Command {
   async run ({ t, author, channel, language, flags }) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
-    const parentCommand = this.parentCommand
-    const lolApi = this.client.apis.lol
+    const { embedColor, authorString, authorImage, authorURL } = this.parentCommand
+    const { fetchChampionRotation, fetchChampion } = this.client.apis.lol
     try {
-      const rotation = await lolApi.fetchChampionRotation()
+      const rotation = await fetchChampionRotation()
       const champions = flags['newplayers'] ? rotation.freeChampionIdsForNewPlayers : rotation.freeChampionIds
       const championPayload = await Promise.all(champions.map(async c => {
-        var payload = await lolApi.fetchChampion(c, language, true)
+        var payload = await fetchChampion(c, language, true)
         return `**${payload.name}**, ${payload.title}`
       }))
-      embed.setColor(parentCommand.embedColor)
-        .setAuthor(t(parentCommand.authorString), parentCommandauthorImage, parentCommand.authorURL)
+      embed.setColor(embedColor)
+        .setAuthor(t(authorString), authorImage, authorURL)
         .setTitle(t('commands:leagueoflegends.subcommands.rotation.weeklyChampRotation'))
         .setDescription(championPayload.join('\n'))
       channel.send(embed).then(() => channel.stopTyping())

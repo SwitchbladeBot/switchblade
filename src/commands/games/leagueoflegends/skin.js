@@ -16,13 +16,13 @@ module.exports = class LeagueOfLegendsSkin extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
-      const skinInfo = await this.client.apis.lol.fetchSkin(skin, this.client)
-      const parentCommand = this.parentCommand
-      embed.setColor(parentCommand.embedColor)
-        .setAuthor(t(parentCommandauthorString), parentCommand.authorImage, parentCommand.authorURL)
-        .setTitle(`${skinInfo.name}`)
-        .setImage(skinInfo.splashUrl)
-        .setDescription(t('commands:leagueoflegends.subcommands.skin.description', { videoUrl: skinInfo.videoUrl }))
+      const { name, splashUrl, videoUrl } = await this.client.apis.lol.fetchSkin(skin, this.client)
+      const { embedColor, authorString, authorImage, authorURL} = this.parentCommand
+      embed.setColor(embedColor)
+        .setAuthor(t(authorString), authorImage, authorURL)
+        .setTitle(`${name}`)
+        .setImage(splashUrl)
+        .setDescription(t('commands:leagueoflegends.subcommands.skin.description', { videoUrl: videoUrl }))
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('commands:leagueoflegends.subcommands.skin.invalidSkin'))
