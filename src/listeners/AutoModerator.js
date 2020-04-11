@@ -9,7 +9,7 @@ module.exports = class AutoModerator extends EventListener {
 
   async onGuildMemberAdd (member) {
     const guild = member.guild
-    const joinLockActive = await this.modules.joinLock.isActive(guild.id)
+    const joinLockActive = this.modules && await this.modules.joinLock.isActive(guild.id)
 
     // TODO: Write a function to parse {placeholders} like the one used below
     if (joinLockActive && member.kickable) {
