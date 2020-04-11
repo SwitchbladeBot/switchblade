@@ -15,7 +15,6 @@ module.exports = class Switchblade extends Client {
     this.playerManager = null
 
     this.loaded = false
-    this.initialize()
   }
 
   async initialize () {

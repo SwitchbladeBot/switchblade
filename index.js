@@ -22,4 +22,5 @@ const CLIENT_OPTIONS = {
 console.log(readFileSync('bigtitle.txt', 'utf8').toString())
 
 const Switchblade = require('./src/Switchblade.js')
-new Switchblade(CLIENT_OPTIONS)
+const client = new Switchblade(CLIENT_OPTIONS)
+client.initialize()
