@@ -99,6 +99,6 @@
     "@discordjs/uws": "^11.149.1",
     "canvas": "^2.5.0",
     "erlpack": "github:discordapp/erlpack",
-    "node-opus": "^0.3.3"
+    "node-opus": "^0.3.1"
   }
 }

@@ -60,8 +60,6 @@ typings/
 # next.js build output
 .next
 
-.vscode
-
 .idea/
 
 src/locales/*
