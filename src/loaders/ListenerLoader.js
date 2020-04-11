@@ -3,7 +3,8 @@ const { Loader, EventListener, FileUtils } = require('../')
 module.exports = class ListenerLoader extends Loader {
   constructor (client) {
     super({
-      critical: true
+      critical: true,
+      preLoad: true
     }, client)
 
     this.listeners = []

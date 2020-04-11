@@ -10,6 +10,7 @@ module.exports = class Loader {
     const options = Utils.createOptionHandler('Loader', opts)
 
     this.critical = options.optional('critical', false)
+    this.preLoad = options.optional('preLoad', false)
 
     this.client = client
   }

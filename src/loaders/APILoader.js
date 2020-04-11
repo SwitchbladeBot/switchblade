@@ -2,7 +2,9 @@ const { Loader, APIWrapper, FileUtils } = require('../')
 
 module.exports = class APILoader extends Loader {
   constructor (client) {
-    super({}, client)
+    super({
+      preLoad: true
+    }, client)
 
     this.apis = {}
   }

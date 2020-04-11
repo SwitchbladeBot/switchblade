@@ -15,7 +15,37 @@ module.exports = class Switchblade extends Client {
     this.playerManager = null
 
     this.loaded = false
-    this.initializeLoaders()
+    this.initialize()
+  }
+
+  async initialize () {
+    const loaders = Object.values(Loaders).map(L => new L(this))
+    const [ preLoad, normal ] = loaders.reduce(([ pl, n ], l) => (l.preLoad ? [[...pl, l], n] : [pl, [...n, l]]), [[], []])
+
+    for (let l of preLoad) {
+      await this.initializeLoader(l)
+    }
+
+    await this.login()
+      .then(() => this.log('Logged in successfully!', { color: 'green', tags: ['Discord'] }))
+      .catch(this.logError)
+
+    for (let l of normal) {
+      await this.initializeLoader(l)
+    }
+
+    this.loaded = true
+  }
+
+  async initializeLoader (loader) {
+    let success = false
+    try {
+      success = await loader.load()
+    } catch (e) {
+      this.logError(e)
+    } finally {
+      if (!success && loader.critical) process.exit(1)
+    }
   }
 
   /**
@@ -93,20 +123,5 @@ module.exports = class Switchblade extends Client {
 
     context.setFixedT(this.i18next.getFixedT(language))
     return command._run(context, args).catch(this.logError)
-  }
-
-  async initializeLoaders () {
-    for (let name in Loaders) {
-      const loader = new Loaders[name](this)
-      let success = false
-      try {
-        success = await loader.load()
-      } catch (e) {
-        this.logError(e)
-      } finally {
-        if (!success && loader.critical) process.exit(1)
-      }
-    }
-    this.loaded = true
   }
 }

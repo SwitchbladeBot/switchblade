@@ -21,7 +21,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
         this.version = data.v
       })
 
-    await this.loadSkins()
+    this.loadSkins()
     return this
   }
 

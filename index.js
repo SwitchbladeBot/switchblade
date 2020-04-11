@@ -22,7 +22,4 @@ const CLIENT_OPTIONS = {
 console.log(readFileSync('bigtitle.txt', 'utf8').toString())
 
 const Switchblade = require('./src/Switchblade.js')
-const client = new Switchblade(CLIENT_OPTIONS)
-client.login()
-  .then(() => client.log('Logged in successfully!', { color: 'green', tags: ['Discord'] }))
-  .catch(client.logError)
+new Switchblade(CLIENT_OPTIONS)

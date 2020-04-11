@@ -3,7 +3,9 @@ const { MongoDB } = require('../database')
 
 module.exports = class DatabaseLoader extends Loader {
   constructor (client) {
-    super({}, client)
+    super({
+      preLoad: true
+    }, client)
 
     this.database = null
   }
