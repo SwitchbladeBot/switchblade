@@ -1058,11 +1058,20 @@
         "commandUsage": "<champion name>",
         "noChampion": "You have to give me a champion name to search for.",
         "invalidChamp": "Invalid champion.",
-        "spells": "Spells"
+        "spells": "Spells",
+        "skins": "Skins",
+        "skinText": "Want to see how any of these skins look like? Use `{{skinCommandUsage}}`!"
       },
       "rotation": {
         "commandDescription": "Shows the current week's champion rotation.",
         "weeklyChampRotation": "Weekly Champion Rotation"
+      },
+      "skin": {
+        "commandDescription": "Shows information about a League of Legends champion's skin.",
+        "commandUsage": "<skin name>",
+        "noSkin": "You have to give me a skin name to search for.",
+        "invalidSkin": "Invalid skin.",
+        "description": "Want to see the skin spotlight video for this skin? Click [here]({{videoUrl}})!"
       }
     }
   },
@@ -1416,6 +1425,10 @@
   "crappydesign": {
     "commandDescription": "Shows a random image from r/CrappyDesign.",
     "title": "Here's your crappy design."
+  },
+  "httpcat": {
+    "commandDescription": "A cat for every HTTP status!",
+    "commandUsage": "[code]"
   },
   "createrole": {
     "commandDescription": "Create a role.",
