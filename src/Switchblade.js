@@ -14,6 +14,7 @@ module.exports = class Switchblade extends Client {
     this.canvasLoaded = options.canvasLoaded
     this.playerManager = null
 
+    this.loaded = false
     this.initializeLoaders()
   }
 
@@ -106,5 +107,6 @@ module.exports = class Switchblade extends Client {
         if (!success && loader.critical) process.exit(1)
       }
     }
+    this.loaded = true
   }
 }

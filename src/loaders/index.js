@@ -1,4 +1,5 @@
 module.exports = {
+  ListenerLoader: require('./ListenerLoader.js'),
   DatabaseLoader: require('./DatabaseLoader.js'),
   APILoader: require('./APILoader.js'),
   LocaleLoader: require('./LocaleLoader.js'),
@@ -7,6 +8,5 @@ module.exports = {
   ModuleLoader: require('./ModuleLoader.js'),
   HTTPLoader: require('./HTTPLoader.js'),
   CommandLoader: require('./CommandLoader.js'),
-  ConnectionLoader: require('./ConnectionLoader.js'),
-  ListenerLoader: require('./ListenerLoader.js') // DON'T MOVE THIS FFS
+  ConnectionLoader: require('./ConnectionLoader.js')
 }

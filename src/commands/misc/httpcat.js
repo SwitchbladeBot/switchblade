@@ -2,14 +2,14 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class HttpCat extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'httpcat',
       category: 'general',
       parameters: [{
         type: 'number',
         required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, statusCode = 200) {
