@@ -75,7 +75,8 @@
     "splitargs": "0.0.7",
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",
-    "transform-props": "^1.0.1"
+    "transform-props": "^1.0.1",
+    "zlib-sync": "^0.1.6"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
