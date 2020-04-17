@@ -9,8 +9,9 @@ const Loaders = require('./loaders')
  * @param {Object} options - Options for the client
  */
 module.exports = class Switchblade extends Client {
-  constructor (options = {}) {
+  constructor (options = {}, sentry) {
     super(options)
+    this.sentry = sentry
     this.canvasLoaded = options.canvasLoaded
     this.playerManager = null
 
@@ -65,6 +66,7 @@ module.exports = class Switchblade extends Client {
    * @param {string} message - Error message
    */
   logError (...args) {
+    this.sentry.captureException(args[args.length - 1])
     const tags = args.length > 1 ? args.slice(0, -1).map(t => `[${t}]`) : []
     console.error('[ErrorLog]', ...tags, args[args.length - 1])
   }
