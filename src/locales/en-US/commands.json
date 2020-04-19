@@ -1456,5 +1456,9 @@
         "noCardsFound": "I couldn't find a card by that name."
       }
     }
+  },
+  "goose": {
+    "commandDescription": "Fetches a random goose and HONK HONK HONK.",
+    "honk": "honk honk"
   }
 }
