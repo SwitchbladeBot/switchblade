@@ -15,6 +15,7 @@ module.exports = class Switchblade extends Client {
     this.canvasLoaded = options.canvasLoaded
     this.playerManager = null
 
+    this.logError = this.logError.bind(this)
     this.loaded = false
   }
 
