@@ -1,3 +1,4 @@
+// Initialize functions
 const { readFileSync } = require('fs')
 
 require('moment')
