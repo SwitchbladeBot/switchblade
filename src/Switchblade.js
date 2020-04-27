@@ -3,15 +3,17 @@ const chalk = require('chalk')
 const _ = require('lodash')
 const Loaders = require('./loaders')
 
+const Sentry = require('@sentry/node')
+Sentry.init({ dsn: process.env.SENTRY_DSN })
+
 /**
  * Custom Discord.js Client.
  * @constructor
  * @param {Object} options - Options for the client
  */
 module.exports = class Switchblade extends Client {
-  constructor (options = {}, sentry) {
+  constructor (options = {}) {
     super(options)
-    this.sentry = sentry
     this.canvasLoaded = options.canvasLoaded
     this.playerManager = null
 
@@ -96,7 +98,7 @@ module.exports = class Switchblade extends Client {
    * @param {string} message - Error message
    */
   logError (...args) {
-    this.sentry.captureException(args[args.length - 1])
+    Sentry.captureException(args[args.length - 1])
     const tags = args.length > 1 ? args.slice(0, -1).map(t => `[${t}]`) : []
     console.error('[ErrorLog]', ...tags, args[args.length - 1])
   }

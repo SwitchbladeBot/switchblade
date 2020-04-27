@@ -42,13 +42,7 @@ workflows:
               ignore: /master|dev/
   deploy:
     jobs:
-      - test:
-          filters:
-            branches:
-              only: /master|dev/
       - deploy:
-          requires:
-            - test
           filters:
             branches:
               only: /master|dev/
