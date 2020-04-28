@@ -1,6 +1,6 @@
 const { Command } = require('../../')
 
-module.exports = class Goat extends Command {
+module.exports = class ImageSearchCommand extends Command {
   constructor (client) {
     super({
       name: 'image',
