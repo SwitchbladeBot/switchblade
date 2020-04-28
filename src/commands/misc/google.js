@@ -8,7 +8,7 @@ module.exports = class GoogleCommand extends SearchCommand {
       name: 'google',
       aliases: ['gogle', 'googl'],
       embedColor: Constants.GOOGLE_COLOR,
-      embedLogoURL: 'https://i.imgur.com/gwYyZwf.png'
+      embedLogoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png'
     }, client)
   }
 
@@ -18,7 +18,9 @@ module.exports = class GoogleCommand extends SearchCommand {
   }
 
   searchResultFormatter ({ htmlTitle, link }) {
-    let title = turndownService.turndown(htmlTitle)
+    let title = turndownService.turndown(htmlTitle
+      .replace(/\]/g, '\\\\］')
+      .replace(/\[/g, '\\\\［'))
     title = link.length > 120 ? title : `[${title}](${link})`
     return `${title}`
   }
