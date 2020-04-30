@@ -1125,12 +1125,12 @@
         "notFound": "User not found.",
         "noData": "Nothing found.",
         "title": "{{user}}'s {{top}} in {{period}}",
-        "top":{
+        "top": {
           "tracks": "top tracks",
           "albums": "top albums",
           "artists": "top artists"
         },
-        "period":{
+        "period": {
           "overall": "all time",
           "7day": "a week",
           "1month": "a month",
@@ -1185,7 +1185,7 @@
   },
   "showerthoughts": {
     "commandDescription": "Shows a random thought from r/Showerthoughts."
-},
+  },
   "keanu": {
     "commandDescription": "Shows a random image from r/KeanuBeingAwesome."
   },
@@ -1456,5 +1456,14 @@
         "noCardsFound": "I couldn't find a card by that name."
       }
     }
+  },
+  "google": {
+    "commandDescription": "Searches something on google",
+    "commandUsage": "<query>"
+  },
+  "image": {
+    "commandDescription": "Searches for some image on google",
+    "commandUsage": "<query>",
+    "noQuery": "Please insert something to search."
   }
 }

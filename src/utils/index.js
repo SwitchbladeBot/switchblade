@@ -25,7 +25,6 @@ module.exports = {
         if (typeof value === 'undefined') {
           throw new Error(`The option "${name}" of structure "${structureName}" is required.`)
         }
-
         return value
       }
     })
