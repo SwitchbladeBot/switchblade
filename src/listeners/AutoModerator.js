@@ -26,12 +26,17 @@ module.exports = class AutoModerator extends EventListener {
 
     const autoRoleActive = await this.modules.autoRole.isActive(guild.id)
     if (autoRoleActive) {
+      const hasRole = (id) => member.roles.has(id)
       if (member.user.bot) {
         const botRoles = await this.modules.autoRole.retrieveValue(guild.id, 'botRoles')
-        if (botRoles.length) member.addRoles(botRoles, 'AutoRole for bots')
+        if (botRoles.length) {
+          member.addRoles(botRoles.filter(r => !member.roles.has(r)), 'AutoRole for bots')
+        }
       } else {
         const userRoles = await this.modules.autoRole.retrieveValue(guild.id, 'userRoles')
-        if (userRoles.length) member.addRoles(userRoles, 'AutoRole for users')
+        if (userRoles.length) {
+          member.addRoles(userRoles.filter(r => !member.roles.has(r)), 'AutoRole for users')
+        }
       }
     }
   }
