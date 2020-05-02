@@ -1436,7 +1436,7 @@
   },
   "httpcat": {
     "commandDescription": "A cat for every HTTP status!",
-    "commandUsage": "[code]"
+    "commandUsage": "[http code]"
   },
   "createrole": {
     "commandDescription": "Create a role.",
