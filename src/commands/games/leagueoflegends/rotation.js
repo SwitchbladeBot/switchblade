@@ -14,12 +14,11 @@ module.exports = class LeagueOfLegendsRotation extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     const { embedColor, authorString, authorImage, authorURL } = this.parentCommand
-    const { fetchChampionRotation, fetchChampion } = this.client.apis.lol
     try {
-      const { freeChampionIdsForNewPlayers, freeChampionIds } = await fetchChampionRotation()
+      const { freeChampionIdsForNewPlayers, freeChampionIds } = await this.client.apis.lol.fetchChampionRotation()
       const champions = flags.newplayers ? freeChampionIdsForNewPlayers : freeChampionIds
       const championPayload = await Promise.all(champions.map(async c => {
-        const { name, title } = await fetchChampion(c, language, true)
+        const { name, title } = await this.client.apis.lol.fetchChampion(c, language, true)
         return `**${name}**, ${title}`
       }))
       embed.setColor(embedColor)

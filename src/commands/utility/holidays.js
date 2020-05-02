@@ -16,7 +16,7 @@ const supportedCountries = [
 
 module.exports = class Holidays extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'holidays',
       category: 'utility',
       parameters: [{
@@ -38,7 +38,7 @@ module.exports = class Holidays extends Command {
         required: false,
         min: 0
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, countryCode = '', year = moment().year()) {

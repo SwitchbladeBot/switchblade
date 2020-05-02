@@ -15,15 +15,14 @@ module.exports = class LeagueOfLegendsChampion extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
-      const { fetchChampion, getLocale, version } = this.client.apis.lol
-      const { name, title, blurb, image, spells, skins, stats } = await fetchChampion(champion, language)
+      const { name, title, blurb, image, spells, skins, stats } = await this.client.apis.lol.fetchChampion(champion, language)
       const { hp, hpregen, mp, mpregen, armor, attackdamage, crit, hpperlevel, armorperlevel, hpregenperlevel, mpperlevel, mpregenperlevel, attackdamageperlevel, critperlevel } = stats
-      const { Health, HealthRegen, Mana, ManaRegen, Armor, Attack, CriticalStrike, Level } = await getLocale(language)
+      const { Health, HealthRegen, Mana, ManaRegen, Armor, Attack, CriticalStrike, Level } = await this.client.apis.lol.getLocale(language)
       const { embedColor, authorString, authorImage, authorURL } = this.parentCommand
       embed.setColor(embedColor)
         .setAuthor(t(authorString), authorImage, authorURL)
         .setTitle(`**${name}**, ${title}`)
-        .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${image.full}`)
+        .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/${this.client.apis.lol.version}/img/champion/${image.full}`)
         .setDescription([
           blurb,
           '',
