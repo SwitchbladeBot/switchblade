@@ -4,10 +4,10 @@ const nekoAPI = 'https://nekos.life/api/v2/img/'
 
 module.exports = class NekoGif extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'nekogif',
       category: 'anime'
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

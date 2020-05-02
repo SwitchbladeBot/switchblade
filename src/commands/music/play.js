@@ -3,7 +3,7 @@ const { Song, Playlist } = require('../../music/structures')
 
 module.exports = class Play extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'play',
       aliases: ['p'],
       category: 'music',
@@ -15,7 +15,7 @@ module.exports = class Play extends Command {
       }, {
         type: 'booleanFlag', name: 'youtube', aliases: ['yt']
       }]]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, flags, guild, voiceChannel }, identifier) {

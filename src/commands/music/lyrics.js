@@ -2,7 +2,7 @@ const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class Lyrics extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'lyrics',
       aliases: ['lyric', 'genius'],
       category: 'music',
@@ -10,7 +10,7 @@ module.exports = class Lyrics extends Command {
       parameters: [{
         type: 'string', full: true, required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, song) {

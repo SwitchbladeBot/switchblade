@@ -9,6 +9,7 @@ module.exports = {
   // Command extensions
   RandomRedditPostCommand: require('./RandomRedditPostCommand.js'),
   SearchCommand: require('./SearchCommand.js'),
+  SubcommandListCommand: require('./SubcommandListCommand.js'),
 
   // Parameters
   Parameter: require('./parameters/types/Parameter.js'),

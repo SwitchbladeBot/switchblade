@@ -3,13 +3,13 @@ const moment = require('moment')
 
 module.exports = class GitHubRepository extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'repository',
       aliases: ['repo'],
-      parentCommand: 'github',
+      parent: 'github',
       embedColor: Constants.GITHUB_COLOR,
       embedLogoURL: 'https://i.imgur.com/gsY6oYB.png'
-    })
+    }, client)
   }
 
   async search (context, query) {

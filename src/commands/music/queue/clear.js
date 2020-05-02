@@ -2,11 +2,11 @@ const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class QueueClear extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'clear',
       aliases: ['cl'],
-      parentCommand: 'queue'
-    })
+      parent: 'queue'
+    }, client)
   }
 
   async run ({ t, author, channel, guild }) {

@@ -4,10 +4,10 @@ const fetch = require('node-fetch')
 
 module.exports = class UIGradient extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'uigradient',
       aliases: ['rg', 'randomgradient']
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

@@ -115,7 +115,7 @@ module.exports = class ImageParameter extends Parameter {
     if (this.lastMessages.accept) {
       const lastMessages = channel.messages.last(this.lastMessages.limit)
       if (lastMessages.length) {
-        for (let i = 0; i < lastMessages.length; i++) {
+        for (let i = lastMessages.length - 1; i >= 0; i--) {
           const msg = lastMessages[i]
           if (this.lastMessages.attachment && msg.attachments.size) {
             parseState.argIndex--

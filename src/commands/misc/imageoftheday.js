@@ -5,10 +5,10 @@ const parser = new Parser()
 
 module.exports = class ImageOfTheDay extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'imageoftheday',
       aliases: ['iotd']
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }) {

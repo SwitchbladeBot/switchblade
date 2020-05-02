@@ -13,6 +13,13 @@ class BonusCooldownError extends Error {
 
 const BONUS_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 class BonusController extends Controller {
+  constructor (parent, client) {
+    super({
+      name: 'bonus',
+      parent
+    }, client)
+  }
+
   get _users () {
     return this.client.database.users
   }
@@ -49,8 +56,10 @@ class BonusController extends Controller {
 // Economy
 module.exports = class EconomyController extends Controller {
   constructor (client) {
-    super('economy', client)
-    this.subcontrollers = [ new BonusController('bonus', client, this) ]
+    super({
+      name: 'economy'
+    }, client)
+    this.subcontrollers = [ new BonusController(this, client) ]
   }
 
   canLoad () {

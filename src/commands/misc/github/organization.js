@@ -3,14 +3,14 @@ const moment = require('moment')
 
 module.exports = class GitHubOrganization extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'organization',
       aliases: ['org'],
-      parentCommand: 'github',
+      parent: 'github',
       parameters: [{
         type: 'string', missingError: 'commands:github.subcommands.organization.noOrg'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, organization) {

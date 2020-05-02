@@ -5,7 +5,7 @@ const util = require('util')
 
 module.exports = class Eval extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'eval',
       aliases: ['execute'],
       category: 'developers',
@@ -14,7 +14,7 @@ module.exports = class Eval extends Command {
       parameters: [{
         type: 'string', full: true, missingError: 'errors:missingParameters', showUsage: false
       }]
-    })
+    }, client)
   }
 
   async run ({ channel, message }, expr) {

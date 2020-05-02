@@ -4,13 +4,13 @@ const fetch = require('node-fetch')
 
 module.exports = class Hug extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'hug',
       category: 'images',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:hug.noMention'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, channel, author }, user) {

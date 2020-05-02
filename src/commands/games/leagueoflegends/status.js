@@ -5,10 +5,10 @@ const servers = ['na', 'euw', 'eune', 'lan', 'las', 'br', 'tr', 'ru', 'oce', 'jp
 
 module.exports = class LeagueOfLegendsStatus extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'status',
       aliases: ['s'],
-      parentCommand: 'leagueoflegends',
+      parent: 'leagueoflegends',
       category: 'games',
       parameters: [{
         type: 'string',
@@ -23,7 +23,7 @@ module.exports = class LeagueOfLegendsStatus extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, server) {

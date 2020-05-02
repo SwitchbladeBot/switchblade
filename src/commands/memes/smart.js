@@ -2,11 +2,11 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Smart extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'smart',
       aliases: ['wesmart'],
       category: 'memes'
-    })
+    }, client)
   }
 
   run ({ author, channel }) {

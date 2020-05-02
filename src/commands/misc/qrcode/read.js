@@ -3,17 +3,17 @@ const fetch = require('node-fetch')
 
 module.exports = class QRCodeRead extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'read',
       aliases: ['r'],
-      parentCommand: 'qrcode',
+      parent: 'qrcode',
       parameters: [{
         type: 'image',
         authorAvatar: false,
         url: true,
         missingError: 'commands:qrcode.subcommands.read.noImage'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, channel, author, message }, image) {

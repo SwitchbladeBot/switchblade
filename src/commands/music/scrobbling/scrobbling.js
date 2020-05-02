@@ -2,12 +2,12 @@ const { SwitchbladeEmbed, Command } = require('../../../')
 
 module.exports = class Scrobbling extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'scrobbling',
       category: 'music',
       aliases: ['scrobble', 'scrobbler', 'audioscrobbler'],
       requirements: { envVars: ['DASHBOARD_URL'] }
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, prefix }) {

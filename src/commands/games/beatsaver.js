@@ -5,14 +5,14 @@ const cheerio = require('cheerio')
 
 module.exports = class BeatSaver extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'beatsaver',
       aliases: ['beatsaber', 'bsaver'],
       category: 'games',
       parameters: [{
         type: 'string', missingError: 'commands:beatsaver.noQuery'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, query) {
