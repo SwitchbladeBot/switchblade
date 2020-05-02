@@ -12,7 +12,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
     })
 
     this.version = null
-	this.champions = []
+    this.champions = []
     this.skins = []
   }
 
@@ -22,7 +22,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
         this.version = data.v
       })
 
-	await this.fetchChampions()
+    await this.fetchChampions()
     await this.loadSkins()
     return this
   }
@@ -56,13 +56,13 @@ module.exports = class LeagueOfLegends extends APIWrapper {
 
   async fetchChampions (version = this.version) {
     return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => {
-	  this.champions = u.data;
-	})
+      this.champions = u.data
+    })
   }
 
   async fetchChampion (champion, language, searchById = false) {
-	return new Promise(async (resolve, reject) => {
-	  const champions = this.champions
+    return new Promise(async (resolve, reject) => {
+      const champions = this.champions
       champion = parseInt(champion) ? champion.toString() : champion.replace("'", '').split(' ')
       const name = Object.keys(champions).find(key => searchById ? (champions[key].key === champion) : (key.toLowerCase() === champion.join('').toLowerCase()))
       if (!name) return reject(new Error('INVALID_CHAMPION'))
