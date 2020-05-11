@@ -10,6 +10,7 @@ const APP_SCRIPT_CLIENT_ID_REGEX = /,client_id:"([a-zA-Z0-9-_]+)"/
 const lastMatchWithinLimit = (regex, text, limit) => {
   let i = 0
   let lastMatch
+  let curMatch
   while ((curMatch = regex.exec(text)) !== null && i < limit) {
     lastMatch = curMatch
     i++
