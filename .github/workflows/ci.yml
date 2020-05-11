@@ -16,9 +16,10 @@ jobs:
           node-version: 12
       - name: Install dependencies
         run: npm install
-      - name: Run TSLint
+      - name: Run Tests
         run: npm run test
   build:
+    name: Docker
     runs-on: ubuntu-latest
     needs: test
     if: github.event_name == 'push'
