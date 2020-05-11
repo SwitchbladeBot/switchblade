@@ -12,8 +12,9 @@ Sentry.init({ dsn: process.env.SENTRY_DSN })
  * @param {Object} options - Options for the client
  */
 module.exports = class Switchblade extends Client {
-  constructor (options = {}) {
+  constructor (options = {}, sentry) {
     super(options)
+    this.sentry = sentry
     this.canvasLoaded = options.canvasLoaded
     this.playerManager = null
 

@@ -1015,6 +1015,14 @@
     "commandUsage": "[from] [value] <to>",
     "noCurrency": "You have to give me a valid currency or a pair."
   },
+  "holidays": {
+    "commandDescription": "Shows holidays in a year for a country.",
+    "commandUsage": "<country> [year]",
+    "noCountry": "You have to give me a valid country code.",
+    "invalidCountry": "This is an invalid country code. Choose one below:",
+    "noInformation": "No information was found for this country code",
+    "title": "Here's all holidays of {{countryName}} in {{year}}"
+  },
   "joinlock": {
     "commandDescription": "Enables or disables the join lock.",
     "commandUsage": "<on|off>",
@@ -1125,12 +1133,12 @@
         "notFound": "User not found.",
         "noData": "Nothing found.",
         "title": "{{user}}'s {{top}} in {{period}}",
-        "top":{
+        "top": {
           "tracks": "top tracks",
           "albums": "top albums",
           "artists": "top artists"
         },
-        "period":{
+        "period": {
           "overall": "all time",
           "7day": "a week",
           "1month": "a month",
@@ -1185,7 +1193,7 @@
   },
   "showerthoughts": {
     "commandDescription": "Shows a random thought from r/Showerthoughts."
-},
+  },
   "keanu": {
     "commandDescription": "Shows a random image from r/KeanuBeingAwesome."
   },
@@ -1428,7 +1436,7 @@
   },
   "httpcat": {
     "commandDescription": "A cat for every HTTP status!",
-    "commandUsage": "[code]"
+    "commandUsage": "[http code]"
   },
   "createrole": {
     "commandDescription": "Create a role.",
@@ -1456,5 +1464,14 @@
         "noCardsFound": "I couldn't find a card by that name."
       }
     }
+  },
+  "google": {
+    "commandDescription": "Searches something on google",
+    "commandUsage": "<query>"
+  },
+  "image": {
+    "commandDescription": "Searches for some image on google",
+    "commandUsage": "<query>",
+    "noQuery": "Please insert something to search."
   }
 }

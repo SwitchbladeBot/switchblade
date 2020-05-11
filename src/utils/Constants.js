@@ -24,6 +24,7 @@ module.exports = {
   NOT_PWNED_COLOR: '#348F38',
   PWNED_COLOR: '#BA4343',
   CHORUS_COLOR: '#2C3E50',
+  GOOGLE_COLOR: '#4285F4',
 
   // Emojis
 
