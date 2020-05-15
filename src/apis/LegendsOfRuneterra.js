@@ -1,7 +1,7 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
 
-const CDN_URL = 'https://cdn.jsdelivr.net/gh/zerinho6/lor-bundles'
+const CDN_URL = 'https://lorassets.switchblade.xyz'
 
 let cardData = {}
 let coreData = {}
@@ -32,24 +32,24 @@ module.exports = class LegendsOfRuneterra extends APIWrapper {
 
   async getCardData (lang) {
     const language = this.selectLanguage(lang)
-    if (!cardData[language]) cardData[language] = await this.request(`/set1/${language}/data/set1-${language}.json`)
+    if (!cardData[language]) cardData[language] = await this.request(`/${language}/data/cards.json`)
     return cardData[language]
   }
 
   async getCoreData (lang) {
     const language = this.selectLanguage(lang)
-    if (!coreData[language]) coreData[language] = await this.request(`/core/${language}/data/globals-${language}.json`)
+    if (!coreData[language]) coreData[language] = await this.request(`/${language}/data/globals.json`)
     return coreData[language]
   }
 
   getCardImageURL (cardCode, lang = 'en_us') {
     const language = this.selectLanguage(lang)
-    return `${CDN_URL}/set1/${language}/img/cards/${cardCode}.png`
+    return `${CDN_URL}/${language}/img/cards/${cardCode}.png`
   }
 
   getFullCardImageURL (cardCode, lang = 'en_us') {
     const language = this.selectLanguage(lang)
-    return `${CDN_URL}/set1/${language}/img/cards/${cardCode}-full.png`
+    return `${CDN_URL}/${language}/img/cards/${cardCode}-full.png`
   }
 
   request (endpoint) {
