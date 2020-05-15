@@ -16,7 +16,7 @@
     ]
   },
   "engines": {
-    "node": "10.12.0"
+    "node": "11.9.0"
   },
   "repository": {
     "type": "git",
@@ -33,9 +33,8 @@
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
     "@hapi/joi": "^16.1.7",
-    "@sentry/node": "^5.15.4",
+    "@sentry/node": "^5.15.5",
     "abort-controller": "^2.0.3",
-    "bufferutil": "^4.0.1",
     "chalk": "^3.0.0",
     "cheerio": "^1.0.0-rc.2",
     "cldr-core": "^34.0.0",
@@ -77,6 +76,8 @@
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",
     "transform-props": "^1.0.1",
+    "uws": "^9.14.0",
+    "zlib-sync": "^0.1.6",
     "turndown": "^6.0.0"
   },
   "devDependencies": {

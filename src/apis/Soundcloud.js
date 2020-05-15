@@ -4,8 +4,19 @@ const fetch = require('node-fetch')
 const API_URL = 'http://api.soundcloud.com'
 
 const CLIENT_ID_REFRESH_INTERVAL = 60 * 60 * 1000 // 1 hour
-const PAGE_APP_SCRIPT_REGEX = /https:\/\/[A-Za-z0-9-.]+\/assets\/[a-f3-7-]+\.js/
-const APP_SCRIPT_CLIENT_ID_REGEX = /client_id:"([a-zA-Z0-9]+)"/
+const PAGE_APP_SCRIPT_REGEX = /https:\/\/[A-Za-z0-9-.]+\/assets\/[a-f0-9-]+\.js/
+const APP_SCRIPT_CLIENT_ID_REGEX = /,client_id:"([a-zA-Z0-9-_]+)"/
+
+const lastMatchWithinLimit = (regex, text, limit) => {
+  let i = 0
+  let lastMatch
+  let curMatch
+  while ((curMatch = regex.exec(text)) !== null && i < limit) {
+    lastMatch = curMatch
+    i++
+  }
+  return lastMatch
+}
 
 module.exports = class SoundcloudAPI extends APIWrapper {
   constructor () {
@@ -76,7 +87,7 @@ module.exports = class SoundcloudAPI extends APIWrapper {
     return fetch('https://soundcloud.com').then(async res => {
       if (res.ok) {
         const body = await res.text()
-        const regex = PAGE_APP_SCRIPT_REGEX.exec(body)
+        const regex = lastMatchWithinLimit(PAGE_APP_SCRIPT_REGEX, body, 7)
         if (regex) {
           return regex[0]
         }
@@ -94,6 +105,7 @@ module.exports = class SoundcloudAPI extends APIWrapper {
           return regex[1]
         }
       }
+      return Promise.reject(new Error(res))
     })
   }
 }

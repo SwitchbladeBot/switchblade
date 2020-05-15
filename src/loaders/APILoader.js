@@ -2,7 +2,9 @@ const { Loader, APIWrapper, FileUtils } = require('../')
 
 module.exports = class APILoader extends Loader {
   constructor (client) {
-    super({}, client)
+    super({
+      preLoad: true
+    }, client)
 
     this.apis = {}
   }
@@ -22,12 +24,15 @@ module.exports = class APILoader extends Loader {
    * Initializes all API Wrappers.
    * @param {string} dirPath - Path to the apis directory
    */
-  async initializeAPIs (dirPath = 'src/apis') {
+  initializeAPIs (dirPath = 'src/apis') {
     let success = 0
     let failed = 0
-    return FileUtils.requireDirectory(dirPath, async (NewAPI) => {
+    return FileUtils.requireDirectory(dirPath, (NewAPI) => {
       if (Object.getPrototypeOf(NewAPI) !== APIWrapper) return
-      await this.addAPI(new NewAPI()) ? success++ : failed++
+      this.addAPI(new NewAPI()).then(s => s ? success++ : failed++).catch(e => {
+        this.client.logError(e)
+        failed++
+      })
     }, this.logError.bind(this)).then(() => {
       if (failed) this.log(`${success} API wrappers loaded, ${failed} failed.`, { color: 'yellow', tags: ['APIs'] })
       else this.log(`All ${success} API wrappers loaded without errors.`, { color: 'green', tags: ['APIs'] })

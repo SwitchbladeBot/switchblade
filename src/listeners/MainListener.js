@@ -100,7 +100,7 @@ module.exports = class MainListener extends EventListener {
   }
 
   async onMessage (message) {
-    if (message.author.bot) return
+    if (message.author.bot || !this.loaded) return
 
     const guildId = message.guild && message.guild.id
 

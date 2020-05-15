@@ -24,5 +24,7 @@ const CLIENT_OPTIONS = {
 console.log(readFileSync('bigtitle.txt', 'utf8').toString())
 
 const Switchblade = require('./src/Switchblade.js')
-const client = new Switchblade(CLIENT_OPTIONS, Sentry)
-client.login().then(() => client.log('Logged in successfully!', { color: 'green', tags: ['Discord'] }))
+const client = new Switchblade(CLIENT_OPTIONS)
+client.on('debug', (...args) => console.log('debug', ...args))
+client.on('rateLimit', (...args) => console.log('rateLimit', ...args))
+client.initialize()

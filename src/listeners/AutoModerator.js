@@ -9,7 +9,7 @@ module.exports = class AutoModerator extends EventListener {
 
   async onGuildMemberAdd (member) {
     const guild = member.guild
-    const joinLockActive = await this.modules.joinLock.isActive(guild.id)
+    const joinLockActive = this.modules && await this.modules.joinLock.isActive(guild.id)
 
     // TODO: Write a function to parse {placeholders} like the one used below
     if (joinLockActive && member.kickable) {
@@ -24,14 +24,18 @@ module.exports = class AutoModerator extends EventListener {
       })
     }
 
-    const autoRoleActive = await this.modules.autoRole.isActive(guild.id)
+    const autoRoleActive = this.modules && await this.modules.autoRole.isActive(guild.id)
     if (autoRoleActive) {
       if (member.user.bot) {
-        const botRoles = await this.modules.autoRole.retrieveValue(guild.id, 'botRoles')
-        if (botRoles.length) member.addRoles(botRoles, 'AutoRole for bots')
+        const botRoles = (await this.modules.autoRole.retrieveValue(guild.id, 'botRoles')).filter(r => !member.roles.has(r))
+        if (botRoles.length) {
+          member.addRoles(botRoles, 'AutoRole for bots')
+        }
       } else {
-        const userRoles = await this.modules.autoRole.retrieveValue(guild.id, 'userRoles')
-        if (userRoles.length) member.addRoles(userRoles, 'AutoRole for users')
+        const userRoles = (await this.modules.autoRole.retrieveValue(guild.id, 'userRoles')).filter(r => !member.roles.has(r))
+        if (userRoles.length) {
+          member.addRoles(userRoles, 'AutoRole for users')
+        }
       }
     }
   }
