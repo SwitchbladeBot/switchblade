@@ -38,5 +38,7 @@
   "needSmallerString": "You have to give me a sentence smaller than {{number}} characters.",
   "invalidURL": "You have to give me a valid URL!",
   "invalidImageLink": "You have to give me a valid image link.",
-  "imageParsingError": "An error occurred while parsing the image."
+  "imageParsingError": "An error occurred while parsing the image.",
+  "invalidChannelType": "This commands only works in a channel of type {{type}}",
+  "invalidChannel": "You forgot to mention a channel or I couldn't find it."
 }
