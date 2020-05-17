@@ -1452,6 +1452,23 @@
     "hereIsYourGoat": "Here is your goat!",
     "hereIsYourGoat_resolution": "Here is your **{{width}}x{{height}}** goat!"
   },
+  "rubygems": {
+    "commandDescription": "Searches for a Ruby Gem on RubyGems.org",
+    "commandUsage": "<gem name>",
+    "noNameProvided": "You have to give me a gem name!",
+    "downloadCount": "{{count}} downloads",
+    "install": "Install",
+    "uris": {
+      "gem": "Download",
+      "homepage": "Homepage",
+      "wiki": "Wiki",
+      "documentation": "Documentation",
+      "mailing_list": "Mailing List",
+      "source_code": "Source Code",
+      "bug_tracker": "Bug Tracker",
+      "changelog": "Changelog"
+    }
+  },
   "legendsofruneterra": {
     "commandDescription": "Utility commands for Legends of Runeterra",
     "gameName": "Legends of Runeterra",
