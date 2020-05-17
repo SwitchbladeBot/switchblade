@@ -1,49 +1,65 @@
+const splitArgs = require('splitargs')
+
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
-// eslint-disable-next-line no-useless-escape
+const UNICODE_ALPHABET = '🇦 🇧 🇨 🇩 🇪 🇫 🇬 🇭 🇮 🇯 🇰 🇱 🇲 🇳 🇴 🇵 🇶 🇷 🇸 🇹 🇺 🇻 🇼 🇽 🇾 🇿'.split(' ')
+
 const EscapeMarkdown = (text) => text.replace(/(\*|~+|`)/g, '')
 
 module.exports = class Poll extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'poll',
       parameters: [{
-        type: 'string', full: true, missingError: 'commands:poll.noQuestion'
+        type: 'string',
+        full: true,
+        missingError: 'commands:poll.noQuestion'
       }]
-    })
+    }, client)
   }
 
-  run ({ t, author, channel }, question) {
-    const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
-    const pollPcs = EscapeMarkdown(question).split('|')
-    if (pollPcs.length > 1) {
-      const maxOptions = 26
-      if (pollPcs.slice(1).length > maxOptions) {
-        throw new CommandError(t('commands:poll.tooManyOptions', { maxOptions }))
-      } else {
-        let description = ''
-        const alphabet = ('abcdefghijklmnopqrstuvwxyz').split('')
-        const unicodeAlphabet = ('🇦 🇧 🇨 🇩 🇪 🇫 🇬 🇭 🇮 🇯 🇰 🇱 🇲 🇳 🇴 🇵 🇶 🇷 🇸 🇹 🇺 🇻 🇼 🇽 🇾 🇿').split(' ')
-        for (let i = 0; i < pollPcs.slice(1).length; i++) {
-          description += `:regional_indicator_${alphabet[i]}: ${pollPcs.slice(1)[i]}\n`
-        }
+  async run (context, args) {
+    const { channel, author } = context
 
-        channel.send(embed
-          .setTitle(`:ballot_box: ${pollPcs[0]}`)
-          .setDescription(description)
-        ).then(async m => {
-          for (let i = 0; i < pollPcs.slice(1).length; i++) {
-            await m.react(unicodeAlphabet[i])
-          }
-        })
-      }
-    } else {
-      embed.setTitle(`:ballot_box: ${EscapeMarkdown(question)}`)
-      channel.send(embed).then(m => {
-        m.react('👍').then(() => m.react('👎'))
-      })
-    }
+    channel.startTyping()
+
+    const [question, ...options] = splitArgs(args)
+    const embed = new SwitchbladeEmbed(author)
+
+    const parsedQuestion = EscapeMarkdown(question)
+
+    if (options.length) await this.createPollWithOptions(context, embed, parsedQuestion, options)
+    else await this.createPoll(context, embed, parsedQuestion, options)
+
     channel.stopTyping()
+  }
+
+  async createPoll ({ channel }, embed, question, options) {
+    embed.setTitle(`:ballot_box: ${question}`)
+
+    const message = await channel.send(embed)
+
+    await message.react('👍')
+    await message.react('👎')
+  }
+
+  async createPollWithOptions ({ t, channel }, embed, question, options) {
+    const maxOptions = UNICODE_ALPHABET.length
+
+    if (options.length > maxOptions) {
+      throw new CommandError(t('commands:poll.tooManyOptions', { maxOptions }))
+    }
+
+    let description = options
+      .map((option, i) => `${UNICODE_ALPHABET[i]} ${option}`)
+      .join('\n\n')
+
+    const message = await channel.send(
+      embed
+        .setTitle(`:ballot_box: ${question}`)
+        .setDescription(description)
+    )
+
+    for (let i = 0; i < options.length; i++) await message.react(UNICODE_ALPHABET[i])
   }
 }

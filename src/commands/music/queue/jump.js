@@ -2,14 +2,14 @@ const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class QueueJump extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'jump',
       aliases: ['jumpto', 'skipto'],
-      parentCommand: 'queue',
+      parent: 'queue',
       parameters: [{
         type: 'number', full: true, min: 1, missingError: ({ t }) => t(`commands:${this.tPath}.missingIndexParameter`)
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, guild }, index) {

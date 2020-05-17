@@ -13,6 +13,7 @@ module.exports = {
   // Command extensions
   RandomRedditPostCommand: CommandStructures.RandomRedditPostCommand,
   SearchCommand: CommandStructures.SearchCommand,
+  SubcommandListCommand: CommandStructures.SubcommandListCommand,
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),
@@ -26,6 +27,7 @@ module.exports = {
   Webhook: require('./structures/Webhook.js'),
 
   // Utils
+  Utils: require('./utils'),
   Color: require('./utils/Color.js'),
   Reddit: require('./utils/Reddit.js'),
   Constants: require('./utils/Constants.js'),

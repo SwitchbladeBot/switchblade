@@ -3,8 +3,9 @@ const { Router } = require('express')
 
 module.exports = class Connections extends Route {
   constructor (client) {
-    super(client)
-    this.name = 'connections'
+    super({
+      name: 'connections'
+    }, client)
   }
 
   register (app) {

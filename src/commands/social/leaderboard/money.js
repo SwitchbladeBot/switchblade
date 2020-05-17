@@ -3,11 +3,11 @@ const { Attachment } = require('discord.js')
 
 module.exports = class MoneyLeaderboard extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'money',
       aliases: ['balance', 'switchcoins'],
-      parentCommand: 'leaderboard'
-    })
+      parent: 'leaderboard'
+    }, client)
   }
 
   async run ({ t, author, channel }) {

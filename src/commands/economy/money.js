@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Money extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'money',
       aliases: ['balance', 'bal'],
       category: 'economy',
@@ -10,7 +10,7 @@ module.exports = class Money extends Command {
       parameters: [{
         type: 'user', full: true, required: false
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, user = author) {

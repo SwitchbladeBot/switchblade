@@ -2,10 +2,10 @@ const { SearchCommand, SwitchbladeEmbed, Constants, MiscUtils } = require('../..
 
 module.exports = class DeezerAlbum extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'album',
       aliases: ['al'],
-      parentCommand: 'deezer',
+      parent: 'deezer',
       embedColor: Constants.DEEZER_COLOR,
       embedLogoURL: 'https://i.imgur.com/lKlFtbs.png',
       parameters: [{
@@ -13,7 +13,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
       }, [{
         type: 'booleanFlag', name: 'tracks', aliases: [ 'songs', 's', 't' ]
       }]]
-    })
+    }, client)
   }
 
   async search (context, query) {

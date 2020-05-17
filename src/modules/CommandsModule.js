@@ -20,57 +20,103 @@ const findCommand = (commands, path) => {
   return cmd ? sc.length ? sc.reduce((s, n) => findCA(s, n), cmd.subcommands) : cmd : null
 }
 
-const categoryExists = (client, category) => {
-  const categories = client.commands
+const allCategories = (client) => {
+  return client.commands
     .filter(c => !c.hidden)
     .map(c => c.category)
     .filter((v, i, a) => a.indexOf(v) === i)
-  return categories.includes(category)
 }
+const categoryExists = (client, category) => allCategories(client).includes(category)
 
-// Commands
 module.exports = class CommandsModule extends Module {
   constructor (client) {
-    super('commandRules', client)
-    this.displayName = 'Command Rules'
-
-    this.toggleable = false
-    this.defaultValues = {
-      all: {},
-      commands: {},
-      categories: {}
-    }
-    this.apiMethods = [ 'retrieveCommand', 'saveCommand', 'validCandidates' ]
+    super({
+      name: 'commandRules',
+      displayName: 'Command Rules',
+      toggleable: false,
+      defaultValues: {
+        all: {},
+        commands: {},
+        categories: {}
+      },
+      apiMethods: ['saveCommand']
+    }, client)
   }
 
-  specialInput (guildId) {
-    const joinAliases = (c) => {
-      const { aliases = [] } = c
-      return c.parentCommand ? aliases.concat(joinAliases(c.parentCommand)) : aliases
-    }
-    const addCommand = (a, c) => {
-      if (c.hidden) return a
-      a.push({
-        name: c.fullName,
-        aliases: joinAliases(c),
-        category: c.category
-      })
-      return c.subcommands.length ? c.subcommands.reduce((na, sc) => addCommand(na, sc), a) : a
-    }
+  async specialInput (guildId, userId) {
+    const guild = this.client.guilds.get(guildId)
+    if (!guild || !userId) return {}
 
-    const commands = this.client.commands.reduce((a, c) => addCommand(a, c), [])
-    const categories = commands.map(c => c.category).filter((v, i, a) => a.indexOf(v) === i)
+    const { commands, categories } = this.fetchCommands()
+    // Payload
     return {
-      commands: commands.concat(categories.map(c => ({
-        name: c,
-        aliases: [],
-        category: 'category'
-      })), [{
-        name: 'all commands',
-        aliases: [ '*' ],
-        category: 'all'
-      }])
+      commands: [
+        {
+          name: 'all commands',
+          aliases: [ '*' ],
+          category: 'all'
+        },
+        ...categories.map(c => ({
+          name: c,
+          parsedName: parseString(c),
+          aliases: [],
+          category: 'category'
+        })),
+        ...commands
+      ],
+      candidates: this.validCandidates(guild, userId),
+      rules: await this.fetchRules(guild)
     }
+  }
+
+  validCandidates (guild, userId) {
+    if (!userId) return []
+    const member = guild.member(userId)
+
+    // Category
+    const filteredCategories = guild.channels
+      .filter(c => c.type === 'category' && c.memberPermissions(member).has('VIEW_CHANNEL'))
+      .map(c => ({
+        id: c.id,
+        type: 'category',
+        name: c.name
+      }))
+    // Channel
+    const filteredChannels = guild.channels
+      .filter(c => c.type === 'text' && c.memberPermissions(member).has('VIEW_CHANNEL'))
+      .map(c => ({
+        id: c.id,
+        type: 'channel',
+        name: c.name
+      }))
+
+    // Role
+    const filteredRoles = guild.roles
+      .filter(r => r.editable && r.id !== guild.id && member.highestRole.comparePositionTo(r) > 0)
+      .sort(Role.comparePositions)
+      .map(r => ({
+        id: r.id,
+        type: 'role',
+        name: r.name
+      }))
+    // User
+    const filteredUsers = guild.members
+      .filter(m => !m.user.bot)
+      .map(m => ({
+        id: m.id,
+        type: 'user',
+        name: m.user.username,
+        discriminator: m.user.discriminator,
+        displayName: m.displayName
+      }))
+
+    return [
+      ...filteredCategories,
+      ...filteredChannels,
+      ...filteredRoles,
+      ...filteredUsers,
+      { type: 'all', id: 'all' }
+    ]
   }
 
   async verifyCommand (command, { guild, channel, member }) {
@@ -139,13 +185,7 @@ module.exports = class CommandsModule extends Module {
     return check(command)
   }
 
-  // API Methods
-  async retrieveCommand (guildId, userId, { cmd, isCategory } = {}) {
-    if (!cmd || typeof cmd !== 'string') return { status: 400 }
-
-    const guild = this.client.guilds.get(guildId)
-    if (!guild) return { status: 400 }
-
+  async fetchRules (guild) {
     const mapValues = (v) => {
       const o = {
         type: v.type,
@@ -176,34 +216,47 @@ module.exports = class CommandsModule extends Module {
 
       return o
     }
-
-    if (cmd === 'all') {
-      const all = await this.retrieveValue(guildId, 'all')
-      return { payload: {
-        whitelist: all && all.whitelist ? all.whitelist.map(mapValues) : [],
-        blacklist: all && all.blacklist ? all.blacklist.map(mapValues) : []
-      } }
-    } else if (isCategory) {
-      if (!categoryExists(this.client, cmd)) return { status: 400 }
-      const path = parseString(cmd)
-      const { categories: { [path]: data } } = await this.retrieveValues(guildId, [ categoriesPath(path) ])
-      return { payload: {
-        whitelist: data && data.whitelist ? data.whitelist.map(mapValues) : [],
-        blacklist: data && data.blacklist ? data.blacklist.map(mapValues) : []
-      } }
+    const parseLists = (o) => {
+      return {
+        whitelist: o.whitelist && o.whitelist.map(mapValues),
+        blacklist: o.blacklist && o.blacklist.map(mapValues)
+      }
+    }
+    const reduceFunc = (o, [ k, v ]) => {
+      o[k] = parseLists(v)
+      return o
     }
 
-    const command = findCommand(this.client.commands, cmd)
-    if (!command) return { status: 400 }
-
-    const path = parseName(command)
-    const { commands: { [path]: data } } = await this.retrieveValues(guildId, [ commandsPath(path) ])
-    return { payload: {
-      whitelist: data && data.whitelist ? data.whitelist.map(mapValues) : [],
-      blacklist: data && data.blacklist ? data.blacklist.map(mapValues) : []
-    } }
+    const { commands, categories, all } = await this.retrieveValues(guild.id, [ 'commands', 'categories', 'all' ])
+    const rules = {
+      commands: Object.entries(commands).reduce(reduceFunc, {}),
+      categories: Object.entries(categories).reduce(reduceFunc, {})
+    }
+    if (all.blacklist || all.whitelist) rules.all = parseLists(all)
+    return rules
   }
 
+  fetchCommands () {
+    const joinAliases = (c) => {
+      const aliases = c.aliases || []
+      return c.parentCommand ? aliases.concat(joinAliases(c.parentCommand)) : aliases
+    }
+    const addCommand = (a, c) => {
+      if (c.hidden) return a
+      a.push({
+        name: c.fullName,
+        parsedName: parseName(c),
+        aliases: joinAliases(c),
+        category: c.category
+      })
+      return c.subcommands.length ? c.subcommands.reduce((na, sc) => addCommand(na, sc), a) : a
+    }
+    const commands = this.client.commands.reduce((a, c) => addCommand(a, c), [])
+    const categories = allCategories(this.client)
+    return { commands, categories }
+  }
+
+  // API Methods
   async saveCommand (guildId, userId, { cmd, values, isCategory } = {}) {
     if (!cmd || typeof cmd !== 'string') return { status: 400 }
 
@@ -268,7 +321,7 @@ module.exports = class CommandsModule extends Module {
       .filter(r => r.editable && r.id !== guildId && member.highestRole.comparePositionTo(r) > 0)
       .map(r => r.id)
     // User
-    const filteredUsers = guild.members.map(m => m.id)
+    const filteredUsers = guild.members.filter(m => !m.user.bot).map(m => m.id)
 
     return [
       ...filteredCategories,
@@ -276,65 +329,5 @@ module.exports = class CommandsModule extends Module {
       ...filteredRoles,
       ...filteredUsers
     ]
-  }
-
-  async validCandidates (guildId, userId, { q } = {}) {
-    if (!q || typeof q !== 'string') return { status: 400 }
-
-    const guild = this.client.guilds.get(guildId)
-    if (!guild || !userId) return { status: 500 }
-    const member = guild.member(userId)
-
-    const cq = (t) => t.toLowerCase().includes(q.toLowerCase())
-    const iq = (i) => q === i.id
-
-    // Category
-    const filteredCategories = guild.channels
-      .filter(c => c.type === 'category' && c.memberPermissions(member).has('VIEW_CHANNEL') && (cq(c.name) || iq(c)))
-      .first(10)
-      .map(c => ({
-        id: c.id,
-        type: 'category',
-        name: c.name
-      }))
-    // Channel
-    const filteredChannels = guild.channels
-      .filter(c => c.type === 'text' && c.memberPermissions(member).has('VIEW_CHANNEL') && (cq(c.name) || iq(c)))
-      .first(10)
-      .map(c => ({
-        id: c.id,
-        type: 'channel',
-        name: c.name
-      }))
-
-    // Role
-    const filteredRoles = guild.roles
-      .filter(r => r.editable && r.id !== guildId && member.highestRole.comparePositionTo(r) > 0 && (cq(r.name) || iq(r)))
-      .sort(Role.comparePositions)
-      .first(10)
-      .map(r => ({
-        id: r.id,
-        type: 'role',
-        name: r.name
-      }))
-    // User
-    const filteredUsers = guild.members
-      .filter(m => cq(m.displayName) || cq(m.user.username) || iq(m))
-      .first(10)
-      .map(m => ({
-        id: m.id,
-        type: 'user',
-        name: m.user.username,
-        discriminator: m.user.discriminator,
-        displayName: m.displayName
-      }))
-
-    return { payload: { candidates: [
-      ...filteredCategories,
-      ...filteredChannels,
-      ...filteredRoles,
-      ...filteredUsers,
-      { type: 'all', id: 'all' }
-    ] } }
   }
 }

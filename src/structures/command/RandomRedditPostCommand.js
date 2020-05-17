@@ -1,17 +1,19 @@
 const Command = require('./Command.js')
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
 const Reddit = require('../../utils/Reddit.js')
-
-const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
+const Utils = require('../../utils')
 
 module.exports = class RandomRedditPostCommand extends Command {
-  constructor (client, options = {}) {
-    super(client, options)
-    this.embedColor = options.embedColor
-    this.titleString = options.titleString
-    this.addTitle = defVal(options, 'addTitle', true)
-    this.addPermalink = defVal(options, 'addPermalink', true)
-    this.subreddit = options.subreddit || 'all'
+  constructor (opts = {}, client) {
+    const options = Utils.createOptionHandler('RandomRedditPostCommand', opts)
+
+    super(opts, client)
+
+    this.embedColor = options.optional('embedColor')
+    this.titleString = options.optional('titleString')
+    this.addTitle = options.optional('addTitle', true)
+    this.addPermalink = options.optional('addPermalink', true)
+    this.subreddit = options.optional('subreddit', 'all')
   }
 
   // TODO: Check if the URL is an image type supported by reddit

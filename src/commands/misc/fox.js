@@ -3,7 +3,9 @@ const fetch = require('node-fetch')
 
 module.exports = class Fox extends Command {
   constructor (client) {
-    super(client, { name: 'fox' })
+    super({
+      name: 'fox'
+    }, client)
   }
 
   async run ({ t, author, channel }) {

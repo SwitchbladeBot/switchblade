@@ -3,7 +3,7 @@ const BinaryRegex = '(?=^1*(01*0)*1*$)^.(..)*$'
 
 module.exports = class Binary extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'binary',
       aliases: ['t2b', 'texttobinary', 'ttb'],
       category: 'utility',
@@ -12,7 +12,7 @@ module.exports = class Binary extends Command {
         full: true,
         missingError: 'commands:binary.missingText'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel }, input) {

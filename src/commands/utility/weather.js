@@ -4,7 +4,7 @@ const moment = require('moment')
 
 module.exports = class Weather extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'weather',
       category: 'utility',
       requirements: { canvasOnly: true },
@@ -13,7 +13,7 @@ module.exports = class Weather extends Command {
         full: true,
         missingError: 'commands:weather.noCity'
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, address) {

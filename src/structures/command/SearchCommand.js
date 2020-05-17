@@ -1,20 +1,24 @@
 const Command = require('./Command.js')
 const CommandError = require('./CommandError.js')
 const SwitchbladeEmbed = require('../SwitchbladeEmbed.js')
+const Utils = require('../../utils')
 
 module.exports = class SearchCommand extends Command {
-  constructor (client, options) {
-    super(client, {
-      parameters: options.parameters || [{
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('SearchCommand', opts)
+
+    super({
+      parameters: opts.parameters || [{
         type: 'string', full: true, missingError: 'commons:search.noParams', maxLength: 200, clean: true
       }],
-      ...options
-    })
+      ...opts
+    }, client)
+
+    this.embedColor = options.required('embedColor')
+    this.embedLogoURL = options.required('embedLogoURL')
+    this.maxResults = options.optional('maxResults', 10)
 
     this.parameters = this.mixParameters(this.parameters)
-    this.embedColor = options.embedColor
-    this.embedLogoURL = options.embedLogoURL
-    this.maxResults = options.maxResults || 10
   }
 
   mixParameters (commandParameters) {

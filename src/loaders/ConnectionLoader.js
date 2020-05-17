@@ -2,7 +2,7 @@ const { Loader, Connection, FileUtils } = require('../')
 
 module.exports = class ConnectionLoader extends Loader {
   constructor (client) {
-    super(client)
+    super({}, client)
 
     this.connections = {}
   }
@@ -29,7 +29,8 @@ module.exports = class ConnectionLoader extends Loader {
       if (Object.getPrototypeOf(NewConnection) !== Connection) return
       this.addConnection(new NewConnection(this.client)) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
-      this.log(failed ? `[33m${success} connections loaded, ${failed} failed.` : `[32mAll ${success} connections loaded without errors.`, 'Connections')
+      if (failed) this.log(`${success} connections loaded, ${failed} failed.`, { color: 'yellow', tags: ['Connections'] })
+      else this.log(`All ${success} connections loaded without errors.`, { color: 'green', tags: ['Connections'] })
     })
   }
 
@@ -39,12 +40,12 @@ module.exports = class ConnectionLoader extends Loader {
    */
   addConnection (connection) {
     if (!(connection instanceof Connection)) {
-      this.log(`[31m${connection.name} failed to load - Not an Connection`, 'Connections')
+      this.log(`${connection.name} failed to load - Not an Connection`, { color: 'red', tags: ['Connections'] })
       return false
     }
 
     if (connection.canLoad() !== true) {
-      this.log(`[31m${connection.name} failed to load - ${connection.canLoad() || 'canLoad function did not return true.'}`, 'Connections')
+      this.log(`${connection.name} failed to load - ${connection.canLoad() || 'canLoad function did not return true.'}`, { color: 'red', tags: ['Connections'] })
       return false
     }
 

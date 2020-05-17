@@ -2,11 +2,11 @@ const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class QueueShuffle extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'shuffle',
       aliases: ['sf'],
-      parentCommand: 'queue'
-    })
+      parent: 'queue'
+    }, client)
   }
 
   async run ({ t, author, channel, guild }) {

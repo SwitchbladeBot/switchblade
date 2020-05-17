@@ -1,4 +1,5 @@
 const { Loader, Route, Webhook, FileUtils } = require('../')
+const chalk = require('chalk')
 
 const express = require('express')
 const cors = require('cors')
@@ -6,7 +7,7 @@ const morgan = require('morgan')
 
 module.exports = class HTTPLoader extends Loader {
   constructor (client) {
-    super(client)
+    super({}, client)
 
     this.httpServer = null
     this.httpRoutes = []
@@ -27,7 +28,7 @@ module.exports = class HTTPLoader extends Loader {
   }
 
   initializeHTTPServer (port = process.env.PORT) {
-    if (!port) return this.log(`[31mHTTP server not started - Required environment variable "PORT" is not set.`, 'HTTP')
+    if (!port) return this.log(`Server not started - Required environment variable "PORT" is not set.`, { color: 'red', tags: ['HTTP'] })
 
     this.app = express()
     // Use CORS with Express
@@ -35,10 +36,10 @@ module.exports = class HTTPLoader extends Loader {
     // Parse JSON body
     this.app.use(express.json())
     // Morgan - Request logger middleware
-    this.app.use(morgan('[36m[HTTP][0m [32m:method :url - IP :remote-addr - Code :status - Size :res[content-length] B - Handled in :response-time ms[0m'))
+    this.app.use(morgan(`${chalk.cyan('[HTTP]')} ${chalk.green(':method :url - IP :remote-addr - Code :status - Size :res[content-length] B - Handled in :response-time ms')}`))
 
     this.app.listen(port, () => {
-      this.log(`[32mListening on port ${port}`, 'HTTP')
+      this.log(`Listening on port ${port}`, { color: 'green', tags: ['HTTP'] })
     })
 
     return this.initializeRoutes().then(() => this.initializeWebhooks())
@@ -57,11 +58,8 @@ module.exports = class HTTPLoader extends Loader {
       if (Object.getPrototypeOf(NewRoute) !== Route) return
       this.addRoute(new NewRoute(this.client)) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
-      if (failed === 0) {
-        this.log(`[32mAll ${success} HTTP routes loaded without errors.`, 'HTTP')
-      } else {
-        this.log(`[33m${success} HTTP routes loaded, ${failed} failed.`, 'HTTP')
-      }
+      if (failed) this.log(`${success} HTTP routes loaded, ${failed} failed.`, { color: 'yellow', tags: ['HTTP'] })
+      else this.log(`All ${success} HTTP routes loaded without errors.`, { color: 'green', tags: ['HTTP'] })
     })
   }
 
@@ -71,7 +69,7 @@ module.exports = class HTTPLoader extends Loader {
    */
   addRoute (route) {
     if (!(route instanceof Route)) {
-      this.log(`[31m${route} failed to load - Not a Route`, 'HTTP')
+      this.log(`${route} failed to load - Not a Route`, { color: 'red', tags: ['HTTP'] })
       return false
     }
 
@@ -94,9 +92,9 @@ module.exports = class HTTPLoader extends Loader {
       this.addWebhook(new NewWebhook(this.client)) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
       if (failed === 0) {
-        this.log(`[32mAll ${success} webhooks loaded without errors.`, 'HTTP')
+        this.log(`All ${success} webhooks loaded without errors.`, { color: 'green', tags: ['HTTP'] })
       } else {
-        this.log(`[33m${success} webhooks loaded, ${failed} failed.`, 'HTTP')
+        this.log(`${success} webhooks loaded, ${failed} failed.`, { color: 'red', tags: ['HTTP'] })
       }
     })
   }
@@ -107,7 +105,7 @@ module.exports = class HTTPLoader extends Loader {
    */
   addWebhook (webhook) {
     if (!(webhook instanceof Webhook)) {
-      this.log(`[31m${webhook} failed to load - Not a Webhook`, 'HTTP')
+      this.log(`${webhook} failed to load - Not a Webhook`, { color: 'red', tags: ['HTTP'] })
       return false
     }
 

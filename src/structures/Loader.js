@@ -1,7 +1,18 @@
+const Utils = require('../utils')
+
 module.exports = class Loader {
-  constructor (client) {
+  /**
+   * @param {Object} opts
+   * @param {boolean} [opts.critical]
+   * @param {Client} client
+   */
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('Loader', opts)
+
+    this.critical = options.optional('critical', false)
+    this.preLoad = options.optional('preLoad', false)
+
     this.client = client
-    this.critical = false
   }
 
   load (client) {

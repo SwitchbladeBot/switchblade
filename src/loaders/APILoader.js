@@ -2,7 +2,9 @@ const { Loader, APIWrapper, FileUtils } = require('../')
 
 module.exports = class APILoader extends Loader {
   constructor (client) {
-    super(client)
+    super({
+      preLoad: true
+    }, client)
 
     this.apis = {}
   }
@@ -27,9 +29,13 @@ module.exports = class APILoader extends Loader {
     let failed = 0
     return FileUtils.requireDirectory(dirPath, (NewAPI) => {
       if (Object.getPrototypeOf(NewAPI) !== APIWrapper) return
-      this.addAPI(new NewAPI()) ? success++ : failed++
+      this.addAPI(new NewAPI()).then(s => s ? success++ : failed++).catch(e => {
+        this.client.logError(e)
+        failed++
+      })
     }, this.logError.bind(this)).then(() => {
-      this.log(failed ? `[33m${success} API wrappers loaded, ${failed} failed.` : `[32mAll ${success} API wrappers loaded without errors.`, 'APIs')
+      if (failed) this.log(`${success} API wrappers loaded, ${failed} failed.`, { color: 'yellow', tags: ['APIs'] })
+      else this.log(`All ${success} API wrappers loaded without errors.`, { color: 'green', tags: ['APIs'] })
     })
   }
 
@@ -37,23 +43,23 @@ module.exports = class APILoader extends Loader {
    * Adds a new API Wrapper to the Client.
    * @param {APIWrapper} api - API Wrapper to be added
    */
-  addAPI (api) {
+  async addAPI (api) {
     if (!(api instanceof APIWrapper)) {
-      this.log(`[31m${api.name} failed to load - Not an APIWrapper`, 'APIs')
+      this.log(`${api.name} failed to load - Not an APIWrapper`, { color: 'red', tags: ['APIs'] })
       return false
     }
 
     if (api.canLoad() !== true) {
-      this.log(`[31m${api.name} failed to load - ${api.canLoad() || 'canLoad function did not return true.'}`, 'APIs')
+      this.log(`${api.name} failed to load - ${api.canLoad() || 'canLoad function did not return true.'}`, { color: 'red', tags: ['APIs'] })
       return false
     }
 
     if (!api.envVars.every(variable => {
-      if (!process.env[variable]) this.log(`[31m${api.name} failed to load - Required environment variable "${variable}" is not set.`, 'APIs')
+      if (!process.env[variable]) this.log(`${api.name} failed to load - Required environment variable "${variable}" is not set.`, { color: 'red', tags: ['APIs'] })
       return !!process.env[variable]
     })) return false
 
-    this.apis[api.name] = api.load()
+    this.apis[api.name] = await api.load()
     return true
   }
 }

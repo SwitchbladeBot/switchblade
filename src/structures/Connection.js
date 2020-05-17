@@ -1,5 +1,16 @@
+const Utils = require('../utils')
+
 module.exports = class Connection {
-  constructor (client) {
+  /**
+   * @param {Object} opts
+   * @param {string} opts.name
+   * @param {Client} client
+   */
+  constructor (opts, client) {
+    const options = Utils.createOptionHandler('Connection', opts)
+
+    this.name = options.required('name')
+
     this.client = client
   }
 

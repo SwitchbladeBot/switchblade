@@ -31,7 +31,7 @@ const leetMap = {
 
 module.exports = class Leet extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'leet',
       category: 'memes',
       parameters: [
@@ -46,7 +46,7 @@ module.exports = class Leet extends Command {
           aliases: [ 'hc', '#4I2|D', 'hardcore' ]
         }]
       ]
-    })
+    }, client)
   }
 
   async run ({ channel, flags }, text) {
