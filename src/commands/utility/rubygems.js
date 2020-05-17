@@ -5,7 +5,7 @@ const RUBYGEMS_ICON = 'https://avatars1.githubusercontent.com/u/208761'
 
 module.exports = class RubyGems extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'rubygems',
       aliases: ['gem', 'rubygem'],
       category: 'utility',
@@ -16,7 +16,7 @@ module.exports = class RubyGems extends SearchCommand {
       }],
       embedColor: RUBYGEMS_COLOR,
       embedLogoURL: RUBYGEMS_ICON
-    })
+    }, client)
   }
 
   async search (context, query) {
