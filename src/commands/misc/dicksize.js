@@ -2,10 +2,10 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Dicksize extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'dicksize',
       aliases: ['peepeesize']
-    })
+    }, client)
   }
 
   run ({ t, author, channel }) {

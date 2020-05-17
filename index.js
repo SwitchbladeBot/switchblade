@@ -1,4 +1,6 @@
-// Initialize functions
+const Sentry = require('@sentry/node')
+Sentry.init({ dsn: process.env.SENTRY_DSN })
+
 const { readFileSync } = require('fs')
 
 require('moment')
@@ -23,4 +25,6 @@ console.log(readFileSync('bigtitle.txt', 'utf8').toString())
 
 const Switchblade = require('./src/Switchblade.js')
 const client = new Switchblade(CLIENT_OPTIONS)
-client.login().then(() => client.log('[32mLogged in successfully!', 'Discord')).catch(e => client.logError(e))
+client.on('debug', (...args) => console.log('debug', ...args))
+client.on('rateLimit', (...args) => console.log('rateLimit', ...args))
+client.initialize()

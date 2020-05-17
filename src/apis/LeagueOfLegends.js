@@ -8,17 +8,38 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   constructor () {
     super({
       name: 'lol',
-      envVars: [ 'RIOT_API_KEY' ]
+      envVars: [ 'RIOT_API_KEY', 'YOUTUBE_API_KEY' ]
     })
 
     this.version = null
+    this.champions = []
+    this.skins = []
   }
 
-  async getVersion () {
-    return this.request(`/realms/na.json`).then(data => {
-      this.version = data.v
-      return data.v
-    })
+  async load () {
+    await this.request(`/realms/na.json`)
+      .then(data => {
+        this.version = data.v
+      })
+
+    await this.fetchChampions()
+    await this.loadSkins()
+    return this
+  }
+
+  async loadSkins () {
+    const champions = this.champions
+
+    for (const i in champions) {
+      const champData = await this.fetchChampion(champions[i].id, 'en_US')
+
+      const skins = champData.skins
+
+      skins.forEach(skin => {
+        if (skin.name === 'default') return
+        return this.skins.push({ name: skin.name, splashUrl: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champData.id}_${skin.num}.jpg` })
+      })
+    }
   }
 
   async selectLanguage (language) {
@@ -29,26 +50,39 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   }
 
   async getLocale (language, version = this.version) {
-    if (!version) version = await this.getVersion()
     const matchingLanguage = await this.selectLanguage(language)
     return this.request(`/cdn/${this.version}/data/${matchingLanguage}/language.json`).then(u => u.data)
   }
 
   async fetchChampions (version = this.version) {
-    if (!version) version = await this.getVersion()
-    return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => u.data)
+    return this.request(`/cdn/${version}/data/en_US/champion.json`).then(u => {
+      this.champions = u.data
+    })
   }
 
   async fetchChampion (champion, language, searchById = false) {
     return new Promise(async (resolve, reject) => {
+      const champions = this.champions
       champion = parseInt(champion) ? champion.toString() : champion.replace("'", '').split(' ')
-      const champions = await this.fetchChampions()
       const name = Object.keys(champions).find(key => searchById ? (champions[key].key === champion) : (key.toLowerCase() === champion.join('').toLowerCase()))
       if (!name) return reject(new Error('INVALID_CHAMPION'))
 
       const { id } = champions[name]
       const lang = await this.selectLanguage(language)
       this.request(`/cdn/${this.version}/data/${lang}/champion/${id}.json`).then(u => resolve(u.data[id]))
+    })
+  }
+
+  async fetchSkin (skinName, client) {
+    return new Promise(async (resolve, reject) => {
+      const skin = this.skins.find(s => skinName.toLowerCase() === s.name.toLowerCase())
+      if (!skin) return reject(new Error('INVALID_SKIN'))
+
+      const { items } = await client.apis.youtube.search(`${skin.name} SkinSpotlight`, ['video'])
+
+      const videoUrl = items.find(i => i.snippet.channelTitle === 'SkinSpotlights').id.videoId
+
+      resolve({ name: skin.name, splashUrl: skin.splashUrl, videoUrl: `https://youtube.com/watch?v=${videoUrl}` })
     })
   }
 

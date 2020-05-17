@@ -340,7 +340,7 @@
     "noValue": "You have to give me a valid number of $t(commons:currency_plural) to send!",
     "notEnoughMoney": "You don't have enough $t(commons:currency_plural) for that!",
     "cantPayYourself": "You can't pay yourself!",
-    "transactionSuccessful": "You sent **{{value}} $t(commons:currency_plural)** to {{receiver}}."
+    "transactionSuccessful": "You sent **{{value}} $t(commons:currency{{type}})** to {{receiver}}."
   },
   "xkcd": {
     "commandDescription": "Shows an XKCD webcomic.",
@@ -1015,6 +1015,14 @@
     "commandUsage": "[from] [value] <to>",
     "noCurrency": "You have to give me a valid currency or a pair."
   },
+  "holidays": {
+    "commandDescription": "Shows holidays in a year for a country.",
+    "commandUsage": "<country> [year]",
+    "noCountry": "You have to give me a valid country code.",
+    "invalidCountry": "This is an invalid country code. Choose one below:",
+    "noInformation": "No information was found for this country code",
+    "title": "Here's all holidays of {{countryName}} in {{year}}"
+  },
   "joinlock": {
     "commandDescription": "Enables or disables the join lock.",
     "commandUsage": "<on|off>",
@@ -1039,6 +1047,7 @@
   "leagueoflegends": {
     "commandDescription": "Shows the current issues of a League of Legends server or information about a champion.",
     "commandUsage": "<type> <query>",
+    "gameName": "League of Legends",
     "subcommands": {
       "status": {
         "commandDescription": "Shows the current issues of a League of Legends server.",
@@ -1057,11 +1066,20 @@
         "commandUsage": "<champion name>",
         "noChampion": "You have to give me a champion name to search for.",
         "invalidChamp": "Invalid champion.",
-        "spells": "Spells"
+        "spells": "Spells",
+        "skins": "Skins",
+        "skinText": "Want to see how any of these skins look like? Use `{{skinCommandUsage}}`!"
       },
       "rotation": {
         "commandDescription": "Shows the current week's champion rotation.",
         "weeklyChampRotation": "Weekly Champion Rotation"
+      },
+      "skin": {
+        "commandDescription": "Shows information about a League of Legends champion's skin.",
+        "commandUsage": "<skin name>",
+        "noSkin": "You have to give me a skin name to search for.",
+        "invalidSkin": "Invalid skin.",
+        "description": "Want to see the skin spotlight video for this skin? Click [here]({{videoUrl}})!"
       }
     }
   },
@@ -1115,12 +1133,12 @@
         "notFound": "User not found.",
         "noData": "Nothing found.",
         "title": "{{user}}'s {{top}} in {{period}}",
-        "top":{
+        "top": {
           "tracks": "top tracks",
           "albums": "top albums",
           "artists": "top artists"
         },
-        "period":{
+        "period": {
           "overall": "all time",
           "7day": "a week",
           "1month": "a month",
@@ -1174,8 +1192,8 @@
     "commandDescription": "Shows a random image from r/PortugalGoneWild."
   },
   "showerthoughts": {
-    "commandDescription": "Shows a random thought from r/Showertoughts."
-},
+    "commandDescription": "Shows a random thought from r/Showerthoughts."
+  },
   "keanu": {
     "commandDescription": "Shows a random image from r/KeanuBeingAwesome."
   },
@@ -1416,6 +1434,18 @@
     "commandDescription": "Shows a random image from r/CrappyDesign.",
     "title": "Here's your crappy design."
   },
+  "httpcat": {
+    "commandDescription": "A cat for every HTTP status!",
+    "commandUsage": "[http code]"
+  },
+  "createrole": {
+    "commandDescription": "Create a role.",
+    "commandUsage": "[color] <name>",
+    "successTitle": "Role was created!",
+    "errorTitle": "Role could not be created!",
+    "noParams": "You need to include a role name!",
+    "successMessage": "Name of the role: {{name}}"
+  },
   "goat": {
     "commandDescription": "Shows a goat image from placegoat.com",
     "commandUsage": "[width] [height]",
@@ -1438,5 +1468,27 @@
       "bug_tracker": "Bug Tracker",
       "changelog": "Changelog"
     }
+  },
+  "legendsofruneterra": {
+    "commandDescription": "Utility commands for Legends of Runeterra",
+    "gameName": "Legends of Runeterra",
+    "subcommands": {
+      "card": {
+        "commandUsage": "<card> [--base]",
+        "commandDescription": "Shows information about a Legends of Runeterra card",
+        "illustrationBy": "Illustration by {{artistName}}",
+        "associatedCards": "Associated cards",
+        "noCardsFound": "I couldn't find a card by that name."
+      }
+    }
+  },
+  "google": {
+    "commandDescription": "Searches something on google",
+    "commandUsage": "<query>"
+  },
+  "image": {
+    "commandDescription": "Searches for some image on google",
+    "commandUsage": "<query>",
+    "noQuery": "Please insert something to search."
   }
 }

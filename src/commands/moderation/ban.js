@@ -2,7 +2,7 @@ const { Command, Constants, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Ban extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'ban',
       aliases: ['banir'],
       category: 'moderation',
@@ -12,7 +12,7 @@ module.exports = class Ban extends Command {
       }, {
         type: 'string', full: true, missingError: 'commands:ban.missingReason'
       }]
-    })
+    }, client)
   }
 
   async run ({ channel, guild, author, t }, member, reason) {

@@ -8,7 +8,7 @@ const warningLinks = {
 
 module.exports = class Chorus extends SearchCommand {
   constructor (client) {
-    super(client, {
+    super({
       name: 'chorus',
       aliases: ['clonehero', 'chart'],
       requirements: {
@@ -16,7 +16,7 @@ module.exports = class Chorus extends SearchCommand {
       },
       embedColor: Constants.CHORUS_COLOR,
       embedLogoURL: icon
-    })
+    }, client)
   }
 
   async search (context, query) {
@@ -81,7 +81,7 @@ module.exports = class Chorus extends SearchCommand {
             `[${this.getDownloadLinkText(chart, t)}](${chart.link})`, // Download link
             chart.sources[0] ? (chart.sources[0].isSetlist && chart.sources[0].name && chart.sources[0].link ? `[${t('commands:chorus.downloadFullSetlist', { setlistName: chart.sources[0].name })}](${chart.sources[0].link})` : null) : null // Download full setlist link
           ]
-        ].map(lines => lines.filter(l => !!l).join('\n')).filter(b => !!b.length).join('\n\n'))
+        ])
         .addField(t('commands:chorus.source', { count: chart.sources.length }), chart.sources.map(s => `${s.parent ? `[${s.parent.name}](${s.parent.link}) in ` : ''}${`[${s.name}](${s.link})`}`).join('\n'))
     )
   }

@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class Leaderboard extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'leaderboard',
       aliases: ['top', 'ranking'],
       category: 'social',
       requirements: { databaseOnly: true, canvasOnly: true }
-    })
+    }, client)
   }
 
   async run ({ t, author, prefix, alias, channel }) {

@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 
 module.exports = class Country extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'country',
       category: 'utility',
       parameters: [{
@@ -11,7 +11,7 @@ module.exports = class Country extends Command {
         missingError: 'commands:country.noCountry',
         full: true
       }]
-    })
+    }, client)
   }
 
   async run ({ t, author, channel, language }, country) {

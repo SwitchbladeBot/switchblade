@@ -4,7 +4,7 @@ const types = ['user', 'u', 'repository', 'repo', 'organization', 'org']
 
 module.exports = class GitHub extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'github',
       aliases: ['gh'],
       requirements: { apis: ['github'] },
@@ -22,7 +22,7 @@ module.exports = class GitHub extends Command {
             ].join('\n'))
         }
       }]
-    })
+    }, client)
 
     this.GITHUB_LOGO = 'https://i.imgur.com/gsY6oYB.png'
   }

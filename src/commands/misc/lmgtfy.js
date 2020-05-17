@@ -2,14 +2,14 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class LMGTFY extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'lmgtfy',
       aliases: ['letmegooglethatforyou'],
       category: 'memes',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:lmgtfy.noQuery'
       }]
-    })
+    }, client)
   }
 
   run ({ t, channel, author }, query) {

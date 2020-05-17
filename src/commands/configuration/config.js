@@ -2,12 +2,12 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Config extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'config',
       aliases: ['cfg'],
       category: 'configuration',
       requirements: { guildOnly: true, databaseOnly: true, permissions: ['MANAGE_GUILD'] }
-    })
+    }, client)
   }
 
   run ({ t, author, prefix, alias, channel }) {

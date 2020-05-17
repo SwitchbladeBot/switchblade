@@ -28,19 +28,19 @@ const allCategories = (client) => {
 }
 const categoryExists = (client, category) => allCategories(client).includes(category)
 
-// Commands
 module.exports = class CommandsModule extends Module {
   constructor (client) {
-    super('commandRules', client)
-    this.displayName = 'Command Rules'
-
-    this.toggleable = false
-    this.defaultValues = {
-      all: {},
-      commands: {},
-      categories: {}
-    }
-    this.apiMethods = [ 'saveCommand' ]
+    super({
+      name: 'commandRules',
+      displayName: 'Command Rules',
+      toggleable: false,
+      defaultValues: {
+        all: {},
+        commands: {},
+        categories: {}
+      },
+      apiMethods: ['saveCommand']
+    }, client)
   }
 
   async specialInput (guildId, userId) {
@@ -238,7 +238,7 @@ module.exports = class CommandsModule extends Module {
 
   fetchCommands () {
     const joinAliases = (c) => {
-      const { aliases = [] } = c
+      const aliases = c.aliases || []
       return c.parentCommand ? aliases.concat(joinAliases(c.parentCommand)) : aliases
     }
     const addCommand = (a, c) => {

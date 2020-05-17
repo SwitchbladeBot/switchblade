@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed } = require('../../')
 
 module.exports = class BlacklistCommand extends Command {
   constructor (client) {
-    super(client, {
+    super({
       name: 'blacklist',
       category: 'developers',
       hidden: true,
@@ -12,7 +12,7 @@ module.exports = class BlacklistCommand extends Command {
       }, {
         type: 'string', full: true, missingError: 'commands:blacklist.missingReason'
       }]
-    })
+    }, client)
   }
 
   async run ({ channel, author, t }, user, reason) {
