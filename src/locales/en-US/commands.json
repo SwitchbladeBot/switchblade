@@ -1479,7 +1479,6 @@
     "commandUsage": "<message link> <channel>",
     "missingMessageLink": "You need to give me a message link.",
     "missingChannelMention": "You need to give me a channel.",
-    "invalidMessageLink": "Invalid Message Link",
     "cantSendInChannel": "I can't send messages in the channel you want me to move the message to.",
     "channelsHaveDifferentType": "You're trying to move a message from a nsfw channel to a not nsfw channel.",
     "cantDeleteMessage": "I can't delete the original message because I don't have permission.",
