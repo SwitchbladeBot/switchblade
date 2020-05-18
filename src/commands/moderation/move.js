@@ -1,4 +1,5 @@
-const { Command, Constants, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed, CommandError } = require('../../')
+const Discord = require('discord.js')
 
 module.exports = class Move extends Command {
   constructor (client) {
@@ -8,7 +9,7 @@ module.exports = class Move extends Command {
       category: 'moderation',
       requirements: { guildOnly: true, botPermissions: ['MANAGE_MESSAGES'], permissions: ['MANAGE_MESSAGES'] },
       parameters: [{
-        type: 'url', missingError: 'commands:move.missingMessageLink'
+        type: 'messageLink', sameGuildOnly: true, returnIfExists: true, forceExists: true, missingError: 'commands:move.missingMessageLink'
       }, {
         type: 'channel', onlySameGuild: true, acceptText: true, missingError: 'commands:move.missingChannelMention'
       }]
@@ -17,141 +18,72 @@ module.exports = class Move extends Command {
 
   async run ({ channel, guild, author, t, message }, link, destinationChannel) {
     /*
-    Bot has manage messages and user also has,
-    so now we need to check those permissions in
-    the channel he wants to move to.
+    The bot and the one who wants to move the message
+    needs to have MANAGE_MESSAGES permission, the bot
+    because he needs to delete the message, and the
+    one who wants to move because how else would you
+    move a message if this command din't exist?
+
+    Now, we need to see if the user has permission to
+    send messages in the channel he wants to move the
+    message to and if the bot can send the messages
+    there too, because switchblade bot does not check
+    if the channel that the user sent is one that the
+    bot can access.
+
+    If the message, that the author wants to move, has
+    embed, we'll also need EMBED_LINKS permission on the
+    channel, but I don't think the author needs it. ~ Zerinho6
     */
-    const matchedLink = link.pathname.length > 1 ? link.pathname.match(/channels\/([0-9]{16,18})\/([0-9]{16,18})\/([0-9]{16,18})/) : null
+
+    // const guildId = link[1]
     const embed = new SwitchbladeEmbed(author)
-    if (!matchedLink) {
-      embed.setTitle(t('commands:move.invalidMessageLink'))
-      embed.setDescription(t('commands:move.missingMessageLink'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
-    }
-
-    const guildId = matchedLink[1]
-    const channelId = matchedLink[2]
-    const messageId = matchedLink[3]
-
-    if (guildId !== guild.id) {
-      embed.setDescription(t('commands:move.onlyThisGuild'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
-    }
-
-    if (!guild.channels.has(channelId)) {
-      embed.setDescription(t('commands:move.channelDoesntExist'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
-    }
-
-    const channelFrom = guild.channels.get(channelId)
-
-    if (!channelFrom) {
-      embed.setDescription(t('commands:move.couldntFindChannel'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
-    }
-
     if (!destinationChannel.permissionsFor(this.client.user.id).has('SEND_MESSAGES')) {
-      embed.setDescription(t('commands:move.cantSendInChannel'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
+      throw new CommandError('commands:move.cantSendInChannel')
     }
 
     try {
-      const recievedMessage = await channelFrom.fetchMessage(messageId)
-
-      if (!recievedMessage) {
-        embed.setDescription(t('commands:move.couldntFindMessage'))
-        embed.setColor(Constants.ERROR_COLOR)
-        channel.send(embed)
-        return
-      }
-    } catch (e) {
-      embed.setDescription(t('commands:move.couldntFindMessage'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
-    }
-
-    /*
-    Doing this outside the try catch made the handler on line 71 get ignored.
-    While doing this looks weird, but it works. ~ Zerinho6.
-    */
-    const recievedMessage = await channelFrom.fetchMessage(messageId)
-
-    if (recievedMessage.channel.nsfw && !destinationChannel.nsfw) {
-      embed.setDescription(t('commands:move.channelsHaveDifferentType'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
-    }
-
-    if (!recievedMessage.channel.permissionsFor(this.client.user.id).has('MANAGE_MESSAGES')) {
-      embed.setDescription(t('commands:move.cantDeleteMessage'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
-    }
-
-    if (!recievedMessage.channel.permissionsFor(author.id).has('SEND_MESSAGES')) {
-      embed.setDescription(t('commands:move.userCantSend'))
-      embed.setColor(Constants.ERROR_COLOR)
-      channel.send(embed)
-      return
-    }
-
-    try {
-      destinationChannel.send(`${t('commands:move.messageSentBy')} ${recievedMessage.author.username} ${t('commands:move.movedFrom')} ${recievedMessage.channel.name}  ${t('commands:move.by')} ${author.username}`)
-
-      if (recievedMessage.content.length >= 1) {
-        destinationChannel.send(recievedMessage.content)
+      if (link.channel.nsfw && !destinationChannel.nsfw) {
+        throw new CommandError('commands:move.channelsHaveDifferentType')
       }
 
-      if (recievedMessage.attachments.size >= 1) {
-        const Discord = require('discord.js')
-        destinationChannel.send(new Discord.Attachment(message.attachments.first().url))
+      if (!link.channel.permissionsFor(this.client.user.id).has('MANAGE_MESSAGES')) {
+        throw new CommandError('commands:move.cantDeleteMessage')
       }
-      recievedMessage.delete()
 
-      if (recievedMessage.embeds.length > 1) {
-        if (!recievedMessage.channel.permissionsFor(this.client.user.id).has('EMBED_LINKS')) {
-          embed.setDescription(t('commands:move.cantSendEmbed'))
-          embed.setColor(Constants.ERROR_COLOR)
-          destinationChannel.send(embed)
-          return
+      if (!link.channel.permissionsFor(author.id).has('SEND_MESSAGES')) {
+        throw new CommandError('commands:move.userCantSend')
+      }
+
+      try {
+        destinationChannel.send(t('commands:move.messageMoved', { authorName: link.author.username, movedFrom: link.channel.name, movedBy: author.username }))
+
+        if (link.content.length >= 1) {
+          destinationChannel.send(link.content)
         }
 
-        embed.fields = recievedMessage.embeds[0].fields
-        embed.title = recievedMessage.embeds[0].title
-        embed.description = recievedMessage.embeds[0].description
-        embed.url = recievedMessage.embeds[0].url
-        embed.timestamp = recievedMessage.embeds[0].timestamp
-        embed.color = recievedMessage.embeds[0].color
-        embed.video = recievedMessage.embeds[0].video
-        embed.image = recievedMessage.embeds[0].image
-        embed.thumbnail = recievedMessage.embeds[0].thumbnail
-        embed.author = recievedMessage.embeds[0].author
+        if (link.attachments.size >= 1) {
+          destinationChannel.send(new Discord.Attachment(message.attachments.first().url))
+        }
 
-        /*
-        Wonder why I don't do embed = recievedMessage.embeds[0] ?
-        Well, try it yourself, I've been trying all day to get it
-        working, but somehow it's a empty message, says d.js ~ Zerinho6
-        */
-        destinationChannel.send(embed)
-        recievedMessage.delete()
+        if (link.embeds.length >= 1) {
+          if (!link.channel.permissionsFor(this.client.user.id).has('EMBED_LINKS')) {
+            throw new CommandError('commands:move.cantSendEmbed')
+          }
+
+          ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
+            embed[p] = link.embeds[0][p]
+          })
+          // Thanks for the suggestion, mete. ~ Zerinho6
+
+          destinationChannel.send(embed)
+        }
+        link.delete()
+      } catch (e) {
+        throw new CommandError('commands:move.couldntSendMessage')
       }
     } catch (e) {
-      embed.setDescription(t('commands:move.couldntSendMessage'))
-      embed.setColor(Constants.ERROR_COLOR)
-      destinationChannel.send(embed)
+      throw new CommandError('commands:move.couldntSendMessage')
     }
   }
 }

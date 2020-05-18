@@ -39,6 +39,12 @@
   "invalidURL": "You have to give me a valid URL!",
   "invalidImageLink": "You have to give me a valid image link.",
   "imageParsingError": "An error occurred while parsing the image.",
-  "invalidChannelType": "This commands only works in a channel of type {{type}}",
-  "invalidChannel": "You forgot to mention a channel or I couldn't find it."
+  "invalidChannelType": "This command doesn't work in a {{type}} channel.",
+  "invalidChannel": "You forgot to mention a channel or I couldn't find it.",
+  "messageNotFromSameGuild": "Your link is valid but it's not from this guild.",
+  "messageNotFromSameChannel": "Your link is valid but it's not from this channel.",
+  "validLinkButNotInGuild": "Your link is valid but the bot couldn't find that message.",
+  "validLinkButGhostChannel": "Your link is valid but the bot couldn't find that channel in this guild.",
+  "validLinkButGhostMessage": "Your link is valid but I couldn't find that message.",
+  "invalidMessageLink": "The message link you sent is invalid."
 }
