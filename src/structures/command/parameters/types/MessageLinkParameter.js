@@ -23,7 +23,7 @@ module.exports = class MessageLinkParameter extends Parameter {
       sameChannelOnly: !!options.sameChannelOnly,
       returnModifier: options.returnModifier ? options.returnModifier : ['link', 'guild', 'channel', 'message'],
       forceExists: !!options.forceExists,
-      returnIfExists: !!options.returnIfExists
+      returnRegexResult: !!options.returnRegexResult
     }
   }
 
@@ -32,35 +32,26 @@ module.exports = class MessageLinkParameter extends Parameter {
     if (regexResult) {
       const [, guildId, channelId, messageId] = regexResult
 
-      if (this.sameGuildOnly && guildId !== guild.id) {
-        throw new CommandError(t('errors:messageNotFromSameGuild'))
-      }
+      if (this.sameGuildOnly && guildId !== guild.id) throw new CommandError(t('errors:messageNotFromSameGuild'))
 
-      if (this.sameChannelOnly && channelId !== channel.id) {
-        throw new CommandError(t('errors:messageNotFromSameChannel'))
-      }
+      if (this.sameChannelOnly && channelId !== channel.id) throw new CommandError(t('errors:messageNotFromSameChannel'))
 
       if (this.forceExists) {
         const guild = client.guilds.get(guildId)
-        if (!guild) {
-          throw new CommandError(t('errors:validLinkButNotInGuild'))
-        }
+        if (!guild) throw new CommandError(t('errors:validLinkButNotInGuild'))
 
         const channel = guild.channels.get(channelId)
-        if (!channel) {
-          throw new CommandError(t('errors:validLinkButGhostChannel'))
-        }
+        if (!channel) throw new CommandError(t('errors:validLinkButGhostChannel'))
 
         try {
           const recievedMessage = await channel.fetchMessage(messageId)
+          if (!recievedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
 
-          if (!recievedMessage) {
-            throw new CommandError(t('errors:validLinkButGhostMessage'))
-          }
-
-          if (this.returnIfExists) {
+          if (this.returnRegexResult) {
             return recievedMessage
           }
+
+          return recievedMessage
         } catch (e) {
           throw new CommandError(t('errors:validLinkButGhostMessage'))
         }
