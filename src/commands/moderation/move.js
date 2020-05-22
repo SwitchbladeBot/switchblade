@@ -1,5 +1,4 @@
-const { Command, SwitchbladeEmbed, CommandError } = require('../../')
-const Discord = require('discord.js')
+const { Command, CommandError } = require('../../')
 
 module.exports = class Move extends Command {
   constructor (client) {
@@ -17,7 +16,6 @@ module.exports = class Move extends Command {
   }
 
   async run ({ channel, guild, author, t, message }, link, destinationChannel) {
-    const embed = new SwitchbladeEmbed(author)
     if (!destinationChannel.permissionsFor(this.client.user.id).has('SEND_MESSAGES')) throw new CommandError(t('commands:move.cantSendInChannel'))
 
     try {
@@ -27,20 +25,24 @@ module.exports = class Move extends Command {
 
       if (!link.channel.permissionsFor(author.id).has('SEND_MESSAGES')) throw new CommandError(t('commands:move.userCantSend'))
 
+      const MessageObj = {}
+      let content = link.content
+
+      if (link.attachments.size >= 1) {
+        MessageObj.files = [link.attachments.first().url]
+      }
+
+      if (link.embeds.length >= 1) {
+        if (!link.channel.permissionsFor(this.client.user.id).has('EMBED_LINKS')) throw new CommandError(t('commands:move.cantSendEmbed'))
+        MessageObj.embed = {};
+        ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
+          MessageObj.embed[p] = link.embeds[0][p]
+        })
+      }
+
       try {
-        destinationChannel.send(t('commands:move.messageMoved', { authorName: link.author.username, movedFrom: link.channel.name, movedBy: author.username }))
-
-        if (link.content.length >= 1 || link.attachments.size >= 1) await destinationChannel.send(link.content.length >= 1 ? link.content : '', link.attachments.size >= 1 ? new Discord.Attachment(link.attachments.first().url) : {})
-
-        if (link.embeds.length >= 1) {
-          if (!link.channel.permissionsFor(this.client.user.id).has('EMBED_LINKS')) throw new CommandError(t('commands:move.cantSendEmbed'));
-
-          ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
-            embed[p] = link.embeds[0][p]
-          })
-
-          await destinationChannel.send(embed)
-        }
+        await destinationChannel.send(content, MessageObj)
+        await destinationChannel.send(t('commands:move.messageMoved', { authorName: link.author.username, movedFrom: link.channel.name, movedBy: author.username }))
         link.delete()
       } catch (e) {
         throw new CommandError(t('commands:move.couldntSendMessage'))
