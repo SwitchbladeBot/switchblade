@@ -40,13 +40,9 @@ module.exports = class Move extends Command {
         })
       }
 
-      try {
-        await destinationChannel.send(content, MessageObj)
-        await destinationChannel.send(t('commands:move.messageMoved', { authorName: link.author.username, movedFrom: link.channel.name, movedBy: author.username }))
-        link.delete()
-      } catch (e) {
-        throw new CommandError(t('commands:move.couldntSendMessage'))
-      }
+      await destinationChannel.send(content, MessageObj)
+      await destinationChannel.send(t('commands:move.messageMoved', { authorName: link.author.username, movedFrom: link.channel.name, movedBy: author.username }))
+      link.delete()
     } catch (e) {
       throw new CommandError(t('commands:move.couldntSendMessage'))
     }
