@@ -3,7 +3,8 @@
 
   <img src="https://i.imgur.com/SVyi88i.png"><br>
 
-  [![support][support-badge]][support-invite]
+  [![support][support-image]][support-invite]
+  
   [![crowdin][crowdin-badge]][crowdin-url]
   [![jetbrains][jetbrains-badge]][jetbrains-url]
   [![codeclimate][codeclimate-badge]][codeclimate-url]
@@ -137,7 +138,7 @@ Backers are the people who contribute to our projects monetarily. They get their
 <a href="https://opencollective.com/switchblade/backer/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/10/avatar.svg?requireActive=false"></a>
 
 [support-invite]: https://support.switchblade.xyz
-[support-badge]: https://img.shields.io/discord/445203868624748555?label=chat%20on%20Discord&logo=discord&logoColor=white
+[support-image]: https://invidget.switchblade.xyz/svg/2FB8wDG
 
 [crowdin-url]: https://translate.switchblade.xyz
 [crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
