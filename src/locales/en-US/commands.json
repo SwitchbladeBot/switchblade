@@ -1438,6 +1438,10 @@
     "commandDescription": "A cat for every HTTP status!",
     "commandUsage": "[http code]"
   },
+  "httpdog": {
+    "commandDescription": "A dog for every HTTP status!",
+    "commandUsage": "[http code]"
+  },
   "createrole": {
     "commandDescription": "Create a role.",
     "commandUsage": "[color] <name>",
