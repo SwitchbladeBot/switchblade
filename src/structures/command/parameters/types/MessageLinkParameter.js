@@ -48,7 +48,7 @@ module.exports = class MessageLinkParameter extends Parameter {
           if (!recievedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
 
           if (this.returnRegexResult) {
-            return recievedMessage
+            return regexResult
           }
 
           return recievedMessage
