@@ -8,7 +8,7 @@
   [![crowdin][crowdin-badge]][crowdin-url]
   [![jetbrains][jetbrains-badge]][jetbrains-url]
   [![codeclimate][codeclimate-badge]][codeclimate-url]
-  [![circleci][circleci-badge]][circleci-url]
+  [![ghactions][ghactions-badge]][ghactions-url]
   ![servers-badge]
   ![commands-badge]
   ![languages-badge]
@@ -149,8 +149,8 @@ Backers are the people who contribute to our projects monetarily. They get their
 [codeclimate-url]: https://codeclimate.com/github/SwitchbladeBot/switchblade/maintainability
 [codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg
 
-[circleci-url]: https://circleci.com/gh/SwitchbladeBot/switchblade
-[circleci-badge]: https://img.shields.io/circleci/project/github/SwitchbladeBot/switchblade/dev.svg?logo=circleci
+[ghactions-url]: https://github.com/SwitchbladeBot/switchblade/actions?query=workflow%3ACI
+[ghactions-badge]: https://github.com/SwitchbladeBot/switchblade/workflows/CI/badge.svg
 
 [backers-url]: https://opencollective.com/switchblade#backer
 [backers-badge]: https://opencollective.com/switchblade/tiers/backer/badge.svg?label=backers&color=brightgreen
