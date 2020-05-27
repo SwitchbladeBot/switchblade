@@ -2,7 +2,7 @@ const { Command, SwitchbladeEmbed } = require('../../')
 const fetch = require('node-fetch')
 const waifuAPI = 'https://waifu.pics/api/'
 
-module.exports = class Neko extends Command {
+module.exports = class Waifu extends Command {
   constructor (client) {
     super({
       name: 'waifu',
