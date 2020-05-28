@@ -4,6 +4,11 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
+  "waifu": {
+    "commandDescription": "Fetches a random waifu (lewd if the channel is NSFW) and displays it.",
+    "hereIsYour_sfw": "Here's your waifu!",
+    "hereIsYour_nsfw": "Here's your lewd waifu!"
+  },
   "reverse": {
     "commandDescription": "Reverses the text.",
     "commandUsage": "<text>",
