@@ -43,7 +43,7 @@
     "cows": "^2.1.0",
     "cowsay": "^1.4.0",
     "crowdin-without-vulnerability": "^1.0.0",
-    "discord.js": "^11.4.2",
+    "discord.js": "^12.2.0",
     "discord.js-lavalink": "^2.2.2",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
@@ -100,7 +100,7 @@
   },
   "optionalDependencies": {
     "@discordjs/uws": "^11.149.1",
-    "canvas": "^2.5.0",
+    "canvas": "^2.6.1",
     "erlpack": "github:discordapp/erlpack",
     "node-opus": "^0.3.3"
   }
