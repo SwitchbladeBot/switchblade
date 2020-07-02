@@ -14,21 +14,21 @@ module.exports = class MainListener extends EventListener {
   }
 
   onReady () {
-    this.user.setPresence({ game: { name: `@${this.user.username} help` } })
+    this.user.setActivity(`@${this.user.username} help`, { type: 'PLAYING' })
 
     const presences = [
       {
-        name: `${MiscUtils.formatNumber(this.guilds.size, 'en-US')} Guilds | @${this.user.username} help`,
+        name: `${MiscUtils.formatNumber(this.guilds.cache.size, 'en-US')} Guilds | @${this.user.username} help`,
         type: 'WATCHING'
       }, {
-        name: `${MiscUtils.formatNumber(this.users.size, 'en-US')} Users | @${this.user.username} help`,
+        name: `${MiscUtils.formatNumber(this.users.cache.size, 'en-US')} Users | @${this.user.username} help`,
         type: 'WATCHING'
       }
     ]
 
     setInterval(() => {
       const presence = presences[Math.floor(Math.random() * presences.length)]
-      this.user.setPresence({ game: presence })
+      this.user.setActivity(presence.name, { type: presence.type })
     }, PRESENCE_INTERVAL)
 
     // Lavalink connection
