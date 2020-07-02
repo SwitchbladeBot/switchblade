@@ -28,7 +28,7 @@ module.exports = class Pay extends Command {
       const type = value === 1 ? '' : '_plural'
       await this.client.controllers.economy.transfer(author.id, receiver.id, value)
       embed.setDescription(t('commands:pay.transactionSuccessful', { receiver: `<@${receiver.id}>`, value, type }))
-      // TODO: solve hardcoded thingy below
+      // TODO: solve hardcoded thingy above
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)
       switch (e.message) {
