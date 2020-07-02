@@ -62,7 +62,7 @@ module.exports = class TicTacToe extends Command {
       new SwitchbladeEmbed(author)
         .setAuthor(
           t('commands:tictactoe.hasChallenged', { player: member.displayName }),
-          author.displayAvatarURL
+          author.displayAvatarURL({ format: 'png' })
         )
         .setDescription([
           t('commands:tictactoe.clickTheReaction', { CONFIRMATION_EMOJI }),
