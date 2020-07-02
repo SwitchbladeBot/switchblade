@@ -15,9 +15,9 @@ module.exports = class PermissionUtils {
   }
 
   static isManager (client, user) {
-    const botGuild = client.guilds.get(process.env.BOT_GUILD)
-    const managerRole = botGuild && botGuild.roles.get(process.env.MANAGER_ROLE)
-    const isManager = (managerRole && managerRole.members.has(user.id)) || this.isDeveloper(client, user)
+    const botGuild = client.guilds.cache.get(process.env.BOT_GUILD)
+    const managerRole = botGuild && botGuild.roles.cache.get(process.env.MANAGER_ROLE)
+    const isManager = (managerRole && managerRole.members.cache.has(user.id)) || this.isDeveloper(client, user)
     return isManager
   }
 }
