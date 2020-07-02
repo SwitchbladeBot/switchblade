@@ -27,7 +27,7 @@ module.exports = class EmojiLoader extends Loader {
     if (!emojiGuilds) return this.log(`Required emojis not loaded - Required environment variable "EMOJI_GUILDS" is not set.`, { color: 'red', tags: ['Emojis'] })
 
     emojiGuilds.map(eg => {
-      const filteredEmojis = this.client.emojis.filter(e => e.guild.id === eg)
+      const filteredEmojis = this.client.emojis.cache.filter(e => e.guild.id === eg)
       filteredEmojis.map(emoji => this.officialEmojis.push(emoji))
     })
 

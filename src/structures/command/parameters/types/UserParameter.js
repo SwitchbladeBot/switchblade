@@ -29,9 +29,9 @@ module.exports = class UserParameter extends Parameter {
 
     const regexResult = MENTION_REGEX.exec(arg)
     const id = regexResult && regexResult[1]
-    const findMember = guild.members.find(m => m.user.username.toLowerCase().includes(arg.toLowerCase()) || m.displayName.toLowerCase().includes(arg.toLowerCase()))
+    const findMember = guild.members.cache.find(m => m.user.username.toLowerCase().includes(arg.toLowerCase()) || m.displayName.toLowerCase().includes(arg.toLowerCase()))
 
-    const user = client.users.get(id) || (!!findMember && findMember.user)
+    const user = client.users.cache.get(id) || (!!findMember && findMember.user)
     if (!user) throw new CommandError(t(this.errors.invalidUser))
     if (!this.acceptSelf && user.id === author.id) throw new CommandError(t(this.errors.acceptSelf))
     if (!this.acceptBot && user.bot) throw new CommandError(t(this.errors.acceptBot))

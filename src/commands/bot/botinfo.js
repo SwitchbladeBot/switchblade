@@ -15,11 +15,11 @@ module.exports = class BotInfo extends Command {
     const uptime = moment.duration(process.uptime() * 1000).format('d[d] h[h] m[m] s[s]')
     channel.send(
       new SwitchbladeEmbed(author)
-        .setAuthor(this.client.user.username, this.client.user.displayAvatarURL)
-        .setThumbnail(this.client.user.displayAvatarURL)
+        .setAuthor(this.client.user.username, this.client.user.displayAvatarURL({ format: 'png' }))
+        .setThumbnail(this.client.user.displayAvatarURL({ format: 'png' }))
         .setDescription([
           t('commands:botinfo.hello', { user: this.client.user }),
-          t('commands:botinfo.statistics', { guilds: MiscUtils.formatNumber(this.client.guilds.size, language), commands: MiscUtils.formatNumber(this.client.commands.length, language), uptime, Discord, nodeVersion: process.version, users: MiscUtils.formatNumber(this.client.users.filter(u => !u.bot).size, language) })
+          t('commands:botinfo.statistics', { guilds: MiscUtils.formatNumber(this.client.guilds.cache.size, language), commands: MiscUtils.formatNumber(this.client.commands.length, language), uptime, Discord, nodeVersion: process.version, users: MiscUtils.formatNumber(this.client.users.cache.filter(u => !u.bot).size, language) })
         ].join('\n\n'))
         .addField(t('commands:botinfo.links'), [
           t('commands:botinfo.inviteLink', { botBadge: this.getEmoji('botBadge') }),
