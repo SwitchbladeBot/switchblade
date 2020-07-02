@@ -1,5 +1,5 @@
 const { CanvasTemplates, Command, CommandError } = require('../../')
-const { Attachment } = require('discord.js')
+const { MessageAttachment } = require('discord.js')
 const moment = require('moment')
 
 module.exports = class Weather extends Command {
@@ -48,7 +48,7 @@ module.exports = class Weather extends Command {
       const tempUnit = '°C'
       const weather = await CanvasTemplates.weather({ t }, `${cityName.toUpperCase()}${state ? ` - ${state.short_name}` : ''}`, weatherInfo, tempUnit)
 
-      channel.send(new Attachment(weather, 'weather.png')).then(() => channel.stopTyping())
+      channel.send(new MessageAttachment(weather, 'weather.png')).then(() => channel.stopTyping())
     } else {
       throw new CommandError(t('commands:weather.notFound'))
     }
