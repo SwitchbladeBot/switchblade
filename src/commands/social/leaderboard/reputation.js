@@ -1,5 +1,5 @@
 const { CanvasTemplates, Command, Constants } = require('../../../')
-const { Attachment } = require('discord.js')
+const { MessageAttachment } = require('discord.js')
 
 module.exports = class ReputationLeaderboard extends Command {
   constructor (client) {
@@ -22,6 +22,6 @@ module.exports = class ReputationLeaderboard extends Command {
       valueFunction: (u) => t('commons:reputationWithCount', { count: Math.round(u.rep) })
     })
 
-    channel.send(new Attachment(leaderboard, 'leaderboard.jpg')).then(() => channel.stopTyping())
+    channel.send(new MessageAttachment(leaderboard, 'leaderboard.jpg')).then(() => channel.stopTyping())
   }
 }

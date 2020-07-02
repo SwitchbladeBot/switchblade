@@ -72,7 +72,7 @@ module.exports = class SocialController extends Controller {
   async leaderboard (sortField, projection = sortField, size = 10) {
     const dbRes = await this._users.model.find({}, projection).sort({ [sortField]: -1 }).limit(size + 6)
     const top = dbRes.map(this._users.parse).filter(u => {
-      u.user = this.client.users.get(u._id)
+      u.user = this.client.users.cache.get(u._id)
       return !!u.user
     })
 
