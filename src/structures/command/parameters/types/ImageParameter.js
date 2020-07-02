@@ -113,7 +113,7 @@ module.exports = class ImageParameter extends Parameter {
 
     // Last attachment from channel's last 10 messages
     if (this.lastMessages.accept) {
-      const lastMessages = channel.messages.last(this.lastMessages.limit)
+      const lastMessages = channel.messages.cache.last(this.lastMessages.limit)
       if (lastMessages.length) {
         for (let i = lastMessages.length - 1; i >= 0; i--) {
           const msg = lastMessages[i]
