@@ -12,5 +12,6 @@ module.exports = {
   string: require('./StringParameter.js'),
   url: require('./URLParameter.js'),
   user: require('./UserParameter.js'),
-  time: require('./TimeParameter.js')
+  time: require('./TimeParameter.js'),
+  messageLink: require('./MessageLinkParameter.js')
 }
