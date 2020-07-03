@@ -18,6 +18,6 @@ module.exports = class WelcomeTranslator extends Command {
 
   run ({ t, guild, member: author, channel }, member) {
     channel.startTyping()
-    channel.send(t('commands:welcometranslator.welcomeMessage', { member })).then(() => channel.stopTyping())
+    channel.send(t('commands:welcometranslator.welcomeMessage', { member: `<@${member.id}>` })).then(() => channel.stopTyping())
   }
 }
