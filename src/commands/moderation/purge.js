@@ -19,7 +19,7 @@ module.exports = class Purge extends Command {
     }, client)
   }
 
-  async run ({ channel, guild, author, t, message }, number = 50, member) {
+  async run ({ channel, guild, author, t }, number = 50, member) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     if (member) {
