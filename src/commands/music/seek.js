@@ -15,7 +15,7 @@ module.exports = class Seek extends Command {
 
   async run ({ t, author, channel, guild }, target) {
     const embed = new SwitchbladeEmbed(author)
-    const guildPlayer = this.client.playerManager.get(guild.id)
+    const guildPlayer = this.client.playerManager.players.get(guild.id)
 
     const { playingSong } = guildPlayer
     if (playingSong.isStream) throw new CommandError(t('commands:seek.notLive'))
@@ -37,7 +37,7 @@ class TargetParameter extends Parameter {
   static parse (arg, { client, guild }) {
     if (TIMESTAMP_REGEX.test(arg)) {
       const [ , f, s, t ] = TIMESTAMP_REGEX.exec(arg)
-      const { state: { position } } = client.playerManager.get(guild.id)
+      const { state: { position } } = client.playerManager.players.get(guild.id)
       const target = moment.duration(t ? `${f}:${s}:${t}` : `00:${f}:${s}`).asMilliseconds()
       return target - position
     } else if (FORWARD_REGEX.test(arg)) {

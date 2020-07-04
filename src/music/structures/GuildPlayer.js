@@ -1,10 +1,10 @@
 const { Collection } = require('discord.js')
-const { Player } = require('discord.js-lavalink')
+const { Player } = require('@lavacord/discord.js')
 const moment = require('moment')
 
 module.exports = class GuildPlayer extends Player {
-  constructor (options = {}) {
-    super(options)
+  constructor (options, id) {
+    super(options, id)
 
     this.on('end', ({ reason }) => {
       this.scrobbleSong(this.playingSong)
@@ -30,21 +30,13 @@ module.exports = class GuildPlayer extends Player {
     this._listening = new Collection()
   }
 
-  event (message) {
-    if (message.op === 'playerUpdate') {
-      this.state = Object.assign(this.state, { volume: this._volume }, message.state)
-    } else {
-      super.event(message)
-    }
-  }
-
-  play (song, forcePlay = false, options = {}) {
+  async play (song, forcePlay = false, options = {}) {
     if (this.playing && !forcePlay) {
       this.queueTrack(song)
       return false
     }
 
-    super.play(song.track, options)
+    await super.play(song.track, options)
     this.playingSong = song
     this.volume(this._volume)
     song.emit('start')
@@ -134,12 +126,12 @@ module.exports = class GuildPlayer extends Player {
     if (state) {
       this._previousVolume = this._volume
       this.volume(150)
-      this.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 1 })))
+      this.equalizer(Array(6).fill(0).map((_, i) => ({ band: i, gain: 1 })))
       return true
     }
 
     if (this._previousVolume !== null) this.volume(this._previousVolume)
-    this.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 0 })))
+    this.equalizer(Array(6).fill(0).map((_, i) => ({ band: i, gain: 0 })))
     return false
   }
 
@@ -160,17 +152,6 @@ module.exports = class GuildPlayer extends Player {
 
   get voiceChannel () {
     return this.client.channels.get(this.channel)
-  }
-
-  // Internal
-
-  setEQ (bands) {
-    this.node.send({
-      op: 'equalizer',
-      guildId: this.id,
-      bands
-    })
-    return this
   }
 
   // Voice Update
