@@ -98,7 +98,6 @@ module.exports = class SwitchbladePlayerManager extends Manager {
   async play (song, channel) {
     if (song && song instanceof Song) {
       // const host = this.getIdealHost(channel.guild.region)
-      console.log(channel.guild.id, channel.id)
       const player = await this.join({
         guild: channel.guild.id,
         channel: channel.id,
