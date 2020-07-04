@@ -17,7 +17,7 @@ module.exports = class Ban extends Command {
 
   async run ({ channel, guild, author, t }, member, reason) {
     const embed = new SwitchbladeEmbed(author)
-    await guild.ban(member, { days: 7, reason }).then(bannedMember => {
+    await member.ban({ days: 7, reason }).then(bannedMember => {
       embed
         .setTitle(t('commands:ban.successTitle'))
         .setDescription(`${bannedMember} - \`${reason}\``)

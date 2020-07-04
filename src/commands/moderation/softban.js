@@ -17,8 +17,8 @@ module.exports = class Softban extends Command {
 
   async run ({ channel, guild, author, t }, member, reason) {
     const embed = new SwitchbladeEmbed(author)
-    await guild.ban(member, { days: 7, reason }).then(async bannedMember => {
-      await guild.unban(bannedMember).then(softbannedMember => {
+    await member.ban({ days: 7, reason }).then(async bannedMember => {
+      await guild.members.unban(bannedMember).then(softbannedMember => {
         embed
           .setTitle(t('commands:softban.successTitle'))
           .setDescription(`${softbannedMember} - \`${reason}\``)

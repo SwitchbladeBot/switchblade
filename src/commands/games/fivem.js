@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 
 const { Attachment } = require('discord.js')
 const fetch = require('node-fetch')
@@ -9,7 +9,7 @@ module.exports = class FiveM extends Command {
       name: 'fivem',
       category: 'games',
       parameters: [{
-        type: 'string', missingError: 'commands:fivem.noIP'
+        type: 'string', clean: true, missingError: 'commands:fivem.noIP'
       }]
     }, client)
   }
@@ -17,34 +17,29 @@ module.exports = class FiveM extends Command {
   async run ({ t, author, channel }, address) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
-    const host = address.split(':')[0]
-    const port = address.split(':')[1] || 30120
-    const server = await fetch(`http://${host}:${port}/info.json`).then(res => res.json()).catch(() => {
-      embed.setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:samp.serverUnreachableTitle'))
-        .setDescription(t('commands:samp.serverUnreachableDescription'))
-      channel.send(embed).then(channel.stopTyping())
-    })
+    const id = address.replace(/(http(s?):\/\/)?(cfx.re\/join\/)/g, '')
+    const server = await fetch(`https://servers-frontend.fivem.net/api/servers/single/${id}`)
+      .then(res => res.json())
+      .then(data => data.Data)
+      .catch(() => {
+        throw new CommandError(`${t('commands:fivem.serverUnreachableTitle')} ${t('commands:fivem.serverUnreachableDescription')}`)
+      })
 
     if (server) {
-      const serverData = JSON.parse(server.body)
-      const imageData = Buffer.from(serverData.icon.replace(/^data:image\/([\w+]+);base64,([\s\S]+)/, ''), 'base64')
-      await this.getAllServers().then(function (servers) {
-        for (let serv of servers) {
-          if (serv.EndPoint === `${host}:${port}`) serverData.data = serv.Data
-        }
-      })
       embed.setAuthor('FiveM', 'https://i.imgur.com/u5wzB9A.png')
-        .setTitle(serverData.data.hostname)
-        .setURL(`https://servers.fivem.net/#/servers/detail/${host}:${port}`)
-        .attachFile(new Attachment(imageData, 'serverIcon.png'))
-        .setThumbnail('attachment://serverIcon.png')
-        .addField(t('commands:fivem.address'), `\`${host}:${port}\``, true)
-        .addField(t('commands:fivem.version'), serverData.version, true)
-        .addField(t('commands:fivem.players'), `${serverData.data.players.length}/${serverData.vars.sv_maxClients}`, true)
-        .addField(t('commands:fivem.map'), serverData.data.mapname || t('commands:fivem.noMap'), true)
-        .addField(t('commands:fivem.gameMode'), serverData.data.gametype || t('commands:fivem.noGameMode'), true)
-        .addField(t('commands:fivem.gameName'), serverData.data.gamename || t('commands:fivem.noGameName'), true)
+        .setTitle(`${server.hostname.replace(/\|/g, '\\|').substring(0, 253)}...`)
+        .setURL(`https://servers.fivem.net/servers/detail/${id}`)
+        .setThumbnail(`https://servers-live.fivem.net/servers/icon/${id}/${server.iconVersion}.png`)
+        .addField(t('commands:fivem.address'), `\`cfx.re/join/${id}\``, true)
+        .addField(t('commands:fivem.players'), `${server.players.length}/${server.sv_maxclients}`, true)
+        .addField(t('commands:fivem.map'), server.mapname || t('commands:fivem.noMap'), true)
+        .addField(t('commands:fivem.gameMode'), server.gametype || t('commands:fivem.noGameMode'), true)
+        .addField(t('commands:fivem.gameName'), server.vars.gamename || t('commands:fivem.noGameName'), true)
+
+      if (server.vars.banner_detail || server.vars.banner_connecting) {
+        embed.setImage(server.vars.banner_detail ? server.vars.banner_detail : (server.vars.banner_connecting ? server.vars.banner_connecting : null))
+      }
+
       channel.send(embed).then(channel.stopTyping())
     }
   }

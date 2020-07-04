@@ -18,7 +18,7 @@ module.exports = class CreateRole extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     try {
-      await guild.createRole({ name, color: hexcode })
+      await guild.roles.create({ data: { name, color: hexcode } })
       embed
         .setTitle(t('commands:createrole.successTitle'))
         .setDescription(t('commands:createrole.successMessage', { name }))

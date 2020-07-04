@@ -688,12 +688,11 @@
   },
   "fivem": {
     "commandDescription": "Shows information about a FiveM server.",
-    "commandUsage": "<ip>[:port]",
-    "noIP": "You have to give me an IP!",
+    "commandUsage": "<id>",
+    "noIP": "You have to give me a valid address (ex. cfx.re/join/o6ppl7)!",
     "serverUnreachableTitle": "I couldn't reach this server.",
-    "serverUnreachableDescription": "Check the IP and port, or try again later.",
+    "serverUnreachableDescription": "Check the address, or try again later.",
     "address": "Address",
-    "version": "Version",
     "players": "Players",
     "map": "Map",
     "gameMode": "Game Mode",
@@ -1193,9 +1192,6 @@
   },
   "uigradient": {
     "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)."
-  },
-  "portugalgonewild": {
-    "commandDescription": "Shows a random image from r/PortugalGoneWild."
   },
   "showerthoughts": {
     "commandDescription": "Shows a random thought from r/Showerthoughts."

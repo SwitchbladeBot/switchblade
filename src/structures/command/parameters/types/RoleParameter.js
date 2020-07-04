@@ -10,7 +10,7 @@ module.exports = class RoleParameter extends Parameter {
     const regexResult = MENTION_ROLE_REGEX.exec(arg)
     const id = regexResult && regexResult[1]
 
-    let role = guild.roles.get(id) || guild.roles.find(r => r.name.toLowerCase().includes(arg.toLowerCase()))
+    let role = guild.roles.cache.get(id) || guild.roles.cache.find(r => r.name.toLowerCase().includes(arg.toLowerCase()))
     if (!role) throw new CommandError(t('errors:invalidRole'))
     return role
   }
