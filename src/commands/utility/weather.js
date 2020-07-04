@@ -7,7 +7,10 @@ module.exports = class Weather extends Command {
     super({
       name: 'weather',
       category: 'utility',
-      requirements: { canvasOnly: true },
+      requirements: {
+        canvasOnly: true,
+        apis: [ 'gmaps', 'darksky' ]
+      },
       parameters: [{
         type: 'string',
         full: true,
