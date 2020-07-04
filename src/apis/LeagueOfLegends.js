@@ -16,14 +16,16 @@ module.exports = class LeagueOfLegends extends APIWrapper {
     this.skins = []
   }
 
-  async load () {
-    await this.request(`/realms/na.json`)
+  load () {
+    this.request(`/realms/na.json`)
       .then(data => {
         this.version = data.v
+        this.fetchChampions()
+          .then(() => {
+            this.loadSkins()
+          })
       })
 
-    await this.fetchChampions()
-    await this.loadSkins()
     return this
   }
 

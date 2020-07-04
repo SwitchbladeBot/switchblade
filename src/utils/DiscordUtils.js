@@ -27,5 +27,6 @@ module.exports = class DiscordUtils {
         const role = message.guild.roles.get(input.replace(/<|@|>|&/g, ''))
         return role ? `@${role.name}` : input
       })
+      .replace(/`/g, '')
   }
 }

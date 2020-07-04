@@ -64,6 +64,8 @@ module.exports = class SteamLadderProfile extends Command {
           t('commands:steamladder.joinedOn', { date: `**${new Intl.DateTimeFormat(language).format(new Date(user.steam_join_date))}**` })
         ].join('\n'), true)
     } catch (e) {
+      console.log(e)
+
       throw new CommandError(t('commands:steamladder.userNotFound'))
     }
     channel.send(embed).then(channel.stopTyping())

@@ -704,6 +704,7 @@
   },
   "emoji": {
     "commandDescription": "Enlarges an emoji.",
+    "commandUsage": "<emoji to enlarge>",
     "hereIsYourEmoji": "Here's your emoji!"
   },
   "clapify": {
