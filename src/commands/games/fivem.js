@@ -1,6 +1,5 @@
-const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
-const { Attachment } = require('discord.js')
 const fetch = require('node-fetch')
 
 module.exports = class FiveM extends Command {
