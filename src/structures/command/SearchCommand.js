@@ -30,7 +30,7 @@ module.exports = class SearchCommand extends Command {
 
   async run (context, query) {
     const { t, channel, author } = context
-    await channel.startTyping()
+    channel.startTyping()
     const resultsAll = await this.search(context, query)
     if (!Array.isArray(resultsAll)) throw new TypeError(`SearchCommand.search needs to return an array. ${typeof resultsAll} given in ${this.constructor.name}.`)
     const results = resultsAll.slice(0, this.maxResults)

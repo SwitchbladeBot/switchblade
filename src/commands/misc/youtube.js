@@ -51,7 +51,7 @@ module.exports = class YouTube extends SearchCommand {
 
   async handleResult (ctx, item) {
     const { t, channel } = ctx
-    await channel.startTyping()
+    channel.startTyping()
     const type = this.getType(item.id)
     const embed = await this[`get${MiscUtils.capitalizeFirstLetter(type)}`](ctx, item)
     embed.setAuthor(t(`commands:youtube.${type}Info`), this.embedLogoURL)
