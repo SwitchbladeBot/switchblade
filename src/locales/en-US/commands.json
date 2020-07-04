@@ -1500,5 +1500,18 @@
     "commandDescription": "Searches for some image on google",
     "commandUsage": "<query>",
     "noQuery": "Please insert something to search."
+  },
+  "move": {
+    "commandDescription": "Moves a message from one channel to another.",
+    "commandUsage": "<message link> <channel>",
+    "missingMessageLink": "You need to give me a message link.",
+    "missingChannelMention": "You need to give me a channel.",
+    "cantSendInChannel": "I can't send messages in the channel you want me to move the message to.",
+    "channelsHaveDifferentType": "You're trying to move a message from a nsfw channel to a not nsfw channel.",
+    "cantDeleteMessage": "I can't delete the original message because I don't have permission.",
+    "userCantSend": "You can't send messages in that channel.",
+    "messageMoved": "Message sent by {{authorName}} and moved from {{movedFrom}} by {{movedBy}}.",
+    "cantSendEmbed": "I can't send embed links on the channel where I'm supposed to move the message to.",
+    "couldntSendMessage": "Something happened and I couldn't send the message."
   }
 }

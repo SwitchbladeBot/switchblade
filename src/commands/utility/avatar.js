@@ -19,7 +19,7 @@ module.exports = class Avatar extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     user = user || author
-    embed.setImage(user.displayAvatarURL)
+    embed.setImage(user.displayAvatarURL({ dynamic: true }))
       .setDescription(t('commands:avatar.someonesAvatar', { user }))
     channel.send(embed).then(() => channel.stopTyping())
   }
