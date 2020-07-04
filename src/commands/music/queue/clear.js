@@ -10,7 +10,7 @@ module.exports = class QueueClear extends Command {
   }
 
   async run ({ t, author, channel, guild }) {
-    const guildPlayer = this.client.playerManager.get(guild.id)
+    const guildPlayer = this.client.playerManager.players.get(guild.id)
     if (guildPlayer.nextSong) {
       guildPlayer.clearQueue()
       channel.send(new SwitchbladeEmbed(author)

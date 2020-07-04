@@ -8,7 +8,7 @@ const {
 
 const MusicUtils = require('./MusicUtils.js')
 
-const { PlayerManager } = require('discord.js-lavalink')
+const { Manager } = require('@lavacord/discord.js');
 const fetch = require('node-fetch')
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
@@ -26,7 +26,7 @@ const resolveRegion = (region) => {
   return dRegion && dRegion[0]
 }
 
-module.exports = class SwitchbladePlayerManager extends PlayerManager {
+module.exports = class SwitchbladePlayerManager extends Manager {
   constructor (client, nodes = [], options = {}) {
     options.player = GuildPlayer
     super(client, nodes, options)
@@ -34,13 +34,6 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
     // TODO: Rest API based on guild's region (or maybe bot's location)
     this.REST_ADDRESS = `${nodes[0].host}:${nodes[0].port}`
     this.REST_PASSWORD = nodes[0].password
-  }
-
-  onMessage (message) {
-    if (!message || !message.op) return
-    const player = this.get(message.guildId)
-    if (!player) return
-    return player.event(message)
   }
 
   async fetchTracks (identifier) {
@@ -104,21 +97,23 @@ module.exports = class SwitchbladePlayerManager extends PlayerManager {
 
   async play (song, channel) {
     if (song && song instanceof Song) {
-      const host = this.getIdealHost(channel.guild.region)
-      const player = this.join({
+      // const host = this.getIdealHost(channel.guild.region)
+      const player = await this.join({
         guild: channel.guild.id,
         channel: channel.id,
-        host
+        node: '1'
       }, DEFAULT_JOIN_OPTIONS)
-      player.play(song)
+      await player.play(song)
       return song
     }
     return null
   }
 
+  /*
   getIdealHost (region) {
     region = resolveRegion(region)
     const { host } = (region && this.nodes.find(n => n.ready && n.region === region)) || this.nodes.first()
     return host
   }
+  */
 }

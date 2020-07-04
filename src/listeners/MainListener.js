@@ -9,7 +9,7 @@ const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 module.exports = class MainListener extends EventListener {
   constructor (client) {
     super({
-      events: ['ready', 'message', 'voiceStateUpdate']
+      events: ['ready', 'message']
     }, client)
   }
 
@@ -40,7 +40,9 @@ module.exports = class MainListener extends EventListener {
           user: this.user.id,
           shards: 1
         })
-        this.log('Lavalink connection established!', { color: 'green', tags: ['Music'] })
+        this.playerManager.connect()
+          .then(() => this.log('Lavalink connection established!', { color: 'green', tags: ['Music'] }))
+          .catch(() => this.log(`Failed to establish Lavalink connection - Failed to connect to nodes.`, { color: 'red', tags: ['Music'] }))
       } catch (e) {
         this.log(`Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, { color: 'red', tags: ['Music'] })
       }
@@ -137,12 +139,5 @@ module.exports = class MainListener extends EventListener {
         this.runCommand(command, context, args, language)
       }
     }
-  }
-
-  async onVoiceStateUpdate (oldMember, newMember) {
-    if (!this.playerManager) return
-    const guildPlayer = this.playerManager.get(newMember.guild.id)
-    if (!guildPlayer) return
-    guildPlayer.updateVoiceState(oldMember, newMember)
   }
 }

@@ -6,7 +6,7 @@ module.exports = class CommandContext {
    * @prop {User} user The author of the message
    * @prop {?GuildMember} member The author of the message as a guild member
    * @prop {TextChannel} channel The channel of the message
-   * @prop {?VoiceChannel} voiceChannel The voice channel of the author of the message, if any
+   * @prop {?VoiceState} voiceState The voice state of the author of the message, if any
    * @prop {?Guild} guild The guild of the channel of the message
    * @prop {string} language The language used
    * @prop {Command} command The command
@@ -21,7 +21,7 @@ module.exports = class CommandContext {
     this.author = options.message.author
     this.member = options.message.member
     this.channel = options.message.channel
-    this.voiceChannel = this.member ? this.member.voiceChannel : null
+    this.voiceState = this.member ? this.member.voice : null
     this.guild = options.message.guild
     this.language = options.language
     this.command = options.command

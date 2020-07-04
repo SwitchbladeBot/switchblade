@@ -33,6 +33,7 @@
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
     "@hapi/joi": "^16.1.7",
+    "@lavacord/discord.js": "0.0.7",
     "@sentry/node": "^5.15.5",
     "abort-controller": "^2.0.3",
     "chalk": "^3.0.0",
@@ -44,7 +45,6 @@
     "cowsay": "^1.4.0",
     "crowdin-without-vulnerability": "^1.0.0",
     "discord.js": "^12.2.0",
-    "discord.js-lavalink": "^2.2.2",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
     "fuse.js": "^3.4.6",
@@ -76,9 +76,9 @@
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",
     "transform-props": "^1.0.1",
+    "turndown": "^6.0.0",
     "uws": "^9.14.0",
-    "zlib-sync": "^0.1.6",
-    "turndown": "^6.0.0"
+    "zlib-sync": "^0.1.6"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",

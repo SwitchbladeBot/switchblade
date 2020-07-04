@@ -18,7 +18,7 @@ module.exports = class Lyrics extends Command {
 
     const playingSong = !song
     if (playingSong) {
-      const guildPlayer = (guild && this.client.playerManager && this.client.playerManager.get(guild.id))
+      const guildPlayer = (guild && this.client.playerManager && this.client.playerManager.players.get(guild.id))
       if (!guildPlayer || !guildPlayer.playing) {
         throw new CommandError(t('commands:lyrics.noTrackName'), true)
       }
