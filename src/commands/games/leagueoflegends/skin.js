@@ -15,7 +15,7 @@ module.exports = class LeagueOfLegendsSkin extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
-      const { name, splashUrl } = await this.client.apis.lol.fetchSkin(skin, this.client)
+      const { name, splashUrl } = await this.client.apis.lol.fetchSkin(skin)
       const { embedColor, authorString, authorImage, authorURL } = this.parentCommand
       const { items } = await this.client.apis.youtube.search(`${name} Skin Spotlight`, ['video'])
 
