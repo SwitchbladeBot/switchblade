@@ -7,6 +7,7 @@ module.exports = class Time extends Command {
     super({
       name: 'time',
       aliases: ['currenttime'],
+      requirements: { apis: ['gmaps'] },
       parameters: [{
         type: 'string', full: true, missingError: 'commands:time.noZone'
       }]
