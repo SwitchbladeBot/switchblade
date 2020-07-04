@@ -12,7 +12,7 @@ module.exports = class ImageSearchCommand extends Command {
     }, client)
   }
 
-  async run ({ channel }, query) {
+  async run ({ t, channel }, query) {
     try {
       const image = await this.client.apis.gsearch.searchImage(query)
       channel.send(image.items[0].link)
