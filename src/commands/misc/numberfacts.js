@@ -17,12 +17,13 @@ module.exports = class NumberFacts extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     try {
-      const body = await fetch(`http://numbersapi.com/${number}/trivia`).then(res => res.json())
+      const body = await fetch(`http://numbersapi.com/${number}/trivia`).then(res => res.text())
       embed.setTitle(body)
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()
-      throw new CommandError(t('commands:numberfacts.validNumber'))
+      console.error(e)
+      throw new CommandError(t('commands:numberfacts.anErrorOcurred'))
     }
   }
 }

@@ -715,7 +715,8 @@
   "numberfacts": {
     "commandDescription": "Shows a fact about a number.",
     "commandUsage": "<number>",
-    "validNumber": "You have to give me a number!"
+    "validNumber": "You have to give me a number!",
+    "anErrorOcurred": "An error has ocurred while fetching a fact for that number. Please try again later."
   },
   "blacklist": {
     "commandDescription": "Adds a user to the blacklist.",
