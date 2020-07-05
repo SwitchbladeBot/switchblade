@@ -99,8 +99,8 @@ module.exports = class ImageParameter extends Parameter {
           const user = UserParameter._parse(arg, this.userOptions, context)
           if (user) {
             try {
-              if (this.url) return user.displayAvatarURL
-              const buffer = await imageRequest(user.displayAvatarURL, client)
+              if (this.url) return user.displayAvatarURL({ format: 'jpg' })
+              const buffer = await imageRequest(user.displayAvatarURL({ format: 'jpg' }), client)
               return buffer
             } catch (e) {
               client.logError(e)
@@ -158,8 +158,8 @@ module.exports = class ImageParameter extends Parameter {
     if (this.authorAvatar) {
       try {
         parseState.argIndex--
-        if (this.url) return author.displayAvatarURL
-        const buffer = await imageRequest(author.displayAvatarURL, client)
+        if (this.url) return author.displayAvatarURL({ format: 'jpg' })
+        const buffer = await imageRequest(author.displayAvatarURL({ format: 'jpg' }), client)
         return buffer
       } catch (e) {
         client.logError(e)
