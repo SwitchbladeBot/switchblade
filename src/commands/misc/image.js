@@ -16,8 +16,13 @@ module.exports = class ImageSearchCommand extends Command {
   async run ({ t, channel }, query) {
     try {
       const image = await this.client.apis.gsearch.searchImage(query)
-      channel.send(image.items[0].link)
+      if (image.items) {
+        return channel.send(image.items[0].link)
+      } else {
+        throw new CommandError(t('commons:search.noResults'))
+      }
     } catch (err) {
+      if (err instanceof CommandError) throw err
       throw new CommandError(t('errors:generic'))
     }
   }
