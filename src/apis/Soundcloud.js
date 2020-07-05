@@ -79,7 +79,6 @@ module.exports = class SoundcloudAPI extends APIWrapper {
   async checkIfHardcodedClientIdIsValid () {
     try {
       const track = await this.resolveTrack('https://soundcloud.com/roadrunner-usa/02-sick-bubblegum')
-      console.log(track.id)
       return track && track.id === 35989476
     } catch (_) {
       return false
