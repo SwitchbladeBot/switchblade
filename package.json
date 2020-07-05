@@ -2,10 +2,10 @@
   "name": "switchblade",
   "version": "1.0.0",
   "description": "The multi-purpose Discord bot",
-  "main": "index.js",
+  "main": "shard.js",
   "scripts": {
-    "start": "node index.js",
-    "start-dev": "nodemon --exec node -r dotenv/config index.js",
+    "start": "node shard.js",
+    "start-dev": "nodemon --exec node -r dotenv/config shard.js",
     "test": "mocha src/test --recursive",
     "fix": "standard --fix",
     "crowdin": "crowdin upload sources"
