@@ -46,5 +46,6 @@
   "validLinkButNotInGuild": "Your link is valid but the bot couldn't find that message.",
   "validLinkButGhostChannel": "Your link is valid but the bot couldn't find that channel in this guild.",
   "validLinkButGhostMessage": "Your link is valid but I couldn't find that message.",
-  "invalidMessageLink": "The message link you sent is invalid."
+  "invalidMessageLink": "The message link you sent is invalid.",
+  "messageContainsNothing": "The message you're trying to move has no content."
 }

@@ -23,7 +23,7 @@ module.exports = class Move extends Command {
 
       if (!link.channel.permissionsFor(this.client.user.id).has('MANAGE_MESSAGES')) throw new CommandError(t('commands:move.cantDeleteMessage'))
 
-      if (!link.channel.permissionsFor(author.id).has('SEND_MESSAGES')) throw new CommandError(t('commands:move.userCantSend'))
+      if (!destinationChannel.permissionsFor(author.id).has('SEND_MESSAGES')) throw new CommandError(t('commands:move.userCantSend'))
 
       const MessageObj = {}
       let content = link.content
@@ -33,11 +33,15 @@ module.exports = class Move extends Command {
       }
 
       if (link.embeds.length >= 1) {
-        if (!link.channel.permissionsFor(this.client.user.id).has('EMBED_LINKS')) throw new CommandError(t('commands:move.cantSendEmbed'))
+        if (!destinationChannel.permissionsFor(this.client.user.id).has('EMBED_LINKS')) throw new CommandError(t('commands:move.cantSendEmbed'))
         MessageObj.embed = {};
         ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
           MessageObj.embed[p] = link.embeds[0][p]
         })
+      }
+
+      if (Object.keys(MessageObj).length === 0 && (!content || content === '')) {
+        throw new CommandError(t('errors:messageContainsNothing'))
       }
 
       await destinationChannel.send(content, MessageObj)
