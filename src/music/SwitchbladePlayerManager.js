@@ -14,12 +14,14 @@ const fetch = require('node-fetch')
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
 
 // Region resolver
+/*
 const defaultRegions = {
   asia: [ 'sydney', 'singapore', 'japan', 'hongkong' ],
   eu: [ 'london', 'frankfurt', 'amsterdam', 'russia', 'eu-central', 'eu-west', 'southafrica' ],
   us: [ 'us-central', 'us-west', 'us-east', 'us-south' ],
   sam: [ 'brazil' ]
 }
+*/
 
 /*
 const resolveRegion = (region) => {
