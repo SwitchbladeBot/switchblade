@@ -8,7 +8,7 @@ const {
 
 const MusicUtils = require('./MusicUtils.js')
 
-const { Manager } = require('@lavacord/discord.js');
+const { Manager } = require('@lavacord/discord.js')
 const fetch = require('node-fetch')
 
 const DEFAULT_JOIN_OPTIONS = { selfdeaf: true }
@@ -20,11 +20,14 @@ const defaultRegions = {
   us: [ 'us-central', 'us-west', 'us-east', 'us-south' ],
   sam: [ 'brazil' ]
 }
+
+/*
 const resolveRegion = (region) => {
-  region = region.replace('vip-', '')
-  const dRegion = Object.entries(defaultRegions).find(([ , r ]) => r.includes(region))
-  return dRegion && dRegion[0]
+region = region.replace('vip-', '')
+const dRegion = Object.entries(defaultRegions).find(([ , r ]) => r.includes(region))
+return dRegion && dRegion[0]
 }
+*/
 
 module.exports = class SwitchbladePlayerManager extends Manager {
   constructor (client, nodes = [], options = {}) {
