@@ -5,6 +5,7 @@ module.exports = class ImageSearchCommand extends Command {
     super({
       name: 'image',
       aliases: ['googleimage', 'gogleimage', 'imagesearch', 'images', 'gimages'],
+      requirements: { apis: ['gsearch'] },
       category: 'general',
       parameters: [{
         type: 'string', required: true, full: true, missingError: 'commands:image.noQuery'
