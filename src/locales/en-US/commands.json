@@ -73,6 +73,7 @@
   "github": {
     "commandDescription": "Searches for a user, repository or an organization on GitHub.",
     "commandUsage": "<type> <query>",
+    "serviceName": "GitHub",
     "subcommands": {
       "user": {
         "commandDescription": "Searches for a user on GitHub.",

@@ -25,7 +25,7 @@ module.exports = class GitHubOrganization extends Command {
       const orgMembers = await this.client.apis.github.getOrganizationMembers(organization)
       const embed = new SwitchbladeEmbed(author)
         .setColor(Constants.GITHUB_COLOR)
-        .setAuthor('GitHub', this.parentCommand.GITHUB_LOGO)
+        .setAuthor('GitHub', this.parentCommand.authorImage)
         .setTitle(`${data.login}${data.name ? ` - ${data.name}` : ''}`)
         .setURL(data.html_url)
         .setThumbnail(data.avatar_url)
@@ -34,7 +34,7 @@ module.exports = class GitHubOrganization extends Command {
         .addField(t('commands:github.subcommands.organization.createdAt'), `${moment(data.created_at).format('LLL')}\n(${moment(data.created_at).fromNow()})`, true)
       if (data.public_repos > 0) {
         const repos = await this.client.apis.github.getOrganizationRepositories(organization)
-        embed.addField(t('commands:github.subcommands.user.repositories', { count: data.public_repos }), `${repos.slice(0, 5).map(r => `${r.fork ? `${this.getEmoji('forked')} ` : ''}\`${r.full_name}\``).join('\n')}${data.public_repos > 5 ? `\n${t('commands:github.subcommands.organization.moreRepos', { repos: data.public_repos - 5 })}` : ''}`, true)
+        embed.addField(t('commands:github.subcommands.user.repositories', { count: data.public_repos }), `${repos.slice(0, 5).map(r => `\`${r.full_name}\` ${r.fork ? ` ${this.getEmoji('forked')}` : ''}`).join('\n')}${data.public_repos > 5 ? `\n${t('commands:github.subcommands.organization.moreRepos', { repos: data.public_repos - 5 })}` : ''}`, true)
       }
 
       await channel.send(embed).then(() => channel.stopTyping())
