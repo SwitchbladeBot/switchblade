@@ -1106,6 +1106,7 @@
   "lastfm": {
     "commandDescription": "Searches for a song, album or an artist on Last.fm, or displays information about a user.",
     "commandUsage": "<type> <query>",
+    "serviceName": "Last.fm",
     "topArtists": "Top artists (1 month)",
     "playcount": "Playcount",
     "playcountCount": "Played {{times}} times",
