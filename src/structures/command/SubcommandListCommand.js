@@ -10,7 +10,7 @@ module.exports = class SubcommandListCommand extends Command {
 
     this.embedColor = options.optional('embedColor')
     this.authorString = options.required('authorString')
-    this.authorImage = options.required('authorImage')
+    this.authorImage = options.optional('authorImage')
     this.authorURL = options.optional('authorURL')
   }
 
