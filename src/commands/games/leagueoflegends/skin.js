@@ -4,7 +4,7 @@ module.exports = class LeagueOfLegendsSkin extends Command {
     super({
       name: 'skin',
       aliases: ['s'],
-      requirements: { apis: ['youtube'] },
+      requirements: { apis: ['youtube', 'lol'] },
       parent: 'leagueoflegends',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:leagueoflegends.subcommands.skin.noSkin'
@@ -29,7 +29,8 @@ module.exports = class LeagueOfLegendsSkin extends Command {
         .setDescription(t('commands:leagueoflegends.subcommands.skin.description', { videoUrl }))
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
-      throw new CommandError(t('commands:leagueoflegends.subcommands.skin.invalidSkin'))
+      console.error(e)
+      throw new CommandError(t('commands:leagueoflegends.subcommands.skin.anErrorOcurred'))
     }
   }
 }
