@@ -16,20 +16,35 @@ module.exports = class MainListener extends EventListener {
   onReady () {
     this.user.setActivity(`@${this.user.username} help`, { type: 'PLAYING' })
 
-    const presences = [
-      {
-        name: `${MiscUtils.formatNumber(this.guilds.cache.size, 'en-US')} Guilds | @${this.user.username} help`,
-        type: 'WATCHING'
-      }, {
-        name: `${MiscUtils.formatNumber(this.users.cache.size, 'en-US')} Users | @${this.user.username} help`,
-        type: 'WATCHING'
-      }
-    ]
+    async function updatePresence (client) {
+      const shardGuildCounts = await client.shard.fetchClientValues('guilds.cache.size')
+      const totalGuildCount = shardGuildCounts.reduce((total, current) => total + current)
+      const shardUserCounts = await client.shard.fetchClientValues('users.cache.size')
+      const totalUserCount = shardUserCounts.reduce((total, current) => total + current)
+
+      const presences = [
+        {
+          name: `${MiscUtils.formatNumber(totalGuildCount, 'en-US')} servers | @${client.user.username} help`,
+          type: 'WATCHING'
+        }, {
+          name: `${MiscUtils.formatNumber(totalUserCount, 'en-US')} users | @${client.user.username} help`,
+          type: 'WATCHING'
+        }, {
+          name: `Shard ${client.shard.ids.toString()} | @${client.user.username} help`,
+          type: 'PLAYING'
+        }, {
+          name: `${MiscUtils.formatNumber(client.commands.length, 'en-US')} commands | @${client.user.username} help`,
+          type: 'PLAYING'
+        }
+      ]
+
+      const presence = presences[Math.floor(Math.random() * presences.length)]
+      client.user.setActivity(presence.name, { type: presence.type })
+    }
 
     setInterval(() => {
-      const presence = presences[Math.floor(Math.random() * presences.length)]
-      this.user.setActivity(presence.name, { type: presence.type })
-    }, PRESENCE_INTERVAL)
+      updatePresence(this)
+    }, PRESENCE_INTERVAL, this)
 
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
