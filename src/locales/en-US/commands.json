@@ -249,7 +249,7 @@
   },
   "poll": {
     "commandDescription": "Creates a poll.",
-    "commandUsage": "<poll title> [|option 1|option 2|option 3|...]",
+    "commandUsage": "\"<poll title>\" [\"option 1\" \"option 2\" \"option 3\" \"...\"]",
     "noQuestion": "You have to give me something to be voted!",
     "tooManyOptions": "You can't exceed {{maxOptions}} options!"
   },
