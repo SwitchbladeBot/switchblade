@@ -775,6 +775,7 @@
   "leaderboard": {
     "commandDescription": "Shows a leaderboard.",
     "commandUsage": "<type>",
+    "title": "Switchblade Leaderboards",
     "subcommands": {
       "money": {
         "commandDescription": "Shows a list of the richest users.",
