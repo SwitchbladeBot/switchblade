@@ -132,6 +132,7 @@ module.exports = class Command {
     return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
   }
 
+  // TODO: Add an alias parameter that lets you replace the alias shown in the usage 
   usage (t, prefix, noUsage = true, onlyCommand = false) {
     const usagePath = `${this.tPath}.commandUsage`
     const usage = noUsage ? t(`commands:${usagePath}`) : t([`commands:${usagePath}`, ''])
