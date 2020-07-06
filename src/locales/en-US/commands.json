@@ -465,6 +465,7 @@
   },
   "qrcode": {
     "commandDescription": "Generates or reads a QR code.",
+    "title": "QR Codes",
     "subcommands": {
       "generate": {
         "commandDescription": "Generates a QR code.",
