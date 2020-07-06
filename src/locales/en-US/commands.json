@@ -587,6 +587,7 @@
   },
   "config": {
     "commandDescription": "Changes the current server's configuration.",
+    "title": "Configuration Commands",
     "guildLang": "To change the server language, use `{{command}} language <language code>`",
     "guildPrefix": "To change the server prefix, use `{{command}} prefix <new prefix>`",
     "missingTranslation": "**(A few translations might be missing)**",
