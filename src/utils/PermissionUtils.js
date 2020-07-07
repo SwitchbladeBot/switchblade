@@ -1,8 +1,11 @@
+const fetch = require('node-fetch')
+
 module.exports = class PermissionUtils {
-  static isDeveloper (client, user) {
-    const botGuild = client.guilds.cache.get(process.env.BOT_GUILD)
-    const developerRole = botGuild && botGuild.roles.cache.get(process.env.DEVELOPER_ROLE)
-    const isDeveloper = (developerRole && developerRole.members.has(user.id)) || (process.env.DEVELOPER_USERS && process.env.DEVELOPER_USERS.split(',').includes(user.id))
+  static async isDeveloper (client, user) {
+    const { roles } = await fetch(`https://discord.com/api/v6/guilds/${process.env.BOT_GUILD}/members/${user.id}`, {
+      headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
+    }).then(res => res.json())
+    const isDeveloper = (roles && roles.includes(process.env.DEVELOPER_ROLE)) || (process.env.DEVELOPER_USERS && process.env.DEVELOPER_USERS.split(',').includes(user.id))
     return isDeveloper
   }
 
@@ -14,10 +17,11 @@ module.exports = class PermissionUtils {
     }
   }
 
-  static isManager (client, user) {
-    const botGuild = client.guilds.cache.get(process.env.BOT_GUILD)
-    const managerRole = botGuild && botGuild.roles.cache.get(process.env.MANAGER_ROLE)
-    const isManager = (managerRole && managerRole.members.has(user.id)) || this.isDeveloper(client, user)
+  static async isManager (client, user) {
+    const { roles } = await fetch(`https://discord.com/api/v6/guilds/${process.env.BOT_GUILD}/members/${user.id}`, {
+      headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
+    }).then(res => res.json())
+    const isManager = (roles && roles.includes(process.env.MANAGER_ROLE)) || this.isDeveloper(client, user)
     return isManager
   }
 }

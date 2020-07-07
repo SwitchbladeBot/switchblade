@@ -52,7 +52,7 @@ module.exports = class Command {
    */
   async _run (context, args) {
     try {
-      this.handleRequirements(context, args)
+      await this.handleRequirements(context, args)
     } catch (e) {
       return this.error(context, e)
     }
@@ -132,7 +132,7 @@ module.exports = class Command {
     return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
   }
 
-  // TODO: Add an alias parameter that lets you replace the alias shown in the usage 
+  // TODO: Add an alias parameter that lets you replace the alias shown in the usage
   usage (t, prefix, noUsage = true, onlyCommand = false) {
     const usagePath = `${this.tPath}.commandUsage`
     const usage = noUsage ? t(`commands:${usagePath}`) : t([`commands:${usagePath}`, ''])
