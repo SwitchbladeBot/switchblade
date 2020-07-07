@@ -793,7 +793,12 @@
     "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker."
   },
   "eval": {
-    "commandDescription": "Evals a JS string."
+    "commandDescription": "Evaluates a JS expression.",
+    "commandUsage": "<expression to evaluate>"
+  },
+  "clientvalues": {
+    "commandDescription": "Fetches values from all shards.",
+    "commandUsage": "<value path>"
   },
   "oddlysatisfying": {
     "commandDescription": "Shows a random image from /r/oddlysatisfying."
