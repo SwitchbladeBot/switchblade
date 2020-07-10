@@ -18,7 +18,7 @@ module.exports = class e621 extends APIWrapper {
   async request (endpoint, queryParams = {}) {
     const qParams = new URLSearchParams(queryParams)
     const fetched = await fetch(`${API_URL}${endpoint}?${qParams.toString()}`, {
-      headers: { 'User-Agent': 'SandboxTesting/0.0 xDoges' }
+      headers: { 'User-Agent': 'SwitchbladeBot/1.0 xDoges' }
     })
     return fetched.json()
   }
