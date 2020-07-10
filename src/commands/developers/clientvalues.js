@@ -2,7 +2,7 @@
 
 const { Command } = require('../../')
 
-module.exports = class Eval extends Command {
+module.exports = class ClientValues extends Command {
   constructor (client) {
     super({
       name: 'clientvalues',
