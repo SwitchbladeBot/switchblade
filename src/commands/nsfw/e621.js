@@ -22,8 +22,6 @@ module.exports = class e621 extends Command {
     const { posts } = await this.client.apis.e621.searchPost(`${endpoint} ${query} -flash -webm`)
     console.log(posts)
     try {
-      // console.log(posts)
-      // console.log(posts[0].tags.meta)
       const embed = new SwitchbladeEmbed()
       embed
         .setImage(posts[0].file.url)
