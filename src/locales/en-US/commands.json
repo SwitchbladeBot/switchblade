@@ -1526,6 +1526,8 @@
     "couldntSendMessage": "Something happened and I couldn't send the message."
   },
   "e621": {
+    "commandDescription": "Searches for a post on e621.net (may be explicit if the channel is NSFW)",
+    "commandUsage": "<tags>",
     "id": "ID",
     "artist": "Artist(s)",
     "desc": "Description",
