@@ -1524,5 +1524,14 @@
     "messageMoved": "Message sent by {{authorName}} and moved from {{movedFrom}} by {{movedBy}}.",
     "cantSendEmbed": "I can't send embed links on the channel where I'm supposed to move the message to.",
     "couldntSendMessage": "Something happened and I couldn't send the message."
+  },
+  "e621": {
+    "commandDescription": "Searches for a post on e621.net (may be explicit if the channel is NSFW)",
+    "commandUsage": "<tags>",
+    "id": "ID",
+    "artist": "Artist(s)",
+    "desc": "Description",
+    "notFound": "Post not found",
+    "post": "Post URL"
   }
 }
