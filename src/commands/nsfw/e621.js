@@ -20,7 +20,6 @@ module.exports = class e621 extends Command {
     channel.startTyping()
     const endpoint = channel.nsfw ? '' : 'rating:safe'
     const { posts } = await this.client.apis.e621.searchPost(`${endpoint} ${query} -flash -webm`)
-    console.log(posts)
     try {
       const embed = new SwitchbladeEmbed()
       embed
