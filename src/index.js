@@ -29,7 +29,6 @@ module.exports = {
   // Utils
   Utils: require('./utils'),
   Color: require('./utils/Color.js'),
-  Reddit: require('./utils/Reddit.js'),
   Constants: require('./utils/Constants.js'),
   DiscordUtils: require('./utils/DiscordUtils.js'),
   FileUtils: require('./utils/FileUtils.js'),

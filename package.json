@@ -73,6 +73,7 @@
     "samp-query": "latest",
     "search-npm-registry": "^2.0.3",
     "sinesp-api": "^2.0.2",
+    "snoowrap": "^1.21.0",
     "splitargs": "0.0.7",
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",

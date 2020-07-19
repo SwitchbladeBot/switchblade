@@ -28,7 +28,7 @@ module.exports = class EmojiLoader extends Loader {
     if (!emojiGuilds) return this.log(`Required emojis not loaded - Required environment variable "EMOJI_GUILDS" is not set.`, { color: 'red', tags: ['Emojis'] })
 
     await Promise.all(emojiGuilds.map(async guild => {
-      return fetch(`https://discord.com/api/v6/guilds/${guild}/emojis`, {
+      return fetch(`${this.client.options.http.api}/v${this.client.options.http.version}/guilds/${guild}/emojis`, {
         headers: {
           Authorization: `Bot ${process.env.DISCORD_TOKEN}`
         }
