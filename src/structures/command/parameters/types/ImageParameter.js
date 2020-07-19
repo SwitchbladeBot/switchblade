@@ -43,6 +43,7 @@ module.exports = class ImageParameter extends Parameter {
       link: defVal(options, 'link', true),
       userOptions: user ? UserParameter.parseOptions(options.userOptions) : null,
       authorAvatar: defVal(options, 'authorAvatar', true),
+      avatarFormat: defVal(options, 'avatarFormat', 'jpg'),
       lastMessages: {
         accept: true,
         limit: 10,
@@ -99,8 +100,8 @@ module.exports = class ImageParameter extends Parameter {
           const user = UserParameter._parse(arg, this.userOptions, context)
           if (user) {
             try {
-              if (this.url) return user.displayAvatarURL({ format: 'jpg' })
-              const buffer = await imageRequest(user.displayAvatarURL({ format: 'jpg' }), client)
+              if (this.url) return user.displayAvatarURL({ format: this.avatarFormat })
+              const buffer = await imageRequest(user.displayAvatarURL({ format: this.avatarFormat }), client)
               return buffer
             } catch (e) {
               client.logError(e)
@@ -158,8 +159,8 @@ module.exports = class ImageParameter extends Parameter {
     if (this.authorAvatar) {
       try {
         parseState.argIndex--
-        if (this.url) return author.displayAvatarURL({ format: 'jpg' })
-        const buffer = await imageRequest(author.displayAvatarURL({ format: 'jpg' }), client)
+        if (this.url) return author.displayAvatarURL({ format: this.avatarFormat })
+        const buffer = await imageRequest(author.displayAvatarURL({ format: this.avatarFormat }), client)
         return buffer
       } catch (e) {
         client.logError(e)
