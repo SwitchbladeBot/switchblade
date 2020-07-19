@@ -1,6 +1,6 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
-module.exports = class searchPlate extends Command {
+module.exports = class CEP extends Command {
   constructor (client) {
     super({
       name: 'cep',
