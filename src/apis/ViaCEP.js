@@ -9,14 +9,9 @@ module.exports = class ViaCEP extends APIWrapper {
       name: 'viacep'
     })
   }
-
-  async searchCEP (cep) {
-          return this.request(cep)
-  }
-
   // Default
-  request (endpoint) {
-    return fetch(`${API_URL}${endpoint}/json`)
+  searchCEP (cep) {
+    return fetch(`${API_URL}${cep}/json`)
       .then(res => res.json())
   }
 }
