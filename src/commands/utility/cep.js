@@ -1,5 +1,4 @@
-const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
-const { cleanContent } = require('../../utils/DiscordUtils')
+const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 module.exports = class searchPlate extends Command {
   constructor (client) {
@@ -21,7 +20,7 @@ module.exports = class searchPlate extends Command {
   async run ({ t, author, channel }, cep) {
     channel.startTyping()
     try {
-        const rcep = await this.client.apis.viacep.searchCEP(cep)
+      const rcep = await this.client.apis.viacep.searchCEP(cep)
       channel.send(
         new SwitchbladeEmbed()
           .setDescription(`**${t('commands:cep.cep')}**: ${rcep.cep}\n**${t('commands:cep.fullAddress')}**: ${rcep.logradouro} ${rcep.complemento}\n**${t('commands:cep.neighborhood')}**: ${rcep.bairro}\n**${t('commands:cep.city')}**: ${rcep.localidade} - ${rcep.uf}\n**${t('commands:cep.ibge')}**: ${rcep.ibge}`)
