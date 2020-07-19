@@ -1546,7 +1546,8 @@
     "notstolen": "Not Stolen",
     "stolen": "Stolen! Please call 911, don't approach yourself.",
     "plate": "Plate",
-    "image": "Car image (may not be the accurate image)"
+    "image": "Car image (may not be the accurate image)",
+    "notFound": "Plate not found."
   },
   "cep": {
     "commandDescription": "Searches for a CEP using ViaCEP API",

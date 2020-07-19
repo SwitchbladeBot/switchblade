@@ -13,7 +13,7 @@ module.exports = class searchPlate extends Command {
       parameters: [{
         type: 'string',
         full: true,
-        missingError: 'commands:sinesp.noplate'
+        missingError: 'commands:sinesp.notFound'
       }]
     }, client)
   }
