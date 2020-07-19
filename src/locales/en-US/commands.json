@@ -1547,5 +1547,14 @@
     "stolen": "Stolen! Please call 911, don't approach yourself.",
     "plate": "Plate",
     "image": "Car image (may not be the accurate image)"
+  },
+  "cep": {
+    "commandDescription": "Searches for a CEP using ViaCEP API",
+    "commandUsage": "<cep>",
+    "cep": "CEP",
+    "fullAddress": "Full address",
+    "neighborhood": "Neighborhood",
+    "city": "City",
+    "ibge": "IBGE Number"
   }
 }
