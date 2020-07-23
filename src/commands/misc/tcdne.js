@@ -3,8 +3,8 @@ const { Command, SwitchbladeEmbed } = require('../../')
 module.exports = class TCDNE extends Command {
   constructor (client) {
     super({
-      name: 'thiscatdoesnotexists',
-      aliases: ['tcdne'],
+      name: 'tcdne',
+      aliases: ['thiscatdoesnotexists'],
       category: 'misc'
     }, client)
   }
