@@ -2,10 +2,10 @@
   "name": "switchblade",
   "version": "1.0.0",
   "description": "The multi-purpose Discord bot",
-  "main": "index.js",
+  "main": "shard.js",
   "scripts": {
-    "start": "node index.js",
-    "start-dev": "nodemon --exec node -r dotenv/config index.js",
+    "start": "node shard.js",
+    "start-dev": "nodemon --exec node -r dotenv/config shard.js",
     "test": "mocha src/test --recursive",
     "fix": "standard --fix",
     "crowdin": "crowdin upload sources"
@@ -33,6 +33,7 @@
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
     "@hapi/joi": "^16.1.7",
+    "@lavacord/discord.js": "0.0.7",
     "@sentry/node": "^5.15.5",
     "abort-controller": "^2.0.3",
     "chalk": "^3.0.0",
@@ -43,8 +44,7 @@
     "cows": "^2.1.0",
     "cowsay": "^1.4.0",
     "crowdin-without-vulnerability": "^1.0.0",
-    "discord.js": "^11.4.2",
-    "discord.js-lavalink": "^2.2.2",
+    "discord.js": "^12.2.0",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
     "fuse.js": "^3.4.6",
@@ -72,13 +72,15 @@
     "runeterra": "0.0.6",
     "samp-query": "latest",
     "search-npm-registry": "^2.0.3",
+    "sinesp-api": "^2.0.2",
+    "snoowrap": "^1.21.0",
     "splitargs": "0.0.7",
     "steamapi": "^2.0.7",
     "steamladder": "^1.0.4",
     "transform-props": "^1.0.1",
+    "turndown": "^6.0.0",
     "uws": "^9.14.0",
-    "zlib-sync": "^0.1.6",
-    "turndown": "^6.0.0"
+    "zlib-sync": "^0.1.6"
   },
   "devDependencies": {
     "auto-install": "^1.7.4",
@@ -100,7 +102,7 @@
   },
   "optionalDependencies": {
     "@discordjs/uws": "^11.149.1",
-    "canvas": "^2.5.0",
+    "canvas": "^2.6.1",
     "erlpack": "github:discordapp/erlpack",
     "node-opus": "^0.3.3"
   }

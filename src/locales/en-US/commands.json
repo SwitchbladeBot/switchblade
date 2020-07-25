@@ -73,6 +73,7 @@
   "github": {
     "commandDescription": "Searches for a user, repository or an organization on GitHub.",
     "commandUsage": "<type> <query>",
+    "serviceName": "GitHub",
     "subcommands": {
       "user": {
         "commandDescription": "Searches for a user on GitHub.",
@@ -111,6 +112,7 @@
   "spotify": {
     "commandDescription": "Searches for a song, playlist, album or an artist on Spotify, or displays information about a user.",
     "commandUsage": "<type> <query>",
+    "serviceName": "Spotify",
     "album": "Album",
     "genres": "Genres",
     "artist": "Artist",
@@ -247,7 +249,7 @@
   },
   "poll": {
     "commandDescription": "Creates a poll.",
-    "commandUsage": "<poll title> [|option 1|option 2|option 3|...]",
+    "commandUsage": "\"<poll title>\" [\"option 1\" \"option 2\" \"option 3\" \"...\"]",
     "noQuestion": "You have to give me something to be voted!",
     "tooManyOptions": "You can't exceed {{maxOptions}} options!"
   },
@@ -463,6 +465,7 @@
   },
   "qrcode": {
     "commandDescription": "Generates or reads a QR code.",
+    "title": "QR Codes",
     "subcommands": {
       "generate": {
         "commandDescription": "Generates a QR code.",
@@ -494,6 +497,7 @@
     "noTrackName": "You have to give me a song name.",
     "noTracksFound": "I couldn't find any song with that name.",
     "fans": "Fans",
+    "serviceName": "Deezer",
     "fansCount": "{{fans}} fans",
     "createdAt": "Created at",
     "createdBy": "Created by",
@@ -583,6 +587,7 @@
   },
   "config": {
     "commandDescription": "Changes the current server's configuration.",
+    "title": "Configuration Commands",
     "guildLang": "To change the server language, use `{{command}} language <language code>`",
     "guildPrefix": "To change the server prefix, use `{{command}} prefix <new prefix>`",
     "missingTranslation": "**(A few translations might be missing)**",
@@ -688,12 +693,11 @@
   },
   "fivem": {
     "commandDescription": "Shows information about a FiveM server.",
-    "commandUsage": "<ip>[:port]",
-    "noIP": "You have to give me an IP!",
+    "commandUsage": "<id>",
+    "noIP": "You have to give me a valid address (ex. cfx.re/join/o6ppl7)!",
     "serverUnreachableTitle": "I couldn't reach this server.",
-    "serverUnreachableDescription": "Check the IP and port, or try again later.",
+    "serverUnreachableDescription": "Check the address, or try again later.",
     "address": "Address",
-    "version": "Version",
     "players": "Players",
     "map": "Map",
     "gameMode": "Game Mode",
@@ -704,6 +708,7 @@
   },
   "emoji": {
     "commandDescription": "Enlarges an emoji.",
+    "commandUsage": "<emoji to enlarge>",
     "hereIsYourEmoji": "Here's your emoji!"
   },
   "clapify": {
@@ -715,7 +720,8 @@
   "numberfacts": {
     "commandDescription": "Shows a fact about a number.",
     "commandUsage": "<number>",
-    "validNumber": "You have to give me a number!"
+    "validNumber": "You have to give me a number!",
+    "anErrorOcurred": "An error has ocurred while fetching a fact for that number. Please try again later."
   },
   "blacklist": {
     "commandDescription": "Adds a user to the blacklist.",
@@ -771,6 +777,7 @@
   "leaderboard": {
     "commandDescription": "Shows a leaderboard.",
     "commandUsage": "<type>",
+    "title": "Switchblade Leaderboards",
     "subcommands": {
       "money": {
         "commandDescription": "Shows a list of the richest users.",
@@ -786,7 +793,12 @@
     "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker."
   },
   "eval": {
-    "commandDescription": "Evals a JS string."
+    "commandDescription": "Evaluates a JS expression.",
+    "commandUsage": "<expression to evaluate>"
+  },
+  "clientvalues": {
+    "commandDescription": "Fetches values from all shards.",
+    "commandUsage": "<value path>"
   },
   "oddlysatisfying": {
     "commandDescription": "Shows a random image from /r/oddlysatisfying."
@@ -898,6 +910,7 @@
     "commandDescription": "Shows information related to Minecraft.",
     "commandUsage": "<type> <query>",
     "namemcprofile": "NameMC profile (click here)",
+    "gameName": "Minecraft",
     "subcommands": {
       "server": {
         "commandDescription": "Shows information about a Minecraft server such as number of players and MOTD.",
@@ -1084,6 +1097,7 @@
         "commandUsage": "<skin name>",
         "noSkin": "You have to give me a skin name to search for.",
         "invalidSkin": "Invalid skin.",
+        "anErrorOcurred": "An error has ocurred while fetching information about this skin.",
         "description": "Want to see the skin spotlight video for this skin? Click [here]({{videoUrl}})!"
       }
     }
@@ -1100,6 +1114,7 @@
   "lastfm": {
     "commandDescription": "Searches for a song, album or an artist on Last.fm, or displays information about a user.",
     "commandUsage": "<type> <query>",
+    "serviceName": "Last.fm",
     "topArtists": "Top artists (1 month)",
     "playcount": "Playcount",
     "playcountCount": "Played {{times}} times",
@@ -1192,9 +1207,6 @@
   },
   "uigradient": {
     "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)."
-  },
-  "portugalgonewild": {
-    "commandDescription": "Shows a random image from r/PortugalGoneWild."
   },
   "showerthoughts": {
     "commandDescription": "Shows a random thought from r/Showerthoughts."
@@ -1499,5 +1511,59 @@
     "commandDescription": "Searches for some image on google",
     "commandUsage": "<query>",
     "noQuery": "Please insert something to search."
+  },
+  "move": {
+    "commandDescription": "Moves a message from one channel to another.",
+    "commandUsage": "<message link> <channel>",
+    "missingMessageLink": "You need to give me a message link.",
+    "missingChannelMention": "You need to give me a channel.",
+    "cantSendInChannel": "I can't send messages in the channel you want me to move the message to.",
+    "channelsHaveDifferentType": "You're trying to move a message from a nsfw channel to a not nsfw channel.",
+    "cantDeleteMessage": "I can't delete the original message because I don't have permission.",
+    "userCantSend": "You can't send messages in that channel.",
+    "messageMoved": "Message sent by {{authorName}} and moved from {{movedFrom}} by {{movedBy}}.",
+    "cantSendEmbed": "I can't send embed links on the channel where I'm supposed to move the message to.",
+    "couldntSendMessage": "Something happened and I couldn't send the message."
+  },
+  "e621": {
+    "commandDescription": "Searches for a post on e621.net (may be explicit if the channel is NSFW)",
+    "commandUsage": "<tags>",
+    "id": "ID",
+    "artist": "Artist(s)",
+    "desc": "Description",
+    "notFound": "Post not found",
+    "post": "Post URL"
+  },
+  "searchplate": {
+    "commandDescription": "Searches for a brazilian vehicle plate registration on SINESP (Public information)",
+    "commandUsage": "<plate>",
+    "model": "Model",
+    "year": "Year",
+    "color": "Color",
+    "city": "City",
+    "status": "Status",
+    "chassis": "Chassis",
+    "notstolen": "Not Stolen",
+    "stolen": "Stolen! Please call 911, don't approach yourself.",
+    "plate": "Plate",
+    "image": "Car image (may not be the accurate image)",
+    "notFound": "Plate not found."
+  },
+  "cep": {
+    "commandDescription": "Searches for a CEP using ViaCEP API",
+    "commandUsage": "<cep>",
+    "cep": "CEP",
+    "fullAddress": "Full address",
+    "neighborhood": "Neighborhood",
+    "city": "City",
+    "ibge": "IBGE Number"
+  },
+  "tcdne": {
+    "commandDescription": "Sends an AI generated cat",
+    "cat": "Here's your AI generated CAT™!"
+  },
+  "tpdne": {
+    "commandDescription": "Sends an AI generated person (I know, looks kinda real)",
+    "person": "Here's your AI generated person!"
   }
 }

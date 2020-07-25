@@ -23,7 +23,7 @@ module.exports = class CreateEmoji extends Command {
     channel.startTyping()
 
     try {
-      const emoji = await guild.createEmoji(url.href, name)
+      const emoji = await guild.emojis.create(url.href, name)
 
       embed.setDescription(t('commands:createemoji.created', { emoji }))
         .setThumbnail(url)

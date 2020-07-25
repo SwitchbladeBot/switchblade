@@ -1,6 +1,6 @@
 const { CanvasTemplates, Command, SwitchbladeEmbed } = require('../../')
 
-const { Attachment } = require('discord.js')
+const { MessageAttachment } = require('discord.js')
 const moment = require('moment')
 
 module.exports = class NowPlaying extends Command {
@@ -17,11 +17,11 @@ module.exports = class NowPlaying extends Command {
   }
 
   async run ({ t, author, channel, flags, guild }) {
-    const guildPlayer = this.client.playerManager.get(guild.id)
+    const guildPlayer = this.client.playerManager.players.get(guild.id)
     const song = guildPlayer.playingSong
     if (!flags['text'] && this.client.canvasLoaded) {
       const nowPlaying = await CanvasTemplates.nowPlaying({ t }, guildPlayer, song)
-      channel.send(new Attachment(nowPlaying, 'nowplaying.png')).then(() => channel.stopTyping())
+      channel.send(new MessageAttachment(nowPlaying, 'nowplaying.png')).then(() => channel.stopTyping())
     } else {
       const embed = new SwitchbladeEmbed(author)
       const nf = new Intl.NumberFormat('en-US').format

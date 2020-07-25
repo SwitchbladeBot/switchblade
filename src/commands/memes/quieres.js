@@ -1,6 +1,6 @@
 const { CanvasTemplates, Command } = require('../../')
 
-const { Attachment } = require('discord.js')
+const { MessageAttachment } = require('discord.js')
 
 module.exports = class Quieres extends Command {
   constructor (client) {
@@ -19,6 +19,6 @@ module.exports = class Quieres extends Command {
   async run ({ t, author, channel }, image) {
     channel.startTyping()
     const quieres = await CanvasTemplates.quieres(image)
-    channel.send(new Attachment(quieres, 'quieres.jpg')).then(() => channel.stopTyping())
+    channel.send(new MessageAttachment(quieres, 'quieres.jpg')).then(() => channel.stopTyping())
   }
 }

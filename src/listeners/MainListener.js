@@ -9,27 +9,42 @@ const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 module.exports = class MainListener extends EventListener {
   constructor (client) {
     super({
-      events: ['ready', 'message', 'voiceStateUpdate']
+      events: ['ready', 'message']
     }, client)
   }
 
   onReady () {
-    this.user.setPresence({ game: { name: `@${this.user.username} help` } })
+    this.user.setActivity(`@${this.user.username} help`, { type: 'PLAYING' })
 
-    const presences = [
-      {
-        name: `${MiscUtils.formatNumber(this.guilds.size, 'en-US')} Guilds | @${this.user.username} help`,
-        type: 'WATCHING'
-      }, {
-        name: `${MiscUtils.formatNumber(this.users.size, 'en-US')} Users | @${this.user.username} help`,
-        type: 'WATCHING'
-      }
-    ]
+    async function updatePresence (client) {
+      const shardGuildCounts = await client.shard.fetchClientValues('guilds.cache.size')
+      const totalGuildCount = shardGuildCounts.reduce((total, current) => total + current)
+      const shardUserCounts = await client.shard.fetchClientValues('users.cache.size')
+      const totalUserCount = shardUserCounts.reduce((total, current) => total + current)
+
+      const presences = [
+        {
+          name: `${MiscUtils.formatNumber(totalGuildCount, 'en-US')} servers | @${client.user.username} help`,
+          type: 'WATCHING'
+        }, {
+          name: `${MiscUtils.formatNumber(totalUserCount, 'en-US')} users | @${client.user.username} help`,
+          type: 'WATCHING'
+        }, {
+          name: `Shard ${client.shard.ids.toString()} | @${client.user.username} help`,
+          type: 'PLAYING'
+        }, {
+          name: `${MiscUtils.formatNumber(client.commands.length, 'en-US')} commands | @${client.user.username} help`,
+          type: 'PLAYING'
+        }
+      ]
+
+      const presence = presences[Math.floor(Math.random() * presences.length)]
+      client.user.setActivity(presence.name, { type: presence.type })
+    }
 
     setInterval(() => {
-      const presence = presences[Math.floor(Math.random() * presences.length)]
-      this.user.setPresence({ game: presence })
-    }, PRESENCE_INTERVAL)
+      updatePresence(this)
+    }, PRESENCE_INTERVAL, this)
 
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
@@ -40,7 +55,9 @@ module.exports = class MainListener extends EventListener {
           user: this.user.id,
           shards: 1
         })
-        this.log('Lavalink connection established!', { color: 'green', tags: ['Music'] })
+        this.playerManager.connect()
+          .then(() => this.log('Lavalink connection established!', { color: 'green', tags: ['Music'] }))
+          .catch(() => this.log(`Failed to establish Lavalink connection - Failed to connect to nodes.`, { color: 'red', tags: ['Music'] }))
       } catch (e) {
         this.log(`Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, { color: 'red', tags: ['Music'] })
       }
@@ -137,12 +154,5 @@ module.exports = class MainListener extends EventListener {
         this.runCommand(command, context, args, language)
       }
     }
-  }
-
-  async onVoiceStateUpdate (oldMember, newMember) {
-    if (!this.playerManager) return
-    const guildPlayer = this.playerManager.get(newMember.guild.id)
-    if (!guildPlayer) return
-    guildPlayer.updateVoiceState(oldMember, newMember)
   }
 }

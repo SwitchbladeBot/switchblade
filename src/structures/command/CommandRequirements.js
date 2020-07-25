@@ -41,7 +41,7 @@ module.exports = class CommandRequirements {
     }
   }
 
-  static handle ({ t, author, channel, client, command, guild, member, voiceChannel }, options) {
+  static async handle ({ t, author, channel, client, command, guild, member, voiceState }, options) {
     const opts = this.parseOptions(options)
 
     if (opts.databaseOnly && !client.database) {
@@ -52,12 +52,18 @@ module.exports = class CommandRequirements {
       throw new CommandError(t(opts.errors.playerManagerOnly))
     }
 
-    if (opts.devOnly && !PermissionUtils.isDeveloper(client, author)) {
-      throw new CommandError(t(opts.errors.devOnly))
+    if (opts.devOnly) {
+      const isDeveloper = await PermissionUtils.isDeveloper(client, author)
+      if (!isDeveloper) {
+        throw new CommandError(t(opts.errors.devOnly))
+      }
     }
 
-    if (opts.managersOnly && !PermissionUtils.isManager(client, author)) {
-      throw new CommandError(t(opts.errors.managersOnly))
+    if (opts.managersOnly) {
+      const isManager = await PermissionUtils.isManager(client, author)
+      if (!isManager) {
+        throw new CommandError(t(opts.errors.managersOnly))
+      }
     }
 
     if (opts.guildOnly && !guild) {
@@ -68,11 +74,12 @@ module.exports = class CommandRequirements {
       throw new CommandError(t(opts.errors.nsfwOnly))
     }
 
-    if (opts.sameVoiceChannelOnly && guild.me.voiceChannelID && (!voiceChannel || guild.me.voiceChannelID !== voiceChannel.id)) {
+    const currentChannel = voiceState && voiceState.channelID
+    if (opts.sameVoiceChannelOnly && guild.me.voice.channel && (!currentChannel || guild.me.voice.channelID !== currentChannel)) {
       throw new CommandError(t(opts.errors.sameVoiceChannelOnly))
     }
 
-    if (opts.voiceChannelOnly && !voiceChannel) {
+    if (opts.voiceChannelOnly && !currentChannel) {
       throw new CommandError(t(opts.errors.voiceChannelOnly))
     }
 
@@ -80,7 +87,7 @@ module.exports = class CommandRequirements {
       throw new CommandError(t(opts.errors.onlyOldAccounts))
     }
 
-    const guildPlayer = client.playerManager && client.playerManager.get(guild.id)
+    const guildPlayer = client.playerManager && client.playerManager.players.get(guild.id)
     if (opts.guildPlaying && (!guildPlayer || !guildPlayer.playing)) {
       throw new CommandError(t(opts.errors.guildPlaying))
     }

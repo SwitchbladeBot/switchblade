@@ -10,10 +10,10 @@ module.exports = class Bassboost extends Command {
     }, client)
   }
 
-  async run ({ t, author, channel, guild }, volume) {
+  async run ({ t, author, channel, guild }) {
     const embed = new SwitchbladeEmbed(author)
 
-    const guildPlayer = this.client.playerManager.get(guild.id)
+    const guildPlayer = this.client.playerManager.players.get(guild.id)
     guildPlayer.bassboost(!guildPlayer.bassboosted)
     channel.send(embed.setTitle(t(`commands:bassboost.bassboost_${guildPlayer.bassboosted}`)))
   }

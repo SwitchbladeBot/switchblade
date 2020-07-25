@@ -12,7 +12,7 @@ module.exports = class Pause extends Command {
 
   async run ({ t, author, channel, guild }) {
     const embed = new SwitchbladeEmbed(author)
-    const guildPlayer = this.client.playerManager.get(guild.id)
+    const guildPlayer = this.client.playerManager.players.get(guild.id)
     const pause = !guildPlayer.paused
     embed.setTitle(`${pause ? this.getEmoji('pauseButton') : this.getEmoji('playButton')} ${t('music:stateChanged', { context: pause ? 'pause' : 'resume' })}`)
     channel.send(embed).then(() => guildPlayer.pause(pause))

@@ -1,27 +1,14 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { SubcommandListCommand } = require('../../')
 
-const types = ['track', 'song', 't', 's', 'album', 'al', 'artist', 'ar', 'playlist', 'p', 'user', 'u', 'podcast', 'pod']
-
-module.exports = class Deezer extends Command {
+module.exports = class Deezer extends SubcommandListCommand {
   constructor (client) {
     super({
       name: 'deezer',
       aliases: ['dz'],
       requirements: { apis: ['deezer'] },
-      parameters: [{
-        type: 'string',
-        full: true,
-        whitelist: types,
-        missingError: ({ t, prefix }) => {
-          return new SwitchbladeEmbed().setTitle(t('commons:search.noType'))
-            .setDescription([
-              this.usage(t, prefix),
-              '',
-              `__**${t('commons:search.types')}:**__`,
-              `\`${['track', 'album', 'artist', 'playlist', 'user', 'podcast'].join('`, `')}\``
-            ].join('\n'))
-        }
-      }]
+      authorString: 'commands:deezer.serviceName',
+      authorImage: 'https://lh3.googleusercontent.com/r55K1eQcji3QMHRKERq6zE1-csoh_MTOHiKyHTuTOblhFi_rIz06_8GN5-DHUGJOpn79',
+      authorURL: 'https://deezer.com'
     }, client)
   }
 }

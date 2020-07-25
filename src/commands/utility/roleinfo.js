@@ -18,7 +18,6 @@ module.exports = class RoleInfo extends Command {
   }
 
   async run ({ t, author, channel, language }, role) {
-    await channel.startTyping()
     moment.locale(language)
     channel.send(
       new SwitchbladeEmbed(author)
@@ -33,6 +32,6 @@ module.exports = class RoleInfo extends Command {
         .addField(t('commands:roleinfo.mentionable'), role.mentionable ? t('commands:roleinfo.yes') : t('commands:roleinfo.no'), true)
         .addField(t('commands:roleinfo.hoisted'), role.hoist ? t('commands:roleinfo.yes') : t('commands:roleinfo.no'), true)
         .addField(t('commands:roleinfo.color'), `\`${role.hexColor}\`\n${new Color(role.hexColor).rgb()}`, true)
-    ).then(() => channel.stopTyping())
+    )
   }
 }

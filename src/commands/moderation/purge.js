@@ -23,7 +23,7 @@ module.exports = class Purge extends Command {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     if (member) {
-      channel.fetchMessages({ limit: number })
+      channel.messages.fetch({ limit: number })
         .then(messages => {
           const userMessages = messages.filter(m => m.author.id === member.id)
           channel.bulkDelete(userMessages).then(() => {

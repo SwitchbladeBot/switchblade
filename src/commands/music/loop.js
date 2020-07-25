@@ -12,7 +12,7 @@ module.exports = class Loop extends Command {
 
   async run ({ t, author, channel, guild }) {
     const embed = new SwitchbladeEmbed(author)
-    const guildPlayer = this.client.playerManager.get(guild.id)
+    const guildPlayer = this.client.playerManager.players.get(guild.id)
     const loop = !guildPlayer.looping
     embed.setTitle(t('music:stateChanged_loop', { context: loop ? 'on' : 'off' }))
     channel.send(embed).then(() => guildPlayer.loop(loop))

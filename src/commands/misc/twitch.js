@@ -7,6 +7,7 @@ module.exports = class Twitch extends Command {
     super({
       name: 'twitch',
       aliases: ['twitchchannel'],
+      requirements: { apis: ['twitch'] },
       parameters: [{
         type: 'string', full: true, missingError: 'commands:twitch.noChannel'
       }]
@@ -38,6 +39,7 @@ module.exports = class Twitch extends Command {
         channel.send(embed).then(() => channel.stopTyping())
       } else throw new CommandError(t('commands:twitch.userNotFound'))
     } catch (e) {
+      console.log(e)
       throw new CommandError(t('errors:generic'))
     }
   }
