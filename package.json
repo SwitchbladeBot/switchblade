@@ -56,7 +56,7 @@
     "icecast-parser": "^3.0.0",
     "intl": "^1.2.5",
     "jsonwebtoken": "^8.5.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mal-scraper": "^2.5.0",
     "mathjs": "^5.7.0",
     "moment": "^2.24.0",
