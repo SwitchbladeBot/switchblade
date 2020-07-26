@@ -16,7 +16,7 @@ try {
 
 // Initialize client
 const CLIENT_OPTIONS = {
-  fetchAllMembers: true,
+  fetchAllMembers: false,
   enableEveryone: false,
   canvasLoaded
 }
