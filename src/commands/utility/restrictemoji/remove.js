@@ -18,7 +18,7 @@ module.exports = class RestrictEmojiRemove extends Command {
   async run ({ t, author, channel, guild }, emoji, role) {
     channel.startTyping()
     try {
-      await emoji.removeRestrictedRole(role)
+      await emoji.roles.remove(role)
       channel.send(
         new SwitchbladeEmbed(author)
           .setTitle(t('commands:restrictemoji.subcommands.remove.cantUse', { role: role.name, emoji: emoji.name }))

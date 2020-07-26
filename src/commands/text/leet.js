@@ -38,6 +38,7 @@ module.exports = class Leet extends Command {
         {
           type: 'string',
           full: true,
+          clean: true,
           missingError: 'commands:leet.missingSentence'
         },
         [{

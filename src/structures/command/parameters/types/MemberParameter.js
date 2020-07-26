@@ -13,6 +13,6 @@ module.exports = class MemberParameter extends UserParameter {
 
     const { guild } = context
     const user = super.parse(arg, context)
-    return guild.member(user)
+    return guild.members.cache.get(user.id)
   }
 }

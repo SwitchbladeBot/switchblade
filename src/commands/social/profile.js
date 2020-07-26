@@ -1,5 +1,5 @@
 const { CanvasTemplates, Command, PermissionUtils } = require('../../')
-const { Attachment } = require('discord.js')
+const { MessageAttachment } = require('discord.js')
 
 module.exports = class Profile extends Command {
   constructor (client) {
@@ -21,6 +21,6 @@ module.exports = class Profile extends Command {
     const userDocument = await this.client.controllers.social.retrieveProfile(user.id)
     const role = PermissionUtils.specialRole(this.client, user)
     const profile = await CanvasTemplates.profile({ t }, user, userDocument, role)
-    channel.send(new Attachment(profile, 'profile.jpg')).then(() => channel.stopTyping())
+    channel.send(new MessageAttachment(profile, 'profile.jpg')).then(() => channel.stopTyping())
   }
 }

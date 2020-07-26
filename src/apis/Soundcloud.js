@@ -1,22 +1,11 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
+const cheerio = require('cheerio')
 
-const API_URL = 'http://api.soundcloud.com'
+const API_URL = 'http://api-v2.soundcloud.com'
 
-const CLIENT_ID_REFRESH_INTERVAL = 60 * 60 * 1000 // 1 hour
-const PAGE_APP_SCRIPT_REGEX = /https:\/\/[A-Za-z0-9-.]+\/assets\/[a-f0-9-]+\.js/
-const APP_SCRIPT_CLIENT_ID_REGEX = /,client_id:"([a-zA-Z0-9-_]+)"/
-
-const lastMatchWithinLimit = (regex, text, limit) => {
-  let i = 0
-  let lastMatch
-  let curMatch
-  while ((curMatch = regex.exec(text)) !== null && i < limit) {
-    lastMatch = curMatch
-    i++
-  }
-  return lastMatch
-}
+const HARDCODED_CLIENT_ID = 'H2c34Q0E7hftqnuDHGsk88DbNqhYpgMm'
+const APP_SCRIPT_CLIENT_ID_REGEX = /,client_id:"(.*?)"/
 
 module.exports = class SoundcloudAPI extends APIWrapper {
   constructor () {
@@ -24,12 +13,11 @@ module.exports = class SoundcloudAPI extends APIWrapper {
       name: 'soundcloud'
     })
 
-    this.lastClientIdUpdate = 0
-    this.clientId = null
+    this._clientId = null
   }
 
   load () {
-    this.updateClientId()
+    this.clientId()
     return this
   }
 
@@ -45,67 +33,55 @@ module.exports = class SoundcloudAPI extends APIWrapper {
     return this.request(`/playlists/${id}`)
   }
 
-  // Client ID
-  async request (endpoint, queryParams = {}, tries = 0) {
-    await this.updateClientId()
+  resolveTrack (url) {
+    return this.request('/resolve', { url: encodeURI(url) })
+  }
 
-    queryParams['client_id'] = this.clientId
+  // Client ID
+  async request (endpoint, queryParams = {}) {
+    queryParams['client_id'] = await this.clientId()
     const qParams = new URLSearchParams(queryParams)
     return fetch(API_URL + endpoint + `?${qParams.toString()}`)
-      .then(res => res.json())
-      .catch(e => {
-        if (e.statusCode === 401 && tries < 5) {
-          this.lastClientIdUpdate = 0
-          return this.request(endpoint, queryParams, ++tries)
-        }
-        return e
-      })
+      .then(res => res.ok ? res.json() : Promise.reject(res))
   }
 
-  updateClientId () {
-    const now = Date.now()
-    if (now - this.lastClientIdUpdate < CLIENT_ID_REFRESH_INTERVAL) return
+  async clientId () {
+    if (this._clientId) return this._clientId
 
-    this.lastClientIdUpdate = now
-    return this.findClientIdFromSite().then(id => {
-      if (id) {
-        this.clientId = id
-        return id
-      }
-    }).catch(e => {
-      console.error('SoundCloud client ID request failed.', e.statusCode || e)
-    })
-  }
+    this._clientId = HARDCODED_CLIENT_ID
+    if (await this.checkIfHardcodedClientIdIsValid()) {
+      return this._clientId
+    }
+    this._clientId = null
 
-  findClientIdFromSite () {
-    return this.findApplicationScriptUrl().then(this.findClientIdFromApplicationScript).catch(e => {
-      console.error('Could not find application script from main page.', e.statusCode || e)
-    })
-  }
+    const $ = await fetch('https://soundcloud.com').then(async r => cheerio.load(await r.text()))
+    const elements = $('script[src*="sndcdn.com/assets/"][src$=".js"]').get()
+    elements.reverse()
 
-  async findApplicationScriptUrl () {
-    return fetch('https://soundcloud.com').then(async res => {
-      if (res.ok) {
-        const body = await res.text()
-        const regex = lastMatchWithinLimit(PAGE_APP_SCRIPT_REGEX, body, 7)
-        if (regex) {
-          return regex[0]
+    const headers = { 'Range': 'bytes=0-16384' }
+    for (let i = 0; i < elements.length; i++) {
+      const src = elements[i].attribs.src
+      if (src) {
+        try {
+          const srcContent = await fetch(src, { headers }).then(r => r.text())
+          const [ , clientId ] = APP_SCRIPT_CLIENT_ID_REGEX.exec(srcContent)
+          this._clientId = clientId
+          return clientId
+        } catch (_) {
+          // Ignore it and proceed to try searching other script
         }
       }
-      return Promise.reject(new Error(res))
-    })
+    }
+
+    return null // Couldn't find valid client id
   }
 
-  async findClientIdFromApplicationScript (url) {
-    return fetch(url).then(async res => {
-      if (res.ok) {
-        const body = await res.text()
-        const regex = APP_SCRIPT_CLIENT_ID_REGEX.exec(body)
-        if (regex) {
-          return regex[1]
-        }
-      }
-      return Promise.reject(new Error(res))
-    })
+  async checkIfHardcodedClientIdIsValid () {
+    try {
+      const track = await this.resolveTrack('https://soundcloud.com/roadrunner-usa/02-sick-bubblegum')
+      return track && track.id === 35989476
+    } catch (_) {
+      return false
+    }
   }
 }

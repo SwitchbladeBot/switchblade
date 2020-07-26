@@ -13,7 +13,7 @@ module.exports = class Queue extends Command {
   }
 
   async run ({ t, aliase, author, channel, guild, prefix }) {
-    const { playingSong, queue } = this.client.playerManager.get(guild.id)
+    const { playingSong, queue } = this.client.playerManager.players.get(guild.id)
     const embed = new SwitchbladeEmbed(author)
 
     const npSong = playingSong

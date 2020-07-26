@@ -7,6 +7,7 @@ module.exports = class GoogleCommand extends SearchCommand {
     super({
       name: 'google',
       aliases: ['gogle', 'googl'],
+      requirements: { apis: ['gsearch'] },
       embedColor: Constants.GOOGLE_COLOR,
       embedLogoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png'
     }, client)

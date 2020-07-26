@@ -23,7 +23,7 @@ module.exports = class SpotifyUser extends Command {
       const [image] = images.sort((a, b) => b.width - a.width)
       const embed = new SwitchbladeEmbed(author)
         .setColor(Constants.SPOTIFY_COLOR)
-        .setAuthor(t('commands:spotify.subcommands.user.userInfo'), this.parentCommand.SPOTIFY_LOGO, urls.spotify)
+        .setAuthor(t('commands:spotify.subcommands.user.userInfo'), this.parentCommand.authorImage, urls.spotify)
         .setDescription(name || user)
         .setThumbnail(image.url)
         .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)

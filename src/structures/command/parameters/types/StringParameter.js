@@ -8,7 +8,9 @@ module.exports = class StringParameter extends Parameter {
       ...super.parseOptions(options),
       clean: !!options.clean,
       maxLength: Number(options.maxLength) || 0,
-      truncate: !!options.truncate
+      truncate: !!options.truncate,
+      toUpperCase: !!options.toUpperCase,
+      toLowerCase: !!options.toLowerCase
     }
   }
 
@@ -22,6 +24,9 @@ module.exports = class StringParameter extends Parameter {
       if (!this.truncate) throw new CommandError(t('errors:needSmallerString', { number: this.maxLength }))
       arg = arg.substring(0, this.maxLength)
     }
+
+    if (this.toUpperCase) arg = arg.toUpperCase()
+    if (this.toLowerCase) arg = arg.toLowerCase()
 
     return arg
   }

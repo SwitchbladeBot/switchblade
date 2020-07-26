@@ -3,11 +3,12 @@
 
   <img src="https://i.imgur.com/SVyi88i.png"><br>
 
-  [![support][support-badge]][support-invite]
+  [![support][support-image]][support-invite]
+  
   [![crowdin][crowdin-badge]][crowdin-url]
   [![jetbrains][jetbrains-badge]][jetbrains-url]
   [![codeclimate][codeclimate-badge]][codeclimate-url]
-  [![circleci][circleci-badge]][circleci-url]
+  [![ghactions][ghactions-badge]][ghactions-url]
   ![servers-badge]
   ![commands-badge]
   ![languages-badge]
@@ -137,7 +138,7 @@ Backers are the people who contribute to our projects monetarily. They get their
 <a href="https://opencollective.com/switchblade/backer/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/10/avatar.svg?requireActive=false"></a>
 
 [support-invite]: https://support.switchblade.xyz
-[support-badge]: https://img.shields.io/discord/445203868624748555?label=chat%20on%20Discord&logo=discord&logoColor=white
+[support-image]: https://invidget.switchblade.xyz/2FB8wDG
 
 [crowdin-url]: https://translate.switchblade.xyz
 [crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
@@ -148,8 +149,8 @@ Backers are the people who contribute to our projects monetarily. They get their
 [codeclimate-url]: https://codeclimate.com/github/SwitchbladeBot/switchblade/maintainability
 [codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg
 
-[circleci-url]: https://circleci.com/gh/SwitchbladeBot/switchblade
-[circleci-badge]: https://img.shields.io/circleci/project/github/SwitchbladeBot/switchblade/dev.svg?logo=circleci
+[ghactions-url]: https://github.com/SwitchbladeBot/switchblade/actions?query=workflow%3ACI
+[ghactions-badge]: https://github.com/SwitchbladeBot/switchblade/workflows/CI/badge.svg
 
 [backers-url]: https://opencollective.com/switchblade#backer
 [backers-badge]: https://opencollective.com/switchblade/tiers/backer/badge.svg?label=backers&color=brightgreen

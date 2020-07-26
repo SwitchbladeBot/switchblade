@@ -42,7 +42,7 @@ module.exports = class CanvasTemplates {
 
     const { rep, money, personalText, favColor } = userDocument
     const IMAGE_ASSETS = Promise.all([
-      Image.from(user.displayAvatarURL.replace('.gif', '.png')),
+      Image.from(user.displayAvatarURL({ format: 'png' })),
       Image.from(Constants.COINS_SVG, true),
       Image.from(Constants.REPUTATION_SVG, true),
       Image.from(Constants.DEFAULT_BACKGROUND_PNG, true)
@@ -318,7 +318,7 @@ module.exports = class CanvasTemplates {
     const DEFAULT_AVATAR = Image.from('https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png')
 
     const avatarCoords = []
-    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')).catch(() => DEFAULT_AVATAR))
+    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL({ format: 'png' }).replace('?size=2048', '')).catch(() => DEFAULT_AVATAR))
     const IMAGE_ASSETS = Promise.all([
       Image.from(icon, true),
       Image.from(Constants.MEDAL_SVG, true),

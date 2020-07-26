@@ -1,20 +1,13 @@
-const { Command, SwitchbladeEmbed } = require('../../../')
+const { SubcommandListCommand } = require('../../../')
 
-module.exports = class Leaderboard extends Command {
+module.exports = class Leaderboard extends SubcommandListCommand {
   constructor (client) {
     super({
       name: 'leaderboard',
       aliases: ['top', 'ranking'],
       category: 'social',
+      authorString: 'commands:leaderboard.title',
       requirements: { databaseOnly: true, canvasOnly: true }
     }, client)
-  }
-
-  async run ({ t, author, prefix, alias, channel }) {
-    const embed = new SwitchbladeEmbed(author)
-    embed.setDescription(this.subcommands.map(subcmd => {
-      return `**${prefix}${subcmd.fullName}** - ${t(`commands:${subcmd.tPath}.commandDescription`)}`
-    }).join('\n'))
-    channel.send(embed)
   }
 }

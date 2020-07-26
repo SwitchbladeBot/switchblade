@@ -26,8 +26,6 @@ module.exports = class Math extends Command {
 
   async run ({ t, author, channel }, expression) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
-
     try {
       const result = math.eval(expression)
       embed.setTitle(t('commands:math.result', { result }))
@@ -35,7 +33,6 @@ module.exports = class Math extends Command {
       this.client.log(`Failed math calculation ${expression}\nError: ${error.stack}`, { tags: [this.name] })
       throw new CommandError(t('commands:math.invalidMathExpression'), true)
     }
-
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send(embed)
   }
 }

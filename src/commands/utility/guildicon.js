@@ -20,7 +20,7 @@ module.exports = class GuildIcon extends Command {
     channel.startTyping()
     guild = guild || channel.guild
     if (guild.iconURL) {
-      embed.setImage(guild.iconURL)
+      embed.setImage(guild.iconURL({ format: 'png', dynamic: true }))
         .setDescription(t('commands:guildicon.iconDescription', { guild: guild.name }))
     } else {
       throw new CommandError(t('commands:guildicon.noIcon'))

@@ -6,26 +6,27 @@ module.exports = class DiscordUtils {
       .replace(/<@!?[0-9]+>/g, input => {
         const id = input.replace(/<|!|>|@/g, '')
         if (message.channel.type === 'dm' || message.channel.type === 'group') {
-          const user = message.client.users.get(id)
+          const user = message.client.users.cache.get(id)
           return user ? `@${user.username}` : input
         }
 
-        const member = message.channel.guild.members.get(id)
+        const member = message.channel.guild.members.cache.get(id)
         if (member) {
           return `@${member.displayName}`
         } else {
-          const user = message.client.users.get(id)
+          const user = message.client.users.cache.get(id)
           return user ? `@${user.username}` : input
         }
       })
       .replace(/<#[0-9]+>/g, input => {
-        const channel = message.client.channels.get(input.replace(/<|#|>/g, ''))
+        const channel = message.client.channels.cache.get(input.replace(/<|#|>/g, ''))
         return channel ? `#${channel.name}` : input
       })
       .replace(/<@&[0-9]+>/g, input => {
         if (message.channel.type === 'dm' || message.channel.type === 'group') return input
-        const role = message.guild.roles.get(input.replace(/<|@|>|&/g, ''))
+        const role = message.guild.roles.cache.get(input.replace(/<|@|>|&/g, ''))
         return role ? `@${role.name}` : input
       })
+      .replace(/`/g, '')
   }
 }

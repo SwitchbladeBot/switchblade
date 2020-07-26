@@ -15,8 +15,7 @@ module.exports = class PirateSpeak extends Command {
 
   async run ({ author, channel }, text) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
     embed.setDescription(pirateSpeak.translate(text))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send(embed)
   }
 }
