@@ -1565,5 +1565,8 @@
   "tpdne": {
     "commandDescription": "Sends an AI generated person (I know, looks kinda real)",
     "person": "Here's your AI generated person!"
+  },
+  "shards": {
+    "commandDescription": "Shows information about the bot's shards"
   }
 }
