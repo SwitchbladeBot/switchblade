@@ -21,7 +21,7 @@ module.exports = class AutoRoleModule extends Module {
   }
 
   rolesWhitelist (guildId, userId, idOnly = false) {
-    const guild = this.client.guilds.get(guildId)
+    const guild = this.client.guilds.cache.get(guildId)
     if (!guild || !userId) return []
     const member = guild.member(userId)
     const filteredRoles = guild.roles
