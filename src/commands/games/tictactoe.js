@@ -46,7 +46,7 @@ module.exports = class TicTacToe extends Command {
       name: 'tictactoe',
       aliases: ['ttt'],
       category: 'games',
-      requirements: { guildOnly: true, botPermissions: ['MANAGE_MESSAGES'], permissions: ['ADD_REACTIONS'] },
+      requirements: { guildOnly: true, botPermissions: ['ADD_REACTIONS'] },
       parameters: [{
         type: 'member', acceptSelf: false, missingError: 'commands:tictactoe.missingUser'
       }, [{

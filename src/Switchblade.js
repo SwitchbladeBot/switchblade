@@ -17,6 +17,7 @@ module.exports = class Switchblade extends Client {
     this.sentry = sentry
     this.canvasLoaded = options.canvasLoaded
     this.playerManager = null
+    this.shardId = options.shardId
 
     this.logError = this.logError.bind(this)
     this.loaded = false
