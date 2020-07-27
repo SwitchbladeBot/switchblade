@@ -49,7 +49,7 @@ module.exports = class Help extends Command {
       embed
         .setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL({ format: 'png' }))
         .setDescription([
-          `**${t('commands:help.prefix')}:** \`${prefix}\` (${t('commands:help.youCanUse', { botMention: this.client.user })})`,
+          `**${t('commands:help.prefix')}:** \`${prefix}\` (${t('commands:help.youCanUse', { botMention: this.client.user.toString() })})`,
           `**${t('commands:help.specificInformation', { helpString: `\`${prefix}${this.name} ${t('commands:help.commandUsage')}\`` })}**`
         ].join('\n'))
 
