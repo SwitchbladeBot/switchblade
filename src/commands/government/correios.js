@@ -28,13 +28,13 @@ module.exports = class Correios extends Command {
           .setAuthor(`${tracked[0].code}`, 'https://i.imgur.com/QRBKPwm.png')
           .setTitle(laststate.locale.toUpperCase())
           .setDescription(`${laststate.status.toUpperCase()} ${laststate.observation ? laststate.observation.toUpperCase() : ''}`)
-          .setColor(`${tracked[0].isDelivered ? Constants.SPOTIFY_COLOR : '#0f75bc'}`)
+          .setColor(tracked[0].isDelivered ? Constants.SPOTIFY_COLOR : '#0f75bc')
           .setFooter(t('commands:correios.lastUpdated'))
           .setTimestamp(laststate.trackedAt)
       )
     } catch (e) {
       channel.stopTyping(true)
-      throw new CommandError(`${t('commands:correios.notFound')}`)
+      throw new CommandError(t('commands:correios.notFound'))
     }
   }
 }
