@@ -33,7 +33,7 @@ module.exports = class Correios extends Command {
           .setTimestamp(laststate.trackedAt)
       )
     } catch (e) {
-        channel.stopTyping(true)
+      channel.stopTyping(true)
       throw new CommandError(`${t('commands:correios.notFound')}`)
     }
   }
