@@ -21,7 +21,6 @@ module.exports = class searchPlate extends Command {
   async run ({ t, author, channel }, plt) {
     channel.startTyping()
     const plate = await this.client.apis.sinesp.searchPlate(plt)
-    console.log(plate)
     try {
       // vv  i know that's actually hardcoded :hahaa:
       const carpic = await this.client.apis.gsearch.searchImage(`${plate.modelo} ${plate.anoModelo} a venda&imgSize=medium`)
@@ -34,7 +33,6 @@ module.exports = class searchPlate extends Command {
       channel.stopTyping(true)
     } catch (e) {
       channel.stopTyping(true)
-      console.log(e)
       throw new CommandError(`${t('commands:searchplate.notFound')}`)
     }
   }
