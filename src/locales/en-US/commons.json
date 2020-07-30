@@ -24,5 +24,7 @@
     "results": "Results for \"{{query}}\""
   },
   "enabled": "enabled",
-  "disabled": "disabled"
+  "disabled": "disabled",
+  "yes": "Yes",
+  "no": "No"
 }

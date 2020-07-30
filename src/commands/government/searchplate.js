@@ -33,7 +33,7 @@ module.exports = class searchPlate extends Command {
       channel.stopTyping(true)
     } catch (e) {
       channel.stopTyping(true)
-      throw new CommandError(`${t('commands:e621.notFound')}`)
+      throw new CommandError(t('commands:searchplate.notFound'))
     }
   }
 }

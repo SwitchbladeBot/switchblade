@@ -1568,5 +1568,11 @@
   },
   "shards": {
     "commandDescription": "Shows information about the bot's shards"
+  },
+  "correios": {
+    "commandDescription": "Shows information about a tracking code from ECT (Brazilian Post and Telegraph Corporation)",
+    "commandUsage": "<tracking code>",
+    "lastUpdated": "Last Updated at",
+    "notFound": "Code not found"
   }
 }
