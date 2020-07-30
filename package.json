@@ -69,6 +69,7 @@
     "node-fetch": "^2.3.0",
     "node-spotify-api": "^1.0.7",
     "pirate-speak": "^1.0.1",
+    "rastrojs": "^1.1.0",
     "rss-parser": "^3.7.0",
     "runeterra": "0.0.6",
     "samp-query": "latest",
