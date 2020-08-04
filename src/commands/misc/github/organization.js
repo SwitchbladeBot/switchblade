@@ -29,12 +29,12 @@ module.exports = class GitHubOrganization extends Command {
         .setURL(data.html_url)
         .setThumbnail(data.avatar_url)
         .setDescription(data.description || t('commands:github.subcommands.organization.noDescription'))
-        .addField(t('commands:github.subcommands.organization.members'), MiscUtils.formatNumber(orgMembers, language), true)
-        .addField(t('commands:github.subcommands.organization.createdAt'), `${moment(data.created_at).format('LLL')}\n(${moment(data.created_at).fromNow()})`, true)
+        .addField(t('commands:github.subcommands.organization.members'), MiscUtils.formatNumber(orgMembers, language))
+        .addField(t('commands:github.subcommands.organization.createdAt'), `${moment(data.created_at).format('LLL')}\n(${moment(data.created_at).fromNow()})`)
 
       if (data.public_repos > 0) {
         const repos = await this.client.apis.github.getOrganizationRepositories(organization)
-        embed.addField(t('commands:github.subcommands.user.repositories', { count: data.public_repos }), `${repos.slice(0, 5).map(r => `\`${r.full_name}\` ${r.fork ? ` ${this.getEmoji('forked')}` : ''}`).join('\n')}${data.public_repos > 5 ? `\n${t('commands:github.subcommands.organization.moreRepos', { repos: data.public_repos - 5 })}` : ''}`, true)
+        embed.addField(t('commands:github.subcommands.user.repositories', { count: data.public_repos }), `${repos.slice(0, 5).map(r => `\`${r.full_name}\` ${r.fork ? ` ${this.getEmoji('forked')}` : ''}`).join('\n')}${data.public_repos > 5 ? `\n${t('commands:github.subcommands.organization.moreRepos', { repos: data.public_repos - 5 })}` : ''}`)
       }
 
       channel.send(embed).then(() => channel.stopTyping())
