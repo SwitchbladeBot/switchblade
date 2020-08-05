@@ -27,10 +27,8 @@ module.exports = class Render extends Command {
 
     if (link.embeds.length >= 1) {
       messageHasNoEmbed = false
-      messageObj.embed = {};
-      ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
-        messageObj.embed[p] = link.embeds[0][p]
-      })
+      messageObj.embed = {}
+      messageObj.embed = link.embeds[0].toJSON()
     }
 
     if (Object.keys(messageObj).length === 0 && !content) {
