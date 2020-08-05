@@ -1574,5 +1574,10 @@
     "commandUsage": "<tracking code>",
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
+  },
+  "render": {
+    "youDontHavePermissionToRead": "You don't have permission to read messages in that channel.",
+    "commandUsage": "<message link>",
+    "iDontHavePermissionToRead": "I don't have permission to read that channel."
   }
 }
