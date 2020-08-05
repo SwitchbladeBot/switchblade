@@ -17,23 +17,23 @@ module.exports = class Render extends Command {
     if (!link.channel.permissionsFor(this.client.user.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.iDontHavePermissionToRead'))
     if (!link.channel.permissionsFor(author.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.youDontHavePermissionToRead'))
 
-    const MessageObj = {}
+    const messageObj = {}
     const { content } = link
     let messageHasNoEmbed = true
 
     if (link.attachments.size >= 1) {
-      MessageObj.files = [link.attachments.first().url]
+      messageObj.files = [link.attachments.first().url]
     }
 
     if (link.embeds.length >= 1) {
       messageHasNoEmbed = false
-      MessageObj.embed = {};
+      messageObj.embed = {};
       ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
-        MessageObj.embed[p] = link.embeds[0][p]
+        messageObj.embed[p] = link.embeds[0][p]
       })
     }
 
-    if (Object.keys(MessageObj).length === 0 && !content) {
+    if (Object.keys(messageObj).length === 0 && !content) {
       throw new CommandError(t('errors:messageContainsNothing'))
     }
     try {
@@ -45,14 +45,14 @@ module.exports = class Render extends Command {
           embed.setDescription(content || '')
         }
 
-        if (MessageObj.files) {
-          await embed.setImage(MessageObj.files[0])
-          delete MessageObj.files
+        if (messageObj.files) {
+          await embed.setImage(messageObj.files[0])
+          delete messageObj.files
         }
-        MessageObj.embed = embed
+        messageObj.embed = embed
       }
 
-      message.channel.send('', MessageObj)
+      message.channel.send('', messageObj)
     } catch (e) {
       throw new CommandError(t('commands:move.couldntSendMessage'))
     }
