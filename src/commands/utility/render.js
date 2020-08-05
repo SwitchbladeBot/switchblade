@@ -1,7 +1,7 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Render extends Command {
-  constructor(client) {
+  constructor (client) {
     super({
       name: 'render',
       aliases: ['show'],
@@ -13,7 +13,7 @@ module.exports = class Render extends Command {
     }, client)
   }
 
-  async run({ author, t, message }, link) {
+  async run ({ author, t, message }, link) {
     if (!link.channel.permissionsFor(this.client.user.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.iDontHavePermissionToRead'))
     if (!link.channel.permissionsFor(author.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.youDontHavePermissionToRead'))
 
