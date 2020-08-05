@@ -1,7 +1,7 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
 module.exports = class Render extends Command {
-  constructor (client) {
+  constructor(client) {
     super({
       name: 'render',
       aliases: ['show'],
@@ -13,31 +13,30 @@ module.exports = class Render extends Command {
     }, client)
   }
 
-  async run ({ author, t, message }, link) {
+  async run({ author, t, message }, link) {
+    if (!link.channel.permissionsFor(this.client.user.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.iDontHavePermissionToRead'))
+    if (!link.channel.permissionsFor(author.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.youDontHavePermissionToRead'))
+
+    const MessageObj = {}
+    const { content } = link
+    let messageHasNoEmbed = true
+
+    if (link.attachments.size >= 1) {
+      MessageObj.files = [link.attachments.first().url]
+    }
+
+    if (link.embeds.length >= 1) {
+      messageHasNoEmbed = false
+      MessageObj.embed = {};
+      ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
+        MessageObj.embed[p] = link.embeds[0][p]
+      })
+    }
+
+    if (Object.keys(MessageObj).length === 0 && !content) {
+      throw new CommandError(t('errors:messageContainsNothing'))
+    }
     try {
-      if (!link.channel.permissionsFor(this.client.user.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.iDontHavePermissionToRead'))
-      if (!link.channel.permissionsFor(author.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.youDontHavePermissionToRead'))
-
-      const MessageObj = {}
-      let content = link.content
-      let messageHasNoEmbed = true
-
-      if (link.attachments.size >= 1) {
-        MessageObj.files = [link.attachments.first().url]
-      }
-
-      if (link.embeds.length >= 1) {
-        messageHasNoEmbed = false
-        MessageObj.embed = {};
-        ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
-          MessageObj.embed[p] = link.embeds[0][p]
-        })
-      }
-
-      if (Object.keys(MessageObj).length === 0 && (!content || content === '')) {
-        throw new CommandError(t('errors:messageContainsNothing'))
-      }
-
       if (messageHasNoEmbed) {
         const embed = new SwitchbladeEmbed(author)
           .setAuthor(author.username, author.displayAvatarURL({ dynamic: true }))
