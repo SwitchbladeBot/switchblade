@@ -1,6 +1,6 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
 
-module.exports = class Move extends Command {
+module.exports = class Render extends Command {
   constructor (client) {
     super({
       name: 'render',

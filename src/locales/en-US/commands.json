@@ -1578,6 +1578,7 @@
   "render": {
     "youDontHavePermissionToRead": "You don't have permission to read messages in that channel.",
     "commandUsage": "<message link>",
+    "commandDescription": "Renders a message from another channel using the message link.",
     "iDontHavePermissionToRead": "I don't have permission to read that channel."
   }
 }
