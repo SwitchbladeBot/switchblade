@@ -1,6 +1,8 @@
 const { MessageEmbed } = require('discord.js')
 const ReactionHandler = require('./ReactionHandler.js')
 
+const validateProp = (prop) => typeof prop !== 'undefined' ? prop : true
+
 /**
  * Paginated embed constructor, so that one can incorporate multiple embeds into one.
  * @constructor
@@ -70,9 +72,9 @@ module.exports = class PaginatedEmbed {
     if (!options.filter) options.filter = () => true
     const emojis = this._determineEmojis(
       [],
-      options.stop || true,
-      options.jump || true,
-      options.firstLast || true
+      validateProp(options.stop),
+      validateProp(options.jump),
+      validateProp(options.firstLast)
     )
 
     const msg = message.editable
