@@ -30,6 +30,16 @@ module.exports = class PaginatedEmbed {
   }
 
   /**
+     * Sets emojis, if you don't want the default ones. ¯\_(ツ)_/¯
+     * @param {object} [emojis] - Object with emojis to be edited.
+     * @returns {PaginatedEmbed}
+     */
+  setEmojis (emojis) {
+    Object.assign(this.emojis, emojis)
+    return this
+  }
+
+  /**
      * Adds a embed to the list of embeds to be rendered
      * @param {MessageEmbed} [embed] - MessageEmbed object
      * @returns {PaginatedEmbed}
