@@ -6,14 +6,15 @@ const ReactionHandler = require('./ReactionHandler.js')
  * @constructor
  * @param {object} [t] - i18next translation object
  * @param {User} [author] - The user that executed the command that resulted in this embed
+ * @param {Array[MessageEmbed]} [pages] - Array of embeds that can be used if you don't want to call the addPage() function too many times
  */
-module.exports.PaginatedEmbed = class PaginatedEmbed {
-  constructor (t, author, embed = new MessageEmbed()) {
+module.exports = class PaginatedEmbed {
+  constructor (t, author, pages = [], embed = new MessageEmbed()) {
     this.t = t
     this.author = author
     this.embedTemplate = embed
     this.pages = []
-    this.informationPage = null
+    this.infoPage = null
 
     this.emojis = {
       first: '⏮',
@@ -24,6 +25,8 @@ module.exports.PaginatedEmbed = class PaginatedEmbed {
       info: 'ℹ',
       stop: '⏹'
     }
+
+    pages.forEach(page => this.addPage(page))
   }
   /**
      * Sets emojis, if you don't want the default ones. ¯\_(ツ)_/¯
@@ -66,18 +69,14 @@ module.exports.PaginatedEmbed = class PaginatedEmbed {
     if (!options.filter) options.filter = () => true
     const emojis = this._determineEmojis(
       [],
-      !('stop' in options) || ('stop' in options && options.stop),
-      !('jump' in options) || ('jump' in options && options.jump),
-      !('firstLast' in options) || ('firstLast' in options && options.firstLast)
+      options.stop || true,
+      options.jump || true,
+      options.firstLast || true
     )
 
-    let msg
-    if (message.editable) {
-      await message.edit({ embed: this.pages[options.startPage || 0] })
-      msg = message
-    } else {
-      msg = await message.channel.send(this.pages[options.startPage || 0])
-    }
+    const msg = message.editable
+      ? await message.edit({ embed: this.pages[options.startPage || 0] })
+      : await message.channel.send(this.pages[options.startPage || 0])
 
     return new ReactionHandler(
       msg,
@@ -89,7 +88,7 @@ module.exports.PaginatedEmbed = class PaginatedEmbed {
   }
 
   async _footer () {
-    for (let i = 1; i <= this.pages.length; i++) this.pages[i - 1].setFooter(`${i}/${this.pages.length}`)
+    this.pages.forEach((page, index) => page.setFooter(`${index + 1}/${this.pages.length}`))
     if (this.infoPage) this.infoPage.setFooter('ℹ')
   }
 
@@ -106,7 +105,7 @@ module.exports.PaginatedEmbed = class PaginatedEmbed {
 
   _handlePageGeneration (cb) {
     if (typeof cb === 'function') {
-      const page = cb(this.template)
+      const page = cb(this.embedTemplate)
       if (page instanceof MessageEmbed) return page
     } else if (cb instanceof MessageEmbed) {
       return cb

@@ -15,6 +15,7 @@ module.exports = class ReactionHandler extends ReactionCollector {
       this.resolve = resolve
     }) : Promise.resolve(null)
     this.reactionsDone = false
+    this.infoIsDisplayed = false
 
     if (emojis.length) this._queueEmojiReactions(emojis.slice())
     else return this.stop()
@@ -78,7 +79,13 @@ module.exports = class ReactionHandler extends ReactionCollector {
   }
 
   info () {
-    this.message.edit(this.display.infoPage)
+    if (this.infoIsDisplayed) {
+      this.infoIsDisplayed = false
+      this.first()
+    } else {
+      this.message.edit(this.display.infoPage)
+      this.infoIsDisplayed = true
+    }
   }
 
   stop () {
