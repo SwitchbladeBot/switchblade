@@ -34,16 +34,15 @@ module.exports = class Emojis extends Command {
     })
 
     animatedEmojis.splice(0, animatedEmojis.length)
-    let i, l
-    for (i = 0, l = 0; i < emojisText.length; i++) {
-      if (i > 0 && (textPerEmbed[l].length >= 2048 || ((textPerEmbed[l] ? textPerEmbed[l] : '') + `\n${emojisText[i]}`).length >= 2048)) {
-        l++
-      }
-
-      if (textPerEmbed[l]) {
-        textPerEmbed[l] += `\n${emojisText[i]}`
+    let i
+    let text = ''
+    for (i = 0; i < emojisText.length; i++) {
+      const messageLength = text.length + emojisText[i].length + 1
+      if (messageLength >= 2048) {
+        textPerEmbed.push(text)
+        text = emojisText[i]
       } else {
-        textPerEmbed[l] = `${emojisText[i]}`
+        text += `\n${emojisText[i]}`
       }
     }
 
