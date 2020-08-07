@@ -12,9 +12,8 @@ module.exports = class EmojiList extends Command {
   }
 
   async run ({ message, t, author, channel, language }) {
-    const emojisCache = message.guild.emojis.cache
-    const guildEmojis = emojisCache.filter(emoji => emoji.available & !emoji.animated).array()
-    const animatedEmojis = emojisCache.filter(emoji => emoji.available && emoji.animated).array()
+    const emojisCache = message.guild.emojis.cache.filter(emoji => emoji.available)
+    const [guildEmojis, animatedEmojis] = emojisCache.partition(emoji => !emoji.animated)
     const emojisText = []
     const embeds = []
     const textPerEmbed = []
@@ -28,12 +27,12 @@ module.exports = class EmojiList extends Command {
       emojisText.push(`${emoji.toString()} **${emoji.name}** \`\`<:${emoji.name}:${emoji.id}>\`\``)
     })
 
-    guildEmojis.splice(0, guildEmojis.length)
+    guildEmojis.clear()
     animatedEmojis.forEach((emoji) => {
       emojisText.push(`${emoji.toString()} **${emoji.name}** \`\`<:${emoji.name}:${emoji.id}>\`\``)
     })
 
-    animatedEmojis.splice(0, animatedEmojis.length)
+    animatedEmojis.clear()
     let i, l
     for (i = 0, l = 0; i < emojisText.length; i++) {
       if (i > 0 && textPerEmbed[l] && (textPerEmbed[l].length >= 2048 || (textPerEmbed[l].length || 0) + emojisText[i].length + 1 >= 2048)) {
