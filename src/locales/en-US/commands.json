@@ -1574,5 +1574,10 @@
     "commandUsage": "<tracking code>",
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
+  },
+  "emojis": {
+    "commandDescription": "Take a look at all emojis in the server.",
+    "loading": "Loading emojis...",
+    "guildHasNoEmoji": "This guild has no emoji or all emojis are not available for me."
   }
 }
