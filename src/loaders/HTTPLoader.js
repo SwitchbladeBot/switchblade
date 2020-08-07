@@ -28,7 +28,6 @@ module.exports = class HTTPLoader extends Loader {
   }
 
   initializeHTTPServer (port = process.env.PORT) {
-    if (this.client.shardId !== 0) return this.log(`Server not stared - not shard 0`, { color: 'red', tags: ['HTTP'] })
     if (!port) return this.log(`Server not started - Required environment variable "PORT" is not set.`, { color: 'red', tags: ['HTTP'] })
     if (!this.client.shard.ids.includes(0)) return this.log(`Server not started - Client doesn't manage shard 0`, { color: 'red', tags: ['HTTP'] })
 
