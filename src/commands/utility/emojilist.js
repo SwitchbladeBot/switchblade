@@ -13,29 +13,23 @@ module.exports = class EmojiList extends Command {
 
   async run ({ message, t, author, channel, language }) {
     const emojisCache = message.guild.emojis.cache.filter(emoji => emoji.available)
-    const [guildEmojis, animatedEmojis] = emojisCache.partition(emoji => !emoji.animated)
     const emojisText = []
     const embeds = []
     const textPerEmbed = []
 
-    if (guildEmojis.length === 0 && animatedEmojis.length === 0) {
+    if (emojisCache.size < 0) {
       throw new CommandError(t('errors:guildHasNoEmoji'))
     }
 
     moment.locale(language)
-    guildEmojis.forEach((emoji) => {
-      emojisText.push(`${emoji.toString()} **${emoji.name}** \`\`<:${emoji.name}:${emoji.id}>\`\``)
+    emojisCache.forEach((emoji, id) => {
+      emojisText.push(`${emoji.toString()} **${emoji.name}** \`\`<:${emoji.name}:${id}>\`\``)
     })
 
-    guildEmojis.clear()
-    animatedEmojis.forEach((emoji) => {
-      emojisText.push(`${emoji.toString()} **${emoji.name}** \`\`<:${emoji.name}:${emoji.id}>\`\``)
-    })
-
-    animatedEmojis.clear()
+    emojisCache.clear()
     let i, l
     for (i = 0, l = 0; i < emojisText.length; i++) {
-      if (i > 0 && textPerEmbed[l] && (textPerEmbed[l].length >= 2048 || (textPerEmbed[l].length || 0) + emojisText[i].length + 1 >= 2048)) {
+      if (i > 0 && textPerEmbed[l] && (textPerEmbed[l].length + emojisText[i].length + 1) >= 2048) {
         l++
       }
 
@@ -60,7 +54,7 @@ module.exports = class EmojiList extends Command {
 
     embeds.splice(0, embeds.length)
     try {
-      const msg = await channel.send(t('commands:emojis.loading'))
+      const msg = await channel.send(t('commands:emojilist.loading'))
       pages.run(msg)
     } catch (e) {
       throw new CommandError(t('commands:move.couldntSendMessage'))
