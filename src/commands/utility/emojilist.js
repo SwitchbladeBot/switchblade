@@ -1,5 +1,4 @@
 const { Command, SwitchbladeEmbed, PaginatedEmbed, CommandError } = require('../../')
-const moment = require('moment')
 
 module.exports = class EmojiList extends Command {
   constructor (client) {
@@ -21,7 +20,6 @@ module.exports = class EmojiList extends Command {
       throw new CommandError(t('errors:guildHasNoEmoji'))
     }
 
-    moment.locale(language)
     emojisCache.forEach((emoji, id) => {
       emojisText.push(`${emoji.toString()} **${emoji.name}** \`\`<:${emoji.name}:${id}>\`\``)
     })
