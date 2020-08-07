@@ -1,5 +1,4 @@
 const { Command, SwitchbladeEmbed, PaginatedEmbed, CommandError } = require('../../')
-const { text } = require('figlet')
 
 function compare (a, b) {
   if (a.position < b.position) return -1
