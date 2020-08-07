@@ -1,11 +1,11 @@
 const { Command, SwitchbladeEmbed, PaginatedEmbed, CommandError } = require('../../')
 const moment = require('moment')
 
-module.exports = class Emojis extends Command {
+module.exports = class EmojiList extends Command {
   constructor (client) {
     super({
-      name: 'emojis',
-      aliases: ['emojilist', 'emojislist', 'guildemojis', 'serveremojis'],
+      name: 'emojilist',
+      aliases: ['emojis', 'emojislist', 'guildemojis', 'serveremojis'],
       category: 'utility',
       requirements: { guildOnly: true, botPermissions: ['ADD_REACTIONS', 'EMBED_LINKS'] }
     }, client)
@@ -36,23 +36,26 @@ module.exports = class Emojis extends Command {
     animatedEmojis.splice(0, animatedEmojis.length)
     let i, l
     for (i = 0, l = 0; i < emojisText.length; i++) {
-      if (i > 0 && (textPerEmbed[l].length >= 2048 || ((textPerEmbed[l] ? textPerEmbed[l] : '') + `\n${emojisText[i]}`).length >= 2048)) {
+      if (i > 0 && textPerEmbed[l] && (textPerEmbed[l].length >= 2048 || (textPerEmbed[l].length || 0) + emojisText[i].length + 1 >= 2048)) {
         l++
       }
 
-      if (textPerEmbed[l]) {
-        textPerEmbed[l] += `\n${emojisText[i]}`
-      } else {
-        textPerEmbed[l] = `${emojisText[i]}`
-      }
+      textPerEmbed[l]
+        ? textPerEmbed[l] += `\n${emojisText[i]}`
+        : textPerEmbed[l] = emojisText[i]
     }
 
     emojisText.splice(0, emojisText.length)
-    for (let f = 0; f < textPerEmbed.length; f++) {
+    // for (let f = 0; f < textPerEmbed.length; f++) {
+    //   const currentEmbed = new SwitchbladeEmbed(author)
+    //   currentEmbed.setDescription(textPerEmbed[f])
+    //   await embeds.push(currentEmbed)
+    // }
+    textPerEmbed.forEach((text) => {
       const currentEmbed = new SwitchbladeEmbed(author)
-      currentEmbed.setDescription(textPerEmbed[f])
-      await embeds.push(currentEmbed)
-    }
+      currentEmbed.setDescription(text)
+      embeds.push(currentEmbed)
+    })
 
     textPerEmbed.splice(0, textPerEmbed.length)
     const pages = new PaginatedEmbed(t, author)
