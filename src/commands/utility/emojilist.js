@@ -46,11 +46,6 @@ module.exports = class EmojiList extends Command {
     }
 
     emojisText.splice(0, emojisText.length)
-    // for (let f = 0; f < textPerEmbed.length; f++) {
-    //   const currentEmbed = new SwitchbladeEmbed(author)
-    //   currentEmbed.setDescription(textPerEmbed[f])
-    //   await embeds.push(currentEmbed)
-    // }
     textPerEmbed.forEach((text) => {
       const currentEmbed = new SwitchbladeEmbed(author)
       currentEmbed.setDescription(text)
