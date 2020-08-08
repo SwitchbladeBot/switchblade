@@ -1,5 +1,4 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
-const { MessageAttachment } = require('discord.js')
 module.exports = class Render extends Command {
   constructor (client) {
     super({
