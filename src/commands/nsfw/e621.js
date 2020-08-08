@@ -17,7 +17,7 @@ module.exports = class e621 extends Command {
   }
 
   async run ({ t, author, channel }, query) {
-    await channel.startTyping()
+    channel.startTyping()
     const endpoint = channel.nsfw ? '' : 'rating:safe'
     const { posts } = await this.client.apis.e621.searchPost(`${endpoint} ${query} -flash -webm`)
     try {
