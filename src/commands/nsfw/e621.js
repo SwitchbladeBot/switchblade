@@ -11,13 +11,13 @@ module.exports = class e621 extends Command {
       parameters: [{
         type: 'string',
         full: true,
-        missingError: 'commands:e621.noquery'
+        missingError: 'commands:e621.noQuery'
       }]
     }, client)
   }
 
   async run ({ t, author, channel }, query) {
-    channel.startTyping()
+    await channel.startTyping()
     const endpoint = channel.nsfw ? '' : 'rating:safe'
     const { posts } = await this.client.apis.e621.searchPost(`${endpoint} ${query} -flash -webm`)
     try {
