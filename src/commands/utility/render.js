@@ -1,5 +1,5 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../')
-
+const { MessageAttachment } = require('discord.js')
 module.exports = class Render extends Command {
   constructor (client) {
     super({
@@ -27,7 +27,6 @@ module.exports = class Render extends Command {
 
     if (link.embeds.length >= 1) {
       messageHasNoEmbed = false
-      messageObj.embed = {}
       messageObj.embed = link.embeds[0].toJSON()
     }
 
@@ -43,10 +42,6 @@ module.exports = class Render extends Command {
           embed.setDescription(content || '')
         }
 
-        if (messageObj.files) {
-          await embed.setImage(messageObj.files[0])
-          delete messageObj.files
-        }
         messageObj.embed = embed
       }
 
