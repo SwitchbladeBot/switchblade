@@ -11,7 +11,7 @@ module.exports = class e621 extends APIWrapper {
   }
 
   async searchPost (tags) {
-    return await this.request('/posts.json', { limit: 1, tags })
+    return this.request('/posts.json', { limit: 1, tags })
   }
 
   async request (endpoint, queryParams = {}) {
