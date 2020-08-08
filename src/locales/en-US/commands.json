@@ -336,10 +336,6 @@
     "noUsageProvided": "No usage provided.",
     "commandNotFound": "I couldn't find any command with that name."
   },
-  "e621": {
-    "commandDescription": "Sends a random yiff from e621.",
-    "hereIsYour_yiff": "Here's your yiff!"
-  },
   "pay": {
     "commandDescription": "Pays $t(commons:currency_plural) to a user.",
     "commandUsage": "<@member> <value>",
@@ -1532,7 +1528,8 @@
     "artist": "Artist(s)",
     "desc": "Description",
     "notFound": "Post not found",
-    "post": "Post URL"
+    "post": "Post URL",
+    "noQuery": "You have to give me something to search!"
   },
   "searchplate": {
     "commandDescription": "Searches for a brazilian vehicle plate registration on SINESP (Public information)",

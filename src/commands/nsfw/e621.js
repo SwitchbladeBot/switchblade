@@ -11,7 +11,7 @@ module.exports = class e621 extends Command {
       parameters: [{
         type: 'string',
         full: true,
-        missingError: 'commands:e621.noquery'
+        missingError: 'commands:e621.noQuery'
       }]
     }, client)
   }
