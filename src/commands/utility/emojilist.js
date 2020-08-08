@@ -30,6 +30,6 @@ module.exports = class EmojiList extends Command {
     }
 
     const pages = new PaginatedEmbed(t, author, pagesArr)
-    pages.run(channel) // Assuming you applied the PaginatedEmbed.run() changes
+    pages.run(channel)
   }
 }
