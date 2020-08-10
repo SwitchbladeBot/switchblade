@@ -6,7 +6,8 @@ module.exports = class e621 extends Command {
       name: 'e621',
       category: 'nsfw',
       requirements: {
-        apis: [ 'e621' ]
+        apis: [ 'e621' ],
+        nsfwOnly: true
       },
       parameters: [{
         type: 'string',
