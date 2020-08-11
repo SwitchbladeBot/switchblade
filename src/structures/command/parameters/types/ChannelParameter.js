@@ -12,7 +12,7 @@ const searchOn = (local, id, arg) => (
  * @param  {String} userID - The id of the user who should have permission checked.
  * @param  {Object} channel - The channel from the message.
  * @param  {Array<String>} permissions - An Array with discord permissions.
- * @Param  {Function} t - The translate function.
+ * @param  {Function} t - The translate function.
  * @param  {String} blameWho - Who to blame if the permission is missing.
  * @returns {String}
  */
