@@ -20,7 +20,7 @@ const ensurePermissions = (userID, channel, permissions, t, blameWho) => {
   for (let i = 0; i < permissions.length; i++) {
     const permission = permissions[i]
     if (!channel.permissionsFor(userID).has(permission)) {
-      return t(blameWho === 'bot' ? 'errors:iDontHavePermission' : 'errors:youDontHavePermissionToRead', { permission } )
+      return t(blameWho === 'bot' ? 'errors:iDontHavePermission' : 'errors:youDontHavePermissionToRead', { permission })
     }
   }
 
