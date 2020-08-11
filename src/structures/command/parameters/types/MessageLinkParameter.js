@@ -15,6 +15,25 @@ function returnProperties (modifiers, regexResult) {
   return Result
 }
 
+/**
+ * @param  {String} userID - The id of the user who should have permission checked.
+ * @param  {Object} channel - The channel from the message.
+ * @param  {Array<String>} permissions - An Array with discord permissions.
+ * @Param  {Function} t - The translate function.
+ * @param  {String} blameWho - Who to blame if the permission is missing.
+ * @returns {String}
+ */
+const ensurePermissions = (userID, channel, permissions, t, blameWho) => {
+  for (let i = 0; i < permissions.length; i++) {
+    const permission = permissions[i]
+    if (!channel.permissionsFor(userID).has(permission)) {
+      return t(blameWho === 'bot' ? 'errors:iDontHavePermission' : 'errors:youDontHavePermissionToRead', { permission })
+    }
+  }
+
+  return null
+}
+
 module.exports = class MessageLinkParameter extends Parameter {
   static parseOptions (options = {}) {
     return {
@@ -23,11 +42,13 @@ module.exports = class MessageLinkParameter extends Parameter {
       sameChannelOnly: !!options.sameChannelOnly,
       returnModifier: options.returnModifier ? options.returnModifier : ['link', 'guild', 'channel', 'message'],
       forceExists: !!options.forceExists,
-      returnRegexResult: !!options.returnRegexResult
+      returnRegexResult: !!options.returnRegexResult,
+      linkChannelUserPermission: options.linkChannelUserPermission,
+      linkChannelBotPermission: options.linkChannelBotPermission
     }
   }
 
-  static async parse (arg, { t, client, guild, channel }) {
+  static async parse (arg, { t, client, guild, author, channel }) {
     const regexResult = MESSAGE_LINK.exec(arg)
     if (regexResult) {
       const [, guildId, channelId, messageId] = regexResult
@@ -43,18 +64,24 @@ module.exports = class MessageLinkParameter extends Parameter {
         const channel = guild.channels.cache.get(channelId)
         if (!channel) throw new CommandError(t('errors:validLinkButGhostChannel'))
 
-        try {
-          const recievedMessage = await channel.messages.fetch(messageId)
-          if (!recievedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
+        const recievedMessage = await channel.messages.fetch(messageId)
+        if (!recievedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
 
-          if (this.returnRegexResult) {
-            return regexResult
-          }
+        if (this.linkChannelBotPermission) {
+          const result = ensurePermissions(client.user.id, recievedMessage.channel, this.linkChannelBotPermission, t, 'bot')
 
-          return recievedMessage
-        } catch (e) {
-          throw new CommandError(t('errors:validLinkButGhostMessage'))
+          if (result) throw new CommandError(result)
         }
+
+        if (this.linkChannelUserPermission) {
+          const result = ensurePermissions(author.id, recievedMessage.channel, this.linkChannelUserPermission, t, 'user')
+
+          if (result) throw new CommandError(result)
+        }
+
+        if (this.returnRegexResult) return regexResult
+
+        return recievedMessage
       }
       return returnProperties(this.returnModifier, regexResult)
     }

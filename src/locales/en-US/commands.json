@@ -1576,9 +1576,9 @@
     "notFound": "Code not found"
   },
   "render": {
-    "youDontHavePermissionToRead": "You don't have permission to read messages in that channel.",
+    "youDontHavePermission": "You're missing the following permission in that channel: {{permission}}",
     "commandUsage": "<message link>",
     "commandDescription": "Renders a message from another channel using the message link.",
-    "iDontHavePermissionToRead": "I don't have permission to read that channel."
+    "iDontHavePermission": "I'm missing the following permission in that channel: {{permission}}"
   }
 }

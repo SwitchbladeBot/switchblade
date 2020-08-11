@@ -8,15 +8,17 @@ module.exports = class Render extends Command {
       category: 'utility',
       requirements: { guildOnly: true, botPermissions: ['EMBED_LINKS'] },
       parameters: [{
-        type: 'messageLink', sameGuildOnly: true, forceExists: true, missingError: 'commands:move.missingMessageLink'
+        type: 'messageLink',
+        sameGuildOnly: true,
+        forceExists: true,
+        linkChannelUserPermission: ['VIEW_CHANNEL'],
+        linkChannelBotPermission: ['VIEW_CHANNEL'],
+        missingError: 'commands:move.missingMessageLink'
       }]
     }, client)
   }
 
   async run ({ author, t, message }, link) {
-    if (!link.channel.permissionsFor(this.client.user.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.iDontHavePermissionToRead'))
-    if (!link.channel.permissionsFor(author.id).has('VIEW_CHANNEL')) throw new CommandError(t('commands:render.youDontHavePermissionToRead'))
-
     const messageObj = {}
     const { content } = link
     let messageHasNoEmbed = true
@@ -27,7 +29,6 @@ module.exports = class Render extends Command {
 
     if (link.embeds.length >= 1) {
       messageHasNoEmbed = false
-      messageObj.embed = {}
       messageObj.embed = link.embeds[0].toJSON()
     }
 
@@ -43,10 +44,6 @@ module.exports = class Render extends Command {
           embed.setDescription(content || '')
         }
 
-        if (messageObj.files) {
-          await embed.setImage(messageObj.files[0])
-          delete messageObj.files
-        }
         messageObj.embed = embed
       }
 
