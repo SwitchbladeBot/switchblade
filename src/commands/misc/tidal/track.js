@@ -1,4 +1,4 @@
-const { SearchCommand, SwitchbladeEmbed, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed } = require('../../../')
 
 module.exports = class TidalTrack extends SearchCommand {
   constructor (client) {
