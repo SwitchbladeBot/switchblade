@@ -25,6 +25,7 @@ module.exports = {
   Route: require('./structures/Route.js'),
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),
   Webhook: require('./structures/Webhook.js'),
+  PaginatedEmbed: require('./structures/PaginatedEmbed.js'),
 
   // Utils
   Utils: require('./utils'),
