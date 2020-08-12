@@ -11,7 +11,7 @@ module.exports = class EmojiList extends Command {
   }
 
   async run ({ message, t, author, channel }) {
-    const pagesArr = message.guild.emojis.cache
+    const pages = message.guild.emojis.cache
       .filter(emoji => emoji.available)
       .reduce((descriptionArr, emoji, id) => {
         const line = `${emoji.toString()} **${emoji.name}** \`\`<:${emoji.name}:${id}>\`\``
@@ -25,11 +25,11 @@ module.exports = class EmojiList extends Command {
       }, [])
       .map(desc => new SwitchbladeEmbed(author).setDescription(desc.join('\n')))
 
-    if (pagesArr.length < 0) {
+    if (pages.length < 0) {
       throw new CommandError(t('errors:guildHasNoEmoji'))
     }
 
-    const pages = new PaginatedEmbed(t, author, pagesArr)
-    pages.run(channel)
+    const embed = new PaginatedEmbed(t, author, pages)
+    embed.run(channel)
   }
 }
