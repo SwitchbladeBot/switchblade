@@ -1574,8 +1574,6 @@
   },
   "render": {
     "youDontHavePermission": "You're missing the following permission in that channel: {{permission}}",
-    "commandUsage": "<message link>",
-    "commandDescription": "Renders a message from another channel using the message link.",
-    "iDontHavePermission": "I'm missing the following permission in that channel: {{permission}}"
+    "commandUsage": "<message link>"
   }
 }
