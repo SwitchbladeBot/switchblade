@@ -12,19 +12,20 @@ module.exports = class Guilds extends Route {
     const router = Router()
 
     // Info
-    router.get('/:guildId/members', async (req, res) => {
-      const guild = this.client.guilds.cache.get(req.params.guildId)
+    router.get('/:guildId(\\d{16,18})/members', async (req, res) => {
+      const guildCaches = await this.client.shard.broadcastEval(`this.guilds.cache.get('${req.params.guildId}')`)
+      const guild = guildCaches.find(g => g)
       if (guild) {
-        const { id, name, icon, members: { cache: { size } } } = guild
-        const userMembers = guild.members.cache.filter(m => !m.user.bot).size
-        const botMembers = size - userMembers
-        return res.status(200).json({ id, name, icon, totalMembers: size, userMembers, botMembers })
+        const { id, name, icon, members: { length } } = guild
+        // const userMembers = guild.members.cache.filter(m => !m.user.bot).size
+        // const botMembers = size - userMembers
+        return res.status(200).json({ id, name, icon, totalMembers: length, userMembers: 0, botMembers: 0 })
       }
       res.status(400).json({ error: 'Guild not found!' })
     })
 
     // Modules
-    router.get('/:guildId/modules',
+    router.get('/:guildId(\\d{16,18})/modules',
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {
@@ -41,7 +42,7 @@ module.exports = class Guilds extends Route {
         }
       })
 
-    router.patch('/:guildId/modules/:modName/state',
+    router.patch('/:guildId(\\d{16,18})/modules/:modName/state',
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {
@@ -58,7 +59,7 @@ module.exports = class Guilds extends Route {
         }
       })
 
-    router.patch('/:guildId/modules/:modName/values',
+    router.patch('/:guildId(\\d{16,18})/modules/:modName/values',
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {
@@ -76,7 +77,7 @@ module.exports = class Guilds extends Route {
         }
       })
 
-    router.post('/:guildId/modules/:modName/methods/:methodName',
+    router.post('/:guildId(\\d{16,18})/modules/:modName/methods/:methodName',
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {

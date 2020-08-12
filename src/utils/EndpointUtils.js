@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const Joi = require('@hapi/joi')
 const jwt = require('jsonwebtoken')
+const { Permissions } = require('discord.js')
 
 const API_URL = 'https://discordapp.com/api'
 
@@ -21,6 +22,7 @@ module.exports = class EndpointUtils {
                 if (fetchGuilds) req.guilds = await this._fetchGuilds(client, accessToken)
                 return next()
               } catch (e) {
+                console.log(e)
                 return res.status(401).json({ ok: false })
               }
             }
@@ -42,8 +44,10 @@ module.exports = class EndpointUtils {
   }
 
   static async _fetchGuilds (client, token) {
-    return this._requestDiscord('/users/@me/guilds', token).then(gs => gs.map(g => {
-      g.common = client.guilds.cache.has(g.id)
+    const guilds = await this._requestDiscord('/users/@me/guilds', token)
+    return Promise.all(guilds.map(async g => {
+      const guildEval = await client.shard.broadcastEval(`this.guilds.cache.has('${g.id}')`)
+      g.common = guildEval.some(s => s)
       return g
     }))
   }
@@ -78,11 +82,18 @@ module.exports = class EndpointUtils {
     return async (req, res, next) => {
       let id = req.params.guildId
       if (id) {
-        const guild = client.guilds.cache.get(id)
+        const guildCaches = await client.shard.broadcastEval(`this.guilds.cache.get('${req.params.guildId}')`)
+        const guild = guildCaches.find(g => g)
         if (!guild) return res.status(400).json({ ok: false })
         if (!req.isAdmin) {
-          const member = await guild.members.fetch(req.user.id)
-          if (!member || (permissions && !member.hasPermission(permissions))) return res.status(403).json({ error: 'Missing permissions!' })
+          const { roles: userRoles } = await fetch(`${client.options.http.api}/v${client.options.http.version}/guilds/${guild.id}/members/${req.user.id}`, {
+            headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
+          }).then(res => res.json())
+          const { roles: guildRoles, owner_id } = await fetch(`${client.options.http.api}/v${client.options.http.version}/guilds/${guild.id}`, {
+            headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
+          }).then(res => res.json())
+          const memberPerm = new Permissions(guildRoles.filter(r => userRoles.includes(r.id)).reduce((p, cp) => p | cp.permissions, 0))
+          if (permissions && (owner_id !== req.user.id && !memberPerm.has(permissions))) return res.status(403).json({ error: 'Missing permissions!' })
         }
         req.guildId = id
         return next()
