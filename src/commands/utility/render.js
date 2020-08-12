@@ -18,20 +18,20 @@ module.exports = class Render extends Command {
   }
 
   async run ({ author, t, message }, link) {
-    const messageObj = {}
+    const render = {}
     const { content } = link
     let messageHasNoEmbed = true
 
     if (link.attachments.size >= 1) {
-      messageObj.files = [link.attachments.first().url]
+      render.files = [link.attachments.first().url]
     }
 
     if (link.embeds.length >= 1) {
       messageHasNoEmbed = false
-      messageObj.embed = link.embeds[0].toJSON()
+      render.embed = link.embeds[0].toJSON()
     }
 
-    if (Object.keys(messageObj).length === 0 && !content) {
+    if (Object.keys(render).length === 0 && !content) {
       throw new CommandError(t('errors:messageContainsNothing'))
     }
 
@@ -44,10 +44,10 @@ module.exports = class Render extends Command {
           embed.setDescription(content || '')
         }
 
-        messageObj.embed = embed
+        render.embed = embed
       }
 
-      message.channel.send('', messageObj)
+      message.channel.send(render)
     } catch (e) {
       throw new CommandError(t('commands:move.couldntSendMessage'))
     }
