@@ -1574,5 +1574,16 @@
     "commandUsage": "<tracking code>",
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
+  },
+  "tidal": {
+    "commandDescription": "Shows information about Tidal songs, artists, albums, etc.",
+    "subcommands": {
+      "track": {
+        "commandDescription": "Shows information about a track on Tidal",
+        "commandUsage": "<track name>",
+        "trackInfo": "Track Information",
+        "album": "Album"
+      }
+    }
   }
 }
