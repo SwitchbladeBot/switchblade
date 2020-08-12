@@ -15,8 +15,8 @@ module.exports = class Guilds extends Route {
     router.get('/:guildId/members', async (req, res) => {
       const guild = this.client.guilds.cache.get(req.params.guildId)
       if (guild) {
-        const { id, name, icon, members: { size } } = guild
-        const userMembers = guild.members.filter(m => !m.user.bot).size
+        const { id, name, icon, members: { cache: { size } } } = guild
+        const userMembers = guild.members.cache.filter(m => !m.user.bot).size
         const botMembers = size - userMembers
         return res.status(200).json({ id, name, icon, totalMembers: size, userMembers, botMembers })
       }

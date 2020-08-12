@@ -13,8 +13,9 @@ module.exports = class Contributors extends Route {
 
     router.get('/', async (req, res) => {
       const guild = this.client.guilds.cache.get(process.env.BOT_GUILD)
-      const roles = guild.roles
-      const members = guild.members
+      if (!guild) return res.json({ roles: [] })
+      const roles = guild.roles.cache
+      const members = guild.members.cache
 
       const ignoreUsers = process.env.IGNORE_USERS ? process.env.IGNORE_USERS.split(',') : []
       const alreadyFound = []
@@ -26,7 +27,7 @@ module.exports = class Contributors extends Route {
             id: role.id,
             name: role.name,
             members: members.map(member => {
-              if (member.roles.has(role.id) && !member.user.bot && !alreadyFound.includes(member.id) && !ignoreUsers.includes(member.id)) {
+              if (member.roles.cache.has(role.id) && !member.user.bot && !alreadyFound.includes(member.id) && !ignoreUsers.includes(member.id)) {
                 alreadyFound.push(member.id)
                 const { id, user: { username, discriminator, avatar, presence: { status } } } = member
                 return { username, discriminator, id, avatar, status }

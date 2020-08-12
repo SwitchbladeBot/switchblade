@@ -24,8 +24,8 @@ module.exports = class AutoRoleModule extends Module {
     const guild = this.client.guilds.cache.get(guildId)
     if (!guild || !userId) return []
     const member = guild.member(userId)
-    const filteredRoles = guild.roles
-      .filter(r => r.editable && r.id !== guildId && member.highestRole.comparePositionTo(r) > 0)
+    const filteredRoles = guild.roles.cache
+      .filter(r => r.editable && r.id !== guildId && member.roles.highest.comparePositionTo(r) > 0)
       .sort(Role.comparePositions)
       .map(r => ({
         id: r.id,

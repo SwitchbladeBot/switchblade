@@ -74,7 +74,7 @@ module.exports = class CommandsModule extends Module {
     const member = guild.member(userId)
 
     // Category
-    const filteredCategories = guild.channels
+    const filteredCategories = guild.channels.cache
       .filter(c => c.type === 'category' && c.memberPermissions(member).has('VIEW_CHANNEL'))
       .map(c => ({
         id: c.id,
@@ -82,7 +82,7 @@ module.exports = class CommandsModule extends Module {
         name: c.name
       }))
     // Channel
-    const filteredChannels = guild.channels
+    const filteredChannels = guild.channels.cache
       .filter(c => c.type === 'text' && c.memberPermissions(member).has('VIEW_CHANNEL'))
       .map(c => ({
         id: c.id,
@@ -91,8 +91,8 @@ module.exports = class CommandsModule extends Module {
       }))
 
     // Role
-    const filteredRoles = guild.roles
-      .filter(r => r.editable && r.id !== guild.id && member.highestRole.comparePositionTo(r) > 0)
+    const filteredRoles = guild.roles.cache
+      .filter(r => r.editable && r.id !== guild.id && member.roles.highest.comparePositionTo(r) > 0)
       .sort(Role.comparePositions)
       .map(r => ({
         id: r.id,
@@ -100,7 +100,7 @@ module.exports = class CommandsModule extends Module {
         name: r.name
       }))
     // User
-    const filteredUsers = guild.members
+    const filteredUsers = guild.members.cache
       .filter(m => !m.user.bot)
       .map(m => ({
         id: m.id,
@@ -195,12 +195,12 @@ module.exports = class CommandsModule extends Module {
       switch (v.type) {
         case 'category':
         case 'channel':
-          const channel = guild.channels.get(v.id)
+          const channel = guild.channels.cache.get(v.id)
           if (!channel) o.missing = true
           else o.name = channel.name
           break
         case 'role':
-          const role = guild.roles.get(v.id)
+          const role = guild.roles.cache.get(v.id)
           if (!role) o.missing = true
           else o.name = role.name
           break
@@ -308,20 +308,20 @@ module.exports = class CommandsModule extends Module {
     const member = guild.member(userId)
 
     // Category
-    const filteredCategories = guild.channels
+    const filteredCategories = guild.channels.cache
       .filter(c => c.type === 'category' && c.memberPermissions(member).has('VIEW_CHANNEL'))
       .map(c => c.id)
     // Channel
-    const filteredChannels = guild.channels
+    const filteredChannels = guild.channels.cache
       .filter(c => c.type === 'text' && c.memberPermissions(member).has('VIEW_CHANNEL'))
       .map(c => c.id)
 
     // Role
-    const filteredRoles = guild.roles
-      .filter(r => r.editable && r.id !== guildId && member.highestRole.comparePositionTo(r) > 0)
+    const filteredRoles = guild.roles.cache
+      .filter(r => r.editable && r.id !== guildId && member.roles.highest.comparePositionTo(r) > 0)
       .map(r => r.id)
     // User
-    const filteredUsers = guild.members.filter(m => !m.user.bot).map(m => m.id)
+    const filteredUsers = guild.members.cache.filter(m => !m.user.bot).map(m => m.id)
 
     return [
       ...filteredCategories,
