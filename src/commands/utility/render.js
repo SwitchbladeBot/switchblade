@@ -34,6 +34,7 @@ module.exports = class Render extends Command {
     if (Object.keys(messageObj).length === 0 && !content) {
       throw new CommandError(t('errors:messageContainsNothing'))
     }
+
     try {
       if (messageHasNoEmbed) {
         const embed = new SwitchbladeEmbed(author)

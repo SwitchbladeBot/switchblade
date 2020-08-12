@@ -45,6 +45,7 @@ module.exports = class Move extends Command {
     if (Object.keys(MessageObj).length === 0 && (!content || content === '')) {
       throw new CommandError(t('errors:messageContainsNothing'))
     }
+
     try {
       await destinationChannel.send(content, MessageObj)
       await destinationChannel.send(t('commands:move.messageMoved', { authorName: link.author.username, movedFrom: link.channel.name, movedBy: author.username }))
