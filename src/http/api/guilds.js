@@ -12,24 +12,27 @@ module.exports = class Guilds extends Route {
     const router = Router()
 
     // Info
-    router.get('/:guildId(\\d{16,18})/members', async (req, res) => {
-      const guildCaches = await this.client.shard.broadcastEval(`this.guilds.cache.get('${req.params.guildId}')`)
-      const guild = guildCaches.find(g => g)
-      if (guild) {
-        const { id, name, icon, members: { length } } = guild
-        // const userMembers = guild.members.cache.filter(m => !m.user.bot).size
-        // const botMembers = size - userMembers
-        return res.status(200).json({ id, name, icon, totalMembers: length, userMembers: 0, botMembers: 0 })
-      }
-      res.status(400).json({ error: 'Guild not found!' })
-    })
+    router.get('/:guildId(\\d{16,18})/members',
+      EndpointUtils.authenticate(this),
+      EndpointUtils.handleGuild(this),
+      async (req, res) => {
+        if (req.guild) {
+          const { id, name, icon } = req.guild
+          const members = await EndpointUtils.getGuildMembers(this.client, req.guild.id) // PAGINATION
+          console.log(require('util').inspect(req.guild, { depth: 1 }))
+          const userMembers = members.filter(m => !m.user.bot).length
+          const botMembers = members.length - userMembers
+          return res.status(200).json({ id, name, icon, totalMembers: members.length, userMembers, botMembers })
+        }
+        res.status(400).json({ error: 'Guild not found!' })
+      })
 
     // Modules
     router.get('/:guildId(\\d{16,18})/modules',
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {
-        const id = req.guildId
+        const { id } = req.guild
         try {
           const modules = await Promise.all(
             Object.values(this.client.modules)
@@ -46,7 +49,7 @@ module.exports = class Guilds extends Route {
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {
-        const id = req.guildId
+        const { id } = req.guild
         try {
           const mod = this.client.modules[req.params.modName]
           if (!mod) return res.status(404).json({ error: 'Invalid module name!' })
@@ -63,7 +66,7 @@ module.exports = class Guilds extends Route {
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {
-        const id = req.guildId
+        const { id } = req.guild
         try {
           const mod = this.client.modules[req.params.modName]
           if (!mod) return res.status(404).json({ error: 'Invalid module name!' })
@@ -81,7 +84,7 @@ module.exports = class Guilds extends Route {
       EndpointUtils.authenticate(this),
       EndpointUtils.handleGuild(this),
       async (req, res) => {
-        const id = req.guildId
+        const { id } = req.guild
         try {
           const { modName, methodName } = req.params
           const mod = this.client.modules[modName]

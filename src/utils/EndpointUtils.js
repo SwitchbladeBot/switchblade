@@ -46,8 +46,12 @@ module.exports = class EndpointUtils {
   static async _fetchGuilds (client, token) {
     const guilds = await this._requestDiscord('/users/@me/guilds', token)
     return Promise.all(guilds.map(async g => {
-      const guildEval = await client.shard.broadcastEval(`this.guilds.cache.has('${g.id}')`)
-      g.common = guildEval.some(s => s)
+      try {
+        const guild = await this.getGuild(client, g.id)
+        g.common = guild && guild.code !== 50001
+      } catch (e) {
+        g.common = false
+      }
       return g
     }))
   }
@@ -82,20 +86,14 @@ module.exports = class EndpointUtils {
     return async (req, res, next) => {
       let id = req.params.guildId
       if (id) {
-        const guildCaches = await client.shard.broadcastEval(`this.guilds.cache.get('${req.params.guildId}')`)
-        const guild = guildCaches.find(g => g)
+        const guild = await this.getGuild(client, req.params.guildId)
         if (!guild) return res.status(400).json({ ok: false })
         if (!req.isAdmin) {
-          const { roles: userRoles } = await fetch(`${client.options.http.api}/v${client.options.http.version}/guilds/${guild.id}/members/${req.user.id}`, {
-            headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
-          }).then(res => res.json())
-          const { roles: guildRoles, owner_id } = await fetch(`${client.options.http.api}/v${client.options.http.version}/guilds/${guild.id}`, {
-            headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
-          }).then(res => res.json())
-          const memberPerm = new Permissions(guildRoles.filter(r => userRoles.includes(r.id)).reduce((p, cp) => p | cp.permissions, 0))
-          if (permissions && (owner_id !== req.user.id && !memberPerm.has(permissions))) return res.status(403).json({ error: 'Missing permissions!' })
+          const { roles: userRoles } = await this.getGuildMember(client, guild.id, req.user.id)
+          const memberPerm = new Permissions(guild.roles.filter(r => userRoles.includes(r.id)).reduce((p, cp) => p | cp.permissions, 0))
+          if (permissions && (guild.owner_id !== req.user.id && !memberPerm.has(permissions))) return res.status(403).json({ error: 'Missing permissions!' })
         }
-        req.guildId = id
+        req.guild = guild
         return next()
       }
       return res.status(401).json({ error: 'Invalid guild id!' })
@@ -121,5 +119,30 @@ module.exports = class EndpointUtils {
         } else return res.status(400).json({ error: 'No body' })
       } else return res.status(401).json({ error: 'Invalid Authorization header' })
     }
+  }
+
+  // Discord API methods
+  static getGuild (client, guildId) {
+    return fetch(`${client.options.http.api}/v${client.options.http.version}/guilds/${guildId}`, {
+      headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
+    }).then(res => res.json())
+  }
+
+  static getGuildMember (client, guildId, userId) {
+    return fetch(`${client.options.http.api}/v${client.options.http.version}/guilds/${guildId}/members/${userId}`, {
+      headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
+    }).then(res => res.json())
+  }
+
+  static getGuildMembers (client, guildId) {
+    return fetch(`${client.options.http.api}/v${client.options.http.version}/guilds/${guildId}/members?limit=1000`, {
+      headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
+    }).then(res => res.json())
+  }
+
+  static getGuildRoles (client, guildId) {
+    return fetch(`${client.options.http.api}/v${client.options.http.version}/guilds/${guildId}/roles`, {
+      headers: { 'Authorization': `Bot ${process.env.DISCORD_TOKEN}` }
+    }).then(res => res.json())
   }
 }
