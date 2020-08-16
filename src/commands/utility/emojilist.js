@@ -23,13 +23,12 @@ module.exports = class EmojiList extends Command {
         }
         return descriptionArr
       }, [])
-      .map(desc => new SwitchbladeEmbed(author).setDescription(desc.join('\n')))
 
-    if (pages.length < 0) {
+    if (pages.length === 0) {
       throw new CommandError(t('errors:guildHasNoEmoji'))
     }
 
-    const embed = new PaginatedEmbed(t, author, pages)
+    const embed = new PaginatedEmbed(t, author, pages.map(desc => new SwitchbladeEmbed(author).setDescription(desc.join('\n'))))
     embed.run(channel)
   }
 }
