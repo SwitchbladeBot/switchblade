@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../../')
+const { Command, SwitchbladeEmbed, CommandError } = require('../../../')
 const moment = require('moment')
 
 module.exports = class InfoEmote extends Command {
@@ -16,17 +16,21 @@ module.exports = class InfoEmote extends Command {
 
   async run ({ message, t, author, channel, language }, emoji) {
     moment.locale(language)
-    const emojiAuthor = await emoji.fetchAuthor()
-    const embed = new SwitchbladeEmbed(author)
+    try {
+      const emojiAuthor = await emoji.fetchAuthor()
+      const embed = new SwitchbladeEmbed(author)
 
-      .setTitle(`${emoji.animated ? `${t('commands:info.subcommands.emote.animatedTag')} ` : ''}${emoji.name}`)
-      .setDescription(`
+        .setTitle(`${emoji.animated ? `${t('commands:info.subcommands.emote.animatedTag')} ` : ''}${emoji.name}`)
+        .setDescription(`
         **${t('commands:guildinfo.createdAt')}**: ${moment(emoji.createdAt).format('LLL')}\n(${moment(emoji.createdAt).fromNow()})
         **ID**: ${emoji.id} \`\`<:${emoji.name}:${emoji.id}>\`\`
         ${emojiAuthor ? `**${t('commands:info.subcommands.emote.whoAdded')}**: ${emojiAuthor.tag}` : ''}
         `)
-      .setImage(emoji.url)
+        .setImage(emoji.url)
 
-    channel.send(embed)
+      channel.send(embed)
+    } catch (e) {
+      throw new CommandError(t('errors:needManageEmojis'))
+    }
   }
 }

@@ -50,5 +50,6 @@
   "messageContainsNothing": "The message you're trying to move has no content.",
   "forgotCheckType": "You forgot to give what I'm checking.",
   "forgotCheckValue": "You forgot to give the value of what I'm checking.",
-  "channelDoesntExist": "That channel doesn't exist or I couldn't find it."
+  "channelDoesntExist": "That channel doesn't exist or I couldn't find it.",
+  "needManageEmojis": "I need the manage emojis permissions in order to see who created the emoji."
 }
