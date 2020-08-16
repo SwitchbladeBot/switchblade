@@ -29,7 +29,7 @@ module.exports = class OsuBeatmap extends SearchCommand {
 
     const mode = this.parentCommand.modes[Object.keys(flags).filter(key => flags[key])[0] || 'osu']
     const scores = await this.client.apis.osu.getBeatmapScores(data.beatmap_id, mode[0], 5)
-    
+
     moment.locale(language)
 
     paginatedEmbed.addPage(new SwitchbladeEmbed(author)

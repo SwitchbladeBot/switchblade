@@ -11,7 +11,7 @@ module.exports = class Osu extends SubcommandListCommand {
       authorURL: 'https://osu.ppy.sh',
       embedColor: '#E7669F'
     }, client)
-    
+
     this.modes = {
       'osu': ['0', 'osu!'],
       'taiko': ['1', 'osu!taiko'],

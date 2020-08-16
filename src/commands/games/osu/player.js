@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, PaginatedEmbed, CommandError, MiscUtils, Constants } = require('../../../')
+const { Command, SwitchbladeEmbed, PaginatedEmbed, CommandError, MiscUtils } = require('../../../')
 const moment = require('moment')
 
 module.exports = class OsuPlayer extends Command {
@@ -20,12 +20,11 @@ module.exports = class OsuPlayer extends Command {
   }
 
   async run ({ t, author, flags, channel, language }, user) {
-    
     const connections = await this.client.controllers.connection.getConnectionsFiltered(author.id)
     const osu = connections.find(c => c.name === 'osu')
     if (!user && !osu.account) throw new CommandError(t('commands:osu.subcommands.player.noPlayer'))
     if (!user && osu.account) user = osu.account.id
-    
+
     const mode = this.parentCommand.modes[Object.keys(flags).filter(key => flags[key])[0] || 'osu']
     const paginatedEmbed = new PaginatedEmbed(t, author)
 
