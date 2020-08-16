@@ -28,26 +28,26 @@ module.exports = class Move extends Command {
   async run ({ channel, guild, author, t, message }, link, destinationChannel) {
     if (link.channel.nsfw && !destinationChannel.nsfw) throw new CommandError(t('commands:move.channelsHaveDifferentType'))
 
-    const MessageObj = {}
+    const messageObj = {}
     let content = link.content
 
     if (link.attachments.size >= 1) {
-      MessageObj.files = [link.attachments.first().url]
+      messageObj.files = [link.attachments.array()]
     }
 
     if (link.embeds.length >= 1) {
-      MessageObj.embed = {};
+      messageObj.embed = {};
       ['fields', 'title', 'description', 'url', 'timestamp', 'color', 'image', 'thumbnail', 'author'].forEach(p => {
-        MessageObj.embed[p] = link.embeds[0][p]
+        messageObj.embed[p] = link.embeds[0][p]
       })
     }
 
-    if (Object.keys(MessageObj).length === 0 && (!content || content === '')) {
+    if (Object.keys(messageObj).length === 0 && (!content || content === '')) {
       throw new CommandError(t('errors:messageContainsNothing'))
     }
 
     try {
-      await destinationChannel.send(content, MessageObj)
+      await destinationChannel.send(content, messageObj)
       await destinationChannel.send(t('commands:move.messageMoved', { authorName: link.author.username, movedFrom: link.channel.name, movedBy: author.username }))
       link.delete()
     } catch (e) {

@@ -23,7 +23,7 @@ module.exports = class Render extends Command {
     let messageHasNoEmbed = true
 
     if (link.attachments.size >= 1) {
-      render.files = [link.attachments.first().url]
+      render.files = [link.attachments.array()]
     }
 
     if (link.embeds.length >= 1) {
