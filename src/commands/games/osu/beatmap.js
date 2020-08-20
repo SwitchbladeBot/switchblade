@@ -35,7 +35,7 @@ module.exports = class OsuBeatmap extends SearchCommand {
 
     const mode = this.parentCommand.modes[Object.keys(flags).filter(key => flags[key])[0] || 'osu']
     const scores = await this.client.apis.osu.getBeatmapScores(data.beatmap_id, mode[0], 5)
-    
+
     const connections = await this.client.controllers.connection.getConnectionsFiltered(author.id)
     const osu = connections.find(c => c.name === 'osu')
 
@@ -85,17 +85,17 @@ module.exports = class OsuBeatmap extends SearchCommand {
 
       if (topPlayerScore) {
         paginatedEmbed.addPage(new SwitchbladeEmbed(author)
-        .setAuthor(mode[1], this.parentCommand.authorImage, `${this.parentCommand.authorURL}/b/${data.beatmap_id}`)
-        .setTitle(`${data.artist} - ${data.title} (${data.version})`)
-        .setColor(this.parentCommand.embedColor)
-        .setDescriptionFromBlockArray([
-          [
-            t('commands:osu.subcommands.beatmap.topScoreSelf', { date: moment(topPlayerScore.date).format('LLL') })
-          ],
-          [
-            `${this.client.officialEmojis.get(topPlayerScore.rank.length === 1 ? `${topPlayerScore.rank.toLowerCase()}_` : topPlayerScore.rank.toLowerCase())} - ${topPlayerScore.count300} ${this.client.officialEmojis.get('300')} (${topPlayerScore.countgeki} ${this.client.officialEmojis.get('geki')}), ${topPlayerScore.count100} ${this.client.officialEmojis.get('100')} (${topPlayerScore.countkatu} ${this.client.officialEmojis.get('katu')}), ${topPlayerScore.countmiss} ${this.client.officialEmojis.get('miss')} - **${MiscUtils.formatNumber(parseInt(topPlayerScore.pp), language)}pp**`
-          ]
-        ]))
+          .setAuthor(mode[1], this.parentCommand.authorImage, `${this.parentCommand.authorURL}/b/${data.beatmap_id}`)
+          .setTitle(`${data.artist} - ${data.title} (${data.version})`)
+          .setColor(this.parentCommand.embedColor)
+          .setDescriptionFromBlockArray([
+            [
+              t('commands:osu.subcommands.beatmap.topScoreSelf', { date: moment(topPlayerScore.date).format('LLL') })
+            ],
+            [
+              `${this.client.officialEmojis.get(topPlayerScore.rank.length === 1 ? `${topPlayerScore.rank.toLowerCase()}_` : topPlayerScore.rank.toLowerCase())} - ${topPlayerScore.count300} ${this.client.officialEmojis.get('300')} (${topPlayerScore.countgeki} ${this.client.officialEmojis.get('geki')}), ${topPlayerScore.count100} ${this.client.officialEmojis.get('100')} (${topPlayerScore.countkatu} ${this.client.officialEmojis.get('katu')}), ${topPlayerScore.countmiss} ${this.client.officialEmojis.get('miss')} - **${MiscUtils.formatNumber(parseInt(topPlayerScore.pp), language)}pp**`
+            ]
+          ]))
       }
     }
 
