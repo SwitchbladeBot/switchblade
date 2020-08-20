@@ -1,4 +1,4 @@
-const { SearchCommand, SwitchbladeEmbed, PaginatedEmbed, MiscUtils } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, PaginatedEmbed, MiscUtils, Constants } = require('../../../')
 const moment = require('moment')
 
 module.exports = class OsuBeatmap extends SearchCommand {
