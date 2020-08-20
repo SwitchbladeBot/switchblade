@@ -59,7 +59,8 @@ module.exports = class OsuBeatmap extends SearchCommand {
           data.tags ? t('commands:osu.subcommands.beatmap.tags', { tags: data.tags.split(' ').map(t => `\`${t}\``).join(', ') }) : null
         ],
         [
-          t('commands:osu.subcommands.beatmap.download', { link: `${this.parentCommand.authorURL}/beatmapsets/${data.beatmapset_id}/download`, linkNoVideo: `${this.parentCommand.authorURL}/beatmapsets/${data.beatmapset_id}/download?noVideo=1` })
+          t('commands:osu.subcommands.beatmap.download', { link: `${this.parentCommand.authorURL}/beatmapsets/${data.beatmapset_id}/download` }),
+          Number(data.video) > 0 ? t('commands:osu.subcommands.beatmap.downloadNoVideo', { link: `${this.parentCommand.authorURL}/beatmapsets/${data.beatmapset_id}/download?noVideo=1` }) : null
         ]
       ]))
 

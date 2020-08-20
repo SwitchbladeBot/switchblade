@@ -371,7 +371,7 @@
         "commandUsage": "[profile name or id]",
         "noPlayer": "You have to give me a valid osu! profile name or ID.",
         "level": "Level **{{number}}**",
-        "joinedAt": "Joined on **{{date}}** ({{timeAgo}})",
+        "joinedAt": "Joined at **{{date}}** ({{timeAgo}})",
         "globalRanking": "Global Ranking: **#{{rank}}**",
         "countryRanking": "Country Ranking: **#{{rank}}**",
         "rankedScore": "Ranked Score: **{{rankedScore}}**",
@@ -391,10 +391,11 @@
         "starDifficulty": "Star Difficulty: **{{difficulty}}**",
         "successRate": "Success Rate: **{{rate}}%** ({{successfulPlays}} / {{totalPlays}})",
         "mappedBy": "Mapped by {{mapper}}",
-        "lastUpdate": "Last update on **{{date}}** ({{timeAgo}})",
-        "approved": "Approved on **{{date}}** ({{timeAgo}})",
+        "lastUpdate": "Last update at **{{date}}** ({{timeAgo}})",
+        "approved": "Approved at **{{date}}** ({{timeAgo}})",
         "tags": "Tags: **{{tags}}**",
-        "download": "[Download]({{link}}) - [no video]({{linkNoVideo}})",
+        "download": "[Download beatmap]({{link}})",
+        "downloadNoVideo": "[Download without video]({{link}})",
         "topScores": "Top scores:",
         "topScoreSelf": "Your top score ({{date}})"
       }

@@ -10,7 +10,7 @@ module.exports = class Osu extends APIWrapper {
   constructor () {
     super({
       name: 'osu',
-      envVars: ['OSU_API_KEY']
+      envVars: ['OSU_API_KEY', 'OSU_CLIENT_ID', 'OSU_CLIENT_SECRET']
     })
   }
 
