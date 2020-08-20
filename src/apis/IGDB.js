@@ -1,13 +1,11 @@
 const { APIWrapper } = require('../')
 
 const fetch = require('node-fetch')
-const qs = require('querystring')
-const { URLSearchParams } = require('url')
 
 const API_URL = 'https://api-v3.igdb.com'
 
 module.exports = class IGDB extends APIWrapper {
-  constructor() {
+  constructor () {
     super({
       name: 'igdb',
       envVars: ['IGDB_API_KEY']

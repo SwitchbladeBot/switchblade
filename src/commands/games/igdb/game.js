@@ -1,4 +1,4 @@
-const { SearchCommand, SwitchbladeEmbed, PaginatedEmbed, MiscUtils, Constants } = require('../../../')
+const { SearchCommand, SwitchbladeEmbed, PaginatedEmbed, Constants } = require('../../../')
 const moment = require('moment')
 
 const RATINGS = {
@@ -49,12 +49,12 @@ module.exports = class IGDBGame extends SearchCommand {
     return `[${obj.name}](${this.parentCommand.authorURL}/${obj.slug})`
   }
 
-  async handleResult ({ t, channel, author, language }, { id } = game) {
+  async handleResult ({ t, channel, author, language }, { id }) {
     channel.startTyping()
     moment.locale(language)
 
     const gameData = await this.client.apis.igdb.getGameById(id)
-    
+
     var alternativeNames
     // Updating data outside of the embed, so it doesn't get cluttered
     if (gameData.alternative_names) {
@@ -68,7 +68,7 @@ module.exports = class IGDBGame extends SearchCommand {
       .setURL(gameData.url)
       .setThumbnail(`https:${gameData.cover.url}`)
       .setDescription(gameData.summary ? gameData.summary : '')
-    
+
     if (gameData.age_ratings) {
       firstEmbed.addField('Age Ratings', gameData.age_ratings.map(r => {
         return `**${r.category === 1 ? 'ESRB' : 'PEGI'}**: ${RATINGS[r.rating]}`
