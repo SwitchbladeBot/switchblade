@@ -71,7 +71,7 @@ module.exports = class OsuBeatmap extends SearchCommand {
         ]))
     }
 
-    paginatedEmbed.run(await channel.send('...'))
+    paginatedEmbed.run(await channel.send(Constants.EMPTY_SPACE))
     channel.stopTyping()
   }
 }

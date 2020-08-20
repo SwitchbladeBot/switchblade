@@ -18,23 +18,23 @@ module.exports = class Osu extends APIWrapper {
     return this.request('/get_user', { u: user, m: mode }).then(u => u[0])
   }
 
-  async getBeatmap (beatmap, mode, limit = 5) {
+  async getBeatmap (beatmap, mode = 0, limit = 5) {
     return this.request('/get_beatmaps', { b: beatmap, m: mode, limit }).then(data => {
       if (typeof data !== 'undefined' && data.length > 0) return data
-      else return this.getBeatmapSet(beatmap, limit)
+      else return this.getBeatmapSet(beatmap, mode, limit)
     })
   }
 
   async getBeatmapSet (beatmapSet, mode, limit) {
-    return this.request('/get_beatmaps', { s: beatmapSet, m: mode, limit }).then(u => u)
+    return this.request('/get_beatmaps', { s: beatmapSet, m: mode, limit })
   }
 
   getBeatmapScores (beatmap, mode, limit) {
-    return this.request('/get_scores', { b: beatmap, m: mode, limit }).then(u => u)
+    return this.request('/get_scores', { b: beatmap, m: mode, limit })
   }
 
   getUserTopScores (user, mode, limit) {
-    return this.request('/get_user_best', { u: user, m: mode, limit }).then(u => u)
+    return this.request('/get_user_best', { u: user, m: mode, limit })
   }
 
   getUserRecentPlays (user, mode, limit) {
@@ -48,7 +48,7 @@ module.exports = class Osu extends APIWrapper {
       client_secret: process.env.OSU_CLIENT_SECRET,
       redirect_uri: `${process.env.DASHBOARD_URL}/connections/osu/callback/`,
       code: authCode
-    }).then(u => u)
+    })
   }
 
   getAuthenticatedUserInfo (key) {

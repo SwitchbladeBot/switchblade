@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, PaginatedEmbed, CommandError, MiscUtils } = require('../../../')
+const { Command, SwitchbladeEmbed, PaginatedEmbed, CommandError, MiscUtils, Constants } = require('../../../')
 const moment = require('moment')
 
 module.exports = class OsuPlayer extends Command {
@@ -65,9 +65,9 @@ module.exports = class OsuPlayer extends Command {
       if (topScores.length > 0) {
         let description = []
 
-        for (var i in topScores) {
-          const beatmap = await this.client.apis.osu.getBeatmap(topScores[i].beatmap_id, 0)
-          if (beatmap.length > 0) description.push(`#${parseInt(i) + 1} - **[${beatmap[0].artist} - ${beatmap[0].title} (${beatmap[0].version})](${this.parentCommand.authorURL}/b/${topScores[i].beatmap_id})** ${this.client.officialEmojis.get(topScores[i].rank.length === 1 ? `${topScores[i].rank.toLowerCase()}_` : topScores[i].rank.toLowerCase())} - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), language)}pp**`)
+        for (const i in topScores) {
+          const [firstBeatmap] = await this.client.apis.osu.getBeatmap(topScores[i].beatmap_id, 0)
+          if (firstBeatmap) description.push(`#${parseInt(i) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](${this.parentCommand.authorURL}/b/${topScores[i].beatmap_id})** ${this.client.officialEmojis.get(topScores[i].rank.length === 1 ? `${topScores[i].rank.toLowerCase()}_` : topScores[i].rank.toLowerCase())} - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), language)}pp**`)
         }
 
         paginatedEmbed.addPage(new SwitchbladeEmbed(author)
@@ -86,12 +86,11 @@ module.exports = class OsuPlayer extends Command {
       const recentPlays = await this.client.apis.osu.getUserRecentPlays(user, mode[0], 5)
 
       if (recentPlays.length > 0) {
-        let description = []
+        const description = []
 
-        for (var int in recentPlays) {
-          const beatmap = await this.client.apis.osu.getBeatmap(recentPlays[int].beatmap_id, mode[0])
-          console.log(recentPlays[int])
-          description.push(`#${parseInt(int) + 1} - **[${beatmap[0].artist} - ${beatmap[0].title} (${beatmap[0].version})](${this.parentCommand.authorURL}/b/${recentPlays[int].beatmap_id})** ${this.client.officialEmojis.get(recentPlays[int].rank.length === 1 ? `${recentPlays[int].rank.toLowerCase()}_` : recentPlays[int].rank.toLowerCase())} (${moment(recentPlays[int].date).fromNow()})`)
+        for (const int in recentPlays) {
+          const [firstBeatmap] = await this.client.apis.osu.getBeatmap(recentPlays[int].beatmap_id, mode[0])
+          if (firstBeatmap) description.push(`#${parseInt(int) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](${this.parentCommand.authorURL}/b/${recentPlays[int].beatmap_id})** ${this.client.officialEmojis.get(recentPlays[int].rank.length === 1 ? `${recentPlays[int].rank.toLowerCase()}_` : recentPlays[int].rank.toLowerCase())} (${moment(recentPlays[int].date).fromNow()})`)
         }
 
         paginatedEmbed.addPage(new SwitchbladeEmbed(author)
@@ -107,11 +106,9 @@ module.exports = class OsuPlayer extends Command {
           ]))
       }
 
-      paginatedEmbed.run(await channel.send('...'))
+      paginatedEmbed.run(await channel.send(Constants.EMPTY_SPACE))
       channel.stopTyping()
     } catch (e) {
-      console.log(e)
-
       throw new CommandError(t('commands:osu.subcommands.player.playerNotFound'))
     }
   }

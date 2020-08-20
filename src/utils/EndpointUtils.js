@@ -21,8 +21,6 @@ module.exports = class EndpointUtils {
                 if (fetchGuilds) req.guilds = await this._fetchGuilds(client, accessToken)
                 return next()
               } catch (e) {
-                console.log(e)
-
                 return res.status(401).json({ ok: false })
               }
             }
