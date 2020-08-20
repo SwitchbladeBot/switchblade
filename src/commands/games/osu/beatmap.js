@@ -9,7 +9,13 @@ module.exports = class OsuBeatmap extends SearchCommand {
       parent: 'osu',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:osu.subcommands.beatmap.noBeatmap'
-      }],
+      }, [{
+        type: 'booleanFlag', name: 'taiko'
+      }, {
+        type: 'booleanFlag', name: 'catchthebeat', aliases: ['ctb', 'catch']
+      }, {
+        type: 'booleanFlag', name: 'mania'
+      }]],
       embedColor: '#E7669F',
       embedLogoURL: 'https://i.imgur.com/Ek0hnam.png'
     }, client)

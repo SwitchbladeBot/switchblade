@@ -66,7 +66,7 @@ module.exports = class OsuPlayer extends Command {
         let description = []
 
         for (const i in topScores) {
-          const [firstBeatmap] = await this.client.apis.osu.getBeatmap(topScores[i].beatmap_id, 0)
+          const [firstBeatmap] = await this.client.apis.osu.getBeatmap(topScores[i].beatmap_id, mode[0])
           if (firstBeatmap) description.push(`#${parseInt(i) + 1} - **[${firstBeatmap.artist} - ${firstBeatmap.title} (${firstBeatmap.version})](${this.parentCommand.authorURL}/b/${topScores[i].beatmap_id})** ${this.client.officialEmojis.get(topScores[i].rank.length === 1 ? `${topScores[i].rank.toLowerCase()}_` : topScores[i].rank.toLowerCase())} - **${MiscUtils.formatNumber(parseInt(topScores[i].pp), language)}pp**`)
         }
 
