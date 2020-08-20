@@ -33,6 +33,10 @@ module.exports = class Osu extends APIWrapper {
     return this.request('/get_scores', { b: beatmap, m: mode, limit })
   }
 
+  getBeatmapScoreFromPlayer (beatmap, userId) {
+    return this.request('/get_scores', { b: beatmap, u: userId, limit: '1', type: 'id' })
+  }
+
   getUserTopScores (user, mode, limit) {
     return this.request('/get_user_best', { u: user, m: mode, limit })
   }
