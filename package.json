@@ -105,7 +105,7 @@
   "optionalDependencies": {
     "@discordjs/uws": "^11.149.1",
     "canvas": "^2.6.1",
-    "erlpack": "github:discordapp/erlpack",
+    "erlpack": "^0.1.3",
     "node-opus": "^0.3.3"
   }
 }
