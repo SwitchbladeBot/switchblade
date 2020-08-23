@@ -70,7 +70,7 @@
     "pirate-speak": "^1.0.1",
     "rastrojs": "^1.1.0",
     "rss-parser": "^3.9.0",
-    "samp-query": "latest",
+    "samp-query": "^0.1.5",
     "search-npm-registry": "^2.0.3",
     "sinesp-api": "^2.0.2",
     "snoowrap": "^1.21.0",
