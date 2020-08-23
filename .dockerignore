@@ -5,3 +5,8 @@ node_modules
 .gitignore
 .gitmodules
 README.md
+*.env*
+.dockerignore
+LICENSE
+.github/
+.eslintrc.json
