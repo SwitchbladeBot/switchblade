@@ -7,6 +7,7 @@ COPY . .
 RUN npm test
 RUN npm prune --production
 RUN /usr/local/bin/node-prune
+RUN rm -rf /
 
 FROM node:12-alpine
 WORKDIR /app
