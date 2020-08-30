@@ -16,7 +16,7 @@ module.exports = class EmojiList extends Command {
       .reduce((descriptionArr, emoji, id) => {
         const line = `${emoji.toString()} **${emoji.name}** \`\`<:${emoji.name}:${id}>\`\``
         const [lastDescription] = descriptionArr.slice(-1)
-        if (lastDescription && ([...lastDescription, line]).join('\n').length < 2048) {
+        if (lastDescription && [...lastDescription, line].join('\n').length < 2048) {
           lastDescription.push(line)
         } else {
           descriptionArr.push([line])
