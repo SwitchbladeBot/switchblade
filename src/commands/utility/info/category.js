@@ -8,7 +8,8 @@ module.exports = class InfoCategory extends Command {
       parent: 'info',
       requirements: { guildOnly: true },
       parameters: [{
-        type: 'string',
+        type: 'channel',
+        acceptCategory: true,
         required: true,
         full: true,
         missingError: 'commands:info.subcommands.voice.missingChannelName'
@@ -16,17 +17,13 @@ module.exports = class InfoCategory extends Command {
     }, client)
   }
 
-  async run ({ message, t, author, channel, language }, givenChannel) {
+  async run ({ t, author, channel, language }, givenChannel) {
     moment.locale(language)
-    givenChannel = message.guild.channels.cache
-      .filter(channel => channel.type === 'category' && channel.name.toLowerCase() === givenChannel.toLowerCase())
-    givenChannel = givenChannel.first()
     if (!givenChannel) {
       throw new CommandError(t('errors:channelDoesntExist'))
     }
 
     const embed = new SwitchbladeEmbed(author)
-
       .setTitle(givenChannel.name)
       .setDescription(`
         **${t('commands:guildinfo.createdAt')}**: ${moment(givenChannel.createdAt).format('LLL')}\n(${moment(givenChannel.createdAt).fromNow()})

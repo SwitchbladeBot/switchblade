@@ -14,12 +14,11 @@ module.exports = class InfoEmote extends Command {
     }, client)
   }
 
-  async run ({ message, t, author, channel, language }, emoji) {
+  async run ({ t, author, channel, language }, emoji) {
     moment.locale(language)
     try {
       const emojiAuthor = await emoji.fetchAuthor()
       const embed = new SwitchbladeEmbed(author)
-
         .setTitle(`${emoji.animated ? `${t('commands:info.subcommands.emote.animatedTag')} ` : ''}${emoji.name}`)
         .setDescription(`
         **${t('commands:guildinfo.createdAt')}**: ${moment(emoji.createdAt).format('LLL')}\n(${moment(emoji.createdAt).fromNow()})
