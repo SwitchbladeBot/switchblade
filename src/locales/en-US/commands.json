@@ -1235,6 +1235,24 @@
     "yes": "Yes",
     "no": "No"
   },
+  "igdb": {
+    "commandDescription": "Searches for a game on the IGDB",
+    "commandUsage": "<game name>",
+    "noGame": "You have to give me a game to search for!",
+    "aka": "(also known as {{aliases}})",
+    "ageRating": "Age Rating(s)",
+    "genres": "Genres",
+    "platforms": "Platforms",
+    "popularity": "Popularity",
+    "ratingTitle": "Rating",
+    "ratingDescription": "{{value}} out of {{total}} votes",
+    "releaseDates": "Release Dates",
+    "dlcs": "DLCs",
+    "expansions": "Expansions",
+    "companies": "Involved Companies",
+    "similarGames": "Similar Games",
+    "err": "An error has occurred while trying to get game data: {{err}}"
+  },
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification.",
     "commandUsage": "<text>",
