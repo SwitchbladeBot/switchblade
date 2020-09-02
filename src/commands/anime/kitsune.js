@@ -1,9 +1,11 @@
-const { Command, SwitchbladeEmbed } = require('../../')
-const fetch = require('node-fetch')
+const { Command, SwitchbladeEmbed, CommandError } = require('../../')
+const axios = require('axios');
+
 const nekoAPI = 'https://nekos.life/api/v2/img/'
 
+
 module.exports = class Kitsune extends Command {
-  constructor (client) {
+  constructor(client) {
     super({
       name: 'kitsune',
       aliases: ['foxgirl'],
@@ -11,18 +13,21 @@ module.exports = class Kitsune extends Command {
     }, client)
   }
 
-  async run ({ t, author, channel }) {
+  async run({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
     // Send a lewd kitsune if the channel is NSFW
     const endpoint = channel.nsfw ? 'lewdk' : 'fox_girl'
 
-    const { url } = await fetch(nekoAPI + endpoint).then(res => res.json())
+    const response = await axios.get(nekoAPI + endpoint)
+      .catch(() => {
+        throw new CommandError(t('errors:generic'));
+      });
 
-    embed.setImage(url)
+    embed.setImage(response.data.url)
       .setDescription(t('commands:kitsune.hereIsYour', { context: endpoint }))
+    channel.send(embed).then(() => channel.stopTyping());
 
-    channel.send(embed).then(() => channel.stopTyping())
   }
 }

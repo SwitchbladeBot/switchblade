@@ -1,0 +1,9 @@
+version: "3"
+services:
+  switchblade:
+    build: .
+    command: npm run start-dev
+    ports:
+      - "8060:8060"
+    volumes:
+      - .:/usr/src/app

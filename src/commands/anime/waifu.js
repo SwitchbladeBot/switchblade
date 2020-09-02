@@ -1,27 +1,30 @@
 const { Command, SwitchbladeEmbed } = require('../../')
-const fetch = require('node-fetch')
+const axios = require('axios')
 const waifuAPI = 'https://waifu.pics/api/'
 
 module.exports = class Waifu extends Command {
-  constructor (client) {
+  constructor(client) {
     super({
       name: 'waifu',
       category: 'anime'
     }, client)
   }
 
-  async run ({ t, author, channel }) {
+  async run({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
     // Send a lewd waifu if the channel is NSFW
     const endpoint = channel.nsfw ? 'nsfw' : 'sfw'
 
-    const { url } = await fetch(waifuAPI + endpoint).then(res => res.json())
+    const response = await axios.get(waifuAPI + endpoint)
+      .catch(() => {
+        throw new CommandError(t('errors:generic'));
+      });
 
-    embed.setImage(url)
+    embed.setImage(response.data.url)
       .setDescription(t('commands:waifu.hereIsYour', { context: endpoint }))
+    channel.send(embed).then(() => channel.stopTyping());
 
-    channel.send(embed).then(() => channel.stopTyping())
   }
 }
