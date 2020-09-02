@@ -1,5 +1,6 @@
 const Parameter = require('./Parameter')
 const CommandError = require('../../CommandError')
+const { ensurePermissions } = require('../../../../utils/DiscordUtils')
 
 const MENTION_REGEX = /(<#)?([0-9]{16,18})>?$/
 const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
@@ -7,25 +8,6 @@ const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
 const searchOn = (local, id, arg) => (
   local.channels.cache.get(id) || local.channels.cache.find(c => c.name.toLowerCase().includes(arg.toLowerCase()))
 )
-
-/**
- * @param  {String} userID - The id of the user who should have permission checked.
- * @param  {Object} channel - The channel from the message.
- * @param  {Array<String>} permissions - An Array with discord permissions.
- * @param  {Function} t - The translate function.
- * @param  {String} blameWho - Who to blame if the permission is missing.
- * @returns {String}
- */
-const ensurePermissions = (userID, channel, permissions, t, blameWho) => {
-  for (let i = 0; i < permissions.length; i++) {
-    const permission = permissions[i]
-    if (!channel.permissionsFor(userID).has(permission)) {
-      return t(blameWho === 'bot' ? 'errors:iDontHavePermission' : 'errors:youDontHavePermissionToRead', { permission })
-    }
-  }
-
-  return null
-}
 
 module.exports = class ChannelParameter extends Parameter {
   static parseOptions (options = {}) {
