@@ -98,7 +98,12 @@ module.exports = class Game2048 extends Command {
       const empty = this.getEmptyTile(board)
       board[Math.floor(empty / size)][Math.floor(empty % size)] = 2
     }
-    const msg = await channel.send(`${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
+    let msg
+    try {
+      msg = await channel.send(`${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
+    } catch (_) {
+      return
+    }
     for (const arrow of arrows) {
       await msg.react(arrow)
     }
