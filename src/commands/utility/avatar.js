@@ -20,8 +20,8 @@ module.exports = class Avatar extends Command {
     const embed = new SwitchbladeEmbed(author)
     user = user || author
     embed
-      .setImage(user.displayAvatarURL({ dynamic: true }))
-      .setDescription(t('commands:avatar.someonesAvatar', { user }))
+      .setImage(user.displayAvatarURL({ dynamic: true, size: 2048 }))
+      .setDescription(t('commands:avatar.someonesAvatar', { user: user.toString() }))
     channel.send(embed)
   }
 }
