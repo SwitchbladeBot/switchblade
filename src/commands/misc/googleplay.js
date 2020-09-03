@@ -12,7 +12,7 @@ module.exports = class GooglePlayCommand extends SearchCommand {
   }
 
   async search (_, query) {
-    return await this.client.apis.gplaystore.searchApp(query)
+    return this.client.apis.gplaystore.searchApp(query)
   }
 
   searchResultFormatter (items) {
@@ -26,12 +26,12 @@ module.exports = class GooglePlayCommand extends SearchCommand {
         .setThumbnail(icon)
         .setAuthor(title, icon, url)
         .setDescription(summary)
-        .addField(t('commands:googlePlay.developer'), `${developer} (${developerId})`, true)
-        .addField(t('commands:googlePlay.price'), priceText, true)
-        .addField(t('commands:googlePlay.genre'), genre, true)
-        .addField(t('commands:googlePlay.rating'), contentRating, true)
-        .addField(t('commands:googlePlay.installs'), installs, true)
-        .addField(t('commands:googlePlay.released'), released, true)
+        .addField(t('commands:googleplay.developer'), `${developer} (${developerId})`, true)
+        .addField(t('commands:googleplay.price'), priceText, true)
+        .addField(t('commands:googleplay.genre'), genre, true)
+        .addField(t('commands:googleplay.rating'), contentRating, true)
+        .addField(t('commands:googleplay.installs'), installs, true)
+        .addField(t('commands:googleplay.released'), released, true)
         .setImage(screenshots[Math.floor(Math.random() * screenshots.length)])
     )
   }
