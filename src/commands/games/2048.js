@@ -12,6 +12,69 @@ module.exports = class Game2048 extends Command {
       category: 'games'
     }, client)
   }
+  async run ({ channel, author, t }, boardSize) {
+    const size = boardSize || 4
+    let points = 0
+    const board = this.createBoard(size)
+    let lastPlay = Date.now()
+    for (let i = 0; i < 2; i++) {
+      const empty = this.getEmptyTile(board)
+      board[Math.floor(empty / size)][Math.floor(empty % size)] = 2
+    }
+    let msg
+    try {
+      msg = await channel.send(`${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
+    } catch (e) {
+      throw new CommandError(e.message)
+    }
+    for (const arrow of arrows) {
+      await msg.react(arrow)
+    }
+    const collector = msg.createReactionCollector((r, u) => arrows.includes(r.emoji.name) && (u.id === author.id || u.id === author.client.user.id))
+    const interval = setInterval(() => {
+      if ((Date.now() - lastPlay) / 1000 / 60 >= 2) {
+        collector.stop()
+        msg.reactions.removeAll().catch(function () {})
+        msg.edit(`:skull:${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
+        clearInterval(interval)
+      }
+    }, 1000 * 60)
+    collector.on('collect', (r) => {
+      const u = r.users.cache.last()
+      if (u.id !== author.id) return
+      const old = Array.from(board.reduce((acc, val) => acc.concat(val), []))
+      switch (r.emoji.name) {
+        case arrows[0]:
+          this.rotateBoard(board, true)
+          this.rotateBoard(board, true)
+          points += this.slideLeft(board)
+          this.rotateBoard(board, false)
+          this.rotateBoard(board, false)
+          break
+        case arrows[1]:
+          this.rotateBoard(board, false)
+          points += this.slideLeft(board)
+          this.rotateBoard(board, true)
+          break
+        case arrows[2]:
+          this.rotateBoard(board, true)
+          points += this.slideLeft(board)
+          this.rotateBoard(board, false)
+          break
+        case arrows[3]:
+          points += this.slideLeft(board)
+      }
+      if (board.reduce((acc, val) => acc.concat(val), []).some((tile, i) => tile !== old[i])) {
+        const empty = this.getEmptyTile(board)
+        if (empty !== false) {
+          board[Math.floor(empty / size)][Math.floor(empty % size)] = 2
+        }
+        lastPlay = Date.now()
+        msg.edit(`${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
+      }
+      r.users.remove(author).catch(function () {})
+    })
+  }
   slideLeft (board) {
     let points = 0
     for (let i = 0; i < board.length; i++) {
@@ -88,68 +151,5 @@ module.exports = class Game2048 extends Command {
       return false
     }
     return empty[Math.floor(Math.random() * empty.length)]
-  }
-  async run ({ channel, author, t }, boardSize) {
-    const size = boardSize || 4
-    let points = 0
-    const board = this.createBoard(size)
-    let lastPlay = Date.now()
-    for (let i = 0; i < 2; i++) {
-      const empty = this.getEmptyTile(board)
-      board[Math.floor(empty / size)][Math.floor(empty % size)] = 2
-    }
-    let msg
-    try {
-      msg = await channel.send(`${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
-    } catch (e) {
-      throw new CommandError(e.message)
-    }
-    for (const arrow of arrows) {
-      await msg.react(arrow)
-    }
-    const collector = msg.createReactionCollector((r, u) => arrows.includes(r.emoji.name) && (u.id === author.id || u.id === author.client.user.id))
-    const interval = setInterval(() => {
-      if ((Date.now() - lastPlay) / 1000 / 60 >= 2) {
-        collector.stop()
-        msg.reactions.removeAll().catch(function () {})
-        msg.edit(`:skull:${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
-        clearInterval(interval)
-      }
-    }, 1000 * 60)
-    collector.on('collect', (r) => {
-      const u = r.users.cache.last()
-      if (u.id !== author.id) return
-      const old = Array.from(board.reduce((acc, val) => acc.concat(val), []))
-      switch (r.emoji.name) {
-        case arrows[0]:
-          this.rotateBoard(board, true)
-          this.rotateBoard(board, true)
-          points += this.slideLeft(board)
-          this.rotateBoard(board, false)
-          this.rotateBoard(board, false)
-          break
-        case arrows[1]:
-          this.rotateBoard(board, false)
-          points += this.slideLeft(board)
-          this.rotateBoard(board, true)
-          break
-        case arrows[2]:
-          this.rotateBoard(board, true)
-          points += this.slideLeft(board)
-          this.rotateBoard(board, false)
-          break
-        case arrows[3]:
-          points += this.slideLeft(board)
-      }
-      const empty = this.getEmptyTile(board)
-      if (empty !== false) {
-        board[Math.floor(empty / size)][Math.floor(empty % size)] = 2
-      }
-      if (board.reduce((acc, val) => acc.concat(val), []).some((tile, i) => tile !== old[i])) {
-        lastPlay = Date.now()
-      }
-      msg.edit(`${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
-      r.users.remove(author).catch(function () {})
-    })
   }
 }
