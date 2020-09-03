@@ -1,4 +1,4 @@
-const { Command } = require('../../')
+const { Command, CommandError } = require('../../')
 const arrows = ['➡', '⬇', '⬆', '⬅']
 const numberEmojis = [':zero:', ':one:', ':two:', ':three:', ':four:', ':five:', ':six:', ':seven:', ':eight:', ':nine:']
 module.exports = class Game2048 extends Command {
@@ -101,8 +101,8 @@ module.exports = class Game2048 extends Command {
     let msg
     try {
       msg = await channel.send(`${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
-    } catch (_) {
-      return
+    } catch (e) {
+       throw new CommandError(e.message)
     }
     for (const arrow of arrows) {
       await msg.react(arrow)
