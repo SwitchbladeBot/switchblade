@@ -6,7 +6,7 @@
   },
   "2048": {
     "commandDescription": "Play the 2048 game.",
-    "commandUsage": "[board_size]"
+    "commandUsage": "[board size]"
   },
   "waifu": {
     "commandDescription": "Fetches a random waifu (lewd if the channel is NSFW) and displays it.",
