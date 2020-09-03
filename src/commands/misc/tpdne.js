@@ -4,7 +4,7 @@ module.exports = class TPDNE extends Command {
   constructor (client) {
     super({
       name: 'tpdne',
-      aliases: ['thispersondoesnotexist'],
+      aliases: ['thispersondoesnotexist']
     }, client)
   }
 
