@@ -102,7 +102,7 @@ module.exports = class Game2048 extends Command {
     try {
       msg = await channel.send(`${this.drawPoints(points)}\n\n${this.drawBoard(board)}`)
     } catch (e) {
-       throw new CommandError(e.message)
+      throw new CommandError(e.message)
     }
     for (const arrow of arrows) {
       await msg.react(arrow)
