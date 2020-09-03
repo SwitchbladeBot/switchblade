@@ -5,7 +5,6 @@ module.exports = class TCDNE extends Command {
     super({
       name: 'tcdne',
       aliases: ['thiscatdoesnotexist'],
-      category: 'misc'
     }, client)
   }
 
