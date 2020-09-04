@@ -26,6 +26,7 @@ module.exports = {
   CHORUS_COLOR: '#2C3E50',
   GOOGLE_COLOR: '#4285F4',
   GOOGLEPLAY_COLOR: '#3bccff',
+  CHOCOLATEY_COLOR: '#7eb5e2',
 
   // Emojis
 
