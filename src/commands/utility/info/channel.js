@@ -28,7 +28,7 @@ module.exports = class InfoChannel extends Command {
         `${givenChannel.parent ? `**${t('commands:info.subcommands.channel.category')}**: ${givenChannel.parent.name}` : ''}
         **${t('commands:guildinfo.createdAt')}**: ${moment(givenChannel.createdAt).format('LLL')}\n(${moment(givenChannel.createdAt).fromNow()})
         **ID**: \`${givenChannel.id}\` <#${givenChannel.id}>
-        **${t(`commands:info.subcommands.channel.canViewThisChannel${givenChannel.members.size > 1 ? 'Plural' : ''}`, userCount: givenChannel.members.size)}**
+        **${t(`commands:info.subcommands.channel.canViewThisChannel${givenChannel.members.size > 1 ? 'Plural' : ''}`, { userCount: givenChannel.members.size })}**
         ${givenChannel.topic.length > 1 ? `\n${givenChannel.topic}` : ''}`)
 
     channel.send(embed)
