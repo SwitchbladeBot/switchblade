@@ -147,9 +147,6 @@ module.exports = class Game2048 extends Command {
         }
       }
     }
-    if (empty.length === 0) {
-      return false
-    }
-    return empty[Math.floor(Math.random() * empty.length)]
+    return empty.length ? empty[Math.floor(Math.random() * empty.length)] : false
   }
 }
