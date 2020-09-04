@@ -1665,5 +1665,11 @@
         "channelsInside": "Channels inside of it"
       }
     }
+  },
+  "rolelist": {
+    "commandDescription": "Lists all the roles in the server.",
+    "roles": "Roles",
+    "ids": "IDs",
+    "loading": "Loading roles..."
   }
 }
