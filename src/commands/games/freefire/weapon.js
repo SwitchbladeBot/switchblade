@@ -15,7 +15,11 @@ module.exports = class FreeFireWeapon extends Command {
   }
 
   async run ({ t, channel, language }, query) {
-    const { weapons, commons } = await this.client.apis.freefire.getWeaponData(language)
+    const {
+      weapons,
+      commons: { attribute_names: attributeNames, attachment_names: attachmentNames }
+    } = await this.client.apis.freefire.getWeaponData(language)
+
     const fuse = new Fuse(weapons, {
       shouldSort: true,
       maxPatternLength: 32,
@@ -36,16 +40,27 @@ module.exports = class FreeFireWeapon extends Command {
     const embed = new SwitchbladeEmbed()
       .setTitle(weapon.name)
       .setDescription(`**${weapon.description}**`)
-      .addField('**Attachments:**', this.getInfo(weapon, 'attachments', commons.attachment_names), true)
-      .addField('**Attributes:**', this.getInfo(weapon, 'attributes', commons.attribute_names), true)
+      .addFields([
+        {
+          name: t('commands:freefire.subcommands.weapon.attributes'),
+          value: this.getInfo({ t, weapon, data: 'attributes', names: attributeNames }),
+          inline: true
+        },
+        {
+          name: t('commands:freefire.subcommands.weapon.attachments'),
+          value: this.getInfo({ t, weapon, data: 'attachments', names: attachmentNames }),
+          inline: true
+        }
+      ])
       .setImage(weapon.skins[0].image_url)
 
     await channel.send(embed)
   }
 
-  getInfo (weapon, data, names) {
+  getInfo ({ t, weapon, data, names }) {
+    const locale = 'commands:freefire.subcommands.weapon.answer.'
     return Object.entries(weapon[data])
-      .map(([key, value]) => ` - **${names[key]}:** ${data === 'attachments' ? value.avaliable ? 'yes' : 'no' : value}`)
+      .map(([key, value]) => ` - **${names[key]}:** ${data === 'attachments' ? value.avaliable ? t(locale + 'yes') : t(locale + 'no') : value}`)
       .join('\n')
   }
 }
