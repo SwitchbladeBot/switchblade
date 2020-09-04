@@ -52,5 +52,6 @@
   "forgotCheckValue": "You forgot to give the value of what I'm checking.",
   "channelDoesntExist": "That channel doesn't exist or I couldn't find it.",
   "needManageEmojis": "I need the manage emojis permissions in order to see who created the emoji.",
-  "guildHasNoRole": "This server has no roles to list."
+  "guildHasNoRole": "This server has no roles to list.",
+  "guildHasNoEmoji": "This server has no emoji or no emojis are available for me."
 }

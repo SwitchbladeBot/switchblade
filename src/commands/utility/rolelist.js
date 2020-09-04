@@ -18,7 +18,7 @@ module.exports = class RoleList extends Command {
     const pagesArr = message.guild.roles.cache
       .sort(compare)
       .reduce((descriptionArr, role, id) => {
-        const line = `<@&${id}> \`\`<@&${role.name}:${id}>\`\``
+        const line = `<@&${id}> \`\`<@&${id}>\`\``
         const [lastDescription] = descriptionArr.slice(-1)
         if (lastDescription && ([...lastDescription, line]).join('\n').length < 2048) {
           lastDescription.push(line)
