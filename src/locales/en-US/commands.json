@@ -1638,5 +1638,11 @@
     "rating": "Rating",
     "installs": "Installs",
     "released": "Released on"
+  },
+  "rolelist": {
+    "commandDescription": "Lists all the roles in the server.",
+    "roles": "Roles",
+    "ids": "IDs",
+    "loading": "Loading roles..."
   }
 }
