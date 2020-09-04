@@ -12,7 +12,7 @@ module.exports = class GooglePlayCommand extends SearchCommand {
   }
 
   async search (_, query) {
-    return this.client.apis.gplaystore.searchApp(query)
+    return await this.client.apis.gplaystore.searchApp(query)
   }
 
   searchResultFormatter (items) {
