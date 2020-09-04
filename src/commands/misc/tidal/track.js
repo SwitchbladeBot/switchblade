@@ -21,7 +21,6 @@ module.exports = class TidalTrack extends SearchCommand {
     return `[${item.title}](${item.url}) - ${item.artists[0].name}`
   }
 
-  // TODO: Finish this embed
   async handleResult ({ t, channel, author, language }, result) {
     console.log(result)
     const tidal = this.client.apis.tidal

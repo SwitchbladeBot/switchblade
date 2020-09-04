@@ -19,8 +19,8 @@ module.exports = class TidalAPI extends APIWrapper {
     })
   }
 
-  getAlbumCoverUrl (coverId, size = 640) {
-    return `${RESOURCES_URL}/images/${coverId.replace(/-/g, '/')}/${size}x${size}.jpg`
+  getImage (resourceId, size = 640) {
+    return `${RESOURCES_URL}/images/${resourceId.replace(/-/g, '/')}/${size}x${size}.jpg`
   }
 
   getAlbumUrl (id) {
