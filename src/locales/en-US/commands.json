@@ -941,6 +941,19 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
+  "freefire":  {
+    "commandDescription": "Shows information related to FreeFire",
+    "commandUsage": "<type> <query>",
+    "gameName": "FreeFire",
+    "subcommands": {
+      "weapon": {
+        "commandDescription": "Shows information about a Free Fire weapon.",
+        "commandUsage": "<name>",
+        "missingWeapon": "You have to give me an weapon.",
+        "unknownWeapon": "The weapon {{weapon}} doesn't exist."
+      }
+    }
+  },
   "minecraft": {
     "commandDescription": "Shows information related to Minecraft.",
     "commandUsage": "<type> <query>",
