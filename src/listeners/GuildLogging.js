@@ -19,7 +19,7 @@ module.exports = class GuildLogging extends EventListener {
           .setColor(Constants.GUILD_ADDED_COLOR)
           .setTitle(`Added to "${guild.name}"`)
           .setDescription(`\`${guild.id}\``)
-          .setFooter(`Gained ${formatter.format(guild.members.size)} members`)
+          .setFooter(`Gained ${formatter.format(guild.members.cache.size)} members`)
       )
     }
   }
