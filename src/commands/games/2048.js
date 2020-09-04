@@ -118,7 +118,7 @@ module.exports = class Game2048 extends Command {
     for (const row of board) {
       for (const tile of row) {
         const stringTile = tile.toString()
-        text += this.getEmoji(stringTile.length === 1 ? stringTile + '_' : stringTile)
+        text += this.getEmoji(`2048_${stringTile}`)
       }
       text += '\n'
     }
