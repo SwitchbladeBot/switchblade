@@ -1632,5 +1632,21 @@
     "commandUsage": "<tracking code>",
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
+  },
+  "googleplay": {
+    "commandDescription": "Searches for an APP on Google Play Store",
+    "commandUsage": "<application name>",
+    "developer": "Developer",
+    "price": "Price",
+    "genre": "Genre",
+    "rating": "Rating",
+    "installs": "Installs",
+    "released": "Released on"
+  },
+  "rolelist": {
+    "commandDescription": "Lists all the roles in the server.",
+    "roles": "Roles",
+    "ids": "IDs",
+    "loading": "Loading roles..."
   }
 }
