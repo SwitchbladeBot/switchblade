@@ -1628,5 +1628,14 @@
     "commandUsage": "<tracking code>",
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
+  },
+  "vscodeextension": {
+    "commandDescription": "Shows information about extensions from the Visual Studio Code Marketplace",
+    "commandUsage": "<name>",
+    "name": "Extension Name",
+    "id": "Extension ID",
+    "publisher": "Publisher Name",
+    "releaseDate": "Release Date",
+    "description": "Description"
   }
 }
