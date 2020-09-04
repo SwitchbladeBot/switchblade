@@ -2,7 +2,8 @@ const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
 
 const API_URL = 'https://listen.tidal.com/v1'
-const RESOURCES_URL = 'https://resources.tidal.com/'
+const RESOURCES_URL = 'https://resources.tidal.com'
+const BASE_URL = 'https://www.tidal.com'
 
 module.exports = class TidalAPI extends APIWrapper {
   constructor () {
@@ -20,6 +21,14 @@ module.exports = class TidalAPI extends APIWrapper {
 
   getAlbumCoverUrl (coverId, size = 640) {
     return `${RESOURCES_URL}/images/${coverId.replace(/-/g, '/')}/${size}x${size}.jpg`
+  }
+
+  getAlbumUrl (id) {
+    return `${BASE_URL}/album/${id}`
+  }
+
+  getArtistUrl (id) {
+    return `${BASE_URL}/artist/${id}`
   }
 
   async request (endpoint, query = {}) {

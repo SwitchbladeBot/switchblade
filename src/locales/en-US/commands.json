@@ -1577,12 +1577,16 @@
   },
   "tidal": {
     "commandDescription": "Shows information about Tidal songs, artists, albums, etc.",
+    "serviceName": "Tidal",
     "subcommands": {
       "track": {
         "commandDescription": "Shows information about a track on Tidal",
         "commandUsage": "<track name>",
         "trackInfo": "Track Information",
-        "album": "Album"
+        "album": "Album",
+        "releasedOn": "Released on {{releaseDate}} ({{releaseTimeAgo}})",
+        "artist": "Artist",
+        "artist_plural": "Artists"
       }
     }
   }
