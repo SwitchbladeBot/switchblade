@@ -1634,6 +1634,16 @@
     "loading": "Loading emojis...",
     "guildHasNoEmoji": "This server has no emoji or all emojis are not available for me."
   },
+  "googleplay": {
+    "commandDescription": "Searches for an APP on Google Play Store",
+    "commandUsage": "<application name>",
+    "developer": "Developer",
+    "price": "Price",
+    "genre": "Genre",
+    "rating": "Rating",
+    "installs": "Installs",
+    "released": "Released on"
+  },
   "rolelist": {
     "commandDescription": "Lists all the roles in the server.",
     "roles": "Roles",
