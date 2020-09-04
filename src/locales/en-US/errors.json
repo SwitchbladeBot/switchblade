@@ -49,5 +49,7 @@
   "invalidMessageLink": "The message link you sent is invalid.",
   "messageContainsNothing": "That message has no content.",
   "youDontHavePermission": "You're missing the following permission in that channel: {{permission}}",
-  "iDontHavePermission": "I'm missing the following permission in that channel: {{permission}}"
+  "iDontHavePermission": "I'm missing the following permission in that channel: {{permission}}",
+  "guildHasNoEmoji": "This server has no emoji or all emojis are not available for me.",
+  "guildHasNoRole": "This server has no role to list."
 }

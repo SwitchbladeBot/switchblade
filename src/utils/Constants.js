@@ -25,6 +25,7 @@ module.exports = {
   PWNED_COLOR: '#BA4343',
   CHORUS_COLOR: '#2C3E50',
   GOOGLE_COLOR: '#4285F4',
+  GOOGLEPLAY_COLOR: '#3bccff',
 
   // Emojis
 
@@ -75,5 +76,8 @@ module.exports = {
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
   DEFAULT_BACKGROUND_GRAY_PNG: 'src/assets/png/backgrounds/default_gray.png',
-  TESTING_BACKGROUND_PNG: 'src/assets/png/backgrounds/testing.png'
+  TESTING_BACKGROUND_PNG: 'src/assets/png/backgrounds/testing.png',
+
+  // Text Constants
+  EMPTY_SPACE: String.fromCodePoint(8206)
 }
