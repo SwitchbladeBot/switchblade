@@ -1630,9 +1630,9 @@
     "notFound": "Code not found"
   },
   "vscodeextension": {
-    "commandDescription": "Shows information about extensions from the Visual Studio Code Marketplace",
+    "commandDescription": "Shows information about VS Code extensions from the Visual Studio Marketplace",
     "commandUsage": "<name>",
-    "marketplace": "Visual Studio Code Marketplace",
+    "marketplace": "Visual Studio Marketplace",
     "install": "Install",
     "license": "License",
     "changelog": "Changelog",
