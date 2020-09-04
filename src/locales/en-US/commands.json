@@ -1628,5 +1628,11 @@
     "commandUsage": "<tracking code>",
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
+  },
+  "rolelist": {
+    "commandDescription": "Lists all the roles in the server.",
+    "roles": "Roles",
+    "ids": "IDs",
+    "loading": "Loading roles..."
   }
 }
