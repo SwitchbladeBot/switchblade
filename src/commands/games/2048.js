@@ -1,5 +1,5 @@
 const { Command, CommandError } = require('../../')
-const arrows = ['➡', '⬇', '⬆', '⬅']
+const arrows = ['⬅', '⬇', '⬆', '➡']
 const numberEmojis = [':zero:', ':one:', ':two:', ':three:', ':four:', ':five:', ':six:', ':seven:', ':eight:', ':nine:']
 module.exports = class Game2048 extends Command {
   constructor (client) {
@@ -44,24 +44,24 @@ module.exports = class Game2048 extends Command {
       if (u.id !== author.id) return
       const old = Array.from(board.reduce((acc, val) => acc.concat(val), []))
       switch (r.emoji.name) {
-        case arrows[0]:
+        case '➡':
           this.rotateBoard(board, true)
           this.rotateBoard(board, true)
           points += this.slideLeft(board)
           this.rotateBoard(board, false)
           this.rotateBoard(board, false)
           break
-        case arrows[1]:
+        case '⬇':
           this.rotateBoard(board, false)
           points += this.slideLeft(board)
           this.rotateBoard(board, true)
           break
-        case arrows[2]:
+        case '⬆':
           this.rotateBoard(board, true)
           points += this.slideLeft(board)
           this.rotateBoard(board, false)
           break
-        case arrows[3]:
+        case '⬅':
           points += this.slideLeft(board)
       }
       if (board.reduce((acc, val) => acc.concat(val), []).some((tile, i) => tile !== old[i])) {
