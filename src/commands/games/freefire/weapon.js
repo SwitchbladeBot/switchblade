@@ -1,7 +1,6 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 const Fuse = require('fuse.js')
-const fetch = require('node-fetch')
 
 module.exports = class FreeFireWeapon extends Command {
   constructor (client) {
@@ -16,10 +15,7 @@ module.exports = class FreeFireWeapon extends Command {
   }
 
   async run ({ t, channel, language }, query) {
-    const { locales } = await this.getData('metadata.json')
-    const locale = locales.find(locale => locale === language.slice(0, 2))
-
-    const { weapons } = await this.getData(`${locale}/weapons.json`)
+    const { weapons, commons } = await this.client.apis.freefire.getWeaponData(language)
     const fuse = new Fuse(weapons, {
       shouldSort: true,
       maxPatternLength: 32,
@@ -40,22 +36,16 @@ module.exports = class FreeFireWeapon extends Command {
     const embed = new SwitchbladeEmbed()
       .setTitle(weapon.name)
       .setDescription(`**${weapon.description}**`)
-      .addField('**Attachments:**', this.getInfo(weapon, 'attachments'), true)
-      .addField('**Attributes:**', this.getInfo(weapon, 'attributes'), true)
+      .addField('**Attachments:**', this.getInfo(weapon, 'attachments', commons.attachment_names), true)
+      .addField('**Attributes:**', this.getInfo(weapon, 'attributes', commons.attribute_names), true)
       .setImage(weapon.skins[0].image_url)
 
     await channel.send(embed)
   }
 
-  async getData (endpoint) {
-    const request = await fetch(`https://ffstaticdata.switchblade.xyz/${endpoint}`)
-
-    return request.json()
-  }
-
-  getInfo (weapon, data) {
+  getInfo (weapon, data, names) {
     return Object.entries(weapon[data])
-      .map(([key, value]) => ` - **${key}:** ${data === 'attachments' ? value.avaliable ? 'yes' : 'no' : value}`)
+      .map(([key, value]) => ` - **${names[key]}:** ${data === 'attachments' ? value.avaliable ? 'yes' : 'no' : value}`)
       .join('\n')
   }
 }
