@@ -1629,6 +1629,11 @@
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
   },
+  "emojilist": {
+    "commandDescription": "Lists all emoji within this server",
+    "loading": "Loading emojis...",
+    "guildHasNoEmoji": "This server has no emoji or all emojis are not available for me."
+  },
   "googleplay": {
     "commandDescription": "Searches for an APP on Google Play Store",
     "commandUsage": "<application name>",
