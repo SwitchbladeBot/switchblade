@@ -43,7 +43,7 @@ module.exports = class EndpointUtils {
 
   static async _fetchGuilds (client, token) {
     return this._requestDiscord('/users/@me/guilds', token).then(gs => gs.map(g => {
-      g.common = client.guilds.has(g.id)
+      g.common = client.guilds.cache.has(g.id)
       return g
     }))
   }

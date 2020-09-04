@@ -362,6 +362,45 @@
     "invalidMathExpression": "Invalid math expression.",
     "result": "Result: `{{result}}`"
   },
+  "osu": {
+    "commandDescription": "Searches for a profile or a beatmap on osu!",
+    "commandUsage": "<type> <query>",
+    "subcommands": {
+      "player": {
+        "commandDescription": "Searches for a profile on osu!",
+        "commandUsage": "[profile name or id]",
+        "noPlayer": "You have to give me a valid osu! profile name or ID.",
+        "level": "Level **{{number}}**",
+        "joinedAt": "Joined at **{{date}}** ({{timeAgo}})",
+        "globalRanking": "Global Ranking: **#{{rank}}**",
+        "countryRanking": "Country Ranking: **#{{rank}}**",
+        "rankedScore": "Ranked Score: **{{rankedScore}}**",
+        "playTime": "Played for **{{time}}** - **{{pp}}** pp",
+        "totalScore": "Total Score: **{{totalScore}}**",
+        "hitAccuracy": "Hit Accuracy: **{{accuracy}}%**",
+        "playCount": "Play Count: **{{playCount}}**",
+        "totalHits": "Total Hits: **{{totalHits}}** (**{{300}}** {{emoji300}}, **{{100}}** {{emoji100}}, **{{50}}** {{emoji50}})",
+        "topScores": "**{{user}}**'s top scores:",
+        "recentPlays": "**{{user}}**'s most recent plays in the last 24 hours:",
+        "playerNotFound": "Profile not found."
+      },
+      "beatmap": {
+        "commandDescription": "Searches for a beatmap or beatmap set on osu!",
+        "commandUsage": "<beatmap or beatmap set id>",
+        "noBeatmap": "You have to give me a valid beatmap or beatmap set ID.",
+        "starDifficulty": "Star Difficulty: **{{difficulty}}**",
+        "successRate": "Success Rate: **{{rate}}%** ({{successfulPlays}} / {{totalPlays}})",
+        "mappedBy": "Mapped by {{mapper}}",
+        "lastUpdate": "Last update at **{{date}}** ({{timeAgo}})",
+        "approved": "Approved at **{{date}}** ({{timeAgo}})",
+        "tags": "Tags: **{{tags}}**",
+        "download": "[Download beatmap]({{link}})",
+        "downloadNoVideo": "[Download without video]({{link}})",
+        "topScores": "Top scores:",
+        "topScoreSelf": "Your top score ({{date}})"
+      }
+    }
+  },
   "stoptyping": {
     "commandDescription": "Forces the bot to stop typing.",
     "tryingToStop": "Trying to stop typing..."
@@ -1195,6 +1234,24 @@
     "online": "{{count}} online",
     "yes": "Yes",
     "no": "No"
+  },
+  "igdb": {
+    "commandDescription": "Searches for a game on the IGDB",
+    "commandUsage": "<game name>",
+    "noGame": "You have to give me a game to search for!",
+    "aka": "(also known as {{aliases}})",
+    "ageRating": "Age Rating(s)",
+    "genres": "Genres",
+    "platforms": "Platforms",
+    "popularity": "Popularity",
+    "ratingTitle": "Rating",
+    "ratingDescription": "{{value}} out of {{total}} votes",
+    "releaseDates": "Release Dates",
+    "dlcs": "DLCs",
+    "expansions": "Expansions",
+    "companies": "Involved Companies",
+    "similarGames": "Similar Games",
+    "err": "An error has occurred while trying to get game data: {{err}}"
   },
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification.",
