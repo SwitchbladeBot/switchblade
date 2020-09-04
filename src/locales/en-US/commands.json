@@ -1587,6 +1587,11 @@
         "releasedOn": "Released on {{releaseDate}} ({{releaseTimeAgo}})",
         "artist": "Artist",
         "artist_plural": "Artists"
+      },
+      "artist": {
+        "commandDescription": "Shows information about an artist on Tidal",
+        "commandUsage": "<artist name>",
+        "artistInfo": "Artist Information"
       }
     }
   }

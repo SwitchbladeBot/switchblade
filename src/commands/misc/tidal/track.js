@@ -29,7 +29,7 @@ module.exports = class TidalTrack extends SearchCommand {
       new SwitchbladeEmbed(author)
         .setColor(this.embedColor)
         .setAuthor(t('commands:tidal.subcommands.track.trackInfo'), this.embedLogoURL)
-        .setThumbnail(tidal.getAlbumCoverUrl(result.album.cover, 640))
+        .setThumbnail(tidal.getImage(result.album.cover, 640))
         .setTitle(result.title)
         .setURL(result.url)
         .addField(t('commands:tidal.subcommands.track.album'), [
