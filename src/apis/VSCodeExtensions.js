@@ -11,44 +11,20 @@ module.exports = class VSCodeExtensions extends APIWrapper {
   }
 
   async search (name) {
-    // const opts = {
-    //   body: JSON.stringify({
-    //     'filters': [
-    //       {
-    //         'criteria': [
-    //           {
-    //             'filterType': 10,
-    //             'value': name
-    //           }
-    //         ]
-    //       }
-    //     ]
-    //   }),
-    //   headers: {
-    //     accept: 'application/json;api-version=3.0-preview',
-    //     'content-type': 'application/json; api-version=3.0-preview.1',
-    //     'accept-encoding': 'gzip'
-    //   },
-    //   method: 'POST'
-    // }
-
     return axios({
       data: {
-        'filters': [
-          {
-            'criteria': [
-              {
-                'filterType': 10,
-                'value': name
-              }
-            ]
-          }
-        ]
+        filters: [{
+          criteria: [{
+            filterType: 10,
+            value: name
+          }]
+        }],
+        flags: 0x2 | 0x4 | 0x100
       },
       headers: {
         accept: 'application/json; api-version=3.0-preview',
-        'content-type': 'application/json; api-version=3.0-preview.1',
-        'accept-encoding': 'gzip'
+        'accept-encoding': 'gzip',
+        'content-type': 'application/json; api-version=3.0-preview.1'
       },
       url: API_URL,
       method: 'POST'

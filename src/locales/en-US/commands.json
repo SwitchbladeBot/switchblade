@@ -1632,10 +1632,12 @@
   "vscodeextension": {
     "commandDescription": "Shows information about extensions from the Visual Studio Code Marketplace",
     "commandUsage": "<name>",
-    "name": "Extension Name",
-    "id": "Extension ID",
-    "publisher": "Publisher Name",
-    "releaseDate": "Release Date",
-    "description": "Description"
+    "marketplace": "Visual Studio Code Marketplace",
+    "install": "Install",
+    "license": "License",
+    "changelog": "Changelog",
+    "installs": "{{- count }} installs",
+    "by": "by [{{- displayName }}](https://marketplace.visualstudio.com/publishers/{{- name }})",
+    "lastUpdate": "`{{- version }}` was published {{- ago }}"
   }
 }
