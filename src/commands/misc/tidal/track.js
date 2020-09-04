@@ -43,7 +43,6 @@ module.exports = class TidalTrack extends SearchCommand {
           return `[${artist.name}](${tidal.getArtistUrl(artist.id)})`
         }).join('\n'))
         .setFooter(result.copyright)
-        .setDescription(moment.duration(result.duration * 1000).humanize())
     )
   }
 }
