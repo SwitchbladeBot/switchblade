@@ -27,7 +27,7 @@ module.exports = class InfoCategory extends Command {
       .setTitle(givenChannel.name)
       .setDescription(`
         **${t('commands:guildinfo.createdAt')}**: ${moment(givenChannel.createdAt).format('LLL')}\n(${moment(givenChannel.createdAt).fromNow()})
-        **ID**: ${givenChannel.id}
+        **ID**: \`${givenChannel.id}\`
         **${t('commands:info.subcommands.category.channelsInside')}**: ${givenChannel.children.size}
         `)
 

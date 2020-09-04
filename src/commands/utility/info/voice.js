@@ -28,7 +28,7 @@ module.exports = class InfoVoice extends Command {
       .setDescription(
         `${givenChannel.parent ? `**${t('commands:info.subcommands.channel.category')}**: ${givenChannel.parent.name}` : ''}
         ${t('commands:guildinfo.createdAt')}: ${moment(givenChannel.createdAt).format('LLL')}\n(${moment(givenChannel.createdAt).fromNow()})
-        **ID**: ${givenChannel.id}
+        **ID**: \`${givenChannel.id}\`
         **${t('commands:info.subcommands.voice.bitrate')}**: ${givenChannel.bitrate}
         **${t('commands:info.subcommands.voice.userLimit')}**: ${givenChannel.members.size}/${givenChannel.userLimit}`)
 

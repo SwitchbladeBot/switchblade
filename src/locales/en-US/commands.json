@@ -1634,8 +1634,8 @@
     "channel": "Shows a text/news/announcement channel info.",
     "embedAuthor": "Discord Information Commands",
     "voice": "Shows a voice channel info.",
-    "emote": "Shows a emoji info.",
-    "category": "Shows a category info.",
+    "emoji": "Shows a emoji info.",
+    "category": "Shows a category channel info.",
     "subcommands": {
       "channel": {
         "commandDescription": "Shows channel name, topic, ID, category and how many users can view it.",
@@ -1647,17 +1647,17 @@
       },
       "voice": {
         "commandDescription": "Shows a voice channel info.",
-        "commandUsage": "<channelName>",
+        "commandUsage": "<channel name>",
         "missingChannelName": "You forgot to give the channel name.",
         "bitrate": "Bitrate",
         "userLimit": "User Limit"
       },
-      "emote": {
+      "emoji": {
         "commandDescription": "Shows the creation date, who added and id of the emoji.",
         "commandUsage": "<emoji>",
         "animatedTag": "[Animated]",
         "whoAdded": "Who added",
-        "missingEmote": "You forgot to send the emoji."
+        "missingEmoji": "You forgot to send the emoji."
       },
       "category": {
         "commandDescription": "Shows category ID, creation date and how many channels are part of it.",
