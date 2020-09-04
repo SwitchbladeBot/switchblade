@@ -942,9 +942,9 @@
     "userNotFound": "Twitch user not found!"
   },
   "freefire":  {
-    "commandDescription": "Shows information related to FreeFire",
+    "commandDescription": "Shows information related to Free Fire",
     "commandUsage": "<type> <query>",
-    "gameName": "FreeFire",
+    "gameName": "Free Fire",
     "subcommands": {
       "weapon": {
         "commandDescription": "Shows information about a Free Fire weapon.",

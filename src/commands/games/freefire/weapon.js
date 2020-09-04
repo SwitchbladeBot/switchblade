@@ -17,11 +17,9 @@ module.exports = class FreeFireWeapon extends Command {
 
   async run ({ t, channel, language }, query) {
     const { locales } = await this.getData('metadata.json')
-
     const locale = locales.find(locale => locale === language.slice(0, 2))
 
     const { weapons } = await this.getData(`${locale}/weapons.json`)
-
     const fuse = new Fuse(weapons, {
       shouldSort: true,
       maxPatternLength: 32,
@@ -42,6 +40,8 @@ module.exports = class FreeFireWeapon extends Command {
     const embed = new SwitchbladeEmbed()
       .setTitle(weapon.name)
       .setDescription(`**${weapon.description}**`)
+      .addField('**Attachments:**', this.getInfo(weapon, 'attachments'), true)
+      .addField('**Attributes:**', this.getInfo(weapon, 'attributes'), true)
       .setImage(weapon.skins[0].image_url)
 
     await channel.send(embed)
@@ -49,8 +49,13 @@ module.exports = class FreeFireWeapon extends Command {
 
   async getData (endpoint) {
     const request = await fetch(`https://ffstaticdata.switchblade.xyz/${endpoint}`)
-      .then(res => res.json())
 
-    return request
+    return request.json()
+  }
+
+  getInfo (weapon, data) {
+    return Object.entries(weapon[data])
+      .map(([key, value]) => ` - **${key}:** ${data === 'attachments' ? value.avaliable ? 'yes' : 'no' : value}`)
+      .join('\n')
   }
 }
