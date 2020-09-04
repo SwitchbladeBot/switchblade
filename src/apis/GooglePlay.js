@@ -9,6 +9,6 @@ module.exports = class GooglePlayStore extends APIWrapper {
   }
 
   async searchApp (query) {
-    return await gPlay.search({ term: query, num: 10, fullDetail: true })
+    return gPlay.search({ term: query, num: 10, fullDetail: true })
   }
 }
