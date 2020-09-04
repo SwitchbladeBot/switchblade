@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, TextChannel, DMChannel, Message } = require('discord.js')
 const ReactionHandler = require('./ReactionHandler.js')
 
 const validateProp = (prop) => typeof prop !== 'undefined' ? prop : true
@@ -62,12 +62,12 @@ module.exports = class PaginatedEmbed {
   }
 
   /**
-     * Renders the paginated embed
-     * @param {Message} message - Discord.js message
-     * @param {object} options - ReactionCollector options
-     * @returns {ReactionHandler}
-     */
-  async run (message, options = {}) {
+  * Renders the paginated embed
+  * @param {Channel} channel - Discord.js TextChannel
+  * @param {object} options - ReactionCollector options
+  * @returns {ReactionHandler}
+  */
+  async run (target, options = {}) {
     this._footer()
     if (!options.filter) options.filter = () => true
     const emojis = this._determineEmojis(
@@ -77,13 +77,18 @@ module.exports = class PaginatedEmbed {
       validateProp(options.firstLast)
     )
 
-    const msg = message.editable
-      ? await message.edit({ embed: this.pages[options.startPage || 0] })
-      : await message.channel.send(this.pages[options.startPage || 0])
+    let msg
+    if (target instanceof TextChannel || target instanceof DMChannel) {
+      msg = await target.send(this.pages[options.startPage || 0])
+    } else if (target instanceof Message) {
+      msg = await target.edit({ embed: this.pages[options.startPage || 0] })
+    } else {
+      throw new TypeError('Invalid "target" parameter type, must be "TextChannel", "DMChannel" or "Message".')
+    }
 
     return new ReactionHandler(
       msg,
-      (reaction, user) => emojis.includes(reaction.emoji.id || reaction.emoji.name) && user !== message.client.user && user === this.author && options.filter(reaction, user),
+      (reaction, user) => emojis.includes(reaction.emoji.id || reaction.emoji.name) && user !== target.client.user && user === this.author && options.filter(reaction, user),
       options,
       this,
       emojis
