@@ -21,7 +21,6 @@ module.exports = class CommandSource extends Command {
 
   async run ({ channel, author, t, prefix }, cmd) {
     const branchOrHash = await GitUtils.getHashOrBranch()
-    console.log(branchOrHash)
     if (!branchOrHash) throw new CommandError(t('commands:commandsource.branchNotUpToDate'))
     const validCommands = this.client.commands.filter(c => !c.hidden)
 
@@ -32,10 +31,9 @@ module.exports = class CommandSource extends Command {
       return arr.find(c => c.name === ca || (c.aliases && c.aliases.includes(ca)))
     }, validCommands)
 
-    if (!command) throw new CommandError(t('commands:help.commandNotFound'))
+    if (!command) throw new CommandError(t('commands:commandsource.commandNotFound'))
 
     const paths = ['src', 'commands', command.category, command.name]
-    console.log(process.cwd(), ...paths)
     let cmdPath = path.join(process.cwd(), 'src', 'commands', command.category, command.name)
     try {
       require(cmdPath)

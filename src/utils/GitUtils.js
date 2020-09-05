@@ -15,7 +15,7 @@ module.exports = class GitUtils {
       } catch (_) {
         return false
       }
-      const originHash = res.data[0].sha
+      const originHash = Array.isArray(res.data) ? res.data[0].sha : res.data.sha
 
       return localHash === originHash ? branch : localHash
     } else {
