@@ -1648,7 +1648,7 @@
       "voice": {
         "commandDescription": "Shows information about a voice channel.",
         "commandUsage": "<channel name>",
-        "missingChannelName": "You forgot to give the channel name.",
+        "missingChannelName": "You need to give me the channel name to get information from.",
         "bitrate": "Bitrate",
         "userLimit": "User Limit"
       },
