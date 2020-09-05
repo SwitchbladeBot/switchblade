@@ -4,6 +4,10 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
+  "2048": {
+    "commandDescription": "Play the 2048 game.",
+    "commandUsage": "[board size]"
+  },
   "waifu": {
     "commandDescription": "Fetches a random waifu (lewd if the channel is NSFW) and displays it.",
     "hereIsYour_sfw": "Here's your waifu!",
@@ -1649,5 +1653,15 @@
     "roles": "Roles",
     "ids": "IDs",
     "loading": "Loading roles..."
+  },
+  "snapcraft": {
+    "commandDescription": "Search on snapcraft store",
+    "commandUsage": "<search query>",
+    "noQueryProvided": "You have to give me a app name.",
+    "version": "Current version",
+    "publisher": "App Publisher",
+    "verified": "Verified account",
+    "yes": "Yes",
+    "no": "No"
   }
 }
