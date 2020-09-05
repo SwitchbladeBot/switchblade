@@ -956,11 +956,7 @@
         "missingWeapon": "You have to give me an weapon.",
         "unknownWeapon": "The weapon {{weapon}} doesn't exist.",
         "attachments": "**Attachments:**",
-        "attributes": "**Attributes:**",
-        "answer": {
-          "yes": "Yes.",
-          "no": "No."
-        }
+        "attributes": "**Attributes:**"
       }
     }
   },

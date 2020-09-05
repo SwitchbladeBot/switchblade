@@ -58,10 +58,9 @@ module.exports = class FreeFireWeapon extends Command {
   }
 
   getInfo ({ t, weapon, data, names }) {
-    const locale = 'commands:freefire.subcommands.weapon.answer.'
     return Object.entries(weapon[data])
       .filter(([key, value]) => value.avaliable || value >= 1)
-      .map(([key, value]) => ` - **${names[key]}:** ${data === 'attachments' ? value.avaliable ? t(locale + 'yes') : t(locale + 'no') : value}`)
+      .map(([key, value]) => ` - **${names[key]}**: ${data !== 'attachments' ? value : ''}`)
       .join('\n')
   }
 }
