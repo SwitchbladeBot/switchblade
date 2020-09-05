@@ -4,6 +4,10 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
+  "2048": {
+    "commandDescription": "Play the 2048 game.",
+    "commandUsage": "[board size]"
+  },
   "waifu": {
     "commandDescription": "Fetches a random waifu (lewd if the channel is NSFW) and displays it.",
     "hereIsYour_sfw": "Here's your waifu!",
