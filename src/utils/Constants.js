@@ -27,6 +27,7 @@ module.exports = {
   GOOGLE_COLOR: '#4285F4',
   GOOGLEPLAY_COLOR: '#3bccff',
   CHOCOLATEY_COLOR: '#7eb5e2',
+  SNAPCRAFT_COLOR: '82BEA0',
 
   // Emojis
 
