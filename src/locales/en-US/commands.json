@@ -1636,9 +1636,9 @@
     "install": "Install",
     "license": "License",
     "changelog": "Changelog",
-    "installs": "{{- count }} installs",
-    "by": "by [{{- displayName }}](https://marketplace.visualstudio.com/publishers/{{- name }})",
-    "lastUpdate": "`{{- version }}` was published {{- ago }}"
+    "installs": "{{count}} installs",
+    "by": "by [{{displayName }}](https://marketplace.visualstudio.com/publishers/{{name}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
   },
   "emojilist": {
     "commandDescription": "Lists all emoji within this server",
