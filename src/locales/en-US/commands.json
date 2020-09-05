@@ -1653,7 +1653,7 @@
         "userLimit": "User Limit"
       },
       "emoji": {
-        "commandDescription": "Shows the creation date, who added and id of the emoji.",
+        "commandDescription": "Shows information about an emoji, such as its creation date, who added it, and its ID.",
         "commandUsage": "<emoji>",
         "animatedTag": "[Animated]",
         "whoAdded": "Who added",
