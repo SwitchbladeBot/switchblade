@@ -1665,7 +1665,7 @@
     "no": "No"
   },
   "chocolatey": {
-    "commandDescription": "Searches for a packages on Chocolatey",
+    "commandDescription": "Searches for packages on Chocolatey",
     "commandUsage": "<package name>",
     "by": "by {{authors}}",
     "installs": "{{count}} installs",
