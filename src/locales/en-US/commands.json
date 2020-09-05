@@ -1646,7 +1646,7 @@
         "nsfwTag": "[NSFW]"
       },
       "voice": {
-        "commandDescription": "Shows a voice channel info.",
+        "commandDescription": "Shows information about a voice channel.",
         "commandUsage": "<channel name>",
         "missingChannelName": "You forgot to give the channel name.",
         "bitrate": "Bitrate",
