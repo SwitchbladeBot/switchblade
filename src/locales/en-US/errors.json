@@ -48,5 +48,6 @@
   "validLinkButGhostMessage": "Your link is valid but I couldn't find that message.",
   "invalidMessageLink": "The message link you sent is invalid.",
   "messageContainsNothing": "The message you're trying to move has no content.",
+  "guildHasNoEmoji": "This server has no emoji or all emojis are not available for me.",
   "guildHasNoRole": "This server has no role to list."
 }

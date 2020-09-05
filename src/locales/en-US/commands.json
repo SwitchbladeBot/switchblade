@@ -1633,6 +1633,11 @@
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
   },
+  "emojilist": {
+    "commandDescription": "Lists all emoji within this server",
+    "loading": "Loading emojis...",
+    "guildHasNoEmoji": "This server has no emoji or all emojis are not available for me."
+  },
   "googleplay": {
     "commandDescription": "Searches for an APP on Google Play Store",
     "commandUsage": "<application name>",
@@ -1648,5 +1653,15 @@
     "roles": "Roles",
     "ids": "IDs",
     "loading": "Loading roles..."
+  },
+  "snapcraft": {
+    "commandDescription": "Search on snapcraft store",
+    "commandUsage": "<search query>",
+    "noQueryProvided": "You have to give me a app name.",
+    "version": "Current version",
+    "publisher": "App Publisher",
+    "verified": "Verified account",
+    "yes": "Yes",
+    "no": "No"
   }
 }
