@@ -29,7 +29,7 @@ module.exports = class InfoVoice extends Command {
         `${givenChannel.parent ? `**${t('commands:info.subcommands.channel.category')}**: ${givenChannel.parent.name}` : ''}
         ${t('commands:guildinfo.createdAt')}: ${moment(givenChannel.createdAt).format('LLL')}\n(${moment(givenChannel.createdAt).fromNow()})
         **ID**: \`${givenChannel.id}\`
-        **${t('commands:info.subcommands.voice.bitrate')}**: ${givenChannel.bitrate}
+        **${t('commands:info.subcommands.voice.bitrate')}**: ${givenChannel.bitrate / 1000}kbps
         **${t('commands:info.subcommands.voice.userLimit')}**: ${givenChannel.members.size}/${givenChannel.userLimit}`)
 
     channel.send(embed)
