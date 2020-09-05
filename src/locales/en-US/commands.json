@@ -1649,5 +1649,15 @@
     "roles": "Roles",
     "ids": "IDs",
     "loading": "Loading roles..."
+  },
+  "snapcraft": {
+    "commandDescription": "Search on snapcraft store",
+    "commandUsage": "<search query>",
+    "noQueryProvided": "You have to give me a app name.",
+    "version": "Current version",
+    "publisher": "App Publisher",
+    "verified": "Verified account",
+    "yes": "Yes",
+    "no": "No"
   }
 }
