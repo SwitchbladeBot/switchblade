@@ -21,7 +21,7 @@ module.exports = class InfoEmoji extends Command {
       .setTitle(`${emoji.animated ? `${t('commands:info.subcommands.emoji.animatedTag')} ` : ''}${emoji.name}`)
       .setDescription(`
         **${t('commands:guildinfo.createdAt')}**: ${moment(emoji.createdAt).format('LLL')}\n(${moment(emoji.createdAt).fromNow()})
-        **ID**: \`${emoji.id}\` \`\`<:${emoji.name}:${emoji.id}>\`\`
+        **ID**: \`${emoji.id}\` \`\`${emoji.toString()}\`\`
         ${emojiAuthor ? `**${t('commands:info.subcommands.emoji.whoAdded')}**: ${emojiAuthor.tag}` : ''}
         `)
       .setImage(emoji.url)
