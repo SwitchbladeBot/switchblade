@@ -1663,5 +1663,12 @@
     "verified": "Verified account",
     "yes": "Yes",
     "no": "No"
+  },
+  "chocolatey": {
+    "commandDescription": "Searches for a packages on Chocolatey",
+    "commandUsage": "<package name>",
+    "by": "by {{- authors }}",
+    "installs": "{{- count }} installs",
+    "license": "License"
   }
 }
