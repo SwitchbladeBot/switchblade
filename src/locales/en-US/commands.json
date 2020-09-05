@@ -1660,7 +1660,7 @@
         "missingEmoji": "You forgot to send the emoji."
       },
       "category": {
-        "commandDescription": "Shows category ID, creation date and how many channels are part of it.",
+        "commandDescription": "Shows a category's ID, creation date and how many channels are part of it.",
         "commandUsage": "<categoryName>",
         "channelsInside": "Channels inside of it"
       }
