@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed, CommandError } = require('../../')
 const axios = require('axios')
 const waifuAPI = 'https://waifu.pics/api/'
 
