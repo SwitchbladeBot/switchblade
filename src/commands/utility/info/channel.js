@@ -14,7 +14,7 @@ module.exports = class InfoChannel extends Command {
         acceptNews: true,
         acceptStore: true,
         onlySameGuild: true,
-        missingError: 'commands:move.missingChannelMention'
+        missingError: 'commands:info.subcommands.category.missingCategoryMention'
       }]
     }, client)
   }
