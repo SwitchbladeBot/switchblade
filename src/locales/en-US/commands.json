@@ -1670,8 +1670,6 @@
     "branchNotUpToDate": "The branch is not up to date with origin",
     "missingText": "You have to give me the name of a command",
     "commandNotFound": "I couldn't find any command with that name.",
-    "commandFileNotFound": "I found a command, but I could not find the path to it",
-    "currentBranchOrCommit": "Current branch (or commit)",
     "commandSource": "Command Source"
   }
 }
