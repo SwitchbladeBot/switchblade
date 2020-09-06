@@ -22,7 +22,6 @@ module.exports = class InfoChannel extends Command {
   async run ({ t, author, channel, language }, givenChannel) {
     moment.locale(language)
     const embed = new SwitchbladeEmbed(author)
-
       .setTitle(`${givenChannel.nsfw ? `${t('commands:info.subcommands.channel.nsfwTag')} ` : ''}${givenChannel.name}`)
       .setDescription(
         `${givenChannel.parent ? `**${t('commands:info.subcommands.channel.category')}**: ${givenChannel.parent.name}` : ''}
