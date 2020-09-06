@@ -9,6 +9,15 @@ module.exports = class Chocolatey extends APIWrapper {
   }
 
   async search (query) {
-    return axios.get(`https://chocolatey.org/api/v2/Search()?$filter=IsLatestVersion&$skip=0&$top=10&searchTerm=${encodeURIComponent(`'${query}'`)}&targetFramework=%27%27&includePrerelease=false`)
+    return axios.get('https://chocolatey.org/api/v2/Search()', {
+      params: {
+        $filter: 'IsLatestVersion',
+        $skip: 0,
+        $top: 10,
+        searchTerm: encodeURIComponent(`'${query}'`),
+        targetFramework: "''",
+        includePrerelease: false
+      }
+    })
   }
 }
