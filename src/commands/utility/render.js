@@ -41,7 +41,7 @@ module.exports = class Render extends Command {
           .setAuthor(author.username, author.displayAvatarURL({ dynamic: true }))
 
         if (content) {
-          embed.setDescription(content || '')
+          embed.setDescription(content)
         }
 
         render.embed = embed
