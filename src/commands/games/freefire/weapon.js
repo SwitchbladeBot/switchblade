@@ -43,12 +43,12 @@ module.exports = class FreeFireWeapon extends Command {
       .addFields([
         {
           name: t('commands:freefire.subcommands.weapon.attributes'),
-          value: this.getInfo({ t, weapon, data: 'attributes', names: attributeNames }),
+          value: this.getInfo({ weapon, data: 'attributes', names: attributeNames }),
           inline: true
         },
         {
           name: t('commands:freefire.subcommands.weapon.attachments'),
-          value: this.getInfo({ t, weapon, data: 'attachments', names: attachmentNames }),
+          value: this.getInfo({ weapon, data: 'attachments', names: attachmentNames }),
           inline: true
         }
       ])
@@ -57,10 +57,10 @@ module.exports = class FreeFireWeapon extends Command {
     await channel.send(embed)
   }
 
-  getInfo ({ t, weapon, data, names }) {
+  getInfo ({ weapon, data, names }) {
     return Object.entries(weapon[data])
       .filter(([key, value]) => value.avaliable || value >= 1)
-      .map(([key, value]) => ` - **${names[key]}**: ${data !== 'attachments' ? value : ''}`)
+      .map(([key, value]) => ` - **${names[key]}**${data !== 'attachments' ? `: ${value}` : ''}`)
       .join('\n')
   }
 }
