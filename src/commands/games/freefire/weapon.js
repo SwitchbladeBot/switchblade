@@ -39,7 +39,17 @@ module.exports = class FreeFireWeapon extends Command {
 
     const embed = new SwitchbladeEmbed()
       .setTitle(weapon.name)
-      .setDescription(`**${weapon.description}**`)
+      .setDescriptionFromBlockArray([
+        [
+          weapon.description
+        ],
+        [
+          weapon.ammunition ? `**${t('commands:freefire.subcommands.weapon.ammunition')}:** ${weapon.ammunition}` : null
+        ],
+        [
+          weapon.labels.map(l => `\`${l}\``).join(', ')
+        ]
+      ])
       .addFields([
         {
           name: t('commands:freefire.subcommands.weapon.attributes'),
