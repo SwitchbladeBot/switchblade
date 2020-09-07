@@ -803,4 +803,63 @@ module.exports = class CanvasTemplates {
     ctx.drawImage(myimg, 0, 0, WIDTH, HEIGHT)
     return canvas.toBuffer('image/jpeg', { quality: 0.08 })
   }
+
+  static async kannaPaper (text) {
+    const background = await Image.from(Constants.KANNA_PAPER_TEMPLATE)
+    const canvas = createCanvas(background.width, background.height)
+    const ctx = canvas.getContext('2d')
+    const x = 53
+    const y = 25
+
+    const cutWord = (word, count) => {
+      const result = word.match(new RegExp(`.{0,${count}}`, 'g'))
+      console.log('aqui', word, result, count)
+      return result.filter(word => word)
+    }
+
+    const lineBreak = (text, perLine = 10, maxLines = 6) => {
+      const lines = []
+      let currentLineIndex = 0
+      let lastSpaceIndex = 0
+
+      for (let i = 0; i <= text.length; i++) {
+        if (text[i] === ' ' || i === text.length) {
+          const startPhraseindex = lastSpaceIndex === 0 ? 0 : lastSpaceIndex + 1
+          const endPhraseIndex = i === text.length ? i : i - 1
+          const phrase = text.slice(startPhraseindex, endPhraseIndex)
+          const previusLine = lines[currentLineIndex] + ' ' + phrase
+
+          if (phrase.length > perLine) {
+            const words = cutWord(phrase, perLine)
+            lines.push(...words)
+            currentLineIndex += words.length
+            if (lines.length >= maxLines) {
+              break
+            }
+          } else if (previusLine.length > perLine) {
+            lines.push(phrase)
+            currentLineIndex++
+            if (lines.length >= maxLines) {
+              break
+            }
+          } else {
+            lines[currentLineIndex] += phrase
+          }
+
+          lastSpaceIndex = i
+        }
+      }
+
+      console.log(lines)
+      return lines.map(line => line.trimStart()).slice(0, maxLines)
+    }
+
+    ctx.drawImage(background, 0, 0, background.width, background.height)
+    ctx.font = '15px "SF Pro Display"'
+    ctx.rotate(12 * Math.PI / 180)
+
+    const lines = lineBreak(text, 8, 6)
+    ctx.fillText(lines.join('\n'), x, y)
+    return canvas.toBuffer()
+  }
 }
