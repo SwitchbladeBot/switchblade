@@ -953,10 +953,11 @@
       "weapon": {
         "commandDescription": "Shows information about a Free Fire weapon.",
         "commandUsage": "<name>",
+        "ammunition": "Ammunition",
         "missingWeapon": "You have to give me an weapon.",
         "unknownWeapon": "The weapon {{weapon}} doesn't exist.",
-        "attachments": "**Attachments:**",
-        "attributes": "**Attributes:**"
+        "attachments": "Attachments",
+        "attributes": "Attributes"
       }
     }
   },
