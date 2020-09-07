@@ -845,20 +845,24 @@ module.exports = class CanvasTemplates {
             lines.push(phrase)
             currentLineIndex++
           } else {
-            lines[currentLineIndex] += ' ' + phrase
+            if (!lines[currentLineIndex]) {
+              lines[currentLineIndex] += phrase
+            } else {
+              lines[currentLineIndex] += ' ' + phrase
+            }
           }
           lastSpaceIndex = i
         }
       }
 
-      return lines.map(line => line.trimStart())
+      return lines
     }
 
     ctx.drawImage(background, 0, 0, background.width, background.height)
     ctx.font = '15px "SF Pro Display"'
     ctx.rotate(12 * Math.PI / 180)
 
-    const lines = lineBreak(text, 8, 6)
+    const lines = lineBreak(text, 9, 6)
     ctx.fillText(lines.join('\n'), x, y)
     return canvas.toBuffer()
   }
