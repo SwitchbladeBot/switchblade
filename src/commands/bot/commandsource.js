@@ -13,7 +13,7 @@ module.exports = class CommandSource extends Command {
         type: 'command',
         full: true,
         required: true,
-        missingError: 'commands:commandsource.missingText',
+        missingError: 'commands:commandsource.missingCommand',
         acceptHidden: true
       }]
     }, client)
@@ -21,6 +21,7 @@ module.exports = class CommandSource extends Command {
 
   async run ({ channel, author, t }, command) {
     const branchOrHash = await GitUtils.getHashOrBranch()
+    if (branchOrHash === null) throw new CommandError(t('commands:commandsource.noRepositoryOrHEAD'))
     if (!branchOrHash) throw new CommandError(t('commands:commandsource.branchNotUpToDate'))
 
     channel.send(new SwitchbladeEmbed(author)

@@ -1668,7 +1668,8 @@
     "commandDescription": "Get the source code of a command",
     "commandUsage": "<command name>",
     "branchNotUpToDate": "The branch is not up to date with origin",
-    "missingText": "You have to give me the name of a command",
-    "commandSource": "Command Source"
+    "missingCommand": "You have to give me the name of a command",
+    "commandSource": "Command Source",
+    "noRepositoryOrHEAD": "There is no local repository or the local repository has no HEAD"
   }
 }
