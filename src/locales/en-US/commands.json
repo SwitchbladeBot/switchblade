@@ -1669,7 +1669,6 @@
     "commandUsage": "<command name>",
     "branchNotUpToDate": "The branch is not up to date with origin",
     "missingText": "You have to give me the name of a command",
-    "commandNotFound": "I couldn't find any command with that name.",
     "commandSource": "Command Source"
   }
 }
