@@ -812,7 +812,7 @@ module.exports = class CanvasTemplates {
     const y = 25
 
     const cutWord = (word, count) => {
-      return word.match(new RegExp(`.{0,${count}}`, 'g'))
+      return word.match(new RegExp(`.{0,${count}}`, 'g')).filter(w => w)
     }
 
     const lineBreak = (text, perLine = 10, maxLines = 6) => {
@@ -820,11 +820,19 @@ module.exports = class CanvasTemplates {
       let currentLineIndex = 0
       let lastSpaceIndex = 0
 
+      const getPreviusLine = phrase => {
+        if (lines[currentLineIndex]) {
+          return lines[currentLineIndex] + ' ' + phrase
+        }
+        return lines[currentLineIndex] + phrase
+      }
+
       for (let i = 0; i <= text.length; i++) {
         if (text[i] === ' ' || i === text.length || text[i] === '\n') {
           const phrase = text.slice(lastSpaceIndex, i).trim()
 
-          const previusLine = lines[currentLineIndex] + ' ' + phrase
+          const previusLine = getPreviusLine(phrase)
+
           if (phrase.length > perLine) {
             if (lines.length === 1) {
               lines.splice(0, 1)
@@ -832,9 +840,11 @@ module.exports = class CanvasTemplates {
 
             const words = cutWord(phrase, perLine)
             const maxWords = words.length - ((lines.length + words.length) - maxLines)
+            const parsedWords = words.slice(0, maxWords)
 
-            lines.push(...words.slice(0, maxWords))
-            currentLineIndex += words.length
+            lines.push(...parsedWords)
+
+            currentLineIndex += parsedWords.length
             if (lines.length >= maxLines) {
               break
             }
@@ -862,7 +872,8 @@ module.exports = class CanvasTemplates {
     ctx.font = '15px "SF Pro Display"'
     ctx.rotate(12 * Math.PI / 180)
 
-    const lines = lineBreak(text, 9, 6)
+    const lines = lineBreak(text, 13, 6)
+    console.log(lines)
     ctx.fillText(lines.join('\n'), x, y)
     return canvas.toBuffer()
   }

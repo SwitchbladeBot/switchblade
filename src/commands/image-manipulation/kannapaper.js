@@ -10,7 +10,7 @@ module.exports = class KannaPaper extends Command {
       category: 'images',
       requirements: { canvasOnly: true },
       parameters: [{
-        type: 'string', full: true, required: true, missingError: 'commands:kannapaper.missingText'
+        type: 'string', full: true, required: true, clean: true, missingError: 'commands:kannapaper.missingText'
       }]
     }, client)
   }
