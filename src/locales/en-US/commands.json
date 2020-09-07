@@ -14,7 +14,7 @@
     "commandUsage": "<text>",
     "noSentence": "You have to give me some text to reverse!"
   },
-  "docs": {
+  "djsdocs": {
     "commandDescription": "Shows information from the discord.js documentation.",
     "commandUsage": "<query>",
     "noQueryProvided": "You have to give me a search query!"

@@ -2,7 +2,7 @@ const { Command } = require('../..')
 const fetch = require('node-fetch')
 const VALID_SOURCES = ['stable', 'master', 'commando', 'rpc', 'akairo-master', 'collection']
 
-module.exports = class Docs extends Command {
+module.exports = class DjsDocs extends Command {
   constructor (client) {
     super({
       name: 'djsdocs',
