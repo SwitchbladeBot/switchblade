@@ -808,8 +808,6 @@ module.exports = class CanvasTemplates {
     const background = await Image.from(Constants.KANNA_PAPER_TEMPLATE)
     const canvas = createCanvas(background.width, background.height)
     const ctx = canvas.getContext('2d')
-    const x = 53
-    const y = 25
 
     const cutWord = (word, count) => {
       return word.match(new RegExp(`.{0,${count}}`, 'g')).filter(w => w)
@@ -869,12 +867,13 @@ module.exports = class CanvasTemplates {
     }
 
     ctx.drawImage(background, 0, 0, background.width, background.height)
-    ctx.font = '15px "SF Pro Display"'
+    ctx.font = '15px "Arial"'
     ctx.rotate(12 * Math.PI / 180)
 
     const lines = lineBreak(text, 13, 6)
     console.log(lines)
-    ctx.fillText(lines.join('\n'), x, y)
+    ctx.fillText(lines.join('\n'), 53, 25)
+
     return canvas.toBuffer()
   }
 }

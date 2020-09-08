@@ -1663,5 +1663,10 @@
     "verified": "Verified account",
     "yes": "Yes",
     "no": "No"
+  },
+  "kannapaper": {
+    "commandDescription": "Generates a text on the kanna paper.",
+    "commandUsage": "<text>",
+    "missingText": "You have to give me some text for the kanna paper!"
   }
 }
