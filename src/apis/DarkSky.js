@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const fetch = require('node-fetch')
+const axios = require('axios')
 
 const API_URL = 'https://api.darksky.net'
 
@@ -27,9 +27,11 @@ module.exports = class DarkSkyAPI extends APIWrapper {
   }
 
   // Default
-  request (endpoint, lat, lng, queryParams = {}) {
-    const qParams = new URLSearchParams(queryParams)
-    return fetch(`${API_URL}${endpoint}/${process.env.DARKSKY_KEY}/${lat},${lng}?${qParams.toString()}`)
-      .then(res => res.json())
+  async request (endpoint, lat, lng, queryParams = {}) {
+    const qParams = new URLSearchParams(queryParams);
+
+    const response = await axios.get(`${API_URL}${endpoint}/${process.env.DARKSKY_KEY}/${lat},${lng}?${qParams.toString()}`);
+    return response.data;
+    
   }
 }

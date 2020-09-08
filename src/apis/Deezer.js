@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const fetch = require('node-fetch')
+const axios = require('axios')
 
 const API_URL = 'https://api.deezer.com'
 
@@ -77,9 +77,9 @@ module.exports = class DeezerAPI extends APIWrapper {
   }
 
   // Default
-  request (endpoint, queryParams = {}) {
+ async request (endpoint, queryParams = {}) {
     const qParams = new URLSearchParams(queryParams)
-    return fetch(API_URL + endpoint + `?${qParams.toString()}`)
-      .then(res => res.json())
+    const response = await axios.get(API_URL + endpoint + `?${qParams.toString()}`);
+    return response.data;
   }
 }
