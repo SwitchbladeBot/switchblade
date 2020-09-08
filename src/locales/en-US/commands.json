@@ -4,6 +4,10 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
+  "2048": {
+    "commandDescription": "Play the 2048 game.",
+    "commandUsage": "[board size]"
+  },
   "waifu": {
     "commandDescription": "Fetches a random waifu (lewd if the channel is NSFW) and displays it.",
     "hereIsYour_sfw": "Here's your waifu!",
@@ -1640,10 +1644,48 @@
     "by": "by [{{displayName }}](https://marketplace.visualstudio.com/publishers/{{name}})",
     "lastUpdate": "`{{version}}` was published {{ago}}"
   },
+  "info": {
+    "commandDescription": "Shows channels/categories and emojis information.",
+    "channel": "Shows information about a text/news/announcement channel.",
+    "embedAuthor": "Discord Information Commands",
+    "voice": "Shows information about a voice channel.",
+    "emoji": "Shows information about an emoji.",
+    "category": "Shows information about a category.",
+    "subcommands": {
+      "channel": {
+        "commandDescription": "Shows a channel's name, topic, ID, category and how many users can view it.",
+        "commandUsage": "<channel>",
+        "category": "Category",
+        "canViewThisChannel": "{{userCount}} User can view this channel.",
+        "canViewThisChannelPlural": "{{userCount}} Users can view this channel.",
+        "nsfwTag": "[NSFW]"
+      },
+      "voice": {
+        "commandDescription": "Shows information about a voice channel.",
+        "commandUsage": "<channel name>",
+        "missingChannelName": "You need to give me the channel name to get information from.",
+        "bitrate": "Bitrate",
+        "userLimit": "User Limit"
+      },
+      "emoji": {
+        "commandDescription": "Shows information about an emoji, such as its creation date, who added it, and its ID.",
+        "commandUsage": "<emoji>",
+        "animatedTag": "[Animated]",
+        "whoAdded": "Who added",
+        "missingEmoji": "You forgot to send the emoji."
+      },
+      "category": {
+        "commandDescription": "Shows a category's ID, creation date and how many channels are part of it.",
+        "commandUsage": "<categoryName>",
+        "channelsInside": "Channels inside of it",
+        "missingCategoryMention": "That category doesn't exist or I couldn't find it."
+      }
+    }
+  },
   "emojilist": {
     "commandDescription": "Lists all emoji within this server",
     "loading": "Loading emojis...",
-    "guildHasNoEmoji": "This server has no emoji or all emojis are not available for me."
+    "guildHasNoEmoji": "This server has no available emojis for me."
   },
   "googleplay": {
     "commandDescription": "Searches for an APP on Google Play Store",
@@ -1660,5 +1702,15 @@
     "roles": "Roles",
     "ids": "IDs",
     "loading": "Loading roles..."
+  },
+  "snapcraft": {
+    "commandDescription": "Search on snapcraft store",
+    "commandUsage": "<search query>",
+    "noQueryProvided": "You have to give me a app name.",
+    "version": "Current version",
+    "publisher": "App Publisher",
+    "verified": "Verified account",
+    "yes": "Yes",
+    "no": "No"
   }
 }
