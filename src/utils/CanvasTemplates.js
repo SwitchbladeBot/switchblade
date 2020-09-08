@@ -871,7 +871,6 @@ module.exports = class CanvasTemplates {
     ctx.rotate(12 * Math.PI / 180)
 
     const lines = lineBreak(text, 13, 6)
-    console.log(lines)
     ctx.fillText(lines.join('\n'), 53, 25)
 
     return canvas.toBuffer()
