@@ -1701,5 +1701,15 @@
     "verified": "Verified account",
     "yes": "Yes",
     "no": "No"
+  },
+  "eclipseplugin": {
+    "commandDescription": "Search for plugins on the Eclipse Plugin Marketplace",
+    "commandUsage": "<plugin name>",
+    "marketplace": "Eclipse Plugin Marketplace",
+    "by": "by [{{name}}]({{homepage}})",
+    "installs": "{{count}} installs",
+    "lastUpdate": "`{{version}}` was published {{ago}}",
+    "license": "License",
+    "install": "Install using Eclipse Marketplace Client"
   }
 }

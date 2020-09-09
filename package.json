@@ -37,6 +37,7 @@
     "@sentry/node": "^5.15.5",
     "abort-controller": "^2.0.3",
     "ascii-table": "0.0.9",
+    "axios": "^0.20.0",
     "chalk": "^3.0.0",
     "cheerio": "^1.0.0-rc.2",
     "cldr-core": "^34.0.0",
@@ -83,6 +84,7 @@
     "transform-props": "^1.0.1",
     "turndown": "^6.0.0",
     "uws": "^9.14.0",
+    "xml2json": "^0.12.0",
     "zlib-sync": "^0.1.6"
   },
   "devDependencies": {
