@@ -101,7 +101,7 @@ module.exports = class CommandRequirements {
     }
 
     if (opts.botPermissions && opts.botPermissions.length > 0) {
-      if (!channel.permissionsFor(guild.me).has(opts.permissions)) {
+      if (!channel.permissionsFor(guild.me).has(opts.botPermissions)) {
         const permission = opts.botPermissions.map(p => t(`permissions:${p}`)).map(p => `**"${p}"**`).join(', ')
         const sentence = opts.botPermissions.length >= 1 ? 'errors:botMissingOnePermission' : 'errors:botMissingMultiplePermissions'
         throw new CommandError(t(sentence, { permission }))
