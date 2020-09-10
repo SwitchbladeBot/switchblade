@@ -1701,5 +1701,16 @@
     "verified": "Verified account",
     "yes": "Yes",
     "no": "No"
+  },
+  "jetbrainsplugin": {
+    "commandDescription": "Search for JetBrains plugins",
+    "commandUsage": "<name>",
+    "plugins": "JetBrains Plugins",
+    "download": "Download",
+    "license": "License",
+    "documentation": "Documentation",
+    "installs": "{{count}} installs",
+    "by": "by [{{name}}]({{url}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
   }
 }
