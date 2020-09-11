@@ -16,4 +16,3 @@ module.exports = class GooglePlayStore extends APIWrapper {
     return gPlay.developer({ devId: query, fullDetail: true, num: 10 })
   }
 }
-

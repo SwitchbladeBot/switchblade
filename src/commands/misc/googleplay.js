@@ -9,7 +9,7 @@ module.exports = class GooglePlay extends SubcommandListCommand {
       authorString: 'commands:googleplay.serviceName',
       authorImage: 'https://i.imgur.com/kLdJwcj.png',
       authorURL: 'https://play.google.com',
-      embedColor: Constants.GOOGLEPLAY_COLOR,
+      embedColor: Constants.GOOGLEPLAY_COLOR
     }, client)
   }
 }
