@@ -1677,29 +1677,37 @@
     "guildHasNoEmoji": "This server has no available emojis for me."
   },
   "googleplay": {
-    "commandDescription": "Searches for an APP on Google Play Store",
-    "commandUsage": "<application name>",
+    "commandDescription": "Searches for an application, developer or [REDACTED] on Google Play Store",
+    "commandUsage": "<type> <query>",
+    "serviceName": "Google Play Store",
     "developer": "Developer",
     "price": "Price",
     "genre": "Genre",
     "rating": "Rating",
     "installs": "Installs",
-    "released": "Released on"
-  },
-  "rolelist": {
-    "commandDescription": "Lists all the roles in the server.",
-    "roles": "Roles",
-    "ids": "IDs",
-    "loading": "Loading roles..."
-  },
-  "snapcraft": {
-    "commandDescription": "Search on snapcraft store",
-    "commandUsage": "<search query>",
-    "noQueryProvided": "You have to give me a app name.",
-    "version": "Current version",
-    "publisher": "App Publisher",
-    "verified": "Verified account",
-    "yes": "Yes",
-    "no": "No"
+    "released": "Released on",
+    "subcommands": {
+      "app": {
+        "commandDescription": "Searches for an APP on Google Play Store",
+        "commandUsage": "<application name>",
+        "trackInfo": "APP information"
+      }
+    },
+    "rolelist": {
+      "commandDescription": "Lists all the roles in the server.",
+      "roles": "Roles",
+      "ids": "IDs",
+      "loading": "Loading roles..."
+    },
+    "snapcraft": {
+      "commandDescription": "Search on snapcraft store",
+      "commandUsage": "<search query>",
+      "noQueryProvided": "You have to give me a app name.",
+      "version": "Current version",
+      "publisher": "App Publisher",
+      "verified": "Verified account",
+      "yes": "Yes",
+      "no": "No"
+    }
   }
 }
