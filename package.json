@@ -67,7 +67,7 @@
     "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "ms": "^2.1.2",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.1",
     "node-spotify-api": "^1.0.7",
     "pirate-speak": "^1.0.1",
     "rastrojs": "^1.1.0",
