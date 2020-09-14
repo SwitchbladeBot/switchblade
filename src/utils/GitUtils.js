@@ -1,5 +1,6 @@
 const axios = require('axios')
 const fs = require('fs')
+const child = require('child_process')
 
 module.exports = class GitUtils {
   static async getHashOrBranch () {
@@ -29,6 +30,34 @@ module.exports = class GitUtils {
       }
     } catch (_) {
       return null
+    }
+  }
+
+  static async getLatestCommitInfo () {
+    const branchOrHash = await GitUtils.getHashOrBranch()
+    if (!branchOrHash && branchOrHash !== null) {
+      const data = child.execSync('git log --pretty=format:"%cn | %cd"').toString()
+      const [user, ...date] = data.split('\n')[0].split('|')
+      return {
+        date: new Date(...date),
+        user
+      }
+    }
+
+    let res
+    try {
+      res = await axios.get(`https://api.github.com/repos/SwitchbladeBot/switchblade/commits/${branchOrHash}`)
+    } catch (_) {
+      return false
+    }
+
+    if (res.data && res.data.author && res.data.commit) {
+      const originCommiter = res.data.author.login
+      const originDate = new Date(res.data.commit.author.date)
+      return {
+        date: originDate,
+        user: originCommiter
+      }
     }
   }
 }
