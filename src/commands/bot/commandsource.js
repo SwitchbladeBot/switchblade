@@ -21,9 +21,8 @@ module.exports = class CommandSource extends Command {
   }
 
   async run ({ channel, author, language, t }, command) {
-    const branchOrHash = await GitUtils.getHashOrBranch()
+    let branchOrHash = await GitUtils.getHashOrBranch()
     if (branchOrHash === null) throw new CommandError(t('commands:commandsource.noRepositoryOrHEAD'))
-    if (!branchOrHash) throw new CommandError(t('commands:commandsource.branchNotUpToDate'))
 
     moment.locale(language)
 
@@ -34,11 +33,12 @@ module.exports = class CommandSource extends Command {
       .setTitle(command.fullName)
       .setDescriptionFromBlockArray([
         [
-          `[${path}](${REPOSITORY_URL}/blob/${branchOrHash}/${path})`
+          !branchOrHash ? `**${t('commands:commandsource.branchNotUpToDate')}**` : '',
+          `[${path}](${REPOSITORY_URL}/blob/${branchOrHash || 'master'}/${path})`
         ],
         [
           `${t('commands:commandsource.lastEdited', { ago: moment(date).fromNow(), user })}`,
-          `[\`${branchOrHash}\`](${REPOSITORY_URL}/tree/${branchOrHash})`
+          `[\`${branchOrHash || 'master'}\`](${REPOSITORY_URL}/tree/${branchOrHash || 'master'})`
         ]
       ])
     )
