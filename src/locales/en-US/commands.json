@@ -1710,6 +1710,6 @@
     "installs": "{{count}} installs",
     "lastUpdate": "`{{version}}` was published {{ago}}",
     "license": "License",
-    "install": "Install using Eclipse Marketplace Client"
+    "install": "Drag this link to your Eclipse workspace to install"
   }
 }
