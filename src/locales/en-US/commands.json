@@ -1692,7 +1692,8 @@
         "commandUsage": "<application name>",
         "trackInfo": "APP information"
       }
-    },
+    }
+  },
     "rolelist": {
       "commandDescription": "Lists all the roles in the server.",
       "roles": "Roles",
@@ -1710,4 +1711,3 @@
       "no": "No"
     }
   }
-}
