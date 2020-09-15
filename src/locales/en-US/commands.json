@@ -945,6 +945,22 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
+  "freefire":  {
+    "commandDescription": "Shows information related to Free Fire",
+    "commandUsage": "<type> <query>",
+    "gameName": "Free Fire",
+    "subcommands": {
+      "weapon": {
+        "commandDescription": "Shows information about a Free Fire weapon.",
+        "commandUsage": "<name>",
+        "ammunition": "Ammunition",
+        "missingWeapon": "You have to give me an weapon.",
+        "unknownWeapon": "The weapon {{weapon}} doesn't exist.",
+        "attachments": "Attachments",
+        "attributes": "Attributes"
+      }
+    }
+  },
   "minecraft": {
     "commandDescription": "Shows information related to Minecraft.",
     "commandUsage": "<type> <query>",
@@ -1633,6 +1649,17 @@
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
   },
+  "vscodeextension": {
+    "commandDescription": "Shows information about VS Code extensions from the Visual Studio Marketplace",
+    "commandUsage": "<name>",
+    "marketplace": "Visual Studio Marketplace",
+    "install": "Install",
+    "license": "License",
+    "changelog": "Changelog",
+    "installs": "{{count}} installs",
+    "by": "by [{{displayName }}](https://marketplace.visualstudio.com/publishers/{{name}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
+  },
   "info": {
     "commandDescription": "Shows channels/categories and emojis information.",
     "channel": "Shows information about a text/news/announcement channel.",
@@ -1712,5 +1739,10 @@
     "installs": "{{count}} installs",
     "by": "by [{{name}}]({{url}})",
     "lastUpdate": "`{{version}}` was published {{ago}}"
+  },
+  "kannapaper": {
+    "commandDescription": "Generates an image of Kanna (from Miss Kobayashi's Dragon Maid) holding a paper with text",
+    "commandUsage": "<text>",
+    "missingText": "You have to give me some text for the paper!"
   }
 }
