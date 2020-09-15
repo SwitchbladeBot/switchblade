@@ -1728,5 +1728,10 @@
     "verified": "Verified account",
     "yes": "Yes",
     "no": "No"
+  },
+  "kannapaper": {
+    "commandDescription": "Generates an image of Kanna (from Miss Kobayashi's Dragon Maid) holding a paper with text",
+    "commandUsage": "<text>",
+    "missingText": "You have to give me some text for the paper!"
   }
 }
