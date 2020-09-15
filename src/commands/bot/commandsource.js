@@ -21,7 +21,7 @@ module.exports = class CommandSource extends Command {
   }
 
   async run ({ channel, author, language, t }, command) {
-    let branchOrHash = await GitUtils.getHashOrBranch()
+    const branchOrHash = await GitUtils.getHashOrBranch()
     if (branchOrHash === null) throw new CommandError(t('commands:commandsource.noRepositoryOrHEAD'))
 
     moment.locale(language)
