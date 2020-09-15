@@ -103,7 +103,8 @@
   "nodemonConfig": {
     "ignore": [
       "locales/*"
-    ]
+    ],
+    "delay": "5000"
   },
   "optionalDependencies": {
     "@discordjs/uws": "^11.149.1",
