@@ -32,19 +32,22 @@ module.exports = class UserParameter extends Parameter {
     const regexResult = MENTION_REGEX.exec(arg)
     const id = regexResult && regexResult[1]
     const findMember = guild.members.cache.get(id) || guild.members.cache.find(m => m.user.username.toLowerCase().includes(arg.toLowerCase()) || m.displayName.toLowerCase().includes(arg.toLowerCase()))
-    try {
-      const partialUser = await client.users.fetch(id)
-      const user = client.users.cache.get(id) || (!!findMember && findMember.user)
-      if (!user && !this.acceptPartial) throw new CommandError(t(this.errors.invalidUser))
-      if (!this.acceptSelf && user.id === author.id) throw new CommandError(t(this.errors.acceptSelf))
-      if (!this.acceptBot && user.bot) throw new CommandError(t(this.errors.acceptBot))
-      if (!this.acceptUser && !user.bot) throw new CommandError(t(this.errors.acceptUser))
-      if (!this.acceptDeveloper && PermissionUtils.isDeveloper(client, user)) throw new CommandError(t(this.errors.acceptDeveloper), false)
-      if (!this.acceptPartial && partialUser && !findMember) throw new CommandError(t(this.errors.acceptPartial))
+    const partialUser = this.acceptPartial && await client.users.fetch(id).catch(() => null)
+    const user = (!!findMember && findMember.user) || client.users.cache.get(id)
 
-      return this.acceptPartial ? partialUser : user
-    } catch (e) {
-      return undefined
+    if (!user) {
+      if (!this.acceptPartial) throw new CommandError(t(this.errors.acceptPartial))
+      if (partialUser) {
+        return partialUser
+      }
+      throw new CommandError(t(this.errors.invalidUser))
     }
+
+    if (!this.acceptSelf && user.id === author.id) throw new CommandError(t(this.errors.acceptSelf))
+    if (!this.acceptBot && user.bot) throw new CommandError(t(this.errors.acceptBot))
+    if (!this.acceptUser && !user.bot) throw new CommandError(t(this.errors.acceptUser))
+    if (!this.acceptDeveloper && PermissionUtils.isDeveloper(client, user)) throw new CommandError(t(this.errors.acceptDeveloper), false)
+
+    return user
   }
 }
