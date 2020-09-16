@@ -1743,5 +1743,11 @@
     "lastUpdate": "`{{version}}` was published {{ago}}",
     "license": "License",
     "install": "Drag this link to your Eclipse workspace to install"
+  "chocolatey": {
+    "commandDescription": "Searches for packages on Chocolatey",
+    "commandUsage": "<package name>",
+    "by": "by {{authors}}",
+    "installs": "{{count}} installs",
+    "license": "License"
   }
 }
