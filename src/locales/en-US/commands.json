@@ -945,6 +945,22 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
+  "freefire":  {
+    "commandDescription": "Shows information related to Free Fire",
+    "commandUsage": "<type> <query>",
+    "gameName": "Free Fire",
+    "subcommands": {
+      "weapon": {
+        "commandDescription": "Shows information about a Free Fire weapon.",
+        "commandUsage": "<name>",
+        "ammunition": "Ammunition",
+        "missingWeapon": "You have to give me an weapon.",
+        "unknownWeapon": "The weapon {{weapon}} doesn't exist.",
+        "attachments": "Attachments",
+        "attributes": "Attributes"
+      }
+    }
+  },
   "minecraft": {
     "commandDescription": "Shows information related to Minecraft.",
     "commandUsage": "<type> <query>",
@@ -1633,10 +1649,59 @@
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
   },
+  "vscodeextension": {
+    "commandDescription": "Shows information about VS Code extensions from the Visual Studio Marketplace",
+    "commandUsage": "<name>",
+    "marketplace": "Visual Studio Marketplace",
+    "install": "Install",
+    "license": "License",
+    "changelog": "Changelog",
+    "installs": "{{count}} installs",
+    "by": "by [{{displayName }}](https://marketplace.visualstudio.com/publishers/{{name}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
+  },
+  "info": {
+    "commandDescription": "Shows channels/categories and emojis information.",
+    "channel": "Shows information about a text/news/announcement channel.",
+    "embedAuthor": "Discord Information Commands",
+    "voice": "Shows information about a voice channel.",
+    "emoji": "Shows information about an emoji.",
+    "category": "Shows information about a category.",
+    "subcommands": {
+      "channel": {
+        "commandDescription": "Shows a channel's name, topic, ID, category and how many users can view it.",
+        "commandUsage": "<channel>",
+        "category": "Category",
+        "canViewThisChannel": "{{userCount}} User can view this channel.",
+        "canViewThisChannelPlural": "{{userCount}} Users can view this channel.",
+        "nsfwTag": "[NSFW]"
+      },
+      "voice": {
+        "commandDescription": "Shows information about a voice channel.",
+        "commandUsage": "<channel name>",
+        "missingChannelName": "You need to give me the channel name to get information from.",
+        "bitrate": "Bitrate",
+        "userLimit": "User Limit"
+      },
+      "emoji": {
+        "commandDescription": "Shows information about an emoji, such as its creation date, who added it, and its ID.",
+        "commandUsage": "<emoji>",
+        "animatedTag": "[Animated]",
+        "whoAdded": "Who added",
+        "missingEmoji": "You forgot to send the emoji."
+      },
+      "category": {
+        "commandDescription": "Shows a category's ID, creation date and how many channels are part of it.",
+        "commandUsage": "<categoryName>",
+        "channelsInside": "Channels inside of it",
+        "missingCategoryMention": "That category doesn't exist or I couldn't find it."
+      }
+    }
+  },
   "emojilist": {
     "commandDescription": "Lists all emoji within this server",
     "loading": "Loading emojis...",
-    "guildHasNoEmoji": "This server has no emoji or all emojis are not available for me."
+    "guildHasNoEmoji": "This server has no available emojis for me."
   },
   "googleplay": {
     "commandDescription": "Searches for an APP on Google Play Store",
@@ -1663,6 +1728,18 @@
     "verified": "Verified account",
     "yes": "Yes",
     "no": "No"
+  },
+  "kannapaper": {
+    "commandDescription": "Generates an image of Kanna (from Miss Kobayashi's Dragon Maid) holding a paper with text",
+    "commandUsage": "<text>",
+    "missingText": "You have to give me some text for the paper!"
+  },
+  "chocolatey": {
+    "commandDescription": "Searches for packages on Chocolatey",
+    "commandUsage": "<package name>",
+    "by": "by {{authors}}",
+    "installs": "{{count}} installs",
+    "license": "License"
   },
   "commandsource": {
     "commandDescription": "Get the source code of a command",
