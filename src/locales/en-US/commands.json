@@ -1734,6 +1734,17 @@
     "yes": "Yes",
     "no": "No"
   },
+  "jetbrainsplugin": {
+    "commandDescription": "Search for JetBrains plugins",
+    "commandUsage": "<name>",
+    "plugins": "JetBrains Plugins",
+    "download": "Download",
+    "license": "License",
+    "documentation": "Documentation",
+    "installs": "{{count}} installs",
+    "by": "by [{{name}}]({{url}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
+  },
   "kannapaper": {
     "commandDescription": "Generates an image of Kanna (from Miss Kobayashi's Dragon Maid) holding a paper with text",
     "commandUsage": "<text>",
