@@ -7,7 +7,7 @@ module.exports = class VSCodeExtensions extends SearchCommand {
   constructor (client) {
     super({
       name: 'vscodeextension',
-      aliases: ['vscodeextensions', 'codeextensions', 'codeext', 'vscmarketplace'],
+      aliases: ['vscodeextensions', 'codeextensions', 'codeext', 'vscmarketplace', 'vscode'],
       requirements: { apis: ['vscodeextensions'] },
       embedColor: Constants.VSCODE_EXTENSIONS_COLOR,
       embedLogoURL: 'https://i.imgur.com/Ihot5Zi.png'
