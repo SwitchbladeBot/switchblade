@@ -29,6 +29,7 @@ module.exports = {
   GOOGLEPLAY_COLOR: '#3bccff',
   CHOCOLATEY_COLOR: '#7eb5e2',
   SNAPCRAFT_COLOR: '82BEA0',
+  JETBRAINS_PLUGIN: '#d44386',
   ECLIPSE_PLUGINS_COLOR: '#42347f',
 
   // Emojis
