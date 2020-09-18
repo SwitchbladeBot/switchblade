@@ -23,7 +23,7 @@ module.exports = class Render extends Command {
     let messageHasNoEmbed = true
 
     if (link.attachments.size >= 1) {
-      render.files = [link.attachments.array()]
+      render.files = link.attachments.array()
     }
 
     if (link.embeds.length >= 1) {
@@ -38,7 +38,9 @@ module.exports = class Render extends Command {
     try {
       if (messageHasNoEmbed) {
         const embed = new SwitchbladeEmbed(author)
-          .setAuthor(author.username, author.displayAvatarURL({ dynamic: true }))
+        if (link.guild.member(author.id)) {
+          embed.setColor(link.guild.member(author.id).displayHexColor)
+        }
 
         if (content) {
           embed.setDescription(content)
