@@ -1649,6 +1649,11 @@
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
   },
+  "render": {
+    "youDontHavePermission": "You're missing the following permission in that channel: {{permission}}",
+    "commandUsage": "<message link>",
+    "commandDescription": "Renders a message from another channel using the message link."
+  },
   "vscodeextension": {
     "commandDescription": "Shows information about VS Code extensions from the Visual Studio Marketplace",
     "commandUsage": "<name>",
@@ -1728,6 +1733,17 @@
     "verified": "Verified account",
     "yes": "Yes",
     "no": "No"
+  },
+  "jetbrainsplugin": {
+    "commandDescription": "Search for JetBrains plugins",
+    "commandUsage": "<name>",
+    "plugins": "JetBrains Plugins",
+    "download": "Download",
+    "license": "License",
+    "documentation": "Documentation",
+    "installs": "{{count}} installs",
+    "by": "by [{{name}}]({{url}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
   },
   "kannapaper": {
     "commandDescription": "Generates an image of Kanna (from Miss Kobayashi's Dragon Maid) holding a paper with text",
