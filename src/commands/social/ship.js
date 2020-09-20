@@ -1,5 +1,5 @@
 const { Command, SwitchbladeEmbed, CanvasTemplates } = require('../../')
-const { Attachment } = require('discord.js')
+const { MessageAttachment } = require('discord.js')
 
 module.exports = class Ship extends Command {
   constructor (client) {
@@ -40,7 +40,7 @@ module.exports = class Ship extends Command {
       return {
         tag: user.tag,
         document: await this.client.controllers.social.retrieveProfile(user.id),
-        profile: user.displayAvatarURL.replace('.gif', '.png')
+        profile: user.displayAvatarURL({ format: 'png' })
       }
     })
 
@@ -48,7 +48,7 @@ module.exports = class Ship extends Command {
 
     const embed = new SwitchbladeEmbed(author)
       .setDescription(message)
-      .attachFile(new Attachment(image, 'ship.png'))
+      .attachFiles(new MessageAttachment(image, 'ship.png'))
       .setImage('attachment://ship.png')
 
     await channel.send(embed)

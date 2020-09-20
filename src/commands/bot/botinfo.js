@@ -11,15 +11,20 @@ module.exports = class BotInfo extends Command {
     }, client)
   }
 
-  run ({ channel, author, t, language }) {
+  async run ({ channel, author, t, language }) {
     const uptime = moment.duration(process.uptime() * 1000).format('d[d] h[h] m[m] s[s]')
+    const shardGuildCounts = await this.client.shard.fetchClientValues('guilds.cache.size')
+    const totalGuildCount = shardGuildCounts.reduce((total, current) => total + current)
+    const shardUserCounts = await this.client.shard.fetchClientValues('users.cache.size')
+    const totalUserCount = shardUserCounts.reduce((total, current) => total + current)
     channel.send(
       new SwitchbladeEmbed(author)
-        .setAuthor(this.client.user.username, this.client.user.displayAvatarURL)
-        .setThumbnail(this.client.user.displayAvatarURL)
+        .setAuthor(this.client.user.username, this.client.user.displayAvatarURL({ format: 'png' }))
+        .setThumbnail(this.client.user.displayAvatarURL({ format: 'png' }))
+        .setFooter(`Shard ${this.client.shard.ids.toString()}`)
         .setDescription([
           t('commands:botinfo.hello', { user: this.client.user }),
-          t('commands:botinfo.statistics', { guilds: MiscUtils.formatNumber(this.client.guilds.size, language), commands: MiscUtils.formatNumber(this.client.commands.length, language), uptime, Discord, nodeVersion: process.version, users: MiscUtils.formatNumber(this.client.users.filter(u => !u.bot).size, language) })
+          t('commands:botinfo.statistics', { guilds: MiscUtils.formatNumber(totalGuildCount, language), commands: MiscUtils.formatNumber(this.client.commands.length, language), uptime, Discord, nodeVersion: process.version, users: MiscUtils.formatNumber(totalUserCount, language) })
         ].join('\n\n'))
         .addField(t('commands:botinfo.links'), [
           t('commands:botinfo.inviteLink', { botBadge: this.getEmoji('botBadge') }),

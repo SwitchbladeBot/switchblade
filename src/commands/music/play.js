@@ -18,27 +18,28 @@ module.exports = class Play extends Command {
     }, client)
   }
 
-  async run ({ t, author, channel, flags, guild, voiceChannel }, identifier) {
+  async run ({ t, author, channel, flags, guild, voiceState }, identifier) {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
 
-    if (!voiceChannel.joinable && !voiceChannel.connection) {
+    if (!voiceState.channel.joinable && guild.me.voice.channelID !== voiceState.channelID) {
       return channel.send(embed.setTitle(t('errors:voiceChannelJoin')))
     }
 
+    identifier = identifier.replace(/<?>?/g, '')
     const playerManager = this.client.playerManager
     try {
       const specificSearch = flags['soundcloud'] || flags['youtube']
-      if (flags['soundcloud']) identifier = `scsearch:${identifier.replace(/<?>?/g, '')}`
-      else if (flags['youtube']) identifier = `ytsearch:${identifier.replace(/<?>?/g, '')}`
+      if (flags['soundcloud']) identifier = `scsearch:${identifier}`
+      else if (flags['youtube']) identifier = `ytsearch:${identifier}`
 
-      let { result, tryAgain } = await playerManager.loadTracks(identifier.replace(/<?>?/g, ''), author)
+      let { result, tryAgain } = await playerManager.loadTracks(identifier, author)
       if (tryAgain && !result && !specificSearch) {
-        result = (await playerManager.loadTracks(`ytsearch:${identifier.replace(/<?>?/g, '')}`, author)).result
+        result = (await playerManager.loadTracks(`ytsearch:${identifier}`, author)).result
       }
 
       if (result) {
-        this.loadSongs({ t, channel, voiceChannel }, result, playerManager).then(() => channel.stopTyping())
+        this.loadSongs({ t, channel, voiceChannel: voiceState.channel }, result, playerManager).then(() => channel.stopTyping())
       } else {
         throw new CommandError(t('music:songNotFound'))
       }

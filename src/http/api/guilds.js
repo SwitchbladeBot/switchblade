@@ -13,7 +13,7 @@ module.exports = class Guilds extends Route {
 
     // Info
     router.get('/:guildId/members', async (req, res) => {
-      const guild = this.client.guilds.get(req.params.guildId)
+      const guild = this.client.guilds.cache.get(req.params.guildId)
       if (guild) {
         const { id, name, icon, members: { size } } = guild
         const userMembers = guild.members.filter(m => !m.user.bot).size

@@ -25,6 +25,11 @@ module.exports = {
   PWNED_COLOR: '#BA4343',
   CHORUS_COLOR: '#2C3E50',
   GOOGLE_COLOR: '#4285F4',
+  VSCODE_EXTENSIONS_COLOR: '#23aaf2',
+  GOOGLEPLAY_COLOR: '#3bccff',
+  CHOCOLATEY_COLOR: '#7eb5e2',
+  SNAPCRAFT_COLOR: '82BEA0',
+  JETBRAINS_PLUGIN: '#d44386',
 
   // Emojis
 
@@ -70,10 +75,13 @@ module.exports = {
   // Misc
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
   QUIERES_HAND_PNG: 'src/assets/png/quieres.png',
+  KANNA_PAPER_TEMPLATE: 'src/assets/png/kanna_paper_template.png',
   PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
-
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
   DEFAULT_BACKGROUND_GRAY_PNG: 'src/assets/png/backgrounds/default_gray.png',
-  TESTING_BACKGROUND_PNG: 'src/assets/png/backgrounds/testing.png'
+  TESTING_BACKGROUND_PNG: 'src/assets/png/backgrounds/testing.png',
+
+  // Text Constants
+  EMPTY_SPACE: String.fromCodePoint(8206)
 }

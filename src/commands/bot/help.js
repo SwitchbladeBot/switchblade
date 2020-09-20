@@ -46,10 +46,11 @@ module.exports = class Help extends Command {
         throw new CommandError(t('commands:help.commandNotFound'))
       }
     } else {
+      const botMention = `<@!${this.client.user.id}>`
       embed
-        .setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL)
+        .setAuthor(t('commands:help.listTitle'), this.client.user.displayAvatarURL({ format: 'png' }))
         .setDescription([
-          `**${t('commands:help.prefix')}:** \`${prefix}\` (${t('commands:help.youCanUse', { botMention: this.client.user })})`,
+          `**${t('commands:help.prefix')}:** \`${prefix}\` (${t('commands:help.youCanUse', { botMention })})`,
           `**${t('commands:help.specificInformation', { helpString: `\`${prefix}${this.name} ${t('commands:help.commandUsage')}\`` })}**`
         ].join('\n'))
 

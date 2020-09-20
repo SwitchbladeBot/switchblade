@@ -38,5 +38,21 @@
   "needSmallerString": "You have to give me a sentence smaller than {{number}} characters.",
   "invalidURL": "You have to give me a valid URL!",
   "invalidImageLink": "You have to give me a valid image link.",
-  "imageParsingError": "An error occurred while parsing the image."
+  "imageParsingError": "An error occurred while parsing the image.",
+  "invalidChannelType": "This command doesn't work in a {{type}} channel.",
+  "invalidChannel": "You forgot to mention a channel or I couldn't find it.",
+  "messageNotFromSameGuild": "Your link is valid but it's not from this guild.",
+  "messageNotFromSameChannel": "Your link is valid but it's not from this channel.",
+  "validLinkButNotInGuild": "Your link is valid but the bot couldn't find that message.",
+  "validLinkButGhostChannel": "Your link is valid but the bot couldn't find that channel in this guild.",
+  "validLinkButGhostMessage": "Your link is valid but I couldn't find that message.",
+  "invalidMessageLink": "The message link you sent is invalid.",
+  "youDontHavePermission": "You're missing the following permission in that channel: {{permission}}",
+  "iDontHavePermission": "I'm missing the following permission in that channel: {{permission}}",
+  "messageContainsNothing": "The message you're trying to move has no content.",
+  "forgotCheckType": "You forgot to give what I'm checking.",
+  "forgotCheckValue": "You forgot to give the value of what I'm checking.",
+  "channelDoesntExist": "That channel doesn't exist or I couldn't find it.",
+  "guildHasNoRole": "This server has no roles to list.",
+  "guildHasNoEmoji": "This server has no emoji or no emojis are available for me."
 }

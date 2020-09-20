@@ -22,15 +22,15 @@ module.exports = class Holidays extends Command {
       parameters: [{
         type: 'string',
         whitelist: supportedCountries,
+        toUpperCase: true,
         missingError: ({ t }) => {
           return new SwitchbladeEmbed()
             .setTitle(t('commands:holidays.invalidCountry'))
             .setDescription(supportedCountries
               .map(countryCode => {
-                const countryName = t(`countries:${countryCode}`)
-                return `${countryCode} - ${countryName}`
+                return `\`${countryCode}\``
               }
-              ).join('\n')
+              ).join(', ')
             )
         }
       }, {

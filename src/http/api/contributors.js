@@ -12,7 +12,7 @@ module.exports = class Contributors extends Route {
     const router = Router()
 
     router.get('/', async (req, res) => {
-      const guild = this.client.guilds.get(process.env.BOT_GUILD)
+      const guild = this.client.guilds.cache.get(process.env.BOT_GUILD)
       const roles = guild.roles
       const members = guild.members
 

@@ -20,7 +20,7 @@ module.exports = class DeleteEmoji extends Command {
     channel.startTyping()
 
     try {
-      await guild.deleteEmoji(emoji)
+      await emoji.delete()
 
       embed.setDescription(t('commands:deleteemoji.deleted', { emoji }))
         .setThumbnail(emoji.url)

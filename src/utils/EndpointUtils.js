@@ -43,7 +43,7 @@ module.exports = class EndpointUtils {
 
   static async _fetchGuilds (client, token) {
     return this._requestDiscord('/users/@me/guilds', token).then(gs => gs.map(g => {
-      g.common = client.guilds.has(g.id)
+      g.common = client.guilds.cache.has(g.id)
       return g
     }))
   }
@@ -78,7 +78,7 @@ module.exports = class EndpointUtils {
     return async (req, res, next) => {
       let id = req.params.guildId
       if (id) {
-        const guild = client.guilds.get(id)
+        const guild = client.guilds.cache.get(id)
         if (!guild) return res.status(400).json({ ok: false })
         if (!req.isAdmin) {
           const member = await guild.fetchMember(req.user.id)

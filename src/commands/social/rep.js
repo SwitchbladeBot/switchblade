@@ -23,7 +23,7 @@ module.exports = class Rep extends Command {
 
     try {
       await this.client.controllers.social.addReputation(author.id, user.id)
-      embed.setDescription(t('commands:rep.reputationPoint', { user }))
+      embed.setDescription(t('commands:rep.reputationPoint', { user: `<@${user.id}>` }))
     } catch (e) {
       embed.setColor(Constants.ERROR_COLOR)
       switch (e.message) {

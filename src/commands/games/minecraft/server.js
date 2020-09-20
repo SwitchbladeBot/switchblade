@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
-const { Attachment } = require('discord.js')
+const { MessageAttachment: Attachment } = require('discord.js')
 const fetch = require('node-fetch')
 
 module.exports = class MinecraftServer extends Command {
@@ -31,7 +31,7 @@ module.exports = class MinecraftServer extends Command {
           .addField(t('commands:minecraft.subcommands.server.address'), `\`${host}:${port}\``, true)
           .addField(t('commands:minecraft.subcommands.server.players'), `${body.players.now}/${body.players.max}`, true)
           .addField(t('commands:minecraft.subcommands.server.version'), body.server.name.replace(/§[0-9a-fk-or]/g, ''), true)
-          .attachFile(new Attachment(this.decodeBase64Image(body.favicon), 'favIcon.png'))
+          .attachFiles(new Attachment(this.decodeBase64Image(body.favicon), 'favIcon.png'))
           .setThumbnail('attachment://favIcon.png')
       ).then(channel.stopTyping())
     } else {

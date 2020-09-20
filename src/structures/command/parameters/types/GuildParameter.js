@@ -4,7 +4,7 @@ const CommandError = require('../../CommandError.js')
 module.exports = class GuildParameter extends Parameter {
   static parse (arg, { t, client }) {
     if (!arg) return
-    const guild = client.guilds.get(arg)
+    const guild = client.guilds.cache.get(arg)
     if (!guild) throw new CommandError(t('errors:invalidGuild'))
     return guild
   }

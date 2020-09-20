@@ -10,6 +10,6 @@ module.exports = class Ping extends Command {
   }
 
   run ({ channel }) {
-    channel.send(`:ping_pong: \`${Math.ceil(this.client.ping)}ms\``)
+    channel.send(`:ping_pong: \`${Math.ceil(this.client.ws.ping)}ms\``)
   }
 }

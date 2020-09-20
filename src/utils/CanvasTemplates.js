@@ -42,7 +42,7 @@ module.exports = class CanvasTemplates {
 
     const { rep, money, personalText, favColor } = userDocument
     const IMAGE_ASSETS = Promise.all([
-      Image.from(user.displayAvatarURL.replace('.gif', '.png')),
+      Image.from(user.displayAvatarURL({ format: 'png' })),
       Image.from(Constants.COINS_SVG, true),
       Image.from(Constants.REPUTATION_SVG, true),
       Image.from(Constants.DEFAULT_BACKGROUND_PNG, true)
@@ -318,7 +318,7 @@ module.exports = class CanvasTemplates {
     const DEFAULT_AVATAR = Image.from('https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png')
 
     const avatarCoords = []
-    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL.replace('.gif', '.png').replace('?size=2048', '')).catch(() => DEFAULT_AVATAR))
+    const avatarPictures = top.map(u => Image.from(u.user.displayAvatarURL({ format: 'png' }).replace('?size=2048', '')).catch(() => DEFAULT_AVATAR))
     const IMAGE_ASSETS = Promise.all([
       Image.from(icon, true),
       Image.from(Constants.MEDAL_SVG, true),
@@ -802,5 +802,77 @@ module.exports = class CanvasTemplates {
     const ctx = canvas.getContext('2d')
     ctx.drawImage(myimg, 0, 0, WIDTH, HEIGHT)
     return canvas.toBuffer('image/jpeg', { quality: 0.08 })
+  }
+
+  static async kannaPaper (text) {
+    const background = await Image.from(Constants.KANNA_PAPER_TEMPLATE)
+    const canvas = createCanvas(background.width, background.height)
+    const ctx = canvas.getContext('2d')
+
+    const cutWord = (word, count) => {
+      return word.match(new RegExp(`.{0,${count}}`, 'g')).filter(w => w)
+    }
+
+    const lineBreak = (text, perLine = 10, maxLines = 6) => {
+      const lines = ['']
+      let currentLineIndex = 0
+      let lastSpaceIndex = 0
+
+      const getPreviusLine = phrase => {
+        if (lines[currentLineIndex]) {
+          return lines[currentLineIndex] + ' ' + phrase
+        }
+        return lines[currentLineIndex] + phrase
+      }
+
+      for (let i = 0; i <= text.length; i++) {
+        if (text[i] === ' ' || i === text.length || text[i] === '\n') {
+          const phrase = text.slice(lastSpaceIndex, i).trim()
+
+          const previusLine = getPreviusLine(phrase)
+
+          if (phrase.length > perLine) {
+            if (lines.length === 1) {
+              lines.splice(0, 1)
+            }
+
+            const words = cutWord(phrase, perLine)
+            const maxWords = words.length - ((lines.length + words.length) - maxLines)
+            const parsedWords = words.slice(0, maxWords)
+
+            lines.push(...parsedWords)
+
+            currentLineIndex += parsedWords.length
+            if (lines.length >= maxLines) {
+              break
+            }
+          } else if (previusLine.length > perLine) {
+            if (lines.length >= maxLines) {
+              break
+            }
+            lines.push(phrase)
+            currentLineIndex++
+          } else {
+            if (!lines[currentLineIndex]) {
+              lines[currentLineIndex] += phrase
+            } else {
+              lines[currentLineIndex] += ' ' + phrase
+            }
+          }
+          lastSpaceIndex = i
+        }
+      }
+
+      return lines
+    }
+
+    ctx.drawImage(background, 0, 0, background.width, background.height)
+    ctx.font = '15px "Arial"'
+    ctx.rotate(12 * Math.PI / 180)
+
+    const lines = lineBreak(text, 13, 6)
+    ctx.fillText(lines.join('\n'), 53, 25)
+
+    return canvas.toBuffer()
   }
 }

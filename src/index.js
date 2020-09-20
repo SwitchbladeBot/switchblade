@@ -25,11 +25,11 @@ module.exports = {
   Route: require('./structures/Route.js'),
   SwitchbladeEmbed: require('./structures/SwitchbladeEmbed.js'),
   Webhook: require('./structures/Webhook.js'),
+  PaginatedEmbed: require('./structures/PaginatedEmbed.js'),
 
   // Utils
   Utils: require('./utils'),
   Color: require('./utils/Color.js'),
-  Reddit: require('./utils/Reddit.js'),
   Constants: require('./utils/Constants.js'),
   DiscordUtils: require('./utils/DiscordUtils.js'),
   FileUtils: require('./utils/FileUtils.js'),

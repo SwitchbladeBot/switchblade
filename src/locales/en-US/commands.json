@@ -4,6 +4,15 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
+  "2048": {
+    "commandDescription": "Play the 2048 game.",
+    "commandUsage": "[board size]"
+  },
+  "waifu": {
+    "commandDescription": "Fetches a random waifu (lewd if the channel is NSFW) and displays it.",
+    "hereIsYour_sfw": "Here's your waifu!",
+    "hereIsYour_nsfw": "Here's your lewd waifu!"
+  },
   "reverse": {
     "commandDescription": "Reverses the text.",
     "commandUsage": "<text>",
@@ -68,6 +77,7 @@
   "github": {
     "commandDescription": "Searches for a user, repository or an organization on GitHub.",
     "commandUsage": "<type> <query>",
+    "serviceName": "GitHub",
     "subcommands": {
       "user": {
         "commandDescription": "Searches for a user on GitHub.",
@@ -106,6 +116,7 @@
   "spotify": {
     "commandDescription": "Searches for a song, playlist, album or an artist on Spotify, or displays information about a user.",
     "commandUsage": "<type> <query>",
+    "serviceName": "Spotify",
     "album": "Album",
     "genres": "Genres",
     "artist": "Artist",
@@ -242,7 +253,7 @@
   },
   "poll": {
     "commandDescription": "Creates a poll.",
-    "commandUsage": "<poll title> [|option 1|option 2|option 3|...]",
+    "commandUsage": "\"<poll title>\" [\"option 1\" \"option 2\" \"option 3\" \"...\"]",
     "noQuestion": "You have to give me something to be voted!",
     "tooManyOptions": "You can't exceed {{maxOptions}} options!"
   },
@@ -329,10 +340,6 @@
     "noUsageProvided": "No usage provided.",
     "commandNotFound": "I couldn't find any command with that name."
   },
-  "e621": {
-    "commandDescription": "Sends a random yiff from e621.",
-    "hereIsYour_yiff": "Here's your yiff!"
-  },
   "pay": {
     "commandDescription": "Pays $t(commons:currency_plural) to a user.",
     "commandUsage": "<@member> <value>",
@@ -358,6 +365,45 @@
     "needMathExpression": "You have to give me a math expression to evaluate!",
     "invalidMathExpression": "Invalid math expression.",
     "result": "Result: `{{result}}`"
+  },
+  "osu": {
+    "commandDescription": "Searches for a profile or a beatmap on osu!",
+    "commandUsage": "<type> <query>",
+    "subcommands": {
+      "player": {
+        "commandDescription": "Searches for a profile on osu!",
+        "commandUsage": "[profile name or id]",
+        "noPlayer": "You have to give me a valid osu! profile name or ID.",
+        "level": "Level **{{number}}**",
+        "joinedAt": "Joined at **{{date}}** ({{timeAgo}})",
+        "globalRanking": "Global Ranking: **#{{rank}}**",
+        "countryRanking": "Country Ranking: **#{{rank}}**",
+        "rankedScore": "Ranked Score: **{{rankedScore}}**",
+        "playTime": "Played for **{{time}}** - **{{pp}}** pp",
+        "totalScore": "Total Score: **{{totalScore}}**",
+        "hitAccuracy": "Hit Accuracy: **{{accuracy}}%**",
+        "playCount": "Play Count: **{{playCount}}**",
+        "totalHits": "Total Hits: **{{totalHits}}** (**{{300}}** {{emoji300}}, **{{100}}** {{emoji100}}, **{{50}}** {{emoji50}})",
+        "topScores": "**{{user}}**'s top scores:",
+        "recentPlays": "**{{user}}**'s most recent plays in the last 24 hours:",
+        "playerNotFound": "Profile not found."
+      },
+      "beatmap": {
+        "commandDescription": "Searches for a beatmap or beatmap set on osu!",
+        "commandUsage": "<beatmap or beatmap set id>",
+        "noBeatmap": "You have to give me a valid beatmap or beatmap set ID.",
+        "starDifficulty": "Star Difficulty: **{{difficulty}}**",
+        "successRate": "Success Rate: **{{rate}}%** ({{successfulPlays}} / {{totalPlays}})",
+        "mappedBy": "Mapped by {{mapper}}",
+        "lastUpdate": "Last update at **{{date}}** ({{timeAgo}})",
+        "approved": "Approved at **{{date}}** ({{timeAgo}})",
+        "tags": "Tags: **{{tags}}**",
+        "download": "[Download beatmap]({{link}})",
+        "downloadNoVideo": "[Download without video]({{link}})",
+        "topScores": "Top scores:",
+        "topScoreSelf": "Your top score ({{date}})"
+      }
+    }
   },
   "stoptyping": {
     "commandDescription": "Forces the bot to stop typing.",
@@ -458,6 +504,7 @@
   },
   "qrcode": {
     "commandDescription": "Generates or reads a QR code.",
+    "title": "QR Codes",
     "subcommands": {
       "generate": {
         "commandDescription": "Generates a QR code.",
@@ -489,6 +536,7 @@
     "noTrackName": "You have to give me a song name.",
     "noTracksFound": "I couldn't find any song with that name.",
     "fans": "Fans",
+    "serviceName": "Deezer",
     "fansCount": "{{fans}} fans",
     "createdAt": "Created at",
     "createdBy": "Created by",
@@ -578,6 +626,7 @@
   },
   "config": {
     "commandDescription": "Changes the current server's configuration.",
+    "title": "Configuration Commands",
     "guildLang": "To change the server language, use `{{command}} language <language code>`",
     "guildPrefix": "To change the server prefix, use `{{command}} prefix <new prefix>`",
     "missingTranslation": "**(A few translations might be missing)**",
@@ -683,12 +732,11 @@
   },
   "fivem": {
     "commandDescription": "Shows information about a FiveM server.",
-    "commandUsage": "<ip>[:port]",
-    "noIP": "You have to give me an IP!",
+    "commandUsage": "<id>",
+    "noIP": "You have to give me a valid address (ex. cfx.re/join/o6ppl7)!",
     "serverUnreachableTitle": "I couldn't reach this server.",
-    "serverUnreachableDescription": "Check the IP and port, or try again later.",
+    "serverUnreachableDescription": "Check the address, or try again later.",
     "address": "Address",
-    "version": "Version",
     "players": "Players",
     "map": "Map",
     "gameMode": "Game Mode",
@@ -699,6 +747,7 @@
   },
   "emoji": {
     "commandDescription": "Enlarges an emoji.",
+    "commandUsage": "<emoji to enlarge>",
     "hereIsYourEmoji": "Here's your emoji!"
   },
   "clapify": {
@@ -710,7 +759,8 @@
   "numberfacts": {
     "commandDescription": "Shows a fact about a number.",
     "commandUsage": "<number>",
-    "validNumber": "You have to give me a number!"
+    "validNumber": "You have to give me a number!",
+    "anErrorOcurred": "An error has ocurred while fetching a fact for that number. Please try again later."
   },
   "blacklist": {
     "commandDescription": "Adds a user to the blacklist.",
@@ -766,6 +816,7 @@
   "leaderboard": {
     "commandDescription": "Shows a leaderboard.",
     "commandUsage": "<type>",
+    "title": "Switchblade Leaderboards",
     "subcommands": {
       "money": {
         "commandDescription": "Shows a list of the richest users.",
@@ -781,7 +832,12 @@
     "commandDescription": "Shows the \"boliña de gorfe\" meme from Woody Woodpecker."
   },
   "eval": {
-    "commandDescription": "Evals a JS string."
+    "commandDescription": "Evaluates a JS expression.",
+    "commandUsage": "<expression to evaluate>"
+  },
+  "clientvalues": {
+    "commandDescription": "Fetches values from all shards.",
+    "commandUsage": "<value path>"
   },
   "oddlysatisfying": {
     "commandDescription": "Shows a random image from /r/oddlysatisfying."
@@ -889,10 +945,27 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
+  "freefire":  {
+    "commandDescription": "Shows information related to Free Fire",
+    "commandUsage": "<type> <query>",
+    "gameName": "Free Fire",
+    "subcommands": {
+      "weapon": {
+        "commandDescription": "Shows information about a Free Fire weapon.",
+        "commandUsage": "<name>",
+        "ammunition": "Ammunition",
+        "missingWeapon": "You have to give me an weapon.",
+        "unknownWeapon": "The weapon {{weapon}} doesn't exist.",
+        "attachments": "Attachments",
+        "attributes": "Attributes"
+      }
+    }
+  },
   "minecraft": {
     "commandDescription": "Shows information related to Minecraft.",
     "commandUsage": "<type> <query>",
     "namemcprofile": "NameMC profile (click here)",
+    "gameName": "Minecraft",
     "subcommands": {
       "server": {
         "commandDescription": "Shows information about a Minecraft server such as number of players and MOTD.",
@@ -1079,6 +1152,7 @@
         "commandUsage": "<skin name>",
         "noSkin": "You have to give me a skin name to search for.",
         "invalidSkin": "Invalid skin.",
+        "anErrorOcurred": "An error has ocurred while fetching information about this skin.",
         "description": "Want to see the skin spotlight video for this skin? Click [here]({{videoUrl}})!"
       }
     }
@@ -1095,6 +1169,7 @@
   "lastfm": {
     "commandDescription": "Searches for a song, album or an artist on Last.fm, or displays information about a user.",
     "commandUsage": "<type> <query>",
+    "serviceName": "Last.fm",
     "topArtists": "Top artists (1 month)",
     "playcount": "Playcount",
     "playcountCount": "Played {{times}} times",
@@ -1180,6 +1255,24 @@
     "yes": "Yes",
     "no": "No"
   },
+  "igdb": {
+    "commandDescription": "Searches for a game on the IGDB",
+    "commandUsage": "<game name>",
+    "noGame": "You have to give me a game to search for!",
+    "aka": "(also known as {{aliases}})",
+    "ageRating": "Age Rating(s)",
+    "genres": "Genres",
+    "platforms": "Platforms",
+    "popularity": "Popularity",
+    "ratingTitle": "Rating",
+    "ratingDescription": "{{value}} out of {{total}} votes",
+    "releaseDates": "Release Dates",
+    "dlcs": "DLCs",
+    "expansions": "Expansions",
+    "companies": "Involved Companies",
+    "similarGames": "Similar Games",
+    "err": "An error has occurred while trying to get game data: {{err}}"
+  },
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification.",
     "commandUsage": "<text>",
@@ -1187,9 +1280,6 @@
   },
   "uigradient": {
     "commandDescription": "Gets a random gradient from [https://uigradients.com](https://uigradients.com)."
-  },
-  "portugalgonewild": {
-    "commandDescription": "Shows a random image from r/PortugalGoneWild."
   },
   "showerthoughts": {
     "commandDescription": "Shows a random thought from r/Showerthoughts."
@@ -1466,6 +1556,10 @@
     "commandDescription": "A cat for every HTTP status!",
     "commandUsage": "[http code]"
   },
+  "httpdog": {
+    "commandDescription": "A dog for every HTTP status!",
+    "commandUsage": "[http code]"
+  },
   "createrole": {
     "commandDescription": "Create a role.",
     "commandUsage": "[color] <name>",
@@ -1479,6 +1573,23 @@
     "commandUsage": "[width] [height]",
     "hereIsYourGoat": "Here is your goat!",
     "hereIsYourGoat_resolution": "Here is your **{{width}}x{{height}}** goat!"
+  },
+  "rubygems": {
+    "commandDescription": "Searches for a Ruby Gem on RubyGems.org",
+    "commandUsage": "<gem name>",
+    "noNameProvided": "You have to give me a gem name!",
+    "downloadCount": "{{count}} downloads",
+    "install": "Install",
+    "uris": {
+      "gem": "Download",
+      "homepage": "Homepage",
+      "wiki": "Wiki",
+      "documentation": "Documentation",
+      "mailing_list": "Mailing List",
+      "source_code": "Source Code",
+      "bug_tracker": "Bug Tracker",
+      "changelog": "Changelog"
+    }
   },
   "legendsofruneterra": {
     "commandDescription": "Utility commands for Legends of Runeterra",
@@ -1501,5 +1612,177 @@
     "commandDescription": "Searches for some image on google",
     "commandUsage": "<query>",
     "noQuery": "Please insert something to search."
+  },
+  "move": {
+    "commandDescription": "Moves a message from one channel to another.",
+    "commandUsage": "<message link> <channel>",
+    "missingMessageLink": "You need to give me a message link.",
+    "missingChannelMention": "You need to give me a channel.",
+    "cantSendInChannel": "I can't send messages in the channel you want me to move the message to.",
+    "channelsHaveDifferentType": "You're trying to move a message from a nsfw channel to a not nsfw channel.",
+    "cantDeleteMessage": "I can't delete the original message because I don't have permission.",
+    "userCantSend": "You can't send messages in that channel.",
+    "messageMoved": "Message sent by {{authorName}} and moved from {{movedFrom}} by {{movedBy}}.",
+    "cantSendEmbed": "I can't send embed links on the channel where I'm supposed to move the message to.",
+    "couldntSendMessage": "Something happened and I couldn't send the message."
+  },
+  "e621": {
+    "commandDescription": "Searches for a post on e621.net (may be explicit if the channel is NSFW)",
+    "commandUsage": "<tags>",
+    "id": "ID",
+    "artist": "Artist(s)",
+    "desc": "Description",
+    "notFound": "Post not found",
+    "post": "Post URL",
+    "noQuery": "You have to give me something to search!"
+  },
+  "searchplate": {
+    "commandDescription": "Searches for a brazilian vehicle plate registration on SINESP (Public information)",
+    "commandUsage": "<plate>",
+    "model": "Model",
+    "year": "Year",
+    "color": "Color",
+    "city": "City",
+    "status": "Status",
+    "chassis": "Chassis",
+    "notstolen": "Not Stolen",
+    "stolen": "Stolen! Please call 911, don't approach yourself.",
+    "plate": "Plate",
+    "image": "Car image (may not be the accurate image)",
+    "notFound": "Plate not found."
+  },
+  "cep": {
+    "commandDescription": "Searches for a CEP using ViaCEP API",
+    "commandUsage": "<cep>",
+    "cep": "CEP",
+    "fullAddress": "Full address",
+    "neighborhood": "Neighborhood",
+    "city": "City",
+    "ibge": "IBGE Number"
+  },
+  "tcdne": {
+    "commandDescription": "Sends an AI generated cat",
+    "cat": "Here's your AI generated CAT™!"
+  },
+  "tpdne": {
+    "commandDescription": "Sends an AI generated person (I know, looks kinda real)",
+    "person": "Here's your AI generated person!"
+  },
+  "shards": {
+    "commandDescription": "Shows information about the bot's shards"
+  },
+  "correios": {
+    "commandDescription": "Shows information about a tracking code from ECT (Brazilian Post and Telegraph Corporation)",
+    "commandUsage": "<tracking code>",
+    "lastUpdated": "Last Updated at",
+    "notFound": "Code not found"
+  },
+  "render": {
+    "youDontHavePermission": "You're missing the following permission in that channel: {{permission}}",
+    "commandUsage": "<message link>",
+    "commandDescription": "Renders a message from another channel using the message link."
+  },
+  "vscodeextension": {
+    "commandDescription": "Shows information about VS Code extensions from the Visual Studio Marketplace",
+    "commandUsage": "<name>",
+    "marketplace": "Visual Studio Marketplace",
+    "install": "Install",
+    "license": "License",
+    "changelog": "Changelog",
+    "installs": "{{count}} installs",
+    "by": "by [{{displayName }}](https://marketplace.visualstudio.com/publishers/{{name}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
+  },
+  "info": {
+    "commandDescription": "Shows channels/categories and emojis information.",
+    "channel": "Shows information about a text/news/announcement channel.",
+    "embedAuthor": "Discord Information Commands",
+    "voice": "Shows information about a voice channel.",
+    "emoji": "Shows information about an emoji.",
+    "category": "Shows information about a category.",
+    "subcommands": {
+      "channel": {
+        "commandDescription": "Shows a channel's name, topic, ID, category and how many users can view it.",
+        "commandUsage": "<channel>",
+        "category": "Category",
+        "canViewThisChannel": "{{userCount}} User can view this channel.",
+        "canViewThisChannelPlural": "{{userCount}} Users can view this channel.",
+        "nsfwTag": "[NSFW]"
+      },
+      "voice": {
+        "commandDescription": "Shows information about a voice channel.",
+        "commandUsage": "<channel name>",
+        "missingChannelName": "You need to give me the channel name to get information from.",
+        "bitrate": "Bitrate",
+        "userLimit": "User Limit"
+      },
+      "emoji": {
+        "commandDescription": "Shows information about an emoji, such as its creation date, who added it, and its ID.",
+        "commandUsage": "<emoji>",
+        "animatedTag": "[Animated]",
+        "whoAdded": "Who added",
+        "missingEmoji": "You forgot to send the emoji."
+      },
+      "category": {
+        "commandDescription": "Shows a category's ID, creation date and how many channels are part of it.",
+        "commandUsage": "<categoryName>",
+        "channelsInside": "Channels inside of it",
+        "missingCategoryMention": "That category doesn't exist or I couldn't find it."
+      }
+    }
+  },
+  "emojilist": {
+    "commandDescription": "Lists all emoji within this server",
+    "loading": "Loading emojis...",
+    "guildHasNoEmoji": "This server has no available emojis for me."
+  },
+  "googleplay": {
+    "commandDescription": "Searches for an APP on Google Play Store",
+    "commandUsage": "<application name>",
+    "developer": "Developer",
+    "price": "Price",
+    "genre": "Genre",
+    "rating": "Rating",
+    "installs": "Installs",
+    "released": "Released on"
+  },
+  "rolelist": {
+    "commandDescription": "Lists all the roles in the server.",
+    "roles": "Roles",
+    "ids": "IDs",
+    "loading": "Loading roles..."
+  },
+  "snapcraft": {
+    "commandDescription": "Search on snapcraft store",
+    "commandUsage": "<search query>",
+    "noQueryProvided": "You have to give me a app name.",
+    "version": "Current version",
+    "publisher": "App Publisher",
+    "verified": "Verified account",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "jetbrainsplugin": {
+    "commandDescription": "Search for JetBrains plugins",
+    "commandUsage": "<name>",
+    "plugins": "JetBrains Plugins",
+    "download": "Download",
+    "license": "License",
+    "documentation": "Documentation",
+    "installs": "{{count}} installs",
+    "by": "by [{{name}}]({{url}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
+  },
+  "kannapaper": {
+    "commandDescription": "Generates an image of Kanna (from Miss Kobayashi's Dragon Maid) holding a paper with text",
+    "commandUsage": "<text>",
+    "missingText": "You have to give me some text for the paper!"
+  },
+  "chocolatey": {
+    "commandDescription": "Searches for packages on Chocolatey",
+    "commandUsage": "<package name>",
+    "by": "by {{authors}}",
+    "installs": "{{count}} installs",
+    "license": "License"
   }
 }

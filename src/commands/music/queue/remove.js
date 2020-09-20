@@ -13,7 +13,7 @@ module.exports = class QueueRemove extends Command {
   }
 
   async run ({ t, author, channel, guild }, index) {
-    const guildPlayer = this.client.playerManager.get(guild.id)
+    const guildPlayer = this.client.playerManager.players.get(guild.id)
     if (guildPlayer.nextSong) {
       try {
         const song = guildPlayer.removeFromQueue(Math.round(index) - 1)

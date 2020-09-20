@@ -3,11 +3,12 @@
 
   <img src="https://i.imgur.com/SVyi88i.png"><br>
 
-  [![support][support-badge]][support-invite]
+  [![support][support-image]][support-invite]
+  
   [![crowdin][crowdin-badge]][crowdin-url]
   [![jetbrains][jetbrains-badge]][jetbrains-url]
   [![codeclimate][codeclimate-badge]][codeclimate-url]
-  [![circleci][circleci-badge]][circleci-url]
+  [![ghactions][ghactions-badge]][ghactions-url]
   ![servers-badge]
   ![commands-badge]
   ![languages-badge]
@@ -106,7 +107,7 @@ We usually do that every two months or so, but we might skip a month if we're no
 
 <h2 align="center">Sponsors</h2>
 
-Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!]([sponsors-url])
+Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!][sponsors-url]
 
 <a href="https://opencollective.com/switchblade/sponsor/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/1/avatar.svg?requireActive=false"></a>
@@ -122,7 +123,7 @@ Sponsors are organizations and companies that contribute to our projects with mo
 
 <h2 align="center">Backers</h2>
 
-Backers are the people who contribute to our projects monetarily. They get their image with a link to their website on this page, an awesome badge on their Switchblade profile and a role that grants exclusive access to some channels in our discord server. [Click here and become a backer today!]([backers-url])
+Backers are the people who contribute to our projects monetarily. They get their image with a link to their website on this page, an awesome badge on their Switchblade profile and a role that grants exclusive access to some channels in our discord server. [Click here and become a backer today!][backers-url]
 
 <a href="https://opencollective.com/switchblade/backer/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/backer/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/1/avatar.svg?requireActive=false"></a>
@@ -137,7 +138,7 @@ Backers are the people who contribute to our projects monetarily. They get their
 <a href="https://opencollective.com/switchblade/backer/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/10/avatar.svg?requireActive=false"></a>
 
 [support-invite]: https://support.switchblade.xyz
-[support-badge]: https://img.shields.io/discord/445203868624748555?label=chat%20on%20Discord&logo=discord&logoColor=white
+[support-image]: https://invidget.switchblade.xyz/2FB8wDG
 
 [crowdin-url]: https://translate.switchblade.xyz
 [crowdin-badge]: https://d322cqt584bo4o.cloudfront.net/switchblade/localized.svg
@@ -148,8 +149,8 @@ Backers are the people who contribute to our projects monetarily. They get their
 [codeclimate-url]: https://codeclimate.com/github/SwitchbladeBot/switchblade/maintainability
 [codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/SwitchbladeBot/switchblade.svg
 
-[circleci-url]: https://circleci.com/gh/SwitchbladeBot/switchblade
-[circleci-badge]: https://img.shields.io/circleci/project/github/SwitchbladeBot/switchblade/dev.svg?logo=circleci
+[ghactions-url]: https://github.com/SwitchbladeBot/switchblade/actions?query=workflow%3ACI
+[ghactions-badge]: https://github.com/SwitchbladeBot/switchblade/workflows/CI/badge.svg
 
 [backers-url]: https://opencollective.com/switchblade#backer
 [backers-badge]: https://opencollective.com/switchblade/tiers/backer/badge.svg?label=backers&color=brightgreen

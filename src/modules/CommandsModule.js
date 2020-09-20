@@ -44,7 +44,7 @@ module.exports = class CommandsModule extends Module {
   }
 
   async specialInput (guildId, userId) {
-    const guild = this.client.guilds.get(guildId)
+    const guild = this.client.guilds.cache.get(guildId)
     if (!guild || !userId) return {}
 
     const { commands, categories } = this.fetchCommands()
@@ -303,7 +303,7 @@ module.exports = class CommandsModule extends Module {
   }
 
   fetchAllCandidates (guildId, userId) {
-    const guild = this.client.guilds.get(guildId)
+    const guild = this.client.guilds.cache.get(guildId)
     if (!guild || !userId) return []
     const member = guild.member(userId)
 

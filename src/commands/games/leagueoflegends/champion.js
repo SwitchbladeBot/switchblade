@@ -19,6 +19,11 @@ module.exports = class LeagueOfLegendsChampion extends Command {
       const { hp, hpregen, mp, mpregen, armor, attackdamage, crit, hpperlevel, armorperlevel, hpregenperlevel, mpperlevel, mpregenperlevel, attackdamageperlevel, critperlevel } = stats
       const { Health, HealthRegen, Mana, ManaRegen, Armor, Attack, CriticalStrike, Level } = await this.client.apis.lol.getLocale(language)
       const { embedColor, authorString, authorImage, authorURL } = this.parentCommand
+
+      const subcommandSkinUsage = this.client.commands.find(c => c.name === 'leagueoflegends').subcommands.find(s => s.name === 'skin')
+        ? `\n\n*${t('commands:leagueoflegends.subcommands.champion.skinText', { skinCommandUsage: `${prefix}leagueoflegends skin ${t('commands:leagueoflegends.subcommands.skin.commandUsage')}` })}*`
+        : ''
+
       embed.setColor(embedColor)
         .setAuthor(t(authorString), authorImage, authorURL)
         .setTitle(`**${name}**, ${title}`)
@@ -35,7 +40,7 @@ module.exports = class LeagueOfLegendsChampion extends Command {
           `**${CriticalStrike}:** ${crit} - ${critperlevel}/${Level}`
         ].join('\n'))
         .addField(t('commands:leagueoflegends.subcommands.champion.spells'), spells.map((spell, i) => `**${spell.name}** (${buttons[i]})`).join(', '), true)
-        .addField(t('commands:leagueoflegends.subcommands.champion.skins'), `${skins.filter(s => s.name !== 'default').map(skin => `**${skin.name}**`).join(', ')}\n\n*${t('commands:leagueoflegends.subcommands.champion.skinText', { skinCommandUsage: `${prefix}leagueoflegends skin ${t('commands:leagueoflegends.subcommands.skin.commandUsage')}` })}*`)
+        .addField(t('commands:leagueoflegends.subcommands.champion.skins'), `${skins.filter(s => s.name !== 'default').map(skin => `**${skin.name}**`).join(', ')}${subcommandSkinUsage}`)
       channel.send(embed).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('commands:leagueoflegends.subcommands.champion.invalidChamp'))

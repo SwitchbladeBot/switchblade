@@ -46,7 +46,7 @@ module.exports = class TicTacToe extends Command {
       name: 'tictactoe',
       aliases: ['ttt'],
       category: 'games',
-      requirements: { guildOnly: true, botPermissions: ['MANAGE_MESSAGES'], permissions: ['ADD_REACTIONS'] },
+      requirements: { guildOnly: true, botPermissions: ['ADD_REACTIONS'] },
       parameters: [{
         type: 'member', acceptSelf: false, missingError: 'commands:tictactoe.missingUser'
       }, [{
@@ -62,7 +62,7 @@ module.exports = class TicTacToe extends Command {
       new SwitchbladeEmbed(author)
         .setAuthor(
           t('commands:tictactoe.hasChallenged', { player: member.displayName }),
-          author.displayAvatarURL
+          author.displayAvatarURL({ format: 'png' })
         )
         .setDescription([
           t('commands:tictactoe.clickTheReaction', { CONFIRMATION_EMOJI }),
@@ -78,7 +78,7 @@ module.exports = class TicTacToe extends Command {
           .setColor(Constants.ERROR_COLOR)
           .setTitle(t('commands:tictactoe.timeout'))
       )
-      gameMessage.clearReactions()
+      gameMessage.reactions.removeAll()
       return
     }
 
@@ -92,15 +92,15 @@ module.exports = class TicTacToe extends Command {
       ]
     }
 
-    await gameMessage.clearReactions()
+    await gameMessage.reactions.removeAll()
     let loadComplete = false
     const collector = gameMessage.createReactionCollector(() => true)
     collector.on('collect', async (reaction) => {
       const selectedCoordinate = gridToLinear[selectedBoard.reactionButtons.findIndex(c => c === reaction.emoji.name)]
-      if (loadComplete && selectedBoard.reactionButtons.includes(reaction.emoji.name) && reaction.users.some(u => u.id === gameState.players[gameState.currentPlayer].id) && this.isSpaceEmpty(gameState, selectedCoordinate)) {
+      if (loadComplete && selectedBoard.reactionButtons.includes(reaction.emoji.name) && reaction.users.cache.some(u => u.id === gameState.players[gameState.currentPlayer].id) && this.isSpaceEmpty(gameState, selectedCoordinate)) {
         gameState.board[selectedCoordinate[0]][selectedCoordinate[1]] = gameState.currentPlayer
         gameState.currentPlayer = gameState.currentPlayer === 1 ? 0 : 1
-        reaction.users.forEach(u => { reaction.remove(u) })
+        reaction.users.cache.forEach(u => { reaction.remove(u) })
         if (this.getWinner(gameState) !== undefined) {
           gameMessage.edit(
             new SwitchbladeEmbed()
@@ -108,11 +108,11 @@ module.exports = class TicTacToe extends Command {
               .setDescription(
                 [
                   this.renderBoard(gameState, selectedBoard),
-                  `:crown: **${t('commands:tictactoe.wins', { player: gameState.players[this.getWinner(gameState)] })}**`
+                  `:crown: **${t('commands:tictactoe.wins', { player: gameState.players[this.getWinner(gameState)].toString() })}**`
                 ].join('\n\n')
               )
           )
-          gameMessage.clearReactions()
+          gameMessage.reactions.removeAll()
           collector.stop()
         } else if (this.getEmptySpaceCount(gameState) === 0) {
           gameMessage.edit(
@@ -125,13 +125,13 @@ module.exports = class TicTacToe extends Command {
                 ].join('\n\n')
               )
           )
-          gameMessage.clearReactions()
+          gameMessage.reactions.removeAll()
           collector.stop()
         } else {
           this.updateEmbed(gameState, selectedBoard, gameMessage, t, author)
         }
       } else {
-        reaction.users.forEach(u => {
+        reaction.users.cache.forEach(u => {
           if (u.id !== this.client.user.id) reaction.remove(u)
         })
       }
@@ -161,7 +161,7 @@ module.exports = class TicTacToe extends Command {
 
   updateEmbed (gameState, boardInfo, gameMessage, t, author) {
     return gameMessage.edit(
-      t('commands:tictactoe.itsYourTurn', { player: gameState.players[gameState.currentPlayer] }),
+      t('commands:tictactoe.itsYourTurn', { player: gameState.players[gameState.currentPlayer].toString() }),
       new SwitchbladeEmbed(author)
         .setTitle(t('commands:tictactoe.title'))
         .setDescription(this.renderBoard(gameState, boardInfo))

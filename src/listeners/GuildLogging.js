@@ -14,12 +14,12 @@ module.exports = class GuildLogging extends EventListener {
   onGuildCreate (guild) {
     this.log(`Added to "${guild.name}" (${guild.id})`, { color: 'magenta', tags: ['Guilds'] })
     if (process.env.LOGGING_CHANNEL_ID) {
-      this.channels.get(process.env.LOGGING_CHANNEL_ID).send(
+      this.channels.cache.get(process.env.LOGGING_CHANNEL_ID).send(
         new SwitchbladeEmbed()
           .setColor(Constants.GUILD_ADDED_COLOR)
           .setTitle(`Added to "${guild.name}"`)
           .setDescription(`\`${guild.id}\``)
-          .setFooter(`Gained ${formatter.format(guild.members.size)} members`)
+          .setFooter(`Gained ${formatter.format(guild.members.cache.size)} members`)
       )
     }
   }
@@ -27,7 +27,7 @@ module.exports = class GuildLogging extends EventListener {
   onGuildDelete (guild) {
     this.log(`Removed from "${guild.name}" (${guild.id})`, { color: 'magenta', tags: ['Guilds'] })
     if (process.env.LOGGING_CHANNEL_ID) {
-      this.channels.get(process.env.LOGGING_CHANNEL_ID).send(
+      this.channels.cache.get(process.env.LOGGING_CHANNEL_ID).send(
         new SwitchbladeEmbed()
           .setColor(Constants.GUILD_LOST_COLOR)
           .setTitle(`Removed from "${guild.name}"`)

@@ -18,7 +18,7 @@ module.exports = class RestrictEmojiAdd extends Command {
   async run ({ t, author, channel, guild }, emoji, role) {
     channel.startTyping()
     try {
-      await emoji.addRestrictedRole(role)
+      await emoji.roles.add(role)
       channel.send(
         new SwitchbladeEmbed(author)
           .setTitle(t('commands:restrictemoji.subcommands.add.canUse', { role: role.name, emoji: emoji.name }))

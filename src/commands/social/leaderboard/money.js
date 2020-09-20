@@ -1,5 +1,5 @@
 const { CanvasTemplates, Command, Constants } = require('../../../')
-const { Attachment } = require('discord.js')
+const { MessageAttachment } = require('discord.js')
 
 module.exports = class MoneyLeaderboard extends Command {
   constructor (client) {
@@ -22,6 +22,6 @@ module.exports = class MoneyLeaderboard extends Command {
       valueFunction: (u) => t('commons:currencyWithCount_plural', { count: Math.round(u.money) })
     })
 
-    channel.send(new Attachment(leaderboard, 'leaderboard.jpg')).then(() => channel.stopTyping())
+    channel.send(new MessageAttachment(leaderboard, 'leaderboard.jpg')).then(() => channel.stopTyping())
   }
 }

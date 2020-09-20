@@ -30,7 +30,7 @@ module.exports = class Volume extends Command {
 
   async run ({ t, author, channel, guild }, volume) {
     const embed = new SwitchbladeEmbed(author)
-    const guildPlayer = this.client.playerManager.get(guild.id)
+    const guildPlayer = this.client.playerManager.players.get(guild.id)
 
     if (volume === MAX_VOLUME) embed.setImage('https://i.imgur.com/A6HWTqq.png')
     else if (guildPlayer.bassboosted) guildPlayer.bassboost(false)
