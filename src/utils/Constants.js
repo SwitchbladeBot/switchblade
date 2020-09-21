@@ -30,6 +30,7 @@ module.exports = {
   CHOCOLATEY_COLOR: '#7eb5e2',
   SNAPCRAFT_COLOR: '82BEA0',
   JETBRAINS_PLUGIN: '#d44386',
+  MDN_COLOR: '#88d1f1',
 
   // Emojis
 
