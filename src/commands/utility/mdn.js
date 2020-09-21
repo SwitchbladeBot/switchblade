@@ -7,7 +7,7 @@ module.exports = class MDN extends SearchCommand {
   constructor (client) {
     super({
       name: 'mdn',
-      aliases: ['mdn', 'mdndoc', 'mdndocumentation', 'mozilladevelopernetwork'],
+      aliases: ['mdndoc', 'mdndocumentation', 'mozilladevelopernetwork'],
       requirements: { apis: ['mdn'] },
       embedColor: Constants.MDN_COLOR,
       embedLogoURL: 'https://i.imgur.com/6IzokAO.jpeg'
