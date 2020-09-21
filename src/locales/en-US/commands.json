@@ -1756,5 +1756,12 @@
     "by": "by {{authors}}",
     "installs": "{{count}} installs",
     "license": "License"
+  },
+  "mdn": {
+    "commandDescription": "Seaches for JavaScript documentation on the Mozilla Developer Network",
+    "commandUsage": "<query>",
+    "syntax": "Syntax",
+    "returns": "Returns",
+    "mdn": "Mozilla Developer Network"
   }
 }
