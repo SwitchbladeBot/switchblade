@@ -21,8 +21,12 @@ module.exports = class CommandSource extends Command {
   }
 
   async run ({ channel, author, language, t }, command) {
+    channel.startTyping()
     const branchOrHash = await GitUtils.getHashOrBranch()
-    if (branchOrHash === null) throw new CommandError(t('commands:commandsource.noRepositoryOrHEAD'))
+    if (branchOrHash === null) {
+      await channel.stopTyping(true)
+      throw new CommandError(t('commands:commandsource.noRepositoryOrHEAD'))
+    }
 
     moment.locale(language)
 
@@ -41,6 +45,6 @@ module.exports = class CommandSource extends Command {
           `[\`${branchOrHash || 'master'}\`](${REPOSITORY_URL}/tree/${branchOrHash || 'master'})`
         ]
       ])
-    )
+    ).then(() => channel.stopTyping(true))
   }
 }
