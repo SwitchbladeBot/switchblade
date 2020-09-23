@@ -1,5 +1,5 @@
 const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
-const { cleanContent } = require('../../utils/DiscordUtils')
+const { Util } = require('discord.js')
 
 module.exports = class searchPlate extends Command {
   constructor (client) {
@@ -18,7 +18,7 @@ module.exports = class searchPlate extends Command {
     }, client)
   }
 
-  async run ({ t, author, channel }, plt) {
+  async run ({ t, author, channel, message }, plt) {
     channel.startTyping()
     const plate = await this.client.apis.sinesp.searchPlate(plt)
     try {
@@ -26,7 +26,7 @@ module.exports = class searchPlate extends Command {
       const carpic = await this.client.apis.gsearch.searchImage(`${plate.modelo} ${plate.anoModelo} a venda&imgSize=medium`)
       channel.send(
         new SwitchbladeEmbed()
-          .setDescription(`**${t('commands:searchplate.plate')}**: ${plate.placa}\n**${t('commands:searchplate.model')}**: ${plate.marca} ${plate.modelo}\n**${t('commands:searchplate.year')}**: ${plate.anoModelo}\n**${t('commands:searchplate.color')}**: ${plate.cor}\n**${t('commands:searchplate.city')}**: ${plate.municipio} - ${plate.uf}\n**${t('commands:searchplate.status')}**: ${(plate.situacao !== 'Roubo/Furto') ? t('commands:searchplate.notstolen') : `**${t('commands:searchplate.stolen')}**`}\n**${t('commands:searchplate.chassis')}**: ${cleanContent(plate.chassi)}\n\n**${t('commands:searchplate.image')}**:`)
+          .setDescription(`**${t('commands:searchplate.plate')}**: ${plate.placa}\n**${t('commands:searchplate.model')}**: ${plate.marca} ${plate.modelo}\n**${t('commands:searchplate.year')}**: ${plate.anoModelo}\n**${t('commands:searchplate.color')}**: ${plate.cor}\n**${t('commands:searchplate.city')}**: ${plate.municipio} - ${plate.uf}\n**${t('commands:searchplate.status')}**: ${(plate.situacao !== 'Roubo/Furto') ? t('commands:searchplate.notstolen') : `**${t('commands:searchplate.stolen')}**`}\n**${t('commands:searchplate.chassis')}**: ${Util.cleanContent(plate.chassi, message)}\n\n**${t('commands:searchplate.image')}**:`)
           .setImage(carpic.items[0].link || 'https://i.imgur.com/awMCwj3.jpg')
           .setColor((plate.situacao !== 'Roubo/Furto') ? Constants.GUILD_ADDED_COLOR : Constants.GUILD_LOST_COLOR)
       )
