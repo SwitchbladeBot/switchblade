@@ -1,5 +1,6 @@
 const Parameter = require('./Parameter.js')
 const CommandError = require('../../CommandError.js')
+const { ensurePermissions } = require('../../../../utils/DiscordUtils')
 
 const MESSAGE_LINK = /https?:\/\/(?:canary\.)*discord(?:app)*.com\/channels\/([0-9]{16,18})\/([0-9]{16,18})\/([0-9]{16,18})/
 function returnProperties (modifiers, regexResult) {
@@ -23,11 +24,13 @@ module.exports = class MessageLinkParameter extends Parameter {
       sameChannelOnly: !!options.sameChannelOnly,
       returnModifier: options.returnModifier ? options.returnModifier : ['link', 'guild', 'channel', 'message'],
       forceExists: !!options.forceExists,
-      returnRegexResult: !!options.returnRegexResult
+      returnRegexResult: !!options.returnRegexResult,
+      linkChannelUserPermission: options.linkChannelUserPermission,
+      linkChannelBotPermission: options.linkChannelBotPermission
     }
   }
 
-  static async parse (arg, { t, client, guild, channel }) {
+  static async parse (arg, { t, client, guild, author, channel }) {
     const regexResult = MESSAGE_LINK.exec(arg)
     if (regexResult) {
       const [, guildId, channelId, messageId] = regexResult
@@ -43,18 +46,24 @@ module.exports = class MessageLinkParameter extends Parameter {
         const channel = guild.channels.cache.get(channelId)
         if (!channel) throw new CommandError(t('errors:validLinkButGhostChannel'))
 
-        try {
-          const recievedMessage = await channel.messages.fetch(messageId)
-          if (!recievedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
+        const recievedMessage = await channel.messages.fetch(messageId).catch(() => null)
+        if (!recievedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
 
-          if (this.returnRegexResult) {
-            return regexResult
-          }
+        if (this.linkChannelBotPermission) {
+          const result = ensurePermissions(client.user.id, recievedMessage.channel, this.linkChannelBotPermission, t, 'bot')
 
-          return recievedMessage
-        } catch (e) {
-          throw new CommandError(t('errors:validLinkButGhostMessage'))
+          if (result) throw new CommandError(result)
         }
+
+        if (this.linkChannelUserPermission) {
+          const result = ensurePermissions(author.id, recievedMessage.channel, this.linkChannelUserPermission, t, 'user')
+
+          if (result) throw new CommandError(result)
+        }
+
+        if (this.returnRegexResult) return regexResult
+
+        return recievedMessage
       }
       return returnProperties(this.returnModifier, regexResult)
     }
