@@ -38,7 +38,7 @@ module.exports = class Render extends Command {
     try {
       if (messageHasNoEmbed) {
         const embed = new SwitchbladeEmbed(author)
-        embed.setAuthor(link.author.username, link.author.displayAvatarURL({ dynamic: true }))
+          .setAuthor(link.author.username, link.author.displayAvatarURL({ dynamic: true }))
         if (link.guild.member(author.id)) {
           embed.setColor(link.guild.member(author.id).displayHexColor)
         }
