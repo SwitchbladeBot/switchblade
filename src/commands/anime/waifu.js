@@ -17,7 +17,7 @@ module.exports = class Waifu extends Command {
     // Send a lewd waifu if the channel is NSFW
     const endpoint = channel.nsfw ? 'nsfw' : 'sfw'
 
-    const { url } = await fetch(waifuAPI + endpoint).then(res => res.json())
+    const { url } = await fetch(waifuAPI + endpoint + 'waifu').then(res => res.json())
 
     embed.setImage(url)
       .setDescription(t('commands:waifu.hereIsYour', { context: endpoint }))
