@@ -36,12 +36,14 @@ module.exports = class MessageLinkParameter extends Parameter {
         const receivedMessage = await channel.messages.fetch(messageId).catch(() => null)
         if (!receivedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
 
-        if (this.linkChannelBotPermission && ensurePermissions(client.user.id, receivedMessage.channel, this.linkChannelBotPermission, t, 'bot')) {
-          throw new CommandError(result)
+        if (this.linkChannelBotPermission) {
+          const result = ensurePermissions(client.user.id, receivedMessage.channel, this.linkChannelBotPermission, t, 'bot')
+          if (result) throw new CommandError(result)
         }
 
-        if (this.linkChannelUserPermission && ensurePermissions(author.id, receivedMessage.channel, this.linkChannelUserPermission, t, 'user')) {
-          throw new CommandError(result)
+        if (this.linkChannelUserPermission) {
+          const result = ensurePermissions(author.id, receivedMessage.channel, this.linkChannelUserPermission, t, 'user')
+          if (result) throw new CommandError(result)
         }
 
         if (this.returnRegexResult) return regexResult
