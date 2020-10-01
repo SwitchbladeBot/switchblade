@@ -1774,19 +1774,11 @@
     "installs": "{{count}} installs",
     "license": "License"
   },
-  "auxilioemergencial": {
-    "commandDescription": "Searches for a CPF or NIS on \"Portal da Transparência\" for the Emergencial Assistance.",
-    "commandUsage": "<cpf or nis>",
-    "name": "Name",
-    "cpf": "CPF",
-    "nis": "NIS",
-    "amount": "Amount",
-    "city": "City"
-  },
   "giverole": {
     "commandDescription": "Gives a role to a member",
     "commandUsage": "<member> <role>",
     "roleAdded": "Role gived!",
-    "error": "Error! I was not able to give this role."
+    "error": "Error! I was not able to give this role.",
+    "higherError": "Error! I was not able to give this role because the role is higher than you."
   }
 }
