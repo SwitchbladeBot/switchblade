@@ -1767,6 +1767,15 @@
     "installs": "{{count}} installs",
     "license": "License"
   },
+  "auxilioemergencial": {
+    "commandDescription": "Searches for a CPF or NIS on \"Portal da Transparência\" for the Emergencial Assistance.",
+    "commandUsage": "<cpf or nis>",
+    "name": "Name",
+    "cpf": "CPF",
+    "nis": "NIS",
+    "amount": "Amount",
+    "city": "City"
+  },
   "giverole": {
     "commandDescription": "Gives a role to a member",
     "commandUsage": "<member> <role>",
