@@ -1,6 +1,6 @@
 const Parameter = require('./Parameter.js')
 const CommandError = require('../../CommandError.js')
-const { Util } = require('discord.js')
+const { cleanContent } = require('discord.js').Util
 
 module.exports = class StringParameter extends Parameter {
   static parseOptions (options = {}) {
@@ -18,7 +18,7 @@ module.exports = class StringParameter extends Parameter {
     arg = arg ? (typeof arg === 'string' ? arg : String(arg)) : undefined
     if (!arg) return
 
-    if (this.clean) arg = Util.cleanContent(arg, message)
+    if (this.clean) arg = cleanContent(arg, message)
 
     if (this.maxLength > 0 && arg.length > this.maxLength) {
       if (!this.truncate) throw new CommandError(t('errors:needSmallerString', { number: this.maxLength }))
