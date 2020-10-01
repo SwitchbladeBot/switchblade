@@ -2,7 +2,7 @@ const Parameter = require('./Parameter.js')
 const CommandError = require('../../CommandError.js')
 const { ensurePermissions } = require('../../../../utils/DiscordUtils')
 
-const MESSAGE_LINK = /https?:\/\/(?:canary\.)*discord(?:app)*.com\/channels\/(?<guild>[0-9]{16,18})\/(?<channel>[0-9]{16,18})\/(?<message>[0-9]{16,18})/
+const MESSAGE_LINK = /https?:\/\/(?:(?:canary|ptb|development)\.)*discord(?:app)*.com\/channels\/(?<guild>[0-9]{16,18})\/(?<channel>[0-9]{16,18})\/(?<message>[0-9]{16,18})/
 
 module.exports = class MessageLinkParameter extends Parameter {
   static parseOptions (options = {}) {
