@@ -1,4 +1,4 @@
-const { Command, Constants, SwitchbladeEmbed } = require('../../')
+const { Command, Constants, SwitchbladeEmbed, CommandError } = require('../../')
 
 module.exports = class GiveRole extends Command {
   constructor (client) {
@@ -18,7 +18,6 @@ module.exports = class GiveRole extends Command {
 
   async run ({ channel, guild, author, t }, member, role) {
     const embed = new SwitchbladeEmbed(author)
-    console.log(role.position + '\n' + member.roles.highest.position)
     if (member.roles.highest.position < role.position) {
       await member.roles.add(role).then(() => {
         embed
