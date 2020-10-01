@@ -8,7 +8,7 @@ module.exports = class GiveRole extends Command {
       category: 'moderation',
       requirements: { guildOnly: true, botPermissions: ['MANAGE_ROLES'], permissions: ['MANAGE_ROLES'] },
       parameters: [{
-        type: 'member', acceptBot: true, missingError: 'commands:giverole.missingUser', acceptSelf: true
+        type: 'member', acceptBot: true, missingError: 'errors:invalidUser', acceptSelf: true
       },
       {
         type: 'role', full: true, missingError: 'errors:invalidRole'
