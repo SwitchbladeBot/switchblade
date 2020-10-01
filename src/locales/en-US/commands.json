@@ -945,7 +945,7 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
-  "freefire":  {
+  "freefire": {
     "commandDescription": "Shows information related to Free Fire",
     "commandUsage": "<type> <query>",
     "gameName": "Free Fire",
@@ -1775,5 +1775,22 @@
     "nis": "NIS",
     "amount": "Amount",
     "city": "City"
+  },
+  "bmi": {
+    "commandDescription": "Calculates your BMI",
+    "commandUsage": "<weigth in kilograms> <height in meters>",
+    "missingWeight": "You have to specify a valid weight in kilograms.",
+    "missingHeight": "You have to specify a valid weight in kilograms.",
+    "title": "Your BMI is {{value}}",
+    "description": "That means you are {{category}}",
+    "footer": "More information: https://en.wikipedia.org/wiki/Body_mass_index",
+    "categoryVerySeverelyUnderweight": "Very severely underweight",
+    "categorySeverelyUnderweight": "Severely Underweight",
+    "categoryUnderweight": "Underweight",
+    "categoryNormal": "Normal (healthy weight)",
+    "categoryOverweight": "Overweight",
+    "categoryObese1": "Obese Class I (Moderately obese)",
+    "categoryObese2": "Obese Class II (Severely obese)",
+    "categoryObese3": "Obese Class III (Very severely obese)"
   }
 }
