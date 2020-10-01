@@ -10,9 +10,9 @@ module.exports = class GiveRole extends Command {
       parameters: [{
         type: 'member', acceptBot: true, missingError: 'commands:giverole.missingUser', acceptSelf: true
       },
-        {
-          type: 'role', full: true, missingError: 'errors:invalidRole'
-        }]
+      {
+        type: 'role', full: true, missingError: 'errors:invalidRole'
+      }]
     }, client)
   }
 
