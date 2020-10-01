@@ -11,17 +11,19 @@ module.exports = class Wikipedia extends SearchCommand {
     }, client)
   }
 
-  async search (_, query) {
-    const res = await wiki().search(query)
-    return res.results
+  async search ({ language }, query) {
+    const lang = language.split('-')[0]
+    const res = await wiki({ apiUrl: `https://${lang}.wikipedia.org/w/api.php` }).search(query)
+    return res.results.map((i) => ({ name: i, url: `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(i)}` }))
   }
 
   searchResultFormatter (i) {
-    return `[${i}](https://en.wikipedia.org/wiki/${encodeURIComponent(i)})`
+    return `[${i.name}](${i.url})`
   }
 
-  async handleResult ({ t, author, channel, language }, name) {
-    const info = await wiki().page(name)
+  async handleResult ({ t, author, channel, language }, { name, url }) {
+    const lang = language.split('-')[0]
+    const info = await wiki({ apiUrl: `https://${lang}.wikipedia.org/w/api.php` }).page(name)
     const [thumbnail, description] = await Promise.all([
       info.mainImage(),
       info.summary()
@@ -29,8 +31,8 @@ module.exports = class Wikipedia extends SearchCommand {
 
     channel.send(
       new SwitchbladeEmbed(author)
-        .setDescription(description.split('\n').slice(2).toString().substring(0, 1020) + '...')
-        .setAuthor('Wikipedia', this.embedLogoURL, 'https://en.wikipedia.org')
+        .setDescription(description.split('\n').slice(2).toString().substring(0, 2000) + '...')
+        .setAuthor('Wikipedia', this.embedLogoURL, `https://${lang}.wikipedia.org`)
         .setColor(this.embedColor)
         .setTitle(info.raw.title)
         .setURL(info.raw.fullurl)
