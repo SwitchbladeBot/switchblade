@@ -29,7 +29,7 @@ module.exports = class GiveRole extends Command {
       embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:giverole.higherError'))
+      channel.send(embed)
     }
-    channel.send(embed)
   }
 }
