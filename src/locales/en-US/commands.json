@@ -998,9 +998,9 @@
       "modpack": {
         "commandDescription": "Shows a Minecraft modpack from CurseForge (Twitch).",
         "commandUsage": "<modpack name>",
-        "downloadCount": "Download Count",
-        "releasedAt": "Released At",
-        "directDownload": "Direct Download"
+        "downloadCount": "Downloads",
+        "releasedAt": "Released at",
+        "directDownload": "Direct download"
       }
     }
   },
