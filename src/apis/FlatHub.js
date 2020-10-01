@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const fetch = require('node-fetch')
+const axios = require('axios')
 
 const API_URL = 'https://flathub.org/api/v1/apps'
 
@@ -11,14 +11,17 @@ module.exports = class FlatHub extends APIWrapper {
   }
 
   async list () {
-    return fetch(API_URL).then(r => r.json())
+    const res = await axios({ baseURL: API_URL });
+    return res.data
   }
 
   async getApp (appId) {
-    return fetch(`${API_URL}/${appId}`).then(r => r.json())
+    const res = await axios({ baseURL: API_URL, url: `/${appId}` })
+    return res.data
   }
 
   async search (query) {
-    return fetch(`${API_URL}/search/${query}`).then(r => r.json())
+    const res = await axios({ baseURL: API_URL, url: `/search/${query}` })
+    return res.data
   }
 }
