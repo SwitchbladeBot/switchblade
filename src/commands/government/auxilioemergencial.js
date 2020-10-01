@@ -26,7 +26,7 @@ module.exports = class AuxilioEmergencial extends Command {
         new SwitchbladeEmbed(author)
           .setAuthor('Portal da Transparência', 'https://logodownload.org/wp-content/uploads/2017/03/brasao-do-brasil-republica-1.png', 'http://portaltransparencia.gov.br/')
           .setColor(Constants.PORTALTRANSPARENCIA_COLOR)
-          .setDescription(`**${t('commands:auxilioemergencial.name')}**: ${auxilio[0].beneficiario.nome}\n**${t('commands:auxilioemergencial.cpf')}**:` + auxilio[0].beneficiario.cpfFormatado+ `\n**${t('commands:auxilioemergencial.nis')}**: ${auxilio[0].beneficiario.nis}\n**${t('commands:auxilioemergencial.amount')}**: R$ ${auxilio[0].valor}.00\n**${t('commands:auxilioemergencial.city')}**: ${auxilio[0].municipio.nomeIBGE} - ${auxilio[0].municipio.uf.sigla}`)
+          .setDescription(`**${t('commands:auxilioemergencial.name')}**: ${auxilio[0].beneficiario.nome}\n**${t('commands:auxilioemergencial.cpf')}**:` + auxilio[0].beneficiario.cpfFormatado + `\n**${t('commands:auxilioemergencial.nis')}**: ${auxilio[0].beneficiario.nis}\n**${t('commands:auxilioemergencial.amount')}**: R$ ${auxilio[0].valor}.00\n**${t('commands:auxilioemergencial.city')}**: ${auxilio[0].municipio.nomeIBGE} - ${auxilio[0].municipio.uf.sigla}`)
       )
     } catch (e) {
       channel.stopTyping(true)
