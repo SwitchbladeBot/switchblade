@@ -12,9 +12,12 @@ module.exports = class MerriamWebster extends SearchCommand {
     }, client)
   }
 
-  async search (_, query) {
+  async search ({ channel }, query) {
     const res = await this.client.apis.merriamwebster.search(query)
-    return res.data.filter((d) => d.shortdef.length)
+    return res.data.filter((d) => {
+      if (!d.shortdef.length) return false
+      return !(d.meta.offensive && !channel.nsfw)
+    })
   }
 
   searchResultFormatter (i) {
