@@ -8,7 +8,7 @@ module.exports = class MinecraftModpack extends SearchCommand {
       aliases: ['curseforge', 'm', 'twitch'],
       parent: 'minecraft',
       embedColor: Constants.CURSEFORGE_COLOR,
-      embedLogoURL: 'https://minecraft-hosting.com/wp-content/uploads/2019/01/curseforge.png'
+      embedLogoURL: 'https://i.imgur.com/MwL5MFw.png'
     }, client)
   }
 
@@ -25,7 +25,7 @@ module.exports = class MinecraftModpack extends SearchCommand {
     channel.send(
       new SwitchbladeEmbed(author)
         .setThumbnail(attachments[0].url)
-        .setAuthor(name, 'https://minecraft-hosting.com/wp-content/uploads/2019/01/curseforge.png', websiteUrl)
+        .setAuthor(name, this.embedLogoURL, websiteUrl)
         .setColor(Constants.CURSEFORGE_COLOR)
         .setDescription(summary)
         .addField(t('commands:minecraft.subcommands.modpack.downloadCount'), downloadCount, true)
