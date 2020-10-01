@@ -1,6 +1,5 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
-
 const API_URL = 'http://api.languagelayer.com/'
 
 module.exports = class LanguageLayerAPI extends APIWrapper {
