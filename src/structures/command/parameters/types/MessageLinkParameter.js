@@ -46,24 +46,24 @@ module.exports = class MessageLinkParameter extends Parameter {
         const channel = guild.channels.cache.get(channelId)
         if (!channel) throw new CommandError(t('errors:validLinkButGhostChannel'))
 
-        const recievedMessage = await channel.messages.fetch(messageId).catch(() => null)
-        if (!recievedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
+        const receivedMessage = await channel.messages.fetch(messageId).catch(() => null)
+        if (!receivedMessage) throw new CommandError(t('errors:validLinkButGhostMessage'))
 
         if (this.linkChannelBotPermission) {
-          const result = ensurePermissions(client.user.id, recievedMessage.channel, this.linkChannelBotPermission, t, 'bot')
+          const result = ensurePermissions(client.user.id, receivedMessage.channel, this.linkChannelBotPermission, t, 'bot')
 
           if (result) throw new CommandError(result)
         }
 
         if (this.linkChannelUserPermission) {
-          const result = ensurePermissions(author.id, recievedMessage.channel, this.linkChannelUserPermission, t, 'user')
+          const result = ensurePermissions(author.id, receivedMessage.channel, this.linkChannelUserPermission, t, 'user')
 
           if (result) throw new CommandError(result)
         }
 
         if (this.returnRegexResult) return regexResult
 
-        return recievedMessage
+        return receivedMessage
       }
       return returnProperties(this.returnModifier, regexResult)
     }
