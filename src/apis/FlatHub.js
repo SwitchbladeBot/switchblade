@@ -11,7 +11,7 @@ module.exports = class FlatHub extends APIWrapper {
   }
 
   async list () {
-    const res = await axios({ baseURL: API_URL })
+    const res = await axios(API_URL)
     return res.data
   }
 
