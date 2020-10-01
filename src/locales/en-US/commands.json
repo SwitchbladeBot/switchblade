@@ -1750,6 +1750,16 @@
     "commandUsage": "<text>",
     "missingText": "You have to give me some text for the paper!"
   },
+  "eclipseplugin": {
+    "commandDescription": "Search for plugins on the Eclipse Plugin Marketplace",
+    "commandUsage": "<plugin name>",
+    "marketplace": "Eclipse Plugin Marketplace",
+    "by": "by [{{name}}]({{homepage}})",
+    "installs": "{{count}} installs",
+    "lastUpdate": "`{{version}}` was published {{ago}}",
+    "license": "License",
+    "install": "Drag this link to your Eclipse workspace to install"
+  },
   "chocolatey": {
     "commandDescription": "Searches for packages on Chocolatey",
     "commandUsage": "<package name>",
