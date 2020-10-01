@@ -13,13 +13,13 @@ module.exports = class WhatLanguage extends Command {
 
   async run ({ t, author, channel }, query) {
     channel.startTyping()
-    const result = await this.client.apis.languagelayer.detectText(query)
+    const { data } = await this.client.apis.languagelayer.detectText(query)
     const embed = new SwitchbladeEmbed(author)
       .setTitle(t('commands:whatlanguage.embedTitle'))
       .setDescription(t('commands:whatlanguage.embedDes'))
-      .addField(t('commands:whatlanguage.fieldLanguage'), `:flag_${result.results[0].language_code}: ${result.results[0].language_name}`, true)
-      .addField(t('commands:whatlanguage.fieldProbability'), `${Math.round(result.results[0].probability)}%`, true)
-      .addField(t('commands:whatlanguage.fieldPercentage'), `${result.results[0].percentage}%`, true)
+      .addField(t('commands:whatlanguage.fieldLanguage'), `:flag_${data.results[0].language_code}: ${data.results[0].language_name}`, true)
+      .addField(t('commands:whatlanguage.fieldProbability'), `${Math.round(data.results[0].probability)}%`, true)
+      .addField(t('commands:whatlanguage.fieldPercentage'), `${data.results[0].percentage}%`, true)
     channel.send(embed).then(() => channel.stopTyping())
   }
 }
