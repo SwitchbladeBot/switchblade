@@ -17,6 +17,5 @@ module.exports = class LanguageLayerAPI extends APIWrapper {
   request (endpoint, query = {}) {
     let apikey = `&access_key=${process.env.LANGUAGELAYER_API_KEY}`
     return axios.get(API_URL + endpoint + apikey + query)
-      .then(res => res.json())
   }
 }
