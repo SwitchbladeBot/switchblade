@@ -1766,5 +1766,14 @@
     "by": "by {{authors}}",
     "installs": "{{count}} installs",
     "license": "License"
+  },
+  "flathub": {
+    "commandDescription": "Searches for linux app on FlatHub",
+    "commandUsage": "<search query>",
+    "title": "FlatHub {{name}} app information",
+    "categories": "Categories",
+    "license": "License",
+    "version": "Release Version",
+    "download": "Download"
   }
 }
