@@ -1782,5 +1782,11 @@
     "nis": "NIS",
     "amount": "Amount",
     "city": "City"
+  },
+  "giverole": {
+    "commandDescription": "Gives a role to a member",
+    "commandUsage": "<member> <role>",
+    "roleAdded": "Role gived!",
+    "error": "Error! I was not able to give this role."
   }
 }
