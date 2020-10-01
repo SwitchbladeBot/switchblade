@@ -10,7 +10,7 @@ module.exports = class FlatHubCommand extends SearchCommand {
       aliases: ['flath'],
       requirements: { apis: ['flathub'] },
       embedColor: Constants.FLATHUB_COLOR,
-      embedLogoURL: 'https://flathub.org/assets/themes/flathub/flathub-logo.png'
+      embedLogoURL: 'https://i.imgur.com/9hFtZnF.png'
     }, client)
   }
 
