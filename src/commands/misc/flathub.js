@@ -4,29 +4,29 @@ const turndownService = new Turndown()
 const moment = require('moment')
 
 module.exports = class FlatHubCommand extends SearchCommand {
-  constructor(client) {
+  constructor (client) {
     super({
       name: 'flathub',
       aliases: ['flath'],
       requirements: { apis: ['flathub'] },
       embedColor: Constants.FLATHUB_COLOR,
-      embedLogoURL: 'https://flathub.org/assets/themes/flathub/flathub-logo.png',
+      embedLogoURL: 'https://flathub.org/assets/themes/flathub/flathub-logo.png'
     }, client)
   }
 
-  search(_, query) {
-    return this.client.apis.flathub.search(query);
+  search (_, query) {
+    return this.client.apis.flathub.search(query)
   }
 
-  searchResultFormatter(item) {
+  searchResultFormatter (item) {
     return `[${item.name}](https://flathub.org/apps/details/${item.flatpakAppId}) - ${item.summary}`
   }
 
-  async handleResult({ t, author, channel, language }, { flatpakAppId }) {
+  async handleResult ({ t, author, channel, language }, { flatpakAppId }) {
     channel.startTyping()
     const { name, summary, projectLicense, currentReleaseVersion, currentReleaseDate, description, downloadFlatpakRefUrl, categories, iconDesktopUrl, screenshots } = await this.client.apis.flathub.getApp(flatpakAppId)
-    const screenshot = screenshots.length ? screenshots[Math.floor(Math.random() * screenshots.length)] : null;
-    const licence = /.+\=(https?)/.test(projectLicense) ? `[${projectLicense.split('=')[0]}](${projectLicense.split('=')[1]})` : projectLicense
+    const screenshot = screenshots.length ? screenshots[Math.floor(Math.random() * screenshots.length)] : null
+    const licence = /.+=(https?)/.test(projectLicense) ? `[${projectLicense.split('=')[0]}](${projectLicense.split('=')[1]})` : projectLicense
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
       .setAuthor(t('commands:flathub.title', { name }), this.embedLogoURL, `https://flathub.org/apps/details/${flatpakAppId}`)
