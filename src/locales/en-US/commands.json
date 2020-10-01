@@ -4,6 +4,15 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
+  "whatlanguage": {
+    "commandDescription": "Tells you what language a piece of text is in.",
+    "noText": "You have to give me some text!",
+    "embedTitle": "What language is this?",
+    "embedDes": "I have detected that the language of this text is",
+    "fieldLanguage": "Language",
+    "fieldProbability": "Probability",
+    "fieldPercentage": "Percentage"
+  },
   "2048": {
     "commandDescription": "Play the 2048 game.",
     "commandUsage": "[board size]"
@@ -945,7 +954,7 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
-  "freefire":  {
+  "freefire": {
     "commandDescription": "Shows information related to Free Fire",
     "commandUsage": "<type> <query>",
     "gameName": "Free Fire",
