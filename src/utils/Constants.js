@@ -79,6 +79,8 @@ module.exports = {
   QUIERES_HAND_PNG: 'src/assets/png/quieres.png',
   KANNA_PAPER_TEMPLATE: 'src/assets/png/kanna_paper_template.png',
   PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
+  PETPET_HAND_PNG: 'src/assets/png/petpet_sprite.png',
+
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
   DEFAULT_BACKGROUND_GRAY_PNG: 'src/assets/png/backgrounds/default_gray.png',

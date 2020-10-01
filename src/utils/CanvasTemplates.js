@@ -2,6 +2,7 @@ const Constants = require('./Constants')
 const Color = require('./Color.js')
 
 const GIFEncoder = require('gifencoder')
+const GIF_Encoder = require('gif-encoder')
 const moment = require('moment')
 
 let Canvas = {}
@@ -471,10 +472,10 @@ module.exports = class CanvasTemplates {
       Image.from(buffer)
     ])
 
-    const encoder = new GIFEncoder(WIDTH, HEIGHT)
-    encoder.start()
+    const encoder = new GIF_Encoder(WIDTH, HEIGHT)
     encoder.setRepeat(0) // Repeat
     encoder.setDelay(50) // 50ms delay between frames
+    encoder.writeHeader()
 
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
@@ -490,12 +491,98 @@ module.exports = class CanvasTemplates {
       ctx.fillStyle = '#FF000033'
       ctx.fillRect(0, 0, WIDTH, HEIGHT)
       ctx.drawImage(triggeredLabel, random(LABEL_RANDOM_MAX), HEIGHT - 54 + random(LABEL_RANDOM_MAX), 256 + LABEL_RANDOM_MAX, 54 + LABEL_RANDOM_MAX)
-      encoder.addFrame(ctx)
+      encoder.addFrame(ctx.getImageData(0, 0, WIDTH, HEIGHT).data)
     }
 
     encoder.finish()
+    return encoder.read()
+  }
 
-    return encoder.out.getData()
+  static async petpet (buffer) {
+    const SIZE = 112
+
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.PETPET_HAND_PNG, true),
+      Image.from(buffer)
+    ])
+
+    const encoder = new GIF_Encoder(SIZE, SIZE)
+    encoder.setDelay(63) // 63ms delay
+    encoder.setRepeat(0) // Repeat
+    encoder.setTransparent(0x00ff00) // Transparent color is green
+    encoder.writeHeader()
+
+    const canvas = createCanvas(SIZE, SIZE)
+    const ctx = canvas.getContext('2d')
+
+    const tempCanvas = createCanvas(SIZE, SIZE)
+    const tempCtx = tempCanvas.getContext('2d')
+
+    const [ handSprite, avatarImage ] = await IMAGE_ASSETS
+
+    const optimizeFrameColors = (data) => {
+      for (let i = 0; i < data.length; i += 4) {
+        // clamp greens to avoid pure greens from turning transparent
+        data[i + 1] = data[i + 1] > 250 ? 250 : data[i + 1];
+        // clamp transparency
+        data[i + 3] = data[i + 3] > 127 ? 255 : 0;
+      }
+    }
+    // frames
+    const frames = [
+      {
+        x: 18,
+        y: 18,
+        w: SIZE * 0.875,
+        h: SIZE * 0.875,
+      },
+      {
+        x: 14,
+        y: 30,
+        w: SIZE * 0.875 + 4,
+        h: SIZE * 0.875 - 12,
+      },
+      {
+        x: 6,
+        y: 36,
+        w: SIZE * 0.875 + 12,
+        h: SIZE * 0.875 - 18,
+      },
+      {
+        x: 6,
+        y: 30,
+        w: SIZE * 0.875 + 4,
+        h: SIZE * 0.875 - 12,
+      },
+      {
+        x: 14,
+        y: 18,
+        w: SIZE * 0.875,
+        h: SIZE * 0.875,
+      },
+    ]
+    frames.forEach((frameData, frame) => {
+      // clear canvases
+      tempCtx.clearRect(0, 0, SIZE, SIZE)
+      ctx.clearRect(0, 0, SIZE, SIZE)
+      ctx.fillStyle = '#0f0'
+      ctx.fillRect(0, 0, SIZE, SIZE)
+
+      // draw frame
+      tempCtx.drawImage(avatarImage, frameData.x, frameData.y, frameData.w, frameData.h)
+      tempCtx.drawImage(handSprite, frame * SIZE, 0, SIZE, SIZE, 0, 0, SIZE, SIZE)
+
+      // fix transparency
+      const imgData = tempCtx.getImageData(0, 0, SIZE, SIZE)
+      optimizeFrameColors(imgData.data)
+      tempCtx.putImageData(imgData, 0, 0)
+
+      // add frame to gif
+      ctx.drawImage(tempCanvas, 0, 0)
+      encoder.addFrame(ctx.getImageData(0, 0, SIZE, SIZE).data)
+    })
+    encoder.finish()
+    return encoder.read()
   }
 
   static async weather ({ t }, title, { now, daily }, unit) {

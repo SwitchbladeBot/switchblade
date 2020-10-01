@@ -50,6 +50,7 @@
     "express": "^4.16.4",
     "figlet": "^1.2.1",
     "fuse.js": "^3.4.6",
+    "gif-encoder": "^0.7.2",
     "gifencoder": "^2.0.1",
     "google-play-scraper": "^8.0.2",
     "googleapis": "^39.1.0",
