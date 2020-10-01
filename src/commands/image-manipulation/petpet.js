@@ -11,7 +11,7 @@ module.exports = class Petpet extends Command {
       requirements: { canvasOnly: true },
       parameters: [{
         type: 'image',
-        missingError: 'commands:morejpeg.missingImage'
+        missingError: 'commands:petpet.missingImage'
       }]
     }, client)
   }
