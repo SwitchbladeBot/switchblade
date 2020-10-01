@@ -1775,5 +1775,9 @@
     "nis": "NIS",
     "amount": "Amount",
     "city": "City"
+  },
+  "wikipedia": {
+    "commandDescription": "Searches for articles on wikipedia",
+    "commandUsage": "<keywords>"
   }
 }
