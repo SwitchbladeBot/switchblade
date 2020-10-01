@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const fetch = require('node-fetch')
+const axios = require('axios');
 const API_URL = 'http://api.languagelayer.com/'
 
 module.exports = class LanguageLayerAPI extends APIWrapper {
@@ -16,7 +16,7 @@ module.exports = class LanguageLayerAPI extends APIWrapper {
 
   request (endpoint, query = {}) {
     let apikey = `&access_key=${process.env.LANGUAGELAYER_API_KEY}`
-    return fetch(API_URL + endpoint + apikey + query)
+    return axios.get(API_URL + endpoint + apikey + query)
       .then(res => res.json())
   }
 }
