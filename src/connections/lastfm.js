@@ -46,8 +46,4 @@ module.exports = class LastFM extends Connection {
     const { lastfm } = await this.client.controllers.connection.getConnections(user)
     return lastfm.connected ? lastfm : false
   }
-
-  updateNowPlaying (user, song) {
-
-  }
 }
