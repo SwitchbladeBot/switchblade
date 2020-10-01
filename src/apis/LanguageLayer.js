@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const axios = require('axios');
+const axios = require('axios')
 const API_URL = 'http://api.languagelayer.com/'
 
 module.exports = class LanguageLayerAPI extends APIWrapper {
