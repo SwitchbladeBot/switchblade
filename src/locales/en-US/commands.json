@@ -1768,7 +1768,7 @@
     "license": "License"
   },
   "flathub": {
-    "commandDescription": "Searches for linux app on FlatHub",
+    "commandDescription": "Searches for Linux apps on FlatHub",
     "commandUsage": "<search query>",
     "title": "FlatHub {{name}} app information",
     "categories": "Categories",
