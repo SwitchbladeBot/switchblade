@@ -31,6 +31,7 @@ module.exports = {
   SNAPCRAFT_COLOR: '82BEA0',
   JETBRAINS_PLUGIN: '#d44386',
   ECLIPSE_PLUGINS_COLOR: '#42347f',
+  FLATHUB_COLOR: '#4A86CF',
 
   // Emojis
 
