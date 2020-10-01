@@ -1775,5 +1775,10 @@
     "nis": "NIS",
     "amount": "Amount",
     "city": "City"
+  },
+  "merriamwebster": {
+    "commandDescription": "Lookup word definitions on the Merriam Webster dictionary",
+    "commandUsage": "<word>",
+    "title": "Merriam Webster Dictionary"
   }
 }

@@ -21,16 +21,12 @@ module.exports = class MerriamWebster extends SearchCommand {
     return `${i.meta.stems[0]} - *${i.fl}*`
   }
 
-  async handleResult ({ t, author, channel, language }, word) {
+  async handleResult ({ t, author, channel, language }, { hwi, meta, shortdef, fl }) {
     moment.locale(language)
-
-    console.log(word)
-
-    const { hwi, meta, shortdef, fl } = word
 
     channel.send(
       new SwitchbladeEmbed(author)
-        .setAuthor('Merriam Webster Dictionary', this.embedLogoURL)
+        .setAuthor(t('commands:merriamwebster.title'), this.embedLogoURL)
         .setColor(this.embedColor)
         .setTitle(meta.stems[0])
         .setDescriptionFromBlockArray([
