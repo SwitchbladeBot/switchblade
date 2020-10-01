@@ -47,5 +47,12 @@
   "validLinkButGhostChannel": "Your link is valid but the bot couldn't find that channel in this guild.",
   "validLinkButGhostMessage": "Your link is valid but I couldn't find that message.",
   "invalidMessageLink": "The message link you sent is invalid.",
-  "messageContainsNothing": "The message you're trying to move has no content."
+  "youDontHavePermission": "You're missing the following permission in that channel: {{permission}}",
+  "iDontHavePermission": "I'm missing the following permission in that channel: {{permission}}",
+  "messageContainsNothing": "The message you're trying to move has no content.",
+  "forgotCheckType": "You forgot to give what I'm checking.",
+  "forgotCheckValue": "You forgot to give the value of what I'm checking.",
+  "channelDoesntExist": "That channel doesn't exist or I couldn't find it.",
+  "guildHasNoRole": "This server has no roles to list.",
+  "guildHasNoEmoji": "This server has no emoji or no emojis are available for me."
 }

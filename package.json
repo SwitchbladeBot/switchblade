@@ -37,6 +37,7 @@
     "@sentry/node": "^5.15.5",
     "abort-controller": "^2.0.3",
     "ascii-table": "0.0.9",
+    "axios": "^0.20.0",
     "chalk": "^3.0.0",
     "cheerio": "^1.0.0-rc.2",
     "cldr-core": "^34.0.0",
@@ -44,12 +45,13 @@
     "cors": "^2.8.5",
     "cows": "^2.1.0",
     "cowsay": "^1.4.0",
-    "crowdin-without-vulnerability": "^1.0.0",
+    "crowdin-without-vulnerability": "Doges/crowdin-node",
     "discord.js": "^12.2.0",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
     "fuse.js": "^3.4.6",
     "gifencoder": "^2.0.1",
+    "google-play-scraper": "^8.0.2",
     "googleapis": "^39.1.0",
     "i18n-iso-countries": "^3.7.8",
     "i18next": "^19.6.0",
@@ -73,7 +75,6 @@
     "rss-parser": "^3.7.0",
     "runeterra": "0.0.6",
     "samp-query": "latest",
-    "search-npm-registry": "^2.0.3",
     "sinesp-api": "^2.0.2",
     "snoowrap": "^1.21.0",
     "splitargs": "0.0.7",
@@ -82,6 +83,7 @@
     "transform-props": "^1.0.1",
     "turndown": "^6.0.0",
     "uws": "^9.14.0",
+    "xml2json": "^0.12.0",
     "zlib-sync": "^0.1.6"
   },
   "devDependencies": {
@@ -100,7 +102,8 @@
   "nodemonConfig": {
     "ignore": [
       "locales/*"
-    ]
+    ],
+    "delay": "5000"
   },
   "optionalDependencies": {
     "@discordjs/uws": "^11.149.1",

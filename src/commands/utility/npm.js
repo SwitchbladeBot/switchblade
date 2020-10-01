@@ -1,5 +1,4 @@
 const { SearchCommand, SwitchbladeEmbed, Constants } = require('../../')
-const npm = require('search-npm-registry')
 const moment = require('moment')
 
 module.exports = class Npm extends SearchCommand {
@@ -13,20 +12,22 @@ module.exports = class Npm extends SearchCommand {
         fullJoin: '-',
         missingError: 'commands:npm.noNameProvided'
       }],
+      requirements: { apis: ['npmregistry'] },
       embedColor: Constants.NPM_COLOR,
       embedLogoURL: 'https://i.imgur.com/24yrZxG.png'
     }, client)
   }
 
-  async search (context, query) {
-    return npm().text(query).size(10).search()
+  async search (_, query) {
+    const { data } = await this.client.apis.npmregistry.search(query)
+    return data.objects
   }
 
-  searchResultFormatter (obj) {
-    return `[${obj.name}](${obj.links.npm})`
+  searchResultFormatter ({ package: pkg }) {
+    return `[${pkg.name}](${pkg.links.npm})`
   }
 
-  async handleResult ({ t, channel, author, language }, pkg) {
+  async handleResult ({ t, channel, author, language }, { package: pkg }) {
     const embed = new SwitchbladeEmbed(author)
     moment.locale(language)
     channel.startTyping()
