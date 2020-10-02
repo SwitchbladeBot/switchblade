@@ -76,6 +76,7 @@ module.exports = {
   HTTP_BRAND_SVG: 'src/assets/svg/brands/http.svg',
 
   // Misc
+  PETPET_PNG: 'src/assets/png/petpet.png',
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
   QUIERES_HAND_PNG: 'src/assets/png/quieres.png',
   KANNA_PAPER_TEMPLATE: 'src/assets/png/kanna_paper_template.png',
