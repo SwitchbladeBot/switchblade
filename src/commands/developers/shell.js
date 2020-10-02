@@ -1,6 +1,6 @@
 const { exec } = require('child_process')
 
-module.exports = class Eval extends Command {
+module.exports = class Shell extends Command {
   constructor (client) {
     super({
       name: 'shell',
