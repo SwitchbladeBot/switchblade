@@ -111,7 +111,7 @@ module.exports = class LastFM extends APIWrapper {
    * @param {boolean} [signature=false] - if the request need's a signature
    * @param {boolean} [write=false] - if the request is a write type
    * @param {string} [format=json] - the result format
-   * @returns {Promise|*|Promise<never>|Promise<T>|PromiseLike<T | never>|Promise<T | never>}
+   * @returns {Promise<Object>}
    */
   request (method, queryParams, signature = false, write = false, format = 'json') {
     const params = { method, api_key: process.env.LASTFM_KEY, format }
