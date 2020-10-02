@@ -835,6 +835,10 @@
     "commandDescription": "Evaluates a JS expression.",
     "commandUsage": "<expression to evaluate>"
   },
+  "shell": {
+    "commandDescription": "Executes a shell command",
+    "commandUsage": "<command to execute>"
+  },
   "clientvalues": {
     "commandDescription": "Fetches values from all shards.",
     "commandUsage": "<value path>"
@@ -945,7 +949,7 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
-  "freefire":  {
+  "freefire": {
     "commandDescription": "Shows information related to Free Fire",
     "commandUsage": "<type> <query>",
     "gameName": "Free Fire",
