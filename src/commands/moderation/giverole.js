@@ -16,7 +16,7 @@ module.exports = class GiveRole extends Command {
     }, client)
   }
 
-  async run ({ channel, guild, author, t }, member, role) {
+  async run ({ channel, guild, member: author, t }, member, role) {
     const embed = new SwitchbladeEmbed(author)
     if (member.roles.highest.position < role.position && author.roles.highest.position < role.position) {
       await member.roles.add(role).then(() => {
