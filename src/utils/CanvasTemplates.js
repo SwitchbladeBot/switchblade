@@ -498,6 +498,44 @@ module.exports = class CanvasTemplates {
     return encoder.out.getData()
   }
 
+  static async petpet (buffer) {
+    const WIDTH = 112
+    const HEIGHT = 112
+
+    const AVATAR_HEIGHT = [94, 82, 76, 82, 94]
+    const AVATAR_WIDTH = [94, 98, 106, 102, 98]
+    const X_FRAMES = [18, 14, 6, 6, 14]
+    const Y_FRAMES = [18, 30, 36, 30, 18]
+    const AVATAR_SCALE = 1.1
+
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.PETPET_PNG, true),
+      Image.from(buffer)
+    ])
+
+    const encoder = new GIFEncoder(WIDTH, HEIGHT)
+    encoder.start()
+    encoder.setRepeat(0) // Repeat
+    encoder.setDelay(55) // 55ms delay between frames
+    encoder.setTransparent('#000000')
+
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    const [ petHand, avatarImage ] = await IMAGE_ASSETS
+
+    for (let i = 0; i < 5; i++) {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT)
+      ctx.drawImage(avatarImage, X_FRAMES[i], Y_FRAMES[i], AVATAR_WIDTH[i] * AVATAR_SCALE, AVATAR_HEIGHT[i] * AVATAR_SCALE)
+      ctx.drawImage(petHand, WIDTH - (WIDTH * (i + 1)), 0, petHand.width, HEIGHT)
+      encoder.addFrame(ctx)
+    }
+
+    encoder.finish()
+
+    return encoder.out.getData()
+  }
+
   static async weather ({ t }, title, { now, daily }, unit) {
     const WIDTH = 400
     const HEIGHT = 286
