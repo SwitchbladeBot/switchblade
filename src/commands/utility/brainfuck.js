@@ -35,8 +35,9 @@ module.exports = class BrainfuckCommand extends Command {
       if (err.name === 'BrainfuckError') {
         const outputMsg = this.constructOutputMsg(err.result, t)
         channel.send(`**${t('commands:brainfuck.error')}:** ${err.message}\n${outputMsg}`)
+      } else {
+        throw err
       }
-      throw err
     }
   }
 }
