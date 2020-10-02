@@ -50,6 +50,11 @@
   "ping": {
     "commandDescription": "Checks if the bot is online."
   },
+  "petpet": {
+    "commandDescription": "Pet your friends!",
+    "commandUsage": "[image link]",
+    "missingImage": "You need to give me an image to pet."
+  },
   "hibp": {
     "commandDescription": "Checks if an email has been found in a data breach or paste.",
     "commandUsage": "<type> <query>",
