@@ -29,7 +29,7 @@ module.exports = class MerriamWebster extends SearchCommand {
 
     channel.send(
       new SwitchbladeEmbed(author)
-        .setAuthor(t('commands:merriamwebster.title'), this.embedLogoURL)
+        .setAuthor(t('commands:merriamwebster.title'), this.embedLogoURL, 'https://www.merriam-webster.com')
         .setColor(this.embedColor)
         .setTitle(meta.stems[0])
         .setDescriptionFromBlockArray([
