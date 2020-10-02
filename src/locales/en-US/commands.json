@@ -1772,6 +1772,15 @@
     "installs": "{{count}} installs",
     "license": "License"
   },
+  "flathub": {
+    "commandDescription": "Searches for Linux apps on FlatHub",
+    "commandUsage": "<search query>",
+    "title": "FlatHub {{name}} app information",
+    "categories": "Categories",
+    "license": "License",
+    "version": "Release Version",
+    "download": "Download"
+  },
   "auxilioemergencial": {
     "commandDescription": "Searches for a CPF or NIS on \"Portal da Transparência\" for the Emergencial Assistance.",
     "commandUsage": "<cpf or nis>",
