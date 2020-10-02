@@ -56,6 +56,7 @@ module.exports = class BMI extends Command {
   constructor (client) {
     super({
       name: 'bmi',
+      aliases: ['bodymassindex'],
       parameters: [
         {
           type: 'number',
