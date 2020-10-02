@@ -1780,7 +1780,7 @@
     "commandDescription": "Calculates your BMI",
     "commandUsage": "<weigth in kilograms> <height in meters>",
     "missingWeight": "You have to specify a valid weight in kilograms.",
-    "missingHeight": "You have to specify a valid weight in kilograms.",
+    "missingHeight": "You have to specify a valid height in kilograms.",
     "title": "Your BMI is {{value}}",
     "description": "That means you are {{category}}",
     "footer": "More information: https://en.wikipedia.org/wiki/Body_mass_index",
