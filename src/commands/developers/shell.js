@@ -1,4 +1,5 @@
 const { exec } = require('child_process')
+const { Command } = require('../../')
 
 module.exports = class Shell extends Command {
   constructor (client) {
@@ -15,9 +16,8 @@ module.exports = class Shell extends Command {
 
   run ({ channel }, command) {
     exec(command, (error, stdout, stderr) => {
-      if (stderr) return channel.send(`\`${command}\`\n\`\`\`${stderr}\`\`\``);
-      channel.send(`\`${command}\`\n\`\`\`${stdout}\`\`\``);
-    });
+      if (error || stderr) return channel.send(`\`${command}\`\n\`\`\`${stderr}\`\`\``)
+      channel.send(`\`${command}\`\n\`\`\`${stdout}\`\`\``)
+    })
   }
 }
-  
