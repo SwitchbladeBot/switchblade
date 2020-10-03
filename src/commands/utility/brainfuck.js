@@ -22,12 +22,12 @@ module.exports = class BrainfuckCommand extends Command {
       ]
     }, client)
   }
-  
+
   constructOutputMsg (input, t) {
     const output = `\`\`\`${input.output}\`\`\``
     return `**${t('commands:brainfuck.steps')}:** ${input.steps}\n**${t('commands:brainfuck.time')}:** ${input.time}ms\n**${t('commands:brainfuck.output')}:** ${output}`
   }
-  
+
   run ({ t, channel }, code, input) {
     try {
       const result = brainfuck.execute(code, input)
