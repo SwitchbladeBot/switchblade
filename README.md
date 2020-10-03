@@ -13,8 +13,8 @@
   ![commands-badge]
   ![languages-badge]
   [![backers][backers-badge]][backers-url]
-  [![hacktober][hacktoberfest-badge]][hacktoberfest-url]
   [![sponsors][sponsors-badge]][sponsors-url]
+  [![hacktober][hacktoberfest-badge]][hacktoberfest-url]
   <br>
   <br>
   <strong><a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD SWITCHBLADE TO YOUR SERVER</a></strong>
@@ -123,10 +123,6 @@ Sponsors are organizations and companies that contribute to our projects with mo
 <a href="https://opencollective.com/switchblade/sponsor/9/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/9/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/10/avatar.svg?requireActive=false"></a>
 
-<h2 align="center">Hacktoberfest</h2>
-
-We are totally Hacktoberfest friendly, in 2020 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab clicking [here.][hacktoberfest-url]
-
 <h2 align="center">Backers</h2>
 
 Backers are the people who contribute to our projects monetarily. They get their image with a link to their website on this page, an awesome badge on their Switchblade profile and a role that grants exclusive access to some channels in our discord server. [Click here and become a backer today!][backers-url]
@@ -142,6 +138,10 @@ Backers are the people who contribute to our projects monetarily. They get their
 <a href="https://opencollective.com/switchblade/backer/8/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/8/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/backer/9/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/9/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/backer/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/10/avatar.svg?requireActive=false"></a>
+
+<h2 align="center">Hacktoberfest</h2>
+
+We are totally Hacktoberfest friendly, in 2020 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab clicking [here.][hacktoberfest-url]
 
 [support-invite]: https://support.switchblade.xyz
 [support-image]: https://invidget.switchblade.xyz/2FB8wDG
