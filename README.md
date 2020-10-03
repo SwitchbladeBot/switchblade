@@ -14,6 +14,7 @@
   ![languages-badge]
   [![backers][backers-badge]][backers-url]
   [![sponsors][sponsors-badge]][sponsors-url]
+  [![hacktober][hacktoberfest-badge]][hacktoberfest-url]
   <br>
   <br>
   <strong><a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD SWITCHBLADE TO YOUR SERVER</a></strong>
@@ -40,6 +41,7 @@ Switchblade is a free and open source solution to your server managing problems,
 - [Branching, canary and updates](#branching-canary-and-updates)
 - [Sponsors](#sponsors)
 - [Backers](#backers)
+- [Hacktoberfest](#hacktoberfest)
 
 <h2 align="center">Commands</h2>
 
@@ -109,6 +111,9 @@ We usually do that every two months or so, but we might skip a month if we're no
 
 Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!][sponsors-url]
 
+<h2 align="center">Hacktoberfest</h2>
+We are totally Hacktoberfest friendly, in 2020 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab clicking [here.][hacktoberfest-url]
+
 <a href="https://opencollective.com/switchblade/sponsor/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/1/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/2/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/2/avatar.svg?requireActive=false"></a>
@@ -163,6 +168,9 @@ Backers are the people who contribute to our projects monetarily. They get their
 [commands-badge]: https://img.shields.io/badge/dynamic/json.svg?label=commands&colorB=7289DA&url=https://prod.switchblade.xyz/api/statistics&query=commandCount
 
 [languages-badge]: https://img.shields.io/badge/dynamic/json.svg?label=languages&colorB=7289DA&url=https://prod.switchblade.xyz/api/statistics&query=languageCount
+
+[hacktoberfest-badge]: https://img.shields.io/static/v1?label=hacktoberfest&message=friendly&color=success
+[hacktoberfest-url]: https://github.com/SwitchbladeBot/switchblade/issues?q=is%3Aopen+is%3Aissue+label%3Ahacktoberfest
 
 <!-- Widgets -->
 [discordbots-widget]: https://discordbots.org/api/widget/445277324175474689.svg
