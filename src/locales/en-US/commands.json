@@ -1779,7 +1779,7 @@
   "brainfuck": {
     "commandDescription": "Executes a brainfuck code",
     "commandUsage": "<code> <input optional>",
-    "noCode": "You have to give me a brainfuck code",
+    "noCode": "You have to give me some brainfuck code",
     "steps": "Steps",
     "time": "Execution time",
     "output": "Output",
