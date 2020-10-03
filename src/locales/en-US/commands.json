@@ -1777,7 +1777,7 @@
     "city": "City"
   },
   "brainfuck": {
-    "commandDescription": "Executes a brainfuck code",
+    "commandDescription": "Executes brainfuck code",
     "commandUsage": "<code> <input optional>",
     "noCode": "You have to give me some brainfuck code",
     "steps": "Steps",
