@@ -3,15 +3,15 @@ const fetch = require('node-fetch')
 
 const CDN_URL = 'https://lorassets.switchblade.xyz'
 
-let cardData = {}
-let coreData = {}
-let languages = []
+const cardData = {}
+const coreData = {}
 
 module.exports = class LegendsOfRuneterra extends APIWrapper {
   constructor () {
     super({
       name: 'legendsofruneterra'
     })
+    this.languages = []
   }
 
   load () {
@@ -21,25 +21,22 @@ module.exports = class LegendsOfRuneterra extends APIWrapper {
 
   async loadLanguages () {
     const response = await this.request('/metadata.json')
-    languages = response.locales
+    this.languages = response.locales
   }
 
   selectLanguage (language = 'en_us') {
     const normalizedLanguage = language.replace('-', '_').toLowerCase()
-    const matchingLanguage = languages.find(l => l.toLowerCase() === normalizedLanguage)
-    return matchingLanguage || 'en_us'
+    return this.languages.find(l => l.toLowerCase() === normalizedLanguage) || 'en_us'
   }
 
   async getCardData (lang) {
     const language = this.selectLanguage(lang)
-    if (!cardData[language]) cardData[language] = await this.request(`/${language}/data/cards.json`)
-    return cardData[language]
+    return cardData[language] || (cardData[language] = await this.request(`/${language}/data/cards.json`))
   }
 
   async getCoreData (lang) {
     const language = this.selectLanguage(lang)
-    if (!coreData[language]) coreData[language] = await this.request(`/${language}/data/globals.json`)
-    return coreData[language]
+    return coreData[language] || (coreData[language] = await this.request(`/${language}/data/globals.json`))
   }
 
   getCardImageURL (cardCode, lang = 'en_us') {

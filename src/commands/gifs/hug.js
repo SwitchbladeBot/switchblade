@@ -18,7 +18,7 @@ module.exports = class Hug extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     embed.setImage(body.url)
-      .setDescription(t('commands:hug.success', { hugger: author, hugged: user }))
+      .setDescription(t('commands:hug.success', { hugger: author.toString(), hugged: user.toString() }))
     channel.send(embed).then(() => channel.stopTyping())
   }
 }
