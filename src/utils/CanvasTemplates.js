@@ -923,7 +923,7 @@ module.exports = class CanvasTemplates {
 
     ctx.drawImage(background, 0, 0, background.width, background.height)
 
-    ctx.drawImage(img, 298, 224, 204.03, 246.98)
+    ctx.drawImage(img, 298, 224, 205, 247)
 
     ctx.font = '45px "Arial"'
     ctx.fillStyle = '#FFFFFF'
