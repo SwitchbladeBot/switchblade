@@ -1714,7 +1714,7 @@
     "guildHasNoEmoji": "This server has no available emojis for me."
   },
   "googleplay": {
-    "commandDescription": "Searches for an application, developer or [REDACTED] on Google Play Store",
+    "commandDescription": "Searches for an application or a developer on Google Play Store",
     "commandUsage": "<type> <query>",
     "serviceName": "Google Play Store",
     "developer": "Developer",
