@@ -913,4 +913,21 @@ module.exports = class CanvasTemplates {
 
     return canvas.toBuffer()
   }
+
+  static async squareKirby (image) {
+    const background = await Image.from(Constants.SQUARE_KIRBY_TEMPLATE)
+    const canvas = createCanvas(background.width, background.height)
+    const ctx = canvas.getContext('2d')
+
+    const img = await Image.from(image)
+
+    ctx.drawImage(background, 0, 0, background.width, background.height)
+
+    ctx.drawImage(img, 298, 224, 204.03, 246.98)
+
+    ctx.font = '45px "Arial"'
+    ctx.fillStyle = '#FFFFFF'
+    ctx.fillText('This is how he looks.', 165, 515)
+    return canvas.toBuffer()
+  }
 }

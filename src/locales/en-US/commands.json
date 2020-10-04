@@ -1789,5 +1789,10 @@
     "nis": "NIS",
     "amount": "Amount",
     "city": "City"
+  },
+  "squarekirby": {
+    "commandDescription": "Transform your image as squared Kirby, from Super Smash Bros. Ultimate.",
+    "commandUsage": "[image link]",
+    "missingImage": "You have to give me an image or a link!"
   }
 }
