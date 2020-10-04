@@ -1728,6 +1728,11 @@
         "commandDescription": "Searches for an APP on Google Play Store",
         "commandUsage": "<application name>",
         "trackInfo": "APP information"
+      },
+      "developer": {
+        "commandDescription": "Searches for a Developer on Google Play Store",
+        "commandUsage": "<developer name/id>",
+        "trackInfo": "Developer information"
       }
     }
   },
@@ -1796,6 +1801,7 @@
     "cpf": "CPF",
     "nis": "NIS",
     "amount": "Amount",
-    "city": "City"
+    "city": "City",
+    "notFound": "CPF or NIS not found."
   }
 }
