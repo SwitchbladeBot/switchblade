@@ -923,8 +923,10 @@ module.exports = class CanvasTemplates {
 
     ctx.drawImage(background, 0, 0, background.width, background.height)
 
-    ctx.drawImage(img, 298, 224, 205, 247)
+    ctx.setTransform(1, 0, -0.08, 1, 0, 0)
+    ctx.drawImage(img, 326, 226, 200, 246)
 
+    ctx.setTransform(1, 0, 0, 1, 0, 0)
     ctx.font = '45px "Arial"'
     ctx.fillStyle = '#FFFFFF'
     ctx.fillText('This is how he looks.', 165, 515)
