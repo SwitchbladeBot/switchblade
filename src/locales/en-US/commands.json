@@ -1731,12 +1731,12 @@
       }
     }
   },
-    "rolelist": {
-      "commandDescription": "Lists all the roles in the server.",
-      "roles": "Roles",
-      "ids": "IDs",
-      "loading": "Loading roles..."
-    },
+  "rolelist": {
+    "commandDescription": "Lists all the roles in the server.",
+    "roles": "Roles",
+    "ids": "IDs",
+    "loading": "Loading roles..."
+  },
   "snapcraft": {
     "commandDescription": "Search on snapcraft store",
     "commandUsage": "<search query>",
