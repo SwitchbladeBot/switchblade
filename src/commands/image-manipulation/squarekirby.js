@@ -11,7 +11,10 @@ module.exports = class SquareKirby extends Command {
       requirements: { canvasOnly: true },
       parameters: [{
         type: 'image',
-        missingError: 'commands:morejpeg.missingImage'
+        missingError: 'commands:morejpeg.missingImage',
+        userOptions: {
+          acceptBot: true
+        }
       }]
     }, client)
   }
