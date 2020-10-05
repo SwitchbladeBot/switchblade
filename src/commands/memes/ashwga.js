@@ -6,7 +6,7 @@ module.exports = class HereWeGoAgain extends Command {
   constructor (client) {
     super({
       name: 'herewegoagain',
-      aliases: ['ahshit', 'ashwga', 'hwga'],
+      aliases: ['ahshit', 'ahshitherewegoagain', 'ashwga', 'hwga'],
       category: 'images',
       requirements: { canvasOnly: true },
       parameters: [{
