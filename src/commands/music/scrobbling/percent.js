@@ -5,6 +5,7 @@ module.exports = class ScrobblingPercent extends Command {
     super({
       name: 'percent',
       aliases: ['p'],
+      category: 'music',
       parent: 'scrobbling',
       parameters: [{ type: 'number', min: 45, max: 95, missingError: 'commands.scrobbling.subcommands.percent.missingNumber' }]
     }, client)

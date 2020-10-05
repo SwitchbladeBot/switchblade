@@ -6,7 +6,7 @@ module.exports = class Pat extends Command {
   constructor (client) {
     super({
       name: 'pat',
-      category: 'images',
+      category: 'gifs',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:pat.noMention'
       }]

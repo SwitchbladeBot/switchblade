@@ -3,7 +3,8 @@ const { Command, SwitchbladeEmbed } = require('../../')
 module.exports = class Adorable extends Command {
   constructor (client) {
     super({
-      name: 'adorable'
+      name: 'adorable',
+      category: 'misc'
     }, client)
   }
 

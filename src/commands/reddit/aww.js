@@ -5,7 +5,7 @@ module.exports = class Aww extends RandomRedditPostCommand {
     super({
       name: 'aww',
       aliases: ['aw', 'cute', 'eyebleach'],
-      category: 'memes',
+      category: 'reddit',
       subreddit: 'aww',
       titleString: 'commands:aww.title'
     }, client)

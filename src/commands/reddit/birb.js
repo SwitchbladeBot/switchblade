@@ -5,7 +5,7 @@ module.exports = class Birb extends RandomRedditPostCommand {
     super({
       name: 'birb',
       aliases: ['bird', 'borb'],
-      category: 'memes',
+      category: 'reddit',
       subreddit: 'birbs',
       titleString: 'commands:birb.hereIsYourBirb'
     }, client)

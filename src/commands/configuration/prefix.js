@@ -4,6 +4,7 @@ module.exports = class ConfigPrefix extends Command {
   constructor (client) {
     super({
       name: 'prefix',
+      category: 'configuration',
       parent: 'config',
       parameters: [{
         type: 'string',

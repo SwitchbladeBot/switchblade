@@ -4,6 +4,7 @@ module.exports = class LeagueOfLegendsSkin extends Command {
     super({
       name: 'skin',
       aliases: ['s'],
+      category: 'games',
       requirements: { apis: ['youtube', 'lol'] },
       parent: 'leagueoflegends',
       parameters: [{

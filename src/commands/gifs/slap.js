@@ -6,7 +6,7 @@ module.exports = class Slap extends Command {
   constructor (client) {
     super({
       name: 'slap',
-      category: 'images',
+      category: 'gifs',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:slap.noMention'
       }]

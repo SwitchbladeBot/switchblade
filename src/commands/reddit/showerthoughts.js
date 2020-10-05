@@ -4,6 +4,7 @@ module.exports = class Showerthoughts extends RandomRedditPostCommand {
   constructor (client) {
     super({
       name: 'showerthoughts',
+      category: 'reddit',
       subreddit: 'showerthoughts'
     }, client)
   }

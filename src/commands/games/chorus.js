@@ -11,6 +11,7 @@ module.exports = class Chorus extends SearchCommand {
     super({
       name: 'chorus',
       aliases: ['clonehero', 'chart'],
+      category: 'games',
       requirements: {
         apis: ['chorus']
       },

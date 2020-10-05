@@ -6,6 +6,7 @@ module.exports = class ReputationLeaderboard extends Command {
     super({
       name: 'reputation',
       aliases: ['rep'],
+      category: 'social',
       parent: 'leaderboard'
     }, client)
   }

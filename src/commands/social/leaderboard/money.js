@@ -6,6 +6,7 @@ module.exports = class MoneyLeaderboard extends Command {
     super({
       name: 'money',
       aliases: ['balance', 'switchcoins'],
+      category: 'social',
       parent: 'leaderboard'
     }, client)
   }

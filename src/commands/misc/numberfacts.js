@@ -7,6 +7,7 @@ module.exports = class NumberFacts extends Command {
     super({
       name: 'numberfacts',
       aliases: ['number', 'numfacts', 'numf'],
+      category: 'misc',
       parameters: [{
         type: 'number', min: 0, missingError: 'commands:numberfacts.validNumber'
       }]

@@ -4,7 +4,8 @@ const fetch = require('node-fetch')
 module.exports = class Fox extends Command {
   constructor (client) {
     super({
-      name: 'fox'
+      name: 'fox',
+      category: 'misc'
     }, client)
   }
 

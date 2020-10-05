@@ -480,13 +480,6 @@
       }
     }
   },
-  "strawpoll": {
-    "commandDescription": "Creates a Straw Poll.",
-    "commandUsage": "<poll title|<option 1|option 2|option 3...>",
-    "noParameters": "You have to give me a title and some options!",
-    "optionsNumberError": "You have to give me a number of options between 2 and 30!",
-    "clickHere": "Click here to vote"
-  },
   "imageoftheday": {
     "commandDescription": "Shows the NASA Image of the Day.",
     "embedAuthor": "NASA Image of the Day"
@@ -809,10 +802,6 @@
   "aww": {
     "title": "Here is some eyebleach for ya!",
     "commandDescription": "Shows a random image from /r/aww."
-  },
-  "videochat": {
-    "commandDescription": "Enables videochat for the voice channel that you're currently connected to and shares a link to it. (Beta feature!)",
-    "text": "**Click on this link to join the video chat:** `(You must already be in {{channelName}}!)`"
   },
   "vaporwave": {
     "commandDescription": "Vaporwavefies the text.",

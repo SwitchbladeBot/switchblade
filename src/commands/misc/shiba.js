@@ -6,7 +6,8 @@ module.exports = class Shiba extends Command {
   constructor (client) {
     super({
       name: 'shiba',
-      aliases: ['shibainu', 'doge']
+      aliases: ['shibainu', 'doge'],
+      category: 'misc'
     }, client)
   }
 

@@ -7,7 +7,7 @@ module.exports = class PresidentialAlert extends Command {
     super({
       name: 'presidentialalert',
       aliases: ['pa'],
-      category: 'images',
+      category: 'image-manipulation',
       requirements: { canvasOnly: true },
       parameters: [{
         type: 'string', full: true, required: true, missingError: 'commands:presidentialalert.missingText'

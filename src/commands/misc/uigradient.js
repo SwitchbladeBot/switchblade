@@ -6,7 +6,8 @@ module.exports = class UIGradient extends Command {
   constructor (client) {
     super({
       name: 'uigradient',
-      aliases: ['rg', 'randomgradient']
+      aliases: ['rg', 'randomgradient'],
+      category: 'misc'
     }, client)
   }
 

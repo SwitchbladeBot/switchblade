@@ -5,6 +5,7 @@ module.exports = class Tesla extends RandomRedditPostCommand {
     super({
       name: 'tesla',
       aliases: ['weebmusk', 'teslaporn'],
+      category: 'reddit',
       subreddit: 'TeslaPorn'
     }, client)
   }

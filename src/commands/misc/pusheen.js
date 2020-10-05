@@ -31,6 +31,7 @@ module.exports = class Pusheen extends Command {
   constructor (client) {
     super({
       name: 'pusheen',
+      category: 'misc',
       requirements: { apis: ['tumblr'] }
     }, client)
   }

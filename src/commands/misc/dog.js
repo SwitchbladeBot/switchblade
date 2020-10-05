@@ -6,7 +6,7 @@ module.exports = class Dog extends Command {
     super({
       name: 'dog',
       aliases: ['doggo', 'dogpics', 'randomdog'],
-      category: 'general'
+      category: 'misc'
     }, client)
   }
 

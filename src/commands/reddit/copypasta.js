@@ -4,7 +4,7 @@ module.exports = class Copypasta extends RandomRedditPostCommand {
   constructor (client) {
     super({
       name: 'copypasta',
-      category: 'memes',
+      category: 'reddit',
       subreddit: 'copypasta'
     }, client)
   }

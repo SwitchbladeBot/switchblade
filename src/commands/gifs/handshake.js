@@ -11,7 +11,7 @@ module.exports = class Handshake extends Command {
     super({
       name: 'handshake',
       aliases: ['hs', 'hands'],
-      category: 'images',
+      category: 'gifs',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:handshake.noMention'
       }]

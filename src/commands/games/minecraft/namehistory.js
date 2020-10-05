@@ -8,6 +8,7 @@ module.exports = class MinecraftNameHistory extends Command {
     super({
       name: 'namehistory',
       aliases: ['nameh', 'nh'],
+      category: 'games',
       parent: 'minecraft',
       parameters: [{
         type: 'string',

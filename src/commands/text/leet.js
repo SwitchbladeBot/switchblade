@@ -34,7 +34,7 @@ module.exports = class Leet extends Command {
   constructor (client) {
     super({
       name: 'leet',
-      category: 'memes',
+      category: 'text',
       parameters: [
         {
           type: 'string',

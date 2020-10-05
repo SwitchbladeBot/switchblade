@@ -6,7 +6,8 @@ module.exports = class InspiroBot extends Command {
   constructor (client) {
     super({
       name: 'inspirobot',
-      aliases: ['inspiro', 'ibot']
+      aliases: ['inspiro', 'ibot'],
+      category: 'misc'
     }, client)
   }
 

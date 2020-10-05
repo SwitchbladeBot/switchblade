@@ -5,7 +5,8 @@ module.exports = class GeekJokes extends Command {
   constructor (client) {
     super({
       name: 'geekjokes',
-      aliases: ['geek', 'geekjoke', 'geekj']
+      aliases: ['geek', 'geekjoke', 'geekj'],
+      category: 'misc'
     }, client)
   }
 

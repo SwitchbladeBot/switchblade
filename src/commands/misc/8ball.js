@@ -5,6 +5,7 @@ module.exports = class EightBall extends Command {
     super({
       name: '8ball',
       aliases: ['eightball', '8b', 'magicball', '8-ball'],
+      category: 'misc',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:8ball.noQuestion'
       }]

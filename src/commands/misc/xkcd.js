@@ -8,6 +8,7 @@ module.exports = class XKCD extends Command {
   constructor (client) {
     super({
       name: 'xkcd',
+      category: 'misc',
       parameters: [{
         type: 'string', full: true, required: false
       }]

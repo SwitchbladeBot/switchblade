@@ -5,6 +5,7 @@ module.exports = class LeagueOfLegendsChampion extends Command {
     super({
       name: 'champion',
       aliases: ['champ', 'c'],
+      category: 'games',
       parent: 'leagueoflegends',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:leagueoflegends.subcommands.champion.noChampion'

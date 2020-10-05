@@ -5,7 +5,7 @@ module.exports = class Goat extends Command {
     super({
       name: 'goat',
       aliases: ['placegoat'],
-      category: 'general',
+      category: 'misc',
       parameters: [{
         type: 'number',
         required: false

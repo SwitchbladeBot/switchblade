@@ -11,6 +11,7 @@ module.exports = class SteamLadderProfile extends Command {
     super({
       name: 'profile',
       aliases: ['p'],
+      category: 'games',
       parent: 'steamladder',
       parameters: [{
         type: 'string',

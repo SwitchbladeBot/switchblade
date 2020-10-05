@@ -7,7 +7,7 @@ module.exports = class Kiss extends Command {
     super({
       name: 'kiss',
       aliases: ['beijo', 'beijar'],
-      category: 'images',
+      category: 'gifs',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:kiss.noMention'
       }]

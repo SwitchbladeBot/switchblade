@@ -4,7 +4,7 @@ module.exports = class Vaporwave extends Command {
   constructor (client) {
     super({
       name: 'vaporwave',
-      category: 'memes',
+      category: 'text',
       parameters: [{
         type: 'string',
         full: true,

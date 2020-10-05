@@ -4,6 +4,7 @@ module.exports = class XKCD37 extends Command {
   constructor (client) {
     super({
       name: 'xkcd37',
+      category: 'misc',
       parameters: [{
         type: 'string', full: true
       }]

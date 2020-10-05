@@ -5,6 +5,7 @@ module.exports = class TranslateCommand extends Command {
     super({
       name: 'translate',
       aliases: ['translator'],
+      category: 'utility',
       parameters: [
         {
           type: 'string'

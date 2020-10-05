@@ -5,6 +5,7 @@ module.exports = class Fursuit extends RandomRedditPostCommand {
     super({
       name: 'fursuit',
       aliases: ['expensiveaf', 'furrysuit'],
+      category: 'reddit',
       subreddit: 'fursuit'
     }, client)
   }

@@ -4,7 +4,7 @@ module.exports = class HttpCat extends Command {
   constructor (client) {
     super({
       name: 'httpcat',
-      category: 'general',
+      category: 'misc',
       parameters: [{
         type: 'number',
         required: false

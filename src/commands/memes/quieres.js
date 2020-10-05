@@ -7,7 +7,7 @@ module.exports = class Quieres extends Command {
     super({
       name: 'quieres',
       aliases: ['bufa'],
-      category: 'images',
+      category: 'memes',
       requirements: { canvasOnly: true },
       parameters: [{
         type: 'image',

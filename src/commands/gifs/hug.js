@@ -6,7 +6,7 @@ module.exports = class Hug extends Command {
   constructor (client) {
     super({
       name: 'hug',
-      category: 'images',
+      category: 'gifs',
       parameters: [{
         type: 'user', acceptBot: true, acceptSelf: false, missingError: 'commands:hug.noMention'
       }]

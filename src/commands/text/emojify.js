@@ -22,7 +22,7 @@ module.exports = class Emojify extends Command {
   constructor (client) {
     super({
       name: 'emojify',
-      category: 'memes',
+      category: 'text',
       parameters: [{
         type: 'string',
         full: true,

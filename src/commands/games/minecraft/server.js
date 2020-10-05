@@ -9,6 +9,7 @@ module.exports = class MinecraftServer extends Command {
     super({
       name: 'server',
       aliases: ['sv'],
+      category: 'games',
       parent: 'minecraft',
       parameters: [{
         type: 'string',

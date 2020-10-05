@@ -5,6 +5,7 @@ module.exports = class QueueRemove extends Command {
     super({
       name: 'remove',
       aliases: ['rm'],
+      category: 'music',
       parent: 'queue',
       parameters: [{
         type: 'number', full: true, min: 1, missingError: ({ t }) => t(`commands:${this.tPath}.missingIndexParameter`)
