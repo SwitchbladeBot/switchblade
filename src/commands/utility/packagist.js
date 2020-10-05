@@ -20,8 +20,7 @@ module.exports = class Packagist extends SearchCommand {
 
   async search (_, query) {
     const { data } = await this.client.apis.packagist.search(query)
-    var queryArray = Object.keys(data.results).map(i => data.results[i])
-    return queryArray
+    return Object.keys(data.results).map(i => data.results[i])
   }
 
   searchResultFormatter (item) {
