@@ -13,9 +13,9 @@ module.exports = class Packagist extends APIWrapper {
   async search (name) {
     return axios({
       params: {
-        q: encodeURIComponent(name),
+        q: encodeURIComponent(name)
       },
-      url: API_URL,
+      url: API_URL
     })
   }
 }

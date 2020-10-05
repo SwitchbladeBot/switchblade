@@ -20,13 +20,12 @@ module.exports = class Packagist extends SearchCommand {
 
   async search (_, query) {
     const { data } = await this.client.apis.packagist.search(query)
-    var queryArray = Object.keys(data.results).map(i => data.results[i]);
-    return(queryArray);
-    
+    var queryArray = Object.keys(data.results).map(i => data.results[i])
+    return queryArray
   }
 
   searchResultFormatter (item) {
-    return `[${item.name}](${item.repository})`;
+    return `[${item.name}](${item.repository})`
   }
 
   async handleResult ({ channel, author, language }, item) {
@@ -47,4 +46,3 @@ module.exports = class Packagist extends SearchCommand {
     channel.send(embed).then(() => channel.stopTyping())
   }
 }
- 
