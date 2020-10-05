@@ -1806,7 +1806,7 @@
     "notFound": "This user couldn't be found.",
     "following": "Following",
     "followers": "Followers"
-  }
+  },
   "owlbot": {
     "commandDescription": "Shows a definiton for given word from owlbot.info.",
     "commandUsage": "<word>",
