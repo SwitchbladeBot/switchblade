@@ -19,7 +19,6 @@ module.exports = class Math extends Command {
       const data = await this.client.apis.mathematics.calculate(expression).then(json => JSON.parse(json))
       embed.setTitle(t('commands:math.result', { result: data._data || data }))
     } catch (error) {
-      this.client.log(`Failed math calculation ${expression}\nError: ${error.stack}`, { tags: [this.name] })
       throw new CommandError(t('commands:math.invalidMathExpression'), true)
     }
     channel.send(embed)
