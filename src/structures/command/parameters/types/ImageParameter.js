@@ -5,6 +5,7 @@ const CommandError = require('../../CommandError.js')
 const { URL } = require('url')
 const fetch = require('node-fetch')
 const AbortController = require('abort-controller')
+const { EMOJI_REGEX } = require('./EmojiParameter.js')
 
 const isValidURL = (q) => {
   try {
@@ -16,7 +17,7 @@ const isValidURL = (q) => {
 }
 
 const MAX_SIZE = 20000000
-const SUPPORTED_TYPES = [ 'image/jpeg', 'image/png', 'image/svg+xml' ]
+const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml']
 const imageResponseCheck = (res) => (
   res.ok && SUPPORTED_TYPES.includes(res.headers.get('content-type')) &&
   res.headers.has('content-length') && Number(res.headers.get('content-length')) <= MAX_SIZE
@@ -33,7 +34,7 @@ const imageRequest = (url, client, timeout = 3000) => {
 const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
 
 module.exports = class ImageParameter extends Parameter {
-  static parseOptions (options = {}) {
+  static parseOptions(options = {}) {
     const user = defVal(options, 'user', true)
     return {
       ...super.parseOptions(options),
@@ -41,6 +42,7 @@ module.exports = class ImageParameter extends Parameter {
       url: defVal(options, 'url', false),
       attachment: defVal(options, 'attachment', true),
       link: defVal(options, 'link', true),
+      emoji: defVal(options, 'emoji', true),
       userOptions: user ? UserParameter.parseOptions(options.userOptions) : null,
       authorAvatar: defVal(options, 'authorAvatar', true),
       avatarFormat: defVal(options, 'avatarFormat', 'jpg'),
@@ -64,7 +66,7 @@ module.exports = class ImageParameter extends Parameter {
    *   Last attachment from channel's last 10 messages
    *   Author's avatar
    */
-  static async parse (arg, context) {
+  static async parse(arg, context) {
     const { t, author, channel, client, message, parseState } = context
 
     // Attachment
@@ -108,7 +110,29 @@ module.exports = class ImageParameter extends Parameter {
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
-        } catch (e) {}
+        } catch (e) { }
+      }
+
+      if (this.emoji) {
+        try {
+          let url
+
+          if (EMOJI_REGEX.test(arg)) {
+            const regexResult = EMOJI_REGEX.exec(arg)
+            const [, , , id] = regexResult
+            url = `https://cdn.discordapp.com/emojis/${id}.png`
+          } else {
+            const codePoints = Array.from(arg)
+              .map((v) => v.codePointAt(0).toString(16))
+
+            url = `https://twemoji.maxcdn.com/v/13.0.1/72x72/${codePoints.join('-')}.png`
+          }
+
+          const buffer = await imageRequest(url, client)
+          return buffer
+        } catch (e) {
+          console.error(e)
+        }
       }
     }
 
