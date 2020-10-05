@@ -34,7 +34,7 @@ const imageRequest = (url, client, timeout = 3000) => {
 const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]
 
 module.exports = class ImageParameter extends Parameter {
-  static parseOptions(options = {}) {
+  static parseOptions (options = {}) {
     const user = defVal(options, 'user', true)
     return {
       ...super.parseOptions(options),
@@ -66,7 +66,7 @@ module.exports = class ImageParameter extends Parameter {
    *   Last attachment from channel's last 10 messages
    *   Author's avatar
    */
-  static async parse(arg, context) {
+  static async parse (arg, context) {
     const { t, author, channel, client, message, parseState } = context
 
     // Attachment
@@ -110,7 +110,9 @@ module.exports = class ImageParameter extends Parameter {
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
-        } catch (e) { }
+        } catch (e) {
+          console.log(e)
+        }
       }
 
       if (this.emoji) {
@@ -130,9 +132,7 @@ module.exports = class ImageParameter extends Parameter {
 
           const buffer = await imageRequest(url, client)
           return buffer
-        } catch (e) {
-          console.error(e)
-        }
+        } catch (e) { }
       }
     }
 
