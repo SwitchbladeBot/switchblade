@@ -20,7 +20,7 @@ module.exports = class Packagist extends SearchCommand {
 
   async search (_, query) {
     const { data } = await this.client.apis.packagist.search(query)
-    return Object.keys(data.results).map(i => data.results[i])
+    return Object.values(data.results)
   }
 
   searchResultFormatter (item) {
@@ -36,7 +36,8 @@ module.exports = class Packagist extends SearchCommand {
       .setAuthor('Packagist', this.embedLogoURL, 'https://packagist.org/')
       .setDescriptionFromBlockArray([
         [
-          `[${item.name}](${item.url})`, item.description ? item.description : null
+          `[${item.name}](${item.url})`,
+          item.description ? item.description : null
         ],
         [
           `\`\`\`composer require ${item.name}\`\`\``
