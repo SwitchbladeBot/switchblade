@@ -18,7 +18,7 @@ module.exports = class Slap extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     embed.setImage(body.url)
-      .setDescription(t('commands:slap.success', { _author: author, slapped: user }))
+      .setDescription(t('commands:slap.success', { _author: author.toString(), slapped: user.toString() }))
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

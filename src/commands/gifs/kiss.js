@@ -19,7 +19,7 @@ module.exports = class Kiss extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     embed.setImage(body.url)
-      .setDescription(t('commands:kiss.success', { kisser: author, kissed: user }))
+      .setDescription(t('commands:kiss.success', { kisser: author.toString(), kissed: user.toString() }))
     channel.send(embed).then(() => channel.stopTyping())
   }
 }
