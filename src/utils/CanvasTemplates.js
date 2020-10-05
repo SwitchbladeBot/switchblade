@@ -10,7 +10,7 @@ let CanvasUtils = {}
 try {
   Canvas = require('canvas')
   CanvasUtils = require('./CanvasUtils.js')
-} catch (e) { }
+} catch (e) {}
 
 const { createCanvas, Image } = Canvas
 const { ALIGN, measureText } = CanvasUtils
