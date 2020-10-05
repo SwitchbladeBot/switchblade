@@ -110,9 +110,7 @@ module.exports = class ImageParameter extends Parameter {
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
-        } catch (e) {
-          console.log(e)
-        }
+        } catch (e) { }
       }
 
       if (this.emoji) {
