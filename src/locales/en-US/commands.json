@@ -950,7 +950,7 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
-  "freefire":  {
+  "freefire": {
     "commandDescription": "Shows information related to Free Fire",
     "commandUsage": "<type> <query>",
     "gameName": "Free Fire",
@@ -1789,5 +1789,13 @@
     "nis": "NIS",
     "amount": "Amount",
     "city": "City"
+  },
+  "instagram": {
+    "commandDescription": "Shows a Instagram profile.",
+    "commandUsage": "<instagram user>",
+    "noUser": "Please insert a username!",
+    "notFound": "This user couldn't be found.",
+    "following": "Following",
+    "followers": "Followers"
   }
 }
