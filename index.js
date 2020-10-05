@@ -12,7 +12,7 @@ try {
   require('canvas')
   require('./src/utils/CanvasUtils.js').initializeHelpers()
   canvasLoaded = true
-} catch (e) { }
+} catch (e) {}
 
 // Initialize client
 const CLIENT_OPTIONS = {
