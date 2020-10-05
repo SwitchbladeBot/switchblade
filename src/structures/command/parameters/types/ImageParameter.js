@@ -110,7 +110,7 @@ module.exports = class ImageParameter extends Parameter {
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
-        } catch (e) { }
+        } catch (e) {}
       }
 
       if (this.emoji) {
@@ -130,7 +130,7 @@ module.exports = class ImageParameter extends Parameter {
 
           const buffer = await imageRequest(url, client)
           return buffer
-        } catch (e) { }
+        } catch (e) {}
       }
     }
 
