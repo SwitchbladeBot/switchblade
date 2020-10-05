@@ -80,6 +80,7 @@ module.exports = {
   PETPET_PNG: 'src/assets/png/petpet.png',
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
   QUIERES_HAND_PNG: 'src/assets/png/quieres.png',
+  HERE_WE_GO_AGAIN_PNG: 'src/assets/png/ashwga.png',
   KANNA_PAPER_TEMPLATE: 'src/assets/png/kanna_paper_template.png',
   PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
   // Backgrounds

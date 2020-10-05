@@ -727,6 +727,21 @@ module.exports = class CanvasTemplates {
     return canvas.toBuffer()
   }
 
+  static async herewegoagain (buffer) {
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.HERE_WE_GO_AGAIN_PNG, true),
+      Image.from(buffer)
+    ])
+    const [ template, image ] = await IMAGE_ASSETS
+    const WIDTH = image.width
+    const HEIGHT = image.height
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(image, 0, 0, WIDTH, HEIGHT)
+    ctx.drawImage(template, WIDTH - template.width, HEIGHT - template.height, template.width, template.height)
+    return canvas.toBuffer()
+  }
+
   static gradient (colors, width, height) {
     // TODO: more gradient directions besides linear
     const canvas = createCanvas(width, height)
