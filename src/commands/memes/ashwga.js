@@ -11,7 +11,7 @@ module.exports = class HereWeGoAgain extends Command {
       requirements: { canvasOnly: true },
       parameters: [{
         type: 'image',
-        missingError: 'commands:herwegoagain.missingImage'
+        missingError: 'commands:herewegoagain.missingImage'
       }]
     }, client)
   }
