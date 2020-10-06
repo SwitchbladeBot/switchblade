@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed } = require('../../')
+const { Command, SwitchbladeEmbed, MiscUtils } = require('../../')
 
 module.exports = class MostPlayed extends Command {
   constructor (client) {
@@ -28,12 +28,16 @@ module.exports = class MostPlayed extends Command {
 
     const gamesList = Object.keys(games)
     const mostPlayed = gamesList.sort((a, b) => games[b] - games[a]).slice(0, 20)
+    const totalPlayers = gamesList.length
+      ? Object.values(games).reduce((acc, val) => acc + val)
+      : 0
 
     embed.setThumbnail(guild.iconURL({ dynamic: true }) ? guild.iconURL({ dynamic: true }) : `https://guild-default-icon.herokuapp.com/${guild.nameAcronym}`)
-      .setTitle('Most played games')
+      .setTitle(t('commands:mostplayed.mostPlayedTitle', { name: guild.name }))
       .setDescription(mostPlayed.length
-        ? mostPlayed.map((game, i) => `${i + 1}. **${game}** - ${games[game]} players`)
-        : 'Nobody is playing games here!')
+        ? mostPlayed.map((game, i) => t('commands:mostplayed.hasPlayers', { rank: i + 1, game, count: MiscUtils.formatNumber(games[game], language) }))
+        : t('commands:mostplayed.noPlayers'))
+      .setFooter(t('commands:mostplayed.totalPlayers', { count: MiscUtils.formatNumber(totalPlayers, language) }))
 
     channel.send(embed).then(() => channel.stopTyping())
   }
