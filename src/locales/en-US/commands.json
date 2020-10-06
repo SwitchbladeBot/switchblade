@@ -1799,6 +1799,21 @@
     "amount": "Amount",
     "city": "City"
   },
+  "owlbot": {
+    "commandDescription": "Shows a definiton for given word from owlbot.info.",
+    "commandUsage": "<word>",
+    "noWord": "You have to give me a word",
+    "footer": "Provided by owlbot: owlbot.info",
+    "notFound": "Word not found",
+    "error": "An error has occurred while requesting definitons. Please try again later."
+  },
+  "packagist": {
+    "commandDescription": "Shows information about public PHP packages installable with Composer.",
+    "commandUsage": "<package name>",
+    "noDescription": "No description provided.",
+    "notFound": "Package not found.",
+    "noNameProvided": "You have to give me a package name!"
+  },
   "commandsource": {
     "commandDescription": "Get the source code of a command",
     "commandUsage": "<command name>",

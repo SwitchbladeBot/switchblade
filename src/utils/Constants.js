@@ -33,6 +33,8 @@ module.exports = {
   PORTALDATRANSPARENCIA_COLOR: '#2369b3',
   ECLIPSE_PLUGINS_COLOR: '#42347f',
   FLATHUB_COLOR: '#4A86CF',
+  OWLBOT_COLOR: '#82d2d4',
+  PACKAGIST_COLOR: '#d8dff2',
 
   // Emojis
 
