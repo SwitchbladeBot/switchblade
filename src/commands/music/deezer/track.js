@@ -5,7 +5,6 @@ module.exports = class DeezerTrack extends SearchCommand {
     super({
       name: 'track',
       aliases: ['song', 't', 's'],
-      category: 'music',
       parent: 'deezer',
       embedColor: Constants.DEEZER_COLOR,
       embedLogoURL: 'https://i.imgur.com/lKlFtbs.png'

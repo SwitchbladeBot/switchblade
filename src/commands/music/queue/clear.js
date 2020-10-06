@@ -5,7 +5,6 @@ module.exports = class QueueClear extends Command {
     super({
       name: 'clear',
       aliases: ['cl'],
-      category: 'music',
       parent: 'queue'
     }, client)
   }

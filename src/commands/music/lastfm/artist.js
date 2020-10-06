@@ -5,7 +5,6 @@ module.exports = class LastfmArtist extends SearchCommand {
     super({
       name: 'artist',
       aliases: ['ar'],
-      category: 'music',
       parent: 'lastfm',
       embedColor: Constants.LASTFM_COLOR,
       embedLogoURL: 'https://i.imgur.com/TppYCun.png'

@@ -8,7 +8,6 @@ module.exports = class MinecraftSkin extends Command {
     super({
       name: 'skin',
       aliases: ['minecraftskin', 'mskin', 's'],
-      category: 'games',
       parent: 'minecraft',
       parameters: [{
         type: 'string',

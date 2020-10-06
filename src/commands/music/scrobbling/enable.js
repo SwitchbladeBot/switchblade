@@ -5,7 +5,6 @@ module.exports = class ScrobblingEnabler$ extends Command {
     super({
       name: 'enable',
       aliases: ['e'],
-      category: 'music',
       parent: 'scrobbling',
       parameters: [{ type: 'boolean' }]
     }, client)

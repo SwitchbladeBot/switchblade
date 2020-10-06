@@ -4,7 +4,6 @@ module.exports = class RestrictEmojiRemove extends Command {
   constructor (client) {
     super({
       name: 'remove',
-      category: 'moderation',
       parent: 'restrictemoji',
       parameters: [{
         type: 'emoji',

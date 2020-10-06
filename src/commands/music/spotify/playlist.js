@@ -5,7 +5,6 @@ module.exports = class SpotifyPlaylist extends SearchCommand {
     super({
       name: 'playlist',
       aliases: ['p'],
-      category: 'music',
       parent: 'spotify',
       embedColor: Constants.SPOTIFY_COLOR,
       embedLogoURL: 'https://i.imgur.com/vw8svty.png'

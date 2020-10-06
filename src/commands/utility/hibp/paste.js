@@ -6,7 +6,6 @@ module.exports = class HIBPPaste extends Command {
     super({
       name: 'paste',
       aliases: ['p'],
-      category: 'utility',
       parent: 'hibp',
       parameters: [{
         type: 'string', missingError: 'commands:hibp.noEmail'

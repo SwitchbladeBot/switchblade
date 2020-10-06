@@ -6,7 +6,6 @@ module.exports = class HIBPBreach extends Command {
     super({
       name: 'breach',
       aliases: ['b'],
-      category: 'utility',
       parent: 'hibp',
       parameters: [{
         type: 'string', missingError: 'commands:hibp.noEmail'

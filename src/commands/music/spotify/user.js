@@ -5,7 +5,6 @@ module.exports = class SpotifyUser extends Command {
     super({
       name: 'user',
       aliases: ['u'],
-      category: 'music',
       parent: 'spotify',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:spotify.subcommands.user.noUser'

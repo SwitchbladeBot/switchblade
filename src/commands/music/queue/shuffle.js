@@ -5,7 +5,6 @@ module.exports = class QueueShuffle extends Command {
     super({
       name: 'shuffle',
       aliases: ['sf'],
-      category: 'music',
       parent: 'queue'
     }, client)
   }

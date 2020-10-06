@@ -5,7 +5,6 @@ module.exports = class LastfmLoveTrack extends Command {
     super({
       name: 'love',
       aliases: ['l'],
-      category: 'music',
       parent: 'lastfm',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, envVars: ['DASHBOARD_URL'] }
     }, client)

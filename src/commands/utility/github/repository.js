@@ -6,7 +6,6 @@ module.exports = class GitHubRepository extends SearchCommand {
     super({
       name: 'repository',
       aliases: ['repo'],
-      category: 'utility',
       parent: 'github',
       embedColor: Constants.GITHUB_COLOR,
       embedLogoURL: 'https://i.imgur.com/gsY6oYB.png'

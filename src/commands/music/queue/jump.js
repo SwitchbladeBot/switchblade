@@ -5,7 +5,6 @@ module.exports = class QueueJump extends Command {
     super({
       name: 'jump',
       aliases: ['jumpto', 'skipto'],
-      category: 'music',
       parent: 'queue',
       parameters: [{
         type: 'number', full: true, min: 1, missingError: ({ t }) => t(`commands:${this.tPath}.missingIndexParameter`)

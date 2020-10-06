@@ -6,7 +6,6 @@ module.exports = class LegendsOfRuneterraCard extends Command {
     super({
       name: 'card',
       aliases: ['c'],
-      category: 'games',
       parent: 'legendsofruneterra',
       requirements: { apis: ['legendsofruneterra'] },
       parameters: [{

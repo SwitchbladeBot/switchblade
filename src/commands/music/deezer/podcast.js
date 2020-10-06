@@ -5,7 +5,6 @@ module.exports = class DeezerPodcast extends SearchCommand {
     super({
       name: 'podcast',
       aliases: ['pod'],
-      category: 'music',
       parent: 'deezer',
       embedColor: Constants.DEEZER_COLOR,
       embedLogoURL: 'https://i.imgur.com/lKlFtbs.png',

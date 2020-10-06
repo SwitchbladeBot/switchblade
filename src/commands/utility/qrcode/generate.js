@@ -5,7 +5,6 @@ module.exports = class QRCodeGenerate extends Command {
     super({
       name: 'generate',
       aliases: ['create', 'g'],
-      category: 'utility',
       parent: 'qrcode',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:qrcode.subcommands.generate.noText'

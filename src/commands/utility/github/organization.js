@@ -6,7 +6,6 @@ module.exports = class GitHubOrganization extends Command {
     super({
       name: 'organization',
       aliases: ['org'],
-      category: 'utility',
       parent: 'github',
       parameters: [{
         type: 'string', missingError: 'commands:github.subcommands.organization.noOrg'

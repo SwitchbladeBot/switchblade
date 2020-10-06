@@ -6,7 +6,6 @@ module.exports = class GitHubUser extends Command {
     super({
       name: 'user',
       aliases: ['u'],
-      category: 'utility',
       parent: 'github',
       parameters: [{
         type: 'string', missingError: 'commands:github.subcommands.user.noUser'

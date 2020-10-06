@@ -6,7 +6,6 @@ module.exports = class QRCodeRead extends Command {
     super({
       name: 'read',
       aliases: ['r'],
-      category: 'utility',
       parent: 'qrcode',
       parameters: [{
         type: 'image',

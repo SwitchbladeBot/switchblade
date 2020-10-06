@@ -7,7 +7,6 @@ module.exports = class LastfmUserTop extends Command {
   constructor (client) {
     super({
       name: 'top',
-      category: 'music',
       parent: 'lastfm',
       parameters: [{
         type: 'string', missingError: 'commands:lastfm.subcommands.top.missingUser'

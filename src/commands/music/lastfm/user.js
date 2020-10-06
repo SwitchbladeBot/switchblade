@@ -6,7 +6,6 @@ module.exports = class LastfmUser extends Command {
     super({
       name: 'user',
       aliases: ['u'],
-      category: 'music',
       parent: 'lastfm',
       parameters: [{
         type: 'string', full: true, missingError: 'commands:lastfm.subcommands.user.missing'
