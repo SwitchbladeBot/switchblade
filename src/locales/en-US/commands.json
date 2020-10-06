@@ -69,7 +69,7 @@
     "commandUsage": "[server id]",
     "mostPlayedTitle": "Most played games in {{name}}",
     "hasPlayers": "{{rank}}. **{{game}}** - **{{count}}** players.",
-    "totalPlayers": "{{count}} total games being played.",
+    "totalPlayers": "{{count}} total people playing games.",
     "noPlayers": "Nobody in this server is playing a game!"
   },
   "hibp": {
