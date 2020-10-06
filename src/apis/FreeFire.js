@@ -3,14 +3,14 @@ const fetch = require('node-fetch')
 
 const REQUEST_URL = 'https://ffstaticdata.switchblade.xyz'
 
-let weaponData = {}
-let languages = []
+const weaponData = {}
 
 module.exports = class FreeFire extends APIWrapper {
   constructor () {
     super({
       name: 'freefire'
     })
+    this.languages = []
   }
 
   load () {
@@ -20,21 +20,17 @@ module.exports = class FreeFire extends APIWrapper {
 
   async loadLanguages () {
     const { locales } = await this.request('/metadata.json')
-    languages = locales
+    this.languages = locales
   }
 
   selectLanguage (language = 'en_US') {
     const normalizedLanguage = language.slice(0, 2)
-    const matchingLanguage = languages.find(l => l.toLowerCase() === normalizedLanguage)
-
-    return matchingLanguage || 'en'
+    return this.languages.find(l => l.toLowerCase() === normalizedLanguage) || 'en'
   }
 
   async getWeaponData (lang) {
     const language = this.selectLanguage(lang)
-
-    if (!weaponData[language]) weaponData[language] = await this.request(`/${language}/weapons.json`)
-    return weaponData[language]
+    return weaponData[language] || (weaponData[language] = await this.request(`/${language}/weapons.json`))
   }
 
   request (endpoint) {
