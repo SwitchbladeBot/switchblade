@@ -1813,5 +1813,13 @@
     "noDescription": "No description provided.",
     "notFound": "Package not found.",
     "noNameProvided": "You have to give me a package name!"
+  },
+  "commandsource": {
+    "commandDescription": "Get the source code of a command",
+    "commandUsage": "<command name>",
+    "branchNotUpToDate": "The local branch is not up to date with origin, using master as base instead",
+    "missingCommand": "You have to give me the name of a command",
+    "noRepositoryOrHEAD": "There is no local repository or the local repository has no HEAD",
+    "lastEdited": "Last edited by **{{user}}** {{ago}}"
   }
 }
