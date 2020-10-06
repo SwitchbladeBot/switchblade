@@ -35,6 +35,7 @@ module.exports = {
   FLATHUB_COLOR: '#4A86CF',
   INSTAGRAM_COLOR: '#E1306C',
   OWLBOT_COLOR: '#82d2d4',
+  PACKAGIST_COLOR: '#d8dff2',
 
   // Emojis
 
