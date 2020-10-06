@@ -4,7 +4,7 @@ module.exports = class Stop extends Command {
   constructor (client) {
     super({
       name: 'stop',
-      category: 'music',
+      category: 'musicplayer',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true, permissions: ['MANAGE_GUILD'] }
     }, client)
   }

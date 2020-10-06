@@ -7,7 +7,7 @@ module.exports = class Volume extends Command {
     super({
       name: 'volume',
       aliases: ['vol'],
-      category: 'music',
+      category: 'musicplayer',
       requirements: {
         guildOnly: true,
         sameVoiceChannelOnly: true,

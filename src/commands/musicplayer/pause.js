@@ -5,7 +5,7 @@ module.exports = class Pause extends Command {
     super({
       name: 'pause',
       aliases: ['resume'],
-      category: 'music',
+      category: 'musicplayer',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
     }, client)
   }

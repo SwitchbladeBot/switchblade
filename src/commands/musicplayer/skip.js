@@ -5,7 +5,7 @@ module.exports = class Skip extends Command {
     super({
       name: 'skip',
       aliases: ['next'],
-      category: 'music',
+      category: 'musicplayer',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
     }, client)
   }

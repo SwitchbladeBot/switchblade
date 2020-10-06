@@ -7,7 +7,7 @@ module.exports = class Queue extends Command {
     super({
       name: 'queue',
       aliases: ['playlist'],
-      category: 'music',
+      category: 'musicplayer',
       requirements: { guildOnly: true, guildPlaying: true }
     }, client)
   }

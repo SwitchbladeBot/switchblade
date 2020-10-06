@@ -6,7 +6,7 @@ module.exports = class Play extends Command {
     super({
       name: 'play',
       aliases: ['p'],
-      category: 'music',
+      category: 'musicplayer',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, voiceChannelOnly: true, playerManagerOnly: true },
       parameters: [{
         type: 'string', full: true, missingError: 'commands:play.noTrackIdentifier'

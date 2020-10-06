@@ -8,7 +8,7 @@ module.exports = class NowPlaying extends Command {
     super({
       name: 'nowplaying',
       aliases: ['np', 'currentplaying'],
-      category: 'music',
+      category: 'musicplayer',
       requirements: { guildOnly: true, guildPlaying: true },
       parameters: [[{
         type: 'booleanFlag', name: 'text'

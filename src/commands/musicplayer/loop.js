@@ -1,20 +1,20 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 
-module.exports = class Bassboost extends Command {
+module.exports = class Loop extends Command {
   constructor (client) {
     super({
-      name: 'bassboost',
-      aliases: ['bass', 'earrape'],
-      category: 'music',
+      name: 'loop',
+      aliases: ['repeat'],
+      category: 'musicplayer',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true }
     }, client)
   }
 
   async run ({ t, author, channel, guild }) {
     const embed = new SwitchbladeEmbed(author)
-
     const guildPlayer = this.client.playerManager.players.get(guild.id)
-    guildPlayer.bassboost(!guildPlayer.bassboosted)
-    channel.send(embed.setTitle(t(`commands:bassboost.bassboost_${guildPlayer.bassboosted}`)))
+    const loop = !guildPlayer.looping
+    embed.setTitle(t('music:stateChanged_loop', { context: loop ? 'on' : 'off' }))
+    channel.send(embed).then(() => guildPlayer.loop(loop))
   }
 }

@@ -5,7 +5,7 @@ module.exports = class Seek extends Command {
   constructor (client) {
     super({
       name: 'seek',
-      category: 'music',
+      category: 'musicplayer',
       requirements: { guildOnly: true, sameVoiceChannelOnly: true, guildPlaying: true },
       parameters: [{
         type: TargetParameter, full: true, missingError: 'commands:seek.missingSeekParameter'
