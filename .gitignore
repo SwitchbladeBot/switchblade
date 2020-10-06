@@ -66,3 +66,6 @@ typings/
 
 src/locales/*
 !src/locales/en-US/
+
+# yucky macOS garbage files
+.DS_Store
