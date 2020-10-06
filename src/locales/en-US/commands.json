@@ -1799,6 +1799,14 @@
     "amount": "Amount",
     "city": "City"
   },
+  "instagram": {
+    "commandDescription": "Shows a Instagram profile.",
+    "commandUsage": "<instagram user>",
+    "noUser": "Please insert a username!",
+    "notFound": "This user couldn't be found.",
+    "following": "Following",
+    "followers": "Followers"
+  },
   "owlbot": {
     "commandDescription": "Shows a definiton for given word from owlbot.info.",
     "commandUsage": "<word>",
