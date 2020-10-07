@@ -1829,5 +1829,14 @@
     "missingCommand": "You have to give me the name of a command",
     "noRepositoryOrHEAD": "There is no local repository or the local repository has no HEAD",
     "lastEdited": "Last edited by **{{user}}** {{ago}}"
+  },
+  "brainfuck": {
+    "commandDescription": "Executes brainfuck code",
+    "commandUsage": "<code> <input optional>",
+    "noCode": "You have to give me some brainfuck code",
+    "steps": "Steps",
+    "time": "Execution time",
+    "output": "Output",
+    "error": "Error"
   }
 }
