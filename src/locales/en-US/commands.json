@@ -4,6 +4,15 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
+  "whatlanguage": {
+    "commandDescription": "Tells you what language a piece of text is in.",
+    "noText": "You have to give me some text!",
+    "embedTitle": "What language is this?",
+    "embedDes": "I have detected that the language of this text is",
+    "fieldLanguage": "Language",
+    "fieldProbability": "Probability",
+    "fieldPercentage": "Percentage"
+  },
   "2048": {
     "commandDescription": "Play the 2048 game.",
     "commandUsage": "[board size]"
@@ -49,6 +58,11 @@
   },
   "ping": {
     "commandDescription": "Checks if the bot is online."
+  },
+  "petpet": {
+    "commandDescription": "Pet your friends!",
+    "commandUsage": "[image link]",
+    "missingImage": "You need to give me an image to pet."
   },
   "hibp": {
     "commandDescription": "Checks if an email has been found in a data breach or paste.",
@@ -1767,6 +1781,15 @@
     "installs": "{{count}} installs",
     "license": "License"
   },
+  "flathub": {
+    "commandDescription": "Searches for Linux apps on FlatHub",
+    "commandUsage": "<search query>",
+    "title": "FlatHub {{name}} app information",
+    "categories": "Categories",
+    "license": "License",
+    "version": "Release Version",
+    "download": "Download"
+  },
   "auxilioemergencial": {
     "commandDescription": "Searches for a CPF or NIS on \"Portal da Transparência\" for the Emergencial Assistance.",
     "commandUsage": "<cpf or nis>",
@@ -1775,6 +1798,37 @@
     "nis": "NIS",
     "amount": "Amount",
     "city": "City"
+  },
+  "instagram": {
+    "commandDescription": "Shows a Instagram profile.",
+    "commandUsage": "<instagram user>",
+    "noUser": "Please insert a username!",
+    "notFound": "This user couldn't be found.",
+    "following": "Following",
+    "followers": "Followers"
+  },
+  "owlbot": {
+    "commandDescription": "Shows a definiton for given word from owlbot.info.",
+    "commandUsage": "<word>",
+    "noWord": "You have to give me a word",
+    "footer": "Provided by owlbot: owlbot.info",
+    "notFound": "Word not found",
+    "error": "An error has occurred while requesting definitons. Please try again later."
+  },
+  "packagist": {
+    "commandDescription": "Shows information about public PHP packages installable with Composer.",
+    "commandUsage": "<package name>",
+    "noDescription": "No description provided.",
+    "notFound": "Package not found.",
+    "noNameProvided": "You have to give me a package name!"
+  },
+  "commandsource": {
+    "commandDescription": "Get the source code of a command",
+    "commandUsage": "<command name>",
+    "branchNotUpToDate": "The local branch is not up to date with origin, using master as base instead",
+    "missingCommand": "You have to give me the name of a command",
+    "noRepositoryOrHEAD": "There is no local repository or the local repository has no HEAD",
+    "lastEdited": "Last edited by **{{user}}** {{ago}}"
   },
   "brainfuck": {
     "commandDescription": "Executes brainfuck code",

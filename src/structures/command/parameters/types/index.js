@@ -3,6 +3,7 @@ module.exports = {
   boolean: require('./BooleanParameter.js'),
   channel: require('./ChannelParameter.js'),
   color: require('./ColorParameter.js'),
+  command: require('./CommandParameter.js'),
   emoji: require('./EmojiParameter.js'),
   guild: require('./GuildParameter.js'),
   image: require('./ImageParameter.js'),

@@ -32,6 +32,10 @@ module.exports = {
   JETBRAINS_PLUGIN: '#d44386',
   PORTALDATRANSPARENCIA_COLOR: '#2369b3',
   ECLIPSE_PLUGINS_COLOR: '#42347f',
+  FLATHUB_COLOR: '#4A86CF',
+  INSTAGRAM_COLOR: '#E1306C',
+  OWLBOT_COLOR: '#82d2d4',
+  PACKAGIST_COLOR: '#d8dff2',
 
   // Emojis
 
@@ -75,6 +79,7 @@ module.exports = {
   HTTP_BRAND_SVG: 'src/assets/svg/brands/http.svg',
 
   // Misc
+  PETPET_PNG: 'src/assets/png/petpet.png',
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
   QUIERES_HAND_PNG: 'src/assets/png/quieres.png',
   KANNA_PAPER_TEMPLATE: 'src/assets/png/kanna_paper_template.png',
