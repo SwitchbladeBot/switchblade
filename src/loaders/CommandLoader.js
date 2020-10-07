@@ -28,8 +28,8 @@ module.exports = class CommandLoader extends Loader {
   initializeCommands (dirPath = 'src/commands') {
     let success = 0
     let failed = 0
-    return FileUtils.requireDirectory(dirPath, (NewCommand) => {
-      this.addCommand(new NewCommand(this.client)) ? success++ : failed++
+    return FileUtils.requireDirectory(dirPath, (NewCommand, path) => {
+      this.addCommand(new NewCommand(this.client), path) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
       const sorted = this.posLoadCommands.sort((a, b) => +(typeof b === 'string') || -(typeof a === 'string') || a.length - b.length)
       sorted.forEach(subCommand => this.addSubcommand(subCommand))
@@ -42,7 +42,8 @@ module.exports = class CommandLoader extends Loader {
    * Adds a new command to the Client.
    * @param {Command} command - Command to be added
    */
-  addCommand (command) {
+  addCommand (command, path) {
+    command.path = path
     if (typeof command.parentCommand === 'string' || Array.isArray(command.parentCommand)) {
       this.posLoadCommands.push(command)
     } else {
