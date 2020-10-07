@@ -25,6 +25,7 @@
   "databaseOnly": "Sorry, I don't have a database connection right now!",
   "playerManagerOnly": "Sorry, I don't have a player connection right now!",
   "invalidColor": "You have to give me a valid color.",
+  "commandNotFound": "I couldn't find any command with that name.",
   "invalidGuild": "You have to give me a valid guild.",
   "invalidEmoji": "You have to give me a valid emoji.",
   "invalidRole": "You have to give me a valid role.",
