@@ -1527,6 +1527,11 @@
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with."
   },
+  "herewegoagain": {
+    "commandDescription": "Generates a \"Ah shit, here we go again.\" meme with the provided image.",
+    "commandUsage": "<image>",
+    "missingImage": "You need to give me an image to generate the meme with."
+  },
   "color": {
     "commandDescription": "Gets information about a color.",
     "commandUsage": "<color>",
