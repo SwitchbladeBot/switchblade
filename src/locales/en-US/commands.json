@@ -1806,6 +1806,14 @@
     "error": "Error! I was not able to give this role.",
     "higherError": "Error! I was not able to give this role because the role is higher than you."
   },
+  "instagram": {
+    "commandDescription": "Shows a Instagram profile.",
+    "commandUsage": "<instagram user>",
+    "noUser": "Please insert a username!",
+    "notFound": "This user couldn't be found.",
+    "following": "Following",
+    "followers": "Followers"
+  },
   "owlbot": {
     "commandDescription": "Shows a definiton for given word from owlbot.info.",
     "commandUsage": "<word>",
@@ -1813,5 +1821,29 @@
     "footer": "Provided by owlbot: owlbot.info",
     "notFound": "Word not found",
     "error": "An error has occurred while requesting definitons. Please try again later."
+  },
+  "packagist": {
+    "commandDescription": "Shows information about public PHP packages installable with Composer.",
+    "commandUsage": "<package name>",
+    "noDescription": "No description provided.",
+    "notFound": "Package not found.",
+    "noNameProvided": "You have to give me a package name!"
+  },
+  "commandsource": {
+    "commandDescription": "Get the source code of a command",
+    "commandUsage": "<command name>",
+    "branchNotUpToDate": "The local branch is not up to date with origin, using master as base instead",
+    "missingCommand": "You have to give me the name of a command",
+    "noRepositoryOrHEAD": "There is no local repository or the local repository has no HEAD",
+    "lastEdited": "Last edited by **{{user}}** {{ago}}"
+  },
+  "brainfuck": {
+    "commandDescription": "Executes brainfuck code",
+    "commandUsage": "<code> <input optional>",
+    "noCode": "You have to give me some brainfuck code",
+    "steps": "Steps",
+    "time": "Execution time",
+    "output": "Output",
+    "error": "Error"
   }
 }
