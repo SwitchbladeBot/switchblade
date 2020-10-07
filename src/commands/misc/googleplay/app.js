@@ -25,7 +25,7 @@ module.exports = class GooglePlayApp extends SearchCommand {
         .setColor(this.embedColor)
         .setThumbnail(icon)
         .setAuthor(title, icon, url)
-        .setDescription(summary)
+        .setDescription(summary.replace(/&amp;/g, '&'))
         .addField(t('commands:googleplay.developer'), `${developer} (${developerId})`, true)
         .addField(t('commands:googleplay.price'), priceText, true)
         .addField(t('commands:googleplay.genre'), genre, true)
