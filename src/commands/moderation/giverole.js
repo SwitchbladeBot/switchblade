@@ -1,4 +1,4 @@
-const { Command, Constants, SwitchbladeEmbed, CommandError } = require('../../')
+const { Command, SwitchbladeEmbed, CommandError } = require('../../')
 
 module.exports = class GiveRole extends Command {
   constructor (client) {
@@ -26,10 +26,7 @@ module.exports = class GiveRole extends Command {
         throw new CommandError(t('commands:giverole.error'))
       })
     } else {
-      embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('commands:giverole.higherError'))
-      channel.send(embed)
+      throw new CommandError(t('commands:giverole.higherError'))
     }
   }
 }
