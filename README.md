@@ -111,9 +111,6 @@ We usually do that every two months or so, but we might skip a month if we're no
 
 Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!][sponsors-url]
 
-<h2 align="center">Hacktoberfest</h2>
-We are totally Hacktoberfest friendly, in 2020 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab clicking [here.][hacktoberfest-url]
-
 <a href="https://opencollective.com/switchblade/sponsor/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/1/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/2/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/2/avatar.svg?requireActive=false"></a>
@@ -141,6 +138,10 @@ Backers are the people who contribute to our projects monetarily. They get their
 <a href="https://opencollective.com/switchblade/backer/8/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/8/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/backer/9/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/9/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/backer/10/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/backer/10/avatar.svg?requireActive=false"></a>
+
+<h2 align="center">Hacktoberfest</h2>
+
+We are totally Hacktoberfest friendly, in 2020 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab clicking [here.][hacktoberfest-url]
 
 [support-invite]: https://support.switchblade.xyz
 [support-image]: https://invidget.switchblade.xyz/2FB8wDG
