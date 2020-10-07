@@ -1843,5 +1843,9 @@
     "time": "Execution time",
     "output": "Output",
     "error": "Error"
+  },
+  "wikipedia": {
+    "commandDescription": "Searches for articles on wikipedia",
+    "commandUsage": "<keywords>"
   }
 }

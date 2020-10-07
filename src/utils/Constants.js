@@ -36,6 +36,7 @@ module.exports = {
   INSTAGRAM_COLOR: '#E1306C',
   OWLBOT_COLOR: '#82d2d4',
   PACKAGIST_COLOR: '#d8dff2',
+  WIKIPEDIA_COLOR: '#e6e6e8',
 
   // Emojis
 
