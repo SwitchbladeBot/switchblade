@@ -5,7 +5,7 @@ module.exports = class GuildIcon extends Command {
     super({
       name: 'guildicon',
       aliases: ['gicon', 'sicon', 'srvicn', 'servericon'],
-      category: 'bot',
+      category: 'social',
       requirements: { guildOnly: true },
       parameters: [{
         type: 'guild',

@@ -5,7 +5,7 @@ module.exports = class Profile extends Command {
   constructor (client) {
     super({
       name: 'profile',
-      category: 'bot',
+      category: 'social',
       requirements: { databaseOnly: true, canvasOnly: true },
       parameters: [{
         type: 'user',

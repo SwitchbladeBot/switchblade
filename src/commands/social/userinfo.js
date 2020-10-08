@@ -6,7 +6,7 @@ module.exports = class UserInfo extends Command {
     super({
       name: 'userinfo',
       aliases: ['user', 'ui', 'uinfo'],
-      category: 'bot',
+      category: 'social',
       requirements: { guildOnly: true },
       parameters: [{
         type: 'member',

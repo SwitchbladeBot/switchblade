@@ -5,7 +5,7 @@ module.exports = class CreateEmoji extends Command {
     super({
       name: 'createemoji',
       aliases: ['newemoji'],
-      category: 'bot',
+      category: 'utility',
       requirements: { guildOnly: true, permissions: ['MANAGE_EMOJIS'], botPermissions: ['MANAGE_EMOJIS'] },
       parameters: [{
         type: 'url',

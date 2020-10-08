@@ -7,7 +7,7 @@ module.exports = class RoleInfo extends Command {
     super({
       name: 'roleinfo',
       aliases: ['rolinfo', 'rol', 'ri', 'roli'],
-      category: 'bot',
+      category: 'social',
       requirements: { guildOnly: true },
       parameters: [{
         type: 'role',
