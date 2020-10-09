@@ -1804,6 +1804,13 @@
     "amount": "Amount",
     "city": "City"
   },
+  "giverole": {
+    "commandDescription": "Gives a role to a member",
+    "commandUsage": "<member> <role>",
+    "roleAdded": "Role given!",
+    "error": "Error! I was not able to give this role.",
+    "higherError": "Error! I was not able to give this role because the role is higher than you."
+  },
   "instagram": {
     "commandDescription": "Shows a Instagram profile.",
     "commandUsage": "<instagram user>",
