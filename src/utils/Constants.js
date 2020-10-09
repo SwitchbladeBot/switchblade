@@ -34,6 +34,10 @@ module.exports = {
   ECLIPSE_PLUGINS_COLOR: '#42347f',
   CURSEFORGE_COLOR: '#f27121',
   FLATHUB_COLOR: '#4A86CF',
+  INSTAGRAM_COLOR: '#E1306C',
+  OWLBOT_COLOR: '#82d2d4',
+  PACKAGIST_COLOR: '#d8dff2',
+  WIKIPEDIA_COLOR: '#e6e6e8',
 
   // Emojis
 
@@ -80,6 +84,7 @@ module.exports = {
   PETPET_PNG: 'src/assets/png/petpet.png',
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
   QUIERES_HAND_PNG: 'src/assets/png/quieres.png',
+  HERE_WE_GO_AGAIN_PNG: 'src/assets/png/ashwga.png',
   KANNA_PAPER_TEMPLATE: 'src/assets/png/kanna_paper_template.png',
   PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
   // Backgrounds
