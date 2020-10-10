@@ -13,7 +13,8 @@ module.exports = class MinecraftModpack extends SearchCommand {
   }
 
   async search (_, query) {
-    return this.client.apis.curseforge.searchAddon(432, query)
+    const res = await this.client.apis.curseforge.searchAddon(432, query)
+    return res.data
   }
 
   searchResultFormatter (items) {
