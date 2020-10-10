@@ -13,7 +13,8 @@ module.exports = class MinecraftModpack extends SearchCommand {
   }
 
   async search (_, query) {
-    return this.client.apis.curseforge.searchAddon(432, query)
+    const res = await this.client.apis.curseforge.searchAddon(432, query)
+    return res.data
   }
 
   searchResultFormatter (items) {
@@ -30,7 +31,7 @@ module.exports = class MinecraftModpack extends SearchCommand {
         .setDescription(summary)
         .addField(t('commands:minecraft.subcommands.modpack.downloadCount'), downloadCount, true)
         .addField(t('commands:minecraft.subcommands.modpack.releasedAt'), moment(dateReleased).format('LL'), true)
-        .addField(Constants.EMPTY_SPACE, `[${t('commands:minecraft.subcommands.modpack.directDownload')}](${latestFiles[0].downloadUrl})`)
+        .addField(Constants.EMPTY_SPACE, `[${t('commands:minecraft.subcommands.modpack.directDownload')}](${encodeURI(latestFiles[0].downloadUrl)})`)
     )
   }
 }
