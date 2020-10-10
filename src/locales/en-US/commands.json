@@ -1728,14 +1728,27 @@
     "guildHasNoEmoji": "This server has no available emojis for me."
   },
   "googleplay": {
-    "commandDescription": "Searches for an APP on Google Play Store",
-    "commandUsage": "<application name>",
+    "commandDescription": "Searches for an application or a developer on Google Play Store",
+    "commandUsage": "<type> <query>",
+    "serviceName": "Google Play Store",
     "developer": "Developer",
     "price": "Price",
     "genre": "Genre",
     "rating": "Rating",
     "installs": "Installs",
-    "released": "Released on"
+    "released": "Released on",
+    "subcommands": {
+      "app": {
+        "commandDescription": "Searches for an APP on Google Play Store",
+        "commandUsage": "<application name>",
+        "trackInfo": "APP information"
+      },
+      "developer": {
+        "commandDescription": "Searches for a Developer on Google Play Store",
+        "commandUsage": "<developer name/id>",
+        "trackInfo": "Developer information"
+      }
+    }
   },
   "rolelist": {
     "commandDescription": "Lists all the roles in the server.",
@@ -1802,7 +1815,8 @@
     "cpf": "CPF",
     "nis": "NIS",
     "amount": "Amount",
-    "city": "City"
+    "city": "City",
+    "notFound": "CPF or NIS not found."
   },
   "giverole": {
     "commandDescription": "Gives a role to a member",
