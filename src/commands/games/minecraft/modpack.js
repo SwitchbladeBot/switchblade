@@ -31,7 +31,7 @@ module.exports = class MinecraftModpack extends SearchCommand {
         .setDescription(summary)
         .addField(t('commands:minecraft.subcommands.modpack.downloadCount'), downloadCount, true)
         .addField(t('commands:minecraft.subcommands.modpack.releasedAt'), moment(dateReleased).format('LL'), true)
-        .addField('\u200B', `[${t('commands:minecraft.subcommands.modpack.directDownload')}](${latestFiles[0].downloadUrl})`)
+        .addField('\u200B', `[${t('commands:minecraft.subcommands.modpack.directDownload')}](${encodeURI(latestFiles[0].downloadUrl)})`)
     )
   }
 }
