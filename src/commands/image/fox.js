@@ -5,7 +5,7 @@ module.exports = class Fox extends Command {
   constructor (client) {
     super({
       name: 'fox',
-      category: 'misc'
+      category: 'image'
     }, client)
   }
 

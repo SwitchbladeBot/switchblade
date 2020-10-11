@@ -8,7 +8,7 @@ module.exports = class ImageOfTheDay extends Command {
     super({
       name: 'imageoftheday',
       aliases: ['iotd'],
-      category: 'misc'
+      category: 'image'
     }, client)
   }
 

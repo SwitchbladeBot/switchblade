@@ -4,7 +4,7 @@ module.exports = class Adorable extends Command {
   constructor (client) {
     super({
       name: 'adorable',
-      category: 'misc'
+      category: 'image'
     }, client)
   }
 

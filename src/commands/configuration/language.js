@@ -10,7 +10,6 @@ module.exports = class ConfigLanguage extends Command {
     super({
       name: 'language',
       aliases: ['lang'],
-      category: 'configuration',
       parent: 'config',
       parameters: [{
         type: 'string',

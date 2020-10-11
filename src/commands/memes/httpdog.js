@@ -4,7 +4,7 @@ module.exports = class HttpDog extends Command {
   constructor (client) {
     super({
       name: 'httpdog',
-      category: 'misc',
+      category: 'memes',
       parameters: [{
         type: 'number',
         required: false
