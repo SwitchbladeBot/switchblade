@@ -1008,6 +1008,13 @@
         "unknownName": "Name or UUID not found.",
         "title": "{{name}}'s name history!",
         "originalname": "Original Name"
+      },
+      "modpack": {
+        "commandDescription": "Shows a Minecraft modpack from CurseForge (Twitch).",
+        "commandUsage": "<modpack name>",
+        "downloadCount": "Downloads",
+        "releasedAt": "Released at",
+        "directDownload": "Direct download"
       }
     }
   },
