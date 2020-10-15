@@ -31,7 +31,7 @@ module.exports = class CovidCountries extends Command {
           .setFooter(t('commands:covid.updatedAt'))
           .setTimestamp(data.updated)
       )
-    } catch(e) {
+    } catch (e) {
       throw new CommandError('deu erro rapai')
     }
   }
