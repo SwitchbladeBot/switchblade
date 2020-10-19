@@ -1,5 +1,4 @@
 const { Command, CommandError, SwitchbladeEmbed, MiscUtils, Constants } = require('../../../')
-
 const moment = require('moment')
 
 module.exports = class CovidCountries extends Command {
@@ -23,7 +22,7 @@ module.exports = class CovidCountries extends Command {
       channel.send(
         new SwitchbladeEmbed(author)
           .setThumbnail(data.countryInfo.flag)
-          .setColor(Constants.NPM_COLOR)
+          .setColor(Constants.GENERIC_RED_COLOR)
           .setAuthor(`${data.country} - (${MiscUtils.formatNumber(data.tests, language)} ${t('commands:covid.tested')})`, 'https://i.imgur.com/Rnobe3k.png')
           .setDescription(t('commands:covid.source'))
           .addField(t('commands:covid.cases'), MiscUtils.formatNumber(data.cases, language), true)

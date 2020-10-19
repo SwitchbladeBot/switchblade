@@ -1,5 +1,4 @@
 const { Command, CommandError, SwitchbladeEmbed, MiscUtils, Constants } = require('../../../')
-
 const moment = require('moment')
 
 module.exports = class CovidStates extends Command {
@@ -22,7 +21,7 @@ module.exports = class CovidStates extends Command {
       const { data } = await this.client.apis.covid.getState(state)
       channel.send(
         new SwitchbladeEmbed(author)
-          .setColor(Constants.NPM_COLOR)
+          .setColor(Constants.GENERIC_RED_COLOR)
           .setDescription(t('commands:covid.source'))
           .setThumbnail(`https://cdn.jsdelivr.net/gh/CivilServiceUSA/us-states/images/flags/${data.state.toLowerCase().replace(' ', '-')}-large.png`)
           .setAuthor(`${data.state} - ${MiscUtils.formatNumber(data.tests, language)} ${t('commands:covid.tested')}`, 'https://i.imgur.com/Rnobe3k.png')

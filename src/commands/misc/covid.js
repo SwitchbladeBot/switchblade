@@ -8,7 +8,7 @@ module.exports = class Covid extends SubcommandListCommand {
       authorString: 'commands:covid.covid',
       authorImage: 'https://i.imgur.com/Rnobe3k.png',
       authorURL: 'https://covid19.who.int/',
-      embedColor: Constants.NPM_COLOR
+      embedColor: Constants.GENERIC_RED_COLOR
     }, client)
   }
 }
