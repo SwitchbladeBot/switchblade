@@ -1,5 +1,6 @@
 const { SearchCommand, SwitchbladeEmbed, Constants, CommandError } = require('../..')
 const moment = require('moment')
+const iso639 = require('iso-639/data/iso_639-1.min.json')
 
 module.exports = class Steam extends SearchCommand {
   constructor (client) {
@@ -22,7 +23,8 @@ module.exports = class Steam extends SearchCommand {
   }
 
   async handleResult ({ t, author, channel, language, guild }, { id }) {
-    const res = await this.client.apis.steamstore.info(id)
+    const lang = iso639[language.split(/-|_/)[0].toLowerCase()]
+    const res = await this.client.apis.steamstore.info(id, lang ? lang.name.toLowerCase() : 'english')
     const {
       short_description: description,
       name,

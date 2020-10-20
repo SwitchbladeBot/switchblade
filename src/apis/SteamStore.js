@@ -21,11 +21,12 @@ module.exports = class SteamStore extends APIWrapper {
     })
   }
 
-  info (id) {
+  info (id, lang = 'english') {
     return axios({
       url: `${API_URL}/appdetails`,
       params: {
-        appids: id
+        appids: id,
+        l: lang
       }
     })
   }
