@@ -1,10 +1,9 @@
-const { SearchCommand, SwitchbladeEmbed, Constants, CommandError } = require('../..')
+const { SearchCommand, SwitchbladeEmbed, Constants } = require('../..')
 const moment = require('moment')
-const cheerio = require('cheerio')
 
 module.exports = class PyPi extends SearchCommand {
-  constructor(client) {
-    super({
+  constructor (client) {
+    super ({
       name: 'pypi',
       aliases: ['pythonpackage'],
       requirements: { apis: ['pypiapi'] },
@@ -13,35 +12,31 @@ module.exports = class PyPi extends SearchCommand {
     }, client)
   }
 
-  async search(_, query) {
+  async search (_, query) {
     const res = await this.client.apis.pypiapi.search(query)
     return res
   }
 
-  searchResultFormatter(i) {
+  searchResultFormatter (i) {
     return `${i.id}: ${i.description}.`
   }
 
-
-  async handleResult({ t, author, channel, language, guild }, { id }) {
+  async handleResult ({ t, author, channel, language, guild }, { id }) {
     const res = await this.client.apis.pypiapi.info(id)
     const {
       description,
       name,
       command,
       date,
-      package_link,
-      doc_link,
-      source_link
+      packageLink
     } = res
-
 
     moment.locale(language)
 
     channel.send(
       new SwitchbladeEmbed(author)
         .setAuthor('PyPi', this.embedLogoURL, 'https://pypi.org/')
-        .setURL(package_link)
+        .setURL(packageLink)
         .setTitle(name)
         .setDescriptionFromBlockArray([
           [
