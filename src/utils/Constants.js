@@ -38,6 +38,7 @@ module.exports = {
   OWLBOT_COLOR: '#82d2d4',
   PACKAGIST_COLOR: '#d8dff2',
   WIKIPEDIA_COLOR: '#e6e6e8',
+  PYPI_COLOR: "#007eb7",
 
   // Emojis
 

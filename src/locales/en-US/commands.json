@@ -1875,5 +1875,9 @@
   "wikipedia": {
     "commandDescription": "Searches for articles on wikipedia",
     "commandUsage": "<keywords>"
+  },
+  "pypi": {
+    "commandDescription": "Searches for a package on PyPi",
+    "commandUsage": "<name>"
   }
 }
