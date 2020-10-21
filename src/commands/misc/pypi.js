@@ -3,7 +3,7 @@ const moment = require('moment')
 
 module.exports = class PyPi extends SearchCommand {
   constructor (client) {
-    super ({
+    super({
       name: 'pypi',
       aliases: ['pythonpackage'],
       requirements: { apis: ['pypiapi'] },
