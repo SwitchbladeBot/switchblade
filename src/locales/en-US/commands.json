@@ -1875,5 +1875,42 @@
   "wikipedia": {
     "commandDescription": "Searches for articles on wikipedia",
     "commandUsage": "<keywords>"
+  },
+  "covid": {
+    "commandDescription": "Shows data from multiple sources about Covid-19 (deaths, cases, tests).",
+    "cases": "Cases",
+    "covid": "Covid-19 (Sars-CoV-2)",
+    "todayCases": "Today cases",
+    "activeCases": "Active Cases",
+    "recovered": "Recovered",
+    "oneCasePerPeople": "One case per people",
+    "updatedAt": "Updated at",
+    "tested": "people tested",
+    "deaths": "Deaths",
+    "casesPerOneMillion": "Cases per one million",
+    "source": "Data provided by [disease-sh](https://github.com/disease-sh). Check the [sources](https://github.com/disease-sh/API/blob/master/README.md#sources)",
+    "subcommands": {
+      "countries": {
+        "commandDescription": "Shows data from multiple sources from a country about Covid-19 (deaths, cases, tests, one case per people).",
+        "commandUsage": "<country>",
+        "noCountry": "You have to give me a country.",
+        "notFound": "Country not found."
+      },
+      "worldwide": {
+        "commandDescription": "Shows worldwide data from multiple sources about Covid-19 (deaths, cases, tests, cases per one million).",
+        "affectedCountries": "Affected countries"
+      },
+      "continents": {
+        "commandDescription": "Shows a continent data from multiple sources about Covid-19 (deaths, cases, tests, countries, cases per one million).",
+        "countries": "countries",
+        "notFound": "Continent not found.",
+        "noContinent": "You have to give me a continent."
+      },
+      "states": {
+        "commandDescription": "Shows an US state data from multiple sources about Covid-19 (deaths, cases, tests, cases per one million).",
+        "noState": "You have to give me a state.",
+        "notFound": "US State not found."
+      }
+    }
   }
 }
