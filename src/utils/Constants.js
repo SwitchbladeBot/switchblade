@@ -6,6 +6,7 @@ module.exports = {
   ERROR_COLOR: '#FF3333',
   EIGHTBALL_COLOR: '#000000',
   NPM_COLOR: '#CB3837',
+  GENERIC_RED_COLOR: '#CB3837',
   E621_COLOR: '#258CF5',
   XKCD_COLOR: '#96A8C8',
   DEEZER_COLOR: '#00C7F2',
@@ -30,6 +31,14 @@ module.exports = {
   CHOCOLATEY_COLOR: '#7eb5e2',
   SNAPCRAFT_COLOR: '82BEA0',
   JETBRAINS_PLUGIN: '#d44386',
+  PORTALDATRANSPARENCIA_COLOR: '#2369b3',
+  ECLIPSE_PLUGINS_COLOR: '#42347f',
+  CURSEFORGE_COLOR: '#f27121',
+  FLATHUB_COLOR: '#4A86CF',
+  INSTAGRAM_COLOR: '#E1306C',
+  OWLBOT_COLOR: '#82d2d4',
+  PACKAGIST_COLOR: '#d8dff2',
+  WIKIPEDIA_COLOR: '#e6e6e8',
 
   // Emojis
 
@@ -73,8 +82,10 @@ module.exports = {
   HTTP_BRAND_SVG: 'src/assets/svg/brands/http.svg',
 
   // Misc
+  PETPET_PNG: 'src/assets/png/petpet.png',
   TRIGGERED_LABEL_PNG: 'src/assets/png/triggered_label.png',
   QUIERES_HAND_PNG: 'src/assets/png/quieres.png',
+  HERE_WE_GO_AGAIN_PNG: 'src/assets/png/ashwga.png',
   KANNA_PAPER_TEMPLATE: 'src/assets/png/kanna_paper_template.png',
   PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
   // Backgrounds
