@@ -14,8 +14,8 @@ module.exports = class Steam extends SearchCommand {
   }
 
   async search (_, query) {
-    const res = await this.client.apis.steamstore.search(query)
-    return res.data.items
+    return this.client.apis.steamstore.search(query)
+      .then(({ data }) => data.items)
   }
 
   searchResultFormatter (i) {
