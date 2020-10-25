@@ -23,7 +23,7 @@ const CLIENT_OPTIONS = {
 
 console.log(readFileSync('bigtitle.txt', 'utf8').toString())
 
-const debug = Boolean(process.env.DEBUG)
+const debug = process.env.DEBUG === 'true'
 
 const Switchblade = require('./src/Switchblade.js')
 const client = new Switchblade(CLIENT_OPTIONS)
