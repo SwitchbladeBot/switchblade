@@ -11,7 +11,7 @@ module.exports = class Matrix extends Array {
       this[i] = []
 
       for (let j = 0; j < this.columns; j++) {
-        this[i][j] = callback()
+        this[i][j] = callback(i, j)
       }
     }
   }
