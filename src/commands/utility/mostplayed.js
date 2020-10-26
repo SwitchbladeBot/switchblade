@@ -6,21 +6,16 @@ module.exports = class MostPlayed extends Command {
       name: 'mostplayed',
       aliases: ['topgames'],
       category: 'utility',
-      requirements: { guildOnly: true },
-      parameters: [{
-        type: 'guild',
-        full: true,
-        required: false
-      }]
+      requirements: { guildOnly: true }
     }, client)
   }
 
-  run ({ t, channel, language }, guild = channel.guild) {
+  run ({ message, t, channel, language }) {
     const embed = new SwitchbladeEmbed()
     channel.startTyping()
     const games = {}
 
-    guild.members.cache.filter(member => !member.user.bot && member.presence.activities.length).each(member => {
+    message.guild.members.cache.filter(member => !member.user.bot && member.presence.activities.length).each(member => {
       member.presence.activities.filter(activity => activity.type === 'PLAYING').forEach(activity => {
         games[activity.name] = games[activity.name] + 1 || 1
       })
@@ -32,8 +27,8 @@ module.exports = class MostPlayed extends Command {
       ? Object.values(games).reduce((acc, val) => acc + val)
       : 0
 
-    embed.setThumbnail(guild.iconURL({ dynamic: true }) ? guild.iconURL({ dynamic: true }) : `https://guild-default-icon.herokuapp.com/${guild.nameAcronym}`)
-      .setTitle(t('commands:mostplayed.mostPlayedTitle', { name: guild.name }))
+    embed.setThumbnail(message.guild.iconURL({ dynamic: true }) ? message.guild.iconURL({ dynamic: true }) : `https://guild-default-icon.herokuapp.com/${message.guild.nameAcronym}`)
+      .setTitle(t('commands:mostplayed.mostPlayedTitle', { name: message.guild.name }))
       .setDescription(mostPlayed.length
         ? mostPlayed.map((game, i) => t('commands:mostplayed.hasPlayers', { rank: i + 1, game, count: MiscUtils.formatNumber(games[game], language) }))
         : t('commands:mostplayed.noPlayers'))
