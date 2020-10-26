@@ -6,5 +6,16 @@
     "timeout": "This {{gameName}} invite has timed out."
   },
 
-  "games": {}
+  "games": {
+    "connect4": {
+      "displayName": "Connect4",
+      "loading": "Please wait, loading game...",
+      "win": "{{player}} wins!",
+      "tie": "It's a tie!",
+      "yourTurn": "It's your turn, {{player}}",
+      "currentPlayer": "Current player",
+      "clickTimeoutsIn": "You have {{timeout}} seconds to play",
+      "didNotPlay": "One player didn't make their move"
+    }
+  }
 }
