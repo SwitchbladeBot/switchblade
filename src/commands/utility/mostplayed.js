@@ -11,7 +11,6 @@ module.exports = class MostPlayed extends Command {
   }
 
   run ({ message, t, channel, language }) {
-    const embed = new SwitchbladeEmbed()
     channel.startTyping()
     const games = {}
 
@@ -27,13 +26,14 @@ module.exports = class MostPlayed extends Command {
       ? Object.values(games).reduce((acc, val) => acc + val)
       : 0
 
-    embed.setThumbnail(message.guild.iconURL({ dynamic: true }) ? message.guild.iconURL({ dynamic: true }) : `https://guild-default-icon.herokuapp.com/${message.guild.nameAcronym}`)
-      .setTitle(t('commands:mostplayed.mostPlayedTitle', { name: message.guild.name }))
-      .setDescription(mostPlayed.length
-        ? mostPlayed.map((game, i) => t('commands:mostplayed.hasPlayers', { rank: i + 1, game, count: MiscUtils.formatNumber(games[game], language) }))
-        : t('commands:mostplayed.noPlayers'))
-      .setFooter(t('commands:mostplayed.totalPlayers', { count: MiscUtils.formatNumber(totalPlayers, language) }))
-
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send(
+      new SwitchbladeEmbed()
+        .setThumbnail(message.guild.iconURL({ dynamic: true }) ? message.guild.iconURL({ dynamic: true }) : `https://guild-default-icon.herokuapp.com/${message.guild.nameAcronym}`)
+        .setTitle(t('commands:mostplayed.mostPlayedTitle', { name: message.guild.name }))
+        .setDescription(mostPlayed.length
+          ? mostPlayed.map((game, i) => t('commands:mostplayed.hasPlayers', { rank: i + 1, game, count: MiscUtils.formatNumber(games[game], language) }))
+          : t('commands:mostplayed.noPlayers'))
+        .setFooter(t('commands:mostplayed.totalPlayers', { count: MiscUtils.formatNumber(totalPlayers, language) }))
+    ).then(() => channel.stopTyping(true))
   }
 }
