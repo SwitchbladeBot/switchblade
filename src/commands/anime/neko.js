@@ -21,7 +21,7 @@ module.exports = class Neko extends Command {
     const { url } = await fetch(`${nekoAPI}/${type}/neko`).then(res => res.json())
 
     embed.setImage(url)
-      .setDescription(t('commands:neko.hereIsYour', { context: endpoint }))
+      .setDescription(t('commands:neko.hereIsYour', { context: type }))
 
     channel.send(embed).then(() => channel.stopTyping())
   }

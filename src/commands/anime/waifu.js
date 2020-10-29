@@ -17,10 +17,10 @@ module.exports = class Waifu extends Command {
     // Send a lewd waifu if the channel is NSFW
     const type = channel.nsfw ? 'nsfw' : 'sfw'
 
-    const { url } = await fetch(`${nekoAPI}/${type}/waifu`).then(res => res.json())
+    const { url } = await fetch(`${waifuAPI}/${type}/waifu`).then(res => res.json())
 
     embed.setImage(url)
-      .setDescription(t('commands:waifu.hereIsYour', { context: endpoint }))
+      .setDescription(t('commands:waifu.hereIsYour', { context: type }))
 
     channel.send(embed).then(() => channel.stopTyping())
   }
