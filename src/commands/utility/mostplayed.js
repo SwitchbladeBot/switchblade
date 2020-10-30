@@ -28,7 +28,7 @@ module.exports = class MostPlayed extends Command {
 
     channel.send(
       new SwitchbladeEmbed()
-        .setThumbnail(message.guild.iconURL({ dynamic: true }) ? message.guild.iconURL({ dynamic: true }) : `https://guild-default-icon.herokuapp.com/${message.guild.nameAcronym}`)
+        .setThumbnail(message.guild.iconURL({ dynamic: true }))
         .setTitle(t('commands:mostplayed.mostPlayedTitle', { name: message.guild.name }))
         .setDescription(mostPlayed.length
           ? mostPlayed.map((game, i) => t('commands:mostplayed.hasPlayers', { rank: i + 1, game, count: MiscUtils.formatNumber(games[game], language) }))
