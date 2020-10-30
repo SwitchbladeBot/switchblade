@@ -65,8 +65,7 @@
     "missingImage": "You need to give me an image to pet."
   },
   "mostplayed": {
-    "commandDescription": "Shows the most popular games in this or another server.",
-    "commandUsage": "[server id]",
+    "commandDescription": "Shows the most popular games in this server.",
     "mostPlayedTitle": "Most played games in {{name}}",
     "hasPlayers": "{{rank}}. **{{game}}** - **{{count}}** players.",
     "totalPlayers": "{{count}} total people playing games.",
