@@ -1917,5 +1917,14 @@
     "commandDescription": "Challenge someone to a game of Connect4.",
     "commandUsage": "<user to challenge>",
     "missingUser": "You have to give me someone to challenge!"
+  },
+  "steam": {
+    "commandDescription": "Searches for a game on the steam store",
+    "commandUsage": "<game>",
+    "by": "by {{publisher}}",
+    "free": "Free",
+    "released": "Released {{ago}}",
+    "comingSoon": "Coming soon",
+    "metacriticScore": "Metacritic Score"
   }
 }
