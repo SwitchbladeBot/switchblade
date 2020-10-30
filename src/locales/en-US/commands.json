@@ -1015,6 +1015,13 @@
         "unknownName": "Name or UUID not found.",
         "title": "{{name}}'s name history!",
         "originalname": "Original Name"
+      },
+      "modpack": {
+        "commandDescription": "Shows a Minecraft modpack from CurseForge (Twitch).",
+        "commandUsage": "<modpack name>",
+        "downloadCount": "Downloads",
+        "releasedAt": "Released at",
+        "directDownload": "Direct download"
       }
     }
   },
@@ -1534,6 +1541,11 @@
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with."
   },
+  "herewegoagain": {
+    "commandDescription": "Generates a \"Ah shit, here we go again.\" meme with the provided image.",
+    "commandUsage": "<image>",
+    "missingImage": "You need to give me an image to generate the meme with."
+  },
   "color": {
     "commandDescription": "Gets information about a color.",
     "commandUsage": "<color>",
@@ -1730,14 +1742,27 @@
     "guildHasNoEmoji": "This server has no available emojis for me."
   },
   "googleplay": {
-    "commandDescription": "Searches for an APP on Google Play Store",
-    "commandUsage": "<application name>",
+    "commandDescription": "Searches for an application or a developer on Google Play Store",
+    "commandUsage": "<type> <query>",
+    "serviceName": "Google Play Store",
     "developer": "Developer",
     "price": "Price",
     "genre": "Genre",
     "rating": "Rating",
     "installs": "Installs",
-    "released": "Released on"
+    "released": "Released on",
+    "subcommands": {
+      "app": {
+        "commandDescription": "Searches for an APP on Google Play Store",
+        "commandUsage": "<application name>",
+        "trackInfo": "APP information"
+      },
+      "developer": {
+        "commandDescription": "Searches for a Developer on Google Play Store",
+        "commandUsage": "<developer name/id>",
+        "trackInfo": "Developer information"
+      }
+    }
   },
   "rolelist": {
     "commandDescription": "Lists all the roles in the server.",
@@ -1804,7 +1829,15 @@
     "cpf": "CPF",
     "nis": "NIS",
     "amount": "Amount",
-    "city": "City"
+    "city": "City",
+    "notFound": "CPF or NIS not found."
+  },
+  "giverole": {
+    "commandDescription": "Gives a role to a member",
+    "commandUsage": "<member> <role>",
+    "roleAdded": "Role given!",
+    "error": "Error! I was not able to give this role.",
+    "higherError": "Error! I was not able to give this role because the role is higher than you."
   },
   "instagram": {
     "commandDescription": "Shows a Instagram profile.",
@@ -1836,5 +1869,64 @@
     "missingCommand": "You have to give me the name of a command",
     "noRepositoryOrHEAD": "There is no local repository or the local repository has no HEAD",
     "lastEdited": "Last edited by **{{user}}** {{ago}}"
+  },
+  "brainfuck": {
+    "commandDescription": "Executes brainfuck code",
+    "commandUsage": "<code> <input optional>",
+    "noCode": "You have to give me some brainfuck code",
+    "steps": "Steps",
+    "time": "Execution time",
+    "output": "Output",
+    "error": "Error"
+  },
+  "wikipedia": {
+    "commandDescription": "Searches for articles on wikipedia",
+    "commandUsage": "<keywords>"
+  },
+  "covid": {
+    "commandDescription": "Shows data from multiple sources about Covid-19 (deaths, cases, tests).",
+    "cases": "Cases",
+    "covid": "Covid-19 (Sars-CoV-2)",
+    "todayCases": "Today cases",
+    "activeCases": "Active Cases",
+    "recovered": "Recovered",
+    "oneCasePerPeople": "One case per people",
+    "updatedAt": "Updated at",
+    "tested": "people tested",
+    "deaths": "Deaths",
+    "casesPerOneMillion": "Cases per one million",
+    "source": "Data provided by [disease-sh](https://github.com/disease-sh). Check the [sources](https://github.com/disease-sh/API/blob/master/README.md#sources)",
+    "subcommands": {
+      "countries": {
+        "commandDescription": "Shows data from multiple sources from a country about Covid-19 (deaths, cases, tests, one case per people).",
+        "commandUsage": "<country>",
+        "noCountry": "You have to give me a country.",
+        "notFound": "Country not found."
+      },
+      "worldwide": {
+        "commandDescription": "Shows worldwide data from multiple sources about Covid-19 (deaths, cases, tests, cases per one million).",
+        "affectedCountries": "Affected countries"
+      },
+      "continents": {
+        "commandDescription": "Shows a continent data from multiple sources about Covid-19 (deaths, cases, tests, countries, cases per one million).",
+        "countries": "countries",
+        "notFound": "Continent not found.",
+        "noContinent": "You have to give me a continent."
+      },
+      "states": {
+        "commandDescription": "Shows an US state data from multiple sources about Covid-19 (deaths, cases, tests, cases per one million).",
+        "noState": "You have to give me a state.",
+        "notFound": "US State not found."
+      }
+    }
+  },
+  "steam": {
+    "commandDescription": "Searches for a game on the steam store",
+    "commandUsage": "<game>",
+    "by": "by {{publisher}}",
+    "free": "Free",
+    "released": "Released {{ago}}",
+    "comingSoon": "Coming soon",
+    "metacriticScore": "Metacritic Score"
   }
 }
