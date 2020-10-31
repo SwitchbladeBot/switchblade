@@ -22,9 +22,10 @@
 
 ---
 
-<h2 align="center">Switchblade</h2>
+<h2 align="center">SwitchBlade</h2>
 
 Switchblade is a free and open source solution to your server managing problems, built from scratch with code organization and quality in mind. Our goal is to cover as many functionalities and niches as possible, while still maintaining high quality.
+SwitchBlade is offering cool swags to whoever who contribute and pull up a PR. Its a limited time period offer So please guys pull up and PR and get your cool swag delivered to your place right away.
 
 <h3>Table of Contents</h3>
 
