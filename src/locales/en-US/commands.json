@@ -1928,5 +1928,12 @@
     "released": "Released {{ago}}",
     "comingSoon": "Coming soon",
     "metacriticScore": "Metacritic Score"
+  },
+  "node": {
+    "commandDescription": "Searches for JavaScript runtime documentation on Node.js",
+    "commandUsage": "<query>",
+    "syntax": "Syntax",
+    "returns": "Returns",
+    "node": "Node.js"
   }
 }

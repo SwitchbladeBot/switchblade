@@ -40,6 +40,7 @@ module.exports = {
   PACKAGIST_COLOR: '#d8dff2',
   WIKIPEDIA_COLOR: '#e6e6e8',
   STEAM_COLOR: '#1b2838',
+  NODE_COLOR: '#3C873A',
 
   // Emojis
 
