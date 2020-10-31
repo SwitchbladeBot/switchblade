@@ -1546,6 +1546,11 @@
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with."
   },
+  "bonk": {
+    "commandDescription": "Generates a \"Bonk\" meme with the provided user's avatar image.",
+    "commandUsage": "<user>",
+    "missingUser": "You need to give me a user to generate this meme with."
+  },
   "color": {
     "commandDescription": "Gets information about a color.",
     "commandUsage": "<color>",
