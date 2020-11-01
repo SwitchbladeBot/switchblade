@@ -1,5 +1,4 @@
 const { CanvasTemplates, Command } = require('../../')
-
 const { MessageAttachment } = require('discord.js')
 
 module.exports = class Bonk extends Command {
@@ -16,9 +15,9 @@ module.exports = class Bonk extends Command {
     }, client)
   }
 
-  async run ({ t, author, channel }, user) {
+  async run ({ t, author, channel }, image) {
     channel.startTyping()
-    const bonk = await CanvasTemplates.bonk(user)
+    const bonk = await CanvasTemplates.bonk(image)
     channel.send(new MessageAttachment(bonk, 'bonk.png')).then(() => channel.stopTyping())
   }
 }

@@ -743,17 +743,17 @@ module.exports = class CanvasTemplates {
     return canvas.toBuffer()
   }
 
-  static async bonk (user) {
-    user = await Promise.all(user)
+  static async bonk (image) {
+    image = await Promise.all(image)
 
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.BONK_TEMPLATE, true),
-      Image.from(user.displayAvatarURL({ format: 'png' }))
+      Image.from(image)
     ])
     const [ template, avatarImage ] = await IMAGE_ASSETS
     const AVATAR_WIDTH = avatarImage.width
     const AVATAR_HEIGHT = avatarImage.height
-    const canvas = createCanvas(WIDTH, HEIGHT)
+    const canvas = createCanvas(template.width, template.height)
     const ctx = canvas.getContext('2d')
     ctx.drawImage(avatarImage, 4 * AVATAR_WIDTH, AVATAR_HEIGHT, AVATAR_WIDTH, AVATAR_HEIGHT)
     ctx.drawImage(template, 0, 0, template.width, template.height)
