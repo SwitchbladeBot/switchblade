@@ -28,7 +28,7 @@ module.exports = class UPCBarcode extends Command {
           t('commands:barcode.footer'),
           'https://upcdatabase.org/images/logo.png'
         )
-      if (data.description !== "") embed.setDescription(`/${data.description}/`)
+      if (data.description !== '') embed.setDescription(`/${data.description}/`)
       if (data.images) embed.setThumbnail(data.images[0])
       if (data.stores) {
         embed.addFields(
