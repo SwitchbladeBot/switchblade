@@ -40,7 +40,7 @@ module.exports = class PyPI extends APIWrapper {
     parsed('.vertical-tabs__tab').each(
       function (i, e) {
         if (parsed(this).text().trim() === 'Homepage') {
-          data['package_link'] = parsed(this).attr('href')
+          data.packageLink = parsed(this).attr('href')
         }
       }
     )
