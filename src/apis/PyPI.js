@@ -44,10 +44,10 @@ module.exports = class PyPI extends APIWrapper {
         }
       }
     )
-    data['description'] = desc
-    data['name'] = title
-    data['command'] = pipCommand
-    data['date'] = date
+    data.description = desc
+    data.name = title
+    data.command = pipCommand
+    data.date = date
 
     return data
   }
