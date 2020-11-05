@@ -6,6 +6,7 @@ module.exports = {
   ERROR_COLOR: '#FF3333',
   EIGHTBALL_COLOR: '#000000',
   NPM_COLOR: '#CB3837',
+  GENERIC_RED_COLOR: '#CB3837',
   E621_COLOR: '#258CF5',
   XKCD_COLOR: '#96A8C8',
   DEEZER_COLOR: '#00C7F2',
@@ -39,6 +40,7 @@ module.exports = {
   PACKAGIST_COLOR: '#d8dff2',
   WIKIPEDIA_COLOR: '#e6e6e8',
   PYPI_COLOR: '#007eb7',
+  STEAM_COLOR: '#1b2838',
 
   // Emojis
 
