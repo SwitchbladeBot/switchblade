@@ -1,0 +1,10 @@
+{
+  "challenge": {
+    "title": "{{player}} has challenged you to a game of {{gameName}}",
+    "clickToAccept": "Click the {{emoji}} reaction button below to accept.",
+    "timeoutIn": "You have {{timeout}} seconds to accept it",
+    "timeout": "This {{gameName}} invite has timed out."
+  },
+
+  "games": {}
+}
