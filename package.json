@@ -47,7 +47,7 @@
     "cows": "^2.1.0",
     "cowsay": "^1.4.0",
     "crowdin-without-vulnerability": "Doges/crowdin-node",
-    "discord.js": "^12.2.0",
+    "discord.js": "^12.4.1",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
     "fuse.js": "^3.4.6",
