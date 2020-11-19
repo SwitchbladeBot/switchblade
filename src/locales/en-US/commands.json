@@ -64,6 +64,13 @@
     "commandUsage": "[image link]",
     "missingImage": "You need to give me an image to pet."
   },
+  "mostplayed": {
+    "commandDescription": "Shows the most popular games in this server.",
+    "mostPlayedTitle": "Most played games in {{name}}",
+    "hasPlayers": "{{rank}}. **{{game}}** - **{{count}}** players.",
+    "totalPlayers": "{{count}} total people playing games.",
+    "noPlayers": "Nobody in this server is playing a game!"
+  },
   "hibp": {
     "commandDescription": "Checks if an email has been found in a data breach or paste.",
     "commandUsage": "<type> <query>",
@@ -1912,6 +1919,11 @@
         "notFound": "US State not found."
       }
     }
+  },
+  "connect4": {
+    "commandDescription": "Challenge someone to a game of Connect4.",
+    "commandUsage": "<user to challenge>",
+    "missingUser": "You have to give me someone to challenge!"
   },
   "steam": {
     "commandDescription": "Searches for a game on the steam store",

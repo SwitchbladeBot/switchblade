@@ -1,4 +1,5 @@
 const { Command } = require('../../')
+const { cleanContent } = require('discord.js').Util
 
 const leetMap = {
   a: { soft: '4', hard: '4' },
@@ -50,17 +51,20 @@ module.exports = class Leet extends Command {
     }, client)
   }
 
-  async run ({ channel, flags }, text) {
-    const leetTranslation = text
-      .split('')
-      .map(char => {
-        const normalizedChar = char.toLowerCase()
-        const mappedChar = leetMap[normalizedChar]
-        return mappedChar // if char has leet translation
-          ? mappedChar[flags.hard ? 'hard' : 'soft']
-          : char
-      })
-      .join('')
+  async run ({ channel, flags, message }, text) {
+    const leetTranslation = cleanContent(
+      text
+        .split('')
+        .map(char => {
+          const normalizedChar = char.toLowerCase()
+          const mappedChar = leetMap[normalizedChar]
+          return mappedChar // if char has leet translation
+            ? mappedChar[flags.hard ? 'hard' : 'soft']
+            : char
+        })
+        .join(''),
+      message
+    )
     channel.send(leetTranslation)
   }
 }
