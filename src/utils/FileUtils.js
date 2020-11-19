@@ -11,7 +11,7 @@ module.exports = class FileUtils {
       if (file.match(/\.(js|json)$/)) {
         try {
           const required = require(fullPath)
-          if (success) await success(required)
+          if (success) await success(required, path.join(dirPath, file))
           filesObject[file] = required
           return required
         } catch (e) {
@@ -20,7 +20,7 @@ module.exports = class FileUtils {
       } else if (recursive) {
         const isDirectory = await FileUtils.stat(fullPath).then(f => f.isDirectory())
         if (isDirectory) {
-          return FileUtils.requireDirectory(fullPath, success, error)
+          return FileUtils.requireDirectory(path.join(dirPath, file), success, error)
         }
       }
     })).then(() => filesObject).catch(console.error)

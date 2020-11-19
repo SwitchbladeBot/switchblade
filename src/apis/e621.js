@@ -1,8 +1,6 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
 
-const API_URL = 'https://e621.net'
-
 module.exports = class e621 extends APIWrapper {
   constructor () {
     super({
@@ -10,14 +8,13 @@ module.exports = class e621 extends APIWrapper {
     })
   }
 
-  async searchPost (tags) {
-    const results = await this.request('/posts.json', { limit: 1, tags })
-    return results
+  async searchPost (tags, eURL = 'https://e926.net') {
+    return this.request('/posts.json', { limit: 1, tags }, eURL)
   }
 
-  async request (endpoint, queryParams = {}) {
+  async request (endpoint, queryParams = {}, eURL) {
     const qParams = new URLSearchParams(queryParams)
-    const fetched = await fetch(`${API_URL}${endpoint}?${qParams.toString()}`, {
+    const fetched = await fetch(`${eURL}${endpoint}?${qParams.toString()}`, {
       headers: { 'User-Agent': 'SwitchbladeBot/1.0 xDoges' }
     })
     return fetched.json()

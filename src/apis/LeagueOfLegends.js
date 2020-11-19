@@ -47,8 +47,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   async selectLanguage (language) {
     const languages = await this.request('/cdn/languages.json')
     const normalizedLanguage = language.replace('-', '_').toLowerCase()
-    const matchingLanguage = languages.find(l => l.toLowerCase() === normalizedLanguage)
-    return matchingLanguage || 'en_US'
+    return languages.find(l => l.toLowerCase() === normalizedLanguage) || 'en_US'
   }
 
   async getLocale (language, version = this.version) {

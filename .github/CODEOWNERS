@@ -1,1 +1,2 @@
-/src/locales/ @SwitchbladeBot/translation-managers
+/src/commands/ @SwitchbladeBot/chatbot-commands
+* @SwitchbladeBot/chatbot-core

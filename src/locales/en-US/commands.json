@@ -4,6 +4,19 @@
     "hereIsYour_neko": "Here's your neko!",
     "hereIsYour_lewd": "Here's your lewd neko!"
   },
+  "whatlanguage": {
+    "commandDescription": "Tells you what language a piece of text is in.",
+    "noText": "You have to give me some text!",
+    "embedTitle": "What language is this?",
+    "embedDes": "I have detected that the language of this text is",
+    "fieldLanguage": "Language",
+    "fieldProbability": "Probability",
+    "fieldPercentage": "Percentage"
+  },
+  "2048": {
+    "commandDescription": "Play the 2048 game.",
+    "commandUsage": "[board size]"
+  },
   "waifu": {
     "commandDescription": "Fetches a random waifu (lewd if the channel is NSFW) and displays it.",
     "hereIsYour_sfw": "Here's your waifu!",
@@ -45,6 +58,18 @@
   },
   "ping": {
     "commandDescription": "Checks if the bot is online."
+  },
+  "petpet": {
+    "commandDescription": "Pet your friends!",
+    "commandUsage": "[image link]",
+    "missingImage": "You need to give me an image to pet."
+  },
+  "mostplayed": {
+    "commandDescription": "Shows the most popular games in this server.",
+    "mostPlayedTitle": "Most played games in {{name}}",
+    "hasPlayers": "{{rank}}. **{{game}}** - **{{count}}** players.",
+    "totalPlayers": "{{count}} total people playing games.",
+    "noPlayers": "Nobody in this server is playing a game!"
   },
   "hibp": {
     "commandDescription": "Checks if an email has been found in a data breach or paste.",
@@ -336,10 +361,6 @@
     "noUsageProvided": "No usage provided.",
     "commandNotFound": "I couldn't find any command with that name."
   },
-  "e621": {
-    "commandDescription": "Sends a random yiff from e621.",
-    "hereIsYour_yiff": "Here's your yiff!"
-  },
   "pay": {
     "commandDescription": "Pays $t(commons:currency_plural) to a user.",
     "commandUsage": "<@member> <value>",
@@ -365,6 +386,45 @@
     "needMathExpression": "You have to give me a math expression to evaluate!",
     "invalidMathExpression": "Invalid math expression.",
     "result": "Result: `{{result}}`"
+  },
+  "osu": {
+    "commandDescription": "Searches for a profile or a beatmap on osu!",
+    "commandUsage": "<type> <query>",
+    "subcommands": {
+      "player": {
+        "commandDescription": "Searches for a profile on osu!",
+        "commandUsage": "[profile name or id]",
+        "noPlayer": "You have to give me a valid osu! profile name or ID.",
+        "level": "Level **{{number}}**",
+        "joinedAt": "Joined at **{{date}}** ({{timeAgo}})",
+        "globalRanking": "Global Ranking: **#{{rank}}**",
+        "countryRanking": "Country Ranking: **#{{rank}}**",
+        "rankedScore": "Ranked Score: **{{rankedScore}}**",
+        "playTime": "Played for **{{time}}** - **{{pp}}** pp",
+        "totalScore": "Total Score: **{{totalScore}}**",
+        "hitAccuracy": "Hit Accuracy: **{{accuracy}}%**",
+        "playCount": "Play Count: **{{playCount}}**",
+        "totalHits": "Total Hits: **{{totalHits}}** (**{{300}}** {{emoji300}}, **{{100}}** {{emoji100}}, **{{50}}** {{emoji50}})",
+        "topScores": "**{{user}}**'s top scores:",
+        "recentPlays": "**{{user}}**'s most recent plays in the last 24 hours:",
+        "playerNotFound": "Profile not found."
+      },
+      "beatmap": {
+        "commandDescription": "Searches for a beatmap or beatmap set on osu!",
+        "commandUsage": "<beatmap or beatmap set id>",
+        "noBeatmap": "You have to give me a valid beatmap or beatmap set ID.",
+        "starDifficulty": "Star Difficulty: **{{difficulty}}**",
+        "successRate": "Success Rate: **{{rate}}%** ({{successfulPlays}} / {{totalPlays}})",
+        "mappedBy": "Mapped by {{mapper}}",
+        "lastUpdate": "Last update at **{{date}}** ({{timeAgo}})",
+        "approved": "Approved at **{{date}}** ({{timeAgo}})",
+        "tags": "Tags: **{{tags}}**",
+        "download": "[Download beatmap]({{link}})",
+        "downloadNoVideo": "[Download without video]({{link}})",
+        "topScores": "Top scores:",
+        "topScoreSelf": "Your top score ({{date}})"
+      }
+    }
   },
   "stoptyping": {
     "commandDescription": "Forces the bot to stop typing.",
@@ -906,6 +966,22 @@
     "followers": "Followers",
     "userNotFound": "Twitch user not found!"
   },
+  "freefire": {
+    "commandDescription": "Shows information related to Free Fire",
+    "commandUsage": "<type> <query>",
+    "gameName": "Free Fire",
+    "subcommands": {
+      "weapon": {
+        "commandDescription": "Shows information about a Free Fire weapon.",
+        "commandUsage": "<name>",
+        "ammunition": "Ammunition",
+        "missingWeapon": "You have to give me an weapon.",
+        "unknownWeapon": "The weapon {{weapon}} doesn't exist.",
+        "attachments": "Attachments",
+        "attributes": "Attributes"
+      }
+    }
+  },
   "minecraft": {
     "commandDescription": "Shows information related to Minecraft.",
     "commandUsage": "<type> <query>",
@@ -939,6 +1015,13 @@
         "unknownName": "Name or UUID not found.",
         "title": "{{name}}'s name history!",
         "originalname": "Original Name"
+      },
+      "modpack": {
+        "commandDescription": "Shows a Minecraft modpack from CurseForge (Twitch).",
+        "commandUsage": "<modpack name>",
+        "downloadCount": "Downloads",
+        "releasedAt": "Released at",
+        "directDownload": "Direct download"
       }
     }
   },
@@ -1200,6 +1283,24 @@
     "yes": "Yes",
     "no": "No"
   },
+  "igdb": {
+    "commandDescription": "Searches for a game on the IGDB",
+    "commandUsage": "<game name>",
+    "noGame": "You have to give me a game to search for!",
+    "aka": "(also known as {{aliases}})",
+    "ageRating": "Age Rating(s)",
+    "genres": "Genres",
+    "platforms": "Platforms",
+    "popularity": "Popularity",
+    "ratingTitle": "Rating",
+    "ratingDescription": "{{value}} out of {{total}} votes",
+    "releaseDates": "Release Dates",
+    "dlcs": "DLCs",
+    "expansions": "Expansions",
+    "companies": "Involved Companies",
+    "similarGames": "Similar Games",
+    "err": "An error has occurred while trying to get game data: {{err}}"
+  },
   "presidentialalert": {
     "commandDescription": "Generates a Presidential Alert notification.",
     "commandUsage": "<text>",
@@ -1440,6 +1541,11 @@
     "commandUsage": "<image>",
     "missingImage": "You need to give me an image to generate the meme with."
   },
+  "herewegoagain": {
+    "commandDescription": "Generates a \"Ah shit, here we go again.\" meme with the provided image.",
+    "commandUsage": "<image>",
+    "missingImage": "You need to give me an image to generate the meme with."
+  },
   "color": {
     "commandDescription": "Gets information about a color.",
     "commandUsage": "<color>",
@@ -1532,7 +1638,8 @@
     "artist": "Artist(s)",
     "desc": "Description",
     "notFound": "Post not found",
-    "post": "Post URL"
+    "post": "Post URL",
+    "noQuery": "You have to give me something to search!"
   },
   "searchplate": {
     "commandDescription": "Searches for a brazilian vehicle plate registration on SINESP (Public information)",
@@ -1574,5 +1681,257 @@
     "commandUsage": "<tracking code>",
     "lastUpdated": "Last Updated at",
     "notFound": "Code not found"
+  },
+  "render": {
+    "youDontHavePermission": "You're missing the following permission in that channel: {{permission}}",
+    "commandUsage": "<message link>",
+    "commandDescription": "Renders a message from another channel using the message link."
+  },
+  "vscodeextension": {
+    "commandDescription": "Shows information about VS Code extensions from the Visual Studio Marketplace",
+    "commandUsage": "<name>",
+    "marketplace": "Visual Studio Marketplace",
+    "install": "Install",
+    "license": "License",
+    "changelog": "Changelog",
+    "installs": "{{count}} installs",
+    "by": "by [{{displayName }}](https://marketplace.visualstudio.com/publishers/{{name}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
+  },
+  "info": {
+    "commandDescription": "Shows channels/categories and emojis information.",
+    "channel": "Shows information about a text/news/announcement channel.",
+    "embedAuthor": "Discord Information Commands",
+    "voice": "Shows information about a voice channel.",
+    "emoji": "Shows information about an emoji.",
+    "category": "Shows information about a category.",
+    "subcommands": {
+      "channel": {
+        "commandDescription": "Shows a channel's name, topic, ID, category and how many users can view it.",
+        "commandUsage": "<channel>",
+        "category": "Category",
+        "canViewThisChannel": "{{userCount}} User can view this channel.",
+        "canViewThisChannelPlural": "{{userCount}} Users can view this channel.",
+        "nsfwTag": "[NSFW]"
+      },
+      "voice": {
+        "commandDescription": "Shows information about a voice channel.",
+        "commandUsage": "<channel name>",
+        "missingChannelName": "You need to give me the channel name to get information from.",
+        "bitrate": "Bitrate",
+        "userLimit": "User Limit"
+      },
+      "emoji": {
+        "commandDescription": "Shows information about an emoji, such as its creation date, who added it, and its ID.",
+        "commandUsage": "<emoji>",
+        "animatedTag": "[Animated]",
+        "whoAdded": "Who added",
+        "missingEmoji": "You forgot to send the emoji."
+      },
+      "category": {
+        "commandDescription": "Shows a category's ID, creation date and how many channels are part of it.",
+        "commandUsage": "<categoryName>",
+        "channelsInside": "Channels inside of it",
+        "missingCategoryMention": "That category doesn't exist or I couldn't find it."
+      }
+    }
+  },
+  "emojilist": {
+    "commandDescription": "Lists all emoji within this server",
+    "loading": "Loading emojis...",
+    "guildHasNoEmoji": "This server has no available emojis for me."
+  },
+  "googleplay": {
+    "commandDescription": "Searches for an application or a developer on Google Play Store",
+    "commandUsage": "<type> <query>",
+    "serviceName": "Google Play Store",
+    "developer": "Developer",
+    "price": "Price",
+    "genre": "Genre",
+    "rating": "Rating",
+    "installs": "Installs",
+    "released": "Released on",
+    "subcommands": {
+      "app": {
+        "commandDescription": "Searches for an APP on Google Play Store",
+        "commandUsage": "<application name>",
+        "trackInfo": "APP information"
+      },
+      "developer": {
+        "commandDescription": "Searches for a Developer on Google Play Store",
+        "commandUsage": "<developer name/id>",
+        "trackInfo": "Developer information"
+      }
+    }
+  },
+  "rolelist": {
+    "commandDescription": "Lists all the roles in the server.",
+    "roles": "Roles",
+    "ids": "IDs",
+    "loading": "Loading roles..."
+  },
+  "snapcraft": {
+    "commandDescription": "Search on snapcraft store",
+    "commandUsage": "<search query>",
+    "noQueryProvided": "You have to give me a app name.",
+    "version": "Current version",
+    "publisher": "App Publisher",
+    "verified": "Verified account",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "jetbrainsplugin": {
+    "commandDescription": "Search for JetBrains plugins",
+    "commandUsage": "<name>",
+    "plugins": "JetBrains Plugins",
+    "download": "Download",
+    "license": "License",
+    "documentation": "Documentation",
+    "installs": "{{count}} installs",
+    "by": "by [{{name}}]({{url}})",
+    "lastUpdate": "`{{version}}` was published {{ago}}"
+  },
+  "kannapaper": {
+    "commandDescription": "Generates an image of Kanna (from Miss Kobayashi's Dragon Maid) holding a paper with text",
+    "commandUsage": "<text>",
+    "missingText": "You have to give me some text for the paper!"
+  },
+  "eclipseplugin": {
+    "commandDescription": "Search for plugins on the Eclipse Plugin Marketplace",
+    "commandUsage": "<plugin name>",
+    "marketplace": "Eclipse Plugin Marketplace",
+    "by": "by [{{name}}]({{homepage}})",
+    "installs": "{{count}} installs",
+    "lastUpdate": "`{{version}}` was published {{ago}}",
+    "license": "License",
+    "install": "Drag this link to your Eclipse workspace to install"
+  },
+  "chocolatey": {
+    "commandDescription": "Searches for packages on Chocolatey",
+    "commandUsage": "<package name>",
+    "by": "by {{authors}}",
+    "installs": "{{count}} installs",
+    "license": "License"
+  },
+  "flathub": {
+    "commandDescription": "Searches for Linux apps on FlatHub",
+    "commandUsage": "<search query>",
+    "title": "FlatHub {{name}} app information",
+    "categories": "Categories",
+    "license": "License",
+    "version": "Release Version",
+    "download": "Download"
+  },
+  "auxilioemergencial": {
+    "commandDescription": "Searches for a CPF or NIS on \"Portal da Transparência\" for the Emergencial Assistance.",
+    "commandUsage": "<cpf or nis>",
+    "name": "Name",
+    "cpf": "CPF",
+    "nis": "NIS",
+    "amount": "Amount",
+    "city": "City",
+    "notFound": "CPF or NIS not found."
+  },
+  "giverole": {
+    "commandDescription": "Gives a role to a member",
+    "commandUsage": "<member> <role>",
+    "roleAdded": "Role given!",
+    "error": "Error! I was not able to give this role.",
+    "higherError": "Error! I was not able to give this role because the role is higher than you."
+  },
+  "instagram": {
+    "commandDescription": "Shows a Instagram profile.",
+    "commandUsage": "<instagram user>",
+    "noUser": "Please insert a username!",
+    "notFound": "This user couldn't be found.",
+    "following": "Following",
+    "followers": "Followers"
+  },
+  "owlbot": {
+    "commandDescription": "Shows a definiton for given word from owlbot.info.",
+    "commandUsage": "<word>",
+    "noWord": "You have to give me a word",
+    "footer": "Provided by owlbot: owlbot.info",
+    "notFound": "Word not found",
+    "error": "An error has occurred while requesting definitons. Please try again later."
+  },
+  "packagist": {
+    "commandDescription": "Shows information about public PHP packages installable with Composer.",
+    "commandUsage": "<package name>",
+    "noDescription": "No description provided.",
+    "notFound": "Package not found.",
+    "noNameProvided": "You have to give me a package name!"
+  },
+  "commandsource": {
+    "commandDescription": "Get the source code of a command",
+    "commandUsage": "<command name>",
+    "branchNotUpToDate": "The local branch is not up to date with origin, using master as base instead",
+    "missingCommand": "You have to give me the name of a command",
+    "noRepositoryOrHEAD": "There is no local repository or the local repository has no HEAD",
+    "lastEdited": "Last edited by **{{user}}** {{ago}}"
+  },
+  "brainfuck": {
+    "commandDescription": "Executes brainfuck code",
+    "commandUsage": "<code> <input optional>",
+    "noCode": "You have to give me some brainfuck code",
+    "steps": "Steps",
+    "time": "Execution time",
+    "output": "Output",
+    "error": "Error"
+  },
+  "wikipedia": {
+    "commandDescription": "Searches for articles on wikipedia",
+    "commandUsage": "<keywords>"
+  },
+  "covid": {
+    "commandDescription": "Shows data from multiple sources about Covid-19 (deaths, cases, tests).",
+    "cases": "Cases",
+    "covid": "Covid-19 (Sars-CoV-2)",
+    "todayCases": "Today cases",
+    "activeCases": "Active Cases",
+    "recovered": "Recovered",
+    "oneCasePerPeople": "One case per people",
+    "updatedAt": "Updated at",
+    "tested": "people tested",
+    "deaths": "Deaths",
+    "casesPerOneMillion": "Cases per one million",
+    "source": "Data provided by [disease-sh](https://github.com/disease-sh). Check the [sources](https://github.com/disease-sh/API/blob/master/README.md#sources)",
+    "subcommands": {
+      "countries": {
+        "commandDescription": "Shows data from multiple sources from a country about Covid-19 (deaths, cases, tests, one case per people).",
+        "commandUsage": "<country>",
+        "noCountry": "You have to give me a country.",
+        "notFound": "Country not found."
+      },
+      "worldwide": {
+        "commandDescription": "Shows worldwide data from multiple sources about Covid-19 (deaths, cases, tests, cases per one million).",
+        "affectedCountries": "Affected countries"
+      },
+      "continents": {
+        "commandDescription": "Shows a continent data from multiple sources about Covid-19 (deaths, cases, tests, countries, cases per one million).",
+        "countries": "countries",
+        "notFound": "Continent not found.",
+        "noContinent": "You have to give me a continent."
+      },
+      "states": {
+        "commandDescription": "Shows an US state data from multiple sources about Covid-19 (deaths, cases, tests, cases per one million).",
+        "noState": "You have to give me a state.",
+        "notFound": "US State not found."
+      }
+    }
+  },
+  "connect4": {
+    "commandDescription": "Challenge someone to a game of Connect4.",
+    "commandUsage": "<user to challenge>",
+    "missingUser": "You have to give me someone to challenge!"
+  },
+  "steam": {
+    "commandDescription": "Searches for a game on the steam store",
+    "commandUsage": "<game>",
+    "by": "by {{publisher}}",
+    "free": "Free",
+    "released": "Released {{ago}}",
+    "comingSoon": "Coming soon",
+    "metacriticScore": "Metacritic Score"
   }
 }
