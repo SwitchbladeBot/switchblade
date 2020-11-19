@@ -1,28 +1,33 @@
-module.exports = class PlayerManager {
+module.exports = class PlayerManager extends Array {
   constructor () {
-    this.players = []
-    this.index = 0
+    super()
+
+    this.currentIndex = 0
   }
 
-  get currentPlayer () {
-    return this.players[this.index]
+  get current () {
+    return this[this.currentIndex]
+  }
+
+  isCurrentPlayer (id) {
+    return this.current.user.id === id
   }
 
   next () {
-    this.index = (this.index + 1) % this.players.length
+    this.currentIndex = (this.currentIndex + 1) % this.length
   }
 
   shuffle () {
-    let currentIndex = this.players.length
+    let currentIndex = this.length
 
     while (currentIndex !== 0) {
       const randomIndex = Math.floor(Math.random() * currentIndex)
 
       currentIndex -= 1
 
-      const tempValue = this.players[currentIndex]
-      this.players[currentIndex] = this.players[randomIndex]
-      this.players[randomIndex] = tempValue
+      const tempValue = this[currentIndex]
+      this[currentIndex] = this[randomIndex]
+      this[randomIndex] = tempValue
     }
   }
 }

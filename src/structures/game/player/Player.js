@@ -1,5 +1,10 @@
 module.exports = class Player {
-  constructor (user) {
+  constructor (game, user) {
+    this.game = game
     this.user = user
+  }
+
+  toString () {
+    return this.user.toString()
   }
 }

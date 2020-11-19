@@ -18,18 +18,19 @@ module.exports = class TwoPlayerGame extends Game {
       this.opponent,
       new SwitchbladeEmbed(this.host)
         .setAuthor(
-          this.t('game:challenge.title', {
-            player: this.host.toString(),
+          this.rootT('game:challenge.title', {
+            player: this.host.username,
             gameName: this.displayName
           }),
           this.host.displayAvatarURL({ format: 'png' })
         )
         .setDescription([
-          this.t('game:challenge.clickToAccept', { emoji: CONFIRMATION_EMOJI }),
-          this.t('game:challenge.timeoutIn', { timeout: COLLECTOR_TIMEOUT })
+          this.rootT('game:challenge.clickToAccept', { emoji: CONFIRMATION_EMOJI }),
+          this.rootT('game:challenge.timeoutIn', { timeout: COLLECTOR_TIMEOUT })
         ].join('\n'))
     )
 
+    await this.message.react(CONFIRMATION_EMOJI)
     const result = await this.message.awaitReactions(
       (r, u) => r.emoji.name === CONFIRMATION_EMOJI && u.id === this.opponent.id,
       {
@@ -44,7 +45,7 @@ module.exports = class TwoPlayerGame extends Game {
       await this.message.edit(
         new SwitchbladeEmbed(this.host)
           .setColor(Constants.ERROR_COLOR)
-          .setTitle(this.t('game:challenge.timeout', { gameName: this.displayName }))
+          .setTitle(this.rootT('game:challenge.timeout', { gameName: this.displayName }))
       )
 
       return false
