@@ -31,7 +31,6 @@ module.exports = class TwoPlayerGame extends Game {
     )
 
     await this.message.react(CONFIRMATION_EMOJI)
-
     const result = await this.message.awaitReactions(
       (r, u) => r.emoji.name === CONFIRMATION_EMOJI && u.id === this.opponent.id,
       {

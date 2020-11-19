@@ -5,7 +5,6 @@
     "timeoutIn": "You have {{timeout}} seconds to accept it",
     "timeout": "This {{gameName}} invite has timed out."
   },
-
   "games": {
     "connect4": {
       "displayName": "Connect4",
