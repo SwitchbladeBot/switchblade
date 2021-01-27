@@ -1933,5 +1933,10 @@
     "released": "Released {{ago}}",
     "comingSoon": "Coming soon",
     "metacriticScore": "Metacritic Score"
+  },
+  "merriamwebster": {
+    "commandDescription": "Lookup word definitions on the Merriam Webster dictionary",
+    "commandUsage": "<word>",
+    "title": "Merriam Webster Dictionary"
   }
 }
