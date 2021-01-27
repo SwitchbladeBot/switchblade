@@ -1,0 +1,20 @@
+{
+  "challenge": {
+    "title": "{{player}} has challenged you to a game of {{gameName}}",
+    "clickToAccept": "Click the {{emoji}} reaction button below to accept.",
+    "timeoutIn": "You have {{timeout}} seconds to accept it",
+    "timeout": "This {{gameName}} invite has timed out."
+  },
+  "games": {
+    "connect4": {
+      "displayName": "Connect4",
+      "loading": "Please wait, loading game...",
+      "win": "{{player}} wins!",
+      "tie": "It's a tie!",
+      "yourTurn": "It's your turn, {{player}}",
+      "currentPlayer": "Current player",
+      "clickTimeoutsIn": "You have {{timeout}} seconds to play",
+      "didNotPlay": "One player didn't make their move"
+    }
+  }
+}
