@@ -3,7 +3,7 @@ const fs = require('fs')
 const child = require('child_process')
 
 module.exports = class GitUtils {
-  static async getHashOrBranch () {
+  static async getHashOrBranch (user, repository, fallbackBranch = 'master') {
     try {
       const rev = fs.readFileSync('.git/HEAD').toString().trim()
 
@@ -13,7 +13,7 @@ module.exports = class GitUtils {
 
         let res
         try {
-          res = await axios.get(`https://api.github.com/repos/SwitchbladeBot/switchblade/commits/${branch}`)
+          res = await axios.get(`https://api.github.com/repos/${user}/${repository}/commits/${branch}`)
         } catch (_) {
           return false
         }
@@ -29,12 +29,21 @@ module.exports = class GitUtils {
         return rev
       }
     } catch (_) {
-      return null
+      let res
+      try {
+        res = await axios.get(`https://api.github.com/repos/${user}/${repository}/commits/${fallbackBranch}`)
+      } catch (__) {
+        return false
+      }
+
+      const sha = Array.isArray(res.data) ? res.data[0].sha : res.data.sha
+
+      return sha.length > 7 ? sha.slice(0, 7) : sha
     }
   }
 
-  static async getLatestCommitInfo () {
-    const branchOrHash = await GitUtils.getHashOrBranch()
+  static async getLatestCommitInfo (user, repository, fallbackBranch) {
+    const branchOrHash = await GitUtils.getHashOrBranch(user, repository, fallbackBranch)
     if (!branchOrHash && branchOrHash !== null) {
       const data = child.execSync('git log --pretty=format:"%cn | %cd"').toString()
       const [user, ...date] = data.split('\n')[0].split('|')
