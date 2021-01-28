@@ -78,7 +78,7 @@ module.exports = class MainListener extends EventListener {
 
       // discordbots.org
       if (process.env.DBL_TOKEN) {
-        fetch(`https://discordbots.org/api/bots/${client.user.id}/stats`, {
+        fetch(`https://top.gg/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DBL_TOKEN },
           body: { server_count: client.guilds.size }

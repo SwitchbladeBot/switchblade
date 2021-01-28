@@ -37,7 +37,7 @@
     "@sentry/node": "^5.15.5",
     "abort-controller": "^2.0.3",
     "ascii-table": "0.0.9",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "brainfuck-node": "^1.0.2",
     "chalk": "^3.0.0",
     "cheerio": "^1.0.0-rc.2",
