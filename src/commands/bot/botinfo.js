@@ -13,10 +13,8 @@ module.exports = class BotInfo extends Command {
 
   async run ({ channel, author, t, language }) {
     const uptime = moment.duration(process.uptime() * 1000).format('d[d] h[h] m[m] s[s]')
-    const shardGuildCounts = await this.client.shard.fetchClientValues('guilds.cache.size')
-    const totalGuildCount = shardGuildCounts.reduce((total, current) => total + current)
-    const shardUserCounts = await this.client.shard.fetchClientValues('users.cache.size')
-    const totalUserCount = shardUserCounts.reduce((total, current) => total + current)
+    const totalGuildCount = await this.client.shard.broadcastEval('this.guilds.cache.size').then((res) => res.reduce((a, b) => a + b, 0))
+    const totalUserCount = await this.client.shard.broadcastEval('this.guilds.cache.reduce((a, g) => a + g.memberCount, 0)').then((res) => res.reduce((a, b) => a + b, 0))
     channel.send(
       new SwitchbladeEmbed(author)
         .setAuthor(this.client.user.username, this.client.user.displayAvatarURL({ format: 'png' }))

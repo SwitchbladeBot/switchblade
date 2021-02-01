@@ -17,10 +17,10 @@ module.exports = class MainListener extends EventListener {
     this.user.setActivity(`@${this.user.username} help`, { type: 'PLAYING' })
 
     async function updatePresence (client) {
-      const shardGuildCounts = await client.shard.fetchClientValues('guilds.cache.size')
-      const totalGuildCount = shardGuildCounts.reduce((total, current) => total + current)
-      const shardUserCounts = await client.shard.fetchClientValues('users.cache.size')
-      const totalUserCount = shardUserCounts.reduce((total, current) => total + current)
+      const [totalGuildCount, totalUserCount] = await Promise.all([
+        client.shard.fetchClientValues('guilds.cache.size'),
+        client.shard.broadcastEval('this.guilds.cache.reduce((a, g) => a + g.memberCount, 0)')
+      ])
 
       const presences = [
         {
@@ -64,13 +64,17 @@ module.exports = class MainListener extends EventListener {
     }
 
     // TODO: Make stat posters modular
-    function postStats (client) {
+    async function postStats (client) {
+      const [totalGuilds, totalUsers] = await Promise.all([
+        client.shard.fetchClientValues('guilds.cache.size'),
+        client.shard.broadcastEval('this.guilds.cache.reduce((a, g) => a + g.memberCount, 0)')
+      ])
       // bots.discord.pw
       if (process.env.DISCORDBOTSPW_TOKEN) {
         fetch(`https://bots.discord.pw/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DISCORDBOTSPW_TOKEN },
-          body: { server_count: client.guilds.size }
+          body: { server_count: totalGuilds }
         })
           .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['bots.discord.pw'] }))
           .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['bots.discord.pw'] }))
@@ -81,7 +85,7 @@ module.exports = class MainListener extends EventListener {
         fetch(`https://top.gg/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DBL_TOKEN },
-          body: { server_count: client.guilds.size }
+          body: { server_count: totalGuilds }
         })
           .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['discordbots.org'] }))
           .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['discordbots.org'] }))
@@ -92,7 +96,7 @@ module.exports = class MainListener extends EventListener {
         fetch(`https://botsfordiscord.com/api/bots/${client.user.id}`, {
           method: 'POST',
           headers: { Authorization: process.env.BOTSFORDISCORD_TOKEN },
-          body: { server_count: client.guilds.size }
+          body: { server_count: totalGuilds }
         })
           .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['botsfordiscord.com'] }))
           .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['botsfordiscord.com'] }))
@@ -102,7 +106,7 @@ module.exports = class MainListener extends EventListener {
         fetch(`https://discordbotlist.com/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DBL2_TOKEN },
-          body: { guilds: client.guilds.size, users: client.users.size }
+          body: { guilds: totalGuilds, users: totalUsers }
         })
           .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['discordbotlist.com'] }))
           .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['discordbotlist.com'] }))
