@@ -62,7 +62,7 @@
     "iso-639": "^0.2.2",
     "jsonwebtoken": "^8.5.0",
     "lodash": "^4.17.20",
-    "mal-scraper": "^2.5.0",
+    "mal-scraper": "^2.11.3",
     "mathjs": "^5.7.0",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.2.2",
