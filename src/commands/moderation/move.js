@@ -11,7 +11,7 @@ module.exports = class Move extends Command {
         type: 'messageLink',
         sameGuildOnly: true,
         forceExists: true,
-        linkChannelUserPermission: ['VIEW_MESSAGES'],
+        linkChannelUserPermission: ['VIEW_CHANNEL'],
         linkChannelBotPermission: ['MANAGE_MESSAGES'],
         missingError: 'commands:move.missingMessageLink'
       }, {
