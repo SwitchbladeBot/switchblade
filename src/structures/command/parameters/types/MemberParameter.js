@@ -3,8 +3,7 @@ const UserParameter = require('./UserParameter.js')
 module.exports = class MemberParameter extends UserParameter {
   static parseOptions (options = {}) {
     return {
-      ...super.parseOptions(options),
-      fetchUser: false
+      ...super.parseOptions(options)
     }
   }
 
@@ -15,6 +14,6 @@ module.exports = class MemberParameter extends UserParameter {
     const user = await super.parse(arg, context)
 
     if (!user) return undefined
-    return !user.joinedTimestamp && user.id ? user : guild.members.cache.get(user.id)
+    return user.user ? user : (guild.members.cache.get(user.id) || user)
   }
 }

@@ -21,14 +21,14 @@ module.exports = class UserInfo extends Command {
 
   async run ({ t, guild, member: author, channel, language }, member = author) {
     moment.locale(language)
-    const isUserPartial = !member.joinedTimestamp
-    const createdAt = isUserPartial ? member.createdAt : member.user.createdTimestamp
+    const isUserPartial = !member.user
+    const createdAt = isUserPartial ? member.createdAt : member.user.createdAt
     const embed = new SwitchbladeEmbed()
       .setTitle(isUserPartial ? member.username : member.displayName)
       .setThumbnail((isUserPartial ? member : member.user).displayAvatarURL({ format: 'png' }))
       .addField(t('commands:userinfo.tag'), isUserPartial ? member.tag : member.user.tag, true)
       .addField(t('commands:userinfo.id'), member.id, true)
-      .addField(t('commands:userinfo.status'), t(`commands:userinfo.${member.presence.status}`, { status: this.getEmoji(member.presence.status) }), true)
+      // .addField(t('commands:userinfo.status'), t(`commands:userinfo.${member.presence.status}`, { status: this.getEmoji(member.presence.status) }), true)
       .addField(t('commands:userinfo.createdAt'), `${moment(createdAt).format('LLL')}\n(${moment(createdAt).fromNow()})`, true)
 
     if (!isUserPartial) {

@@ -33,7 +33,7 @@ module.exports = class UserParameter extends Parameter {
     const id = regexResult && regexResult[1]
     const findMember = guild.members.cache.get(id) || guild.members.cache.find(m => m.user.username.toLowerCase().includes(arg.toLowerCase()) || m.displayName.toLowerCase().includes(arg.toLowerCase()))
     const partialUser = this.acceptPartial && await client.users.fetch(id).catch(() => null)
-    const user = (!!findMember && findMember.user) || client.users.cache.get(id)
+    const user = findMember ? findMember.user : client.users.fetch(id)
 
     if (!user) {
       if (!this.acceptPartial) throw new CommandError(t(this.errors.acceptPartial))
@@ -48,6 +48,6 @@ module.exports = class UserParameter extends Parameter {
     if (!this.acceptUser && !user.bot) throw new CommandError(t(this.errors.acceptUser))
     if (!this.acceptDeveloper && PermissionUtils.isDeveloper(client, user)) throw new CommandError(t(this.errors.acceptDeveloper), false)
 
-    return user
+    return guild.member(user) ? guild.member(user) : user
   }
 }
