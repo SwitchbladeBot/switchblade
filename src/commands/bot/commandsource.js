@@ -1,8 +1,8 @@
-const { Command, CommandError, SwitchbladeEmbed, GitUtils } = require('../../')
+const { Command, SwitchbladeEmbed, GitUtils } = require('../../')
 const { sep } = require('path')
 const moment = require('moment')
 
-const REPOSITORY_URL = 'https://github.com/SwitchbladeBot/switchblade'
+const REPOSITORY_URL = (user, repository) => `https://github.com/${user}/${repository}`
 
 module.exports = class CommandSource extends Command {
   constructor (client) {
@@ -22,27 +22,28 @@ module.exports = class CommandSource extends Command {
 
   async run ({ channel, author, language, t }, command) {
     channel.startTyping()
-    const branchOrHash = await GitUtils.getHashOrBranch()
-    if (branchOrHash === null) {
-      await channel.stopTyping(true)
-      throw new CommandError(t('commands:commandsource.noRepositoryOrHEAD'))
-    }
+
+    const org = process.env.GITHUB_USER || 'SwitchbladeBot'
+    const repository = process.env.GITHUB_REPOSITORY || 'switchblade'
+    const fallbackBranch = process.env.GITHUB_BRANCH || 'master'
+
+    const branchOrHash = await GitUtils.getHashOrBranch(org, repository, fallbackBranch)
 
     moment.locale(language)
 
     const path = command.path.split(sep).join('/')
-    const { date, user } = await GitUtils.getLatestCommitInfo()
+    const { date, user } = await GitUtils.getLatestCommitInfo(org, repository, fallbackBranch)
 
     channel.send(new SwitchbladeEmbed(author)
       .setTitle(command.fullName)
       .setDescriptionFromBlockArray([
         [
           !branchOrHash ? `**${t('commands:commandsource.branchNotUpToDate')}**` : '',
-          `[${path}](${REPOSITORY_URL}/blob/${branchOrHash || 'master'}/${path})`
+          `[${path}](${REPOSITORY_URL(org, repository)}/blob/${branchOrHash || 'master'}/${path})`
         ],
         [
           `${t('commands:commandsource.lastEdited', { ago: moment(date).fromNow(), user })}`,
-          `[\`${branchOrHash || 'master'}\`](${REPOSITORY_URL}/tree/${branchOrHash || 'master'})`
+          `[\`${branchOrHash || 'master'}\`](${REPOSITORY_URL(org, repository)}/tree/${branchOrHash || 'master'})`
         ]
       ])
     ).then(() => channel.stopTyping(true))

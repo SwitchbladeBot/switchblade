@@ -31,7 +31,7 @@ module.exports = class Wikipedia extends SearchCommand {
 
     channel.send(
       new SwitchbladeEmbed(author)
-        .setDescription(description.split('\n').slice(2).toString().substring(0, 2000) + '...')
+        .setDescription(description.length > 2000 ? description.substring(0, 2000) + '...' : description)
         .setAuthor('Wikipedia', this.embedLogoURL, `https://${lang}.wikipedia.org`)
         .setColor(this.embedColor)
         .setTitle(info.raw.title)

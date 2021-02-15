@@ -2,7 +2,7 @@ const { Webhook, SwitchbladeEmbed, EndpointUtils } = require('../../index')
 const { Router } = require('express')
 const cors = require('cors')
 const corsOptions = {
-  origin: 'https://discordbots.org',
+  origin: 'https://top.gg',
   optionsSuccessStatus: 200
 }
 

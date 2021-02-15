@@ -64,6 +64,13 @@
     "commandUsage": "[image link]",
     "missingImage": "You need to give me an image to pet."
   },
+  "mostplayed": {
+    "commandDescription": "Shows the most popular games in this server.",
+    "mostPlayedTitle": "Most played games in {{name}}",
+    "hasPlayers": "{{rank}}. **{{game}}** - **{{count}}** players.",
+    "totalPlayers": "{{count}} total people playing games.",
+    "noPlayers": "Nobody in this server is playing a game!"
+  },
   "hibp": {
     "commandDescription": "Checks if an email has been found in a data breach or paste.",
     "commandUsage": "<type> <query>",
@@ -1912,5 +1919,41 @@
         "notFound": "US State not found."
       }
     }
+  },
+  "connect4": {
+    "commandDescription": "Challenge someone to a game of Connect4.",
+    "commandUsage": "<user to challenge>",
+    "missingUser": "You have to give me someone to challenge!"
+  },
+  "steam": {
+    "commandDescription": "Searches for a game on the steam store",
+    "commandUsage": "<game>",
+    "by": "by {{publisher}}",
+    "free": "Free",
+    "released": "Released {{ago}}",
+    "comingSoon": "Coming soon",
+    "metacriticScore": "Metacritic Score"
+  },
+  "merriamwebster": {
+    "commandDescription": "Lookup word definitions on the Merriam Webster dictionary",
+    "commandUsage": "<word>",
+    "title": "Merriam Webster Dictionary"
+  },
+  "bmi": {
+    "commandDescription": "Calculates your BMI",
+    "commandUsage": "<weigth in kilograms> <height in meters>",
+    "missingWeight": "You have to specify a valid weight in kilograms.",
+    "missingHeight": "You have to specify a valid height in kilograms.",
+    "title": "Your BMI is {{value}}",
+    "description": "That means you are {{category}}",
+    "footer": "More information: https://en.wikipedia.org/wiki/Body_mass_index",
+    "categoryVerySeverelyUnderweight": "Very severely underweight",
+    "categorySeverelyUnderweight": "Severely Underweight",
+    "categoryUnderweight": "Underweight",
+    "categoryNormal": "Normal (healthy weight)",
+    "categoryOverweight": "Overweight",
+    "categoryObese1": "Obese Class I (Moderately obese)",
+    "categoryObese2": "Obese Class II (Severely obese)",
+    "categoryObese3": "Obese Class III (Very severely obese)"
   }
 }
