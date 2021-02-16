@@ -14,7 +14,8 @@ module.exports = class UserInfo extends Command {
         required: false,
         acceptBot: true,
         acceptSelf: true,
-        acceptPartial: true
+        acceptPartial: true,
+        userPartial: true
       }]
     }, client)
   }

@@ -8,7 +8,7 @@ module.exports = class Softban extends Command {
       category: 'moderation',
       requirements: { guildOnly: true, botPermissions: ['BAN_MEMBERS'], permissions: ['BAN_MEMBERS'] },
       parameters: [{
-        type: 'member', acceptBot: true, missingError: 'commands:softban.missingUser'
+        type: 'member', acceptPartial: true, acceptBot: true, missingError: 'commands:softban.missingUser'
       }, {
         type: 'string', full: true, missingError: 'commands:softban.missingReason'
       }]

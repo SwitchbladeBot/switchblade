@@ -8,7 +8,7 @@ module.exports = class Ban extends Command {
       category: 'moderation',
       requirements: { guildOnly: true, botPermissions: ['BAN_MEMBERS'], permissions: ['BAN_MEMBERS'] },
       parameters: [{
-        type: 'member', acceptBot: true, missingError: 'commands:ban.missingUser'
+        type: 'member', acceptPartial: true, acceptBot: true, missingError: 'commands:ban.missingUser'
       }, {
         type: 'string', full: true, missingError: 'commands:ban.missingReason'
       }]

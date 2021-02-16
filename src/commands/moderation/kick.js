@@ -8,7 +8,7 @@ module.exports = class Kick extends Command {
       category: 'moderation',
       requirements: { guildOnly: true, botPermissions: ['KICK_MEMBERS'], permissions: ['KICK_MEMBERS'] },
       parameters: [{
-        type: 'member', acceptBot: true, missingError: 'commands:kick.missingUser'
+        type: 'member', acceptPartial: true, acceptBot: true, missingError: 'commands:kick.missingUser'
       }, {
         type: 'string', full: true, missingError: 'commands:kick.missingReason'
       }]

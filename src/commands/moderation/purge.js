@@ -14,7 +14,7 @@ module.exports = class Purge extends Command {
         max: 100,
         missingError: 'commands:purge.invalidNumber'
       }, {
-        type: 'member', required: false, full: false, acceptSelf: true, acceptBot: true
+        type: 'member', acceptPartial: true, required: false, full: false, acceptSelf: true, acceptBot: true
       }]
     }, client)
   }
