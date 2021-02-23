@@ -61,7 +61,7 @@
     "intl": "^1.2.5",
     "iso-639": "^0.2.2",
     "jsonwebtoken": "^8.5.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "mal-scraper": "^2.5.0",
     "mathjs": "^5.7.0",
     "moment": "^2.24.0",
