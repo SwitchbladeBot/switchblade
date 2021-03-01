@@ -13,26 +13,36 @@ module.exports = class UserParameter extends Parameter {
       acceptUser: defVal(options, 'acceptUser', true),
       acceptDeveloper: defVal(options, 'acceptDeveloper', true),
       acceptSelf: !!options.acceptSelf,
+      acceptPartial: !!options.acceptPartial,
       errors: {
         invalidUser: 'errors:invalidUser',
         acceptSelf: 'errors:sameUser',
         acceptBot: 'errors:invalidUserBot',
         acceptUser: 'errors:invalidUserNotBot',
         acceptDeveloper: 'errors:userCantBeDeveloper',
+        acceptPartial: 'errors:userPartial',
         ...(options.errors || {})
       }
     }
   }
 
-  static parse (arg, { t, client, author, guild }) {
+  static async parse (arg, { t, client, author, guild }) {
     if (!arg) return
 
     const regexResult = MENTION_REGEX.exec(arg)
     const id = regexResult && regexResult[1]
     const findMember = guild.members.cache.get(id) || guild.members.cache.find(m => m.user.username.toLowerCase().includes(arg.toLowerCase()) || m.displayName.toLowerCase().includes(arg.toLowerCase()))
+    const partialUser = this.acceptPartial && await client.users.fetch(id).catch(() => null)
+    const user = (!!findMember && findMember.user) || client.users.cache.get(id)
 
-    const user = client.users.cache.get(id) || (!!findMember && findMember.user)
-    if (!user) throw new CommandError(t(this.errors.invalidUser))
+    if (!user) {
+      if (!this.acceptPartial) throw new CommandError(t(this.errors.acceptPartial))
+      if (partialUser) {
+        return partialUser
+      }
+      throw new CommandError(t(this.errors.invalidUser))
+    }
+
     if (!this.acceptSelf && user.id === author.id) throw new CommandError(t(this.errors.acceptSelf))
     if (!this.acceptBot && user.bot) throw new CommandError(t(this.errors.acceptBot))
     if (!this.acceptUser && !user.bot) throw new CommandError(t(this.errors.acceptUser))
