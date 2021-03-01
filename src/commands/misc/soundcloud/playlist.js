@@ -14,6 +14,8 @@ module.exports = class SoundCloudPlaylist extends SearchCommand {
 
   search (_, query) {
     return this.client.apis.soundcloud.searchPlaylist(query)
+  search (context, query) {
+    return this.client.apis.soundcloud.searchPlaylist(query)
   }
 
   searchResultFormatter (playlist) {
