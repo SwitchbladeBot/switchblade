@@ -18,6 +18,7 @@ module.exports = class TwitchSong extends Song {
       const user = await tw.getUser(stream.user_id)
       if (user) {
         this.artwork = user.profile_image_url
+        console.log('ate aqui foi')
         this.richInfo = {
           viewerCount: stream.viewer_count,
           viewCount: user.view_count,

@@ -21,6 +21,7 @@ module.exports = class searchPlate extends Command {
   async run ({ t, author, channel, message }, plt) {
     channel.startTyping()
     const plate = await this.client.apis.sinesp.searchPlate(plt)
+    console.log(plate)
     try {
       // vv  i know that's actually hardcoded :hahaa:
       const carpic = await this.client.apis.gsearch.searchImage(`${plate.modelo} ${plate.anoModelo} a venda&imgSize=medium`)

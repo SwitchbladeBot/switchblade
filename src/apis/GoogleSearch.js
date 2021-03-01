@@ -1,7 +1,7 @@
 const { APIWrapper } = require('../')
 const fetch = require('node-fetch')
 
-module.exports = class CrowdinAPI extends APIWrapper {
+module.exports = class GoogleSearchAPI extends APIWrapper {
   constructor () {
     super({
       name: 'gsearch',
