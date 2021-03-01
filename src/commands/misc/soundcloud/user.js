@@ -16,6 +16,8 @@ module.exports = class SoundCloudUser extends SearchCommand {
     return results
   search (context, query) {
     return this.client.apis.soundcloud.searchUser(query)
+  search (context, query) {
+    return this.client.apis.soundcloud.searchUser(query)
   }
 
   searchResultFormatter (user) {
