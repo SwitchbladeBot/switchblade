@@ -18,7 +18,7 @@ module.exports = class Pat extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     embed.setImage(body.url)
-      .setDescription(t('commands:pat.success', { _author: author, pat: user }))
+      .setDescription(t('commands:pat.success', { _author: author.toString(), pat: user.toString() }))
     channel.send(embed).then(() => channel.stopTyping())
   }
 }

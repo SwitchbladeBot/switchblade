@@ -3,6 +3,7 @@ const Color = require('./Color.js')
 
 const GIFEncoder = require('gifencoder')
 const moment = require('moment')
+const { loadImage } = require('canvas')
 
 let Canvas = {}
 let CanvasUtils = {}
@@ -151,7 +152,7 @@ module.exports = class CanvasTemplates {
     )
 
     // Image handling
-    const [ avatarImage, coinsImage, repImage, backgroundImage ] = await IMAGE_ASSETS
+    const [avatarImage, coinsImage, repImage, backgroundImage] = await IMAGE_ASSETS
 
     const AVATAR_HALF = AVATAR_SIZE * 0.5
     const AVATAR_Y = CARD_MARGIN - (AVATAR_SIZE * 0.5)
@@ -246,7 +247,7 @@ module.exports = class CanvasTemplates {
     ctx.writeParagraph(song.title, TITLE_FONT, LEFT_TEXT_MARGIN, TITLE_Y, RIGHT_TEXT_MARGIN, TITLE_Y + 1, 5, ALIGN.BOTTOM_LEFT)
 
     // Image handling
-    const [ mainImage, backgroundImage, brand ] = await IMAGE_ASSETS
+    const [mainImage, backgroundImage, brand] = await IMAGE_ASSETS
 
     // Brand
     const BRAND_MARGIN = 12
@@ -394,11 +395,11 @@ module.exports = class CanvasTemplates {
     })
 
     // Image handling
-    const [ valueImage, medalImage, backgroundImage, ...avatarImages ] = await IMAGE_ASSETS
+    const [valueImage, medalImage, backgroundImage, ...avatarImages] = await IMAGE_ASSETS
 
     const avatarImage = avatarImages.shift()
     //   Top avatar shadow
-    const [ TOP_USER_AVATAR_X, TOP_USER_AVATAR_Y ] = TOP_USER_AVATAR_COORDS
+    const [TOP_USER_AVATAR_X, TOP_USER_AVATAR_Y] = TOP_USER_AVATAR_COORDS
     ctx.save()
     ctx.fillStyle = '#00000099'
     ctx.shadowColor = '#00000099'
@@ -417,7 +418,7 @@ module.exports = class CanvasTemplates {
 
     // Others avatars
     avatarImages.forEach((avatar, i) => {
-      const [ avatarX, avatarY ] = avatarCoords[i]
+      const [avatarX, avatarY] = avatarCoords[i]
       ctx.roundImage(avatar, avatarX, avatarY, OTHERS_AVATAR_SIZE, OTHERS_AVATAR_SIZE)
 
       const POSITION_RADIUS = 12
@@ -479,7 +480,7 @@ module.exports = class CanvasTemplates {
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
 
-    const [ triggeredLabel, avatarImage ] = await IMAGE_ASSETS
+    const [triggeredLabel, avatarImage] = await IMAGE_ASSETS
 
     const BUFFER_RANDOM_MAX = 20
     const LABEL_RANDOM_MAX = 10
@@ -490,6 +491,44 @@ module.exports = class CanvasTemplates {
       ctx.fillStyle = '#FF000033'
       ctx.fillRect(0, 0, WIDTH, HEIGHT)
       ctx.drawImage(triggeredLabel, random(LABEL_RANDOM_MAX), HEIGHT - 54 + random(LABEL_RANDOM_MAX), 256 + LABEL_RANDOM_MAX, 54 + LABEL_RANDOM_MAX)
+      encoder.addFrame(ctx)
+    }
+
+    encoder.finish()
+
+    return encoder.out.getData()
+  }
+
+  static async petpet (buffer) {
+    const WIDTH = 112
+    const HEIGHT = 112
+
+    const AVATAR_HEIGHT = [94, 82, 76, 82, 94]
+    const AVATAR_WIDTH = [94, 98, 106, 102, 98]
+    const X_FRAMES = [18, 14, 6, 6, 14]
+    const Y_FRAMES = [18, 30, 36, 30, 18]
+    const AVATAR_SCALE = 1.1
+
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.PETPET_PNG, true),
+      Image.from(buffer)
+    ])
+
+    const encoder = new GIFEncoder(WIDTH, HEIGHT)
+    encoder.start()
+    encoder.setRepeat(0) // Repeat
+    encoder.setDelay(55) // 55ms delay between frames
+    encoder.setTransparent('#000000')
+
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    const [petHand, avatarImage] = await IMAGE_ASSETS
+
+    for (let i = 0; i < 5; i++) {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT)
+      ctx.drawImage(avatarImage, X_FRAMES[i], Y_FRAMES[i], AVATAR_WIDTH[i] * AVATAR_SCALE, AVATAR_HEIGHT[i] * AVATAR_SCALE)
+      ctx.drawImage(petHand, WIDTH - (WIDTH * (i + 1)), 0, petHand.width, HEIGHT)
       encoder.addFrame(ctx)
     }
 
@@ -535,7 +574,7 @@ module.exports = class CanvasTemplates {
     const usedIcons = daily.map(d => icon(d.icon)).reduce((a, i) => {
       if (!a.includes(i)) a.push(i)
       return a
-    }, [ icon(now.icon) ])
+    }, [icon(now.icon)])
 
     const ICONS_ASSETS = Promise.all(usedIcons.map(i => Image.from(Constants[`WEATHER_${i}`])))
 
@@ -601,7 +640,7 @@ module.exports = class CanvasTemplates {
       ctx.drawIcon(getIcon(day.icon), day.iconX, day.iconY, DAY_ICON_SIZE, DAY_ICON_SIZE, '#fff')
     })
 
-    const [ backgroundImage, arrowImage, windImage ] = await IMAGE_ASSETS
+    const [backgroundImage, arrowImage, windImage] = await IMAGE_ASSETS
 
     // Max
     ctx.drawIcon(arrowImage, INNER_MARGIN, currentlyMax.topY, INFO_ICON_SIZE, INFO_ICON_SIZE, '#fff')
@@ -679,13 +718,28 @@ module.exports = class CanvasTemplates {
       Image.from(Constants.QUIERES_HAND_PNG, true),
       Image.from(buffer)
     ])
-    const [ hand, image ] = await IMAGE_ASSETS
+    const [hand, image] = await IMAGE_ASSETS
     const WIDTH = image.width
     const HEIGHT = image.height
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
     ctx.drawImage(image, 0, 0, WIDTH, HEIGHT)
     ctx.drawImage(hand, WIDTH - hand.width, HEIGHT - hand.height, hand.width, hand.height)
+    return canvas.toBuffer()
+  }
+
+  static async herewegoagain (buffer) {
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.HERE_WE_GO_AGAIN_PNG, true),
+      Image.from(buffer)
+    ])
+    const [ template, image ] = await IMAGE_ASSETS
+    const WIDTH = image.width
+    const HEIGHT = image.height
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(image, 0, 0, WIDTH, HEIGHT)
+    ctx.drawImage(template, WIDTH - template.width, HEIGHT - template.height, template.width, template.height)
     return canvas.toBuffer()
   }
 
@@ -743,7 +797,7 @@ module.exports = class CanvasTemplates {
     })
 
     //  IMAGES
-    const [ heartIcon, ...avatarImages ] = await IMAGE_ASSETS
+    const [heartIcon, ...avatarImages] = await IMAGE_ASSETS
 
     // Avatars
     users.forEach((user, i) => {
@@ -872,6 +926,36 @@ module.exports = class CanvasTemplates {
 
     const lines = lineBreak(text, 13, 6)
     ctx.fillText(lines.join('\n'), 53, 25)
+
+    return canvas.toBuffer()
+  }
+
+  static async instagramFeed (urls, GAP = 3) {
+    const SIZE = 500
+    const TILES = 3
+
+    const canvas = createCanvas(SIZE, SIZE)
+    const ctx = canvas.getContext('2d')
+
+    ctx.fillStyle = '#fff'
+    ctx.fillRect(0, 0, SIZE, SIZE)
+
+    const images = await Promise.all(urls.map(i => loadImage(i)))
+
+    const GAPS_SIZE = GAP * (TILES - 1)
+    const TILE_SIZE = ((SIZE - GAPS_SIZE) / TILES)
+
+    let count = 0
+    for (let i = 0; i < TILES; i++) {
+      for (let j = 0; j < TILES; j++) {
+        const img = images[count]
+        if (!img) break
+
+        ctx.drawImage(img, j * (TILE_SIZE + GAP), i * (TILE_SIZE + GAP), TILE_SIZE, TILE_SIZE)
+
+        count++
+      }
+    }
 
     return canvas.toBuffer()
   }

@@ -1,4 +1,5 @@
 const CommandStructures = require('./structures/command')
+const GameStructures = require('./structures/game')
 
 module.exports = {
   // Command Structures
@@ -14,6 +15,14 @@ module.exports = {
   RandomRedditPostCommand: CommandStructures.RandomRedditPostCommand,
   SearchCommand: CommandStructures.SearchCommand,
   SubcommandListCommand: CommandStructures.SubcommandListCommand,
+
+  // Game Structures
+  GameStructures,
+  Game: GameStructures.Game,
+  TwoPlayerGame: GameStructures.TwoPlayerGame,
+  Matrix: GameStructures.Matrix,
+  Player: GameStructures.Player,
+  PlayerManager: GameStructures.PlayerManager,
 
   // Structures
   APIWrapper: require('./structures/APIWrapper.js'),
@@ -38,6 +47,7 @@ module.exports = {
   PermissionUtils: require('./utils/PermissionUtils.js'),
   EmojiUtils: require('./utils/EmojiUtils.js'),
   EndpointUtils: require('./utils/EndpointUtils.js'),
+  GitUtils: require('./utils/GitUtils.js'),
   ConfirmationBox: require('./utils/ConfirmationBox.js'),
   PlaceholderUtils: require('./utils/placeholders/PlaceholderUtils.js'),
   PlaceholderRules: require('./utils/placeholders/PlaceholderRules.js')

@@ -1,6 +1,6 @@
 const { Command, SwitchbladeEmbed } = require('../../')
 const fetch = require('node-fetch')
-const nekoAPI = 'https://nekos.life/api/v2/img/'
+const nekoAPI = 'https://waifu.pics/api'
 
 module.exports = class Neko extends Command {
   constructor (client) {
@@ -16,12 +16,12 @@ module.exports = class Neko extends Command {
     channel.startTyping()
 
     // Send a lewd neko if the channel is NSFW
-    const endpoint = channel.nsfw ? 'lewd' : 'neko'
+    const type = channel.nsfw ? 'nsfw' : 'sfw'
 
-    const { url } = await fetch(nekoAPI + endpoint).then(res => res.json())
+    const { url } = await fetch(`${nekoAPI}/${type}/neko`).then(res => res.json())
 
     embed.setImage(url)
-      .setDescription(t('commands:neko.hereIsYour', { context: endpoint }))
+      .setDescription(t('commands:neko.hereIsYour', { context: type }))
 
     channel.send(embed).then(() => channel.stopTyping())
   }
