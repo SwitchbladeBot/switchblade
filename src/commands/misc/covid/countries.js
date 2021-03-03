@@ -19,6 +19,7 @@ module.exports = class CovidCountries extends Command {
     moment.locale(language)
     try {
       const { data } = await this.client.apis.covid.getCountry(country)
+      const vaccineData = await this.client.apis.covid.getCountryVaccine(country)
       channel.send(
         new SwitchbladeEmbed(author)
           .setThumbnail(data.countryInfo.flag)
@@ -31,6 +32,7 @@ module.exports = class CovidCountries extends Command {
           .addField(t('commands:covid.deaths'), MiscUtils.formatNumber(data.deaths, language), true)
           .addField(t('commands:covid.recovered'), MiscUtils.formatNumber(data.recovered, language), true)
           .addField(t('commands:covid.oneCasePerPeople'), MiscUtils.formatNumber(data.oneCasePerPeople, language), true)
+          .addField(t('commands:covid.vaccinated'), MiscUtils.formatNumber(vaccineData.timeline[Object.keys(vaccineData.timeline)[0]], language), true)
           .setFooter(t('commands:covid.updatedAt'))
           .setTimestamp(data.updated)
       )

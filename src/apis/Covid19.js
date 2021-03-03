@@ -14,6 +14,16 @@ module.exports = class Covid19 extends APIWrapper {
     return this.request('countries', country)
   }
 
+  async getCountryVaccine (country) {
+    const vaccineData = await this.request('vaccine/coverage/countries', `${country}?lastdays=1`)
+    return vaccineData.data
+  }
+
+  async getWorldwideVaccine () {
+    const vaccineData = await this.request('vaccine/coverage', `?lastdays=1`)
+    return vaccineData.data
+  }
+
   async getWorldwide () {
     return this.request('all')
   }

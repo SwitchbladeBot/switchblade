@@ -14,6 +14,7 @@ module.exports = class CovidWorldwide extends Command {
     moment.locale(language)
     try {
       const { data } = await this.client.apis.covid.getWorldwide()
+      const vaccineData = await this.client.apis.covid.getWorldwideVaccine()
       channel.send(
         new SwitchbladeEmbed(author)
           .setColor(Constants.GENERIC_RED_COLOR)
@@ -26,6 +27,8 @@ module.exports = class CovidWorldwide extends Command {
           .addField(t('commands:covid.recovered'), MiscUtils.formatNumber(data.recovered, language), true)
           .addField(t('commands:covid.casesPerOneMillion'), MiscUtils.formatNumber(data.casesPerOneMillion, language), true)
           .addField(t('commands:covid.subcommands.worldwide.affectedCountries'), MiscUtils.formatNumber(data.affectedCountries, language), true)
+          .addField(t('commands:covid.vaccinated'), MiscUtils.formatNumber(vaccineData[Object.keys(vaccineData)[0]], language), true)
+
           .setFooter(t('commands:covid.updatedAt'))
           .setTimestamp(data.updated)
       )
