@@ -28,7 +28,7 @@ module.exports = class UserInfo extends Command {
       .setThumbnail((isUserPartial ? member : member.user).displayAvatarURL({ format: 'png' }))
       .addField(t('commands:userinfo.tag'), isUserPartial ? member.tag : member.user.tag, true)
       .addField(t('commands:userinfo.id'), member.id, true)
-      .addField(t('commands:userinfo.status'), t(`commands:userinfo.${member.presence.status}`, { status: this.getEmoji(member.presence.status) }), true)
+      // .addField(t('commands:userinfo.status'), t(`commands:userinfo.${member.presence.status}`, { status: this.getEmoji(member.presence.status) }), true)
       .addField(t('commands:userinfo.createdAt'), `${moment(createdAt).format('LLL')}\n(${moment(createdAt).fromNow()})`, true)
 
     if (!isUserPartial) {
