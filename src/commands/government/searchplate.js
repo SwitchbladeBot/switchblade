@@ -24,7 +24,7 @@ module.exports = class searchPlate extends Command {
     const plate = await this.client.apis.consultaplaca.searchPlate(plt)
     try {
       // vv  i know that's actually hardcoded :hahaa:
-      const carpic = await this.client.apis.gsearch.searchImage(`${plate.extra.marca_modelo.marca} ${plate.extra.marca_modelo.grupo} ${plate.anoModelo} icarros`).then(res => res)
+      const carpic = await this.client.apis.gsearch.searchImage(`${plate.extra.marca_modelo.marca} ${plate.extra.marca_modelo.grupo} ${plate.anoModelo} icarros`)
       console.log(carpic)
       const mercoSul = await CanvasTemplates.plateMercosul(plate.placa, `https://cdn.jsdelivr.net/gh/bgeneto/bandeiras-br/imagens/${plate.uf.toUpperCase()}.png`)
       const attach = new MessageAttachment(mercoSul, 'mercosul.png')
