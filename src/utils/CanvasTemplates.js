@@ -713,6 +713,29 @@ module.exports = class CanvasTemplates {
     return canvas.toBuffer()
   }
 
+  static async plateMercosul (text, buffer) {
+    const WIDTH = 840
+    const HEIGHT = 294
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.PLACA_MERCOSUL_PNG, true),
+      Image.from(buffer)
+    ])
+    const [background, state] = await IMAGE_ASSETS
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.fillStyle = '#363536'
+
+    const PARAGRAPH_START_X = 425
+    const PARAGRAPH_START_Y = 165
+    const PARAGRAPH_HEIGHT = 10
+    const PARAGRAPH_WIDTH = 840
+
+    ctx.drawImage(background, 0, 0, WIDTH, HEIGHT)
+    ctx.drawImage(state, 742, 100, 61, 41)
+    ctx.writeParagraph(text, '120px "FE-Font"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.CENTER)
+    return canvas.toBuffer()
+  }
+
   static async quieres (buffer) {
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.QUIERES_HAND_PNG, true),
