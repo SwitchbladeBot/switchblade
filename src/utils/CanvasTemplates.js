@@ -736,6 +736,24 @@ module.exports = class CanvasTemplates {
     return canvas.toBuffer()
   }
 
+  static async oldPlate (plate, city) {
+    const WIDTH = 1920
+    const HEIGHT = 624
+    const background = await Image.from(Constants.OLD_PLATE_PNG)
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    const PARAGRAPH_START_X = 960
+    const PARAGRAPH_START_Y = 372
+    const PARAGRAPH_HEIGHT = 10
+    const PARAGRAPH_WIDTH = 1920
+
+    ctx.drawImage(background, 0, 0, WIDTH, HEIGHT)
+    ctx.writeParagraph(city, '80px "Mandatory"', PARAGRAPH_START_X, 160, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.CENTER)
+    ctx.writeParagraph(plate, '320px "Mandatory"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.CENTER)
+    return canvas.toBuffer()
+  }
+
   static async quieres (buffer) {
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.QUIERES_HAND_PNG, true),

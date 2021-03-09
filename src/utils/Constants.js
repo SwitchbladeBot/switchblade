@@ -91,6 +91,7 @@ module.exports = {
   KANNA_PAPER_TEMPLATE: 'src/assets/png/kanna_paper_template.png',
   PRESIDENTIAL_ALERT_TEMPLATE: 'src/assets/jpg/presidential_alert.jpg',
   PLACA_MERCOSUL_PNG: 'src/assets/png/placaMercosul.png',
+  OLD_PLATE_PNG: 'src/assets/png/oldPlate.png',
   // Backgrounds
   DEFAULT_BACKGROUND_PNG: 'src/assets/png/backgrounds/default.png',
   DEFAULT_BACKGROUND_GRAY_PNG: 'src/assets/png/backgrounds/default_gray.png',
