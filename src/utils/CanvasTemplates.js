@@ -714,8 +714,8 @@ module.exports = class CanvasTemplates {
   }
 
   static async plateMercosul (text, buffer) {
-    const WIDTH = 840
-    const HEIGHT = 294
+    const WIDTH = 1920
+    const HEIGHT = 672
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.PLACA_MERCOSUL_PNG, true),
       Image.from(buffer)
@@ -725,14 +725,14 @@ module.exports = class CanvasTemplates {
     const ctx = canvas.getContext('2d')
     ctx.fillStyle = '#363536'
 
-    const PARAGRAPH_START_X = 425
-    const PARAGRAPH_START_Y = 165
+    const PARAGRAPH_START_X = 960
+    const PARAGRAPH_START_Y = 373
     const PARAGRAPH_HEIGHT = 10
-    const PARAGRAPH_WIDTH = 840
+    const PARAGRAPH_WIDTH = 1920
 
     ctx.drawImage(background, 0, 0, WIDTH, HEIGHT)
-    ctx.drawImage(state, 742, 100, 61, 41)
-    ctx.writeParagraph(text, '120px "FE-Font"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.CENTER)
+    ctx.drawImage(state, 1720, 241, 114, 76)
+    ctx.writeParagraph(text, '302px "FE-Font"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 100, ALIGN.CENTER)
     return canvas.toBuffer()
   }
 
