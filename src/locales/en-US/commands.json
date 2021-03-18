@@ -1946,7 +1946,7 @@
   },
   "bmi": {
     "commandDescription": "Calculates your BMI",
-    "commandUsage": "<weigth in kilograms> <height in meters>",
+    "commandUsage": "<weight in kilograms> <height in meters>",
     "missingWeight": "You have to specify a valid weight in kilograms.",
     "missingHeight": "You have to specify a valid height in kilograms.",
     "title": "Your BMI is {{value}}",
@@ -1960,5 +1960,17 @@
     "categoryObese1": "Obese Class I (Moderately obese)",
     "categoryObese2": "Obese Class II (Severely obese)",
     "categoryObese3": "Obese Class III (Very severely obese)"
+  },
+  "kabum": {
+    "commandDescription": "Searches for product prices in \"Kabum.com.br\"",
+    "commandUsage": "<product>",
+    "missingProduct": "You have to give me a product to search.",
+    "manufacter": "Manufacter",
+    "price": "Price",
+    "withDiscount": "With Discount",
+    "availability": "Availability",
+    "weight": "Weight",
+    "warrant": "Warrant",
+    "year": "Year(s)"
   }
 }
