@@ -16,7 +16,7 @@ module.exports = class CrowdinAPI extends APIWrapper {
     const { data } = await this.request('/download/all.zip')
 
     const zip = new Zip(data)
-    zip.extractAllTo(path)
+    zip.extractAllTo(path, true)
   }
 
   async request (endpoint) {
