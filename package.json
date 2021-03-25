@@ -67,7 +67,7 @@
     "moment": "^2.24.0",
     "moment-duration-format": "^2.2.2",
     "moment-timezone": "^0.5.23",
-    "mongoose": "^5.11.7",
+    "mongoose": "^5.12.2",
     "morgan": "^1.9.1",
     "ms": "^2.1.2",
     "node-fetch": "^2.3.0",
