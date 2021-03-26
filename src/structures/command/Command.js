@@ -57,7 +57,7 @@ module.exports = class Command {
       return this.error(context, e)
     }
 
-    const [ subcmd ] = args
+    const [subcmd] = args
     const subcommand = this.subcommands.find(c => c.name.toLowerCase() === subcmd || (c.aliases && c.aliases.includes(subcmd)))
     if (subcommand) {
       return subcommand._run(context, args.splice(1))

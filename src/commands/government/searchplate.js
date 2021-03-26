@@ -6,10 +6,10 @@ module.exports = class searchPlate extends Command {
   constructor (client) {
     super({
       name: 'searchplate',
-      alias: [ 'searchPlate' ],
+      alias: ['searchPlate'],
       category: 'government',
       requirements: {
-        apis: [ 'consultaplaca', 'gsearch' ]
+        apis: ['consultaplaca', 'gsearch']
       },
       parameters: [{
         type: 'string',

@@ -17,6 +17,6 @@ class MongoDB extends DBWrapper {
   }
 }
 
-MongoDB.envVars = [ 'MONGODB_URI' ]
+MongoDB.envVars = ['MONGODB_URI']
 
 module.exports = MongoDB

@@ -22,7 +22,7 @@ module.exports = class DBL extends APIWrapper {
   request (endpoint, queryParams = {}) {
     const qParams = new URLSearchParams(queryParams)
     return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
-      headers: { 'Authorization': process.env.DBL_TOKEN }
+      headers: { Authorization: process.env.DBL_TOKEN }
     }).then(res => res.json())
   }
 }

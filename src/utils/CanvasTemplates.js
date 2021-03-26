@@ -774,7 +774,7 @@ module.exports = class CanvasTemplates {
       Image.from(Constants.HERE_WE_GO_AGAIN_PNG, true),
       Image.from(buffer)
     ])
-    const [ template, image ] = await IMAGE_ASSETS
+    const [template, image] = await IMAGE_ASSETS
     const WIDTH = image.width
     const HEIGHT = image.height
     const canvas = createCanvas(WIDTH, HEIGHT)

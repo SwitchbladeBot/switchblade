@@ -69,7 +69,7 @@ module.exports = class SwitchbladePlayerManager extends Manager {
     if (songs && songs.length > 0) {
       const searchResult = new SongSearchResult(songs.searchResult)
       if (songs.searchResult || songs.length === 1) {
-        const [ song ] = songs
+        const [song] = songs
         const source = song.info.source = MusicUtils.getSongSource(song)
 
         switch (source) {

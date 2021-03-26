@@ -13,7 +13,7 @@ module.exports = class DeezerPlaylist extends SearchCommand {
       parameters: [{
         type: 'string', full: true, missingError: 'commons:search.noParams'
       }, [{
-        type: 'booleanFlag', name: 'tracks', aliases: [ 'songs', 's', 't' ]
+        type: 'booleanFlag', name: 'tracks', aliases: ['songs', 's', 't']
       }]]
     }, client)
   }

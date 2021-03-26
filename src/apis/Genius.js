@@ -30,7 +30,7 @@ module.exports = class GeniusAPI extends APIWrapper {
   request (endpoint, queryParams = {}) {
     const qParams = new URLSearchParams(queryParams)
     return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
-      headers: { 'Authorization': `Bearer ${process.env.GENIUS_API}` }
+      headers: { Authorization: `Bearer ${process.env.GENIUS_API}` }
     }).then(res => res.json())
   }
 }

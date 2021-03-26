@@ -22,7 +22,7 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   getVideo (id, part = 'snippet,statistics') {
-    return this.getVideos([ id ], part).then(r => r && r[0])
+    return this.getVideos([id], part).then(r => r && r[0])
   }
 
   getChannels (ids, part = 'snippet,statistics') {
@@ -30,7 +30,7 @@ module.exports = class YoutubeAPI extends APIWrapper {
   }
 
   getChannel (id, part = 'snippet,statistics') {
-    return this.getChannels([ id ], part).then(r => r && r[0])
+    return this.getChannels([id], part).then(r => r && r[0])
   }
 
   getPlaylist (id, part = 'snippet') {

@@ -7,7 +7,7 @@ module.exports = class Owlbot extends Command {
       aliases: ['owl'],
       category: 'misc',
       requirements: {
-        apis: [ 'owlbot' ]
+        apis: ['owlbot']
       },
       parameters: [{
         type: 'string',

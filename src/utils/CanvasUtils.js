@@ -184,7 +184,7 @@ module.exports = class CanvasUtils {
       let sum = 0
       for (let y = -blur; y <= blur; y += step) {
         for (let x = -blur; x <= blur; x += step) {
-          let weight = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta))
+          const weight = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta))
           sum += weight
         }
       }

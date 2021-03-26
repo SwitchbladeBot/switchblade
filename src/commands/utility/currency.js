@@ -27,7 +27,7 @@ module.exports = class Currency extends Command {
     try {
       const params = new URLSearchParams({ to, from, value })
       const { pretty } = await fetch(`https://api.ksoft.si/kumo/currency?${params.toString()}`, {
-        headers: { 'Authorization': `Bearer ${process.env.KSOFT_KEY}` }
+        headers: { Authorization: `Bearer ${process.env.KSOFT_KEY}` }
       }).then(res => res.json())
 
       if (pretty) {

@@ -19,7 +19,7 @@ module.exports = class GoogleMapsAPI extends APIWrapper {
    * @returns {Promise<?Object>} Returns the object of the location or returns null if not found
    */
   async searchCity (address, language = 'en-us') {
-    const { status, results: [ result ] } = await this.request('/geocode', { address, language })
+    const { status, results: [result] } = await this.request('/geocode', { address, language })
     if (status === 'OK' && result.address_components.some(({ types }) => {
       return types.includes('administrative_area_level_2') || types.includes('locality')
     })) {
@@ -28,7 +28,7 @@ module.exports = class GoogleMapsAPI extends APIWrapper {
   }
 
   async searchPlace (address, language = 'en-us') {
-    const { results: [ result ] } = await this.request('/geocode', { address, language })
+    const { results: [result] } = await this.request('/geocode', { address, language })
     return result
   }
 

@@ -7,7 +7,7 @@ module.exports = class DarkSkyAPI extends APIWrapper {
   constructor () {
     super({
       name: 'darksky',
-      envVars: [ 'DARKSKY_KEY' ]
+      envVars: ['DARKSKY_KEY']
     })
   }
 

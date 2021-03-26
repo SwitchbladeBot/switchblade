@@ -15,19 +15,19 @@ module.exports = class YouTube extends SearchCommand {
         {
           type: 'booleanFlag',
           name: 'video',
-          aliases: [ 'v', 'videos' ]
+          aliases: ['v', 'videos']
         }, {
           type: 'booleanFlag',
           name: 'channel',
-          aliases: [ 'c', 'channels' ]
+          aliases: ['c', 'channels']
         }, {
           type: 'booleanFlag',
           name: 'playlist',
-          aliases: [ 'p', 'playlists' ]
+          aliases: ['p', 'playlists']
         }, {
           type: 'string',
           name: 'order',
-          aliases: [ 'o' ],
+          aliases: ['o'],
           whitelist: ['date', 'rating', 'relevance', 'title', 'videoCount', 'viewCount']
         }
       ]],

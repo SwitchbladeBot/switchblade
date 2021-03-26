@@ -23,5 +23,5 @@ module.exports = new Schema({
   rep: Number,
   lastRep: Number,
   lastDBLBonusClaim: Number,
-  connections: [ UserConnection ]
+  connections: [UserConnection]
 })
