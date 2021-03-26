@@ -30,7 +30,7 @@ module.exports = class LastfmUserTop extends Command {
     }
 
     try {
-      let res = await this.client.apis.lastfm.getUserTop(user, type, period, 10)
+      const res = await this.client.apis.lastfm.getUserTop(user, type, period, 10)
 
       const res1 = res.topalbums || res.topartists || res.toptracks
       const top = this.formatTopList(t, res1)

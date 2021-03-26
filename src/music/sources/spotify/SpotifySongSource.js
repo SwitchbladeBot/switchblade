@@ -5,24 +5,24 @@ const SpotifySong = require('./SpotifySong.js')
 
 module.exports = class SpotifySongSource extends SongSource {
   static get customSources () {
-    const albumHandler = ([ , id ], m, r) => this.provideAlbum(m, id, r)
-    const playlistHandler = ([ , id ], m, r) => this.providePlaylist(m, id, r)
-    const trackHandler = async ([ , id ], m, r) => {
+    const albumHandler = ([, id], m, r) => this.provideAlbum(m, id, r)
+    const playlistHandler = ([, id], m, r) => this.providePlaylist(m, id, r)
+    const trackHandler = async ([, id], m, r) => {
       const track = await m.client.apis.spotify.getTrack(id)
       return this.provideTrack(m, track, r)
     }
 
     return [
       [
-        [ /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/track\/([a-zA-Z\d-_]+)/, /spotify:track:([a-zA-Z\d-_]+)$/ ],
+        [/^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/track\/([a-zA-Z\d-_]+)/, /spotify:track:([a-zA-Z\d-_]+)$/],
         trackHandler
       ],
       [
-        [ /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/album\/([a-zA-Z\d-_]+)/, /spotify:album:([a-zA-Z\d-_]+)$/ ],
+        [/^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com\/album\/([a-zA-Z\d-_]+)/, /spotify:album:([a-zA-Z\d-_]+)$/],
         albumHandler
       ],
       [
-        [ /^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com(?:\/user\/[a-zA-Z\d-_]+)?\/playlist\/([a-zA-Z\d-_]+)/, /^spotify(?::user:[a-zA-Z\d-_]+)?:playlist:([a-zA-Z\d-_]+)/ ],
+        [/^(?:https?:\/\/|)?(?:www\.)?open\.spotify\.com(?:\/user\/[a-zA-Z\d-_]+)?\/playlist\/([a-zA-Z\d-_]+)/, /^spotify(?::user:[a-zA-Z\d-_]+)?:playlist:([a-zA-Z\d-_]+)/],
         playlistHandler
       ]
     ]
@@ -50,7 +50,7 @@ module.exports = class SpotifySongSource extends SongSource {
     const video = await this.getClosestVideo(manager, track)
     if (video) {
       try {
-        const [ song ] = await manager.fetchTracks(video)
+        const [song] = await manager.fetchTracks(video)
         return new SpotifySong(song, requestedBy, track, album).loadInfo()
       } catch (e) {
         manager.client.logError(e)

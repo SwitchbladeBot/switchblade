@@ -29,7 +29,7 @@ module.exports = class ConnectionController extends Controller {
     const connection = user.connections.find(c => c.name === _connection)
     const connectionChecker = (k, v) => this.client.connections[_connection].checkConfig(k, v)
     let newConfig = Object.entries(_config).filter(c => (connection.config[c[0]] !== undefined && connectionChecker(c)))
-    let config = {}
+    const config = {}
     newConfig.forEach(([key, val]) => {
       config[key] = val
     })

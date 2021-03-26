@@ -51,6 +51,7 @@ module.exports = class LastFM extends APIWrapper {
   getSession (token) {
     return this.request('auth.getSession', { token }, true).then(r => r.session)
   }
+
   getAuthenticatedUserInfo (sk) {
     return this.request('user.getInfo', { sk }, true).then(r => r.user)
   }

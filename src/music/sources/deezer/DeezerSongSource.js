@@ -5,9 +5,9 @@ const DeezerSong = require('./DeezerSong.js')
 
 module.exports = class DeezerSongSource extends SongSource {
   static get customSources () {
-    const albumHandler = ([ , id ], m, r) => this.provideAlbum(m, id, r)
-    const playlistHandler = ([ , id ], m, r) => this.providePlaylist(m, id, r)
-    const trackHandler = async ([ , id ], m, r) => this.provideTrack(m, id, r)
+    const albumHandler = ([, id], m, r) => this.provideAlbum(m, id, r)
+    const playlistHandler = ([, id], m, r) => this.providePlaylist(m, id, r)
+    const trackHandler = async ([, id], m, r) => this.provideTrack(m, id, r)
     return [
       [
         /^(?:https?:\/\/|)?(?:www\.)?deezer\.com\/(?:\w{2}\/)?track\/(\d+)/,
@@ -50,7 +50,7 @@ module.exports = class DeezerSongSource extends SongSource {
     const video = await this.getClosestVideo(manager, track)
     if (video) {
       try {
-        const [ song ] = await manager.fetchTracks(video)
+        const [song] = await manager.fetchTracks(video)
         return new DeezerSong(song, requestedBy, track, album).loadInfo()
       } catch (e) {
         manager.client.logError(e)

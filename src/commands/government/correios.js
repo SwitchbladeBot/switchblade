@@ -5,10 +5,10 @@ module.exports = class Correios extends Command {
   constructor (client) {
     super({
       name: 'correios',
-      alias: [ 'trackCorreios' ],
+      alias: ['trackCorreios'],
       category: 'government',
       requirements: {
-        apis: [ 'correios' ]
+        apis: ['correios']
       },
       parameters: [{
         type: 'string',

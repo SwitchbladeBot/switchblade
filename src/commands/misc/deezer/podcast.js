@@ -11,7 +11,7 @@ module.exports = class DeezerPodcast extends SearchCommand {
       parameters: [{
         type: 'string', full: true, missingError: 'commons:search.noParams'
       }, [{
-        type: 'booleanFlag', name: 'episodes', aliases: [ 'e', 'eps', 'ep' ]
+        type: 'booleanFlag', name: 'episodes', aliases: ['e', 'eps', 'ep']
       }]]
     }, client)
   }

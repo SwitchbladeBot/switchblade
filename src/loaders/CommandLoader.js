@@ -69,7 +69,7 @@ module.exports = class CommandLoader extends Loader {
 
     if (!parentCommand) {
       parentCommand = subCommand.parentCommand
-      const name = (Array.isArray(parentCommand) ? parentCommand : [ parentCommand ]).concat([ subCommand.name ]).join(' ')
+      const name = (Array.isArray(parentCommand) ? parentCommand : [parentCommand]).concat([subCommand.name]).join(' ')
       this.log(`${name} failed to load - Couldn't find parent command.`, { color: 'red', tags: ['Commands'] })
       return false
     }
