@@ -1960,5 +1960,21 @@
     "categoryObese1": "Obese Class I (Moderately obese)",
     "categoryObese2": "Obese Class II (Severely obese)",
     "categoryObese3": "Obese Class III (Very severely obese)"
+  },
+  "genshinimpact": {
+    "commandDescription": "a",
+    "commandUsage": "<aab>",
+    "subcommands": {
+      "character": {
+        "commandDescription": "genshin character",
+        "commandUsage": "<character>",
+        "vision": "Vision",
+        "weapon": "Weapon",
+        "nation": "Nation",
+        "affiliation": "Affiliation",
+        "constellation": "Constellation",
+        "rarity": "Rarity"
+      }
+    }
   }
 }
