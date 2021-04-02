@@ -27,7 +27,7 @@ module.exports = class Lyrics extends Command {
     }
 
     const embed = new SwitchbladeEmbed(author)
-    const { response: { hits: [ hit ] } } = await this.client.apis.genius.findTrack(song)
+    const { response: { hits: [hit] } } = await this.client.apis.genius.findTrack(song)
     if (hit) {
       const { result: {
         song_art_image_thumbnail_url: thumbnailUrl,

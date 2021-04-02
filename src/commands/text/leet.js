@@ -45,7 +45,7 @@ module.exports = class Leet extends Command {
         [{
           type: 'booleanFlag',
           name: 'hard',
-          aliases: [ 'hc', '#4I2|D', 'hardcore' ]
+          aliases: ['hc', '#4I2|D', 'hardcore']
         }]
       ]
     }, client)

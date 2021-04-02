@@ -30,13 +30,13 @@ module.exports = class LastfmAlbum extends SearchCommand {
       .setThumbnail(albumInfo.image[3]['#text'])
 
     try {
-      let { album } = await this.client.apis.lastfm.getAlbumInfo(albumInfo.name, albumInfo.artist, language.split('-')[0])
+      const { album } = await this.client.apis.lastfm.getAlbumInfo(albumInfo.name, albumInfo.artist, language.split('-')[0])
 
       embed.addField(t('commands:lastfm.playcount'), MiscUtils.formatNumber(album.playcount, language), true)
         .addField(t('commands:lastfm.listeners'), MiscUtils.formatNumber(album.listeners, language), true)
       if (album.tags.tag.length > 1) embed.addField(t('commands:lastfm.tags'), album.tags.tag.map(t => `[${t.name}](${t.url})`).join(', '))
       if (album.wiki) {
-        let regex = this.parentCommand.READ_MORE_REGEX.exec(album.wiki.summary)
+        const regex = this.parentCommand.READ_MORE_REGEX.exec(album.wiki.summary)
         embed.setDescription(`${album.wiki.summary.replace(this.parentCommand.READ_MORE_REGEX, '')} [${t('commands:lastfm.readMore')}](${regex[1]})`)
       }
       if (album.tracks.track.length > 0) {

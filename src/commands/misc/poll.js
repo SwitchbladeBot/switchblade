@@ -50,7 +50,7 @@ module.exports = class Poll extends Command {
       throw new CommandError(t('commands:poll.tooManyOptions', { maxOptions }))
     }
 
-    let description = options
+    const description = options
       .map((option, i) => `${UNICODE_ALPHABET[i]} ${option}`)
       .join('\n\n')
 

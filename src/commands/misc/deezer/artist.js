@@ -11,9 +11,9 @@ module.exports = class DeezerArtist extends SearchCommand {
       parameters: [{
         type: 'string', full: true, missingError: 'commons:search.noParams'
       }, [{
-        type: 'booleanFlag', name: 'albums', aliases: [ 'a' ]
+        type: 'booleanFlag', name: 'albums', aliases: ['a']
       }, {
-        type: 'booleanFlag', name: 'related', aliases: [ 'r' ]
+        type: 'booleanFlag', name: 'related', aliases: ['r']
       }]]
     }, client)
   }

@@ -9,7 +9,7 @@ module.exports = class Weather extends Command {
       category: 'utility',
       requirements: {
         canvasOnly: true,
-        apis: [ 'gmaps', 'darksky' ]
+        apis: ['gmaps', 'darksky']
       },
       parameters: [{
         type: 'string',
@@ -24,7 +24,7 @@ module.exports = class Weather extends Command {
     channel.startTyping()
     const city = await this.client.apis.gmaps.searchCity(address)
     if (city) {
-      const [ lang ] = language.split('-')
+      const [lang] = language.split('-')
       const { lat, lng } = city.geometry.location
       // TODO: configurable units
       const { currently, daily: { data: daily }, timezone } = await this.client.apis.darksky.getForecast(lat, lng, { lang, units: 'ca' })

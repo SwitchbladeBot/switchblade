@@ -43,12 +43,12 @@ module.exports = class CommandParameters {
     if (opts.flags) {
       const flagIndex = args.findIndex(a => a.startsWith('--'))
       if (flagIndex > -1) {
-        const [ , ...allFlags ] = args.splice(flagIndex).join(' ').split('--')
+        const [, ...allFlags] = args.splice(flagIndex).join(' ').split('--')
         const flagsObject = {}
 
         const flagsParsed = allFlags.map(s => s.trim().split(/[ \t]+/))
         for (let i = 0; i < flagsParsed.length; i++) {
-          const [ name, ...flagArgs ] = flagsParsed[i]
+          const [name, ...flagArgs] = flagsParsed[i]
           const flag = opts.flags.find(f => f.name === name || (f.aliases && f.aliases.includes(name)))
           if (!flag) return
 

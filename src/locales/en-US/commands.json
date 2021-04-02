@@ -1682,7 +1682,12 @@
     "stolen": "Stolen! Please call 911, don't approach yourself.",
     "plate": "Plate",
     "image": "Car image (may not be the accurate image)",
-    "notFound": "Plate not found."
+    "notFound": "Plate not found.",
+    "type": "Vehicle type",
+    "maxtorque": "Max Torque",
+    "engineCapacity": "Engine capacity",
+    "nationality": "Nationality",
+    "fuelType": "Fuel type"
   },
   "cep": {
     "commandDescription": "Searches for a CEP using ViaCEP API",

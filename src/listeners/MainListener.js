@@ -49,7 +49,7 @@ module.exports = class MainListener extends EventListener {
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
       try {
-        let nodes = JSON.parse(process.env.LAVALINK_NODES)
+        const nodes = JSON.parse(process.env.LAVALINK_NODES)
         if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR')
         this.playerManager = new SwitchbladePlayerManager(this, nodes, {
           user: this.user.id,
@@ -121,7 +121,7 @@ module.exports = class MainListener extends EventListener {
 
     const guildId = message.guild && message.guild.id
 
-    const { prefix, spacePrefix } = await this.modules.prefix.retrieveValues(guildId, [ 'prefix', 'spacePrefix' ])
+    const { prefix, spacePrefix } = await this.modules.prefix.retrieveValues(guildId, ['prefix', 'spacePrefix'])
     const language = await this.modules.language.retrieveValue(guildId, 'language')
 
     const botMention = this.user.toString()

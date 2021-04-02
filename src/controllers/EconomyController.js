@@ -59,7 +59,7 @@ module.exports = class EconomyController extends Controller {
     super({
       name: 'economy'
     }, client)
-    this.subcontrollers = [ new BonusController(this, client) ]
+    this.subcontrollers = [new BonusController(this, client)]
   }
 
   canLoad () {

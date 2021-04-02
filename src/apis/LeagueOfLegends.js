@@ -8,7 +8,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   constructor () {
     super({
       name: 'lol',
-      envVars: [ 'RIOT_API_KEY' ]
+      envVars: ['RIOT_API_KEY']
     })
 
     this.version = null

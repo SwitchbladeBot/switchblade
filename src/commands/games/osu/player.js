@@ -63,7 +63,7 @@ module.exports = class OsuPlayer extends Command {
 
       const topScores = await this.client.apis.osu.getUserTopScores(user, mode[0], 5)
       if (topScores.length > 0) {
-        let description = []
+        const description = []
 
         for (const i in topScores) {
           const [firstBeatmap] = await this.client.apis.osu.getBeatmap(topScores[i].beatmap_id, mode[0])

@@ -58,7 +58,7 @@ module.exports = class Web extends Route {
     if (!token) throw new Error('INVALID_TOKEN')
 
     return fetch(`${API_URL}${endpoint}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     }).then(res => res.ok ? res.json() : Promise.reject(res))
   }
 

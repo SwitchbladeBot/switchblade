@@ -79,13 +79,13 @@ module.exports = class SoundcloudAPI extends APIWrapper {
     const elements = $('script[src*="sndcdn.com/assets/"][src$=".js"]').get()
     elements.reverse()
 
-    const headers = { 'Range': 'bytes=0-16384' }
+    const headers = { Range: 'bytes=0-16384' }
     for (let i = 0; i < elements.length; i++) {
       const src = elements[i].attribs.src
       if (src) {
         try {
           const srcContent = await fetch(src, { headers }).then(r => r.text())
-          const [ , clientId ] = APP_SCRIPT_CLIENT_ID_REGEX.exec(srcContent)
+          const [, clientId] = APP_SCRIPT_CLIENT_ID_REGEX.exec(srcContent)
           this._clientId = clientId
           return clientId
         } catch (_) {

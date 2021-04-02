@@ -22,7 +22,7 @@ module.exports = class RubyGemsAPI extends APIWrapper {
   request (endpoint, queryParams = {}) {
     const qParams = new URLSearchParams(queryParams)
     return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
-      headers: { 'Authorization': process.env.RUBYGEMS_API_KEY }
+      headers: { Authorization: process.env.RUBYGEMS_API_KEY }
     }).then(res => res.json())
   }
 }
