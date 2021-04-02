@@ -127,7 +127,7 @@ module.exports = class Switchblade extends Client {
       if (!verify) return
     }
 
-    context.setFixedT(this.i18next.getFixedT('wh-AT'))
+    context.setFixedT(this.i18next.getFixedT(language))
     return command._run(context, args).catch(this.logError)
   }
 }
