@@ -12,6 +12,7 @@ module.exports = class Game2048 extends Command {
       category: 'games'
     }, client)
   }
+
   async run ({ channel, author, t }, boardSize) {
     const size = boardSize || 4
     let points = 0
@@ -75,6 +76,7 @@ module.exports = class Game2048 extends Command {
       r.users.remove(author).catch(function () {})
     })
   }
+
   slideLeft (board) {
     let points = 0
     for (let i = 0; i < board.length; i++) {
@@ -98,6 +100,7 @@ module.exports = class Game2048 extends Command {
     }
     return points
   }
+
   rotateBoard (board, option) {
     const rotatedBoardArray = this.createBoard(board.length)
     for (let i = 0; i < board.length; i++) {
@@ -113,6 +116,7 @@ module.exports = class Game2048 extends Command {
       board[i] = rotatedBoardArray[i]
     }
   }
+
   drawBoard (board) {
     let text = ''
     for (const row of board) {
@@ -124,9 +128,11 @@ module.exports = class Game2048 extends Command {
     }
     return text
   }
+
   drawPoints (points) {
     return points.toString().split('').map(point => numberEmojis[point]).join('')
   }
+
   createBoard (size) {
     const board = []
     for (let i = 0; i < size; i++) {
@@ -138,6 +144,7 @@ module.exports = class Game2048 extends Command {
     }
     return board
   }
+
   getEmptyTile (board) {
     const empty = []
     for (let i = 0; i < board.length; i++) {

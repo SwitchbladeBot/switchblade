@@ -3,7 +3,7 @@ const { Module, PlaceholderUtils, PlaceholderRules } = require('../')
 const Joi = require('@hapi/joi')
 
 const MAX_MESSAGE_SIZE = 250
-const PLACEHOLDER_BLACKLIST = [ 'channel', 'channelName' ]
+const PLACEHOLDER_BLACKLIST = ['channel', 'channelName']
 
 module.exports = class JoinLockModule extends Module {
   constructor (client) {

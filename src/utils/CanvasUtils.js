@@ -47,6 +47,8 @@ module.exports = class CanvasUtils {
     registerFont('src/assets/fonts/Montserrat-Black.ttf', { family: 'Montserrat Black' })
     registerFont('src/assets/fonts/Montserrat-BlackItalic.ttf', { family: 'Montserrat Black', style: 'italic' })
     registerFont('src/assets/fonts/SFProDisplay-Regular.ttf', { family: 'SF Pro Display' })
+    registerFont('src/assets/fonts/Fe-Font.ttf', { family: 'Fe-Font' })
+    registerFont('src/assets/fonts/Mandatory.ttf', { family: 'Mandatory' })
 
     // Image loading
     Image.from = function (url, localFile = false) {
@@ -182,7 +184,7 @@ module.exports = class CanvasUtils {
       let sum = 0
       for (let y = -blur; y <= blur; y += step) {
         for (let x = -blur; x <= blur; x += step) {
-          let weight = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta))
+          const weight = alphaLeft * Math.exp(-(x * x + y * y) / (2 * delta * delta))
           sum += weight
         }
       }

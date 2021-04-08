@@ -15,7 +15,7 @@ const recPaths = (c) => {
 
 const findCommand = (commands, path) => {
   const findCA = (a, c) => a.find(o => o.name === c)
-  const [ c, ...sc ] = path.split(/\s+/)
+  const [c, ...sc] = path.split(/\s+/)
   const cmd = findCA(commands, c)
   return cmd ? sc.length ? sc.reduce((s, n) => findCA(s, n), cmd.subcommands) : cmd : null
 }
@@ -53,7 +53,7 @@ module.exports = class CommandsModule extends Module {
       commands: [
         {
           name: 'all commands',
-          aliases: [ '*' ],
+          aliases: ['*'],
           category: 'all'
         },
         ...categories.map(c => ({
@@ -222,12 +222,12 @@ module.exports = class CommandsModule extends Module {
         blacklist: o.blacklist && o.blacklist.map(mapValues)
       }
     }
-    const reduceFunc = (o, [ k, v ]) => {
+    const reduceFunc = (o, [k, v]) => {
       o[k] = parseLists(v)
       return o
     }
 
-    const { commands, categories, all } = await this.retrieveValues(guild.id, [ 'commands', 'categories', 'all' ])
+    const { commands, categories, all } = await this.retrieveValues(guild.id, ['commands', 'categories', 'all'])
     const rules = {
       commands: Object.entries(commands).reduce(reduceFunc, {}),
       categories: Object.entries(categories).reduce(reduceFunc, {})

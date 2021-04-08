@@ -9,6 +9,7 @@ module.exports = class ViaCEP extends APIWrapper {
       name: 'viacep'
     })
   }
+
   // Default
   searchCEP (cep) {
     return fetch(`${API_URL}${cep}/json`)

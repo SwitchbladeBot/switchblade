@@ -11,6 +11,7 @@ module.exports = class LeagueOfLegendsChampion extends Command {
       }]
     }, client)
   }
+
   async run ({ t, author, channel, prefix, language }, champion) {
     channel.startTyping()
     const embed = new SwitchbladeEmbed(author)

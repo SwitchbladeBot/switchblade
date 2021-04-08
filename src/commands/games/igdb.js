@@ -3,29 +3,29 @@ const moment = require('moment')
 const { CommandError } = require('../../structures/command')
 
 const RATINGS = {
-  '1': '3+',
-  '2': '7+',
-  '3': '12+',
-  '4': '16+',
-  '5': '18+',
-  '6': 'RP',
-  '7': 'EC',
-  '8': 'E',
-  '9': 'E10',
-  '10': 'T',
-  '11': 'M',
-  '12': 'AO'
+  1: '3+',
+  2: '7+',
+  3: '12+',
+  4: '16+',
+  5: '18+',
+  6: 'RP',
+  7: 'EC',
+  8: 'E',
+  9: 'E10',
+  10: 'T',
+  11: 'M',
+  12: 'AO'
 }
 
 const REGIONS = {
-  '1': ':flag_eu:',
-  '2': ':flag_us:',
-  '3': ':flag_au:',
-  '4': ':flag_nz:',
-  '5': ':flag_jp:',
-  '6': ':flag_cn:',
-  '7': ':earth_asia:',
-  '8': ':globe_with_meridians:'
+  1: ':flag_eu:',
+  2: ':flag_us:',
+  3: ':flag_au:',
+  4: ':flag_nz:',
+  5: ':flag_jp:',
+  6: ':flag_cn:',
+  7: ':earth_asia:',
+  8: ':globe_with_meridians:'
 }
 
 module.exports = class IGDB extends SearchCommand {

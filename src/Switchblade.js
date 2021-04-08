@@ -25,9 +25,9 @@ module.exports = class Switchblade extends Client {
 
   async initialize () {
     const loaders = Object.values(Loaders).map(L => new L(this))
-    const [ preLoad, normal ] = loaders.reduce(([ pl, n ], l) => (l.preLoad ? [[...pl, l], n] : [pl, [...n, l]]), [[], []])
+    const [preLoad, normal] = loaders.reduce(([pl, n], l) => (l.preLoad ? [[...pl, l], n] : [pl, [...n, l]]), [[], []])
 
-    for (let l of preLoad) {
+    for (const l of preLoad) {
       await this.initializeLoader(l)
     }
 
@@ -35,7 +35,7 @@ module.exports = class Switchblade extends Client {
       .then(() => this.log('Logged in successfully!', { color: 'green', tags: ['Discord'] }))
       .catch(this.logError)
 
-    for (let l of normal) {
+    for (const l of normal) {
       await this.initializeLoader(l)
     }
 
@@ -117,7 +117,7 @@ module.exports = class Switchblade extends Client {
     // Command rules
     if (context.guild && !command.hidden) {
       const deepSubcmd = (c, a) => {
-        const [ arg ] = a
+        const [arg] = a
         const cmd = c.subcommands
           ? c.subcommands.find(s => s.name.toLowerCase() === arg || (s.aliases && s.aliases.includes(arg)))
           : null

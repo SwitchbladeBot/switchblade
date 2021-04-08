@@ -29,7 +29,7 @@ module.exports = class Move extends Command {
     if (link.channel.nsfw && !destinationChannel.nsfw) throw new CommandError(t('commands:move.channelsHaveDifferentType'))
 
     const messageObj = {}
-    let content = link.content
+    const content = link.content
 
     if (link.attachments.size >= 1) {
       messageObj.files = [link.attachments.array()]

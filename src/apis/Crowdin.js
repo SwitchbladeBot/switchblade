@@ -1,5 +1,8 @@
 const { APIWrapper } = require('../')
-const Crowdin = require('crowdin-without-vulnerability')
+const axios = require('axios')
+const Zip = require('adm-zip')
+
+const BASE_URL = 'https://api.crowdin.net/api/project/'
 
 module.exports = class CrowdinAPI extends APIWrapper {
   constructor () {
@@ -9,10 +12,18 @@ module.exports = class CrowdinAPI extends APIWrapper {
     })
   }
 
-  load () {
-    return new Crowdin({
-      apiKey: process.env.CROWDIN_API_KEY,
-      endpointUrl: `https://api.crowdin.net/api/project/${process.env.CROWDIN_PROJECT_ID}`
+  async downloadToPath (path) {
+    const { data } = await this.request('/download/all.zip')
+
+    const zip = new Zip(data)
+    zip.extractAllTo(path, true)
+  }
+
+  async request (endpoint) {
+    return axios({
+      method: 'GET',
+      url: BASE_URL + process.env.CROWDIN_PROJECT_ID + endpoint + `?key=${process.env.CROWDIN_API_KEY}`,
+      responseType: 'arraybuffer'
     })
   }
 }

@@ -4,10 +4,10 @@ module.exports = class CEP extends Command {
   constructor (client) {
     super({
       name: 'cep',
-      alias: [ 'searchCEP' ],
+      alias: ['searchCEP'],
       category: 'utility',
       requirements: {
-        apis: [ 'viacep' ]
+        apis: ['viacep']
       },
       parameters: [{
         type: 'string',
