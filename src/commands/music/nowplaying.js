@@ -56,7 +56,7 @@ module.exports = class NowPlaying extends Command {
 
       const description = [
         `**${t('music:nowPlaying')}:** [${song.title}](${song.uri}) ${durationText}`,
-        `*[${t('music:addedBy', { user: song.requestedBy })}]*`
+        `*[${t('music:addedBy', { user: '<@' + song.requestedBy + '>' })}]*`
       ]
 
       channel.send(embed.setDescription(description.join('\n')))
