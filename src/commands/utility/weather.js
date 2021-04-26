@@ -23,12 +23,11 @@ module.exports = class Weather extends Command {
     moment.locale(language)
     channel.startTyping()
     const city = await this.client.apis.positionstack.getAddress(address)
-    if (city.data[0]) {
-      const [lang] = language.split('-')
+    if (city.data[0].county) {
       const { latitude, longitude } = city.data[0]
       // TODO: configurable units
+      const [lang] = language.split('-')
       const { currently, daily: { data: daily }, timezone } = await this.client.apis.darksky.getForecast(latitude, longitude, { lang, units: 'ca' })
-
       const now = daily.shift()
       const weatherInfo = {
         now: {

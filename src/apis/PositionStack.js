@@ -16,6 +16,6 @@ module.exports = class PositionStack extends APIWrapper {
   }
 
   request (endpoint, query = '') {
-    return axios.get(encodeURI(`${API_URL}/${endpoint}?query=${query}&access_key=${process.env.PS_ACCESS_KEY}&limit=1&output=json`))
+    return axios.get(encodeURI(`${API_URL}/${endpoint}?query=${query}&access_key=${process.env.PS_ACCESS_KEY}&limit=1&output=json&timezone_module=1`))
   }
 }
