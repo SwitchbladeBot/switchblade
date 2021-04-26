@@ -11,11 +11,14 @@ module.exports = class PositionStack extends APIWrapper {
     })
   }
 
-  async getAddress (city) {
-    return this.request('forward', city).then(res => res.data)
+  async getAddress (city, options) {
+    options = Object.assign({ query: city, limit: 1, output: 'json', timezone_module: 1 }, options)
+    return this.request('forward', city, options)
   }
 
-  request (endpoint, query = '') {
-    return axios.get(encodeURI(`${API_URL}/${endpoint}?query=${query}&access_key=${process.env.PS_ACCESS_KEY}&limit=1&output=json&timezone_module=1`))
+  request (endpoint, query, queryParams = '') {
+    const qParams = new URLSearchParams(queryParams)
+    return axios.get(encodeURI(`${API_URL}/${endpoint}?access_key=${process.env.PS_ACCESS_KEY}&${qParams.toString()}`))
+      .then(res => res.data)
   }
 }
