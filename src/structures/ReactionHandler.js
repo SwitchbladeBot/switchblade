@@ -10,10 +10,12 @@ module.exports = class ReactionHandler extends ReactionCollector {
     this.prompt = this.options.prompt || this.display.t('commons:whichPage')
     this.time = typeof this.options.time === 'number' ? this.options.time : 30 * 1000
     this.awaiting = false
-    this.selection = this.display.emojis.zero ? new Promise((resolve, reject) => {
-      this.reject = reject
-      this.resolve = resolve
-    }) : Promise.resolve(null)
+    this.selection = this.display.emojis.zero
+      ? new Promise((resolve, reject) => {
+          this.reject = reject
+          this.resolve = resolve
+        })
+      : Promise.resolve(null)
     this.reactionsDone = false
     this.infoIsDisplayed = false
 

@@ -56,7 +56,7 @@ module.exports = class IGDB extends SearchCommand {
     try {
       const gameData = await this.client.apis.igdb.getGameById(id)
 
-      var alternativeNames
+      let alternativeNames
       // Updating data outside of the embed, so it doesn't get cluttered
       if (gameData.alternative_names) {
         alternativeNames = gameData.alternative_names.length > 5 ? gameData.alternative_names.slice(0, 5) : gameData.alternative_names

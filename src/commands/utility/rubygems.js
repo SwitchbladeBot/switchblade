@@ -55,7 +55,7 @@ module.exports = class RubyGems extends SearchCommand {
             ].filter(u => !!gem[`${u}_uri`]).map(u => `[${t(`commands:rubygems.uris.${u}`)}](${gem[`${u}_uri`]})`).join(' • ')
           ],
           [
-            `**Gemfile**`,
+            '**Gemfile**',
             `\`\`\`gem '${gem.name}', '~> ${gem.version}'\`\`\``,
             `**${t('commands:rubygems.install')}**`,
             `\`\`\`gem install ${gem.name}\`\`\``

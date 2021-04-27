@@ -70,9 +70,12 @@ class Color {
   }
 
   static calcLightness (R, G, B, m, M, type = 'bi-hexcone') {
-    return type === 'luma601' ? (0.299 * R) + (0.587 * G) + (0.114 * B)
-      : type === 'luma709' ? (0.2126 * R) + (0.7152 * G) + (0.0772 * B)
-        : type === 'bi-hexcone' ? ((m + M) * 0.5)
+    return type === 'luma601'
+      ? (0.299 * R) + (0.587 * G) + (0.114 * B)
+      : type === 'luma709'
+        ? (0.2126 * R) + (0.7152 * G) + (0.0772 * B)
+        : type === 'bi-hexcone'
+          ? ((m + M) * 0.5)
           : 0
   }
 

@@ -25,13 +25,13 @@ module.exports = class Contributors extends Route {
           return {
             id: role.id,
             name: role.name,
-            members: members.map(member => {
-              if (member.roles.has(role.id) && !member.user.bot && !alreadyFound.includes(member.id) && !ignoreUsers.includes(member.id)) {
+            members: members
+              .filter(member => member.roles.has(role.id) && !member.user.bot && !alreadyFound.includes(member.id) && !ignoreUsers.includes(member.id))
+              .map(member => {
                 alreadyFound.push(member.id)
                 const { id, user: { username, discriminator, avatar, presence: { status } } } = member
                 return { username, discriminator, id, avatar, status }
-              }
-            }).filter(u => u)
+              })
           }
         }).filter(r => r.members.length > 0)
 

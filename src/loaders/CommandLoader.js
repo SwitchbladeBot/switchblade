@@ -62,7 +62,7 @@ module.exports = class CommandLoader extends Loader {
     } else if (Array.isArray(subCommand.parentCommand)) {
       parentCommand = subCommand.parentCommand.reduce((o, ca) => {
         const arr = (Array.isArray(o) && o) || (o && o.subcommands)
-        if (!arr) return
+        if (!arr) return null
         return arr.find(c => c.name === ca)
       }, this.commands)
     }

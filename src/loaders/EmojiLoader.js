@@ -25,7 +25,7 @@ module.exports = class EmojiLoader extends Loader {
    */
   async getAndStoreEmojis () {
     const emojiGuilds = process.env.EMOJI_GUILDS && process.env.EMOJI_GUILDS.split(',')
-    if (!emojiGuilds) return this.log(`Required emojis not loaded - Required environment variable "EMOJI_GUILDS" is not set.`, { color: 'red', tags: ['Emojis'] })
+    if (!emojiGuilds) return this.log('Required emojis not loaded - Required environment variable "EMOJI_GUILDS" is not set.', { color: 'red', tags: ['Emojis'] })
 
     await Promise.all(emojiGuilds.map(async guild => {
       return fetch(`${this.client.options.http.api}/v${this.client.options.http.version}/guilds/${guild}/emojis`, {

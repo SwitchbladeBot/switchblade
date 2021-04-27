@@ -92,6 +92,7 @@
   "devDependencies": {
     "auto-install": "^1.7.4",
     "dotenv": "^8.2.0",
+    "eslint": "^7.13.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-node": "^8.0.1",
@@ -100,7 +101,7 @@
     "mocha": "^8.3.2",
     "mocha-standard": "^1.0.0",
     "nodemon": "^2.0.7",
-    "standard": "^12.0.1"
+    "standard": "^16.0.3"
   },
   "nodemonConfig": {
     "ignore": [
