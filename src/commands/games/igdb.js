@@ -33,6 +33,7 @@ module.exports = class IGDB extends SearchCommand {
     super({
       name: 'igdb',
       aliases: ['game'],
+      requirements: { apis: ['igdb'] },
       parameters: [{
         type: 'string', full: true, missingError: 'commands:igdb.noGame'
       }],
