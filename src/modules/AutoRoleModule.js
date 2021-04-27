@@ -1,7 +1,7 @@
 const { Module } = require('../')
 const { Role } = require('discord.js')
 
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 
 module.exports = class AutoRoleModule extends Module {
   constructor (client) {
