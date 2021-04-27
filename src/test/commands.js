@@ -1,3 +1,5 @@
+/* globals describe, it */
+
 const FileUtils = require('../utils/FileUtils.js')
 const MiscUtils = require('../utils/MiscUtils.js')
 
