@@ -1,7 +1,7 @@
 const { Controller } = require('../')
 
 const moment = require('moment')
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 
 const REP_INTERVAL = 24 * 60 * 60 * 1000 // 1 day
 class RepCooldownError extends Error {

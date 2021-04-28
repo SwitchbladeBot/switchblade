@@ -67,12 +67,14 @@ module.exports = class ConnectionController extends Controller {
     const connections = await this.getConnections(_user)
     const userConnections = await Promise.all(allConn.map(async conn => {
       const foundConn = connections.find(c => c.name === conn.name)
-      return foundConn ? {
-        name: foundConn.name,
-        connected: true,
-        account: await this.client.connections[conn.name].getAccountInfo(foundConn.tokens),
-        configuration: foundConn.config
-      } : conn
+      return foundConn
+        ? {
+            name: foundConn.name,
+            connected: true,
+            account: await this.client.connections[conn.name].getAccountInfo(foundConn.tokens),
+            configuration: foundConn.config
+          }
+        : conn
     }))
     return userConnections
   }

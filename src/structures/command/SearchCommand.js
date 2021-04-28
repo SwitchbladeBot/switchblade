@@ -37,7 +37,7 @@ module.exports = class SearchCommand extends Command {
 
     if (!results) throw new CommandError(t('commons:search.searchFail'))
     if (!results.length) throw new CommandError(t('commons:search.noResults'))
-    if (context.flags['lucky'] || results.length === 1) return this.handleResult(context, results[0]).then(() => channel.stopTyping())
+    if (context.flags.lucky || results.length === 1) return this.handleResult(context, results[0]).then(() => channel.stopTyping())
     const description = results.map((item, i) => `\`${this.formatIndex(i, results)}\`. ${this.searchResultFormatter(item, context)}`)
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)

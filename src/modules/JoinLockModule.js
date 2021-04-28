@@ -1,6 +1,6 @@
 const { Module, PlaceholderUtils, PlaceholderRules } = require('../')
 
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 
 const MAX_MESSAGE_SIZE = 250
 const PLACEHOLDER_BLACKLIST = ['channel', 'channelName']
