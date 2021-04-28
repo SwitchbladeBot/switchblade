@@ -7,7 +7,7 @@ module.exports = class Time extends Command {
     super({
       name: 'time',
       aliases: ['currenttime'],
-      requirements: { apis: ['gmaps'] },
+      requirements: { apis: ['positionstack'] },
       parameters: [{
         type: 'string', full: true, missingError: 'commands:time.noZone'
       }]
@@ -19,17 +19,16 @@ module.exports = class Time extends Command {
     channel.startTyping()
     moment.locale(language)
 
-    const place = await this.client.apis.gmaps.searchPlace(address, language)
-    if (!place) {
+    const place = await this.client.apis.positionstack.getAddress(address)
+    if (!place.data[0]) {
       throw new CommandError(t('commands:time.notFound'))
     }
 
-    const { lat, lng } = place.geometry.location
-    const { timeZoneId } = await this.client.apis.gmaps.getTimezone(lat, lng)
-    const time = moment.tz(timeZoneId).format('LLLL (z)')
+    const { name } = place.data[0].timezone_module
+    const time = moment.tz(name).format('LLLL (z)')
 
     embed
-      .setTitle(t('commands:time.currentTime', { timezone: place.formatted_address }))
+      .setTitle(t('commands:time.currentTime', { timezone: place.data[0].label }))
       .setDescription(time)
     channel.send(embed).then(() => channel.stopTyping())
   }
