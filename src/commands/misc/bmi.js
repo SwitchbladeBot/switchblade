@@ -64,7 +64,8 @@ module.exports = class BMI extends Command {
           required: true,
           missingError: 'commands:bmi.missingWeight'
         },
-        { type: 'number',
+        {
+          type: 'number',
           min: 0,
           required: true,
           missingError: 'commands:bmi.missingHeight'

@@ -102,11 +102,11 @@ module.exports = class Module {
     const dbObj = {}
     Object.entries(entity).forEach(([k, v]) => {
       if (_.isEqual(this.defaultValues[k], v)) {
-        if (!dbObj['$unset']) dbObj['$unset'] = {}
-        dbObj['$unset'][pathF(k)] = ''
+        if (!dbObj.$unset) dbObj.$unset = {}
+        dbObj.$unset[pathF(k)] = ''
       } else {
-        if (!dbObj['$set']) dbObj['$set'] = {}
-        dbObj['$set'][pathF(k)] = v
+        if (!dbObj.$set) dbObj.$set = {}
+        dbObj.$set[pathF(k)] = v
       }
     })
     return this._guilds.update(_guild, dbObj)

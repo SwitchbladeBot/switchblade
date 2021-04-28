@@ -23,7 +23,7 @@ module.exports = class UIGradient extends Command {
       .setURL(`https://uigradients.com/#${name.replace(/\s+/g, '')}`)
       .setColor(colors[0])
       .setImage('attachment://gradient.png')
-      .setDescription(`\`${colors.join(`\`, \``)}\``)
+      .setDescription(`\`${colors.join('`, `')}\``)
       .attachFiles(new MessageAttachment(gradient, 'gradient.png'))
     channel.send(embed).then(() => channel.stopTyping())
   }

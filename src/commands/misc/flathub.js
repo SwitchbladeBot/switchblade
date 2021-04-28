@@ -32,7 +32,7 @@ module.exports = class FlatHubCommand extends SearchCommand {
       .setAuthor(t('commands:flathub.title', { name }), this.embedLogoURL, `https://flathub.org/apps/details/${flatpakAppId}`)
       .setDescription(turndownService.turndown(description
         .replace(/\]/g, '\\\\］')
-        .replace(/\[/g, '\\\\［')).substring(0, 500) + (description.length > 500 ? `...` : ''))
+        .replace(/\[/g, '\\\\［')).substring(0, 500) + (description.length > 500 ? '...' : ''))
       .setThumbnail(iconDesktopUrl)
       .setImage(screenshot.imgDesktopUrl)
       .addField(t('commands:flathub.license'), licence, true)

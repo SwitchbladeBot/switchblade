@@ -16,7 +16,7 @@ module.exports = class GitHubAPI extends APIWrapper {
   }
 
   findRepositories (repository, maxValues) {
-    return this.request(`/search/repositories`, { q: repository, per_page: maxValues }).then(res => res && res.items)
+    return this.request('/search/repositories', { q: repository, per_page: maxValues }).then(res => res && res.items)
   }
 
   getUserRepositories (username) {

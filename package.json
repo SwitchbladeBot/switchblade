@@ -16,7 +16,7 @@
     ]
   },
   "engines": {
-    "node": "> 12.0.0"
+    "node": "> 14.0.0"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
-    "@hapi/joi": "^16.1.7",
     "@lavacord/discord.js": "0.0.7",
     "@sentry/node": "^6.2.3",
     "abort-controller": "^3.0.0",
@@ -60,6 +59,7 @@
     "icecast-parser": "^4.0.2",
     "intl": "^1.2.5",
     "iso-639": "^0.2.2",
+    "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mal-scraper": "^2.11.3",
@@ -92,15 +92,15 @@
   "devDependencies": {
     "auto-install": "^1.7.4",
     "dotenv": "^8.2.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "mocha": "^6.2.1",
+    "eslint": "^7.13.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "mocha": "^8.3.2",
     "mocha-standard": "^1.0.0",
     "nodemon": "^2.0.7",
-    "standard": "^12.0.1"
+    "standard": "^16.0.3"
   },
   "nodemonConfig": {
     "ignore": [
