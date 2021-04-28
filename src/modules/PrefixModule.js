@@ -1,6 +1,6 @@
 const { Module } = require('../')
 
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 
 const MIN_PREFIX_SIZE = 1
 const MAX_PREFIX_SIZE = 50

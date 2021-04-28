@@ -39,7 +39,7 @@ module.exports = class SoundcloudAPI extends APIWrapper {
 
   // Client ID
   async request (endpoint, queryParams = {}) {
-    queryParams['client_id'] = await this.clientId()
+    queryParams.client_id = await this.clientId()
     const qParams = new URLSearchParams(queryParams)
     return fetch(API_URL + endpoint + `?${qParams.toString()}`)
       .then(res => res.ok ? res.json() : Promise.reject(res))

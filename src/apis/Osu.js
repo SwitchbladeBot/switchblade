@@ -56,7 +56,7 @@ module.exports = class Osu extends APIWrapper {
   }
 
   getAuthenticatedUserInfo (key) {
-    return fetch(API_URL + `/v2/me`, {
+    return fetch(API_URL + '/v2/me', {
       headers: { Authorization: `Bearer ${key}` }
     }).then(res => res.json())
   }

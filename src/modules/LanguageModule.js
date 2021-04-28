@@ -1,6 +1,6 @@
 const { Module } = require('../')
 
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 
 // Language
 module.exports = class LanguageModule extends Module {
