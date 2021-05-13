@@ -1,21 +1,16 @@
 const { Command } = require('../../')
 
-const specialCodes = {
-  0: ':zero:',
-  1: ':one:',
-  2: ':two:',
-  3: ':three:',
-  4: ':four:',
-  5: ':five:',
-  6: ':six:',
-  7: ':seven:',
-  8: ':eight:',
-  9: ':nine:',
-  '#': ':hash:',
-  '*': ':asterisk:',
-  '?': ':grey_question:',
-  '!': ':grey_exclamation:',
-  ' ': '   '
+const phrases = {
+  'i':':eye:',
+  'be':':bee:',
+  'bee':':bee:',
+  'beer':':beer:',
+  'believe':':bee: :leaves:',
+  'cloud':':cloud:',
+  'dont':':x:',
+  'eye':':eye:',
+  'love':':heart:',
+  'well':':whale2:'
 }
 
 module.exports = class EmojiTr extends Command {
@@ -36,8 +31,8 @@ module.exports = class EmojiTr extends Command {
     const emojified = text.toLowerCase().split('').map(letter => {
       if (/[a-z]/g.test(letter)) {
         return `:regional_indicator_${letter}: `
-      } else if (specialCodes[letter]) {
-        return `${specialCodes[letter]} `
+      } else if (phrases[letter]) {
+        return `${phrases[letter]} `
       }
       return letter
     }).join('')
