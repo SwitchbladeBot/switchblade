@@ -21,6 +21,7 @@ const phrases = {
   hello: ":wave:",
   hey: ":person_raising_hand:",
   hi: ":wave:",
+  how:':question:',
   i: ":eye:",
   info: ":information_source:",
   information: ":information_source:",
@@ -41,7 +42,7 @@ const phrases = {
   whale:':whale2:',
   you: ":point_right: :bust_in_silhouette:",
 };
-
+const seperators=/([\.,\!\?;])/
 module.exports = class EmojiTr extends Command {
   constructor(client) {
     super(
@@ -64,16 +65,17 @@ module.exports = class EmojiTr extends Command {
   async run({ t, author, channel }, text) {
     const emojified = text
       .toLowerCase()
-      .split("")
-      .map((letter) => {
-        if (/[a-z]/g.test(letter)) {
-          return `:regional_indicator_${letter}: `;
-        } else if (phrases[letter]) {
-          return `${phrases[letter]} `;
+      .split(" ")
+      .map((word) => {
+        let suffix=(seperators.test(word)?seperators.exec(word)[1]:'');
+        console.log(suffix)
+        word=word.replace(seperators, '')
+        if (phrases[word]) {
+          return phrases[word]+" "+suffix;
         }
-        return letter;
+        return word+suffix;
       })
-      .join("");
+      .join(" ");
     channel.send(emojified);
   }
 };
