@@ -68,7 +68,6 @@ module.exports = class EmojiTr extends Command {
       .split(" ")
       .map((word) => {
         let suffix=(seperators.test(word)?seperators.exec(word)[1]:'');
-        console.log(suffix)
         word=word.replace(seperators, '')
         if (phrases[word]) {
           return phrases[word]+" "+suffix;
