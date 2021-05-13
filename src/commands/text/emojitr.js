@@ -1,14 +1,17 @@
 const { Command } = require('../../')
 
 const phrases = {
-  'i':':eye:',
+  
   'be':':bee:',
   'bee':':bee:',
   'beer':':beer:',
   'believe':':bee: :leaves:',
+  'black':':black_circle:',
+  'cat':':cat:',
   'cloud':':cloud:',
   'dont':':x:',
   'eye':':eye:',
+  'i':':eye:',
   'love':':heart:',
   'well':':whale2:'
 }
