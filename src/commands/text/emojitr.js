@@ -18,10 +18,11 @@ const specialCodes = {
   ' ': '   '
 }
 
-module.exports = class Emojify extends Command {
+module.exports = class EmojiTr extends Command {
   constructor (client) {
     super({
-      name: 'emojify',
+      name: 'emojitr',
+      aliases: ['translate2emoji', 'obfuscate-emoji', 'emoji-tr'],
       category: 'memes',
       parameters: [{
         type: 'string',
