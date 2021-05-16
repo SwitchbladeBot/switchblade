@@ -66,7 +66,7 @@ const phrases = {
   you: ":point_right: :bust_in_silhouette:",
   youtube: ":arrow_forward: :pause_button:",
 };
-const separators = /([\.,\!\?;])/;
+const separators = /([.,!?;])/;
 module.exports = class EmojiTr extends Command {
   constructor(client) {
     super(
