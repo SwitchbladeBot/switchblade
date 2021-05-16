@@ -53,7 +53,7 @@ const phrases = {
   sad:':sob:',
   screw:':nut_and_bolt:',
   sonic: ":blue_circle: :hedgehog:",
-  sorry:':sob: '
+  sorry:':sob: ',
   shit: ":shit:",
   true:':ballot_box_with_check: ',
   tweet: ":bird:",
