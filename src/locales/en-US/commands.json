@@ -889,6 +889,11 @@
     "commandUsage": "<text>",
     "missingSentence": "You have to give me some text to emojify!"
   },
+  "emojitr": {
+    "commandDescription": "Replaces your words with emojis.",
+    "commandUsage": "<text>",
+    "missingSentence": "You have to give me some text to translate the meaning to emojis!"
+  },
   "fox": {
     "commandDescription": "Shows a random image of a fox.",
     "hereIsYourFox": "Here's your fox!"
