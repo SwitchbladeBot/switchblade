@@ -54,7 +54,7 @@ module.exports = class EmojiTr extends Command {
           {
             type: "string",
             full: true,
-            missingError: "commands:emojify.missingSentence",
+            missingError: "commands:emojitr.missingSentence",
           },
         ],
       },
