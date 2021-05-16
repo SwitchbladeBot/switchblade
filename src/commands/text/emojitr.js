@@ -90,8 +90,8 @@ module.exports = class EmojiTr extends Command {
     const emojified = text
       .split(" ")
       .map((word) => {
-        let suffix = seperators.test(word) ? seperators.exec(word)[1] : "";
-        word = word.replace(seperators, "");
+        let suffix = separators.test(word) ? separators.exec(word)[1] : "";
+        word = word.replace(separators, "");
         if (phrases[word.toLowerCase()]) {
           return phrases[word.toLowerCase()] + " " + suffix;
         }
