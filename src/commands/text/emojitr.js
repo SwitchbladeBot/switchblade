@@ -21,7 +21,7 @@ const phrases = {
   hello: ":wave:",
   hey: ":person_raising_hand:",
   hi: ":wave:",
-  how:':question:',
+  how: ":question:",
   i: ":eye:",
   info: ":information_source:",
   information: ":information_source:",
@@ -30,7 +30,7 @@ const phrases = {
   minecraft: ":green_square: :pick:",
   or: ":arrows_counterclockwise:",
   phone: ":telephone:",
-  pin:":pushpin:",
+  pin: ":pushpin:",
   read: ":eyes:",
   reads: ":eyes:",
   sonic: ":blue_circle: :hedgehog:",
@@ -39,10 +39,10 @@ const phrases = {
   twitter: ":bird:",
   watch: ":watch:",
   well: ":whale2:",
-  whale:':whale2:',
+  whale: ":whale2:",
   you: ":point_right: :bust_in_silhouette:",
 };
-const seperators=/([\.,\!\?;])/
+const seperators = /([\.,\!\?;])/;
 module.exports = class EmojiTr extends Command {
   constructor(client) {
     super(
@@ -66,14 +66,12 @@ module.exports = class EmojiTr extends Command {
     const emojified = text
       .split(" ")
       .map((word) => {
-        let suffix=(seperators.test(word)?seperators.exec(word)[1]:'');
-        word=word.replace(seperators, '')
-        if (phrases[word
-          .toLowerCase()]) {
-          return phrases[word
-            .toLowerCase()]+" "+suffix;
+        let suffix = seperators.test(word) ? seperators.exec(word)[1] : "";
+        word = word.replace(seperators, "");
+        if (phrases[word.toLowerCase()]) {
+          return phrases[word.toLowerCase()] + " " + suffix;
         }
-        return word+suffix;
+        return word + suffix;
       })
       .join(" ");
     channel.send(emojified);
