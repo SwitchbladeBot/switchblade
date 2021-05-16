@@ -64,13 +64,14 @@ module.exports = class EmojiTr extends Command {
 
   async run({ t, author, channel }, text) {
     const emojified = text
-      .toLowerCase()
       .split(" ")
       .map((word) => {
         let suffix=(seperators.test(word)?seperators.exec(word)[1]:'');
         word=word.replace(seperators, '')
-        if (phrases[word]) {
-          return phrases[word]+" "+suffix;
+        if (phrases[word
+          .toLowerCase()]) {
+          return phrases[word
+            .toLowerCase()]+" "+suffix;
         }
         return word+suffix;
       })
