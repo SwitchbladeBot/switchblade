@@ -1,4 +1,4 @@
-const { Command } = require('../../');
+const { Command } = require('../../')
 
 const phrases = {
   be: ':bee:',
@@ -64,11 +64,11 @@ const phrases = {
   whale: ':whale2:',
   yes: ':ballot_box_with_check: ',
   you: ':point_right: :bust_in_silhouette:',
-  youtube: ':arrow_forward: :pause_button:',
-};
-const separators = /([.,!?;])/;
+  youtube: ':arrow_forward: :pause_button:'
+}
+const separators = /([.,!?;])/
 module.exports = class EmojiTr extends Command {
-  constructor(client) {
+  constructor (client) {
     super(
       {
         name: 'emojitr',
@@ -78,26 +78,26 @@ module.exports = class EmojiTr extends Command {
           {
             type: 'string',
             full: true,
-            missingError: 'commands:emojitr.missingSentence',
-          },
-        ],
+            missingError: 'commands:emojitr.missingSentence'
+          }
+        ]
       },
       client
-    );
+    )
   }
 
-  async run({ t, author, channel }, text) {
+  async run ({ t, author, channel }, text) {
     const emojified = text
       .split(' ')
       .map((word) => {
-        let suffix = separators.test(word) ? separators.exec(word)[1] : '';
-        word = word.replace(separators, '');
+        const suffix = separators.test(word) ? separators.exec(word)[1] : ''
+        word = word.replace(separators, '')
         if (phrases[word.toLowerCase()]) {
-          return phrases[word.toLowerCase()] + ' ' + suffix;
+          return phrases[word.toLowerCase()] + ' ' + suffix
         }
-        return word + suffix;
+        return word + suffix
       })
-      .join(' ');
-    channel.send(emojified);
+      .join(' ')
+    channel.send(emojified)
   }
 };
