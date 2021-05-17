@@ -100,4 +100,4 @@ module.exports = class EmojiTr extends Command {
       .join(' ')
     channel.send(emojified)
   }
-};
+}
