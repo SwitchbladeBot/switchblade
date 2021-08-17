@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 const jwt = require('jsonwebtoken')
 
 const API_URL = 'https://discordapp.com/api'

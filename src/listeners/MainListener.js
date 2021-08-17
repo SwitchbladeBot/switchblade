@@ -57,9 +57,9 @@ module.exports = class MainListener extends EventListener {
         })
         this.playerManager.connect()
           .then(() => this.log('Lavalink connection established!', { color: 'green', tags: ['Music'] }))
-          .catch(() => this.log(`Failed to establish Lavalink connection - Failed to connect to nodes.`, { color: 'red', tags: ['Music'] }))
+          .catch(() => this.log('Failed to establish Lavalink connection - Failed to connect to nodes.', { color: 'red', tags: ['Music'] }))
       } catch (e) {
-        this.log(`Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, { color: 'red', tags: ['Music'] })
+        this.log('Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.', { color: 'red', tags: ['Music'] })
       }
     }
 

@@ -15,7 +15,7 @@ module.exports = class BeatSaverAPI extends APIWrapper {
   }
 
   searchMaps (q) {
-    return this.request(`/search/text/0`, { q, automapper: 1 }).then(r => r.docs)
+    return this.request('/search/text/0', { q, automapper: 1 }).then(r => r.docs)
   }
 
   request (endpoint, queryParams = {}) {
