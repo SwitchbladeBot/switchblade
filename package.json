@@ -1,25 +1,31 @@
 {
   "name": "switchblade",
   "version": "2.0.0",
-  "description": "",
+  "description": "The open source Discord bot that solves all of your problems.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && npm run start",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SwitchbladeBot/switchblade.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "BSD 4",
+  "author": "SwitchbladeBot",
+  "license": "BSD-4-clause",
   "bugs": {
     "url": "https://github.com/SwitchbladeBot/switchblade/issues"
   },
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
-    "discord.js": "^13.0.1",
+    "@types/dotenv": "^8.2.0",
+    "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
+    "generic-type-guard": "^3.4.1",
+    "require-all": "^3.0.0",
+    "signale": "^1.4.0",
     "source-map-support": "^0.5.19"
   },
   "engine": {
@@ -28,6 +34,12 @@
   },
   "devDependencies": {
     "@types/node": "^16.4.13",
+    "@types/require-all": "^3.0.3",
+    "@types/signale": "^1.4.2",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
     "tsc-watch": "^4.4.0",
     "typescript": "^4.3.5"
   }
