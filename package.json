@@ -37,7 +37,7 @@
     "abort-controller": "^3.0.0",
     "adm-zip": "^0.5.4",
     "ascii-table": "0.0.9",
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "brainfuck-node": "^1.0.2",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.5",
