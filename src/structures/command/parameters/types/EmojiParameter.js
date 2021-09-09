@@ -26,3 +26,5 @@ module.exports = class EmojiParameter extends Parameter {
     return emoji
   }
 }
+
+module.exports.EMOJI_REGEX = EMOJI_REGEX
