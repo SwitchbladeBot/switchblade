@@ -49,7 +49,10 @@ module.exports = class Instagram extends Command {
       channel.send(embed)
     } catch (e) {
       if (e instanceof CommandError) throw e
-      else throw new CommandError(t('errors:generic'))
+      else {
+        this.logger.error(e)
+        throw new CommandError(t('errors:generic'))
+      }
     }
   }
 }
