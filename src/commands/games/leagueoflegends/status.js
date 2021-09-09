@@ -28,15 +28,15 @@ module.exports = class LeagueOfLegendsStatus extends Command {
 
   async run ({ t, author, channel, language }, server) {
     channel.startTyping()
-    const body = await fetch(`https://status.leagueoflegends.com/shards/${server}/summary`).then(res => res.json())
+    const body = await fetch(`http://status.leagueoflegends.com/shards/${server}/summary`).then(res => res.json())
     channel.send(
       new SwitchbladeEmbed(author)
         .setDescription(
           [
             `${this.getEmoji(`lol${body.status}`)} **[${t(`lolservers:${server}`)} - ${t(`commands:leagueoflegends.subcommands.status.${body.status}`)}](https://status.leagueoflegends.com/?${language.replace('-', '_')}#${server})**\n`,
-            body.messages ? body.messages.map(m => {
-              return `${this.getEmoji(`lol${m.severity}`)} **${t(`commands:leagueoflegends.subcommands.status.${m.severity}`)}:** ${this.getLocalizedContent(m, language)}`
-            }).join('\n\n') : null
+            body.messages
+              ? body.messages.map(m => `${this.getEmoji(`lol${m.severity}`)} **${t(`commands:leagueoflegends.subcommands.status.${m.severity}`)}:** ${this.getLocalizedContent(m, language)}`).join('\n\n')
+              : null
           ].join('\n')
         )
         .setColor(body.status === 'online' ? 0x199A19 : 0xDC0607)

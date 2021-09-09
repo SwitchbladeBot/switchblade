@@ -1,5 +1,5 @@
 const { APIWrapper } = require('../')
-const fetch = require('node-fetch')
+const axios = require('axios')
 
 const API_URL = 'https://api.darksky.net'
 
@@ -7,7 +7,7 @@ module.exports = class DarkSkyAPI extends APIWrapper {
   constructor () {
     super({
       name: 'darksky',
-      envVars: [ 'DARKSKY_KEY' ]
+      envVars: ['DARKSKY_KEY']
     })
   }
 
@@ -29,7 +29,7 @@ module.exports = class DarkSkyAPI extends APIWrapper {
   // Default
   request (endpoint, lat, lng, queryParams = {}) {
     const qParams = new URLSearchParams(queryParams)
-    return fetch(`${API_URL}${endpoint}/${process.env.DARKSKY_KEY}/${lat},${lng}?${qParams.toString()}`)
-      .then(res => res.json())
+    return axios(`${API_URL}${endpoint}/${process.env.DARKSKY_KEY}/${lat},${lng}?${qParams.toString()}`)
+      .then(res => res.data)
   }
 }

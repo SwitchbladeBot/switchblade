@@ -6,7 +6,10 @@ module.exports = class Ship extends Command {
     super({
       name: 'ship',
       category: 'social',
-      requirements: { databaseOnly: true },
+      requirements: {
+        databaseOnly: true,
+        canvasOnly: true
+      },
       parameters: [{
         type: 'user',
         required: false,

@@ -70,21 +70,24 @@ class Color {
   }
 
   static calcLightness (R, G, B, m, M, type = 'bi-hexcone') {
-    return type === 'luma601' ? (0.299 * R) + (0.587 * G) + (0.114 * B)
-      : type === 'luma709' ? (0.2126 * R) + (0.7152 * G) + (0.0772 * B)
-        : type === 'bi-hexcone' ? ((m + M) * 0.5)
+    return type === 'luma601'
+      ? (0.299 * R) + (0.587 * G) + (0.114 * B)
+      : type === 'luma709'
+        ? (0.2126 * R) + (0.7152 * G) + (0.0772 * B)
+        : type === 'bi-hexcone'
+          ? ((m + M) * 0.5)
           : 0
   }
 
   hslArray () {
-    const [ R, G, B ] = this.rgbArray().map(v => v / 255)
+    const [R, G, B] = this.rgbArray().map(v => v / 255)
     const M = Math.max(R, G, B)
     const m = Math.min(R, G, B)
     const C = M - m
     const H = maxCap(this.constructor.calcHue(R, G, B, M, C), 0, 360)
     const L = maxCap(this.constructor.calcLightness(R, G, B, m, M))
     const S = maxCap(this.constructor.calcSaturation(L, C))
-    return [ toFixed(H, 1), toFixed(S), toFixed(L) ]
+    return [toFixed(H, 1), toFixed(S), toFixed(L)]
   }
 
   hsl () {
@@ -94,7 +97,7 @@ class Color {
   // Luminance
   get colorLuminance () {
     if (!this.valid) return 0
-    const [ R, G, B ] = this.rgbArray(false).map(v => v / 255).map(v => v < 0.03928 ? v / 12.92 : Math.pow(((v + 0.055) / 1.055), 2))
+    const [R, G, B] = this.rgbArray(false).map(v => v / 255).map(v => v < 0.03928 ? v / 12.92 : Math.pow(((v + 0.055) / 1.055), 2))
     return this.constructor.calcLightness(R, G, B, null, null, 'luma709')
   }
 
@@ -111,23 +114,23 @@ class Color {
 
     const array = text instanceof Array && (text.length === 3 || text.length === 4) && text.every(t => !isNaN(t)) && text
     if (array) {
-      let [ R, G, B, A ] = array
+      let [R, G, B, A] = array
       if (!A && A !== 0) A = 1
-      return [ parseRGBValue(R), parseRGBValue(G), parseRGBValue(B), parseRGBAlpha(A) ]
+      return [parseRGBValue(R), parseRGBValue(G), parseRGBValue(B), parseRGBAlpha(A)]
     }
   }
 
   static parseRGB (text) {
     if (this.RGB_REGEX.test(text)) {
-      let [ , R, G, B, A ] = this.RGB_REGEX.exec(text)
+      let [, R, G, B, A] = this.RGB_REGEX.exec(text)
       A = A || 1
-      return [ parseRGBValue(R), parseRGBValue(G), parseRGBValue(B), parseRGBAlpha(A) ]
+      return [parseRGBValue(R), parseRGBValue(G), parseRGBValue(B), parseRGBAlpha(A)]
     }
   }
 
   static parseHex (text) {
     if (this.HEX_REGEX.test(text)) {
-      const [ , HEX, A ] = this.HEX_REGEX.exec(text)
+      const [, HEX, A] = this.HEX_REGEX.exec(text)
       const rgba = HEX.match(/[a-f\d]{2}/gi).map(parseHexValue) // Base hex
       rgba.push(parseHexAlpha(A || 'ff')) // Alpha
       return rgba
@@ -136,7 +139,7 @@ class Color {
 
   static parseSimpleHex (text) {
     if (this.SIMPLE_HEX_REGEX.test(text)) {
-      const [ , HEX, A ] = this.SIMPLE_HEX_REGEX.exec(text)
+      const [, HEX, A] = this.SIMPLE_HEX_REGEX.exec(text)
       const rgba = HEX.split('').map(v => parseHexValue(v + v)) // Base hex
       rgba.push(parseHexAlpha(A ? A + A : 'ff')) // Alpha
       return rgba
@@ -145,7 +148,7 @@ class Color {
 
   static parseHSL (text) {
     if (this.HSL_REGEX.test(text)) {
-      const [ , H, S, L, A ] = this.HSL_REGEX.exec(text)
+      const [, H, S, L, A] = this.HSL_REGEX.exec(text)
       const rgba = parseHSL(H, S, L)
       rgba.push(A || 1)
       return rgba
@@ -185,25 +188,25 @@ const parseHSL = (H, S, L) => {
     R = G = B = L
   } else {
     const C = (1 - Math.abs((2 * L) - 1)) * S
-    const [ r, g, b ] = parseHue(H, C)
+    const [r, g, b] = parseHue(H, C)
     const m = L - (C * 0.5)
     R = r + m
     G = g + m
     B = b + m
   }
 
-  return [ parseRGBValue(R * 255), parseRGBValue(G * 255), parseRGBValue(B * 255) ]
+  return [parseRGBValue(R * 255), parseRGBValue(G * 255), parseRGBValue(B * 255)]
 }
 const parseHue = (H, C) => {
   const h = H / 60
   const X = C * (1 - Math.abs((h % 2) - 1))
-  if (h >= 0 && h <= 1) return [ C, X, 0 ]
-  if (h >= 1 && h <= 2) return [ X, C, 0 ]
-  if (h >= 2 && h <= 3) return [ 0, C, X ]
-  if (h >= 3 && h <= 4) return [ 0, X, C ]
-  if (h >= 4 && h <= 5) return [ X, 0, C ]
-  if (h >= 5 && h <= 6) return [ C, 0, C ]
-  return [ 0, 0, 0 ]
+  if (h >= 0 && h <= 1) return [C, X, 0]
+  if (h >= 1 && h <= 2) return [X, C, 0]
+  if (h >= 2 && h <= 3) return [0, C, X]
+  if (h >= 3 && h <= 4) return [0, X, C]
+  if (h >= 4 && h <= 5) return [X, 0, C]
+  if (h >= 5 && h <= 6) return [C, 0, C]
+  return [0, 0, 0]
 }
 
 module.exports = Color

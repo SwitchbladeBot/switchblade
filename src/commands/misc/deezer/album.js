@@ -11,7 +11,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
       parameters: [{
         type: 'string', full: true, missingError: 'commons:search.noParams'
       }, [{
-        type: 'booleanFlag', name: 'tracks', aliases: [ 'songs', 's', 't' ]
+        type: 'booleanFlag', name: 'tracks', aliases: ['songs', 's', 't']
       }]]
     }, client)
   }
@@ -39,7 +39,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
       .setThumbnail(cover)
       .setURL(link)
 
-    if (flags['tracks']) {
+    if (flags.tracks) {
       if (tracks.data.length > 10) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 10 }))
       embed.setAuthor(t('commands:deezer.subcommands.album.albumTracks'), this.embedLogoURL, link)
         .setTitle(title)

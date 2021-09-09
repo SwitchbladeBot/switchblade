@@ -13,10 +13,10 @@ module.exports = class Osu extends SubcommandListCommand {
     }, client)
 
     this.modes = {
-      'osu': ['0', 'osu!'],
-      'taiko': ['1', 'osu!taiko'],
-      'catchthebeat': ['2', 'osu!catch'],
-      'mania': ['3', 'osu!mania']
+      osu: ['0', 'osu!'],
+      taiko: ['1', 'osu!taiko'],
+      catchthebeat: ['2', 'osu!catch'],
+      mania: ['3', 'osu!mania']
     }
   }
 }

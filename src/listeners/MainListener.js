@@ -49,7 +49,7 @@ module.exports = class MainListener extends EventListener {
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
       try {
-        let nodes = JSON.parse(process.env.LAVALINK_NODES)
+        const nodes = JSON.parse(process.env.LAVALINK_NODES)
         if (!Array.isArray(nodes)) throw new Error('PARSE_ERROR')
         this.playerManager = new SwitchbladePlayerManager(this, nodes, {
           user: this.user.id,
@@ -57,9 +57,9 @@ module.exports = class MainListener extends EventListener {
         })
         this.playerManager.connect()
           .then(() => this.log('Lavalink connection established!', { color: 'green', tags: ['Music'] }))
-          .catch(() => this.log(`Failed to establish Lavalink connection - Failed to connect to nodes.`, { color: 'red', tags: ['Music'] }))
+          .catch(() => this.log('Failed to establish Lavalink connection - Failed to connect to nodes.', { color: 'red', tags: ['Music'] }))
       } catch (e) {
-        this.log(`Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.`, { color: 'red', tags: ['Music'] })
+        this.log('Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.', { color: 'red', tags: ['Music'] })
       }
     }
 
@@ -78,7 +78,7 @@ module.exports = class MainListener extends EventListener {
 
       // discordbots.org
       if (process.env.DBL_TOKEN) {
-        fetch(`https://discordbots.org/api/bots/${client.user.id}/stats`, {
+        fetch(`https://top.gg/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DBL_TOKEN },
           body: { server_count: client.guilds.size }
@@ -121,7 +121,7 @@ module.exports = class MainListener extends EventListener {
 
     const guildId = message.guild && message.guild.id
 
-    const { prefix, spacePrefix } = await this.modules.prefix.retrieveValues(guildId, [ 'prefix', 'spacePrefix' ])
+    const { prefix, spacePrefix } = await this.modules.prefix.retrieveValues(guildId, ['prefix', 'spacePrefix'])
     const language = await this.modules.language.retrieveValue(guildId, 'language')
 
     const botMention = this.user.toString()

@@ -15,7 +15,7 @@ const recPaths = (c) => {
 
 const findCommand = (commands, path) => {
   const findCA = (a, c) => a.find(o => o.name === c)
-  const [ c, ...sc ] = path.split(/\s+/)
+  const [c, ...sc] = path.split(/\s+/)
   const cmd = findCA(commands, c)
   return cmd ? sc.length ? sc.reduce((s, n) => findCA(s, n), cmd.subcommands) : cmd : null
 }
@@ -53,7 +53,7 @@ module.exports = class CommandsModule extends Module {
       commands: [
         {
           name: 'all commands',
-          aliases: [ '*' ],
+          aliases: ['*'],
           category: 'all'
         },
         ...categories.map(c => ({
@@ -194,17 +194,19 @@ module.exports = class CommandsModule extends Module {
 
       switch (v.type) {
         case 'category':
-        case 'channel':
+        case 'channel': {
           const channel = guild.channels.get(v.id)
           if (!channel) o.missing = true
           else o.name = channel.name
           break
-        case 'role':
+        }
+        case 'role': {
           const role = guild.roles.get(v.id)
           if (!role) o.missing = true
           else o.name = role.name
           break
-        case 'user':
+        }
+        case 'user': {
           const m = guild.member(v.id)
           if (!m) o.missing = true
           else {
@@ -212,6 +214,7 @@ module.exports = class CommandsModule extends Module {
             o.discriminator = m.user.discriminator
             o.displayName = m.displayName
           }
+        }
       }
 
       return o
@@ -222,12 +225,12 @@ module.exports = class CommandsModule extends Module {
         blacklist: o.blacklist && o.blacklist.map(mapValues)
       }
     }
-    const reduceFunc = (o, [ k, v ]) => {
+    const reduceFunc = (o, [k, v]) => {
       o[k] = parseLists(v)
       return o
     }
 
-    const { commands, categories, all } = await this.retrieveValues(guild.id, [ 'commands', 'categories', 'all' ])
+    const { commands, categories, all } = await this.retrieveValues(guild.id, ['commands', 'categories', 'all'])
     const rules = {
       commands: Object.entries(commands).reduce(reduceFunc, {}),
       categories: Object.entries(categories).reduce(reduceFunc, {})

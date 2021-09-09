@@ -9,7 +9,7 @@ module.exports = class Weather extends Command {
       category: 'utility',
       requirements: {
         canvasOnly: true,
-        apis: [ 'gmaps', 'darksky' ]
+        apis: ['positionstack', 'darksky']
       },
       parameters: [{
         type: 'string',
@@ -22,13 +22,12 @@ module.exports = class Weather extends Command {
   async run ({ t, author, channel, language }, address) {
     moment.locale(language)
     channel.startTyping()
-    const city = await this.client.apis.gmaps.searchCity(address)
-    if (city) {
-      const [ lang ] = language.split('-')
-      const { lat, lng } = city.geometry.location
+    try {
+      const city = await this.client.apis.positionstack.getAddress(address)
+      const { latitude, longitude } = city.data[0]
       // TODO: configurable units
-      const { currently, daily: { data: daily }, timezone } = await this.client.apis.darksky.getForecast(lat, lng, { lang, units: 'ca' })
-
+      const [lang] = language.split('-')
+      const { currently, daily: { data: daily }, timezone } = await this.client.apis.darksky.getForecast(latitude, longitude, { lang, units: 'ca' })
       const now = daily.shift()
       const weatherInfo = {
         now: {
@@ -45,14 +44,11 @@ module.exports = class Weather extends Command {
         })
       }
 
-      const cityName = city.address_components.find(({ types }) => types.includes('administrative_area_level_2') || types.includes('locality')).short_name
-      const state = city.address_components.find(({ types }) => types.includes('administrative_area_level_1'))
-
       const tempUnit = '°C'
-      const weather = await CanvasTemplates.weather({ t }, `${cityName.toUpperCase()}${state ? ` - ${state.short_name}` : ''}`, weatherInfo, tempUnit)
+      const weather = await CanvasTemplates.weather({ t }, `${city.data[0].locality.toUpperCase()}${city.data[0].region ? ` - ${city.data[0].region_code}` : ''}`, weatherInfo, tempUnit)
 
       channel.send(new MessageAttachment(weather, 'weather.png')).then(() => channel.stopTyping())
-    } else {
+    } catch (e) {
       throw new CommandError(t('commands:weather.notFound'))
     }
   }

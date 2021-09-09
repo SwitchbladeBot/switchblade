@@ -13,7 +13,7 @@ module.exports = class SoundcloudSong extends Song {
     const sc = this._Soundcloud
 
     const identifierRegex = /\/soundcloud:tracks:(\d+)\//
-    const [ , id ] = identifierRegex.exec(this.identifier)
+    const [, id] = identifierRegex.exec(this.identifier)
     const track = await sc.getTrack(id)
     if (track && !track.errors) {
       const artwork = track.artwork_url || (track.user && track.user.avatar_url)

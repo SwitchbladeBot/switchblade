@@ -11,9 +11,9 @@ module.exports = class DeezerArtist extends SearchCommand {
       parameters: [{
         type: 'string', full: true, missingError: 'commons:search.noParams'
       }, [{
-        type: 'booleanFlag', name: 'albums', aliases: [ 'a' ]
+        type: 'booleanFlag', name: 'albums', aliases: ['a']
       }, {
-        type: 'booleanFlag', name: 'related', aliases: [ 'r' ]
+        type: 'booleanFlag', name: 'related', aliases: ['r']
       }]]
     }, client)
   }
@@ -34,7 +34,7 @@ module.exports = class DeezerArtist extends SearchCommand {
       .setColor(this.embedColor)
       .setAuthor(t('commands:deezer.subcommands.artist.artistInfo'), this.embedLogoURL, link)
       .setThumbnail(cover)
-    if (flags['albums']) {
+    if (flags.albums) {
       const { data } = await this.client.apis.deezer.getArtistAlbums(id)
       const albumList = data.map((album, i) => {
         const explicit = album.explicit_lyrics ? this.getEmoji('explicit') : ''
@@ -49,7 +49,7 @@ module.exports = class DeezerArtist extends SearchCommand {
       ).then(() => channel.stopTyping())
     }
 
-    if (flags['related']) {
+    if (flags.related) {
       const { data } = await this.client.apis.deezer.getArtistRelated(id)
       const artistList = data.slice(0, 10).map((artist, i) => {
         return `\`${this.formatIndex(i, data)}\`. [${artist.name}](${artist.link}) - ${t('commands:deezer.fansCount', { fans: MiscUtils.formatNumber(artist.nb_fan, language) })}`

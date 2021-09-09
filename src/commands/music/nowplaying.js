@@ -19,7 +19,7 @@ module.exports = class NowPlaying extends Command {
   async run ({ t, author, channel, flags, guild }) {
     const guildPlayer = this.client.playerManager.players.get(guild.id)
     const song = guildPlayer.playingSong
-    if (!flags['text'] && this.client.canvasLoaded) {
+    if (!flags.text && this.client.canvasLoaded) {
       const nowPlaying = await CanvasTemplates.nowPlaying({ t }, guildPlayer, song)
       channel.send(new MessageAttachment(nowPlaying, 'nowplaying.png')).then(() => channel.stopTyping())
     } else {
@@ -56,7 +56,7 @@ module.exports = class NowPlaying extends Command {
 
       const description = [
         `**${t('music:nowPlaying')}:** [${song.title}](${song.uri}) ${durationText}`,
-        `*[${t('music:addedBy', { user: song.requestedBy })}]*`
+        `*[${t('music:addedBy', { user: '<@' + song.requestedBy + '>' })}]*`
       ]
 
       channel.send(embed.setDescription(description.join('\n')))

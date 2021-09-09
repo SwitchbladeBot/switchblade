@@ -29,7 +29,7 @@ module.exports = class ConnectionController extends Controller {
     const connection = user.connections.find(c => c.name === _connection)
     const connectionChecker = (k, v) => this.client.connections[_connection].checkConfig(k, v)
     let newConfig = Object.entries(_config).filter(c => (connection.config[c[0]] !== undefined && connectionChecker(c)))
-    let config = {}
+    const config = {}
     newConfig.forEach(([key, val]) => {
       config[key] = val
     })
@@ -67,12 +67,14 @@ module.exports = class ConnectionController extends Controller {
     const connections = await this.getConnections(_user)
     const userConnections = await Promise.all(allConn.map(async conn => {
       const foundConn = connections.find(c => c.name === conn.name)
-      return foundConn ? {
-        name: foundConn.name,
-        connected: true,
-        account: await this.client.connections[conn.name].getAccountInfo(foundConn.tokens),
-        configuration: foundConn.config
-      } : conn
+      return foundConn
+        ? {
+            name: foundConn.name,
+            connected: true,
+            account: await this.client.connections[conn.name].getAccountInfo(foundConn.tokens),
+            configuration: foundConn.config
+          }
+        : conn
     }))
     return userConnections
   }

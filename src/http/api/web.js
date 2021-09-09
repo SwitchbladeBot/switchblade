@@ -30,14 +30,16 @@ module.exports = class Web extends Route {
             scope
           } = await this._exchangeCode(code)
 
-          res.json({ token: jwt.sign({
-            accessToken,
-            refreshToken,
-            expiresIn,
-            expiresAt: Date.now() + expiresIn * 1000,
-            tokenType,
-            scope
-          }, process.env.JWT_SECRET) })
+          res.json({
+            token: jwt.sign({
+              accessToken,
+              refreshToken,
+              expiresIn,
+              expiresAt: Date.now() + expiresIn * 1000,
+              tokenType,
+              scope
+            }, process.env.JWT_SECRET)
+          })
         } catch (e) {
           res.status(403).json({ error: 'Couldn\'t validate authentication code!' })
         }
@@ -58,7 +60,7 @@ module.exports = class Web extends Route {
     if (!token) throw new Error('INVALID_TOKEN')
 
     return fetch(`${API_URL}${endpoint}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     }).then(res => res.ok ? res.json() : Promise.reject(res))
   }
 

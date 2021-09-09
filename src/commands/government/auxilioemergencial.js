@@ -5,10 +5,10 @@ module.exports = class AuxilioEmergencial extends Command {
   constructor (client) {
     super({
       name: 'auxilioemergencial',
-      alias: [ 'aemergencial', 'ae' ],
+      alias: ['aemergencial', 'ae'],
       category: 'government',
       requirements: {
-        apis: [ 'portaldatransparencia' ]
+        apis: ['portaldatransparencia']
       },
       parameters: [{
         type: 'string',

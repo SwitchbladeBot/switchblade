@@ -19,6 +19,7 @@ module.exports = class TumblrAPI extends APIWrapper {
   getPhotoPosts (blog, params = {}) {
     return this.request(`/blog/${blog}/posts/photo`, params)
   }
+
   // Default
   request (endpoint, queryParams = {}) {
     queryParams.api_key = process.env.TUMBLR_API_KEY

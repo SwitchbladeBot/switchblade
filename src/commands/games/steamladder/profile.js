@@ -22,7 +22,7 @@ module.exports = class SteamLadderProfile extends Command {
   async run ({ t, author, channel, language }, query) {
     channel.startTyping()
     const formatter = new Intl.NumberFormat(language)
-    let embed = new SwitchbladeEmbed(author)
+    const embed = new SwitchbladeEmbed(author)
     try {
       const steamid = await this.client.apis.steam.resolve(query)
       const {
@@ -31,7 +31,7 @@ module.exports = class SteamLadderProfile extends Command {
         steam_stats: stats,
         ladder_rank: rank
       } = await this.client.apis.steamladder.getProfile(steamid)
-      const description = [ EmojiUtils.getFlag(user.steam_country_code) ]
+      const description = [EmojiUtils.getFlag(user.steam_country_code)]
       if (info.is_staff) description.push(this.getEmoji('steamladder_staff_icon'))
       if (info.is_winter_18) description.push(this.getEmoji('steamladder_winter_badge'))
       if (info.is_donator) description.push(this.getEmoji('steamladder_donator'))

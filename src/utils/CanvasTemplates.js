@@ -3,6 +3,7 @@ const Color = require('./Color.js')
 
 const GIFEncoder = require('gifencoder')
 const moment = require('moment')
+const { loadImage } = require('canvas')
 
 let Canvas = {}
 let CanvasUtils = {}
@@ -712,6 +713,47 @@ module.exports = class CanvasTemplates {
     return canvas.toBuffer()
   }
 
+  static async plateMercosul (text, buffer) {
+    const WIDTH = 1920
+    const HEIGHT = 672
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.PLACA_MERCOSUL_PNG, true),
+      Image.from(buffer)
+    ])
+    const [background, state] = await IMAGE_ASSETS
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.fillStyle = '#363536'
+
+    const PARAGRAPH_START_X = 960
+    const PARAGRAPH_START_Y = 373
+    const PARAGRAPH_HEIGHT = 10
+    const PARAGRAPH_WIDTH = 1920
+
+    ctx.drawImage(background, 0, 0, WIDTH, HEIGHT)
+    ctx.drawImage(state, 1720, 241, 114, 76)
+    ctx.writeParagraph(text, '302px "FE-Font"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 100, ALIGN.CENTER)
+    return canvas.toBuffer()
+  }
+
+  static async oldPlate (plate, city) {
+    const WIDTH = 1920
+    const HEIGHT = 624
+    const background = await Image.from(Constants.OLD_PLATE_PNG)
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+
+    const PARAGRAPH_START_X = 960
+    const PARAGRAPH_START_Y = 372
+    const PARAGRAPH_HEIGHT = 10
+    const PARAGRAPH_WIDTH = 1920
+
+    ctx.drawImage(background, 0, 0, WIDTH, HEIGHT)
+    ctx.writeParagraph(city, '80px "Mandatory"', PARAGRAPH_START_X, 160, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.CENTER)
+    ctx.writeParagraph(plate, '320px "Mandatory"', PARAGRAPH_START_X, PARAGRAPH_START_Y, PARAGRAPH_START_X + PARAGRAPH_WIDTH, PARAGRAPH_START_Y + PARAGRAPH_HEIGHT, 10, ALIGN.CENTER)
+    return canvas.toBuffer()
+  }
+
   static async quieres (buffer) {
     const IMAGE_ASSETS = Promise.all([
       Image.from(Constants.QUIERES_HAND_PNG, true),
@@ -733,6 +775,21 @@ module.exports = class CanvasTemplates {
     }
 
     ctx.drawImage(hand, WIDTH - HAND_WIDTH, HEIGHT - HAND_HEIGHT, HAND_WIDTH, HAND_HEIGHT)
+    return canvas.toBuffer()
+  }
+
+  static async herewegoagain (buffer) {
+    const IMAGE_ASSETS = Promise.all([
+      Image.from(Constants.HERE_WE_GO_AGAIN_PNG, true),
+      Image.from(buffer)
+    ])
+    const [template, image] = await IMAGE_ASSETS
+    const WIDTH = image.width
+    const HEIGHT = image.height
+    const canvas = createCanvas(WIDTH, HEIGHT)
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(image, 0, 0, WIDTH, HEIGHT)
+    ctx.drawImage(template, WIDTH - template.width, HEIGHT - template.height, template.width, template.height)
     return canvas.toBuffer()
   }
 
@@ -919,6 +976,36 @@ module.exports = class CanvasTemplates {
 
     const lines = lineBreak(text, 13, 6)
     ctx.fillText(lines.join('\n'), 53, 25)
+
+    return canvas.toBuffer()
+  }
+
+  static async instagramFeed (urls, GAP = 3) {
+    const SIZE = 500
+    const TILES = 3
+
+    const canvas = createCanvas(SIZE, SIZE)
+    const ctx = canvas.getContext('2d')
+
+    ctx.fillStyle = '#fff'
+    ctx.fillRect(0, 0, SIZE, SIZE)
+
+    const images = await Promise.all(urls.map(i => loadImage(i)))
+
+    const GAPS_SIZE = GAP * (TILES - 1)
+    const TILE_SIZE = ((SIZE - GAPS_SIZE) / TILES)
+
+    let count = 0
+    for (let i = 0; i < TILES; i++) {
+      for (let j = 0; j < TILES; j++) {
+        const img = images[count]
+        if (!img) break
+
+        ctx.drawImage(img, j * (TILE_SIZE + GAP), i * (TILE_SIZE + GAP), TILE_SIZE, TILE_SIZE)
+
+        count++
+      }
+    }
 
     return canvas.toBuffer()
   }

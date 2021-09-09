@@ -26,25 +26,27 @@ module.exports = class LocaleLoader extends Loader {
    * Initializes i18next.
    * @param {string} dirPath - Path to the locales directory
    */
-  downloadAndInitializeLocales (dirPath = 'src/locales') {
-    return new Promise(async (resolve, reject) => {
-      if (this.client.apis.crowdin) {
-        this.log('Downloading locales from Crowdin', { tags: ['Localization'] })
-        try {
-          await this.client.apis.crowdin.downloadToPath(dirPath)
-          this.log('Locales downloaded', { color: 'green', tags: ['Localization'] })
-        } catch (e) {
-          this.log('Couldn\'t download locales - An error ocurred.', { color: 'red', tags: ['Localization'] })
-          this.logError(e)
-        }
-      } else {
-        this.log('Couldn\'t download locales - API wrapper didn\'t load.', { color: 'red', tags: ['Localization'] })
+  async downloadAndInitializeLocales (dirPath = 'src/locales') {
+    if (this.client.apis.crowdin) {
+      this.log('Downloading locales from Crowdin', { tags: ['Localization'] })
+      try {
+        await this.client.apis.crowdin.downloadToPath(dirPath)
+        this.log('Locales downloaded', { color: 'green', tags: ['Localization'] })
+      } catch (e) {
+        this.log('Couldn\'t download locales - An error ocurred.', { color: 'red', tags: ['Localization'] })
+        this.logError(e)
       }
+    } else {
+      this.log('Couldn\'t download locales - API wrapper didn\'t load.', { color: 'red', tags: ['Localization'] })
+    }
 
+    const dir = await FileUtils.readdir(dirPath)
+
+    return new Promise((resolve) => {
       try {
         i18next.use(translationBackend).init({
-          ns: [ 'categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions', 'moderation', 'lolservers', 'languages', 'countries' ],
-          preload: await FileUtils.readdir(dirPath),
+          ns: ['categories', 'commands', 'commons', 'errors', 'music', 'permissions', 'regions', 'moderation', 'lolservers', 'languages', 'countries', 'game'],
+          preload: dir,
           fallbackLng: 'en-US',
           backend: {
             loadPath: `${dirPath}/{{lng}}/{{ns}}.json`
@@ -71,13 +73,13 @@ module.exports = class LocaleLoader extends Loader {
     const lw = (s) => s.toLowerCase()
     const langs = codes.reduce((o, l) => { o[l] = {}; return o }, {})
     codes.forEach(lc => {
-      let [ language ] = lc.split('-')
+      const [language] = lc.split('-')
       try {
         const { main } = require(`cldr-localenames-modern/main/${language}/languages`)
         const display = main[language].localeDisplayNames.languages
         codes.forEach(l => {
           const langObj = langs[l][lc] = []
-          let [ lcode ] = l.split('-')
+          const [lcode] = l.split('-')
           if (codes.filter(c => c.startsWith(lcode)).length === 1 && display[lcode]) {
             langObj.push(lw(display[lcode]))
           }

@@ -1,3 +1,5 @@
+/* globals describe, it */
+
 const FileUtils = require('../utils/FileUtils.js')
 const MiscUtils = require('../utils/MiscUtils.js')
 
@@ -12,7 +14,7 @@ describe('Commands', () => {
   it('should have no duplicate names or aliases', (done) => {
     const aliases = commands.reduce((arr, NewCommand) => {
       const { name, aliases } = new NewCommand()
-      return [ ...arr, name, ...(aliases || []) ]
+      return [...arr, name, ...(aliases || [])]
     }, [])
     const dupes = MiscUtils.findArrayDuplicates(aliases)
     if (dupes.length) {

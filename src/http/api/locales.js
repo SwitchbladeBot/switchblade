@@ -14,7 +14,7 @@ module.exports = class Locales extends Route {
     router.get('/', async (req, res) => {
       const language = req.query.language
 
-      const languages = Object.entries(this.client.cldr.languages).map(([ key, v ]) => {
+      const languages = Object.entries(this.client.cldr.languages).map(([key, v]) => {
         const targetLang = v[language] || v['en-US']
         return { key, displayName: targetLang[0] || key }
       }).sort((a, b) => a.displayName.localeCompare(b.displayName))

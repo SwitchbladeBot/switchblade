@@ -11,7 +11,7 @@ module.exports = class DeezerPodcast extends SearchCommand {
       parameters: [{
         type: 'string', full: true, missingError: 'commons:search.noParams'
       }, [{
-        type: 'booleanFlag', name: 'episodes', aliases: [ 'e', 'eps', 'ep' ]
+        type: 'booleanFlag', name: 'episodes', aliases: ['e', 'eps', 'ep']
       }]]
     }, client)
   }
@@ -35,7 +35,7 @@ module.exports = class DeezerPodcast extends SearchCommand {
       .setTitle(title)
       .setURL(link)
 
-    if (flags['episodes']) {
+    if (flags.episodes) {
       const { data } = await this.client.apis.deezer.getPodcastEpisodes(id)
       const episodesList = data.slice(0, 10).map((ep, i) => `\`${this.formatIndex(i, data)}\`. [${ep.title}](https://www.deezer.com/episode/${ep.id}) \`(${MiscUtils.formatDuration(ep.duration * 1000)})\``)
       if (data.length > 10) episodesList.push(t('commands:deezer.subcommands.podcast.moreEpisodes', { episodes: data.length - 10 }))

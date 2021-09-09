@@ -7,6 +7,7 @@ module.exports = class Correios extends APIWrapper {
       name: 'correios'
     })
   }
+
   // Default
   trackCode (tCode) {
     return rastro.track(tCode)

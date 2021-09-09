@@ -45,7 +45,7 @@ module.exports = class TwitchAPI extends APIWrapper {
   request (endpoint, queryParams = {}) {
     const qParams = new URLSearchParams(queryParams)
     return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
-      headers: { 'Client-ID': process.env.TWITCH_CLIENT_ID, 'Authorization': `Bearer ${this.accessToken}` }
+      headers: { 'Client-ID': process.env.TWITCH_CLIENT_ID, Authorization: `Bearer ${this.accessToken}` }
     }).then(res => res.json())
       .then(data => {
         if (data.error === 'Unauthorized') {

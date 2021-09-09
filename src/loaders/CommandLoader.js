@@ -28,8 +28,8 @@ module.exports = class CommandLoader extends Loader {
   initializeCommands (dirPath = 'src/commands') {
     let success = 0
     let failed = 0
-    return FileUtils.requireDirectory(dirPath, (NewCommand) => {
-      this.addCommand(new NewCommand(this.client)) ? success++ : failed++
+    return FileUtils.requireDirectory(dirPath, (NewCommand, path) => {
+      this.addCommand(new NewCommand(this.client), path) ? success++ : failed++
     }, this.logError.bind(this)).then(() => {
       const sorted = this.posLoadCommands.sort((a, b) => +(typeof b === 'string') || -(typeof a === 'string') || a.length - b.length)
       sorted.forEach(subCommand => this.addSubcommand(subCommand))
@@ -42,7 +42,8 @@ module.exports = class CommandLoader extends Loader {
    * Adds a new command to the Client.
    * @param {Command} command - Command to be added
    */
-  addCommand (command) {
+  addCommand (command, path) {
+    command.path = path
     if (typeof command.parentCommand === 'string' || Array.isArray(command.parentCommand)) {
       this.posLoadCommands.push(command)
     } else {
@@ -61,14 +62,14 @@ module.exports = class CommandLoader extends Loader {
     } else if (Array.isArray(subCommand.parentCommand)) {
       parentCommand = subCommand.parentCommand.reduce((o, ca) => {
         const arr = (Array.isArray(o) && o) || (o && o.subcommands)
-        if (!arr) return
+        if (!arr) return null
         return arr.find(c => c.name === ca)
       }, this.commands)
     }
 
     if (!parentCommand) {
       parentCommand = subCommand.parentCommand
-      const name = (Array.isArray(parentCommand) ? parentCommand : [ parentCommand ]).concat([ subCommand.name ]).join(' ')
+      const name = (Array.isArray(parentCommand) ? parentCommand : [parentCommand]).concat([subCommand.name]).join(' ')
       this.log(`${name} failed to load - Couldn't find parent command.`, { color: 'red', tags: ['Commands'] })
       return false
     }

@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 const jwt = require('jsonwebtoken')
 
 const API_URL = 'https://discordapp.com/api'
@@ -9,7 +9,7 @@ module.exports = class EndpointUtils {
     return async (req, res, next) => {
       const authorization = req.get('Authorization')
       if (authorization) {
-        const [ identifier, token ] = authorization.split(' ')
+        const [identifier, token] = authorization.split(' ')
         if (!identifier || !token) return res.status(400).json({ ok: false })
 
         switch (identifier) {
@@ -52,7 +52,7 @@ module.exports = class EndpointUtils {
     if (!token) throw new Error('INVALID_TOKEN')
 
     return fetch(`${API_URL}${endpoint}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     }).then(res => res.ok ? res.json() : Promise.reject(res))
   }
 
@@ -76,7 +76,7 @@ module.exports = class EndpointUtils {
 
   static handleGuild ({ client }, permissions = 'MANAGE_GUILD') {
     return async (req, res, next) => {
-      let id = req.params.guildId
+      const id = req.params.guildId
       if (id) {
         const guild = client.guilds.cache.get(id)
         if (!guild) return res.status(400).json({ ok: false })

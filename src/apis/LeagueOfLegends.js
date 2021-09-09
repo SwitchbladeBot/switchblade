@@ -8,7 +8,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   constructor () {
     super({
       name: 'lol',
-      envVars: [ 'RIOT_API_KEY' ]
+      envVars: ['RIOT_API_KEY']
     })
 
     this.version = null
@@ -17,7 +17,7 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   }
 
   load () {
-    this.request(`/realms/na.json`)
+    this.request('/realms/na.json')
       .then(data => {
         this.version = data.v
         this.fetchChampions()
@@ -62,25 +62,23 @@ module.exports = class LeagueOfLegends extends APIWrapper {
   }
 
   async fetchChampion (champion, language, searchById = false) {
-    return new Promise(async (resolve, reject) => {
-      const champions = this.champions
-      champion = parseInt(champion) ? champion.toString() : champion.replace("'", '').split(' ')
-      const name = Object.keys(champions).find(key => searchById ? (champions[key].key === champion) : (key.toLowerCase() === champion.join('').toLowerCase()))
-      if (!name) return reject(new Error('INVALID_CHAMPION'))
+    const champions = this.champions
+    champion = parseInt(champion) ? champion.toString() : champion.replace("'", '').split(' ')
 
-      const { id } = champions[name]
-      const lang = await this.selectLanguage(language)
-      this.request(`/cdn/${this.version}/data/${lang}/champion/${id}.json`).then(u => resolve(u.data[id]))
-    })
+    const name = Object.keys(champions).find(key => searchById ? (champions[key].key === champion) : (key.toLowerCase() === champion.join('').toLowerCase()))
+    if (!name) throw new Error('INVALID_CHAMPION')
+
+    const { id } = champions[name]
+    const lang = await this.selectLanguage(language)
+    const { data } = await this.request(`/cdn/${this.version}/data/${lang}/champion/${id}.json`)
+    return data[id]
   }
 
   async fetchSkin (skinName) {
-    return new Promise(async (resolve, reject) => {
-      const skin = this.skins.find(s => skinName.toLowerCase() === s.name.toLowerCase())
+    const skin = this.skins.find(s => skinName.toLowerCase() === s.name.toLowerCase())
+    if (!skin) throw new Error('INVALID_SKIN')
 
-      if (!skin) return reject(new Error('INVALID_SKIN'))
-      resolve({ name: skin.name, splashUrl: skin.splashUrl })
-    })
+    return { name: skin.name, splashUrl: skin.splashUrl }
   }
 
   fetchChampionRotation () {
