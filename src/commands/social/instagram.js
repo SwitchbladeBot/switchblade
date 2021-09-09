@@ -50,7 +50,7 @@ module.exports = class Instagram extends Command {
     } catch (e) {
       if (e instanceof CommandError) throw e
       else {
-        this.logger.error(e)
+        console.log(e)
         throw new CommandError(t('errors:generic'))
       }
     }
