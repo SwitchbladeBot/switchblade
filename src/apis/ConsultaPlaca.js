@@ -19,7 +19,7 @@ module.exports = class ConsultaPlaca extends APIWrapper {
   async searchPlate (placa) {
     const firstRequest = await this.request(API_URL, `${placa.replace('-', '')}/${process.env.KEYCONSULTA}`)
     const secondRequest = await this.request(`${Buffer.from(process.env.PLATE_API_URL, 'base64')}`, `${placa}/json`)
-    return (firstRequest.modelo === 'Sem Dados') ? firstRequest : secondRequest
+    return (firstRequest.modelo !== 'Sem Dados') ? firstRequest : secondRequest
   }
 
   request (url, query = '') {

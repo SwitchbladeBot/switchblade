@@ -1659,7 +1659,8 @@
     "maxtorque": "Max Torque",
     "engineCapacity": "Engine capacity",
     "nationality": "Nationality",
-    "fuelType": "Fuel type"
+    "fuelType": "Fuel type",
+    "renavam": "Renavam"
   },
   "cep": {
     "commandDescription": "Searches for a CEP using ViaCEP API",
