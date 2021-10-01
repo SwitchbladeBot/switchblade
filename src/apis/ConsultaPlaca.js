@@ -11,12 +11,15 @@ const agent = new https.Agent({
 module.exports = class ConsultaPlaca extends APIWrapper {
   constructor () {
     super({
-      name: 'consultaplaca'
+      name: 'consultaplaca',
+      envVars: ['PLATE_API_URL']
     })
   }
 
   async searchPlate (placa) {
-    return this.request('consultas', placa.replace('-', '')).then(res => res.data)
+    const firstRequest = await this.request('consultas', placa.replace('-', '')).then(res => res.data)
+    const secondRequest = await axios.get(`${Buffer.from(process.env.PLATE_API_URL, 'base64')}${placa}/json`).then(res => res.data)
+    return (firstRequest.modelo === 'Sem Dados') ? firstRequest : secondRequest
   }
 
   request (endpoint, query = '') {
