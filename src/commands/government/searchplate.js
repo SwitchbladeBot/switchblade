@@ -23,7 +23,6 @@ module.exports = class searchPlate extends Command {
     const plateRegex = /^[a-zA-Z]{3}[0-9]{4}$/
     try {
       const plate = await this.client.apis.consultaplaca.searchPlate(plt)
-      console.log(`https://cdn.jsdelivr.net/gh/bgeneto/bandeiras-br/imagens/${plate.uf}.png`)
       const mercosulPlate = await CanvasTemplates.plateMercosul(plate.placa, `https://cdn.jsdelivr.net/gh/bgeneto/bandeiras-br/imagens/${plate.uf}.png`)
       const oldPlate = await CanvasTemplates.oldPlate(plate.placa.replace(/(....)$/, '-$1'), `${plate.uf} - ${plate.municipio.toUpperCase()}`)
       const plateType = plateRegex.test(plt) ? oldPlate : mercosulPlate
