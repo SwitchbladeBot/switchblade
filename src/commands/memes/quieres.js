@@ -11,7 +11,10 @@ module.exports = class Quieres extends Command {
       requirements: { canvasOnly: true },
       parameters: [{
         type: 'image',
-        missingError: 'commands:quieres.missingImage'
+        missingError: 'commands:quieres.missingImage',
+        userOptions: {
+          acceptSelf: true
+        }
       }]
     }, client)
   }
