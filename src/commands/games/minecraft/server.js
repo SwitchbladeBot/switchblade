@@ -2,7 +2,6 @@
 const { Command, CommandError, SwitchbladeEmbed } = require('../../../')
 
 const { MessageAttachment: Attachment } = require('discord.js')
-const fetch = require('node-fetch')
 
 module.exports = class MinecraftServer extends Command {
   constructor (client) {
