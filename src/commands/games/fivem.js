@@ -45,7 +45,7 @@ module.exports = class FiveM extends Command {
 
         channel.send(embed).then(channel.stopTyping())
       }
-    } catch (e) {
+    } catch {
       throw new CommandError(`${t('commands:fivem.serverUnreachableTitle')} ${t('commands:fivem.serverUnreachableDescription')}`)
     }
   }
