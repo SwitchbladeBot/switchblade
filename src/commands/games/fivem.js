@@ -43,7 +43,8 @@ module.exports = class FiveM extends Command {
           embed.setImage(server.vars.banner_detail ? server.vars.banner_detail : (server.vars.banner_connecting ? server.vars.banner_connecting : null))
         }
 
-        channel.send(embed).then(channel.stopTyping())
+        channel.send(embed).then(() => channel.stopTyping())
+
       }
     } catch {
       throw new CommandError(`${t('commands:fivem.serverUnreachableTitle')} ${t('commands:fivem.serverUnreachableDescription')}`)
