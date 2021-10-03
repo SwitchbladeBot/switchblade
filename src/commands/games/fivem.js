@@ -20,8 +20,7 @@ module.exports = class FiveM extends Command {
       channel.startTyping()
       const id = address.replace(/(http(s?):\/\/)?(cfx.re\/join\/)/g, '')
       const server = await axios(`https://servers-frontend.fivem.net/api/servers/single/${id}`)
-        .then(res => res.data)
-        .then(data => data.Data)
+        .then(res => res.data.Data)
         .catch(() => {
           throw new CommandError(`${t('commands:fivem.serverUnreachableTitle')} ${t('commands:fivem.serverUnreachableDescription')}`)
         })
