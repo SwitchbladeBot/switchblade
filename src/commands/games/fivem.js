@@ -50,11 +50,8 @@ module.exports = class FiveM extends Command {
     }
   }
 
-  getAllServers () {
-    return new Promise(function (resolve, reject) {
-      axios.get('http://servers-live.fivem.net/api/servers/')
-        .then(res => resolve(res.data))
-        .catch(error => reject(error))
-    })
+  async getAllServers () {
+    const result = await axios.get('http://servers-live.fivem.net/api/servers/')
+    return result.data
   }
 }
