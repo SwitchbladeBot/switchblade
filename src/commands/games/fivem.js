@@ -38,7 +38,8 @@ module.exports = class FiveM extends Command {
           .addField(t('commands:fivem.gameMode'), server.gametype || t('commands:fivem.noGameMode'), true)
           .addField(t('commands:fivem.gameName'), server.vars.gamename || t('commands:fivem.noGameName'), true)
 
-        if (server.vars.banner_detail.endsWith('png' || 'jpg' || 'gif') || server.vars.banner_connecting.endsWith('png' || 'jpg' || 'gif')) {
+        const allowedExtensions = ['png', 'jpg', 'gif']
+        if (allowedExtensions.some(e => server.vars.banner_detail.endsWith(e)) || allowedExtensions.some(e => server.vars.banner_connecting.endsWith(e))) {
           embed.setImage(server.vars.banner_detail ? server.vars.banner_detail : (server.vars.banner_connecting ? server.vars.banner_connecting : null))
         }
 
