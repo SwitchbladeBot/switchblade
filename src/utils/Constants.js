@@ -42,6 +42,9 @@ module.exports = {
   STEAM_COLOR: '#1b2838',
   MERRIAM_WEBSTER_COLOR: '#375c71',
 
+  GENERIC_SUCCESS: '#16f747',
+  GENERIC_FAILURE: '#e03d19',
+
   // Emojis
 
   // Common
