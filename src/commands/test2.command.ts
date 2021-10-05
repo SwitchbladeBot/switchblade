@@ -14,13 +14,13 @@ export default class TestCommand extends Command {
             command: {
                 name: 'test-me-again',
                 description: 'A simple test command, but again',
-                // options: [
-                //     {
-                //         type: 'STRING',
-                //         name: 'locale',
-                //         description: 'Locale for testing. en-US or pt-BR',
-                //     },
-                // ],
+                options: [
+                    {
+                        type: 'STRING',
+                        name: 'locale',
+                        description: 'Locale for testing. en-US or pt-BR',
+                    },
+                ],
             },
         });
     }
