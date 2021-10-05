@@ -1,13 +1,17 @@
 import EventEmitter from 'events';
 import { Main } from '../Main';
 import requireall from 'require-all';
-import { BaseModule } from './BaseModule';
+import { BaseModule, IBaseModuleOptions } from './BaseModule';
 import { Client, Collection } from 'discord.js';
 import { Signale } from 'signale';
 
 export interface IBaseHandlerOptions {
     directory: string;
     filter?: RegExp
+}
+
+export interface ModuleConstructor<TModule extends BaseModule> {
+    new(handler: BaseHandler<BaseModule>, options: IBaseModuleOptions): TModule
 }
 
 export class BaseHandler<TModule extends BaseModule> extends EventEmitter {
@@ -18,10 +22,10 @@ export class BaseHandler<TModule extends BaseModule> extends EventEmitter {
 
     constructor(
         public readonly main: Main,
-        public readonly options: IBaseHandlerOptions
+        public readonly options: IBaseHandlerOptions,
     ) {
         super();
-        
+
         this.client = main.discord;
         this.logger = main.logger;
     }
@@ -57,6 +61,7 @@ export class BaseHandler<TModule extends BaseModule> extends EventEmitter {
             dirname: this.options.directory,
             filter: this.options.filter ?? /(.+module)\.(js|ts)$/,
             recursive: true,
+        // eslint-disable-next-line new-cap
         })).map((entry: [string, any]) => new entry[1].default(this, {})) as TModule[];
 
         for (const entry of modules) {
@@ -78,5 +83,14 @@ export class BaseHandler<TModule extends BaseModule> extends EventEmitter {
             this._ready = false;
             throw err;
         }
+    }
+
+    public getModule<M extends TModule>(module: ModuleConstructor<M>): M | undefined {
+        for (const [, mod] of this.modules) {
+            if (mod instanceof module) {
+                return mod;
+            }
+        }
+        return undefined;
     }
 }

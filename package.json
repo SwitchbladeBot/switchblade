@@ -4,9 +4,11 @@
   "description": "The open source Discord bot that solves all of your problems.",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build && npm run start",
+    "start-dev": "npm run clean && npm run build && npm run copy-locales && npm run start",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "copy-locales": "cp -r src/locales dist/locales"
   },
   "repository": {
     "type": "git",
@@ -21,9 +23,12 @@
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
     "@types/dotenv": "^8.2.0",
+    "@types/i18next-fs-backend": "^1.1.2",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "generic-type-guard": "^3.4.1",
+    "i18next": "^21.2.4",
+    "i18next-fs-backend": "^1.1.1",
     "require-all": "^3.0.0",
     "signale": "^1.4.0",
     "source-map-support": "^0.5.19"

@@ -1,8 +1,8 @@
-import dotenv from 'dotenv'
-import { readFileSync } from 'fs'
-dotenv.config()
+import dotenv from 'dotenv';
+import { readFileSync } from 'fs';
+dotenv.config();
 
-console.log(readFileSync('bigtitle.txt', 'utf8').toString() + '\n')
+console.log(readFileSync('bigtitle.txt', 'utf8').toString() + '\n');
 import { Main } from './Main';
-const main = new Main()
-main.init()
+const main = new Main();
+main.init();

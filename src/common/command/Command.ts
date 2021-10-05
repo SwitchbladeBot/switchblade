@@ -1,4 +1,4 @@
-import { CommandHandler } from './CommandHandler';
+import CommandHandler from './CommandHandler';
 import {
     ApplicationCommand,
     ChatInputApplicationCommandData,
@@ -8,6 +8,7 @@ import {
     Snowflake,
 } from 'discord.js';
 import { BaseModule, IBaseModuleOptions } from '../BaseModule';
+import { ICommandContext } from './CommandContext';
 
 
 export interface ICommandOptions extends IBaseModuleOptions{
@@ -34,8 +35,8 @@ export class Command extends BaseModule {
         this.options = options.command;
     }
 
-    async exec(interaction: CommandInteraction): Promise<any> {
-        throw new Error(`${this.constructor}`);
+    async exec(interaction: CommandInteraction, context: ICommandContext): Promise<any> {
+        throw new Error(`Command ${this.constructor} has no executable`);
     }
 
     get _name(): string {

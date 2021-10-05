@@ -1,6 +1,5 @@
-import { ApplicationCommand, ApplicationCommandManager, Collection, Interaction, Snowflake } from 'discord.js';
+import { Collection } from 'discord.js';
 import EventEmitter from 'events';
-import requireall from 'require-all';
 import { BaseHandler, IBaseHandlerOptions } from '../BaseHandler';
 import { Main } from '../../Main';
 import { EventListener } from './EventListener';
@@ -8,7 +7,7 @@ import { EventListener } from './EventListener';
 export interface IEventListenerHandlerOptions extends IBaseHandlerOptions {
 }
 
-export class EventListenerHandler extends BaseHandler<EventListener> {
+export default class EventListenerHandler extends BaseHandler<EventListener> {
     public sources: Collection<string, EventEmitter>;
 
     constructor(
@@ -26,7 +25,7 @@ export class EventListenerHandler extends BaseHandler<EventListener> {
         }
 
         this.sources.set(source.constructor.name, source);
-    
+
         return this;
     }
 }

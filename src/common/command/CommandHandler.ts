@@ -1,9 +1,10 @@
-import { ApplicationCommand, ApplicationCommandData, ApplicationCommandManager, Collection, Interaction, Snowflake } from 'discord.js';
-import EventEmitter from 'events';
+import { ApplicationCommand, ApplicationCommandData, ApplicationCommandManager, Interaction } from 'discord.js';
 import { Command } from './Command';
 import requireall from 'require-all';
 import { BaseHandler, IBaseHandlerOptions } from '../BaseHandler';
 import { Main } from '../../Main';
+import { ICommandContext } from './CommandContext';
+import LocalisationModule from '../../modules/common/localisation.module';
 
 export interface ICommandHandlerOptions extends IBaseHandlerOptions {
 }
@@ -13,7 +14,7 @@ export type TCommand = {
     file?: Command
 }
 
-export class CommandHandler extends BaseHandler<Command> {
+export default class CommandHandler extends BaseHandler<Command> {
     public manager?: ApplicationCommandManager;
 
     constructor(
@@ -23,7 +24,7 @@ export class CommandHandler extends BaseHandler<Command> {
         super(main, options);
     }
 
-   /*  public async load(module: Command, reload: boolean = false) {
+    /*  public async load(module: Command, reload: boolean = false) {
         if (!this.client) {
             this.logger.error('Client not set.');
             throw new Error('Client not set.');
@@ -33,7 +34,9 @@ export class CommandHandler extends BaseHandler<Command> {
             throw new Error('ApplicaitonCommandManager not set.');
         }
 
-        const entry = this._commands.find((c) => c.command?.name === module.name && (!!module.guild ? c.command.guildId === module.guild : true)) || {};
+        const entry = this._commands
+        .find((c) => c.command?.name === module.name && (!!module.guild ? c.command.guildId === module.guild : true))
+        || {};
 
         try {
             if (!entry.command) {
@@ -72,26 +75,39 @@ export class CommandHandler extends BaseHandler<Command> {
         this.logger.info({ scope: '[Switchblade]', message: `Module ${module._name} loaded.` });
         this.emit('load', module, reload);
     } */
-            
+
     public async loadAll() {
         if (!this.client) {
             throw this.logger.error(new Error('Module - Client not set'));
         }
-        if (!this.manager){
+        if (!this.manager) {
             throw new Error('CommandHandler: manager is not set');
         }
-        const modules = await Object.entries(requireall({
+        const modules: Command[] = [];
+
+        const entries = await Object.entries(requireall({
             dirname: this.options.directory,
             filter: this.options.filter ?? /(.+module)\.(js|ts)$/,
             recursive: true,
-        })).map((entry: [string, any]) => new entry[1].default(this, {})) as Command[];
+        }));
+
+        for (const entry of entries) {
+            try {
+                if (!entry[1].default) throw new Error('Module is not exported at default');
+                // eslint-disable-next-line new-cap
+                const cmd = new entry[1].default(this, {});
+                modules.push(cmd);
+            } catch (e) {
+                this.logger.error(`Could not load ${entry[0]} command.`, e);
+            }
+        }
 
         const groupedCommands = modules.reduce((r, a) => {
             const index = a.guild || 'global';
             r[index] = r[index] || [];
             r[index].push({
                 module: a,
-                json: a.commandJSON
+                json: a.commandJSON,
             });
             return r;
         }, Object.create(null)) as {
@@ -100,15 +116,15 @@ export class CommandHandler extends BaseHandler<Command> {
                 json: ApplicationCommandData
             }[]
         };
-        
+
         for (const [scope, commands] of Object.entries(groupedCommands)) {
             try {
                 const res = await (
-                    scope === 'global'
-                        ? this.manager.set(commands.map((c) => c.json))
-                        : this.manager.set(commands.map((c) => c.json), scope)
-                )
-                
+                    scope === 'global' ?
+                        this.manager.set(commands.map((c) => c.json)) :
+                        this.manager.set(commands.map((c) => c.json), scope)
+                );
+
                 for (const { module } of commands) {
                     const found = res.find((command) => command.name === module.options.name);
                     if (!found) {
@@ -122,7 +138,7 @@ export class CommandHandler extends BaseHandler<Command> {
             }
         }
 
-        console.log(this.modules);
+        // console.log(this.modules);
         /* for (const command of leftover) {
             if (command) {
                 if (command.guildId) {
@@ -131,7 +147,9 @@ export class CommandHandler extends BaseHandler<Command> {
                     await this.manager.delete(command.id);
                 }
                 this._commands.delete(command.id);
-                this.logger.info(`Leftover ${command.guildId ? `guild (${command.guildId}) `: ''}command ${command.name} deleted.`);
+                this.logger.info(
+                    `Leftover ${command.guildId? `guild (${command.guildId}) `: ''}command ${command.name} deleted.`
+                    );
             }
         } */
     }
@@ -151,10 +169,18 @@ export class CommandHandler extends BaseHandler<Command> {
                 throw new Error(`Command ${interaction.commandId} (${interaction.commandName}) not found`);
             }
 
-            await command.exec(interaction);
+            await command.exec(interaction, this.createContextFromInteraction(interaction));
         } catch (err) {
             this.emit('error', err);
         }
+    }
+
+    private createContextFromInteraction(interaction: Interaction): ICommandContext {
+        console.log(interaction.guild?.preferredLocale);
+        const localisationModule = this.main.commonModulesHandler.getModule(LocalisationModule)!;
+        return {
+            t: localisationModule.i18n.getFixedT(interaction.guild?.preferredLocale!) ?? localisationModule.i18n.t,
+        };
     }
 
     public async init() {

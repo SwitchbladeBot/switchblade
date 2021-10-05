@@ -1,6 +1,5 @@
 import {
     Client,
-    CommandInteraction,
 } from 'discord.js';
 import { BaseHandler } from './BaseHandler';
 import { Main } from '../Main';
@@ -19,22 +18,18 @@ export class BaseModule {
 
     constructor(
         public readonly handler: BaseHandler<BaseModule>,
-        public readonly options: IBaseModuleOptions
+        public readonly options: IBaseModuleOptions,
     ) {
         this.main = handler.main;
-        this.client = handler.client;   
+        this.client = handler.client;
         this.logger = handler.logger;
         this.name = options.name;
-    }
-
-    async exec(interaction: CommandInteraction): Promise<any> {
-        throw new Error('exec not implemented');
     }
 
     get _name(): string {
         return this.name;
     }
-          
+
     async onLoad(isReload: boolean): Promise<void> { }
     async onUnload(): Promise<void> { }
     async onError(error: Error): Promise<void> { }

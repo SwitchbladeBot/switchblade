@@ -1,26 +1,32 @@
-import { CommandInteraction } from "discord.js";
-import { Command } from "../common/command/Command";
-import { CommandHandler } from "../common/command/CommandHandler";
+import { CommandInteraction } from 'discord.js';
+import { Command } from '../common/command/Command';
+import { ICommandContext } from '../common/command/CommandContext';
+import CommandHandler from '../common/command/CommandHandler';
 
 export default class TestCommand extends Command {
     constructor(
         handler: CommandHandler,
-        _: any
+        _: any,
     ) {
         super(handler, {
-            name: "test",
-            guild: "445203868624748555",
+            name: 'test',
+            guild: '445203868624748555',
             command: {
-                name: "test-me",
-                description: "A simple test command"
-            }
+                name: 'test-me',
+                description: 'A simple test command',
+            },
         });
     }
 
-    async exec(interaction: CommandInteraction) {
+    exec(interaction: CommandInteraction, context: ICommandContext) {
         return interaction.reply({
-            content: 'Howdy partner!',
-            ephemeral: true
+            content: `Uepa! This guild's default language is ${interaction.guild?.preferredLocale}.`,
+            embeds: [
+                {
+                    title: context.t('common:hello') ?? 'uepa algo deu errado',
+                },
+            ],
+            ephemeral: true,
         });
     }
 }

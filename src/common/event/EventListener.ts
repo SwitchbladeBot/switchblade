@@ -1,13 +1,8 @@
 import {
-    ApplicationCommand,
-    ChatInputApplicationCommandData,
-    ApplicationCommandManager,
     CommandInteraction,
-    GuildResolvable,
-    Snowflake,
 } from 'discord.js';
 import { BaseModule, IBaseModuleOptions } from '../BaseModule';
-import { EventListenerHandler } from './EventListenerHandler';
+import EventListenerHandler from './EventListenerHandler';
 
 
 export interface IEventListenerOptions extends IBaseModuleOptions {
@@ -20,7 +15,7 @@ export class EventListener extends BaseModule {
 
     public readonly source: string;
     public readonly event: string;
-    
+
     constructor(
         handler: EventListenerHandler,
         options: IEventListenerOptions,
