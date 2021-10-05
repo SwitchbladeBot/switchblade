@@ -1970,7 +1970,7 @@
     "lose": "You lose!",
     "notEnoughMoney": "You don't have this enough money to bet",
     "bet": {
-      "draw": "You haven't lost or won anything!",
+      "draw": "You balance hasn't changed!",
       "win": "Nice! You have won **$t(commons:currencyWithCount, { 'count': {{count}} })**",
       "lose": "Whoops! You lose **$t(commons:currencyWithCount, { 'count': {{count}} })**"
     }
