@@ -13,10 +13,12 @@ module.exports = class Ship extends Command {
       parameters: [{
         type: 'user',
         required: false,
-        acceptSelf: true
+        acceptSelf: true,
+        acceptBot: true
       }, {
         type: 'user',
         acceptSelf: true,
+        acceptBot: true,
         missingError: 'commands:ship.noUser'
       }]
     }, client)
