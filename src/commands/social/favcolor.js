@@ -24,7 +24,7 @@ module.exports = class FavColor extends Command {
       await this.client.controllers.social.setFavoriteColor(author.id, hexcode)
       embed.setColor(hexcode)
         .setTitle(t('commands:favcolor.changedSuccessfully', { hexcode }))
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('errors:generic'))
     }

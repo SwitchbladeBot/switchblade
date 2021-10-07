@@ -35,6 +35,6 @@ module.exports = class SpotifyArtist extends SearchCommand {
     if (total > 5) albumList.push(t('commands:spotify.moreAlbums', { albums: total - 5 }))
     if (genres.length) embed.addField(t('commands:spotify.genres'), `\`${genres.join('`, `')}\``, true)
     if (albums.length) embed.addField(`${t('commands:spotify.albumPlural')} (${total})`, albumList)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

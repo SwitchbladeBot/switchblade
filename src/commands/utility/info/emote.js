@@ -26,6 +26,6 @@ module.exports = class InfoEmoji extends Command {
         `)
       .setImage(emoji.url)
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

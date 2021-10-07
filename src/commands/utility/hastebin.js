@@ -31,6 +31,6 @@ module.exports = class Hastebin extends Command {
     embed
       .setAuthor(t('commands:hastebin.hereIsYourURL'))
       .setDescription(`${baseURL}/${key}`)
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

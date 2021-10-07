@@ -9,10 +9,12 @@ module.exports = class Support extends Command {
   }
 
   async run ({ t, channel }) {
-    channel.send(
-      new SwitchbladeEmbed()
-        .setImage('https://i.imgur.com/wuuQaZu.png')
-        .setDescription(`${this.getEmoji('discordLogo')} ${t('commands:support.clickHere')}`)
-    )
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed()
+          .setImage('https://i.imgur.com/wuuQaZu.png')
+          .setDescription(`${this.getEmoji('discordLogo')} ${t('commands:support.clickHere')}`)
+      ]
+    })
   }
 }

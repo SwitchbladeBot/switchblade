@@ -36,6 +36,6 @@ module.exports = class MyAnimeList extends Command {
       throw new CommandError(t('commands:myanimelist.animeNotFound'))
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

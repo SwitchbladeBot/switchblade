@@ -37,6 +37,6 @@ module.exports = class SpotifyPlaylist extends SearchCommand {
     const total = tracks.total
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
     embed.addField(`${t('commands:spotify.trackPlural')} (${total})`, trackList)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

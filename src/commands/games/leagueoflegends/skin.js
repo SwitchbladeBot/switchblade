@@ -28,7 +28,7 @@ module.exports = class LeagueOfLegendsSkin extends Command {
         .setTitle(name)
         .setImage(splashUrl)
         .setDescription(t('commands:leagueoflegends.subcommands.skin.description', { videoUrl }))
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       console.error(e)
       throw new CommandError(t('commands:leagueoflegends.subcommands.skin.anErrorOcurred'))

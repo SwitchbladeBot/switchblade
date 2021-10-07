@@ -30,6 +30,6 @@ module.exports = class Time extends Command {
     embed
       .setTitle(t('commands:time.currentTime', { timezone: place.data[0].label }))
       .setDescription(time)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

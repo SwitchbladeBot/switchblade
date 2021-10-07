@@ -36,7 +36,7 @@ module.exports = class Twitch extends Command {
             .addField(t('commands:twitch.streamingTitle', { gameName }), t('commands:twitch.streamingDescription', { title: stream.title, viewers: MiscUtils.formatNumber(stream.viewer_count, language) }))
             .setImage(stream.thumbnail_url.replace('{width}', 1920).replace('{height}', 1080))
         }
-        channel.send(embed).then(() => channel.stopTyping())
+        channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
       } else throw new CommandError(t('commands:twitch.userNotFound'))
     } catch (e) {
       console.log(e)

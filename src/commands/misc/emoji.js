@@ -16,6 +16,6 @@ module.exports = class Emoji extends Command {
     channel.startTyping()
     embed.setImage(emoji.url)
       .setDescription(t('commands:emoji.hereIsYourEmoji'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

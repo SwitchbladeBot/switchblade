@@ -44,7 +44,7 @@ module.exports = class SearchCommand extends Command {
       .setTitle(t('commons:search.typeHelper'))
       .setAuthor(t('commons:search.results', { query }), this.embedLogoURL)
       .setDescription(description)
-    await channel.send(embed).then(() => channel.stopTyping())
+    await channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
 
     this.awaitResponseMessage(context, results)
   }

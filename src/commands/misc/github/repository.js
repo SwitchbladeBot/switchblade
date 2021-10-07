@@ -39,6 +39,6 @@ module.exports = class GitHubRepository extends SearchCommand {
       embed.addField(t('commands:github.subcommands.repository.license'), `[${data.license.spdx_id}](${data.license.url})`, true)
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

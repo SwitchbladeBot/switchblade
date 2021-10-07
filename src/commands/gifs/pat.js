@@ -19,6 +19,6 @@ module.exports = class Pat extends Command {
     channel.startTyping()
     embed.setImage(body.url)
       .setDescription(t('commands:pat.success', { _author: author.toString(), pat: user.toString() }))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

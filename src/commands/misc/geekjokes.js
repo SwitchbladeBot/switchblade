@@ -14,6 +14,6 @@ module.exports = class GeekJokes extends Command {
     channel.startTyping()
     const body = await fetch('https://geek-jokes.sameerkumar.website/api').then(res => res.json())
     embed.setTitle(body)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

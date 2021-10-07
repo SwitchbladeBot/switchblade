@@ -14,6 +14,6 @@ module.exports = class Fox extends Command {
     const { image } = await fetch('https://randomfox.ca/floof/').then(res => res.json())
     embed.setImage(image)
       .setDescription(t('commands:fox.hereIsYourFox'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

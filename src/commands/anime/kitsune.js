@@ -23,6 +23,6 @@ module.exports = class Kitsune extends Command {
     embed.setImage(url)
       .setDescription(t('commands:kitsune.hereIsYour', { context: endpoint }))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

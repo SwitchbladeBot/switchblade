@@ -25,6 +25,6 @@ module.exports = class UIGradient extends Command {
       .setImage('attachment://gradient.png')
       .setDescription(`\`${colors.join('`, `')}\``)
       .attachFiles(new MessageAttachment(gradient, 'gradient.png'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

@@ -18,6 +18,6 @@ module.exports = class OwO extends Command {
     const embed = new SwitchbladeEmbed(author)
     channel.startTyping()
     embed.setDescription(Owoify(text))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

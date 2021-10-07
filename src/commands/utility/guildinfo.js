@@ -41,6 +41,6 @@ module.exports = class GuildInfo extends Command {
         t('commands:guildinfo.bots', { count: MiscUtils.formatNumber(guild.members.cache.filter(m => m.user.bot).size, language) })
       ].join('\n'))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

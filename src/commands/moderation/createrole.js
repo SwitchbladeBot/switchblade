@@ -27,6 +27,6 @@ module.exports = class CreateRole extends Command {
       throw new CommandError(t('commands:createrole.errorTitle'))
     }
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

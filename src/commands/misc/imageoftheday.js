@@ -23,6 +23,6 @@ module.exports = class ImageOfTheDay extends Command {
       .setImage(item.enclosure.url)
       .setDescription(item.content)
       .setColor(0x0b3d91)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

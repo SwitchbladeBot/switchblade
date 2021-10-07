@@ -34,6 +34,6 @@ module.exports = class DeezerUser extends SearchCommand {
       .setURL(link)
       .addField(t('commands:deezer.followers'), MiscUtils.formatNumber(followers.total, language), true)
       .addField(t('commands:deezer.following'), MiscUtils.formatNumber(followings.total, language), true)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

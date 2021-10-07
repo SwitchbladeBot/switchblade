@@ -32,6 +32,6 @@ module.exports = class InfoVoice extends Command {
         **${t('commands:info.subcommands.voice.bitrate')}**: ${givenChannel.bitrate / 1000}kbps
         **${t('commands:info.subcommands.voice.userLimit')}**: ${givenChannel.members.size}/${givenChannel.userLimit}`)
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

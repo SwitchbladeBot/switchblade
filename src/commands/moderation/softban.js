@@ -29,6 +29,6 @@ module.exports = class Softban extends Command {
         .setTitle(t('commands:softban.cantSoftban'))
         .setDescription(`\`${err}\``)
     })
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

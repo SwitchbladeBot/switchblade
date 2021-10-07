@@ -47,6 +47,6 @@ module.exports = class LastfmAlbum extends SearchCommand {
     } catch (e) {
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

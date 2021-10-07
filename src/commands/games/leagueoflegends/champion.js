@@ -42,7 +42,7 @@ module.exports = class LeagueOfLegendsChampion extends Command {
         ].join('\n'))
         .addField(t('commands:leagueoflegends.subcommands.champion.spells'), spells.map((spell, i) => `**${spell.name}** (${buttons[i]})`).join(', '), true)
         .addField(t('commands:leagueoflegends.subcommands.champion.skins'), `${skins.filter(s => s.name !== 'default').map(skin => `**${skin.name}**`).join(', ')}${subcommandSkinUsage}`)
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('commands:leagueoflegends.subcommands.champion.invalidChamp'))
     }

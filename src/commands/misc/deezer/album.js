@@ -44,7 +44,7 @@ module.exports = class DeezerAlbum extends SearchCommand {
       embed.setAuthor(t('commands:deezer.subcommands.album.albumTracks'), this.embedLogoURL, link)
         .setTitle(title)
         .setDescription(trackList)
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
       return
     }
 
@@ -56,6 +56,6 @@ module.exports = class DeezerAlbum extends SearchCommand {
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
       .addField(t('music:genres'), genres.data.map(g => g.name).join(', '), true)
       .addField(t('music:tracksCountParentheses', { tracks: trackNumber }), trackList)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

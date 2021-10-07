@@ -45,7 +45,7 @@ module.exports = class DeezerPlaylist extends SearchCommand {
       if (tracks.data.length > 10) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 10 }))
       embed.setAuthor(t('commands:deezer.subcommands.playlist.playlistTracks'), this.embedLogoURL, link)
         .setDescription(trackList)
-      return channel.send(embed).then(() => channel.stopTyping())
+      return channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     }
     trackList = trackList.slice(0, 5)
     if (tracks.data.length > 5) trackList.push(t('music:moreTracks', { tracks: tracks.data.length - 5 }))
@@ -54,6 +54,6 @@ module.exports = class DeezerPlaylist extends SearchCommand {
       .addField(t('commands:deezer.createdBy'), `[${creator.name}](https://www.deezer.com/profile/${creator.id})`, true)
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
       .addField(t('music:tracksCountParentheses', { tracks: trackNumber }), trackList)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

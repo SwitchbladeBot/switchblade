@@ -17,13 +17,13 @@ module.exports = class reloadlocales extends Command {
       this.client.downloadAndInitializeLocales('src/locales').then(() => {
         embed
           .setTitle(t('commands:reloadlocales:reloaded'))
-        channel.send(embed).then(() => channel.stopTyping())
+        channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
       })
     } catch (e) {
       embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     }
   }
 }

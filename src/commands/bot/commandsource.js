@@ -34,18 +34,21 @@ module.exports = class CommandSource extends Command {
     const path = command.path.split(sep).join('/')
     const { date, user } = await GitUtils.getLatestCommitInfo(org, repository, fallbackBranch)
 
-    channel.send(new SwitchbladeEmbed(author)
-      .setTitle(command.fullName)
-      .setDescriptionFromBlockArray([
-        [
-          !branchOrHash ? `**${t('commands:commandsource.branchNotUpToDate')}**` : '',
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setTitle(command.fullName)
+          .setDescriptionFromBlockArray([
+            [
+              !branchOrHash ? `**${t('commands:commandsource.branchNotUpToDate')}**` : '',
           `[${path}](${REPOSITORY_URL(org, repository)}/blob/${branchOrHash || 'master'}/${path})`
-        ],
-        [
+            ],
+            [
           `${t('commands:commandsource.lastEdited', { ago: moment(date).fromNow(), user })}`,
           `[\`${branchOrHash || 'master'}\`](${REPOSITORY_URL(org, repository)}/tree/${branchOrHash || 'master'})`
-        ]
-      ])
-    ).then(() => channel.stopTyping(true))
+            ]
+          ])
+      ]
+    }).then(() => channel.stopTyping(true))
   }
 }

@@ -37,7 +37,7 @@ module.exports = class Poll extends Command {
   async createPoll ({ channel }, embed, question, options) {
     embed.setTitle(`:ballot_box: ${question}`)
 
-    const message = await channel.send(embed)
+    const message = await channel.send({ embeds: [embed] })
 
     await message.react('👍')
     await message.react('👎')

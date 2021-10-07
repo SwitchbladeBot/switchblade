@@ -20,6 +20,6 @@ module.exports = class Coinflip extends Command {
     channel.startTyping()
     embed.setDescription(t('commands:coinflip.landed', { chosenSide }))
       .setThumbnail(coins[chosenSide])
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

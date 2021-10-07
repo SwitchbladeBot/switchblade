@@ -25,6 +25,6 @@ module.exports = class GuildIcon extends Command {
     } else {
       throw new CommandError(t('commands:guildicon.noIcon'))
     }
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

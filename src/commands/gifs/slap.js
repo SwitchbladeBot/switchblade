@@ -19,6 +19,6 @@ module.exports = class Slap extends Command {
     channel.startTyping()
     embed.setImage(body.url)
       .setDescription(t('commands:slap.success', { _author: author.toString(), slapped: user.toString() }))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

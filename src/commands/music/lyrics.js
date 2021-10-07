@@ -46,7 +46,7 @@ module.exports = class Lyrics extends Command {
         .setColor(Constants.GENIUS_COLOR)
         .setTitle(`${title} - ${artist}`)
         .setURL(`http://genius.com${path}`)
-      return channel.send(embed).then(() => channel.stopTyping())
+      return channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } else {
       const error = playingSong ? 'noLyricsFoundPlaying' : 'noLyricsFound'
       throw new CommandError(t(`commands:lyrics.${error}`))

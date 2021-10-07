@@ -22,7 +22,7 @@ module.exports = class ScrobblingEnabler$ extends Command {
       const newConfig = await this.client.controllers.connection.editConfig(author.id, 'lastfm', { scrobbling })
       const scrobblingStatus = newConfig.scrobbling ? t('commons:enabled') : t('commons:disabled')
       embed.setDescription(t('commands:scrobbling.subcommands.enable.changed', { scrobblingStatus }))
-      await channel.send(embed)
+      await channel.send({ embeds: [embed] })
     } catch (e) {
       await channel.send(embed.setDescription(t('commands:scrobbling.configNotConnected', { link: `${process.env.DASHBOARD_URL}/profile` }))
         .setColor(Constants.ERROR_COLOR))

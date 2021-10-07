@@ -16,6 +16,6 @@ module.exports = class Dicksize extends Command {
     embed
       .setTitle(t('commands:dicksize.yourDickSize'))
       .setDescription(`${size} cm\n8${'='.repeat(size)}D`)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

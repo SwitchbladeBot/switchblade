@@ -37,6 +37,6 @@ module.exports = class SpotifyAlbum extends SearchCommand {
     if (total > 5) trackList.push(t('commands:spotify.moreTracks', { tracks: total - 5 }))
 
     embed.addField(total > 1 ? `${t('commands:spotify.trackPlural')} (${total})` : `${t('commands:spotify.track')}`, trackList)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

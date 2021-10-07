@@ -54,6 +54,6 @@ module.exports = class Help extends Command {
           embed.addField(`${t(`categories:${category}`)} [**${length}**]`, commands, false)
         })
     }
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

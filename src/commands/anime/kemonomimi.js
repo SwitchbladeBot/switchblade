@@ -22,6 +22,6 @@ module.exports = class Kemonomimi extends Command {
     embed.setImage(url)
       .setDescription(t('commands:kemonomimi.hereIsYour', { context: endpoint }))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

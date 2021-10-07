@@ -43,6 +43,6 @@ module.exports = class Packagist extends SearchCommand {
           `\`\`\`composer require ${item.name}\`\`\``
         ]
       ])
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

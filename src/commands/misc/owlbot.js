@@ -38,7 +38,7 @@ module.exports = class Owlbot extends Command {
       if (data.pronunciation) embed.setDescription(`/${data.pronunciation}/`)
       const definitionWithImage = data.definitions.find(d => d.image_url)
       if (definitionWithImage) embed.setThumbnail(definitionWithImage.image_url)
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (err) {
       channel.stopTyping()
       if (err.response && err.response.status === 404) {

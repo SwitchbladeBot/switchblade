@@ -27,7 +27,7 @@ module.exports = class ColorCommand extends Command {
         .addField(t('commands:color:rgb'), `\`${colorInfo.rgb.value}\``, true)
         .addField(t('commands:color:hsl'), `\`${colorInfo.hsl.value}\``, true)
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('errors:generic'))
     }

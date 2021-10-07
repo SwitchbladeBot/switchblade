@@ -56,7 +56,7 @@ module.exports = class YouTube extends SearchCommand {
     const embed = await this[`get${MiscUtils.capitalizeFirstLetter(type)}`](ctx, item)
     embed.setAuthor(t(`commands:youtube.${type}Info`), this.embedLogoURL)
       .setColor(this.embedColor)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 
   async getVideo ({ t, author, language }, { id: videoID }) {

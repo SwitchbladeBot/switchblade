@@ -21,7 +21,7 @@ module.exports = class ScrobblingPercent extends Command {
       }
       const newConfig = await this.client.controllers.connection.editConfig(author.id, 'lastfm', { percent })
       embed.setDescription(t('commands:scrobbling.subcommands.percent.changed', { percent: newConfig.percent }))
-      await channel.send(embed)
+      await channel.send({ embeds: [embed] })
     } catch (e) {
       await channel.send(embed.setDescription(t('commands:scrobbling.configNotConnected', { link: `${process.env.DASHBOARD_URL}/profile` }))
         .setColor(Constants.ERROR_COLOR))

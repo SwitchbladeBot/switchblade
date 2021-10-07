@@ -24,6 +24,6 @@ module.exports = class Handshake extends Command {
     channel.startTyping()
     embed.setImage(handshakeImg)
       .setDescription(t('commands:handshake.success', { handshaker: author.toString(), handshaked: user.toString() }))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

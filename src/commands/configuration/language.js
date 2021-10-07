@@ -52,6 +52,6 @@ module.exports = class ConfigLanguage extends Command {
         .setTitle(t('errors:generic'))
     }
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

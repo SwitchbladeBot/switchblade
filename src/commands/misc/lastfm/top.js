@@ -49,7 +49,7 @@ module.exports = class LastfmUserTop extends Command {
         embed.setDescription(t('commands:lastfm.subcommands.top.noData'))
       }
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('commands:lastfm.subcommands.top.notFound'))
     }

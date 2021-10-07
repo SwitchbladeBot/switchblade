@@ -26,7 +26,7 @@ module.exports = class LeagueOfLegendsRotation extends Command {
         .setAuthor(t(authorString), authorImage, authorURL)
         .setTitle(t('commands:leagueoflegends.subcommands.rotation.weeklyChampRotation'))
         .setDescription(championPayload.join('\n'))
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       throw new CommandError(t('errors:generic'))
     }

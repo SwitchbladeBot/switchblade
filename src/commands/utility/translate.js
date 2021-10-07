@@ -40,7 +40,7 @@ module.exports = class TranslateCommand extends Command {
       .addField(t('commands:translate.translatedFrom'), languages[fromT] + auto, true)
       .addField(t('commands:translate.translatedTo'), languages[toT], true)
       .setAuthor(t('commands:translate.title'), 'https://i.imgur.com/FQuOtF5.jpg')
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
       .then(() => channel.stopTyping())
   }
 }

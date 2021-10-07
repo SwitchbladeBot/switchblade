@@ -41,10 +41,10 @@ module.exports = class DeezerPodcast extends SearchCommand {
       if (data.length > 10) episodesList.push(t('commands:deezer.subcommands.podcast.moreEpisodes', { episodes: data.length - 10 }))
       embed.setDescription(episodesList)
         .setAuthor(t('commands:deezer.subcommands.podcast.podcastEpisodes'), this.embedLogoURL, link)
-      return channel.send(embed).then(() => channel.stopTyping())
+      return channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     }
     embed.setDescription(description.length < 2040 ? description : description.substring(0, 2040) + '...')
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

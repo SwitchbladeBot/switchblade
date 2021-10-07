@@ -27,6 +27,6 @@ module.exports = class Ban extends Command {
         .setTitle(t('commands:ban.cantBan'))
         .setDescription(`\`${err}\``)
     })
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

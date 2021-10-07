@@ -15,6 +15,6 @@ module.exports = class i18n extends Command {
     embed
       .setDescription(`${this.getEmoji('crowdinLogo')} ${t('commands:i18n.translateMe')}`)
       .setImage('https://i.imgur.com/UVIAzg0.gif')
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

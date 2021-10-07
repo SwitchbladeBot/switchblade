@@ -22,6 +22,6 @@ module.exports = class NekoGif extends Command {
     embed.setImage(url)
       .setDescription(t('commands:nekogif.hereIsYour', { context: endpoint }))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

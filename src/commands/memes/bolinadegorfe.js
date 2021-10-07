@@ -15,6 +15,6 @@ module.exports = class BolinaDeGorfe extends Command {
     embed
       .setTitle('ooo, boliña de gorfe')
       .setImage('https://j.gifs.com/9QVDRP.gif')
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

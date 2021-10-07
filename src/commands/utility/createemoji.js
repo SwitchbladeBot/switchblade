@@ -28,7 +28,7 @@ module.exports = class CreateEmoji extends Command {
       embed.setDescription(t('commands:createemoji.created', { emoji }))
         .setThumbnail(url)
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()
       throw new CommandError(`${t('commands:createemoji.error')}\n${e.toString()}`)

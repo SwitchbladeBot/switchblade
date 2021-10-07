@@ -33,7 +33,7 @@ module.exports = class SAMP extends Command {
         .setTitle(t('commands:samp.serverUnreachableTitle'))
         .setDescription(t('commands:samp.serverUnreachableDescription')))
     }
-    channel.send(embed).then(channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(channel.stopTyping())
   }
 
   async queryPromise (options) {

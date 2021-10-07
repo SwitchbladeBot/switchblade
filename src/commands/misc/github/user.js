@@ -37,7 +37,7 @@ module.exports = class GitHubUser extends Command {
         embed.addField(t('commands:github.subcommands.user.repositories', { count: data.public_repos }), `${repos.slice(0, 5).map(r => `\`${r.full_name}\`${r.fork ? ` ${this.getEmoji('forked')}` : ''}`).join('\n')}${data.public_repos > 5 ? `\n${t('commands:github.subcommands.user.moreRepos', { repos: data.public_repos - 5 })}` : ''}`, true)
       }
 
-      await channel.send(embed).then(() => channel.stopTyping())
+      await channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
       return true
     } catch (e) {
       return false

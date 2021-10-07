@@ -49,6 +49,6 @@ module.exports = class LastfmTrack extends SearchCommand {
     } catch (e) {
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

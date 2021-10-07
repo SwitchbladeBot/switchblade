@@ -21,6 +21,6 @@ module.exports = class BlacklistCommand extends Command {
     embed
       .setTitle(t('commands:blacklist.successTitle'))
       .setDescription(`${user} - \`${reason}\``)
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

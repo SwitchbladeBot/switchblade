@@ -14,6 +14,6 @@ module.exports = class Stop extends Command {
     const guildPlayer = this.client.playerManager.players.get(guild.id)
     guildPlayer.stop(author)
     embed.setDescription(`${this.getEmoji('stopButton')} ${t('commands:stop.stopped')}`)
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

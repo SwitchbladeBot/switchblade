@@ -66,6 +66,6 @@ module.exports = class DeezerArtist extends SearchCommand {
     embed.setDescription(`[${name}](${link})`)
       .addField(t('music:albumPlural'), MiscUtils.formatNumber(albums, language), true)
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

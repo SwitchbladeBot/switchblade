@@ -57,20 +57,21 @@ module.exports = class TicTacToe extends Command {
 
   async run ({ channel, member, author, t, flags }, opponent) {
     const selectedBoard = BOARDS[flags.text ? 'text' : 'default']
-    const gameMessage = await channel.send(
-      opponent,
-      new SwitchbladeEmbed(author)
-        .setAuthor(
-          t('commands:tictactoe.hasChallenged', { player: member.displayName }),
-          author.displayAvatarURL({ format: 'png' })
-        )
-        .setDescription([
-          t('commands:tictactoe.clickTheReaction', { CONFIRMATION_EMOJI }),
-          `**(${t('commands:tictactoe.thisTimeoutsIn', { COLLECTOR_TIMEOUT })})**`
-        ].join('\n'))
-    )
+    const gameMessage = await channel.send({
+      content: opponent,
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setAuthor(
+            t('commands:tictactoe.hasChallenged', { player: member.displayName }),
+            author.displayAvatarURL({ format: 'png' })
+          )
+          .setDescription([
+            t('commands:tictactoe.clickTheReaction', { CONFIRMATION_EMOJI }),
+        `**(${t('commands:tictactoe.thisTimeoutsIn', { COLLECTOR_TIMEOUT })})**`
+          ].join('\n'))]
+    })
     await gameMessage.react(CONFIRMATION_EMOJI)
-    const result = await gameMessage.awaitReactions((r, u) => r.emoji.name === CONFIRMATION_EMOJI && u.id === opponent.id, { time: COLLECTOR_TIMEOUT * 1000, maxEmojis: 1 })
+    const result = await gameMessage.awaitReactions({ filter: (r, u) => r.emoji.name === CONFIRMATION_EMOJI && u.id === opponent.id, time: COLLECTOR_TIMEOUT * 1000, maxEmojis: 1 })
 
     if (!result.size) {
       gameMessage.edit(

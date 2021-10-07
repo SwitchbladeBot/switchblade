@@ -88,6 +88,6 @@ module.exports = class BMI extends Command {
       .setDescription(t('commands:bmi.description', { category: t(displayName) }))
       .setColor(color)
       .setFooter(t('commands:bmi.footer'))
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

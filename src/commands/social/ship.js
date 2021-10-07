@@ -56,7 +56,7 @@ module.exports = class Ship extends Command {
       .attachFiles(new MessageAttachment(image, 'ship.png'))
       .setImage('attachment://ship.png')
 
-    await channel.send(embed)
+    await channel.send({ embeds: [embed] })
     await channel.stopTyping()
   }
 }

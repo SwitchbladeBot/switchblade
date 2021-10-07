@@ -20,6 +20,6 @@ module.exports = class Kiss extends Command {
     channel.startTyping()
     embed.setImage(body.url)
       .setDescription(t('commands:kiss.success', { kisser: author.toString(), kissed: user.toString() }))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

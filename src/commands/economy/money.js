@@ -24,6 +24,6 @@ module.exports = class Money extends Command {
       embed.setDescription(t('commands:money.someoneHas', { count: money, user }))
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

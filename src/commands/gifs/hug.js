@@ -19,6 +19,6 @@ module.exports = class Hug extends Command {
     channel.startTyping()
     embed.setImage(body.url)
       .setDescription(t('commands:hug.success', { hugger: author.toString(), hugged: user.toString() }))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

@@ -21,6 +21,6 @@ module.exports = class RestrictEmoji extends Command {
       t('commands:restrictemoji.removeRole', { command: `${prefix}${alias || this.name}` }),
       t('commands:restrictemoji.reset', { command: `${prefix}${alias || this.name}` })
     ].join('\n'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

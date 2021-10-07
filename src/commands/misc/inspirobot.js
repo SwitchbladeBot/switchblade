@@ -17,6 +17,6 @@ module.exports = class InspiroBot extends Command {
     embed
       .setImage(body.toString('utf8'))
       .setDescription(t('commands:inspirobot.quote'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

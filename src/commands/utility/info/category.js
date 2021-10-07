@@ -31,6 +31,6 @@ module.exports = class InfoCategory extends Command {
         **${t('commands:info.subcommands.category.channelsInside')}**: ${givenChannel.children.size}
         `)
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

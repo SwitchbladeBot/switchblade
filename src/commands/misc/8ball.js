@@ -18,6 +18,6 @@ module.exports = class EightBall extends Command {
     const result = Math.floor((Math.random() * answerCount))
     embed.setColor(Constants.EIGHTBALL_COLOR)
       .setDescription(`:grey_question: ${question}\n:8ball: ${t(`commands:8ball.answers.${result}`)}`)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

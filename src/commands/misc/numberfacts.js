@@ -19,7 +19,7 @@ module.exports = class NumberFacts extends Command {
     try {
       const body = await fetch(`http://numbersapi.com/${number}/trivia`).then(res => res.text())
       embed.setTitle(body)
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()
       console.error(e)

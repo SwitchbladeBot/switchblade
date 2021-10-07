@@ -28,7 +28,7 @@ module.exports = class SpotifyUser extends Command {
         .setThumbnail(image.url)
         .addField(t('commands:spotify.followers'), MiscUtils.formatNumber(followers.total, language), true)
 
-      await channel.send(embed).then(() => channel.stopTyping())
+      await channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
       return true
     } catch (e) {
       return false

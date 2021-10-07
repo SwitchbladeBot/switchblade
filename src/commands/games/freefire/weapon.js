@@ -64,7 +64,7 @@ module.exports = class FreeFireWeapon extends Command {
       ])
       .setImage(weapon.skins[0].image_url)
 
-    await channel.send(embed)
+    await channel.send({ embeds: [embed] })
   }
 
   getInfo ({ weapon, data, names }) {

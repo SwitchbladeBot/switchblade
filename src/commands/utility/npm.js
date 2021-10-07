@@ -49,6 +49,6 @@ module.exports = class Npm extends SearchCommand {
           `\`\`\`npm i ${pkg.name}\`\`\``
         ]
       ])
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

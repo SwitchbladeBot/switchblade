@@ -47,7 +47,7 @@ module.exports = class XKCD extends Command {
         .setURL(`http://xkcd.com/${response.num}`)
         .setDescription(response.alt)
         .setImage(response.img)
-      channel.send(embed).then(() => { channel.stopTyping() })
+      channel.send({ embeds: [embed] }).then(() => { channel.stopTyping() })
     }
   }
 }

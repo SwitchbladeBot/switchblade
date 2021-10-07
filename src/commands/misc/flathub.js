@@ -40,6 +40,6 @@ module.exports = class FlatHubCommand extends SearchCommand {
       .addField(t('commands:flathub.categories'), categories.map(category => `\`${category.name}\``).join(', '))
       .addField(t('commands:flathub.download'), `[[${summary || name}]](${downloadFlatpakRefUrl})`)
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }

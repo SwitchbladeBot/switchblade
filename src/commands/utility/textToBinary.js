@@ -33,7 +33,7 @@ module.exports = class Binary extends Command {
         .setTitle(t('commands:binary.tooLongTitle'))
         .setDescription(t('commands:binary.tooLongDescription'))
     }
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 
   textToBinary (text) {

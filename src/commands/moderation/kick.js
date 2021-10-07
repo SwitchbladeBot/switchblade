@@ -27,6 +27,6 @@ module.exports = class Kick extends Command {
         .setTitle(t('commands:kick.cantKick'))
         .setDescription(`\`${err}\``)
     })
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

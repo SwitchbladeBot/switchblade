@@ -43,6 +43,6 @@ module.exports = class SnapCraft extends SearchCommand {
           ${t('commands:snapcraft.verified')} - \`${publisher.verified ? t('commands:snapcraft.yes') : t('commands:snapcraft.no')}\``
         }
       ])
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

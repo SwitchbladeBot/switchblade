@@ -66,6 +66,6 @@ module.exports = class JetBrainsPlugin extends SearchCommand {
 
     if (icon) embed.setThumbnail(`${BASE_URL}${icon.replace(/svg$/, 'png')}`)
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

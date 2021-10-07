@@ -66,6 +66,6 @@ module.exports = class SteamLadderProfile extends Command {
     } catch (e) {
       throw new CommandError(t('commands:steamladder.userNotFound'))
     }
-    channel.send(embed).then(channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(channel.stopTyping())
   }
 }

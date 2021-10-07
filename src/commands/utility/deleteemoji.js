@@ -25,7 +25,7 @@ module.exports = class DeleteEmoji extends Command {
       embed.setDescription(t('commands:deleteemoji.deleted', { emoji }))
         .setThumbnail(emoji.url)
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
     } catch (e) {
       channel.stopTyping()
       throw new CommandError(`${t('commands:deleteemoji.error')}\n${e.toString()}`)

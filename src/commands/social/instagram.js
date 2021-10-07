@@ -46,7 +46,7 @@ module.exports = class Instagram extends Command {
         .attachFiles(new MessageAttachment(feed, 'feed.png'))
         .setImage('attachment://feed.png')
 
-      channel.send(embed)
+      channel.send({ embeds: [embed] })
     } catch (e) {
       if (e instanceof CommandError) throw e
       else {

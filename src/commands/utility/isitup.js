@@ -29,6 +29,6 @@ module.exports = class IsItUp extends Command {
     } else {
       throw new CommandError(t('commands:isitup.isDown'))
     }
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(() => channel.stopTyping())
   }
 }
