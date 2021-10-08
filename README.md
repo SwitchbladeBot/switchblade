@@ -49,6 +49,8 @@ Switchblade has over 190 commands, and having to update a list here would be unp
 
 <h2 align="center">Music</h2>
 
+> **⚠ Music is currently disabled on Switchblade's main instance!**
+
 We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **SoundCloud**, **Deezer**, **Twitch**, and many more. In order to provide you ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection available to the voice server you're in.
 
 To play a song, join a voice channel and type **`s!play <query>`**. The `<query>` can be anything you want, from a song name to a **Soundcloud playlist URL**, we've got you covered!
