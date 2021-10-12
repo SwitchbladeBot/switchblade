@@ -27,7 +27,6 @@ module.exports = class searchPlate extends Command {
       const oldPlate = await CanvasTemplates.oldPlate(plate.placa.replace(/(....)$/, '-$1'), `${plate.uf} - ${plate.municipio.toUpperCase()}`)
       const plateType = plateRegex.test(plt) ? oldPlate : mercosulPlate
       const newpic = await this.client.apis.bingimages.searchImage(`${plate.anoModelo} ${plate.modelo.replace('I/', '')}`)
-      console.log(newpic)
       const attach = new MessageAttachment(plateType, 'plate.png')
       const embed = new SwitchbladeEmbed()
       // i don't like if's gonna change it to something else
