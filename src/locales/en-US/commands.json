@@ -39,9 +39,6 @@
   "thinking": {
     "commandDescription": "Shows a random :thinking: image from /r/thinking."
   },
-  "adorable": {
-    "commandDescription": "Generates an adorable avatar."
-  },
   "avatar": {
     "commandDescription": "Shows yours or someone else's avatar.",
     "commandUsage": "[user]",

@@ -45,13 +45,15 @@ Switchblade is a free and open source solution to your server managing problems,
 
 <h2 align="center">Commands</h2>
 
-Switchblade has over 130 commands, and having to update a list here would be unproductive. Instead, we have a commands page on our website that pulls command metadata straight out of the running bot, so you always get the latest information. **[Check it out!](https://switchblade.xyz/commands)**
+Switchblade has over 190 commands, and having to update a list here would be unproductive. Instead, we have a commands page on our website that pulls command metadata straight out of the running bot, so you always get the latest information. **[Check it out!](https://switchblade.xyz/commands)**
 
 <h2 align="center">Music</h2>
 
-We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **YouTube**, **SoundCloud**, **Spotify**, **Deezer**, **Mixer**, **Twitch**, and many more. In order to provide you ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection available to the voice server you're in.
+> **⚠ Music is currently disabled on Switchblade's main instance!**
 
-To play a song, join a voice channel and type **`s!play <query>`**. The `<query>` can be anything you want, from a song name to a **Spotify playlist URL**, we've got you covered!
+We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **SoundCloud**, **Deezer**, **Twitch**, and many more. In order to provide you ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection available to the voice server you're in.
+
+To play a song, join a voice channel and type **`s!play <query>`**. The `<query>` can be anything you want, from a song name to a **Soundcloud playlist URL**, we've got you covered!
 
 ### Playback control commands
 
@@ -141,7 +143,7 @@ Backers are the people who contribute to our projects monetarily. They get their
 
 <h2 align="center">Hacktoberfest</h2>
 
-We are totally Hacktoberfest friendly, in 2020 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab clicking [here.][hacktoberfest-url]
+We are totally Hacktoberfest friendly, in 2021 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab clicking [here.][hacktoberfest-url]
 
 [support-invite]: https://support.switchblade.xyz
 [support-image]: https://invidget.switchblade.xyz/2FB8wDG
