@@ -1,6 +1,5 @@
 const { Client } = require('discord.js')
 const chalk = require('chalk')
-const _ = require('lodash')
 const Loaders = require('./loaders')
 
 const Sentry = require('@sentry/node')

@@ -1,4 +1,3 @@
-const _ = require('lodash')
 const Utils = require('../utils')
 
 module.exports = class Module {
@@ -101,7 +100,7 @@ module.exports = class Module {
     const pathF = (k) => `modules.${this.name}.values.${k}`
     const dbObj = {}
     Object.entries(entity).forEach(([k, v]) => {
-      if (_.isEqual(this.defaultValues[k], v)) {
+      if (Object.entries(this.defaultValues[k]).toString() === Object.entries(v).toString()) {
         if (!dbObj.$unset) dbObj.$unset = {}
         dbObj.$unset[pathF(k)] = ''
       } else {
