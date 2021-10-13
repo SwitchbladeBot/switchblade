@@ -6,18 +6,22 @@ const findSentryException = (arg) => arg instanceof Error || typeof arg === 'str
 
 module.exports = class Logger {
   constructor () {
-    this.bunyan = bunyan.createLogger({
-      name: 'switchblade',
-      level: process.env.DEBUG === 'true' ? 'debug' : 'info'
-    })
+    const streams = []
+    const level = process.env.DEBUG === 'true' ? 'trace' : 'info'
 
     if (process.env.NODE_ENV !== 'production') {
-      this.bunyan.addStream({
+      streams.push({
         type: 'raw',
         stream: new PrettyStream(),
-        level: 'trace'
+        level
       })
     }
+
+    this.bunyan = bunyan.createLogger({
+      name: 'switchblade',
+      level,
+      streams
+    })
   }
 
   fatal (...args) {
