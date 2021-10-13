@@ -31,11 +31,8 @@ module.exports = class Switchblade extends Client {
     }
 
     await this.login()
-      .then(() => this.client.logger.info({ tag: 'Discord' }, 'Logged in successfully!'))
-      .catch((e) => {
-        console.log(this)
-        this.client.logger.error(e)
-      })
+      .then(() => this.logger.info({ tag: 'Discord' }, 'Logged in successfully!'))
+      .catch((e) => this.logger.error(e))
 
     for (const l of normal) {
       await this.initializeLoader(l)
@@ -49,7 +46,7 @@ module.exports = class Switchblade extends Client {
     try {
       success = await loader.load()
     } catch (e) {
-      this.client.logger.error(e)
+      this.logger.error(e)
     } finally {
       if (!success && loader.critical) process.exit(1)
     }
@@ -88,6 +85,6 @@ module.exports = class Switchblade extends Client {
     }
 
     context.setFixedT(this.i18next.getFixedT(language))
-    return command._run(context, args).catch((e) => this.client.logger.error(e))
+    return command._run(context, args).catch((e) => this.logger.error(e))
   }
 }

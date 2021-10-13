@@ -56,10 +56,10 @@ module.exports = class MainListener extends EventListener {
           shards: 1
         })
         this.playerManager.connect()
-          .then(() => this.client.logger.info({ tag: 'Music' }, 'Lavalink connection established!'))
-          .catch(() => this.client.logger.error({ tag: 'Music' }, 'Failed to establish Lavalink connection - Failed to connect to nodes.'))
+          .then(() => this.logger.info({ tag: 'Music' }, 'Lavalink connection established!'))
+          .catch(() => this.logger.error({ tag: 'Music' }, 'Failed to establish Lavalink connection - Failed to connect to nodes.'))
       } catch (e) {
-        this.client.logger.error({ tag: 'Music' }, 'Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.')
+        this.logger.error({ tag: 'Music' }, 'Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.')
       }
     }
 
@@ -150,7 +150,7 @@ module.exports = class MainListener extends EventListener {
           language
         })
 
-        this.client.logger.info({ tag: 'Commands' }, `"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`)
+        this.logger.info({ tag: 'Commands' }, `"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`)
         this.runCommand(command, context, args, language)
       }
     }
