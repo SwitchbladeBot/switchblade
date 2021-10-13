@@ -53,7 +53,7 @@ module.exports = class DeezerSongSource extends SongSource {
         const [song] = await manager.fetchTracks(video)
         return new DeezerSong(song, requestedBy, track, album).loadInfo()
       } catch (e) {
-        manager.client.logError(e)
+        manager.client.logger.error(e)
       }
     }
   }

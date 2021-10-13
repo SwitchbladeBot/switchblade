@@ -40,7 +40,7 @@ module.exports = class searchPlate extends Command {
       channel.stopTyping(true)
     } catch (e) {
       channel.stopTyping(true)
-      console.log(e)
+
       throw new CommandError(t('commands:searchplate.notFound'))
     }
   }

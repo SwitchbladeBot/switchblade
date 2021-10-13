@@ -39,7 +39,6 @@ module.exports = class Twitch extends Command {
         channel.send(embed).then(() => channel.stopTyping())
       } else throw new CommandError(t('commands:twitch.userNotFound'))
     } catch (e) {
-      console.log(e)
       throw new CommandError(t('errors:generic'))
     }
   }
