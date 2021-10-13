@@ -56,10 +56,10 @@ module.exports = class MainListener extends EventListener {
           shards: 1
         })
         this.playerManager.connect()
-          .then(() => this.log('Lavalink connection established!', { color: 'green', tags: ['Music'] }))
-          .catch(() => this.log('Failed to establish Lavalink connection - Failed to connect to nodes.', { color: 'red', tags: ['Music'] }))
+          .then(() => this.logger.info({ tag: 'Music' }, 'Lavalink connection established!'))
+          .catch(() => this.logger.error({ tag: 'Music' }, 'Failed to establish Lavalink connection - Failed to connect to nodes.'))
       } catch (e) {
-        this.log('Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.', { color: 'red', tags: ['Music'] })
+        this.logger.error({ tag: 'Music' }, 'Failed to establish Lavalink connection - Failed to parse LAVALINK_NODES environment variable.')
       }
     }
 
@@ -72,8 +72,8 @@ module.exports = class MainListener extends EventListener {
           headers: { Authorization: process.env.DISCORDBOTSPW_TOKEN },
           body: { server_count: client.guilds.size }
         })
-          .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['bots.discord.pw'] }))
-          .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['bots.discord.pw'] }))
+          .then(() => client.logger.info({ tags: ['bots.discord.pw'] }, 'Posted statistics successfully'))
+          .catch(() => client.logger.error({ tags: ['bots.discord.pw'] }, 'Failed to post statistics'))
       }
 
       // discordbots.org
@@ -83,8 +83,8 @@ module.exports = class MainListener extends EventListener {
           headers: { Authorization: process.env.DBL_TOKEN },
           body: { server_count: client.guilds.size }
         })
-          .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['discordbots.org'] }))
-          .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['discordbots.org'] }))
+          .then(() => client.logger.info('Posted statistics successfully', { tags: ['discordbots.org'] }))
+          .catch(() => client.logger.error('Failed to post statistics', { tags: ['discordbots.org'] }))
       }
 
       // botsfordiscord.com
@@ -94,8 +94,8 @@ module.exports = class MainListener extends EventListener {
           headers: { Authorization: process.env.BOTSFORDISCORD_TOKEN },
           body: { server_count: client.guilds.size }
         })
-          .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['botsfordiscord.com'] }))
-          .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['botsfordiscord.com'] }))
+          .then(() => client.logger.info('Posted statistics successfully', { tags: ['botsfordiscord.com'] }))
+          .catch(() => client.logger.error('Failed to post statistics', { tags: ['botsfordiscord.com'] }))
       }
 
       if (process.env.DBL2_TOKEN) {
@@ -104,8 +104,8 @@ module.exports = class MainListener extends EventListener {
           headers: { Authorization: process.env.DBL2_TOKEN },
           body: { guilds: client.guilds.size, users: client.users.size }
         })
-          .then(() => client.log('Posted statistics successfully', { color: 'green', tags: ['discordbotlist.com'] }))
-          .catch(() => client.log('Failed to post statistics', { color: 'red', tags: ['discordbotlist.com'] }))
+          .then(() => client.logger.info('Posted statistics successfully', { tags: ['discordbotlist.com'] }))
+          .catch(() => client.logger.error('Failed to post statistics', { tags: ['discordbotlist.com'] }))
       }
     }
 
@@ -150,7 +150,7 @@ module.exports = class MainListener extends EventListener {
           language
         })
 
-        this.log(`"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`, { color: 'magenta', tags: ['Commands'] })
+        this.logger.info({ tag: 'Commands' }, `"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`)
         this.runCommand(command, context, args, language)
       }
     }
