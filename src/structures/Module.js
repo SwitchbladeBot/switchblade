@@ -1,4 +1,5 @@
 const Utils = require('../utils')
+const MiscUtils = require('../utils/MiscUtils')
 
 module.exports = class Module {
   /**
@@ -100,7 +101,7 @@ module.exports = class Module {
     const pathF = (k) => `modules.${this.name}.values.${k}`
     const dbObj = {}
     Object.entries(entity).forEach(([k, v]) => {
-      if (Object.entries(this.defaultValues[k]).toString() === Object.entries(v).toString()) {
+      if (MiscUtils.isEqual(this.defaultValues[k], v)) {
         if (!dbObj.$unset) dbObj.$unset = {}
         dbObj.$unset[pathF(k)] = ''
       } else {
