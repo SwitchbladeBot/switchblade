@@ -5,7 +5,7 @@ module.exports = class flightradar24 extends Command {
     super({
       name: 'flightradar24',
       category: 'general',
-      alias: ['flightradar', 'fr24', 'fr'],
+      aliases: ['flightradar', 'fr24', 'fr'],
       requirements: {
         apis: ['flightradar']
       },
