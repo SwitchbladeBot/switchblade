@@ -16,7 +16,7 @@ module.exports = class ListenerLoader extends Loader {
       this.client.listeners = this.listeners
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e)
     }
     return false
   }
@@ -31,9 +31,9 @@ module.exports = class ListenerLoader extends Loader {
     return FileUtils.requireDirectory(dirPath, (NewListener) => {
       if (Object.getPrototypeOf(NewListener) !== EventListener) return
       this.addListener(new NewListener(this.client)) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
-      if (failed) this.log(`${success} listeners loaded, ${failed} failed.`, { color: 'yellow', tags: ['Listeners'] })
-      else this.log(`All ${success} listeners loaded without errors.`, { color: 'green', tags: ['Listeners'] })
+    }, (e) => this.client.logger.error(e)).then(() => {
+      if (failed) this.client.logger.info({ tag: 'Listeners' }, `${success} listeners loaded, ${failed} failed.`)
+      else this.client.logger.info({ tag: 'Listeners' }, `All ${success} listeners loaded without errors.`)
     })
   }
 
@@ -43,7 +43,7 @@ module.exports = class ListenerLoader extends Loader {
    */
   addListener (listener) {
     if (!(listener instanceof EventListener)) {
-      this.log(`${listener.name} failed to load - Not an EventListener`, { color: 'red', tags: ['Listeners'] })
+      this.client.logger.warn({ tag: 'Listeners' }, `${listener.name} failed to load - Not an EventListener`)
       return false
     }
 

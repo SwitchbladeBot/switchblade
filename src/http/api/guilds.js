@@ -36,7 +36,7 @@ module.exports = class Guilds extends Route {
           )
           res.status(200).json({ modules })
         } catch (e) {
-          this.client.logError(e, 'HTTP/Modules')
+          this.client.logger.error(e, 'HTTP/Modules')
           res.status(500).json({ error: 'Internal server error!' })
         }
       })
@@ -53,7 +53,7 @@ module.exports = class Guilds extends Route {
           await mod.updateState(id, !!req.body.active, req.user.id)
           res.status(200).json({ id })
         } catch (e) {
-          this.client.logError(e, 'HTTP/Modules/State')
+          this.client.logger.error(e, 'HTTP/Modules/State')
           res.status(500).json({ error: 'Internal server error!' })
         }
       })
@@ -70,7 +70,7 @@ module.exports = class Guilds extends Route {
           await mod.updateValues(id, req.body.values, req.user.id)
           res.status(200).json({ id })
         } catch (e) {
-          this.client.logError(e, 'HTTP/Modules/Values')
+          this.client.logger.error(e, 'HTTP/Modules/Values')
           if (e.isJoi) return res.status(400).json({ error: e.name })
           res.status(500).json({ error: 'Internal server error!' })
         }
@@ -93,7 +93,7 @@ module.exports = class Guilds extends Route {
           } = await mod[methodName](id, req.user.id, req.body, req, res) || {}
           res.status(status).json(payload)
         } catch (e) {
-          this.client.logError(e, 'HTTP/Modules/Methods')
+          this.client.logger.error(e, 'HTTP/Modules/Methods')
           if (e.isJoi) return res.status(400).json({ error: e.name })
           res.status(500).json({ error: 'Internal server error!' })
         }
