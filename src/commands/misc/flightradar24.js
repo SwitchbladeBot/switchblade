@@ -40,7 +40,7 @@ module.exports = class flightradar24 extends Command {
       channel.send(embed)
     } catch (e) {
       console.log(e)
-      throw new CommandError('erro')
+      throw new CommandError('error')
     }
   }
 }
