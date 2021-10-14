@@ -12,7 +12,12 @@ module.exports = class FlightRadar extends APIWrapper {
   }
 
   async findId (flightNum) {
-    return axios.get(ID_API_URL + `?query=${flightNum}&limit=1`).then(res => res.data)
+    return axios.get(ID_API_URL, {
+      params: {
+        query: flightNum,
+        limit: 1
+      }
+    }).then(res => res.data)
   }
 
   async searchAircraft (flightNum) {
