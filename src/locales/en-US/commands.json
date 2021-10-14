@@ -1968,6 +1968,7 @@
     "copyright": "Copyright",
     "dataBy": "Data by",
     "photoBy": "Photo by",
-    "departed": "Departed"
+    "departed": "Departed",
+    "notFound": "Aircraft not found"
   }
 }
