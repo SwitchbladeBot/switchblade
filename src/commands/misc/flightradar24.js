@@ -12,7 +12,7 @@ module.exports = class flightradar24 extends Command {
       parameters: [{
         type: 'string',
         full: true,
-        missingError: 'commands:searchplate.notFound'
+        missingError: 'commands:flightradar24.notFound'
       }]
     }, client)
   }
