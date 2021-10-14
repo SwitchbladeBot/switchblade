@@ -22,6 +22,10 @@ module.exports = class FlightRadar extends APIWrapper {
 
   async searchAircraft (flightNum) {
     const { results } = await this.findId(flightNum)
-    return axios.get(AIRCRAFT_API_URL + `&flight=${results[0].id}`)
+    return axios.get(AIRCRAFT_API_URL, {
+      params: {
+        flight: results[0].id
+      }
+    }).then(res => res.data)
   }
 }
