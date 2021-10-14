@@ -13,7 +13,7 @@ module.exports = class ConnectionLoader extends Loader {
       this.client.connections = this.connections
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e)
     }
     return false
   }
@@ -28,9 +28,9 @@ module.exports = class ConnectionLoader extends Loader {
     return FileUtils.requireDirectory(dirPath, (NewConnection) => {
       if (Object.getPrototypeOf(NewConnection) !== Connection) return
       this.addConnection(new NewConnection(this.client)) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
-      if (failed) this.log(`${success} connections loaded, ${failed} failed.`, { color: 'yellow', tags: ['Connections'] })
-      else this.log(`All ${success} connections loaded without errors.`, { color: 'green', tags: ['Connections'] })
+    }, (e) => this.client.logger.error(e)).then(() => {
+      if (failed) this.client.logger.info({ tag: 'Connections' }, `${success} connections loaded, ${failed} failed.`)
+      else this.client.logger.info({ tag: 'Connections' }, `All ${success} connections loaded without errors.`)
     })
   }
 
@@ -40,12 +40,12 @@ module.exports = class ConnectionLoader extends Loader {
    */
   addConnection (connection) {
     if (!(connection instanceof Connection)) {
-      this.log(`${connection.name} failed to load - Not an Connection`, { color: 'red', tags: ['Connections'] })
+      this.client.logger.warn({ tag: 'Connections' }, `${connection.name} failed to load - Not an Connection`)
       return false
     }
 
     if (connection.canLoad() !== true) {
-      this.log(`${connection.name} failed to load - ${connection.canLoad() || 'canLoad function did not return true.'}`, { color: 'red', tags: ['Connections'] })
+      this.client.logger.warn({ tag: 'Connections' }, `${connection.name} failed to load - ${connection.canLoad() || 'canLoad function did not return true.'}`)
       return false
     }
 

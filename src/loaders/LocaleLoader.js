@@ -17,7 +17,7 @@ module.exports = class LocaleLoader extends Loader {
       this.client.cldr = this.cldr
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e)
     }
     return false
   }
@@ -28,16 +28,16 @@ module.exports = class LocaleLoader extends Loader {
    */
   async downloadAndInitializeLocales (dirPath = 'src/locales') {
     if (this.client.apis.crowdin) {
-      this.log('Downloading locales from Crowdin', { tags: ['Localization'] })
+      this.client.logger.info({ tag: 'Localization' }, 'Downloading locales from Crowdin')
       try {
         await this.client.apis.crowdin.downloadToPath(dirPath)
-        this.log('Locales downloaded', { color: 'green', tags: ['Localization'] })
+        this.client.logger.info({ tag: 'Localization' }, 'Locales downloaded')
       } catch (e) {
-        this.log('Couldn\'t download locales - An error ocurred.', { color: 'red', tags: ['Localization'] })
-        this.logError(e)
+        this.client.logger.warn({ tag: 'Localization' }, 'Couldn\'t download locales - An error ocurred.')
+        this.client.logger.error({ tag: 'Localization' }, e)
       }
     } else {
-      this.log('Couldn\'t download locales - API wrapper didn\'t load.', { color: 'red', tags: ['Localization'] })
+      this.client.logger.warn({ tag: 'Localization' }, 'Couldn\'t download locales - API wrapper didn\'t load.')
     }
 
     const dir = await FileUtils.readdir(dirPath)
@@ -57,10 +57,10 @@ module.exports = class LocaleLoader extends Loader {
           returnEmptyString: false
         }, () => {
           resolve(this.loadLanguagesDisplayNames(Object.keys(i18next.store.data)))
-          this.log('i18next initialized', { color: 'green', tags: ['Localization'] })
+          this.client.logger.info({ tag: 'Localization' }, 'i18next initialized')
         })
       } catch (e) {
-        this.logError(e)
+        this.client.logger.error(e)
       }
     })
   }
