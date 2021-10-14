@@ -40,7 +40,6 @@
     "axios": "^0.21.4",
     "brainfuck-node": "^1.0.2",
     "bunyan": "^1.8.15",
-    "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
     "cldr-core": "^39.0.0",
     "cldr-localenames-modern": "^39.0.0",
