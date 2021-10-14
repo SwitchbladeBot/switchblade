@@ -39,7 +39,6 @@ module.exports = class flightradar24 extends Command {
         .setFooter(`${t('commands:flightradar24.dataBy')} Flightradar24 | ${t('commands:flightradar24.photoBy')} ${airplaneData.aircraft.images.large[0].source} | ${t('commands:flightradar24.copyright')} ${airplaneData.aircraft.images.large[0].copyright}`)
       channel.send(embed)
     } catch (e) {
-      console.log(e)
       throw new CommandError('error')
     }
   }
