@@ -1959,11 +1959,11 @@
     "categoryObese3": "Obese Class III (Very severely obese)"
   },
   "flightradar24": {
-    "commandDescription": "Searches for an aircraft on Flightradar24",
+    "commandDescription": "Searches for an aircraft on Flightradar24.",
     "commandUsage": "<aircraft registration/aircraft ICAO code/aircraft callsign>",
     "airline": "Airline",
     "live": "Live",
-    "locatedAt": "Located in",
+    "locatedIn": "Located in",
     "expectedArrival": "Expected arrival",
     "copyright": "Copyright ©",
     "dataBy": "Data by",
