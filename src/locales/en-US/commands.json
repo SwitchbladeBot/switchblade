@@ -1451,7 +1451,24 @@
       "hasBrokenNotes": "possible broken notes (e.g. notes hidden behind others, broken chords)",
       "notesAfterEnd": "might have notes after end of song"
     },
-    "noteDensityRatings": ["Are there even any notes?", "First steps", "Warmup", "Apprentice", "Solid", "Moderate", "Challenging", "Nightmare", "Pretty hard", "Pretty damn hard", "It's starting to hurt", "Carpal tunnel", "Basically Soulless 4", "ouch", "God help me", "...I'm out"]
+    "noteDensityRatings": [
+      "Are there even any notes?",
+      "First steps",
+      "Warmup",
+      "Apprentice",
+      "Solid",
+      "Moderate",
+      "Challenging",
+      "Nightmare",
+      "Pretty hard",
+      "Pretty damn hard",
+      "It's starting to hurt",
+      "Carpal tunnel",
+      "Basically Soulless 4",
+      "ouch",
+      "God help me",
+      "...I'm out"
+    ]
   },
   "youtube": {
     "commandDescription": "Searches for a video, playlist or a channel on YouTube.",
