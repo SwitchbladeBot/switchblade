@@ -1142,6 +1142,17 @@
     "notLive": "I can't change livestreams' positions!",
     "positionSet": "Player position set to `{{position}}`."
   },
+  "genshinimpact": {
+    "commandDescription": "Shows information about Genshin Impact characters, artifacts, events and more.",
+    "commandUsage": "<type> <query>",
+    "gameName": "Genshin Impact ©️ miHoYo Co Ltd",
+    "subcommands": {
+      "character": {
+        "commandDescription": "Looks up a Genshin Impact character's information.",
+        "commandUsage": "<character name>"
+      }
+    }
+  },
   "leagueoflegends": {
     "commandDescription": "Shows the current issues of a League of Legends server or information about a champion.",
     "commandUsage": "<type> <query>",
