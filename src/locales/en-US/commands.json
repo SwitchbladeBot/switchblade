@@ -683,7 +683,13 @@
       }
     },
     "noText": "You have to give me media and search terms!"
-},
+  },
+  "tastediv": {
+    "commandDescription": "Provides similar content related to your liking.",
+    "commandUsage": "<liking> <type>",
+    "example": "s!tastediv Far Cry 5 Game",
+    "noText": "You have to give me your liking and type!"
+  },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",
     "hereIsYourHentai": "Here's your hentai!"
