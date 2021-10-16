@@ -4,7 +4,7 @@ module.exports = class GenshinImpact extends SubcommandListCommand {
   constructor (client) {
     super({
       name: 'genshinimpact',
-      aliases: ['genshin', 'gi'],
+      aliases: ['genshin'],
       category: 'games',
       requirements: { apis: ['genshinimpact'] },
       authorString: 'commands:genshinimpact.gameName',

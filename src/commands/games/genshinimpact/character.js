@@ -66,7 +66,7 @@ module.exports = class GenshinImpactCharacter extends Command {
           .setAuthor(t(authorString), authorImage, authorURL)
           .setTitle(`${name} ${'✦'.repeat(rarity)} | ${vision} • ${weapon}`)
           .setDescriptionFromBlockArray([
-            [description ? description : ''],
+            [description || ''],
             [
               nation ? `**Nation**: ${nation}` : '',
               affiliation ? `**Affiliation**: ${affiliation}` : '',
