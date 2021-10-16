@@ -34,7 +34,7 @@ module.exports = class HowLongToBeat extends Command {
 
           const embed = new SwitchbladeEmbed(author)
           embed
-            .setTitle(t('commands:howlongtobeat.title', { game: game }))
+            .setTitle(t('commands:howlongtobeat.title', { game: gameResult.name }))
             .setDescription(description)
             .setImage(`https://howlongtobeat.com${gameResult.imageUrl}`)
             .setColor(Constants.HOW_LONG_TO_BEAT_COLOR)
