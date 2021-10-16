@@ -1451,24 +1451,7 @@
       "hasBrokenNotes": "possible broken notes (e.g. notes hidden behind others, broken chords)",
       "notesAfterEnd": "might have notes after end of song"
     },
-    "noteDensityRatings": [
-      "Are there even any notes?",
-      "First steps",
-      "Warmup",
-      "Apprentice",
-      "Solid",
-      "Moderate",
-      "Challenging",
-      "Nightmare",
-      "Pretty hard",
-      "Pretty damn hard",
-      "It's starting to hurt",
-      "Carpal tunnel",
-      "Basically Soulless 4",
-      "ouch",
-      "God help me",
-      "...I'm out"
-    ]
+    "noteDensityRatings": ["Are there even any notes?", "First steps", "Warmup", "Apprentice", "Solid", "Moderate", "Challenging", "Nightmare", "Pretty hard", "Pretty damn hard", "It's starting to hurt", "Carpal tunnel", "Basically Soulless 4", "ouch", "God help me", "...I'm out"]
   },
   "youtube": {
     "commandDescription": "Searches for a video, playlist or a channel on YouTube.",
@@ -1996,5 +1979,12 @@
     "homePage": "Home Page",
     "missingFormulae": "You have to specify a valid formulae.",
     "invalidFormulae": "This formulae is unknown please try another."
+  },
+  "howlongtobeat": {
+    "title": "How long to beat {{game}}",
+    "commandDescription": "Calculates the length of time it takes to beat a game",
+    "commandUsage": "<game>",
+    "missingGame": "You have to specify a valid game.",
+    "invalidGame": "This game is unknown please try another."
   }
 }
