@@ -1,4 +1,4 @@
-const { Command, CommandError, SwitchbladeEmbed } = require('../../')
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 const hltb = require('howlongtobeat')
 const hltbService = new hltb.HowLongToBeatService()
 
@@ -12,7 +12,7 @@ module.exports = class HowLongToBeat extends Command {
         parameters: [
           {
             type: 'string',
-            missingError: 'commands:howlongtobeat.noGame'
+            missingError: 'commands:howlongtobeat.missingGame'
           }
         ]
       },
@@ -22,7 +22,7 @@ module.exports = class HowLongToBeat extends Command {
 
   async run ({ t, author, channel, guild }, game) {
     try {
-      hltbService.search(game).then((result) => {
+      await hltbService.search(game).then((result) => {
         if (result.length === 0) {
           throw new CommandError(t('commands:howlongtobeat.invalidGame'), true)
         } else {
@@ -37,9 +37,9 @@ module.exports = class HowLongToBeat extends Command {
             .setTitle(t('commands:howlongtobeat.title', { game: game }))
             .setDescription(description)
             .setImage(`https://howlongtobeat.com${gameResult.imageUrl}`)
-            .setColor('#91A1F4')
+            .setColor(Constants.HOW_LONG_TO_BEAT_COLOR)
 
-          channel.send(embed).then(() => channel.stopTyping())
+          channel.send(embed)
         }
       })
     } catch (e) {
