@@ -78,7 +78,7 @@ module.exports = class ImageParameter extends Parameter {
         const buffer = await imageRequest(attachment.url, client)
         return buffer
       } catch (e) {
-        client.logError(e)
+        client.logger.error(e)
         throw new CommandError(t('errors:imageParsingError'))
       }
     }
@@ -91,7 +91,7 @@ module.exports = class ImageParameter extends Parameter {
           const buffer = await imageRequest(arg, client)
           return buffer
         } catch (e) {
-          client.logError(e)
+          client.logger.error(e)
           throw new CommandError(t('errors:invalidImageLink'), this.showUsage)
         }
       }
@@ -106,7 +106,7 @@ module.exports = class ImageParameter extends Parameter {
               const buffer = await imageRequest(user.displayAvatarURL({ format: this.avatarFormat }), client)
               return buffer
             } catch (e) {
-              client.logError(e)
+              client.logger.error(e)
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
@@ -148,7 +148,7 @@ module.exports = class ImageParameter extends Parameter {
               const buffer = await imageRequest(attachment.url, client)
               return buffer
             } catch (e) {
-              client.logError(e)
+              client.logger.error(e)
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
@@ -168,7 +168,7 @@ module.exports = class ImageParameter extends Parameter {
                 const buffer = await imageRequest(url, client)
                 return buffer
               } catch (e) {
-                client.logError(e)
+                client.logger.error(e)
                 throw new CommandError(t('errors:imageParsingError'))
               }
             }
@@ -185,7 +185,7 @@ module.exports = class ImageParameter extends Parameter {
         const buffer = await imageRequest(author.displayAvatarURL({ format: this.avatarFormat }), client)
         return buffer
       } catch (e) {
-        client.logError(e)
+        client.logger.error(e)
         throw new CommandError(t('errors:imageParsingError'))
       }
     }
