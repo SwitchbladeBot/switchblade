@@ -39,7 +39,7 @@
     "ascii-table": "0.0.9",
     "axios": "^0.21.4",
     "brainfuck-node": "^1.0.2",
-    "chalk": "^4.1.2",
+    "bunyan": "^1.8.15",
     "cheerio": "^1.0.0-rc.10",
     "cldr-core": "^39.0.0",
     "cldr-localenames-modern": "^39.0.0",
@@ -61,7 +61,6 @@
     "iso-639": "^0.2.2",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21",
     "mal-scraper": "^2.11.3",
     "mathjs": "^9.5.0",
     "moment": "^2.29.1",
@@ -111,7 +110,7 @@
   "optionalDependencies": {
     "@discordjs/uws": "^11.149.1",
     "canvas": "^2.8.0",
-    "erlpack": "github:almeidx/erlpack#f0c535f73817fd914806d6ca26a7730c14e0fb7c",
+    "erlpack": "github:discord/erlpack",
     "node-opus": "^0.3.3"
   }
 }

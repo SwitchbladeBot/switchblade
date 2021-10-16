@@ -13,7 +13,7 @@ module.exports = class ModuleLoader extends Loader {
       this.client.modules = this.modules
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e)
     }
     return false
   }
@@ -28,9 +28,9 @@ module.exports = class ModuleLoader extends Loader {
     return FileUtils.requireDirectory(dirPath, (NewModule) => {
       if (Object.getPrototypeOf(NewModule) !== Module) return
       this.addModule(new NewModule(this.client)) ? success++ : failed++
-    }, this.logError.bind(this)).then(() => {
-      if (failed) this.log(`${success} modules loaded, ${failed} failed.`, { color: 'yellow', tags: ['Modules'] })
-      else this.log(`All ${success} modules loaded without errors.`, { color: 'green', tags: ['Modules'] })
+    }, (e) => this.client.logger.error(e)).then(() => {
+      if (failed) this.client.logger.info({ tag: 'Modules' }, `${success} modules loaded, ${failed} failed.`)
+      else this.client.logger.info({ tag: 'Modules' }, `All ${success} modules loaded without errors.`)
     })
   }
 
@@ -40,7 +40,7 @@ module.exports = class ModuleLoader extends Loader {
    */
   addModule (module) {
     if (!(module instanceof Module)) {
-      this.log(`${module.name} failed to load - Not an Module`, { color: 'red', tags: ['Modules'] })
+      this.client.logger.warn({ tag: 'Modules' }, `${module.name} failed to load - Not an Module`)
       return false
     }
 

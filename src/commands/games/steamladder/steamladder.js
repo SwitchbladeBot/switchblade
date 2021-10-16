@@ -68,7 +68,7 @@ module.exports = class SteamLadder extends Command {
         .setAuthor('Steam Ladder', 'https://i.imgur.com/tm9VKhD.png')
         .setColor(embedColor)
     } catch (e) {
-      this.client.logError(e)
+      this.client.logger.error(e)
       throw new CommandError(t('commands:steamladder.ladderNotFound'))
     }
     channel.send(embed).then(channel.stopTyping())
