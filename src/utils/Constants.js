@@ -43,6 +43,9 @@ module.exports = {
   MERRIAM_WEBSTER_COLOR: '#375c71',
   FIVEM_COLOR: '#ff8637',
 
+  GENERIC_SUCCESS: '#16f747',
+  GENERIC_FAILURE: '#e03d19',
+
   // Emojis
 
   // Common

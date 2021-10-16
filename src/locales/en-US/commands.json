@@ -1957,5 +1957,19 @@
     "categoryObese1": "Obese Class I (Moderately obese)",
     "categoryObese2": "Obese Class II (Severely obese)",
     "categoryObese3": "Obese Class III (Very severely obese)"
+  },
+  "rockpaperscissors": {
+    "commandDescription": "Plays Rock Paper Scissors with the bot",
+    "commandUsage": "<rock, paper or scissors> [money to bet]",
+    "noChoice": "You have to give me your choice, either rock, paper or scissors",
+    "draw": "It's a draw!",
+    "win": "You win!",
+    "lose": "You lose!",
+    "notEnoughMoney": "You don't have this enough money to bet",
+    "bet": {
+      "draw": "You balance hasn't changed!",
+      "win": "Nice! You have won **$t(commons:currencyWithCount, { 'count': {{count}} })**",
+      "lose": "Whoops! You lose **$t(commons:currencyWithCount, { 'count': {{count}} })**"
+    }
   }
 }

@@ -96,4 +96,16 @@ module.exports = class EconomyController extends Controller {
 
     return { won, chosenSide }
   }
+
+  give (_user, amount) {
+    return this._users.update(_user, { $inc: { money: amount } })
+  }
+
+  async take (_user, amount) {
+    const balance = await this.balance(_user)
+
+    if (balance < amount) throw new Error('NOT_ENOUGH_MONEY')
+
+    return this._users.update(_user, { $inc: { money: -amount } })
+  }
 }
