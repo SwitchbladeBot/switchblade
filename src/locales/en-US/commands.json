@@ -1963,12 +1963,13 @@
     "commandUsage": "<aircraft registration/aircraft ICAO code/aircraft callsign>",
     "airline": "Airline",
     "live": "Live",
-    "locatedAt": "Located at",
+    "locatedAt": "Located in",
     "expectedArrival": "Expected arrival",
-    "copyright": "Copyright",
+    "copyright": "Copyright ©",
     "dataBy": "Data by",
     "photoBy": "Photo by",
     "departed": "Departed",
-    "notFound": "Aircraft not found"
+    "notFound": "Aircraft not found",
+    "noCallsign": "NO CALLSIGN"
   }
 }
