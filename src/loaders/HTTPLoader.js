@@ -39,7 +39,7 @@ module.exports = class HTTPLoader extends Loader {
     this.app.use(morgan(':method :url - IP :remote-addr - Code :status - Size :res[content-length] B - Handled in :response-time ms'))
 
     this.app.listen(port, () => {
-      this.client.logger.info({ tag: 'HTTP' }, `Listening on port ${port}`, { tag: 'HTTP' })
+      this.client.logger.info({ tag: 'HTTP' }, `Listening on port ${port}`)
     })
 
     return this.initializeRoutes().then(() => this.initializeWebhooks())
