@@ -23,27 +23,28 @@ module.exports = class Dicksize extends Command {
   }
 
   async run ({ t, author, channel }, count) {
-    try {
-      let messageDesc = ''
+    let messageDesc = ''
 
+<<<<<<< Updated upstream
+=======
+    // Limit The Count Between 1 and 10 So It Doesn't Spam Chat
+    count = Math.max(Math.min(count, 10), 1)
+>>>>>>> Stashed changes
 
-      for (let i = 0; i < count; i++) {
-        const suit = suits[Math.round(Math.random() * 3)]
-        let card = Math.round(Math.random() * 13)
-        if (card > 10 || card === 0) {
-          card = t(`commands:drawcard.card${card}`)
-        }
-        messageDesc += `${suit} ${card}\n`
+    for (let i = 0; i < count; i++) {
+      const suit = suits[Math.round(Math.random() * 3)]
+      let card = Math.round(Math.random() * 13)
+      if (card > 10 || card === 0) {
+        card = t(`commands:drawcard.card${card}`)
       }
-
-      channel.send(
-        new SwitchbladeEmbed(author)
-          .setTitle(t('commands:drawcard.title', { number: count }))
-          .setDescription(messageDesc)
-          .setColor(Constants.DRAWCARD_COLOR)
-      )
-    } catch (error) {
-      throw new CommandError(t('commands:drawcard.invalidNumber'), true)
+      messageDesc += `${suit} ${card}\n`
     }
+
+    channel.send(
+      new SwitchbladeEmbed(author)
+        .setTitle(t('commands:drawcard.title', { number: count }))
+        .setDescription(messageDesc)
+        .setColor(Constants.DRAWCARD_COLOR)
+    )
   }
 }
