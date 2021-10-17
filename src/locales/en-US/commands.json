@@ -2002,6 +2002,6 @@
     "commandDescription": "Calculates the length of time it takes to beat a game",
     "commandUsage": "<game>",
     "missingGame": "You have to specify a valid game.",
-    "invalidGame": "This game is unknown please try another."
+    "invalidGame": "Could not find the game you specified. Please, try another one."
   }
 }
