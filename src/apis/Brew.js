@@ -9,6 +9,6 @@ module.exports = class Brew extends APIWrapper {
   }
 
   async search (formulae) {
-    return axios.get(`https://formulae.brew.sh/api/formula/${formulae}.json`)
+    return axios.get(`https://formulae.brew.sh/api/formula/${formulae}.json`).then(res => res.data)
   }
 }
