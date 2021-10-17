@@ -1993,7 +1993,7 @@
     "365d": "365 Day Downloads",
     "links": "Links",
     "homebrewLink": "Homebrew Link",
-    "homePage": "Home Page"
+    "homePage": "Home Page",
     "missingFormulae": "You have to specify a valid formulae.",
     "invalidFormulae": "This formulae is unknown please try another."
   }
