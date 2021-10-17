@@ -28,5 +28,6 @@
   "yes": "Yes",
   "no": "No",
   "whichPage": "Which page would you like to jump to?",
-  "invalidPage": "Invalid page number, check the number of pages on the footer of the embed."
+  "invalidPage": "Invalid page number, check the number of pages on the footer of the embed.",
+  "notAvailable": "N/A"
 }

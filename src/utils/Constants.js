@@ -42,6 +42,7 @@ module.exports = {
   STEAM_COLOR: '#1b2838',
   MERRIAM_WEBSTER_COLOR: '#375c71',
   FIVEM_COLOR: '#ff8637',
+  IDLE_AIRCRAFT_COLOR: '#f8c023',
 
   // Emojis
 
