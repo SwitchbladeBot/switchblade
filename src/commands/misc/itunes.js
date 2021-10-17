@@ -17,8 +17,6 @@ module.exports = class Itunes extends SearchCommand {
     async search(_ , query){
         const data = await this.client.apis.itunes.search(query)
 
-        console.log(data)
-
         return await data;
     }
 

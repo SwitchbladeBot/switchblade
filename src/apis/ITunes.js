@@ -13,8 +13,10 @@ module.exports = class ITunes extends APIWrapper {
 
         const media = query.at(0)
 
-        if(!["movie", "podcast", "music", "musicVideo", "audiobook", "shortFilm", "tvShow", "software", "ebook", "all"].includes(media)){
-            return [{"errorMessage": `Invaid term provided. The term has to be one of the following: ${["movie", "podcast", "music", "musicVideo", "audiobook", "shortFilm", "tvShow", "software", "ebook", "all"].join(" , ")}`}]
+        const mediaWhiteList = ["movie", "podcast", "music", "musicVideo", "audiobook", "shortFilm", "tvShow", "software", "ebook", "all"]
+
+        if(!mediaWhiteList.includes(media)){
+            return [{"errorMessage": `Invaid term provided. The term has to be one of the following: ${mediaWhiteList.join(" , ")}`}]
         }
 
         const term = query.splice(1 , query.length - 1).join("+").toLowerCase()
