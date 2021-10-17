@@ -25,7 +25,7 @@ module.exports = class HowLongToBeat extends Command {
       const gameData = await hltbService.search(game)
 
       if (gameData.length === 0) {
-        throw new CommandError(t('commands:howlongtobeat.invalidGame'), true)
+        throw new Error()
       } else {
         const gameResult = gameData[0]
         let description = ''
