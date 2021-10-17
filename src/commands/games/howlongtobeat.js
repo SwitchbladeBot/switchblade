@@ -1,5 +1,6 @@
 const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 const hltb = require('howlongtobeat')
+const { auth } = require('google-auth-library')
 const hltbService = new hltb.HowLongToBeatService()
 
 module.exports = class HowLongToBeat extends Command {
@@ -22,26 +23,26 @@ module.exports = class HowLongToBeat extends Command {
 
   async run ({ t, author, channel, guild }, game) {
     try {
-      await hltbService.search(game).then((result) => {
-        if (result.length === 0) {
-          throw new CommandError(t('commands:howlongtobeat.invalidGame'), true)
-        } else {
-          const gameResult = result[0]
-          let description = ''
-          gameResult.timeLabels.forEach(timeLabel => {
-            description += `${timeLabel[1]} : ${gameResult[timeLabel[0]]} hrs\n`
-          })
+      const gameData = await hltbService.search(game)
 
-          const embed = new SwitchbladeEmbed(author)
-          embed
+      if (gameData.length === 0) {
+        throw new CommandError(t('commands:howlongtobeat.invalidGame'), true)
+      } else {
+        const gameResult = gameData[0]
+        let description = ''
+        
+        gameResult.timeLabels.forEach(timeLabel => {
+          description += `${timeLabel[1]} : ${gameResult[timeLabel[0]]} hrs\n`
+        })
+
+        channel.send(
+          new SwitchbladeEmbed(author)
             .setTitle(t('commands:howlongtobeat.title', { game: gameResult.name }))
             .setDescription(description)
             .setImage(`https://howlongtobeat.com${gameResult.imageUrl}`)
             .setColor(Constants.HOW_LONG_TO_BEAT_COLOR)
-
-          channel.send(embed)
-        }
-      })
+        )
+      }
     } catch (e) {
       throw new CommandError(t('commands:howlongtobeat.invalidGame'), true)
     }
