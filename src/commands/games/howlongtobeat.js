@@ -29,10 +29,6 @@ module.exports = class HowLongToBeat extends Command {
       } else {
         const gameResult = gameData[0]
         const description = gameResult.timeLabels.map(timeLabel => `${timeLabel[1]} : ${gameResult[timeLabel[0]]} hrs`).join('\n')
-        gameResult.timeLabels.forEach(timeLabel => {
-          description += `${timeLabel[1]} : ${gameResult[timeLabel[0]]} hrs\n`
-        })
-
         channel.send(
           new SwitchbladeEmbed(author)
             .setTitle(t('commands:howlongtobeat.title', { game: gameResult.name }))
