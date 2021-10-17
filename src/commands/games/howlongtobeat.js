@@ -1,6 +1,5 @@
 const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 const hltb = require('howlongtobeat')
-const { auth } = require('google-auth-library')
 const hltbService = new hltb.HowLongToBeatService()
 
 module.exports = class HowLongToBeat extends Command {
@@ -30,7 +29,6 @@ module.exports = class HowLongToBeat extends Command {
       } else {
         const gameResult = gameData[0]
         let description = ''
-        
         gameResult.timeLabels.forEach(timeLabel => {
           description += `${timeLabel[1]} : ${gameResult[timeLabel[0]]} hrs\n`
         })
