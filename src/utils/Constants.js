@@ -44,6 +44,7 @@ module.exports = {
   FIVEM_COLOR: '#ff8637',
   IDLE_AIRCRAFT_COLOR: '#f8c023',
   DRAWCARD_COLOR: '#F06161',
+  HOMEBREW_COLOR: '#C86E38',
 
   // Emojis
   CLUBS: '♣️',

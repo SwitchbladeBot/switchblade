@@ -1981,5 +1981,15 @@
     "card11": "Jack",
     "card12": "Queen",
     "card13": "King"
+  },
+  "brew": {
+    "commandUsage": "<formulae>",
+    "commandDescription": "Returns homebrew data for a given formulae",
+    "title": "Homebrew Info For {{name}}",
+    "description": "**Description** : \n{{description}} \n\n",
+    "analytics": "**Analytics** : \n30 Day Downloads : `{{30d}}` \n90 Day Downloads : `{{90d}}` \n365 Day Downloads : `{{365d}}` \n\n",
+    "downloadLink": "**Links** : \nHomebrew Link : {{brew_link}} \nHome Page : {{home_page}}",
+    "missingFormulae": "You have to specify a valid formulae.",
+    "invalidFormulae": "This formulae is unknown please try another."
   }
 }
