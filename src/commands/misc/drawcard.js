@@ -26,8 +26,6 @@ module.exports = class Dicksize extends Command {
     try {
       let messageDesc = ''
 
-      // Limit The Count Between 1 and 10 So It Doesn't Spam Chat
-      count = Math.max(Math.min(count, 10), 1)
 
       for (let i = 0; i < count; i++) {
         const suit = suits[Math.round(Math.random() * 3)]
