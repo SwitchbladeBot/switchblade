@@ -22,17 +22,23 @@ module.exports = class BrewSearch extends Command {
       channel.send(
         new SwitchbladeEmbed(author)
           .setTitle(t('commands:brew.title', { name: formulaeData.data.full_name }))
-          .setDescription(
-            t('commands:brew.description', { description: formulaeData.data.desc }) +
-            t('commands:brew.analytics', {
-              '30d': formulaeData.data.analytics.install['30d'][formulaeData.data.name],
-              '90d': formulaeData.data.analytics.install['90d'][formulaeData.data.name],
-              '365d': formulaeData.data.analytics.install['365d'][formulaeData.data.name]
-            }) +
-            t('commands:brew.downloadLink', {
-              brew_link: `https://formulae.brew.sh/formula/${formulaeData.data.name}`,
-              home_page: formulaeData.data.homepage
-            }))
+          .setDescriptionFromBlockArray([
+            [
+              `**${t('commands:brew.description')}**: ${formulaeData.data.desc}`,
+              `**${t('commands:brew.analytics')}**:\n${t('commands:brew.30d')}: \`${
+                formulaeData.data.analytics.install['30d'][formulaeData.data.name]
+              }\`\n${t('commands:brew.90d')}: \`${
+                formulaeData.data.analytics.install['90d'][formulaeData.data.name]
+              }\`\n${t('commands:brew.365d')}: ${
+                formulaeData.data.analytics.install['365d'][formulaeData.data.name]
+              }`,
+              `**${t('commands:brew.links')}**:\n[${t(
+                'commands:brew.homebrewLink'
+              )}](https://formulae.brew.sh/formula/${formulaeData.data.name}) [${t(
+                'commands:brew.homePage'
+              )}](${formulaeData.data.homepage})`
+            ]
+          ])
           .setColor(Constants.HOMEBREW_COLOR)
       )
     } catch {
