@@ -41,7 +41,7 @@ module.exports = class HowLongToBeat extends Command {
             .setColor(Constants.HOW_LONG_TO_BEAT_COLOR)
         )
       }
-    } catch (e) {
+    } catch {
       throw new CommandError(t('commands:howlongtobeat.invalidGame'), true)
     }
   }
