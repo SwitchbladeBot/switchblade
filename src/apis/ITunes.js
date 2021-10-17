@@ -27,7 +27,7 @@ module.exports = class ITunes extends APIWrapper {
             const { data } = await axios.get(`https://itunes.apple.com/search?media=${media}&term=${term}&limit=10&country=${userCountry}`)
 
             if(data.results == 0){
-                throw new TypeError()
+                throw new Error()
             }
 
             return data.results
