@@ -1971,5 +1971,15 @@
     "departed": "Departed",
     "notFound": "Aircraft not found",
     "noCallsign": "NO CALLSIGN"
+  },
+  "drawcard": {
+    "commandDescription": "Generates a random set of cards.",
+    "commandUsage": "<amount of cards>",
+    "title": "Drew {{number}} cards.",
+    "missingNumber": "You need to give me a number between 1 and 10.",
+    "card0": "Ace",
+    "card11": "Jack",
+    "card12": "Queen",
+    "card13": "King"
   }
 }

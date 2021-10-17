@@ -43,8 +43,13 @@ module.exports = {
   MERRIAM_WEBSTER_COLOR: '#375c71',
   FIVEM_COLOR: '#ff8637',
   IDLE_AIRCRAFT_COLOR: '#f8c023',
+  DRAWCARD_COLOR: '#F06161',
 
   // Emojis
+  CLUBS: '♣️',
+  RED_HEART: '❤️',
+  SPADES: '♠️',
+  RED_DIAMOND: '♦️',
 
   // Common
   UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
