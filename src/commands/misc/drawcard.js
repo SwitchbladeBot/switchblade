@@ -15,7 +15,9 @@ module.exports = class Dicksize extends Command {
       parameters: [{
         type: 'number',
         required: true,
-        missingError: 'commands:drawcard.missingNumber'
+        missingError: 'commands:drawcard.missingNumber',
+        min: 1,
+        max: 10
       }]
     }, client)
   }
