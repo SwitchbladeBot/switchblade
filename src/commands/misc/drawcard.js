@@ -7,7 +7,7 @@ const suits = [
   Constants.RED_DIAMOND
 ]
 
-module.exports = class Dicksize extends Command {
+module.exports = class DrawCard extends Command {
   constructor (client) {
     super({
       name: 'drawcard',
