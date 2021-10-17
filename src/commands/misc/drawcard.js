@@ -1,4 +1,4 @@
-const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, SwitchbladeEmbed, Constants } = require('../../')
 
 const suits = [
   Constants.CLUBS,
@@ -24,12 +24,6 @@ module.exports = class Dicksize extends Command {
 
   async run ({ t, author, channel }, count) {
     let messageDesc = ''
-
-<<<<<<< Updated upstream
-=======
-    // Limit The Count Between 1 and 10 So It Doesn't Spam Chat
-    count = Math.max(Math.min(count, 10), 1)
->>>>>>> Stashed changes
 
     for (let i = 0; i < count; i++) {
       const suit = suits[Math.round(Math.random() * 3)]
