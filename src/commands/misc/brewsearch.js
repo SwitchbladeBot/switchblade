@@ -7,7 +7,6 @@ module.exports = class BrewSearch extends Command {
       parameters: [
         {
           type: 'string',
-          // TODO: Add Missing Command
           missingError: 'commands:brew.missingFormulae'
         }
       ],
