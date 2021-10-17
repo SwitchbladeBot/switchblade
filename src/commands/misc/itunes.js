@@ -10,7 +10,7 @@ module.exports = class Itunes extends SearchCommand {
                 apis: ["itunes"]
             },
             embedColor: Constants.ITUNES_COLOR,
-            embedLogoURL: "https://i.imgur.com/mwPUlYA.png",
+            embedLogoURL: "https://i.imgur.com/K8uqCSw.png",
         } , client);
     }
     
