@@ -24,7 +24,13 @@ module.exports = class ITunes extends APIWrapper {
         const userCountry = await this.getUserCountry()
 
         try{
-            const { data } = await axios.get(`https://itunes.apple.com/search?media=${media}&term=${term}&limit=10&country=${userCountry}`)
+            const { data } = await axios.get(`https://itunes.apple.com/search` , {
+                params: {
+                    media: media,
+                    term: term,
+                    country: userCountry,
+                }
+            })
 
             if(data.results == 0){
                 throw new Error()
@@ -36,7 +42,7 @@ module.exports = class ITunes extends APIWrapper {
         }        
     }
 
-    getUserCountry = async () => {
+    async getUserCountry() {
         const response = await axios.get("https://ipinfo.io")
 
         return response.data.country
