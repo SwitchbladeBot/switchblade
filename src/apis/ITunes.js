@@ -29,6 +29,7 @@ module.exports = class ITunes extends APIWrapper {
                     media: media,
                     term: term,
                     country: userCountry,
+                    limit: 10,
                 }
             })
 
