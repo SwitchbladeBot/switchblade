@@ -51,7 +51,7 @@ Switchblade has over 190 commands, and having to update a list here would be unp
 
 > **⚠ Music is currently disabled on Switchblade's main instance!**
 
-We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **SoundCloud**, **Deezer**, **Twitch**, and many more. In order to provide you ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection available to the voice server you're in.
+We've put a lot of effort into our music system, so you always get the best listening experience. Our system accepts URLs from many different services, like **SoundCloud**, **Deezer**, **Twitch**, and many more. In order to provide your ears with delightful lag-free music, we've spread our Lavalink nodes around the globe, so there's always a low latency connection available to the voice server you're in.
 
 To play a song, join a voice channel and type **`s!play <query>`**. The `<query>` can be anything you want, from a song name to a **Soundcloud playlist URL**, we've got you covered!
 
@@ -71,7 +71,7 @@ Command|Description
 
 <h2 align="center">Contributing</h2>
 
-**We want everyone to be able to help with Switchblade as easily as possible,** so we've created a list with the many ways you can contribute to the project. Take a look, and if you think you can help with any of these, please do! If you have any questions, don't hesitate to [join our community server](http://support.switchblade.xyz) and ask as many questions as you want.
+**We want everyone to be able to help with Switchblade as easily as possible,** so we've created a list consisting of the ways how you can contribute to the project. Take a look, and if you think you can help with any of these, please do! If you have any questions, don't hesitate to [join our community server](http://support.switchblade.xyz) and ask as many questions as you want.
 
 ### Ideas and discussion
 
@@ -89,29 +89,29 @@ Found something crashes the bot? Something isn't working like intended? Please l
 
 ### Triaging bug reports
 
-There are probably many [bug reports](https://github.com/SwitchbladeBot/switchblade/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22type%3A+bug%22+) in the issues tab of this repo already. You can help by triaging them and telling us if the, or maybe writing a comment with more information about it. The reports should have a step-by-step guide on how to reproduce the problem, so go ahead! Try to reproduce a bug yourself and tell us what you found.
+There are probably many [bug reports](https://github.com/SwitchbladeBot/switchblade/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22type%3A+bug%22+) in the issues tab of this repo already. You can help by triaging them and telling us if they, or maybe writing a comment with more information about it. The reports should have a step-by-step guide on how to reproduce the problem, so go ahead! Try to reproduce a bug yourself and tell us what you found.
 
 ### Translation
 
-One of our main goals is to make Switchblade avaliable as many people as possible, and that's why we have put together an awesome team consisting of **more than 50 translators** from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through **Crowdin**, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
+One of our main goals is to make Switchblade available to as many people as possible, and that's why we have put together an awesome team consisting of **more than 50 translators** from all around the globe. Do you want to be a part of it? Awesome! We translate our strings through **Crowdin**, a platform made for software localisation. Go to [our Crowdin page](http://translate.switchblade.xyz) and request to join the team. After that, join our [community server](http://support.switchblade.xyz) and ping one of the translation managers so they can accept you and give you your roles. [**Ah, and did we mention that translators get an awesome badge on their profile card?**](https://cdn.discordapp.com/attachments/445203869115351041/587286168308154369/profile.jpg)
 
 <h2 align="center">Self-hosting</h2>
 
-**We ask you to please not host your own instance of Switchblade.** Even though our license allows it, self-hosted instances of the bot have brought us a lot of headache in the past. If you're considering self-hosting, please [try the official instance of the bot first](http://invite.switchblade.xyz/). If you have any concerns about the security of our instance, please contact us. We'd love to talk and answer any questions you have.
+**We ask you to please not host your own instance of Switchblade.** Even though our license allows it, self-hosted instances of the bot have brought us a lot of headaches in the past. If you're considering self-hosting, please [try the official instance of the bot first](http://invite.switchblade.xyz/). If you have any concerns about the security of our instance, please contact us. We'd love to talk and answer any questions you have.
 
 > If you're really really really going to self-host the bot, please [read our license](https://github.com/SwitchbladeBot/switchblade/blob/dev/LICENSE) first, and be aware that we don't provide any self-hosting support. **You'll be on your own.**
 
 <h2 align="center">Branching, canary and updates</h2>
 
-We work on the `dev` branch, which is deployed automagically to **Switchblade Canary**, our private testing , whenever commits are pushed. Canary isn't publicly avaliable for everyone to add to their servers, but, if you ask nicely enough, we might open an exception.
+We work on the `dev` branch, which is deployed automatically to **Switchblade Canary**, our private testing, whenever commits are pushed. Canary isn't publicly available for everyone to add to their servers, but, if you ask nicely enough, we might open an exception.
 
-Once we feel like the code on `dev` is stable enough, we merge it to the `master` branch, that gets deployed to **Switchblade**, the public instance that everyone can [add to their servers](https://invite.switchblade.xyz/).
+Once we feel like the code on `dev` is stable enough, we merge it to the `master` branch, which gets deployed to **Switchblade**, the public instance that everyone can [add to their servers](https://invite.switchblade.xyz/).
 
 We usually do that every two months or so, but we might skip a month if we're not confident enough about the reliability of the current code. To get to know about updates as soon as they happen, follow us on medium or join our community server. We post detailed updates notes as soon as stuff goes live.
 
 <h2 align="center">Sponsors</h2>
 
-Sponsors are organizations and companies that contribute to our projects with money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!][sponsors-url]
+Sponsors are organizations and companies that contribute to our projects with the money. They get their logo with a link to their website on this page! [Click here and become a sponsor today!][sponsors-url]
 
 <a href="https://opencollective.com/switchblade/sponsor/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/switchblade/sponsor/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/switchblade/sponsor/1/avatar.svg?requireActive=false"></a>
@@ -143,7 +143,7 @@ Backers are the people who contribute to our projects monetarily. They get their
 
 <h2 align="center">Hacktoberfest</h2>
 
-We are totally Hacktoberfest friendly, in 2021 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab clicking [here.][hacktoberfest-url]
+We are totally Hacktoberfest friendly, in 2021 we are even giving Switchblade Stickers to those who open 3 or more _valid_ PRs to Switchblade during October, please check our issue tab by clicking [here.][hacktoberfest-url]
 
 [support-invite]: https://support.switchblade.xyz
 [support-image]: https://invidget.switchblade.xyz/2FB8wDG
