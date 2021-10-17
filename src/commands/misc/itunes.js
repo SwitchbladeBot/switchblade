@@ -1,54 +1,78 @@
-const { Command, SwitchbladeEmbed, SearchCommand } = require('../../')
-const fetch = require("node-fetch")
+const { SwitchbladeEmbed, SearchCommand, Constants, CommandStructures } = require('../../')
+const { Command, CommandParameters, StringParameter } = CommandStructures
+const moment = require("moment")
 
-module.exports = class Itunes extends Command {
+module.exports = class Itunes extends SearchCommand {
     constructor(client) {
         super({
-            name: 'itunes',
-            aliases: ['itunes'],
-            parameters: [{
-                type: 'string',
-                full: true,
-                clean: true,
-                missingError: 'commands:itunes.noText'
-            }]
-        }, client)
+            name: "itunes",
+            requirements: {
+                apis: ["itunes"]
+            },
+            embedColor: Constants.ITUNES_COLOR,
+            embedLogoURL: "https://i.imgur.com/mwPUlYA.png",
+        } , client);
+    }
+    
+    async search(_ , query){
+        const data = await this.client.apis.itunes.search(query)
+
+        console.log(data)
+
+        return await data;
     }
 
-    async run({ channel, message }, text) {
-        text = text.split(" ")
+    searchResultFormatter(i) {
+        if(!i.error){
+            return `[${i.trackName}](${i.trackViewUrl}) - [${i.artistName}](${i.artistViewUrl})`
+        } else {
+            return i.error
+        }
+    }
 
-        const media = text.at(0)
+    getRatingEmojis (rating) {
+        return (this.getEmoji('ratingstar', '⭐').repeat(Math.floor(rating))) + (this.getEmoji('ratinghalfstar').repeat(Math.ceil(rating - Math.floor(rating))))
+    }
 
-        const term = text.splice(1 , text.length - 1).join(" ")
+    async handleResult({ t, author, channel }, data){
+        if(data.errorMessage){
+            const embed = new SwitchbladeEmbed(author)
+                .setColor(Constants.ERROR_COLOR)
+                .setTitle(data.errorMessage)
 
-        const data = await fetch(`https://itunes.apple.com/search?media=${media}&term=${term}&limit=10`).then(res => res.json()).then(data => data)
+            channel.send(embed)
 
-        const description = this.createDescription(data)
+            return 
+        } 
 
-        const embed = new SwitchbladeEmbed()
+
+        const stars = this.getRatingEmojis(data.averageUserRating)
+
+        const embed = new SwitchbladeEmbed(author)
             .setColor(this.embedColor)
-            .setTitle(media.toUpperCase() + ' - ' + term.toUpperCase())
-            .setDescription(description)
+            .setAuthor(t('commands:itunes.place'), this.embedLogoURL, 'https://www.apple.com/itunes/')
+            .setURL(data.trackViewUrl)
+            .setTitle(t("commands:itunes.track" , {name: data.trackName, artistName: data.artistName}))
+            .setThumbnail(data.artworkUrl100)
+            .setDescriptionFromBlockArray([
+            [
+                data.description ? `Description: ${data.description.replace(new RegExp('<[^>]*>' , 'g') , "")}` : data.longDescription ? `Description: ${data.longDescription}` :  ""
+            ],
+            [
+                data.userRatingCount ? t('commands:itunes.ratingCount', { count: data.userRatingCount || 0}) : "",
+                data.averageUserRating ? `Rating: ${stars} (${Math.round(data.averageUserRating) || ""})`: ""
+            ],
+            [
+                t("commands:itunes.price" , {price: data.formattedPrice || data.trackPrice , currency: data.currency})
+            ],
+            [
+                t("commands:itunes.release" , {date: moment(data.releaseDate).format("DD/MM/YYYY")})
+            ],
+            [
+                `Genres: ${(data.genres || ["-"]).join(" , ")}`
+            ]
+        ])
 
-        channel.send(embed); 
-    }
-
-    createDescription = (data) => {
-        var description = ""
-
-        var count = 1
-
-        for(let key in data.results){
-            description += `${count < 10 ? "0" + count.toString() : count}: [${data.results[key].trackName}](${data.results[key].trackViewUrl}) - [${data.results[key].artistName}](${data.results[key].artistViewUrl})\n`
-
-            count += 1
-        }
-
-        if(count === 1){
-            description = "Not Found"
-        }
-
-        return description
+        channel.send(embed)
     }
 }

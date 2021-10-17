@@ -676,12 +676,11 @@
     "commandDescription": "Provides the content within the iTunes Store and Apple Books Store.",
     "commandUsage": "<media> <term>",
     "example": "s!itunes ebook Famous Five",
-    "subcommands": {
-      "media": {
-          "commandDescription": "Type of media. Examples: Ebook , Movie , PodCast",
-          "commandUsage": "media <term>"
-      }
-    },
+    "place": "Itunes Store",
+    "track": "{{name}} - {{artistName}}",
+    "ratingCount": "Rating Count: {{count}}",
+    "price": "Price: {{price}} ({{currency}})",
+    "release": "Release Date: {{date}}",
     "noText": "You have to give me media and search terms!"
 },
   "hentai": {
