@@ -28,7 +28,7 @@ module.exports = class HowLongToBeat extends Command {
         throw new Error()
       } else {
         const gameResult = gameData[0]
-        let description = ''
+        const description = gameResult.timeLabels.map(timeLabel => `${timeLabel[1]} : ${gameResult[timeLabel[0]]} hrs`).join('\n')
         gameResult.timeLabels.forEach(timeLabel => {
           description += `${timeLabel[1]} : ${gameResult[timeLabel[0]]} hrs\n`
         })
