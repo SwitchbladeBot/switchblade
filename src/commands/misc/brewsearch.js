@@ -35,7 +35,7 @@ module.exports = class BrewSearch extends Command {
             }))
           .setColor(Constants.HOMEBREW_COLOR)
       )
-    } catch (e) {
+    } catch {
       throw new CommandError(t('commands:brew.invalidFormulae'))
     }
   }
