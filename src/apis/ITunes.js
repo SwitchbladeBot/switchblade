@@ -6,11 +6,7 @@ module.exports = class ITunes extends APIWrapper {
     super({name: 'itunes'})
   }
 
-  async search(query) {
-    query = query.split(' ')
-
-    const media = query.at(0)
-
+  async search(media , term , country) {
     const mediaWhiteList =
         [
           'movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm',
@@ -25,16 +21,12 @@ module.exports = class ITunes extends APIWrapper {
       }]
     }
 
-    const term = query.splice(1, query.length - 1).join('+').toLowerCase()
-
-    const userCountry = await this.getUserCountry()
-
     try {
       const {data} = await axios.get(`https://itunes.apple.com/search`, {
         params: {
           media: media,
           term: term,
-          country: userCountry,
+          country: country,
           limit: 10,
         }
       })
