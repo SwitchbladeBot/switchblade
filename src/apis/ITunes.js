@@ -1,23 +1,20 @@
 const {APIWrapper} = require('../')
 const axios = require('axios')
 
+const MEDIA_WHITE_LIST = ['movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm',
+'tvShow', 'software', 'ebook', 'all']
+
 module.exports = class ITunes extends APIWrapper {
   constructor() {
     super({name: 'itunes'})
   }
 
   async search(media , term , country) {
-    const mediaWhiteList =
-        [
-          'movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm',
-          'tvShow', 'software', 'ebook', 'all'
-        ]
-
-        if (!mediaWhiteList.includes(media)) {
+    if (!MEDIA_WHITE_LIST.includes(media)) {
       return [{
         'errorMessage':
             `Invaid term provided. The term has to be one of the following: ${
-                mediaWhiteList.join(' , ')}`
+                MEDIA_WHITE_LIST.join(' , ')}`
       }]
     }
 
