@@ -1,4 +1,4 @@
-const {APIWrapper} = require('../')
+const {APIWrapper} = require('..')
 const axios = require('axios')
 
 const MEDIA_WHITE_LIST = ['movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm',
@@ -9,7 +9,24 @@ module.exports = class ITunes extends APIWrapper {
     super({name: 'itunes'})
   }
 
-  async search(media , term , country) {
+  async search(query) {
+    query = query.split(" ")
+
+    const media = query.at(0)
+    
+    var term = query.splice(1 , query.length - 2).join(" ")
+
+    var country = query.splice(query.length - 1 , 1).join(" ")
+
+    console.log(media , " - " , term , " - " , country)
+
+    // Check if the country code is 2 letters 
+    if(country.length != 2){
+      term += " " + country
+
+      country = "US"
+    }
+
     if (!MEDIA_WHITE_LIST.includes(media)) {
       return [{
         'errorMessage':
@@ -17,6 +34,8 @@ module.exports = class ITunes extends APIWrapper {
                 MEDIA_WHITE_LIST.join(' , ')}`
       }]
     }
+
+    console.log(media , term , country)
 
     try {
       const {data} = await axios.get(`https://itunes.apple.com/search`, {
@@ -36,11 +55,5 @@ module.exports = class ITunes extends APIWrapper {
     } catch {
       return [{'errorMessage': 'No results found'}]
     }
-  }
-
-  async getUserCountry() {
-    const response = await axios.get('https://ipinfo.io')
-
-    return response.data.country
   }
 }
