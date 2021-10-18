@@ -672,22 +672,10 @@
     "commandUsage": "<text>",
     "noText": "You have to give me some text to asciify!"
   },
-  "itunes": {
-    "commandDescription": "Provides the content within the iTunes Store and Apple Books Store.",
-    "commandUsage": "<media> <term>",
-    "example": "s!itunes ebook Famous Five",
-    "subcommands": {
-      "media": {
-          "commandDescription": "Type of media. Examples: Ebook , Movie , PodCast",
-          "commandUsage": "media <term>"
-      }
-    },
-    "noText": "You have to give me media and search terms!"
-  },
-  "tastediv": {
+  "tastedive": {
     "commandDescription": "Provides similar content related to your liking.",
     "commandUsage": "<liking> <type>",
-    "example": "s!tastediv Far Cry 5 Game",
+    "example": "s!tastedive Far Cry 5 Game",
     "noText": "You have to give me your liking and type!"
   },
   "hentai": {
