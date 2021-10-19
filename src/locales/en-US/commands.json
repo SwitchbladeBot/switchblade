@@ -1896,6 +1896,7 @@
     "updatedAt": "Updated at",
     "tested": "people tested",
     "deaths": "Deaths",
+    "vaccinated": "People vaccinated",
     "casesPerOneMillion": "Cases per one million",
     "source": "Data provided by [disease-sh](https://github.com/disease-sh). Check the [sources](https://github.com/disease-sh/API/blob/master/README.md#sources)",
     "subcommands": {
