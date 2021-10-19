@@ -28,7 +28,7 @@ module.exports = class TasteDive extends Command {
     const { data } = await axios.get(`https://tastedive.com/api/similar`, {
       params: {
         q: liking,
-        type: type,
+        type,
         limit: 10,
       }
     })
