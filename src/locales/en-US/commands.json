@@ -675,7 +675,6 @@
   "tastedive": {
     "commandDescription": "Provides similar content related to your liking.",
     "commandUsage": "<liking> <type>",
-    "example": "s!tastedive Far Cry 5 Game",
     "noText": "You have to give me your liking and type!"
   },
   "hentai": {
