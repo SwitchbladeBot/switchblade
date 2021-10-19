@@ -28,7 +28,7 @@ module.exports = class Birthday extends Command {
 
         const rule = new schedule.RecurrenceRule()
 
-        rule.hour = 22
+        rule.hour = 0
 
         rule.minute = 0
         
