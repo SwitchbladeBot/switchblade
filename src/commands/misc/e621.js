@@ -1,4 +1,4 @@
-const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../index')
+const { Command, CommandError, SwitchbladeEmbed, Constants } = require('../../')
 
 module.exports = class e621 extends Command {
   constructor (client) {
