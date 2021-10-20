@@ -8,7 +8,7 @@ module.exports = class RolesRepository extends MongoRepository {
 
   parse (entity) {
     return {
-      giftedRole: "",
+      giftedRole: '',
       users: [],
       ...(super.parse(entity) || {})
     }
