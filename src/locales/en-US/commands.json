@@ -1996,5 +1996,12 @@
     "homePage": "Home Page",
     "missingFormulae": "You have to specify a valid formulae.",
     "invalidFormulae": "This formulae is unknown please try another."
+  },
+  "howlongtobeat": {
+    "title": "How long to beat {{game}}",
+    "commandDescription": "Calculates the length of time it takes to beat a game",
+    "commandUsage": "<game>",
+    "missingGame": "You have to specify a valid game.",
+    "invalidGame": "Could not find the game you specified. Please, try another one."
   }
 }
