@@ -49,7 +49,7 @@ module.exports = class SwitchbladePlayerManager extends Manager {
     const res = await fetch(`http://${this.REST_ADDRESS}/loadtracks?${params.toString()}`, {
       headers: { Authorization: this.REST_PASSWORD }
     }).then(res => res.json()).catch(err => {
-      this.client.logError(new Error(`Lavalink fetchTracks ${err}`))
+      this.client.logger.error(new Error(`Lavalink fetchTracks ${err}`))
     })
 
     if (!res) return false

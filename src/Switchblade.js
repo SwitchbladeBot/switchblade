@@ -1,6 +1,5 @@
 const { Client } = require('discord.js')
-const chalk = require('chalk')
-const _ = require('lodash')
+const Logger = require('./utils/logger/Logger')
 const Loaders = require('./loaders')
 
 const Sentry = require('@sentry/node')
@@ -18,8 +17,8 @@ module.exports = class Switchblade extends Client {
     this.canvasLoaded = options.canvasLoaded
     this.playerManager = null
     this.shardId = options.shardId
+    this.logger = new Logger()
 
-    this.logError = this.logError.bind(this)
     this.loaded = false
   }
 
@@ -32,8 +31,8 @@ module.exports = class Switchblade extends Client {
     }
 
     await this.login()
-      .then(() => this.log('Logged in successfully!', { color: 'green', tags: ['Discord'] }))
-      .catch(this.logError)
+      .then(() => this.logger.info({ tag: 'Discord' }, 'Logged in successfully!'))
+      .catch((e) => this.logger.error(e))
 
     for (const l of normal) {
       await this.initializeLoader(l)
@@ -47,7 +46,7 @@ module.exports = class Switchblade extends Client {
     try {
       success = await loader.load()
     } catch (e) {
-      this.logError(e)
+      this.logger.error(e)
     } finally {
       if (!success && loader.critical) process.exit(1)
     }
@@ -63,48 +62,6 @@ module.exports = class Switchblade extends Client {
   }
 
   // Helpers
-
-  /**
-   * Adds a new log entry to the console.
-   * @param {string} message - Log message
-   * @param {Object} [options] - Options
-   * @param {string[]} [options.tags] - Tags to identify the log entry
-   * @param {boolean} [options.bold] - If message will be bold
-   * @param {boolean} [options.italic] - If message will be italic
-   * @param {boolean} [options.underline] - If message will be underline
-   * @param {boolean} [options.reversed] - If message will be reversed
-   * @param {'bgBlack'|'bgBlackBright'|'bgRed'|'bgRedBright'|'bgGreen'|'bgGreenBright'|'bgYellow'|'bgYellowBright'|'bgBlue'|'bgBlueBright'|'bgMagenta'|'bgMagentaBright'|'bgCyan'|'bgCyanBright'|'bgWhite'|'bgWhiteBright'} [options.bgColor] - Background color of message
-   * @param {'black'|'blackBright'|'red'|'redBright'|'green'|'greenBright'|'yellow'|'yellowBright'|'blue'|'blueBright'|'magenta'|'magentaBright'|'cyan'|'cyanBright'|'white'|'whiteBright'} [options.color] - Color of message
-   */
-  log (
-    message,
-    {
-      tags = [],
-      bold = false,
-      italic = false,
-      underline = false,
-      reversed = false,
-      bgColor = false,
-      color = 'white'
-    } = {}
-  ) {
-    const colorFunction = _.get(
-      chalk,
-      [bold, italic, underline, reversed, bgColor, color].filter(Boolean).join('.')
-    )
-
-    console.log(...tags.map(t => chalk.cyan(`[${t}]`)), colorFunction(message))
-  }
-
-  /**
-   * Adds a new error log entry to the console.
-   * @param {string} message - Error message
-   */
-  logError (...args) {
-    Sentry.captureException(args[args.length - 1])
-    const tags = args.length > 1 ? args.slice(0, -1).map(t => `[${t}]`) : []
-    console.error('[ErrorLog]', ...tags, args[args.length - 1])
-  }
 
   /**
    * Runs a command.
@@ -128,6 +85,6 @@ module.exports = class Switchblade extends Client {
     }
 
     context.setFixedT(this.i18next.getFixedT(language))
-    return command._run(context, args).catch(this.logError)
+    return command._run(context, args).catch((e) => this.logger.error(e))
   }
 }
