@@ -1,27 +1,97 @@
-const {Command, SwitchbladeEmbed } = require('../..')
-const axios = require('axios')
+const { SwitchbladeEmbed, Command } = require('../../')
+
+const MEDIA_WHITE_LIST = ['music', 'movies', 'shows', 'podcasts', 'books', 'authors', 'games']
+
+// module.exports = class TasteDive extends Command {
+//   constructor (client) {
+//     super({
+//       name: 'tastedive',
+//       // requirements: { apis: ['tastedive'] },
+//       parameters: [{
+//         type: 'string',
+//         full: false,
+//         name: 'media',
+//         whitelist: MEDIA_WHITE_LIST,
+//         missingError: "Error",
+//         required: true
+//       }, {
+//         type: 'string',
+//         full: true,
+//         name: 'term',
+//         required: true
+//       }]
+//     },
+//     client)
+
+//     this.embedUrl = 'https://i.imgur.com/mwPUlYA.png'
+//   }
+
+//   async run (context, name , term) {
+//     // this.author = context.author
+
+//     // const data = await this.client.apis.itunes.search(media, term, country)
+
+//     // this.parseResponse(context, await data, context.message.content)
+//   }
+
+//   searchResultFormatter (i) {
+//     return `[${i.trackName}](${i.trackViewUrl}) - [${i.artistName}](${i.artistViewUrl})`
+//   }
+
+//   getRatingEmojis (rating) {
+//     return (this.getEmoji('ratingstar', '⭐').repeat(Math.floor(rating))) +
+//             (this.getEmoji('ratinghalfstar')
+//               .repeat(Math.ceil(rating - Math.floor(rating))))
+//   }
+
+//   async parseResponse ({ channel, author, t }, data, title) {
+//     let description = ''
+
+//     let index = 1
+
+//     const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
+
+//     for (const item of data) {
+//       description += `\`${formatNumber(index)}\`: ${this.searchResultFormatter(item)} \n`
+
+//       index++
+//     }
+
+//     const embed = new SwitchbladeEmbed(author)
+//       .setThumbnail(this.embedUrl)
+//       .setDescription(description)
+//       .setTitle(t('commands:itunes.title', { title: title }))
+
+//     channel.send(embed)
+//   }
+// }
 
 module.exports = class TasteDive extends Command {
-  constructor(client) {
-    super(
+  constructor (client) {
+    super({
+      name: 'tastedive',
+      requirements: { apis: ['tastedive'] },
+      parameters: [
         {
-          name: 'tastedive',
-          parameters: [
-            {
-              type: 'string',
-              full: false,
-              clean: true,
-              whitelist: ["music" , "movies" , "shows" , "podcasts" , "books" , "authors" , "games"],
-              missingError: 'commands:tastedive.noText',
-            },
-            {
-              type: 'string',
-              full: true,
-              clean: true,
-            }
-          ],
-        },
-        client)
+          type: 'string',
+          full: false,
+          whitelist: MEDIA_WHITE_LIST,
+          missingError: ({ t, prefix }) => {
+            return new SwitchbladeEmbed()
+              .setTitle(t('commands:tastedive.noMedia'))
+              .setDescription([
+                this.usage(t, prefix),
+                '',
+                `__**${t('commands:tastedive.availableMedia')}:**__`,
+                `**${MEDIA_WHITE_LIST.map(l => `\`${l}\``).join(', ')}**`
+              ].join('\n'))
+          }
+        }, {
+          type: 'string',
+          full: true,
+        }
+      ]
+    }, client)
   }
 
   async run({ channel }, type, liking) {
@@ -44,21 +114,23 @@ module.exports = class TasteDive extends Command {
     channel.send(embed);
   }
 
-  createDescription = (data) => {
-    var description = ''
+  parseResponse (t, title, data) {
+    const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
-    var count = 1
+    let description = ''
 
-    for (let key in data) {
-      description += `\`${count < 10 ? '0' + count.toString() : count}\`:  *${data[key].Name}*\n`
+    let index = 1
 
-      count += 1
+    for (const key in data) {
+      description += `\`${formatNumber(index)}\`:  *${data[key].Name}*\n`
+
+      index += 1
     }
 
-    if (count === 1) {
-      description = 'Not Found'
-    }
+    const embed = new SwitchbladeEmbed()
+      .setTitle(t('commands:tastedive.title', { title: title }))
+      .setDescription(description)
 
-    return description
+    return embed
   }
 }
