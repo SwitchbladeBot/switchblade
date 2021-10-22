@@ -673,11 +673,6 @@
     "noText": "You have to give me some text to asciify!"
   },
   "tastedive": {
-<<<<<<< HEAD
-    "commandDescription": "Provides similar content related to your liking.",
-    "commandUsage": "<liking> <type>",
-    "noText": "You have to give me your liking and type!"
-=======
     "commandDescription": "Provides similar types of media according to user's liking",
     "commandUsage": "<media> <liking>",
     "place": "TasteDive",
@@ -685,7 +680,6 @@
     "noMedia": "You will have to give me a valid type of media",
     "availableMedia": "All the available media's are",
     "noText": "You have to give me media and search terms!"
->>>>>>> 3e2beda0 (Make requested changes)
   },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",
