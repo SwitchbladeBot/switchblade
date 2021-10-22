@@ -1,5 +1,4 @@
-const { SwitchbladeEmbed, Constants, Command } = require('../../')
-const moment = require('moment')
+const { SwitchbladeEmbed, Command } = require('../../')
 
 const MEDIA_WHITE_LIST = ['movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm', 'tvShow', 'software', 'ebook', 'all']
 
@@ -9,9 +8,9 @@ module.exports = class Itunes extends Command {
       name: 'itunes',
       requirements: { apis: ['itunes'] },
       parameters: [{
-        type: "string",
+        type: 'string',
         full: false,
-        name: "media",
+        name: 'media',
         whitelist: MEDIA_WHITE_LIST,
         missingError: ({ t, prefix }) => {
           return new SwitchbladeEmbed().setTitle(t('commands:itunes.noMedia'))
@@ -22,33 +21,32 @@ module.exports = class Itunes extends Command {
               `**${MEDIA_WHITE_LIST.map(l => `\`${l}\``).join(', ')}**`
             ].join('\n'))
         },
-        required: true,
-      } , {
-        type: "string",
-        full: true,
-        name: "term",
-        required: true,
+        required: true
       }, {
-        type: "string",
+        type: 'string',
+        full: true,
+        name: 'term',
+        required: true
+      }, {
+        type: 'string',
         full: false,
-        name: "country",
-        required: false,
+        name: 'country',
+        required: false
       }]
     },
     client)
 
     this.author = null
 
-    this.embedUrl = "https://i.imgur.com/U4jjk5F.png"
-
+    this.embedUrl = 'https://i.imgur.com/U4jjk5F.png'
   }
 
-  async run (context , media , term , country = "US") {
+  async run (context, media, term, country = 'US') {
     this.author = context.author
 
-    const data = await this.client.apis.itunes.search(media , term , country)
+    const data = await this.client.apis.itunes.search(media, term, country)
 
-    this.parseResponse(context , await data , context.message.content)
+    this.parseResponse(context, await data, context.message.content)
   }
 
   searchResultFormatter (i) {
@@ -60,24 +58,24 @@ module.exports = class Itunes extends Command {
             (this.getEmoji('ratinghalfstar')
               .repeat(Math.ceil(rating - Math.floor(rating))))
   }
-  
-  async parseResponse({ channel , author, t } , data , title) {
-    var description = ""
 
-    var index = 1
+  async parseResponse ({ channel, author, t }, data, title) {
+    let description = ''
+
+    let index = 1
 
     const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
-    for(let item of data){
+    for (const item of data) {
       description += `\`${formatNumber(index)}\`: ${this.searchResultFormatter(item)} \n`
 
       index++
     }
 
     const embed = new SwitchbladeEmbed(author)
-                      .setThumbnail(this.embedUrl)
-                      .setDescription(description)
-                      .setTitle(t("commands:itunes.title" , { title: title }))
+      .setThumbnail(this.embedUrl)
+      .setDescription(description)
+      .setTitle(t('commands:itunes.title', { title: title }))
 
     channel.send(embed)
   }
