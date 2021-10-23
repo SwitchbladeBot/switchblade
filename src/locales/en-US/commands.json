@@ -893,6 +893,10 @@
     "commandDescription": "Shows a random image of a fox.",
     "hereIsYourFox": "Here's your fox!"
   },
+  "birthday": {
+    "noText": "You have to give a either the role to set or your birthday!",
+    "available": "All the available subcommands are:"
+  },
   "birb": {
     "commandDescription": "Shows a random image of a birb.",
     "hereIsYourBirb": "Here's your birb!"

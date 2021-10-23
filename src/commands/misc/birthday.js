@@ -1,28 +1,43 @@
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const { Command, SwitchbladeEmbed, Constants , PermissionUtils } = require('../../')
 const mongoose = require('mongoose')
 const moment = require('moment')
 const schedule = require('node-schedule')
 const RolesRepository = require('../../database/mongo/repositories/RolesRepository')
 
+const SUB_COMMANDS = ['set', 'role']
+
 module.exports = class Birthday extends Command {
   constructor (client) {
-    super(
-      {
-        name: 'birthday',
-        parameters: [{
-          type: 'string',
-          full: false,
-          clean: true,
-          missingError: 'commands:birthday.missingSentence'
-        }, {
-          type: 'string',
-          full: false,
-          clean: true
-        }]
-      },
-      client)
+    super({
+      name: 'birthday',
+      parameters: [{
+        type: 'string',
+        full: false,
+        clean: true,
+        whitelist: SUB_COMMANDS,
+        missingError: ({ t, prefix }) => {
+          return new SwitchbladeEmbed().setTitle(t('commands:birthday.noText'))
+            .setDescription([
+              this.usage(t, prefix),
+              '',
+              `__**${t('commands:birthday.availble')}:**__`,
+              `**${SUB_COMMANDS.map(l => `\`${l}\``).join(', ')}**`
+            ].join('\n'))
+        }
+      }, {
+        type: 'string',
+        full: false,
+        clean: true
+      }]
+    },
+    client)
 
     this.mongo = new RolesRepository(mongoose)
+
+    this.subcommands = [
+      new CMDSet(client, this.mongo),
+      new CMDRole(client, this.mongo)
+    ]
 
     this.rolesMap = new Map()
 
@@ -33,111 +48,6 @@ module.exports = class Birthday extends Command {
     rule.minute = 0
 
     schedule.scheduleJob(rule, this.checkForBirthdays)
-  }
-
-  run ({ channel, message }, subCommand, term) {
-    if (subCommand === 'role') {
-      this.setRole(channel, message, term)
-    } else {
-      this.setUserBirthday(channel, message, term)
-    }
-  }
-
-  async setRole (channel, message, term) {
-    const user = message.mentions.users.first() || message.author
-
-    let flag = true
-
-    message.guild.member(user).roles.cache.forEach(r => {
-      if (r.name === 'MANAGE_ROLE') {
-        flag = false
-      }
-    })
-
-    if (flag) {
-      this.sendEmbed(channel, message.author.username, 'Invalid Permissions', 'You cannot set the gift role because you do not have the role of MANAGE_ROLE!', Constants.ERROR_COLOR)
-
-      return
-    }
-
-    flag = true
-
-    message.guild.roles.cache.forEach(r => {
-      if (r.id === term || r.name === term) {
-        flag = false
-      }
-    })
-
-    if (flag) {
-      this.sendEmbed(channel, message.author.username, 'Invalid Role', `Sorry, but it looks like role ${term} does not exist.`, Constants.ERROR_COLOR)
-
-      return
-    }
-
-    await this.mongo.update('role', { giftedRole: term })
-
-    this.sendEmbed(channel, 'Success', `Role ${term} will be given to member's birthday!`, Constants.SUCCESS_COLOR)
-  }
-
-  sendEmbed (channel, user, title, description, color) {
-    const embed = new SwitchbladeEmbed()
-      .setTitle(title)
-      .setFooter(user)
-      .setDescription(description)
-      .setColor(color)
-
-    channel.send(embed)
-  }
-
-  async setUserBirthday (channel, message, term) {
-    const username = await message.author.username
-
-    const dateInMoment = moment(term, 'DD/MM', true)
-
-    if (!dateInMoment.isValid()) {
-      this.sendEmbed(channel, username, 'Invalid Date', `Invalid date ${term}. Make sure it is in format of DD/MM`, Constants.ERROR_COLOR)
-
-      return
-    }
-
-    const currentUsers = await this.mongo.get('role')
-
-    let flag = false
-
-    for (const [index, user] of currentUsers.users.entries()) {
-      if (user.username === username) {
-        const entity = {}
-
-        const newKeyValue = {}
-
-        newKeyValue[`users.${index}.birthday`] = term
-
-        entity.$set = newKeyValue
-
-        await this.mongo.update('role', entity, { upsert: false })
-
-        flag = true
-
-        break
-      }
-    }
-
-    if (!flag) {
-      this.callback(username, term)
-    }
-
-    this.sendEmbed(channel, username, 'Success', 'Successfully added your birthday', Constants.SUCCESS_COLOR)
-  }
-
-  async callback (username, term) {
-    await this.mongo.update('role', {
-      $push: {
-        users: {
-          username: username,
-          birthday: term
-        }
-      }
-    })
   }
 
   checkForBirthdays () {
@@ -176,5 +86,104 @@ module.exports = class Birthday extends Command {
         })
       })
     } catch { }
+  }
+}
+
+class CMDSet extends Command {
+  constructor (client , mongodb) {
+    super({"name": "set"} , client)
+    this.mongodb = mongodb
+  }
+
+  async run ({ channel, message }, birthday) {
+    const username = await message.author.username
+
+    const dateInMoment = moment(birthday, 'DD/MM', true)
+
+    if (!dateInMoment.isValid()) {
+      this.sendEmbed(channel, username, 'Invalid Date', `Invalid date ${birthday}. Make sure it is in format of DD/MM`, Constants.ERROR_COLOR)
+
+      return
+    }
+
+    const currentUsers = await this.mongo.get('role')
+
+    let flag = false
+
+    for (const [index, user] of currentUsers.users.entries()) {
+      if (user.username === username) {
+        const entity = {}
+
+        const newKeyValue = {}
+
+        newKeyValue[`users.${index}.birthday`] = birthday
+
+        entity.$set = newKeyValue
+
+        await this.mongo.update('role', entity, { upsert: false })
+
+        flag = true
+
+        break
+      }
+    }
+
+    if (!flag) {
+      await this.mongo.update('role', {
+        $push: {
+          users: {
+            username: username,
+            birthday: birthday
+          }
+        }
+      })
+    }
+
+    this.sendEmbed(channel, username, 'Success', 'Successfully added your birthday', Constants.SUCCESS_COLOR)
+  }
+}
+
+class CMDRole extends Command {
+  constructor (client, mongodb) {
+    super({name: "role"} , client)
+    this.mongo = mongodb
+  }
+
+  async run ({ channel, message }, role) {
+    const user = message.mentions.users.first() || message.author
+
+    let flag = true
+
+    // message.guild.member(user).roles.cache.forEach(r => {
+    //   if (r.name === 'MANAGE_ROLE') {
+    //     flag = false
+    //   }
+    // })
+    console.log(await PermissionUtils.isManager(this.client , user))
+
+  //   if (flag) {
+  //     this.sendEmbed(channel, message.author.username, 'Invalid Permissions', 'You cannot set the gift role because you do not have the role of MANAGE_ROLE!', Constants.ERROR_COLOR)
+
+  //     return
+  //   }
+
+  //   flag = true
+
+  //   message.guild.roles.cache.forEach(r => {
+  //     if (r.id === role || r.name === role) {
+  //       flag = false
+  //     }
+  //   })
+
+  //   if (flag) {
+  //     this.sendEmbed(channel, message.author.username, 'Invalid Role', `Sorry, but it looks like role ${role} does not exist.`, Constants.ERROR_COLOR)
+
+  //     return
+  //   }
+
+  //   await this.mongo.update('role', { giftedRole: role })
+
+  //   this.sendEmbed(channel, 'Success', `Role ${role} will be given to member's birthday!`, Constants.SUCCESS_COLOR)
+  // }
   }
 }
