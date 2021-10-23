@@ -22,10 +22,6 @@ module.exports = class TasteDive extends APIWrapper {
 
       return data.Similar.Results
     } catch (err) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 3e2beda0 (Make requested changes)
       return []
     }
   }
