@@ -36,14 +36,10 @@ module.exports = class Itunes extends Command {
     },
     client)
 
-    this.author = null
-
     this.embedUrl = 'https://i.imgur.com/U4jjk5F.png'
   }
 
   async run (context, media, term, country = 'US') {
-    this.author = context.author
-
     const data = await this.client.apis.itunes.search(media, term, country)
 
     this.parseResponse(context, await data, context.message.content)
@@ -60,22 +56,14 @@ module.exports = class Itunes extends Command {
   }
 
   async parseResponse ({ channel, author, t }, data, title) {
-    let description = ''
-
-    let index = 1
-
     const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
-    for (const item of data) {
-      description += `\`${formatNumber(index)}\`: ${this.searchResultFormatter(item)} \n`
-
-      index++
-    }
+    const description = data.map(([item, index]) => `\`${formatNumber(index)}\`: ${this.searchResultFormatter(item)}`).join('\n')
 
     const embed = new SwitchbladeEmbed(author)
       .setThumbnail(this.embedUrl)
       .setDescription(description)
-      .setTitle(t('commands:itunes.title', { title: title }))
+      .setTitle(t('commands:itunes.title', { title }))
 
     channel.send(embed)
   }

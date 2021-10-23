@@ -10,9 +10,9 @@ module.exports = class ITunes extends APIWrapper {
     try {
       const { data } = await axios.get('https://itunes.apple.com/search', {
         params: {
-          media: media,
-          term: term,
-          country: country,
+          media,
+          term,
+          country,
           limit: 10
         }
       })

@@ -685,7 +685,7 @@
     "price": "Price: {{price}} ({{currency}})",
     "release": "Release Date: {{date}}",
     "noText": "You have to give me media and search terms!"
-},
+  },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",
     "hereIsYourHentai": "Here's your hentai!"
