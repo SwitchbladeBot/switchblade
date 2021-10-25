@@ -1,5 +1,5 @@
 const { SwitchbladeEmbed, Command } = require('../../')
-const axios = require('axios')
+const Constants = require('../../utils/Constants')
 
 const MEDIA_WHITE_LIST = ['music', 'movies', 'shows', 'podcasts', 'books', 'authors', 'games']
 
@@ -25,35 +25,22 @@ module.exports = class TasteDive extends Command {
           }
         }, {
           type: 'string',
-          full: true
+          full: true,
         }
       ]
     }, client)
   }
 
-  async run ({ channel }, type, liking) {
-    const { data } = await axios.get('https://tastedive.com/api/similar', {
-      params: {
-        q: liking,
-        type,
-        limit: 10
-      }
-    })
+  async run ({ channel, t , message }, media, term) {
+    const data = await this.client.apis.tastedive.search(media , term)
 
-    const description = this.createDescription(data.Similar.Results)
-
-    const embed =
-        new SwitchbladeEmbed()
-          .setTitle(type.toUpperCase() + ' - ' + liking.toUpperCase())
-          .setDescription(description)
-
-    channel.send(embed)
+    channel.send(this.parseResponse(t , message.content , data))
   }
 
   parseResponse (t, title, data) {
     const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
-    const description = data.map(([item, index]) => `\`${formatNumber(index)}\`:  *${item.Name}*`).join('\n')
+    const description = data.map((item, index) => `\`${formatNumber(index)}\`:  *${item.Name}*`).join('\n')
 
     const embed = new SwitchbladeEmbed()
       .setTitle(t('commands:tastedive.title', { title: title }))
