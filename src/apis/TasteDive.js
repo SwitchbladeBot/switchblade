@@ -16,12 +16,10 @@ module.exports = class TasteDive extends APIWrapper {
         }
       })
 
-      if (data.results === 0) {
-        throw new Error()
-      }
+      if (data.results === 0) throw new Error()
 
       return data.Similar.Results
-    } catch (err) {
+    } catch {
       return []
     }
   }

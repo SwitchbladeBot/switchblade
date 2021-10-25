@@ -44,7 +44,6 @@ module.exports = class TasteDive extends Command {
 
     const embed =
         new SwitchbladeEmbed()
-          .setColor(this.embedColor)
           .setTitle(type.toUpperCase() + ' - ' + liking.toUpperCase())
           .setDescription(description)
 
@@ -54,15 +53,7 @@ module.exports = class TasteDive extends Command {
   parseResponse (t, title, data) {
     const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
-    let description = ''
-
-    let index = 1
-
-    for (const key in data) {
-      description += `\`${formatNumber(index)}\`:  *${data[key].Name}*\n`
-
-      index += 1
-    }
+    const description = data.map(([item, index]) => `\`${formatNumber(index)}\`:  *${item.Name}*`).join('\n')
 
     const embed = new SwitchbladeEmbed()
       .setTitle(t('commands:tastedive.title', { title: title }))
