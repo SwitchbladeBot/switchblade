@@ -1,7 +1,7 @@
 const { APIWrapper } = require('../')
 const axios = require('axios')
 
-module.exports = class BingAPI extends APIWrapper {
+module.exports = class BingImages extends APIWrapper {
   constructor () {
     super({
       name: 'bingimages',
@@ -10,7 +10,10 @@ module.exports = class BingAPI extends APIWrapper {
   }
 
   async searchImage (query) {
-    return axios.get(`https://api.bing.microsoft.com/v7.0/images/search?q=${query}`, {
+    return axios.get('https://api.bing.microsoft.com/v7.0/images/search', {
+      params: {
+        q: query
+      },
       headers: {
         'Ocp-Apim-Subscription-Key': process.env.BING_API_KEY
       }

@@ -9,6 +9,10 @@ module.exports = class VinDecoderAPI extends APIWrapper {
   }
 
   async getVIN (query) {
-    return axios.get(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/${query}?format=json`).then(res => res.data)
+    return axios.get(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/${query}`, {
+      params: {
+        format: 'json'
+      }
+    }).then(res => res.data)
   }
 }

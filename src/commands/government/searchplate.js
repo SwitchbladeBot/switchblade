@@ -26,7 +26,7 @@ module.exports = class searchPlate extends Command {
       const plateType = plateRegex.test(plt)
         ? await CanvasTemplates.oldPlate(plate.placa.replace(/(....)$/, '-$1'), `${plate.uf || plate.uf_placa} - ${plate.municipio.toUpperCase()}`)
         : await CanvasTemplates.plateMercosul(plate.placa, `https://cdn.jsdelivr.net/gh/bgeneto/bandeiras-br/imagens/${plate.uf || plate.uf_placa}.png`)
-      const newpic = await this.client.apis.bingimages.searchImage(`${plate.anoModelo} ${plate.modelo.replace('I/', '')}`)
+      const newpic = await this.client.apis.bingimages.searchImage(`${plate.anoModelo} ${(plate.modelo.replace('I/', ''))}`)
       const attach = new MessageAttachment(plateType, 'plate.png')
       const embed = new SwitchbladeEmbed()
       // i don't like if's gonna change it to something else
