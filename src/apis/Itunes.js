@@ -17,12 +17,10 @@ module.exports = class ITunes extends APIWrapper {
         }
       })
 
-      if (data.results === 0) {
-        throw new Error()
-      }
+      if (data.results === 0) throw new Error()
 
       return data.results
-    } catch (err) {
+    } catch {
       return []
     }
   }

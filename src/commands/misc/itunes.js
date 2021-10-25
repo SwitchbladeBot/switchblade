@@ -1,4 +1,4 @@
-const { SwitchbladeEmbed, Command } = require('../../')
+const { SwitchbladeEmbed, Command, Constants } = require('../../')
 
 const MEDIA_WHITE_LIST = ['movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm', 'tvShow', 'software', 'ebook', 'all']
 
@@ -7,6 +7,7 @@ module.exports = class Itunes extends Command {
     super({
       name: 'itunes',
       requirements: { apis: ['itunes'] },
+      embedLogoURL: 'https://i.imgur.com/U4jjk5F.png',
       parameters: [{
         type: 'string',
         full: false,
@@ -35,8 +36,6 @@ module.exports = class Itunes extends Command {
       }]
     },
     client)
-
-    this.embedUrl = 'https://i.imgur.com/U4jjk5F.png'
   }
 
   async run (context, media, term, country = 'US') {
@@ -58,11 +57,12 @@ module.exports = class Itunes extends Command {
   async parseResponse ({ channel, author, t }, data, title) {
     const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
-    const description = data.map(([item, index]) => `\`${formatNumber(index)}\`: ${this.searchResultFormatter(item)}`).join('\n')
+    const description = data.map((item, index) => `\`${formatNumber(index)}\`: ${this.searchResultFormatter(item)}`)
 
     const embed = new SwitchbladeEmbed(author)
       .setThumbnail(this.embedUrl)
       .setDescription(description)
+      .setColor(Constants.ITUNES_COLOR)
       .setTitle(t('commands:itunes.title', { title }))
 
     channel.send(embed)
