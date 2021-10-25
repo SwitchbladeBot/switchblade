@@ -1966,5 +1966,51 @@
     "categoryObese1": "Obese Class I (Moderately obese)",
     "categoryObese2": "Obese Class II (Severely obese)",
     "categoryObese3": "Obese Class III (Very severely obese)"
+  },
+  "flightradar24": {
+    "commandDescription": "Searches for an aircraft on Flightradar24.",
+    "commandUsage": "<aircraft registration/aircraft ICAO code/aircraft callsign>",
+    "airline": "Airline",
+    "live": "Live",
+    "locatedIn": "Located in",
+    "expectedArrival": "Expected arrival",
+    "copyright": "Copyright ©",
+    "dataBy": "Data by",
+    "photoBy": "Photo by",
+    "departed": "Departed",
+    "notFound": "Aircraft not found",
+    "noCallsign": "NO CALLSIGN"
+  },
+  "drawcard": {
+    "commandDescription": "Generates a random set of cards.",
+    "commandUsage": "<amount of cards>",
+    "title": "Drew {{number}} cards.",
+    "missingNumber": "You need to give me a number between 1 and 10.",
+    "card0": "Ace",
+    "card11": "Jack",
+    "card12": "Queen",
+    "card13": "King"
+  },
+  "brew": {
+    "commandUsage": "<formulae>",
+    "commandDescription": "Returns homebrew data for a given formulae",
+    "title": "Homebrew Info For {{name}}",
+    "description": "Description",
+    "analytics": "Analytics",
+    "30d": "30 Day Downloads",
+    "90d": "90 Day Downloads",
+    "365d": "365 Day Downloads",
+    "links": "Links",
+    "homebrewLink": "Homebrew Link",
+    "homePage": "Home Page",
+    "missingFormulae": "You have to specify a valid formulae.",
+    "invalidFormulae": "This formulae is unknown please try another."
+  },
+  "howlongtobeat": {
+    "title": "How long to beat {{game}}",
+    "commandDescription": "Calculates the length of time it takes to beat a game",
+    "commandUsage": "<game>",
+    "missingGame": "You have to specify a valid game.",
+    "invalidGame": "Could not find the game you specified. Please, try another one."
   }
 }
