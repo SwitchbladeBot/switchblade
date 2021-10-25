@@ -1,5 +1,4 @@
 const { SwitchbladeEmbed, Command } = require('../../')
-const Constants = require('../../utils/Constants')
 
 const MEDIA_WHITE_LIST = ['music', 'movies', 'shows', 'podcasts', 'books', 'authors', 'games']
 
@@ -13,19 +12,19 @@ module.exports = class TasteDive extends Command {
           type: 'string',
           full: false,
           whitelist: MEDIA_WHITE_LIST,
-          missingError: "commands:searchplate.notFound"
+          missingError: 'commands:searchplate.notFound'
         }, {
           type: 'string',
-          full: true,
+          full: true
         }
       ]
     }, client)
   }
 
-  async run ({ channel, t , message }, media, term) {
-    const data = await this.client.apis.tastedive.search(media , term)
+  async run ({ channel, t, message }, media, term) {
+    const data = await this.client.apis.tastedive.search(media, term)
 
-    channel.send(this.parseResponse(t , message.content , data))
+    channel.send(this.parseResponse(t, message.content, data))
   }
 
   parseResponse (t, title, data) {
