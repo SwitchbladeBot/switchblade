@@ -2,6 +2,8 @@ const { SwitchbladeEmbed, Command, Constants } = require('../../')
 
 const MEDIA_WHITE_LIST = ['movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm', 'tvShow', 'software', 'ebook', 'all']
 
+const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
+
 module.exports = class Itunes extends Command {
   constructor (client) {
     super({
@@ -41,7 +43,7 @@ module.exports = class Itunes extends Command {
   async run (context, media, term, country = 'US') {
     const data = await this.client.apis.itunes.search(media, term, country)
 
-    this.parseResponse(context, await data, context.message.content)
+    this.parseResponse(context, data, context.message.content)
   }
 
   searchResultFormatter (i) {
@@ -55,7 +57,6 @@ module.exports = class Itunes extends Command {
   }
 
   async parseResponse ({ channel, author, t }, data, title) {
-    const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
     const description = data.map((item, index) => `\`${formatNumber(index)}\`: ${this.searchResultFormatter(item)}`)
 
