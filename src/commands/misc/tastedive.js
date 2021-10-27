@@ -1,6 +1,7 @@
-const { SwitchbladeEmbed, Command } = require('../../')
+const { SwitchbladeEmbed, Command} = require('../../')
 
 const MEDIA_WHITE_LIST = ['music', 'movies', 'shows', 'podcasts', 'books', 'authors', 'games']
+const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
 module.exports = class TasteDive extends Command {
   constructor (client) {
@@ -12,10 +13,19 @@ module.exports = class TasteDive extends Command {
           type: 'string',
           full: false,
           whitelist: MEDIA_WHITE_LIST,
-          missingError: 'commands:searchplate.notFound'
+          missingError: ({ t, prefix }) => {
+            return new SwitchbladeEmbed()
+              .setTitle(t('commands:tastedive.noMedia'))
+              .setDescription([
+                this.usage(t, prefix),
+                '',
+                `__**${t('commands:tastedive.availableMedia')}:**__`,
+                `**${MEDIA_WHITE_LIST.map(l => `\`${l}\``).join(', ')}**`
+              ].join('\n'))
+          }
         }, {
           type: 'string',
-          full: true
+          full: true,
         }
       ]
     }, client)
@@ -28,12 +38,11 @@ module.exports = class TasteDive extends Command {
   }
 
   parseResponse (t, title, data) {
-    const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
-    const description = data.map((item, index) => `\`${formatNumber(index)}\`:  *${item.Name}*`).join('\n')
+    const description = data.map(([item, index]) => `\`${formatNumber(index)}\`:  *${item.Name}*`).join('\n')
 
     const embed = new SwitchbladeEmbed()
-      .setTitle(t('commands:tastedive.title', { title: title }))
+      .setTitle(t('commands:tastedive.title', { title }))
       .setDescription(description)
 
     return embed
