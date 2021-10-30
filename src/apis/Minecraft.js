@@ -1,6 +1,5 @@
 const { APIWrapper } = require('../')
 const axios = require('axios')
-const moment = require('moment')
 
 module.exports = class Minecraft extends APIWrapper {
   constructor () {
@@ -10,15 +9,13 @@ module.exports = class Minecraft extends APIWrapper {
   }
 
   async nameToUUID (name) {
-    const { data } = await axios(`https://api.mojang.com/users/profiles/minecraft/${name}?at=${moment().format('x')}`)
+    const { data } = await axios(`https://api.mojang.com/users/profiles/minecraft/${name}`)
     if (data.id) return { uuid: data.id, name: data.name }
-    return false
   }
 
   async uuidToName (uuid) {
     const { data } = await axios(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`)
-    if (data.id) return { uuid: data.id, name: data.name }
-    return false
+    return data.id ? { uuid: data.id, name: data.name } : null
   }
 
   async getPreviousNames (uuid) {
