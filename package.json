@@ -39,7 +39,7 @@
     "ascii-table": "0.0.9",
     "axios": "^0.21.4",
     "brainfuck-node": "^1.0.2",
-    "chalk": "^4.1.2",
+    "bunyan": "^1.8.15",
     "cheerio": "^1.0.0-rc.10",
     "cldr-core": "^39.0.0",
     "cldr-localenames-modern": "^39.0.0",
@@ -53,6 +53,7 @@
     "gifencoder": "^2.0.1",
     "google-play-scraper": "^8.0.4",
     "googleapis": "^87.0.0",
+    "howlongtobeat": "^1.5.0",
     "i18n-iso-countries": "^6.8.0",
     "i18next": "^21.2.0",
     "i18next-node-fs-backend": "^2.1.3",
@@ -61,7 +62,6 @@
     "iso-639": "^0.2.2",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21",
     "mal-scraper": "^2.11.3",
     "mathjs": "^9.5.0",
     "moment": "^2.29.1",
@@ -81,7 +81,7 @@
     "snoowrap": "^1.23.0",
     "splitargs": "0.0.7",
     "steamapi": "^2.1.3",
-    "steamladder": "^1.0.4",
+    "steamladder": "^1.0.7",
     "transform-props": "^1.0.1",
     "turndown": "^7.1.1",
     "uws": "^200.0.0",
@@ -111,7 +111,7 @@
   "optionalDependencies": {
     "@discordjs/uws": "^11.149.1",
     "canvas": "^2.8.0",
-    "erlpack": "github:discordapp/erlpack",
+    "erlpack": "github:discord/erlpack",
     "node-opus": "^0.3.3"
   }
 }

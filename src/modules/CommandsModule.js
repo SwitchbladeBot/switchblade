@@ -1,7 +1,6 @@
 const { Module } = require('../')
 const { Role } = require('discord.js')
-
-const _ = require('lodash')
+const MiscUtils = require('../utils/MiscUtils')
 
 // Helpers
 const parseString = (s) => s.replace(/\s+/g, '__')
@@ -284,7 +283,7 @@ module.exports = class CommandsModule extends Module {
     // Check
     const { whitelist, blacklist } = values
     const valid = validate(whitelist) && validate(blacklist)
-    if (!valid || whitelist.find(v => blacklist.find(oV => _.isEqual(v, oV)))) throw new Error('INVALID_LIST')
+    if (!valid || whitelist.find(v => blacklist.find(oV => MiscUtils.isEqual(v, oV)))) throw new Error('INVALID_LIST')
 
     // Clear?
     const path = cmd !== 'all' ? isCategory ? categoriesPath(parseString(command)) : commandsPath(parseName(command)) : 'all'

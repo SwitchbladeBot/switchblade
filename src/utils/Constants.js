@@ -41,8 +41,17 @@ module.exports = {
   WIKIPEDIA_COLOR: '#e6e6e8',
   STEAM_COLOR: '#1b2838',
   MERRIAM_WEBSTER_COLOR: '#375c71',
+  FIVEM_COLOR: '#ff8637',
+  IDLE_AIRCRAFT_COLOR: '#f8c023',
+  DRAWCARD_COLOR: '#F06161',
+  HOMEBREW_COLOR: '#C86E38',
+  HOW_LONG_TO_BEAT_COLOR: '#91A1F4',
 
   // Emojis
+  CLUBS: '♣️',
+  RED_HEART: '❤️',
+  SPADES: '♠️',
+  RED_DIAMOND: '♦️',
 
   // Common
   UNKNOWN_COUNTRY_FLAG: '<:missingflag:513764139412357130>',
