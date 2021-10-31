@@ -675,15 +675,9 @@
   "itunes": {
     "commandDescription": "Provides the content within the iTunes Store and Apple Books Store.",
     "commandUsage": "<media> <term> <country code>",
-    "example": "s!itunes ebook Famous Five",
-    "place": "Itunes Store",
     "title": "Showing Results for {{title}}.",
-    "track": "{{name}} - {{artistName}}",
     "noMedia": "You will have to give me a valid type of media",
     "availableMedia": "All the available media's are",
-    "ratingCount": "Rating Count: {{count}}",
-    "price": "Price: {{price}} ({{currency}})",
-    "release": "Release Date: {{date}}",
     "noText": "You have to give me media and search terms!",
     "notFound": "I wasn't able to find the term with the given media!'"
   },
