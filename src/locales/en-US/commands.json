@@ -677,8 +677,6 @@
     "commandUsage": "<media> <liking>",
     "place": "TasteDive",
     "title": "Showing Results for {{title}}.",
-    "noMedia": "You will have to give me a valid type of media",
-    "availableMedia": "All the available media's are",
     "noText": "You have to give me media and search terms!",
     "notFound": "I was not able to find your liking with the provided media!"
   },
