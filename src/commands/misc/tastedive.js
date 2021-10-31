@@ -1,7 +1,6 @@
 const { SwitchbladeEmbed, Command} = require('../../')
 
 const MEDIA_WHITE_LIST = ['music', 'movies', 'shows', 'podcasts', 'books', 'authors', 'games']
-const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
 
 module.exports = class TasteDive extends Command {
   constructor (client) {
@@ -38,8 +37,7 @@ module.exports = class TasteDive extends Command {
   }
 
   parseResponse (t, title, data) {
-
-    const description = data.map(([item, index]) => `\`${formatNumber(index)}\`:  *${item.Name}*`).join('\n')
+    const description = data.map((item, index) => `\`${String(index).padStart(2, '0')}\`:  *${item.Name}*`).join('\n')
 
     const embed = new SwitchbladeEmbed()
       .setTitle(t('commands:tastedive.title', { title }))
