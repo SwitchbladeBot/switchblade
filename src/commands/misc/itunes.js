@@ -2,8 +2,6 @@ const { SwitchbladeEmbed, Command, Constants } = require('../../')
 
 const MEDIA_WHITE_LIST = ['movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm', 'tvShow', 'software', 'ebook', 'all']
 
-const formatNumber = (n) => Number(n) > 9 ? n : '0' + n
-
 module.exports = class Itunes extends Command {
   constructor (client) {
     super({
@@ -57,8 +55,7 @@ module.exports = class Itunes extends Command {
   }
 
   async parseResponse ({ channel, author, t }, data, title) {
-
-    const description = data.map((item, index) => `\`${formatNumber(index)}\`: ${this.searchResultFormatter(item)}`)
+    const description = data.map((item, index) => `\`${String(index).padStart(2, '0')}\`: ${this.searchResultFormatter(item)}`)
 
     const embed = new SwitchbladeEmbed(author)
       .setThumbnail(this.embedUrl)
