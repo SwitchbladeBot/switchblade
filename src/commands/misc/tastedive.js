@@ -12,16 +12,7 @@ module.exports = class TasteDive extends Command {
           type: 'string',
           full: false,
           whitelist: MEDIA_WHITE_LIST,
-          missingError: ({ t, prefix }) => {
-            return new SwitchbladeEmbed()
-              .setTitle(t('commands:tastedive.noMedia'))
-              .setDescription([
-                this.usage(t, prefix),
-                '',
-                `__**${t('commands:tastedive.availableMedia')}:**__`,
-                `**${MEDIA_WHITE_LIST.map(l => `\`${l}\``).join(', ')}**`
-              ].join('\n'))
-          }
+          missingError: 'commands:searchplate.notFound' 
         }, {
           type: 'string',
           full: true,
