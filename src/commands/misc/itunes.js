@@ -13,7 +13,7 @@ module.exports = class Itunes extends Command {
         full: false,
         name: 'media',
         whitelist: MEDIA_WHITE_LIST,
-        missingError: 'commands:searchplate.notFound',
+        missingError: 'commands:itunes.notFound',
         required: true
       }, {
         type: 'string',
