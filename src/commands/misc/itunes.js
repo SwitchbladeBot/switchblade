@@ -13,15 +13,7 @@ module.exports = class Itunes extends Command {
         full: false,
         name: 'media',
         whitelist: MEDIA_WHITE_LIST,
-        missingError: ({ t, prefix }) => {
-          return new SwitchbladeEmbed().setTitle(t('commands:itunes.noMedia'))
-            .setDescription([
-              this.usage(t, prefix),
-              '',
-              `__**${t('commands:itunes.availableMedia')}:**__`,
-              `**${MEDIA_WHITE_LIST.map(l => `\`${l}\``).join(', ')}**`
-            ].join('\n'))
-        },
+        missingError: 'commands:searchplate.notFound',
         required: true
       }, {
         type: 'string',
