@@ -1,4 +1,4 @@
-const { SwitchbladeEmbed, Command, Constants } = require('../../')
+const { SwitchbladeEmbed, Command, Constants, CommandError } = require('../../')
 
 const MEDIA_WHITE_LIST = ['movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm', 'tvShow', 'software', 'ebook', 'all']
 
@@ -31,7 +31,11 @@ module.exports = class Itunes extends Command {
   }
 
   async run (context, media, term, country = 'US') {
-    const data = await this.client.apis.itunes.search(media, term, country)
+    const data = Array.from(await this.client.apis.itunes.search(media, term, country))
+
+    if(data.length == 0){
+      throw new CommandError(context.t("commands:itunes.noResults"))
+    }
 
     this.parseResponse(context, data, context.message.content)
   }

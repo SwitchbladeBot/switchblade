@@ -675,7 +675,8 @@
   "itunes": {
     "commandDescription": "Provides the content within the iTunes Store and Apple Books Store.",
     "commandUsage": "<media> <term> <country code>",
-    "notFound": "I wasn't able to find the term with the given media!'"
+    "notFound": "I wasn't able to find the term with the given media.",
+    "noResults": "No reults found."
   },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",
