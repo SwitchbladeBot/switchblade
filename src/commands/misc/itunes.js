@@ -33,8 +33,8 @@ module.exports = class Itunes extends Command {
   async run (context, media, term, country = 'US') {
     const data = Array.from(await this.client.apis.itunes.search(media, term, country))
 
-    if(data.length == 0){
-      throw new CommandError(context.t("commands:itunes.noResults"))
+    if (data.length === 0) {
+      throw new CommandError(context.t('commands:itunes.noResults'))
     }
 
     this.parseResponse(context, data, context.message.content)
