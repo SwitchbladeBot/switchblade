@@ -677,7 +677,6 @@
     "commandUsage": "<media> <liking>",
     "title": "Showing Results for {{title}}.",
     "noText": "You have to give me media and search terms!",
-    "notFound": "I was not able to find your liking with the provided media!"
   },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",

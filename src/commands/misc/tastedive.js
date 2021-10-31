@@ -12,12 +12,12 @@ module.exports = class TasteDive extends Command {
           type: 'string',
           full: false,
           whitelist: MEDIA_WHITE_LIST,
-          missingError: 'commands:tastedive.notFound' 
+          missingError: 'commands:tastedive.noText' 
         }, {
           type: 'string',
           full: true,
           required: true,
-          missingError: 'commands:tastedive.notFound' 
+          missingError: 'commands:tastedive.noText' 
         }
       ]
     }, client)
