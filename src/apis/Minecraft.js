@@ -10,8 +10,7 @@ module.exports = class Minecraft extends APIWrapper {
 
   async nameToUUID (name) {
     const { data } = await axios(`https://api.mojang.com/users/profiles/minecraft/${name}`)
-    if (data.id) return { uuid: data.id, name: data.name }
-    return null
+    return data.id ? { uuid: data.id, name: data.name } : null
   }
 
   async uuidToName (uuid) {
