@@ -1017,7 +1017,8 @@
         "commandUsage": "<username/UUID>",
         "noName": "You have to give me a username or a UUID.",
         "unknownName": "Name or UUID not found.",
-        "title": "{{name}}'s skin!"
+        "title": "{{name}}'s skin!",
+        "thanks": "Thank you to [Crafatar]({{url}}) for providing the avatars."
       },
       "namehistory": {
         "commandDescription": "Shows the previous names of a Minecraft player, by username or UUID.",
@@ -2010,5 +2011,12 @@
     "homePage": "Home Page",
     "missingFormulae": "You have to specify a valid formulae.",
     "invalidFormulae": "This formulae is unknown please try another."
+  },
+  "howlongtobeat": {
+    "title": "How long to beat {{game}}",
+    "commandDescription": "Calculates the length of time it takes to beat a game",
+    "commandUsage": "<game>",
+    "missingGame": "You have to specify a valid game.",
+    "invalidGame": "Could not find the game you specified. Please, try another one."
   }
 }
