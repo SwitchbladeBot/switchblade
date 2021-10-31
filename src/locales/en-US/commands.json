@@ -672,11 +672,9 @@
     "commandUsage": "<text>",
     "noText": "You have to give me some text to asciify!"
   },
-  "itunes": {
-    "commandDescription": "Provides the content within the iTunes Store and Apple Books Store.",
-    "commandUsage": "<media> <term> <country code>",
-    "notFound": "I wasn't able to find the term with the given media.",
-    "noResults": "No reults found."
+  "lorem": {
+    "commandDescription": "Generates a random lorem text with speciifed number of paragraphs",
+    "commandUsage": "<no of paragraphs>"
   },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",
