@@ -16,6 +16,8 @@ module.exports = class TasteDive extends Command {
         }, {
           type: 'string',
           full: true,
+          required: true,
+          missingError: 'commands:tastedive.notFound' 
         }
       ]
     }, client)
