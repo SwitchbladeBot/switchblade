@@ -7,20 +7,16 @@ module.exports = class TasteDive extends APIWrapper {
   }
 
   async search (type, q) {
-    try {
-      const { data } = await axios.get('https://tastedive.com/api/similar', {
-        params: {
-          type,
-          q,
-          limit: 10
-        }
-      })
+    const { data } = await axios.get('https://tastedive.com/api/similar', {
+      params: {
+        type,
+        q,
+        limit: 10
+      }
+    })
 
-      if (!data.results) throw new Error()
+    if (!data.Similar.Results) throw new Error()
 
-      return data.Similar.Results
-    } catch {
-      return []
-    }
+    return data.Similar.Results
   }
 }

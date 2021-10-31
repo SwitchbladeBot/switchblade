@@ -1,4 +1,4 @@
-const { SwitchbladeEmbed, Command} = require('../../')
+const { SwitchbladeEmbed, Command , CommandError} = require('../../')
 
 const MEDIA_WHITE_LIST = ['music', 'movies', 'shows', 'podcasts', 'books', 'authors', 'games']
 
@@ -24,7 +24,11 @@ module.exports = class TasteDive extends Command {
   }
 
   async run ({ channel, t, message }, media, term) {
-    const data = await this.client.apis.tastedive.search(media, term)
+    const data = Array.from(await this.client.apis.tastedive.search(media, term))
+
+    if(data.length == 0){
+      throw new CommandError(t("commands:tastedive.noResults"))
+    }
 
     channel.send(this.parseResponse(t, message.content, data))
   }
