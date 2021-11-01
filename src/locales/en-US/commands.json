@@ -673,10 +673,10 @@
     "noText": "You have to give me some text to asciify!"
   },
   "lorem": {
-    "commandDescription": "Generates a random lorem ipsum text with the specified amount of paragraphs.",
-    "commandUsage": "<number of paragraphs>",
-    "noNumber": "Number of paragraphs to generate is missing!",
-    "exceededNumber": "Number of paragraphs should be in a range of 1 to 4096"
+    "commandDescription": "Generates a random lorem ipsum text with the specified amount of words.",
+    "commandUsage": "<number of words>",
+    "noNumber": "Number of words to generate is missing!",
+    "exceededNumber": "Number of words should be in a range of 1 to 4096"
   },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",

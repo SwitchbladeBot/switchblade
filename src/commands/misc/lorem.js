@@ -17,12 +17,12 @@ module.exports = class Lorem extends Command {
     this.lorem = new LoremIpsum()
   }
 
-  async run ({ channel , t}, paragraphs) {
-    if(paragraphs > 4096 || paragraphs < 1){
+  async run ({ channel , t}, words) {
+    if(words > 4096 || words < 1){
       throw new CommandError(t("commands:lorem.exceededNumber"))
     }
     const embed = new SwitchbladeEmbed()
-      .setDescription(this.lorem.generateParagraphs(paragraphs))
+      .setDescription(this.lorem.generateWords(words))
 
     channel.send(embed)
   }
