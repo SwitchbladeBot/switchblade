@@ -10,7 +10,8 @@ module.exports = class Lorem extends Command {
         full: true,
         missingError: 'commands:lorem.noNumber',
         required: false,
-        default: 2
+        min: 1,
+        max: 100,
       }]
     },
     client)
@@ -19,6 +20,10 @@ module.exports = class Lorem extends Command {
   }
 
   async run ({ channel, t }, words) {
+    if(words === undefined) {
+      words = 20
+    }
+
     if (words > 4096 || words < 1) {
       throw new CommandError(t('commands:lorem.exceededNumber'))
     }
