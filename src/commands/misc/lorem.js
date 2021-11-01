@@ -11,7 +11,7 @@ module.exports = class Lorem extends Command {
         missingError: 'commands:lorem.noNumber',
         required: false,
         min: 1,
-        max: 100,
+        max: 10,
       }]
     },
     client)
@@ -19,16 +19,15 @@ module.exports = class Lorem extends Command {
     this.lorem = new LoremIpsum()
   }
 
-  async run ({ channel, t }, words) {
-    if(words === undefined) {
-      words = 20
+  async run ({ channel, t }, paragraphs) {
+    if(paragraphs === undefined) {
+      paragraphs = 2
     }
 
-    if (words > 4096 || words < 1) {
-      throw new CommandError(t('commands:lorem.exceededNumber'))
-    }
+    const loremString = this.lorem.generateParagraphs(paragraphs)
+
     const embed = new SwitchbladeEmbed()
-      .setDescription(this.lorem.generateWords(words))
+      .setDescription(loremString)
 
     channel.send(embed)
   }
