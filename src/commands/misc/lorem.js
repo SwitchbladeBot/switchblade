@@ -9,7 +9,7 @@ module.exports = class Lorem extends Command {
         type: 'number',
         full: true,
         missingError: 'commands:lorem.noNumber',
-        required: true,
+        required: false,
         default: 2
       }]
     },
