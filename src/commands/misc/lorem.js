@@ -1,5 +1,5 @@
-const { SwitchbladeEmbed, Command } = require('../../')
-const LoremIpsum = require('lorem-ipsum').LoremIpsum
+const { SwitchbladeEmbed, Command, CommandError } = require('../../')
+const { LoremIpsum } = require('lorem-ipsum')
 
 module.exports = class Lorem extends Command {
   constructor (client) {
@@ -8,7 +8,7 @@ module.exports = class Lorem extends Command {
       parameters: [{
         type: 'number',
         full: true,
-        missingError: 'commands:lorem.notFound',
+        missingError: 'commands:lorem.noNumber',
         required: true
       }]
     },
@@ -17,7 +17,10 @@ module.exports = class Lorem extends Command {
     this.lorem = new LoremIpsum()
   }
 
-  async run ({ channel }, paragraphs) {
+  async run ({ channel , t}, paragraphs) {
+    if(paragraphs > 4096 || paragraphs < 1){
+      throw new CommandError(t("commands:lorem.exceededNumber"))
+    }
     const embed = new SwitchbladeEmbed()
       .setDescription(this.lorem.generateParagraphs(paragraphs))
 
