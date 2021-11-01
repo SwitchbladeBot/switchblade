@@ -17,21 +17,27 @@ module.exports = class Itunes extends Command {
         required: true
       }, {
         type: 'string',
-        full: true,
-        name: 'term',
+        full: false,
+        name: 'country',
         required: true
       }, {
         type: 'string',
-        full: false,
-        name: 'country',
-        required: false
+        full: true,
+        name: 'term',
+        required: true
       }]
     },
     client)
   }
 
-  async run (context, media, term, country = 'US') {
-    const data = Array.from(await this.client.apis.itunes.search(media, term, country))
+  async run (context, media, country, term) {
+    term = term.replaceAll(" " , "+")
+
+    const [data , response] = Array.from(await this.client.apis.itunes.search(media, term, country))
+
+    if(!response) {
+      throw new CommandError(context.t("commands:itunes.invalidTerm"))
+    }
 
     if (data.length === 0) {
       throw new CommandError(context.t('commands:itunes.noResults'))

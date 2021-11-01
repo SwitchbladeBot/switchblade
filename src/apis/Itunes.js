@@ -7,15 +7,19 @@ module.exports = class ITunes extends APIWrapper {
   }
 
   async search (media, term, country) {
-    const { data } = await axios.get('https://itunes.apple.com/search', {
-      params: {
-        media,
-        term,
-        country,
-        limit: 10
-      }
-    })
+    try{
+      const { data } = await axios.get('https://itunes.apple.com/search', {
+        params: {
+          media,
+          term,
+          country,
+          limit: 10
+        }
+      })
 
-    return data.results
+      return [data.results , true]
+    } catch {
+      return [[] , false]
+    }
   }
 }
