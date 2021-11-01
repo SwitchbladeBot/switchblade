@@ -9,7 +9,8 @@ module.exports = class Lorem extends Command {
         type: 'number',
         full: true,
         missingError: 'commands:lorem.noNumber',
-        required: true
+        required: true,
+        default: 2
       }]
     },
     client)
@@ -17,9 +18,9 @@ module.exports = class Lorem extends Command {
     this.lorem = new LoremIpsum()
   }
 
-  async run ({ channel , t}, words) {
-    if(words > 4096 || words < 1){
-      throw new CommandError(t("commands:lorem.exceededNumber"))
+  async run ({ channel, t }, words) {
+    if (words > 4096 || words < 1) {
+      throw new CommandError(t('commands:lorem.exceededNumber'))
     }
     const embed = new SwitchbladeEmbed()
       .setDescription(this.lorem.generateWords(words))
