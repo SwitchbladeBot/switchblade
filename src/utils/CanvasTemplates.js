@@ -765,7 +765,16 @@ module.exports = class CanvasTemplates {
     const canvas = createCanvas(WIDTH, HEIGHT)
     const ctx = canvas.getContext('2d')
     ctx.drawImage(image, 0, 0, WIDTH, HEIGHT)
-    ctx.drawImage(hand, WIDTH - hand.width, HEIGHT - hand.height, hand.width, hand.height)
+
+    let HAND_WIDTH = WIDTH * 0.6
+    let HAND_HEIGHT = HAND_WIDTH
+
+    if (WIDTH > HEIGHT) {
+      HAND_HEIGHT = HEIGHT * 0.6
+      HAND_WIDTH = HAND_HEIGHT
+    }
+
+    ctx.drawImage(hand, WIDTH - HAND_WIDTH, HEIGHT - HAND_HEIGHT, HAND_WIDTH, HAND_HEIGHT)
     return canvas.toBuffer()
   }
 

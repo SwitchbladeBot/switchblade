@@ -4,7 +4,7 @@ module.exports = class e621 extends Command {
   constructor (client) {
     super({
       name: 'e621',
-      category: 'nsfw',
+      category: 'general',
       requirements: {
         apis: ['e621']
       },

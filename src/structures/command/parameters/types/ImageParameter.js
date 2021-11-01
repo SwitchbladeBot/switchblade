@@ -5,6 +5,7 @@ const CommandError = require('../../CommandError.js')
 const { URL } = require('url')
 const fetch = require('node-fetch')
 const AbortController = require('abort-controller')
+const { EMOJI_REGEX } = require('./EmojiParameter.js')
 
 const isValidURL = (q) => {
   try {
@@ -41,6 +42,7 @@ module.exports = class ImageParameter extends Parameter {
       url: defVal(options, 'url', false),
       attachment: defVal(options, 'attachment', true),
       link: defVal(options, 'link', true),
+      emoji: defVal(options, 'emoji', true),
       userOptions: user ? UserParameter.parseOptions(options.userOptions) : null,
       authorAvatar: defVal(options, 'authorAvatar', true),
       avatarFormat: defVal(options, 'avatarFormat', 'jpg'),
@@ -76,7 +78,7 @@ module.exports = class ImageParameter extends Parameter {
         const buffer = await imageRequest(attachment.url, client)
         return buffer
       } catch (e) {
-        client.logError(e)
+        client.logger.error(e)
         throw new CommandError(t('errors:imageParsingError'))
       }
     }
@@ -89,7 +91,7 @@ module.exports = class ImageParameter extends Parameter {
           const buffer = await imageRequest(arg, client)
           return buffer
         } catch (e) {
-          client.logError(e)
+          client.logger.error(e)
           throw new CommandError(t('errors:invalidImageLink'), this.showUsage)
         }
       }
@@ -104,10 +106,30 @@ module.exports = class ImageParameter extends Parameter {
               const buffer = await imageRequest(user.displayAvatarURL({ format: this.avatarFormat }), client)
               return buffer
             } catch (e) {
-              client.logError(e)
+              client.logger.error(e)
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
+        } catch (e) {}
+      }
+
+      if (this.emoji) {
+        try {
+          let url
+
+          if (EMOJI_REGEX.test(arg)) {
+            const regexResult = EMOJI_REGEX.exec(arg)
+            const [, , , id] = regexResult
+            url = `https://cdn.discordapp.com/emojis/${id}.png`
+          } else {
+            const codePoints = Array.from(arg)
+              .map((v) => v.codePointAt(0).toString(16))
+
+            url = `https://twemoji.maxcdn.com/v/13.0.1/72x72/${codePoints.join('-')}.png`
+          }
+
+          const buffer = await imageRequest(url, client)
+          return buffer
         } catch (e) {}
       }
     }
@@ -126,7 +148,7 @@ module.exports = class ImageParameter extends Parameter {
               const buffer = await imageRequest(attachment.url, client)
               return buffer
             } catch (e) {
-              client.logError(e)
+              client.logger.error(e)
               throw new CommandError(t('errors:imageParsingError'))
             }
           }
@@ -146,7 +168,7 @@ module.exports = class ImageParameter extends Parameter {
                 const buffer = await imageRequest(url, client)
                 return buffer
               } catch (e) {
-                client.logError(e)
+                client.logger.error(e)
                 throw new CommandError(t('errors:imageParsingError'))
               }
             }
@@ -163,7 +185,7 @@ module.exports = class ImageParameter extends Parameter {
         const buffer = await imageRequest(author.displayAvatarURL({ format: this.avatarFormat }), client)
         return buffer
       } catch (e) {
-        client.logError(e)
+        client.logger.error(e)
         throw new CommandError(t('errors:imageParsingError'))
       }
     }

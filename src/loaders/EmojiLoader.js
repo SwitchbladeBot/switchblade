@@ -15,7 +15,7 @@ module.exports = class EmojiLoader extends Loader {
       this.client.officialEmojis.get = this.getEmoji
       return true
     } catch (e) {
-      this.logError(e)
+      this.client.logger.error(e)
     }
     return false
   }
@@ -25,7 +25,7 @@ module.exports = class EmojiLoader extends Loader {
    */
   async getAndStoreEmojis () {
     const emojiGuilds = process.env.EMOJI_GUILDS && process.env.EMOJI_GUILDS.split(',')
-    if (!emojiGuilds) return this.log('Required emojis not loaded - Required environment variable "EMOJI_GUILDS" is not set.', { color: 'red', tags: ['Emojis'] })
+    if (!emojiGuilds) return this.client.logger.warn({ tag: 'Emojis' }, 'Required emojis not loaded - Required environment variable "EMOJI_GUILDS" is not set.')
 
     await Promise.all(emojiGuilds.map(async guild => {
       return fetch(`${this.client.options.http.api}/v${this.client.options.http.version}/guilds/${guild}/emojis`, {
@@ -34,13 +34,13 @@ module.exports = class EmojiLoader extends Loader {
         }
       }).then(res => res.json()).then(emojis => {
         if (emojis) this.officialEmojis = this.officialEmojis.concat(emojis)
-        this.log(`Loaded ${emojis.length || 0} emojis from ${guild}.`, { color: 'green', tags: ['Emojis'] })
+        this.client.logger.info({ tag: 'Emojis' }, `Loaded ${emojis.length || 0} emojis from ${guild}.`)
       }).catch(e => {
-        this.log(`Failed to fetch emojis from ${guild}`, { color: 'yellow', tags: ['Emojis'] })
+        this.client.logger.error({ tag: 'Emojis' }, `Failed to fetch emojis from ${guild}`)
       })
     }))
 
-    this.log(`All ${this.officialEmojis.length} emojis stored without errors.`, { color: 'green', tags: ['Emojis'] })
+    this.client.logger.info({ tag: 'Emojis' }, `All ${this.officialEmojis.length} emojis stored without errors.`)
   }
 
   /**

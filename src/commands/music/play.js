@@ -46,7 +46,7 @@ module.exports = class Play extends Command {
     } catch (e) {
       if (e instanceof CommandError) throw e
 
-      this.client.logError(e)
+      this.client.logger.error(e)
       channel.send(embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
