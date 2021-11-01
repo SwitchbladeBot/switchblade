@@ -12,32 +12,28 @@ module.exports = class GuildLogging extends EventListener {
   }
 
   onGuildCreate (guild) {
-    if (this.client.readyTimestamp) {
-      this.client.logger.info({ tag: 'Guilds' }, `Added to "${guild.name}" (${guild.id})`)
-      if (process.env.LOGGING_CHANNEL_ID) {
-        this.channels.cache.get(process.env.LOGGING_CHANNEL_ID).send(
-          new SwitchbladeEmbed()
-            .setColor(Constants.GUILD_ADDED_COLOR)
-            .setTitle(`Added to "${guild.name}"`)
-            .setDescription(`\`${guild.id}\``)
-            .setFooter(`Gained ${formatter.format(guild.members.cache.size)} members`)
-        )
-      }
+    this.logger.info({ tag: 'Guilds' }, `Added to "${guild.name}" (${guild.id})`)
+    if (process.env.LOGGING_CHANNEL_ID) {
+      this.channels.cache.get(process.env.LOGGING_CHANNEL_ID).send(
+        new SwitchbladeEmbed()
+          .setColor(Constants.GUILD_ADDED_COLOR)
+          .setTitle(`Added to "${guild.name}"`)
+          .setDescription(`\`${guild.id}\``)
+          .setFooter(`Gained ${formatter.format(guild.members.cache.size)} members`)
+      )
     }
   }
 
   onGuildDelete (guild) {
-    if (this.client.readyTimestamp) {
-      this.client.logger.info({ tag: 'Guilds' }, `Removed from "${guild.name}" (${guild.id})`)
-      if (process.env.LOGGING_CHANNEL_ID) {
-        this.channels.cache.get(process.env.LOGGING_CHANNEL_ID).send(
-          new SwitchbladeEmbed()
-            .setColor(Constants.GUILD_LOST_COLOR)
-            .setTitle(`Removed from "${guild.name}"`)
-            .setDescription(`\`${guild.id}\``)
-            .setFooter(`Lost ${formatter.format(guild.members.size)} members`)
-        )
-      }
+    this.logger.info({ tag: 'Guilds' }, `Removed from "${guild.name}" (${guild.id})`)
+    if (process.env.LOGGING_CHANNEL_ID) {
+      this.channels.cache.get(process.env.LOGGING_CHANNEL_ID).send(
+        new SwitchbladeEmbed()
+          .setColor(Constants.GUILD_LOST_COLOR)
+          .setTitle(`Removed from "${guild.name}"`)
+          .setDescription(`\`${guild.id}\``)
+          .setFooter(`Lost ${formatter.format(guild.members.size)} members`)
+      )
     }
   }
 }
