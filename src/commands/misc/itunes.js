@@ -17,33 +17,34 @@ module.exports = class Itunes extends Command {
         required: true
       }, {
         type: 'string',
-        full: false,
         name: 'country',
-        required: true
+        required: true,
+        missingError: 'commands:itunes.notFound',
       }, {
         type: 'string',
         full: true,
         name: 'term',
-        required: true
+        required: true,
+        missingError: 'commands:itunes.notFound',
       }]
     },
     client)
   }
 
-  async run (context, media, country, term) {
-    term = term.replaceAll(" " , "+")
+  async run ({ t, author, message, channel }, media, country, term) {
+    term = term.replaceAll(' ', '+')
 
-    const [data , response] = Array.from(await this.client.apis.itunes.search(media, term, country))
+    const [data, response] = await this.client.apis.itunes.search(media, term, country)
 
-    if(!response) {
-      throw new CommandError(context.t("commands:itunes.invalidTerm"))
+    if (!response) {
+      throw new CommandError(t('commands:itunes.invalidTerm'))
     }
 
     if (data.length === 0) {
-      throw new CommandError(context.t('commands:itunes.noResults'))
+      throw new CommandError(t('commands:itunes.noResults'))
     }
 
-    this.parseResponse(context, data, context.message.content)
+    channel.send(await this.parseResponse(author, t, data, message.content))
   }
 
   searchResultFormatter (i) {
@@ -56,15 +57,13 @@ module.exports = class Itunes extends Command {
               .repeat(Math.ceil(rating - Math.floor(rating))))
   }
 
-  async parseResponse ({ channel, author, t }, data, title) {
+  async parseResponse (author, t, data, title) {
     const description = data.map((item, index) => `\`${String(index).padStart(2, '0')}\`: ${this.searchResultFormatter(item)}`)
 
-    const embed = new SwitchbladeEmbed(author)
+    return new SwitchbladeEmbed(author)
       .setThumbnail(this.embedUrl)
       .setDescription(description)
       .setColor(Constants.ITUNES_COLOR)
       .setTitle(t('commands:itunes.title', { title }))
-
-    channel.send(embed)
   }
 }

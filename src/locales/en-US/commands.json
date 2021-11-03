@@ -674,6 +674,7 @@
   },
   "itunes": {
     "commandDescription": "Provides the content within the iTunes Store and Apple Books Store.",
+    "title": "Showing results for `{{title}}`",
     "commandUsage": "<media> <country code> <term>",
     "notFound": "I wasn't able to find the term with the given media.",
     "noResults": "No results found.",
