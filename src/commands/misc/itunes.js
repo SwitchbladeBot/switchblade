@@ -19,13 +19,13 @@ module.exports = class Itunes extends Command {
         type: 'string',
         name: 'country',
         required: true,
-        missingError: 'commands:itunes.notFound',
+        missingError: 'commands:itunes.notFound'
       }, {
         type: 'string',
         full: true,
         name: 'term',
         required: true,
-        missingError: 'commands:itunes.notFound',
+        missingError: 'commands:itunes.notFound'
       }]
     },
     client)
