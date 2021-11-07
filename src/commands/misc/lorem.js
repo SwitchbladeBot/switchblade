@@ -1,4 +1,4 @@
-const { SwitchbladeEmbed, Command, CommandError } = require('../../')
+const { SwitchbladeEmbed, Command } = require('../../')
 const { LoremIpsum } = require('lorem-ipsum')
 
 module.exports = class Lorem extends Command {
@@ -11,7 +11,7 @@ module.exports = class Lorem extends Command {
         missingError: 'commands:lorem.noNumber',
         required: false,
         min: 1,
-        max: 10,
+        max: 10
       }]
     },
     client)
@@ -20,7 +20,7 @@ module.exports = class Lorem extends Command {
   }
 
   async run ({ channel, t }, paragraphs) {
-    if(paragraphs === undefined) {
+    if (paragraphs === undefined) {
       paragraphs = 2
     }
 
