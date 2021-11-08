@@ -20,11 +20,7 @@ module.exports = class Lorem extends Command {
   }
 
   async run ({ channel, t }, paragraphs) {
-    if (paragraphs === undefined) {
-      paragraphs = 2
-    }
-
-    const loremString = this.lorem.generateParagraphs(paragraphs)
+    const loremString = this.lorem.generateParagraphs(paragraphs || 2)
 
     const embed = new SwitchbladeEmbed()
       .setDescription(loremString)
