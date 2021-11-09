@@ -675,7 +675,7 @@
   "lorem": {
     "commandDescription": "Generates a random lorem ipsum text with the specified amount of words.",
     "commandUsage": "<number of words>",
-    "noNumber": "Number of words to generate is missing!",
+    "noNumber": "Number of words to generate is missing!"
   },
   "hentai": {
     "commandDescription": "Sends hentai in an NSFW channel.",
