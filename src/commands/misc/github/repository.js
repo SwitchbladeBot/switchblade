@@ -21,7 +21,6 @@ module.exports = class GitHubRepository extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, { full_name: repo }) {
-    channel.startTyping()
     moment.locale(language)
     const repositorySplitted = repo.split('/')
     const data = await this.client.apis.github.getRepository(repositorySplitted[0], repositorySplitted[1])
@@ -39,6 +38,6 @@ module.exports = class GitHubRepository extends SearchCommand {
       embed.addField(t('commands:github.subcommands.repository.license'), `[${data.license.spdx_id}](${data.license.url})`, true)
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

@@ -17,7 +17,6 @@ module.exports = class Twitch extends Command {
   async run ({ t, author, channel, language }, user) {
     const embed = new SwitchbladeEmbed(author)
     try {
-      channel.startTyping()
       const twitchUser = await this.client.apis.twitch.getUserByUsername(user)
       if (twitchUser) {
         const stream = await this.client.apis.twitch.getStreamByUsername(user)
@@ -36,7 +35,7 @@ module.exports = class Twitch extends Command {
             .addField(t('commands:twitch.streamingTitle', { gameName }), t('commands:twitch.streamingDescription', { title: stream.title, viewers: MiscUtils.formatNumber(stream.viewer_count, language) }))
             .setImage(stream.thumbnail_url.replace('{width}', 1920).replace('{height}', 1080))
         }
-        channel.send(embed).then(() => channel.stopTyping())
+        channel.send({ embeds: [embed] })
       } else throw new CommandError(t('commands:twitch.userNotFound'))
     } catch (e) {
       throw new CommandError(t('errors:generic'))

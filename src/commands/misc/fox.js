@@ -10,10 +10,10 @@ module.exports = class Fox extends Command {
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     const { image } = await fetch('https://randomfox.ca/floof/').then(res => res.json())
     embed.setImage(image)
       .setDescription(t('commands:fox.hereIsYourFox'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

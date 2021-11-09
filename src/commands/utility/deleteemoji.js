@@ -17,7 +17,6 @@ module.exports = class DeleteEmoji extends Command {
 
   async run ({ t, channel, author, guild }, emoji) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     try {
       await emoji.delete()
@@ -25,7 +24,7 @@ module.exports = class DeleteEmoji extends Command {
       embed.setDescription(t('commands:deleteemoji.deleted', { emoji }))
         .setThumbnail(emoji.url)
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       channel.stopTyping()
       throw new CommandError(`${t('commands:deleteemoji.error')}\n${e.toString()}`)

@@ -51,7 +51,6 @@ module.exports = class IGDB extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, { id }) {
-    channel.startTyping()
     moment.locale(language)
 
     try {

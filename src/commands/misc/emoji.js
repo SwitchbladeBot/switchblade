@@ -13,9 +13,9 @@ module.exports = class Emoji extends Command {
 
   run ({ t, author, channel }, emoji) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     embed.setImage(emoji.url)
       .setDescription(t('commands:emoji.hereIsYourEmoji'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

@@ -11,7 +11,6 @@ module.exports = class MostPlayed extends Command {
   }
 
   run ({ message, t, channel, language }) {
-    channel.startTyping()
     const games = {}
 
     message.guild.members.cache.filter(member => !member.user.bot && member.presence.activities.length).each(member => {

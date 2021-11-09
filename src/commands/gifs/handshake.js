@@ -21,9 +21,9 @@ module.exports = class Handshake extends Command {
   run ({ t, channel, author }, user) {
     const handshakeImg = handshakeArray[Math.floor(Math.random() * handshakeArray.length)]
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     embed.setImage(handshakeImg)
       .setDescription(t('commands:handshake.success', { handshaker: author.toString(), handshaked: user.toString() }))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

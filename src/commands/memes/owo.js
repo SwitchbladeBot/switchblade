@@ -16,8 +16,8 @@ module.exports = class OwO extends Command {
 
   async run ({ author, channel }, text) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     embed.setDescription(Owoify(text))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

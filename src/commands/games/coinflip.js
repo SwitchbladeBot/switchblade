@@ -17,9 +17,9 @@ module.exports = class Coinflip extends Command {
     const sides = ['heads', 'tails']
     const chosenSide = sides[Math.floor(Math.random() * sides.length)]
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     embed.setDescription(t('commands:coinflip.landed', { chosenSide }))
       .setThumbnail(coins[chosenSide])
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

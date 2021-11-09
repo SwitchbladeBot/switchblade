@@ -12,7 +12,6 @@ module.exports = class Kemonomimi extends Command {
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     // Send a lewd kemonomimi if the channel is NSFW
     const endpoint = channel.nsfw ? 'lewdkemo' : 'kemonomimi'
@@ -22,6 +21,6 @@ module.exports = class Kemonomimi extends Command {
     embed.setImage(url)
       .setDescription(t('commands:kemonomimi.hereIsYour', { context: endpoint }))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

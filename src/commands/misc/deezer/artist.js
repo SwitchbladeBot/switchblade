@@ -28,7 +28,6 @@ module.exports = class DeezerArtist extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, artist) {
-    channel.startTyping()
     const { id, name, link, nb_album: albums, picture_big: cover, nb_fan: fans } = artist
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
@@ -46,7 +45,7 @@ module.exports = class DeezerArtist extends SearchCommand {
         .setTitle(name)
         .setURL(link)
         .setAuthor(t('commands:deezer.subcommands.artist.artistAlbums'), this.embedLogoURL, link)
-      ).then(() => channel.stopTyping())
+      )
     }
 
     if (flags.related) {
@@ -60,12 +59,12 @@ module.exports = class DeezerArtist extends SearchCommand {
         .setTitle(name)
         .setURL(link)
         .setAuthor(t('commands:deezer.subcommands.artist.artistRelated'), this.embedLogoURL, link)
-      ).then(() => channel.stopTyping())
+      )
     }
 
     embed.setDescription(`[${name}](${link})`)
       .addField(t('music:albumPlural'), MiscUtils.formatNumber(albums, language), true)
       .addField(t('commands:deezer.fans'), MiscUtils.formatNumber(fans, language), true)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

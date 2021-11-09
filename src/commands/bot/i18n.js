@@ -11,10 +11,10 @@ module.exports = class i18n extends Command {
 
   async run ({ t, channel }) {
     const embed = new SwitchbladeEmbed()
-    channel.startTyping()
+
     embed
       .setDescription(`${this.getEmoji('crowdinLogo')} ${t('commands:i18n.translateMe')}`)
       .setImage('https://i.imgur.com/UVIAzg0.gif')
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

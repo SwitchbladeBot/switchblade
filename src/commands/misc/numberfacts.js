@@ -15,11 +15,11 @@ module.exports = class NumberFacts extends Command {
 
   async run ({ t, author, channel }, number) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     try {
       const body = await fetch(`http://numbersapi.com/${number}/trivia`).then(res => res.text())
       embed.setTitle(body)
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       channel.stopTyping()
       console.error(e)

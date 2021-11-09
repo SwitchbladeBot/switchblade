@@ -14,8 +14,6 @@ module.exports = class Money extends Command {
   }
 
   async run ({ t, author, channel }, user = author) {
-    channel.startTyping()
-
     const embed = new SwitchbladeEmbed(author)
     const money = await this.client.controllers.economy.balance(user.id)
     if (author.id === user.id) {
@@ -24,6 +22,6 @@ module.exports = class Money extends Command {
       embed.setDescription(t('commands:money.someoneHas', { count: money, user }))
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

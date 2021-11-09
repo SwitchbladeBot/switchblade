@@ -15,12 +15,12 @@ module.exports = class RestrictEmoji extends Command {
 
   run ({ t, author, prefix, alias, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     embed.setDescription([
       t('commands:restrictemoji.addRole', { command: `${prefix}${alias || this.name}` }),
       t('commands:restrictemoji.removeRole', { command: `${prefix}${alias || this.name}` }),
       t('commands:restrictemoji.reset', { command: `${prefix}${alias || this.name}` })
     ].join('\n'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

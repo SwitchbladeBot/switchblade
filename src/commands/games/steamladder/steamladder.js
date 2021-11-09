@@ -54,8 +54,6 @@ module.exports = class SteamLadder extends Command {
   }
 
   async run ({ t, author, channel, language }, ladderType = 'xp', regionOrCountry) {
-    channel.startTyping()
-
     if (ladderType === 'age') ladderType = 'steam_age'
     if (regionOrCountry) regionOrCountry = regionOrCountry.toLowerCase()
 
@@ -71,7 +69,7 @@ module.exports = class SteamLadder extends Command {
       this.client.logger.error(e)
       throw new CommandError(t('commands:steamladder.ladderNotFound'))
     }
-    channel.send(embed).then(channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(channel.stopTyping())
   }
 
   generateLadderEmbedTitle ({ type, country_code: cc }, t, language) {

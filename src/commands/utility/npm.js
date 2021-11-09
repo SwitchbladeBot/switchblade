@@ -30,7 +30,7 @@ module.exports = class Npm extends SearchCommand {
   async handleResult ({ t, channel, author, language }, { package: pkg }) {
     const embed = new SwitchbladeEmbed(author)
     moment.locale(language)
-    channel.startTyping()
+
     embed
       .setColor(Constants.NPM_COLOR)
       .setAuthor('npm', this.embedLogoURL, 'https://www.npmjs.com/')
@@ -49,6 +49,6 @@ module.exports = class Npm extends SearchCommand {
           `\`\`\`npm i ${pkg.name}\`\`\``
         ]
       ])
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

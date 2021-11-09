@@ -31,6 +31,6 @@ module.exports = class JoinLock extends Command {
         .setColor(Constants.ERROR_COLOR)
     }
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

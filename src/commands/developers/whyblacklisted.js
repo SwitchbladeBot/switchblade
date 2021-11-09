@@ -29,6 +29,6 @@ module.exports = class WhyBlacklisted extends Command {
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('commands:whyblacklisted.notBlacklisted'))
     }
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

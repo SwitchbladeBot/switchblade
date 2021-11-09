@@ -29,7 +29,6 @@ module.exports = class OsuPlayer extends Command {
     const paginatedEmbed = new PaginatedEmbed(t, author)
 
     try {
-      channel.startTyping()
       moment.locale(language)
       const userData = await this.client.apis.osu.getUser(user, mode[0])
 

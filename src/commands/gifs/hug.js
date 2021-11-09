@@ -16,9 +16,9 @@ module.exports = class Hug extends Command {
   async run ({ t, channel, author }, user) {
     const body = await fetch('https://nekos.life/api/v2/img/hug').then(res => res.json())
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     embed.setImage(body.url)
       .setDescription(t('commands:hug.success', { hugger: author.toString(), hugged: user.toString() }))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

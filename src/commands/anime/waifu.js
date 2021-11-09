@@ -12,7 +12,6 @@ module.exports = class Waifu extends Command {
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     // Send a lewd waifu if the channel is NSFW
     const type = channel.nsfw ? 'nsfw' : 'sfw'
@@ -22,6 +21,6 @@ module.exports = class Waifu extends Command {
     embed.setImage(url)
       .setDescription(t('commands:waifu.hereIsYour', { context: type }))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

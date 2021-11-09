@@ -36,13 +36,12 @@ module.exports = class Pusheen extends Command {
   }
 
   async run ({ t, author, channel }) {
-    channel.startTyping()
     const posts = await this.client.apis.tumblr.getPhotoPosts('pusheen', { offset: Math.floor(Math.random() * 155) })
     const randomPost = getRandom(posts.response.posts)
     const embed = new SwitchbladeEmbed(author)
       .setAuthor(posts.response.blog.title, `https://i.imgur.com/${getRandom(pusheenAvatars)}.png`, randomPost.post_url)
       .setImage(randomPost.photos.length < 2 ? randomPost.photos[0].original_size.url : getRandomPhoto(randomPost.photos).original_size.url)
       .setDescription(Math.random() > 0.99 ? t('commands:pusheen.hidden', { link: 'https://www.patreon.com/switchblade' }) : getRandom(pusheenMessages))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

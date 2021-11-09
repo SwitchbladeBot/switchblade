@@ -21,7 +21,7 @@ module.exports = class Weather extends Command {
 
   async run ({ t, author, channel, language }, address) {
     moment.locale(language)
-    channel.startTyping()
+
     try {
       const city = await this.client.apis.positionstack.getAddress(address)
       const { latitude, longitude } = city.data[0]
@@ -47,7 +47,7 @@ module.exports = class Weather extends Command {
       const tempUnit = '°C'
       const weather = await CanvasTemplates.weather({ t }, `${city.data[0].locality.toUpperCase()}${city.data[0].region ? ` - ${city.data[0].region_code}` : ''}`, weatherInfo, tempUnit)
 
-      channel.send(new MessageAttachment(weather, 'weather.png')).then(() => channel.stopTyping())
+      channel.send(new MessageAttachment(weather, 'weather.png'))
     } catch (e) {
       throw new CommandError(t('commands:weather.notFound'))
     }

@@ -28,7 +28,6 @@ module.exports = class RubyGems extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, partialGem) {
-    channel.startTyping()
     const gem = await this.client.apis.rubygems.getGem(partialGem.name)
     channel.send(
       new SwitchbladeEmbed(author)

@@ -12,7 +12,6 @@ module.exports = class ImageOfTheDay extends Command {
   }
 
   async run ({ t, author, channel }) {
-    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     const feed = await parser.parseURL('https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss')
     const item = feed.items[0]
@@ -23,6 +22,6 @@ module.exports = class ImageOfTheDay extends Command {
       .setImage(item.enclosure.url)
       .setDescription(item.content)
       .setColor(0x0b3d91)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

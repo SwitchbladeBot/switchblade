@@ -22,7 +22,6 @@ module.exports = class TranslateCommand extends Command {
   }
 
   async run ({ t, author, channel, language }, from, to, text) {
-    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
 
     const languages = require(`../../locales/${language}/languages.json`)
@@ -40,7 +39,6 @@ module.exports = class TranslateCommand extends Command {
       .addField(t('commands:translate.translatedFrom'), languages[fromT] + auto, true)
       .addField(t('commands:translate.translatedTo'), languages[toT], true)
       .setAuthor(t('commands:translate.title'), 'https://i.imgur.com/FQuOtF5.jpg')
-    channel.send(embed)
-      .then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

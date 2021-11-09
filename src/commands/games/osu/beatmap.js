@@ -30,7 +30,6 @@ module.exports = class OsuBeatmap extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language, flags }, data) {
-    channel.startTyping()
     const paginatedEmbed = new PaginatedEmbed(t, author)
 
     const mode = this.parentCommand.modes[Object.keys(flags).filter(key => flags[key])[0] || 'osu']

@@ -20,7 +20,6 @@ module.exports = class Play extends Command {
 
   async run ({ t, author, channel, flags, guild, voiceState }, identifier) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     if (!voiceState.channel.joinable && guild.me.voice.channelID !== voiceState.channelID) {
       return channel.send(embed.setTitle(t('errors:voiceChannelJoin')))
@@ -39,7 +38,7 @@ module.exports = class Play extends Command {
       }
 
       if (result) {
-        this.loadSongs({ t, channel, voiceChannel: voiceState.channel }, result, playerManager).then(() => channel.stopTyping())
+        this.loadSongs({ t, channel, voiceChannel: voiceState.channel }, result, playerManager)
       } else {
         throw new CommandError(t('music:songNotFound'))
       }
@@ -50,7 +49,7 @@ module.exports = class Play extends Command {
       channel.send(embed
         .setColor(Constants.ERROR_COLOR)
         .setTitle(t('errors:generic'))
-      ).then(() => channel.stopTyping())
+      )
     }
   }
 

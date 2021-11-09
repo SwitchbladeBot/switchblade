@@ -19,7 +19,6 @@ module.exports = class Rep extends Command {
 
   async run ({ t, author, channel }, user) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     try {
       await this.client.controllers.social.addReputation(author.id, user.id)
@@ -36,6 +35,6 @@ module.exports = class Rep extends Command {
       }
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

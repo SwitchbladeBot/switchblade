@@ -23,7 +23,6 @@ module.exports = class FlatHubCommand extends SearchCommand {
   }
 
   async handleResult ({ t, author, channel, language }, { flatpakAppId }) {
-    channel.startTyping()
     const { name, summary, projectLicense, currentReleaseVersion, currentReleaseDate, description, downloadFlatpakRefUrl, categories, iconDesktopUrl, screenshots } = await this.client.apis.flathub.getApp(flatpakAppId)
     const screenshot = screenshots.length ? screenshots[Math.floor(Math.random() * screenshots.length)] : null
     const licence = /.+=(https?)/.test(projectLicense) ? `[${projectLicense.split('=')[0]}](${projectLicense.split('=')[1]})` : projectLicense
@@ -40,6 +39,6 @@ module.exports = class FlatHubCommand extends SearchCommand {
       .addField(t('commands:flathub.categories'), categories.map(category => `\`${category.name}\``).join(', '))
       .addField(t('commands:flathub.download'), `[[${summary || name}]](${downloadFlatpakRefUrl})`)
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

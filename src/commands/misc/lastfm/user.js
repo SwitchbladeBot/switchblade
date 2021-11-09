@@ -14,7 +14,6 @@ module.exports = class LastfmUser extends Command {
   }
 
   async run ({ t, author, channel, guild, language }, param) {
-    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
 
     try {
@@ -36,7 +35,7 @@ module.exports = class LastfmUser extends Command {
         embed.addField(t('commands:lastfm.topArtists'), topField)
       }
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       throw new CommandError(t('commands:lastfm.subcommands.user.notFound'))
     }

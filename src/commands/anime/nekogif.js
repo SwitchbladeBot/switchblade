@@ -12,7 +12,6 @@ module.exports = class NekoGif extends Command {
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     // Send a lewd neko if the channel is NSFW
     const endpoint = channel.nsfw ? 'nsfw_neko_gif' : 'ngif'
@@ -22,6 +21,6 @@ module.exports = class NekoGif extends Command {
     embed.setImage(url)
       .setDescription(t('commands:nekogif.hereIsYour', { context: endpoint }))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

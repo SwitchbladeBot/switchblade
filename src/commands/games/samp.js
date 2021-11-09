@@ -14,7 +14,7 @@ module.exports = class SAMP extends Command {
 
   async run ({ t, author, channel }, address) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     const [host, port = 7777] = address.split(':')
     try {
       const response = await this.queryPromise({ host, port })
@@ -33,7 +33,7 @@ module.exports = class SAMP extends Command {
         .setTitle(t('commands:samp.serverUnreachableTitle'))
         .setDescription(t('commands:samp.serverUnreachableDescription')))
     }
-    channel.send(embed).then(channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(channel.stopTyping())
   }
 
   async queryPromise (options) {

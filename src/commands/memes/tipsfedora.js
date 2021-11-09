@@ -11,6 +11,6 @@ module.exports = class TipsFedora extends Command {
   run ({ author, channel }) {
     const embed = new SwitchbladeEmbed(author)
     embed.setImage('https://i.kym-cdn.com/photos/images/masonry/000/747/485/3a1.gif')
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

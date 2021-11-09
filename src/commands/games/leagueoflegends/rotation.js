@@ -12,7 +12,6 @@ module.exports = class LeagueOfLegendsRotation extends Command {
   }
 
   async run ({ t, author, channel, language, flags }) {
-    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     const { embedColor, authorString, authorImage, authorURL } = this.parentCommand
     try {
@@ -26,7 +25,7 @@ module.exports = class LeagueOfLegendsRotation extends Command {
         .setAuthor(t(authorString), authorImage, authorURL)
         .setTitle(t('commands:leagueoflegends.subcommands.rotation.weeklyChampRotation'))
         .setDescription(championPayload.join('\n'))
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       throw new CommandError(t('errors:generic'))
     }

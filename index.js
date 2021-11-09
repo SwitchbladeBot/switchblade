@@ -1,5 +1,6 @@
 const Sentry = require('@sentry/node')
 Sentry.init({ dsn: process.env.SENTRY_DSN })
+const { Intents } = require('discord.js')
 
 const { readFileSync } = require('fs')
 
@@ -16,6 +17,7 @@ try {
 
 // Initialize client
 const CLIENT_OPTIONS = {
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
   fetchAllMembers: false,
   enableEveryone: false,
   canvasLoaded

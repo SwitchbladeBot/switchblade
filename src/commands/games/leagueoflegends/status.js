@@ -27,7 +27,6 @@ module.exports = class LeagueOfLegendsStatus extends Command {
   }
 
   async run ({ t, author, channel, language }, server) {
-    channel.startTyping()
     const body = await fetch(`http://status.leagueoflegends.com/shards/${server}/summary`).then(res => res.json())
     channel.send(
       new SwitchbladeEmbed(author)

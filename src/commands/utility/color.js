@@ -16,7 +16,6 @@ module.exports = class ColorCommand extends Command {
 
   async run ({ t, author, channel }, color) {
     const hexcode = color.rgb(true, true)
-    channel.startTyping()
 
     try {
       const colorInfo = await fetch(`http://www.thecolorapi.com/id?format=json&hex=${hexcode}`).then(r => r.json())
@@ -27,7 +26,7 @@ module.exports = class ColorCommand extends Command {
         .addField(t('commands:color:rgb'), `\`${colorInfo.rgb.value}\``, true)
         .addField(t('commands:color:hsl'), `\`${colorInfo.hsl.value}\``, true)
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       throw new CommandError(t('errors:generic'))
     }

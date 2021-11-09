@@ -19,7 +19,6 @@ module.exports = class LastfmUserTop extends Command {
   }
 
   async run ({ t, author, channel, guild, language }, user, type, period = '1month') {
-    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
 
     if (!TYPES.includes(type)) {
@@ -49,7 +48,7 @@ module.exports = class LastfmUserTop extends Command {
         embed.setDescription(t('commands:lastfm.subcommands.top.noData'))
       }
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       throw new CommandError(t('commands:lastfm.subcommands.top.notFound'))
     }

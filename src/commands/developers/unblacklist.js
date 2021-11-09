@@ -17,6 +17,6 @@ module.exports = class Unblacklist extends Command {
     const embed = new SwitchbladeEmbed(author)
     await this.client.controllers.developer.unblacklist(user.id)
     embed.setDescription(`**${t('commands:unblacklist.success', { user })}**`)
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

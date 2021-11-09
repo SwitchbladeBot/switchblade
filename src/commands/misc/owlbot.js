@@ -17,7 +17,6 @@ module.exports = class Owlbot extends Command {
   }
 
   async run ({ t, channel }, word) {
-    channel.startTyping()
     try {
       const { data } = await this.client.apis.owlbot.request(word)
       const embed = new SwitchbladeEmbed()
@@ -38,7 +37,7 @@ module.exports = class Owlbot extends Command {
       if (data.pronunciation) embed.setDescription(`/${data.pronunciation}/`)
       const definitionWithImage = data.definitions.find(d => d.image_url)
       if (definitionWithImage) embed.setThumbnail(definitionWithImage.image_url)
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (err) {
       channel.stopTyping()
       if (err.response && err.response.status === 404) {

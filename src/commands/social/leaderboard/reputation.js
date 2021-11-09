@@ -11,8 +11,6 @@ module.exports = class ReputationLeaderboard extends Command {
   }
 
   async run ({ t, author, channel }) {
-    channel.startTyping()
-
     const top = await this.client.controllers.social.leaderboard('rep')
     const leaderboard = await CanvasTemplates.leaderboard({ t }, top, {
       icon: Constants.REPUTATION_SVG,
@@ -22,6 +20,6 @@ module.exports = class ReputationLeaderboard extends Command {
       valueFunction: (u) => t('commons:reputationWithCount', { count: Math.round(u.rep) })
     })
 
-    channel.send(new MessageAttachment(leaderboard, 'leaderboard.jpg')).then(() => channel.stopTyping())
+    channel.send(new MessageAttachment(leaderboard, 'leaderboard.jpg'))
   }
 }

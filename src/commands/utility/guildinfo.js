@@ -19,7 +19,7 @@ module.exports = class GuildInfo extends Command {
   run ({ t, author, channel, language }, guild = channel.guild) {
     const embed = new SwitchbladeEmbed(author)
     moment.locale(language)
-    channel.startTyping()
+
     embed.setTitle(guild.name)
       .setThumbnail(guild.iconURL({ dynamic: true }) ? guild.iconURL({ dynamic: true }) : `https://guild-default-icon.herokuapp.com/${guild.nameAcronym}`)
       .addField(t('commands:guildinfo.id'), guild.id, true)
@@ -41,6 +41,6 @@ module.exports = class GuildInfo extends Command {
         t('commands:guildinfo.bots', { count: MiscUtils.formatNumber(guild.members.cache.filter(m => m.user.bot).size, language) })
       ].join('\n'))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

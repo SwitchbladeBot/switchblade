@@ -20,7 +20,6 @@ module.exports = class CreateEmoji extends Command {
 
   async run ({ t, channel, author, guild }, url, name) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     try {
       const emoji = await guild.emojis.create(url.href, name)
@@ -28,7 +27,7 @@ module.exports = class CreateEmoji extends Command {
       embed.setDescription(t('commands:createemoji.created', { emoji }))
         .setThumbnail(url)
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       channel.stopTyping()
       throw new CommandError(`${t('commands:createemoji.error')}\n${e.toString()}`)

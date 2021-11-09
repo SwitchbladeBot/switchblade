@@ -21,8 +21,6 @@ module.exports = class CommandSource extends Command {
   }
 
   async run ({ channel, author, language, t }, command) {
-    channel.startTyping()
-
     const org = process.env.GITHUB_USER || 'SwitchbladeBot'
     const repository = process.env.GITHUB_REPOSITORY || 'switchblade'
     const fallbackBranch = process.env.GITHUB_BRANCH || 'master'

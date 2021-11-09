@@ -12,7 +12,6 @@ module.exports = class UIGradient extends Command {
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     const body = await fetch('https://cdn.jsdelivr.net/gh/ghosh/uiGradients/gradients.json').then(res => res.json())
     const { name, colors } = body[Math.floor(Math.random() * body.length)]
@@ -25,6 +24,6 @@ module.exports = class UIGradient extends Command {
       .setImage('attachment://gradient.png')
       .setDescription(`\`${colors.join('`, `')}\``)
       .attachFiles(new MessageAttachment(gradient, 'gradient.png'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

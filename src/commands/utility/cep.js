@@ -18,7 +18,6 @@ module.exports = class CEP extends Command {
   }
 
   async run ({ t, author, channel }, cep) {
-    channel.startTyping()
     try {
       const rcep = await this.client.apis.viacep.searchCEP(cep)
       channel.send(

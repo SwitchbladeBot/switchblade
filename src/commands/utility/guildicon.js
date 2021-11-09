@@ -17,7 +17,7 @@ module.exports = class GuildIcon extends Command {
 
   run ({ t, author, channel }, guild = channel.guild) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     guild = guild || channel.guild
     if (guild.iconURL) {
       embed.setImage(guild.iconURL({ format: 'png', dynamic: true }))
@@ -25,6 +25,6 @@ module.exports = class GuildIcon extends Command {
     } else {
       throw new CommandError(t('commands:guildicon.noIcon'))
     }
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

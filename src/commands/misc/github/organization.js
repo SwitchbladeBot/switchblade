@@ -14,7 +14,6 @@ module.exports = class GitHubOrganization extends Command {
   }
 
   async run ({ t, author, channel, language }, organization) {
-    channel.startTyping()
     moment.locale(language)
 
     const data = await this.client.apis.github.getOrganization(organization)
@@ -36,6 +35,6 @@ module.exports = class GitHubOrganization extends Command {
       embed.addField(t('commands:github.subcommands.user.repositories', { count: data.public_repos }), `${repos.slice(0, 5).map(r => `\`${r.full_name}\` ${r.fork ? ` ${this.getEmoji('forked')}` : ''}`).join('\n')}${data.public_repos > 5 ? `\n${t('commands:github.subcommands.organization.moreRepos', { repos: data.public_repos - 5 })}` : ''}`)
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

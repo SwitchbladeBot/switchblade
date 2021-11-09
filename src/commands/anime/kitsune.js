@@ -13,7 +13,6 @@ module.exports = class Kitsune extends Command {
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     // Send a lewd kitsune if the channel is NSFW
     const endpoint = channel.nsfw ? 'lewdk' : 'fox_girl'
@@ -23,6 +22,6 @@ module.exports = class Kitsune extends Command {
     embed.setImage(url)
       .setDescription(t('commands:kitsune.hereIsYour', { context: endpoint }))
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

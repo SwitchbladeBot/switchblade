@@ -30,6 +30,6 @@ module.exports = class InfoChannel extends Command {
         **${t(`commands:info.subcommands.channel.canViewThisChannel${givenChannel.members.size > 1 ? 'Plural' : ''}`, { userCount: givenChannel.members.size })}**
         ${givenChannel.topic.length > 1 ? `\n${givenChannel.topic}` : ''}`)
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

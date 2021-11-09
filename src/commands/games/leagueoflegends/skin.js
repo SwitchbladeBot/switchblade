@@ -13,7 +13,6 @@ module.exports = class LeagueOfLegendsSkin extends Command {
   }
 
   async run ({ t, author, channel }, skin) {
-    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     try {
       const { name, splashUrl } = await this.client.apis.lol.fetchSkin(skin)
@@ -28,7 +27,7 @@ module.exports = class LeagueOfLegendsSkin extends Command {
         .setTitle(name)
         .setImage(splashUrl)
         .setDescription(t('commands:leagueoflegends.subcommands.skin.description', { videoUrl }))
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       console.error(e)
       throw new CommandError(t('commands:leagueoflegends.subcommands.skin.anErrorOcurred'))

@@ -30,7 +30,7 @@ module.exports = class Packagist extends SearchCommand {
   async handleResult ({ channel, author, language }, item) {
     const embed = new SwitchbladeEmbed(author)
     moment.locale(language)
-    channel.startTyping()
+
     embed
       .setColor(Constants.PACKAGIST_COLOR)
       .setAuthor('Packagist', this.embedLogoURL, 'https://packagist.org/')
@@ -43,6 +43,6 @@ module.exports = class Packagist extends SearchCommand {
           `\`\`\`composer require ${item.name}\`\`\``
         ]
       ])
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

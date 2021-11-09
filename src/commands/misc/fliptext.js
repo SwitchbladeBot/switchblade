@@ -20,6 +20,6 @@ module.exports = class FlipText extends Command {
         .map(c => mapping[c] || ' ')
         .reverse().join('')
     )
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

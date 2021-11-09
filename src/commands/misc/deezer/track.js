@@ -21,7 +21,6 @@ module.exports = class DeezerTrack extends SearchCommand {
   }
 
   handleResult ({ t, channel, author }, track) {
-    channel.startTyping()
     const { link, title, duration, explicit_lyrics: explicitLyric, artist, album } = track
     const explicit = explicitLyric ? this.getEmoji('explicit') : ''
     const embed = new SwitchbladeEmbed(author)
@@ -31,6 +30,6 @@ module.exports = class DeezerTrack extends SearchCommand {
       .setDescription(`${explicit} [${title}](${link}) \`(${MiscUtils.formatDuration(duration * 1000)})\``)
       .addField(t('music:artist'), `[${artist.name}](${artist.link})`, true)
       .addField(t('music:album'), `[${album.title}](https://www.deezer.com/album/${album.id})`, true)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

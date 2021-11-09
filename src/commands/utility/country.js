@@ -15,7 +15,6 @@ module.exports = class Country extends Command {
   }
 
   async run ({ t, author, channel, language }, country) {
-    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
     const endpoint = country.split('').length <= 3 ? 'alpha' : 'name'
     try {
@@ -44,7 +43,7 @@ module.exports = class Country extends Command {
           ]
         ])
 
-      channel.send(embed).then(() => channel.stopTyping())
+      channel.send({ embeds: [embed] })
     } catch (e) {
       channel.stopTyping()
       throw new CommandError(`${t('errors:generic')}`)

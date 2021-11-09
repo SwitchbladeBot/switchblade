@@ -27,7 +27,6 @@ module.exports = class DBL extends SearchCommand {
   }
 
   async handleResult ({ t, author, channel, language }, bot) {
-    channel.startTyping()
     moment.locale(language)
     const data = await this.client.apis.dbl.getBot(bot.clientid)
     const embed = new SwitchbladeEmbed(author)
@@ -47,6 +46,6 @@ module.exports = class DBL extends SearchCommand {
     if (data.support) embed.addField(t('commands:dbl.supportServer'), t('commands:dbl.clickHere', { link: `https://discord.gg/${data.support}` }), true)
     if (data.github) embed.addField(t('commands:dbl.githubRepository'), t('commands:dbl.clickHere', { link: data.github }), true)
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

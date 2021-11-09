@@ -21,7 +21,6 @@ module.exports = class RandomRedditPostCommand extends Command {
 
   // TODO: Check if the URL is an image type supported by reddit
   async run ({ channel, author, t }) {
-    channel.startTyping()
     const response = await this.client.apis.reddit.getSubreddit(this.subreddit).getRandomSubmission()
 
     /*
@@ -44,7 +43,7 @@ module.exports = class RandomRedditPostCommand extends Command {
         .setURL(this.addPermalink ? `https://reddit.com${post.permalink}` : null)
         .setDescription(post.selftext ? this.shortenTextIfTooBig(post.selftext) : '')
         .setImage(post.url)
-    ).then(() => channel.stopTyping())
+    )
   }
 
   shortenTextIfTooBig (text) {

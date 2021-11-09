@@ -4,5 +4,5 @@ const manager = new ShardingManager('./index.js', {
   totalShards: parseInt(process.env.SHARD_COUNT) || 'auto'
 })
 
-manager.spawn()
 manager.on('shardCreate', shard => console.log(`Launching shard ${shard.id}`))
+manager.spawn()

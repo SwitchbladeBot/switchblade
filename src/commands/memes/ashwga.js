@@ -17,8 +17,7 @@ module.exports = class HereWeGoAgain extends Command {
   }
 
   async run ({ t, author, channel }, image) {
-    channel.startTyping()
     const hwga = await CanvasTemplates.herewegoagain(image)
-    channel.send(new MessageAttachment(hwga, 'ashwga.png')).then(() => channel.stopTyping())
+    channel.send(new MessageAttachment(hwga, 'ashwga.png'))
   }
 }

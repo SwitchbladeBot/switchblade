@@ -16,9 +16,9 @@ module.exports = class Pat extends Command {
   async run ({ t, channel, author }, user) {
     const body = await fetch('https://nekos.life/api/v2/img/pat').then(res => res.json())
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     embed.setImage(body.url)
       .setDescription(t('commands:pat.success', { _author: author.toString(), pat: user.toString() }))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

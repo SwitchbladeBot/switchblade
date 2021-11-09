@@ -17,10 +17,9 @@ module.exports = class Profile extends Command {
   }
 
   async run ({ t, author, channel }, user = author) {
-    channel.startTyping()
     const userDocument = await this.client.controllers.social.retrieveProfile(user.id)
     const role = PermissionUtils.specialRole(this.client, user)
     const profile = await CanvasTemplates.profile({ t }, user, userDocument, role)
-    channel.send(new MessageAttachment(profile, 'profile.jpg')).then(() => channel.stopTyping())
+    channel.send(new MessageAttachment(profile, 'profile.jpg'))
   }
 }

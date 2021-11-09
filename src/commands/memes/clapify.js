@@ -23,6 +23,6 @@ module.exports = class Clapify extends Command {
     } else {
       embed.setTitle(`${emoji} ${text.toUpperCase().split(' ').join(` ${emoji} `)} ${emoji}`)
     }
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

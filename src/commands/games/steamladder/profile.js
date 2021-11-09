@@ -20,7 +20,6 @@ module.exports = class SteamLadderProfile extends Command {
   }
 
   async run ({ t, author, channel, language }, query) {
-    channel.startTyping()
     const formatter = new Intl.NumberFormat(language)
     const embed = new SwitchbladeEmbed(author)
     try {
@@ -66,6 +65,6 @@ module.exports = class SteamLadderProfile extends Command {
     } catch (e) {
       throw new CommandError(t('commands:steamladder.userNotFound'))
     }
-    channel.send(embed).then(channel.stopTyping())
+    channel.send({ embeds: [embed] }).then(channel.stopTyping())
   }
 }

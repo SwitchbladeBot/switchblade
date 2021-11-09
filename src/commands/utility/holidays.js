@@ -43,7 +43,6 @@ module.exports = class Holidays extends Command {
 
   async run ({ t, author, channel }, countryCode = '', year = moment().year()) {
     try {
-      channel.startTyping()
       const embed = new SwitchbladeEmbed(author)
       const countryName = t(`countries:${countryCode.toUpperCase()}`)
       const url = `https://date.nager.at/api/v2/publicholidays/${year}/${countryCode}`

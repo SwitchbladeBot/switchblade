@@ -17,7 +17,7 @@ module.exports = class Binary extends Command {
 
   async run ({ t, author, channel }, input) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     if (input.length <= 200) {
       if (input.match(BinaryRegex)) {
         embed
@@ -33,7 +33,7 @@ module.exports = class Binary extends Command {
         .setTitle(t('commands:binary.tooLongTitle'))
         .setDescription(t('commands:binary.tooLongDescription'))
     }
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 
   textToBinary (text) {

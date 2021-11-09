@@ -22,6 +22,6 @@ module.exports = class Avatar extends Command {
     embed
       .setImage(user.displayAvatarURL({ dynamic: true, size: 2048 }))
       .setDescription(t('commands:avatar.someonesAvatar', { user: user.toString() }))
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

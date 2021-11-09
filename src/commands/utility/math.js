@@ -21,6 +21,6 @@ module.exports = class Math extends Command {
     } catch (error) {
       throw new CommandError(t('commands:math.invalidMathExpression'), true)
     }
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

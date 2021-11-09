@@ -17,7 +17,6 @@ module.exports = class Personaltext extends Command {
 
   async run ({ t, author, channel }, text) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     const socialController = this.client.controllers.social
     try {
@@ -35,6 +34,6 @@ module.exports = class Personaltext extends Command {
       }
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

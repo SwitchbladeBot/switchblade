@@ -16,7 +16,6 @@ module.exports = class KannaPaper extends Command {
   }
 
   async run ({ channel }, text = 'teste') {
-    channel.startTyping()
     const kannaPaper = await CanvasTemplates.kannaPaper(text)
     channel.send(new MessageAttachment(kannaPaper, 'kanna.jpg'))
     channel.stopTyping()

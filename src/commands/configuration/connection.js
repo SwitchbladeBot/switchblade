@@ -28,6 +28,6 @@ module.exports = class UserConnections extends Command {
         .setTitle(t('errors:generic'))
     }
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

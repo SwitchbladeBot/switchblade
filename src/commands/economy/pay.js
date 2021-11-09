@@ -22,7 +22,6 @@ module.exports = class Pay extends Command {
 
   async run ({ t, author, channel }, receiver, value) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     try {
       const type = value === 1 ? '' : '_plural'
@@ -40,6 +39,6 @@ module.exports = class Pay extends Command {
       }
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

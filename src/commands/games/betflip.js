@@ -20,7 +20,6 @@ module.exports = class Betflip extends Command {
 
   async run ({ channel, author, t }, bet, side) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     try {
       const { won, chosenSide } = await this.client.controllers.economy.betflip(author.id, bet, side)
@@ -37,6 +36,6 @@ module.exports = class Betflip extends Command {
       }
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

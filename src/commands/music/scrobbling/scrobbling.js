@@ -11,7 +11,6 @@ module.exports = class Scrobbling extends Command {
   }
 
   async run ({ t, author, channel, prefix }) {
-    channel.startTyping()
     const embed = new SwitchbladeEmbed(author)
       .setTitle(t('commands:scrobbling.title'))
     const userConnections = await this.client.controllers.connection.getConnections(author.id)
@@ -19,7 +18,7 @@ module.exports = class Scrobbling extends Command {
     const link = `${process.env.DASHBOARD_URL}/profile`
     if (!lastfm) {
       channel.send(embed.setDescription(t('commands:scrobbling.notConnectedDescription', { link }))
-        .then(() => channel.stopTyping()))
+      )
       return
     }
     const scrobblingStatus = lastfm.config.scrobbling ? t('commons:enabled') : t('commons:disabled')
@@ -28,6 +27,5 @@ module.exports = class Scrobbling extends Command {
     channel.send(embed.setTitle(t('commands:scrobbling.title'))
       .setDescription(t('commands:scrobbling.connectedDescription', { scrobblingStatus, percent: lastfm.config.percent }))
       .addField(t('commands:scrobbling.configuration.title'), config))
-      .then(() => channel.stopTyping())
   }
 }

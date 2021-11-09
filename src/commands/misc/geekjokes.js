@@ -11,9 +11,9 @@ module.exports = class GeekJokes extends Command {
 
   async run ({ author, channel }, number) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     const body = await fetch('https://geek-jokes.sameerkumar.website/api').then(res => res.json())
     embed.setTitle(body)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

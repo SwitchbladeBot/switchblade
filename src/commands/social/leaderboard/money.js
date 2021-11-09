@@ -11,8 +11,6 @@ module.exports = class MoneyLeaderboard extends Command {
   }
 
   async run ({ t, author, channel }) {
-    channel.startTyping()
-
     const top = await this.client.controllers.social.leaderboard('money')
     const leaderboard = await CanvasTemplates.leaderboard({ t }, top, {
       icon: Constants.COINS_SVG,
@@ -22,6 +20,6 @@ module.exports = class MoneyLeaderboard extends Command {
       valueFunction: (u) => t('commons:currencyWithCount_plural', { count: Math.round(u.money) })
     })
 
-    channel.send(new MessageAttachment(leaderboard, 'leaderboard.jpg')).then(() => channel.stopTyping())
+    channel.send(new MessageAttachment(leaderboard, 'leaderboard.jpg'))
   }
 }

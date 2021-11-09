@@ -17,7 +17,7 @@ module.exports = class FiveM extends Command {
     try {
       const testregex = /\^[0-9]/g
       const embed = new SwitchbladeEmbed(author)
-      channel.startTyping()
+
       const id = address.replace(/(http(s?):\/\/)?(cfx.re\/join\/)/g, '')
       const server = await axios(`https://servers-frontend.fivem.net/api/servers/single/${id}`)
         .then(res => res.data.Data)
@@ -42,7 +42,7 @@ module.exports = class FiveM extends Command {
           embed.setImage(server.vars.banner_detail ? server.vars.banner_detail : (server.vars.banner_connecting ? server.vars.banner_connecting : null))
         }
 
-        channel.send(embed).then(() => channel.stopTyping())
+        channel.send({ embeds: [embed] })
       }
     } catch {
       throw new CommandError(`${t('commands:fivem.serverUnreachableTitle')} ${t('commands:fivem.serverUnreachableDescription')}`)

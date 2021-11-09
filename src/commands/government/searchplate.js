@@ -20,7 +20,6 @@ module.exports = class searchPlate extends Command {
   }
 
   async run ({ t, author, channel, message }, plt) {
-    channel.startTyping()
     try {
       const plate = await this.client.apis.consultaplaca.searchPlate(plt)
       const mercosulPlate = await CanvasTemplates.plateMercosul(plate.placa, `https://cdn.jsdelivr.net/gh/bgeneto/bandeiras-br/imagens/${plate.extra.municipio.uf.toUpperCase()}.png`)

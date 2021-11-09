@@ -21,8 +21,6 @@ module.exports = class Instagram extends Command {
   }
 
   async run ({ t, author, channel, language, flags }, user) {
-    channel.startTyping()
-
     try {
       const embed = new SwitchbladeEmbed(author)
         .setColor(Constants.INSTAGRAM_COLOR)
@@ -46,7 +44,7 @@ module.exports = class Instagram extends Command {
         .attachFiles(new MessageAttachment(feed, 'feed.png'))
         .setImage('attachment://feed.png')
 
-      channel.send(embed)
+      channel.send({ embeds: [embed] })
     } catch (e) {
       if (e instanceof CommandError) throw e
       else {

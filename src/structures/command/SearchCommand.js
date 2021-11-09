@@ -30,21 +30,21 @@ module.exports = class SearchCommand extends Command {
 
   async run (context, query) {
     const { t, channel, author } = context
-    channel.startTyping()
+
     const resultsAll = await this.search(context, query)
     if (!Array.isArray(resultsAll)) throw new TypeError(`SearchCommand.search needs to return an array. ${typeof resultsAll} given in ${this.constructor.name}.`)
     const results = resultsAll.slice(0, this.maxResults)
 
     if (!results) throw new CommandError(t('commons:search.searchFail'))
     if (!results.length) throw new CommandError(t('commons:search.noResults'))
-    if (context.flags.lucky || results.length === 1) return this.handleResult(context, results[0]).then(() => channel.stopTyping())
+    if (context.flags.lucky || results.length === 1) return this.handleResult(context, results[0])
     const description = results.map((item, i) => `\`${this.formatIndex(i, results)}\`. ${this.searchResultFormatter(item, context)}`)
     const embed = new SwitchbladeEmbed(author)
       .setColor(this.embedColor)
       .setTitle(t('commons:search.typeHelper'))
       .setAuthor(t('commons:search.results', { query }), this.embedLogoURL)
       .setDescription(description)
-    await channel.send(embed).then(() => channel.stopTyping())
+    await channel.send({ embeds: [embed] })
 
     this.awaitResponseMessage(context, results)
   }

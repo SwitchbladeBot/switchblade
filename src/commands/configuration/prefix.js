@@ -26,6 +26,6 @@ module.exports = class ConfigPrefix extends Command {
         .setTitle(t('errors:generic'))
     }
 
-    channel.send(embed)
+    channel.send({ embeds: [embed] })
   }
 }

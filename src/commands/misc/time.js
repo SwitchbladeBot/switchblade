@@ -16,7 +16,7 @@ module.exports = class Time extends Command {
 
   async run ({ t, author, channel, language }, address) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     moment.locale(language)
 
     const place = await this.client.apis.positionstack.getAddress(address)
@@ -30,6 +30,6 @@ module.exports = class Time extends Command {
     embed
       .setTitle(t('commands:time.currentTime', { timezone: place.data[0].label }))
       .setDescription(time)
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

@@ -33,6 +33,6 @@ module.exports = class BeatSaver extends SearchCommand {
       .setTimestamp(new Date(map.uploaded))
       .setFooter(map.metadata.levelAuthorName)
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

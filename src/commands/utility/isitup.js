@@ -20,7 +20,7 @@ module.exports = class IsItUp extends Command {
   async run ({ t, author, channel }, url) {
     url = url.replace(PROTOCOL_REGEX, '').replace(PATH_REGEX, '')
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     const body = await fetch(`https://isitup.org/${url}.json`).then(res => res.json())
     if (body.response_code) {
       body.response_time *= 1000
@@ -29,6 +29,6 @@ module.exports = class IsItUp extends Command {
     } else {
       throw new CommandError(t('commands:isitup.isDown'))
     }
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

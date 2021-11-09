@@ -12,7 +12,6 @@ module.exports = class LastfmUnloveTrack extends Command {
 
   async run ({ t, author, channel, guild, prefix }) {
     try {
-      channel.startTyping()
       const embed = new SwitchbladeEmbed(author)
       const userConnections = await this.client.controllers.connection.getConnections(author.id)
       const lastfm = userConnections.find(c => c.name === 'lastfm')

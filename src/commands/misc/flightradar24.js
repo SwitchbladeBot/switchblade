@@ -37,7 +37,7 @@ module.exports = class flightradar24 extends Command {
       }
       embed.setImage(airplaneData.aircraft.images?.large?.[0].src || airplaneData.aircraft.images?.sideview || 'https://www.flightradar24.com/static/images/jp-promo-blocked.jpg')
         .setFooter(`${t('commands:flightradar24.dataBy')} Flightradar24 | ${t('commands:flightradar24.photoBy')} ${airplaneData.aircraft.images?.large[0].source || t('commons:notAvailable')} | ${t('commands:flightradar24.copyright')} ${airplaneData.aircraft.images?.large[0].copyright || t('commons:notAvailable')}`)
-      channel.send(embed)
+      channel.send({ embeds: [embed] })
     } catch (e) {
       throw new CommandError(t('commands:flightradar24:notFound'))
     }

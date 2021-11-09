@@ -12,11 +12,11 @@ module.exports = class InspiroBot extends Command {
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+
     const body = await fetch('http://inspirobot.me/api?generate=true').then(res => res.text())
     embed
       .setImage(body.toString('utf8'))
       .setDescription(t('commands:inspirobot.quote'))
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

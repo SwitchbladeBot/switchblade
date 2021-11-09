@@ -15,7 +15,6 @@ module.exports = class MyAnimeList extends Command {
 
   async run ({ t, author, channel }, anime) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     try {
       const data = await malScraper.getInfoFromName(anime)
@@ -36,6 +35,6 @@ module.exports = class MyAnimeList extends Command {
       throw new CommandError(t('commands:myanimelist.animeNotFound'))
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

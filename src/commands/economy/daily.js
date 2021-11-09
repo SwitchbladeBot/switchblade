@@ -11,7 +11,6 @@ module.exports = class Daily extends Command {
 
   async run ({ t, author, channel }) {
     const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
 
     try {
       const { collectedMoney } = await this.client.controllers.economy.bonus.claimDaily(author.id)
@@ -28,6 +27,6 @@ module.exports = class Daily extends Command {
       }
     }
 
-    channel.send(embed).then(() => channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 }

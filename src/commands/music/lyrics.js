@@ -14,8 +14,6 @@ module.exports = class Lyrics extends Command {
   }
 
   async run ({ t, author, channel, guild }, song) {
-    channel.startTyping()
-
     const playingSong = !song
     if (playingSong) {
       const guildPlayer = (guild && this.client.playerManager && this.client.playerManager.players.get(guild.id))
@@ -46,7 +44,7 @@ module.exports = class Lyrics extends Command {
         .setColor(Constants.GENIUS_COLOR)
         .setTitle(`${title} - ${artist}`)
         .setURL(`http://genius.com${path}`)
-      return channel.send(embed).then(() => channel.stopTyping())
+      return channel.send({ embeds: [embed] })
     } else {
       const error = playingSong ? 'noLyricsFoundPlaying' : 'noLyricsFound'
       throw new CommandError(t(`commands:lyrics.${error}`))
