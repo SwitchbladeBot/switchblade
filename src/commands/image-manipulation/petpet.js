@@ -21,7 +21,7 @@ module.exports = class Petpet extends Command {
 
   async run ({ channel }, image) {
     const petpet = await CanvasTemplates.petpet(image)
-    channel.send(new MessageAttachment(petpet, 'petpet.gif'))
+    channel.send({ files: [new MessageAttachment(petpet, 'petpet.gif')] })
     channel.stopTyping()
   }
 }

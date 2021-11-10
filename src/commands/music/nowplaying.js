@@ -21,7 +21,7 @@ module.exports = class NowPlaying extends Command {
     const song = guildPlayer.playingSong
     if (!flags.text && this.client.canvasLoaded) {
       const nowPlaying = await CanvasTemplates.nowPlaying({ t }, guildPlayer, song)
-      channel.send(new MessageAttachment(nowPlaying, 'nowplaying.png'))
+      channel.send({ files: [new MessageAttachment(nowPlaying, 'nowplaying.png')] })
     } else {
       const embed = new SwitchbladeEmbed(author)
       const nf = new Intl.NumberFormat('en-US').format

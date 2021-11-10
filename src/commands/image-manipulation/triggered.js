@@ -21,6 +21,6 @@ module.exports = class Triggered extends Command {
 
   async run ({ t, author, channel }, image) {
     const triggered = await CanvasTemplates.triggered(image)
-    channel.send(new MessageAttachment(triggered, 'triggered.gif'))
+    channel.send({ files: [new MessageAttachment(triggered, 'triggered.gif')] })
   }
 }

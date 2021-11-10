@@ -47,7 +47,7 @@ module.exports = class Weather extends Command {
       const tempUnit = '°C'
       const weather = await CanvasTemplates.weather({ t }, `${city.data[0].locality.toUpperCase()}${city.data[0].region ? ` - ${city.data[0].region_code}` : ''}`, weatherInfo, tempUnit)
 
-      channel.send(new MessageAttachment(weather, 'weather.png'))
+      channel.send({ files: [new MessageAttachment(weather, 'weather.png')] })
     } catch (e) {
       throw new CommandError(t('commands:weather.notFound'))
     }

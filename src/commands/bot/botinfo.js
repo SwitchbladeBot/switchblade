@@ -36,7 +36,6 @@ module.exports = class BotInfo extends Command {
             t('commands:botinfo.openCollective', { openCollectiveLogo: this.getEmoji('openCollectiveLogo') })
           ].join('\n'))
       ]
-    }
-    )
+    })
   }
 }

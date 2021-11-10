@@ -20,6 +20,6 @@ module.exports = class ReputationLeaderboard extends Command {
       valueFunction: (u) => t('commons:reputationWithCount', { count: Math.round(u.rep) })
     })
 
-    channel.send(new MessageAttachment(leaderboard, 'leaderboard.jpg'))
+    channel.send({ files: [new MessageAttachment(leaderboard, 'leaderboard.jpg')] })
   }
 }

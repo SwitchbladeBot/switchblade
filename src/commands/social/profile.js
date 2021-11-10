@@ -20,6 +20,6 @@ module.exports = class Profile extends Command {
     const userDocument = await this.client.controllers.social.retrieveProfile(user.id)
     const role = PermissionUtils.specialRole(this.client, user)
     const profile = await CanvasTemplates.profile({ t }, user, userDocument, role)
-    channel.send(new MessageAttachment(profile, 'profile.jpg'))
+    channel.send({ files: [new MessageAttachment(profile, 'profile.jpg')] })
   }
 }

@@ -15,7 +15,6 @@ module.exports = class Support extends Command {
           .setImage('https://i.imgur.com/wuuQaZu.png')
           .setDescription(`${this.getEmoji('discordLogo')} ${t('commands:support.clickHere')}`)
       ]
-    }
-    )
+    })
   }
 }

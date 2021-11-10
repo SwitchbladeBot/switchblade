@@ -46,7 +46,6 @@ module.exports = class CommandSource extends Command {
             ]
           ])
       ]
-    }
-    )
+    })
   }
 }

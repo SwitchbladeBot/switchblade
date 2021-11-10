@@ -21,6 +21,6 @@ module.exports = class Quieres extends Command {
 
   async run ({ t, author, channel }, image) {
     const quieres = await CanvasTemplates.quieres(image)
-    channel.send(new MessageAttachment(quieres, 'quieres.jpg'))
+    channel.send({ files: [new MessageAttachment(quieres, 'quieres.jpg')] })
   }
 }

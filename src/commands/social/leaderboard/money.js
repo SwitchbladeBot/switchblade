@@ -20,6 +20,6 @@ module.exports = class MoneyLeaderboard extends Command {
       valueFunction: (u) => t('commons:currencyWithCount_plural', { count: Math.round(u.money) })
     })
 
-    channel.send(new MessageAttachment(leaderboard, 'leaderboard.jpg'))
+    channel.send({ files: [new MessageAttachment(leaderboard, 'leaderboard.jpg')] })
   }
 }
