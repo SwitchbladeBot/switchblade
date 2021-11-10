@@ -21,17 +21,19 @@ module.exports = class MinecraftServer extends Command {
     const body = await this.client.apis.minecraft.getServer(host, port)
 
     if (body.online) {
-      channel.send(
-        new SwitchbladeEmbed(author)
-          .setAuthor(t('commands:minecraft.subcommands.server.server'), this.parentCommand.MINECRAFT_LOGO)
-          .setDescription(body.motd.replace(/§[0-9a-fk-or]/g, ''))
-          .addField(t('commands:minecraft.subcommands.server.status'), body.online ? t('commands:minecraft.subcommands.server.online') : t('commands:minecraft.subcommands.server.offline'), true)
-          .addField(t('commands:minecraft.subcommands.server.address'), `\`${host}:${port}\``, true)
-          .addField(t('commands:minecraft.subcommands.server.players'), `${body.players.now}/${body.players.max}`, true)
-          .addField(t('commands:minecraft.subcommands.server.version'), body.server.name.replace(/§[0-9a-fk-or]/g, ''), true)
-          .attachFiles(new Attachment(this.decodeBase64Image(body.favicon), 'favIcon.png'))
-          .setThumbnail('attachment://favIcon.png')
-      )
+      channel.send({
+        embeds: [
+          new SwitchbladeEmbed(author)
+            .setAuthor(t('commands:minecraft.subcommands.server.server'), this.parentCommand.MINECRAFT_LOGO)
+            .setDescription(body.motd.replace(/§[0-9a-fk-or]/g, ''))
+            .addField(t('commands:minecraft.subcommands.server.status'), body.online ? t('commands:minecraft.subcommands.server.online') : t('commands:minecraft.subcommands.server.offline'), true)
+            .addField(t('commands:minecraft.subcommands.server.address'), `\`${host}:${port}\``, true)
+            .addField(t('commands:minecraft.subcommands.server.players'), `${body.players.now}/${body.players.max}`, true)
+            .addField(t('commands:minecraft.subcommands.server.version'), body.server.name.replace(/§[0-9a-fk-or]/g, ''), true)
+            .attachFiles(new Attachment(this.decodeBase64Image(body.favicon), 'favIcon.png'))
+            .setThumbnail('attachment://favIcon.png')
+        ]
+      })
     } else {
       throw new CommandError(t('commands:minecraft.subcommands.server.unknownServer'))
     }

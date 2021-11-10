@@ -15,16 +15,17 @@ module.exports = class SubcommandListCommand extends Command {
   }
 
   async run ({ channel, author, t, prefix }) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setAuthor(t(this.authorString), this.authorImage, this.authorURL)
-        .setDescriptionFromBlockArray(this.subcommands.map(subcommand => {
-          return [
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setAuthor(t(this.authorString), this.authorImage, this.authorURL)
+          .setDescriptionFromBlockArray(this.subcommands.map(subcommand => {
+            return [
             `\`${subcommand.usage(t, prefix, false, true)}\``,
             t([`commands:${subcommand.tPath}.commandDescription`, 'commands:help.noDescriptionProvided'])
-          ]
-        }))
-        .setColor(this.embedColor || process.env.EMBED_COLOR)
-    )
+            ]
+          }))
+          .setColor(this.embedColor || process.env.EMBED_COLOR)]
+    })
   }
 }

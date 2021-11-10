@@ -10,8 +10,7 @@ module.exports = class Invite extends Command {
 
   async run ({ t, channel }) {
     const embed = new SwitchbladeEmbed()
-
-    const invite = await this.client.generateInvite()
+    const invite = this.client.generateInvite({ scopes: ['bot'] })
     embed.setThumbnail(this.client.user.displayAvatarURL({ format: 'png' }))
       .setDescription(`[${t('commands:invite.clickHere')}](${invite})\n${t('commands:invite.noteThat')}`)
     channel.send({ embeds: [embed] })
