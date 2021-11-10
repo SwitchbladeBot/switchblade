@@ -1,7 +1,7 @@
 const SwitchbladeEmbed = require('../structures/SwitchbladeEmbed')
 
 module.exports = async (author, channel, content) => {
-  const msg = await channel.send(new SwitchbladeEmbed(author).setAuthor(content))
+  const msg = await channel.send({ embeds: [new SwitchbladeEmbed(author).setAuthor(content)] })
 
   await msg.react('✅')
   await msg.react('❌')

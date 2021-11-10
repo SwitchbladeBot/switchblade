@@ -1,4 +1,4 @@
-const { Command, SwitchbladeEmbed, Constants, MiscUtils } = require('../../../')
+const { Command, SwitchbladeEmbed, Constants, MiscUtils, CommandError } = require('../../../')
 const moment = require('moment')
 
 module.exports = class HIBPBreach extends Command {
@@ -23,11 +23,7 @@ module.exports = class HIBPBreach extends Command {
         .setDescription(`${data.length > 1 ? t('commands:hibp.subcommands.breach.pwnedInPlural', { count: MiscUtils.formatNumber(data.length, language) }) : t('commands:hibp.subcommands.breach.pwnedInSingular')}:\n\n${data.slice(0, 5).map(breach => `**${breach.Title}** - ${moment(breach.BreachDate).format('LLL')}`).join('\n')}${data.length > 5 ? `\n${t('commands:hibp.andMore', { count: data.length - 5 })}` : ''}`)
       channel.send({ embeds: [embed] })
     } catch (e) {
-      channel.send(new SwitchbladeEmbed(author)
-        .setColor(Constants.NOT_PWNED_COLOR)
-        .setAuthor(t('commands:hibp.notBreached'), this.parentCommand.HIBP_LOGO)
-        .setDescription(t('commands:hibp.subcommands.breach.notFoundBreach'))
-      )
+      throw new CommandError(t('commands:hibp.subcommands.breach.notFoundBreach'))
     }
   }
 }

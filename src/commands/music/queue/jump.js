@@ -19,8 +19,10 @@ module.exports = class QueueJump extends Command {
         const song = guildPlayer.jumpToIndex(Math.round(index) - 1)
         const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
         const songName = `[${song.title}](${song.uri}) ${duration}`
-        channel.send(new SwitchbladeEmbed(author)
-          .setDescription(t(`commands:${this.tPath}.jumpedToSong`, { songName })))
+        channel.send({
+          embeds: [new SwitchbladeEmbed(author)
+            .setDescription(t(`commands:${this.tPath}.jumpedToSong`, { songName }))]
+        })
       } catch (e) {
         throw new CommandError(t(`commands:${this.tPath}.missingIndexParameter`))
       }

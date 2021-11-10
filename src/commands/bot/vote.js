@@ -9,7 +9,11 @@ module.exports = class Vote extends Command {
   }
 
   async run ({ t, author, channel }) {
-    channel.send(new SwitchbladeEmbed(author)
-      .setDescription(t('commands:vote.howToVote.dbl', { link: `https://discordbots.org/bot/${this.client.user.id}/vote` })))
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setDescription(t('commands:vote.howToVote.dbl', { link: `https://discordbots.org/bot/${this.client.user.id}/vote` }))
+      ]
+    })
   }
 }

@@ -13,8 +13,11 @@ module.exports = class QueueShuffle extends Command {
     const guildPlayer = this.client.playerManager.players.get(guild.id)
     if (guildPlayer.nextSong) {
       guildPlayer.shuffleQueue()
-      channel.send(new SwitchbladeEmbed(author)
-        .setTitle(t(`commands:${this.tPath}.queueShuffled`)))
+      channel.send({
+        embeds: [new SwitchbladeEmbed(author)
+          .setTitle(t(`commands:${this.tPath}.queueShuffled`))
+        ]
+      })
     } else {
       throw new CommandError(t('music:noneAfterCurrent'))
     }

@@ -29,20 +29,27 @@ module.exports = class Purge extends Command {
             embed.setDescription(t(userMessages.size > 1 ? 'commands:purge.purgedMemberPlural' : 'commands:purge.purgedMemberSingular', { count: number, user: member.displayName }))
             channel.send({ embeds: [embed] })
           }).catch(() => {
-            return channel.send(new SwitchbladeEmbed()
-              .setTitle(t('errors:generic')))
+            return channel.send({
+              embed: [new SwitchbladeEmbed()
+                .setTitle(t('errors:generic'))
+              ]
+            })
           })
         }).catch(() => {
-          return channel.send(new SwitchbladeEmbed()
-            .setTitle(t('errors:generic')))
+          return channel.send({
+            embed: [new SwitchbladeEmbed()
+              .setTitle(t('errors:generic'))]
+          })
         })
     } else {
       channel.bulkDelete(number).then(() => {
         embed.setDescription(t(number > 1 ? 'commands:purge.purgedPlural' : 'commands:purge.purgedSingular', { count: number }))
         channel.send({ embeds: [embed] })
       }).catch(() => {
-        return channel.send(new SwitchbladeEmbed()
-          .setTitle(t('errors:generic')))
+        return channel.send({
+          embeds: [new SwitchbladeEmbed()
+            .setTitle(t('errors:generic'))]
+        })
       })
     }
   }
