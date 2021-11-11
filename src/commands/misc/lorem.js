@@ -7,7 +7,6 @@ module.exports = class Lorem extends Command {
       name: 'lorem',
       parameters: [{
         type: 'number',
-        full: true,
         missingError: 'commands:lorem.noNumber',
         required: false,
         min: 1,
