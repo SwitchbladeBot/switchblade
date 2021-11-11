@@ -18,8 +18,8 @@ module.exports = class Lorem extends Command {
     this.lorem = new LoremIpsum()
   }
 
-  async run ({ channel, t }, paragraphs) {
-    let loremString = this.lorem.generateParagraphs(paragraphs || 2)
+  async run ({ channel, t }, paragraphs = 2) {
+    let loremString = this.lorem.generateParagraphs(paragraphs)
 
     if (loremString.length >= 4096) {
       loremString = loremString.slice(0, 4095) + '…'
