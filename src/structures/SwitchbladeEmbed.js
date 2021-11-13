@@ -19,7 +19,7 @@ module.exports = class SwitchbladeEmbed extends MessageEmbed {
    * @returns {SwitchbladeEmbed}
    */
   setDescriptionFromBlockArray (blocks) {
-    this.description = blocks.map(lines => lines.filter(l => !!l).join('\n')).filter(b => !!b.length).join('\n\n')
+    this.description = blocks.filter(l => !!l).filter(b => !!b.length).join('\n\n')
     return this
   }
 }

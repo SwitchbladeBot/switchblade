@@ -23,15 +23,17 @@ module.exports = class Correios extends Command {
     moment.locale(language)
     try {
       const laststate = tracked[0].tracks[tracked[0].tracks.length - 1]
-      channel.send(
-        new SwitchbladeEmbed()
-          .setAuthor(`${tracked[0].code}`, 'https://i.imgur.com/QRBKPwm.png')
-          .setTitle(laststate.locale.toUpperCase())
-          .setDescription(`${laststate.status.toUpperCase()} ${laststate.observation ? laststate.observation.toUpperCase() : ''}`)
-          .setColor(tracked[0].isDelivered ? Constants.SPOTIFY_COLOR : '#0f75bc')
-          .setFooter(t('commands:correios.lastUpdated'))
-          .setTimestamp(laststate.trackedAt)
-      )
+      channel.send({
+        embeds: [
+          new SwitchbladeEmbed()
+            .setAuthor(`${tracked[0].code}`, 'https://i.imgur.com/QRBKPwm.png')
+            .setTitle(laststate.locale.toUpperCase())
+            .setDescription(`${laststate.status.toUpperCase()} ${laststate.observation ? laststate.observation.toUpperCase() : ''}`)
+            .setColor(tracked[0].isDelivered ? Constants.SPOTIFY_COLOR : '#0f75bc')
+            .setFooter(t('commands:correios.lastUpdated'))
+            .setTimestamp(laststate.trackedAt)
+        ]
+      })
     } catch (e) {
       channel.stopTyping(true)
       throw new CommandError(t('commands:correios.notFound'))

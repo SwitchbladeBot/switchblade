@@ -37,10 +37,11 @@ module.exports = class Render extends Command {
 
     try {
       if (messageHasNoEmbed) {
+        console.log(link.guild)
         const embed = new SwitchbladeEmbed(author)
           .setAuthor(link.author.username, link.author.displayAvatarURL({ dynamic: true }))
-        if (link.guild.member(author.id)) {
-          embed.setColor(link.guild.member(author.id).displayHexColor)
+        if (link.guild.members) {
+          embed.setColor(link.guild.members.cache.get(author.id).displayHexColor)
         }
 
         if (content) {
@@ -50,8 +51,9 @@ module.exports = class Render extends Command {
         render.embed = embed
       }
 
-      message.channel.send(render)
+      message.channel.send({ embeds: [render] })
     } catch (e) {
+      console.log(e)
       throw new CommandError(t('commands:move.couldntSendMessage'))
     }
   }

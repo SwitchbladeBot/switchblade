@@ -20,9 +20,8 @@ module.exports = class Play extends Command {
 
   async run ({ t, author, channel, flags, guild, voiceState }, identifier) {
     const embed = new SwitchbladeEmbed(author)
-
-    if (!voiceState.channel.joinable && guild.me.voice.channelID !== voiceState.channelID) {
-      return channel.send(embed.setTitle(t('errors:voiceChannelJoin')))
+    if (!voiceState.channel.joinable && guild.me.voice.channelId !== voiceState.channelId) {
+      return channel.send({ embeds: [embed.setTitle(t('errors:voiceChannelJoin'))] })
     }
 
     identifier = identifier.replace(/<?>?/g, '')
@@ -46,10 +45,11 @@ module.exports = class Play extends Command {
       if (e instanceof CommandError) throw e
 
       this.client.logger.error(e)
-      channel.send(embed
-        .setColor(Constants.ERROR_COLOR)
-        .setTitle(t('errors:generic'))
-      )
+      channel.send({
+        embeds: [embed
+          .setColor(Constants.ERROR_COLOR)
+          .setTitle(t('errors:generic'))]
+      })
     }
   }
 
@@ -71,17 +71,17 @@ module.exports = class Play extends Command {
     const duration = `\`(${playlist.formattedDuration})\``
     const count = playlist.songs.length
     const playlistName = `[${playlist.title}](${playlist.uri})`
-    channel.send(
-      new SwitchbladeEmbed()
+    channel.send({
+      embeds: [new SwitchbladeEmbed()
         .setThumbnail(playlist.artwork)
-        .setDescription(`${this.getEmoji('playButton')} ${t('music:addedFromPlaylist', { count, playlistName, duration })}`)
-    )
+        .setDescription(`${this.getEmoji('playButton')} ${t('music:addedFromPlaylist', { count, playlistName, duration })}`)]
+    })
   }
 
   songFeedback ({ t, channel }, song, queueFeedback = true, startFeedback = true) {
     const bEmbed = (d, u) => new SwitchbladeEmbed(u).setDescription(d)
-    const send = (d, u) => channel.send(bEmbed(d, u))
-    const sendWI = (d, i, u) => channel.send(bEmbed(d, u).setThumbnail(i || song.artwork))
+    const send = (d, u) => channel.send({ embeds: [bEmbed(d, u)] })
+    const sendWI = (d, i, u) => channel.send({ embeds: [bEmbed(d, u).setThumbnail(i || song.artwork)] })
 
     const duration = song.isStream ? `(${t('music:live')})` : `\`(${song.formattedDuration})\``
     const songName = `[${song.title}](${song.uri}) ${duration}`

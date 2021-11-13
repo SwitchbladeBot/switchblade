@@ -23,12 +23,12 @@ const imageResponseCheck = (res) => (
   res.headers.has('content-length') && Number(res.headers.get('content-length')) <= MAX_SIZE
 )
 
-const imageRequest = (url, client, timeout = 3000) => {
+const imageRequest = (url, timeout = 3000) => {
   const controller = new AbortController()
-  const abortTimeout = client.setTimeout(() => controller.abort(), timeout)
+  const abortTimeout = setTimeout(() => controller.abort(), timeout)
   return fetch(url, { signal: controller.signal })
     .then(res => imageResponseCheck(res) ? res.buffer() : Promise.reject(res))
-    .finally(() => client.clearTimeout(abortTimeout))
+    .finally(() => clearTimeout(abortTimeout))
 }
 
 const defVal = (o, k, d) => typeof o[k] === 'undefined' ? d : o[k]

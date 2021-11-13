@@ -36,14 +36,16 @@ module.exports = class RandomRedditPostCommand extends Command {
       post = response
     }
 
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setTitle(this.addTitle ? (this.titleString ? t(this.titleString) : post.title) : '')
-        .setColor(this.embedColor || process.env.EMBED_COLOR)
-        .setURL(this.addPermalink ? `https://reddit.com${post.permalink}` : null)
-        .setDescription(post.selftext ? this.shortenTextIfTooBig(post.selftext) : '')
-        .setImage(post.url)
-    )
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setTitle(this.addTitle ? (this.titleString ? t(this.titleString) : post.title) : '')
+          .setColor(this.embedColor || process.env.EMBED_COLOR)
+          .setURL(this.addPermalink ? `https://reddit.com${post.permalink}` : null)
+          .setDescription(post.selftext ? this.shortenTextIfTooBig(post.selftext) : '')
+          .setImage(post.url)
+      ]
+    })
   }
 
   shortenTextIfTooBig (text) {

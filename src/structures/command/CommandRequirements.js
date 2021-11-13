@@ -74,8 +74,8 @@ module.exports = class CommandRequirements {
       throw new CommandError(t(opts.errors.nsfwOnly))
     }
 
-    const currentChannel = voiceState && voiceState.channelID
-    if (opts.sameVoiceChannelOnly && guild.me.voice.channel && (!currentChannel || guild.me.voice.channelID !== currentChannel)) {
+    const currentChannel = voiceState && voiceState.channelId
+    if (opts.sameVoiceChannelOnly && guild.me.voice.channel && (!currentChannel || guild.me.voice.channelId !== currentChannel)) {
       throw new CommandError(t(opts.errors.sameVoiceChannelOnly))
     }
 

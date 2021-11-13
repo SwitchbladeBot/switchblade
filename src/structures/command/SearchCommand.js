@@ -43,10 +43,10 @@ module.exports = class SearchCommand extends Command {
       .setColor(this.embedColor)
       .setTitle(t('commons:search.typeHelper'))
       .setAuthor(t('commons:search.results', { query }), this.embedLogoURL)
-      .setDescription(description)
+      .setDescriptionFromBlockArray(description)
     await channel.send({ embeds: [embed] })
 
-    this.awaitResponseMessage(context, results)
+    await this.awaitResponseMessage(context, results)
   }
 
   async search () {
@@ -67,7 +67,7 @@ module.exports = class SearchCommand extends Command {
     const { author, channel } = context
     const filter = c => c.author.equals(author) && this.verifyCollected(c.content, results.length)
 
-    channel.awaitMessages(filter, { time: 10000, max: 1 })
+    channel.awaitMessages({ filter, time: 10000, max: 1 })
       .then(collected => {
         if (collected.size > 0) {
           const result = results[Math.round(Number(collected.first().content)) - 1]
