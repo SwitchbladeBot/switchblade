@@ -36,10 +36,8 @@ module.exports = class TasteDive extends Command {
   parseResponse (t, title, data) {
     const description = data.map((item, index) => `\`${String(index).padStart(2, '0')}\`:  *${item.Name}*`).join('\n')
 
-    const embed = new SwitchbladeEmbed()
+    return new SwitchbladeEmbed()
       .setTitle(t('commands:tastedive.title', { title }))
       .setDescription(description)
-
-    return embed
   }
 }
