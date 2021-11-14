@@ -44,7 +44,7 @@ module.exports = class Itunes extends Command {
       throw new CommandError(t('commands:itunes.noResults'))
     }
 
-    channel.send(await this.parseResponse(author, t, data, message.content))
+    channel.send(this.parseResponse(author, t, data, message.content))
   }
 
   searchResultFormatter (i) {
@@ -57,7 +57,7 @@ module.exports = class Itunes extends Command {
               .repeat(Math.ceil(rating - Math.floor(rating))))
   }
 
-  async parseResponse (author, t, data, title) {
+  parseResponse (author, t, data, title) {
     const description = data.map((item, index) => `\`${String(index).padStart(2, '0')}\`: ${this.searchResultFormatter(item)}`)
 
     return new SwitchbladeEmbed(author)
