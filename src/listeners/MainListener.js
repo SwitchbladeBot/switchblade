@@ -64,13 +64,18 @@ module.exports = class MainListener extends EventListener {
     }
 
     // TODO: Make stat posters modular
-    function postStats (client) {
+    async function postStats (client) {
+      const shardGuildCounts = await client.shard.fetchClientValues('guilds.cache.size')
+      const totalGuildCount = shardGuildCounts.reduce((total, current) => total + current)
+      const shardUserCounts = await client.shard.fetchClientValues('users.cache.size')
+      const totalUserCount = shardUserCounts.reduce((total, current) => total + current)
+
       // bots.discord.pw
       if (process.env.DISCORDBOTSPW_TOKEN) {
         fetch(`https://bots.discord.pw/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DISCORDBOTSPW_TOKEN },
-          body: { server_count: client.guilds.size }
+          body: { server_count: totalGuildCount }
         })
           .then(() => client.logger.info({ tags: ['bots.discord.pw'] }, 'Posted statistics successfully'))
           .catch(() => client.logger.error({ tags: ['bots.discord.pw'] }, 'Failed to post statistics'))
@@ -81,7 +86,7 @@ module.exports = class MainListener extends EventListener {
         fetch(`https://top.gg/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DBL_TOKEN },
-          body: { server_count: client.guilds.size }
+          body: { server_count: totalGuildCount }
         })
           .then(() => client.logger.info('Posted statistics successfully', { tags: ['discordbots.org'] }))
           .catch(() => client.logger.error('Failed to post statistics', { tags: ['discordbots.org'] }))
@@ -92,7 +97,7 @@ module.exports = class MainListener extends EventListener {
         fetch(`https://botsfordiscord.com/api/bots/${client.user.id}`, {
           method: 'POST',
           headers: { Authorization: process.env.BOTSFORDISCORD_TOKEN },
-          body: { server_count: client.guilds.size }
+          body: { server_count: totalGuildCount }
         })
           .then(() => client.logger.info('Posted statistics successfully', { tags: ['botsfordiscord.com'] }))
           .catch(() => client.logger.error('Failed to post statistics', { tags: ['botsfordiscord.com'] }))
@@ -102,7 +107,7 @@ module.exports = class MainListener extends EventListener {
         fetch(`https://discordbotlist.com/api/bots/${client.user.id}/stats`, {
           method: 'POST',
           headers: { Authorization: process.env.DBL2_TOKEN },
-          body: { guilds: client.guilds.size, users: client.users.size }
+          body: { guilds: totalGuildCount, users: totalUserCount }
         })
           .then(() => client.logger.info('Posted statistics successfully', { tags: ['discordbotlist.com'] }))
           .catch(() => client.logger.error('Failed to post statistics', { tags: ['discordbotlist.com'] }))
