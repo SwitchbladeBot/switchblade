@@ -21,7 +21,6 @@ module.exports = class NumberFacts extends Command {
       embed.setTitle(body)
       channel.send({ embeds: [embed] })
     } catch (e) {
-      channel.stopTyping()
       console.error(e)
       throw new CommandError(t('commands:numberfacts.anErrorOcurred'))
     }

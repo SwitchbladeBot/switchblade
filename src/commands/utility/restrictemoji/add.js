@@ -23,7 +23,6 @@ module.exports = class RestrictEmojiAdd extends Command {
           .setTitle(t('commands:restrictemoji.subcommands.add.canUse', { role: role.name, emoji: emoji.name }))
       )
     } catch (e) {
-      channel.stopTyping()
       throw new CommandError(t('errors:generic'))
     }
   }

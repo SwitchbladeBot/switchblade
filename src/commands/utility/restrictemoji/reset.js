@@ -19,7 +19,6 @@ module.exports = class RestrictEmojiReset extends Command {
           .setTitle(t('commands:restrictemoji.subcommands.reset.reset', { emoji: emoji.name }))
       )
     } catch (e) {
-      channel.stopTyping()
       throw new CommandError(t('errors:generic'))
     }
   }

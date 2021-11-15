@@ -18,6 +18,5 @@ module.exports = class PresidentialAlert extends Command {
   async run ({ t, author, channel }, text) {
     const presidential = await CanvasTemplates.presidentialAlert(text)
     channel.send({ files: [new MessageAttachment(presidential, 'president.jpg')] })
-    channel.stopTyping()
   }
 }

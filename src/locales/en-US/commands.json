@@ -36,9 +36,7 @@
   "softwaregore": {
     "commandDescription": "Shows a random image from /r/softwaregore."
   },
-  "thinking": {
-    "commandDescription": "Shows a random :thinking: image from /r/thinking."
-  },
+
   "avatar": {
     "commandDescription": "Shows yours or someone else's avatar.",
     "commandUsage": "[user]",
@@ -180,9 +178,6 @@
         "userInfo": "User information"
       }
     }
-  },
-  "copypasta": {
-    "commandDescription": "Shows a random text from /r/copypasta."
   },
   "owo": {
     "commandDescription": "Owoifies your text.",
@@ -422,10 +417,6 @@
         "topScoreSelf": "Your top score ({{date}})"
       }
     }
-  },
-  "stoptyping": {
-    "commandDescription": "Forces the bot to stop typing.",
-    "tryingToStop": "Trying to stop typing..."
   },
   "isitup": {
     "commandDescription": "Checks whether a website is up or down.",
@@ -706,10 +697,6 @@
     "commandDescription": "Shows a random InspiroBot quote.",
     "quote": "Here's your InspiroBot quote!"
   },
-  "cat": {
-    "commandDescription": "Fetches a random cat and displays it. Nya~",
-    "hereIsYourCat": "Here's your cat!"
-  },
   "i18n": {
     "commandDescription": "Shows the link to Switchblade's translation page.",
     "translateMe": "**[Translate me to your language](https://translate.switchblade.xyz)**"
@@ -890,10 +877,6 @@
     "commandDescription": "Shows a random image of a fox.",
     "hereIsYourFox": "Here's your fox!"
   },
-  "birb": {
-    "commandDescription": "Shows a random image of a birb.",
-    "hereIsYourBirb": "Here's your birb!"
-  },
   "loop": {
     "commandDescription": "Activates or deactivates the music playback's loop mode."
   },
@@ -935,12 +918,6 @@
   "reloadlocales": {
     "commandDescription": "Reloads the locales folder.",
     "reloaded": "Locales reloaded!"
-  },
-  "tesla": {
-    "commandDescription": "Shows a random image from /r/TeslaPorn."
-  },
-  "fursuit": {
-    "commandDescription": "Shows a random image from /r/fursuit."
   },
   "parrot": {
     "commandDescription": "Shows a random image from /r/partyparrot."
@@ -1309,9 +1286,6 @@
   },
   "showerthoughts": {
     "commandDescription": "Shows a random thought from r/Showerthoughts."
-  },
-  "keanu": {
-    "commandDescription": "Shows a random image from r/KeanuBeingAwesome."
   },
   "tictactoe": {
     "commandDescription": "Challenge someone to a game of Tic Tac Toe.",

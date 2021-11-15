@@ -106,7 +106,6 @@ module.exports = class OsuPlayer extends Command {
       }
 
       paginatedEmbed.run(await channel.send(Constants.EMPTY_SPACE))
-      channel.stopTyping()
     } catch (e) {
       throw new CommandError(t('commands:osu.subcommands.player.playerNotFound'))
     }

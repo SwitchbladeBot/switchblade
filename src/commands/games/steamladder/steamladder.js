@@ -69,7 +69,7 @@ module.exports = class SteamLadder extends Command {
       this.client.logger.error(e)
       throw new CommandError(t('commands:steamladder.ladderNotFound'))
     }
-    channel.send({ embeds: [embed] }).then(channel.stopTyping())
+    channel.send({ embeds: [embed] })
   }
 
   generateLadderEmbedTitle ({ type, country_code: cc }, t, language) {

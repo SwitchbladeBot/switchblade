@@ -64,8 +64,6 @@ module.exports = class Holidays extends Command {
       }
     } catch (e) {
       throw new CommandError(t('commons:error'), true)
-    } finally {
-      channel.stopTyping()
     }
   }
 }

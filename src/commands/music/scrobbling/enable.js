@@ -26,6 +26,5 @@ module.exports = class ScrobblingEnabler$ extends Command {
       await channel.send(embed.setDescription(t('commands:scrobbling.configNotConnected', { link: `${process.env.DASHBOARD_URL}/profile` }))
         .setColor(Constants.ERROR_COLOR))
     }
-    channel.stopTyping()
   }
 }

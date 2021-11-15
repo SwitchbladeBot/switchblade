@@ -140,7 +140,5 @@ module.exports = class IGDB extends SearchCommand {
     } catch (err) {
       throw new CommandError(t('commands:igdb.error', { err }))
     }
-
-    channel.stopTyping()
   }
 }

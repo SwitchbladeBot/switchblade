@@ -39,7 +39,6 @@ module.exports = class Owlbot extends Command {
       if (definitionWithImage) embed.setThumbnail(definitionWithImage.image_url)
       channel.send({ embeds: [embed] })
     } catch (err) {
-      channel.stopTyping()
       if (err.response && err.response.status === 404) {
         throw new CommandError(t('commands:owlbot.notFound'))
       } else {

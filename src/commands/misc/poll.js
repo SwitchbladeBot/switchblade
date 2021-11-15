@@ -19,7 +19,7 @@ module.exports = class Poll extends Command {
   }
 
   async run (context, args) {
-    const { channel, author } = context
+    const { author } = context
 
     const [question, ...options] = splitArgs(args)
     const embed = new SwitchbladeEmbed(author)
@@ -28,8 +28,6 @@ module.exports = class Poll extends Command {
 
     if (options.length) await this.createPollWithOptions(context, embed, parsedQuestion, options)
     else await this.createPoll(context, embed, parsedQuestion, options)
-
-    channel.stopTyping()
   }
 
   async createPoll ({ channel }, embed, question, options) {

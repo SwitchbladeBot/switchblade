@@ -45,7 +45,6 @@ module.exports = class Country extends Command {
 
       channel.send({ embeds: [embed] })
     } catch (e) {
-      channel.stopTyping()
       throw new CommandError(`${t('errors:generic')}`)
     }
   }

@@ -33,6 +33,6 @@ module.exports = class MostPlayed extends Command {
           ? mostPlayed.map((game, i) => t('commands:mostplayed.hasPlayers', { rank: i + 1, game, count: MiscUtils.formatNumber(games[game], language) }))
           : t('commands:mostplayed.noPlayers'))
         .setFooter(t('commands:mostplayed.totalPlayers', { count: MiscUtils.formatNumber(totalPlayers, language) }))
-    ).then(() => channel.stopTyping(true))
+    )
   }
 }

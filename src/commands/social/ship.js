@@ -48,13 +48,10 @@ module.exports = class Ship extends Command {
     })
 
     const image = await CanvasTemplates.ship(users, shipName, percent)
-
     const embed = new SwitchbladeEmbed(author)
       .setDescription(message)
       .attachFiles(new MessageAttachment(image, 'ship.png'))
       .setImage('attachment://ship.png')
-
     await channel.send({ embeds: [embed] })
-    await channel.stopTyping()
   }
 }

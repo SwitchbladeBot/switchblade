@@ -23,7 +23,6 @@ module.exports = class RestrictEmojiRemove extends Command {
           .setTitle(t('commands:restrictemoji.subcommands.remove.cantUse', { role: role.name, emoji: emoji.name }))
       )
     } catch (e) {
-      channel.stopTyping()
       throw new CommandError(t('errors:generic'))
     }
   }
