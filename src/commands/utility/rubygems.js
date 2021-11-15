@@ -29,37 +29,40 @@ module.exports = class RubyGems extends SearchCommand {
 
   async handleResult ({ t, channel, author, language }, partialGem) {
     const gem = await this.client.apis.rubygems.getGem(partialGem.name)
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setAuthor('RubyGems.org', RUBYGEMS_ICON)
-        .setColor(RUBYGEMS_COLOR)
-        .setDescriptionFromBlockArray([
-          [
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setAuthor('RubyGems.org', RUBYGEMS_ICON)
+          .setColor(RUBYGEMS_COLOR)
+          .setDescriptionFromBlockArray([
+            [
             `[**${gem.name}**](${gem.project_uri}) _${gem.version}_`,
             gem.info
-          ],
-          [
-            `_${t('commands:rubygems.downloadCount', { count: MiscUtils.formatNumber(gem.downloads, language) })}_`
-          ],
-          [
+            ],
             [
-              'gem',
-              'homepage',
-              'wiki',
-              'documentation',
-              'mailing_list',
-              'source_code',
-              'bug_tracker',
-              'changelog'
-            ].filter(u => !!gem[`${u}_uri`]).map(u => `[${t(`commands:rubygems.uris.${u}`)}](${gem[`${u}_uri`]})`).join(' • ')
-          ],
-          [
-            '**Gemfile**',
+            `_${t('commands:rubygems.downloadCount', { count: MiscUtils.formatNumber(gem.downloads, language) })}_`
+            ],
+            [
+              [
+                'gem',
+                'homepage',
+                'wiki',
+                'documentation',
+                'mailing_list',
+                'source_code',
+                'bug_tracker',
+                'changelog'
+              ].filter(u => !!gem[`${u}_uri`]).map(u => `[${t(`commands:rubygems.uris.${u}`)}](${gem[`${u}_uri`]})`).join(' • ')
+            ],
+            [
+              '**Gemfile**',
             `\`\`\`gem '${gem.name}', '~> ${gem.version}'\`\`\``,
             `**${t('commands:rubygems.install')}**`,
             `\`\`\`gem install ${gem.name}\`\`\``
-          ]
-        ])
-    ).then(() => { channel.stopTyping() })
+            ]
+          ])
+      ]
+    }
+    )
   }
 }

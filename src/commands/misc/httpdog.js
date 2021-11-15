@@ -13,9 +13,12 @@ module.exports = class HttpDog extends Command {
   }
 
   async run ({ t, author, channel }, statusCode = 200) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setImage(`https://httpstatusdogs.com/img/${Math.round(statusCode)}.jpg`)
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setImage(`https://httpstatusdogs.com/img/${Math.round(statusCode)}.jpg`)
+      ]
+    }
     )
   }
 }

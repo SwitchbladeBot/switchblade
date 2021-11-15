@@ -36,37 +36,40 @@ module.exports = class VSCodeExtensions extends SearchCommand {
 
     const url = `${EXTENSION_URL}${publisher.publisherName}.${extensionName}`
 
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setColor(this.embedColor)
-        .setAuthor(t('commands:vscodeextension.marketplace'), this.embedLogoURL, 'https://marketplace.visualstudio.com/vscode')
-        .setURL(url)
-        .setThumbnail(`${assetUri}/Microsoft.VisualStudio.Services.Icons.Default`)
-        .setTitle(displayName)
-        .setDescriptionFromBlockArray([
-          [
-            shortDescription
-          ],
-          [
-            t('commands:vscodeextension.by', { displayName: publisher.displayName, name: publisher.publisherName })
-          ],
-          [
-            t('commands:vscodeextension.installs', { count: installs.toLocaleString(language) }),
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setColor(this.embedColor)
+          .setAuthor(t('commands:vscodeextension.marketplace'), this.embedLogoURL, 'https://marketplace.visualstudio.com/vscode')
+          .setURL(url)
+          .setThumbnail(`${assetUri}/Microsoft.VisualStudio.Services.Icons.Default`)
+          .setTitle(displayName)
+          .setDescriptionFromBlockArray([
+            [
+              shortDescription
+            ],
+            [
+              t('commands:vscodeextension.by', { displayName: publisher.displayName, name: publisher.publisherName })
+            ],
+            [
+              t('commands:vscodeextension.installs', { count: installs.toLocaleString(language) }),
             `${stars} (${Math.round(ratingCount)})`
-          ],
-          [
-            categories.join(', '),
-            tags.map((t) => `\`${t}\``).join(', ')
-          ],
-          [
-            t('commands:vscodeextension.lastUpdate', { ago: moment(lastUpdated).fromNow(), version })
-          ],
-          [
+            ],
+            [
+              categories.join(', '),
+              tags.map((t) => `\`${t}\``).join(', ')
+            ],
+            [
+              t('commands:vscodeextension.lastUpdate', { ago: moment(lastUpdated).fromNow(), version })
+            ],
+            [
             `[${t('commands:vscodeextension.license')}](${url}/license)`,
             `[${t('commands:vscodeextension.changelog')}](${url}/changelog)`,
             `[${t('commands:vscodeextension.install')}](https://vscoderedirect.switchblade.xyz/${publisher.publisherName}.${extensionName})`
-          ]
-        ])
+            ]
+          ])
+      ]
+    }
     )
   }
 }

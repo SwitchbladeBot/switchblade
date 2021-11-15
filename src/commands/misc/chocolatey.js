@@ -21,33 +21,36 @@ module.exports = class Chocolatey extends SearchCommand {
   }
 
   async handleResult ({ t, author, channel, language }, { __metadata, Authors, Description, DownloadCount, GalleryDetailsUrl, LicenseUrl, IconUrl, Tags, Title, Summary, Version }) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setColor(this.embedColor)
-        .setAuthor('Chocolatey', this.embedLogoURL, 'https://chocolatey.org/packages')
-        .setURL(GalleryDetailsUrl)
-        .setThumbnail(IconUrl)
-        .setTitle(`${Title} v${Version}`)
-        .setDescriptionFromBlockArray([
-          [
-            Summary || (Description && Description.split('\n')[0].replace(/#/g, ''))
-          ],
-          [
-            t('commands:chocolatey.by', { authors: Authors.split(', ').map((a) => `**${a}**`).join(', ') })
-          ],
-          [
-            t('commands:chocolatey.installs', { count: DownloadCount.toLocaleString(language) })
-          ],
-          [
-            Tags.trim().split(' ').map((t) => `\`${t}\``).join(', ')
-          ],
-          [
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setColor(this.embedColor)
+          .setAuthor('Chocolatey', this.embedLogoURL, 'https://chocolatey.org/packages')
+          .setURL(GalleryDetailsUrl)
+          .setThumbnail(IconUrl)
+          .setTitle(`${Title} v${Version}`)
+          .setDescriptionFromBlockArray([
+            [
+              Summary || (Description && Description.split('\n')[0].replace(/#/g, ''))
+            ],
+            [
+              t('commands:chocolatey.by', { authors: Authors.split(', ').map((a) => `**${a}**`).join(', ') })
+            ],
+            [
+              t('commands:chocolatey.installs', { count: DownloadCount.toLocaleString(language) })
+            ],
+            [
+              Tags.trim().split(' ').map((t) => `\`${t}\``).join(', ')
+            ],
+            [
             `[${t('commands:chocolatey.license')}](${LicenseUrl})`
-          ],
-          [
+            ],
+            [
             `\`\`\`\nchoco install ${__metadata.uri.match(/Id='([.\w\d_-]+)'/)[1].toLowerCase()}\n\`\`\``
-          ]
-        ])
+            ]
+          ])
+      ]
+    }
     )
   }
 }

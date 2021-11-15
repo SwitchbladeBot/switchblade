@@ -13,9 +13,11 @@ module.exports = class HttpCat extends Command {
   }
 
   async run ({ t, author, channel }, statusCode = 200) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setImage(`https://http.cat/${Math.round(statusCode)}`)
-    )
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setImage(`https://http.cat/${Math.round(statusCode)}`)
+      ]
+    })
   }
 }

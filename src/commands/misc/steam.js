@@ -43,28 +43,31 @@ module.exports = class Steam extends SearchCommand {
 
     moment.locale(language)
 
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setAuthor('Steam Store', this.embedLogoURL, 'https://store.steampowered.com/')
-        .setThumbnail(image)
-        .setTitle(name)
-        .setURL(website)
-        .setDescriptionFromBlockArray([
-          [
-            description.slice(0, 1024)
-          ],
-          [
-            isFree ? t('commands:steam.free') : priceInfo.final_formatted,
-            t('commands:steam.by', { publisher: publishers.join(',') }),
-            comingSoon ? t('commands:steam.comingSoon') : t('commands:steam.released', { ago: moment(new Date(date)).fromNow() })
-          ],
-          [
-            metacritic ? `\`${t('commands:steam.metacriticScore')}\`: [${metacritic.score}](${metacritic.url})` : ''
-          ],
-          [
-            categories.map((c) => `\`${c.description}\``).join(', ')
-          ]
-        ])
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setAuthor('Steam Store', this.embedLogoURL, 'https://store.steampowered.com/')
+          .setThumbnail(image)
+          .setTitle(name)
+          .setURL(website)
+          .setDescriptionFromBlockArray([
+            [
+              description.slice(0, 1024)
+            ],
+            [
+              isFree ? t('commands:steam.free') : priceInfo.final_formatted,
+              t('commands:steam.by', { publisher: publishers.join(',') }),
+              comingSoon ? t('commands:steam.comingSoon') : t('commands:steam.released', { ago: moment(new Date(date)).fromNow() })
+            ],
+            [
+              metacritic ? `\`${t('commands:steam.metacriticScore')}\`: [${metacritic.score}](${metacritic.url})` : ''
+            ],
+            [
+              categories.map((c) => `\`${c.description}\``).join(', ')
+            ]
+          ])
+      ]
+    }
     )
   }
 }

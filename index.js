@@ -1,8 +1,8 @@
 const Sentry = require('@sentry/node')
 Sentry.init({ dsn: process.env.SENTRY_DSN })
 const { Intents } = require('discord.js')
-const Tracer = require('dd-trace')
-Tracer.init()
+// const Tracer = require('dd-trace')
+// Tracer.init()
 
 const { readFileSync } = require('fs')
 

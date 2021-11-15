@@ -39,30 +39,33 @@ module.exports = class LegendsOfRuneterraCard extends Command {
     if (query.toUpperCase() !== card.cardCode) card = this.levelUp(card, data)
     if (flags.base) card = this.getBase(card, data)
 
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setTitle(card.name)
-        .setURL(`https://lor.mobalytics.gg/cards/${card.cardCode}`)
-        .setDescriptionFromBlockArray([
-          [
-            this.parseDescription(card, data, globals)
-          ],
-          [
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setTitle(card.name)
+          .setURL(`https://lor.mobalytics.gg/cards/${card.cardCode}`)
+          .setDescriptionFromBlockArray([
+            [
+              this.parseDescription(card, data, globals)
+            ],
+            [
             `${this.getEmoji(`lorregion${card.regionRef.toLowerCase()}`, '')} **${card.region}**`
-          ],
-          card.keywordRefs.map((k, i) => {
-            return `${this.getEmoji(`lorsprite${k.toLowerCase()}`, '')}** ${card.keywords[i]}** ${globals.keywords.find(kw => kw.nameRef === k).description}`
-          }),
-          [
+            ],
+            card.keywordRefs.map((k, i) => {
+              return `${this.getEmoji(`lorsprite${k.toLowerCase()}`, '')}** ${card.keywords[i]}** ${globals.keywords.find(kw => kw.nameRef === k).description}`
+            }),
+            [
             `> _${card.flavorText.replace(/^\n+|\n+$/g, '')}_`
-          ],
-          [
-            card.associatedCardRefs.length > 0 ? `**${t('commands:legendsofruneterra.subcommands.card.associatedCards')}:** ${card.associatedCardRefs.map(c => `[${this.getCardName(c, data, t)}](https://lor.mobalytics.gg/cards/${c})`).join(', ')}` : null
-          ]
-        ])
-        .setImage(this.client.apis.legendsofruneterra.getCardImageURL(card.cardCode, language))
-        .setThumbnail(card.type !== 'Spell' ? this.client.apis.legendsofruneterra.getFullCardImageURL(card.cardCode, language) : null)
-        .setFooter(`${card.cardCode} • ${t('commands:legendsofruneterra.subcommands.card.illustrationBy', { artistName: card.artistName })}`)
+            ],
+            [
+              card.associatedCardRefs.length > 0 ? `**${t('commands:legendsofruneterra.subcommands.card.associatedCards')}:** ${card.associatedCardRefs.map(c => `[${this.getCardName(c, data, t)}](https://lor.mobalytics.gg/cards/${c})`).join(', ')}` : null
+            ]
+          ])
+          .setImage(this.client.apis.legendsofruneterra.getCardImageURL(card.cardCode, language))
+          .setThumbnail(card.type !== 'Spell' ? this.client.apis.legendsofruneterra.getFullCardImageURL(card.cardCode, language) : null)
+          .setFooter(`${card.cardCode} • ${t('commands:legendsofruneterra.subcommands.card.illustrationBy', { artistName: card.artistName })}`)
+      ]
+    }
     )
   }
 

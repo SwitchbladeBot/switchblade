@@ -13,9 +13,12 @@ module.exports = class QRCodeGenerate extends Command {
   }
 
   async run ({ t, author, channel, language }, text) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setImage(`https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(text)}`)
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setImage(`https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(text)}`)
+      ]
+    }
     )
   }
 }

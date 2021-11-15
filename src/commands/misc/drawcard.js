@@ -34,11 +34,13 @@ module.exports = class DrawCard extends Command {
       messageDesc += `${suit} ${card}\n`
     }
 
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setTitle(t('commands:drawcard.title', { number: count }))
-        .setDescription(messageDesc)
-        .setColor(Constants.DRAWCARD_COLOR)
-    )
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setTitle(t('commands:drawcard.title', { number: count }))
+          .setDescription(messageDesc)
+          .setColor(Constants.DRAWCARD_COLOR)
+      ]
+    })
   }
 }

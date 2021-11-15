@@ -29,14 +29,17 @@ module.exports = class Wikipedia extends SearchCommand {
       info.summary()
     ])
 
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setDescription(description.length > 2000 ? description.substring(0, 2000) + '...' : description)
-        .setAuthor('Wikipedia', this.embedLogoURL, `https://${lang}.wikipedia.org`)
-        .setColor(this.embedColor)
-        .setTitle(info.raw.title)
-        .setURL(info.raw.fullurl)
-        .setThumbnail(thumbnail)
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setDescription(description.length > 2000 ? description.substring(0, 2000) + '...' : description)
+          .setAuthor('Wikipedia', this.embedLogoURL, `https://${lang}.wikipedia.org`)
+          .setColor(this.embedColor)
+          .setTitle(info.raw.title)
+          .setURL(info.raw.fullurl)
+          .setThumbnail(thumbnail)
+      ]
+    }
     )
   }
 }

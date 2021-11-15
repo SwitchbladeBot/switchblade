@@ -27,18 +27,21 @@ module.exports = class MerriamWebster extends SearchCommand {
   async handleResult ({ t, author, channel, language }, { hwi, meta, shortdef, fl }) {
     moment.locale(language)
 
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setAuthor(t('commands:merriamwebster.title'), this.embedLogoURL, 'https://www.merriam-webster.com')
-        .setColor(this.embedColor)
-        .setTitle(meta.stems[0])
-        .setDescriptionFromBlockArray([
-          [
-            hwi.prs ? `> /${hwi.prs[0].mw}/` : '',
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setAuthor(t('commands:merriamwebster.title'), this.embedLogoURL, 'https://www.merriam-webster.com')
+          .setColor(this.embedColor)
+          .setTitle(meta.stems[0])
+          .setDescriptionFromBlockArray([
+            [
+              hwi.prs ? `> /${hwi.prs[0].mw}/` : '',
             `*${fl}*`
-          ],
-          shortdef.map((d, i) => `\`${String(i + 1).padStart(2, '0')}\`. ${d}`)
-        ])
+            ],
+            shortdef.map((d, i) => `\`${String(i + 1).padStart(2, '0')}\`. ${d}`)
+          ])
+      ]
+    }
     )
   }
 }

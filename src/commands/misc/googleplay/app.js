@@ -20,19 +20,22 @@ module.exports = class GooglePlayApp extends SearchCommand {
   }
 
   async handleResult ({ t, channel, author, language }, { title, screenshots, installs, released, contentRating, genre, url, priceText, price, icon, summary, appId, developer, developerId, currency }) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setColor(this.embedColor)
-        .setThumbnail(icon)
-        .setAuthor(title, icon, url)
-        .setDescription(summary.replace(/&amp;/g, '&'))
-        .addField(t('commands:googleplay.developer'), `${developer} (${developerId})`, true)
-        .addField(t('commands:googleplay.price'), priceText, true)
-        .addField(t('commands:googleplay.genre'), genre, true)
-        .addField(t('commands:googleplay.rating'), contentRating, true)
-        .addField(t('commands:googleplay.installs'), installs, true)
-        .addField(t('commands:googleplay.released'), released, true)
-        .setImage(screenshots[Math.floor(Math.random() * screenshots.length)])
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setColor(this.embedColor)
+          .setThumbnail(icon)
+          .setAuthor(title, icon, url)
+          .setDescription(summary.replace(/&amp;/g, '&'))
+          .addField(t('commands:googleplay.developer'), `${developer} (${developerId})`, true)
+          .addField(t('commands:googleplay.price'), priceText, true)
+          .addField(t('commands:googleplay.genre'), genre, true)
+          .addField(t('commands:googleplay.rating'), contentRating, true)
+          .addField(t('commands:googleplay.installs'), installs, true)
+          .addField(t('commands:googleplay.released'), released, true)
+          .setImage(screenshots[Math.floor(Math.random() * screenshots.length)])
+      ]
+    }
     )
   }
 }

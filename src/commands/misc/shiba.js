@@ -14,7 +14,7 @@ module.exports = class Shiba extends Command {
     const embed = new SwitchbladeEmbed(author)
 
     const body = await fetch('http://shibe.online/api/shibes').then(res => res.json())
-    embed.setDescription(`${t('commands:shiba.hereIsYourShiba')} <:DoggoF:445701839564963840>`)
+    embed.setDescription(`${t('commands:shiba.hereIsYourShiba')} 🐕`)
     embed.setImage(body[0])
     channel.send({ embeds: [embed] })
   }

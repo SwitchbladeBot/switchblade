@@ -1,6 +1,6 @@
 const { APIWrapper } = require('../')
-const fetch = require('node-fetch')
-const cheerio = require('cheerio')
+const axios = require('axios')
+const genius = require('genius-lyrics-api')
 
 const API_URL = 'https://api.genius.com'
 
@@ -19,18 +19,16 @@ module.exports = class GeniusAPI extends APIWrapper {
 
   // Load lyrics from the html
   loadLyrics (url) {
-    return fetch(url).then(async r => {
-      const _ = await r.text()
-      const $ = cheerio.load(_)
-      return $('.lyrics') ? $('.lyrics').text().trim() : null
-    })
+    return genius.getLyrics(url)
   }
 
   // Default
   request (endpoint, queryParams = {}) {
     const qParams = new URLSearchParams(queryParams)
-    return fetch(API_URL + endpoint + `?${qParams.toString()}`, {
-      headers: { Authorization: `Bearer ${process.env.GENIUS_API}` }
-    }).then(res => res.json())
+    return axios.get(API_URL + endpoint + `?${qParams.toString()}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.GENIUS_API}`
+      }
+    }).then(res => res.data)
   }
 }

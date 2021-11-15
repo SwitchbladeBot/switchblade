@@ -9,10 +9,13 @@ module.exports = class TCDNE extends Command {
   }
 
   run ({ t, channel, author }) {
-    channel.send(
-      new SwitchbladeEmbed(author)
-        .setDescription(t('commands:tcdne.cat'))
-        .setImage(`https://thiscatdoesnotexist.com/?q=${new Date().getTime()}`)
+    channel.send({
+      embeds: [
+        new SwitchbladeEmbed(author)
+          .setDescription(t('commands:tcdne.cat'))
+          .setImage(`https://thiscatdoesnotexist.com/?q=${new Date().getTime()}`)
+      ]
+    }
     )
   }
 }

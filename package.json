@@ -54,6 +54,7 @@
     "express": "^4.17.1",
     "figlet": "^1.5.2",
     "fuse.js": "^6.4.6",
+    "genius-lyrics-api": "^3.2.0",
     "gifencoder": "^2.0.1",
     "google-play-scraper": "^8.0.4",
     "googleapis": "^87.0.0",
