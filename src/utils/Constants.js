@@ -45,6 +45,7 @@ module.exports = {
   IDLE_AIRCRAFT_COLOR: '#f8c023',
   DRAWCARD_COLOR: '#F06161',
   HOMEBREW_COLOR: '#C86E38',
+  HOW_LONG_TO_BEAT_COLOR: '#91A1F4',
 
   // Emojis
   CLUBS: '♣️',
