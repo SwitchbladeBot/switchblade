@@ -8,17 +8,18 @@ module.exports = class Guilds extends Route {
     }, client)
   }
 
-  register (app) {
+  async register (app) {
     const router = Router()
 
     // Info
     router.get('/:guildId/members', async (req, res) => {
-      const guild = this.client.guilds.cache.get(req.params.guildId)
+      const guild = await this.client.guilds.fetch(req.params.guildId)
+      const guildMembers = await guild.members.fetch()
       if (guild) {
-        const { id, name, icon, members: { size } } = guild
-        const userMembers = guild.members.filter(m => !m.user.bot).size
-        const botMembers = size - userMembers
-        return res.status(200).json({ id, name, icon, totalMembers: size, userMembers, botMembers })
+        const { id, name, icon, memberCount } = guild
+        const userMembers = guildMembers.filter(m => !m.user.bot).size
+        const botMembers = memberCount - userMembers
+        return res.status(200).json({ id, name, icon, totalMembers: memberCount, userMembers, botMembers })
       }
       res.status(400).json({ error: 'Guild not found!' })
     })
