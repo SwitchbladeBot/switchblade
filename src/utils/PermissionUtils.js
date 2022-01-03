@@ -9,7 +9,7 @@ module.exports = class PermissionUtils {
     return isDeveloper
   }
 
-  static specialRole (client, user) {
+  static async specialRole (client, user) {
     const botGuild = client.guilds.fetch(process.env.BOT_GUILD)
     const member = botGuild && botGuild.members.fetch(user.id)
     if (member) {
