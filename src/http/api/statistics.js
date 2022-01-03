@@ -13,8 +13,8 @@ module.exports = class Statistics extends Route {
     const router = Router()
     const shardGuildCounts = await this.client.shard.fetchClientValues('guilds.cache.size')
     const totalGuildCount = shardGuildCounts.reduce((total, current) => total + current)
-    const shardUserCounts = await this.client.shard.fetchClientValues('users.cache.size')
-    const totalUserCount = shardUserCounts.reduce((total, current) => total + current)
+    const shardUserCounts = await this.client.shard.broadcastEval('this.guilds.cache.reduce((acc, g) => acc + g.memberCount, 0)')
+    const totalUserCount = shardUserCounts.reduce((total, current) => total + current, 0)
 
     router.get('/', (req, res) => {
       res.status(200).json({
