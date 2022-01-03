@@ -18,7 +18,7 @@ module.exports = class GuildInfo extends Command {
 
   async run ({ t, author, channel, language }, guild = channel.guild) {
     if (guild.members.cache.size !== guild.memberCount) {
-      guild.members.fetch({ withPresences: true })
+      await guild.members.fetch({ withPresences: true })
     }
     const embed = new SwitchbladeEmbed(author)
     moment.locale(language)
