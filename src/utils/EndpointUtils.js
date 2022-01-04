@@ -43,7 +43,7 @@ module.exports = class EndpointUtils {
 
   static async _fetchGuilds (client, token) {
     return this._requestDiscord('/users/@me/guilds', token).then(gs => gs.map(g => {
-      g.common = client.guilds.cache.has(g.id)
+      g.common = client.guilds.fetch(g.id)
       return g
     }))
   }
@@ -81,7 +81,7 @@ module.exports = class EndpointUtils {
         const guild = client.guilds.cache.get(id)
         if (!guild) return res.status(400).json({ ok: false })
         if (!req.isAdmin) {
-          const member = await guild.fetchMember(req.user.id)
+          const member = await guild.members.fetch(req.user.id)
           if (!member || (permissions && !member.hasPermission(permissions))) return res.status(403).json({ error: 'Missing permissions!' })
         }
         req.guildId = id
