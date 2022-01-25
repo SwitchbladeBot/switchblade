@@ -34,7 +34,6 @@ module.exports = class searchPlate extends Command {
         const vinDecoder = /^([A-Z0-9]){17}$/.test(plate.extra.chassi)
           ? await this.client.apis.vindecoder.getVIN(plate.extra.chassi)
           : null
-        console.log(vinDecoder?.Results)
         const cnpj = plate.extra.faturado
           ? await this.client.apis.cnpj.getCNPJ(plate.extra.faturado)
           : undefined
@@ -59,7 +58,6 @@ module.exports = class searchPlate extends Command {
         .setThumbnail('attachment://plate.png')
       channel.send(embed)
     } catch (e) {
-      console.log(e)
       throw new CommandError(t('commands:searchplate.notFound'))
     }
   }

@@ -1667,7 +1667,8 @@
     "engine": "Engine specs",
     "passengers": "passengers",
     "engineNumber": "Engine number",
-    "vendor": "Vendor CNPJ"
+    "vendor": "Vendor CNPJ",
+    "unknown": "Unknown"
   },
   "cep": {
     "commandDescription": "Searches for a CEP using ViaCEP API",
