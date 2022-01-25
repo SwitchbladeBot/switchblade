@@ -12,7 +12,7 @@ module.exports = class GuildLogging extends EventListener {
   }
 
   onGuildCreate (guild) {
-    this.client.logger.info({ tag: 'Guilds' }, `Added to "${guild.name}" (${guild.id})`)
+    this.logger.info({ tag: 'Guilds' }, `Added to "${guild.name}" (${guild.id})`)
     if (process.env.LOGGING_CHANNEL_ID) {
       this.channels.cache.get(process.env.LOGGING_CHANNEL_ID).send(
         new SwitchbladeEmbed()
@@ -25,7 +25,7 @@ module.exports = class GuildLogging extends EventListener {
   }
 
   onGuildDelete (guild) {
-    this.client.logger.info({ tag: 'Guilds' }, `Removed from "${guild.name}" (${guild.id})`)
+    this.logger.info({ tag: 'Guilds' }, `Removed from "${guild.name}" (${guild.id})`)
     if (process.env.LOGGING_CHANNEL_ID) {
       this.channels.cache.get(process.env.LOGGING_CHANNEL_ID).send(
         new SwitchbladeEmbed()
