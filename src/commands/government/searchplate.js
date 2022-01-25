@@ -34,7 +34,7 @@ module.exports = class searchPlate extends Command {
         const vinDecoder = /^([A-Z0-9]){17}$/.test(plate.extra.chassi)
           ? await this.client.apis.vindecoder.getVIN(plate.extra.chassi)
           : null
-        const cnpj = plate.extra.faturado
+        const cnpj = plate.extra?.faturado.length === 14
           ? await this.client.apis.cnpj.getCNPJ(plate.extra.faturado)
           : undefined
         embed.setTitle((vinDecoder && plate.extra.marca_modelo.modelo === plate.extra.marca_modelo.marca) ? `${plate.extra.marca_modelo.modelo} ${vinDecoder?.Results[8].Value} - ${plate.anoModelo}` : `${plate.extra.marca_modelo.modelo ? plate.extra.marca_modelo.modelo.replace(/(IMP*){3}\//, '') : plate.modelo.replace(/(IMP*){3}\//, '')} - ${plate.anoModelo}`)
