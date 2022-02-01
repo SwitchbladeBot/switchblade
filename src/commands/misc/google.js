@@ -13,8 +13,8 @@ module.exports = class GoogleCommand extends SearchCommand {
     }, client)
   }
 
-  async search (_, query) {
-    const { items } = await this.client.apis.gsearch.search(query)
+  async search ({ channel }, query) {
+    const { items } = await this.client.apis.gsearch.search(query, channel.nsfw)
     return items
   }
 
