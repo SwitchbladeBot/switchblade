@@ -9,13 +9,13 @@ module.exports = class CrowdinAPI extends APIWrapper {
     })
   }
 
-  async search (query) {
-    return fetch(`https://www.googleapis.com/customsearch/v1?q=${query}&key=${process.env.G_CSE_CREDENTIALS}&cx=${process.env.G_CSE_ID}&safe=active`)
+  async search (query, useSafeSearch = true) {
+    return fetch(`https://www.googleapis.com/customsearch/v1?q=${query}&key=${process.env.G_CSE_CREDENTIALS}&cx=${process.env.G_CSE_ID}&safe=${useSafeSearch ? 'active' : 'off'}`)
       .then(r => r.json())
   }
 
-  async searchImage (query) {
-    return fetch(`https://www.googleapis.com/customsearch/v1?q=${query}&key=${process.env.G_CSE_CREDENTIALS}&cx=${process.env.G_CSE_ID}&safe=active&searchType=image`)
+  async searchImage (query, useSafeSearch = true) {
+    return fetch(`https://www.googleapis.com/customsearch/v1?q=${query}&key=${process.env.G_CSE_CREDENTIALS}&cx=${process.env.G_CSE_ID}&safe=${useSafeSearch ? 'active' : 'off'}&searchType=image`)
       .then(r => r.json())
   }
 }

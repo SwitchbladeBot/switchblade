@@ -15,7 +15,7 @@ module.exports = class ImageSearchCommand extends Command {
 
   async run ({ t, channel }, query) {
     try {
-      const image = await this.client.apis.gsearch.searchImage(query)
+      const image = await this.client.apis.gsearch.searchImage(query, channel.nsfw)
       if (image.items) {
         return channel.send(image.items[0].link)
       } else {
