@@ -11,6 +11,7 @@ module.exports = class SwitchbladeEmbed extends MessageEmbed {
     super(data)
     this.setColor(process.env.EMBED_COLOR).setTimestamp()
     if (user) this.setFooter(user.tag)
+    this._files = []
   }
 
   /**
@@ -20,6 +21,17 @@ module.exports = class SwitchbladeEmbed extends MessageEmbed {
    */
   setDescriptionFromBlockArray (blocks) {
     this.description = blocks.map(lines => lines.filter(l => !!l).join('\n')).filter(b => !!b.length).join('\n\n')
+    return this
+  }
+
+  setDescription (description) {
+    if (description instanceof Array) return super.setDescription(description.join('\n'))
+    else return super.setDescription(description.toString?.() ?? description)
+  }
+
+  attachFiles (t) {
+    if (t instanceof Array) this._files = [...this._files, ...t]
+    else this._files.push(t)
     return this
   }
 }
