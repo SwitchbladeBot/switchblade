@@ -3,10 +3,10 @@ const axios = require('axios')
 
 const endpoint = 'https://omgvamp-hearthstone-v1.p.rapidapi.com'
 
-module.exports = class HearthStone extends APIWrapper {
+module.exports = class HearthStoneAPI extends APIWrapper {
   constructor() {
     super({
-      name: 'hearthstone',
+      name: 'hearthstoneapi',
       envVars: ['HEARTHSTONE_RAPIDAPI_KEY']
     })
   }
