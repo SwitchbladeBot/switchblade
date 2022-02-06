@@ -1,7 +1,7 @@
 const { SubcommandListCommand } = require('../../')
 
 module.exports = class HearthStone extends SubcommandListCommand {
-  constructor(client) {
+  constructor (client) {
     super(
       {
         name: 'hearthstone',

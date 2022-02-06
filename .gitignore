@@ -65,6 +65,7 @@ yarn.lock
 
 #prettier files
 .prettierrc
+.prettierignore
 
 .vscode
 
