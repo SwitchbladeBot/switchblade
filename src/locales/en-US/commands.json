@@ -672,6 +672,14 @@
     "commandUsage": "<text>",
     "noText": "You have to give me some text to asciify!"
   },
+  "itunes": {
+    "commandDescription": "Provides the content within the iTunes Store and Apple Books Store.",
+    "title": "Showing results for `{{title}}`",
+    "commandUsage": "<media> <country code> <term>",
+    "notFound": "I wasn't able to find the term with the given media.",
+    "noResults": "No results found.",
+    "invalidTerm": "Invalid term! Make sure that you are giving correct term."
+  },
   "lorem": {
     "commandDescription": "Generates a random lorem ipsum text with the specified amount of paragraphs.",
     "commandUsage": "<number of paragraphs>",
