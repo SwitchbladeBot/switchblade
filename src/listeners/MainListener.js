@@ -12,8 +12,8 @@ module.exports = class MainListener extends EventListener {
   }
 
   onReady () {
-    this.user.setActivity(`@${this.user.username} is getting archived. Huge thanks to everyone!`, { type: 'PLAYING' })
     this.user.setStatus('idle')
+    this.user.setActivity(`@${this.user.username} is getting archived. For more info check our discord server.`, { type: 'PLAYING' })
 
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
