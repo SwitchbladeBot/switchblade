@@ -4,8 +4,6 @@ const fetch = require('node-fetch')
 
 const EmojiLoader = require('../loaders/EmojiLoader.js')
 
-const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
-
 module.exports = class MainListener extends EventListener {
   constructor (client) {
     super({
