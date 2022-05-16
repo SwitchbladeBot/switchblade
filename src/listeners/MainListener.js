@@ -1,4 +1,4 @@
-const { CommandContext, EventListener, MiscUtils } = require('../')
+const { CommandContext, EventListener } = require('../')
 const { SwitchbladePlayerManager } = require('../music')
 const fetch = require('node-fetch')
 
@@ -16,17 +16,6 @@ module.exports = class MainListener extends EventListener {
   onReady () {
     this.user.setActivity(`@${this.user.username} is getting archived. Huge thanks to everyone!`, { type: 'PLAYING' })
     this.user.setStatus('idle')
-
-    async function updatePresence (client) {
-      const shardGuildCounts = await client.shard.fetchClientValues('guilds.cache.size')
-      const totalGuildCount = shardGuildCounts.reduce((total, current) => total + current)
-      const shardUserCounts = await client.shard.fetchClientValues('users.cache.size')
-      const totalUserCount = shardUserCounts.reduce((total, current) => total + current)
-    }
-
-    setInterval(() => {
-      updatePresence(this)
-    }, PRESENCE_INTERVAL, this)
 
     // Lavalink connection
     if (process.env.LAVALINK_NODES) {
