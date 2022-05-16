@@ -1,3 +1,10 @@
+# ⚠⚠ Warning ⚠⚠
+### Switchblade has outdated code and we don't recommend self-hosting unless you're using for a personal server. We are NOT providing any type of support.
+
+
+
+#
+
 <div align="center">
   <img src="https://i.imgur.com/LID4HYe.png"><br><br>
 
@@ -17,7 +24,7 @@
   [![hacktober][hacktoberfest-badge]][hacktoberfest-url]
   <br>
   <br>
-  <strong><a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD SWITCHBLADE TO YOUR SERVER</a></strong>
+  <strong><a href="https://invite.switchblade.xyz/">CLICK HERE TO ADD SWITCHBLADE TO YOUR SERVER (archived)</a></strong>
 </div>
 
 ---
