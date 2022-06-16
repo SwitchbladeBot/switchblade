@@ -119,7 +119,8 @@ module.exports = class CommandsModule extends Module {
   }
 
   async verifyCommand (command, { guild, channel, member }) {
-    if (member.hasPermission('ADMINISTRATOR')) return true
+    console.log(member)
+    if (member.permissions.has('ADMINISTRATOR')) return true
 
     const allCommands = recPaths(command)
     const { commands, categories, all } = await this.retrieveValues(guild.id, [

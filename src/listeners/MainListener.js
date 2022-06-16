@@ -9,7 +9,7 @@ const PRESENCE_INTERVAL = 60 * 1000 // 1 minute
 module.exports = class MainListener extends EventListener {
   constructor (client) {
     super({
-      events: ['ready', 'message']
+      events: ['ready', 'interactionCreate']
     }, client)
   }
 
@@ -116,43 +116,27 @@ module.exports = class MainListener extends EventListener {
     emojiLoader.load()
   }
 
-  async onMessage (message) {
-    if (message.author.bot || !this.loaded) return
+  async onInteractionCreate (interaction) {
+    if (!interaction.isCommand() || !interaction.member) return
+    const cmd = interaction.commandName
+    const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
+    if (command) {
+      const userDocument = this.database && await this.database.users.findOne(interaction.user.id, 'blacklisted')
+      if (userDocument && userDocument.blacklisted) return
+      let args = interaction.options._hoistedOptions.map(z => z.value)
+      if (interaction.options._subcommand) args = [interaction.options._subcommand, ...args]
+      args = args.map(z => z.toString?.() ?? z)
 
-    const guildId = message.guild && message.guild.id
+      const context = new CommandContext({
+        client: this,
+        interaction,
+        command,
+        language: interaction.locale,
+        args
+      })
 
-    const { prefix, spacePrefix } = await this.modules.prefix.retrieveValues(guildId, ['prefix', 'spacePrefix'])
-    const language = await this.modules.language.retrieveValue(guildId, 'language')
-
-    const botMention = this.user.toString()
-
-    const sw = (...s) => s.some(st => message.content.startsWith(st))
-    const usedPrefix = sw(botMention, `<@!${this.user.id}>`) ? `${botMention} ` : sw(prefix) ? prefix : null
-
-    if (usedPrefix) {
-      const fullCmd = message.content.substring(usedPrefix.length).split(/[ \t]+/).filter(a => !spacePrefix || a)
-      const args = fullCmd.slice(1)
-      if (!fullCmd.length) return
-
-      const cmd = fullCmd[0].toLowerCase().trim()
-      const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
-      if (command) {
-        const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
-        if (userDocument && userDocument.blacklisted) return
-
-        const context = new CommandContext({
-          defaultPrefix: usedPrefix,
-          aliase: cmd,
-          client: this,
-          prefix,
-          message,
-          command,
-          language
-        })
-
-        this.logger.info({ tag: 'Commands' }, `"${message.content}" (${command.constructor.name}) ran by "${message.author.tag}" (${message.author.id}) on guild "${message.guild.name}" (${message.guild.id}) channel "#${message.channel.name}" (${message.channel.id})`)
-        this.runCommand(command, context, args, language)
-      }
+      this.logger.info({ tag: 'Commands' }, `"(${command.constructor.name}) ran by "${interaction.user.tag}" (${interaction.user.id})`)
+      this.runCommand(command, context, args, interaction.locale)
     }
   }
 }

@@ -1,6 +1,7 @@
 const Sentry = require('@sentry/node')
 Sentry.init({ dsn: process.env.SENTRY_DSN })
 
+const { Intents } = require('discord.js')
 const { readFileSync } = require('fs')
 
 require('moment')
@@ -16,9 +17,9 @@ try {
 
 // Initialize client
 const CLIENT_OPTIONS = {
-  fetchAllMembers: false,
   enableEveryone: false,
-  canvasLoaded
+  canvasLoaded,
+  intents: [Intents.FLAGS.GUILDS]
 }
 
 console.log(readFileSync('bigtitle.txt', 'utf8').toString())

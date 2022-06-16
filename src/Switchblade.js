@@ -80,8 +80,8 @@ module.exports = class Switchblade extends Client {
           : null
         return cmd ? deepSubcmd(cmd, a.slice(1)) : c
       }
-      const verify = await this.modules.commandRules.verifyCommand(deepSubcmd(command, args), context)
-      if (!verify) return
+      /*const verify = await this.modules.commandRules.verifyCommand(deepSubcmd(command, args), context)
+      if (!verify) return */
     }
 
     context.setFixedT(this.i18next.getFixedT(language))

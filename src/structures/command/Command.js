@@ -119,7 +119,7 @@ module.exports = class Command {
       const embed = error.embed || new SwitchbladeEmbed(author)
         .setTitle(error.message)
         .setDescription(error.showUsage ? usage : '')
-      return channel.send(embed.setColor(Constants.ERROR_COLOR)).then(() => channel.stopTyping())
+      return channel.send(embed.setColor(Constants.ERROR_COLOR))
     }
     console.error(error)
   }

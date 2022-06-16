@@ -1,3 +1,5 @@
+const { MessageEmbed, MessageAttachment } = require('discord.js')
+
 module.exports = class CommandContext {
   /**
    * @param {Object} options The context options
@@ -17,20 +19,54 @@ module.exports = class CommandContext {
   constructor (options = {}) {
     this.client = options.client
 
-    this.message = options.message
-    this.author = options.message.author
-    this.member = options.message.member
-    this.channel = options.message.channel
+    this.interaction = options.interaction
+    this.author = options.interaction.user
+    this.member = options.interaction.member
+    this.channel = options.interaction.channel
     this.voiceState = this.member ? this.member.voice : null
-    this.guild = options.message.guild
+    this.guild = options.interaction.guild
     this.language = options.language
     this.command = options.command
-    this.aliase = options.aliase
-    this.prefix = options.prefix
-    this.defaultPrefix = options.defaultPrefix
+    this.prefix = '/'
 
     this.t = () => { throw new Error('Invalid FixedT') }
     this.flags = {}
+    this.patchChannel()
+    this.__replied = false
+    this.__deferred = false
+
+    setTimeout(async () => {
+      if (!this.__replied) {
+        await this.interaction.deferReply()
+        this.__deferred = true
+      }
+    }, 1500)
+  }
+
+  reply (content, data = {}) {
+    let request
+    if (data.code) {
+      request = { content: `\`\`\`${data.code}\n${content}\n\`\`\`` }
+    } else if (typeof (content) === 'string') {
+      request = { content, ...data }
+    } else if (content instanceof MessageEmbed) {
+      request = { embeds: [content], files: content._files }
+    } else if (content instanceof MessageAttachment) {
+      request = { files: [content] }
+    } else {
+      request = data
+    }
+
+    this.__replied = true
+    return (this.__deferred
+      ? this.interaction.editReply(request)
+      : this.interaction.reply(request))
+  }
+
+  patchChannel () {
+    this.channel.send = (content, data = {}) => this.reply(content, data)
+    this.channel.stopTyping = function () {}
+    this.channel.startTyping = function () {}
   }
 
   setFixedT (translate) {
