@@ -65,7 +65,7 @@
     "lorem-ipsum": "^2.0.4",
     "mal-scraper": "^2.11.3",
     "mathjs": "^9.5.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.33",
     "mongoose": "^6.0.8",
