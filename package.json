@@ -21,7 +21,7 @@
   "homepage": "https://github.com/SwitchbladeBot/switchblade#readme",
   "dependencies": {
     "@types/dotenv": "^8.2.0",
-    "discord.js": "^14.5.0",
+    "discord.js": "^13.1.0",
     "dotenv": "^16.0.3",
     "generic-type-guard": "^3.7.0",
     "require-all": "^3.0.0",
