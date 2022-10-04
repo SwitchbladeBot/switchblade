@@ -32,7 +32,7 @@ export class Main {
     
     async init () {
         const loading = new Signale({ interactive: true, scope: 'Switchblade' })
-        loading.await('[%d/1] - ta ligando', 1)
+        loading.await('[%d/1] - Waiting for EventHandler', 1)
         await this.eventHandler
             .use(process, 'process')
             .use(this.eventHandler, 'eventHandler')
