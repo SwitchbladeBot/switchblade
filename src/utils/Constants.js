@@ -19,7 +19,6 @@ module.exports = {
   TWITCH_COLOR: '#9147FF',
   GITHUB_COLOR: '#FAFAFA',
   DBL_COLOR: '#7289DA',
-  MIXER_COLOR: '#1FBAED',
   SOUNDCLOUD_COLOR: '#FF5500',
   HIBP_COLOR: '#3A9AC4',
   NOT_PWNED_COLOR: '#348F38',
@@ -31,7 +30,6 @@ module.exports = {
   CHOCOLATEY_COLOR: '#7eb5e2',
   SNAPCRAFT_COLOR: '82BEA0',
   JETBRAINS_PLUGIN: '#d44386',
-  PORTALDATRANSPARENCIA_COLOR: '#2369b3',
   ECLIPSE_PLUGINS_COLOR: '#42347f',
   CURSEFORGE_COLOR: '#f27121',
   FLATHUB_COLOR: '#4A86CF',
@@ -89,7 +87,6 @@ module.exports = {
   YOUTUBE_BRAND_SVG: 'src/assets/svg/brands/youtube.svg',
   DEEZER_BRAND_SVG: 'src/assets/svg/brands/deezer.svg',
   TWITCH_BRAND_SVG: 'src/assets/svg/brands/twitch.svg',
-  MIXER_BRAND_SVG: 'src/assets/svg/brands/mixer.svg',
   HTTP_BRAND_SVG: 'src/assets/svg/brands/http.svg',
 
   // Misc
