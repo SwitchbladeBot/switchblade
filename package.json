@@ -16,8 +16,11 @@
     ]
   },
   "engines": {
-    "node": "> 15.0.0"
+    "node": ">=16.0.0 <18"
   },
+  "cpu": [
+    "!arm"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/SwitchbladeBot/switchblade.git"
@@ -111,7 +114,7 @@
   },
   "optionalDependencies": {
     "@discordjs/uws": "^11.149.1",
-    "canvas": "^2.10.1",
+    "canvas": "^2.8.0",
     "erlpack": "github:discord/erlpack",
     "node-opus": "^0.3.3"
   }
