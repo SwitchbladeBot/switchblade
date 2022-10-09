@@ -98,7 +98,7 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "mocha": "^9.1.2",
+    "mocha": "^9.2.2",
     "mocha-standard": "^1.0.0",
     "nodemon": "^2.0.13",
     "standard": "^16.0.3"
