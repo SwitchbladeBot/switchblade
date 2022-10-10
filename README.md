@@ -9,4 +9,4 @@ Switchblade is now over three years old. It's codebase has grown a lot over the 
 It will probably take some time for us to go over the whole thing and get everything working, but hold tight: the future is bright. As we rewrite each and every feature, we will also refactor our whole infrastructure, containerizing everything and splitting our code into multiple independent "services". This will allow for greater flexibility and less downtime when we create and deploy new features, resulting in a better experience. That said, we do not currently have a deadline, as we want to make sure everything works well and the changes go as smoothly as possible for the end user.
 
 ## What happens to the main branch when the rewrite is complete?
-The new codebase will be moved from this branch to the main one, replacing the current `master` branch but keeping it's history avaliable.
+The new codebase will be moved from this branch to the main one, replacing the current `main` branch but keeping it's history avaliable.
