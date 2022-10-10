@@ -1,5 +1,5 @@
-# ⚠⚠ Warning ⚠⚠
-### Switchblade has outdated code and we don't recommend self-hosting unless you're using for a personal server. We are NOT providing any type of support.
+# Switchblade is gradually coming back and we are only accepting new PRs on "next" branch. The "main" and "dev" branches are still outdated.
+### ~~Switchblade has outdated code and we don't recommend self-hosting unless you're using for a personal server. We are NOT providing any type of support.~~
 
 
 
