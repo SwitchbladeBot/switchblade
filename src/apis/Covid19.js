@@ -26,7 +26,20 @@ module.exports = class Covid19 extends APIWrapper {
     return this.request('states', state)
   }
 
-  request (endpoint, query = '') {
-    return axios.get(encodeURI(`${API_URL}/${endpoint}/${query}`))
+  async getWorldwideVaccinated () {
+    return this.request('vaccine/coverage', '', { lastdays: 1 })
+  }
+
+  async getCountryVaccinated (country) {
+    return this.request('vaccine/coverage/countries', country)
+  }
+
+  async getStateVaccinated () {
+    return this.request('vaccine/coverage/states/state')
+  }
+
+  request (endpoint, query = '', queryParams) {
+    const qParams = new URLSearchParams(queryParams)
+    return axios.get(encodeURI(`${API_URL}/${endpoint}/${query}?${qParams.toString()}`)).then(res => res.data)
   }
 }
