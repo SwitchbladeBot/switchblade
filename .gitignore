@@ -60,6 +60,13 @@ typings/
 # next.js build output
 .next
 
+# yarn files
+yarn.lock
+
+#prettier files
+.prettierrc
+.prettierignore
+
 .vscode
 
 .idea/
