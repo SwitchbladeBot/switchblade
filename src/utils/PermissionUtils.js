@@ -9,9 +9,9 @@ module.exports = class PermissionUtils {
     return isDeveloper
   }
 
-  static specialRole (client, user) {
-    const botGuild = client.guilds.cache.get(process.env.BOT_GUILD)
-    const member = botGuild && botGuild.members.cache.get(user.id)
+  static async specialRole (client, user) {
+    const botGuild = await client.guilds.fetch(process.env.BOT_GUILD)
+    const member = botGuild && await botGuild.members.fetch(user.id)
     if (member) {
       return member.roles.cache.filter(r => r.hoist).sort((a, b) => b.position - a.position).first()
     }

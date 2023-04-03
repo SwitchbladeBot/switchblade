@@ -11,6 +11,7 @@ module.exports = class MoneyLeaderboard extends Command {
   }
 
   async run ({ t, author, channel }) {
+    // TODO: Remake everything because it's not working properly
     channel.startTyping()
 
     const top = await this.client.controllers.social.leaderboard('money')

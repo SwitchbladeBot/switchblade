@@ -137,6 +137,7 @@ module.exports = class MainListener extends EventListener {
       const cmd = fullCmd[0].toLowerCase().trim()
       const command = this.commands.find(c => c.name.toLowerCase() === cmd || (c.aliases && c.aliases.includes(cmd)))
       if (command) {
+        if (!message.channel.permissionsFor(this.user.id).has('SEND_MESSAGES')) return
         const userDocument = this.database && await this.database.users.findOne(message.author.id, 'blacklisted')
         if (userDocument && userDocument.blacklisted) return
 
