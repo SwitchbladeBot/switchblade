@@ -76,7 +76,7 @@
     "node-worker-threads-pool": "^1.5.1",
     "pirate-speak": "^1.0.1",
     "rastrojs": "^1.1.1",
-    "rss-parser": "^3.12.0",
+    "rss-parser": "^3.13.0",
     "runeterra": "3.0.0",
     "samp-query": "^0.1.5",
     "snoowrap": "^1.23.0",
