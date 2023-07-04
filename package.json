@@ -63,7 +63,7 @@
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "lorem-ipsum": "^2.0.4",
-    "mal-scraper": "^2.11.3",
+    "mal-scraper": "^2.13.0",
     "mathjs": "^9.5.0",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
